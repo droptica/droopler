@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_forms
+    - paragraphs.paragraphs_type.d_p_form
+id: paragraph.d_p_form.field_d_forms
+field_name: field_d_forms
+entity_type: paragraph
+bundle: d_p_form
+label: Form
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:contact_form'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

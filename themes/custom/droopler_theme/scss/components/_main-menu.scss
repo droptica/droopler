@@ -1,0 +1,316 @@
+/*
+Components Main menu
+
+ul with main menu.
+
+Markup:
+<ul class="nav navbar-nav main-menu">
+  <li class="nav-item active"><a href="/en/node/1" class="nav-link active is-active" data-drupal-link-system-path="node/1">Home</a> </li>
+  <li class="nav-item"><a href="/node/2" class="nav-link">About</a></li>
+  <li class="nav-item"><a href="/node/3" class="nav-link">Services</a></li>
+  <li class="nav-item"><a href="/node/4" class="nav-link">Gallery</a></li>
+  <li class="nav-item"><a href="/node/5" class="nav-link">Contact</a></li>
+</ul>
+
+Styleguide 2.1
+*/
+
+// Colour variables used in this component
+$menu-main-link-color: $color-priam !default;
+$menu-main-link-hover-color: darken($color-priam, 20%) !default;
+$menu-main-link-active-color: darken($color-priam, 20%) !default;
+$menu-main-link-dropdown: $color-hector !default; // Dropdown icon
+
+$submenu-link-color: $menu-main-link-color !default; // Submenu item text color
+$submenu-link-hover-color: darken($color-priam, 20%) !default; // Submenu item hover color
+$submenu-link-hover-background: $color-andromache !default; // Submenu item hover color
+
+$menu-mobile-background: $color-agamemnon !default;
+$menu-mobile-link-color: $color-odysseus !default;
+$menu-mobile-link-border: $color-menelaus !default;
+$submenu-mobile-background: $menu-mobile-link-border !default;
+
+$navbar-toggler-color: $color-agamemnon !default;
+
+// Font sizes
+$menu-font-size: $font-size-lg !default;
+$menu-mobile-font-size: $font-size-lg !default;
+$submenu-font-size: $font-size-base !default;
+$menu-dropdown-size: 2.3rem !default; // Size of the dropdown arrow
+$navbar-toggler-size: 2.3rem !default; // Size of the toggler arrow
+
+// Paddings, margins and heights.
+$menu-dropdown-width: 4rem !default;  // Width of desktop dropdown icon (desktop)
+$menu-dropdown-mobile-padding-x: 1rem !default;  // Padding on both sides of dropdown icon (mobile)
+$menu-main-link-height: $header-height - (2 * $navbar-padding-y) !default;  // Height of menu item
+$menu-main-link-padding-x: 1.5rem !default; // Space on the right and left side of the link (desktop)
+$navbar-toggler-width: 5.625rem !default; // Width of mobile menu on/off toggler
+$navbar-toggler-height: $header-mobile-height !default; // Height of mobile menu on/off toggler
+$menu-mobile-main-link-height: 3.5rem !default;  // Height of menu item (mobile)
+$menu-mobile-main-link-padding-x: 2.15rem !default; // Percentage width of menu item, it should align with the toggler icon (mobile).
+$submenu-offset-left: -1rem !default; // Move the submenu left or right (desktop)
+$submenu-link-padding-x: 1.4rem !default; // Horizontal padding of submenu element (desktop)
+$submenu-link-height: 2.9rem !default; // Height of links in submenu (desktop)
+$submenu-mobile-link-height: $menu-mobile-main-link-height !default; // Height of links in submenu (mobile)
+
+// The main menu region for >= LG
+@include media-breakpoint-up(lg) {
+  .region-primary-menu {
+    height: $menu-main-link-height;
+  }
+}
+
+// The main menu
+.main-menu {
+
+  // Menu link for >= LG
+  @include media-breakpoint-up(lg) {
+    &.navbar-nav {
+
+      // Menu <a> link (not submenu)
+      .nav-link {
+        font-size: $menu-font-size;
+        color: $menu-main-link-color;
+
+        // Remember about Bootstrap link padding.
+        line-height: $menu-main-link-height - (2 * $nav-link-padding-y);
+        height: $menu-main-link-height;
+        padding-left: $menu-main-link-padding-x;
+        padding-right: $menu-main-link-padding-x;
+
+        &:hover, &:focus {
+          color: $menu-main-link-hover-color;
+        }
+        &:active {
+          color: $menu-main-link-active-color;
+        }
+      }
+
+      // Menu <li> item with opened dropdown.
+      .menu-item--expanded {
+
+        padding-right: $menu-dropdown-width;
+
+        a.nav-link {
+          padding-right: 0;
+        }
+
+        // Menu item with expanded submenu.
+        .show {
+          a.nav-link {
+            &:focus, &:active {
+              outline: none;
+              -moz-outline-style: none
+            }
+          }
+        }
+
+        // Dropdown icon
+        .menu-dropdown-icon {
+          line-height: $menu-main-link-height - (2 * $nav-link-padding-y);
+          top: $nav-link-padding-y;
+          padding: 0;
+          width: $menu-dropdown-width;
+        }
+      }
+
+      // Submenu
+      .dropdown-menu {
+        padding: 0;
+        margin-top: -1 * ($menu-main-link-height / 5);
+        margin-left: $submenu-offset-left;
+        border-radius: 0;
+
+        // Submenu forced to show on hover
+        &.force-show {
+          display: block;
+        }
+
+        // Submenu item
+        .dropdown-item {
+          padding: 0;
+          &:active, &:hover, &.active:active, &.active:hover {
+            background: $submenu-link-hover-background;
+            a {
+              color: $submenu-link-hover-color;
+              text-decoration: none;
+            }
+          }
+          &.active {
+            background: transparent;
+          }
+          a {
+            color: $submenu-link-color;
+            font-size: $submenu-font-size;
+            padding: 0 $submenu-link-padding-x;
+            line-height: $submenu-link-height;
+            width: 100%;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  // Menu link for <= MD
+  @include media-breakpoint-down(md) {
+    &.navbar-nav {
+      background: $menu-mobile-background;
+
+      // Menu link (not submenu)
+      .nav-link {
+        color: $menu-mobile-link-color;
+        font-size: $menu-mobile-font-size;
+
+        //width: $menu-mobile-main-link-width;
+
+        border-bottom: 0.125rem solid $menu-mobile-link-border;
+        margin: 0 $menu-mobile-main-link-padding-x;
+        padding: 0;
+        line-height: $menu-mobile-main-link-height;
+        max-height: $menu-mobile-main-link-height;
+        text-align: center;
+      }
+
+      // Menu link with dropdown
+      .menu-item--expanded {
+        a.nav-link {
+          position: relative;
+
+          &:after {
+            // Position the icon as absolute
+            line-height: $menu-mobile-main-link-height;
+            max-height: $menu-mobile-main-link-height;
+            float: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+          }
+        }
+        a.menu-dropdown-icon {
+          //right: (100% - $menu-mobile-main-link-width) / 2;
+          right: $menu-mobile-main-link-padding-x - $menu-dropdown-mobile-padding-x;
+          padding: 0 $menu-dropdown-mobile-padding-x;
+        }
+        &.show > a {
+            border-bottom: none;
+        }
+      }
+
+      // Last menu item
+      .nav-item:last-child {
+        .nav-link {
+          border-bottom: none;
+        }
+      }
+    }
+
+    // Dropdown menu
+    .dropdown-menu {
+      border: none;
+      padding: 0;
+
+      // Single <li>
+      .dropdown-item {
+        padding: 0;
+        background: $submenu-mobile-background;
+        list-style-type: none; // Leave for IE compatibility
+        list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7); // Leave for IE compatibility (css hack)
+
+        a {
+          font-size: $menu-mobile-font-size;
+          color: $menu-mobile-link-color;
+          border-bottom: 0.125rem solid $menu-mobile-background;
+          text-align: center;
+          line-height: $submenu-mobile-link-height;
+          max-height: $submenu-mobile-link-height;
+          margin: 0 $menu-mobile-main-link-padding-x;
+          padding: 0;
+          display: block;
+
+          &:hover, &:active, &:focus, .active {
+            text-decoration: none;
+          }
+        }
+
+        &:last-child a {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  // Menu <li> with dropdown
+  .menu-item--expanded {
+
+    position: relative;
+
+    // Dropdown icon
+    .menu-dropdown-icon {
+      color: $menu-main-link-dropdown;
+      font-family: "fontello";
+      font-size: $menu-dropdown-size;
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      text-align: center;
+
+      &:before {
+        content: "\e804";
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    // Expanded submenu
+     &.show, &.force-show {
+       .menu-dropdown-icon:before {
+         content: "\e806";
+       }
+     }
+  }
+}
+
+button.navbar-toggler {
+  display: none;
+}
+@include media-breakpoint-down(md) {
+  button.navbar-toggler {
+    display: block;
+    z-index: 100;
+    width: $navbar-toggler-width;
+    height: $navbar-toggler-height;
+    padding: 0;
+    border: none;
+    border-radius: none;
+
+    .navbar-toggler-icon {
+      width: $navbar-toggler-width;
+      height: $navbar-toggler-height;
+
+      &:after {
+        font-family: "fontello";
+        color: $navbar-toggler-color;
+        font-size: $navbar-toggler-size;
+        line-height: $navbar-toggler-height;
+        position: relative;
+      }
+    }
+
+    &[aria-expanded="false"] .navbar-toggler-icon:after {
+      content: "\f008";
+    }
+    &[aria-expanded="true"] .navbar-toggler-icon {
+      background: $menu-mobile-background;
+
+      &:after {
+        color: $menu-main-link-dropdown;
+        content: "\e806";
+        font-size: $menu-dropdown-size;
+      }
+    }
+  }
+}

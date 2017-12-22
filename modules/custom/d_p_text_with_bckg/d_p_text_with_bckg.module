@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Contains d_paragraphs_image_background.module..
+ */
+
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_p_text_with_bckg_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  $styles_ids = d_p_responsive_style_ids();
+
+  switch ($bundle) {
+    case 'd_p_text_with_bckg':
+      d_p_generate_image_set($variables, $styles_ids, $bundle);
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function d_p_text_with_bckg_theme($existing, $type, $theme, $path) {
+  return [
+    'paragraph__d_p_text_with_bckg' => [
+      'base hook' => 'paragraph',
+    ],
+  ];
+}

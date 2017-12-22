@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Droopler's Theme override for a local task link.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper element.
+ * - is_active: Whether the task item is an active tab.
+ * - link: A rendered link element.
+ * - item.text: Text for the link
+ * - item.url: URL object for link
+ *
+ * Note: This template renders the content for each task item in
+ * menu-local-tasks.html.twig.
+ *
+ * @see template_preprocess_menu_local_task()
+ */
+#}
+{%
+  set classes = [
+    'nav-link',
+    is_active ? 'active',
+  ]
+%}
+<li{{ attributes.addClass(is_active ? 'active', 'nav-item') }}>{{ link(item.text, item.url, {'class': classes}) }}</li>

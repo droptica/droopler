@@ -1,0 +1,50 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the profilename install profile.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function droopler_install() {
+  // First, do everything in standard profile.
+  include_once DRUPAL_ROOT . '/core/profiles/standard/standard.install';
+  standard_install();
+
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('default', 'droopler_theme')
+    ->set('admin', 'seven')
+    ->save();
+
+  // @TODO this should not really be here because this subtheme is not part
+  // of the distribution
+  $themes = \Drupal::service('theme_handler')->listInfo();
+  if(isset($themes['droopler_subtheme'])) {
+    \Drupal::configFactory()
+      ->getEditable('system.theme')
+      ->set('default', 'droopler_subtheme')
+      ->set('admin', 'seven')
+      ->save();
+  }
+
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('default_langcode', 'en')
+    ->set('page.front', '/node/1')
+    ->save();
+
+  \Drupal::service('module_installer')->install(['d_content_init']);
+
+  try {
+    \Drupal::entityDefinitionUpdateManager()->applyUpdates();
+  }
+  catch (\Drupal\Core\Entity\EntityStorageException $e) {
+    watchdog_exception('droopler_install', $e);
+  }
+}

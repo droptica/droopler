@@ -1,0 +1,69 @@
+name: Droopler profile
+type: profile
+description: 'Ready to use site builder with paragraphs'
+core: 8.x
+
+
+# Required modules
+# Note that any dependencies of the modules listed here will be installed automatically.
+dependencies:
+  - config_update
+  - features
+  - features_ui
+  - node
+  - history
+  - block
+  - block_content
+  - contact
+  - breakpoint
+  - color
+  - config
+  - contextual
+  - help
+  - image
+  - locale
+  - content_translation
+  - language
+  - options
+  - path
+  - taxonomy
+  - dblog
+  - search
+  - shortcut
+  - toolbar
+  - field_ui
+  - file
+  - rdf
+  - views
+  - views_ui
+  - editor
+  - ckeditor
+  - menu_ui
+  - admin_toolbar
+  - admin_toolbar_tools
+  - entity_reference_revisions
+  - paragraphs
+  - pathauto
+  - redirect
+  - menu_link_attributes
+  - link_attributes
+  - d_content
+  - d_p
+  - d_p_banner
+  - d_p_text_blocks
+  - d_p_side_image
+  - d_p_text_with_bckg
+  - d_p_subscribe_file
+  - d_p_text_paged
+  - d_p_form
+  - d_lang_dropdown
+  - google_tag
+  - metatag
+
+# List any themes that should be installed as part of the installation
+# profile installation.
+# Note that this will not set any theme as the default theme.
+themes:
+  - droopler_subtheme
+  - droopler_theme
+  - seven

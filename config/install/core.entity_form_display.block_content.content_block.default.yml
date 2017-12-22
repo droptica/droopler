@@ -1,0 +1,51 @@
+uuid: 3af68b8d-5572-4e3f-8d65-b0b68059cc52
+langcode: pl
+status: true
+dependencies:
+  config:
+    - block_content.type.content_block
+    - field.field.block_content.content_block.field_d_long_text
+    - field.field.block_content.content_block.field_d_main_title
+  module:
+    - text
+_core:
+  default_config_hash: QQS1dUfX_jZ-WrQYmLb4qFWYtZQxM6ypCLlu0jANzRA
+id: block_content.content_block.default
+targetEntityType: block_content
+bundle: content_block
+mode: default
+content:
+  field_d_long_text:
+    weight: 26
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_d_main_title:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+hidden: {  }

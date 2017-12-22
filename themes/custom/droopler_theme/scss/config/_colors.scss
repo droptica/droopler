@@ -1,0 +1,82 @@
+// Colors variables
+//
+// config/colors.scss
+//
+// $color-priam - Main gray
+//
+// markup:
+//   <div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
+//
+//
+// Styleguide 1.2
+$white: #fff !default;
+$black: #000 !default;
+
+
+// -----------COLOUR NAMING CONVENTION ----------//
+
+// The above are so obvious thet thay stay as they are. There is just one total black and one total white.
+
+// A general situation on a website looks like this: There are 2-3 main sets of colours and there are accents.
+//
+// There is however not a single easy way to see which colours will end up where
+// on which website or even or a particular section.
+// Any naming convention is bound to fail. To devise a mechanism in which we do not end up with contradicting
+// name and value of a color, we completely abstract variable names from colours they hold.
+// In this way we hope we can build many websites on the same codebase without making a mess and perhaps with
+// some additional fun.
+//
+// The apporach:
+// We derive name the variables from the participants of the Troyan wors (The Greeks and the Troyans)
+// Plenty of names can be found here: https://en.wikipedia.org/wiki/Trojan_War
+
+// We then obviously have 2 sets of colors (one for the Troyans and one for Greeks). If you need a 3rd set,
+// use greek gods
+// Accents are named after those who stood out in the wars: Achillies, Hektor, Helen, Troyan-hors ;)
+
+// I have no idea if this is a good idea but all the other ideas  failed immediately when I wanted to theme site
+// number 2 which was brown/orange, when the first base was blue/grey. This was not even a case of dark vs bright
+// but a completely different set of colours. Hence this small experiment.
+
+// The Greeks
+//Agamemnon  Menelaus Nestor Odysseus Diomedes Patroclus Thersites Achaeans Myrmidons
+
+$color-agamemnon: #196dba !default;
+$color-menelaus: #5d98ce !default;
+$color-nestor: #65e2ff !default;
+$color-odysseus: white !default;
+
+// The Troyans
+// Priam Hecuba Troilus Cassandra Andromache Aeneas Memnon Penthesilea and the Amazons Sarpedon
+$color-priam: #7a7a7a !default;
+$color-hecuba: #727272 !default;
+$color-troilus: #4c4c4c !default;
+$color-cassandra: black !default;
+$color-andromache: #d2d2d2 !default;
+
+// The accents
+// Achillies, Hector, Helen, Paris
+$color-hector: #d3d3d3 !default;
+$color-achillies: #ec6d06 !default;
+
+// The Gods
+// Caused the war: Eris Zeus
+// On the Greek side: Athena Hera Hephaestus Hermes Poseidon Thetis
+// On the Trojan side: Aphrodite Apollo Ares Artemis Leto Scamander
+
+//$colour-zeus: #ff0000 !default; // just an example
+
+
+
+
+// Styleguide 1.1.1
+
+// --------------READ THIS -------------------
+// Here we can stick in only general colour applicable to the whole site
+// So only applicable to generic elements <html><body><p><ul> etc not restricted
+// to a particular block, paragraph or section
+// All other colours should be defined in a component they refer to and have own variables
+// For example check _d_p_banner.scss
+
+$link-color: $color-agamemnon !default;
+$link-hover-color: darken($link-color, 5%) !default;

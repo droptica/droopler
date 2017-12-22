@@ -1,0 +1,23 @@
+/*
+Form paragraph.
+
+Styleguide components.d_p.form
+*/
+
+// Margins, paddings and sizes.
+$d-p-form-padding-top: 5% !default;
+$d-p-form-padding-bottom: 7% !default;
+$d-p-form-button-margin-top: 1rem !default;
+
+.paragraph-form {
+  h2, form {
+    margin: $d-p-form-padding-top 0 $d-p-form-padding-bottom 0;
+  }
+
+  .form-actions {
+    text-align: center;
+    .btn {
+      margin-top: $d-p-form-button-margin-top;
+    }
+  }
+}

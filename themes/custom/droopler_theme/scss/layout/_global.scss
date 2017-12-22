@@ -1,0 +1,58 @@
+// Global.
+//
+// Styleguide 3.1
+
+// Colour variables used in this file.
+$light-gray-background: $color-hector !default;
+
+// Paddings, margins and heights.
+
+#main {
+  margin-top: 0;
+  .node__content {
+    margin-top: 0;
+  }
+}
+.page-wrapper {
+  min-width: $page-min-width;
+  img {
+    max-width: 100%;
+  }
+  main.main-content {
+    width: 100%;
+  }
+  h1 {
+    @include font-main-header-big;
+  }
+  h2 {
+    @include font-main-header;
+  }
+  p {
+    @include font-body-standard;
+  }
+  a:not(.btn) {
+    @include font-links;
+  }
+}
+.no-padding {
+  padding: 0;
+  @include media-breakpoint-down(sm) {
+    &-sm {
+      padding: 0;
+    }
+  }
+}
+
+.alert {
+  @extend .container;
+}
+
+.background {
+  &-gray-light {
+    background: $light-gray-background;
+  }
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}

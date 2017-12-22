@@ -1,0 +1,78 @@
+// Main config files.
+//
+//  This section contain base variable and mixines.
+//
+// Styleguide 1.0
+
+// Theme configuration.
+@import 'config/all';
+@import '../../../../../../../libraries/bootstrap/scss/bootstrap';
+@import '../../../../../../../libraries/bootstrap/scss/bootstrap-grid';
+@import '../../../../../../../libraries/bootstrap/scss/bootstrap-reboot';
+@import 'mixins/fonts';
+
+// Fonts.
+@import 'fonts/fontello';
+@import '../../../../../../../libraries/lato-webfont/scss/lato-regular';
+
+// Layout.
+@import 'layout/global';
+
+// Components
+//
+//  This section contain components class and mixines.
+//
+// Styleguide 2.0
+
+@import 'barrio/breadcrumb';
+@import 'barrio/contextual';
+@import 'barrio/feed-icon';
+@import 'barrio/field';
+@import 'barrio/form';
+@import 'barrio/header';
+@import 'barrio/help';
+@import 'barrio/icons';
+@import 'barrio/image-button';
+@import 'barrio/item-list';
+@import 'barrio/list-group';
+@import 'barrio/node-preview';
+@import 'barrio/node';
+@import 'barrio/search-form';
+@import 'barrio/search-results';
+@import 'barrio/shortcut';
+@import 'barrio/site-footer';
+@import 'barrio/skip-link';
+@import 'barrio/table';
+@import 'barrio/ui.widget';
+@import 'barrio/tabs';
+@import 'barrio/textarea';
+@import 'barrio/user';
+@import 'barrio/views';
+@import 'barrio/ui-dialog';
+@import 'components/decorations';
+@import 'components/main-menu';
+@import 'components/buttons.scss';
+@import 'components/forms';
+
+// Paragraphs
+//
+//
+// Styleguide components.d_p
+@import 'components/d_lang-dropdown';
+@import 'components/d_p_subscribe';
+@import 'components/d_p_banner';
+@import 'components/d_p_side_image';
+@import 'components/d_p_text_blocks';
+@import 'components/d_p_text_paged';
+@import 'components/d_p_form';
+@import 'components/d_p_text_with_bckg';
+
+// Layouts.
+//
+//  This section contain Layouts class.
+//
+// Styleguide 3.0
+
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/download_page';

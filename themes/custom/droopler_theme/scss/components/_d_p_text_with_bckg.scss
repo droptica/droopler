@@ -1,0 +1,74 @@
+/*
+Form paragraph.
+
+Styleguide components.d_p.d_p_text_with_bckg
+*/
+
+// Colour variables used in this paragraph.
+$d-p-text-with-bckg-background-overlay: $color-odysseus !default;
+$d-p-text-with-bckg-line-color: $line-background !default;
+
+
+// Margins, paddings and sizing.
+$d-p-text-with-bckg-title-margin-y: 5% !default;
+$d-p-text-with-bckg-button-margin-top: 3.125rem !default;
+$d-p-text-with-bckg-padding-top: 1.5% !default;
+$d-p-text-with-bckg-padding-bottom: 3.5% !default;
+$d-p-text-with-bckg-mobile-padding-top: 6.25rem !default;
+$d-p-text-with-bckg-mobile-padding-bottom: 6.25rem !default;
+$d-p-text-with-bckg-line-margin-top: $line-center-margin-top !default;
+$d-p-text-with-bckg-line-margin-bottom: $line-center-margin-bottom !default;
+
+// Other settings
+$d-p-text-with-bckg-img-opacity: 0.1 !default;
+
+.d-p-text-with-bckg {
+  background: $d-p-text-with-bckg-background-overlay;
+  z-index: 0;
+
+  h2 {
+    margin: $d-p-text-with-bckg-title-margin-y 0;
+  }
+  h3.field--name-field-d-subtitle {
+    @include font-subtitle;
+    text-align: center;
+    &:after {
+      @include decoration-header-line-main-center;
+      background: $d-p-text-with-bckg-line-color;
+      margin-top: $d-p-text-with-bckg-line-margin-top;
+      margin-bottom: $d-p-text-with-bckg-line-margin-bottom;
+    }
+  }
+  p {
+    @include font-body-standard;
+    text-align: center;
+    line-height: 1.7;
+  }
+  .field--type-link {
+    text-align: center;
+    a {
+      @extend .btn;
+      @extend .btn-primary;
+      margin-top: $d-p-text-with-bckg-button-margin-top;
+    }
+  }
+  .backstretch-item {
+    img {
+      opacity: $d-p-text-with-bckg-img-opacity;
+      @include media-breakpoint-down(sm) {
+        max-width: none;
+        width: 100%;
+        overflow: hidden;
+      }
+    }
+  }
+  .content-wrapper {
+    width: 100%;
+    padding-top: $d-p-text-with-bckg-padding-top;
+    padding-bottom: $d-p-text-with-bckg-padding-bottom;
+    @include media-breakpoint-down(sm) {
+      padding-top: $d-p-text-with-bckg-mobile-padding-top;
+      padding-bottom: $d-p-text-with-bckg-mobile-padding-bottom;
+    }
+  }
+}

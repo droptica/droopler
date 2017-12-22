@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override for a progress bar.
+ *
+ * Note that the core Batch API uses this only for non-JavaScript batch jobs.
+ *
+ * Available variables:
+ * - label: The label of the working task.
+ * - percent: The percentage of the progress.
+ * - message: A string containing information to be displayed.
+ */
+#}
+{{ attach_library('droopler_theme/progress') }}
+<div class="progress">
+  {% if label %}
+    <div class="progress__label">{{ label }}</div>
+  {% endif %}
+  <progress class="progress progress-striped" value="{{ percent }}" max="100">
+    <div class="progress">
+      <span class="progress-bar" style="width: {{ percent }}%;">{{ percent }}%</span>
+    </div>
+  </progress>
+  <small class="progress__description">{{ message }}</small>
+</div>

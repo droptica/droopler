@@ -1,0 +1,18 @@
+/* ------------------ Header ------------------ */
+.navbar-brand .site-logo {
+  margin-right: 1rem;
+}
+
+@media (max-width: 33.9em) {
+.navbar-toggleable-xs .navbar-nav .nav-item + .nav-item, .navbar-toggleable-xs.collapse.in .navbar-nav .nav-item  {
+  margin-left: 0;
+  float: none;
+}
+}
+
+@media (max-width: 47.9em) {
+.navbar-toggleable-sm .navbar-nav .nav-item + .nav-item, .navbar-toggleable-xs.collapse.in .navbar-nav .nav-item  {
+  margin-left: 0;
+  float: none;
+}
+}

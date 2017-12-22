@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function d_lang_dropdown_block_view_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+  if (isset($build['#base_plugin_id']) && $build['#base_plugin_id'] == 'language_block') {
+    $build['#attached']['library'][] = 'd_lang_dropdown/d_lang_dropdown';
+  }
+}

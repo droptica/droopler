@@ -1,0 +1,16 @@
+/**
+ * @file
+ * Visual styles for Droopler's form components.
+ */
+
+.form-required::after {
+    content: '';
+    vertical-align: super;
+    display: inline-block;
+    background-image: url($theme_path + '/images/required.svg');
+    background-repeat: no-repeat;
+    background-size: 7px 7px;
+    width: 7px;
+    height: 7px;
+    margin: 0 0.3em;
+}

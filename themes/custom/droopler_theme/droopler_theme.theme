@@ -1,0 +1,163 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Droopler theme.
+ */
+
+use Drupal\Core\Link;
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Adds body classes if certain regions have content.
+ */
+function droopler_theme_preprocess_html(&$variables) {
+  $config = \Drupal::config('droopler_theme.settings');
+  $variables['#attached']['drupalSettings']['droopler'] = $config->get('droopler_theme_hash');
+
+  // Add page specific info to <body>.
+  $variables['path_info']['args'] = FALSE;
+  $path = \Drupal::service('path.current')->getPath();
+  $path = ltrim($path, '/');
+  $path_args = explode('/', $path);
+  if (isset($path_args[0]) && isset($path_args[1]) && ($path_args[0] == 'node') && (is_numeric($path_args[1]))) {
+    $variables['attributes']['class'][] = 'page-node-' . $path_args[1];
+  }
+  if (isset($path_args[0]) && isset($path_args[1]) && ($path_args[0] == 'user')) {
+    $variables['attributes']['class'][] = 'page-user-' . $path_args[1];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function droopler_theme_preprocess_page(&$variables) {
+
+  // Define default classes for containers
+  $navbar_top_attributes = [
+    'class' => ['navbar'],
+    'id' => ['navbar-top'],
+  ];
+  $navbar_attributes = [
+    'class' => ['navbar'],
+    'id' => ['navbar-main'],
+  ];
+  $main_attributes = [
+    'class' => !empty($variables['node']) && $variables['node']->getType() === 'content_page' ?
+      ['container-fluid'] : ['container', 'py-4'],
+    'id' => ['main'],
+  ];
+  $content_attributes = [
+    'class' => ['main-content', 'col-md-12'],
+    'id' => ['content'],
+    'role' => ['main'],
+  ];
+
+  // Declare attributes
+  $variables['navbar_top_attributes'] = new Attribute($navbar_top_attributes);
+  $variables['navbar_attributes'] = new Attribute($navbar_attributes);
+  $variables['main_attributes'] = new Attribute($main_attributes);
+  $variables['content_attributes'] = new Attribute($content_attributes);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for maintenance-page.html.twig.
+ */
+function droopler_theme_preprocess_maintenance_page(&$variables) {
+  // By default, site_name is set to Drupal if no db connection is available
+  // or during site installation.
+  if (!$variables['db_is_active']) {
+    $variables['site_name'] = 'Droopler';
+  }
+
+  // Droopler has custom styling for the maintenance page.
+  $variables['#attached']['library'][] = 'droopler_theme/maintenance_page';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for form_element.
+ */
+function droopler_theme_preprocess_form_element(&$variables) {
+  if (!isset($variables['label']['#title'])) {
+    $variables['input_title'] = NULL;
+  }
+  elseif (is_object($variables['label']['#title'])) {
+    if (method_exists($variables['label']['#title'], 'render')) {
+      $variables['input_title'] = $variables['label']['#title']->render();
+    }
+  }
+  else {
+    $variables['input_title'] = $variables['label']['#title'];
+  }
+  if (isset($variables['element']['#attributes'])) {
+    $variables['input_attributes'] = new Attribute($variables['element']['#attributes']);
+  }
+}
+
+function droopler_theme_preprocess_menu_local_task(&$variables) {
+  $link = $variables['element']['#link'];
+  $url = $link['url'];
+  $options = $url->getOptions();
+  $url->setOptions($options + $link['localized_options']);
+  $variables['item'] = Link::fromTextAndUrl($link['title'], $url);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for links templates.
+ */
+function droopler_theme_theme_suggestions_links_alter(array &$suggestions, array $variables) {
+  // ToDo get from core a variable to flag inline links
+  if (in_array('inline', $variables['attributes']['class'])) {
+    $suggestions[] = 'links__inline';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ */
+function droopler_theme_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  if ($variables['element']['#form_id'] == 'search_block_form') {
+    $suggestions[] = 'form__search_block_form';
+  }
+  if ($variables['element']['#form_id'] == 'node_form') {
+    $suggestions[] = 'node_edit_form';
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_input() to add classes to inputs.
+ */
+function droopler_theme_preprocess_input(&$variables) {
+  // For submit elements.
+  if ($variables['element']['#type'] == 'submit') {
+    // If button has some class.
+    if (is_object($variables['attributes']['class'])) {
+      // If there is no .btn-{type} class.
+      if (empty(array_intersect([
+        'btn-primary',
+        'btn-secondary',
+        'btn-success',
+        'btn-warning',
+        'btn-danger',
+        'btn-link',
+      ], $variables['attributes']['class']->value()))
+      ) {
+        $variables['attributes']['class']->addClass('btn-primary');
+      }
+      // If there is no .btn class.
+      if (!in_array('btn', $variables['attributes']['class']->value())) {
+        $variables['attributes']['class']->addClass('btn');
+      }
+    }
+    // If there are no classes at all.
+    else {
+      $variables['attributes']['class'][] = 'btn';
+      $variables['attributes']['class'][] = 'btn-primary';
+
+      $variables['attributes'] = new Attribute($variables['attributes']);
+    }
+  }
+}

@@ -1,0 +1,26 @@
+langcode: pl
+status: true
+dependencies:
+  config:
+    - field.field.node.content_page.field_page_section
+    - node.type.content_page
+  module:
+    - entity_reference_revisions
+    - user
+id: node.content_page.default
+targetEntityType: node
+bundle: content_page
+mode: default
+content:
+  field_page_section:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+hidden:
+  langcode: true
+  links: true

@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * d_content_init module.
+ */
+
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
+
+/** Save node with paragraphs.
+ *
+ * @param array $node_to_create
+ *   Array node with paragraph content.
+ * @param string $lang_code
+ *   Lang code.
+ */
+
+
+function d_content_init_save_node($node_to_create, $lang_code) {
+
+  $node = Node::create([
+    'type' => $node_to_create['type'],
+    'title' => $node_to_create['title'],
+    'langcode' => $lang_code,
+  ]);
+
+  if (isset($node_to_create['field_page_section']['paragraphs'])) {
+    foreach ($node_to_create['field_page_section']['paragraphs'] as $paragraph_data) {
+
+      $paragraph = d_content_init_fill_paragraph($paragraph_data);
+
+      $node->field_page_section->appendItem($paragraph);
+    }
+    $node->save();
+  }
+}
+
+/**
+ * @param $paragraph_data
+ *
+ * @return $paragraph_object
+ *
+ */
+function d_content_init_fill_paragraph($paragraph_data) {
+  $paragraph = Paragraph::create([
+    'type' => $paragraph_data['paragraph_type'],
+  ]);
+
+  foreach ($paragraph_data['data'] as $field_name => $value) {
+
+    switch ($value['type']) {
+      case 'text':
+      case 'text_long':
+        $paragraph->set($field_name, $value['data']);
+        $paragraph->$field_name->format = 'full_html';
+        break;
+      case 'text_select':
+        $paragraph->set($field_name, $value['data']);
+        break;
+      case 'cta':
+        $paragraph->set($field_name, [
+          'title' => $value['data']['text'],
+          'uri' => $value['data']['link'],
+        ]);
+        break;
+      case 'file':
+      case 'image':
+        $image = file_get_contents(drupal_get_path('module', 'd_content_init') . '/assets/' . $value['data']);
+        $image = file_save_data($image, 'public://' . $value['data'], FILE_EXISTS_REPLACE);
+        $paragraph->$field_name->appendItem($image);
+        break;
+
+      case 'paragraph_reference':
+        foreach ($value['data'] as $child) {
+          // @TODO fix this ugly fix of incorrect structure in array
+          if($field_name == 'field_d_p_tb_block_reference') {
+            $new_child['data'] = $child;
+            $new_child['paragraph_type'] = 'd_p_single_text_block';
+            $child_paragraph = d_content_init_fill_paragraph($new_child);
+            $paragraph->$field_name->appendItem($child_paragraph);
+          }
+
+        }
+
+        break;
+
+      case 'entity_reference':
+        $paragraph->set($field_name, $value['data']);
+        break;
+    }
+
+  }
+
+  $paragraph->save();
+
+  return $paragraph;
+}

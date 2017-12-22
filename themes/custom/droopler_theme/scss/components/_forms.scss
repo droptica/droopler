@@ -1,0 +1,75 @@
+/*
+Forms
+
+Styleguide 2.9
+*/
+
+// Colour variables used used in this component.
+$form-control-border-color: $color-hecuba !default;
+
+// Margins, paddings and sizes.
+$form-label-margin-bottom: .4rem !default;
+$form-label-font-size: .85em !default;
+$form-control-padding: 1rem 1.5rem 0.8rem 1.5rem !default;
+$form-control-border-thickness: 0.063rem !default;
+$form-control-border-radius: 0 !default;
+$form-text-margin-top: 0.25rem !default;
+$form-email-margin-top: 0.25rem !default;
+
+label {
+  margin-bottom: $form-label-margin-bottom;
+  font-size: $form-label-font-size;
+}
+.form-control {
+  padding: $form-control-padding;
+  border: $form-control-border-thickness solid $form-control-border-color;
+  border-radius: $form-control-border-radius;
+}
+
+.form-text {
+  display: block;
+  margin-top: $form-text-margin-top;
+}
+
+.form-email {
+  display: block;
+  margin-top: $form-email-margin-top;
+}
+input {
+  font-weight: bold;
+}
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-weight: normal;
+}
+input::-moz-placeholder { /* Firefox 19+ */
+  font-weight: normal;
+}
+input:-ms-input-placeholder { /* IE 10+ */
+  font-weight: normal;
+}
+input:-moz-placeholder { /* Firefox 18- */
+  font-weight: normal;
+}
+
+@mixin make-inline-form {
+  fieldset {
+    display: inline-block;
+    input {
+      margin-top: 0;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    display: block;
+  }
+  .button {
+    display: inline-block;
+    vertical-align: top;
+    @include media-breakpoint-down(md) {
+      display: block;
+      margin: 0 auto;
+    }
+    @include media-breakpoint-down(xs) {
+      width: 100%;
+    }
+  }
+}
