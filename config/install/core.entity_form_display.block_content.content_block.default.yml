@@ -1,5 +1,4 @@
-uuid: 3af68b8d-5572-4e3f-8d65-b0b68059cc52
-langcode: pl
+langcode: en
 status: true
 dependencies:
   config:
@@ -8,15 +7,13 @@ dependencies:
     - field.field.block_content.content_block.field_d_main_title
   module:
     - text
-_core:
-  default_config_hash: QQS1dUfX_jZ-WrQYmLb4qFWYtZQxM6ypCLlu0jANzRA
 id: block_content.content_block.default
 targetEntityType: block_content
 bundle: content_block
 mode: default
 content:
   field_d_long_text:
-    weight: 26
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
@@ -24,7 +21,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 27
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -33,7 +30,7 @@ content:
     region: content
   info:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -43,7 +40,8 @@ content:
     type: language_select
     weight: 2
     region: content
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
   translation:
     weight: 10

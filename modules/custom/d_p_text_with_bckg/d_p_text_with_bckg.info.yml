@@ -1,6 +1,6 @@
 name: d_p_text_with_bckg
 core: 8.x
-description: 'Provides a drop-down menu interface to the core Drupal Toolbar.'
+description: 'Provides a paragraph with text + background.'
 type: module
 dependencies:
   - content_translation
@@ -9,7 +9,8 @@ dependencies:
   - image
   - language
   - link
+  - link_attributes
   - paragraphs
   - text
 package: d
-version: 8.x-1.0-beta1
+version: 8.x-1.0-beta3
