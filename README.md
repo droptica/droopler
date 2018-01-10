@@ -12,15 +12,13 @@ The Droopler profile should be installed via Composer. We recommend using [Droop
 
 ```json
 "require": {
-  // ...
-  "droptica/droopler": "^1.0",
+  "droptica/droopler": "^1.0"
 }
 ```
 
 Also add a new repository to **repositories** section:
 ```json
 "repositories": {
-  // ...
   "droptica-droopler": {
     "type": "git",
     "url":  "git@github.com:droptica/droopler.git"
