@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: content_nodes
+label: 'Content nodes'
+description: ''
+attributes:
+  target:
+    id: target
+    weight: 0
+    settings:
+      widget_type: simple_checkbox
+matchers:
+  a0278b17-a284-42b8-ac99-54c4d4c39dbe:
+    uuid: a0278b17-a284-42b8-ac99-54c4d4c39dbe
+    id: 'entity:node'
+    weight: 0
+    settings:
+      result_description: '[node:langcode], [node:author], [node:created]'
+      bundles:
+        content_page: content_page
+      group_by_bundle: false
+      include_unpublished: false
