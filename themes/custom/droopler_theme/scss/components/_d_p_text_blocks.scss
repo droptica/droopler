@@ -37,6 +37,7 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 .d-p-group-of-text-blocks {
   & > h2 {
     @include font-main-header;
+    text-align: center;
     margin: $d-p-text-blocks-group-margin;
     @include media-breakpoint-down(md) {
       margin: $d-p-text-blocks-mobile-group-margin;

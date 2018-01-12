@@ -12,6 +12,7 @@ $d-p-side-image-banner-text-color: $color-odysseus !default;
 $d-p-side-image-banner-link-color: $color-nestor !default;
 $d-p-side-image-banner-link-hover-color: darken($d-p-side-image-banner-link-color, 5%) !default;
 $d-p-side-image-line-color: $color-nestor !default;
+$d-p-side-image-header-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-side-image-line-margin-top: 1.44rem !default;
@@ -25,12 +26,16 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
   color: $d-p-side-image-banner-text-color;
   h2 {
     @include font-main-header;
+    color: $d_p_side-image-header-color;
     text-align: left;
     &:after {
       @include decoration-header-line;
       margin-top: $d-p-side-image-line-margin-top;
       margin-bottom: $d-p-side-image-line-margin-bottom;
       margin-background: $d-p-side-image-line-color;
+    }
+    &:last-child:after {
+      display: none;
     }
   }
   a {

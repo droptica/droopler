@@ -27,6 +27,10 @@ $light-gray-background: $color-hector !default;
   h2 {
     @include font-main-header;
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font-header;
+    font-weight: $font-header-weight;
+  }
   p {
     @include font-body-standard;
   }

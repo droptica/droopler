@@ -4,9 +4,14 @@ Form paragraph.
 Styleguide components.d_p.form
 */
 
+// Colors.
+$d-p-form-header-color: $color-cassandra !default;
+$d-p-form-text-color: $color-cassandra !default;
+
 // Margins, paddings and sizes.
+$d-p-form-header-margin-top: 10% !default;
 $d-p-form-padding-top: 5% !default;
-$d-p-form-padding-bottom: 7% !default;
+$d-p-form-padding-bottom: 10% !default;
 $d-p-form-button-margin-top: 1rem !default;
 
 .paragraph-form {
@@ -14,10 +19,21 @@ $d-p-form-button-margin-top: 1rem !default;
     margin: $d-p-form-padding-top 0 $d-p-form-padding-bottom 0;
   }
 
+  h2 {
+    @include font-main-header;
+    margin-top: $d-p-form-header-margin-top;
+    text-align: center;
+    color: $d-p-form-header-color;
+  }
+
   .form-actions {
     text-align: center;
     .btn {
       margin-top: $d-p-form-button-margin-top;
     }
+  }
+
+  label {
+    color: $d-p-form-text-color;
   }
 }
