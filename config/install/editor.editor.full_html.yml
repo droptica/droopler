@@ -16,21 +16,36 @@ settings:
           items:
             - Bold
             - Italic
+            - Underline
             - Strike
             - Superscript
             - Subscript
-            - '-'
             - RemoveFormat
+            - '-'
+        -
+          name: Undo
+          items:
+            - Undo
+            - Redo
+        -
+          name: Alignment
+          items:
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
         -
           name: Linking
           items:
-            - DrupalLink
+            - Linkit
             - DrupalUnlink
         -
           name: Lists
           items:
             - BulletedList
             - NumberedList
+            - Outdent
+            - Indent
         -
           name: Media
           items:
@@ -45,11 +60,18 @@ settings:
         -
           name: Tools
           items:
+            - SpecialChar
+            - Language
             - ShowBlocks
             - Source
+            - Maximize
   plugins:
     stylescombo:
       styles: ''
+    language:
+      language_list: un
+    linkit:
+      linkit_profile: content_nodes
 image_upload:
   status: true
   scheme: public
