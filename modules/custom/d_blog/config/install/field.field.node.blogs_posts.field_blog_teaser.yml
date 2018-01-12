@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog_teaser
+    - node.type.blogs_posts
+  module:
+    - text
+id: node.blogs_posts.field_blog_teaser
+field_name: field_blog_teaser
+entity_type: node
+bundle: blogs_posts
+label: 'Blog teaser'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

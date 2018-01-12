@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog_category
+    - node.type.blogs_posts
+    - taxonomy.vocabulary.blog_posts_category
+id: node.blogs_posts.field_blog_category
+field_name: field_blog_category
+entity_type: node
+bundle: blogs_posts
+label: 'Blog category'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      blog_posts_category: blog_posts_category
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.blogs_posts.field_blog_main_image
+    - field.field.node.blogs_posts.field_blog_teaser
+    - node.type.blogs_posts
+  module:
+    - user
+id: node.blogs_posts.teaser
+targetEntityType: node
+bundle: blogs_posts
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_blog_main_image: true
+  field_blog_teaser: true
+  langcode: true
