@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function d_blog_theme($existing, $type, $theme, $path) {
+  return [
+    'node__blogs_posts' => [
+      'base hook' => 'node',
+    ],
+  ];
+}
