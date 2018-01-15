@@ -112,24 +112,20 @@
     {% endblock %}
   {% endif %}
   {% if page.admin_tabs %}
-    <div class="admin_tabs">
-      <aside class="container section clearfix" role="complementary">
-        {{ page.admin_tabs }}
-      </aside>
+    <div class="admin_tabs container">
+      {{ page.admin_tabs }}
     </div>
   {% endif %}
   <div id="main-wrapper" class="layout-main-wrapper clearfix">
     {% block content %}
       <div{{ main_attributes }}>
-        <div class="row clearfix">
-          {{ page.breadcrumb }}
-          <main class="main-content">
-            <section class="section">
-              <a id="main-content" tabindex="-1"></a>
-              {{ page.content }}
-            </section>
-          </main>
-        </div>
+        {{ page.breadcrumb }}
+        <main class="main-content">
+          <section class="section">
+            <a id="main-content" tabindex="-1"></a>
+            {{ page.content }}
+          </section>
+        </main>
       </div>
     {% endblock %}
   </div>
