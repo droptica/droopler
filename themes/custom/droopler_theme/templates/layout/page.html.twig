@@ -119,13 +119,15 @@
   <div id="main-wrapper" class="layout-main-wrapper clearfix">
     {% block content %}
       <div{{ main_attributes }}>
+        <div class="row clearfix">
         {{ page.breadcrumb }}
-        <main class="main-content">
-          <section class="section">
-            <a id="main-content" tabindex="-1"></a>
-            {{ page.content }}
-          </section>
-        </main>
+          <main class="main-content">
+            <section class="section">
+              <a id="main-content" tabindex="-1"></a>
+              {{ page.content }}
+            </section>
+          </main>
+        </div>
       </div>
     {% endblock %}
   </div>
