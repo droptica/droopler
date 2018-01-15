@@ -10,11 +10,11 @@ $d-p-text-paged-line-color: $color-agamemnon !default;
 $d-p-text-paged-color: $color-hecuba !default;
 
 // Margins, paddings and sizing.
-$d-p-text-paged-title-margin-top: 5% !default;
 $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
 $d-p-text-paged-line-margin-top: 1rem !default;
 $d-p-text-paged-line-margin-bottom: 1rem !default;
 $d-p-text-paged-margin-y: 5% !default;
+$d-p-text-paged-first-margin-top: 2% !default;
 
 .text-page {
   margin-top: $d-p-text-paged-margin-y;
@@ -22,7 +22,6 @@ $d-p-text-paged-margin-y: 5% !default;
 
   > h2 {
     @include font-main-header;
-    margin-top: $d-p-text-paged-title-margin-top;
     text-align: center;
   }
 
@@ -45,4 +44,9 @@ $d-p-text-paged-margin-y: 5% !default;
       margin-bottom: $d-p-text-paged-line-margin-bottom;
     }
   }
+}
+
+// If this is the first paragraph - decrease top margin.
+.paragraph-sections > section:first-child > .text-page {
+  margin-top: $d-p-text-paged-first-margin-top;
 }

@@ -41,6 +41,7 @@
  * - page.primary_menu: Items for the primary menu region.
  * - page.secondary_menu: Items for the secondary menu region.
  * - page.featured_top: Items for the featured top region.
+ * - page.admin_tabs: Items for node management.
  * - page.content: The main content of the current page.
  * - page.featured_bottom_first: Items for the first featured bottom region.
  * - page.featured_bottom_second: Items for the second featured bottom region.
@@ -109,6 +110,13 @@
         </aside>
       </div>
     {% endblock %}
+  {% endif %}
+  {% if page.admin_tabs %}
+    <div class="admin_tabs">
+      <aside class="container section clearfix" role="complementary">
+        {{ page.admin_tabs }}
+      </aside>
+    </div>
   {% endif %}
   <div id="main-wrapper" class="layout-main-wrapper clearfix">
     {% block content %}
