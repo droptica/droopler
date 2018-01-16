@@ -1,0 +1,23 @@
+uuid: 785a5e30-b6b0-4ea3-b874-cc99c4a72d16
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_blog_image_full_width
+    - paragraphs.paragraphs_type.d_p_blog_image
+id: paragraph.d_p_blog_image.field_d_p_blog_image_full_width
+field_name: field_d_p_blog_image_full_width
+entity_type: paragraph
+bundle: d_p_blog_image
+label: 'Image full page width'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Image is 100% width on page'
+  off_label: 'Image have width of text container'
+field_type: boolean
