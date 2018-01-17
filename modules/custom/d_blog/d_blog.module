@@ -5,7 +5,7 @@
  */
 function d_blog_theme($existing, $type, $theme, $path) {
   return [
-    'node__blogs_posts' => [
+    'node__blog_post' => [
       'base hook' => 'node',
     ],
   ];
