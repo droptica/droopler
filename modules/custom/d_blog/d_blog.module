@@ -10,3 +10,17 @@ function d_blog_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * @TODO Change preprocessing images only for blog node pages
+ */
+function d_blog_preprocess_image(&$variables) {
+  $attributes = &$variables['attributes'];
+
+  foreach (array('width', 'height') as $key) {
+    unset($attributes[$key]);
+    unset($variables[$key]);
+  }
+}
