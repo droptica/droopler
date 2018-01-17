@@ -1,0 +1,27 @@
+uuid: 2ec01fac-920b-49b1-a96c-bad0d705d0f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_blog_image_full_width.field_d_p_blog_image_full_width
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.d_p_blog_image_full_width
+  module:
+    - image
+id: paragraph.d_p_blog_image_full_width.default
+targetEntityType: paragraph
+bundle: d_p_blog_image_full_width
+mode: default
+content:
+  field_d_p_blog_image_full_width:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

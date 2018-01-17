@@ -1,13 +1,17 @@
+uuid: 5f0e5f77-cef9-46b4-962a-b011901bafdf
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_blog_sections
     - node.type.blog_post
+    - paragraphs.paragraphs_type.d_p_blog_image_full_width
     - paragraphs.paragraphs_type.d_p_blog_image_page_width
     - paragraphs.paragraphs_type.d_p_blog_text
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: DNzhBZS3TmkUXyEVEfh_sTz3dvpExNYLtfzczLjz3pY
 id: node.blog_post.field_blog_sections
 field_name: field_blog_sections
 entity_type: node
@@ -24,36 +28,40 @@ settings:
     negate: 0
     target_bundles:
       d_p_blog_image_page_width: d_p_blog_image_page_width
+      d_p_blog_image_full_width: d_p_blog_image_full_width
       d_p_blog_text: d_p_blog_text
     target_bundles_drag_drop:
       d_p_banner:
-        weight: 12
+        weight: -23
         enabled: false
       d_p_blog_image_page_width:
         enabled: true
-        weight: 12
+        weight: -22
+      d_p_blog_image_full_width:
+        enabled: true
+        weight: -21
       d_p_blog_text:
         enabled: true
-        weight: 13
+        weight: -20
       d_p_form:
-        weight: 14
+        weight: -19
         enabled: false
       d_p_group_of_text_blocks:
-        weight: 15
+        weight: -18
         enabled: false
       d_p_side_image:
-        weight: 16
+        weight: -17
         enabled: false
       d_p_single_text_block:
-        weight: 17
+        weight: -16
         enabled: false
       d_p_subscribe_file:
-        weight: 18
+        weight: -15
         enabled: false
       d_p_text_paged:
-        weight: 19
+        weight: -14
         enabled: false
       d_p_text_with_bckg:
-        weight: 20
+        weight: -13
         enabled: false
 field_type: entity_reference_revisions
