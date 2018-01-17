@@ -1,11 +1,9 @@
-uuid: 6e3bb22d-c8cb-4f90-95fd-b8c50d9f5aed
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.blogs_posts.field_blog_category
     - field.field.node.blogs_posts.field_blog_main_image
-    - field.field.node.blogs_posts.field_blog_main_image_full_width
     - field.field.node.blogs_posts.field_blog_sections
     - field.field.node.blogs_posts.field_blog_teaser
     - node.type.blogs_posts
@@ -13,8 +11,6 @@ dependencies:
     - entity_reference_revisions
     - image
     - user
-_core:
-  default_config_hash: JtFvfa6tONvFjhBVH7GIOPN87zXImh4fj2pjrglz5I8
 id: node.blogs_posts.default
 targetEntityType: node
 bundle: blogs_posts
@@ -52,6 +48,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_blog_main_image_full_width: true
   field_blog_teaser: true
   langcode: true

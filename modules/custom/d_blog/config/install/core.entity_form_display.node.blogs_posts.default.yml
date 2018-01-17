@@ -1,11 +1,9 @@
-uuid: c3ba41b2-96b9-4160-a6f4-29de9c7a07bb
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.blogs_posts.field_blog_category
     - field.field.node.blogs_posts.field_blog_main_image
-    - field.field.node.blogs_posts.field_blog_main_image_full_width
     - field.field.node.blogs_posts.field_blog_sections
     - field.field.node.blogs_posts.field_blog_teaser
     - image.style.thumbnail
@@ -15,8 +13,6 @@ dependencies:
     - paragraphs
     - path
     - text
-_core:
-  default_config_hash: Uqn2LYPouYg-a6FwKu9JB1Cr_X2vFr9Vc2EeKGcfIP4
 id: node.blogs_posts.default
 targetEntityType: node
 bundle: blogs_posts
@@ -29,7 +25,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_blog_category:
-    weight: 14
+    weight: 13
     settings:
       match_operator: CONTAINS
       size: 60
@@ -45,16 +41,9 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
-  field_blog_main_image_full_width:
-    weight: 12
-    settings:
-      display_label: true
-    third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_blog_sections:
     type: entity_reference_paragraphs
-    weight: 13
+    weight: 12
     settings:
       title: Paragraph
       title_plural: Paragraphs
