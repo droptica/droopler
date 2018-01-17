@@ -1,6 +1,7 @@
 name: d_content
 type: module
 core: 8.x
+description: 'Provides "content page" node type.'
 dependencies:
   - block
   - block_content
@@ -8,6 +9,7 @@ dependencies:
   - entity_reference_revisions
   - field
   - language
+  - menu_link_content
   - menu_ui
   - node
   - paragraphs
@@ -17,4 +19,4 @@ dependencies:
   - user
   - views
 package: d
-version: 8.x-1.0-beta2
+version: 8.x-1.0-beta3

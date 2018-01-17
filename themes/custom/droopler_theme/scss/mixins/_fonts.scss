@@ -10,8 +10,6 @@ $font-main-header-size-down: 2rem !default;
 @mixin font-main-header {
   font-size: $font-main-header-size;
   font-weight: bold;
-  text-align: center;
-  word-wrap: break-word;
   @include media-breakpoint-down(md) {
     font-size: $font-main-header-size-down;
   }
@@ -23,12 +21,9 @@ $font-main-header-big-size-down-md: 2.5rem !default;
 $font-main-header-big-size-down-sm: 2.5rem !default;
 $font-main-header-big-margin-bottom: 0.8rem !default;
 @mixin font-main-header-big {
-  text-transform: uppercase;
   font-weight: 900;
   margin-bottom: $font-main-header-big-margin-bottom;
-  text-align: center;
   font-size: $font-main-header-big-size;
-  word-wrap: break-word;
   @include media-breakpoint-down(md) {
     font-size: $font-main-header-big-size-down-md;
   }
