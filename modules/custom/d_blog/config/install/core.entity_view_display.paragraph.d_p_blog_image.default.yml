@@ -4,12 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_blog_image.field_d_p_blog_image
-    - field.field.paragraph.d_p_blog_image.field_d_p_blog_image_full_width
     - paragraphs.paragraphs_type.d_p_blog_image
   module:
     - image
-_core:
-  default_config_hash: UcvlcAOiQaMYqNTXlZlElWz1Q6C4Ha_vFwr5jL1Wfnk
 id: paragraph.d_p_blog_image.default
 targetEntityType: paragraph
 bundle: d_p_blog_image
@@ -24,5 +21,4 @@ content:
       image_style: ''
       image_link: ''
     third_party_settings: {  }
-hidden:
-  field_d_p_blog_image_full_width: true
+hidden: {  }
