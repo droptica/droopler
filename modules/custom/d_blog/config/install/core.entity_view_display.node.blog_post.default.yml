@@ -1,3 +1,4 @@
+uuid: fe50c45d-968f-4108-86c0-a840cae8707a
 langcode: en
 status: true
 dependencies:
@@ -11,13 +12,15 @@ dependencies:
     - entity_reference_revisions
     - image
     - user
+_core:
+  default_config_hash: 2FVpCk64aLqqHD84Z2gAl1tALhd3_n6NACdmnTSffTc
 id: node.blog_post.default
 targetEntityType: node
 bundle: blog_post
 mode: default
 content:
   field_blog_category:
-    weight: 3
+    weight: 1
     label: hidden
     settings:
       link: true
@@ -25,7 +28,7 @@ content:
     type: entity_reference_label
     region: content
   field_blog_main_image:
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       image_style: ''
@@ -35,7 +38,7 @@ content:
     region: content
   field_blog_sections:
     type: entity_reference_revisions_entity_view
-    weight: 2
+    weight: 3
     label: hidden
     settings:
       view_mode: default
