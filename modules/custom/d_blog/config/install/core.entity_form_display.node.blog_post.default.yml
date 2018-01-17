@@ -2,20 +2,20 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.blogs_posts.field_blog_category
-    - field.field.node.blogs_posts.field_blog_main_image
-    - field.field.node.blogs_posts.field_blog_sections
-    - field.field.node.blogs_posts.field_blog_teaser
+    - field.field.node.blog_post.field_blog_category
+    - field.field.node.blog_post.field_blog_main_image
+    - field.field.node.blog_post.field_blog_sections
+    - field.field.node.blog_post.field_blog_teaser
     - image.style.thumbnail
-    - node.type.blogs_posts
+    - node.type.blog_post
   module:
     - image
     - paragraphs
     - path
     - text
-id: node.blogs_posts.default
+id: node.blog_post.default
 targetEntityType: node
-bundle: blogs_posts
+bundle: blog_post
 mode: default
 content:
   created:

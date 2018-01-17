@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - node.type.blogs_posts
+    - node.type.blog_post
   module:
     - node
     - user
@@ -136,7 +136,7 @@ display:
           table: node_field_data
           field: type
           value:
-            blogs_posts: blogs_posts
+            blog_post: blog_post
           entity_type: node
           entity_field: type
           plugin_id: bundle

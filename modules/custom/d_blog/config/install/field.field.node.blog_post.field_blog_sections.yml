@@ -3,15 +3,15 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_blog_sections
-    - node.type.blogs_posts
+    - node.type.blog_post
     - paragraphs.paragraphs_type.d_p_blog_image_page_width
     - paragraphs.paragraphs_type.d_p_blog_text
   module:
     - entity_reference_revisions
-id: node.blogs_posts.field_blog_sections
+id: node.blog_post.field_blog_sections
 field_name: field_blog_sections
 entity_type: node
-bundle: blogs_posts
+bundle: blog_post
 label: 'Blog sections'
 description: ''
 required: false

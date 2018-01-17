@@ -3,13 +3,13 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_blog_main_image
-    - node.type.blogs_posts
+    - node.type.blog_post
   module:
     - image
-id: node.blogs_posts.field_blog_main_image
+id: node.blog_post.field_blog_main_image
 field_name: field_blog_main_image
 entity_type: node
-bundle: blogs_posts
+bundle: blog_post
 label: 'Blog main image'
 description: ''
 required: false

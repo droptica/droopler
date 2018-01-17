@@ -22,14 +22,14 @@ visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
-      blogs_posts: blogs_posts
+      blog_post: blog_post
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
   node_type:
     id: node_type
     bundles:
-      blogs_posts: blogs_posts
+      blog_post: blog_post
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'

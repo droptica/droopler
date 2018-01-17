@@ -3,13 +3,13 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_blog_teaser
-    - node.type.blogs_posts
+    - node.type.blog_post
   module:
     - text
-id: node.blogs_posts.field_blog_teaser
+id: node.blog_post.field_blog_teaser
 field_name: field_blog_teaser
 entity_type: node
-bundle: blogs_posts
+bundle: blog_post
 label: 'Blog teaser'
 description: ''
 required: true

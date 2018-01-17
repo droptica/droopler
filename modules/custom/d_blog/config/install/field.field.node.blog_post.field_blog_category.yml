@@ -3,12 +3,12 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_blog_category
-    - node.type.blogs_posts
+    - node.type.blog_post
     - taxonomy.vocabulary.blog_posts_category
-id: node.blogs_posts.field_blog_category
+id: node.blog_post.field_blog_category
 field_name: field_blog_category
 entity_type: node
-bundle: blogs_posts
+bundle: blog_post
 label: 'Blog category'
 description: ''
 required: false

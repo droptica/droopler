@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.blogs_posts
-id: node.blogs_posts.promote
+    - node.type.blog_post
+id: node.blog_post.promote
 field_name: promote
 entity_type: node
-bundle: blogs_posts
+bundle: blog_post
 label: 'Promoted to front page'
 description: ''
 required: false
