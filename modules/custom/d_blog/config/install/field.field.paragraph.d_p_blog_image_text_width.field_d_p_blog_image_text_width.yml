@@ -3,14 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_d_p_blog_image_page_width
-    - paragraphs.paragraphs_type.d_p_blog_image_page_width
+    - field.storage.paragraph.field_d_p_blog_image_text_width
+    - paragraphs.paragraphs_type.d_p_blog_image_text_width
   module:
     - image
-id: paragraph.d_p_blog_image_page_width.field_d_p_blog_image_page_width
-field_name: field_d_p_blog_image_page_width
+id: paragraph.d_p_blog_image_text_width.field_d_p_blog_image_text_width
+field_name: field_d_p_blog_image_text_width
 entity_type: paragraph
-bundle: d_p_blog_image_page_width
+bundle: d_p_blog_image_text_width
 label: 'Blog image'
 description: ''
 required: false
