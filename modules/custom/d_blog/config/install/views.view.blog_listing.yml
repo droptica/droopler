@@ -1,3 +1,4 @@
+uuid: 225fc5ae-c500-45ba-a33a-77a5541192ba
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
   module:
     - node
     - user
+_core:
+  default_config_hash: 1KQdPrXl5DkmrJhum3cz5dEkJi8uqcXZQlSE1_wJ40c
 id: blog_listing
 label: 'Blog listing'
 module: views
@@ -54,6 +57,9 @@ display:
           offset: 0
           id: 0
           total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -62,9 +68,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          tags:
-            previous: ‹‹
-            next: ››
       style:
         type: default
       row:
@@ -180,10 +183,10 @@ display:
     display_options:
       display_extenders: {  }
       path: blog
+      rendering_language: '***LANGUAGE_language_interface***'
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'

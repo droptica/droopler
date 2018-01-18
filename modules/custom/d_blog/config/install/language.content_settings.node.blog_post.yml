@@ -1,3 +1,4 @@
+uuid: 8b0b2afe-4bbe-4751-a83a-20d9c0d1eaa8
 langcode: en
 status: true
 dependencies:
@@ -8,8 +9,10 @@ dependencies:
 third_party_settings:
   content_translation:
     enabled: true
+_core:
+  default_config_hash: 3idWyV67oqP06DEiV5L6fRU-dhsA2a-O2e2qaJGvDVY
 id: node.blog_post
 target_entity_type_id: node
 target_bundle: blog_post
 default_langcode: site_default
-language_alterable: false
+language_alterable: true

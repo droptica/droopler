@@ -7,6 +7,8 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_blog_text
   module:
     - text
+_core:
+  default_config_hash: NmdjeYbYQuiWeZqF30nxfQaxzdlJA3v4lJfHZNJdO2o
 id: paragraph.d_p_blog_text.field_d_p_blog_text
 field_name: field_d_p_blog_text
 entity_type: paragraph
@@ -14,7 +16,7 @@ bundle: d_p_blog_text
 label: 'Blog text'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
