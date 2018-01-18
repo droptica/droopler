@@ -7,6 +7,8 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_blog_text
   module:
     - text
+_core:
+  default_config_hash: wb-beTJQ4rbY-0QddB9I6h13SOxhst1v3Q_i2muTH5o
 id: paragraph.d_p_blog_text.default
 targetEntityType: paragraph
 bundle: d_p_blog_text
@@ -20,6 +22,9 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
 hidden:
   created: true
   status: true

@@ -5,13 +5,12 @@ dependencies:
   config:
     - field.storage.node.field_blog_sections
     - node.type.blog_post
-    - paragraphs.paragraphs_type.d_p_blog_image_full_width
     - paragraphs.paragraphs_type.d_p_blog_image_text_width
     - paragraphs.paragraphs_type.d_p_blog_text
   module:
     - entity_reference_revisions
 _core:
-  default_config_hash: DNzhBZS3TmkUXyEVEfh_sTz3dvpExNYLtfzczLjz3pY
+  default_config_hash: 25S4_q8mNQ1GwOgOpsigQu9PzHG5iIG9t0gPVWXJA5k
 id: node.blog_post.field_blog_sections
 field_name: field_blog_sections
 entity_type: node
@@ -28,7 +27,6 @@ settings:
     negate: 0
     target_bundles:
       d_p_blog_image_text_width: d_p_blog_image_text_width
-      d_p_blog_image_full_width: d_p_blog_image_full_width
       d_p_blog_text: d_p_blog_text
     target_bundles_drag_drop:
       d_p_banner:

@@ -1,27 +1,15 @@
-uuid: b8e16a79-ecea-4ad8-9c2f-754fa387b98a
+uuid: 218ebc68-b635-4a2f-81f6-fd6447585a34
 langcode: en
 status: true
 dependencies:
   module:
-    - file
-    - image
     - paragraphs
 id: paragraph.field_d_p_blog_image_full_width
 field_name: field_d_p_blog_image_full_width
 entity_type: paragraph
-type: image
-settings:
-  uri_scheme: public
-  default_image:
-    uuid: ''
-    alt: ''
-    title: ''
-    width: null
-    height: null
-  target_type: file
-  display_field: false
-  display_default: false
-module: image
+type: boolean
+settings: {  }
+module: core
 locked: false
 cardinality: 1
 translatable: true
