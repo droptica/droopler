@@ -25,9 +25,14 @@ $text-container-width: 35em;
   }
 
   .field--name-field-blog-main-image,
-  .field--name-field-d-p-blog-image-full-width {
+  .paragraph--full-screen-width {
     img {
       width: 100%;
+    }
+    .field--name-field-d-p-blog-image {
+      img {
+        width: 100%;
+      }
     }
   }
 
