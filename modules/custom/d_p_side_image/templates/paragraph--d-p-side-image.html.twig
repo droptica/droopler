@@ -43,9 +43,8 @@
 'd-p-side-image-banner',
 'paragraph--type--' ~ paragraph.bundle|clean_class,
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-image_on_full_screen_width ? 'paragraph--full-screen-width'|clean_class,
 ] %}
-{#{% block paragraph %}#}
+{% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     <div class="clearfix d-p-side-image-banner-wrapper image-side-{{ image_side }}">
       <div class="d-image col-md-6 background-image" data-id="{{ id }}">
