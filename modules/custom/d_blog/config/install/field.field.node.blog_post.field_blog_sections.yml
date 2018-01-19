@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_blog_sections
     - node.type.blog_post
-    - paragraphs.paragraphs_type.d_p_blog_image_text_width
+    - paragraphs.paragraphs_type.d_p_blog_image
     - paragraphs.paragraphs_type.d_p_blog_text
   module:
     - entity_reference_revisions
@@ -26,13 +26,13 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
-      d_p_blog_image_text_width: d_p_blog_image_text_width
+      d_p_blog_image: d_p_blog_image
       d_p_blog_text: d_p_blog_text
     target_bundles_drag_drop:
       d_p_banner:
         weight: -23
         enabled: false
-      d_p_blog_image_text_width:
+      d_p_blog_image:
         enabled: true
         weight: -22
       d_p_blog_text:
