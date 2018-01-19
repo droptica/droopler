@@ -19,15 +19,9 @@ class RouteSubscriber extends RouteSubscriberBase {
      * {@inheritdoc}
      */
     public function alterRoutes(RouteCollection $collection) {
-//        $col = $collection->all();
-//        $filtered_col = array_filter($col, function($key) {var_dump($key); return strpos('entity', $key) !== false; }, ARRAY_FILTER_USE_KEY);
-//        var_dump(array_keys($filtered_col));
         if ($route = $collection->get('entity.taxonomy_term.canonical')) {
             $route->setDefault('_controller', '\Drupal\d_blog\Controller\TaxonomyTermViewPageController::handle');
         }
-//        if ($route = $collection->get('entity.view.edit_display_form')) {
-//            $route->setDefault('_controller', '\Drupal\d_blog\Controller\TaxonomyTermViewPageController::handle');
-//        }
     }
 
     /**
