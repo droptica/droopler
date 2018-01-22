@@ -71,6 +71,7 @@
     'clearfix',
 ]
 %}
+{% set date = node.created.value|date("d.m.Y") %}
 <article{{ attributes.addClass(classes) }}>
     <header class="blog_post_header">
         <div class="blog_post_header_absolute_wrapper">
