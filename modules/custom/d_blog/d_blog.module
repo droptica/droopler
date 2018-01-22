@@ -4,7 +4,6 @@
  * Implements hook_theme().
  */
 function d_blog_theme($existing, $type, $theme, $path) {
-    $d = 'd';
   return [
     'node__blog_post' => [
       'base hook' => 'node',

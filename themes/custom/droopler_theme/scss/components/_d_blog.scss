@@ -20,7 +20,6 @@ $text-container-width: 35em;
   .node__meta {
     span {
       text-align: center;
-      display: block;
     }
   }
 
@@ -30,12 +29,21 @@ $text-container-width: 35em;
 
   .blog_post_header_absolute_wrapper {
     position: absolute;
-    top: 50%;
+    top: 83%;
+    -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 100%;
     text-align: center;
     padding-left: 10px;
     padding-right: 10px;
+
+    h1 {
+      font-size: 48px;
+      width: 54%;
+      margin-left: auto;
+      margin-right: auto;
+      text-transform: none;
+    }
   }
 
   .field--name-field-blog-main-image,

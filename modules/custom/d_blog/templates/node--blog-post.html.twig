@@ -75,9 +75,6 @@
     <header class="blog_post_header">
         <div class="blog_post_header_absolute_wrapper">
             {{ title_prefix }}
-
-            {{ content.field_blog_category}}
-
             {% if not page %}
                 <h2{{ title_attributes.addClass('node__title') }}>
                     <a href="{{ url }}" rel="bookmark">{{ label }}</a>
@@ -92,13 +89,15 @@
 
                     {% block submitted %}
                         <span{{ author_attributes }} class="author_attributes">
-                            {% trans %}Submitted on {{ date }}{% endtrans %}
+                        {% trans %}{{ author_name }} /  {{ date }}{% endtrans %}
                     </span>
                     {% endblock %}
 
                     {{ metadata }}
 
                     <h1>{{ node.title.value }} </h1>
+
+                    {{ content.field_blog_category}}
                 </div>
             {% endif %}
         </div>
