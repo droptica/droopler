@@ -24,6 +24,20 @@ $text-container-width: 35em;
     }
   }
 
+  .blog_post_header {
+    position: relative;
+  }
+
+  .blog_post_header_absolute_wrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .field--name-field-blog-main-image,
   .paragraph--full-screen-width {
     img {

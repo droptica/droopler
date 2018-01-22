@@ -35,5 +35,4 @@ class RouteSubscriber extends RouteSubscriberBase {
 
         return $events;
     }
-
 }

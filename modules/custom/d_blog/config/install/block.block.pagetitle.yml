@@ -1,16 +1,18 @@
 uuid: 62413e4f-d03f-4887-840a-d7c54c29075f
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - ctools
     - node
   theme:
     - droopler_subtheme
+_core:
+  default_config_hash: w2Thp8i42m7a9cjajJCHe2CsyxjhU_NTFlhTwwuMFT8
 id: pagetitle
 theme: droopler_subtheme
 region: content
-weight: 0
+weight: -2
 provider: null
 plugin: page_title_block
 settings:
