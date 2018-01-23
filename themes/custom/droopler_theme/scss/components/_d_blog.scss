@@ -1,4 +1,5 @@
 $text-container-width: 35em;
+$color-taxonomy-in-header: #8e8a89;
 
 .node--type-blog-post {
 
@@ -18,7 +19,7 @@ $text-container-width: 35em;
   .blog_post_header {
     min-height: 200px;
     position: relative;
-    background-color: #4C4C4C;
+    background-color: $color-troilus;
 
     .blog_post_header_absolute_wrapper {
       color: white;
@@ -48,10 +49,10 @@ $text-container-width: 35em;
       .field--name-field-blog-category {
         text-align: center;
         font-size: 16px;
-        color: #8e8a89;
+        color: $color-taxonomy-in-header;
 
         a {
-          color: #8e8a89;
+          color: $color-taxonomy-in-header;
         }
       }
 
@@ -63,12 +64,11 @@ $text-container-width: 35em;
       }
     }
 
-  @media all and (max-width: 1200px) {
-    .blog_post_header_absolute_wrapper {
+    @media all and (max-width: 1200px) {
+      .blog_post_header_absolute_wrapper {
 
         bottom: 0;
         h1 {
-          color: red;
           margin: 25px auto 22px;
           font-size: 26px;
         }
