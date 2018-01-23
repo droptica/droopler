@@ -8,6 +8,9 @@ function d_blog_theme($existing, $type, $theme, $path) {
     'node__blog_post' => [
       'base hook' => 'node',
     ],
+    'node__view__blog_listing' => [
+        'base hook' => 'node',
+    ],
     'paragraph__d_p_blog_image' => [
         'base hook' => 'paragraph',
     ],
