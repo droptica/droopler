@@ -75,8 +75,10 @@
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     'clearfix',
+    'container'
 ]
 %}
+{% set date = node.created.value|date("d.m.Y") %}
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
     <header>
@@ -91,13 +93,13 @@
             <div class="node__meta">
                 {{ author_picture }}
                 <span{{ author_attributes }}>
-          {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+                {% trans %}{{ date }} / {% endtrans %}{{ content.field_blog_category}}
         </span>
                 {{ metadata }}
             </div>
         {% endif %}
     </header>
     <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-        {{ content }}
+        {{ content|without('field_blog_category') }}
     </div>
 </article>
