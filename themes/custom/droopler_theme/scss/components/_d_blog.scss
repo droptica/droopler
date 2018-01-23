@@ -10,6 +10,9 @@ $text-container-width: 35em;
 
   .node .field--type-image {
     float: none;
+    img {
+      margin: 0;
+    }
   }
 
   .blog_post_header {
@@ -60,8 +63,9 @@ $text-container-width: 35em;
       }
     }
 
+  @media all and (max-width: 1200px) {
     .blog_post_header_absolute_wrapper {
-      @media all and (max-width: 1200px) {
+
         bottom: 0;
         h1 {
           color: red;
@@ -75,6 +79,20 @@ $text-container-width: 35em;
 
         .field--name-field-blog-category {
           font-size: 10px;
+        }
+      }
+    }
+  }
+
+  @media all and (max-width: 576px) {
+    .blog_post_header {
+      min-height: 150px;
+      .blog_post_header_absolute_wrapper {
+        top: 40%;
+        transform: translateY(-50%);
+        h1 {
+          font-size:18px;
+          margin: 15px auto 15px;
         }
       }
     }
@@ -113,8 +131,7 @@ $text-container-width: 35em;
 
   .field--name-field-d-p-blog-text {
     width: $text-container-width;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
     display: block;
 
     h1, h2, h3, h4, h5, h6 {
@@ -125,6 +142,34 @@ $text-container-width: 35em;
 
     h2 {
       font-size: 2em
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    .field--name-field-d-p-blog-text {
+      width: 73%;
+      h2 {
+        font-size: 22px;
+      }
+      h3, h4, h5, h6 {
+        font-size: 20px;
+      }
+    }
+    .field--name-field-d-p-blog-image {
+      img {
+        width: 100%;
+      }
+    }
+  }
+  @media all and (max-width: 576px) {
+    .field--name-field-d-p-blog-text {
+      width: 73%;
+      h2 {
+        font-size: 17px;
+      }
+      h3, h4, h5, h6 {
+        font-size: 16px;
+      }
     }
   }
 }
