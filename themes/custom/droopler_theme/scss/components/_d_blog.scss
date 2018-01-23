@@ -30,7 +30,7 @@ $text-container-width: 35em;
         font-size: 45px;
         margin: 25px auto 35px;
         text-transform: none;
-        color: white
+        color: white;
       }
 
       .author_attributes {
@@ -60,9 +60,25 @@ $text-container-width: 35em;
       }
     }
 
+    .blog_post_header_absolute_wrapper {
+      @media all and (max-width: 1200px) {
+        bottom: 0;
+        h1 {
+          color: red;
+          margin: 25px auto 22px;
+          font-size: 26px;
+        }
+
+        .author_attributes {
+          font-size: 12px;
+        }
+
+        .field--name-field-blog-category {
+          font-size: 10px;
+        }
+      }
+    }
   }
-
-
 
   .field--name-field-blog-main-image {
     img {
@@ -100,5 +116,15 @@ $text-container-width: 35em;
     margin-left: auto;
     margin-right: auto;
     display: block;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: black;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 2em
+    }
   }
 }
