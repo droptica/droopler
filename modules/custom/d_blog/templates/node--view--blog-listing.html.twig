@@ -75,13 +75,22 @@
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     'clearfix',
-    'container'
+    'container-fluid'
 ]
 %}
 {% set date = node.created.value|date("d.m.Y") %}
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
     <header>
+        {% if display_submitted %}
+            <div class="node__meta">
+                {{ author_picture }}
+                <span{{ author_attributes }}>
+                    {% trans %}{{ date }} / {% endtrans %}{{ content.field_blog_category}}
+                </span>
+                {{ metadata }}
+            </div>
+        {% endif %}
         {{ title_prefix }}
         {% if not page %}
             <h2{{ title_attributes.addClass('node__title') }}>
@@ -89,15 +98,6 @@
             </h2>
         {% endif %}
         {{ title_suffix }}
-        {% if display_submitted %}
-            <div class="node__meta">
-                {{ author_picture }}
-                <span{{ author_attributes }}>
-                {% trans %}{{ date }} / {% endtrans %}{{ content.field_blog_category}}
-        </span>
-                {{ metadata }}
-            </div>
-        {% endif %}
     </header>
     <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
         {{ content|without('field_blog_category') }}

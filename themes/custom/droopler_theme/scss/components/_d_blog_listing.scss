@@ -1,3 +1,18 @@
+$blog-listing-header-color: #1a6dbb;
+
+.blog-listing-main-header {
+  background-color: $blog-listing-header-color;
+  color: $white;
+  padding-top: 125px;
+  padding-bottom: 86px;
+  text-transform: none;
+
+  &:after {
+    @include decoration-header-line-main-center;
+  }
+
+}
+
 .node--view-mode-teaser {
   .field--name-field-blog-category {
     display: inline;
