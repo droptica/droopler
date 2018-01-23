@@ -26,11 +26,36 @@ $blog-listing-header-color: #1a6dbb;
     }
   }
 
+
+
   .node__meta {
     padding-left: 0;
   }
   .nav-link {
     padding-left: 0;
   }
+
+  @media all and (min-width: 768px) {
+    .article-row {
+      height: 326px;
+    }
+
+    .node_blog_post_title {
+      font-size: 22px;
+    }
+
+    .node__content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .field--name-field-blog-teaser {
+      p {
+        font-size: 10px;
+        margin: 0;
+      }
+    }
+  }
+
 }
 
