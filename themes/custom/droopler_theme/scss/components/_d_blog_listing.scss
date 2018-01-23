@@ -10,11 +10,27 @@ $blog-listing-header-color: #1a6dbb;
   &:after {
     @include decoration-header-line-main-center;
   }
-
 }
 
 .node--view-mode-teaser {
   .field--name-field-blog-category {
     display: inline;
   }
+
+  .node_blog_post_title {
+    text-align: left;
+    padding-left: 0;
+
+    &:after {
+      @include decoration-header-line;
+    }
+  }
+
+  .node__meta {
+    padding-left: 0;
+  }
+  .nav-link {
+    padding-left: 0;
+  }
 }
+

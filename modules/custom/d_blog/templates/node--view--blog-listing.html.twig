@@ -83,7 +83,7 @@
 <article{{ attributes.addClass(classes) }}>
     <header>
         {% if display_submitted %}
-            <div class="node__meta">
+            <div class="node__meta col-6">
                 {{ author_picture }}
                 <span{{ author_attributes }}>
                     {% trans %}{{ date }} / {% endtrans %}{{ content.field_blog_category}}
@@ -93,7 +93,7 @@
         {% endif %}
         {{ title_prefix }}
         {% if not page %}
-            <h2{{ title_attributes.addClass('node__title') }}>
+            <h2{{ title_attributes.addClass('node_blog_post_title').addClass('col-6') }}>
                 <a href="{{ url }}" rel="bookmark">{{ label }}</a>
             </h2>
         {% endif %}

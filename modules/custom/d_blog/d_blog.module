@@ -44,6 +44,15 @@ function d_blog_preprocess_paragraph(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_links().
+ */
+function d_blog_preprocess_links(&$variables) {
+    if (isset($variables['links']['node-readmore'])) {
+        $variables['links']['node-readmore']['link']['#title'] = t('Read article');
+    }
+}
+
+/**
  * Implements hook_preprocess_HOOK().
  *
  * @TODO Change preprocessing images only for blog node pages
