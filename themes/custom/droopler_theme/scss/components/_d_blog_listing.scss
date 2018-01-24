@@ -107,7 +107,8 @@ $blog-listing-taxonomy-link-color: #68696b;
     .field--name-field-blog-main-image {
       img {
         width: 640px;
-        height: 400px
+        height: 400px;
+        object-fit: cover;
       }
     }
   }
