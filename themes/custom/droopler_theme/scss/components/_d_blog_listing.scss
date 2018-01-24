@@ -1,4 +1,5 @@
 $blog-listing-header-color: #1a6dbb;
+$blog-listing-taxonomy-link-color: #68696b;
 
 .view-blog-listing {
   margin-top: 40px;
@@ -38,9 +39,9 @@ $blog-listing-header-color: #1a6dbb;
 
   .node__meta {
     padding-left: 0;
-    color: #68696b;
+    color: $blog-listing-taxonomy-link-color;
     a {
-      color: #68696b;
+      color: $blog-listing-taxonomy-link-color;
     }
   }
   .nav-link {
