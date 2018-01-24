@@ -6,7 +6,7 @@ $blog-listing-header-color: #1a6dbb;
 
 .field--name-field-blog-teaser {
   p {
-    margin: 43px 0;
+    margin: 20px 0;
   }
 }
 
@@ -59,6 +59,9 @@ $blog-listing-header-color: #1a6dbb;
 
     .blog-main-image-row {
       margin-left: 30px;
+      img {
+        padding-right: 10px
+      }
     }
   }
 
@@ -68,7 +71,7 @@ $blog-listing-header-color: #1a6dbb;
     padding-bottom: 0;
 
     .article-row {
-      min-height: 520px;
+      min-height: 420px;
     }
 
     .title-row-for-mobile {
@@ -77,12 +80,12 @@ $blog-listing-header-color: #1a6dbb;
 
     .title-row {
       display: block;
-      margin-top: 73px
+      margin-top: 35px
     }
 
     .node_blog_post_title {
       font-size: 38px;
-      padding-top: 37px
+      padding-top: 18px;
     }
 
     .node__content {
@@ -93,8 +96,43 @@ $blog-listing-header-color: #1a6dbb;
     .field--name-field-blog-teaser {
       p {
         font-size: 16px;
+      }
+    }
+
+    .inline__links {
+      margin-top: 21px
+    }
+
+    .field--name-field-blog-main-image {
+      img {
+        width: 640px;
+        height: 400px
+      }
+    }
+  }
+  @media all and (min-width: 1200px) {
+
+    .article-row {
+      min-height: 520px;
+    }
+
+    .field--name-field-blog-teaser {
+      p {
         margin: 43px 0;
       }
+    }
+
+    .title-row {
+      margin-top: 73px
+    }
+
+    .node_blog_post_title {
+      padding-top: 37px
+    }
+
+    .node__content {
+      padding: 0;
+      margin: 43px 0;
     }
 
     .inline__links {
@@ -103,10 +141,8 @@ $blog-listing-header-color: #1a6dbb;
 
     .field--name-field-blog-main-image {
       img {
-        width: 640px;
         height: 480px
       }
     }
   }
 }
-
