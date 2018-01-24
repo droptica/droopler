@@ -48,7 +48,7 @@ function d_blog_preprocess_paragraph(&$variables) {
  */
 function d_blog_preprocess_links(&$variables) {
     if (isset($variables['links']['node-readmore'])) {
-        $variables['links']['node-readmore']['link']['#title'] = t('Read article...');
+        $variables['links']['node-readmore']['link']['#title'] = t('READ ARTICLE...');
     }
 }
 
