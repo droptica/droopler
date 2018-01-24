@@ -161,6 +161,7 @@ $color-taxonomy-in-header: #8e8a89;
       }
     }
   }
+
   @media all and (max-width: 576px) {
     .field--name-field-d-p-blog-text {
       width: 73%;
@@ -170,6 +171,22 @@ $color-taxonomy-in-header: #8e8a89;
       h3, h4, h5, h6 {
         font-size: 16px;
       }
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .node--type-blog-post {
+    .blog_post_header {
+      min-height: 300px;
+    }
+  }
+}
+
+@media all and (min-width: 1400px)  {
+  .node--type-blog-post {
+    .blog_post_header {
+      min-height: 250px;
     }
   }
 }
