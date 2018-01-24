@@ -101,13 +101,13 @@
             {{ title_suffix }}
         </div>
 
-        <div class="col-md-6 row">
-            <div class="offset-md-2">
+        <div class="col-lg-6 row blog-main-image-row">
+            <div class="offset-lg-2">
                 {{ content.field_blog_main_image }}
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <div class="title-row">
                 {% if display_submitted %}
                     <div class="node__meta col-6">
@@ -120,14 +120,14 @@
                 {% endif %}
                 {{ title_prefix }}
                 {% if not page %}
-                    <h2{{ title_attributes.addClass('node_blog_post_title', 'col-6') }}>
+                    <h2{{ title_attributes.addClass('node_blog_post_title', 'col-xl-6') }}>
                         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
                     </h2>
                 {% endif %}
                 {{ title_suffix }}
             </div>
 
-            <div{{ content_attributes.addClass('node__content', 'clearfix', 'col-md-6') }}>
+            <div{{ content_attributes.addClass('node__content', 'clearfix', 'col-xl-6') }}>
                 {{ content|without('field_blog_main_image', 'field_blog_category') }}
             </div>
         </div>
