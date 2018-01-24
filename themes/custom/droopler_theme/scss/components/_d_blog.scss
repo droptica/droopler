@@ -18,6 +18,9 @@ $color-taxonomy-in-header: #8e8a89;
 
   .blog_post_header {
     min-height: 200px;
+    img{
+      min-height: 150px;
+    }
     position: relative;
     background-color: $color-troilus;
 
@@ -86,7 +89,6 @@ $color-taxonomy-in-header: #8e8a89;
 
   @media all and (max-width: 576px) {
     .blog_post_header {
-      min-height: 150px;
       .blog_post_header_absolute_wrapper {
         top: 40%;
         transform: translateY(-50%);
@@ -173,20 +175,16 @@ $color-taxonomy-in-header: #8e8a89;
       }
     }
   }
-}
-
-@media all and (min-width: 1200px) {
-  .node--type-blog-post {
+  @media all and (min-width: 1200px) {
     .blog_post_header {
       min-height: 300px;
     }
   }
-}
 
-@media all and (min-width: 1400px)  {
-  .node--type-blog-post {
+  @media all and (min-width: 1400px)  {
     .blog_post_header {
       min-height: 250px;
     }
   }
 }
+
