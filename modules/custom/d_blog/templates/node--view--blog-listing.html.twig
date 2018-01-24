@@ -120,14 +120,14 @@
                 {% endif %}
                 {{ title_prefix }}
                 {% if not page %}
-                    <h2{{ title_attributes.addClass('node_blog_post_title', 'col-md-10', 'col-xl-6') }}>
+                    <h2{{ title_attributes.addClass('node_blog_post_title', 'col-md-10', 'col-xl-8') }}>
                         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
                     </h2>
                 {% endif %}
                 {{ title_suffix }}
             </div>
 
-            <div{{ content_attributes.addClass('node__content', 'clearfix', 'col-xl-6') }}>
+            <div{{ content_attributes.addClass('node__content', 'clearfix', 'col-xl-8') }}>
                 {{ content|without('field_blog_main_image', 'field_blog_category') }}
             </div>
         </div>

@@ -110,16 +110,10 @@ $blog-listing-header-color: #1a6dbb;
       }
     }
   }
-  @media all and (min-width: 1200px) {
 
+  @media all and (min-width: 1200px) {
     .article-row {
       min-height: 520px;
-    }
-
-    .field--name-field-blog-teaser {
-      p {
-        margin: 43px 0;
-      }
     }
 
     .title-row {
@@ -135,13 +129,29 @@ $blog-listing-header-color: #1a6dbb;
       margin: 43px 0;
     }
 
-    .inline__links {
-      margin-top: 43px
-    }
+
 
     .field--name-field-blog-main-image {
       img {
         height: 480px
+      }
+    }
+  }
+
+  @media all and (min-width: 1600px) {
+    .title-row {
+      width: 70%;
+    }
+
+
+    .inline__links {
+      margin-top: 43px
+    }
+
+    .field--name-field-blog-teaser {
+      p {
+        margin: 43px 0;
+        width: 70%
       }
     }
   }
