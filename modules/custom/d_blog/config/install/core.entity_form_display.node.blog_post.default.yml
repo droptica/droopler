@@ -1,3 +1,4 @@
+uuid: 42fab797-6b4e-4b3d-bb73-5267e748deac
 langcode: en
 status: true
 dependencies:
@@ -13,6 +14,8 @@ dependencies:
     - paragraphs
     - path
     - text
+_core:
+  default_config_hash: __ppXHGSjcgx5mQKDetN7TpWQVHourd7lu9lr1zvJP4
 id: node.blog_post.default
 targetEntityType: node
 bundle: blog_post
@@ -26,12 +29,9 @@ content:
     third_party_settings: {  }
   field_blog_category:
     weight: 13
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_buttons
     region: content
   field_blog_main_image:
     weight: 11
