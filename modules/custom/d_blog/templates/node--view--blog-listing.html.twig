@@ -86,18 +86,26 @@
             {% if display_submitted %}
                 <div class="node__meta">
                     {{ author_picture }}
+
                     <span{{ author_attributes }}>
-                        {% trans %}{{ date }} / {% endtrans %}{{ content.field_blog_category}}
+                        {% trans %}{{ date }} {% endtrans %}
+
+                        {% if content.field_blog_category['#object'] %}
+                            / {{ content.field_blog_category}}
+                        {% endif %}
                     </span>
                     {{ metadata }}
                 </div>
             {% endif %}
+
             {{ title_prefix }}
+
             {% if not page %}
                 <h2{{ title_attributes.addClass('node_blog_post_title') }}>
                     <a href="{{ url }}" rel="bookmark">{{ label }}</a>
                 </h2>
             {% endif %}
+
             {{ title_suffix }}
         </div>
 
@@ -112,18 +120,26 @@
                 {% if display_submitted %}
                     <div class="node__meta col-6">
                         {{ author_picture }}
+
                         <span{{ author_attributes }}>
-                            {% trans %}{{ date }} / {% endtrans %}{{ content.field_blog_category}}
+                            {% trans %}{{ date }} {% endtrans %}
+
+                            {% if content.field_blog_category['#object'] %}
+                                / {{ content.field_blog_category}}
+                            {% endif %}
                         </span>
                         {{ metadata }}
                     </div>
                 {% endif %}
+
                 {{ title_prefix }}
+
                 {% if not page %}
                     <h2{{ title_attributes.addClass('node_blog_post_title', 'col-md-10', 'col-xl-8') }}>
                         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
                     </h2>
                 {% endif %}
+
                 {{ title_suffix }}
             </div>
 
