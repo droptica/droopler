@@ -20,71 +20,20 @@ Sed vel ex pretium, consectetur nisi nec, aliquet orci. Donec placerat lorem eui
 Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui et velit ullamcorper, vel pulvinar nisl blandit. Mauris pretium cursus libero nec eleifend. Proin mauris magna, fermentum quis dui sit amet, sodales porta enim. Nam dictum libero at consequat consectetur. Fusce consectetur urna nisi, at congue nisi pharetra sed.
 
 ';
-    $d_blog_post_title = 'Blog 6';
 
-    $images = ['demo_1.jpg', 'demo_2.jpg', 'demo_3.jpg'];
+    $images_arr = ['demo_1.jpg', 'demo_2.jpg', 'demo_3.jpg', 'demo_4.jpg', 'demo_5.jpg'];
+    $last_image = end($images_arr);
+    reset($images_arr);
 
-    d_blog_init_save_blog($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images);
-}
+    $how_many_blog_post = 16;
+    for($i = 1; $i <= $how_many_blog_post; $i++) {
+        $d_blog_post_title = 'Droopler Blog ' . $i;
+        $images = [];
 
-/**
- * @param $d_blog_post_title
- * @param $d_blog_teaser_text
- * @param $d_blog_paragraph_text
- * @param $images
- */
-function d_blog_init_save_blog($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images)
-{
-    $blog_post_1 = [
-        'type' => 'blog_post',
-        'title' => '' . $d_blog_post_title . '',
-        'field_blog_main_image' => $images[0],
-        'field_blog_teaser' => $d_blog_teaser_text,
-        'field_blog_sections' => [
-            'paragraphs' => [
-                [
-                    'paragraph_type' => 'd_p_blog_text',
-                    'data' => [
-                        'field_d_p_blog_text' => [
-                            'type' => 'text',
-                            'data' => $d_blog_paragraph_text,
-                        ],
-                    ],
-                ],
-                [
-                    'paragraph_type' => 'd_p_blog_image',
-                    'data' => [
-                        'field_d_p_blog_image' => [
-                            'type' => 'image',
-                            'data' => $images[1],
-                        ],
-                        'field_d_p_blog_image_full_width' => [
-                            'type' => 'boolean',
-                            'data' => true,
-                        ],
-                    ],
-                ],
-                [
-                    'paragraph_type' => 'd_p_blog_text',
-                    'data' => [
-                        'field_d_p_blog_text' => [
-                            'type' => 'text',
-                            'data' => $d_blog_paragraph_text,
-                        ],
-                    ],
-                ],
-                [
-                    'paragraph_type' => 'd_p_blog_image',
-                    'data' => [
-                        'field_d_p_blog_image' => [
-                            'type' => 'image',
-                            'data' => $images[2],
-                        ],
-                    ],
-                ],
-            ],
-        ],
-    ];
-
-    d_blog_init_save_node($blog_post_1, 'en');
+        for ($j = 0; $j < 3; $j++) {
+            $images[] = current($images_arr);
+            current($images_arr) == $last_image ? reset($images_arr) : next($images_arr);
+        }
+        d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images);
+    }
 }
