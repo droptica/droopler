@@ -31,6 +31,16 @@ function d_blog_init_save_node($node_to_create, $lang_code) {
       $node->field_blog_sections->appendItem($paragraph);
     }
 
+    if(isset($node_to_create['field_blog_teaser'])) {
+      $node->field_blog_teaser->appendItem($node_to_create['field_blog_teaser']);
+    }
+
+    if(isset($node_to_create['field_blog_main_image'])) {
+        $image = d_blog_init_get_image($node_to_create['field_blog_main_image']);
+        $node->field_blog_main_image->appendItem($image);
+    }
+
+
     $node->save();
   }
 }
@@ -50,40 +60,16 @@ function d_blog_init_fill_paragraph($paragraph_data) {
 
     switch ($value['type']) {
       case 'text':
-      case 'text_long':
         $paragraph->set($field_name, $value['data']);
         $paragraph->$field_name->format = 'full_html';
         break;
-      case 'text_select':
-        $paragraph->set($field_name, $value['data']);
-        break;
-      case 'cta':
-        $paragraph->set($field_name, [
-          'title' => $value['data']['text'],
-          'uri' => $value['data']['link'],
-        ]);
-        break;
-      case 'file':
       case 'image':
-        $image = file_get_contents(drupal_get_path('module', 'd_blog_init') . '/assets/' . $value['data']);
-        $image = file_save_data($image, 'public://' . $value['data'], FILE_EXISTS_REPLACE);
+        $image = d_blog_init_get_image($value['data']);
         $paragraph->$field_name->appendItem($image);
         break;
-
-      case 'paragraph_reference':
-        foreach ($value['data'] as $child) {
-          // @TODO fix this ugly fix of incorrect structure in array
-          if($field_name == 'field_d_p_tb_block_reference') {
-            $new_child['data'] = $child;
-            $new_child['paragraph_type'] = 'd_p_single_text_block';
-            $child_paragraph = d_blog_init_fill_paragraph($new_child);
-            $paragraph->$field_name->appendItem($child_paragraph);
-          }
-
-        }
-
-        break;
-
+      case 'boolean':
+          $paragraph->set($field_name, $value['data']);
+          break;
       case 'entity_reference':
         $paragraph->set($field_name, $value['data']);
         break;
@@ -94,4 +80,15 @@ function d_blog_init_fill_paragraph($paragraph_data) {
   $paragraph->save();
 
   return $paragraph;
+}
+
+/**
+ * @param $value
+ * @return bool|\Drupal\file\FileInterface|false|string
+ */
+function d_blog_init_get_image($imageName)
+{
+    $image = file_get_contents(drupal_get_path('module', 'd_blog_init') . '/assets/' . $imageName);
+    $image = file_save_data($image, 'public://' . $imageName, FILE_EXISTS_REPLACE);
+    return $image;
 }
