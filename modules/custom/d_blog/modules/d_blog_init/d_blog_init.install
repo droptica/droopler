@@ -20,6 +20,7 @@ Sed vel ex pretium, consectetur nisi nec, aliquet orci. Donec placerat lorem eui
 Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui et velit ullamcorper, vel pulvinar nisl blandit. Mauris pretium cursus libero nec eleifend. Proin mauris magna, fermentum quis dui sit amet, sodales porta enim. Nam dictum libero at consequat consectetur. Fusce consectetur urna nisi, at congue nisi pharetra sed.
 
 ';
+    $taxonomy = "droopler_test";
 
     $images_arr = ['demo_1.jpg', 'demo_2.jpg', 'demo_3.jpg', 'demo_4.jpg', 'demo_5.jpg'];
     $last_image = end($images_arr);
@@ -34,6 +35,6 @@ Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui
             $images[] = current($images_arr);
             current($images_arr) == $last_image ? reset($images_arr) : next($images_arr);
         }
-        d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images);
+        d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images, $taxonomy);
     }
 }

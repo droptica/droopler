@@ -7,7 +7,7 @@
 
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
-
+use \Drupal\taxonomy\Entity\Term;
 
 
 /**
@@ -15,14 +15,16 @@ use Drupal\paragraphs\Entity\Paragraph;
  * @param $d_blog_teaser_text
  * @param $d_blog_paragraph_text
  * @param $images
+ * @param $taxonomy
  */
-function d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images)
+function d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images, $taxonomy)
 {
     $blog_post_1 = [
         'type' => 'blog_post',
         'title' => '' . $d_blog_post_title . '',
         'field_blog_main_image' => $images[0],
         'field_blog_teaser' => $d_blog_teaser_text,
+        'field_blog_category' => $taxonomy,
         'field_blog_sections' => [
             'paragraphs' => [
                 [
@@ -104,6 +106,29 @@ function d_blog_init_save_node($node_to_create, $lang_code) {
         $node->field_blog_main_image->appendItem($image);
     }
 
+    if (isset($node_to_create['field_blog_category'])) {
+      $cat = $node_to_create['field_blog_category'];
+      $terms = taxonomy_term_load_multiple_by_name($cat);
+
+      if (empty($terms)) { //Create term and use it
+        $term = Term::create([
+          'name' => $cat,
+          'vid' => 'blog_posts_category',
+        ]);
+
+        $term->save();
+        $terms = taxonomy_term_load_multiple_by_name($cat);
+
+      foreach ($terms as $id => $term) {
+          $node->field_blog_category->appendItem($id);
+        }
+      }
+      else {
+        foreach ($terms as $id => $term) {
+          $node->field_blog_category->appendItem($term->id());
+        }
+      }
+    }
 
     $node->save();
   }
