@@ -20,6 +20,9 @@ function d_blog_theme($existing, $type, $theme, $path) {
     'page__blog' => [
       'base hook' => 'page',
     ],
+    'page__taxonomy__term' => [
+      'base hook' => 'page',
+    ],
   ];
 }
 
