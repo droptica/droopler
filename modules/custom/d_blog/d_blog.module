@@ -23,6 +23,9 @@ function d_blog_theme($existing, $type, $theme, $path) {
     'page__taxonomy__term' => [
       'base hook' => 'page',
     ],
+    'pager__blog_listing__page' => [
+      'base hook' => 'pager',
+    ],
   ];
 }
 
