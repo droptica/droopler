@@ -5,14 +5,46 @@ $border-bottom-color: #d3d7d9;
 .view-blog-listing {
   margin-top: 40px;
 
-  .pager {
+  .pager, .pagination {
     background-color: $color-troilus;
+    margin-bottom: 0;
+    border-bottom: 1px solid $border-bottom-color;
+    padding-top: 120px;
+    padding-bottom: 110px;
+    justify-content: center;
+
+    li {
+      padding: 1.5em;
+      a {
+        color: inherit;
+      }
+    }
+
+    .pager__item--next, .pager__item--last, .pager__item--previous, .pager__item--first {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+
+    .pager__item--next {
+        content: "NEXT";
+
+    }
+
+    .pager__item--previous {
+
+        content: "PREVIOUS";
+
+    }
+
+    .active {
+      a {
+        color: $white;
+      }
+    }
 
     .pager__items {
       margin-bottom: 0;
     }
-    border-bottom: 1px solid $border-bottom-color;
-    padding-bottom: 110px;
   }
 }
 
