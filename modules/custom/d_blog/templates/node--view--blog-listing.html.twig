@@ -80,45 +80,12 @@
 %}
 {% set date = node.created.value|date("d.m.Y") %}
 {{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
-    <div class="row article-row">
-        <div class="title-row-for-mobile col-sm-12">
-            {% if display_submitted %}
-                <div class="node__meta">
-                    {{ author_picture }}
-
-                    <span{{ author_attributes }}>
-                        {% trans %}{{ date }} {% endtrans %}
-
-                        {% if content.field_blog_category['#object'] %}
-                            / {{ content.field_blog_category}}
-                        {% endif %}
-                    </span>
-                    {{ metadata }}
-                </div>
-            {% endif %}
-
-            {{ title_prefix }}
-
-            {% if not page %}
-                <h2{{ title_attributes.addClass('node_blog_post_title') }}>
-                    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-                </h2>
-            {% endif %}
-
-            {{ title_suffix }}
-        </div>
-
-        <div class="col-md-7 blog-main-image-row">
-            <div class="">
-                {{ content.field_blog_main_image }}
-            </div>
-        </div>
-
-        <div class="col-md-5">
-            <div class="title-row">
+<div class="article-wrapper">
+    <article{{ attributes.addClass(classes) }}>
+        <div class="row article-row ">
+            <div class="title-row-for-mobile col-sm-12">
                 {% if display_submitted %}
-                    <div class="node__meta col-6">
+                    <div class="node__meta">
                         {{ author_picture }}
 
                         <span{{ author_attributes }}>
@@ -135,7 +102,7 @@
                 {{ title_prefix }}
 
                 {% if not page %}
-                    <h2{{ title_attributes.addClass('node_blog_post_title')}}>
+                    <h2{{ title_attributes.addClass('node_blog_post_title') }}>
                         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
                     </h2>
                 {% endif %}
@@ -143,9 +110,44 @@
                 {{ title_suffix }}
             </div>
 
-            <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-                {{ content|without('field_blog_main_image', 'field_blog_category') }}
+            <div class="col-md-7 blog-main-image-row">
+                <div class="">
+                    {{ content.field_blog_main_image }}
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="title-row">
+                    {% if display_submitted %}
+                        <div class="node__meta col-6">
+                            {{ author_picture }}
+
+                            <span{{ author_attributes }}>
+                                {% trans %}{{ date }} {% endtrans %}
+
+                                {% if content.field_blog_category['#object'] %}
+                                    / {{ content.field_blog_category}}
+                                {% endif %}
+                            </span>
+                            {{ metadata }}
+                        </div>
+                    {% endif %}
+
+                    {{ title_prefix }}
+
+                    {% if not page %}
+                        <h2{{ title_attributes.addClass('node_blog_post_title')}}>
+                            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+                        </h2>
+                    {% endif %}
+
+                    {{ title_suffix }}
+                </div>
+
+                <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+                    {{ content|without('field_blog_main_image', 'field_blog_category') }}
+                </div>
             </div>
         </div>
-    </div>
-</article>
+    </article>
+</div>

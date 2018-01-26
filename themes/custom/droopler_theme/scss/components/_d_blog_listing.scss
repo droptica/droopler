@@ -23,7 +23,22 @@ $blog-listing-taxonomy-link-color: #68696b;
   }
 }
 
+.article-wrapper {
+  border-bottom: 1px solid #d3d7d9;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+
+  @media all and (min-width: 1140px) {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
 .node--view-mode-teaser {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
   .field--name-field-blog-category {
     display: inline;
   }
@@ -98,13 +113,7 @@ $blog-listing-taxonomy-link-color: #68696b;
     }
   }
 
-
-    @media all and (min-width: 1140px) {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-
-
+  @media all and (min-width: 1140px) {
     .title-row-for-mobile {
       display: none;
     }
@@ -130,7 +139,6 @@ $blog-listing-taxonomy-link-color: #68696b;
       padding: 0;
       margin: 43px 0;
     }
-
 
     .field--name-field-blog-main-image {
       img {
