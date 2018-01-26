@@ -49,6 +49,13 @@ function d_blog_preprocess_paragraph(&$variables) {
     }
 }
 
+function d_blog_preprocess_pager__blog_listing__page(&$variables) {
+    $left_pagination = file_get_contents(drupal_get_path('module', 'd_blog') . '/assets/left-pagination.svg');
+    $right_pagination = file_get_contents(drupal_get_path('module', 'd_blog') . '/assets/right-pagination.svg');
+    $variables['left_pagination'] = $left_pagination;
+    $variables['right_pagination'] = $right_pagination;
+}
+
 /**
  * Implements hook_preprocess_links().
  */
