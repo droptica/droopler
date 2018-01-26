@@ -12,6 +12,7 @@ $border-bottom-color: #d3d7d9;
     padding-top: 120px;
     padding-bottom: 110px;
     justify-content: center;
+    font-size: 20px;
 
     li {
       padding: 1.5em;
@@ -26,14 +27,11 @@ $border-bottom-color: #d3d7d9;
     }
 
     .pager__item--next {
-        content: "NEXT";
-
+      padding-left: 1em;
     }
 
     .pager__item--previous {
-
-        content: "PREVIOUS";
-
+      padding-right: 1em;
     }
 
     .active {
