@@ -82,7 +82,7 @@
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
     <div class="row article-row">
-        <div class="title-row-for-mobile">
+        <div class="title-row-for-mobile col-sm-12">
             {% if display_submitted %}
                 <div class="node__meta">
                     {{ author_picture }}
@@ -109,13 +109,13 @@
             {{ title_suffix }}
         </div>
 
-        <div class="col-lg-7 row blog-main-image-row">
+        <div class="col-md-7 blog-main-image-row">
             <div class="">
                 {{ content.field_blog_main_image }}
             </div>
         </div>
 
-        <div class="col-lg-5">
+        <div class="col-md-5">
             <div class="title-row">
                 {% if display_submitted %}
                     <div class="node__meta col-6">
