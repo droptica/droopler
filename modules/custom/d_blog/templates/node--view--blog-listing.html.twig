@@ -75,7 +75,7 @@
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     'clearfix',
-    'container-fluid'
+    'container'
 ]
 %}
 {% set date = node.created.value|date("d.m.Y") %}
@@ -109,13 +109,13 @@
             {{ title_suffix }}
         </div>
 
-        <div class="col-lg-6 row blog-main-image-row">
-            <div class="offset-lg-2">
+        <div class="col-lg-7 row blog-main-image-row">
+            <div class="">
                 {{ content.field_blog_main_image }}
             </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <div class="title-row">
                 {% if display_submitted %}
                     <div class="node__meta col-6">
@@ -135,7 +135,7 @@
                 {{ title_prefix }}
 
                 {% if not page %}
-                    <h2{{ title_attributes.addClass('node_blog_post_title', 'col-md-10', 'col-xl-8') }}>
+                    <h2{{ title_attributes.addClass('node_blog_post_title')}}>
                         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
                     </h2>
                 {% endif %}
@@ -143,7 +143,7 @@
                 {{ title_suffix }}
             </div>
 
-            <div{{ content_attributes.addClass('node__content', 'clearfix', 'col-xl-8') }}>
+            <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
                 {{ content|without('field_blog_main_image', 'field_blog_category') }}
             </div>
         </div>
