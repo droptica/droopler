@@ -112,7 +112,7 @@
     {% endif %}
     <div id="main-wrapper" class="layout-main-wrapper clearfix">
         {% block content %}
-            <div{{ main_attributes.addClass('container-fluid').removeClass('container') }}>
+            <div{{ main_attributes.addClass('container-fluid').removeClass('container', 'py-4') }}>
                 <div class="row clearfix">
                     {{ page.breadcrumb }}
                     <main class="main-content">

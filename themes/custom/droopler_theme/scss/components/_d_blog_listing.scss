@@ -1,8 +1,19 @@
 $blog-listing-header-color: #1a6dbb;
 $blog-listing-taxonomy-link-color: #68696b;
+$border-bottom-color: #d3d7d9;
 
 .view-blog-listing {
   margin-top: 40px;
+
+  .pager {
+    background-color: $color-troilus;
+
+    .pager__items {
+      margin-bottom: 0;
+    }
+    border-bottom: 1px solid $border-bottom-color;
+    padding-bottom: 110px;
+  }
 }
 
 .field--name-field-blog-teaser {
@@ -24,7 +35,7 @@ $blog-listing-taxonomy-link-color: #68696b;
 }
 
 .article-wrapper {
-  border-bottom: 1px solid #d3d7d9;
+  border-bottom: 1px solid $border-bottom-color;
   margin-bottom: 30px;
   padding-bottom: 15px;
 
