@@ -3,13 +3,14 @@ status: true
 dependencies:
   module:
     - paragraphs
-    - text
-id: paragraph.field_d_long_text
-field_name: field_d_long_text
+id: paragraph.field_d_number
+field_name: field_d_number
 entity_type: paragraph
-type: text_long
-settings: {  }
-module: text
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
 locked: false
 cardinality: 1
 translatable: true
