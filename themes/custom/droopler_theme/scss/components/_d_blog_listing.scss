@@ -2,6 +2,19 @@ $blog-listing-header-color: #1a6dbb;
 $blog-listing-taxonomy-link-color: #68696b;
 $border-bottom-color: #d3d7d9;
 
+// Header underline aligned to the center
+@mixin pagination-link-underline {
+  content: ' ';
+  display: block;
+  width: 1em;
+  background: $blog-listing-taxonomy-link-color;
+  position: relative;
+  height: 0.125rem;
+  margin-bottom: -0.125em;
+  margin-left: 0.15em;
+}
+
+
 .view-blog-listing {
   margin-top: 40px;
 
@@ -24,6 +37,15 @@ $border-bottom-color: #d3d7d9;
     .pager__item--next, .pager__item--last, .pager__item--previous, .pager__item--first {
       padding-left: 0.5em;
       padding-right: 0.5em;
+      display: inline;
+    }
+
+    .pager__item--last, .pager__item--first {
+      &:hover  {
+        &:after {
+          @include pagination-link-underline;
+        }
+      }
     }
 
     .pager__item--next {
@@ -35,6 +57,7 @@ $border-bottom-color: #d3d7d9;
     }
 
     .active {
+      display: inline;
       a {
         color: $white;
       }
@@ -42,6 +65,32 @@ $border-bottom-color: #d3d7d9;
 
     .pager__items {
       margin-bottom: 0;
+    }
+  }
+
+  @media all and (max-width: 767px) {
+    .pagination {
+      li {
+        display: none;
+      }
+
+      .pager__item--next, .pager__item--previous {
+        &:hover  {
+          &:after {
+            @include pagination-link-underline;
+          }
+        }
+      }
+    }
+
+    .desktop-tablet {
+      display: none;
+    }
+  }
+
+  @media all and (min-width: 768px) {
+    .mob-only {
+      display: none;
     }
   }
 }
