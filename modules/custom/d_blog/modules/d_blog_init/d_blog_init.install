@@ -10,6 +10,7 @@ use Drupal\menu_link_content\Entity\MenuLinkContent;
  * Implements hook_install().
  */
 function d_blog_init_install() {
+    $how_many_blog_post = 25;
 
     $d_blog_teaser_text = 'Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies. Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.';
     $d_blog_paragraph_text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna.
@@ -25,7 +26,6 @@ Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui
     $last_image = end($images_arr);
     reset($images_arr);
 
-    $how_many_blog_post = 16;
     for($i = 1; $i <= $how_many_blog_post; $i++) {
         $d_blog_post_title = 'Droopler Blog ' . $i;
         $images = [];
