@@ -5,4 +5,12 @@
  */
 function d_blog_install() {
   \Drupal::service('entity.definition_update_manager')->applyUpdates();
+
+  try {
+    d_blog_add_translation('NEXT', 'DALEJ', 'pl');
+    d_blog_add_translation('PREVIOUS', 'WSTECZ', 'pl');
+  }
+  catch (\Exception $e) {
+
+  }
 }

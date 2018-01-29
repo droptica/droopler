@@ -9,7 +9,6 @@ use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use \Drupal\taxonomy\Entity\Term;
 
-
 /**
  * @param $d_blog_post_title
  * @param $d_blog_teaser_text
@@ -17,59 +16,62 @@ use \Drupal\taxonomy\Entity\Term;
  * @param $images
  * @param $taxonomy
  */
-function d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images, $taxonomy)
+function d_blog_init_save_blog_post(
+  $d_blog_post_title, $d_blog_teaser_text,
+  $d_blog_paragraph_text, $images, $taxonomy
+)
 {
   $blog_post_1 = [
-        'type' => 'blog_post',
-        'title' => '' . $d_blog_post_title . '',
-        'field_blog_main_image' => $images[0],
-        'field_blog_teaser' => $d_blog_teaser_text,
-        'field_blog_category' => $taxonomy,
-        'field_blog_sections' => [
-            'paragraphs' => [
-                [
-                    'paragraph_type' => 'd_p_blog_text',
-                    'data' => [
-                        'field_d_p_blog_text' => [
-                            'type' => 'text',
-                            'data' => $d_blog_paragraph_text,
-                        ],
-                    ],
-                ],
-                [
-                    'paragraph_type' => 'd_p_blog_image',
-                    'data' => [
-                        'field_d_p_blog_image' => [
-                            'type' => 'image',
-                            'data' => $images[1],
-                        ],
-                        'field_d_p_blog_image_full_width' => [
-                            'type' => 'boolean',
-                            'data' => true,
-                        ],
-                    ],
-                ],
-                [
-                    'paragraph_type' => 'd_p_blog_text',
-                    'data' => [
-                        'field_d_p_blog_text' => [
-                            'type' => 'text',
-                            'data' => $d_blog_paragraph_text,
-                        ],
-                    ],
-                ],
-                [
-                    'paragraph_type' => 'd_p_blog_image',
-                    'data' => [
-                        'field_d_p_blog_image' => [
-                            'type' => 'image',
-                            'data' => $images[2],
-                        ],
-                    ],
-                ],
+    'type' => 'blog_post',
+    'title' => '' . $d_blog_post_title . '',
+    'field_blog_main_image' => $images[0],
+    'field_blog_teaser' => $d_blog_teaser_text,
+    'field_blog_category' => $taxonomy,
+    'field_blog_sections' => [
+      'paragraphs' => [
+        [
+          'paragraph_type' => 'd_p_blog_text',
+          'data' => [
+            'field_d_p_blog_text' => [
+                'type' => 'text',
+                'data' => $d_blog_paragraph_text,
             ],
+          ],
         ],
-    ];
+        [
+          'paragraph_type' => 'd_p_blog_image',
+          'data' => [
+              'field_d_p_blog_image' => [
+                  'type' => 'image',
+                  'data' => $images[1],
+              ],
+              'field_d_p_blog_image_full_width' => [
+                  'type' => 'boolean',
+                  'data' => true,
+              ],
+          ],
+        ],
+        [
+          'paragraph_type' => 'd_p_blog_text',
+          'data' => [
+              'field_d_p_blog_text' => [
+                  'type' => 'text',
+                  'data' => $d_blog_paragraph_text,
+              ],
+          ],
+        ],
+        [
+          'paragraph_type' => 'd_p_blog_image',
+          'data' => [
+            'field_d_p_blog_image' => [
+                'type' => 'image',
+                'data' => $images[2],
+            ],
+          ],
+        ],
+      ],
+    ],
+  ];
 
   d_blog_init_save_node($blog_post_1, 'en');
 }
@@ -84,10 +86,10 @@ function d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_
 function d_blog_init_save_node($node_to_create, $lang_code) {
 
   $node = Node::create(
-      [
-    'type' => $node_to_create['type'],
-    'title' => $node_to_create['title'],
-    'langcode' => $lang_code,
+    [
+      'type' => $node_to_create['type'],
+      'title' => $node_to_create['title'],
+      'langcode' => $lang_code,
     ]
   );
 
@@ -171,7 +173,7 @@ function d_blog_init_fill_paragraph($paragraph_data) {
 }
 
 /**
- * @param $value
+ * @param $imgName
  * @return bool|\Drupal\file\FileInterface|false|string
  */
 function d_blog_init_get_image($imgName)
