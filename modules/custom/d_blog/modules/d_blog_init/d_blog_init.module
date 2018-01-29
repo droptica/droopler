@@ -19,7 +19,7 @@ use \Drupal\taxonomy\Entity\Term;
  */
 function d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_blog_paragraph_text, $images, $taxonomy)
 {
-    $blog_post_1 = [
+  $blog_post_1 = [
         'type' => 'blog_post',
         'title' => '' . $d_blog_post_title . '',
         'field_blog_main_image' => $images[0],
@@ -71,7 +71,7 @@ function d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_
         ],
     ];
 
-    d_blog_init_save_node($blog_post_1, 'en');
+  d_blog_init_save_node($blog_post_1, 'en');
 }
 
 /** Save node with paragraphs.
@@ -83,11 +83,13 @@ function d_blog_init_save_blog_post($d_blog_post_title, $d_blog_teaser_text, $d_
  */
 function d_blog_init_save_node($node_to_create, $lang_code) {
 
-  $node = Node::create([
+  $node = Node::create(
+      [
     'type' => $node_to_create['type'],
     'title' => $node_to_create['title'],
     'langcode' => $lang_code,
-  ]);
+    ]
+  );
 
   if (isset($node_to_create['field_blog_sections']['paragraphs'])) {
     foreach ($node_to_create['field_blog_sections']['paragraphs'] as $paragraph_data) {
@@ -102,8 +104,8 @@ function d_blog_init_save_node($node_to_create, $lang_code) {
     }
 
     if(isset($node_to_create['field_blog_main_image'])) {
-        $image = d_blog_init_get_image($node_to_create['field_blog_main_image']);
-        $node->field_blog_main_image->appendItem($image);
+      $image = d_blog_init_get_image($node_to_create['field_blog_main_image']);
+      $node->field_blog_main_image->appendItem($image);
     }
 
     if (isset($node_to_create['field_blog_category'])) {
@@ -146,7 +148,6 @@ function d_blog_init_fill_paragraph($paragraph_data) {
   ]);
 
   foreach ($paragraph_data['data'] as $field_name => $value) {
-
     switch ($value['type']) {
       case 'text':
         $paragraph->set($field_name, $value['data']);
@@ -163,7 +164,6 @@ function d_blog_init_fill_paragraph($paragraph_data) {
         $paragraph->set($field_name, $value['data']);
         break;
     }
-
   }
 
   $paragraph->save();
@@ -174,9 +174,10 @@ function d_blog_init_fill_paragraph($paragraph_data) {
  * @param $value
  * @return bool|\Drupal\file\FileInterface|false|string
  */
-function d_blog_init_get_image($imageName)
+function d_blog_init_get_image($imgName)
 {
-    $image = file_get_contents(drupal_get_path('module', 'd_blog_init') . '/assets/' . $imageName);
-    $image = file_save_data($image, 'public://' . $imageName, FILE_EXISTS_REPLACE);
-    return $image;
+  $imagePath = drupal_get_path('module', 'd_blog_init') . '/assets/' . $imgName;
+  $image = file_get_contents($imagePath);
+  $image = file_save_data($image, 'public://' . $imgName, FILE_EXISTS_REPLACE);
+  return $image;
 }
