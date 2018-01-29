@@ -1,5 +1,5 @@
 $blog-listing-header-color: #1a6dbb;
-$blog-listing-taxonomy-link-color: #68696b;
+$blog-listing-taxonomy-link-color: #969696;
 $border-bottom-color: #d3d7d9;
 
 // Header underline aligned to the center
@@ -18,10 +18,14 @@ $border-bottom-color: #d3d7d9;
 .view-blog-listing {
   margin-top: 40px;
 
+  .pagination-wrapper {
+    background-color: $color-troilus;
+  }
+
   .pager, .pagination {
     background-color: $color-troilus;
     margin-bottom: 0;
-    border-bottom: 1px solid $border-bottom-color;
+    border-bottom: 2px solid $blog-listing-taxonomy-link-color;
     padding-top: 120px;
     padding-bottom: 110px;
     justify-content: center;

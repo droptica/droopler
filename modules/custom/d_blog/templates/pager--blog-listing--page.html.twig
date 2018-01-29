@@ -30,9 +30,9 @@
  */
 #}
 {% if items %}
-    <nav role="navigation" aria-labelledby="pagination-heading">
+    <nav role="navigation" aria-labelledby="pagination-heading" class="pagination-wrapper">
         <h4 id="pagination-heading" class="visually-hidden">{{ 'Pagination'|t }}</h4>
-        <ul class="pagination">
+        <ul class="pagination container">
             {# Print first item if we are not on the first page. #}
             {% if items.first %}
                 <li class="pager__item--first">
