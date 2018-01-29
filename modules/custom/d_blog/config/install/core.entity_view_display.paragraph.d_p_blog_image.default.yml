@@ -3,18 +3,28 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.d_p_blog_image.field_d_p_blog_image_full_width
     - field.field.paragraph.d_p_blog_image.field_d_p_blog_image
+    - field.field.paragraph.d_p_blog_image.field_d_p_blog_image_full_width
+    - image.style.responsive_image_2000
     - paragraphs.paragraphs_type.d_p_blog_image
   module:
     - image
 _core:
-  default_config_hash: 0v-4tmqsqBA0pnVb1QzI6tidK0zOc3VWLeX69ibyY64
+  default_config_hash: sdGSh3nDAvR4-sTuWqE29uVxDY0DGumWBMykcxxOMQE
 id: paragraph.d_p_blog_image.default
 targetEntityType: paragraph
 bundle: d_p_blog_image
 mode: default
 content:
+  field_d_p_blog_image:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: responsive_image_2000
+      image_link: ''
+    third_party_settings: {  }
   field_d_p_blog_image_full_width:
     weight: 1
     label: hidden
@@ -25,13 +35,4 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_d_p_blog_image:
-    type: image
-    weight: 0
-    region: content
-    label: hidden
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
 hidden: {  }
