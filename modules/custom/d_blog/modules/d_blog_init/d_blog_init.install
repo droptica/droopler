@@ -10,10 +10,10 @@ use Drupal\menu_link_content\Entity\MenuLinkContent;
  * Implements hook_install().
  */
 function d_blog_init_install() {
-    $how_many_blog_post = 25;
+  $how_many_blog_post = 25;
 
-    $d_blog_teaser_text = 'Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies. Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.';
-    $d_blog_paragraph_text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna.
+  $d_blog_teaser_text = 'Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies. Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.';
+  $d_blog_paragraph_text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna.
 
 Sed vel ex pretium, consectetur nisi nec, aliquet orci. Donec placerat lorem euismod leo scelerisque cursus. Pellentesque commodo neque sed ipsum hendrerit dapibus. Phasellus placerat lectus eu commodo ultricies. Vivamus enim metus, aliquet eu consequat eget, imperdiet in massa. Duis arcu nisl, ullamcorper a malesuada id, rhoncus in lacus. Maecenas volutpat accumsan nunc id condimentum. Curabitur id sapien posuere, varius nisl non, varius elit. Curabitur lacinia ultrices neque dignissim rutrum. Donec eu arcu ex. Morbi sit amet blandit elit. Vestibulum non leo at diam iaculis vestibulum. Aenean et est ullamcorper, porta turpis sit amet, semper enim. Ut hendrerit eu purus in vulputate. Integer ullamcorper vulputate laoreet.
 
@@ -36,13 +36,13 @@ Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui
     $d_blog_post_title = 'Droopler Blog ' . $i;
     $images = [];
 
-    for ($j = 0; $j < 3; $j++) {
-        $images[] = current($images_arr);
-        current($images_arr) == $last_image ? reset($images_arr) : next($images_arr);
-    }
-    d_blog_init_save_blog_post(
-        $d_blog_post_title, $d_blog_teaser_text,
-        $d_blog_paragraph_text, $images, $taxonomy
-    );
+  for ($j = 0; $j < 3; $j++) {
+    $images[] = current($images_arr);
+    current($images_arr) == $last_image ? reset($images_arr) : next($images_arr);
+  }
+  d_blog_init_save_blog_post(
+    $d_blog_post_title, $d_blog_teaser_text,
+    $d_blog_paragraph_text, $images, $taxonomy
+  );
   }
 }
