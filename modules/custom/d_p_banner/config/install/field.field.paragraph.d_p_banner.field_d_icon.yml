@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_d_image_background
+    - field.storage.paragraph.field_d_icon
     - paragraphs.paragraphs_type.d_p_banner
   module:
     - content_translation
@@ -10,26 +10,26 @@ dependencies:
 third_party_settings:
   content_translation:
     translation_sync:
-      file: file
-      alt: '0'
-      title: '0'
-id: paragraph.d_p_banner.field_d_image_background
-field_name: field_d_image_background
+      alt: alt
+      title: title
+      file: '0'
+id: paragraph.d_p_banner.field_d_icon
+field_name: field_d_icon
 entity_type: paragraph
 bundle: d_p_banner
-label: Background
+label: Icon
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: 'backgrounds/[current-page:url:args:value:0]_[current-page:url:args:value:1]'
-  file_extensions: 'png gif jpg jpeg'
+  file_directory: 'icons/[current-page:url:args:value:0]_[current-page:url:args:value:1]'
+  file_extensions: 'png gif jpg jpeg svg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
-  alt_field: false
+  alt_field: true
   alt_field_required: true
   title_field: false
   title_field_required: false
