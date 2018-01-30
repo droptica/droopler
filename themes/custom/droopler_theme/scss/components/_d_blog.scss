@@ -5,12 +5,12 @@ $color-taxonomy-in-header: #8e8a89;
 
   #main {
     margin: 0 ! important;
-    padding: 0 !important;
     max-width: 100vw;
   }
 
   .node .field--type-image {
     float: none;
+    margin-right: 0;
   }
 
   .blog_post_header {
@@ -99,7 +99,7 @@ $color-taxonomy-in-header: #8e8a89;
 
   .field--name-field-blog-main-image {
     img {
-      width: 100%;
+      width: 100vw;
       height: 100%;
       margin: 0;
     }
@@ -111,7 +111,7 @@ $color-taxonomy-in-header: #8e8a89;
     }
     .field--name-field-d-p-blog-image {
       img {
-        width: 100%;
+        width: 100vw;
       }
     }
   }
