@@ -6,11 +6,28 @@
 function d_blog_install() {
   \Drupal::service('entity.definition_update_manager')->applyUpdates();
 
+
+  // Add Translation of pagination  iin blog
   try {
     d_blog_add_translation('NEXT', 'DALEJ', 'pl');
     d_blog_add_translation('PREVIOUS', 'WSTECZ', 'pl');
   }
   catch (\Exception $e) {
-
   }
+
+
+  // Add configuration to TVI module
+  // Taxonomy Views Integrator
+  // Page of taxonomy blog_post is the same as view blog_listing
+  $entity_type = 'taxonomy_vocabulary';
+  $entity_id = 'blog_posts_category';
+
+  Drupal::configFactory()
+    ->getEditable('tvi.' . $entity_type . '.' . $entity_id)
+    ->set('enable_override', 1)
+    ->set('view', 'blog_listing')
+    ->set('view_display', "page_1")
+    ->set('inherit_settings', 1)
+    ->set('pass_arguments', 1)
+    ->save();
 }
