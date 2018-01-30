@@ -5,6 +5,7 @@ dependencies:
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_cta_link
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_icon
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_main_title
+    - field.field.paragraph.d_p_group_of_text_blocks.field_d_number
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference
     - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_group_of_text_blocks
@@ -18,7 +19,7 @@ bundle: d_p_group_of_text_blocks
 mode: default
 content:
   field_d_cta_link:
-    weight: 3
+    weight: 4
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -48,9 +49,16 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_d_number:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_d_p_tb_block_reference:
     type: entity_reference_paragraphs
-    weight: 2
+    weight: 3
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -61,7 +69,7 @@ content:
     third_party_settings: {  }
     region: content
   translation:
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
