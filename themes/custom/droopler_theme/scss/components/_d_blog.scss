@@ -14,12 +14,20 @@ $color-taxonomy-in-header: #8e8a89;
   }
 
   .blog_post_header {
+    z-index: 1;
     min-height: 200px;
     img{
       min-height: 150px;
     }
     position: relative;
-    background-color: $color-troilus;
+    background-color: black;
+
+    .field--name-field-blog-main-image {
+      img {
+        z-index: -3;
+        filter: opacity(50%);
+      }
+    }
 
     .blog_post_header_absolute_wrapper {
       color: white;
@@ -31,14 +39,15 @@ $color-taxonomy-in-header: #8e8a89;
       padding-right: 10px;
 
       h1 {
-        font-size: 45px;
+        font-size: 3.5em;
         margin: 25px auto 35px;
         text-transform: none;
         color: white;
+        font-weight: 700;
       }
 
       .author_attributes {
-        font-size: 18px;
+        font-size: 1.25em;
         color: white;
 
         a {
@@ -48,7 +57,7 @@ $color-taxonomy-in-header: #8e8a89;
 
       .field--name-field-blog-category {
         text-align: center;
-        font-size: 16px;
+        font-size: 1.2em;
         color: $color-taxonomy-in-header;
 
         a {
@@ -58,13 +67,22 @@ $color-taxonomy-in-header: #8e8a89;
 
       // Center text Submitted on ...
       .node__meta {
+        z-index:  5;
         span {
           text-align: center;
         }
       }
     }
 
-    @media all and (max-width: 1200px) {
+    @media all and (min-width: 1200px) and (max-width: 1400px) {
+      .blog_post_header_absolute_wrapper {
+        h1 {
+          font-size: 2.8em;
+        }
+      }
+    }
+
+    @media all and (max-width: 1199px) {
       .blog_post_header_absolute_wrapper {
 
         bottom: 0;
@@ -175,13 +193,13 @@ $color-taxonomy-in-header: #8e8a89;
   }
   @media all and (min-width: 1200px) {
     .blog_post_header {
-      min-height: 300px;
+      min-height: 325px;
     }
   }
 
   @media all and (min-width: 1400px)  {
     .blog_post_header {
-      min-height: 250px;
+      min-height: 300px;
     }
   }
 }

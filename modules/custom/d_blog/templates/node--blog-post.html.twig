@@ -74,6 +74,8 @@
 {% set date = node.created.value|date("d.m.Y") %}
 <article{{ attributes.addClass(classes) }}>
     <header class="blog_post_header">
+        {{ content.field_blog_main_image }}
+
         <div class="blog_post_header_absolute_wrapper container-fluid">
             {{ title_prefix }}
             {% if not page %}
@@ -102,7 +104,6 @@
                 </div>
             {% endif %}
         </div>
-        {{ content.field_blog_main_image }}
     </header>
     <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
         {{ content|without('field_blog_main_image', 'field_blog_category') }}
