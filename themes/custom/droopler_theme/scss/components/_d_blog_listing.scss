@@ -198,16 +198,20 @@ $border-bottom-color: #d3d7d9;
 
     .field--name-field-blog-main-image {
       img {
-        width: 640px;
+        width: 600px;
         height: 400px;
         object-fit: cover;
       }
     }
   }
 
-  @media all and (min-width: 1140px) {
+  @media all and (min-width: 1200px) {
     .title-row-for-mobile {
       display: none;
+    }
+
+    .blog-main-image-row {
+      padding: 0;
     }
 
     .title-row {
