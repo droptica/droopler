@@ -1,4 +1,4 @@
-langcode: pl
+langcode: en
 status: true
 dependencies:
   config:
@@ -17,14 +17,14 @@ id: paragraph.d_p_text_with_bckg.field_d_image_background
 field_name: field_d_image_background
 entity_type: paragraph
 bundle: d_p_text_with_bckg
-label: Image
+label: Background
 description: ''
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_directory: 'backgrounds/[current-page:url:args:value:0]_[current-page:url:args:value:1]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''

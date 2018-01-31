@@ -40,15 +40,16 @@
 #}
 {% set classes = [
 'paragraph',
-'container',
 'text-page blog-page',
 'paragraph--type--' ~ paragraph.bundle|clean_class,
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
-    {% block content %}
-      {{ content }}
-    {% endblock %}
+    <div class="container">
+      {% block content %}
+        {{ content }}
+      {% endblock %}
+    </div>
   </div>
 {% endblock paragraph %}

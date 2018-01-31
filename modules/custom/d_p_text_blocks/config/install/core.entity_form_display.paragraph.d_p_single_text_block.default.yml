@@ -1,13 +1,16 @@
-langcode: pl
+langcode: en
 status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_single_text_block.field_d_cta_link
+    - field.field.paragraph.d_p_single_text_block.field_d_icon
     - field.field.paragraph.d_p_single_text_block.field_d_long_text
     - field.field.paragraph.d_p_single_text_block.field_d_main_title
+    - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_single_text_block
   module:
-    - link
+    - link_attributes
+    - svg_image
     - text
 id: paragraph.d_p_single_text_block.default
 targetEntityType: paragraph
@@ -15,7 +18,7 @@ bundle: d_p_single_text_block
 mode: default
 content:
   field_d_cta_link:
-    weight: 2
+    weight: 3
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -29,8 +32,16 @@ content:
     third_party_settings: {  }
     type: link_attributes
     region: content
+  field_d_icon:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_d_long_text:
-    weight: 1
+    weight: 2
     settings:
       rows: 5
       placeholder: ''
@@ -38,7 +49,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -46,8 +57,10 @@ content:
     type: string_textfield
     region: content
   translation:
-    weight: 10
+    weight: 4
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   status: true

@@ -1,12 +1,12 @@
 name: d_p_form
 core: 8.x
-description: 'Paragraph with form'
+description: 'Provides a paragraph with form.'
 type: module
 dependencies:
-  - d_p
   - contact
   - contact_formatter
   - content_translation
+  - d_p
   - entity_reference_revisions
   - field
   - file
@@ -15,6 +15,7 @@ dependencies:
   - link
   - options
   - paragraphs
+  - svg_image
   - text
 package: d
-version: 8.x-1.0-beta1
+version: 8.x-1.0-beta2

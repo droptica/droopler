@@ -6,6 +6,7 @@ Styleguide 2.10
 
 // Colour variables used in this paragraph
 $d-p-subscribe-color: $color-odysseus !default;
+$d-p-subscribe-header-color: $color-odysseus !default;
 $d-p-subscribe-background: $color-agamemnon !default;
 $d-p-subscribe-line-color: $line-background !default;
 
@@ -69,8 +70,13 @@ $d-p-subscribe-img-opacity: 0.4 !default;
   a {
     color: $d-p-subscribe-color;
   }
+  .field--name-field-d-icon {
+    text-align: center;
+  }
   h2 {
     @include font-main-header;
+    color: $d-p-subscribe-header-color;
+    text-align: center;
 
     // Horizontal line
     &:after {

@@ -1,8 +1,9 @@
-langcode: pl
+langcode: en
 status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_text_with_bckg.field_d_cta_link
+    - field.field.paragraph.d_p_text_with_bckg.field_d_icon
     - field.field.paragraph.d_p_text_with_bckg.field_d_image_background
     - field.field.paragraph.d_p_text_with_bckg.field_d_long_text
     - field.field.paragraph.d_p_text_with_bckg.field_d_main_title
@@ -10,8 +11,8 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_text_with_bckg
   module:
-    - image
-    - link
+    - link_attributes
+    - svg_image
     - text
 id: paragraph.d_p_text_with_bckg.default
 targetEntityType: paragraph
@@ -19,7 +20,7 @@ bundle: d_p_text_with_bckg
 mode: default
 content:
   field_d_cta_link:
-    weight: 4
+    weight: 5
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -33,8 +34,16 @@ content:
     third_party_settings: {  }
     type: link_attributes
     region: content
+  field_d_icon:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_d_image_background:
-    weight: 2
+    weight: 3
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -42,7 +51,7 @@ content:
     type: image_image
     region: content
   field_d_long_text:
-    weight: 3
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
@@ -50,14 +59,6 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 0
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_d_subtitle:
     weight: 1
     settings:
       size: 60
@@ -65,8 +66,16 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_d_subtitle:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   translation:
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }

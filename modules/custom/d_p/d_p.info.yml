@@ -1,6 +1,6 @@
 name: d_p
 core: 8.x
-description: 'Provides a drop-down menu interface to the core Drupal Toolbar.'
+description: 'Provides base paragraph features.'
 type: module
 dependencies:
   - content_translation
@@ -10,9 +10,9 @@ dependencies:
   - image
   - language
   - link
+  - link_attributes
   - options
   - paragraphs
-  - link_attributes
   - text
 package: d
 version: 8.x-1.0-beta1

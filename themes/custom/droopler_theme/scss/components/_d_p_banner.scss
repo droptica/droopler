@@ -5,6 +5,8 @@ Styleguide 2.banner
 */
 
 // Colour variables used in this paragraph
+$d-p-banner-header-color: $color-odysseus !default;
+$d-p-banner-subheader-color: $color-odysseus !default;
 $d-p-banner-text-color: $color-odysseus !default;
 $d-p-banner-background-overlay: $color-cassandra !default;
 $d-p-banner-line-color: $color-odysseus !default;
@@ -15,29 +17,32 @@ $d-p-banner-button-margin-top: 4.375rem !default;
 $d-p-banner-padding-top: 18.5% !default;
 $d-p-banner-padding-bottom: 14.5% !default;
 $d-p-banner-mobile-padding-top: 6.25rem !default;
-$d-p-banner-mobile-padding-bottom: 6.25rem !default
-$d-p-banner-line-margin-top: $line-center-margin-top !default;;
-$d-p-banner-line-margin-bottom: $line-center-margin-bottom !default;;
+$d-p-banner-mobile-padding-bottom: 6.25rem !default;
+$d-p-banner-line-margin-top: $line-center-margin-top !default;
+$d-p-banner-line-margin-bottom: $line-center-margin-bottom !default;
 
 // Other settings
 $d-p-banner-img-opacity: 0.5 !default;
+$d-p-banner-subheader-opacity: 0.7 !default;
 
 .d-p-banner {
   background: $d-p-banner-background-overlay;
   color: $d-p-banner-text-color;
   z-index: 0;
-  h2 {
+  .content > h2 {
     @include font-main-header-big;
+    color: $d-p-banner-header-color;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .field--name-field-d-icon {
+    text-align: center;
   }
   h3.field--name-field-d-subtitle {
     @include font-subtitle;
     text-align: center;
-    &:after {
-      @include decoration-header-line-main-center;
-      background: $d-p-banner-line-color;
-      margin-top: $d-p-banner-line-margin-top;
-      margin-bottom: $d-p-banner-line-margin-bottom;
-    }
+    color: $d-p-banner-subheader-color;
+    opacity: $d-p-banner-subheader-opacity;
   }
   p {
     @include font-body-standard;
@@ -50,6 +55,16 @@ $d-p-banner-img-opacity: 0.5 !default;
       @extend .btn;
       @extend .btn-primary;
       margin-top: $d-p-banner-button-margin-top;
+    }
+  }
+  h2 + .field--type-link,
+  h3 + .field--type-link,
+  .field--name-field-d-long-text {
+    &:before {
+      @include decoration-header-line-main-center;
+      background: $d-p-banner-line-color;
+      margin-top: $d-p-banner-line-margin-top;
+      margin-bottom: $d-p-banner-line-margin-bottom;
     }
   }
   .backstretch-item {
