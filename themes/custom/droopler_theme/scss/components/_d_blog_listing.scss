@@ -18,6 +18,10 @@ $border-bottom-color: #d3d7d9;
 .view-blog-listing {
   margin-top: 40px;
 
+  .field--type-image {
+    margin: 0;
+  }
+
   .pagination-wrapper {
     background-color: $color-troilus;
   }
@@ -164,12 +168,6 @@ $border-bottom-color: #d3d7d9;
   @media all and (max-width: 767px) {
     .title-row-for-mobile {
       padding-left: 30px;
-    }
-
-    .blog-main-image-row {
-      img {
-        padding-right: 10px
-      }
     }
   }
 
