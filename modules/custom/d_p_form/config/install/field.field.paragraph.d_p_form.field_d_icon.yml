@@ -2,30 +2,30 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_d_image_background
-    - paragraphs.paragraphs_type.d_p_side_image
+    - field.storage.paragraph.field_d_icon
+    - paragraphs.paragraphs_type.d_p_form
   module:
     - content_translation
     - image
 third_party_settings:
   content_translation:
     translation_sync:
-      file: file
-      alt: '0'
-      title: '0'
-id: paragraph.d_p_side_image.field_d_image_background
-field_name: field_d_image_background
+      alt: alt
+      title: title
+      file: '0'
+id: paragraph.d_p_form.field_d_icon
+field_name: field_d_icon
 entity_type: paragraph
-bundle: d_p_side_image
-label: Image
+bundle: d_p_form
+label: Icon
 description: ''
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: 'backgrounds/[current-page:url:args:value:0]_[current-page:url:args:value:1]'
-  file_extensions: 'png gif jpg jpeg'
+  file_directory: 'icons/[current-page:url:args:value:0]_[current-page:url:args:value:1]'
+  file_extensions: 'png gif jpg jpeg svg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
