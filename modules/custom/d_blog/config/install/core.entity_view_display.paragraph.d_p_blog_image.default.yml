@@ -5,24 +5,24 @@ dependencies:
   config:
     - field.field.paragraph.d_p_blog_image.field_d_p_blog_image
     - field.field.paragraph.d_p_blog_image.field_d_p_blog_image_full_width
-    - image.style.responsive_image_2000
     - paragraphs.paragraphs_type.d_p_blog_image
+    - responsive_image.styles.blog_images_style
   module:
-    - image
+    - responsive_image
 _core:
-  default_config_hash: sdGSh3nDAvR4-sTuWqE29uVxDY0DGumWBMykcxxOMQE
+  default_config_hash: '-P9JdgJzUXU2tnxHWlF0Y2loPjHmPDjML9R8uETUcVE'
 id: paragraph.d_p_blog_image.default
 targetEntityType: paragraph
 bundle: d_p_blog_image
 mode: default
 content:
   field_d_p_blog_image:
-    type: image
+    type: responsive_image
     weight: 0
     region: content
     label: hidden
     settings:
-      image_style: responsive_image_2000
+      responsive_image_style: blog_images_style
       image_link: ''
     third_party_settings: {  }
   field_d_p_blog_image_full_width:
