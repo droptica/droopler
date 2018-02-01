@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.storage.paragraph.field_d_p_blog_image_full_width
     - paragraphs.paragraphs_type.d_p_blog_image
+_core:
+  default_config_hash: cf-7KmDuP7et56y3bQEp-x-HuaIuOYgMYcXq1LDQgIM
 id: paragraph.d_p_blog_image.field_d_p_blog_image_full_width
 field_name: field_d_p_blog_image_full_width
 entity_type: paragraph
@@ -18,6 +20,6 @@ default_value:
     value: 0
 default_value_callback: ''
 settings:
-  on_label: 'Image is 100% width on page'
-  off_label: 'Check to make image 100% width on page'
+  on_label: 'Image is on the full width of the screen'
+  off_label: 'Image is on the width of the text'
 field_type: boolean
