@@ -47,6 +47,7 @@ $color-taxonomy-in-header: #8e8a89;
         text-transform: none;
         color: white;
         font-weight: 700;
+        letter-spacing: 1px;
       }
 
       .author_attributes {
@@ -123,6 +124,15 @@ $color-taxonomy-in-header: #8e8a89;
     }
   }
 
+  .field--name-field-blog-sections {
+    margin-top: 50px;
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+
   .field--name-field-blog-main-image {
     img {
       width: 100vw;
@@ -143,8 +153,7 @@ $color-taxonomy-in-header: #8e8a89;
   }
 
   .field--name-field-d-p-blog-image {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 35px auto;
     display: block;
     img {
       width: $text-container-width;
@@ -157,7 +166,7 @@ $color-taxonomy-in-header: #8e8a89;
 
   .field--name-field-d-p-blog-text {
     width: $text-container-width;
-    margin: 10px auto;
+    margin: 25px auto;
     display: block;
 
     h1, h2, h3, h4, h5, h6 {
