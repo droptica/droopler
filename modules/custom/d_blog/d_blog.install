@@ -31,4 +31,13 @@ function d_blog_install() {
     ->set('inherit_settings', 1)
     ->set('pass_arguments', 1)
     ->save();
+
+  // Enable xml sitemap generation for Content type: blog posts
+  \Drupal::service('simple_sitemap.generator')
+    ->saveSetting('remove_duplicates', TRUE)
+    ->enableEntityType('node')
+    ->setBundleSettings('node', 'blog_post', ['index' => TRUE, 'priority' => 0.5])
+    ->removeCustomLinks()
+    ->addCustomLink('/some/view/page', ['priority' => 0.5])
+    ->generateSitemap();
 }
