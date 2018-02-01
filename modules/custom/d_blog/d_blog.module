@@ -51,15 +51,6 @@ function d_blog_preprocess_paragraph(&$variables) {
   }
 }
 
-function d_blog_preprocess_pager__blog_listing__page(&$variables) {
-  $left_pagination_patch = drupal_get_path('module', 'd_blog') . '/assets/left-pagination.svg';
-  $right_pagination_patch = drupal_get_path('module', 'd_blog') . '/assets/right-pagination.svg';
-  $left_pagination = file_get_contents($left_pagination_patch);
-  $right_pagination = file_get_contents($right_pagination_patch);
-  $variables['left_pagination_icon'] = $left_pagination;
-  $variables['right_pagination_icon'] = $right_pagination;
-}
-
 /**
  * Implements hook_preprocess_links().
  */
