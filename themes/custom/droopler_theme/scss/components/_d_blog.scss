@@ -60,6 +60,11 @@ $color-taxonomy-in-header: #8e8a89;
         font-size: 1.2em;
         color: $color-taxonomy-in-header;
 
+        .field__item {
+          display: inline;
+          @include add-commas-to-elements;
+        }
+
         a {
           color: $color-taxonomy-in-header;
         }

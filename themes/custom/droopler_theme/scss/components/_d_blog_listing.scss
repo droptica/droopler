@@ -140,6 +140,10 @@ $border-bottom-color: #d3d7d9;
   padding-bottom: 0;
   .field--name-field-blog-category {
     display: inline;
+    .field__item {
+      display: inline;
+      @include add-commas-to-elements;
+    }
   }
 
   .node_blog_post_title {
