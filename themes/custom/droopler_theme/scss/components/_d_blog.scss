@@ -16,8 +16,11 @@ $color-taxonomy-in-header: #8e8a89;
   .blog_post_header {
     z-index: 1;
     min-height: 200px;
+
     img{
       min-height: 150px;
+      max-height: 700px;
+      object-fit: cover;
     }
     position: relative;
     background-color: black;
