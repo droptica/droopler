@@ -48,14 +48,6 @@ $border-bottom-color: #d3d7d9;
       display: inline;
     }
 
-    .pager__item--last, .pager__item--first {
-      &:hover  {
-        &:after {
-          @include pagination-link-underline;
-        }
-      }
-    }
-
     .pager__item--next {
       padding-left: 1em;
     }
@@ -80,14 +72,6 @@ $border-bottom-color: #d3d7d9;
     .pagination {
       li {
         display: none;
-      }
-
-      .pager__item--next, .pager__item--previous {
-        &:hover  {
-          &:after {
-            @include pagination-link-underline;
-          }
-        }
       }
     }
 
