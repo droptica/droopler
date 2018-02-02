@@ -2,18 +2,6 @@ $blog-listing-header-color: #1a6dbb;
 $blog-listing-taxonomy-link-color: #969696;
 $border-bottom-color: #d3d7d9;
 
-// Header underline aligned to the center
-@mixin pagination-link-underline {
-  content: ' ';
-  display: block;
-  width: 1em;
-  background: $blog-listing-taxonomy-link-color;
-  position: relative;
-  height: 0.125rem;
-  margin-bottom: -0.125em;
-  margin-left: 0.15em;
-}
-
 .view-blog-listing {
   margin-top: 40px;
 
