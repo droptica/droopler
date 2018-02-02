@@ -175,6 +175,16 @@ $border-bottom-color: #d3d7d9;
     }
   }
 
+  @media all and (max-width: 767px) {
+    .node_blog_post_title {
+      font-size: 1em; //because German language and long words
+    }
+
+    .node-readmore {
+      font-size: 15px;
+    }
+  }
+
   @media all and (min-width: 768px) {
     .article-row {
       min-height: 420px;

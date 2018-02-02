@@ -46,4 +46,11 @@ Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui
       $d_blog_paragraph_text, $images, $taxonomy
     );
   }
+
+  //Check for german language
+  $german_title = 'Arbeitsunfähigkeitsbescheinigung';
+  d_blog_init_save_blog_post(
+    $german_title, $d_blog_teaser_text,
+    $d_blog_paragraph_text, $images, $taxonomy
+  );
 }
