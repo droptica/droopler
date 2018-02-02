@@ -14,7 +14,6 @@ $border-bottom-color: #d3d7d9;
   margin-left: 0.15em;
 }
 
-
 .view-blog-listing {
   margin-top: 40px;
 
@@ -110,7 +109,6 @@ $border-bottom-color: #d3d7d9;
   border-bottom: 1px solid $border-bottom-color;
   //margin-bottom: 30px;
 
-
   @media all and (min-width: 1140px) {
     border-bottom: none;
     margin-bottom: 0;
@@ -173,9 +171,7 @@ $border-bottom-color: #d3d7d9;
     .node-readmore {
       margin-bottom: 15px;
     }
-  }
 
-  @media all and (max-width: 767px) {
     .node_blog_post_title {
       font-size: 1em; //because German language and long words
     }
@@ -216,6 +212,12 @@ $border-bottom-color: #d3d7d9;
         height: 400px;
         object-fit: cover;
       }
+    }
+  }
+
+  @media all and (min-width: 768px) and (max-width: 1199px) {
+    .field--name-field-blog-main-image {
+      margin-bottom: 15px;
     }
   }
 
