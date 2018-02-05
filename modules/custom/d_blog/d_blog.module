@@ -61,6 +61,32 @@ function d_blog_preprocess_links(&$variables) {
 }
 
 /**
+ * Implementation of hook_element_info_alter
+ * Remove N/A option from radio button field
+ * @param array $types
+ */
+function d_blog_element_info_alter(array &$types) {
+  if (isset($types['radios'])) {
+    $types['radios']['#process'][] = '_d_blog_remove_radio_na';
+  }
+}
+
+/**
+ * remove_radio_na
+ * A Callback function for d_blog_element_info_alter
+ * @param array $element
+ * @return array modified $element
+ */
+function _d_blog_remove_radio_na($element) {
+  $field_name = 'field_d_p_blog_image_full_width';
+  if (!empty($element['#field_name']) && $element['#field_name'] == $field_name) {
+    unset($element['_none']);
+  }
+
+  return $element;
+}
+
+/**
  * @param $source_string
  * @param $translated_string
  * @param $langcode
