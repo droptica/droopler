@@ -25,7 +25,7 @@ $teaser-text-margin-top-desktop: 30px !default;
 $teaser-text-padding-left: 0 !default;
 $teaser-text-padding-left-mobile: 30px !default;
 $margin-between-teaser-mobile: 15px !default;
-$teaser-blog-post-title-mobile: 1rem !default;
+$teaser-blog-post-title-mobile: 1.0625rem !default;
 $read-article-font-size: 0.9375rem !default;
 $title-teaser-font-size-desktop: 2.375rem !default;
 $title-teaser-padding-top-desktop: 18px !default;
@@ -38,6 +38,7 @@ $teaser-image-margin-bottom-tablet: 15px !default;
 $teaser-image-row-padding-desktop: 0 !default;
 $teaser-title-margin-top-desktop: 73px !default;
 $teaser-title-padding-desktop: 37px !default;
+$teaser-title-margin-between-text-decoration-mobile: 0.75rem;
 $teaser-min-height-desktop: 520px !default;
 $teaser-image-height-desktop: 480px !default;
 $margin-between-header-and-article-teasers: 40px !default;
@@ -201,7 +202,12 @@ $field-type-image-margin: 0 !default;
     }
 
     .node_blog_post_title {
-      font-size: $teaser-blog-post-title-mobile; //because German language and long words
+      //because German language and long words
+      font-size: $teaser-blog-post-title-mobile;
+
+      &:after {
+        margin-top: $teaser-title-margin-between-text-decoration-mobile;
+      }
     }
 
     .node-readmore {
