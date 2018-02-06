@@ -1,20 +1,27 @@
-uuid: 6e1851e8-8479-4c3e-ac92-6ece47d89532
+uuid: a1a27d45-b9fa-4fca-b695-f45aa72bc659
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_d_p_blog_image
+    - field.storage.paragraph.field_d_image
     - paragraphs.paragraphs_type.d_p_blog_image
   module:
+    - content_translation
     - image
-id: paragraph.d_p_blog_image.field_d_p_blog_image
-field_name: field_d_p_blog_image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
+id: paragraph.d_p_blog_image.field_d_image
+field_name: field_d_image
 entity_type: paragraph
 bundle: d_p_blog_image
 label: 'Blog image'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
