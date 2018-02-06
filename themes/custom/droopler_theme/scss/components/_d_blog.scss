@@ -1,39 +1,38 @@
 $text-container-width: 35em;
-$img-width-for-dekstop: 41em; //make img width the sames as text for desktop
+$img-width-for-desktop: 41em; //make img width the sames as text for desktop
 
 $font-color: $white;
 $headers-color: $black;
 $under-background-color: $black; // color when image is not
 $color-taxonomy-in-header: #8e8a89;
 
-
 $image-opacity-for-blog: 50%;
 
 $margin-beetwen-html-paragraphs: 1.5rem;
 $margin-between-blog-sections: 3rem;
-
 $header-padding: 10px;
 $header-margin-mobile: 15px auto 15px;
-
 $header-margin-tablet: 25px auto 22px;
 $header-margin-dekstop: 25px auto 35px;
 $image-margin: 35px auto;
 $paragraph-text-margin: 25px auto;
 
 
-$header-desktop-font: 3rem;
+$header-desktop-font-size: 3rem;
 $header-small-desktop-screen: 2.375rem;
-$header-tablet-font: 1.625rem;
-$header-mobile-font: 1.125rem;
-$author-attributes-font-desktop: 1.0625em;
-$author-attributes-font-mobile: 0.75rem;
-$block-category-font-mobile: 0.625rem;
-$block-category-font-desktop: 1rem;
-
-$header-h2-font-blog-text-desktop: 2.5rem;
-$header-h2--font-blog-text-mobile: 1.375rem;
-$smaller-header-font-blog-text-mobile: 1.25rem;
-$blog-text-font-size-dekstop: 1.25rem;
+$header-tablet-font-size: 1.625rem;
+$header-mobile-font-size: 1.125rem;
+$author-attributes-font-size-desktop: 1.0625em;
+$author-attributes-font-size-mobile: 0.75rem;
+$block-category-font-size-desktop: 1rem;
+$block-category-font-size-mobile: 0.625rem;
+$header-h2-font-size-blog-text-desktop: 2.5rem;
+$header-h2-font-size-blog-text-mobile: 1.375rem;
+$smaller-header-font-size-blog-text-mobile: 1.25rem;
+$blog-text-font-size-desktop: 1.25rem;
+$blog-text-width-mobile: 85%;
+$header-min-height-small-desktop: 325px;
+$header-min-height-big-desktop: 300px;
 
 .node--type-blog-post {
 
@@ -76,7 +75,7 @@ $blog-text-font-size-dekstop: 1.25rem;
       padding-right: $header-padding;
 
       h1 {
-        font-size: $header-desktop-font;
+        font-size: $header-desktop-font-size;
         margin: $header-margin-dekstop;
         text-transform: none;
         color: $font-color;
@@ -85,7 +84,7 @@ $blog-text-font-size-dekstop: 1.25rem;
       }
 
       .author_attributes {
-        font-size: $author-attributes-font-desktop;
+        font-size: $author-attributes-font-size-desktop;
         color: $font-color;
 
         a {
@@ -95,7 +94,7 @@ $blog-text-font-size-dekstop: 1.25rem;
 
       .field--name-field-blog-category {
         text-align: center;
-        font-size: $block-category-font-desktop;
+        font-size: $block-category-font-size-desktop;
         color: $color-taxonomy-in-header;
 
         .field__item {
@@ -131,15 +130,15 @@ $blog-text-font-size-dekstop: 1.25rem;
         bottom: 0;
         h1 {
           margin: $header-margin-tablet;
-          font-size: $header-tablet-font;
+          font-size: $header-tablet-font-size;
         }
 
         .author_attributes {
-          font-size: $author-attributes-font-mobile;
+          font-size: $author-attributes-font-size-mobile;
         }
 
         .field--name-field-blog-category {
-          font-size: $block-category-font-mobile;
+          font-size: $block-category-font-size-mobile;
         }
       }
     }
@@ -151,7 +150,7 @@ $blog-text-font-size-dekstop: 1.25rem;
         top: 40%;
         transform: translateY(-50%);
         h1 {
-          font-size: $header-mobile-font;
+          font-size: $header-mobile-font-size;
           margin: $header-margin-mobile;
         }
       }
@@ -210,22 +209,22 @@ $blog-text-font-size-dekstop: 1.25rem;
     }
 
     h1 {
-      font-size: $header-desktop-font;
+      font-size: $header-desktop-font-size;
     }
 
     h2 {
-      font-size: $header-h2-font-blog-text-desktop
+      font-size: $header-h2-font-size-blog-text-desktop
     }
   }
 
   @media all and (max-width: 768px) {
     .field--name-field-d-long-text {
-      width: 85%;
+      width: $blog-text-width-mobile;
       h2 {
-        font-size: $header-h2--font-blog-text-mobile;
+        font-size: $header-h2-font-size-blog-text-mobile;
       }
       h3, h4, h5, h6 {
-        font-size: $smaller-header-font-blog-text-mobile;
+        font-size: $smaller-header-font-size-blog-text-mobile;
       }
     }
     .field--name-field-d-image {
@@ -237,26 +236,26 @@ $blog-text-font-size-dekstop: 1.25rem;
 
   @media all and (min-width: 992px) {
     .field--name-field-d-long-text {
-      font-size: $blog-text-font-size-dekstop;
+      font-size: $blog-text-font-size-desktop;
       p {
-        font-size: $blog-text-font-size-dekstop;
+        font-size: $blog-text-font-size-desktop;
       }
     }
 
     .field--name-field-d-image img {
-      width: $img-width-for-dekstop;
+      width: $img-width-for-desktop;
     }
   }
 
   @media all and (min-width: 1200px) {
     .blog_post_header {
-      min-height: 325px;
+      min-height: $header-min-height-small-desktop;
     }
   }
 
   @media all and (min-width: 1400px)  {
     .blog_post_header {
-      min-height: 300px;
+      min-height: $header-min-height-big-desktop;
     }
   }
 }
