@@ -1,38 +1,38 @@
-$text-container-width: 35em;
-$img-width-for-desktop: 41em; //make img width the sames as text for desktop
+$text-container-width: 35em !default;
+$img-width-for-desktop: 41em !default; //make img width the sames as text for desktop
 
-$font-color: $white;
-$headers-color: $black;
-$under-background-color: $black; // color when image is not
-$color-taxonomy-in-header: #8e8a89;
+$font-color: $white !default;
+$headers-color: $black !default;
+$under-background-color: $black !default; // color when image is not
+$color-taxonomy-in-header: #8e8a89 !default;
 
-$image-opacity-for-blog: 50%;
+$image-opacity-for-blog: 50% !default;
 
-$margin-beetwen-html-paragraphs: 1.5rem;
-$margin-between-blog-sections: 3rem;
-$header-padding: 10px;
-$header-margin-mobile: 15px auto 15px;
-$header-margin-tablet: 25px auto 22px;
-$header-margin-dekstop: 25px auto 35px;
-$image-margin: 35px auto;
-$paragraph-text-margin: 25px auto;
+$margin-between-html-paragraphs: 1.5rem !default;
+$margin-between-blog-sections: 3rem !default;
+$header-padding: 10px !default;
+$header-margin-mobile: 15px auto 15px !default;
+$header-margin-tablet: 25px auto 22px !default;
+$header-margin-dekstop: 25px auto 35px !default;
+$header-desktop-font-size: 3rem !default;
+$header-small-desktop-screen: 2.375rem !default;
+$header-tablet-font-size: 1.625rem !default;
+$header-mobile-font-size: 1.125rem !default;
+$header-h2-font-size-blog-text-desktop: 2.5rem !default;
+$header-h2-font-size-blog-text-mobile: 1.375rem !default;
+$smaller-header-font-size-blog-text-mobile: 1.25rem !default;
+$header-min-height-small-desktop: 325px !default;
+$header-min-height-big-desktop: 300px !default;
 
+$author-attributes-font-size-desktop: 1.0625em !default;
+$author-attributes-font-size-mobile: 0.75rem !default;
+$block-category-font-size-desktop: 1rem !default;
+$block-category-font-size-mobile: 0.625rem !default;
 
-$header-desktop-font-size: 3rem;
-$header-small-desktop-screen: 2.375rem;
-$header-tablet-font-size: 1.625rem;
-$header-mobile-font-size: 1.125rem;
-$author-attributes-font-size-desktop: 1.0625em;
-$author-attributes-font-size-mobile: 0.75rem;
-$block-category-font-size-desktop: 1rem;
-$block-category-font-size-mobile: 0.625rem;
-$header-h2-font-size-blog-text-desktop: 2.5rem;
-$header-h2-font-size-blog-text-mobile: 1.375rem;
-$smaller-header-font-size-blog-text-mobile: 1.25rem;
-$blog-text-font-size-desktop: 1.25rem;
-$blog-text-width-mobile: 85%;
-$header-min-height-small-desktop: 325px;
-$header-min-height-big-desktop: 300px;
+$image-margin: 35px auto !default;
+$paragraph-text-margin: 25px auto !default;
+$blog-text-font-size-desktop: 1.25rem !default;
+$blog-text-width-mobile: 85% !default;
 
 .node--type-blog-post {
 
@@ -161,7 +161,7 @@ $header-min-height-big-desktop: 300px;
     margin-top: $margin-between-blog-sections;
 
     p {
-      margin-bottom: $margin-beetwen-html-paragraphs;
+      margin-bottom: $margin-between-html-paragraphs;
     }
   }
 
