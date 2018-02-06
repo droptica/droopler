@@ -1,5 +1,39 @@
 $text-container-width: 35em;
+$img-width-for-dekstop: 41em; //make img width the sames as text for desktop
+
+$font-color: $white;
+$headers-color: $black;
+$under-background-color: $black; // color when image is not
 $color-taxonomy-in-header: #8e8a89;
+
+
+$image-opacity-for-blog: 50%;
+
+$margin-beetwen-html-paragraphs: 1.5rem;
+$margin-between-blog-sections: 3rem;
+
+$header-padding: 10px;
+$header-margin-mobile: 15px auto 15px;
+
+$header-margin-tablet: 25px auto 22px;
+$header-margin-dekstop: 25px auto 35px;
+$image-margin: 35px auto;
+$paragraph-text-margin: 25px auto;
+
+
+$header-desktop-font: 3rem;
+$header-small-desktop-screen: 2.375rem;
+$header-tablet-font: 1.625rem;
+$header-mobile-font: 1.125rem;
+$author-attributes-font-desktop: 1.0625em;
+$author-attributes-font-mobile: 0.75rem;
+$block-category-font-mobile: 0.625rem;
+$block-category-font-desktop: 1rem;
+
+$header-h2-font-blog-text-desktop: 2.5rem;
+$header-h2--font-blog-text-mobile: 1.375rem;
+$smaller-header-font-blog-text-mobile: 1.25rem;
+$blog-text-font-size-dekstop: 1.25rem;
 
 .node--type-blog-post {
 
@@ -23,45 +57,45 @@ $color-taxonomy-in-header: #8e8a89;
       object-fit: cover;
     }
     position: relative;
-    background-color: black;
+    background-color: $under-background-color;
 
     .field--name-field-blog-main-image {
       img {
         z-index: -3;
-        filter: opacity(50%);
+        filter: opacity($image-opacity-for-blog);
       }
     }
 
     .blog_post_header_absolute_wrapper {
-      color: white;
+      color: $font-color;
       position: absolute;
       bottom: -4px;
       width: 100%;
       text-align: center;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: $header-padding;
+      padding-right: $header-padding;
 
       h1 {
-        font-size: 3.5em;
-        margin: 25px auto 35px;
+        font-size: $header-desktop-font;
+        margin: $header-margin-dekstop;
         text-transform: none;
-        color: white;
+        color: $font-color;
         font-weight: 700;
         letter-spacing: 1px;
       }
 
       .author_attributes {
-        font-size: 1.25em;
-        color: white;
+        font-size: $author-attributes-font-desktop;
+        color: $font-color;
 
         a {
-          color: white;
+          color: $font-color;
         }
       }
 
       .field--name-field-blog-category {
         text-align: center;
-        font-size: 1.2em;
+        font-size: $block-category-font-desktop;
         color: $color-taxonomy-in-header;
 
         .field__item {
@@ -86,7 +120,7 @@ $color-taxonomy-in-header: #8e8a89;
     @media all and (min-width: 1200px) and (max-width: 1400px) {
       .blog_post_header_absolute_wrapper {
         h1 {
-          font-size: 2.8em;
+          font-size: $header-small-desktop-screen;
         }
       }
     }
@@ -96,16 +130,16 @@ $color-taxonomy-in-header: #8e8a89;
 
         bottom: 0;
         h1 {
-          margin: 25px auto 22px;
-          font-size: 26px;
+          margin: $header-margin-tablet;
+          font-size: $header-tablet-font;
         }
 
         .author_attributes {
-          font-size: 12px;
+          font-size: $author-attributes-font-mobile;
         }
 
         .field--name-field-blog-category {
-          font-size: 10px;
+          font-size: $block-category-font-mobile;
         }
       }
     }
@@ -117,18 +151,18 @@ $color-taxonomy-in-header: #8e8a89;
         top: 40%;
         transform: translateY(-50%);
         h1 {
-          font-size:18px;
-          margin: 15px auto 15px;
+          font-size: $header-mobile-font;
+          margin: $header-margin-mobile;
         }
       }
     }
   }
 
   .field--name-field-blog-sections {
-    margin-top: 50px;
+    margin-top: $margin-between-blog-sections;
 
     p {
-      margin-bottom: 1.5rem;
+      margin-bottom: $margin-beetwen-html-paragraphs;
     }
   }
 
@@ -153,7 +187,7 @@ $color-taxonomy-in-header: #8e8a89;
   }
 
   .field--name-field-d-image {
-    margin: 35px auto;
+    margin: $image-margin;
     display: block;
     img {
       width: $text-container-width;
@@ -166,28 +200,21 @@ $color-taxonomy-in-header: #8e8a89;
 
   .field--name-field-d-long-text {
     width: $text-container-width;
-    margin: 25px auto;
+    margin: $paragraph-text-margin;
     display: block;
 
     h1, h2, h3, h4, h5, h6 {
-      color: black;
+      color: $headers-color;
       text-align: left;
       font-weight: bold;
     }
 
-    h2 {
-      font-size: 2em
+    h1 {
+      font-size: $header-desktop-font;
     }
-  }
 
-  @media all and (max-width: 576px) {
-    .field--name-field-d-long-text {
-      h2 {
-        font-size: 17px;
-      }
-      h3, h4, h5, h6 {
-        font-size: 16px;
-      }
+    h2 {
+      font-size: $header-h2-font-blog-text-desktop
     }
   }
 
@@ -195,10 +222,10 @@ $color-taxonomy-in-header: #8e8a89;
     .field--name-field-d-long-text {
       width: 85%;
       h2 {
-        font-size: 22px;
+        font-size: $header-h2--font-blog-text-mobile;
       }
       h3, h4, h5, h6 {
-        font-size: 20px;
+        font-size: $smaller-header-font-blog-text-mobile;
       }
     }
     .field--name-field-d-image {
@@ -210,14 +237,14 @@ $color-taxonomy-in-header: #8e8a89;
 
   @media all and (min-width: 992px) {
     .field--name-field-d-long-text {
-      font-size: 20px;
+      font-size: $blog-text-font-size-dekstop;
       p {
-        font-size: 20px;
+        font-size: $blog-text-font-size-dekstop;
       }
     }
 
     .field--name-field-d-image img {
-      width: 41em;
+      width: $img-width-for-dekstop;
     }
   }
 
