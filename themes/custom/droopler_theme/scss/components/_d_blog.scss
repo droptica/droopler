@@ -38,6 +38,8 @@ $d-blog-text-font-size-desktop: 1.25rem !default;
 $d-blog-text-width-mobile: 85% !default;
 $d-blog-header-text-distance-from-bottom: -0.25rem !default;
 $d-blog-header-text-distance-from-top-mobile: 40% !default;
+$d-blog-size-of-large-desktop: 1400px;
+$d-blog-size-of-small-desktop: 1200px;
 
 .node--type-blog-post {
 
@@ -121,7 +123,7 @@ $d-blog-header-text-distance-from-top-mobile: 40% !default;
       }
     }
 
-    @media all and (min-width: 1200px) and (max-width: 1400px) {
+    @media all and (min-width: $d-blog-size-of-small-desktop)  and (max-width: $d-blog-size-of-large-desktop) {
       .blog_post_header_absolute_wrapper {
         h1 {
           font-size: $d-blog-header-small-desktop-screen;
@@ -222,7 +224,7 @@ $d-blog-header-text-distance-from-top-mobile: 40% !default;
     }
   }
 
-  @media all and (max-width: 768px) {
+  @include media-breakpoint-down(sm) {
     .field--name-field-d-long-text {
       width: $d-blog-text-width-mobile;
       h2 {
@@ -239,7 +241,7 @@ $d-blog-header-text-distance-from-top-mobile: 40% !default;
     }
   }
 
-  @media all and (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     .field--name-field-d-long-text {
       font-size: $d-blog-text-font-size-desktop;
       p {
@@ -252,13 +254,13 @@ $d-blog-header-text-distance-from-top-mobile: 40% !default;
     }
   }
 
-  @media all and (min-width: 1200px) {
+  @include media-breakpoint-up(xl) {
     .blog_post_header {
       min-height: $d-blog-header-min-height-small-desktop;
     }
   }
 
-  @media all and (min-width: 1400px)  {
+  @media all and (min-width: $d-blog-size-of-large-desktop)  {
     .blog_post_header {
       min-height: $d-blog-header-min-height-big-desktop;
     }

@@ -98,7 +98,7 @@ $d-blog-article-row-min-height: 420px;
     }
   }
 
-  @media all and (max-width: 767px) {
+  @include media-breakpoint-down(sm) {
     .pagination {
       li {
         display: none;
@@ -110,7 +110,7 @@ $d-blog-article-row-min-height: 420px;
     }
   }
 
-  @media all and (min-width: 768px) {
+  @include media-breakpoint-up(sm) {
     .mob-only {
       display: none;
     }
@@ -139,7 +139,7 @@ $d-blog-article-row-min-height: 420px;
 .article-wrapper {
   border-bottom: $d-blog-article-border;
 
-  @media all and (min-width: 1140px) {
+  @include media-breakpoint-only(xl) {
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -160,7 +160,7 @@ $d-blog-article-row-min-height: 420px;
 
   &.node--sticky {
     padding: $d-blog-sticky-article-padding-desktop;
-    @media all and (max-width: 767px) {
+    @include media-breakpoint-down(sm) {
       padding: $d-blog-sticky-article-padding-mobile;
       margin-bottom: $d-blog-sticky-article-margin-bottom;
       margin-top: $d-blog-sticky-article-margin-top;
@@ -198,7 +198,7 @@ $d-blog-article-row-min-height: 420px;
     display: none;
   }
 
-  @media all and (max-width: 767px) {
+  @include media-breakpoint-down(sm) {
     .title-row-for-mobile {
       padding-left: $d-blog-teaser-text-padding-left-mobile;
     }
@@ -218,7 +218,7 @@ $d-blog-article-row-min-height: 420px;
     }
   }
 
-  @media all and (min-width: 768px) {
+  @include media-breakpoint-up(sm) {
     .article-row {
       min-height: $d-blog-article-row-min-height;
     }
@@ -251,13 +251,13 @@ $d-blog-article-row-min-height: 420px;
     }
   }
 
-  @media all and (min-width: 768px) and (max-width: 1199px) {
+  @include media-breakpoint-between(md, xl) {
     .field--name-field-blog-main-image {
       margin-bottom: $d-blog-teaser-image-margin-bottom-tablet;
     }
   }
 
-  @media all and (min-width: 1200px) {
+  @include media-breakpoint-up(xl) {
     .title-row-for-mobile {
       display: none;
     }
