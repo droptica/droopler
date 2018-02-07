@@ -170,6 +170,7 @@ $field-type-image-margin: 0 !default;
   .node_blog_post_title {
     text-align: left;
     padding-left: $teaser-text-padding-left;
+    word-wrap: break-word;
 
     &:after {
       @include decoration-header-line;
