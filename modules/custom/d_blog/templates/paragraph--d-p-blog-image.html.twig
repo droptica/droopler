@@ -38,18 +38,16 @@
  * @ingroup themeable
  */
 #}
-{%
-    set classes = [
-    'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    image_on_full_screen_width ? 'paragraph--full-screen-width'|clean_class,
-]
-%}
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  image_on_full_screen_width ? 'paragraph--full-screen-width'|clean_class,
+] %}
 {% block paragraph %}
-    <div{{ attributes.addClass(classes) }}>
-        {% block content %}
-            {{ content }}
-        {% endblock %}
-    </div>
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
 {% endblock paragraph %}

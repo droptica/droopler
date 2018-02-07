@@ -66,88 +66,86 @@
  * @see template_preprocess_node()
  */
 #}
-{%
-    set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'clearfix',
-    'container'
-]
-%}
+{% set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  'clearfix',
+  'container'
+] %}
 {% set date = node.created.value|date("d.m.Y") %}
 {{ attach_library('classy/node') }}
 <div class="article-wrapper">
-    <article{{ attributes.addClass(classes) }}>
-        <div class="row article-row ">
-            <div class="title-row-for-mobile col-sm-12">
-                {% if display_submitted %}
-                    <div class="node__meta">
-                        {{ author_picture }}
+  <article{{ attributes.addClass(classes) }}>
+    <div class="row article-row ">
+      <div class="title-row-for-mobile col-sm-12">
+        {% if display_submitted %}
+          <div class="node__meta">
+            {{ author_picture }}
 
-                        <span{{ author_attributes }}>
+            <span{{ author_attributes }}>
                             {% trans %}{{ date }} {% endtrans %}
 
-                            {% if content.field_blog_category['#object'] %}
-                                / {{ content.field_blog_category}}
-                            {% endif %}
+              {% if content.field_blog_category['#object'] %}
+                / {{ content.field_blog_category }}
+              {% endif %}
                         </span>
-                        {{ metadata }}
-                    </div>
-                {% endif %}
+            {{ metadata }}
+          </div>
+        {% endif %}
 
-                {{ title_prefix }}
+        {{ title_prefix }}
 
-                {% if not page %}
-                    <h2{{ title_attributes.addClass('node_blog_post_title') }}>
-                        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-                    </h2>
-                {% endif %}
+        {% if not page %}
+          <h2{{ title_attributes.addClass('node_blog_post_title') }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+        {% endif %}
 
-                {{ title_suffix }}
-            </div>
+        {{ title_suffix }}
+      </div>
 
-            <div class="col-md-7 col-xl-6 blog-main-image-row">
-                <div class="">
-                    {{ content.field_blog_main_image }}
-                </div>
-            </div>
+      <div class="col-md-7 col-xl-6 blog-main-image-row">
+        <div class="">
+          {{ content.field_blog_main_image }}
+        </div>
+      </div>
 
-            <div class="col-md-5 col-xl-5 offset-xl-1">
-                <div class="title-row">
-                    {% if display_submitted %}
-                        <div class="node__meta col-10">
-                            {{ author_picture }}
+      <div class="col-md-5 col-xl-5 offset-xl-1">
+        <div class="title-row">
+          {% if display_submitted %}
+            <div class="node__meta col-10">
+              {{ author_picture }}
 
-                            <span{{ author_attributes }}>
+              <span{{ author_attributes }}>
                                 {% trans %}{{ date }} {% endtrans %}
 
-                                {% if content.field_blog_category['#object'] %}
-                                    / {{ content.field_blog_category}}
-                                {% endif %}
+                {% if content.field_blog_category['#object'] %}
+                  / {{ content.field_blog_category }}
+                {% endif %}
                             </span>
-                            {{ metadata }}
-                        </div>
-                    {% endif %}
-
-                    {{ title_prefix }}
-
-                    {% if not page %}
-                        <h2{{ title_attributes.addClass('node_blog_post_title')}}>
-                            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-                        </h2>
-                    {% endif %}
-
-                    {{ title_suffix }}
-                </div>
-
-                <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-                    {{ content|without('field_blog_main_image', 'field_blog_category') }}
-                </div>
+              {{ metadata }}
             </div>
+          {% endif %}
+
+          {{ title_prefix }}
+
+          {% if not page %}
+            <h2{{ title_attributes.addClass('node_blog_post_title') }}>
+              <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+          {% endif %}
+
+          {{ title_suffix }}
         </div>
-    </article>
+
+        <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+          {{ content|without('field_blog_main_image', 'field_blog_category') }}
+        </div>
+      </div>
+    </div>
+  </article>
 </div>

@@ -20,10 +20,12 @@ use \Drupal\taxonomy\Entity\Term;
  * @param $taxonomy
  */
 function d_blog_init_save_blog_post(
-  $d_blog_post_title, $d_blog_teaser_text,
-  $d_blog_paragraph_text, $images, $taxonomy
-)
-{
+  $d_blog_post_title,
+  $d_blog_teaser_text,
+  $d_blog_paragraph_text,
+  $images,
+  $taxonomy
+) {
   $blog_post_1 = [
     'type' => 'blog_post',
     'title' => '' . $d_blog_post_title . '',

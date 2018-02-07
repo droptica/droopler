@@ -60,52 +60,50 @@
  */
 #}
 
-{%
-    set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'clearfix',
-]
-%}
+{% set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  'clearfix',
+] %}
 {% set date = node.created.value|date("d.m.Y") %}
 <article{{ attributes.addClass(classes) }}>
-    <header class="blog_post_header">
-        {{ content.field_blog_main_image }}
+  <header class="blog_post_header">
+    {{ content.field_blog_main_image }}
 
-        <div class="blog_post_header_absolute_wrapper container-fluid">
-            {{ title_prefix }}
-            {% if not page %}
-                <h2{{ title_attributes.addClass('node__title') }}>
-                    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-                </h2>
-            {% endif %}
+    <div class="blog_post_header_absolute_wrapper container-fluid">
+      {{ title_prefix }}
+      {% if not page %}
+        <h2{{ title_attributes.addClass('node__title') }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+      {% endif %}
 
-            {{ title_suffix }}
+      {{ title_suffix }}
 
-            {% if display_submitted %}
-                <div class="node__meta">
-                    {{ author_picture }}
+      {% if display_submitted %}
+        <div class="node__meta">
+          {{ author_picture }}
 
-                    {% block submitted %}
-                        <span{{ author_attributes }} class="author_attributes">
+          {% block submitted %}
+            <span{{ author_attributes }} class="author_attributes">
                         {% trans %}{{ author_name }} /  {{ date }}{% endtrans %}
                     </span>
-                    {% endblock %}
+          {% endblock %}
 
-                    {{ metadata }}
+          {{ metadata }}
 
-                    <h1 class="col-md-8 col-xs-12">{{ node.title.value }} </h1>
+          <h1 class="col-md-8 col-xs-12">{{ node.title.value }} </h1>
 
-                    {{ content.field_blog_category}}
-                </div>
-            {% endif %}
+          {{ content.field_blog_category }}
         </div>
-    </header>
-    <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-        {{ content|without('field_blog_main_image', 'field_blog_category') }}
+      {% endif %}
     </div>
+  </header>
+  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+    {{ content|without('field_blog_main_image', 'field_blog_category') }}
+  </div>
 </article>
