@@ -28,7 +28,7 @@ function d_blog_init_save_blog_post(
 ) {
   $blog_post_1 = [
     'type' => 'blog_post',
-    'title' => '' . $d_blog_post_title . '',
+    'title' => $d_blog_post_title,
     'field_blog_main_image' => $images[0],
     'field_blog_teaser' => $d_blog_teaser_text,
     'field_blog_category' => $taxonomy,
@@ -191,7 +191,7 @@ function d_blog_init_fill_paragraph($paragraph_data)
  */
 function d_blog_init_get_image($imgName)
 {
-  $imagePath = drupal_get_path('module', 'd_blog_init') . '/assets/' . $imgName;
+  $imagePath = drupal_get_path('module', 'd_content_init') . '/assets/' . $imgName;
   $image = file_get_contents($imagePath);
   $image = file_save_data($image, 'public://' . $imgName, FILE_EXISTS_REPLACE);
   return $image;
