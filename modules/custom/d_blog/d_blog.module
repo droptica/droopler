@@ -5,8 +5,7 @@ use \Drupal\locale\SourceString;
 /**
  * Implements hook_theme().
  */
-function d_blog_theme($existing, $type, $theme, $path)
-{
+function d_blog_theme($existing, $type, $theme, $path) {
   return [
     'node__blog_post' => [
       'base hook' => 'node',
@@ -35,8 +34,7 @@ function d_blog_theme($existing, $type, $theme, $path)
 /**
  * Implements hook_preprocess_HOOK().
  */
-function d_blog_preprocess_paragraph(&$variables)
-{
+function d_blog_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $paragraph_type = $paragraph->getType();
   switch ($paragraph_type) {
@@ -56,10 +54,9 @@ function d_blog_preprocess_paragraph(&$variables)
 /**
  * Implements hook_preprocess_links().
  */
-function d_blog_preprocess_links(&$variables)
-{
+function d_blog_preprocess_links(&$variables) {
   if (isset($variables['links']['node-readmore'])) {
-    $variables['links']['node-readmore']['link']['#title'] = t('READ ARTICLE...');
+    $variables['links']['node-readmore']['link']['#title'] = t('Read article...');
   }
 }
 
@@ -70,8 +67,7 @@ function d_blog_preprocess_links(&$variables)
  * @param $langcode
  * @throws \Drupal\locale\StringStorageException
  */
-function d_blog_add_translation($source_string, $translated_string, $langcode)
-{
+function d_blog_add_translation($source_string, $translated_string, $langcode) {
   // Find existing source string.
   $storage = \Drupal::service('locale.storage');
   $string = $storage->findString(array('source' => $source_string));

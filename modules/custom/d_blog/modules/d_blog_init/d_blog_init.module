@@ -151,8 +151,7 @@ function d_blog_init_save_node(array $node_to_create, $lang_code) {
  * @return $paragraph_object
  *
  */
-function d_blog_init_fill_paragraph($paragraph_data)
-{
+function d_blog_init_fill_paragraph($paragraph_data) {
   $paragraph = Paragraph::create([
     'type' => $paragraph_data['paragraph_type'],
   ]);
@@ -189,8 +188,7 @@ function d_blog_init_fill_paragraph($paragraph_data)
  * @param $imgName
  * @return bool|\Drupal\file\FileInterface|false|string
  */
-function d_blog_init_get_image($imgName)
-{
+function d_blog_init_get_image($imgName) {
   $imagePath = drupal_get_path('module', 'd_content_init') . '/assets/' . $imgName;
   $image = file_get_contents($imagePath);
   $image = file_save_data($image, 'public://' . $imgName, FILE_EXISTS_REPLACE);
