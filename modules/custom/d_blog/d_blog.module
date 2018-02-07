@@ -5,16 +5,17 @@ use \Drupal\locale\SourceString;
 /**
  * Implements hook_theme().
  */
-function d_blog_theme($existing, $type, $theme, $path) {
+function d_blog_theme($existing, $type, $theme, $path)
+{
   return [
     'node__blog_post' => [
       'base hook' => 'node',
     ],
     'node__view__blog_listing' => [
-        'base hook' => 'node',
+      'base hook' => 'node',
     ],
     'paragraph__d_p_blog_image' => [
-        'base hook' => 'paragraph',
+      'base hook' => 'paragraph',
     ],
     'field__node__field_blog_main_image__blog_post' => [
       'base hook' => 'field',
@@ -34,18 +35,19 @@ function d_blog_theme($existing, $type, $theme, $path) {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function d_blog_preprocess_paragraph(&$variables) {
+function d_blog_preprocess_paragraph(&$variables)
+{
   $paragraph = $variables['paragraph'];
   $paragraph_type = $paragraph->getType();
   switch ($paragraph_type) {
     case 'd_p_blog_image':
       $paragraph_has_field_image_full_width = $paragraph->hasField('field_d_p_blog_image_full_width');
-      if($paragraph_has_field_image_full_width) {
-          $field_blog_image_full_width = $paragraph->get('field_d_p_blog_image_full_width')->get(0);
-          $image_on_full_screen_width = $field_blog_image_full_width->getValue()['value'];
-          if($image_on_full_screen_width) {
-              $variables['image_on_full_screen_width'] = $image_on_full_screen_width;
-          }
+      if ($paragraph_has_field_image_full_width) {
+        $field_blog_image_full_width = $paragraph->get('field_d_p_blog_image_full_width')->get(0);
+        $image_on_full_screen_width = $field_blog_image_full_width->getValue()['value'];
+        if ($image_on_full_screen_width) {
+          $variables['image_on_full_screen_width'] = $image_on_full_screen_width;
+        }
       }
       break;
   }
@@ -54,30 +56,33 @@ function d_blog_preprocess_paragraph(&$variables) {
 /**
  * Implements hook_preprocess_links().
  */
-function d_blog_preprocess_links(&$variables) {
+function d_blog_preprocess_links(&$variables)
+{
   if (isset($variables['links']['node-readmore'])) {
     $variables['links']['node-readmore']['link']['#title'] = t('READ ARTICLE...');
   }
 }
 
 /**
- * Implementation of hook_element_info_alter
- * Remove N/A option from radio button field
- * @param array $types
+ * Implements hook_element_info_alter().
+ *
+ * Remove N/A option from radio button field.
  */
-function d_blog_element_info_alter(array &$types) {
+function d_blog_element_info_alter(array &$types)
+{
   if (isset($types['radios'])) {
     $types['radios']['#process'][] = '_d_blog_remove_radio_na';
   }
 }
 
 /**
- * remove_radio_na
+ * Remove_radio_na.
  * A Callback function for d_blog_element_info_alter
  * @param array $element
  * @return array modified $element
  */
-function _d_blog_remove_radio_na($element) {
+function _d_blog_remove_radio_na($element)
+{
   $field_name = 'field_d_p_blog_image_full_width';
   if (!empty($element['#field_name']) && $element['#field_name'] == $field_name) {
     unset($element['_none']);
@@ -87,13 +92,14 @@ function _d_blog_remove_radio_na($element) {
 }
 
 /**
+ * Add translation.
  * @param $source_string
  * @param $translated_string
  * @param $langcode
  * @throws \Drupal\locale\StringStorageException
  */
-
-function d_blog_add_translation($source_string, $translated_string, $langcode) {
+function d_blog_add_translation($source_string, $translated_string, $langcode)
+{
   // Find existing source string.
   $storage = \Drupal::service('locale.storage');
   $string = $storage->findString(array('source' => $source_string));

@@ -3,8 +3,6 @@
  * @file
  * Installation hooks for paragraphs module.
  */
-use Drupal\menu_link_content\Entity\MenuLinkContent;
-
 
 /**
  * Implements hook_install().
@@ -27,12 +25,12 @@ Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui
     'demo_2.jpg',
     'demo_3.jpg',
     'demo_4.jpg',
-    'demo_5.jpg'
+    'demo_5.jpg',
   ];
   $last_image = end($images_arr);
   reset($images_arr);
 
-  for($i = 1; $i <= $how_many_blog_post; $i++) {
+  for ($i = 1; $i <= $how_many_blog_post; $i++) {
     $d_blog_post_title = 'Droopler Blog ' . $i;
     $images = [];
 
@@ -47,7 +45,7 @@ Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui
     );
   }
 
-  //Check for german language
+  // Check for german language.
   $german_title = 'Arbeitsunfähigkeitsbescheinigung';
   d_blog_init_save_blog_post(
     $german_title, $d_blog_teaser_text,
