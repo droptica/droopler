@@ -14,8 +14,8 @@ function d_blog_install() {
     d_blog_add_translation('READ ARTICLE...', 'CZYTAJ ARTYKUŁ...', 'pl');
   }
   catch (\Exception $e) {
+    \Drupal::logger('my_module')->error($e);
   }
-
 
   // Add configuration to TVI module
   // Taxonomy Views Integrator

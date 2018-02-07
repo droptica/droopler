@@ -44,10 +44,10 @@ function d_blog_preprocess_paragraph(&$variables)
       $paragraph_has_field_image_full_width = $paragraph->hasField('field_d_p_blog_image_full_width');
       if ($paragraph_has_field_image_full_width) {
         $field_blog_image_full_width = $paragraph->get('field_d_p_blog_image_full_width')->get(0);
-        $image_on_full_screen_width = $field_blog_image_full_width->getValue()['value'];
-        if ($image_on_full_screen_width) {
-          $variables['image_on_full_screen_width'] = $image_on_full_screen_width;
-        }
+        $image_on_full_screen_width = $field_blog_image_full_width->getValue();
+        $variables['image_on_full_screen_width'] = isset($image_on_full_screen_width['value'])
+          ? $image_on_full_screen_width['value']
+          : NULL;
       }
       break;
   }
@@ -61,34 +61,6 @@ function d_blog_preprocess_links(&$variables)
   if (isset($variables['links']['node-readmore'])) {
     $variables['links']['node-readmore']['link']['#title'] = t('READ ARTICLE...');
   }
-}
-
-/**
- * Implements hook_element_info_alter().
- *
- * Remove N/A option from radio button field.
- */
-function d_blog_element_info_alter(array &$types)
-{
-  if (isset($types['radios'])) {
-    $types['radios']['#process'][] = '_d_blog_remove_radio_na';
-  }
-}
-
-/**
- * Remove_radio_na.
- * A Callback function for d_blog_element_info_alter
- * @param array $element
- * @return array modified $element
- */
-function _d_blog_remove_radio_na($element)
-{
-  $field_name = 'field_d_p_blog_image_full_width';
-  if (!empty($element['#field_name']) && $element['#field_name'] == $field_name) {
-    unset($element['_none']);
-  }
-
-  return $element;
 }
 
 /**
