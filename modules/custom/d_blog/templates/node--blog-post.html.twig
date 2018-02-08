@@ -90,8 +90,8 @@
 
           {% block submitted %}
             <span{{ author_attributes }} class="author_attributes">
-                        {% trans %}{{ author_name }} /  {{ date }}{% endtrans %}
-                    </span>
+              {% trans %}{{ author_name }} /  {{ date }}{% endtrans %}
+            </span>
           {% endblock %}
 
           {{ metadata }}

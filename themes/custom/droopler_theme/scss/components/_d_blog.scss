@@ -38,8 +38,7 @@ $d-blog-text-font-size-desktop: 1.25rem !default;
 $d-blog-text-width-mobile: 85% !default;
 $d-blog-header-text-distance-from-bottom: -0.25rem !default;
 $d-blog-header-text-distance-from-top-mobile: 40% !default;
-$d-blog-size-of-large-desktop: 1400px;
-$d-blog-size-of-small-desktop: 1200px;
+$d-blog-size-of-large-desktop: 1400px !default;
 
 .node--type-blog-post {
 
@@ -123,7 +122,7 @@ $d-blog-size-of-small-desktop: 1200px;
       }
     }
 
-    @media all and (min-width: $d-blog-size-of-small-desktop)  and (max-width: $d-blog-size-of-large-desktop) {
+    @media all and (min-width: $container-max-widths[xl])  and (max-width: $d-blog-size-of-large-desktop) {
       .blog_post_header_absolute_wrapper {
         h1 {
           font-size: $d-blog-header-small-desktop-screen;

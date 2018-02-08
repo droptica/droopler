@@ -1,7 +1,7 @@
-$d-blog-listing-header-color: $color-memnon;
-$d-blog-listing-taxonomy-link-color: $color-penthesilea;
-$d-blog-border-bottom-color: $color-diomedes;
-$d-blog-padding-link-color: $color-patroclus;
+$d-blog-listing-header-color: $color-memnon !default;
+$d-blog-listing-taxonomy-link-color: $color-penthesilea !default;
+$d-blog-border-bottom-color: $color-diomedes !default;
+$d-blog-padding-link-color: $color-patroclus !default;
 
 $d-blog-pagination-padding-top: 120px !default;
 $d-blog-pagination-padding-bottom: 110px !default;
@@ -43,7 +43,7 @@ $d-blog-teaser-min-height-desktop: 520px !default;
 $d-blog-teaser-image-height-desktop: 480px !default;
 $d-blog-margin-between-header-and-article-teasers: 40px !default;
 $d-blog-field-type-image-margin: 0 !default;
-$d-blog-article-row-min-height: 420px;
+$d-blog-article-row-min-height: 420px !default;
 
 .view-blog-listing {
   margin-top: $d-blog-margin-between-header-and-article-teasers;
