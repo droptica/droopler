@@ -15,10 +15,10 @@ function d_content_init_install() {
   // Create main menu.
   $items = [
     '1' => ['title' => 'Home', 'weight' => 1],
-    '2' => ['title' => 'About', 'weight' => 2],
-    '3' => ['title' => 'Services', 'weight' => 3],
-    '4' => ['title' => 'Gallery', 'weight' => 4],
-    '5' => ['title' => 'Contact', 'weight' => 5],
+    '2' => ['title' => 'About', 'weight' => 4],
+    '3' => ['title' => 'Services', 'weight' => 8],
+    '4' => ['title' => 'Gallery', 'weight' => 16],
+    '5' => ['title' => 'Contact', 'weight' => 32],
   ];
   foreach ($items as $nid => $item) {
     $menu_link = MenuLinkContent::create([
