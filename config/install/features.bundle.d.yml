@@ -6,9 +6,9 @@ machine_name: d
 description: 'Auto-generated bundle from package d'
 assignments:
   alter:
-    core: true
-    uuid: true
-    user_permissions: true
+    core: 1
+    uuid: 1
+    user_permissions: 0
     enabled: true
     weight: 0
   base:
@@ -59,7 +59,8 @@ assignments:
     weight: 0
   optional:
     types:
-      config: {  }
+      config:
+        responsive_image_style: responsive_image_style
     enabled: true
     weight: 0
   packages:
@@ -93,5 +94,5 @@ assignments:
         filter_format: filter_format
     enabled: true
     weight: 7
-profile_name: ''
+profile_name: droopler
 is_profile: false
