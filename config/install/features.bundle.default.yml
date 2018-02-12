@@ -6,9 +6,9 @@ machine_name: default
 description: ''
 assignments:
   alter:
-    core: true
-    uuid: true
-    user_permissions: true
+    core: 1
+    uuid: 1
+    user_permissions: 0
     enabled: true
     weight: 0
   base:
@@ -59,7 +59,8 @@ assignments:
     weight: 0
   optional:
     types:
-      config: {  }
+      config:
+        responsive_image_style: responsive_image_style
     enabled: true
     weight: 0
   packages:
