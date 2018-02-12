@@ -40,6 +40,7 @@ function droopler_install() {
     ->save();
 
   \Drupal::service('module_installer')->install(['d_content_init']);
+  \Drupal::service('module_installer')->install(['d_blog']);
 
   try {
     \Drupal::entityDefinitionUpdateManager()->applyUpdates();
