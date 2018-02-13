@@ -10,10 +10,9 @@ $d-p-text-with-bckg-line-color: $line-background !default;
 $d-p-text-with-bckg-header-color: $color-cassandra !default;
 
 // Margins, paddings and sizing.
-$d-p-text-with-bckg-title-margin-top: 5% !default;
 $d-p-text-with-bckg-button-margin-top: 3.125rem !default;
-$d-p-text-with-bckg-padding-top: 1.5% !default;
-$d-p-text-with-bckg-padding-bottom: 3.5% !default;
+$d-p-text-with-bckg-padding-top: 6.5% !default;
+$d-p-text-with-bckg-padding-bottom: 6.5% !default;
 $d-p-text-with-bckg-mobile-padding-top: 6.25rem !default;
 $d-p-text-with-bckg-mobile-padding-bottom: 6.25rem !default;
 $d-p-text-with-bckg-line-margin-top: $line-center-margin-top !default;
@@ -30,7 +29,9 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
     @include font-main-header;
     color: $d-p-text-with-bckg-header-color;
     text-align: center;
-    margin-top: $d-p-text-with-bckg-title-margin-top;
+  }
+  .field--name-field-d-icon {
+    text-align: center;
   }
   h3.field--name-field-d-subtitle {
     @include font-subtitle;

@@ -14,6 +14,9 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   id = "SubscribeFileEntity",
  *   label = @Translation("SubscribeFile"),
  *   base_table = "d_p_subscribe_file",
+ *   handlers = {
+ *     "views_data" = "Drupal\d_p_subscribe_file\Entity\SubscribeFileViewsData",
+ *   },
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid",
