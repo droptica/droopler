@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_d_blog_category
+    - taxonomy.vocabulary.blog_posts_category
+id: taxonomy_term.blog_posts_category.field_d_blog_category
+field_name: field_d_blog_category
+entity_type: taxonomy_term
+bundle: blog_posts_category
+label: 'Blog category'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

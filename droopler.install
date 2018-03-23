@@ -41,6 +41,20 @@ function droopler_install() {
 
   \Drupal::service('module_installer')->install(['d_content_init']);
 
+  // If subtheme is available install the blog.
+  // @TODO this should not really be here because this subtheme is not part of the distribution
+  if (isset($themes['droopler_subtheme'])) {
+    \Drupal::service('module_installer')->install(['d_blog']);
+    \Drupal::service('module_installer')->install(['d_blog_init']);
+
+    // Setup Linkit to work with blog
+    $linkit = \Drupal::configFactory()->getEditable('linkit.linkit_profile.content_nodes');
+    $matchers = $linkit->get("matchers");
+    $keys = array_keys($matchers);
+    $uuid = reset($keys);
+    $linkit->set("matchers.$uuid.settings.bundles.blog_post", "blog_post")->save();
+  }
+
   try {
     \Drupal::entityDefinitionUpdateManager()->applyUpdates();
   }

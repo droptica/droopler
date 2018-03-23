@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_blog_image_full_width
+    - paragraphs.paragraphs_type.d_p_blog_image
+id: paragraph.d_p_blog_image.field_d_p_blog_image_full_width
+field_name: field_d_p_blog_image_full_width
+entity_type: paragraph
+bundle: d_p_blog_image
+label: 'Blog image width'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Image is on the full width of the screen'
+  off_label: 'Image is on the width of the text'
+field_type: boolean

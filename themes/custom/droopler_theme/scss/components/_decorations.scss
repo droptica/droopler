@@ -37,3 +37,20 @@ $line-thickness: 0.125rem !default;
     position: relative;
     height: $line-thickness;
 }
+
+@mixin add-commas-to-elements {
+    &:after {
+        content: ', ';
+    }
+
+    &:last-child:after {
+        content: '';
+    }
+}
+
+// Common field for paragraph icons.
+.node .field.field--name-field-d-icon {
+    display: block;
+    margin: 0;
+    float: none;
+}

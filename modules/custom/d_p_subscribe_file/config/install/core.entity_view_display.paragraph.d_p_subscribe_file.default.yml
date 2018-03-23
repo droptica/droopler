@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.d_p_subscribe_file.field_d_icon
     - field.field.paragraph.d_p_subscribe_file.field_d_image_background
     - field.field.paragraph.d_p_subscribe_file.field_d_long_text
     - field.field.paragraph.d_p_subscribe_file.field_d_main_title
@@ -12,24 +13,41 @@ dependencies:
     - field.field.paragraph.d_p_subscribe_file.field_file_download
     - paragraphs.paragraphs_type.d_p_subscribe_file
   module:
-    - image
+    - svg_image
     - text
 id: paragraph.d_p_subscribe_file.default
 targetEntityType: paragraph
 bundle: d_p_subscribe_file
 mode: default
 content:
-  field_d_image_background:
+  field_d_icon:
     weight: 0
-    label: visually_hidden
+    label: hidden
     settings:
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
       image_style: ''
       image_link: ''
     third_party_settings: {  }
     type: image
     region: content
-  field_d_long_text:
+  field_d_image_background:
     weight: 2
+    label: visually_hidden
+    settings:
+      image_style: ''
+      image_link: ''
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_d_long_text:
+    weight: 3
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
@@ -44,7 +62,7 @@ content:
     type: string
     region: content
   field_d_p_sf_additional_info:
-    weight: 3
+    weight: 4
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
