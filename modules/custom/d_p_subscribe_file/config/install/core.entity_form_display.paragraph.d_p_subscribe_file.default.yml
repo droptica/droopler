@@ -7,6 +7,7 @@ dependencies:
     - field.field.paragraph.d_p_subscribe_file.field_d_long_text
     - field.field.paragraph.d_p_subscribe_file.field_d_main_title
     - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_additional_info
+    - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_consent
     - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_download_button
     - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_download_page
     - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_mail_body
@@ -61,6 +62,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_d_p_sf_consent:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: 'Enter consent label (HTML is allowed).'
+    third_party_settings: {  }
+    type: text_textfield
     region: content
   field_d_p_sf_download_button:
     weight: 9
