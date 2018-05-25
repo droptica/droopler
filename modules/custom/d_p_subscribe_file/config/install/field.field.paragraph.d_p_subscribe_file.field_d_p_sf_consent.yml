@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_sf_consent
+    - paragraphs.paragraphs_type.d_p_subscribe_file
+  module:
+    - text
+id: paragraph.d_p_subscribe_file.field_d_p_sf_consent
+field_name: field_d_p_sf_consent
+entity_type: paragraph
+bundle: d_p_subscribe_file
+label: Consents
+description: 'You can add some personal data consents here. Droopler will display them as required checkboxes.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

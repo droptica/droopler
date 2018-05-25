@@ -65,6 +65,20 @@ class SubscribeFileForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Get Download link'),
     ];
+
+    // Keep compatibility with older Droopler.
+    // Check field existence first.
+    if ($paragraph->hasField('field_d_p_sf_consent')) {
+      $consents = $paragraph->get('field_d_p_sf_consent')->getValue();
+      foreach ($consents as $key => $consent) {
+        $form["consent_$key"] = [
+          '#type' => 'checkbox',
+          '#title' => $consent['value'],
+          '#required' => TRUE,
+        ];
+      }
+    }
+
     $file = $paragraph->get('field_file_download');
     $file_id = $file->getValue();
     $form_state->setTemporaryValue('paragraph_id', $paragraph->id());
