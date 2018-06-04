@@ -1,0 +1,86 @@
+<?php
+
+use \Drupal\locale\SourceString;
+
+/**
+ * Implements hook_theme().
+ */
+function d_blog_theme($existing, $type, $theme, $path) {
+  return [
+    'node__blog_post' => [
+      'base hook' => 'node',
+    ],
+    'node__view__blog_listing' => [
+      'base hook' => 'node',
+    ],
+    'paragraph__d_p_blog_image' => [
+      'base hook' => 'paragraph',
+    ],
+    'field__node__field_blog_main_image__blog_post' => [
+      'base hook' => 'field',
+    ],
+    'page__blog' => [
+      'base hook' => 'page',
+    ],
+    'page__taxonomy__term' => [
+      'base hook' => 'page',
+    ],
+    'pager__blog_listing__page' => [
+      'base hook' => 'pager',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_blog_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  $paragraph_type = $paragraph->getType();
+  switch ($paragraph_type) {
+    case 'd_p_blog_image':
+      $paragraph_has_field_image_full_width = $paragraph->hasField('field_d_p_blog_image_full_width');
+      if ($paragraph_has_field_image_full_width) {
+        $field_blog_image_full_width = $paragraph->get('field_d_p_blog_image_full_width')->get(0);
+        $image_on_full_screen_width = $field_blog_image_full_width->getValue();
+        $variables['image_on_full_screen_width'] = isset($image_on_full_screen_width['value'])
+          ? $image_on_full_screen_width['value']
+          : NULL;
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_links().
+ */
+function d_blog_preprocess_links(&$variables) {
+  if (isset($variables['links']['node-readmore'])) {
+    $variables['links']['node-readmore']['link']['#title'] = t('Read article...');
+  }
+}
+
+/**
+ * Add translation.
+ * @param $source_string
+ * @param $translated_string
+ * @param $langcode
+ * @throws \Drupal\locale\StringStorageException
+ */
+function d_blog_add_translation($source_string, $translated_string, $langcode) {
+  // Find existing source string.
+  $storage = \Drupal::service('locale.storage');
+  $string = $storage->findString(array('source' => $source_string));
+  if (is_null($string)) {
+    $string = new SourceString();
+    $string->setString($source_string);
+    $string->setStorage($storage);
+    $string->save();
+  }
+  // Create translation. If one already exists, it will be replaced.
+  $translation = $storage->createTranslation(array(
+    'lid' => $string->lid,
+    'language' => $langcode,
+    'translation' => $translated_string,
+  ))->save();
+}

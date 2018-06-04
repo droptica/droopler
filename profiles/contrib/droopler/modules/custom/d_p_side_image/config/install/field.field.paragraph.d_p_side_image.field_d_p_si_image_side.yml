@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_si_image_side
+    - paragraphs.paragraphs_type.d_p_side_image
+  module:
+    - options
+id: paragraph.d_p_side_image.field_d_p_si_image_side
+field_name: field_d_p_si_image_side
+entity_type: paragraph
+bundle: d_p_side_image
+label: 'Image side'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

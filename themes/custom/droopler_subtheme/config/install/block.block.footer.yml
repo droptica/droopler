@@ -1,0 +1,24 @@
+langcode: pl
+status: true
+dependencies:
+  content:
+    - 'block_content:content_block:092dd69e-c6c4-4f0a-9780-ec15b89ec5b5'
+  module:
+    - block_content
+  theme:
+    - droopler_subtheme
+id: footer
+theme: droopler_subtheme
+region: footer_main
+weight: 0
+provider: null
+plugin: 'block_content:092dd69e-c6c4-4f0a-9780-ec15b89ec5b5'
+settings:
+  id: 'block_content:092dd69e-c6c4-4f0a-9780-ec15b89ec5b5'
+  label: Footer
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

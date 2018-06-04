@@ -1,0 +1,7 @@
+tvi.global_settings:
+  path: '/admin/config/user-interface/tvi'
+  defaults:
+    _form: 'Drupal\tvi\Form\TaxonomyViewsIntegratorSettingsForm'
+    _title: 'Taxonomy Views Integrator'
+  requirements:
+    _permission: 'administer taxonomy views integrator'

@@ -1,0 +1,119 @@
+<?php
+
+/**
+ * @file
+ * Contains d_paragraphs.module..
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+
+/**
+ * Implements hook_theme().
+ */
+function d_p_theme($existing, $type, $theme, $path) {
+  return [
+    'field__field_d_main_title' => [
+      'base hook' => 'field',
+    ],
+    'field__field_d_subtitle' => [
+      'base hook' => 'field',
+    ],
+  ];
+}
+
+
+//@TODO should the helpers be a class?
+
+function d_p_responsive_style_ids() {
+
+  $styles_ids = [
+    'responsive_image_2000',
+    'responsive_image_768',
+    'responsive_image_992',
+    'responsive_image_1200',
+    'responsive_image_1600',
+    'responsive_image_3000',
+  ];
+
+  return $styles_ids;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_p_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  $styles_ids = d_p_responsive_style_ids();
+
+  switch ($bundle) {
+    case 'd_p_banner':
+      unset($styles_ids['responsive_image_768']);
+      $styles_ids[] = 'responsive_image_768_banner';
+      d_p_generate_image_set($variables, $styles_ids, $bundle);
+
+      break;
+  }
+  $variables['#attached']['library'][] = 'd_p/d_p';
+}
+
+/**
+ * Conver d_image_background to resposive image set.
+ *
+ * @param $variables
+ *   $twig variables.
+ * @param $styles_ids
+ *   Array with styles to create.
+ * @param $bundle
+ *   Bundle paragraph
+ * @param $js
+ *   Send to drupal settings.
+ */
+function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
+  $urls = NULL;
+  $paragraph = $variables['paragraph'];
+  $background = $paragraph->get('field_d_image_background')->getValue();
+  if (isset($background[0]['target_id'])) {
+    $image_file = File::load($background[0]['target_id']);
+    $styles = ImageStyle::loadMultiple($styles_ids);
+    foreach ($styles as $style) {
+      $image_uri = $image_file->getFileUri();
+      $effects = $style->getEffects();
+      $effect = $effects->getInstanceIds('image_scale');
+      $image_scale = $style->getEffect(reset($effect));
+      $conf = $image_scale->getConfiguration();
+      if (isset($conf['data']['width']) && !empty($conf['data']['width'])) {
+        $width = $conf['data']['width'];
+        $urls[] = ['url' => file_url_transform_relative($style->buildUrl($image_uri)), 'width' => $width];
+      }
+      elseif ($style->getName() == 'responsive_image_768_banner') {
+        $width = '768';
+        $urls[] = ['url' => $style->buildUrl($image_uri, TRUE), 'width' => $width];
+      }
+    }
+    unset($variables['content']['field_d_image_background']);
+
+    if ($js) {
+      $variables['#attached']['drupalSettings']['image_background']['paragraph-' . $paragraph->id()] = $urls;
+      $variables['id'] = 'paragraph-' . $paragraph->id();
+    }
+    else {
+      $variables['images'] = $urls;
+    }
+  }
+
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function d_p_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'contact_message_contact_form_form') {
+    unset($form['actions']['preview']);
+    $form['name']['#type'] = 'textfield';
+    $form['mail']['#type'] = 'textfield';
+  }
+}
+

@@ -1,0 +1,266 @@
+@import "variables";
+
+.paragraphs-dragdrop-wrapper {
+  --dnd-item-chosen-bg: #fff;
+  --dnd-item-chosen-border: #000;
+  --dnd-item-ghost-bg: #d9edf7;
+  --dnd-item-ghost-border: #0074bd;
+  --dnd-icon-size: 28px;
+  --dnd-item-indentation: 0.5em;
+  --dnd-item-min-height: 30px;
+
+  @media all and (min-width: 780px) {
+    --dnd-icon-size: 35px;
+    --dnd-item-indentation: 1em;
+    --dnd-item-min-height: 40px;
+  }
+}
+
+// "Complete drag & drop" submit button.
+.field-dragdrop-mode-submit {
+  margin-right: 10px;
+
+  [dir="rtl"] & {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+}
+
+// The outermost drag and drop wrapper. Appears when drag and drop mode is
+// enabled.
+.paragraphs-dragdrop-wrapper {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+// <ul> container for draggable Paragraphs field.
+.paragraphs-dragdrop__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  [dir="rtl"] & {
+    margin: 0;
+  }
+
+  // An empty list represents a field where items can be dropped.
+  &:empty {
+    min-height: var(--dnd-item-min-height);
+    margin: 5px 5px 10px 0;
+    border: 1px dashed $grey-dark;
+    border-radius: 3px;
+
+    [dir="rtl"] & {
+      margin-right: 5px;
+      margin-left: 0;
+    }
+  }
+
+  // Indentation is normally applied at list item level, but since there are
+  // none in this case, the list itself is indented for visual consistency.
+  .paragraphs-dragdrop__list:empty {
+    margin-left: var(--dnd-item-indentation);
+
+    [dir="rtl"] & {
+      margin-right: var(--dnd-item-indentation);
+      margin-left: 0;
+    }
+  }
+}
+
+// <li> container for individual draggable Paragraphs field items.
+.paragraphs-dragdrop__item {
+  display: flex;
+  position: relative;
+  flex: 0 0 100%;
+  flex-flow: row wrap;
+  align-items: center;
+  min-height: var(--dnd-item-min-height);
+  // @todo If animation is desired, do this with JavaScript. This height is too
+  // small in my limited testing, and it the height manipulation is what causes
+  // the scrollbar jumps. Temporarily disabled due to feedback in #23.
+  // max-height: 1000px;
+  margin: 5px 5px 10px 0;
+  padding: 0 0 0 var(--dnd-icon-size);
+  transition: max-height 0.8s ease;
+  border: 1px solid $grey-dark;
+  border-left-width: 10px;
+  border-radius: 3px;
+  background: #fff;
+  overflow: hidden;
+
+  [dir="rtl"] & {
+    margin-right: 0;
+    margin-left: 5px;
+    padding-right: var(--dnd-icon-size);
+    padding-left: 0;
+    border-right-width: 10px;
+    border-left-width: 1px;
+  }
+
+  // Indent only nested items.
+  .paragraphs-dragdrop__item {
+    margin-left: var(--dnd-item-indentation);
+
+    [dir="rtl"] & {
+      margin-right: var(--dnd-item-indentation);
+      margin-left: 5px;
+    }
+  }
+
+  // Item selected for dragging. Applies to the parent list item as soon as its
+  // drag handle is clicked, and remains throughout the drag operation.
+  &.sortable-chosen {
+    border-color: var(--dnd-item-chosen-border);
+  }
+
+  // Item being dragged. Applies to the parent list item in addition to
+  // .sortable-chosen as soon as dragging begins.
+  &.sortable-drag {
+    // This is needed for the animation, but causes the scrollbar jumping, so
+    // it's temporarily disabled.
+    height: var(--dnd-item-min-height);
+    background: #fff;
+    opacity: 1;
+  }
+
+  // Item drop placeholder. Applies when dragging near drop-enabled area. The
+  // item being dragged is cloned, and is made to appear empty via the opacity
+  // transition to help visualize the dropping action.
+  &.sortable-ghost {
+    min-height: 0;
+    max-height: var(--dnd-item-min-height);
+    border-style: dashed;
+    border-left-style: solid;
+    border-color: var(--dnd-item-ghost-border);
+    background-color: var(--dnd-item-ghost-bg);
+    opacity: 1;
+
+    [dir="rtl"] & {
+      border-right-style: solid;
+      border-left-style: dashed;
+    }
+
+    > * {
+      opacity: 0;
+    }
+  }
+
+  > * {
+    transition: opacity 0.5s ease;
+  }
+
+  // While dragging, lighten the borders of lists that are not currently droppable
+  // targets.
+  .is-dragging-paragraphs .paragraphs-dragdrop__list:not(.is-droppable-target) > & {
+    border-color: #ededed;
+    // It is possible for a ghost to be visible, while not dragging over a valid
+    // target. This ensures that stays styled properly.
+    &.sortable-ghost {
+      border-color: var(--dnd-item-ghost-border);
+    }
+  }
+
+  // Only one of these is present at a given time, so it's always one of these
+  // along with the drag handle. Note: This should specifically target wrappers
+  // that are nested in list items.
+  .paragraphs-summary-wrapper,
+  .paragraphs-dragdrop-wrapper {
+    flex: 1 0 calc(100% - var(--dnd-icon-size));
+    width: calc(100% - var(--dnd-icon-size));
+  }
+
+  // Collapsed summary container.
+  .paragraphs-summary-wrapper {
+    display: flex;
+    align-items: center;
+    height: 1.538em;
+    margin: 5px 0;
+    line-height: 1.538em;
+
+    > .paragraphs-collapsed-description {
+      flex-grow: 1;
+      font-style: italic;
+    }
+  }
+}
+
+// The drag handle.
+.paragraphs-dragdrop__handle {
+  display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  flex: 0 0 var(--dnd-icon-size);
+  align-self: stretch;
+  justify-content: center;
+  width: var(--dnd-icon-size);
+  height: 100%;
+  background: transparent;
+  text-decoration: none;
+  cursor: move;
+
+  [dir="rtl"] & {
+    right: 0;
+    left: auto;
+    align-self: flex-end;
+  }
+
+  // Drag handle, while dragging a selected item.
+  .sortable-chosen > & {
+    background-color: #f8f8f8;
+    cursor: grab;
+  }
+
+  // Prevent above styles from applying to nested item icons.
+  .sortable-chosen .paragraphs-dragdrop__item & {
+    background-color: transparent;
+  }
+}
+
+// Drag handle icon.
+.paragraphs-dragdrop__icon {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: calc(var(--dnd-icon-size) + 2px);
+  background: transparent url(../icons/icon-drag-move.svg) no-repeat 50% 50%;
+
+  // When an item can be dropped in a list, the drag handle icon is changed to
+  // an icon with vertical arrows to indicate dropping is possible above and
+  // below the item(s) in the target list.
+  .is-droppable-target > .paragraphs-dragdrop__item > .paragraphs-dragdrop__handle & {
+    background-image: url(../icons/icon-drag-arrows.svg);
+    background-size: 14px auto;
+  }
+}
+
+// Labels for Paragraph field name or bundle.
+.paragraphs-dragdrop__label {
+  display: block;
+  line-height: inherit;
+  white-space: nowrap;
+
+  &--field {
+    margin: 10px 0;
+    text-transform: uppercase;
+
+    // Indent nested labels.
+    .paragraphs-dragdrop__item & {
+      margin-left: calc(var(--dnd-item-indentation) + 0.5ch);
+
+      [dir="rtl"] & {
+        margin-right: calc(var(--dnd-item-indentation) + 0.5ch);
+        margin-left: 0;
+      }
+    }
+  }
+
+  &--bundle {
+    height: 1.538em;
+    padding: 0 0.5em;
+    line-height: 1.538em;
+  }
+}

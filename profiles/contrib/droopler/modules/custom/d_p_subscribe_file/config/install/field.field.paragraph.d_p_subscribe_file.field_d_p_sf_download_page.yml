@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_sf_download_page
+    - paragraphs.paragraphs_type.d_p_subscribe_file
+  module:
+    - text
+id: paragraph.d_p_subscribe_file.field_d_p_sf_download_page
+field_name: field_d_p_sf_download_page
+entity_type: paragraph
+bundle: d_p_subscribe_file
+label: 'Download page message'
+description: 'Use [download-button] to render download button.'
+required: true
+translatable: true
+default_value:
+  -
+    value: "<h2>Enjoy Droopler!</h2>\r\n\r\n<p>[download-button]</p>\r\n\r\n<p class=\"additional\">More info how use it on <a href=\"https://droopler.pl/doc\">https://droopler.pl/doc</a>.</p>\r\n"
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

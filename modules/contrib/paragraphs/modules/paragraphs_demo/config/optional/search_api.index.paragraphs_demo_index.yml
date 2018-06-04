@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs_demo
+    - field.storage.paragraph.field_text_demo
+    - field.storage.paragraph.field_paragraphs_demo
+    - search_api.server.paragraphs_demo_server
+  module:
+    - paragraphs
+    - search_api
+    - node
+_core:
+  default_config_hash: B_uQ3elh-QzaQ7uk45NlfZyN4HBV3s2azPvbHDF1Xxw
+id: paragraphs_demo_index
+name: 'Paragraphs demo index'
+description: null
+read_only: false
+field_settings:
+  field_text_demo:
+    label: 'Paragraphs » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs_demo:entity:field_text_demo'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs_demo
+        - field.storage.paragraph.field_text_demo
+      module:
+        - paragraphs
+  field_text_demo_1:
+    label: 'Paragraphs » Paragraph » Nested Content » Paragraph » Text'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs_demo:entity:field_paragraphs_demo:entity:field_text_demo'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_paragraphs_demo
+        - field.storage.paragraph.field_paragraphs_demo
+        - field.storage.paragraph.field_text_demo
+      module:
+        - paragraphs
+        - paragraphs
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  aggregated_field: {  }
+  rendered_item: {  }
+  add_url: {  }
+tracker_settings:
+  default: {  }
+options:
+  index_directly: true
+  cron_limit: 50
+server: paragraphs_demo_server

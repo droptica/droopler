@@ -1,0 +1,8 @@
+services:
+  tvi.tvi_manager:
+    class: Drupal\tvi\Service\TaxonomyViewsIntegratorManager
+    arguments: ['@config.factory', '@entity_type.manager', '@request_stack']
+  tvi.route_subscriber:
+    class: Drupal\tvi\EventSubscriber\RouteSubscriber
+    tags:
+      - { name: 'event_subscriber' }

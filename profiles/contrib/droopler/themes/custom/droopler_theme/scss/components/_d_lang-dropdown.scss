@@ -1,0 +1,159 @@
+/*
+Components Lang switcher
+
+Styleguide 2.2
+*/
+
+// Colour variables used in this component.
+$lang-dropdown-header-color: $menu-main-link-color !default;  // Color of language link in main menu
+$lang-dropdown-toggle-color: $menu-main-link-dropdown !default; // Color of language dropdown toggle icon
+$lang-dropdown-submenu-color: $submenu-link-color !default; // Color of link in language menu
+$lang-dropdown-submenu-hover-color: $submenu-link-hover-color !default; // Color of hover link in language submenu
+$lang-dropdown-submenu-hover-background: $submenu-link-hover-background !default; // Color of hover bg in language submenu
+$lang-dropdown-submenu-active-color: $menu-main-link-active-color !default; // Color of active link in language submenu
+$lang-dropdown-mobile-background: $color-troilus !default; // Background color of mobile language menu
+$lang-dropdown-mobile-link-color: $color-priam !default; // Link color of mobile language menu
+$lang-dropdown-mobile-link-hover-color: lighten($lang-dropdown-mobile-link-color, 5%) !default; // Link hover color of mobile language menu
+$lang-dropdown-mobile-header-color: $color-odysseus !default; // Color of active language in mobile lang menu
+
+// Font sizes.
+$lang-dropdown-link-font-size: $menu-font-size !default; // Font size of language link in main menu
+$lang-dropdown-size: $menu-dropdown-size !default; // Size of dropdown icon in lang menu
+$lang-dropdown-submenu-font-size: $submenu-font-size !default; // Font size in the lang submenu
+
+// Paddings and margins.
+$lang-dropdown-margin-left: 4.5rem !default;
+$lang-dropdown-link-padding-x: $submenu-link-padding-x !default;
+$lang-dropdown-link-height: $menu-main-link-height !default;
+$lang-dropdown-dropdown-width: $menu-dropdown-width !default;  // Width of desktop dropdown
+$lang-dropdown-submenu-link-height: $submenu-link-height !default;
+$lang-dropdown-mobile-link-padding: 0.625rem !default;
+$lang-dropdown-mobile-padding: 1.25rem !default;
+
+.block-language.dropdown {
+
+  // Styling for desktop (>= LG)
+  @include media-breakpoint-up(lg) {
+    margin-left: $lang-dropdown-margin-left;
+
+    // Toggle - current language with dropdown
+    .dropdown-toggle {
+      text-transform: uppercase;
+      text-align: right;
+      vertical-align: middle;
+      cursor: pointer;
+      line-height: $lang-dropdown-link-height;  // Same height as menus.
+      height: $lang-dropdown-link-height;
+      font-size: $lang-dropdown-link-font-size;
+      color: $lang-dropdown-header-color;
+      position: relative;
+      padding-right: $lang-dropdown-dropdown-width;
+      &:after {
+        text-align: center;
+        color: $lang-dropdown-toggle-color;
+        font-family: "fontello";
+        content: "\e804";
+        font-size: $lang-dropdown-size;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: $lang-dropdown-dropdown-width;
+        height: auto;
+        margin: 0;
+        vertical-align: middle;
+        border: none;
+      }
+      &-down {
+        &:after {
+          content: "\e806";
+        }
+      }
+    }
+    .dropdown-menu {
+      cursor: pointer;
+      padding: 0;
+      left: auto;
+      right: -0.063rem;
+      top: ($lang-dropdown-link-height / 2) - 1.6rem;
+      border-radius: 0;
+
+      // Submenu forced to show on hover
+      &.force-show {
+        display: block;
+      }
+
+      li {
+        list-style-type: none; // Leave for IE compatibility
+        list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7); // Leave for IE compatibility (css hack)
+        &:first-child, a {
+          text-transform: uppercase;
+          padding: 0 $lang-dropdown-link-padding-x;
+          line-height: $lang-dropdown-submenu-link-height;
+          display: block;
+        }
+        &:nth-child(1):after {
+          content: "\e806";
+          color: $lang-dropdown-toggle-color;
+          font-family: "fontello";
+          display: inline-block;
+          width: 0;
+          border: none;
+          font-size: $lang-dropdown-size;
+          margin-right: $lang-dropdown-link-padding-x;
+          float: right;
+        }
+        a {
+          font-size: $lang-dropdown-submenu-font-size;
+          color: $lang-dropdown-submenu-color;
+          text-transform: uppercase;
+          &:hover, &:focus {
+            color: $lang-dropdown-submenu-hover-color;
+            background: $lang-dropdown-submenu-hover-background;
+            text-decoration: none;
+          }
+          &:active {
+            color: $lang-dropdown-submenu-active-color;
+          }
+        }
+      }
+    }
+  }
+
+  // Styling for mobile (<= MD)
+  @include media-breakpoint-down(md) {
+    .active-lang-code {
+      display: none;
+    }
+    .dropdown-menu {
+      position: relative;
+      top: 100%;
+      left: 0;
+      z-index: 200;
+      display: block;
+      float: none;
+      padding: $lang-dropdown-mobile-padding;
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      background-color: $lang-dropdown-mobile-background;
+      border: 0;
+      border-radius: 0;
+      li {
+        text-transform: uppercase;
+        &:first-child {
+          color: $lang-dropdown-mobile-header-color;
+          padding: $lang-dropdown-mobile-link-padding;
+        }
+        a {
+          display: block;
+          color: $lang-dropdown-mobile-link-color;
+          padding: $lang-dropdown-mobile-link-padding;
+          &:hover {
+            color: $lang-dropdown-mobile-link-hover-color;
+          }
+        }
+      }
+    }
+  }
+}

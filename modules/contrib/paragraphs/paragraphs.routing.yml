@@ -1,0 +1,39 @@
+# ParagraphsType routing definition
+entity.paragraphs_type.collection:
+  path: '/admin/structure/paragraphs_type'
+  defaults:
+    _entity_list: 'paragraphs_type'
+    _title: 'Paragraphs types'
+  requirements:
+    _permission: 'administer paragraphs types'
+
+paragraphs.type_add:
+  path: '/admin/structure/paragraphs_type/add'
+  defaults:
+    _entity_form: 'paragraphs_type.add'
+    _title: 'Add Paragraphs type'
+  requirements:
+    _permission: 'administer paragraphs types'
+
+entity.paragraphs_type.edit_form:
+  path: '/admin/structure/paragraphs_type/{paragraphs_type}'
+  defaults:
+    _entity_form: 'paragraphs_type.edit'
+  requirements:
+    _permission: 'administer paragraphs types'
+
+entity.paragraphs_type.delete_form:
+  path: '/admin/structure/paragraphs_type/{paragraphs_type}/delete'
+  defaults:
+    _entity_form: 'paragraphs_type.delete'
+    _title: 'Delete'
+  requirements:
+    _permission: 'administer paragraphs types'
+
+paragraphs.settings:
+  path: '/admin/config/content/paragraphs'
+  defaults:
+    _form: '\Drupal\paragraphs\Form\ParagraphsSettingsForm'
+    _title: 'Paragraphs settings'
+  requirements:
+    _permission: 'administer paragraphs settings'

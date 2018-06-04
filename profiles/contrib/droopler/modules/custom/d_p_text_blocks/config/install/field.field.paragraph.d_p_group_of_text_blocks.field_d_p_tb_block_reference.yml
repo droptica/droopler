@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_tb_block_reference
+    - paragraphs.paragraphs_type.d_p_group_of_text_blocks
+    - paragraphs.paragraphs_type.d_p_single_text_block
+  module:
+    - entity_reference_revisions
+id: paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference
+field_name: field_d_p_tb_block_reference
+entity_type: paragraph
+bundle: d_p_group_of_text_blocks
+label: 'Single text block'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      d_p_single_text_block: d_p_single_text_block
+    target_bundles_drag_drop:
+      d_p_group_of_text_blocks:
+        weight: 7
+        enabled: false
+      d_banner:
+        weight: 8
+        enabled: false
+      d_sidebar_image:
+        weight: 9
+        enabled: false
+      d_p_single_text_block:
+        enabled: true
+        weight: 10
+      d_text_image_background:
+        weight: 11
+        enabled: false
+      d_text_paged:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

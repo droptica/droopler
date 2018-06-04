@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.responsive_image_1200
+    - image.style.responsive_image_2000
+    - image.style.responsive_image_768
+    - image.style.responsive_image_992
+  theme:
+    - droopler_theme
+id: blog_images_style
+label: 'Blog image style'
+image_style_mappings:
+  -
+    breakpoint_id: droopler_theme.extra
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: responsive_image_2000
+  -
+    breakpoint_id: droopler_theme.large
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: responsive_image_1200
+  -
+    breakpoint_id: droopler_theme.medium
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: responsive_image_992
+  -
+    breakpoint_id: droopler_theme.small
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: responsive_image_768
+breakpoint_group: droopler_theme
+fallback_image_style: responsive_image_2000

@@ -1,0 +1,259 @@
+<?php
+
+/**
+ * @file
+ * Main module file containing hooks.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\system\MenuInterface;
+use Drupal\language\ConfigurableLanguageInterface;
+
+/**
+ *Implements hook_help.
+ *
+ * @param $route_name
+ * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+ * @return \Drupal\Component\Render\MarkupInterface|null
+ */
+function simple_sitemap_help($route_name, RouteMatchInterface $route_match) {
+  return $route_name === 'help.page.simple_sitemap' ?
+    check_markup(file_get_contents(dirname(__FILE__) . "/README.md")) : NULL;
+}
+
+/**
+ * Implements hook_form_alter.
+ *
+ * Adds sitemap settings to entity types that are supported via plugins.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function simple_sitemap_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  /**
+   * @var Drupal\simple_sitemap\Form\FormHelper $f
+   */
+  $f = \Drupal::service('simple_sitemap.form_helper');
+  if (!$f->processForm($form_state)) {
+    return;
+  }
+
+  $form['simple_sitemap'] = [
+    '#type' => 'details',
+    '#group' => isset($form['additional_settings']) ? 'additional_settings' : 'advanced',
+    '#title' => t('Simple XML sitemap'),
+    '#description' => $f->getEntityCategory() === 'instance' ? t('Settings for this entity can be overridden here.') : '',
+  ];
+
+  // Attach some js magic to forms.
+  // todo: JS not working on comment entity form, hence disabling.
+  if ($f->getEntityTypeId() !== 'comment' || $f->getEntityCategory() !== 'instance') {
+    $form['#attached']['library'][] = 'simple_sitemap/form';
+  }
+
+  // Only attach fieldset summary js to 'additional settings' vertical tabs.
+  if (isset($form['additional_settings'])) {
+    $form['#attached']['library'][] = 'simple_sitemap/fieldsetSummaries';
+  }
+
+  $f->displayEntitySettings($form['simple_sitemap'])
+  // todo: do not show setting when creating new bundle.
+    ->displayRegenerateNow($form['simple_sitemap']);
+
+  // Add submission handler.
+  if (isset($form['actions']['submit']['#submit'])) {
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action !== 'preview'
+        && isset($form['actions'][$action]['#type'])
+        && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'simple_sitemap_entity_form_submit';
+      }
+    }
+  }
+  // Fix for account page rendering other submit handlers not usable.
+  else {
+    $form['#submit'][] = 'simple_sitemap_entity_form_submit';
+  }
+}
+
+/**
+ * Form submission handler called in hook_form_alter.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function simple_sitemap_entity_form_submit($form, FormStateInterface &$form_state) {
+
+  /**
+   * @var Drupal\simple_sitemap\Form\FormHelper $f
+   */
+  $f = \Drupal::service('simple_sitemap.form_helper');
+  if (!$f->processForm($form_state)) {
+    return;
+  }
+
+  $values = $form_state->getValues();
+
+  // Fix for values appearing in a sub array on a commerce product entity.
+  $values = isset($values['simple_sitemap']) ? $values['simple_sitemap'] : $values;
+
+  // Only make changes in DB if sitemap settings actually changed.
+  if ($f->valuesChanged($form, $values)) {
+
+    /**
+     * @var \Drupal\simple_sitemap\Simplesitemap $generator
+     */
+    $generator = \Drupal::service('simple_sitemap.generator');
+
+    $settings = [
+      'index' => $values['simple_sitemap_index_content'],
+      'priority' => $values['simple_sitemap_priority'],
+      'changefreq' => $values['simple_sitemap_changefreq'],
+      'include_images' => $values['simple_sitemap_include_images'],
+    ];
+
+    switch ($f->getEntityCategory()) {
+
+      case 'bundle':
+        $generator->setBundleSettings(
+          $f->getEntityTypeId(),
+          !empty($f->getBundleName()) ? $f->getBundleName() : $f->getFormEntityId(),
+          $settings
+        );
+        break;
+
+      case 'instance':
+        $generator->setEntityInstanceSettings(
+          $f->getEntityTypeId(),
+          !empty($f->getInstanceId()) ? $f->getInstanceId() : $f->getFormEntityId(),
+          $settings
+        );
+        break;
+    }
+
+    // Regenerate sitemaps according to user setting.
+    if ($values['simple_sitemap_regenerate_now']) {
+      $generator->generateSitemap();
+    }
+  }
+}
+
+/**
+ * Implements hook_cron.
+ */
+function simple_sitemap_cron() {
+
+  /**
+   * @var \Drupal\simple_sitemap\Simplesitemap $generator
+   */
+  $generator = \Drupal::service('simple_sitemap.generator');
+  if ($generator->getSetting('cron_generate')) {
+    $interval = (int) $generator->getSetting('cron_generate_interval', 0) * 60 * 60;
+    $requestTime = \Drupal::service('datetime.time')->getRequestTime();
+    if ($interval === 0 || ((\Drupal::state()->get('simple_sitemap.last_cron_generate', 0) + $interval) <= $requestTime)) {
+      \Drupal::state()->set('simple_sitemap.last_cron_generate', $requestTime);
+      $generator->generateSitemap('backend');
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * When a language is removed from the system remove it also from settings.
+ */
+function simple_sitemap_configurable_language_delete(ConfigurableLanguageInterface $language) {
+
+  /**
+   * @var \Drupal\simple_sitemap\Simplesitemap $generator
+   */
+  $generator = \Drupal::service('simple_sitemap.generator');
+  $excluded_languages = $generator->getSetting('excluded_languages');
+  if (isset($excluded_languages[$language->id()])) {
+    unset($excluded_languages[$language->id()]);
+    $generator->saveSetting('excluded_languages', $excluded_languages);
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ *
+ * Removes settings of the removed entity.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function simple_sitemap_entity_delete(EntityInterface $entity) {
+
+  /**
+   * @var \Drupal\simple_sitemap\Simplesitemap $generator
+   */
+  $generator = \Drupal::service('simple_sitemap.generator');
+  $generator->removeEntityInstanceSettings(
+    $entity->getEntityTypeId(), $entity->id()
+  );
+}
+
+/**
+ * Implements hook_entity_bundle_delete().
+ *
+ * Removes settings of the removed bundle.
+ *
+ * @param string $entity_type_id
+ * @param string $bundle
+ */
+function simple_sitemap_entity_bundle_delete($entity_type_id, $bundle) {
+  simple_sitemap_delete_bundle_config($entity_type_id, $bundle);
+}
+
+/**
+ * Implements hook_menu_delete().
+ *
+ * Removes settings for the removed menu.
+ *
+ * @param \Drupal\system\MenuInterface $menu
+ */
+function simple_sitemap_menu_delete(MenuInterface $menu) {
+  simple_sitemap_delete_bundle_config('menu_link_content', $menu->id());
+}
+
+/**
+ * Helper function used by simple_sitemap_entity_bundle_delete() and
+ * simple_sitemap_menu_delete() hooks. This is needed, as menus are technically
+ * not bundles.
+ *
+ * @param string $entity_type_id
+ * @param string $bundle
+ */
+function simple_sitemap_delete_bundle_config($entity_type_id, $bundle) {
+
+  /**
+   * @var \Drupal\simple_sitemap\Simplesitemap $generator
+   */
+  $generator = \Drupal::service('simple_sitemap.generator');
+  $deleted_bundle_settings = $generator->getBundleSettings($entity_type_id, $bundle);
+  if ($deleted_bundle_settings !== FALSE) {
+
+    // Delete bundle settings.
+    \Drupal::service('config.factory')->getEditable("simple_sitemap.bundle_settings.$entity_type_id.$bundle")->delete();
+
+    $message = 'You may want to <a href="@url">regenerate</a> your XML sitemap now.';
+    if ($generator->getSetting('cron_generate')) {
+      $message .= ' Otherwise the sitemap will be regenerated during a future cron run.';
+    }
+    drupal_set_message(t($message, ['@url' => $GLOBALS['base_url'] . '/admin/config/search/simplesitemap']));
+  }
+}
+
+/**
+ * Implements hook_robotstxt().
+ */
+function simple_sitemap_robotstxt() {
+  return [
+    '# XML sitemap',
+    'Sitemap: ' . $GLOBALS['base_url'] . '/sitemap.xml', //todo: Use base URL setting?
+  ];
+}

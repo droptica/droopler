@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_form.field_d_forms
+    - field.field.paragraph.d_p_form.field_d_icon
+    - field.field.paragraph.d_p_form.field_d_image_background
+    - field.field.paragraph.d_p_form.field_d_main_title
+    - paragraphs.paragraphs_type.d_p_form
+  module:
+    - contact_formatter
+    - svg_image
+id: paragraph.d_p_form.default
+targetEntityType: paragraph
+bundle: d_p_form
+mode: default
+content:
+  field_d_forms:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: contact_field_formatter
+    region: content
+  field_d_icon:
+    weight: 0
+    label: hidden
+    settings:
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_d_image_background:
+    weight: 3
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_d_main_title:
+    weight: 1
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

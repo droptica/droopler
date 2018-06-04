@@ -1,0 +1,88 @@
+// Fonts and typography.
+//
+// Styleguide 1.3
+
+
+
+// Font for <h2> header
+$font-main-header-size: 3rem !default;
+$font-main-header-size-down: 2rem !default;
+@mixin font-main-header {
+  font-size: $font-main-header-size;
+  font-weight: bold;
+  @include media-breakpoint-down(md) {
+    font-size: $font-main-header-size-down;
+  }
+}
+
+// Font for <h1> or bigger <h2>
+$font-main-header-big-size: 3.44rem !default;
+$font-main-header-big-size-down-md: 2.5rem !default;
+$font-main-header-big-size-down-sm: 2.5rem !default;
+$font-main-header-big-margin-bottom: 0.8rem !default;
+@mixin font-main-header-big {
+  font-weight: 900;
+  margin-bottom: $font-main-header-big-margin-bottom;
+  font-size: $font-main-header-big-size;
+  @include media-breakpoint-down(md) {
+    font-size: $font-main-header-big-size-down-md;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: $font-main-header-big-size-down-sm;
+  }
+}
+
+// Font for subtitle below main title, typically <h3>
+$font-main-subtitle-size: $font-size-mdlg !default;
+$font-main-subtitle-size-down-sm: $font-size-sm !default;
+@mixin font-subtitle {
+  font-size: $font-main-subtitle-size;
+  @include media-breakpoint-down(sm) {
+    font-size: $font-main-subtitle-size-down-sm;
+  }
+}
+
+// Button font
+$font-main-button-size: $font-size-mdsm !default;
+$font-main-button-size-down-sm: $font-size-vsm !default;
+@mixin font-button {
+  font-size: $font-main-button-size;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  @include media-breakpoint-down(sm) {
+    font-size: $font-main-button-size-down-sm;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// Standard <p> font
+$font-main-standard-size: $font-size-base !default;
+$font-main-standard-size-down-md: $font-size-mdsm !default;
+$font-main-standard-size-down-sm: $font-size-sm !default;
+@mixin font-body-standard {
+  font-size: $font-main-standard-size;
+  @include media-breakpoint-down(md) {
+    font-size: $font-main-standard-size-down-md;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: $font-main-standard-size-down-sm;
+  }
+}
+
+// Font for <a> links
+@mixin font-links {
+  @include font-body-standard;
+}
+
+@mixin text-transform($transform: none) {
+  @if $transform == none {
+    // we transform up only
+    // if you have to transfer to none somewhere
+    // then this is a but, please report
+  } @else {
+    text-transform: $transform;
+  }
+}

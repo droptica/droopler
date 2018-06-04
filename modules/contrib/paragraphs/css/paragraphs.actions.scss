@@ -1,0 +1,126 @@
+@import "variables";
+
+.paragraphs-actions {
+  display: flex;
+  align-items: center;
+
+  // Actions buttons (the one that are not in dropdown).
+  > .button {
+    margin-left: $gutter-top;
+    margin-right: 0;
+
+    + .paragraphs-dropdown {
+      margin-left: $gutter-top;
+    }
+  }
+
+  .paragraphs-icon {
+    margin-left: $gutter-top;
+    // We need right margin here so that lock icon is horizontally aligned with
+    // dropdown icon.
+    margin-right: $gutter-top;
+  }
+
+  @at-root .paragraphs-dropdown {
+    position: relative;
+
+    &-toggle {
+      // Use block display so parent can have same dimensions as toggle button.
+      display: block;
+      height: $action-size-big;
+      width: $action-size-big;
+      background: url('../icons/icon-actions.svg') no-repeat center;
+      background-size: $action-size-normal $action-size-normal;
+      border: 1px solid transparent;
+      border-radius: $action-border-radius;
+      transition: all 0.1s;
+
+      @media (min-width: map-get($grid-breakpoints, 'md')) {
+        height: $action-size-normal;
+        width: $action-size-normal;
+      }
+
+      &:hover, &:focus {
+        background-color: $action-hover-bg;
+        // Border and shadow are the same as for standard Drupal button.
+        border: 1px solid $action-border;
+        box-shadow: $action-hover-box-shadow;
+        outline: none;
+      }
+    }
+
+    &-actions {
+      display: none;
+      // We are using overflow hidden to prevent button background overflowing
+      // on hover.
+      overflow: hidden;
+      position: absolute;
+      right: 0;
+      top: $action-size-big;
+      z-index: 100;
+      background: $action-hover-bg;
+      border: 1px solid $action-border;
+      border-radius: 5px 0 5px 5px;
+      box-shadow: 0 2px 6px 0 #aaa;
+
+      @media (min-width: map-get($grid-breakpoints, 'md')) {
+        top: $action-size-normal;
+      }
+
+      // Override seven .item-list styles - we need to do like this because we
+      // can't remove the class without overriding template.
+      .item-list & {
+        list-style: none;
+
+        li {
+          margin: 0;
+          list-style: none;
+        }
+      }
+    }
+
+    &.open {
+      .paragraphs-dropdown-actions {
+        display: block;
+      }
+    }
+
+    &-action {
+      width: 100%;
+
+      &.button {
+        margin-right: 0;
+        margin-left: 0;
+        text-align: left;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        font-weight: 600;
+        line-height: 18px;
+        white-space: nowrap;
+
+        &:focus {
+          border: none;
+          box-shadow: none;
+          outline: none;
+        }
+
+        // Override seven button.css top margin.
+        .form-wrapper & {
+          margin-top: 0;
+
+          @media (max-width: map-get($grid-breakpoints, 'md')) {
+            // Bigger touch area for small screens.
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  &-item-icon {
+    height: 20px;
+    padding: 0 10px;
+  }
+}

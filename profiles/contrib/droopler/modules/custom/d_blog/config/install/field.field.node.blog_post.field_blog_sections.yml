@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog_sections
+    - node.type.blog_post
+    - paragraphs.paragraphs_type.d_p_blog_image
+    - paragraphs.paragraphs_type.d_p_blog_text
+  module:
+    - entity_reference_revisions
+id: node.blog_post.field_blog_sections
+field_name: field_blog_sections
+entity_type: node
+bundle: blog_post
+label: 'Blog sections'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      d_p_blog_image: d_p_blog_image
+      d_p_blog_text: d_p_blog_text
+    target_bundles_drag_drop:
+      d_p_banner:
+        weight: -23
+        enabled: false
+      d_p_blog_image:
+        enabled: true
+        weight: -22
+      d_p_blog_text:
+        enabled: true
+        weight: -20
+      d_p_form:
+        weight: -19
+        enabled: false
+      d_p_group_of_text_blocks:
+        weight: -18
+        enabled: false
+      d_p_side_image:
+        weight: -17
+        enabled: false
+      d_p_single_text_block:
+        weight: -16
+        enabled: false
+      d_p_subscribe_file:
+        weight: -15
+        enabled: false
+      d_p_text_paged:
+        weight: -14
+        enabled: false
+      d_p_text_with_bckg:
+        weight: -13
+        enabled: false
+field_type: entity_reference_revisions

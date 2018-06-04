@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a paragraphs actions component.
+ *
+ * Available variables:
+ * - actions - default actions, always visible and not in dropdown.
+ * - dropdown_actions - actions for dropdown subcomponent.
+ *
+ * @see template_preprocess()
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="paragraphs-actions">
+  {{ actions }}
+  {# We are still using access attribute on some places to disable dropdown
+     actions and that is why we will first render dropdown_actions and then
+     render dropdown subcomoponent if needed. #}
+  {% set dropdown_actions_output = render_var(dropdown_actions) %}
+  {% if dropdown_actions_output %}
+    <div class="paragraphs-dropdown">
+      <button class="paragraphs-dropdown-toggle"><span class="visually-hidden">{% trans %}Toggle Actions{% endtrans %}</span></button>
+      <div class="paragraphs-dropdown-actions">
+        {{ dropdown_actions_output }}
+      </div>
+    </div>
+  {% endif %}
+</div>

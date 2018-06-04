@@ -1,0 +1,38 @@
+{
+  "name": "drupal/admin_toolbar_links_access_filter",
+  "description": "Provides a workaround for the common problem that users with 'Use the administration pages and help' permission see menu links they don't have access permission for. Once the issue https://www.drupal.org/node/296693 be solved, this module will be deprecated.",
+  "type": "drupal-module",
+  "keywords": ["Drupal", "Toolbar"],
+  "homepage": "http://drupal.org/project/admin_toolbar",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Wilfrid Roze (eme)",
+      "homepage": "https://www.drupal.org/u/eme",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Romain Jarraud (romainj)",
+      "homepage": "https://www.drupal.org/u/romainj",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Adrian Cid Almaguer (adriancid)",
+      "email": "adriancid@gmail.com",
+      "homepage": "https://www.drupal.org/u/adriancid",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Mohamed Anis Taktak (matio89)",
+      "homepage": "https://www.drupal.org/u/matio89",
+      "role": "Maintainer"
+    }    
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/admin_toolbar",
+    "source": "http://cgit.drupalcode.org/admin_toolbar"
+  },
+  "require": {
+    "drupal/admin_toolbar": "^1"
+  }
+}

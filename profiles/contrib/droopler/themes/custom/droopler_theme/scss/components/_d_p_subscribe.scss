@@ -1,0 +1,105 @@
+/*
+Subscribe paragraph
+
+Styleguide 2.10
+*/
+
+// Colour variables used in this paragraph
+$d-p-subscribe-color: $color-odysseus !default;
+$d-p-subscribe-header-color: $color-odysseus !default;
+$d-p-subscribe-background: $color-agamemnon !default;
+$d-p-subscribe-line-color: $line-background !default;
+
+// Padding, margins & sizing.
+$d-p-subscribe-form-margin: 2.2rem auto 1.25rem auto !default;
+$d-p-subscribe-form-max-width: 56rem !default;
+$d-p-subscribe-mobile-form-max-width: 31.25rem !default;
+$d-p-subscribe-mobile-form-margin-y: 3% !default;
+$d-p-subscribe-padding-y: 8% !default;
+$d-p-subscribe-line-margin-top: 1.45rem !default;
+$d-p-subscribe-line-margin-bottom: $line-center-margin-bottom !default;
+
+// Other settings.
+$d-p-subscribe-img-opacity: 0.4 !default;
+
+// Subscribe form
+.d-p-subscribe-file-form {
+
+  margin: $d-p-subscribe-form-margin;
+  text-align: center;
+
+  .form-control {
+    border: none;
+  }
+
+  @include make-inline-form;
+  fieldset.form-item-name {
+    max-width: 0.25 * $d-p-subscribe-form-max-width;
+    margin-right: 0.025 * $d-p-subscribe-form-max-width;
+  }
+  fieldset.form-item-mail {
+    max-width: 0.4 * $d-p-subscribe-form-max-width;
+    margin-right: 0.025 * $d-p-subscribe-form-max-width;
+  }
+  .checkbox {
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include media-breakpoint-up(lg) {
+    .checkbox {
+      width: 0.75 * $d-p-subscribe-form-max-width;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    fieldset.form-item-mail {
+      max-width: 0.35 * $d-p-subscribe-form-max-width;
+    }
+    .checkbox {
+      width: 90%;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    max-width: $d-p-subscribe-mobile-form-max-width;
+    margin: $d-p-subscribe-mobile-form-margin-y auto;
+    fieldset.form-item-name, fieldset.form-item-mail {
+      max-width: 100%;
+      margin-right: 0;
+    }
+  }
+}
+
+// Entire paragraph
+.subscribe_file {
+  color: $d-p-subscribe-color;
+  z-index: 0;
+  padding: $d-p-subscribe-padding-y 0;
+  background: $d-p-subscribe-background;
+  .backstretch-item {
+    img {
+      opacity: $d-p-subscribe-img-opacity;
+    }
+  }
+  a {
+    color: $d-p-subscribe-color;
+  }
+  .field--name-field-d-icon {
+    text-align: center;
+  }
+  h2 {
+    @include font-main-header;
+    color: $d-p-subscribe-header-color;
+    text-align: center;
+
+    // Horizontal line
+    &:after {
+      @include decoration-header-line-main-center;
+      margin-top: $d-p-subscribe-line-margin-top;
+      margin-bottom: $d-p-subscribe-line-margin-bottom;
+      color: $d-p-subscribe-line-color;
+    }
+  }
+  p {
+    text-align: center;
+  }
+}

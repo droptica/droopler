@@ -1,0 +1,41 @@
+{
+  "linters": {
+    "chmod": {
+      "type": "chmod"
+    },
+    "filename": {
+      "type": "filename"
+    },
+    "generated": {
+      "type": "generated"
+    },
+    "json": {
+      "type": "json",
+      "include": [
+        "(^\\.arcconfig$)",
+        "(^\\.arclint$)",
+        "(\\.json$)"
+      ]
+    },
+    "less": {
+      "type": "lessc",
+      "include": [
+        "(^less/lato-webfont.less$)"
+      ]
+    },
+    "spelling": {
+      "type": "spelling"
+    },
+    "text": {
+      "type": "text",
+      "exclude" : [
+        "(^css/)",
+        "(\\.scss$)",
+        "(\\.less$)"
+      ],
+      "severity": {
+        "5": "disabled"
+      }
+    }
+  }
+}

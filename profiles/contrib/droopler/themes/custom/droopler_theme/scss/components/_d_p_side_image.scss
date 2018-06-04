@@ -1,0 +1,94 @@
+/*
+Components Image Side Banner
+
+Styleguide 2.image-slide-banner
+
+*/
+
+// Colour variables used in this paragraph.
+$d-p-side-image-banner-background-color: $color-agamemnon !default;
+$d-p-side-image-banner-background-color-secondary: darken($d-p-side-image-banner-background-color, 15%) !default;
+$d-p-side-image-banner-text-color: $color-odysseus !default;
+$d-p-side-image-banner-link-color: $color-nestor !default;
+$d-p-side-image-banner-link-hover-color: darken($d-p-side-image-banner-link-color, 5%) !default;
+$d-p-side-image-line-color: $color-nestor !default;
+$d-p-side-image-header-color: $color-odysseus !default;
+
+// Margins, paddings and sizing.
+$d-p-side-image-line-margin-top: 1.44rem !default;
+$d-p-side-image-line-margin-bottom: 1.44rem !default;
+$d-p-side-image-mobile-height: 18.75rem !default;
+$d-p-side-image-banner-text-padding: 7% !default;
+$d-p-side-image-banner-text-width: 35.625rem !default;
+$d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and half of the screen
+
+.d-p-side-image-banner {
+  color: $d-p-side-image-banner-text-color;
+  h2 {
+    @include font-main-header;
+    color: $d_p_side-image-header-color;
+    text-align: left;
+    &:after {
+      @include decoration-header-line;
+      margin-top: $d-p-side-image-line-margin-top;
+      margin-bottom: $d-p-side-image-line-margin-bottom;
+      margin-background: $d-p-side-image-line-color;
+    }
+    &:last-child:after {
+      display: none;
+    }
+  }
+  a {
+    color: $d-p-side-image-banner-link-color;
+    &:hover {
+      color: $d-p-side-image-banner-link-hover-color;
+    }
+  }
+  .d-image {
+    padding: 0;
+    @include media-breakpoint-down(sm) {
+      height: $d-p-side-image-mobile-height !important;
+    }
+  }
+  .container-half {
+    padding: $d-p-side-image-banner-text-padding;
+  }
+  .image-side {
+    &-right {
+      background: $d-p-side-image-banner-background-color;
+    }
+    &-left {
+      background: $d-p-side-image-banner-background-color-secondary;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .container-half {
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: ($grid-gutter-width / 2);
+      padding-left: ($grid-gutter-width / 2);
+      width: $d-p-side-image-banner-text-width;
+    }
+    .image-side {
+      &-right {
+        .d-image {
+          float: right;
+        }
+        .container-half {
+          padding-right: $d-p-side-image-banner-half-padding;
+          float: right;
+        }
+      }
+      &-left {
+        .d-image {
+          float: left;
+        }
+        .container-half {
+          padding-left: $d-p-side-image-banner-half-padding;
+          float: left;
+        }
+      }
+    }
+  }
+}

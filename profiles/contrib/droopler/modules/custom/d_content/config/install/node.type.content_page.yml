@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_translation
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  content_translation:
+    enabled: true
+name: 'Content Page'
+type: content_page
+description: 'Simple page with paragraphs'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false
