@@ -14,9 +14,6 @@ use Drupal\Core\Template\Attribute;
  * Adds body classes if certain regions have content.
  */
 function droopler_theme_preprocess_html(&$variables) {
-  $config = \Drupal::config('droopler_theme.settings');
-  $variables['#attached']['drupalSettings']['droopler'] = $config->get('droopler_theme_hash');
-
   // Add page specific info to <body>.
   $variables['path_info']['args'] = FALSE;
   $path = \Drupal::service('path.current')->getPath();
