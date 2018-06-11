@@ -4,13 +4,31 @@
  * Installation hooks for paragraphs module.
  */
 
-use Drupal\menu_link_content\Entity\MenuLinkContent;
-
+use Drupal\language\Entity\ConfigurableLanguage;
 
 /**
  * Implements hook_install().
  */
 function d_content_init_install() {
+  $langcode = \Drupal::config('system.site')->get('langcode');
+
+  if ($langcode != 'en') {
+    // Get the ConfigurableLanguageManager.
+    /** {\Drupal\language\ConfigurableLanguageManager} $configManager */
+    $configManager = \Drupal::entityTypeManager()->getStorage('configurable_language');
+
+    // Now load the matching ConfigEntity of Language.
+    /** @var ConfigurableLanguage $language */
+    $language = $configManager->load($langcode);
+
+    if (!$language) {
+      // Create the language if not already shipped with a profile.
+      $language = ConfigurableLanguage::createFromLangcode($langcode);
+    }
+    $language->save();
+
+    \Drupal::service('language.default')->set($language);
+  }
 
   // Create main menu.
   $items = [
@@ -20,37 +38,18 @@ function d_content_init_install() {
     '4' => ['title' => 'Gallery', 'weight' => 16],
     '5' => ['title' => 'Contact', 'weight' => 32],
   ];
-  foreach ($items as $nid => $item) {
-    $menu_link = MenuLinkContent::create([
-      'title' => $item['title'],
-      'link' => ['uri' => 'internal:/node/' . $nid],
-      'menu_name' => 'main',
-      'weight' => $item['weight'],
-    ]);
-    $menu_link->save();
-  }
+  d_content_init_save_menu($items);
 
-  $default_content = [
-    // Keyed by entity type.
-    'block_content' => [
-      // Then by UUID.
-      '092dd69e-c6c4-4f0a-9780-ec15b89ec5b5' => [
-        'info' => 'Footer',
-        'type' => 'content_block',
-        'field_d_main_title' => 'Droopler Company',
-        'field_d_long_text' => 'Dunska 9 Wroclaw',
-      ],
-    ],
+  // Footer block.
+  $footer = [
+    'info' => 'Footer',
+    'type' => 'content_block',
+    'field_d_main_title' => 'Droopler Company',
+    'field_d_long_text' => 'Dunska 9 Wroclaw',
   ];
-  foreach ($default_content as $entity_type_id => $items) {
-    $storage = \Drupal::entityTypeManager()->getStorage($entity_type_id);
-    foreach ($items as $uuid => $item) {
-      $entity = $storage->create($item + ['uuid' => $uuid]);
-      $entity->save();
-    }
-  }
+  d_content_init_save_entity($footer, 'block_content', '092dd69e-c6c4-4f0a-9780-ec15b89ec5b5');
 
-
+  // Home page
   $home_page = [
     'type' => 'content_page',
     'title' => 'Home Page',
@@ -61,11 +60,11 @@ function d_content_init_install() {
           'data' => [
             'field_d_subtitle' => [
               'type' => 'text',
-              'data' =>'Odkryj wszystkie korzyści atrakcyjnej oferty.',
+              'data' =>'Experience all possibilities!',
             ],
             'field_d_main_title' => [
               'type' => 'text',
-              'data' =>'Korzystaj z życia, ciesz się jazdą!!',
+              'data' =>'Enjoy life and your ride',
             ],
             'field_d_image_background' => [
               'type' => 'image',
@@ -73,13 +72,13 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Stworzone z myślą o Tobie przy tych małych i dużych wyzwaniach. Dzięki zestawieniu sportowego charakteru połączonego ze stylem, wydajnością i funkcjonalnością przygoda z nim będzie czystą przyjemnością. Znajdz w sobie odkrywcę i rusz po przygodę!',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex. Quisque id nisl blandit magna elementum bibendum eu at nunc.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
               'data' => [
                 "link" => 'internal:/node/1',
-                'text' => 'Zobacz szczegóły',
+                'text' => 'See the Details',
               ],
             ],
           ],
@@ -89,13 +88,13 @@ function d_content_init_install() {
           'data' => [
             'field_d_main_title' => [
               'type' => 'text',
-              'data' =>'Innowacje i Technologia',
+              'data' =>'Innovation and Technology',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
               'data' => [
                 "link" => 'internal:/node/5',
-                'text' => 'Umów się na jazdę próbną',
+                'text' => 'Take a test ride',
               ],
             ],
             'field_d_p_tb_block_reference' => [
@@ -104,93 +103,104 @@ function d_content_init_install() {
                 [
                   'field_d_main_title' => [
                     'type' => 'text',
-                    'data' =>'Bezpieczeństwo',
+                    'data' =>'Safety',
                   ],
                   'field_d_long_text' => [
                     'type' => 'text_long',
-                    'data' => 'Solidna podstawa to optymalne bezpieczeństwo jazdy dzięki najnowszym technologiom marki BMW.',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.',
                   ],
                   'field_d_cta_link' => [
                     'type' => 'cta',
                     'data' => [
                       "link" => 'internal:/node/2',
-                      'text' => 'Czytaj dalej',
+                      'text' => 'More',
                     ],
                   ],
                 ],
                 [
                   'field_d_main_title' => [
                     'type' => 'text',
-                    'data' =>'Silniki',
+                    'data' =>'Engines',
                   ],
                   'field_d_long_text' => [
                     'type' => 'text_long',
-                    'data' => 'Połącz moc z radością. Sercem każdego samochodu jest silnik, a gdy BMW przyspiesza, budzi zachwyt u każdego kogo mija.',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.',
                   ],
                   'field_d_cta_link' => [
                     'type' => 'cta',
                     'data' => [
                       "link" => 'internal:/node/2',
-                      'text' => 'Czytaj dalej',
+                      'text' => 'More',
                     ],
                   ],
                 ],
                 [
                   'field_d_main_title' => [
                     'type' => 'text',
-                    'data' =>'Wyposażenie',
+                    'data' =>'The package',
                   ],
                   'field_d_long_text' => [
                     'type' => 'text_long',
-                    'data' => 'Indywidualność i wszechstronność pełna charakteru. Oryginalne akcesoria BMW podkreślają wyjątkowy styl Twojego BMW.',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.',
                   ],
                   'field_d_cta_link' => [
                     'type' => 'cta',
                     'data' => [
                       "link" => 'internal:/node/2',
-                      'text' => 'Czytaj dalej',
+                      'text' => 'More',
                     ],
                   ],
                 ],
-
                 [
                   'field_d_main_title' => [
                     'type' => 'text',
-                    'data' =>'Kolory',
+                    'data' =>'Colors',
                   ],
                   'field_d_long_text' => [
                     'type' => 'text_long',
-                    'data' => 'Styl z charakterem. Podobno kolor maszyny wybieramy nie tylko w oparciu o modę ale także o naszą osobowość.',
-                  ],
-
-                ],
-                [
-                  'field_d_main_title' => [
-                    'type' => 'text',
-                    'data' =>'Układ Jezdny',
-                  ],
-                  'field_d_long_text' => [
-                    'type' => 'text_long',
-                    'data' => 'Awangardowe systemy dające jeszcze większą radość z jazdy - na każdej prostej, na każdym zakręcie, w każdej sekundzie. ',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.',
                   ],
                   'field_d_cta_link' => [
-                  'type' => 'cta',
-                  'data' => [
-                    "link" => 'internal:/node/1',
-                    'text' => 'Learn more',
+                    'type' => 'cta',
+                    'data' => [
+                      "link" => 'internal:/node/2',
+                      'text' => 'More',
+                    ],
                   ],
-                ],
                 ],
                 [
                   'field_d_main_title' => [
                     'type' => 'text',
-                    'data' =>'Serwis',
+                    'data' =>'Drive',
                   ],
                   'field_d_long_text' => [
                     'type' => 'text_long',
-                    'data' => 'Mały gest, duże wsparcie. Kupując samochód marki BMW, wybierasz także doskonały serwis i kompleksową obsługę.',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.',
                   ],
-
+                  'field_d_cta_link' => [
+                    'type' => 'cta',
+                    'data' => [
+                      "link" => 'internal:/node/2',
+                      'text' => 'More',
+                    ],
+                  ],
+                ],
+                [
+                  'field_d_main_title' => [
+                    'type' => 'text',
+                    'data' =>'Service',
+                  ],
+                  'field_d_long_text' => [
+                    'type' => 'text_long',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.',
+                  ],
+                  'field_d_cta_link' => [
+                    'type' => 'cta',
+                    'data' => [
+                      "link" => 'internal:/node/2',
+                      'text' => 'More',
+                    ],
+                  ],
                 ],
               ],
             ],
@@ -201,7 +211,7 @@ function d_content_init_install() {
           'data'=> [
             'field_d_main_title' => [
               'type' => 'text',
-              'data' =>'Najwyższy komfort już przy wsiadaniu',
+              'data' =>'Comfort when onboarding',
             ],
             'field_d_image_background' => [
               'type' => 'image',
@@ -213,7 +223,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => '',
+              'data' => 'Aenean feugiat dui sit amet condimentum volutpat. Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend. Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna luctus mi.',
             ],
 
           ],
@@ -223,7 +233,7 @@ function d_content_init_install() {
           'data' => [
             'field_d_main_title' => [
               'type' => 'text',
-              'data' =>'Skup wzrok na drodze',
+              'data' =>'Focus on the road',
             ],
             'field_d_image_background' => [
               'type' => 'image',
@@ -235,7 +245,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => '',
+              'data' => 'Aenean feugiat dui sit amet condimentum volutpat. Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend. Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna luctus mi.',
             ],
 
           ],
@@ -245,7 +255,7 @@ function d_content_init_install() {
           'data' => [
             'field_d_main_title' => [
               'type' => 'text',
-              'data' =>'Wszystko masz pod kontrolą',
+              'data' =>'All under control',
             ],
             'field_d_image_background' => [
               'type' => 'image',
@@ -257,7 +267,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => '',
+              'data' => 'Aenean feugiat dui sit amet condimentum volutpat. Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend. Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna luctus mi.',
             ],
 
           ]
@@ -267,7 +277,7 @@ function d_content_init_install() {
           'data' => [
             'field_d_main_title' => [
               'type' => 'text',
-              'data' =>'Autentyczna radość z jazdy',
+              'data' =>'Authentic pleasure of driving',
             ],
             'field_d_image_background' => [
               'type' => 'image',
@@ -279,7 +289,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => '',
+              'data' => 'Aenean feugiat dui sit amet condimentum volutpat. Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend. Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna luctus mi.',
             ],
 
           ],
@@ -290,7 +300,7 @@ function d_content_init_install() {
           'data' => [
             'field_d_main_title' => [
               'type' => 'text',
-              'data' =>'Idealna podróż w zasięgu ręki, daj się zainspirować!',
+              'data' =>'Perfect trip is just around the corner!',
             ],
           ]
         ],
@@ -300,11 +310,11 @@ function d_content_init_install() {
           'data' => [
             'field_d_main_title' => [
               'type' => 'text',
-              'data' =>'Czas na Twój krok!',
+              'data' =>'Your turn',
             ],
             'field_d_subtitle' => [
               'type' => 'text',
-              'data' =>'Umów się już dziś na darmową jazdę próbną i sam zdecyduj co dalej. Wszystko zależy od Ciebie, to ty decydujesz, którędy droga.',
+              'data' =>'Schedule a test ride. It is your decision which road to take and how fast you go!',
             ],
             'field_d_image_background' => [
               'type' => 'image',
@@ -318,7 +328,7 @@ function d_content_init_install() {
               'type' => 'cta',
               'data' => [
                 "link" => 'internal:/node/5',
-                'text' => 'Umów się na jazdę próbną',
+                'text' => 'Contact Us',
               ],
             ],
           ],
@@ -327,7 +337,7 @@ function d_content_init_install() {
       ],
     ],
   ];
-  d_content_init_save_node($home_page, 'pl');
+  d_content_init_save_node($home_page);
 
   $about_us = [
     'type' => 'content_page',
@@ -339,7 +349,7 @@ function d_content_init_install() {
           'data' => [
             'field_d_subtitle' => [
               'type' => 'text',
-              'data' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.',
             ],
             'field_d_main_title' => [
               'type' => 'text',
@@ -351,13 +361,13 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Aenean feugiat dui sit amet condimentum volutpat. Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend. Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna luctus mi. Praesent consectetur commodo libero. In imperdiet suscipit porta. Donec condimentum condimentum sem, nec porta velit malesuada ut. Proin et tempor metus, sagittis rhoncus arcu. Ut quis libero risus. Donec vitae leo eget lorem eleifend sagittis. Nulla condimentum dictum nulla, at rutrum orci lobortis non.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
               'data' => [
                 "link" => 'internal:/node/1',
-                'text' => 'meet our bikes',
+                'text' => 'Contact Us',
               ],
             ]
           ]
@@ -387,7 +397,7 @@ function d_content_init_install() {
                   ],
                   'field_d_long_text' => [
                     'type' => 'text_long',
-                    'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
                   ],
                   'field_d_cta_link' => [
                     'type' => 'cta',
@@ -404,7 +414,7 @@ function d_content_init_install() {
                   ],
                   'field_d_long_text' => [
                     'type' => 'text_long',
-                    'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
                   ],
                   'field_d_cta_link' => [
                     'type' => 'cta',
@@ -421,7 +431,7 @@ function d_content_init_install() {
                   ],
                   'field_d_long_text' => [
                     'type' => 'text_long',
-                    'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+                    'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
                   ],
                   'field_d_cta_link' => [
                     'type' => 'cta',
@@ -452,7 +462,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -480,7 +490,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -494,7 +504,7 @@ function d_content_init_install() {
       ],
     ],
   ];
-  d_content_init_save_node($about_us, 'pl');
+  d_content_init_save_node($about_us);
 
   $services = [
     'type' => 'content_page',
@@ -506,7 +516,7 @@ function d_content_init_install() {
           'data' => [
             'field_d_subtitle' => [
               'type' => 'text',
-              'data' =>'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              'data' =>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             ],
             'field_d_main_title' => [
               'type' => 'text',
@@ -518,7 +528,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -546,7 +556,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -574,7 +584,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -588,7 +598,7 @@ function d_content_init_install() {
       ],
     ],
   ];
-  d_content_init_save_node($services, 'pl');
+  d_content_init_save_node($services);
 
   $gallery = [
     'type' => 'content_page',
@@ -612,7 +622,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -640,7 +650,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -668,7 +678,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -682,7 +692,7 @@ function d_content_init_install() {
       ],
     ],
   ];
-  d_content_init_save_node($gallery, 'pl');
+  d_content_init_save_node($gallery);
 
   $contact = [
     'type' => 'content_page',
@@ -706,7 +716,7 @@ function d_content_init_install() {
             ],
             'field_d_long_text' => [
               'type' => 'text_long',
-              'data' => 'Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem Lorem Ipsum is simp the 960s with the release of Letraset sheets containing Lorem ',
+              'data' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.',
             ],
             'field_d_cta_link' => [
               'type' => 'cta',
@@ -737,5 +747,5 @@ function d_content_init_install() {
       ],
     ],
   ];
-  d_content_init_save_node($contact, 'pl');
+  d_content_init_save_node($contact);
 }

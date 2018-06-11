@@ -10,14 +10,23 @@
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use \Drupal\taxonomy\Entity\Term;
+use Drupal\language\Entity\ConfigurableLanguage;
 
 /**
  * Save blog post.
+ *
  * @param $d_blog_post_title
+ *  Title of the post.
  * @param $d_blog_teaser_text
+ *  Teaser content.
  * @param $d_blog_paragraph_text
+ *  Body content.
  * @param $images
+ *  Array of images.
  * @param $taxonomy
+ *  Category name.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_blog_init_save_blog_post(
   $d_blog_post_title,
@@ -78,7 +87,7 @@ function d_blog_init_save_blog_post(
     ],
   ];
 
-  d_blog_init_save_node($blog_post_1, 'en');
+  d_blog_init_save_node($blog_post_1);
 }
 
 /**
@@ -86,24 +95,18 @@ function d_blog_init_save_blog_post(
  *
  * @param array $node_to_create
  *   Array node with paragraph content.
- * @param string $lang_code
- *   Lang code.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function d_blog_init_save_node(array $node_to_create, $lang_code) {
-
-  $node = Node::create(
-    [
-      'type' => $node_to_create['type'],
-      'title' => $node_to_create['title'],
-      'langcode' => $lang_code,
-    ]
-  );
+function d_blog_init_save_node(array $node_to_create) {
+  $node = Node::create([
+    'type' => $node_to_create['type'],
+    'title' => $node_to_create['title'],
+  ]);
 
   if (isset($node_to_create['field_blog_sections']['paragraphs'])) {
     foreach ($node_to_create['field_blog_sections']['paragraphs'] as $paragraph_data) {
-
       $paragraph = d_blog_init_fill_paragraph($paragraph_data);
-
       $node->field_blog_sections->appendItem($paragraph);
     }
 
@@ -147,9 +150,13 @@ function d_blog_init_save_node(array $node_to_create, $lang_code) {
 
 /**
  * Fill paragraph with text.
- * @param $paragraph_data
- * @return $paragraph_object
  *
+ * @param array $paragraph_data
+ *  The array with paragraph data.
+ *
+ * @return \Drupal\Core\Entity\EntityInterface|\Drupal\paragraphs\Entity\Paragraph
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_blog_init_fill_paragraph($paragraph_data) {
   $paragraph = Paragraph::create([
@@ -185,12 +192,14 @@ function d_blog_init_fill_paragraph($paragraph_data) {
 /**
  * Get image.
  *
- * @param $imgName
- * @return bool|\Drupal\file\FileInterface|false|string
+ * @param string $image_name
+ *  File name without path.
+ *
+ * @return \Drupal\file\FileInterface
  */
-function d_blog_init_get_image($imgName) {
-  $imagePath = drupal_get_path('module', 'd_content_init') . '/assets/' . $imgName;
-  $image = file_get_contents($imagePath);
-  $image = file_save_data($image, 'public://' . $imgName, FILE_EXISTS_REPLACE);
+function d_blog_init_get_image($image_name) {
+  $image_path = drupal_get_path('module', 'd_content_init') . '/assets/' . $image_name;
+  $image = file_get_contents($image_path);
+  $image = file_save_data($image, 'public://' . $image_name, FILE_EXISTS_REPLACE);
   return $image;
 }
