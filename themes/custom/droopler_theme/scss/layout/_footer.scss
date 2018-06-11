@@ -5,14 +5,6 @@
 // Colour variables used in this file.
 $footer-background: $color-troilus !default;
 $footer-text-color: $white !default;
-$footer-droopler-color: $color-priam !default;
-$footer-droopler-color-hover: darken($color-priam, 20%) !default;
-
-// Paddings, margins and heights.
-
-// Other variables.
-$footer-droopler-opacity: 0.7 !default;
-$footer-droopler-margin: 0.625rem auto !default;
 
 @mixin font-footer-header {
   font-size: $font-size-vlg;
@@ -49,23 +41,6 @@ footer {
     .block {
       text-align: center;
       border: 0;
-    }
-  }
-}
-
-.footer-droopler {
-  opacity: $footer-droopler-opacity;
-  color: lighten($menu-main-link-color, 20%);
-  margin: $footer-droopler-margin;
-  text-align: right;
-  font-size: $font-size-svsm;
-  @extend .container;
-  a {
-    font-size: $font-size-svsm;
-    color: $footer-droopler-color;
-    text-transform: uppercase;
-    &:hover, &:focus {
-      color: $footer-droopler-color-hover;
     }
   }
 }
