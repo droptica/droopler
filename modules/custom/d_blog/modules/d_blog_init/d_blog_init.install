@@ -9,7 +9,27 @@
  * Implements hook_install().
  */
 function d_blog_init_install() {
-  $how_many_blog_post = 25;
+  $langcode = \Drupal::config('system.site')->get('langcode');
+
+  if ($langcode != 'en') {
+    // Get the ConfigurableLanguageManager.
+    /** {\Drupal\language\ConfigurableLanguageManager} $configManager */
+    $configManager = \Drupal::entityTypeManager()->getStorage('configurable_language');
+
+    // Now load the matching ConfigEntity of Language.
+    /** @var ConfigurableLanguage $language */
+    $language = $configManager->load($langcode);
+
+    if (!$language) {
+      // Create the language if not already shipped with a profile.
+      $language = ConfigurableLanguage::createFromLangcode($langcode);
+    }
+    $language->save();
+
+    \Drupal::service('language.default')->set($language);
+  }
+
+  $how_many_blog_post = 5;
 
   $d_blog_teaser_text = 'Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies. Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.';
   $d_blog_paragraph_text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna.
@@ -42,11 +62,4 @@ Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui
       $d_blog_paragraph_text, $images, $taxonomy
     );
   }
-
-  // Check for german language.
-  $german_title = 'Arbeitsunfähigkeitsbescheinigung';
-  d_blog_init_save_blog_post(
-    $german_title, $d_blog_teaser_text,
-    $d_blog_paragraph_text, $images, $taxonomy
-  );
 }

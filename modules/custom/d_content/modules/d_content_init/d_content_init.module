@@ -7,29 +7,26 @@
 
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 
-/** Save node with paragraphs.
+/**
+ * Save node with paragraphs.
  *
  * @param array $node_to_create
  *   Array node with paragraph content.
- * @param string $lang_code
- *   Lang code.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
-
-
-function d_content_init_save_node($node_to_create, $lang_code) {
+function d_content_init_save_node($node_to_create) {
 
   $node = Node::create([
     'type' => $node_to_create['type'],
     'title' => $node_to_create['title'],
-    'langcode' => $lang_code,
   ]);
 
   if (isset($node_to_create['field_page_section']['paragraphs'])) {
     foreach ($node_to_create['field_page_section']['paragraphs'] as $paragraph_data) {
-
       $paragraph = d_content_init_fill_paragraph($paragraph_data);
-
       $node->field_page_section->appendItem($paragraph);
     }
     $node->save();
@@ -37,10 +34,54 @@ function d_content_init_save_node($node_to_create, $lang_code) {
 }
 
 /**
- * @param $paragraph_data
+ * Save an entity.
  *
- * @return $paragraph_object
+ * @param $entity_to_create
+ *  Array with entity.
+ * @param $entity_type
+ *  Entity type.
+ * @param $uuid
+ *  UUID of entity.
  *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
+  $storage = \Drupal::entityTypeManager()->getStorage($entity_type);
+  $entity = $storage->create($entity_to_create + ['uuid' => $uuid]);
+  $entity->save();
+}
+
+/**
+ * Save menu items.
+ *
+ * @param $links
+ *  Array of links.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_save_menu($links) {
+  foreach ($links as $nid => $item) {
+    $menu_link = MenuLinkContent::create([
+      'title' => $item['title'],
+      'link' => ['uri' => 'internal:/node/' . $nid],
+      'menu_name' => 'main',
+      'weight' => $item['weight'],
+    ]);
+    $menu_link->save();
+  }
+}
+
+/**
+ * Fill the paragraph.
+ *
+ * @param array $paragraph_data
+ *  Array with paragraph content.
+ *
+ * @return \Drupal\Core\Entity\EntityInterface|\Drupal\paragraphs\Entity\Paragraph
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_fill_paragraph($paragraph_data) {
   $paragraph = Paragraph::create([
@@ -48,7 +89,6 @@ function d_content_init_fill_paragraph($paragraph_data) {
   ]);
 
   foreach ($paragraph_data['data'] as $field_name => $value) {
-
     switch ($value['type']) {
       case 'text':
       case 'text_long':
@@ -70,7 +110,6 @@ function d_content_init_fill_paragraph($paragraph_data) {
         $image = file_save_data($image, 'public://' . $value['data'], FILE_EXISTS_REPLACE);
         $paragraph->$field_name->appendItem($image);
         break;
-
       case 'paragraph_reference':
         foreach ($value['data'] as $child) {
           // @TODO fix this ugly fix of incorrect structure in array
@@ -80,19 +119,14 @@ function d_content_init_fill_paragraph($paragraph_data) {
             $child_paragraph = d_content_init_fill_paragraph($new_child);
             $paragraph->$field_name->appendItem($child_paragraph);
           }
-
         }
-
         break;
-
       case 'entity_reference':
         $paragraph->set($field_name, $value['data']);
         break;
     }
-
   }
 
   $paragraph->save();
-
   return $paragraph;
 }
