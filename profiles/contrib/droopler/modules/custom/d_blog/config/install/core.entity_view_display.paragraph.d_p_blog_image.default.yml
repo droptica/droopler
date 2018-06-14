@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_blog_image.field_d_image
+    - field.field.paragraph.d_p_blog_image.field_d_p_blog_image_full_width
+    - paragraphs.paragraphs_type.d_p_blog_image
+    - responsive_image.styles.blog_images_style
+  module:
+    - responsive_image
+id: paragraph.d_p_blog_image.default
+targetEntityType: paragraph
+bundle: d_p_blog_image
+mode: default
+content:
+  field_d_image:
+    weight: 2
+    label: hidden
+    settings:
+      responsive_image_style: blog_images_style
+      image_link: ''
+    third_party_settings: {  }
+    type: responsive_image
+    region: content
+  field_d_p_blog_image_full_width:
+    weight: 1
+    label: hidden
+    settings:
+      format: custom
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+hidden: {  }

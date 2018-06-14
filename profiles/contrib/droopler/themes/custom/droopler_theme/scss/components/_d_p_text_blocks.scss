@@ -1,0 +1,99 @@
+/*
+Components Boxes
+
+Styleguide 2.8
+*/
+
+// Colour variables used in this paragraph.
+$d-p-single-box-text-color: $color-hecuba !default;
+$d-p-single-box-line-color: $color-agamemnon !default;
+$d-p-text-blocks-line-color: $color-agamemnon !default;
+$d-p-text-blocks-background: $color-agamemnon !default;
+
+// Margins, paddings and sizing.
+$d-p-text-blocks-group-padding-y: 7.75rem;
+$d-p-text-blocks-group-mobile-padding-y: 4rem;
+$d-p-text-blocks-group-margin: 0 0 5.5rem 0 !default;
+$d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0 !default;
+$d-p-text-blocks-group-line-margin: 0.625rem auto !default;
+$d-p-single-box-line-margin-top: $line-left-margin-top !default;
+$d-p-single-box-line-margin-bottom: $line-left-margin-bottom !default;
+$d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
+$d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto !default;
+$d-p-single-box-margin-bottom: 15% !default;
+
+// Other settings.
+$d-p-single-text-box-cta-text-transform: uppercase !default;
+
+// Font mixins
+@mixin font-title-single-box {
+  font-size: $font-size-lg;
+  font-weight: bold;
+  text-align: left;
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-mdlg;
+  }
+}
+
+// Group of text blocks with header and CTA
+.d-p-group-of-text-blocks {
+
+  padding-top: $d-p-text-blocks-group-padding-y;
+  padding-bottom: $d-p-text-blocks-group-padding-y;
+
+  @include media-breakpoint-down(md) {
+    padding-top: $d-p-text-blocks-group-mobile-padding-y;
+    padding-bottom: $d-p-text-blocks-group-mobile-padding-y;
+  }
+
+  & > .field--name-field-d-icon {
+    text-align: center;
+  }
+
+  & > h2 {
+    @include font-main-header;
+    text-align: center;
+    margin: $d-p-text-blocks-group-margin;
+    @include media-breakpoint-down(md) {
+      margin: $d-p-text-blocks-mobile-group-margin;
+    }
+    &:after {
+      @include decoration-header-line-main-center;
+      background: $d-p-text-blocks-line-color;
+      margin: $d-p-text-blocks-group-line-margin;
+    }
+  }
+  > .field--type-link {
+    text-align: center;
+    a {
+      @extend .btn;
+      @extend .btn-primary;
+      margin: $d-p-text-blocks-group-button-margin;
+      @include media-breakpoint-down(md) {
+        margin: $d-p-text-blocks-mobile-group-button-margin;
+      }
+    }
+  }
+}
+
+// Single box
+.d-p-text-block {
+  margin-bottom: $d-p-single-box-margin-bottom;
+  h2 {
+    @include font-title-single-box;
+    &:after {
+      @include decoration-header-line;
+      background: $d-p-single-box-line-color;
+      margin-top: $d-p-single-box-line-margin-top;
+      margin-bottom: $d-p-single-box-line-margin-bottom;
+    }
+  }
+  p {
+    @include font-body-standard;
+    color: $d-p-single-box-text-color;
+  }
+  a {
+    @include text-transform($d-p-single-text-box-cta-text-transform)
+
+  }
+}

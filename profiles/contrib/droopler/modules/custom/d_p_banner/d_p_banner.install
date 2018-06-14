@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function d_p_banner_install() {
+  \Drupal::service('entity.definition_update_manager')->applyUpdates();
+}

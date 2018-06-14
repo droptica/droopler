@@ -1,0 +1,68 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_text_paged.field_d_cta_link
+    - field.field.paragraph.d_p_text_paged.field_d_icon
+    - field.field.paragraph.d_p_text_paged.field_d_long_text
+    - field.field.paragraph.d_p_text_paged.field_d_main_title
+    - field.field.paragraph.d_p_text_paged.field_d_subtitle
+    - paragraphs.paragraphs_type.d_p_text_paged
+  module:
+    - link
+    - svg_image
+    - text
+id: paragraph.d_p_text_paged.default
+targetEntityType: paragraph
+bundle: d_p_text_paged
+mode: default
+content:
+  field_d_cta_link:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_d_icon:
+    weight: 0
+    label: hidden
+    settings:
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_d_long_text:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_d_main_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_d_subtitle:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

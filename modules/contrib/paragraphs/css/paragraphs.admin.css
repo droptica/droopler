@@ -1,0 +1,82 @@
+.js .field--widget-entity-reference-paragraphs .dropbutton-wrapper {
+  display: inline-flex;
+  padding-right: 0em;
+  margin-right: 0em;
+  /* Override 600px breakpoint from core. */
+  width: auto;
+}
+
+.js .field--widget-entity-reference-paragraphs .dropbutton-widget {
+  position: relative;
+}
+
+.js .field--widget-entity-reference-paragraphs .field-multiple-table {
+  margin-bottom: 10px;
+}
+
+.js .field--widget-entity-reference-paragraphs td {
+  padding: 10px 0px 10px 0px;
+}
+
+.js .field--widget-entity-reference-paragraphs .field-multiple-drag {
+  vertical-align: top;
+}
+.js .field--widget-entity-reference-paragraphs .draggable .tabledrag-handle {
+  padding-right: 0;
+  margin-left: 0;
+}
+.js .field--widget-entity-reference-paragraphs .tabledrag-handle .handle {
+  margin-left: 0;
+  margin-right: 0;
+  padding-right: 0.2em;
+}
+
+.js .paragraph-type-top {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.js .paragraphs-collapsed-description {
+  height: 1.538em;
+  padding-left: 1em;
+  padding-right: 1em;
+  position: relative;
+  width: 100%;
+
+  color: #777;
+  overflow: hidden;
+  word-break: break-all;
+}
+.js .paragraphs-collapsed-description:after {
+  content: '\00a0';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 1em;
+  width: 3em;
+
+  background: #fff;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 100%);
+}
+.js .draggable:hover .paragraphs-collapsed-description:after,
+.js .draggable:hover .paragraphs-collapsed-description:after {
+  background: #f7fcff;
+  background: linear-gradient(to right, rgba(247, 252, 255, 0) 0%, #f7fcff 100%);
+}
+.js .drag-previous .paragraphs-collapsed-description:after {
+  background: #ffd;
+  background: linear-gradient(to right, rgba(255, 255, 221, 0) 0%, #ffd 100%);
+}
+.js .paragraph-type-title {
+  flex-basis: 25%;
+  min-width: 80px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.js .field--widget-entity-reference-paragraphs .delta-order {
+  padding-right: 10px;
+  text-align: right;
+}

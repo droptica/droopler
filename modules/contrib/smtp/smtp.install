@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * The installation instructions for the SMTP Authentication Support.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function smtp_uninstall() {
+  $config = \Drupal::service('config.factory');
+  $smtp_config = $config->getEditable('smtp.settings');
+
+  // Restore previous mail system.
+  $default_system_mail = 'php_mail';
+  $mail_config = $config->getEditable('system.mail');
+  $default_interface = (!$smtp_config->get('prev_mail_system')) ? $smtp_config->get('prev_mail_system') : $default_system_mail;
+  $mail_config ->set('interface.default', $default_interface)
+    ->save();
+
+  // Cleaning garbage.
+  $smtp_config->delete();
+}

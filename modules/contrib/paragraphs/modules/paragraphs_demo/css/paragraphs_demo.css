@@ -1,0 +1,50 @@
+/**
+ * @file
+ * paragraph demo styles.
+ */
+
+/**
+ * 50/50 flex grid for image/text paragraph.
+ */
+@media (min-width: 560px) {
+  .paragraph--type--image-text {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .paragraph--type--image-text .field-type-image {
+    flex: 1 1 0px;
+    margin: 0;
+  }
+  .paragraph--type--image-text .field-name-field-text-demo {
+    flex: 1 1 0px;
+  }
+}
+
+/**
+ * Flex row flow for images paragraph.
+ */
+.paragraph--type--images .field-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.paragraph--type--images .field-item {
+  margin: 0 1em 1em 0;
+}
+
+/**
+ *50/50 flex grid for image/text paragraph.
+ */
+@media (min-width: 560px) {
+  .paragraph--type--text-image {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .paragraph--type--text-image .field-name-field-text-demo {
+    flex: 1 1 0px;
+    margin: 0 1em 0 0;
+  }
+  .paragraph--type--text-image .field-type-image {
+    flex: 1 1 0px;
+  }
+}

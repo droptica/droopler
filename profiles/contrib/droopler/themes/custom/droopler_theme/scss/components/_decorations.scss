@@ -1,0 +1,56 @@
+/*
+Decoration elements
+
+Styleguide 2.banner.dupa
+*/
+
+// Colour variables used in this component.
+$line-background: $color-nestor !default;
+
+// Margins, paddings and sizings.
+$line-left-margin-top: 1.25rem !default;
+$line-left-margin-bottom: 0.625rem !default;
+$line-center-margin-top: 1.375rem !default;
+$line-center-margin-bottom: 1.5rem !default;
+$line-width: 3.125rem !default;
+$line-thickness: 0.125rem !default;
+
+// Header underline aligned to the left
+@mixin decoration-header-line {
+    content: ' ';
+    display: block;
+    width: $line-width;
+    background: $line-background;
+    position: relative;
+    height: $line-thickness;
+    margin-top: $line-left-margin-top;
+    margin-bottom: $line-left-margin-bottom;
+}
+
+// Header underline aligned to the center
+@mixin decoration-header-line-main-center {
+    content: ' ';
+    margin: $line-center-margin-top auto $line-center-margin-bottom auto;
+    display: block;
+    width: $line-width;
+    background: $line-background;
+    position: relative;
+    height: $line-thickness;
+}
+
+@mixin add-commas-to-elements {
+    &:after {
+        content: ', ';
+    }
+
+    &:last-child:after {
+        content: '';
+    }
+}
+
+// Common field for paragraph icons.
+.node .field.field--name-field-d-icon {
+    display: block;
+    margin: 0;
+    float: none;
+}

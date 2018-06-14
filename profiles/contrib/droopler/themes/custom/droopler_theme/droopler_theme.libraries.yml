@@ -1,0 +1,52 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      css/print.css: { media: print }
+      css/style.css: {}
+
+global-js:
+  version: VERSION
+  js:
+    js/min/global.min.js: {}
+    /libraries/popper.js/dist/umd/popper.min.js: { weight: -20 } # Required by Bootstrap 4
+    js/min/bootstrap.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+
+dropbutton:
+  version: VERSION
+  css:
+    component:
+      css/libraries/dropbutton.css: { weight: -10 }
+
+file:
+  version: VERSION
+  css:
+    component:
+      css/libraries/file.css: { weight: -10 }
+
+maintenance_page:
+  version: VERSION
+  css:
+    theme:
+      css/libraries/maintenance.css: {}
+  dependencies:
+    - system/maintenance
+    - droopler_theme/global-styling
+
+# icons
+
+# fontawesome:
+#   version: VERSION
+#   css:
+#     component:
+#       //maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css: {}
+
+jquery-backstretch:
+  js:
+    /libraries/jquery-backstretch/src/jquery.backstretch.js: {}
+  dependencies:
+    - core/jquery

@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies: {  }
+name: responsive_image_768_banner
+label: 'Responsive image 768 banner'
+effects:
+  e2c35905-27d9-4444-9ef5-5ac97c726ef1:
+    uuid: e2c35905-27d9-4444-9ef5-5ac97c726ef1
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 1200
+      upscale: true
+  f8b1ebdf-ec77-4785-9520-95e0bcf76201:
+    uuid: f8b1ebdf-ec77-4785-9520-95e0bcf76201
+    id: image_crop
+    weight: 2
+    data:
+      width: 1000
+      height: 1200
+      anchor: center-center
+  8da4d9a8-042b-4c02-b5ea-a710cc333431:
+    uuid: 8da4d9a8-042b-4c02-b5ea-a710cc333431
+    id: image_scale
+    weight: 3
+    data:
+      width: 768
+      height: 1024
+      upscale: false

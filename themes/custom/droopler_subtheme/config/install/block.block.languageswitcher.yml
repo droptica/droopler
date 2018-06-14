@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+  theme:
+    - droopler_subtheme
+_core:
+  default_config_hash: _c6tt6_A2RBQe3ZFuUPGgUfFh9hYd2gug1JNawdS8OI
+id: languageswitcher
+theme: droopler_subtheme
+region: lang_menu
+weight: -1
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: 'Language switcher'
+  provider: language
+  label_display: '0'
+visibility: {  }

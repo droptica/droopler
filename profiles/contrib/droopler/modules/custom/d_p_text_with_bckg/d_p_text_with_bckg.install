@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function d_p_text_with_bckg_install() {
+  \Drupal::service('entity.definition_update_manager')->applyUpdates();
+}

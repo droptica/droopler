@@ -1,0 +1,61 @@
+// Header.
+//
+// Styleguide 3.2
+
+// Paddings, margins and heights.
+$logo-mobile-height: $header-mobile-height !default;
+$logo-width: 20rem !default;
+$logo-mobile-width: 12rem !default;
+$logo-mobile-padding-left: 1rem !default;
+$logo-md-width: 13.5rem !default;
+
+
+header {
+  .site-logo img {
+    max-width: 100%;
+    max-height: $header-height - (2 * $navbar-padding-y);
+  }
+  .region-primary-menu {
+    .navbar {
+      padding: $navbar-padding-y 0;
+    }
+    #block-mainnavigation, #block-languageswitcher {
+      display: inline-block;
+      @include media-breakpoint-down(md) {
+        display: block;
+      }
+    }
+  }
+  .navbar-brand {
+    max-width: $logo-width;
+  }
+  @include media-breakpoint-down(lg) {
+    .navbar-brand {
+      max-width: $logo-md-width;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    min-height: $header-mobile-height;
+
+    .navbar-brand {
+      top: 0;
+      z-index: 1;
+      max-width: $logo-mobile-width;
+      padding-left: $logo-mobile-padding-left;
+
+      .site-logo img {
+        max-width: 100%;
+        width: auto;
+        max-height: $header-mobile-height - (2 * $navbar-brand-padding-y);
+
+        &.logo-svg {
+          height: 100%;
+        }
+      }
+    }
+    .navbar {
+      width: 100%;
+      padding: 0;
+    }
+  }
+}

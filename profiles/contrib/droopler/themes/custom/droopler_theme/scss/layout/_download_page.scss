@@ -1,0 +1,30 @@
+// Colour variables used in this component
+$download-background: $color-agamemnon !default;
+$download-color: $color-odysseus !default;
+$download-header-background: $color-odysseus !default;
+$download-additional-color: $color-nestor !default;
+
+// Margins, paddings and sizes.
+$download-padding: 8% 0 !default;
+$download-button-margin: 3.125rem auto !default;
+
+.download-page {
+  padding: $download-padding;
+  background: $download-background;
+  text-align: center;
+  color: $download-color;
+  h2 {
+    @include font-main-header;
+    &:after {
+      @include decoration-header-line-main-center;
+      background: $download-header-background;
+    }
+  }
+  a.btn {
+    margin: $download-button-margin;
+  }
+  .additional a {
+    color: $download-additional-color;
+    text-transform: inherit;
+  }
+}

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Contains d_paragraphs_text_paged.module..
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function d_p_text_paged_theme($existing, $type, $theme, $path) {
+  return [
+    'paragraph__d_p_text_paged' => [
+      'base hook' => 'paragraph',
+    ],
+  ];
+}

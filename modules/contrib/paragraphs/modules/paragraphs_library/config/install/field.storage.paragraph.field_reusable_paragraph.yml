@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - paragraphs_library
+id: paragraph.field_reusable_paragraph
+field_name: field_reusable_paragraph
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: paragraphs_library_item
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

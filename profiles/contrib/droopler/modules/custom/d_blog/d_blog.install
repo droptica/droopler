@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function d_blog_install() {
+  \Drupal::service('entity.definition_update_manager')->applyUpdates();
+
+  // Add Translation of pagination in blog.
+  try {
+    d_blog_add_translation('Next', 'Dalej', 'pl');
+    d_blog_add_translation('Previous', 'Wstecz', 'pl');
+    d_blog_add_translation('Read Article...', 'Czytaj artykuł...', 'pl');
+  }
+  catch (\Exception $e) {
+    watchdog_exception('d_blog', $e);
+  }
+
+  // Add configuration to TVI module
+  // Taxonomy Views Integrator
+  // Page of taxonomy blog_post is the same as view blog_listing.
+  $entity_type = 'taxonomy_vocabulary';
+  $entity_id = 'blog_posts_category';
+
+  Drupal::configFactory()
+    ->getEditable('tvi.' . $entity_type . '.' . $entity_id)
+    ->set('enable_override', 1)
+    ->set('view', 'blog_listing')
+    ->set('view_display', "page_1")
+    ->set('inherit_settings', 1)
+    ->set('pass_arguments', 1)
+    ->save();
+
+  // Enable xml sitemap generation for Content type: blog posts.
+  \Drupal::service('simple_sitemap.generator')
+    ->saveSetting('remove_duplicates', TRUE)
+    ->enableEntityType('node')
+    ->setBundleSettings('node', 'blog_post', ['index' => TRUE, 'priority' => 0.5])
+    ->removeCustomLinks()
+    ->addCustomLink('/some/view/page', ['priority' => 0.5])
+    ->generateSitemap();
+}

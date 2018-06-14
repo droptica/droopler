@@ -1,0 +1,74 @@
+simple_sitemap.settings:
+  type: config_object
+  mapping:
+    max_links:
+      label: 'Max links'
+      type: integer
+    cron_generate:
+      label: 'Cron generate'
+      type: boolean
+    cron_generate_interval:
+      label: 'Cron generate interval'
+      type: integer
+    remove_duplicates:
+      label: 'Remove duplicates'
+      type: boolean
+    skip_untranslated:
+      label: 'Skip untranslated'
+      type: boolean
+    batch_process_limit:
+      label: 'Batch process limit'
+      type: integer
+    base_url:
+      label: 'Base URL'
+      type: string
+    custom_links_include_images:
+      label: 'Include images of custom links'
+      type: boolean
+    enabled_entity_types:
+      label: 'Enabled entity types'
+      type: sequence
+      sequence:
+        type: string
+    excluded_languages:
+      label: 'Excluded languages'
+      type: sequence
+      sequence:
+        type: string
+
+simple_sitemap.bundle_settings.*.*:
+  label: 'Entity bundle settings'
+  type: config_object
+  mapping:
+    index:
+      label: 'Index'
+      type: integer
+    priority:
+      label: 'Priority'
+      type: string
+    changefreq:
+      label: 'Change frequency'
+      type: string
+    include_images:
+      label: 'Include images'
+      type: integer
+
+simple_sitemap.custom:
+  label: 'Custom links'
+  type: config_object
+  mapping:
+    links:
+      type: sequence
+      label: 'Custom links'
+      sequence:
+        type: mapping
+        mapping:
+          path:
+            label: 'Path'
+            type: string
+          priority:
+            label: 'Priority'
+            type: string
+          changefreq:
+            label: 'Change frequency'
+            type: string

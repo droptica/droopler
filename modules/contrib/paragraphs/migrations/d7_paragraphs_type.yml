@@ -1,0 +1,13 @@
+id: d7_paragraphs_type
+label: Paragraphs type configuration
+migration_tags:
+  - Drupal 7
+source:
+  plugin: d7_paragraphs_type
+  add_description: true
+process:
+  id: bundle
+  label: name
+  description: description
+destination:
+  plugin: 'entity:paragraphs_type'

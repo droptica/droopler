@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_subtitle
+    - paragraphs.paragraphs_type.d_p_text_with_bckg
+id: paragraph.d_p_text_with_bckg.field_d_subtitle
+field_name: field_d_subtitle
+entity_type: paragraph
+bundle: d_p_text_with_bckg
+label: Subtitle
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

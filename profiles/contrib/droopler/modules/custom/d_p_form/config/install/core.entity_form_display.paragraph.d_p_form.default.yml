@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_form.field_d_forms
+    - field.field.paragraph.d_p_form.field_d_icon
+    - field.field.paragraph.d_p_form.field_d_image_background
+    - field.field.paragraph.d_p_form.field_d_main_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.d_p_form
+  module:
+    - svg_image
+id: paragraph.d_p_form.default
+targetEntityType: paragraph
+bundle: d_p_form
+mode: default
+content:
+  field_d_forms:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_d_icon:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_d_image_background:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_d_main_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

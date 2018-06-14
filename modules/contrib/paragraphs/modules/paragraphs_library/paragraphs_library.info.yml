@@ -1,0 +1,18 @@
+name: Paragraphs Library
+type: module
+description: 'Provides a library for reusing paragraphs.'
+# core: 8.x
+package: Paragraphs
+configure: paragraphs_library_item.settings
+dependencies:
+  - paragraphs:paragraphs
+  - drupal:views
+  - entity_usage:entity_usage (>= 8.x-2.0-alpha4)
+test_dependencies:
+  - entity_browser:entity_browser
+
+# Information added by Drupal.org packaging script on 2018-05-28
+version: '8.x-1.3'
+core: '8.x'
+project: 'paragraphs'
+datestamp: 1527502688

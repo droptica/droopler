@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.image_text.field_image_demo
+    - field.field.paragraph.image_text.field_text_demo
+    - paragraphs.paragraphs_type.image_text
+  module:
+    - image
+    - text
+id: paragraph.image_text.default
+targetEntityType: paragraph
+bundle: image_text
+mode: default
+content:
+  field_image_demo:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_text_demo:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+hidden:
+  created: true
+  uid: true

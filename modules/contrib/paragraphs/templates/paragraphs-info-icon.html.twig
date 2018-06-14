@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a paragraphs info icon.
+ *
+ * Available variables:
+ * - icon: Name of the icon to use.
+ * - message: Information message.
+ *
+ * @see template_preprocess()
+ *
+ * @ingroup themeable
+ */
+#}
+<span class="paragraphs-icon paragraphs-icon-{{ icon }}" title="{{ message }}">
+  <span class="paragraphs-icon__message visually-hidden">{{ message }}</span>
+</span>

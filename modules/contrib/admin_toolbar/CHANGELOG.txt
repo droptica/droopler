@@ -1,0 +1,364 @@
+Admin Toolbar 8.x-1.24, 2018-05-28
+----------------------------------
+Changes since 8.x-1.23:
+
+- #2973131 by adriancid: Don't refer to Drupal in the help page.
+- #2975170 by adriancid: Add composer.json file to submodules.
+- #2975165 by Gamewalker, adriancid: datetime.time services is not found in
+  ToolbarController.
+- #2971466 by recrit, adriancid, acbramley: Add media links incorrectly set to
+  "node.add.".
+- #2972553 by dww, adriancid: Add static cache to speed up
+  admin_toolbar_links_access_filter_user_has_admin_role().
+- #2971435 by adriancid: Module help page for Admin Toolbar Extra Tools module 
+  doesn't show the links.
+- #2971398 by adriancid: Add the docblock to the ToolbarController constructor.
+- #2969686 by adriancid, Vidushi Mehta: Add a menu link to clean the twig cache.
+- #2969325 by adriancid: Fix the module version in the CHANGELOG.txt.
+- #2961450 by adriancid: Convert the AdminToolbarAlterTest test class to
+  PHPUnit.
+- #2961445 by adriancid: Convert the AdminToolbarToolsAlterTest test class to
+  PHPUnit.
+- #2959684 by adriancid: Remove recommended modules section from README.txt.
+- #2959647 by adriancid: Use interfaces instead of classes to inject 
+  dependencies.
+- #2952643 by romainj, if-jds, adriancid: Add Item for Files under Content Menu.
+- #2944463 by adriancid: Update the composer.json file.
+
+Admin Toolbar 8.x-1.23, 2018-02-06
+----------------------------------
+Changes since 8.x-1.22:
+
+- #2924266 by sunlix, romainj, adriancid, samerali: Add a menu link for the
+  media module.
+- #2941184 by daniel.nitsche, adriancid: Remove unwanted comment from
+  admin.toolbar.css.
+- #2912503 by Amsteri, m.abdulqader: Right to left language direction support.
+- #2937982 by romainj, adriancid: Auto-generation of menu links conflicts with
+  other modules.
+- #2932873 by vaplas, saravanaprasanth, adriancid: Horizontal mode only works if
+  the page is loaded in horizontal mode.
+- #2935311 by romainj, adriancid: Use the $entityTypeManager variable instead of
+  the \Drupal::entityTypeManager service.
+- #2935449 by adriancid: Add the release information for the 1.22 version in the 
+  CHANGELOG.txt.
+- #2932476 by romainj: toolbar.tree library should have a dependency to the
+  core/drupal library.
+- #2931503 by K3vin_nl: Admin toolbar generates invalid class names.
+
+Admin Toolbar 8.x-1.22, 2018-01-02
+----------------------------------
+Changes since 8.x-1.21:
+
+- #2929053 by kkuhnen, eme, adriancid: admin_toolbar.js should use Drupal
+  behaviors.
+- #2929061 by romainj, dsnopek, adriancid: admin_toolbar_links_access_filter
+  doesn't do anything unless admin_toolbar is enabled.
+- #2928836 by eme: One extra pixel line under the admin toolbar.
+- #2925501 by eme, adriancid, RumyanaRuseva: Menu does not take changes into
+  account (caching issue).
+- #2927914 by adriancid: Parameter comment indentation must be 3 spaces.
+- #2927911 by adriancid: Remove unused variables.
+- #2927905 by adriancid: All dependencies must be prefixed with the project 
+  name.
+- #2925327 by Berdir, adriancid: Better check for is-link-in-admin-menu for
+  local task links.
+- #2922046 by mikejw, adriancid, Berdir, BrianLewisDesign: Notice: Undefined
+  index: entity.eform_type.collection in 
+  admin_toolbar_tools_menu_links_discovered_alter.
+- #2925128 by adriancid: Create the module help page for the Admin Toolbar Links
+  Access Filter submodule.
+
+Admin Toolbar 8.x-1.21, 2017-11-20
+----------------------------------
+Changes since 8.x-1.20:
+
+- #2923580 by sylus, adriancid: Unsupported operand types in 
+  ToolbarHandler::lazyBuilder().
+- #2731369 by stefan.r, DuneBL, Berdir, kbasarab, joachim, adriancid: Local 
+  tasks don't show in the toolbar.
+- #2920793 by adriancid: Change the user TAKTAK by matio89 in the CHANGELOG.txt
+  file.
+- #2873228 by smustgrave, adriancid, flocondetoile: Toolbar menu accessible and
+  navigable with keyboard.
+- #2919775 by adriancid: Create the CHANGELOG.txt file.
+- #2919772 by adriancid: Use the README.txt template.
+- #2919769 by adriancid: Use the README.txt template for the admin_toolbar_tools
+  submodule.
+- #2897309 by finne, adriancid, eme, rgpublic: admin_toolbar_tools module
+  makes all pages uncacheable.
+- #2913299 by esod, Chi, adriancid, hudri, eme: CSS Z-Index of toolbar is
+  inappropriate.
+- #2919390 by adriancid: Create the README.txt file for the admin toolbar links
+  access filter submodule.
+- #2919367 by adriancid: Fix coding standard format.
+- #2919346 by adriancid: Don't show menu links that you don't have access
+  permission for.
+- #2917710: Create the .info.yml file for the admin_toolbar_links_access_filter
+  submodule.
+- #2916064 by adriancid, eme, finne: Use in drupal.org links url parameter and
+  not route_name.
+- #2916040 by adriancid, finne, eme: Remove unused route admin_development.
+- #2915778 by finne, adriancid: Remove the _csrf_token from routes that don't
+  need it.
+- #2909359 by adriancid, Musa.thomas: Add a menu link to clean the Views cache.
+- #2910931 by adriancid: .info.yml files don't have the drupal version.
+- #2759135 by Johnny vd Laar, miiimooo, romainj, chegor, adriancid, ckaotik,
+  bdominguez, SpadXIII, mrtndlmt: Content type, Vocabularies and Menus names are
+  not translated.
+- #2909710 by adriancid, Musa.thomas: Fix coding standard format.
+- #2910934 by adriancid, romainj: Error trying to clean the cache.
+- #2910892 by adriancid: Delete the LICENSE.txt.
+- #2909637 by bapi_22, Musa.thomas, adriancid: Avoid static call inside class
+  method.
+- #2909003 by eme: fix z-index for CKEditor.
+- #2504449 by robin.ingelbrecht, rwam, eme: Un-hover delay.
+
+Admin Toolbar 8.x-1.20, 2017-09-07
+----------------------------------
+Changes since 8.x-1.19:
+
+- #2887439 by romainj: Fix test.
+- #2759135 by Johnny vd Laar, miiimooo, chegor, romainj: Content type, 
+  Vocabularies and Menus names are not translated.
+- #2894520 by romainj, bapi_22: Remove deprecated constant REQUEST_TIME from
+  code base.
+- #2883098 by romainj, Alka Kumari: Admin Toolbar Extra Tools module display
+  theme machine names instead of labels.
+- #2504449 by robin.ingelbrecht: Un-hover delay.
+- #2838636 by ddrozdik, Fons Vandamme, kerby70, romainj: Issue with z-index of
+  dropdown in horizontal tray.
+- #2838636 by Fons Vandamme, ddrozdik, romainj: Issue with z-index of dropdown
+  in horizontal tray.
+- #2870404 by romainj: Add a link to the Webprofiler settings page.
+- #2706643 by esod, romainj, Keenegan, DamienMcKenna: Use short array syntax.
+
+Admin Toolbar 8.x-1.19, 2017-04-06
+----------------------------------
+Changes since 8.x-1.18:
+
+- #2706643 by esod, romainj, Keenegan, DamienMcKenna: Use short array syntax.
+- #2781745 by minakshiPh, eelkeblok, romainj, akhilavnair_zyxware: Drupal coding
+  standard issues found in most of the files.
+- #2855720 by stefan.r, romainj: No logout link in admin toolbar anymore.
+- #2841512 by Chi, romainj: User error: Redirects to external URLs are not
+  allowed by default.
+
+Admin Toolbar 8.x-1.18, 2016-12-01
+----------------------------------
+Changes since 8.x-1.17:
+
+- #2830677 by vaplas, romainj: z-index for sub menu.
+- by romainj: Get rid of the Hello popup.
+- #2805431 by marcusx: Accidentaly committed alert.
+- #2630724 by squarecandy, romainj, reblutus, Hemangi Gokhale, jacoferg,
+  Balu Ertl, Jeff Burnz, Don Greco: Consider changes to link title parameter to
+  avoid tooltip visual conflict.
+- #2518202 by james.williams, chegor, eme, romainj, DuneBL: Change default link
+  to taxonomy.
+
+Admin Toolbar 8.x-1.17, 2016-08-19
+----------------------------------
+Changes since 8.x-1.16:
+
+- #2779251 by romainj, DuneBL: Wrong integration of field_collection delete 
+  form.
+- #2776229 by Chi, romainj, mattlt: Chevron icons missing if Drupal is not in
+  document root.
+- by romainj: CSS coding standard cleaning.
+- #2781059 by mstrelan, romainj: Why is CRON in all caps?
+- #2778935 by akhilavnair_zyxware, rjarraud: As per Drupal Standards each line
+  in documentation should not exceeds 80 characters.
+- by romainj: Adds ending new line where required.
+- #2776229 by Chi, rjarraud: Chevron icons missing if Drupal is not in document
+  root.
+- by eme: Commiting again #2707611.
+- #2757687 by neerajsingh: Remove usages of \Drupal::url().
+- #2707747 by Balu Ertl, nevergone, eme, esod: D8 logo not rendered with smooth
+  antialiasing.
+
+Admin Toolbar 8.x-1.16, 2016-07-28
+----------------------------------
+Changes since 8.x-1.15:
+
+- #2723209 by andrewmacpherson, colan, mattshoaf: Enabling admin_toolbar_tools
+  causes Devel Settings to disappear from the main configuration page.
+- #2759335 bycwells, jalpesh: fixes a mistaken link in hook_help().
+- #2664564 by kolier, matio89, romainj and Michèle: auto-detect content entities
+  with Field UI route.
+- #2735257 by colan, romainj, Balu Ertl: respect of coding standards in the
+  module README.txt file.
+- #2735257 by colan, romainj, Balu Ertl: shortens the module README.txt
+  description text.
+- by romainj: Fixes a problem with the link to the Admin menu overview page.
+- #2735257 by Balu Ertl, colan, romainj: improves Admin Toolbar Extra Tools
+  description in the README.txt file.
+- #2723381 by joachim, romainj: fieldable content entities are no more
+  hardcoded.
+- #2735257 by Balu Ertl, colan, romainj: added some description details in the
+  README.txt files.
+- by romainj: Menu link definitions updated.
+- by romainj: Change routing permissions to follow Drupal default permissions
+  for administration pages.
+- by romainj: Fixes issue #2737027.
+- by romainj: fixes issue #2701825.
+- by romainj: Adds the menu name for each menu item in
+  admin_toolbar_tools/admin_toolbar_tools.links.menu.yml file.
+- #2735153 by Kionn: InvalidArgumentException: Cannot redirect to an empty URL.
+  в Symfony\Component\HttpFoundation\RedirectResponse->setTargetUrl().
+- by matio89: correction InvalidArgumentException: Cannot redirect to an empty
+  URL. в Symfony\Component\HttpFoundation\RedirectResponse->setTargetUrl().
+- by romainj: Add a new Render Cache shortcut on the admin menu.
+- by romainj: Fixes issue #2731663 by canceling the move of the Logout menu
+  link.
+
+Admin Toolbar 8.x-1.15, 2016-05-23
+----------------------------------
+Changes since 8.x-1.14:
+
+- by matio89: add RTL in admin.toolbar.css.
+- by romainj: Changes Devel menu item titles.
+- by romainj: Fixes issue #2713899.
+- by romainj: Minor code/typo cleaning.
+- #2707611 by Balu Ertl: Add fine shadow under dropdown menus.
+- #2707789 by esod: Fix Automated Tests.
+- by romainj: Code cleaning.
+- by romainj: Replace the deprecated entityManager() by entityTypeManager()
+  service.
+- by romainj: Emptying menu cache with all link types.
+- #2614962 by dbt102, seppelM, neha.gangwar, chegor: Correct text in
+  info.yml(s).
+- by eme: Minor typo changes.
+- by eme: Fix dependencies to core modules.
+- by eme: Fix issue #2666964.
+- by eme: Fix css background color level3.
+- by eme: fix issue #2658896 and refactor and fix chevron-right.svg.
+- by eme: fix Issue #2493037.
+
+Admin Toolbar 8.x-1.14, 2016-02-08
+----------------------------------
+Changes since 8.x-1.13:
+
+- by matio89: Correction differents bugs(problem white page when installing a
+  new module).
+- #2643648 by Lord_of_Codes: Proposed README.txt file for Admin Toolbar.
+- by matio89: resolving the dependecies problem(dependencies of others modules).
+- by matio89: Correction route of entities.
+
+Admin Toolbar 8.x-1.13, 2016-02-02
+----------------------------------
+Changes since 8.x-1.12:
+
+- by matio89: Admin toolbar is compatible with 8.0.2.
+- by matio89: Commmit dev version compatible with drupal 8.0.2.
+- by matio89: New version of admin toolbar compatible with 8.0.2.
+
+Admin Toolbar 8.x-1.12, 2016-01-15
+----------------------------------
+Changes since 8.x-1.11:
+
+- by matio89: Correction AdminToolbaToolsAlterTest.
+- #2493037 by mimran: Empty elements in #toolbar-bar.
+- #2598136 by mimran, felribeiro: Menu items duplicated.
+- #2635154 by Lukas von Blarer: Too general CSS selectors.
+- by eme: Fix chevron right in local state.
+
+Admin Toolbar 8.x-1.11, 2015-12-11
+----------------------------------
+Changes since 8.x-1.10:
+
+- #2620430 by Vagelis, NarendraR: Typo.
+- #2632888 by JamesK: Add dependency on node module.
+- by eme: Fix admin toolbar test.
+- #2552081 by jonhattan, bruvers: chevron-right.svg not found.
+- by Vagelis: Minor typos.
+- by eme: Refactor basic tests.
+- #2613378 by chegor: Add basic test.
+- #2612694 by chegor: Add new view.
+- #2627918 by joe_carvajal: Version in info.yml files does Update Manager try to
+  update.
+- by matio89: correction collapsible behaviour in vertical menu layout.
+- #2582825 by Ben Coleman: Installing Admin Toolbar Tools loses anonymous user
+  login link.
+- by matio89: Correction the login link on the site when in a logged-out state.
+
+Admin Toolbar 8.x-1.10, 2015-08-07
+----------------------------------
+Changes since 8.x-1.9:
+
+- #2546939 by jonhattan: Add dependency on toolbar module.
+
+Admin Toolbar 8.x-1.9, 2015-07-22
+---------------------------------
+Changes since 8.x-1.8:
+
+- #2537016 by matio89: Removing dependance for user & system.
+- #2533420 by Dave Reid, twistor: Chase HEAD changes in toolbar.
+- #2537016 by twistor: Rewrite admin_toolbar_tools.module
+- by matio89: Correction all bugs and add new security features.
+
+Admin Toolbar 8.x-1.8, 2015-06-22
+---------------------------------
+Changes since 8.x-1.7:
+
+- correction not found route.
+- #2493037 by bobrov1989: Empty elements in #toolbar-bar.
+- by fethi: icones.
+
+Admin Toolbar 8.x-1.7, 2015-06-22
+---------------------------------
+Changes since 8.x-1.6:
+
+- correction not found route.
+- #2493037 by bobrov1989: Empty elements in #toolbar-bar.
+- by fethi: icones.
+
+Admin Toolbar 8.x-1.6, 2015-06-03
+---------------------------------
+Changes since 8.x-1.5:
+
+- by matio89: correction admin_toolbar.
+
+Admin Toolbar 8.x-1.5, 2015-06-03
+---------------------------------
+Changes since 8.x-1.4:
+
+- by matio89: test if module update exist or no to display install and update
+  module.
+- by fethi: Change the colors used to match the Seven styleguide.
+- by matio89: compatibility with Drupal 8 béta 11.
+- by  fethi: Change the colors used to match the Seven styleguide.
+
+Admin Toolbar 8.x-1.4, 2015-05-20
+---------------------------------
+Changes since 8.x-1.3:
+
+- by matio89: correction add/node.
+
+Admin Toolbar 8.x-1.3, 2015-05-19
+---------------------------------
+Changes since 8.x-1.2:
+
+- by matio89: add new functionalities.
+- by matio89: add administration devel link.
+- by matio89: correction reload page.
+- by matio89: correction redirect to the same page.
+
+Admin Toolbar 8.x-1.2, 2015-05-19
+---------------------------------
+Changes since 8.x-1.1:
+
+- by matio89: add new functionalities.
+- by matio89: add administration devel link.
+- by matio89: correction reload page.
+- by matio89: correction redirect to the same page.
+
+Admin Toolbar 8.x-1.1, 2015-05-19
+---------------------------------
+Changes since 8.x-1.0:
+
+- by matio89: add new functionalities.
+
+Admin Toolbar 8.x-1.0, 2015-05-07
+---------------------------------
+- Initial release.

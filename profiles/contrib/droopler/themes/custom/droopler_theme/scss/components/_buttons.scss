@@ -1,0 +1,20 @@
+/*
+Components Buttons, links
+
+Styleguide 2.banner.celina
+*/
+
+// Paddings and margins.
+$button-min-width: 18rem !default; // Minimum width of the button (desktop)
+$button-mobile-min-width: 16rem !default;  // Minimum width of the button (mobile)
+
+// Standard Bootstrap button
+.btn {
+  @include font-button;
+  min-width: $button-min-width;
+  cursor: pointer;
+
+  @include media-breakpoint-down(sm) {
+    min-width: $button-mobile-min-width;
+  }
+}

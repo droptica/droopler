@@ -1,0 +1,11 @@
+services:
+  features.commands:
+    class: \Drupal\features\Commands\FeaturesCommands
+    arguments:
+      - '@features_assigner'
+      - '@features.manager'
+      - '@features_generator'
+      - '@config_update.config_diff'
+      - '@config.storage'
+    tags:
+      - { name: drush.command }

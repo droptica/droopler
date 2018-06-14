@@ -1,0 +1,303 @@
+<?php
+
+/**
+ * @file
+ * Main module file for the Paragraphs Library module.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\paragraphs\Plugin\Field\FieldWidget\ParagraphsWidget;
+use Drupal\views\ViewExecutable;
+use Drupal\paragraphs_library\Entity\LibraryItem;
+use Drupal\Core\Field\WidgetBase;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\ParagraphsTypeInterface;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+
+/**
+ * Implements hook_modules_installed().
+ */
+function paragraphs_library_modules_installed($modules) {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+
+  if (!empty(array_intersect(['content_moderation', 'paragraphs_library'], $modules))) {
+    // If Content Moderation is being installed (or was installed when this
+    // module is enabled), make sure the extra field content moderation adds is
+    // not visible inside our EB widget (i.e. in the "summary" viewmode), to
+    // prevent the core bug in 2940513/2945351/2930139.
+    // @TODO Remove this when 2948254 lands.
+    if (\Drupal::moduleHandler()->moduleExists('content_moderation')) {
+      EntityViewDisplay::load('paragraphs_library_item.paragraphs_library_item.summary')
+        ->removeComponent('content_moderation_control')
+        ->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_paragraphs_widget_actions_alter().
+ */
+function paragraphs_library_paragraphs_widget_actions_alter(&$widget_actions, &$context) {
+  // Do not register conversions if structure changes are disallowed.
+  if (!$context['allow_reference_changes']) {
+    return;
+  }
+
+  $field_definition = $context['items']->getFieldDefinition();
+  $parents = $context['element']['#field_parents'];
+  $field_name = $field_definition->getName();
+  $widget_state = $context['widget'];
+  $delta = $context['delta'];
+  $id_prefix = implode('_', array_merge($parents, [$field_name, $delta]));
+  /** @var \Drupal\Paragraphs\ParagraphInterface $paragraphs_entity */
+  $paragraphs_entity = $context['paragraphs_entity'];
+
+  // Don't allow conversion of items not marked as allowed for conversion.
+  $allow_library_conversion = $paragraphs_entity->getParagraphType()->getThirdPartySetting('paragraphs_library', 'allow_library_conversion', FALSE);
+
+  if ($paragraphs_entity->bundle() == 'from_library') {
+    $widget_actions['dropdown_actions']['library_to_paragraph'] = [
+      '#type' => 'submit',
+      '#value' => t('Unlink from library'),
+      '#name' => strtr($id_prefix, '-', '_') . '_unlink_from_library',
+      '#weight' => 503,
+      '#submit' => ['paragraphs_library_library_item_unlink_submit'],
+      '#limit_validation_errors' => [array_merge($parents, [$field_name, 'add_more'])],
+      '#delta' => $delta,
+      '#ajax' => [
+        'callback' => [ParagraphsWidget::class, 'itemAjax'],
+        'wrapper' => $widget_state['ajax_wrapper_id'],
+        'effect' => 'fade',
+      ],
+    ];
+  }
+  elseif ($allow_library_conversion) {
+    // Convert non-library items only.
+    $widget_actions['dropdown_actions']['promote_to_library'] = [
+      '#value' => t('Promote to library'),
+      '#name' => $id_prefix . '_promote_to_library',
+      '#weight' => 503,
+      '#submit' => ['paragraphs_library_make_library_item_submit'],
+      '#limit_validation_errors' => [array_merge($parents, [$field_name, 'promote_to_library'])],
+      '#delta' => $delta,
+      '#ajax' => [
+        'callback' => [ParagraphsWidget::class, 'itemAjax'],
+        'wrapper' => $widget_state['ajax_wrapper_id'],
+      ],
+      '#access' => \Drupal::entityTypeManager()->getAccessControlHandler('paragraphs_library_item')->createAccess(),
+    ];
+  }
+}
+
+/**
+ * Make library item submit callback.
+ *
+ * @param array $form
+ *   The element form array.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state object.
+ */
+function paragraphs_library_make_library_item_submit(array $form, FormStateInterface $form_state) {
+  $submit = ParagraphsWidget::getSubmitElementInfo($form, $form_state, ParagraphsWidget::ACTION_POSITION_ACTIONS);
+
+  // Replacing element in the array.
+  $library_item = LibraryItem::createFromParagraph($submit['widget_state']['paragraphs'][$submit['delta']]['entity']);
+  $library_item->save();
+
+  // Replace this paragraph with a library reference one.
+  $paragraph_item = [
+    'entity' => Paragraph::create([
+      'type' => 'from_library',
+      'field_reusable_paragraph' => $library_item,
+    ]),
+    'display' => $submit['widget_state']['paragraphs'][$submit['delta']]['display'],
+    'mode' => 'edit',
+  ];
+
+  $submit['widget_state']['paragraphs'][$submit['delta']] = $paragraph_item;
+  WidgetBase::setWidgetState($submit['parents'], $submit['field_name'], $form_state, $submit['widget_state']);
+  $form_state->setRebuild();
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function paragraphs_library_preprocess_paragraph(&$variables) {
+  if (isset($variables['paragraph']) && $variables['paragraph']->getType() == 'from_library' && $variables['paragraph']->hasField('field_reusable_paragraph') && $variables['paragraph']->field_reusable_paragraph->entity) {
+    $library_item = $variables['paragraph']->field_reusable_paragraph->entity;
+
+    // Only replace the content if access is allowed to the library. Access
+    // cacheability metadata is already returned by the original widget in case
+    // access is not allowed.
+    if ($library_item->access('view')) {
+      $view_builder = \Drupal::entityTypeManager()
+        ->getViewBuilder('paragraphs_library_item');
+      $library_item_render_array = $view_builder->view($library_item);
+
+      // This will remove all fields other then field_reusable_paragraph.
+      $variables['content'] = $view_builder->build($library_item_render_array)['paragraphs'];
+    }
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function paragraphs_library_views_pre_render(ViewExecutable $view) {
+  if ($view->storage->id() == 'paragraphs_library' && isset($view->field['count']) && !\Drupal::currentUser()->hasPermission('access entity usage statistics')) {
+    // Remove link to usage statistics if user doesn't have permission to view
+    // it.
+    $view->field['count']->options['alter']['make_link'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function paragraphs_library_form_paragraphs_library_item_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $library_item = $form_state->getFormObject()->getEntity();
+  $usage_data = \Drupal::service('entity_usage.usage')->listSources($library_item);
+
+  if ($usage_data) {
+    $usage_count = _paragraphs_library_count_usage($usage_data);
+    \Drupal::messenger()->addWarning(\Drupal::translation()->formatPlural($usage_count, 'Library item is used 1 time.', 'Library item is used @count times.', [
+      '@count' => $usage_count,
+    ]));
+  }
+}
+
+/**
+ * Counts the usage across all entities.
+ *
+ * @param array $usage_data
+ *   Array of usage data returned from Entity Usage service.
+ *
+ * @return int
+ *   Returns the count of entity usage across all entities.
+ *
+ * @see \Drupal\entity_usage\EntityUsageInterface::listSources()
+ */
+function _paragraphs_library_count_usage(array $usage_data) {
+  $count = 0;
+  foreach ($usage_data as $entity_type => $entities) {
+    // We only want to register usages by different entities, ignoring usages
+    // accross revisions / translations / fields of the same entity.
+    $count += count($entities);
+  }
+
+  return $count;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function paragraphs_library_form_paragraphs_type_form_alter(&$form, FormStateInterface $form_state) {
+  // Adds paragraph type grouping to the form.
+  /** @var \Drupal\paragraphs\ParagraphsTypeInterface $paragraph_type */
+  $paragraph_type = $form_state->getFormObject()->getEntity();
+  if ($paragraph_type->id() != 'from_library') {
+    $form['allow_library_conversion'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Allow adding to library'),
+      '#default_value' => $paragraph_type->getThirdPartySetting('paragraphs_library', 'allow_library_conversion', FALSE),
+    ];
+    $form['#entity_builders'][] = 'paragraphs_library_form_paragraphs_type_form_builder';
+  }
+}
+
+
+/**
+ * Entity builder for the paragraphs type form with group property.
+ *
+ * @see primer_base_form_paragraphs_type_form_alter()
+ */
+function paragraphs_library_form_paragraphs_type_form_builder($entity_type, ParagraphsTypeInterface $type, &$form, FormStateInterface $form_state) {
+  if ($form_state->getValue('allow_library_conversion')) {
+    $type->setThirdPartySetting('paragraphs_library', 'allow_library_conversion', $form_state->getValue('allow_library_conversion'));
+  }
+  else {
+    $type->unsetThirdPartySetting('paragraphs_library', 'allow_library_conversion');
+  }
+}
+
+/**
+ * Convert library item submit callback.
+ *
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The current state of the form.
+ */
+function paragraphs_library_library_item_unlink_submit(array $form, FormStateInterface $form_state) {
+  $submit = ParagraphsWidget::getSubmitElementInfo($form, $form_state, ParagraphsWidget::ACTION_POSITION_ACTIONS);
+
+  $submit['widget_state']['original_deltas'] = array_merge($submit['widget_state']['original_deltas'], ['1' => 1]);
+  /** @var \Drupal\Paragraphs\ParagraphInterface $paragraph */
+  $paragraph = $submit['widget_state']['paragraphs'][$submit['delta']]['entity'];
+
+  $original_paragraph = NULL;
+  if ($paragraph->hasField('field_reusable_paragraph')) {
+    /** @var \Drupal\paragraphs_library\Entity\LibraryItem $library_item */
+    $library_item = $paragraph->get('field_reusable_paragraph')->entity;
+    if ($library_item) {
+      $original_paragraph = $library_item->get('paragraphs')->entity;
+    }
+  }
+
+  // Do nothing in case we fail to get the original paragraph.
+  if (!$original_paragraph) {
+    return;
+  }
+
+  // Make a copy of the paragraph. Use the Replicate module, if it is enabled.
+  /** @var \Drupal\Core\Entity\EntityInterface $original_paragraph */
+  if (\Drupal::hasService('replicate.replicator')) {
+    $duplicate_paragraph = \Drupal::getContainer()->get('replicate.replicator')->replicateEntity($original_paragraph);
+  }
+  else {
+    $duplicate_paragraph = $original_paragraph->createDuplicate();
+  }
+
+  $paragraph_item = [
+    'entity' => $duplicate_paragraph,
+    'display' => $submit['widget_state']['paragraphs'][$submit['delta']]['display'],
+    'mode' => 'edit',
+  ];
+
+  $submit['widget_state']['paragraphs'][$submit['delta']] = $paragraph_item;
+  WidgetBase::setWidgetState($submit['parents'], $submit['field_name'], $form_state, $submit['widget_state']);
+  $form_state->setRebuild();
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function paragraphs_library_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  // Ensure that Paragraph fields that only allow certain Paragraphs types
+  // cannot have this restriction bypassed by the use of library items.
+  /** @var \Drupal\Core\Field\FieldDefinitionInterface[] $fields */
+  foreach ($fields as $name => $definition) {
+    if ($definition->getType() != 'entity_reference_revisions') {
+      continue;
+    };
+
+    if ($definition->getSetting('target_type') != 'paragraph') {
+      continue;
+    }
+
+    $fields[$name]->addConstraint('ParagraphsLibraryItemHasAllowedParagraphsType');
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function paragraphs_library_help($route_name, RouteMatchInterface $route_match) {
+  if ($route_name === 'entity.paragraphs_library_item.version_history') {
+    return '<p>' . t('Revisions allow you to track differences between multiple versions of your content, and revert to older versions.') . '</p>';
+  }
+}

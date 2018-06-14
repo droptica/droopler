@@ -1,0 +1,15 @@
+field.widget.settings.link_attributes:
+  type: mapping
+  label: 'Link with attributes settings'
+  mapping:
+    placeholder_url:
+      type: string
+      label: 'Placeholder for URL'
+    placeholder_title:
+      type: label
+      label: 'Placeholder for link text'
+    enabled_attributes:
+      type: sequence
+      sequence:
+        type: boolean
+        label: 'Enabled'

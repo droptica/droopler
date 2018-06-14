@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_demo
+    - paragraphs.paragraphs_type.image_text
+  module:
+    - text
+id: paragraph.image_text.field_text_demo
+field_name: field_text_demo
+entity_type: paragraph
+bundle: image_text
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

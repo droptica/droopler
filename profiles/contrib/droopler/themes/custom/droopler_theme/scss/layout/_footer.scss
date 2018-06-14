@@ -1,0 +1,46 @@
+// Footer.
+//
+// Styleguide 3.3
+
+// Colour variables used in this file.
+$footer-background: $color-troilus !default;
+$footer-text-color: $white !default;
+
+@mixin font-footer-header {
+  font-size: $font-size-vlg;
+  text-transform: uppercase;
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-mdlg;
+  }
+}
+@mixin font-footer-body {
+  font-size: $font-size-mdsm;
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-sm;
+  }
+}
+
+
+footer {
+  &.site-footer {
+    font-family: $font-family-base;
+  }
+  background: $footer-background;
+  color: $footer-text-color;
+  .region-footer-main {
+    h2 {
+      @include font-footer-header;
+      color: $footer-text-color;
+    }
+    p {
+      @include font-footer-body;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .block {
+      text-align: center;
+      border: 0;
+    }
+  }
+}

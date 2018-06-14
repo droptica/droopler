@@ -1,0 +1,7 @@
+google_tag.settings_form:
+  path: '/admin/config/system/google_tag'
+  defaults:
+    _title: 'Google Tag Manager'
+    _form: '\Drupal\google_tag\Form\GoogleTagSettingsForm'
+  requirements:
+    _permission: 'administer google tag manager'

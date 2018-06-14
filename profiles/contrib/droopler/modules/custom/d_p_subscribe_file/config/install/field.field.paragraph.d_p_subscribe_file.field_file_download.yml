@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_file_download
+    - paragraphs.paragraphs_type.d_p_subscribe_file
+  module:
+    - file
+id: paragraph.d_p_subscribe_file.field_file_download
+field_name: field_file_download
+entity_type: paragraph
+bundle: d_p_subscribe_file
+label: 'File download'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt zip pdf doc'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

@@ -1,0 +1,91 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_side_image.field_d_cta_link
+    - field.field.paragraph.d_p_side_image.field_d_icon
+    - field.field.paragraph.d_p_side_image.field_d_image_background
+    - field.field.paragraph.d_p_side_image.field_d_long_text
+    - field.field.paragraph.d_p_side_image.field_d_main_title
+    - field.field.paragraph.d_p_side_image.field_d_p_si_image_side
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.d_p_side_image
+  module:
+    - link_attributes
+    - svg_image
+    - text
+id: paragraph.d_p_side_image.default
+targetEntityType: paragraph
+bundle: d_p_side_image
+mode: default
+content:
+  field_d_cta_link:
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        id: true
+        name: true
+        target: true
+        rel: true
+        class: true
+        accesskey: true
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_d_icon:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_d_image_background:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_d_long_text:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_d_main_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_d_p_si_image_side:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_d_subtitle:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  translation:
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true
