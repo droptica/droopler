@@ -1,0 +1,34 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_page_attachments().
+ */
+function d_p_help_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'd_p_help/droopler';
+}
+
+/**
+ * Implements hook_help().
+ */
+function d_p_help_help($route_name, RouteMatchInterface $route_match) {
+  $a=2;
+  switch ($route_name) {
+    case 'help.page.d_p_help':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Database Logging module logs system events in the Drupal database. For more information, see the <a href=":dblog">online documentation for the Database Logging module</a>.', [':dblog' => 'https://www.drupal.org/documentation/modules/dblog']) . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Monitoring your site') . '</dt>';
+      $output .= '<dd>' . t('The Database Logging module allows you to view an event log on the <a href=":dblog">Recent log messages</a> page. The log is a chronological list of recorded events containing usage data, performance data, errors, warnings and operational information. Administrators should check the log on a regular basis to ensure their site is working properly.', [':dblog' => \Drupal::url('dblog.overview')]) . '</dd>';
+      $output .= '<dt>' . t('Debugging site problems') . '</dt>';
+      $output .= '<dd>' . t('In case of errors or problems with the site, the <a href=":dblog">Recent log messages</a> page can be useful for debugging, since it shows the sequence of events. The log messages include usage information, warnings, and errors.', [':dblog' => \Drupal::url('dblog.overview')]) . '</dd>';
+      $output .= '</dl>';
+      return $output;
+
+    case 'dblog.overview':
+      return '<p>' . t('The Database Logging module logs system events in the Drupal database. Monitor your site or debug site problems on this page.') . '</p>';
+  }
+}
