@@ -6,19 +6,7 @@ core: '8.x'
 base theme: false
 
 libraries:
-  - droopler_theme/global-styling
   - droopler_theme/global-js
-
-libraries-extend:
-  core/drupal.dropbutton:
-    - droopler_theme/dropbutton
-  file/drupal.file:
-    - droopler_theme/file
-
-ckeditor_stylesheets:
-  - css/base/elements.css
-  - css/components/captions.css
-  - css/components/table.css
 
 regions:
   header: Header
