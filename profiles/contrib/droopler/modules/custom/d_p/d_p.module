@@ -7,6 +7,7 @@
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+use\Drupal\Core\Template\Attribute;
 
 /**
  * Implements hook_theme().
@@ -45,9 +46,20 @@ function d_p_responsive_style_ids() {
 function d_p_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
+  $paragraph_id = 'paragraph-' . $bundle .'-'. $paragraph->id();
+  $wrapper_attributes = [
+    'id' => $paragraph_id,
+    'class' => [
+      'wrapper-' . $bundle,
+    ],
+  ];
+  $paragraph_attributes = [
+    'data-id' => $paragraph_id,
+  ];
+  $variables['wrapper_attributes'] = new Attribute($wrapper_attributes);
+  $variables['paragraph_attributes'] = new Attribute($paragraph_attributes);
 
   $styles_ids = d_p_responsive_style_ids();
-
   switch ($bundle) {
     case 'd_p_banner':
       unset($styles_ids['responsive_image_768']);
@@ -96,8 +108,7 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
     unset($variables['content']['field_d_image_background']);
 
     if ($js) {
-      $variables['#attached']['drupalSettings']['image_background']['paragraph-' . $paragraph->id()] = $urls;
-      $variables['id'] = 'paragraph-' . $paragraph->id();
+      $variables['#attached']['drupalSettings']['image_background']['paragraph-' . $bundle .'-'. $paragraph->id()] = $urls;
     }
     else {
       $variables['images'] = $urls;

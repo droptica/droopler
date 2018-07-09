@@ -11,6 +11,13 @@ global-js:
   version: VERSION
   js:
     js/min/global.min.js: {}
+    js/min/base/global.min.js: {}
+    /libraries/popper.js/dist/umd/popper.min.js: { weight: -20 } # Required by Bootstrap 4
+    js/min/base/bootstrap.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
 
 # Libraries for the SCSS version
 dropbutton:
@@ -31,3 +38,13 @@ maintenance_page:
   dependencies:
     - system/maintenance
     - droopler_theme/global-styling
+    
+# Uncomment this to enable Font Awesome support.
+# Look into droopler_subtheme.info.yml too.
+
+# fontawesome:
+#   version: VERSION
+#   css:
+#     component:
+#       //stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css: {}
+

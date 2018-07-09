@@ -39,20 +39,26 @@
  */
 #}
 {% set classes = [
-'paragraph',
-'paragraph--type--' ~ paragraph.bundle|clean_class,
-view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+] %}
+{% set paragraph_classes = [
+  'd-p-text-with-bckg',
+  'background-image',
 ] %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    <div class="d-p-text-with-bckg background-image" data-id="{{ id }}">
-      <div class="content-wrapper">
-        <div class="content container">
-          {% block content %}
-            {{ content }}
-          {% endblock %}
+  <section {{ wrapper_attributes }}>
+    <div{{ attributes.addClass(classes) }}>
+      <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
+        <div class="content-wrapper">
+          <div class="content container">
+            {% block content %}
+              {{ content }}
+            {% endblock %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 {% endblock paragraph %}

@@ -39,19 +39,30 @@
  */
 #}
 {% set classes = [
-'paragraph',
-'d-p-side-image-banner',
-'paragraph--type--' ~ paragraph.bundle|clean_class,
-view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  'paragraph',
+  'd-p-side-image-banner',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+] %}
+{% set paragraph_classes = [
+  'd-image',
+  'background-image',
+  'col-md-6',
+] %}
+{% set side_image_banner_wrapper_classes = [
+  'd-p-side-image-banner-wrapper',
+  'clearfix',
 ] %}
 {% block paragraph %}
+<section {{ wrapper_attributes }}>
   <div{{ attributes.addClass(classes) }}>
-    <div class="clearfix d-p-side-image-banner-wrapper image-side-{{ image_side }}">
-      <div class="d-image col-md-6 background-image" data-id="{{ id }}">
+    <div {{ d_p_side_image_attributes.addClass(side_image_banner_wrapper_classes) }}>
+      <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
       </div>
       <div class="container-half col-md-6">
         {{ content }}
       </div>
     </div>
   </div>
+</section>
 {% endblock paragraph %}

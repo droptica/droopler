@@ -1,4 +1,0 @@
-services:
-  plugin.manager.link_attributes:
-    class: Drupal\link_attributes\LinkAttributesManager
-    arguments: ['@module_handler', '@cache.discovery']

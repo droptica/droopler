@@ -5,6 +5,8 @@
  * Contains d_paragraphs.module..
  */
 
+use\Drupal\Core\Template\Attribute;
+
 /**
  * Implements hook_preprocess_HOOK().
  */
@@ -20,7 +22,12 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
       $field_image_side = $paragraph->get('field_d_p_si_image_side')->get(0);
       if ($field_image_side) {
         $image_side = $field_image_side->getValue();
-        $variables['image_side'] = $image_side['value'];
+        $wrapper_attributes = [
+          'class' => [
+            'image-side-' . $image_side['value'],
+          ],
+        ];
+        $variables['d_p_side_image_attributes'] = new Attribute($wrapper_attributes);
         d_p_generate_image_set($variables, $styles_ids, $bundle);
       }
       break;

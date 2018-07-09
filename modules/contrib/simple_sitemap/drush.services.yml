@@ -1,7 +1,0 @@
-services:
-  simple_sitemap.commands:
-    class: \Drupal\simple_sitemap\Commands\SimplesitemapCommands
-    arguments:
-      - '@simple_sitemap.generator'
-    tags:
-      - { name: drush.command }

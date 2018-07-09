@@ -1,7 +1,0 @@
-administer taxonomy views integrator:
-  title: 'Administer taxonomy views integrator'
-  description: 'Administer global TVI settings and vocab/term assignments.'
-  restrict access: true
-
-permission_callbacks:
-  - Drupal\tvi\TaxonomyViewsIntegratorPermissions::permissions

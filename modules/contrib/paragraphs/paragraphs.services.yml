@@ -1,5 +1,0 @@
-services:
-  plugin.manager.paragraphs.behavior:
-    class: Drupal\paragraphs\ParagraphsBehaviorManager
-    parent: default_plugin_manager
-    arguments: ['@entity_type.manager', '@config.factory']

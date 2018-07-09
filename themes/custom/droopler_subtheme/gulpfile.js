@@ -14,7 +14,6 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var watch = require('gulp-watch');
-var styleguide = require('sc5-styleguide');
 var uglify = require('gulp-uglify');
 var pump = require('pump');
 var fs = require('fs');
@@ -37,8 +36,7 @@ var css_dir = theme_dir + '/css';
 var js_dir = theme_dir + '/js';
 var base_js_dir = base_theme_dir + '/js';
 var jsmin_dir = theme_dir + '/js/min';
-var base_jsmin_dir = base_theme_dir + '/js/min';
-var styleguide_dir = theme_dir + '/styleguide';
+var base_jsmin_dir = theme_dir + '/js/min/base';
 
 // Inputs
 var scss_input = scss_dir + '/' + scss_pattern;
@@ -69,11 +67,11 @@ var autoprefixerOptions = {
 // Default task
 gulp.task('default', ['watch' /*, possible other tasks... */]);
 
-// Watch SASS & KSS & JS
-gulp.task('watch', ['sass:compile', 'styleguide:generate', 'js:compile', 'js:compile-base'], function(callback) {
+// Watch SASS & JS
+gulp.task('watch', ['sass:compile', 'js:compile', 'js:compile-base'], function(callback) {
   watch([scss_input, base_scss_input], function(vinyl) {
     console.log('File ' + vinyl.path + ' changed, running tasks...');
-    runSequence([ 'sass:compile', 'styleguide:generate' ]);
+    runSequence([ 'sass:compile' ]);
   });
   watch(js_input, function(vinyl) {
     console.log('File ' + vinyl.path + ' changed, running tasks...');
@@ -144,40 +142,24 @@ gulp.task('debug', function() {
   } else {
     console.log('[WARNING] .min.js directory does not exist. Please create it and don\'t tempt gulp to fail!');
   }
-
-  // Check for base JS MIN dir
-  if (fs.existsSync(base_jsmin_dir)) {
-    console.log('[OK] Base .min.js directory exists.');
-  } else {
-    console.log('[WARNING] Base .min.js directory does not exist. Please create it and don\'t tempt gulp to fail!');
-  }
-
-  // Check for styleguide dir wirh README.md
-  if (fs.existsSync(styleguide_dir + '/README.md')) {
-    console.log('[OK] Styleguide\'s README.md found.');
-  } else {
-    console.log('[ERROR] Styleguide\'s README.md does not exist. Please create it!');
-  }
 });
 
 // Clean everything
 gulp.task('clean', function (cb) {
   return del([
     css_dir + '/*',
-    jsmin_dir + '/*',
-    styleguide_dir + '/*',
-    '!' + styleguide_dir + '/README.md'
+    jsmin_dir + '/*'
   ], { force: true });
 });
 
 // Clean, then generate the dev assets
 gulp.task('compile', ['clean'], function (cb) {
-  return runSequence([ 'sass:compile', 'styleguide:compile', 'js:compile', 'js:compile-base' ], cb);
+  return runSequence([ 'sass:compile', 'js:compile', 'js:compile-base' ], cb);
 });
 
 // Clean, then generate the production assets
 gulp.task('dist', ['clean'], function (cb) {
-  return runSequence([ 'sass:dist', 'styleguide:compile', 'js:compile', 'js:compile-base' ], cb);
+  return runSequence([ 'sass:dist', 'js:compile', 'js:compile-base' ], cb);
 });
 
 
@@ -229,67 +211,6 @@ gulp.task('sass:dist', function () {
   .pipe(sass(sassOptionsProd))
   .pipe(autoprefixer(autoprefixerOptions))
   .pipe(gulp.dest(css_dir));
-});
-
-// Create neccesary files for styleguide
-gulp.task('styleguide:init', function() {
-  if (!fs.existsSync(styleguide_dir)){
-    console.log('Creating Styleguide\'s dir...');
-    fs.mkdirSync(styleguide_dir);
-  }
-
-  if (!fs.existsSync(styleguide_dir + '/README.md')) {
-    console.log('Creating Styleguide\'s README.md...');
-    fs.writeFileSync(styleguide_dir + '/README.md', 'Styleguide');
-  }
-});
-
-// Generate the styleguide
-gulp.task('styleguide:generate-with-server', ['styleguide:init'], function() {
-  return gulp.src(scss_input)
-    .pipe(styleguide.generate({
-      title: 'Droopler styleguide',
-      server: true,
-      port: 3000,
-      sideNav: 1,
-      commonClass: [ 'html-shadow body-shadow' ],
-      rootPath: styleguide_dir,
-      overviewPath: styleguide_dir + '/README.md',
-      // extraHead: '<img src="http://www.droptica.com/sites/all/themes/dtheme/logo.png">',
-    }))
-    .pipe(gulp.dest(styleguide_dir));
-});
-
-// Generate the styleguide without running the server
-gulp.task('styleguide:generate-without-server', ['styleguide:init'], function() {
-  return gulp.src(scss_input)
-    .pipe(styleguide.generate({
-      title: 'Droopler styleguide',
-      server: false,
-      sideNav: 1,
-      commonClass: [ 'html-shadow body-shadow' ],
-      rootPath: styleguide_dir,
-      overviewPath: styleguide_dir + '/README.md',
-    }))
-    .pipe(gulp.dest(styleguide_dir));
-});
-
-// Apply styles to the styleguide
-gulp.task('styleguide:applystyles', function() {
-  return gulp.src(scss_input)
-    .pipe(sass(sassOptionsDev).on('error', sass.logError))
-    .pipe(styleguide.applyStyles())
-    .pipe(gulp.dest(styleguide_dir));
-});
-
-// Parent task - Compile the styleguide without running the server
-gulp.task('styleguide:compile', function() {
-  runSequence('styleguide:generate-without-server', 'styleguide:applystyles');
-});
-
-// Parent task - Compile the styleguide with running the server
-gulp.task('styleguide:generate', function() {
-  runSequence('styleguide:generate-with-server', 'styleguide:applystyles');
 });
 
 // For Docker - properly catch signals
