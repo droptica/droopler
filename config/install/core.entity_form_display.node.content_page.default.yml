@@ -5,7 +5,7 @@ dependencies:
     - field.field.node.content_page.field_page_section
     - node.type.content_page
   module:
-    - paragraphs
+    - d_p
     - path
 id: node.content_page.default
 targetEntityType: node
@@ -24,17 +24,19 @@ content:
       title: Paragraph
       title_plural: Paragraphs
       edit_mode: closed
-      add_mode: dropdown
+      show_placeholders: 'yes'
+      add_mode: select
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
-    type: entity_reference_paragraphs
+    type: droopler_paragraphs
     region: content
   langcode:
     type: language_select
     weight: 2
     region: content
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
   path:
     type: path
