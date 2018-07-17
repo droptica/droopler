@@ -8,17 +8,20 @@
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\Component\Serialization\Yaml;
 
 /**
  * Save node with paragraphs.
  *
  * @param array $node_to_create
- *   Array node with paragraph content.
+ *  Array node with paragraph content.
+ *
+ * @return integer
+ *  Node ID.
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_save_node($node_to_create) {
-
   $node = Node::create([
     'type' => $node_to_create['type'],
     'title' => $node_to_create['title'],
@@ -29,8 +32,12 @@ function d_content_init_save_node($node_to_create) {
       $paragraph = d_content_init_fill_paragraph($paragraph_data);
       $node->field_page_section->appendItem($paragraph);
     }
-    $node->save();
   }
+
+  \Drupal::moduleHandler()->alter('node_add', $node, $node_to_create);
+  $node->save();
+
+  return $node->id();
 }
 
 /**
@@ -51,26 +58,6 @@ function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
   $storage = \Drupal::entityTypeManager()->getStorage($entity_type);
   $entity = $storage->create($entity_to_create + ['uuid' => $uuid]);
   $entity->save();
-}
-
-/**
- * Save menu items.
- *
- * @param $links
- *  Array of links.
- *
- * @throws \Drupal\Core\Entity\EntityStorageException
- */
-function d_content_init_save_menu($links) {
-  foreach ($links as $nid => $item) {
-    $menu_link = MenuLinkContent::create([
-      'title' => $item['title'],
-      'link' => ['uri' => 'internal:/node/' . $nid],
-      'menu_name' => 'main',
-      'weight' => $item['weight'],
-    ]);
-    $menu_link->save();
-  }
 }
 
 /**
@@ -106,8 +93,7 @@ function d_content_init_fill_paragraph($paragraph_data) {
         break;
       case 'file':
       case 'image':
-        $image = file_get_contents(drupal_get_path('module', 'd_content_init') . '/assets/' . $value['data']);
-        $image = file_save_data($image, 'public://' . $value['data'], FILE_EXISTS_REPLACE);
+        $image = d_content_init_get_image($value['data']);
         $paragraph->$field_name->appendItem($image);
         break;
       case 'paragraph_reference':
@@ -124,9 +110,86 @@ function d_content_init_fill_paragraph($paragraph_data) {
       case 'entity_reference':
         $paragraph->set($field_name, $value['data']);
         break;
+      case 'boolean':
+        $paragraph->set($field_name, $value['data']);
+        break;
     }
   }
 
   $paragraph->save();
   return $paragraph;
+}
+
+/**
+ * Add page content from YML file.
+ *
+ * @param array $params
+ *  Array with parameters:
+ *  - module: a module with ymls and assets to look for (defaults to d_content_init).
+ *  - file: YML file name without path.
+ *  - title: Menu link title
+ *  - weight: Menu link weight
+ *  - children: list of children
+ *  - parent: parent menu ID
+ *
+ * @return integer|null
+ *  Menu item plugin ID.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_add_node($params) {
+  $page_array = Yaml::decode(file_get_contents($params['file']));
+  $nid = d_content_init_save_node($page_array);
+
+  // If title is not empty add menu link.
+  if (!empty($params['link'])) {
+    $config = [
+      'title' => $params['link'],
+      'link' => ['uri' => 'entity:node/' . $nid],
+      'menu_name' => 'main',
+      'weight' => $params['weight'],
+      'expanded' => !empty($params['children'])
+    ];
+
+    // Handle submenus.
+    if (!empty($params['parent'])) {
+      $config['parent'] = $params['parent'];
+    }
+
+    // Save link.
+    $menu_link = MenuLinkContent::create($config);
+    $menu_link->save();
+    return $menu_link->getPluginId();
+  }
+  else {
+    return null;
+  }
+}
+
+/**
+ * Save file in Drupal.
+ *
+ * @param string $path
+ *  File path:
+ *  - "file.jpg" for files inside d_content_init
+ *  - "example_init/file.jpg" for files inside example_init module
+ *
+ * @return \Drupal\file\FileInterface
+ */
+function d_content_init_get_image($path) {
+  // Check if image name contains module.
+  $parts = explode('/', $path);
+  if (count($parts) == 2) {
+    $dir = drupal_get_path('module', $parts[0]);
+    $filename = $parts[1];
+  }
+  else {
+    $dir = drupal_get_path('module', 'd_content_init');
+    $filename = $path;
+  }
+
+  // Save the file.
+  $data = file_get_contents("$dir/assets/$filename");
+  $image = file_save_data($data, 'public://demo/' . $filename, FILE_EXISTS_REPLACE);
+  return $image;
 }

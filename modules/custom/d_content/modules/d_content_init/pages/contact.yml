@@ -1,0 +1,37 @@
+type: content_page
+title: Contact
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Take a test ride and discover your passion
+      field_d_image_background:
+        type: image
+        data: demo_10.JPG
+      field_d_p_si_image_side:
+        type: text_select
+        data: left
+      field_d_long_text:
+        type: text_long
+        data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/node/1
+          text: Learn more...
+  - paragraph_type: d_p_form
+    data:
+      field_d_main_title:
+        type: text
+        data: Enjoy the ride, your own ride
+      field_d_image_background:
+        type: image
+        data: demo_18.JPG
+      field_d_forms:
+        type: entity_reference
+        data: feedback

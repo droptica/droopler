@@ -39,8 +39,6 @@ function droopler_install() {
     ->set('page.front', '/node/1')
     ->save();
 
-  \Drupal::service('module_installer')->install(['d_content_init']);
-
   // If subtheme is available install the blog.
   // @TODO this should not really be here because this subtheme is not part of the distribution
   if (isset($themes['droopler_subtheme'])) {
@@ -55,6 +53,18 @@ function droopler_install() {
     $linkit->set("matchers.$uuid.settings.bundles.blog_post", "blog_post")->save();
   }
 
+  // Try to install custom init that alters the original one.
+  try {
+    \Drupal::service('module_installer')->install(['d_custom_init']);
+  }
+  catch (\Drupal\Core\Extension\MissingDependencyException $e) {
+    \Drupal::logger('my_module')->notice('Custom content init not detected.');
+  }
+
+  // At the end install the main init. Other installers will alter it.
+  \Drupal::service('module_installer')->install(['d_content_init']);
+
+  // Apply updates.
   try {
     \Drupal::entityDefinitionUpdateManager()->applyUpdates();
   }
