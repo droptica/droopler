@@ -42,9 +42,11 @@ function droopler_theme_preprocess_page(&$variables) {
     'id' => ['navbar-main'],
   ];
   $main_attributes = [
-    'class' => !empty($variables['node']) && $variables['node']->getType() === 'content_page' ?
-      ['container-fluid'] : ['container', 'py-4'],
+    'class' => ['container', 'py-4'],
     'id' => ['main'],
+  ];
+  $main_content_attributes = [
+    'class' => ['col-12', 'main-content'],
   ];
   $content_attributes = [
     'class' => ['main-content', 'col-md-12'],
@@ -52,10 +54,17 @@ function droopler_theme_preprocess_page(&$variables) {
     'role' => ['main'],
   ];
 
+  // Make some exceptions for nodes with paragraphs.
+  if (!empty($variables['node']) && in_array($variables['node']->getType(), ['content_page', 'blog_post'])) {
+    $main_attributes['class'] = ['container-fluid'];
+    $main_content_attributes['class'] = ['main-content'];
+  }
+
   // Declare attributes
   $variables['navbar_top_attributes'] = new Attribute($navbar_top_attributes);
   $variables['navbar_attributes'] = new Attribute($navbar_attributes);
   $variables['main_attributes'] = new Attribute($main_attributes);
+  $variables['main_content_attributes'] = new Attribute($main_content_attributes);
   $variables['content_attributes'] = new Attribute($content_attributes);
 }
 
