@@ -39,6 +39,9 @@ function droopler_install() {
     ->set('page.front', '/node/1')
     ->save();
 
+  // Install init content. It will add an install task to be performed later.
+  \Drupal::service('module_installer')->install(['d_content_init']);
+
   // If subtheme is available install the blog.
   // @TODO this should not really be here because this subtheme is not part of the distribution
   if (isset($themes['droopler_subtheme'])) {
@@ -61,9 +64,6 @@ function droopler_install() {
     \Drupal::logger('my_module')->notice('Custom content init not detected.');
   }
 
-  // At the end install the main init. Other installers will alter it.
-  \Drupal::service('module_installer')->install(['d_content_init']);
-
   // Apply updates.
   try {
     \Drupal::entityDefinitionUpdateManager()->applyUpdates();
@@ -71,4 +71,24 @@ function droopler_install() {
   catch (\Drupal\Core\Entity\EntityStorageException $e) {
     watchdog_exception('droopler_install', $e);
   }
+}
+
+/**
+ * Implements hook_install_tasks()
+ */
+function droopler_install_tasks() {
+  $tasks = [
+    'd_content_init_create_all' => [
+      'display' => TRUE,
+      'display_name' => t('Init content'),
+      'type' => 'normal',
+    ],
+    'd_content_init_add_footer' => [
+      'display' => TRUE,
+      'display_name' => t('Add footer'),
+      'type' => 'normal',
+    ],
+  ];
+
+  return $tasks;
 }

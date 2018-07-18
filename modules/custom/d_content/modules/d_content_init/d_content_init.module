@@ -12,6 +12,7 @@ use Drupal\Component\Serialization\Yaml;
 
 /**
  * Save node with paragraphs.
+ * This is alterable in another init modules.
  *
  * @param array $node_to_create
  *  Array node with paragraph content.
@@ -34,6 +35,7 @@ function d_content_init_save_node($node_to_create) {
     }
   }
 
+  // Allow other init modules to add their fields and paragraphs.
   \Drupal::moduleHandler()->alter('node_add', $node, $node_to_create);
   $node->save();
 
@@ -94,12 +96,14 @@ function d_content_init_fill_paragraph($paragraph_data) {
       case 'file':
       case 'image':
         $image = d_content_init_get_image($value['data']);
-        $paragraph->$field_name->appendItem($image);
+        if (!empty($image)) {
+          $paragraph->$field_name->appendItem($image);
+        }
         break;
       case 'paragraph_reference':
         foreach ($value['data'] as $child) {
           // @TODO fix this ugly fix of incorrect structure in array
-          if($field_name == 'field_d_p_tb_block_reference') {
+          if ($field_name == 'field_d_p_tb_block_reference') {
             $new_child['data'] = $child;
             $new_child['paragraph_type'] = 'd_p_single_text_block';
             $child_paragraph = d_content_init_fill_paragraph($new_child);
@@ -167,6 +171,26 @@ function d_content_init_add_node($params) {
 }
 
 /**
+ * Add nodes from a given structure.
+ *
+ * @param $structure
+ *  Array with nodes (may be nested to one level).
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_add_nodes($structure) {
+  foreach ($structure as $key => $page) {
+    $mid = d_content_init_add_node($page);
+    if (!empty($page['children'])) {
+      foreach ($page['children'] as $child) {
+        $child['parent'] = $mid;
+        d_content_init_add_node($child);
+      }
+    }
+  }
+}
+
+/**
  * Save file in Drupal.
  *
  * @param string $path
@@ -190,6 +214,59 @@ function d_content_init_get_image($path) {
 
   // Save the file.
   $data = file_get_contents("$dir/assets/$filename");
-  $image = file_save_data($data, 'public://demo/' . $filename, FILE_EXISTS_REPLACE);
+  $image = file_save_data($data, 'public://' . $filename, FILE_EXISTS_REPLACE);
   return $image;
+}
+
+/**
+ * Create all the content.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_create_all() {
+  // Set default structure.
+  $path = drupal_get_path('module', 'd_content_init') . '/pages';
+  $structure = [
+    'homepage' => ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => 10],
+    'examples' => ['file' => "$path/examples.yml", 'link' => 'Examples', 'weight' => 20, 'children' => [
+      'business' => ['file' => "$path/business.yml", 'link' => 'Local Business Website', 'weight' => 10],
+      'event' => ['file' => "$path/event.yml", 'link' => 'Event Website', 'weight' => 20],
+      'product' => ['file' => "$path/product.yml", 'link' => 'Product Landing Page', 'weight' => 30],
+      'portfolio' => ['file' => "$path/portfolio.yml", 'link' => 'Simple Portfolio', 'weight' => 40],
+      'educational' => ['file' => "$path/educational.yml", 'link' => 'Educational Website', 'weight' => 50],
+    ]],
+    'paragraphs' => ['file' => "$path/examples.yml", 'link' => 'Paragraphs', 'weight' => 30, 'children' => [
+      'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
+      'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
+      'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
+      'd_p_sidebar_image' => ['file' => "$path/d_p_sidebar_image.yml", 'link' => 'Sidebar Image Paragraph', 'weight' => 40],
+      'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
+      'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
+      'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
+    ]],
+    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
+  ];
+
+  // Allow other modules to modify the structure.
+  $context = 'all';
+  \Drupal::moduleHandler()->alter('content_structure', $structure, $context);
+
+  d_content_init_add_nodes($structure);
+}
+
+/**
+ * Add footer to the website.
+ */
+function d_content_init_add_footer() {
+  // Footer block.
+  $config = \Drupal::config('system.site');
+  $footer = [
+    'info' => 'Footer',
+    'type' => 'content_block',
+    'field_d_main_title' => $config->get('name'),
+    'field_d_long_text' => $config->get('slogan'),
+  ];
+  d_content_init_save_entity($footer, 'block_content', '092dd69e-c6c4-4f0a-9780-ec15b89ec5b5');
 }
