@@ -1,0 +1,29 @@
+info:
+  type: content_page
+  title: Contact
+
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_banner
+    data:
+      field_d_main_title:
+        type: text
+        data: Contact us
+      field_d_subtitle:
+        type: text
+        data: What can we do for you?
+      field_d_image_background:
+        type: image
+        data: demo_educational_4.jpg
+
+  - paragraph_type: d_p_form
+    data:
+      field_d_main_title:
+        type: text
+        data: Contact Form
+      field_d_image_background:
+        type: image
+        data: demo_car_18.jpg
+      field_d_forms:
+        type: entity_reference
+        data: feedback
