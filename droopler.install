@@ -61,7 +61,7 @@ function droopler_install() {
     \Drupal::service('module_installer')->install(['d_custom_init']);
   }
   catch (\Drupal\Core\Extension\MissingDependencyException $e) {
-    \Drupal::logger('my_module')->notice('Custom content init not detected.');
+    \Drupal::logger('droopler_install')->notice('Custom content init not detected.');
   }
 
   // Apply updates.
