@@ -7,8 +7,6 @@
  * d_blog_init module.
  */
 
-use \Drupal\taxonomy\Entity\Term;
-
 /**
  * Alter content structure.
  * Implements hook_content_structure_alter()
@@ -31,58 +29,3 @@ function d_blog_init_content_structure_alter(&$structure, $context) {
   }
 }
 
-/**
- * Save node with paragraphs.
- * Blog specific properties.
- * Implements hook_init_node_alter()
- *
- * @param \Drupal\node\Entity\Node $node
- *  Node object.
- *
- * @param array $node_to_create
- *  Array node with paragraph content.
- *
- * @throws \Drupal\Core\Entity\EntityStorageException
- */
-function d_blog_init_node_add_alter(&$node, $node_to_create) {
-  if (isset($node_to_create['field_blog_sections']['paragraphs'])) {
-    foreach ($node_to_create['field_blog_sections']['paragraphs'] as $paragraph_data) {
-      $paragraph = d_content_init_fill_paragraph($paragraph_data);
-      $node->field_blog_sections->appendItem($paragraph);
-    }
-  }
-
-  if (isset($node_to_create['field_blog_teaser'])) {
-    $node->field_blog_teaser->appendItem($node_to_create['field_blog_teaser']);
-  }
-
-  if (isset($node_to_create['field_blog_main_image'])) {
-    $image = d_content_init_get_image($node_to_create['field_blog_main_image']);
-    $node->field_blog_main_image->appendItem($image);
-  }
-
-  if (isset($node_to_create['field_blog_category'])) {
-    $cat = $node_to_create['field_blog_category'];
-    $terms = taxonomy_term_load_multiple_by_name($cat);
-
-    // Create term and use it.
-    if (empty($terms)) {
-      $term = Term::create([
-        'name' => $cat,
-        'vid' => 'blog_posts_category',
-      ]);
-
-      $term->save();
-      $terms = taxonomy_term_load_multiple_by_name($cat);
-
-      foreach ($terms as $id => $term) {
-        $node->field_blog_category->appendItem($id);
-      }
-    }
-    else {
-      foreach ($terms as $id => $term) {
-        $node->field_blog_category->appendItem($term->id());
-      }
-    }
-  }
-}

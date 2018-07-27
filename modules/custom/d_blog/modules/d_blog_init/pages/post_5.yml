@@ -1,10 +1,20 @@
-type: blog_post
-title: Example Blog Post 5
-field_blog_main_image: demo_5.JPG
-field_blog_teaser: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
-  a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
-  Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
-field_blog_category: Sample category
+info:
+  type: blog_post
+  title: Example Blog Post 5
+field_blog_main_image:
+  type: image
+  data: demo_business_4.jpg
+field_blog_teaser:
+  type: text
+  data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
+    a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
+    Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
+field_blog_category:
+  type: taxonomy
+  data:
+    vid: blog_posts_category
+    terms:
+      - Sample category
 field_blog_sections:
   paragraphs:
   - paragraph_type: d_p_blog_text
@@ -30,7 +40,7 @@ field_blog_sections:
     data:
       field_d_image:
         type: image
-        data: demo_1.JPG
+        data: demo_business_1.jpg
       field_d_p_blog_image_full_width:
         type: boolean
         data: true
@@ -57,7 +67,7 @@ field_blog_sections:
     data:
       field_d_image:
         type: image
-        data: demo_2.JPG
+        data: demo_business_2.jpg
   - paragraph_type: d_p_blog_text
     data:
       field_d_long_text:

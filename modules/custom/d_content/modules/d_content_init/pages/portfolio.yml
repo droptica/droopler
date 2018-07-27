@@ -1,5 +1,10 @@
-type: content_page
-title: Portfolio Example
+info:
+  type: content_page
+  title: Portfolio Website Example
+  path:
+    alias: /examples/portfolio-website
+    pathauto: 0
+
 field_page_section:
   paragraphs:
   - paragraph_type: d_p_banner
@@ -15,13 +20,13 @@ field_page_section:
         data: demo_portfolio_1.jpg
       field_d_long_text:
         type: text_long
-        data: Portfolios are usually designed to present you as a great artist or engineer.
+        data: <p>Portfolios are usually designed to present you as a great artist or designer.
           They must be visually perfect. You would probably put here a list of your products,
-          your photo and a contact form for future contractors.
+          your photo and a contact form for future contractors.</p>
       field_d_cta_link:
         type: cta
         data:
-          link: internal:/node/1
+          link: internal:/examples/portfolio-website
           text: Buy My Paintings
   - paragraph_type: d_p_group_of_text_blocks
     data:
@@ -31,7 +36,7 @@ field_page_section:
       field_d_cta_link:
         type: cta
         data:
-          link: internal:/node/1
+          link: internal:/examples/portfolio-website
           text: Learn more...
       field_d_p_tb_block_reference:
         type: paragraph_reference
@@ -44,14 +49,14 @@ field_page_section:
             data: In Front of The Mirror
           field_d_long_text:
             type: text_long
-            data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
               tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
               Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
-              lorem. Vestibulum non accumsan eros, sit amet tempus ex.
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
           field_d_cta_link:
             type: cta
             data:
-              link: internal:/node/1
+              link: internal:/examples/portfolio-website
               text: Learn more...
         - field_d_icon:
             type: image
@@ -61,14 +66,14 @@ field_page_section:
             data: The Impressionist Child
           field_d_long_text:
             type: text_long
-            data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
               tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
               Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
-              lorem. Vestibulum non accumsan eros, sit amet tempus ex.
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
           field_d_cta_link:
             type: cta
             data:
-              link: internal:/node/1
+              link: internal:/examples/portfolio-website
               text: Learn more...
         - field_d_icon:
             type: image
@@ -78,14 +83,14 @@ field_page_section:
             data: Madame in The House
           field_d_long_text:
             type: text_long
-            data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
               tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
               Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
-              lorem. Vestibulum non accumsan eros, sit amet tempus ex.
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
           field_d_cta_link:
             type: cta
             data:
-              link: internal:/node/1
+              link: internal:/examples/portfolio-website
               text: Learn more...
         - field_d_icon:
             type: image
@@ -95,14 +100,14 @@ field_page_section:
             data: A Perfect Kiss
           field_d_long_text:
             type: text_long
-            data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
               tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
               Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
-              lorem. Vestibulum non accumsan eros, sit amet tempus ex.
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
           field_d_cta_link:
             type: cta
             data:
-              link: internal:/node/1
+              link: internal:/examples/portfolio-website
               text: Learn more...
         - field_d_icon:
             type: image
@@ -112,14 +117,14 @@ field_page_section:
             data: The Ark of Noe
           field_d_long_text:
             type: text_long
-            data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
               tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
               Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
-              lorem. Vestibulum non accumsan eros, sit amet tempus ex.
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
           field_d_cta_link:
             type: cta
             data:
-              link: internal:/node/1
+              link: internal:/examples/portfolio-website
               text: Learn more...
         - field_d_icon:
             type: image
@@ -129,14 +134,14 @@ field_page_section:
             data: In The Forest
           field_d_long_text:
             type: text_long
-            data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
               tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
               Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
-              lorem. Vestibulum non accumsan eros, sit amet tempus ex.
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
           field_d_cta_link:
             type: cta
             data:
-              link: internal:/node/1
+              link: internal:/examples/portfolio-website
               text: Learn more...
   - paragraph_type: d_p_form
     data:
