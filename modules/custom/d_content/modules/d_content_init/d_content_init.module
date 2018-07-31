@@ -291,7 +291,8 @@ function d_content_init_create_all() {
       'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
       'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
     ]],
-    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
+    'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 40],
+    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 50],
   ];
 
   // Allow other modules to modify the structure.
