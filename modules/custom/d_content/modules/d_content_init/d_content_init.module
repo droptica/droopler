@@ -282,7 +282,8 @@ function d_content_init_create_all() {
       'portfolio' => ['file' => "$path/portfolio.yml", 'link' => 'Portfolio Website', 'weight' => 40],
       'educational' => ['file' => "$path/educational.yml", 'link' => 'Educational Website', 'weight' => 50],
     ]],
-    'documentation' => ['file' => "$path/documentation.yml", 'link' => 'Documentation', 'weight' => 30, 'children' => [
+    'documentation' => ['file' => "$path/documentation.yml", 'link' => 'Docs', 'weight' => 30, 'children' => [
+      'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
       'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
       'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
       'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
@@ -291,8 +292,7 @@ function d_content_init_create_all() {
       'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
       'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
     ]],
-    'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 40],
-    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 50],
+    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
   ];
 
   // Allow other modules to modify the structure.
