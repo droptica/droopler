@@ -1,4 +1,4 @@
-(function ($i) {
+(function ($) {
   'use strict';
 
   Drupal.behaviors.d_p_counters = {

@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override for the list of counters paragraph.
+ * Theme override for a field.
  *
  * To override output, copy the "field.html.twig" from the templates directory
  * to your theme's directory and customize it, just like customizing other
@@ -37,28 +37,41 @@
  * @see template_preprocess_field()
  */
 #}
-{%
-  set classes = [
+{% set classes = [
   'field',
   'field--name-' ~ field_name|clean_class,
   'field--type-' ~ field_type|clean_class,
   'field--label-' ~ label_display,
-  'row',
-]
-%}
-
-{% set item_classes = [
-  'col-md-3',
-  'col-sm-6',
-  'col-xs-6',
-  'mb-3',
-  'field__item'
 ] %}
-
-<div{{ attributes.addClass(classes, 'field__items') }}>
-  {% for item in items %}
-    <div{{ item.attributes.addClass(item_classes) }}>{{ item.content }}</div>
-  {% endfor %}
-</div>
-
-
+{% set title_classes = [
+  'field__label',
+  label_display == 'visually_hidden' ? 'visually-hidden',
+] %}
+<section {{ wrapper_attributes }}>
+  {% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes.addClass(classes, 'single-boxes-wrapper row') }}>
+      {% for item in items %}
+        <div{{ item.attributes.addClass('single-box-wrapper', column_class) }}>{{ item.content }}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, 'single-box-wrapper', column_class) }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+  {% else %}
+  <div{{ attributes.addClass(classes) }}>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    {% if multiple %}
+    <div class='single-boxes-wrapper row'>
+      {% endif %}
+      {% for item in items %}
+        <div{{ item.attributes.addClass('single-box-wrapper', column_class) }}>{{ item.content }}</div>
+      {% endfor %}
+      {% if multiple %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}

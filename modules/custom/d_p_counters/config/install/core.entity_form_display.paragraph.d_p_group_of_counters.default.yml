@@ -3,13 +3,16 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_group_of_counters.field_d_image_background
-    - field.field.paragraph.d_p_group_of_counters.field_d_main_title
+    - field.field.paragraph.d_p_group_of_text_blocks.field_d_icon
+    - field.field.paragraph.d_p_group_of_text_blocks.field_d_main_title
+    - field.field.paragraph.d_p_group_of_text_blocks.field_d_number
     - field.field.paragraph.d_p_group_of_counters.field_d_counter_reference
     - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_group_of_counters
   module:
     - image
     - paragraphs
+    - svg_image
 id: paragraph.d_p_group_of_counters.default
 targetEntityType: paragraph
 bundle: d_p_group_of_counters
@@ -23,6 +26,14 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
+  field_d_icon:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_d_main_title:
     weight: 0
     settings:
@@ -30,6 +41,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_d_number:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   field_d_counter_reference:
     type: entity_reference_paragraphs
