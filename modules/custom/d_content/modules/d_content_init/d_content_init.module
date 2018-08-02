@@ -104,14 +104,15 @@ function d_content_init_fill_field($entity, $name, $value) {
       }
       break;
     case 'paragraph_reference':
+      if (empty($value['subtype'])) {
+        $value['subtype'] = 'd_p_single_text_block';
+      }
       foreach ($value['data'] as $child) {
         // @TODO fix this ugly fix of incorrect structure in array
-        if ($name == 'field_d_p_tb_block_reference') {
-          $new_child['data'] = $child;
-          $new_child['paragraph_type'] = 'd_p_single_text_block';
-          $child_paragraph = d_content_init_fill_paragraph($new_child);
-          $entity->$name->appendItem($child_paragraph);
-        }
+        $new_child['data'] = $child;
+        $new_child['paragraph_type'] = $value['subtype'];
+        $child_paragraph = d_content_init_fill_paragraph($new_child);
+        $entity->$name->appendItem($child_paragraph);
       }
       break;
     case 'entity_reference':

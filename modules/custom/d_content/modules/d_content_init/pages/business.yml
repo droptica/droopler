@@ -89,6 +89,56 @@ field_page_section:
             data:
               link: internal:/examples/business-website
               text: Order now!
+  - paragraph_type: d_p_group_of_counters
+    data:
+      field_d_image_background:
+        type: image
+        data: demo_bg_2.jpg
+      field_d_number:
+        type: number
+        data: 4
+      field_d_main_title:
+        type: text
+        data: Our Bakery in Numbers
+      field_d_counter_reference:
+        type: paragraph_reference
+        subtype: d_p_single_counter
+        data:
+        - field_d_number:
+            type: number
+            data: 100
+          field_d_main_title:
+            type: text
+            data: Employees
+        - field_d_number:
+            type: number
+            data: 223
+          field_d_main_title:
+            type: text
+            data: Bagels daily
+        - field_d_number:
+            type: number
+            data: 15
+          field_d_main_title:
+            type: text
+            data: Company Shops
+        - field_d_number:
+            type: number
+            data: 60
+          field_d_main_title:
+            type: text
+            data: Bread Ovens
+  - paragraph_type: d_p_text_with_bckg
+    data:
+      field_d_main_title:
+        type: text
+        data: Why Us?
+      field_d_image_background:
+        type: image
+        data: demo_bg.jpg
+      field_d_long_text:
+        type: text_long
+        data: <p>Our bagels are legendary!</p>
   - paragraph_type: d_p_side_image
     data:
       field_d_main_title:

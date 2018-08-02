@@ -92,6 +92,44 @@ field_page_section:
             data:
               link: internal:/examples/educational-website
               text: Learn more...
+
+  - paragraph_type: d_p_group_of_counters
+    data:
+      field_d_image_background:
+        type: image
+        data: demo_bg_2.jpg
+      field_d_number:
+        type: number
+        data: 4
+      field_d_counter_reference:
+        type: paragraph_reference
+        subtype: d_p_single_counter
+        data:
+        - field_d_number:
+            type: number
+            data: 150
+          field_d_main_title:
+            type: text
+            data: Faculties
+        - field_d_number:
+            type: number
+            data: 76
+          field_d_main_title:
+            type: text
+            data: Proffessors
+        - field_d_number:
+            type: number
+            data: 20000
+          field_d_main_title:
+            type: text
+            data: Students
+        - field_d_number:
+            type: number
+            data: 15
+          field_d_main_title:
+            type: text
+            data: Buildings
+
   - paragraph_type: d_p_subscribe_file
     data:
       field_d_main_title:
