@@ -37,15 +37,13 @@
  * @see template_preprocess_field()
  */
 #}
-{%
-    set classes = [
-    'field',
-    'field--name-' ~ field_name|clean_class,
-    'field--type-' ~ field_type|clean_class,
-    'field--label-' ~ label_display,
-]
-%}
+{% set classes = [
+  'field',
+  'field--name-' ~ field_name|clean_class,
+  'field--type-' ~ field_type|clean_class,
+  'field--label-' ~ label_display,
+] %}
 
 {% for item in items %}
-    <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
+  <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
 {% endfor %}
