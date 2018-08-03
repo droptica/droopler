@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_single_counter.field_d_main_title
+    - field.field.paragraph.d_p_single_counter.field_d_number
+    - paragraphs.paragraphs_type.d_p_single_counter
+id: paragraph.d_p_single_counter.default
+targetEntityType: paragraph
+bundle: d_p_single_counter
+mode: default
+content:
+  field_d_main_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_d_number:
+    weight: 0
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden: {  }

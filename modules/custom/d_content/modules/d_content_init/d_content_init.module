@@ -104,14 +104,15 @@ function d_content_init_fill_field($entity, $name, $value) {
       }
       break;
     case 'paragraph_reference':
+      if (empty($value['subtype'])) {
+        $value['subtype'] = 'd_p_single_text_block';
+      }
       foreach ($value['data'] as $child) {
         // @TODO fix this ugly fix of incorrect structure in array
-        if ($name == 'field_d_p_tb_block_reference') {
-          $new_child['data'] = $child;
-          $new_child['paragraph_type'] = 'd_p_single_text_block';
-          $child_paragraph = d_content_init_fill_paragraph($new_child);
-          $entity->$name->appendItem($child_paragraph);
-        }
+        $new_child['data'] = $child;
+        $new_child['paragraph_type'] = $value['subtype'];
+        $child_paragraph = d_content_init_fill_paragraph($new_child);
+        $entity->$name->appendItem($child_paragraph);
       }
       break;
     case 'entity_reference':
@@ -291,6 +292,7 @@ function d_content_init_create_all() {
       'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
       'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
       'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
+      'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
     ]],
     'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
   ];

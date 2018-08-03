@@ -37,8 +37,41 @@
  * @see template_preprocess_field()
  */
 #}
-<div class="paragraph-sections">
-  {% for item in items %}
-    {{ item.content }}
-  {% endfor %}
-</div>
+{% set classes = [
+  'field',
+  'field--name-' ~ field_name|clean_class,
+  'field--type-' ~ field_type|clean_class,
+  'field--label-' ~ label_display,
+] %}
+{% set title_classes = [
+  'field__label',
+  label_display == 'visually_hidden' ? 'visually-hidden',
+] %}
+<section {{ wrapper_attributes }}>
+  {% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes.addClass(classes, 'single-boxes-wrapper row') }}>
+      {% for item in items %}
+        <div{{ item.attributes.addClass('single-box-wrapper', column_class) }}>{{ item.content }}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, 'single-box-wrapper', column_class) }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+  {% else %}
+  <div{{ attributes.addClass(classes) }}>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    {% if multiple %}
+    <div class='single-boxes-wrapper row'>
+      {% endif %}
+      {% for item in items %}
+        <div{{ item.attributes.addClass('single-box-wrapper', column_class) }}>{{ item.content }}</div>
+      {% endfor %}
+      {% if multiple %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}

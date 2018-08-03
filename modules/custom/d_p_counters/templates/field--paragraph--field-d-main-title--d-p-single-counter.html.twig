@@ -37,8 +37,13 @@
  * @see template_preprocess_field()
  */
 #}
-<div class="paragraph-sections">
-  {% for item in items %}
-    {{ item.content }}
-  {% endfor %}
-</div>
+{% set classes = [
+  'field',
+  'field--name-' ~ field_name|clean_class,
+  'field--type-' ~ field_type|clean_class,
+  'field--label-' ~ label_display,
+] %}
+
+{% for item in items %}
+  <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
+{% endfor %}

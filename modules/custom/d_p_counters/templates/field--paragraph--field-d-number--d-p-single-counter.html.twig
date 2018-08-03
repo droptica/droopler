@@ -1,4 +1,4 @@
-{#
+{#Components Repo
 /**
  * @file
  * Theme override for a field.
@@ -37,8 +37,15 @@
  * @see template_preprocess_field()
  */
 #}
-<div class="paragraph-sections">
-  {% for item in items %}
-    {{ item.content }}
-  {% endfor %}
-</div>
+{%
+    set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+]
+%}
+
+{% for item in items %}
+  <big{{ attributes.addClass(classes, 'field__item') }} data-count="{{ item.content }}">0</big>
+{% endfor %}
