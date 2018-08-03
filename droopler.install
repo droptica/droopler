@@ -98,9 +98,9 @@ function droopler_install_tasks() {
 /**
  * Import a config file.
  *
- * @param $module
+ * @param string $module
  *  Module name.
- * @param $name
+ * @param string $name
  *  Config file name without .yml extension.
  */
 function _droopler_import_config($module, $name) {
