@@ -92,3 +92,16 @@ function droopler_install_tasks() {
 
   return $tasks;
 }
+
+/**
+ * Droopler 1.3 Updates.
+ *
+ * Implements hook_update()
+ */
+function droopler_update_8101() {
+  $modules = [
+    'd_p_counters',
+    'd_p_help',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
+}

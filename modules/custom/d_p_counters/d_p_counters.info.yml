@@ -3,11 +3,12 @@ core: 8.x
 description: 'Provides a paragraph with counters.'
 type: module
 dependencies:
-- content_translation
-- d_p
-- entity_reference_revisions
-- field
-- image
-- paragraphs
-package: d
+  - content_translation
+  - d_p
+  - entity_reference_revisions
+  - field
+  - image
+  - paragraphs
+  - svg_image
+package: Paragraphs
 version: 8.x-1.2
