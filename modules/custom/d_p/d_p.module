@@ -7,7 +7,8 @@
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
-use\Drupal\Core\Template\Attribute;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Site\Settings;
 
 /**
  * Implements hook_theme().
@@ -112,6 +113,18 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
     }
     else {
       $variables['images'] = $urls;
+    }
+
+    // Generate a list of image links for httrack.
+    if (Settings::get('httrack_enabled', FALSE)) {
+      if (!empty($urls)) {
+        foreach ($urls as $k => $url) {
+          $variables['#attached']['html_head_link'][] = [[
+            'href' => $url['url'],
+            'rel' => "droopler:".$paragraph->id().":img$k"
+          ]];
+        }
+      }
     }
   }
 
