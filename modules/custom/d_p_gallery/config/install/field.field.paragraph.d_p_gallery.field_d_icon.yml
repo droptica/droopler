@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_d_icon
-    - paragraphs.paragraphs_type.d_p_text_paged
+    - paragraphs.paragraphs_type.d_p_gallery
   module:
     - content_translation
     - image
@@ -13,10 +13,10 @@ third_party_settings:
       alt: alt
       title: title
       file: '0'
-id: paragraph.d_p_text_paged.field_d_icon
+id: paragraph.d_p_gallery.field_d_icon
 field_name: field_d_icon
 entity_type: paragraph
-bundle: d_p_text_paged
+bundle: d_p_gallery
 label: Icon
 description: ''
 required: false
