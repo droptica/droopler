@@ -98,9 +98,18 @@ function d_content_init_fill_field($entity, $name, $value) {
       break;
     case 'file':
     case 'image':
-      $image = d_content_init_get_image($value['data']);
-      if (!empty($image)) {
-        $entity->$name->appendItem($image);
+      // Convert short format to full,
+      if (!is_array($value['data'])) {
+        $value['data'] = [
+          ['file' => $value['data']],
+        ];
+      }
+      // Add all files.
+      foreach ($value['data'] as $file) {
+        $image = d_content_init_get_image($file['file']);
+        if (!empty($image)) {
+          $entity->$name->appendItem($image);
+        }
       }
       break;
     case 'paragraph_reference':
