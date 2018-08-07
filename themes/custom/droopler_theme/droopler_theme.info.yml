@@ -15,26 +15,6 @@ libraries-extend:
   file/drupal.file:
     - droopler_theme/file
 
-libraries-override:
-  colorbox/colorbox:
-    js:
-      /libraries/colorbox/jquery.colorbox-min.js: /libraries/jquery-colorbox/jquery.colorbox-min.js
-  colorbox/colorbox-dev:
-    js:
-      /libraries/colorbox/jquery.colorbox.js: /libraries/jquery-colorbox/jquery.colorbox.js
-  colorbox/example1:
-    js:
-      /libraries/colorbox/example1/colorbox.css: /libraries/jquery-colorbox/example1/colorbox.css
-  colorbox/example2:
-    js:
-      /libraries/colorbox/example2/colorbox.css: /libraries/jquery-colorbox/example2/colorbox.css
-  colorbox/example3:
-    js:
-      /libraries/colorbox/example3/colorbox.css: /libraries/jquery-colorbox/example3/colorbox.css
-  colorbox/example4:
-    js:
-      /libraries/colorbox/example4/colorbox.css: /libraries/jquery-colorbox/example4/colorbox.css
-
 ckeditor_stylesheets:
   - css/ckeditor.css
 
