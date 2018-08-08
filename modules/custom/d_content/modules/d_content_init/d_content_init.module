@@ -98,7 +98,7 @@ function d_content_init_fill_field($entity, $name, $value) {
       break;
     case 'file':
     case 'image':
-      // Convert short format to full,
+      // Convert short format to full.
       if (!is_array($value['data'])) {
         $value['data'] = [
           ['file' => $value['data']],
@@ -107,9 +107,9 @@ function d_content_init_fill_field($entity, $name, $value) {
       // Add all files.
       foreach ($value['data'] as $file) {
         /**
-         * @var \Drupal\file\FileInterface $image
+         * @var \Drupal\file\FileInterface $file_object
          */
-        $file_object = d_content_init_get_image($file['file']);
+        $file_object = d_content_init_get_file($file['file']);
         if (!empty($file_object)) {
           $params = ["target_id" => $file_object->id()];
           if ($value['type'] == 'image') {
@@ -266,7 +266,7 @@ function d_content_init_add_nodes($structure) {
  *
  * @return \Drupal\file\FileInterface
  */
-function d_content_init_get_image($path) {
+function d_content_init_get_file($path) {
   // Check if image name contains module.
   $parts = explode('/', $path);
   if (count($parts) == 2) {

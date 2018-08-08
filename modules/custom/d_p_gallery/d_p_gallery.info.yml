@@ -2,11 +2,15 @@ name: d_p_gallery
 description: 'Provides a gallery paragraph.'
 type: module
 core: 8.x
-package: d
+package: Paragraphs
 dependencies:
+  - colorbox
+  - content_translation
+  - d_p
   - field
   - file
   - image
   - paragraphs
-  - colorbox
+  - svg_image
+  - text
 version: 8.x-1.3
