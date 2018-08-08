@@ -15,8 +15,12 @@ $d-p-gallery-margin-y: 5% !default;
   margin-top: $d-p-gallery-margin-y;
   margin-bottom: $d-p-gallery-margin-y;
 
-  > h2 {
+  h2 {
     @include font-main-header;
+    text-align: center;
+  }
+
+  .field--name-field-d-icon {
     text-align: center;
   }
 

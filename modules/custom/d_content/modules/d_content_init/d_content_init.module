@@ -106,9 +106,18 @@ function d_content_init_fill_field($entity, $name, $value) {
       }
       // Add all files.
       foreach ($value['data'] as $file) {
-        $image = d_content_init_get_image($file['file']);
-        if (!empty($image)) {
-          $entity->$name->appendItem($image);
+        /**
+         * @var \Drupal\file\FileInterface $image
+         */
+        $file_object = d_content_init_get_image($file['file']);
+        if (!empty($file_object)) {
+          $params = ["target_id" => $file_object->id()];
+          if ($value['type'] == 'image') {
+            if (!empty($file['alt'])) {
+              $params["alt"] = $file['alt'];
+            }
+          }
+          $entity->$name->appendItem($params);
         }
       }
       break;
@@ -302,6 +311,7 @@ function d_content_init_create_all() {
       'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
       'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
       'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
+      'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
     ]],
     'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
   ];
