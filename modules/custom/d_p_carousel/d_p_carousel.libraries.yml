@@ -1,0 +1,21 @@
+slick:
+  remote: http://kenwheeler.github.io/slick/
+  version: VERSION
+  license:
+    name: MIT
+    gpl-compatible: false
+  js:
+    /libraries/slick-carousel/slick/slick.min.js: { minified: true }
+  css:
+    component:
+      /libraries/slick-carousel/slick/slick.css: { }
+      /libraries/slick-carousel/slick/slick-theme.css: { }
+
+d_p_carousel:
+  version: VERSION
+  js:
+    js/d_p_carousel.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - d_p_carousel/slick
