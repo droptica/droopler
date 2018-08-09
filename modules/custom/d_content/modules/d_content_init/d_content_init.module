@@ -98,9 +98,27 @@ function d_content_init_fill_field($entity, $name, $value) {
       break;
     case 'file':
     case 'image':
-      $image = d_content_init_get_image($value['data']);
-      if (!empty($image)) {
-        $entity->$name->appendItem($image);
+      // Convert short format to full.
+      if (!is_array($value['data'])) {
+        $value['data'] = [
+          ['file' => $value['data']],
+        ];
+      }
+      // Add all files.
+      foreach ($value['data'] as $file) {
+        /**
+         * @var \Drupal\file\FileInterface $file_object
+         */
+        $file_object = d_content_init_get_file($file['file']);
+        if (!empty($file_object)) {
+          $params = ["target_id" => $file_object->id()];
+          if ($value['type'] == 'image') {
+            if (!empty($file['alt'])) {
+              $params["alt"] = $file['alt'];
+            }
+          }
+          $entity->$name->appendItem($params);
+        }
       }
       break;
     case 'paragraph_reference':
@@ -248,7 +266,7 @@ function d_content_init_add_nodes($structure) {
  *
  * @return \Drupal\file\FileInterface
  */
-function d_content_init_get_image($path) {
+function d_content_init_get_file($path) {
   // Check if image name contains module.
   $parts = explode('/', $path);
   if (count($parts) == 2) {
@@ -275,7 +293,7 @@ function d_content_init_create_all() {
   // Set default structure.
   $path = drupal_get_path('module', 'd_content_init') . '/pages';
   $structure = [
-    /*'homepage' => ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => 10],
+    'homepage' => ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => 10],
     'examples' => ['file' => "$path/examples.yml", 'link' => 'Examples', 'weight' => 20, 'children' => [
       'business' => ['file' => "$path/business.yml", 'link' => 'Local Business Website', 'weight' => 10],
       'event' => ['file' => "$path/event.yml", 'link' => 'Event Website', 'weight' => 20],
@@ -292,10 +310,11 @@ function d_content_init_create_all() {
       'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
       'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
       'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
-      'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],*/
+      'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
+      'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
       'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
-    /*]],
-    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],*/
+    ]],
+    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
   ];
 
   // Allow other modules to modify the structure.

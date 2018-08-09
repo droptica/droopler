@@ -118,6 +118,8 @@ function droopler_update_8101() {
   // Install modules.
   $modules = [
     'd_p_counters',
+    'd_p_gallery',
+    'colorbox',
     'd_p_help',
   ];
   \Drupal::service('module_installer')->install($modules, TRUE);
