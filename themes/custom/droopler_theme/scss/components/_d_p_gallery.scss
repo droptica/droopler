@@ -1,0 +1,48 @@
+/**
+ * Simple gallery paragraph
+ */
+
+// Colour variables used in this paragraph
+$d-p-gallery-line-color: $color-agamemnon !default;
+$d-p-gallery-color: $color-hecuba !default;
+
+// Margins, paddings and sizing.
+$d-p-gallery-line-margin-top: 1rem !default;
+$d-p-gallery-line-margin-bottom: 1rem !default;
+$d-p-gallery-margin-y: 5% !default;
+
+.paragraph--type--d-p-gallery {
+  margin-top: $d-p-gallery-margin-y;
+  margin-bottom: $d-p-gallery-margin-y;
+
+  h2 {
+    @include font-main-header;
+    text-align: center;
+  }
+
+  .field--name-field-d-icon {
+    text-align: center;
+  }
+
+  .field--name-field-d-long-text {
+    p {
+      color: $d-p-gallery-color;
+      text-align: center;
+    }
+
+    &:before {
+      @include decoration-header-line-main-center;
+      background: $d-p-gallery-line-color;
+      margin-top: $d-p-gallery-line-margin-top;
+      margin-bottom: $d-p-gallery-line-margin-bottom;
+    }
+  }
+
+  .field--name-field-d-image {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
