@@ -14,7 +14,7 @@ $d-p-carousel-padding-y: 5rem;
 $d-p-carousel-mobile-padding-y: 4rem;
 $d-p-carousel-items-margin-top: 4rem !default;
 $d-p-carousel-mobile-items-margin-top: 3rem !default;
-$d-p-carousel-line-margin: 0.625rem auto !default;
+$d-p-carousel-line-margin: $line-center-margin-top auto $line-center-margin-bottom auto !default;
 $d-p-carousel-item-line-margin-top: $line-left-margin-top !default;
 $d-p-carousel-item-line-margin-bottom: $line-left-margin-bottom !default;
 $d-p-carousel-item-image-margin-bottom: 1rem !default;
@@ -44,11 +44,11 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     padding-bottom: $d-p-carousel-mobile-padding-y;
   }
 
-  & > .field--name-field-d-icon {
+  .field--name-field-d-icon {
     text-align: center;
   }
 
-  & > .field--name-field-d-main-title {
+  .content > .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
 
@@ -59,12 +59,12 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     }
   }
 
-  & > .field--name-field-d-long-text {
+  .content > .field--name-field-d-long-text {
     text-align: center;
   }
 
-  & > .field--name-field-d-main-title + .field--name-field-d-p-cs-item-reference,
-  & > .field--name-field-d-long-text + .field--name-field-d-p-cs-item-reference {
+  .field--name-field-d-main-title + .field--name-field-d-p-cs-item-reference,
+  .field--name-field-d-long-text + .field--name-field-d-p-cs-item-reference {
     margin-top: $d-p-carousel-items-margin-top;
     @include media-breakpoint-down(md) {
       margin-top: $d-p-carousel-mobile-items-margin-top;
