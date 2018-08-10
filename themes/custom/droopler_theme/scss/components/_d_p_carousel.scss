@@ -10,8 +10,8 @@ $d-p-carousel-background: $color-agamemnon !default;
 $d-p-carousel-arrow-color: $color-agamemnon !default;
 
 // Margins, paddings and sizing.
-$d-p-carousel-padding-y: 5rem;
-$d-p-carousel-mobile-padding-y: 4rem;
+$d-p-carousel-padding-y: 5%;
+$d-p-carousel-mobile-padding-y: 5%;
 $d-p-carousel-items-margin-top: 4rem !default;
 $d-p-carousel-mobile-items-margin-top: 3rem !default;
 $d-p-carousel-line-margin: $line-center-margin-top auto $line-center-margin-bottom auto !default;
@@ -35,7 +35,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
 }
 
 // Group of carousel items.
-.d-p-carousel {
+.paragraph--type--d-p-carousel {
   padding-top: $d-p-carousel-padding-y;
   padding-bottom: $d-p-carousel-padding-y;
 
@@ -71,7 +71,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     }
   }
 
-  .slick-slider.field--name-field-d-p-cs-item-reference {
+  .field--name-field-d-p-cs-item-reference {
     margin-left: $d-p-carousel-arrow-size / 2;
     margin-right: $d-p-carousel-arrow-size / 2;
     @include media-breakpoint-up(sm) {
