@@ -114,54 +114,7 @@ field_page_section:
               link: internal:/examples/product-landing-page
               text: More
 
-  - paragraph_type: d_p_carousel
-    data:
-      field_d_number:
-        type: number
-        data: 1
-      field_d_main_title:
-        type: text
-        data: Testimonials
-      field_d_p_cs_item_reference:
-        type: paragraph_reference
-        subtype: d_p_carousel_item
-        data:
-        - field_d_image:
-            type: image
-            data:
-            - file: demo_face_2.jpg
-              alt: John Smith
-          field_d_main_title:
-            type: text
-            data: John Smith, CEO of Cube Inc.
-          field_d_long_text:
-            type: text_long
-            data: <p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-              tristique dui dignissim gravida. Aenean feugiat dui sit amet condimentum volutpat.</em></p>
-        - field_d_image:
-            type: image
-            data:
-            - file: demo_face_1.jpg
-              alt: Anna Novak
-          field_d_main_title:
-            type: text
-            data: Anna Novak, Chief Architect of BTU
-          field_d_long_text:
-            type: text_long
-            data: <p><em>Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend.
-              Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna mi.</em></p>
-        - field_d_image:
-            type: image
-            data:
-            - file: demo_face_3.jpg
-              alt: Zhang San
-            field_d_main_title:
-              type: text
-              data: Zhang San, Atlantic Jetlines
-            field_d_long_text:
-              type: text_long
-              data: <p><em>Sagittis vitae et leo duis ut diam. Id ornare arcu odio ut. Accumsan sit amet nulla facilisi
-                morbi tempus iaculis urna. Nullam non nisi est sit amet facilisis magna etiam.</em></p>
+
   - paragraph_type: d_p_side_image
     data:
       field_d_main_title:
@@ -230,6 +183,58 @@ field_page_section:
           felis at vulputate. In commodo nunc sed mi placerat eleifend. Morbi maximus,
           enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna
           luctus mi.</p>
+  - paragraph_type: d_p_carousel
+    data:
+      field_d_number:
+        type: number
+        data: 1
+      field_d_main_title:
+        type: text
+        data: Testimonials
+      field_d_p_cs_item_reference:
+        type: paragraph_reference
+        subtype: d_p_carousel_item
+        data:
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_face_2.jpg
+              alt: John Smith
+          field_d_main_title:
+            type: text
+            data: John Smith, CEO of Cube Inc.
+          field_d_long_text:
+            type: text_long
+            data: <p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Aenean feugiat dui sit amet condimentum volutpat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</em></p>
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_face_1.jpg
+              alt: Anna Novak
+          field_d_main_title:
+            type: text
+            data: Anna Novak, Chief Architect of BTU
+          field_d_long_text:
+            type: text_long
+            data: <p><em>Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend.
+              Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna mi.
+              Nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</em></p>
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_face_3.jpg
+              alt: Zhang San
+          field_d_main_title:
+            type: text
+            data: Zhang San, Atlantic Jetlines
+          field_d_long_text:
+            type: text_long
+            data: <p><em>Sagittis vitae et leo duis ut diam. Id ornare arcu odio ut. Accumsan sit amet nulla facilisi
+              morbi tempus iaculis urna. Nullam non nisi est sit amet facilisis magna etiam. Elementum facilisis leo
+              vel fringilla est ullamcorper eget nulla facilisi. Volutpat lacus laoreet non curabitur gravida arcu.</em></p>
+
   - paragraph_type: d_p_text_paged
     data:
       field_d_main_title:
