@@ -5,6 +5,7 @@ dependencies:
     - field.storage.node.field_page_section
     - node.type.content_page
     - paragraphs.paragraphs_type.d_p_banner
+    - paragraphs.paragraphs_type.d_p_carousel
     - paragraphs.paragraphs_type.d_p_form
     - paragraphs.paragraphs_type.d_p_gallery
     - paragraphs.paragraphs_type.d_p_group_of_counters
@@ -33,6 +34,7 @@ settings:
       d_p_banner: d_p_banner
       d_p_form: d_p_form
       d_p_group_of_counters: d_p_group_of_counters
+      d_p_carousel: d_p_carousel
       d_p_gallery: d_p_gallery
       d_p_group_of_text_blocks: d_p_group_of_text_blocks
       d_p_side_image: d_p_side_image
@@ -55,12 +57,18 @@ settings:
       d_p_group_of_counters:
         enabled: true
         weight: 17
+      d_p_carousel:
+        enabled: true
+        weight: 18
       d_p_gallery:
         enabled: true
         weight: 18
       d_p_group_of_text_blocks:
         enabled: true
         weight: 18
+      d_p_carousel_item:
+        weight: 19
+        enabled: false
       d_p_side_image:
         enabled: true
         weight: 19
