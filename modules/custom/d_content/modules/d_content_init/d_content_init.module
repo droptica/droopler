@@ -313,6 +313,7 @@ function d_content_init_create_all() {
       'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
       'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
       'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
+      'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
     ]],
     'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
   ];

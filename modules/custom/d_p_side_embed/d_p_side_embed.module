@@ -17,7 +17,7 @@ function d_p_side_embed_preprocess_paragraph(&$variables) {
   switch ($bundle) {
     case 'd_p_side_embed':
       // Process embed side.
-      $field_embed_side = $paragraph->get('field_d_p_se_embed_side')->get(0);
+      $field_embed_side = $paragraph->get('field_d_p_si_image_side')->get(0);
       if ($field_embed_side) {
         $embed_side = $field_embed_side->getValue();
         $variables['embed_side'] = $embed_side['value'];
