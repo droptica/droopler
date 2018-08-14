@@ -71,6 +71,10 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
       right: 0;
       width: 100%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   }
 

@@ -26,9 +26,9 @@ field_page_section:
         data: 'Full Example:'
       field_d_long_text:
         type: text_long
-        data: <p>This paragraph is one of the most interesting visual features of Droopler.
-          It allows you to put an image to a side, and fill the rest with text.
-          There's a possibility to use a header, icon and CTA link.</p>
+        data: <p>If you need to insert some external iframe to your website, use Side Embed Paragraph.
+          It is perfect for maps and videos. Below you can a fully responsive Google Maps widget. It stretches
+          when you resize the browser window.</p>
 
   - paragraph_type: d_p_side_embed
     data:
@@ -64,8 +64,9 @@ field_page_section:
         data: 'YouTube Example:'
       field_d_long_text:
         type: text
-        data: <p>Side Image Paragraph does not need all those complicated fields around the text.
-          Use it with only a header and see that it is an excellent way to create feature lists.</p>
+        data: <p>Side Embed can contain a video from YouTube, Dailymotion, and other providers.
+          Just copy the iframe code to Droopler. The responsiveness of the video depends on its source,
+          as you can see below, Youtube embeds do not stretch in the container. Instead, they get black borders.</p>
 
   - paragraph_type: d_p_side_embed
     data:
@@ -74,7 +75,7 @@ field_page_section:
         data: Main Title
       field_d_embed:
         type: text_long
-        data: '<iframe width="560" height="315" src="https://www.youtube.com/embed/6yO16tVGC1w" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
+        data: '<iframe allow="autoplay" width="560" height="315" src="https://www.youtube.com/embed/6yO16tVGC1w?showinfo=0&amp;rel=0&amp;modestbranding=1&amp;title=&amp;fs=0&amp;controls=0" frameborder="0" allowfullscreen=""></iframe>'
       field_d_p_si_image_side:
         type: text_select
         data: left
