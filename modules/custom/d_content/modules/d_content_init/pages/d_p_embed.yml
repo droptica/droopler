@@ -1,0 +1,88 @@
+info:
+  type: content_page
+  title: Sidebar Embed Paragraph
+  path:
+    alias: /documentation/sidebar-embed-paragraph
+    pathauto: 0
+
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_text_with_bckg
+    data:
+      field_d_image_background:
+        type: image
+        data: demo_bg.jpg
+      field_d_main_title:
+        type: text
+        data: Sidebar Embed Paragraph
+      field_d_subtitle:
+        type: text
+        data: Droopler Documentation
+
+  - paragraph_type: d_p_text_paged
+    data:
+      field_d_main_title:
+        type: text
+        data: 'Full Example:'
+      field_d_long_text:
+        type: text_long
+        data: <p>If you need to insert some external iframe to your website, use Side Embed Paragraph.
+          It is perfect for maps and videos. Below you can a fully responsive Google Maps widget. It stretches
+          when you resize the browser window.</p>
+
+  - paragraph_type: d_p_side_embed
+    data:
+      field_d_icon:
+        type: image
+        data: demo_droopler_white.svg
+      field_d_main_title:
+        type: text
+        data: Main Title
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_embed:
+        type: text_long
+        data: '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10019.548437096011!2d16.9733284!3d51.110543!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x15d28d9cdc4aa64f!2sDroptica+Sp.+z+o.o.!5e0!3m2!1spl!2spl!4v1534140503730" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
+          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
+          gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus,
+          id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex.
+          Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/documentation/sidebar-image-paragraph
+          text: Call To Action!
+
+  - paragraph_type: d_p_text_paged
+    data:
+      field_d_main_title:
+        type: text
+        data: 'YouTube Example:'
+      field_d_long_text:
+        type: text
+        data: <p>Side Embed can contain a video from YouTube, Dailymotion, and other providers.
+          Just copy the iframe code to Droopler. The responsiveness of the video depends on its source,
+          as you can see below, Youtube embeds do not stretch in the container. Instead, they get black borders.</p>
+
+  - paragraph_type: d_p_side_embed
+    data:
+      field_d_main_title:
+        type: text
+        data: Main Title
+      field_d_embed:
+        type: text_long
+        data: '<iframe allow="autoplay" width="560" height="315" src="https://www.youtube.com/embed/6yO16tVGC1w?showinfo=0&amp;rel=0&amp;modestbranding=1&amp;title=&amp;fs=0&amp;controls=0" frameborder="0" allowfullscreen=""></iframe>'
+      field_d_p_si_image_side:
+        type: text_select
+        data: left
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
+          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
+          gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus,
+          id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex.
+          Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>

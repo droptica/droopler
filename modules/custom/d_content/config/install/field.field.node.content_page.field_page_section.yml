@@ -10,6 +10,7 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_gallery
     - paragraphs.paragraphs_type.d_p_group_of_counters
     - paragraphs.paragraphs_type.d_p_group_of_text_blocks
+    - paragraphs.paragraphs_type.d_p_side_embed
     - paragraphs.paragraphs_type.d_p_side_image
     - paragraphs.paragraphs_type.d_p_subscribe_file
     - paragraphs.paragraphs_type.d_p_text_paged
@@ -41,6 +42,7 @@ settings:
       d_p_subscribe_file: d_p_subscribe_file
       d_p_text_paged: d_p_text_paged
       d_p_text_with_bckg: d_p_text_with_bckg
+      d_p_side_embed: d_p_side_embed
     target_bundles_drag_drop:
       d_p_banner:
         enabled: true
@@ -87,4 +89,7 @@ settings:
       d_p_text_with_bckg:
         enabled: true
         weight: 24
+      d_p_side_embed:
+        enabled: true
+        weight: 26
 field_type: entity_reference_revisions
