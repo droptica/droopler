@@ -47,10 +47,14 @@
   'text-center',
   'mt-4'
 ] %}
-
-<div {{ attributes.addClass(classes, 'field__items') }}>
-  <div class="d-tiles-sizer"></div>
-  {% for item in items %}
-    {{ item.content }}
-  {% endfor %}
+{% set wrapper_classes = [
+  'tiles-wrapper'
+] %}
+<div {{ wrapper_attributes.addClass(wrapper_classes) }}>
+  <div {{ attributes.addClass(classes, 'field__items') }}>
+    <div class="d-tiles-sizer"></div>
+    {% for item in items %}
+      {{ item.content }}
+    {% endfor %}
+  </div>
 </div>

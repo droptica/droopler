@@ -18,7 +18,6 @@
           $grid.masonry('layout');
         });
 
-
         // Add titles to items.
         $wrapper.find('.d-tiles-item').each(function(){
           var alt = $(this).find('img').attr('alt');

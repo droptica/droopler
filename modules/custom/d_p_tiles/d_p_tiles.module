@@ -5,6 +5,8 @@
  * File containing d_p_tiles module.
  */
 
+use \Drupal\Core\Template\Attribute;
+
 /**
  * Implements hook_theme().
  */
@@ -41,9 +43,17 @@ function d_p_tiles_preprocess_paragraph(&$variables) {
 function d_p_tiles_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_tiles') {
-      // Add container class to title and description.
-      if (in_array($variables['field_name'], [ 'field_d_main_title', 'field_d_long_text' ])) {
-        $variables['attributes']['class'][] = 'container';
+      switch($variables['field_name']) {
+
+        case 'field_d_main_title':
+        case 'field_d_long_text':
+          // Add container class to title and description.
+          $variables['attributes']['class'][] = 'container';
+          break;
+
+        case 'field_d_image':
+          $variables['wrapper_attributes'] = new Attribute();
+          break;
       }
     }
   }
