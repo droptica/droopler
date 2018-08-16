@@ -5,6 +5,8 @@
  * File containing d_p_side_tiles module.
  */
 
+use \Drupal\Core\Template\Attribute;
+
 /**
  * Implements hook_preprocess_HOOK().
  */
@@ -14,13 +16,19 @@ function d_p_side_tiles_preprocess_paragraph(&$variables) {
 
   switch ($bundle) {
     case 'd_p_side_tiles':
-      $field_tiles_side = $paragraph->get('field_d_p_st_tiles_side')->get(0);
+      $field_tiles_side = $paragraph->get('field_d_p_si_image_side')->get(0);
       if ($field_tiles_side) {
         $tiles_side = $field_tiles_side->getValue();
         $variables['tiles_side'] = $tiles_side['value'];
       }
       $variables['#attached']['library'][] = 'd_p_tiles/masonry';
       $variables['#attached']['library'][] = 'd_p_tiles/d_p_tiles';
+
+      $variables['tiles_wrapper_attributes'] = new Attribute();
+      $variables['images_side_attributes'] = new Attribute();
+      $variables['content_side_attributes'] = new Attribute();
+      $variables['content_fields_attributes'] = new Attribute();
+
       break;
   }
 }

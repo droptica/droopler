@@ -7,14 +7,14 @@ dependencies:
     - field.field.paragraph.d_p_side_tiles.field_d_image
     - field.field.paragraph.d_p_side_tiles.field_d_long_text
     - field.field.paragraph.d_p_side_tiles.field_d_main_title
-    - field.field.paragraph.d_p_side_tiles.field_d_p_st_tiles_side
+    - field.field.paragraph.d_p_side_tiles.field_d_p_si_image_side
     - image.style.side_tiles_fullsceen
     - image.style.side_tiles_thumbnail
     - paragraphs.paragraphs_type.d_p_side_tiles
   module:
     - colorbox
-    - image
     - link
+    - svg_image
     - text
 id: paragraph.d_p_side_tiles.default
 targetEntityType: paragraph
@@ -39,6 +39,10 @@ content:
     settings:
       image_style: ''
       image_link: ''
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
     third_party_settings: {  }
     type: image
     region: content
@@ -80,4 +84,4 @@ content:
     type: string
     region: content
 hidden:
-  field_d_p_st_tiles_side: true
+  field_d_p_si_image_side: true
