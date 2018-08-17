@@ -13,13 +13,17 @@ $d-p-tiles-overlay-opacity: 0.6 !default;
 $d-p-tiles-line-margin-top: 1rem !default;
 $d-p-tiles-line-margin-bottom: 1rem !default;
 $d-p-tiles-margin-top: 5% !default;
-$d-p-tiles-margin-bottom: 0 !default;
+$d-p-tiles-margin-bottom: 5% !default;
 
 .paragraph--type--d-p-tiles {
   @include clearfix;
 
-  margin-top: $d-p-tiles-margin-top;
-  margin-bottom: $d-p-tiles-margin-bottom;
+  .paragraph-top-light & {
+    margin-top: $d-p-tiles-margin-top;
+  }
+  .paragraph-bottom-light & {
+    margin-bottom: $d-p-tiles-margin-bottom;
+  }
 
   h2 {
     @include font-main-header;
@@ -130,4 +134,20 @@ $d-p-tiles-margin-bottom: 0 !default;
 .wrapper-d_p_tiles + .wrapper-d_p_side_embed,
 .wrapper-d_p_tiles + .wrapper-d_p_side_image {
   border-top: 2px solid transparent;
+}
+
+.wrapper-d_p_text_with_bckg + .wrapper-d_p_tiles.paragraph-top-dark,
+.wrapper-d_p_subscribe_file + .wrapper-d_p_tiles.paragraph-top-dark,
+.wrapper-d_p_form + .wrapper-d_p_tiles.paragraph-top-dark,
+.wrapper-d_p_counters + .wrapper-d_p_tiles.paragraph-top-dark,
+.wrapper-d_p_banner + .wrapper-d_p_tiles.paragraph-top-dark,
+.wrapper-d_p_side_embed + .wrapper-d_p_tiles.paragraph-top-dark,
+.wrapper-d_p_side_image + .wrapper-d_p_tiles.paragraph-top-dark {
+  border-top: 2px solid transparent;
+}
+
+@include media-breakpoint-down(sm) {
+  .wrapper-d_p_side_tiles + .wrapper-d_p_tiles.paragraph-top-dark {
+    border-top: 2px solid transparent;
+  }
 }

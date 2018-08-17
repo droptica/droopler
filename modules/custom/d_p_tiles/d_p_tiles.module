@@ -30,6 +30,7 @@ function d_p_tiles_preprocess_paragraph(&$variables) {
 
   switch ($bundle) {
     case 'd_p_tiles':
+      // Attach libraries.
       $variables['#attached']['library'][] = 'd_p_tiles/masonry';
       $variables['#attached']['library'][] = 'd_p_tiles/d_p_tiles';
       break;
@@ -74,7 +75,7 @@ function d_p_tiles_preprocess_colorbox_formatter(&$variables) {
     if (strstr($alt, '1x1')) {
       $alt = trim(str_replace('1x1', '', $alt));
     }
-    // In other sizes change classes and styles.
+    // In 2x2 change class and image style.
     if (strstr($alt, '2x2')) {
       $alt = trim(str_replace('2x2', '', $alt));
       $variables['image']['#style_name'] = 'tiles_thumbnail_2x2';

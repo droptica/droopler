@@ -1,3 +1,8 @@
+/**
+ * @file
+ * A script that enables Masonry.
+ */
+
 (function ($, Drupal) {
 
   'use strict';

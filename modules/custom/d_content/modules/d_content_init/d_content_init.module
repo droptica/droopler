@@ -314,6 +314,7 @@ function d_content_init_create_all() {
       'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
       'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
       'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
+      'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
     ]],
     'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
   ];

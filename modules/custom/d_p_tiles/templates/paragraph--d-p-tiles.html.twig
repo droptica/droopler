@@ -45,11 +45,17 @@
 'paragraph--type--' ~ paragraph.bundle|clean_class,
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
+{% set wrapper_classes = [
+  paragraph.field_d_icon.value is empty and
+    paragraph.field_d_main_title.value is empty and
+    paragraph.field_d_long_text.value is empty ? 'paragraph-top-dark' : 'paragraph-top-light',
+  'paragraph-bottom-dark',
+] %}
 {% set paragraph_classes = [
   'd-p-tiles',
 ] %}
 {% block paragraph %}
-<section {{ wrapper_attributes }}>
+<section {{ wrapper_attributes.addClass(wrapper_classes) }}>
   <div{{ attributes.addClass(classes) }}>
     <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
       {% block content %}
