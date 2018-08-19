@@ -5,6 +5,7 @@
 // Colour variables used in this paragraph.
 $d-p-side-tiles-image-background-color: $color-odysseus !default;
 $d-p-side-tiles-text-background-color: $color-agamemnon !default;
+$d-p-side-tiles-text-background-color-secondary: darken($d-p-side-tiles-text-background-color, 15%) !default;
 $d-p-side-tiles-text-color: $color-odysseus !default;
 $d-p-side-tiles-link-color: $color-nestor !default;
 $d-p-side-tiles-link-hover-color: darken($d-p-side-tiles-link-color, 5%) !default;
@@ -24,7 +25,12 @@ $d-p-side-tiles-text-width: 35.625rem !default;
 $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half of the screen
 
 .d-p-side-tiles-wrapper {
+
   background-color: $d-p-side-tiles-text-background-color;
+
+  &.image-side-left {
+    background-color: $d-p-side-tiles-text-background-color-secondary;
+  }
 
   .d-p-side-tiles-content {
     color: $d-p-side-tiles-text-color;
