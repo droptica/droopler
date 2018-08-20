@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_main_title
+    - paragraphs.paragraphs_type.d_p_tiles
+id: paragraph.d_p_tiles.field_d_main_title
+field_name: field_d_main_title
+entity_type: paragraph
+bundle: d_p_tiles
+label: 'Main title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

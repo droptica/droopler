@@ -17,9 +17,9 @@ $d-p-side-embed-line-margin-bottom: 1.44rem !default;
 $d-p-side-embed-fields-padding-y: 7% !default;
 $d-p-side-embed-mobile-height: 18.75rem !default;
 $d-p-side-embed-text-desktop-padding-y: 2rem !default;
-$d-p-side-embed-text-mobile-padding-y: 7% !default;
-$d-p-side-embed-text-width: 430px !default;
-$d-p-side-embed-half-padding: 5% !default; // Spacing between content and half of the screen
+$d-p-side-embed-text-mobile-padding: 7% !default;
+$d-p-side-embed-text-width: 35.625rem !default;
+$d-p-side-embed-half-padding: 10% !default; // Spacing between content and half of the screen
 $d-p-side-embed-mobile-height: 300px !default; // This value must be set, otherwise embed won't be visible.
 $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of embed here.
 
@@ -78,17 +78,16 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     }
   }
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(sm) {
     .d-p-side-embed-content {
-      padding-top: $d-p-side-embed-text-mobile-padding-y;
-      padding-bottom: $d-p-side-embed-text-mobile-padding-y;
+      padding: $d-p-side-embed-text-mobile-padding;
     }
     .d-p-side-embed-embed {
       min-height: $d-p-side-embed-mobile-height;
     }
   }
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(md) {
 
     .d-p-side-embed-content {
       padding: $d-p-side-embed-text-desktop-padding-y ($grid-gutter-width / 2);
@@ -104,18 +103,24 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     &.embed-side {
       &-right {
         .d-p-side-embed-content {
-          padding-right: $d-p-side-embed-half-padding;
           justify-content: flex-end;
           order: 1;
         }
         .d-p-side-embed-embed {
           order: 2;
         }
+        .d-p-side-embed-content-fields {
+          padding-right: $d-p-side-embed-half-padding;
+          padding-left: ($grid-gutter-width / 2);
+        }
       }
       &-left {
         .d-p-side-embed-content {
-          padding-left: $d-p-side-embed-half-padding;
           justify-content: flex-start;
+        }
+        .d-p-side-embed-content-fields {
+          padding-left: $d-p-side-embed-half-padding;
+          padding-right: ($grid-gutter-width / 2);
         }
       }
     }

@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Droopler implementation to display a Side Embed Paragraph.
+ * Theme override to display the Tiles Paragraph.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
@@ -40,40 +40,27 @@
 #}
 {% set classes = [
 'paragraph',
-'container-fluid',
-'d-p-side-embed',
+'tiles',
+'clearfix',
 'paragraph--type--' ~ paragraph.bundle|clean_class,
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
-{% set d_p_side_embed_wrapper_classes = [
-  'clearfix',
-  'd-p-side-embed-wrapper',
-  'row',
-  'embed-side-' ~ embed_side,
+{% set wrapper_classes = [
+  paragraph.field_d_icon.value is empty and
+    paragraph.field_d_main_title.value is empty and
+    paragraph.field_d_long_text.value is empty ? 'paragraph-top-dark' : 'paragraph-top-light',
+  'paragraph-bottom-dark',
 ] %}
-{% set embed_side_classes = [
-  'd-p-side-embed-embed',
-  'col-md-6',
-] %}
-{% set content_side_classes = [
-  'd-p-side-embed-content',
-  'col-md-6 p-md-0',
-] %}
-{% set content_fields_classes = [
-  'd-p-side-embed-content-fields',
+{% set paragraph_classes = [
+  'd-p-tiles',
 ] %}
 {% block paragraph %}
-<section {{ wrapper_attributes }}>
+<section {{ wrapper_attributes.addClass(wrapper_classes) }}>
   <div{{ attributes.addClass(classes) }}>
-    <div {{ d_p_side_embed_wrapper_attributes.addClass(d_p_side_embed_wrapper_classes) }}>
-      <div {{ embed_side_attributes.addClass(embed_side_classes) }}>
-        {{ embed | raw }}
-      </div>
-      <div {{ content_side_attributes.addClass(content_side_classes) }}>
-        <div {{ content_fields_attributes.addClass(content_fields_classes) }}>
-          {{ content | without('field_d_embed') }}
-        </div>
-      </div>
+    <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
+      {% block content %}
+        {{ content }}
+      {% endblock %}
     </div>
   </div>
 </section>

@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_tiles.field_d_icon
+    - field.field.paragraph.d_p_tiles.field_d_image
+    - field.field.paragraph.d_p_tiles.field_d_long_text
+    - field.field.paragraph.d_p_tiles.field_d_main_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.d_p_tiles
+  module:
+    - svg_image
+    - text
+id: paragraph.d_p_tiles.default
+targetEntityType: paragraph
+bundle: d_p_tiles
+mode: default
+content:
+  field_d_icon:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_d_image:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_d_long_text:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_d_main_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

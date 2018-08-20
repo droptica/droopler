@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Droopler implementation to display a Side Embed Paragraph.
+ * Theme override to display the Side Tiles Paragraph.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
@@ -39,39 +39,40 @@
  */
 #}
 {% set classes = [
-'paragraph',
-'container-fluid',
-'d-p-side-embed',
-'paragraph--type--' ~ paragraph.bundle|clean_class,
-view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  'paragraph',
+  'container-fluid',
+  'd-p-side-tiles-banner',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
-{% set d_p_side_embed_wrapper_classes = [
+{% set tiles_wrapper_classes = [
   'clearfix',
-  'd-p-side-embed-wrapper',
+  'd-p-side-tiles-wrapper',
   'row',
-  'embed-side-' ~ embed_side,
+  'image-side-' ~ tiles_side,
 ] %}
-{% set embed_side_classes = [
-  'd-p-side-embed-embed',
+{% set images_side_classes = [
+  'd-p-side-tiles-images',
   'col-md-6',
 ] %}
 {% set content_side_classes = [
-  'd-p-side-embed-content',
+  'd-p-side-tiles-content',
   'col-md-6 p-md-0',
 ] %}
 {% set content_fields_classes = [
-  'd-p-side-embed-content-fields',
+  'd-p-side-tiles-content-fields',
 ] %}
 {% block paragraph %}
+
 <section {{ wrapper_attributes }}>
-  <div{{ attributes.addClass(classes) }}>
-    <div {{ d_p_side_embed_wrapper_attributes.addClass(d_p_side_embed_wrapper_classes) }}>
-      <div {{ embed_side_attributes.addClass(embed_side_classes) }}>
-        {{ embed | raw }}
+  <div {{ attributes.addClass(classes) }}>
+    <div {{ tiles_wrapper_attributes.addClass(tiles_wrapper_classes) }}>
+      <div {{ images_side_attributes.addClass(images_side_classes) }}>
+        {{ content.field_d_image }}
       </div>
       <div {{ content_side_attributes.addClass(content_side_classes) }}>
         <div {{ content_fields_attributes.addClass(content_fields_classes) }}>
-          {{ content | without('field_d_embed') }}
+          {{ content | without('field_d_image') }}
         </div>
       </div>
     </div>
