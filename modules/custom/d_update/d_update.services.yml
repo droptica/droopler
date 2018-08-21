@@ -1,0 +1,4 @@
+services:
+  d_updater:
+    class: Drupal\d_update\Updater
+    arguments: ['@module_installer', '@logger.factory']
