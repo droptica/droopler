@@ -39,22 +39,28 @@
  */
 #}
 {% set classes = [
-'paragraph',
-'paragraph--type--' ~ paragraph.bundle|clean_class,
-view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+] %}
+{% set paragraph_classes = [
+  'subscribe_file',
+  'background-image',
 ] %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    <div class="subscribe_file background-image" data-id="{{ id }}">
-      <div class="content-wrapper">
-        <div class="content container">
-          {% block content %}
-            {{ content }}
-            {{ subscribe_file_form  }}
-            {{ additional_info }}
-          {% endblock %}
+  <section {{ wrapper_attributes }}>
+    <div{{ attributes.addClass(classes) }}>
+      <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
+        <div class="content-wrapper">
+          <div class="content container">
+            {% block content %}
+              {{ content }}
+              {{ subscribe_file_form }}
+              {{ additional_info }}
+            {% endblock %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 {% endblock paragraph %}

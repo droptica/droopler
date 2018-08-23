@@ -1,0 +1,67 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_carousel.field_d_icon
+    - field.field.paragraph.d_p_carousel.field_d_long_text
+    - field.field.paragraph.d_p_carousel.field_d_main_title
+    - field.field.paragraph.d_p_carousel.field_d_number
+    - field.field.paragraph.d_p_carousel.field_d_p_cs_item_reference
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.d_p_carousel
+  module:
+    - paragraphs
+    - svg_image
+    - text
+id: paragraph.d_p_carousel.default
+targetEntityType: paragraph
+bundle: d_p_carousel
+mode: default
+content:
+  field_d_icon:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_d_long_text:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_d_main_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_d_number:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_d_p_cs_item_reference:
+    type: entity_reference_paragraphs
+    weight: 5
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

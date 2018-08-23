@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_embed
+    - paragraphs.paragraphs_type.d_p_side_embed
+id: paragraph.d_p_side_embed.field_d_embed
+field_name: field_d_embed
+entity_type: paragraph
+bundle: d_p_side_embed
+label: Embed
+description: 'Paste your embed code here. Avoid setting fixed width.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -13,9 +13,6 @@
       if ($body.hasClass('d-theme-preceded')) {
         return;
       }
-      if (typeof drupalSettings.droopler !== "undefined") {
-        $('footer').after(atob(drupalSettings.droopler));
-      }
       $(window).scroll(function() {
         if ($(this).scrollTop() > 50) {
           $("body").addClass("scrolled");

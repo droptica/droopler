@@ -1,0 +1,194 @@
+info:
+  type: content_page
+  title: Home Page
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_banner
+    data:
+      field_d_main_title:
+        type: text
+        data: Welcome to Droopler
+      field_d_subtitle:
+        type: text
+        data: Build great websites quickly!
+      field_d_image_background:
+        type: image
+        data: demo_droopler_bg.jpg
+      field_d_long_text:
+        type: text_long
+        data: <p>Droopler is a modern and easy to use installation profile for Drupal 8.
+          This page contains a demo content that will help you understand Droopler better.
+          Just click around and see what you can use to build your website.</p>
+
+  - paragraph_type: d_p_group_of_text_blocks
+    data:
+      field_d_main_title:
+        type: text
+        data: Why Droopler?
+      field_d_p_tb_block_reference:
+        type: paragraph_reference
+        data:
+        - field_d_main_title:
+            type: text
+            data: Open Source and Free of Charge
+          field_d_long_text:
+            type: text_long
+            data: <p>Droopler is licensed under General Public License (GPL) v2. You can use it for free and without
+              any limitations. We believe in Open Source, and we fully support it.</p>
+        - field_d_main_title:
+            type: text
+            data: Cutting Edge Technology
+          field_d_long_text:
+            type: text_long
+            data: <p>Droopler uses a modern technology stack - Drupal 8 and Bootstrap 4. You immediately get a head start
+              with code created by great online communities</p>
+        - field_d_main_title:
+            type: text
+            data: Beautiful and Super Flexible Design
+          field_d_long_text:
+            type: text_long
+            data: <p>Out of the box, you get a fantastic, flexible system which allows you to build various pages
+              and websites. You can change whatever you want, however you want it.</p>
+        - field_d_main_title:
+            type: text
+            data: Flexibility and no constraints
+          field_d_long_text:
+            type: text_long
+            data: <p>Using Droopler, you can add any number of subpages and sections, in any order you want.
+              You have full control over your website, and it will be exactly the way you want it.</p>
+        - field_d_main_title:
+            type: text
+            data: Responsiveness
+          field_d_long_text:
+            type: text_long
+            data: <p>Your content in Droopler presents perfectly on your computer, as well as on your phone or tablet.
+              You don't have to write any code to make it happen.</p>
+        - field_d_main_title:
+            type: text
+            data: Support for SEO
+          field_d_long_text:
+            type: text_long
+            data: <p>We optimized all HTML code for search engines. In the system, you'll find modules
+              for setting meta tags and redirections. You'll measure your success thanks to Analytics integration.</p>
+
+  - paragraph_type: d_p_text_with_bckg
+    data:
+      field_d_icon:
+        type: image
+        data: demo_droopler.svg
+      field_d_image_background:
+        type: image
+        data: demo_bg.jpg
+      field_d_main_title:
+        type: text
+        data: Droopler Examples
+      field_d_long_text:
+        type: text_long
+        data: <p>Don't hesitate to use any of these examples in your project.
+          We encourage you to copy them, modify and experiment.
+          It's the fastest way to create a quality content.</p>
+
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Local Business Website
+      field_d_image_background:
+        type: image
+        data: demo_business_2.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_long_text:
+        type: text_long
+        data: <p>Your local business needs a modern and responsive website to beat the competition
+          and encourage customers to use your services. Droopler will help you with that.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/business-website
+          text: Go to the example
+
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Event Website
+      field_d_image_background:
+        type: image
+        data: demo_event_3.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: left
+      field_d_long_text:
+        type: text_long
+        data: <p>Event sites have to be breathtaking, but also easy to create.
+          Droopler allows you to achieve extraordinary results with a few images and texts.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/event-website
+          text: Go to the example
+
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Product Landing Page
+      field_d_image_background:
+        type: image
+        data: demo_car_6.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_long_text:
+        type: text_long
+        data: <p>Sometimes you have to create a landing page for your product. Usually,
+          it contains some high-quality photos and essential technical details.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/product-landing-page
+          text: Go to the example
+
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Portfolio Website
+      field_d_image_background:
+        type: image
+        data: demo_portfolio_1.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: left
+      field_d_long_text:
+        type: text_long
+        data: <p>Portfolios are usually designed to present you as a great artist or designer.
+          They must be visually perfect. Droopler handles them easily.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/portfolio-website
+          text: Go to the example
+
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Educational Website
+      field_d_image_background:
+        type: image
+        data: demo_educational_1.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_long_text:
+        type: text_long
+        data: <p>Educational pages are often built by schools, universities and government organizations.
+          They contain lots of information, they also need to implement custom views and forms.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/educational-website
+          text: Go to the example

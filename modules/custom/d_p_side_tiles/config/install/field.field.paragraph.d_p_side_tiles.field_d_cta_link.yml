@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_cta_link
+    - paragraphs.paragraphs_type.d_p_side_tiles
+  module:
+    - link
+id: paragraph.d_p_side_tiles.field_d_cta_link
+field_name: field_d_cta_link
+entity_type: paragraph
+bundle: d_p_side_tiles
+label: Link
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

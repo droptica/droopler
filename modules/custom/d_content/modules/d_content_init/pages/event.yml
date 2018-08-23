@@ -1,0 +1,247 @@
+info:
+  type: content_page
+  title: Event Website Example
+  path:
+    alias: /examples/event-website
+    pathauto: 0
+
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_banner
+    data:
+      field_d_icon:
+        type: image
+        data: demo_beethoven.svg
+      field_d_main_title:
+        type: text
+        data: Beethoven Festival Europe
+      field_d_subtitle:
+        type: text
+        data: Event Website Example
+      field_d_image_background:
+        type: image
+        data: demo_event_1.jpg
+      field_d_long_text:
+        type: text_long
+        data: <p>Event sites have to be breathtaking, but also easy to create. Droopler allows you to
+          achieve extraordinary results with a few images and texts. Adding an agenda or CTA is very fast.
+          There are some paragraphs available to implement a gallery and a list of sponsors.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/event-website
+          text: Buy Tickets
+  - paragraph_type: d_p_group_of_text_blocks
+    data:
+      field_d_main_title:
+        type: text
+        data: Meet Our Guests
+      field_d_p_tb_block_reference:
+        type: paragraph_reference
+        data:
+        - field_d_icon:
+            type: image
+            data: demo_face_1.jpg
+          field_d_main_title:
+            type: text
+            data: Amanda Doe
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: Learn more...
+        - field_d_icon:
+            type: image
+            data: demo_face_2.jpg
+          field_d_main_title:
+            type: text
+            data: John Smith
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: Learn more...
+        - field_d_icon:
+            type: image
+            data: demo_face_3.jpg
+          field_d_main_title:
+            type: text
+            data: Steven Kovalsky
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: Learn more...
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Friday, 15th May
+      field_d_image_background:
+        type: image
+        data: demo_event_2.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/event-website
+          text: Buy tickets
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Saturday, 16th May
+      field_d_image_background:
+        type: image
+        data: demo_event_3.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: left
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/event-website
+          text: Buy tickets
+  - paragraph_type: d_p_gallery
+    data:
+      field_d_main_title:
+        type: text
+        data: Our Concert Hall
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+      field_d_image:
+        type: image
+        data:
+        - file: demo_event_1.jpg
+          alt: Concert Hall
+        - file: demo_event_2.jpg
+          alt: Concert Hall
+        - file: demo_event_3.jpg
+          alt: Concert Hall
+        - file: demo_event_4.jpg
+          alt: Concert Hall
+        - file: demo_event_3.jpg
+          alt: Concert Hall
+        - file: demo_event_1.jpg
+          alt: Concert Hall
+        - file: demo_event_4.jpg
+          alt: Concert Hall
+        - file: demo_event_2.jpg
+          alt: Concert Hall
+        - file: demo_event_2.jpg
+          alt: Concert Hall
+        - file: demo_event_4.jpg
+          alt: Concert Hall
+        - file: demo_event_1.jpg
+          alt: Concert Hall
+        - file: demo_event_3.jpg
+          alt: Concert Hall
+
+  - paragraph_type: d_p_carousel
+    data:
+      field_d_number:
+        type: number
+        data: 4
+      field_d_main_title:
+        type: text
+        data: Our Sponsors
+      field_d_p_cs_item_reference:
+        type: paragraph_reference
+        subtype: d_p_carousel_item
+        data:
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_logo1.svg
+              alt: BTU
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: BTU
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_logo2.svg
+              alt: Cube Inc.
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: Cube Inc.
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_logo3.svg
+              alt: Atlantic Jetlines
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: Atlantic Jetlines
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_logo4.svg
+              alt: Rock World Cafe
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: Rock World Cafe
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_logo5.svg
+              alt: YETI
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: YETI
+        - field_d_image:
+            type: image
+            data:
+            - file: demo_droopler.svg
+              alt: Droopler
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/event-website
+              text: Droopler

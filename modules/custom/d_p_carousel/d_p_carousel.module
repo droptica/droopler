@@ -1,0 +1,115 @@
+<?php
+
+/**
+ * @file
+ * Contains d_p_carousel module with Carousel Paragraph.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function d_p_carousel_theme($existing, $type, $theme, $path)
+{
+  return [
+    'paragraph__d_p_carousel' => [
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__d_p_carousel_item' => [
+      'base hook' => 'paragraph',
+    ],
+    'field__field_d_p_cs_item_reference' => [
+      'base hook' => 'field',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_field().
+ *
+ * @param array $variables
+ *  Template variables.
+ */
+function d_p_carousel_preprocess_field(&$variables)
+{
+  if ($variables['element']['#entity_type'] == 'paragraph') {
+    if ($variables['element']['#bundle'] == 'd_p_carousel') {
+      if ($variables['field_name'] == 'field_d_p_cs_item_reference') {
+        /**
+         * @var \Drupal\paragraphs\Entity\Paragraph $paragraph
+         */
+        $paragraph = $variables['element']['#object'];
+        $num_array = $paragraph->get('field_d_number')->getValue();
+        $variables['column_classes'] = 'col-sm-4';
+        if (!empty($num_array[0]['value'])) {
+          $columns = $num_array[0]['value'];
+          $columns_sm = min($columns, 2);
+          $num_items = count($variables['items']);
+
+          // MD/LG - special cases when there is one element or
+          // number of elements is smaller than number of columns.
+          if ($num_items === 1) {
+            $columns = 1;
+          }
+          elseif ($num_items <= $columns) {
+            $columns = $num_items - 1;
+          }
+
+          // SM - one or two columns.
+          if ($num_items <= $columns_sm) {
+            $columns_sm = 1;
+          }
+
+          $variables['column_classes'] = [
+            'col-md-' . floor(12 / $columns),
+            'col-sm-' . floor(12 / $columns_sm),
+            'col-xs-12'
+          ];
+
+          $id = $paragraph->id();
+          $variables['#attached']['drupalSettings']['d_p_carousel'][$id] = [
+            'columns' => $columns,
+            'columns_sm' => $columns_sm,
+            'columns_xs' => 1,
+          ];
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * @param array $variables
+ *  Template variables.
+ */
+function d_p_carousel_preprocess_paragraph(&$variables)
+{
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  switch ($bundle) {
+    case 'd_p_carousel':
+      $variables['#attached']['library'][] = 'd_p_carousel/slick';
+      $variables['#attached']['library'][] = 'd_p_carousel/d_p_carousel';
+      $variables['#attached']['drupalSettings']['d_p_carousel']['sm'] = 992;
+      $variables['#attached']['drupalSettings']['d_p_carousel']['xs'] = 540;
+      $variables['attributes']['data-id'][] = $variables['paragraph']->id();
+      break;
+    case 'd_p_carousel_item':
+      /**
+       * @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link
+       */
+      $link = $paragraph->get('field_d_cta_link')->first();
+      if (!is_null($link)) {
+        $variables['has_link'] = true;
+        $variables['attributes']['href'][] = $link->getUrl()->toString();
+      }
+      else {
+        $variables['has_link'] = false;
+      }
+      break;
+  }
+}
+
+

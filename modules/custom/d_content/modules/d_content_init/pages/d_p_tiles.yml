@@ -1,0 +1,143 @@
+info:
+  type: content_page
+  title: Tiles Paragraphs
+  path:
+    alias: /documentation/tiles-paragraphs
+    pathauto: 0
+
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_text_with_bckg
+    data:
+      field_d_image_background:
+        type: image
+        data: demo_bg.jpg
+      field_d_main_title:
+        type: text
+        data: Tiles Paragraphs
+      field_d_subtitle:
+        type: text
+        data: Droopler Documentation
+
+  - paragraph_type: d_p_text_with_bckg
+    data:
+      field_d_image_background:
+        type: image
+        data: demo_blue.png
+      field_d_main_title:
+        type: text
+        data: 'Full Gallery & Side Tiles Example:'
+      field_d_long_text:
+        type: text_long
+        data: <p>The Tiles Paragraphs utilize Masonry to deliver an excellent gallery experience.
+          All images get arranged to fit the screen width. You can manipulate the display by changing
+          the ALT attribute of each image. Appending "2x2" makes the picture two times larger than the
+          others. The "/" character separates the title and subtitle. Below there are four paragraphs -
+          two Tile Galleries and two Side Tiles.</p>
+
+  - paragraph_type: d_p_tiles
+    data:
+      field_d_icon:
+        type: image
+        data: demo_droopler.svg
+      field_d_main_title:
+        type: text
+        data: Main Title
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
+          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim.
+          Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur
+          consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo,
+          eget faucibus mauris egestas.</p>
+      field_d_image:
+        type: image
+        data:
+          - file: demo_car_1.jpg
+            alt: 2x2 Title / Subtitle
+          - file: demo_car_2.jpg
+            alt: Title / Subtitle
+          - file: demo_car_5.jpg
+            alt: Title / Subtitle
+          - file: demo_car_6.jpg
+            alt: Title / Subtitle
+          - file: demo_car_7.jpg
+            alt: Title / Subtitle
+
+  - paragraph_type: d_p_side_tiles
+    data:
+      field_d_icon:
+        type: image
+        data: demo_droopler_white.svg
+      field_d_main_title:
+        type: text
+        data: Main Title
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet.</p>
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/documentation/tiles-paragraphs
+          text: Call To Action!
+      field_d_image:
+        type: image
+        data:
+        - file: demo_car_5.jpg
+          alt: Title / Subtitle
+        - file: demo_car_7.jpg
+          alt: Title / Subtitle
+        - file: demo_car_1.jpg
+          alt: Title / Subtitle
+        - file: demo_car_6.jpg
+          alt: Title / Subtitle
+
+  - paragraph_type: d_p_side_tiles
+    data:
+      field_d_icon:
+        type: image
+        data: demo_droopler_white.svg
+      field_d_main_title:
+        type: text
+        data: Main Title
+      field_d_long_text:
+        type: text_long
+        data: <p>Curabitur consectetur nec ante ac ornare.</p>
+      field_d_p_si_image_side:
+        type: text_select
+        data: left
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/documentation/tiles-paragraphs
+          text: Call To Action!
+      field_d_image:
+        type: image
+        data:
+        - file: demo_car_6.jpg
+          alt: Title / Subtitle
+        - file: demo_car_2.jpg
+          alt: Title / Subtitle
+        - file: demo_car_7.jpg
+          alt: Title / Subtitle
+        - file: demo_car_5.jpg
+          alt: Title / Subtitle
+
+  - paragraph_type: d_p_tiles
+    data:
+      field_d_image:
+        type: image
+        data:
+        - file: demo_car_1.jpg
+          alt: Title / Subtitle
+        - file: demo_car_2.jpg
+          alt: Title / Subtitle
+        - file: demo_car_5.jpg
+          alt: 2x2 Title / Subtitle
+        - file: demo_car_6.jpg
+          alt: Title / Subtitle
+        - file: demo_car_7.jpg
+          alt: Title / Subtitle

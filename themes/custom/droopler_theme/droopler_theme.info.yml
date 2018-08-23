@@ -1,7 +1,7 @@
-name: Droopler theme
+name: Droopler Theme
 type: theme
 description: 'A flexible Booststrap based theme, with many regions and a responsive, mobile-first layout.'
-version: '8.x-1'
+version: 8.x-1.3
 core: '8.x'
 base theme: false
 
@@ -16,9 +16,7 @@ libraries-extend:
     - droopler_theme/file
 
 ckeditor_stylesheets:
-  - css/base/elements.css
-  - css/components/captions.css
-  - css/components/table.css
+  - css/ckeditor.css
 
 regions:
   header: Header
