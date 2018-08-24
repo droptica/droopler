@@ -1,0 +1,36 @@
+countup:
+  remote: http://github.com/inorganik/countUp.js
+  version: VERSION
+  license:
+    name: MIT
+    gpl-compatible: false
+  js:
+    /libraries/countup/dist/countUp.min.js: { minified: true }
+
+countup-dev:
+  remote: http://github.com/inorganik/countUp.js
+  version: VERSION
+  license:
+    name: MIT
+    gpl-compatible: false
+  js:
+    /libraries/countup/dist/countUp.js: { }
+
+in-viewport:
+  remote: http://github.com/vvo/in-viewport
+  version: VERSION
+  license:
+    name: MIT
+    gpl-compatible: false
+  js:
+    /libraries/in-viewport/build/in-viewport.min.js: { minified: true }
+
+d_p_counters:
+  version: VERSION
+  js:
+    js/d_p_counters.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - d_p_counters/in-viewport
+    - d_p_counters/countup

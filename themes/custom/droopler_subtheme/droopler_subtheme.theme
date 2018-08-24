@@ -5,17 +5,12 @@
  * Functions to support theming in the droopler_subtheme theme.
  */
 
-use Drupal\Core\Link;
-use Drupal\Core\Template\Attribute;
-
 /**
  * Implements hook_preprocess_HOOK() for HTML document templates.
- *
- * Adds body classes if certain regions have content.
  */
-function droopler_subtheme_preprocess_html(&$variables) {
-
-}
+// function droopler_subtheme_preprocess_html(&$variables) {
+//
+// }
 
 /**
  * Implements hook_preprocess_HOOK() for page templates.
@@ -27,65 +22,69 @@ function droopler_subtheme_preprocess_page(&$variables) {
 /**
  * Implements hook_preprocess_HOOK() for page templates.
  */
-function droopler_subtheme_preprocess_page_title(&$variables) {
-
-}
+// function droopler_subtheme_preprocess_page_title(&$variables) {
+//
+// }
 
 /**
  * Implements hook_preprocess_HOOK() for maintenance-page.html.twig.
  */
-function droopler_subtheme_preprocess_maintenance_page(&$variables) {
-
-}
+// function droopler_subtheme_preprocess_maintenance_page(&$variables) {
+//
+// }
 
 /**
  * Implements hook_preprocess_HOOK() for node.html.twig.
  */
-function droopler_subtheme_preprocess_node(&$variables) {
-
-}
+// function droopler_subtheme_preprocess_node(&$variables) {
+//
+// }
 
 /**
  * Implements hook_preprocess_HOOK() for block.html.twig.
  */
-function droopler_subtheme_preprocess_block(&$variables) {
-
-}
+// function droopler_subtheme_preprocess_block(&$variables) {
+//
+// }
 
 /**
  * Implements hook_preprocess_HOOK() for form_element.
  */
-function droopler_subtheme_preprocess_form_element(&$variables) {
-
-}
+// function droopler_subtheme_preprocess_form_element(&$variables) {
+//
+// }
 
 /**
  * Implements hook_preprocess_HOOK() for menu.html.twig.
  */
-function droopler_subtheme_preprocess_menu(&$variables) {
-}
+// function droopler_subtheme_preprocess_menu(&$variables) {
+//
+// }
 
-function droopler_subtheme_preprocess_menu_local_task(&$variables) {
-
-}
+/**
+ * Implements hook_preprocess_HOOK() for menu's local tasks.
+ */
+// function droopler_subtheme_preprocess_menu_local_task(&$variables) {
+//
+// }
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for links templates.
  */
-function droopler_subtheme_theme_suggestions_links_alter(array &$suggestions, array $variables) {
-
-}
+// function droopler_subtheme_theme_suggestions_links_alter(array &$suggestions, array $variables) {
+//
+// }
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for form templates.
  */
-function droopler_subtheme_theme_suggestions_form_alter(array &$suggestions, array $variables) {
-
-}
+// function droopler_subtheme_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+//
+// }
 
 /**
  * Implements hook_preprocess_input() to add classes to inputs.
  */
-function droopler_subtheme_preprocess_input(&$variables) {
-
-}
+// function droopler_subtheme_preprocess_input(&$variables) {
+//
+// }

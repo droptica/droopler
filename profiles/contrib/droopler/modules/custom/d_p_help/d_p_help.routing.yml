@@ -1,0 +1,7 @@
+droopler.support:
+  path: '/admin/droopler-support'
+  defaults:
+    _controller: '\Drupal\d_p_help\Controller\SupportController::render'
+    _title: 'Droopler Support'
+  requirements:
+    _permission: 'access administration pages'

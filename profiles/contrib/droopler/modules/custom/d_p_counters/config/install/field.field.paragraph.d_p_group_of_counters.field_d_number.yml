@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_number
+    - paragraphs.paragraphs_type.d_p_group_of_counters
+id: paragraph.d_p_group_of_counters.field_d_number
+field_name: field_d_number
+entity_type: paragraph
+bundle: d_p_group_of_counters
+label: Columns
+description: 'You can use 1, 2, 3, 4, 6 and 12 columns.'
+required: true
+translatable: true
+default_value:
+  -
+    value: 3
+default_value_callback: ''
+settings:
+  min: 1
+  max: 12
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -4,6 +4,8 @@
  * Install, update and uninstall functions for the profilename install profile.
  */
 
+use Drupal\Core\Config\FileStorage;
+
 /**
  * Implements hook_install().
  *
@@ -39,6 +41,7 @@ function droopler_install() {
     ->set('page.front', '/node/1')
     ->save();
 
+  // Install init content. It will add an install task to be performed later.
   \Drupal::service('module_installer')->install(['d_content_init']);
 
   // If subtheme is available install the blog.
@@ -55,10 +58,75 @@ function droopler_install() {
     $linkit->set("matchers.$uuid.settings.bundles.blog_post", "blog_post")->save();
   }
 
+  // Try to install custom init that alters the original one.
+  try {
+    \Drupal::service('module_installer')->install(['d_custom_init']);
+  }
+  catch (\Drupal\Core\Extension\MissingDependencyException $e) {
+    \Drupal::logger('droopler_install')->notice('Custom content init not detected.');
+  }
+
+  // Apply updates.
   try {
     \Drupal::entityDefinitionUpdateManager()->applyUpdates();
   }
   catch (\Drupal\Core\Entity\EntityStorageException $e) {
     watchdog_exception('droopler_install', $e);
   }
+}
+
+/**
+ * Implements hook_install_tasks()
+ */
+function droopler_install_tasks() {
+  $tasks = [
+    'd_content_init_create_all' => [
+      'display' => TRUE,
+      'display_name' => t('Init content'),
+      'type' => 'normal',
+    ],
+    'd_content_init_add_footer' => [
+      'display' => TRUE,
+      'display_name' => t('Add footer'),
+      'type' => 'normal',
+    ],
+  ];
+
+  return $tasks;
+}
+
+/**
+ * Import a config file.
+ * @todo To be moved to a new manager class.
+ *
+ * @param string $module
+ *  Module name.
+ * @param string $name
+ *  Config file name without .yml extension.
+ */
+function _droopler_import_config($module, $name) {
+  $config_path = drupal_get_path('module', $module) . '/config/install';
+  $source = new FileStorage($config_path);
+  $config_storage = \Drupal::service('config.storage');
+  $config_storage->write($name, $source->read($name));
+}
+
+/**
+ * Droopler 1.3 Updates.
+ */
+function droopler_update_8101() {
+  // Install modules.
+  $modules = [
+    'd_p_counters',
+    'd_p_gallery',
+    'd_p_side_embed',
+    'd_p_side_tiles',
+    'd_p_tiles',
+    'colorbox',
+    'd_p_help',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
+
+  // Install config.
+  _droopler_import_config('d_content', 'field.field.node.content_page.field_page_section');
 }

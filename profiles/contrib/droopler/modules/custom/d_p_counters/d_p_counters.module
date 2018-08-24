@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * File containing Counter Paragraph module
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function d_p_counters_theme($existing, $type, $theme, $path) {
+  return [
+    'paragraph__d_p_group_of_counters' => [
+      'base hook' => 'paragraph',
+    ],
+    'field__paragraph__field_d_counter_reference__d_p_group_of_counters' => [
+      'base hook' => 'field',
+    ],
+    'field__paragraph__field_d_number__d_p_single_counter' => [
+      'base hook' => 'field',
+    ],
+    'field__paragraph__field_d_main_title__d_p_single_counter' => [
+      'base hook' => 'field',
+    ]
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_p_counters_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  $styles_ids = d_p_responsive_style_ids();
+
+  switch ($bundle) {
+    case 'd_p_group_of_counters':
+      d_p_generate_image_set($variables, $styles_ids, $bundle);
+      $variables['#attached']['library'][] = 'd_p_counters/d_p_counters';
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function d_p_counters_preprocess_field(&$variables) {
+  if ($variables['element']['#entity_type'] == 'paragraph') {
+    if ($variables['element']['#bundle'] == 'd_p_group_of_counters') {
+      if ($variables['field_name'] == 'field_d_counter_reference') {
+        $num_array = $variables['element']['#object']->get('field_d_number')->getValue();
+        $variables['column_class'] = 'col-sm-4';
+        if (!empty($num_array[0]['value'])) {
+          $columns = floor(12 / $num_array[0]['value']);
+          $variables['column_class'] = 'col-sm-' . $columns;
+        }
+      }
+    }
+  }
+}

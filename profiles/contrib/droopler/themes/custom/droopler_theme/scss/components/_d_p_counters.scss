@@ -1,0 +1,83 @@
+/**
+ * Counters paragraph
+ */
+
+// Colour variables used in this paragraph.
+$d-p-counters-background-overlay: $color-agamemnon !default;
+$d-p-counters-line-color: $line-background !default;
+$d-p-counters-header-color: $color-odysseus !default;
+$d-p-counters-number-color: $color-odysseus !default;
+$d-p-counters-text-color: $color-nestor !default;
+
+// Margins, paddings and sizing.
+$d-p-counters-title-margin-top: 0 !default;
+$d-p-counters-padding-top: 7.5rem !default;
+$d-p-counters-padding-bottom: 7.5rem !default;
+$d-p-counters-mobile-padding-top: 3rem !default;
+$d-p-counters-mobile-padding-bottom: 3rem !default;
+$d-p-counters-line-margin-top: $line-center-margin-top !default;
+$d-p-counters-line-margin-bottom: $line-center-margin-bottom !default;
+
+// Other settings
+$d-p-counters-img-opacity: 0.2 !default;
+
+.paragraph--type--d-p-group-of-counters {
+  background: $d-p-counters-background-overlay;
+  z-index: 0;
+
+  .content-wrapper {
+    width: 100%;
+    padding-top: $d-p-counters-padding-top;
+    padding-bottom: $d-p-counters-padding-bottom;
+    @include media-breakpoint-down(sm) {
+      padding-top: $d-p-counters-mobile-padding-top;
+      padding-bottom: $d-p-counters-mobile-padding-bottom;
+    }
+
+    .field--name-field-d-icon {
+      text-align: center;
+    }
+
+    // The header.
+    h2 {
+      @include font-main-header;
+      color: $d-p-counters-header-color;
+      text-align: center;
+      margin-top: $d-p-counters-title-margin-top;
+
+      &:after {
+        @include decoration-header-line-main-center;
+        background: $d-p-counters-line-color;
+        margin-top: $d-p-counters-line-margin-top;
+        margin-bottom: $d-p-counters-line-margin-bottom;
+      }
+    }
+
+    // List of counters.
+    .paragraph--type--d-p-single-counter {
+      text-align: center;
+      .field--name-field-d-number {
+        @include font-main-header;
+        color: $d-p-counters-number-color;
+        font-family: $font-header;
+      }
+      .field--name-field-d-main-title {
+        color: $d-p-counters-text-color;
+        font-size: 1rem;
+        font-weight: normal;
+      }
+    }
+  }
+
+  // Background image
+  .backstretch-item {
+    img {
+      opacity: $d-p-counters-img-opacity;
+      @include media-breakpoint-down(sm) {
+        max-width: none;
+        width: 100%;
+        overflow: hidden;
+      }
+    }
+  }
+}

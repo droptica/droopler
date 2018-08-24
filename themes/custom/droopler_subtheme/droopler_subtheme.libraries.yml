@@ -39,12 +39,16 @@ maintenance_page:
     - system/maintenance
     - droopler_theme/global-styling
     
-# Uncomment this to enable Font Awesome support.
-# Look into droopler_subtheme.info.yml too.
+## Uncomment this to enable Font Awesome support.
+## Look into droopler_subtheme.info.yml too.
 
-# fontawesome:
-#   version: VERSION
+# font-awesome:
+#   remote: https://fortawesome.github.io/Font-Awesome/
+#   version: 5.1.0
+#   license:
+#     name: MIT
+#     url: https://fortawesome.github.io/Font-Awesome/license/
+#     gpl-compatible: true
 #   css:
-#     component:
-#       //stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css: {}
-
+#     theme:
+#       //use.fontawesome.com/releases/v5.1.0/css/all.css: { type: external, minified: true }

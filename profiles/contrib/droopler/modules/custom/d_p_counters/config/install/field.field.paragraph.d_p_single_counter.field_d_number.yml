@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_number
+    - paragraphs.paragraphs_type.d_p_single_counter
+id: paragraph.d_p_single_counter.field_d_number
+field_name: field_d_number
+entity_type: paragraph
+bundle: d_p_single_counter
+label: Number
+description: 'Enter number to count to.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 1
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

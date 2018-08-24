@@ -1,0 +1,209 @@
+info:
+  type: content_page
+  title: Business Website Example
+  path:
+    alias: /examples/business-website
+    pathauto: 0
+
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_banner
+    data:
+      field_d_main_title:
+        type: text
+        data: Welcome to Our Bakery!
+      field_d_subtitle:
+        type: text
+        data: Local Business Page Example
+      field_d_image_background:
+        type: image
+        data: demo_business_1.jpg
+      field_d_long_text:
+        type: text_long
+        data: <p>This example shows a sample local bakery page. We have a banner, some featured products, important numbers,
+          interesting facts about the company, a map and a contact form for future contractors. It looks delicious!</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/business-website
+          text: Contact Us
+  - paragraph_type: d_p_group_of_text_blocks
+    data:
+      #field_d_icon:
+      #  type: image
+      #  data: demo_star.svg
+      field_d_main_title:
+        type: text
+        data: Featured Products
+      field_d_p_tb_block_reference:
+        type: paragraph_reference
+        data:
+        - field_d_main_title:
+            type: text
+            data: Tasty Croissants
+          field_d_icon:
+            type: image
+            data: demo_croissant.svg
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/business-website
+              text: Order now!
+        - field_d_main_title:
+            type: text
+            data: Appetizing Muffins
+          field_d_icon:
+            type: image
+            data: demo_muffin.svg
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/business-website
+              text: Order now!
+        - field_d_main_title:
+            type: text
+            data: Delicious Bagels
+          field_d_icon:
+            type: image
+            data: demo_bagel.svg
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/business-website
+              text: Order now!
+  - paragraph_type: d_p_group_of_counters
+    data:
+      field_d_image_background:
+        type: image
+        data: demo_bg_2.jpg
+      field_d_number:
+        type: number
+        data: 4
+      field_d_main_title:
+        type: text
+        data: Our Bakery in Numbers
+      field_d_counter_reference:
+        type: paragraph_reference
+        subtype: d_p_single_counter
+        data:
+        - field_d_number:
+            type: number
+            data: 100
+          field_d_main_title:
+            type: text
+            data: Employees
+        - field_d_number:
+            type: number
+            data: 223
+          field_d_main_title:
+            type: text
+            data: Bagels daily
+        - field_d_number:
+            type: number
+            data: 15
+          field_d_main_title:
+            type: text
+            data: Company Shops
+        - field_d_number:
+            type: number
+            data: 60
+          field_d_main_title:
+            type: text
+            data: Bread Ovens
+  - paragraph_type: d_p_text_with_bckg
+    data:
+      field_d_main_title:
+        type: text
+        data: Why Us?
+      field_d_image_background:
+        type: image
+        data: demo_bg.jpg
+      field_d_long_text:
+        type: text_long
+        data: <p>Our bagels are legendary!</p>
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: We love to see you smiling when you taste our pastries
+      field_d_image_background:
+        type: image
+        data: demo_business_2.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: We have a long tradition of baking
+      field_d_image_background:
+        type: image
+        data: demo_business_3.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: left
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+  - paragraph_type: d_p_side_embed
+    data:
+      field_d_main_title:
+        type: text
+        data: We are always close to you
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_embed:
+        type: text_long
+        data: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.9397954890014!2d17.029906465879577!3d51.109570947532966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fc275b16ab765%3A0x9a1fcb4c5e4ede68!2sRatusz+Wroc%C5%82awski!5e0!3m2!1spl!2spl!4v1534224990078" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
+          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
+          gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus,
+          id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex.
+          Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/business-website
+          text: Go to Google Maps
+  - paragraph_type: d_p_form
+    data:
+      field_d_main_title:
+        type: text
+        data: Contact Us!
+      field_d_image_background:
+        type: image
+        data: demo_business_4.jpg
+      field_d_forms:
+        type: entity_reference
+        data: feedback

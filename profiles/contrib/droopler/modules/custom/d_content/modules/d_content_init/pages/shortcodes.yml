@@ -1,0 +1,487 @@
+info:
+  type: content_page
+  title: Shortcodes
+  path:
+    alias: /documentation/shortcodes
+    pathauto: 0
+
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_text_paged
+    data:
+      field_d_main_title:
+        type: text
+        data: Droopler Typography
+      field_d_long_text:
+        type: text_long
+        data: |
+          <h1>Header 1</h1>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel euismod mauris. <strong>Bold Text - Vestibulum rutrum augue mauris, eu lacinia libero volutpat ac.</strong> Vivamus maximus quam et libero accumsan ultricies. Sed eget ipsum mauris. Integer id hendrerit tellus, quis venenatis lacus. Fusce vel turpis sit amet quam malesuada consectetur. Nulla maximus porta bibendum. Mauris ut imperdiet ex, vitae aliquam mi. Proin vitae dignissim quam. <em>Italic text - Ut vitae urna egestas, laoreet libero sed, consequat mi.</em> Nunc tincidunt elit elit, eu sodales sapien hendrerit quis. <em><strong>Bold Italic Text - Aenean ut euismod felis, quis placerat arcu.</strong></em> Praesent viverra imperdiet nulla, eu tempor orci malesuada quis. Cras porttitor ante enim, vel ornare neque imperdiet a.</p>
+
+          <h2>Header 2</h2>
+
+          <p>Nulla facilisi. <u><strong>Underlined fragment</strong> -&nbsp;Nunc aliquam elementum nisl, vel venenatis ante ornare eget.</u> Vivamus pulvinar, ante ut posuere hendrerit, arcu magna maximus leo, vitae blandit nisi tellus ut justo. Ut sit amet ornare tortor, a vestibulum neque. Fusce varius elementum dolor, vitae sagittis neque. In finibus arcu ac justo cursus commodo. Vestibulum est magna, condimentum sit amet purus et, pretium pellentesque elit. Nulla hendrerit enim ut risus euismod aliquam ultricies nec tellus. Morbi non leo id ante viverra eleifend eu non purus. Curabitur hendrerit tortor nec rutrum semper. <s><strong>Striked out fragment</strong> - Sed cursus enim eget massa mollis euismod sit amet quis risus.</s> Fusce scelerisque ultricies sapien, vitae laoreet enim egestas eu. <strong>Horizontal line:</strong></p>
+
+          <hr />
+          <p>Nulla facilisi. Underlined fragment - Nunc aliquam elementum nisl, vel venenatis ante ornare eget. Vivamus pulvinar, ante ut posuere hendrerit, arcu magna maximus leo, vitae blandit nisi tellus ut justo.</p>
+
+          <h3>Header 3</h3>
+
+          <p>Donec commodo felis lorem, in hendrerit orci <strong>superscript ahead -</strong> scelerisque<sup>superscript </sup>eget. Sed mattis elit nibh, et posuere mi aliquam nec. Vivamus pellentesque dictum ligula, at imperdiet augue dapibus id. Etiam ligula quam, semper nec turpis eget, tristique imperdiet sapien. <strong>Subscript ahead -&nbsp;&nbsp;</strong>pellentesque<sub>subscript</sub> porttitor nulla quis felis eleifend, non venenatis erat faucibus. Sed aliquet vitae enim quis aliquet. Suspendisse potenti. Nam justo mi, scelerisque eleifend volutpat quis, fringilla vitae velit. Nulla interdum ornare est, fringilla dapibus lacus sollicitudin vulputate.</p>
+
+          <h4>Header 4</h4>
+
+          <p><strong>Align left - </strong>Nam nec nunc eu lacus ultricies aliquet ac et dui. Proin ultricies metus ac consectetur faucibus. Phasellus non dictum turpis. Praesent lobortis mattis mauris, eu condimentum ex fermentum vestibulum. Ut a lobortis sem. Aenean vel elementum nibh. Vestibulum et lacus convallis, semper eros eu, eleifend risus. Cras tincidunt vehicula scelerisque.</p>
+
+          <p class="text-align-center"><strong>Align center - </strong>Nam nec nunc eu lacus ultricies aliquet ac et dui. Proin ultricies metus ac consectetur faucibus. Phasellus non dictum turpis. Praesent lobortis mattis mauris, eu condimentum ex fermentum vestibulum. Ut a lobortis sem. Aenean vel elementum nibh. Vestibulum et lacus convallis, semper eros eu, eleifend risus. Cras tincidunt vehicula scelerisque.</p>
+
+          <p class="text-align-right"><strong>Align right - </strong>Nam nec nunc eu lacus ultricies aliquet ac et dui. Proin ultricies metus ac consectetur faucibus. Phasellus non dictum turpis. Praesent lobortis mattis mauris, eu condimentum ex fermentum vestibulum. Ut a lobortis sem. Aenean vel elementum nibh. Vestibulum et lacus convallis, semper eros eu, eleifend risus. Cras tincidunt vehicula scelerisque.</p>
+
+          <p class="text-align-justify"><strong>Justify - </strong>Nam nec nunc eu lacus ultricies aliquet ac et dui. Proin ultricies metus ac consectetur faucibus. Phasellus non dictum turpis. Praesent lobortis mattis mauris, eu condimentum ex fermentum vestibulum. Ut a lobortis sem. Aenean vel elementum nibh. Vestibulum et lacus convallis, semper eros eu, eleifend risus. Cras tincidunt vehicula scelerisque.</p>
+
+          <h5>Header 5 (Hyperlinks and Tables)</h5>
+
+          <p>Class aptent taciti sociosqu ad litora <a href="https://droopler.com">torquent per conubia nostra</a>, per inceptos himenaeos. Vestibulum id tempor lorem. <strong><a href="https://droopler.com">Proin finibus ut urna sed congue.</a></strong> Sed sagittis dolor ac justo aliquam tempus. Proin interdum dignissim posuere. Nullam nisl felis, volutpat in faucibus congue, viverra egestas justo. Morbi non suscipit elit, at vulputate magna. Nunc pharetra metus mauris, ac semper nunc volutpat nec. Sed accumsan sapien dignissim felis fringilla condimentum.</p>
+
+          <table border="1" cellpadding="1" cellspacing="1" style="width: 500px;" summary="And its summary">
+              <caption>Example table</caption>
+              <thead>
+                  <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Surname</th>
+                      <th scope="col">Age</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>John</td>
+                      <td>Doe</td>
+                      <td>21</td>
+                  </tr>
+                  <tr>
+                      <td>Joseph</td>
+                      <td>Nowak</td>
+                      <td>45</td>
+                  </tr>
+              </tbody>
+          </table>
+
+          <table class="table table-striped">
+              <caption>Pure Bootstrap table</caption>
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Column 1</th>
+                      <th>Column 2</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <th scope="row">1</th>
+                      <td>John</td>
+                      <td>Doe</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">2</th>
+                      <td>Jack</td>
+                      <td>Smith</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">3</th>
+                      <td>Joseph</td>
+                      <td>Novak</td>
+                  </tr>
+              </tbody>
+          </table>
+
+          <h6>Header 6 (Lists)</h6>
+
+          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ipsum sem, vestibulum vel pretium ut, fringilla eget sapien. Cras eu nulla in eros scelerisque pretium sagittis a ex. Duis rhoncus sollicitudin orci et tempus. Aliquam erat volutpat. Etiam maximus odio id odio gravida maximus:</p>
+
+          <ul>
+              <li>Aenean gravida vestibulum condimentum.</li>
+              <li>Quisque eget eros ut arcu tincidunt pharetra.</li>
+              <li>Nulla laoreet, nulla vel convallis commodo, massa mi cursus ipsum, et consectetur odio risus non magna. Morbi sit amet augue a nisl hendrerit rhoncus. Praesent sagittis erat et tristique iaculis.</li>
+              <li>Sed viverra pulvinar justo, eget ullamcorper elit scelerisque quis. Pellentesque id lectus sollicitudin, interdum augue nec, ullamcorper enim. Quisque et laoreet lorem, vitae tristique leo.</li>
+          </ul>
+
+          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ipsum sem, vestibulum vel pretium ut, fringilla eget sapien. Cras eu nulla in eros scelerisque pretium sagittis a ex. Duis rhoncus sollicitudin orci et tempus. Aliquam erat volutpat. Etiam maximus odio id odio gravida maximus:</p>
+
+          <ol>
+              <li>Aenean gravida vestibulum condimentum. Quisque eget eros ut arcu tincidunt pharetra.</li>
+              <li>Nulla laoreet, nulla vel convallis commodo, massa mi cursus ipsum, et consectetur odio risus non magna.</li>
+              <li>Morbi sit amet augue a nisl hendrerit rhoncus.</li>
+              <li>Praesent sagittis erat et tristique iaculis. Sed viverra pulvinar justo, eget ullamcorper elit scelerisque quis. Pellentesque id lectus sollicitudin, interdum augue nec, ullamcorper enim. Quisque et laoreet lorem, vitae tristique leo.</li>
+          </ol>
+
+          <h1>Header 1</h1>
+
+          <h2>Header 2</h2>
+
+          <h3>Header 3</h3>
+
+          <h4>Header 4</h4>
+
+          <h5>Header 5</h5>
+
+          <h6>Header 6</h6>
+
+          <p><strong>Normal text. </strong>Sed suscipit tellus leo. Maecenas facilisis erat non ex rhoncus, eget suscipit est suscipit. Aliquam lobortis, eros vel tristique malesuada, felis lorem lacinia nisl, et laoreet nunc magna eget eros. Nam non tellus eu odio facilisis semper a vitae elit.</p>
+
+          <pre>
+          <strong>Preformatted Text</strong> - Nunc sed orci justo. Duis posuere faucibus ipsum, et semper eros pharetra nec. Aenean ac scelerisque orci, ac lobortis orci. Suspendisse facilisis dui ut lectus faucibus, at vestibulum ligula viverra. In pharetra in mauris sit amet suscipit. Nam consequat nunc sed lacus cursus tincidunt. Nullam velit est, laoreet sed turpis vestibulum, rhoncus porta dui. Morbi vel lorem vitae enim blandit fringilla.</pre>
+
+          <p><strong>Normal text. </strong>Nam maximus hendrerit accumsan. Maecenas accumsan maximus condimentum. Suspendisse sit amet mauris massa. Curabitur vehicula dictum tincidunt. Duis sed tellus ac ipsum placerat vestibulum quis vel nunc.</p>
+
+          <blockquote>
+          <p><strong>Quote - </strong>Maecenas lobortis nulla diam, sed mollis velit maximus eu. Aenean vitae lobortis eros. Donec et convallis magna. Fusce dui sapien, accumsan sit amet lobortis quis, fermentum ut erat. Duis magna orci, convallis sed placerat vitae, efficitur at mi. Morbi venenatis consequat convallis. Phasellus dignissim, elit ac <strong>condimentum scelerisque</strong>, elit massa efficitur odio, ut congue nisi arcu id ex.<em> Vestibulum id felis tempor, elementum orci sit amet, condimentum leo.</em> Suspendisse sit amet lectus semper.</p>
+          </blockquote>
+
+          <p><strong>Normal text. </strong>Maecenas lobortis nulla diam, sed mollis velit maximus eu. Aenean vitae lobortis eros. Donec et convallis magna. Fusce dui sapien, accumsan sit amet lobortis quis, fermentum ut erat. Duis magna orci, convallis sed placerat vitae, efficitur at mi.</p>
+
+  - paragraph_type: d_p_text_paged
+    data:
+      field_d_icon:
+        type: image
+        data: demo_bootstrap.svg
+      field_d_main_title:
+        type: text
+        data: Bootstrap 4 Components
+      field_d_long_text:
+        type: text_long
+        data: |
+          <h2>Alerts</h2>
+
+          <div class="alert alert-success alert-dismissable fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.
+          </div>
+          <div class="alert alert-info alert-dismissable" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.
+          </div>
+          <div class="alert alert-warning alert-dismissable" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.
+          </div>
+          <div class="alert alert-danger alert-dismissable" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.
+          </div>
+          <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Well done!</h4>
+              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.</p>
+          </div>
+
+          <h2>Badges</h2>
+
+          <h1>Heading 1 <span class="badge badge-secondary">Secondary</span></h1>
+          <h2>Heading 2 <span class="badge badge-primary">Primary</span></h2>
+          <h3>Heading 3 <span class="badge badge-success">Success</span></h3>
+          <h4>Heading 4 <span class="badge badge-info">Info</span></h4>
+          <h5>Heading 5 <span class="badge badge-warning">Warning</span></h5>
+          <h6>Heading 6 <span class="badge badge-danger">Danger</span></h6>
+
+          <p>
+              Paragraph <span class="badge badge-secondary">Secondary</span>
+              <span class="badge badge-primary">Primary</span>
+              <span class="badge badge-success">Success</span>
+              <span class="badge badge-info">Info</span>
+              <span class="badge badge-warning">Warning</span>
+              <span class="badge badge-danger">Danger</span>
+          </p>
+          <p>
+              Alternate pill-style <span class="badge badge-pill badge-secondary">Default</span>
+              <span class="badge badge-pill badge-primary">Primary</span>
+              <span class="badge badge-pill badge-success">Success</span>
+              <span class="badge badge-pill badge-info">Info</span>
+              <span class="badge badge-pill badge-warning">Warning</span>
+              <span class="badge badge-pill badge-danger">Danger</span>
+          </p>
+
+          <h2>Breadcrumb</h2>
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Library</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">Data</a></li>
+          </ol>
+
+          <h2>Buttons</h2>
+          <p>
+              <button type="button" class="btn btn-primary">Primary</button>
+              <button type="button" class="btn btn-secondary">Secondary</button>
+              <button type="button" class="btn btn-success">Success</button>
+              <button type="button" class="btn btn-info">Info</button>
+              <button type="button" class="btn btn-warning">Warning</button>
+              <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-light">Light</button>
+              <button type="button" class="btn btn-dark">Dark</button>
+              <button type="button" class="btn btn-link">Link</button>
+          </p>
+          <p>
+              <button type="button" class="btn btn-outline-primary">Primary Outline</button>
+              <button type="button" class="btn btn-outline-secondary">Secondary Outline</button>
+              <button type="button" class="btn btn-outline-success">Success Outline</button>
+              <button type="button" class="btn btn-outline-info">Info Outline</button>
+              <button type="button" class="btn btn-outline-warning">Warning Outline</button>
+              <button type="button" class="btn btn-outline-danger">Danger Outline</button>
+              <button type="button" class="btn btn-outline-light">Light Outline</button>
+              <button type="button" class="btn btn-outline-dark">Dark Outline</button>
+          </p>
+          <p>
+              <button type="button" class="btn btn-primary btn-lg">Primary Large</button>
+              <button type="button" class="btn btn-primary">Primary Normal</button>
+              <button type="button" class="btn btn-primary btn-sm">Primary Small</button>
+              <button type="button" class="btn btn-primary btn-block">Primary Blocklevel</button>
+          </p>
+          <p>
+              <button type="button" class="btn btn-danger btn-lg">Danger Large</button>
+              <button type="button" class="btn btn-secondary">Secondary Normal</button>
+              <button type="button" class="btn btn-success btn-sm">Success Small</button>
+              <button type="button" class="btn btn-info btn-block">Info Blocklevel</button>
+          </p>
+          <p>
+              <button type="button" class="btn btn-outline-primary btn-lg">Primary O/Large</button>
+              <button type="button" class="btn btn-outline-secondary">Secondary O/Normal</button>
+              <button type="button" class="btn btn-outline-success btn-sm">Success O/Small</button>
+              <button type="button" class="btn btn-outline-info btn-block">Info O/Blocklevel</button>
+          </p>
+          <div class="btn-group" role="group" aria-label="Button group">
+              <button class="btn btn-primary" type="button">This</button>
+              <button class="btn btn-success" type="button">Is</button>
+              <button class="btn btn-info" type="button">Some</button>
+              <button class="btn btn-warning" type="button">Bootstrap</button>
+              <button class="btn btn-danger" type="button">Button</button>
+              <button class="btn btn-light" type="button">Group</button>
+              <button class="btn btn-dark" type="button">Example</button>
+          </div>
+
+          <h2>Cards</h2>
+
+          <div class="card">
+              <div class="card-header">Card Header</div>
+              <div class="card-body">
+                  <h4 class="card-title">Another Title</h4>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a class="btn btn-primary" href="#">Go somewhere</a>
+              </div>
+          </div>
+
+          <h2>Accordions</h2>
+          <div id="accordion" class="accordion">
+              <div class="card">
+                  <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                          <a class="btn btn-link" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Collapsible Group Item #1</a>
+                      </h5>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, diam ac condimentum tincidunt, dolor mauris iaculis justo, in feugiat tellus sapien a velit. Etiam vehicula mi ut egestas tincidunt. Morbi at viverra massa. Morbi sit amet sem mauris. Phasellus fringilla est nec felis imperdiet molestie. Vestibulum convallis velit risus, at aliquam lectus fermentum vitae. Vestibulum tempor pellentesque urna ut fermentum. Nullam id purus vehicula, posuere tortor quis, aliquam felis.
+                      </div>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                          <a class="btn btn-link" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Collapsible Group Item #2</a>
+                      </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body">
+                          Pellentesque ullamcorper mattis elit, eget facilisis nibh ornare nec. Nunc et tincidunt diam, ut ornare neque. Mauris eget interdum leo, quis condimentum mi. Cras vulputate commodo felis sed aliquam. Praesent dapibus eleifend nisl a congue. Phasellus convallis nisi nec risus pellentesque varius. Ut id libero interdum, varius nisl quis, dapibus justo. Mauris sed ullamcorper odio. Phasellus porttitor lorem dui, ac lobortis arcu mattis nec. Mauris a nunc eu turpis ultricies ullamcorper. Vestibulum et nisi nec est ultricies aliquam. Donec urna justo, dignissim vel vehicula at, faucibus sit amet magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                      </div>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                          <a class="btn btn-link" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Collapsible Group Item #3</a>
+                      </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body">
+                          Curabitur eget tellus accumsan, elementum diam non, suscipit nisi. Etiam aliquet mattis facilisis. Donec id turpis neque. Quisque felis ex, varius et mollis vitae, ornare eget nisl. Aenean facilisis est non consectetur mattis. Suspendisse potenti. Etiam viverra quam at arcu fermentum, in ultricies leo pulvinar. Phasellus dignissim tortor non leo tempor, id consequat enim consectetur. Donec euismod dolor dui, sit amet rutrum mauris bibendum ut. Sed sed volutpat sapien. Etiam vitae justo tristique, convallis est sed, pharetra urna.
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <h2>Dropdown menu</h2>
+          <div class="dropdown open clearfix">
+              <button class="btn btn-secondary dropdown-toggle sr-only" type="button" id="dropdownMenu2">
+                  Dropdown
+              </button>
+              <div class="dropdown-menu dropdown-menu-always-show" aria-labelledby="dropdownMenu2">
+                  <h6 class="dropdown-header">Dropdown header</h6>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item active" href="#">Active item</a>
+                  <div class="dropdown-divider"></div>
+                  <h6 class="dropdown-header">Second header</h6>
+                  <a class="dropdown-item" href="#">Something different</a>
+                  <a class="dropdown-item disabled" href="#">Other stuff</a>
+              </div>
+          </div>
+
+          <div class="btn-group">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Primary
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu4">
+                  <h6 class="dropdown-header">Dropdown header</h6>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item active" href="#">Active item</a>
+                  <div class="dropdown-divider"></div>
+                  <h6 class="dropdown-header">Second header</h6>
+                  <a class="dropdown-item" href="#">Something different</a>
+                  <a class="dropdown-item disabled" href="#">Other stuff</a>
+              </div>
+          </div>
+
+          <h2>Jumbotron</h2>
+          <div class="jumbotron">
+              <h1 class="display-3">Hello, world!</h1>
+              <p class="lead">Curabitur eget tellus accumsan, elementum diam non, suscipit nisi. Etiam aliquet mattis facilisis. Donec id turpis neque.</p>
+              <hr class="my-4">
+              <p>Etiam viverra quam at arcu fermentum, in ultricies leo pulvinar. Phasellus dignissim tortor non leo tempor, id consequat enim consectetur.</p>
+              <p class="lead">
+                  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+              </p>
+          </div>
+
+          <h2>List group</h2>
+
+          <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Cras justo odio
+                  <span class="badge badge-primary badge-pill">14</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Dapibus ac facilisis in
+                  <span class="badge badge-primary badge-pill">2</span>
+              </li>
+              <li class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center">
+                  Morbi leo risus
+                  <span class="badge badge-primary badge-pill">1</span>
+              </li>
+          </ul>
+
+          <h2>Another list group</h2>
+          <div class="list-group">
+              <a class="list-group-item list-group-item-action active" href="#">
+                  <h5 class="list-group-item-heading">Phasellus dignissim tortor</h5>
+                  <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper id nunc in vehicula. Pellentesque ex ex, dignissim quis malesuada ut, efficitur nec velit. Sed et feugiat mi. Aenean tincidunt enim id leo placerat, in dapibus turpis laoreet..</p>
+              </a>
+              <a class="list-group-item list-group-item-action" href="#">
+                  <h5 class="list-group-item-heading">Nullam fermentum imperdiet metus</h5>
+                  <p class="list-group-item-text">Suspendisse quis leo tempor dui convallis blandit. Praesent efficitur nisl nibh, vitae tincidunt sem ullamcorper tincidunt. Nullam fermentum imperdiet metus, ut efficitur dolor iaculis imperdiet.</p>
+              </a>
+              <a class="list-group-item list-group-item-action list-group-item-warning" href="#">
+                  <h5 class="list-group-item-heading">Donec at eleifend nunc</h5>
+                  <p class="list-group-item-text">Donec gravida mi eros, vel aliquet metus fermentum vitae. Morbi magna eros, laoreet vel feugiat sit amet, vestibulum nec urna. Donec at eleifend nunc. Sed vulputate leo ut molestie mattis.</p>
+              </a>
+              <a class="list-group-item list-group-item-action list-group-item-success" href="#">
+                  <h5 class="list-group-item-heading">Quisque ultricies ullamcorper</h5>
+                  <p class="list-group-item-text">Sed ultricies urna risus, suscipit cursus nisi aliquam ac. Quisque ultricies ullamcorper nisl, at imperdiet arcu porttitor vitae. Morbi id tincidunt sapien. Vivamus eget scelerisque metus.</p>
+              </a>
+          </div>
+
+          <h2>Modal</h2>
+          <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
+          <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 id="myModalLabel" class="modal-title">Modal title</h5>
+                          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit tincidunt iaculis. Phasellus hendrerit sem non dui commodo, vel iaculis nulla tincidunt.</p>
+                          <p>Sed ultricies urna risus, suscipit cursus nisi aliquam ac. Quisque ultricies ullamcorper nisl, at imperdiet arcu porttitor vitae. Morbi id tincidunt sapien.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <h2>Tabs</h2>
+          <ul class="nav nav-tabs">
+              <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+              <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Separated link</a>
+                  </div>
+              </li>
+          </ul>
+
+          <h2>Pagination</h2>
+          <ul class="pagination">
+              <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                  </a>
+              </li>
+              <li class="page-item active">
+                  <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                  </a>
+              </li>
+          </ul>
+
+
+          <h2>Popover</h2>
+          <p>
+              <button class="btn btn-secondary" type="button" data-container="body" data-toggle="popover" data-placement="left" data-title="Popover title" data-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
+                  Popover on left
+              </button>
+              <button class="btn btn-secondary" type="button" data-container="body" data-toggle="popover" data-placement="top" data-title="Popover title" data-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
+                  Popover on top
+              </button>
+              <button class="btn btn-secondary" type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Popover title" data-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
+                  Popover on bottom
+              </button>
+              <button class="btn btn-secondary" type="button" data-container="body" data-toggle="popover" data-placement="right" data-title="Popover title" data-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
+                  Popover on right
+              </button>
+          </p>
+
+          <h2>Progress bars</h2>
+          <div class="progress mb-3">
+              <div class="progress-bar w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="progress mb-3">
+              <div class="progress-bar w-50 bg-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+          <h2>Tooltips</h2>
+          <p>
+              <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+              <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+              <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+              <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+          </p>
+
+

@@ -1,0 +1,217 @@
+info:
+  type: content_page
+  title: Educational Website Example
+  path:
+    alias: /examples/educational-website
+    pathauto: 0
+
+field_page_section:
+  paragraphs:
+  - paragraph_type: d_p_banner
+    data:
+      field_d_main_title:
+        type: text
+        data: The University of Lorem-Ipsum
+      field_d_subtitle:
+        type: text
+        data: Educational Website Example
+      field_d_image_background:
+        type: image
+        data: demo_educational_1.jpg
+      field_d_long_text:
+        type: text_long
+        data: <p>Educational pages are often built by schools, universities and government organizations.
+          They contain lots of information, they also need to implement custom views and forms.
+          Droopler connects the ease of creating landing pages with the complexity of Drupal 8.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/educational-website
+          text: Become a student
+  - paragraph_type: d_p_group_of_text_blocks
+    data:
+      field_d_main_title:
+        type: text
+        data: Why Our University?
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/educational-website
+          text: Become a student
+      field_d_p_tb_block_reference:
+        type: paragraph_reference
+        data:
+        - field_d_icon:
+            type: image
+            data: demo_script.svg
+          field_d_main_title:
+            type: text
+            data: We have traditions
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/educational-website
+              text: Learn more...
+        - field_d_icon:
+            type: image
+            data: demo_medal.svg
+          field_d_main_title:
+            type: text
+            data: 'We are ranked #1'
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/educational-website
+              text: Learn more...
+        - field_d_icon:
+            type: image
+            data: demo_basketball.svg
+          field_d_main_title:
+            type: text
+            data: We play sports
+          field_d_long_text:
+            type: text_long
+            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+              tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+              Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum
+              lorem. Vestibulum non accumsan eros, sit amet.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/examples/educational-website
+              text: Learn more...
+
+  - paragraph_type: d_p_subscribe_file
+    data:
+      field_d_main_title:
+        type: text
+        data: Get Example Entrance Exam
+      field_d_image_background:
+        type: image
+        data: demo_educational_4.jpg
+      field_file_download:
+        type: file
+        data: demo_file.zip
+      field_d_p_sf_consent:
+        type: text
+        data: I agree to the terms of the Privacy Policy.
+      field_d_p_sf_download_button:
+        type: text
+        data: Send me the exams
+      field_d_p_sf_download_page:
+        type: text_long
+        data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.
+      field_d_p_sf_mail_body:
+        type: text_long
+        data: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+
+  - paragraph_type: d_p_group_of_counters
+    data:
+      field_d_image_background:
+        type: image
+        data: demo_bg_2.jpg
+      field_d_number:
+        type: number
+        data: 4
+      field_d_counter_reference:
+        type: paragraph_reference
+        subtype: d_p_single_counter
+        data:
+        - field_d_number:
+            type: number
+            data: 150
+          field_d_main_title:
+            type: text
+            data: Faculties
+        - field_d_number:
+            type: number
+            data: 76
+          field_d_main_title:
+            type: text
+            data: Proffessors
+        - field_d_number:
+            type: number
+            data: 20000
+          field_d_main_title:
+            type: text
+            data: Students
+        - field_d_number:
+            type: number
+            data: 15
+          field_d_main_title:
+            type: text
+            data: Buildings
+
+  - paragraph_type: d_p_text_paged
+    data:
+      field_d_main_title:
+        type: text
+        data: Our Fields of Study
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Computer science
+      field_d_image_background:
+        type: image
+        data: demo_educational_2.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: right
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/educational-website
+          text: Become a student
+  - paragraph_type: d_p_side_image
+    data:
+      field_d_main_title:
+        type: text
+        data: Biology and Anatomy
+      field_d_image_background:
+        type: image
+        data: demo_educational_3.jpg
+      field_d_p_si_image_side:
+        type: text_select
+        data: left
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+      field_d_cta_link:
+        type: cta
+        data:
+          link: internal:/examples/educational-website
+          text: Become a student

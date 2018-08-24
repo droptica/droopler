@@ -1,0 +1,199 @@
+/**
+ * Masonry side tiles paragraph.
+ */
+
+// Colour variables used in this paragraph.
+$d-p-side-tiles-image-background-color: $color-odysseus !default;
+$d-p-side-tiles-text-background-color: $color-agamemnon !default;
+$d-p-side-tiles-text-background-color-secondary: darken($d-p-side-tiles-text-background-color, 15%) !default;
+$d-p-side-tiles-text-color: $color-odysseus !default;
+$d-p-side-tiles-link-color: $color-nestor !default;
+$d-p-side-tiles-link-hover-color: darken($d-p-side-tiles-link-color, 5%) !default;
+$d-p-side-tiles-line-color: $color-nestor !default;
+$d-p-side-tiles-header-color: $color-odysseus !default;
+$d-p-side-tiles-overlay-background: $color-cassandra !default;
+$d-p-side-tiles-overlay-color: $color-odysseus !default;
+$d-p-side-tiles-overlay-opacity: 0.6 !default;
+
+// Margins, paddings and sizing.
+$d-p-side-tiles-line-margin-top: 1.44rem !default;
+$d-p-side-tiles-line-margin-bottom: 1.44rem !default;
+$d-p-side-tiles-mobile-height: 18.75rem !default;
+$d-p-side-tiles-text-desktop-padding-y: 7% !default;
+$d-p-side-tiles-text-mobile-padding: 7% !default;
+$d-p-side-tiles-text-width: 35.625rem !default;
+$d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half of the screen
+
+.d-p-side-tiles-wrapper {
+
+  background-color: $d-p-side-tiles-text-background-color;
+
+  &.image-side-left {
+    background-color: $d-p-side-tiles-text-background-color-secondary;
+  }
+
+  .d-p-side-tiles-content {
+    color: $d-p-side-tiles-text-color;
+
+    h2 {
+      @include font-main-header;
+      color: $d-p-side-tiles-header-color;
+      text-align: left;
+      &:after {
+        @include decoration-header-line;
+        margin-top: $d-p-side-tiles-line-margin-top;
+        margin-bottom: $d-p-side-tiles-line-margin-bottom;
+        background: $d-p-side-tiles-line-color;
+      }
+      &:last-child:after {
+        display: none;
+      }
+    }
+    a {
+      color: $d-p-side-tiles-link-color;
+      &:hover {
+        color: $d-p-side-tiles-link-hover-color;
+      }
+    }
+  }
+
+  .d-p-side-tiles-images {
+    padding-left: 0;
+    padding-right: 0;
+    background-color: $d-p-side-tiles-image-background-color;
+
+    .field--name-field-d-image {
+      background-color: $d-p-side-tiles-image-background-color;
+
+      a {
+        display: block;
+      }
+      img {
+        width: 100%;
+        height: auto;
+        margin: 0 !important;
+        display: block;
+      }
+    }
+  }
+
+  // Masonry styles.
+  .d-side-tiles {
+    float: none !important;
+    margin: 0 !important;
+    display: block !important;
+
+    .d-tiles-sizer,
+    .d-tiles-item {
+      width: 50%;
+    }
+
+    .d-tiles-item {
+      padding: 2px;
+    }
+
+    .d-tiles-caption {
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      bottom: 2px;
+      right: 2px;
+      background: $d-p-side-tiles-overlay-background;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      div {
+        color: $d-p-side-tiles-overlay-color;
+        font-size: 1.5rem;
+        font-weight: bold;
+
+        small {
+          display: block;
+          font-size: 1rem;
+          font-weight: normal;
+        }
+      }
+    }
+
+    .d-tiles-caption:hover {
+      opacity: $d-p-side-tiles-overlay-opacity;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .d-p-side-tiles-content {
+      padding: $d-p-side-tiles-text-mobile-padding;
+    }
+    .d-p-side-tiles-images {
+      border: 2px solid $d-p-side-tiles-image-background-color;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+
+    .d-p-side-tiles-content {
+      display: flex;
+      align-items: center;
+      border: 2px solid $d-p-side-tiles-image-background-color;
+
+      .d-p-side-tiles-content-fields {
+        width: $d-p-side-tiles-text-width;
+      }
+    }
+    &.image-side {
+      &-right {
+        .d-p-side-tiles-content {
+          justify-content: flex-end;
+          border-left: none;
+          order: 1;
+        }
+        .d-p-side-tiles-images {
+          order: 2;
+          border-right: 2px solid $d-p-side-tiles-image-background-color;
+        }
+        .d-p-side-tiles-content-fields {
+          padding: $d-p-side-tiles-text-desktop-padding-y $d-p-side-tiles-half-padding $d-p-side-tiles-text-desktop-padding-y ($grid-gutter-width / 2);
+        }
+      }
+      &-left {
+        .d-p-side-tiles-content {
+          justify-content: flex-start;
+          border-right: none;
+        }
+        .d-p-side-tiles-images {
+          border-left: 2px solid $d-p-side-tiles-image-background-color;
+        }
+        .d-p-side-tiles-content-fields {
+          padding: $d-p-side-tiles-text-desktop-padding-y ($grid-gutter-width / 2) $d-p-side-tiles-text-desktop-padding-y $d-p-side-tiles-half-padding;
+        }
+      }
+    }
+  }
+}
+
+// @TODO Introduce .paragraph-light and .paragraph-dark
+
+@include media-breakpoint-up(md) {
+  .wrapper-d_p_side_tiles + .wrapper-d_p_text_with_bckg,
+  .wrapper-d_p_side_tiles + .wrapper-d_p_subscribe_file,
+  .wrapper-d_p_side_tiles + .wrapper-d_p_form,
+  .wrapper-d_p_side_tiles + .wrapper-d_p_counters,
+  .wrapper-d_p_side_tiles + .wrapper-d_p_banner,
+  .wrapper-d_p_side_tiles + .wrapper-d_p_side_embed,
+  .wrapper-d_p_side_tiles + .wrapper-d_p_side_image {
+    border-top: 2px solid transparent;
+  }
+}
+
+.wrapper-d_p_text_with_bckg + .wrapper-d_p_side_tiles,
+.wrapper-d_p_subscribe_file + .wrapper-d_p_side_tiles,
+.wrapper-d_p_form + .wrapper-d_p_side_tiles,
+.wrapper-d_p_counters + .wrapper-d_p_side_tiles,
+.wrapper-d_p_banner + .wrapper-d_p_side_tiles,
+.wrapper-d_p_side_embed + .wrapper-d_p_side_tiles,
+.wrapper-d_p_side_image + .wrapper-d_p_side_tiles {
+  border-top: 2px solid transparent;
+}

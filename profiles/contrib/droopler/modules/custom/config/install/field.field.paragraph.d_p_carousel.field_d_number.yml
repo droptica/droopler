@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_number
+    - paragraphs.paragraphs_type.d_p_carousel
+id: paragraph.d_p_carousel.field_d_number
+field_name: field_d_number
+entity_type: paragraph
+bundle: d_p_carousel
+label: Columns
+description: 'Number of layout columns to show in a row within the viewport. Possible values: 1, 2, 3, 4, 6, 12.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 1
+  max: 12
+  prefix: ''
+  suffix: ''
+field_type: integer

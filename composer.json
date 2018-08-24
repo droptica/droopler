@@ -1,6 +1,6 @@
 {
 	"name": "droptica/droopler-project",
-	"description": "Project template for Droopler with composer",
+	"description": "Project template for Droopler with Composer",
 	"type": "project",
 	"license": "GPL-2.0+",
 	"authors": [{
@@ -15,17 +15,13 @@
 		"asset": {
 			"type": "composer",
 			"url": "https://asset-packagist.org"
-		},
-		"droptica-droopler": {
-		    "type": "git",
-            "url":  "git@github.com:droptica/droopler.git"
 		}
 	},
 	"require": {
 		"composer/installers": "^1.2",
 		"oomphinc/composer-installers-extender": "^1.1",
 		"cweagans/composer-patches": "^1.6",
-		"droptica/droopler": "dev-feature/issue_35627",
+		"droptica/droopler": "^8.1.3",
 		"drupal-composer/drupal-scaffold": "^2.2",
 		"drupal/console": "~1.0",
 		"drupal/core": "~8.4",

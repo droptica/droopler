@@ -1,7 +1,7 @@
 name: droopler_subtheme
 type: theme
-description: 'Droopler subtheme'
-version: '8.x-1.2'
+description: 'Droopler Subtheme'
+version: 8.x-1.3
 core: '8.x'
 
 base theme: droopler_theme
@@ -9,9 +9,9 @@ base theme: droopler_theme
 libraries:
   - droopler_theme/global-styling
   - droopler_subtheme/global-styling
-# Uncomment this to enable Font Awesome support.
-# Look into droopler_subtheme.libraries.yml too.
-#  - droopler_subtheme/fontawesome
+## Uncomment this to enable Font Awesome support.
+## Look into droopler_subtheme.libraries.yml too.
+#  - droopler_subtheme/font-awesome
 
 libraries-extend:
   core/drupal.dropbutton:

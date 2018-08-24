@@ -1,8 +1,16 @@
 # Droopler template for new project #
-[![N|Solid](https://www.droopler.pl/sites/default/files/logo_droopler.jpg)](http://droopler.pl)
+<img src="https://demo.droopler.com/themes/custom/droopler_subtheme/logo.png" width=300 alt="Droopler Logo" />
 
 ## What is Droopler? ##
 Droopler is a Drupal 8 profile designed to kickstart a new webpage in a few minutes. It's based on the latest frontend technologies, including Bootstrap 4. The maintainer of Droopler is [Droptica](https://droptica.com).
+
+* **Official website**: [droopler.com](https://droopler.com)
+* **Documentation**: [droopler.com/developers](https://droopler.com/developers)
+* **Demo**: [demo.droopler.com](https://demo.droopler.com)
+* **Profile repository**: [github.com/droptica/droopler](https://github.com/droptica/droopler)
+* **Drupal.org project**: [drupal.org/project/droopler](https://www.drupal.org/project/droopler)
+
+For the latest news please subscribe to our [Facebook](https://www.facebook.com/Droopler/) and [Twitter](https://twitter.com/DrooplerCMS).
 
 ## What is this Droopler template? ##
 It's a skeleton, a boilerplate for new projects based on Droopler. If you wish to use Droopler - fork (or download) this repository. It contains a minimum set of code to start your new website. Threat it the same as [drupal-composer/drupal-project](https://github.com/drupal-composer/drupal-project).
@@ -41,7 +49,7 @@ $ gulp compile
 
 **3) Run Drupal installation**
 
-Go to http://yourserver.dev/install.php, choose **Droopler** install profile. Follow the steps of configuration.
+Go to http://yourserver.local/install.php and follow the steps of configuration.
 
 ## How to work with the subtheme? ##
 
@@ -71,49 +79,26 @@ You can use any SCSS structure you like. We recommend dividing files into **layo
 
 # SCSS Configuration ##
 
-Droopler is designed to make your work easier. You don't have to override SCSS or CSS code to make your own adjustments. In most cases it is enough to modify the configuration. Just look into base theme's SCSS files. They often start with some variable definitions like:
+Droopler is designed to make your work easier. You don't have to override SCSS or CSS code to make your own adjustments. In most cases it is enough to modify the configuration. Just look into variable definitions in the subtheme's **scss/config/_base_theme_overrides.scss** file.
 
 ```scss
-// Variables used in this file
-$banner-text-color: $color-odysseus !default;
-$banner-background: $color-cassandra !default;
-$banner-border: $color-odysseus !default;
-$banner-font-size: 2rem !default;
+// Colours - The Greeks
+// -------------------------
+// $color-odysseus: white;
 
-// Banner component
-.banner {
-	background: $banner-background;
-	border: 1px solid $banner-border;
-	color: $banner-text-color;
-	font-size: $banner-font-size;
-}
+// Paragraph d_p_banner
+// -------------------------
+// $d-p-banner-header-color: $color-odysseus;
+// $d-p-banner-subheader-color: $color-odysseus;
 ```
 
-To alter this you have to create a new config file (let's name it **config/_foo.scss**) and add this line into **config/_all.scss**:
-
-```scss
-@import "foo";
-```
-
-Then fill **config/_foo.scss** with your modifications:
-
-```scss
-// My overrides
-$color-cassandra: white;
-$banner-text-color: red;
-$banner-font-size: 3rem;
-```
-
-What happens here?
- - You set a variable **$color-cassandra**. The trojan name means it's a colour from the palette, used in many places of the website. What are the trojan heroes doing here? They are meant not to suggest any specific color. If we change a color from white to black we don't have to change variable name.
- - You set **$banner-text-color** to red. This will overwrite one single element on the website. Your color will be used instead of pallete color **$color-odysseus**. But **$color-odysseus** will stay intact on other elements.
- - You set a font size.
+To alter this - uncomment the line and change the value. A you can see - there are many levels of variables, see the comments in _base_theme_overrides.scss to get some more information.
 
 When you save this config file, **gulp watch** will recompile all SCSS with your own config.
 
 ## How to install Google Fonts? ##
 
-By default Droopler uses free [Lato](http://www.latofonts.com/) webfont. If you wish to install your own fonts from Google - put their definitions into web/themes/custom/droopler_subtheme/droopler_subtheme.libraries.yml like this:
+By default Droopler uses free [Lato](http://www.latofonts.com/) webfont. If you wish to install your own fonts from Google - put their definitions into **droopler_subtheme.libraries.yml** like this:
 
 ```yaml
 global-styling:
@@ -126,4 +111,4 @@ global-styling:
 
 ## How to install icon fonts? ##
 
-If you wish to install FontAwesome or Glyphicons from the CDN - just grab their URLs and follow the steps described in previous chapter about Google Fonts.
+If you wish to install FontAwesome or Glyphicons from the CDN - just grab their URLs and follow the steps described in previous chapter about Google Fonts. You'll find a FontAwesome example in **droopler_subtheme.libraries.yml** and **droopler_subtheme.info.yml**.

@@ -1,0 +1,511 @@
+// Base theme overrides - variables that you can modify.
+
+// Simple colors
+// -------------------------
+// $white: #fff;
+// $black: #000;
+
+// COLOUR NAMING CONVENTION
+// ----------------------------
+//
+// The two above are so obvious that they stay as they are.
+// There is just one total black and one total white.
+//
+// You may find our color naming convention a little weird. For example "$color-agamemnon" points
+// neither to color nor some website element. It's not easy to connect it with a particular place.
+//
+// Why do we like meaningless names? Because any naming convention is bound to fail!
+// Droopler is a base of many different sites. What if some widely used $color-blue became red?
+// We avoid such problems by completely abstracting variable names from the colors they hold.
+// This way we hope we can build many websites on the same codebase without making a mess
+// and perhaps with some additional fun.
+//
+// What is our approach?
+// A general situation on a website looks like this:
+// There are two sets of colors. One for you and one for us.
+//
+// Our team uses variable names derived from the Greek mythology. You may have already noticed
+// that we named the most important variables after participants of the Troyan Wars.
+// Occasionally we targetted a god from the Olymp.
+//
+// You are free to override any of these "Greek" colors. They are connected with many elements
+// so one small change can lead to an entirely different website layout.
+// You can name your variables however you like. Just don't use any Greek names to avoid conflicts
+// with future versions of Droopler (maybe we like the same ancient heroes).
+// We encourage you to follow our ideas and create variables based on Roman mythology.
+// Like $color-jupiter or $color-mars.
+//
+// Wikipedia is here for you:
+// https://en.wikipedia.org/wiki/List_of_Roman_deities
+//
+// Below you have a list of Droopler's built-in variables. Just uncomment and change them.
+
+
+// Colours - The Greeks
+// -------------------------
+// $color-agamemnon: #196dba;
+// $color-menelaus: #5d98ce;
+// $color-nestor: #65e2ff;
+// $color-odysseus: white;
+// $color-diomedes: #d3d7d9;
+// $color-patroclus: #979797;
+
+// Colours - The Troyans
+// -------------------------
+// $color-priam: #7a7a7a;
+// $color-hecuba: #727272;
+// $color-troilus: #4c4c4c;
+// $color-cassandra: black;
+// $color-andromache: #d2d2d2;
+// $color-aeneas: #8e8a89;
+// $color-memnon: #1a6dbb;
+// $color-penthesilea: #969696;
+
+// Colour accents - Troyan heroes
+// ---------------------------------
+// $color-hector: #d3d3d3;
+// $color-achillies: #ec6d06;
+
+
+// GENERAL VARIABLES
+// ---------------------------------
+// These variables are applicable to global HTML elements.
+// They are not tied to any node or paragraph.
+
+// Links
+// -------------------------
+// $link-color: $color-agamemnon;
+// $link-hover-color: darken($link-color, 5%);
+
+// Font variables used in Droopler
+// -------------------------
+// $font-text: 'Lato', sans-serif;
+// $font-header: 'Lato', sans-serif;
+// $font-header-weight: bold;
+
+// Header
+// -------------------------
+// $header-height: 6rem; // Top navbar height. Increase it if your logo is tall
+// $header-mobile-height: 4.5rem; // Top navbar height. Increase it if your logo is tall
+
+// Logo
+// -------------------------
+// $logo-mobile-height: $header-mobile-height;
+// $logo-width: 20rem;
+// $logo-mobile-width: 12rem;
+// $logo-mobile-padding-left: 1rem;
+// $logo-md-width: 13.5rem;
+
+// Font for <h1> or bigger <h2>
+// -------------------------
+// $font-main-header-big-size: 3.44rem;
+// $font-main-header-big-size-down-md: 2.5rem;
+// $font-main-header-big-size-down-sm: 2.5rem;
+// $font-main-header-big-margin-bottom: 0.8rem;
+
+// Font for <h2> header
+// -------------------------
+// $font-main-header-size: 3rem;
+// $font-main-header-size-down: 2rem;
+
+// Font for subtitle below main title, typically <h3>
+// -------------------------
+// $font-main-subtitle-size: $font-size-mdlg;
+// $font-main-subtitle-size-down-sm: $font-size-sm;
+
+// Line under headers
+// -------------------------
+// $line-background: $color-nestor;
+// $line-left-margin-top: 1.25rem;
+// $line-left-margin-bottom: 0.625rem;
+// $line-center-margin-top: 1.375rem;
+// $line-center-margin-bottom: 1.5rem;
+// $line-width: 3.125rem;
+// $line-thickness: 0.125rem;
+
+// Buttons
+// -------------------------
+// $font-main-button-size: $font-size-mdsm;
+// $font-main-button-size-down-sm: $font-size-vsm;
+// $button-min-width: 18rem; // Minimum width of the button (desktop)
+// $button-mobile-min-width: 16rem;  // Minimum width of the button (mobile)
+
+// Forms
+// -------------------------
+// $form-control-border-color: $color-hecuba;
+// $form-label-margin-bottom: .4rem;
+// $form-label-font-size: .85em;
+// $form-control-padding: 1rem 1.5rem 0.8rem 1.5rem;
+// $form-control-border-thickness: 0.063rem;
+// $form-control-border-radius: 0;
+// $form-text-margin-top: 0.25rem;
+// $form-email-margin-top: 0.25rem;
+
+// Standard <p> font
+// -------------------------
+// $font-main-standard-size: $font-size-base;
+// $font-main-standard-size-down-md: $font-size-mdsm;
+// $font-main-standard-size-down-sm: $font-size-sm;
+
+// Global variables
+// -------------------------
+// $page-min-width: 320px; // Minimum page width in pixels
+// $light-gray-background: // $color-hector;
+
+// Theme paths
+// -------------------------
+// $theme_path: '/profiles/contrib/droopler/themes/custom/droopler_theme';
+// $subtheme_path: '/themes/custom/droopler_subtheme';
+// $lato-font-path: '/libraries/lato-webfont/fonts';
+
+// Footer
+// -------------------------
+// $footer-background: $color-troilus;
+// $footer-text-color: $white;
+
+// Main Menu
+// -------------------------
+// $menu-main-link-color: $color-priam;
+// $menu-main-link-hover-color: darken($color-priam, 20%);
+// $menu-main-link-active-color: darken($color-priam, 20%);
+// $menu-main-link-dropdown: $color-hector; // Dropdown icon
+// $submenu-link-color: $menu-main-link-color; // Submenu item text color
+// $submenu-link-hover-color: darken($color-priam, 20%); // Submenu item hover color
+// $submenu-link-hover-background: $color-andromache; // Submenu item hover color
+// $menu-mobile-background: $color-agamemnon;
+// $menu-mobile-link-color: $color-odysseus;
+// $menu-mobile-link-border: $color-menelaus;
+// $submenu-mobile-background: $menu-mobile-link-border;
+// $navbar-toggler-color: $color-agamemnon;
+// $menu-font-size: $font-size-lg;
+// $menu-mobile-font-size: $font-size-lg;
+// $submenu-font-size: $font-size-base;
+// $menu-dropdown-size: 2.3rem; // Size of the dropdown arrow
+// $navbar-toggler-size: 2.3rem; // Size of the toggler arrow
+// $menu-dropdown-width: 4rem;  // Width of desktop dropdown icon (desktop)
+// $menu-dropdown-mobile-padding-x: 1rem;  // Padding on both sides of dropdown icon (mobile)
+// $menu-main-link-height: $header-height - (2 * $navbar-padding-y);  // Height of menu item
+// $menu-main-link-padding-x: 1.5rem; // Space on the right and left side of the link (desktop)
+// $navbar-toggler-width: 5.625rem; // Width of mobile menu on/off toggler
+// $navbar-toggler-height: $header-mobile-height; // Height of mobile menu on/off toggler
+// $menu-mobile-main-link-height: 3.5rem;  // Height of menu item (mobile)
+// $menu-mobile-main-link-padding-x: 2.15rem; // Percentage width of menu item, it should align with the toggler icon (mobile).
+// $submenu-offset-left: -1rem; // Move the submenu left or right (desktop)
+// $submenu-link-padding-x: 1.4rem; // Horizontal padding of submenu element (desktop)
+// $submenu-link-height: 2.9rem; // Height of links in submenu (desktop)
+// $submenu-mobile-link-height: $menu-mobile-main-link-height; // Height of links in submenu (mobile)
+
+// Lang Dropdown
+// -------------------------
+// $lang-dropdown-header-color: $menu-main-link-color;  // Color of language link in main menu
+// $lang-dropdown-toggle-color: $menu-main-link-dropdown; // Color of language dropdown toggle icon
+// $lang-dropdown-submenu-color: $submenu-link-color; // Color of link in language menu
+// $lang-dropdown-submenu-hover-color: $submenu-link-hover-color; // Color of hover link in language submenu
+// $lang-dropdown-submenu-hover-background: $submenu-link-hover-background; // Color of hover bg in language submenu
+// $lang-dropdown-submenu-active-color: $menu-main-link-active-color; // Color of active link in language submenu
+// $lang-dropdown-mobile-background: $color-troilus; // Background color of mobile language menu
+// $lang-dropdown-mobile-link-color: $color-priam; // Link color of mobile language menu
+// $lang-dropdown-mobile-link-hover-color: lighten($lang-dropdown-mobile-link-color, 5%); // Link hover color of mobile language menu
+// $lang-dropdown-mobile-header-color: $color-odysseus; // Color of active language in mobile lang menu
+// $lang-dropdown-link-font-size: $menu-font-size; // Font size of language link in main menu
+// $lang-dropdown-size: $menu-dropdown-size; // Size of dropdown icon in lang menu
+// $lang-dropdown-submenu-font-size: $submenu-font-size; // Font size in the lang submenu
+// $lang-dropdown-margin-left: 4.5rem;
+// $lang-dropdown-link-padding-x: $submenu-link-padding-x;
+// $lang-dropdown-link-height: $menu-main-link-height;
+// $lang-dropdown-dropdown-width: $menu-dropdown-width;  // Width of desktop dropdown
+// $lang-dropdown-submenu-link-height: $submenu-link-height;
+// $lang-dropdown-mobile-link-padding: 0.625rem;
+// $lang-dropdown-mobile-padding: 1.25rem;
+
+// PARAGRAPHS
+// -------------------------
+// All core paragraph variables have different naming convention.
+// Their names begin with $d-p- prefix.
+
+// Paragraph d_p_subscribe_file
+// -------------------------
+// $download-background: $color-agamemnon;
+// $download-color: $color-odysseus;
+// $download-header-background: $color-odysseus;
+// $download-additional-color: $color-nestor;
+// $download-padding: 8% 0;
+// $download-button-margin: 3.125rem auto;
+// $d-p-subscribe-color: $color-odysseus;
+// $d-p-subscribe-header-color: $color-odysseus;
+// $d-p-subscribe-background: $color-agamemnon;
+// $d-p-subscribe-line-color: $line-background;
+// $d-p-subscribe-form-margin: 2.2rem auto 1.25rem auto;
+// $d-p-subscribe-form-max-width: 56rem;
+// $d-p-subscribe-mobile-form-max-width: 31.25rem;
+// $d-p-subscribe-mobile-form-margin-y: 3%;
+// $d-p-subscribe-padding-y: 8%;
+// $d-p-subscribe-line-margin-top: 1.45rem;
+// $d-p-subscribe-line-margin-bottom: $line-center-margin-bottom;
+// $d-p-subscribe-img-opacity: 0.4;
+
+// Paragraph d_p_banner
+// -------------------------
+// $d-p-banner-header-color: $color-odysseus;
+// $d-p-banner-subheader-color: $color-odysseus;
+// $d-p-banner-text-color: $color-odysseus;
+// $d-p-banner-background-overlay: $color-cassandra;
+// $d-p-banner-line-color: $color-odysseus;
+// $d-p-banner-text-line-height: 1.7;
+// $d-p-banner-button-margin-top: 4.375rem;
+// $d-p-banner-padding-top: 18.5%;
+// $d-p-banner-padding-bottom: 14.5%;
+// $d-p-banner-mobile-padding-top: 6.25rem;
+// $d-p-banner-mobile-padding-bottom: 6.25rem;
+// $d-p-banner-line-margin-top: $line-center-margin-top;
+// $d-p-banner-line-margin-bottom: $line-center-margin-bottom;
+// $d-p-banner-img-opacity: 0.5;
+// $d-p-banner-subheader-opacity: 0.7;
+
+// Paragraph d_p_form
+// -------------------------
+// $d-p-form-header-color: $color-cassandra;
+// $d-p-form-text-color: $color-cassandra;
+// $d-p-form-header-margin-bottom: 10%;
+// $d-p-form-padding-top: 5%;
+// $d-p-form-padding-bottom: 5%;
+// $d-p-form-button-margin-top: 1rem;
+
+// Paragraph d_p_side_image
+// -------------------------
+// $d-p-side-image-banner-background-color: $color-agamemnon;
+// $d-p-side-image-banner-background-color-secondary: darken($d-p-side-image-banner-background-color, 15%);
+// $d-p-side-image-banner-text-color: $color-odysseus;
+// $d-p-side-image-banner-link-color: $color-nestor;
+// $d-p-side-image-banner-link-hover-color: darken($d-p-side-image-banner-link-color, 5%);
+// $d-p-side-image-line-color: $color-nestor;
+// $d-p-side-image-header-color: $color-odysseus;
+// $d-p-side-image-line-margin-top: 1.44rem;
+// $d-p-side-image-line-margin-bottom: 1.44rem;
+// $d-p-side-image-mobile-height: 18.75rem;
+// $d-p-side-image-banner-text-padding: 7%;
+// $d-p-side-image-banner-text-width: 35.625rem;
+// $d-p-side-image-banner-half-padding: 5%; // Spacing between content and half of the screen
+
+// Paragraph d_p_text_blocks
+// -------------------------
+// $d-p-single-box-text-color: $color-hecuba;
+// $d-p-single-box-line-color: $color-agamemnon;
+// $d-p-text-blocks-line-color: $color-agamemnon;
+// $d-p-text-blocks-background: $color-agamemnon;
+// $d-p-text-blocks-group-padding-y: 7.75rem;
+// $d-p-text-blocks-group-mobile-padding-y: 4rem;
+// $d-p-text-blocks-group-margin: 0 0 5.5rem 0;
+// $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0;
+// $d-p-text-blocks-group-line-margin: 0.625rem auto;
+// $d-p-single-box-line-margin-top: $line-left-margin-top;
+// $d-p-single-box-line-margin-bottom: $line-left-margin-bottom;
+// $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto;
+// $d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto;
+// $d-p-single-box-margin-bottom: 15%;
+// $d-p-single-text-box-cta-text-transform: uppercase;
+
+// Paragraph d_p_text_paged
+// -------------------------
+// $d-p-text-paged-subtitle-color: $color-agamemnon;
+// $d-p-text-paged-line-color: $color-agamemnon;
+// $d-p-text-paged-color: $color-hecuba;
+// $d-p-text-paged-subtitle-margin-y: 1.125rem;
+// $d-p-text-paged-line-margin-top: 1rem;
+// $d-p-text-paged-line-margin-bottom: 1rem;
+// $d-p-text-paged-padding-y: 5%;
+// $d-p-text-paged-first-margin-top: 2%;
+
+// Paragraph d_p_text_with_bckg
+// -------------------------
+// $d-p-text-with-bckg-background-overlay: $color-odysseus;
+// $d-p-text-with-bckg-line-color: $line-background;
+// $d-p-text-with-bckg-header-color: $color-cassandra;
+// $d-p-text-with-bckg-button-margin-top: 3.125rem;
+// $d-p-text-with-bckg-padding-top: 6.5%;
+// $d-p-text-with-bckg-padding-bottom: 6.5%;
+// $d-p-text-with-bckg-mobile-padding-top: 6.25rem;
+// $d-p-text-with-bckg-mobile-padding-bottom: 6.25rem;
+// $d-p-text-with-bckg-line-margin-top: $line-center-margin-top;
+// $d-p-text-with-bckg-line-margin-bottom: $line-center-margin-bottom;
+// $d-p-text-with-bckg-img-opacity: 0.1;
+
+// Paragraph d_p_counters
+// -------------------------
+// $d-p-counters-background-overlay: $color-agamemnon;
+// $d-p-counters-line-color: $line-background;
+// $d-p-counters-header-color: $color-odysseus;
+// $d-p-counters-number-color: $color-odysseus;
+// $d-p-counters-text-color: $color-nestor;
+// $d-p-counters-title-margin-top: 0;
+// $d-p-counters-padding-top: 4.5rem;
+// $d-p-counters-padding-bottom: 3.5rem;
+// $d-p-counters-mobile-padding-top: 3rem;
+// $d-p-counters-mobile-padding-bottom: 3rem;
+// $d-p-counters-line-margin-top: $line-center-margin-top;
+// $d-p-counters-line-margin-bottom: $line-center-margin-bottom;
+// $d-p-counters-img-opacity: 0.2;
+
+// Paragraph d_p_gallery
+// -------------------------
+// $d-p-gallery-line-color: $color-agamemnon;
+// $d-p-gallery-color: $color-hecuba;
+// $d-p-gallery-line-margin-top: 1rem;
+// $d-p-gallery-line-margin-bottom: 1rem;
+// $d-p-gallery-margin-y: 5%;
+
+// Paragraph d_p_carousel
+// -------------------------
+// $d-p-carousel-item-text-color: $color-hecuba;
+// $d-p-carousel-item-line-color: $color-agamemnon;
+// $d-p-carousel-line-color: $color-agamemnon;
+// $d-p-carousel-background: $color-agamemnon;
+// $d-p-carousel-arrow-color: $color-agamemnon;
+// $d-p-carousel-padding-y: 5%;
+// $d-p-carousel-mobile-padding-y: 5%;
+// $d-p-carousel-items-margin-top: 2%;
+// $d-p-carousel-mobile-items-margin-top: 3rem;
+// $d-p-carousel-line-margin: $line-center-margin-top auto $line-center-margin-bottom auto;
+// $d-p-carousel-item-line-margin-top: $line-left-margin-top;
+// $d-p-carousel-item-line-margin-bottom: $line-left-margin-bottom;
+// $d-p-carousel-item-image-margin-bottom: 1rem;
+// $d-p-carousel-item-image-height: 200px;
+// $d-p-carousel-item-mobile-image-height: 150px;
+// $d-p-carousel-arrow-size: 40px;
+// $d-p-carousel-arrow-opacity: 0.2;
+// $d-p-carousel-arrow-hover-opacity: 0.3;
+
+// Paragraph d_p_side_embed
+// -------------------------
+// $d-p-side-embed-background-color: $color-agamemnon;
+// $d-p-side-embed-background-color-secondary: darken($d-p-side-embed-background-color, 15%);
+// $d-p-side-embed-text-color: $color-odysseus;
+// $d-p-side-embed-link-color: $color-nestor;
+// $d-p-side-embed-link-hover-color: darken($d-p-side-embed-link-color, 5%);
+// $d-p-side-embed-line-color: $color-nestor;
+// $d-p-side-embed-header-color: $color-odysseus;
+// $d-p-side-embed-line-margin-top: 1.44rem;
+// $d-p-side-embed-line-margin-bottom: 1.44rem;
+// $d-p-side-embed-fields-padding-y: 7%;
+// $d-p-side-embed-mobile-height: 18.75rem;
+// $d-p-side-embed-text-desktop-padding-y: 2rem;
+// $d-p-side-embed-text-mobile-padding-y: 7%;
+// $d-p-side-embed-text-width: 430px;
+// $d-p-side-embed-half-padding: 5%; // Spacing between content and half of the screen
+// $d-p-side-embed-mobile-height: 300px; // This value must be set, otherwise embed won't be visible.
+// $d-p-side-embed-desktop-height: auto; // You can set fixed height of embed here.
+
+// Paragraph d_p_side_tiles
+// -------------------------
+// $d-p-side-tiles-image-background-color: $color-odysseus;
+// $d-p-side-tiles-text-background-color: $color-agamemnon;
+// $d-p-side-tiles-text-background-color-secondary: darken($d-p-side-tiles-text-background-color, 15%);
+// $d-p-side-tiles-text-color: $color-odysseus;
+// $d-p-side-tiles-link-color: $color-nestor;
+// $d-p-side-tiles-link-hover-color: darken($d-p-side-tiles-link-color, 5%);
+// $d-p-side-tiles-line-color: $color-nestor;
+// $d-p-side-tiles-header-color: $color-odysseus;
+// $d-p-side-tiles-overlay-background: $color-cassandra;
+// $d-p-side-tiles-overlay-color: $color-odysseus;
+// $d-p-side-tiles-overlay-opacity: 0.6;
+// $d-p-side-tiles-line-margin-top: 1.44rem;
+// $d-p-side-tiles-line-margin-bottom: 1.44rem;
+// $d-p-side-tiles-mobile-height: 18.75rem;
+// $d-p-side-tiles-text-desktop-padding-y: 7%;
+// $d-p-side-tiles-text-mobile-padding: 7%;
+// $d-p-side-tiles-text-width: 35.625rem;
+// $d-p-side-tiles-half-padding: 10%; // Spacing between content and half of the screen
+
+// Paragraph d_p_tiles
+// -------------------------
+// $d-p-tiles-line-color: $color-agamemnon;
+// $d-p-tiles-color: $color-hecuba;
+// $d-p-tiles-overlay-background: $color-cassandra;
+// $d-p-tiles-overlay-color: $color-odysseus;
+// $d-p-tiles-overlay-opacity: 0.6;
+// $d-p-tiles-line-margin-top: 1rem;
+// $d-p-tiles-line-margin-bottom: 1rem;
+// $d-p-tiles-margin-top: 5%;
+// $d-p-tiles-margin-bottom: 5%;
+
+// BLOG & BLOG LISTING
+// -------------------------
+// $d-blog-text-container-width: 35em;
+// $d-blog-img-width-for-desktop: 41em; //make img width the sames as text for desktop
+// $d-blog-font-color: $color-odysseus;
+// $d-blog-headers-color: $color-cassandra;
+// $d-blog-under-background-color: $color-cassandra; // color when image is not
+// $d-blog-color-taxonomy-in-header: $color-aeneas;
+// $d-blog-image-opacity-for-blog: 50%;
+// $d-blog-margin-between-html-paragraphs: 1.5rem;
+// $d-blog-margin-between-blog-sections: 3rem;
+// $d-blog-header-padding: 0.625rem;
+// $d-blog-header-margin-mobile: 0.9375rem auto 0.9375rem;
+// $d-blog-header-margin-tablet: 1.5625rem auto 1.375rem;
+// $d-blog-header-margin-dekstop: 1.5625rem auto 2.1875rem;
+// $d-blog-header-desktop-font-size: 3rem;
+// $d-blog-header-small-desktop-screen-font-size: 2.375rem;
+// $d-blog-header-tablet-font-size: 1.625rem;
+// $d-blog-header-mobile-font-size: 1.125rem;
+// $d-blog-header-h2-font-size-blog-text-desktop: 2.5rem;
+// $d-blog-header-h2-font-size-blog-text-mobile: 1.375rem;
+// $d-blog-smaller-header-font-size-blog-text-mobile: 1.25rem;
+// $d-blog-header-min-height-small-desktop: 325px;
+// $d-blog-header-min-height-big-desktop: 300px;
+// $d-blog-header-min-height-mobile: 200px;
+// $d-blog-image-header-min-height: 150px;
+// $d-blog-image-header-max-height: 700px;
+// $d-blog-author-attributes-font-size-desktop: 1.0625rem;
+// $d-blog-author-attributes-font-size-mobile: 0.75rem;
+// $d-blog-block-category-font-size-desktop: 1rem;
+// $d-blog-block-category-font-size-mobile: 0.625rem;
+// $d-blog-image-margin: 2.1875rem auto;
+// $d-blog-paragraph-text-margin: 1.5625rem auto;
+// $d-blog-text-font-size-desktop: 1.25rem;
+// $d-blog-text-width-mobile: 85%;
+// $d-blog-header-text-distance-from-bottom: -0.25rem;
+// $d-blog-header-text-distance-from-top-mobile: 40%;
+// $d-blog-size-of-large-desktop: 1400px;
+// $d-blog-listing-header-color: $color-memnon;
+// $d-blog-listing-taxonomy-link-color: $color-penthesilea;
+// $d-blog-border-bottom-color: $color-diomedes;
+// $d-blog-padding-link-color: $color-patroclus;
+// $d-blog-pagination-padding-top: 120px;
+// $d-blog-pagination-padding-bottom: 110px;
+// $d-blog-pagination-font-size: 1.25rem;
+// $d-blog-pagination-padding-between-elements: 1.875rem;
+// $d-blog-pagination-next-prev-element-padding: 1.25rem;
+// $d-blog-pagination-padding-between-pointers: 0.625rem;
+// $d-blog-pagination-border: 2px solid $d-blog-listing-taxonomy-link-color;
+// $d-blog-pagination-margin-bottom: 0;
+// $d-blog-listing-padding-top: 120px;
+// $d-blog-listing-padding-bottom: 86px;
+// $d-blog-article-border: 1px solid $d-blog-border-bottom-color;
+// $d-blog-sticky-article-padding-desktop: 0 30px 10px;
+// $d-blog-sticky-article-padding-mobile: 0 30px;
+// $d-blog-sticky-article-margin-bottom: 0;
+// $d-blog-sticky-article-margin-top: 0;
+// $d-blog-teaser-margin: 20px 0;
+// $d-blog-teaser-text-margin-top-desktop: 30px;
+// $d-blog-teaser-text-padding-left: 0;
+// $d-blog-teaser-text-padding-left-mobile: 30px;
+// $d-blog-margin-between-teaser-mobile: 15px;
+// $d-blog-teaser-blog-post-title-mobile: 1.0625rem;
+// $d-blog-read-article-font-size: 0.9375rem;
+// $d-blog-title-teaser-font-size-desktop: 2.375rem;
+// $d-blog-title-teaser-padding-top-desktop: 18px;
+// $d-blog-teaser-text-padding-desktop-tab: 0;
+// $d-blog-teaser-text-margin-desktop-tab: 43px 0;
+// $d-blog-teaser-text-font-size-desktop: 1rem;
+// $d-blog-read-article-margin-top-desktop-tablet: 21px;
+// $d-blog-teaser-image-width-tablet-desktop: 600px;
+// $d-blog-teaser-image-margin-bottom-tablet: 15px;
+// $d-blog-teaser-image-row-padding-desktop: 0;
+// $d-blog-teaser-title-margin-top-desktop: 73px;
+// $d-blog-teaser-title-padding-desktop: 37px;
+// $d-blog-teaser-title-margin-between-text-decoration-mobile: 0.75rem;
+// $d-blog-teaser-min-height-desktop: 520px;
+// $d-blog-teaser-image-height-desktop: 480px;
+// $d-blog-margin-between-header-and-article-teasers: 40px;
+// $d-blog-field-type-image-margin: 0;
+// $d-blog-article-row-min-height: 420px;

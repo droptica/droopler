@@ -8,29 +8,38 @@
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Save node with paragraphs.
+ * This is alterable in another init modules.
  *
  * @param array $node_to_create
- *   Array node with paragraph content.
+ *  Array node with paragraph content.
+ *
+ * @return integer
+ *  Node ID.
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_save_node($node_to_create) {
+  $node = Node::create($node_to_create['info']);
 
-  $node = Node::create([
-    'type' => $node_to_create['type'],
-    'title' => $node_to_create['title'],
-  ]);
-
-  if (isset($node_to_create['field_page_section']['paragraphs'])) {
-    foreach ($node_to_create['field_page_section']['paragraphs'] as $paragraph_data) {
-      $paragraph = d_content_init_fill_paragraph($paragraph_data);
-      $node->field_page_section->appendItem($paragraph);
+  foreach ($node_to_create as $field_name => $field_value) {
+    if (!empty($field_value['paragraphs'])) {
+      foreach ($field_value['paragraphs'] as $paragraph_data) {
+        $paragraph = d_content_init_fill_paragraph($paragraph_data);
+        $node->$field_name->appendItem($paragraph);
+      }
     }
-    $node->save();
+    elseif ($field_name != 'info') {
+      d_content_init_fill_field($node, $field_name, $field_value);
+    }
   }
+
+  $node->save();
+  return $node->id();
 }
 
 /**
@@ -54,22 +63,107 @@ function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
 }
 
 /**
- * Save menu items.
+ * Fill the field.
  *
- * @param $links
- *  Array of links.
+ * @param Drupal\Core\Entity\ContentEntityBase $entity
+ *  Entity object to set fields.
+ *
+ * @param string $name
+ *  Name of the field.
+ *
+ * @param array $value
+ *  Field array (type and value).
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function d_content_init_save_menu($links) {
-  foreach ($links as $nid => $item) {
-    $menu_link = MenuLinkContent::create([
-      'title' => $item['title'],
-      'link' => ['uri' => 'internal:/node/' . $nid],
-      'menu_name' => 'main',
-      'weight' => $item['weight'],
-    ]);
-    $menu_link->save();
+function d_content_init_fill_field($entity, $name, $value) {
+
+  // Allow other init modules to add their fields types.
+  \Drupal::moduleHandler()->alter('fill_field', $node, $name, $value);
+
+  switch ($value['type']) {
+    case 'text':
+    case 'text_long':
+      $entity->set($name, $value['data']);
+      $entity->$name->format = 'full_html';
+      break;
+    case 'text_select':
+      $entity->set($name, $value['data']);
+      break;
+    case 'cta':
+      $entity->set($name, [
+        'title' => $value['data']['text'],
+        'uri' => $value['data']['link'],
+      ]);
+      break;
+    case 'file':
+    case 'image':
+      // Convert short format to full.
+      if (!is_array($value['data'])) {
+        $value['data'] = [
+          ['file' => $value['data']],
+        ];
+      }
+      // Add all files.
+      foreach ($value['data'] as $file) {
+        /**
+         * @var \Drupal\file\FileInterface $file_object
+         */
+        $file_object = d_content_init_get_file($file['file']);
+        if (!empty($file_object)) {
+          $params = ["target_id" => $file_object->id()];
+          if ($value['type'] == 'image') {
+            if (!empty($file['alt'])) {
+              $params["alt"] = $file['alt'];
+            }
+          }
+          $entity->$name->appendItem($params);
+        }
+      }
+      break;
+    case 'paragraph_reference':
+      if (empty($value['subtype'])) {
+        $value['subtype'] = 'd_p_single_text_block';
+      }
+      foreach ($value['data'] as $child) {
+        // @TODO fix this ugly fix of incorrect structure in array
+        $new_child['data'] = $child;
+        $new_child['paragraph_type'] = $value['subtype'];
+        $child_paragraph = d_content_init_fill_paragraph($new_child);
+        $entity->$name->appendItem($child_paragraph);
+      }
+      break;
+    case 'entity_reference':
+      $entity->set($name, $value['data']);
+      break;
+    case 'boolean':
+      $entity->set($name, $value['data']);
+      break;
+    case 'number':
+      $entity->set($name, $value['data']);
+      break;
+    case 'taxonomy':
+      $vid = $value['data']['vid'];
+      foreach ($value['data']['terms'] as $term_name) {
+        $terms = taxonomy_term_load_multiple_by_name($term_name, $vid);
+
+        if (empty($terms)) {
+          // Create term and use it.
+          $new_term = Term::create([
+            'name' => $term_name,
+            'vid' => $vid,
+          ]);
+
+          $new_term->save();
+          $terms = taxonomy_term_load_multiple_by_name($term_name, $vid);
+        }
+
+        foreach ($terms as $term) {
+          /** @var Term $term */
+          $entity->$name->appendItem($term->id());
+        }
+      }
+      break;
   }
 }
 
@@ -88,45 +182,165 @@ function d_content_init_fill_paragraph($paragraph_data) {
     'type' => $paragraph_data['paragraph_type'],
   ]);
 
-  foreach ($paragraph_data['data'] as $field_name => $value) {
-    switch ($value['type']) {
-      case 'text':
-      case 'text_long':
-        $paragraph->set($field_name, $value['data']);
-        $paragraph->$field_name->format = 'full_html';
-        break;
-      case 'text_select':
-        $paragraph->set($field_name, $value['data']);
-        break;
-      case 'cta':
-        $paragraph->set($field_name, [
-          'title' => $value['data']['text'],
-          'uri' => $value['data']['link'],
-        ]);
-        break;
-      case 'file':
-      case 'image':
-        $image = file_get_contents(drupal_get_path('module', 'd_content_init') . '/assets/' . $value['data']);
-        $image = file_save_data($image, 'public://' . $value['data'], FILE_EXISTS_REPLACE);
-        $paragraph->$field_name->appendItem($image);
-        break;
-      case 'paragraph_reference':
-        foreach ($value['data'] as $child) {
-          // @TODO fix this ugly fix of incorrect structure in array
-          if($field_name == 'field_d_p_tb_block_reference') {
-            $new_child['data'] = $child;
-            $new_child['paragraph_type'] = 'd_p_single_text_block';
-            $child_paragraph = d_content_init_fill_paragraph($new_child);
-            $paragraph->$field_name->appendItem($child_paragraph);
-          }
-        }
-        break;
-      case 'entity_reference':
-        $paragraph->set($field_name, $value['data']);
-        break;
-    }
+  foreach ($paragraph_data['data'] as $field_name => $field_value) {
+    d_content_init_fill_field($paragraph, $field_name, $field_value);
   }
 
   $paragraph->save();
   return $paragraph;
+}
+
+/**
+ * Add page content from YML file.
+ *
+ * @param array $params
+ *  Array with parameters:
+ *  - module: a module with ymls and assets to look for (defaults to d_content_init).
+ *  - file: YML file name without path.
+ *  - title: Menu link title
+ *  - weight: Menu link weight
+ *  - children: list of children
+ *  - parent: parent menu ID
+ *
+ * @return integer|null
+ *  Menu item plugin ID.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_add_node($params) {
+  $page_array = Yaml::decode(file_get_contents($params['file']));
+  $nid = d_content_init_save_node($page_array);
+
+  // If title is not empty add menu link.
+  if (!empty($params['link'])) {
+    $config = [
+      'title' => $params['link'],
+      'link' => ['uri' => 'entity:node/' . $nid],
+      'menu_name' => 'main',
+      'weight' => $params['weight'],
+      'expanded' => !empty($params['children'])
+    ];
+
+    // Handle submenus.
+    if (!empty($params['parent'])) {
+      $config['parent'] = $params['parent'];
+    }
+
+    // Save link.
+    $menu_link = MenuLinkContent::create($config);
+    $menu_link->save();
+    return $menu_link->getPluginId();
+  }
+  else {
+    return null;
+  }
+}
+
+/**
+ * Add nodes from a given structure.
+ *
+ * @param $structure
+ *  Array with nodes (may be nested to one level).
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_add_nodes($structure) {
+  foreach ($structure as $key => $page) {
+    $mid = d_content_init_add_node($page);
+    if (!empty($page['children'])) {
+      foreach ($page['children'] as $child) {
+        $child['parent'] = $mid;
+        d_content_init_add_node($child);
+      }
+    }
+  }
+}
+
+/**
+ * Save file in Drupal.
+ *
+ * @param string $path
+ *  File path:
+ *  - "file.jpg" for files inside d_content_init
+ *  - "example_init/file.jpg" for files inside example_init module
+ *
+ * @return \Drupal\file\FileInterface
+ */
+function d_content_init_get_file($path) {
+  // Check if image name contains module.
+  $parts = explode('/', $path);
+  if (count($parts) == 2) {
+    $dir = drupal_get_path('module', $parts[0]);
+    $filename = $parts[1];
+  }
+  else {
+    $dir = drupal_get_path('module', 'd_content_init');
+    $filename = $path;
+  }
+
+  // Save the file.
+  $data = file_get_contents("$dir/assets/$filename");
+  $image = file_save_data($data, 'public://' . $filename, FILE_EXISTS_REPLACE);
+  return $image;
+}
+
+/**
+ * Create all the content.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_create_all() {
+  // Set default structure.
+  $path = drupal_get_path('module', 'd_content_init') . '/pages';
+  $structure = [
+    'homepage' => ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => 10],
+    'examples' => ['file' => "$path/examples.yml", 'link' => 'Examples', 'weight' => 20, 'children' => [
+      'business' => ['file' => "$path/business.yml", 'link' => 'Local Business Website', 'weight' => 10],
+      'event' => ['file' => "$path/event.yml", 'link' => 'Event Website', 'weight' => 20],
+      'product' => ['file' => "$path/product.yml", 'link' => 'Product Landing Page', 'weight' => 30],
+      'portfolio' => ['file' => "$path/portfolio.yml", 'link' => 'Portfolio Website', 'weight' => 40],
+      'educational' => ['file' => "$path/educational.yml", 'link' => 'Educational Website', 'weight' => 50],
+    ]],
+    'documentation' => ['file' => "$path/documentation.yml", 'link' => 'Docs', 'weight' => 30, 'children' => [
+      'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
+      'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
+      'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
+      'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
+      'd_p_sidebar_image' => ['file' => "$path/d_p_sidebar_image.yml", 'link' => 'Sidebar Image Paragraph', 'weight' => 40],
+      'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
+      'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
+      'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
+      'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
+      'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
+      'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
+      'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
+      'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
+    ]],
+    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
+  ];
+
+  // Allow other modules to modify the structure.
+  $context = 'all';
+  \Drupal::moduleHandler()->alter('content_structure', $structure, $context);
+
+  d_content_init_add_nodes($structure);
+}
+
+/**
+ * Add footer to the website.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_add_footer() {
+  // Footer block.
+  $config = \Drupal::config('system.site');
+  $footer = [
+    'info' => 'Footer',
+    'type' => 'content_block',
+    'field_d_main_title' => $config->get('name'),
+    'field_d_long_text' => $config->get('slogan'),
+  ];
+  d_content_init_save_entity($footer, 'block_content', '092dd69e-c6c4-4f0a-9780-ec15b89ec5b5');
 }
