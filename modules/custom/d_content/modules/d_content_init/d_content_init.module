@@ -344,3 +344,14 @@ function d_content_init_add_footer() {
   ];
   d_content_init_save_entity($footer, 'block_content', '092dd69e-c6c4-4f0a-9780-ec15b89ec5b5');
 }
+
+/**
+ * Removes all the content and recreates it again.
+ */
+function d_content_init_recreate_all() {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $entities = $storage->loadMultiple();
+  $storage->delete($entities);
+
+  d_content_init_create_all();
+}
