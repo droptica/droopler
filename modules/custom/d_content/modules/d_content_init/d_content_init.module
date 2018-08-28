@@ -348,7 +348,7 @@ function d_content_init_add_footer() {
 /**
  * Removes all the content and recreates it again.
  */
-function d_content_init_recreate_all() {
+function d_content_init_recreate_content() {
   $storage = \Drupal::entityTypeManager()->getStorage('node');
   $entities = $storage->loadMultiple();
   $storage->delete($entities);
