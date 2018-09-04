@@ -3,6 +3,9 @@
  * Visual styles for Droopler's node component.
  */
 
+$node-thumbnail-title-link-color: $black !default;
+$node-thumbnail-margin-bottom: 15px !default;
+
 .node__content {
   font-size: 1.071em;
   margin-top: 10px;
@@ -31,6 +34,35 @@
   clear: none;
   font-size: 1em;
   line-height: 1.6;
+}
+
+// View mode thumbnail styles.
+.node--view-mode-thumbnail {
+  h2 {
+    margin-top: 0;
+    padding-top: 0.5em;
+    a {
+      color: $node-thumbnail-title-link-color;
+    }
+  }
+  .node__meta {
+    padding-left: 0;
+  }
+  .node__content {
+    clear: none;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: $node-thumbnail-margin-bottom;
+    .field--type-image {
+      float: none;
+    }
+  }
+  .nav-link {
+    padding-left: 0;
+    &.node-readmore {
+      text-transform: uppercase;
+    }
+  }
 }
 
 /* Node metadata styles. */

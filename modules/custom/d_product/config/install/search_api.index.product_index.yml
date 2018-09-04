@@ -1,0 +1,157 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - field.storage.node.field_product_categories
+    - field.storage.node.field_tags
+    - search_api.server.db_server
+    - core.entity_view_mode.node.full
+  module:
+    - taxonomy
+    - search_api
+    - node
+id: product_index
+name: 'Product Index'
+description: ''
+read_only: false
+field_settings:
+  aggregated_field:
+    label: 'Aggregated field'
+    property_path: aggregated_field
+    type: string
+    configuration:
+      type: concat
+      fields:
+        - 'entity:node/body'
+        - 'entity:node/title'
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  description:
+    label: 'Product categories » Taxonomy term » Description'
+    datasource_id: 'entity:node'
+    property_path: 'field_product_categories:entity:description'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_product_categories
+      module:
+        - taxonomy
+  description_1:
+    label: 'Tags » Taxonomy term » Description'
+    datasource_id: 'entity:node'
+    property_path: 'field_tags:entity:description'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+      module:
+        - taxonomy
+  name:
+    label: 'Product categories » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_product_categories:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_product_categories
+      module:
+        - taxonomy
+  name_1:
+    label: 'Tags » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_tags:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          d_product: full
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - d_product
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  entity_status: {  }
+  add_url: {  }
+  html_filter:
+    all_fields: false
+    fields:
+      - body
+      - description
+      - description_1
+      - name
+      - name_1
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      em: 1
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+      u: 1
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  content_access:
+    weights:
+      preprocess_query: -30
+  rendered_item: {  }
+  aggregated_field: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: db_server
