@@ -126,9 +126,15 @@ function d_content_init_fill_field($entity, $name, $value) {
         $value['subtype'] = 'd_p_single_text_block';
       }
       foreach ($value['data'] as $child) {
-        // @TODO fix this ugly fix of incorrect structure in array
-        $new_child['data'] = $child;
-        $new_child['paragraph_type'] = $value['subtype'];
+        if($value['subtype'] == 'paragraphs_wrapper') {
+          $new_child['data'] = $child['data'];
+          $new_child['paragraph_type'] = $child['type'];
+        }
+        else {
+          // @TODO fix this ugly fix of incorrect structure in array
+          $new_child['data'] = $child;
+          $new_child['paragraph_type'] = $value['subtype'];
+        }
         $child_paragraph = d_content_init_fill_paragraph($new_child);
         $entity->$name->appendItem($child_paragraph);
       }
@@ -343,4 +349,15 @@ function d_content_init_add_footer() {
     'field_d_long_text' => $config->get('slogan'),
   ];
   d_content_init_save_entity($footer, 'block_content', '092dd69e-c6c4-4f0a-9780-ec15b89ec5b5');
+}
+
+/**
+ * Removes all the content and recreates it again.
+ */
+function d_content_init_recreate_content() {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $entities = $storage->loadMultiple();
+  $storage->delete($entities);
+
+  d_content_init_create_all();
 }

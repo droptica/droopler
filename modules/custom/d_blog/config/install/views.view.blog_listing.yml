@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.thumbnail
     - node.type.blog_post
   module:
     - node
@@ -74,6 +75,7 @@ display:
       row:
         type: 'entity:node'
         options:
+          relationship: none
           view_mode: teaser
       fields:
         title:
@@ -283,6 +285,45 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  premium_blog_posts:
+    display_plugin: block
+    id: premium_blog_posts
+    display_title: 'Premium: Blog posts'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      pager:
+        type: some
+        options:
+          items_per_page: 3
+          offset: 0
+      defaults:
+        pager: false
+        title: false
+        style: false
+        row: false
+      title: Blog
+      display_description: ''
+      style:
+        type: default
+        options:
+          row_class: 'col-md-4 col-sm-12'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: thumbnail
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
