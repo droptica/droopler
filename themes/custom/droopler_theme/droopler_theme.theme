@@ -133,9 +133,9 @@ function droopler_theme_theme_suggestions_form_alter(array &$suggestions, array 
 }
 
 /**
- * Implmenets hook_theme_suggestion_page_alter
+ * Implmenets hook_theme_suggestions_page_alter.
  */
-function droopler_theme_theme_suggestions_page_alter(&$suggestions, &$vars) {
+function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
   $routeMatch = \Drupal::routeMatch();
   if ($routeMatch->getRouteName() == 'entity.taxonomy_term.canonical') {
     $storage = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term');
