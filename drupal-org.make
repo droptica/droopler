@@ -1,8 +1,6 @@
 api = 2
 core = 8.x
 
-projects[drupal][type] = core
-
 projects[admin_toolbar][subdir] = contrib
 projects[admin_toolbar][type] = module
 projects[admin_toolbar][version] = 1.24
