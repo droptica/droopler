@@ -66,23 +66,27 @@ $d-blog-article-row-min-height: 420px !default;
     font-size: $d-blog-pagination-font-size;
 
     li {
-      padding: $d-blog-pagination-padding-between-elements;
       a {
+        padding: $d-blog-pagination-padding-between-elements;
         color: $d-blog-padding-link-color;
+        background: none;
+        border: none;
       }
     }
 
     .pager__item--next, .pager__item--last, .pager__item--previous, .pager__item--first {
-      padding-left: $d-blog-pagination-padding-between-pointers;
-      padding-right: $d-blog-pagination-padding-between-pointers;
       display: inline;
+      a {
+        padding-left: $d-blog-pagination-padding-between-pointers;
+        padding-right: $d-blog-pagination-padding-between-pointers;
+      }
     }
 
-    .pager__item--next {
+    .pager__item--next a {
       padding-left: $d-blog-pagination-next-prev-element-padding;
     }
 
-    .pager__item--previous {
+    .pager__item--previous a {
       padding-right: $d-blog-pagination-next-prev-element-padding;
     }
 

@@ -183,3 +183,41 @@ function droopler_theme_preprocess_input(&$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function droopler_theme_preprocess_pager(&$variables) {
+  // Next.
+  if (isset($variables['items']['next'])) {
+    $variables['items']['next']['attributes'] = new Attribute([
+      'class' => ['page-link'],
+    ]);
+  }
+  // Previous.
+  if (isset($variables['items']['previous'])) {
+    $variables['items']['previous']['attributes'] = new Attribute([
+      'class' => ['page-link'],
+    ]);
+  }
+  // First.
+  if (isset($variables['items']['first'])) {
+    $variables['items']['first']['attributes'] = new Attribute([
+      'class' => ['page-link'],
+    ]);
+  }
+  // Last.
+  if (isset($variables['items']['last'])) {
+    $variables['items']['last']['attributes'] = new Attribute([
+      'class' => ['page-link'],
+    ]);
+  }
+  // Pages.
+  if (!empty($variables['items']['pages'])) {
+    foreach ($variables['items']['pages'] as &$page) {
+      $page['attributes'] = new Attribute([
+        'class' => ['page-link'],
+      ]);
+    }
+  }
+}
