@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\d_content\Routing\RouteSubscriber.
+ * Contains \Drupal\d_content\Routing\ContactAlterRouteSubscriber.
  */
 
 namespace Drupal\d_content\Routing;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\RouteCollection;
 /**
  * Listens to the dynamic route events.
  */
-class RouteSubscriber extends RouteSubscriberBase {
+class ContactAlterRouteSubscriber extends RouteSubscriberBase {
 
   /**
    * {@inheritdoc}
