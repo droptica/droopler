@@ -97,6 +97,10 @@ function droopler_theme_preprocess_form_element(&$variables) {
   else {
     $variables['input_title'] = $variables['label']['#title'];
   }
+  if (!empty($variables['input_title'])) {
+    $allowedTags = '<p><a><img><span><blockquote><b><strong><i><em><u>';
+    $variables['input_title'] = strip_tags($variables['input_title'], $allowedTags);
+  }
   if (isset($variables['element']['#attributes'])) {
     $variables['input_attributes'] = new Attribute($variables['element']['#attributes']);
   }
