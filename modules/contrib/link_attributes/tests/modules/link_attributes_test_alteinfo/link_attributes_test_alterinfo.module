@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Link attributes test module.
+ */
+
+/**
+ * Implements hook_link_attributes_plugin_alter().
+ */
+function link_attributes_test_alterinfo_link_attributes_plugin_alter(array &$definitions) {
+  // Alter only if our state flag is set.
+  if (\Drupal::state()->get('link_attributes_test_alterinfo.hook_link_attributes_plugin_alter')) {
+    $definitions['class']['title'] = t('Link style');
+    $definitions['class']['description'] = t('Select how the link should be displayed.');
+    $definitions['class']['type'] = 'select';
+    $definitions['class']['options'] = [
+      'link' => 'Link',
+      'button' => 'Button',
+    ];
+    $definitions['class']['default_value'] = 'button';
+  }
+}

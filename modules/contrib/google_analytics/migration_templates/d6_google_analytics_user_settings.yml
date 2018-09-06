@@ -1,0 +1,22 @@
+id: d6_google_analytics_user_settings
+label: Google Analytics user settings
+migration_tags:
+  - Drupal 6
+source:
+  plugin: d6_user
+  constants:
+    key: user_account_users
+    module: google_analytics
+process:
+  uid: uid
+  key: 'constants/key'
+  module: 'constants/module'
+  settings:
+    plugin: skip_row_if_not_set
+    index: 'custom'
+    source: data/google_analytics
+destination:
+  plugin: user_data
+migration_dependencies:
+  required:
+    - d6_user

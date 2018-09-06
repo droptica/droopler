@@ -1,0 +1,391 @@
+<?php
+
+/**
+ * @file
+ * Provides primary Drupal hook implementations.
+ *
+ * Adds a JavaScript snippet to selected page responses to trigger analytics and
+ * other tracking items configured using the Google Tag Manager.
+ *
+ * @author Jim Berry ("solotandem", http://drupal.org/user/240748)
+ */
+
+use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Default for matching all items except listed.
+ */
+const GOOGLE_TAG_EXCLUDE_LISTED = 'exclude listed';
+
+/**
+ * Default for matching only listed items.
+ */
+const GOOGLE_TAG_INCLUDE_LISTED = 'include listed';
+
+/**
+ * Implements hook_help().
+ */
+function google_tag_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.google_tag':
+    case 'google_tag.settings_form':
+      return t('<a href=":url">Google Tag Manager</a> is a free service (registration required) to manage the insertion of tags for capturing website analytics.', [':url' => 'https://tagmanager.google.com/']);
+  }
+}
+
+/**
+ * Implements hook_rebuild().
+ */
+function google_tag_rebuild() {
+  $rebuild_snippets = \Drupal::config('google_tag.settings')->get('rebuild_snippets');
+  if ($rebuild_snippets) {
+    _google_tag_assets_create();
+  }
+}
+
+/**
+ * Saves snippet files and data layer classes based on current settings.
+ */
+function _google_tag_assets_create() {
+  $config_factory = \Drupal::configFactory();
+  $form = new Drupal\google_tag\Form\GoogleTagSettingsForm($config_factory);
+  $form->createAssets();
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function google_tag_page_attachments(&$attachments) {
+  if (!google_tag_insert_snippet()) {
+    return;
+  }
+
+  $config = \Drupal::config('google_tag.settings');
+  $include_script_as_file = $config->get('include_file');
+  $include_classes = $config->get('include_classes');
+  $types = $include_classes ? ['data_layer', 'script'] : ['script'];
+
+  // Add data_layer and script snippets to head (no longer by default).
+  $weight = 9;
+  if ($include_script_as_file) {
+    foreach ($types as $type) {
+      // @todo Will it matter if file is empty?
+      // @todo Check config for the whitelist and blacklist classes before adding.
+      $attachments['#attached']['html_head'][] = _google_tag_file_tag($type, $weight++);
+    }
+  }
+  else {
+    foreach ($types as $type) {
+      // @see drupal_get_js() in 7.x core.
+      // For inline JavaScript to validate as XHTML, all JavaScript containing
+      // XHTML needs to be wrapped in CDATA.
+      $attachments['#attached']['html_head'][] = _google_tag_inline_tag($type, $weight++);
+    }
+  }
+}
+
+/**
+ * Returns tag array for the snippet type.
+ *
+ * @param string $type
+ *   The snippet type.
+ * @param int $weight
+ *   The weight of the item.
+ *
+ * @return array
+ *   The tag array.
+ */
+function _google_tag_file_tag($type, $weight) {
+  $uri = "public://google_tag/google_tag.$type.js";
+  $url = file_url_transform_relative(file_create_url($uri));
+  $query_string = \Drupal::state()->get('system.css_js_query_string') ?: '0';
+  $attachment = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#attributes' => ['src' => $url . '?' . $query_string],
+      '#weight' => $weight,
+    ],
+    "google_tag_{$type}_tag",
+  ];
+  return $attachment;
+}
+
+/**
+ * Returns tag array for the snippet type.
+ *
+ * @param string $type
+ *   The snippet type.
+ * @param int $weight
+ *   The weight of the item.
+ *
+ * @return array
+ *   The tag array.
+ */
+function _google_tag_inline_tag($type, $weight) {
+  $uri = "public://google_tag/google_tag.$type.js";
+  $url = \Drupal::service('file_system')->realpath($uri);
+  $contents = @file_get_contents($url);
+  $attachment = $contents ? [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#value' => $contents,
+      '#weight' => $weight,
+    ],
+    "google_tag_{$type}_tag",
+  ] : [];
+  return $attachment;
+}
+
+/**
+ * Implements hook_page_top().
+ */
+function google_tag_page_top(&$page) {
+  if (!google_tag_insert_snippet()) {
+    return;
+  }
+
+  // Add noscript snippet to page_top region.
+  $uri = 'public://google_tag/google_tag.noscript.js';
+  $url = \Drupal::service('file_system')->realpath($uri);
+  $contents = @file_get_contents($url);
+
+  // Note: depending on the theme, this may not place the snippet immediately
+  // after the body tag but should be close and it can be altered.
+
+  // @see https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!theme.api.php/group/theme_render/8.2.x
+  // The markup is passed through \Drupal\Component\Utility\Xss::filterAdmin()
+  // which strips known vectors while allowing a permissive list of HTML tags
+  // that are not XSS vectors. (e.g., <script> and <style> are not allowed.)
+  // @todo Core is removing the 'style' attribute from the noscript snippet.
+  if ($contents) {
+    $page['google_tag_noscript_tag'] = [
+      '#markup' => $contents,
+      '#allowed_tags' => ['noscript', 'iframe'],
+      '#weight' => -10,
+    ];
+  }
+}
+
+/**
+ * Determines whether to insert the snippet on the response.
+ *
+ * @return bool
+ *   TRUE if the conditions are met; FALSE otherwise.
+ */
+function google_tag_insert_snippet() {
+  static $satisfied;
+
+  if (!isset($satisfied)) {
+    $config = \Drupal::config('google_tag.settings');
+    $debug = $config->get('debug_output');
+    $id = $config->get('container_id');
+
+    if (empty($id)) {
+      // No container ID.
+      return FALSE;
+    }
+
+    $satisfied = TRUE;
+    if (!_google_tag_status_check() || !_google_tag_path_check() || !_google_tag_role_check()) {
+      // Omit snippet if any condition is not met.
+      $satisfied = FALSE;
+    }
+
+    // Allow other modules to alter the insertion criteria.
+    \Drupal::moduleHandler()->alter('google_tag_insert', $satisfied);
+    $debug ? drupal_set_message(t('after alter @satisfied', ['@satisfied' => $satisfied])) : '';
+  }
+  return $satisfied;
+}
+
+/**
+ * Determines whether to insert the snippet based on status code settings.
+ *
+ * @return bool
+ *   TRUE if the status conditions are met; FALSE otherwise.
+ */
+function _google_tag_status_check() {
+  static $satisfied;
+
+  if (!isset($satisfied)) {
+    $config = \Drupal::config('google_tag.settings');
+    $debug = $config->get('debug_output');
+    $toggle = $config->get('status_toggle');
+    $statuses = $config->get('status_list');
+
+    if (empty($statuses)) {
+      $satisfied = ($toggle == GOOGLE_TAG_EXCLUDE_LISTED);
+    }
+    else {
+      // Get the HTTP response status.
+      $request = \Drupal::request();
+      $status = '200';
+      if ($exception = $request->attributes->get('exception')) {
+        $status = $exception->getStatusCode();
+      }
+      $satisfied = strpos($statuses, (string) $status) !== FALSE;
+      $satisfied = ($toggle == GOOGLE_TAG_EXCLUDE_LISTED) ? !$satisfied : $satisfied;
+    }
+    $debug ? drupal_set_message(t('google_tag')) : '';
+    $debug ? drupal_set_message(t('status check @satisfied', ['@satisfied' => $satisfied])) : '';
+  }
+  return $satisfied;
+}
+
+/**
+ * Determines whether to insert the snippet based on the path settings.
+ *
+ * @return bool
+ *   TRUE if the path conditions are met; FALSE otherwise.
+ */
+function _google_tag_path_check() {
+  static $satisfied;
+
+  if (!isset($satisfied)) {
+    $config = \Drupal::config('google_tag.settings');
+    $debug = $config->get('debug_output');
+    $toggle = $config->get('path_toggle');
+    $paths = Unicode::strtolower($config->get('path_list'));
+
+    if (empty($paths)) {
+      $satisfied = ($toggle == GOOGLE_TAG_EXCLUDE_LISTED);
+    }
+    else {
+      $request = \Drupal::request();
+      $current_path = \Drupal::service('path.current');
+      $alias_manager = \Drupal::service('path.alias_manager');
+      $path_matcher = \Drupal::service('path.matcher');
+      // @todo Are not some paths case sensitive???
+      // Compare the lowercase path alias (if any) and internal path.
+      $path = $current_path->getPath($request);
+      $path_alias = Unicode::strtolower($alias_manager->getAliasByPath($path));
+      $satisfied = $path_matcher->matchPath($path_alias, $paths) || (($path != $path_alias) && $path_matcher->matchPath($path, $paths));
+      $satisfied = ($toggle == GOOGLE_TAG_EXCLUDE_LISTED) ? !$satisfied : $satisfied;
+    }
+    $debug ? drupal_set_message(t('path check @satisfied', ['@satisfied' => $satisfied])) : '';
+  }
+  return $satisfied;
+}
+
+/**
+ * Determines whether to insert the snippet based on the user role settings.
+ *
+ * @return bool
+ *   TRUE if the role conditions are met; FALSE otherwise.
+ */
+function _google_tag_role_check() {
+  static $satisfied;
+
+  if (!isset($satisfied)) {
+    $config = \Drupal::config('google_tag.settings');
+    $debug = $config->get('debug_output');
+    $toggle = $config->get('role_toggle');
+    $roles = $config->get('role_list');
+    $roles = array_filter($roles);
+
+    if (empty($roles)) {
+      $satisfied = ($toggle == GOOGLE_TAG_EXCLUDE_LISTED);
+    }
+    else {
+      $satisfied = FALSE;
+      // Check user roles against listed roles.
+      $satisfied = (bool) array_intersect($roles, \Drupal::currentUser()->getRoles());
+      $satisfied = ($toggle == GOOGLE_TAG_EXCLUDE_LISTED) ? !$satisfied : $satisfied;
+    }
+    $debug ? drupal_set_message(t('role check @satisfied', ['@satisfied' => $satisfied])) : '';
+  }
+  return $satisfied;
+}
+
+/**
+ * Checks that the directory exists and is writable.
+ *
+ * @todo Remove this function if core is updated to check the executable bit.
+ *
+ * @see file_prepare_directory()
+ */
+function __file_prepare_directory(&$directory, $options = FILE_MODIFY_PERMISSIONS) {
+  if (!file_stream_wrapper_valid_scheme(\Drupal::service('file_system')->uriScheme($directory))) {
+    // Only trim if we're not dealing with a stream.
+    $directory = rtrim($directory, '/\\');
+  }
+
+  // Check if directory exists.
+  if (!is_dir($directory)) {
+    // Let mkdir() recursively create directories and use the default directory
+    // permissions.
+    if ($options & FILE_CREATE_DIRECTORY) {
+      return @drupal_mkdir($directory, NULL, TRUE);
+    }
+    return FALSE;
+  }
+  // The directory exists, so check to see if it is writable.
+  $writable = _google_tag_is_writable($directory) && _google_tag_is_executable($directory);
+  if (!$writable && ($options & FILE_MODIFY_PERMISSIONS)) {
+    return drupal_chmod($directory);
+  }
+
+  return $writable;
+}
+
+/**
+ * Determines whether a directory is writable.
+ *
+ * Remove this if PHP is_writable() is changed to respect ACLS on a 'local'
+ * stream wrapper other than the local file wrapper provided by PHP.
+ *
+ * @param string $uri
+ *   A directory path or stream wrapper URI.
+ *
+ * @return bool
+ *   Whether the directory is writable.
+ */
+function _google_tag_is_writable($uri) {
+  // Use the local path, if applicable, since PHP only checks ACLs on its local
+  // file wrapper.
+  $realpath = \Drupal::service('file_system')->realpath($uri);
+  return is_writable($realpath ? $realpath : $uri);
+}
+
+/**
+ * Determines whether a directory is searchable.
+ *
+ * Remove this if PHP is_executable() is changed to not return FALSE simply
+ * because the URI points to a directory (not a file) in a stream wrapper other
+ * than the local file wrapper provided by PHP.
+ *
+ * @param string $uri
+ *   A directory path or stream wrapper URI.
+ *
+ * @return bool
+ *   Whether the directory is searchable.
+ */
+function _google_tag_is_executable($uri) {
+  if ($realpath = \Drupal::service('file_system')->realpath($uri)) {
+    // The URI is a local stream wrapper or a local path.
+    // Use the local path since PHP only checks ACLs on its local file wrapper.
+    return is_executable($realpath);
+  }
+  if ($wrapper = \Drupal::service('stream_wrapper_manager')->getViaUri($uri)) {
+    // The URI is a remote stream wrapper.
+    if (!($stat = $wrapper->url_stat($uri, 0))) {
+      return FALSE;
+    }
+
+    // Determine the appropriate permissions bit mask as an octal.
+    // The stat array is likely to have uid=gid=0 so that the mask is octal 01.
+    // This is true for Amazon S3 and Google Cloud Storage.
+    $mask = 1;
+    if ($stat['uid'] == posix_getuid()) {
+      $mask = $mask << 6;
+    }
+    elseif ($stat['gid'] == posix_getgid()) {
+      $mask = $mask << 3;
+    }
+    return ($stat['mode'] & $mask) != 0;
+  }
+  return FALSE;
+}

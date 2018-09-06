@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * @file
+ * Provides install, update, and uninstall functions.
+ *
+ * @author Jim Berry ("solotandem", http://drupal.org/user/240748)
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function google_tag_requirements($phase) {
+  $requirements = array();
+  if ($phase == 'runtime') {
+    $config = \Drupal::config('google_tag.settings');
+    if (!preg_match('/^GTM-\w{4,}$/', $config->get('container_id'))) {
+      // Google Tag Manager container ID has not been set.
+      $requirements['google_tag'] = array(
+        'title' => t('Google Tag Manager'),
+        'description' => t('Configure this integration module on its <a href=":url">settings page</a>.', array(':url' => \Drupal::url('google_tag.settings_form'))),
+        'severity' => REQUIREMENT_WARNING,
+        'value' => t('Not configured'),
+      );
+    }
+  }
+  if ($phase == 'runtime' || $phase == 'update' || $phase == 'install') {
+    // Adapted from system_requirements().
+    $directory = 'public://google_tag';
+    $phase == 'install' ? module_load_include('module', 'google_tag') : '';
+    if (!is_dir($directory) || !_google_tag_is_writable($directory) || !_google_tag_is_executable($directory)) {
+      __file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    }
+    $is_executable = _google_tag_is_executable($directory);
+    $is_writable = _google_tag_is_writable($directory);
+    $is_directory = is_dir($directory);
+    if (!$is_executable || !$is_writable || !$is_directory) {
+      // The snippet directory does not exist or is not writable or searchable.
+
+      // If applicable, get the directory path of stream wrapper.
+      $wrapper = \Drupal::service('stream_wrapper_manager')->getViaUri($directory);
+      if (method_exists($wrapper, 'getDirectoryPath') && ($path = $wrapper->getDirectoryPath())) {
+        // getDirectoryPath() is not defined in StreamWrapperInterface; it
+        // exists in LocalStream and the local storage replacement classes in
+        // google_appengine; s3fs returns an empty string.
+        $path .= '/google_tag';
+      }
+      elseif (!($path = $wrapper->getExternalUrl())) {
+        $path = $directory;
+      }
+
+      if (!$is_directory) {
+        $error = t('The directory %directory does not exist.', array('%directory' => $path));
+        $description = t('An automated attempt to create the directory failed, possibly due to a permissions problem. Create the directory and make it writable.');
+        $value = t('Does not exist');
+      }
+      elseif (!$is_writable) {
+        $error = t('The directory %directory is not writable.', array('%directory' => $path));
+        $description = t('An automated attempt to make the directory writable failed, possibly due to a permissions problem. Make the directory writable.');
+        $value = t('Not writable');
+      }
+      else {
+        $error = t('The directory %directory is not searchable.', array('%directory' => $path));
+        $description = t('An automated attempt to make the directory searchable failed, possibly due to a permissions problem. Make the directory searchable.');
+        $value = t('Not searchable');
+      }
+      $extra = '';
+      if ($phase == 'install') {
+        $extra = t('For more information, see INSTALL.txt or the <a href=":handbook_url">online handbook</a>.', array(':handbook_url' => 'https://www.drupal.org/server-permissions'));
+        $value = '';
+      }
+      $description = array(
+        '#type' => 'inline_template',
+        '#template' => '{{ error }} {{ description }} {{ extra }}',
+        '#context' => array(
+          'error' => $error,
+          'description' => $description,
+          'extra' => $extra,
+        ),
+      );
+      $requirements['google_tag_snippet_directory'] = array(
+        'title' => t('Google Tag Manager snippet directory'),
+        'description' => $description,
+        'severity' => REQUIREMENT_ERROR,
+        'value' => $value,
+      );
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function google_tag_install() {
+  global $google_tag_display_message;
+  $google_tag_display_message = TRUE;
+  _google_tag_assets_create();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function google_tag_uninstall() {
+  @file_unmanaged_delete_recursive('public://google_tag');
+  \Drupal::service('asset.js.collection_optimizer')->deleteAll();
+  _drupal_flush_css_js();
+}

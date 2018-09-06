@@ -1,0 +1,42 @@
+language: php
+
+branches:
+  # Only test the master branch and SemVer tags.
+  only:
+    - master
+    - /^[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+.*$/
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+      env: 'DEPENCENCIES=highest'
+    - php: 7.2
+    - php: 7.1
+    - php: 7.0.11
+    - php: 5.6
+      env: 'SCENARIO=phpunit4'
+    - php: 5.5
+      env: 'SCENARIO=phpunit4'
+    - php: 5.5
+      env: 'SCENARIO=phpunit4 DEPENDENCIES=lowest'
+
+sudo: false
+
+git:
+ depth: 10000
+
+before_install:
+  - phpenv config-rm xdebug.ini
+  - composer --verbose self-update
+  - composer --version
+
+install:
+  - 'composer scenario "${SCENARIO}" "${DEPENDENCIES}"'
+
+before_script:
+  - git config --global user.email "travisci@example.com"
+  - git config --global user.name "Travis CI Test"
+
+script:
+  - composer test

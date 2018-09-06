@@ -1,0 +1,19 @@
+container_id: ''
+path_toggle: 'exclude listed'
+path_list: "/admin*\n/batch*\n/node/add*\n/node/*/edit\n/node/*/delete\n/user/*/edit*\n/user/*/cancel*"
+role_toggle: 'exclude listed'
+role_list:
+  -
+status_toggle: 'exclude listed'
+status_list: "403\n404"
+compact_snippet: true
+include_file: true
+rebuild_snippets: true
+debug_output: false
+data_layer: 'dataLayer'
+include_classes: false
+whitelist_classes: "google\nnonGooglePixels\nnonGoogleScripts\nnonGoogleIframes"
+blacklist_classes: "customScripts\ncustomPixels"
+include_environment: false
+environment_id: ''
+environment_token: ''

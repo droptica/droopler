@@ -1,0 +1,341 @@
+<?php
+
+/**
+ * @file
+ * Install/Update hooks for paragraphs library.
+ */
+
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\paragraphs_library\Entity\LibraryItem;
+
+/**
+ * Implements hook_install().
+ */
+function paragraphs_library_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+
+  if (\Drupal::moduleHandler()->moduleExists('entity_browser')) {
+    EntityFormDisplay::load('paragraph.from_library.default')
+      ->setComponent('field_reusable_paragraph', [
+        'type' => 'entity_browser_entity_reference',
+        'settings' => [
+          'entity_browser' => 'paragraphs_library_items',
+          'open' => TRUE,
+          'field_widget_display' => 'rendered_entity',
+          'field_widget_display_settings' => [
+            'view_mode' => 'summary',
+          ],
+          'field_widget_remove' => FALSE,
+          'field_widget_replace' => TRUE,
+        ],
+      ])
+      ->save();
+  }
+
+  // Make sure the "Usage" local task is enabled for library items.
+  $entity_usage_config = \Drupal::configFactory()->getEditable('entity_usage.settings');
+  $tabs_enabled = $entity_usage_config->get('local_task_enabled_entity_types');
+  if (is_array($tabs_enabled) && !in_array('paragraphs_library_item', $tabs_enabled)) {
+    $tabs_enabled[] = 'paragraphs_library_item';
+    $entity_usage_config->set('local_task_enabled_entity_types', $tabs_enabled)
+      ->save();
+  }
+}
+
+/**
+ * Make library items translatable.
+ */
+function paragraphs_library_update_8001() {
+
+  \Drupal::service('entity.manager')->clearCachedDefinitions();
+
+  // Load all library items and store their values in memory.
+  $library_values = \Drupal::database()->query('SELECT * FROM {paragraphs_library_item}')->fetchAll(PDO::FETCH_ASSOC);
+
+  // Now, truncate the tables to delete the data without invoking APIs that
+  // would also delete the referenced paragraphs.
+  \Drupal::database()->truncate('paragraphs_library_item')->execute();
+  \Drupal::database()->truncate('paragraphs_library_item_revision')->execute();
+
+    // Make the entity type translatable.
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $entity_type = $entity_definition_update_manager->getEntityType('paragraphs_library_item');
+  //$entity_definition_update_manager->uninstallEntityType($entity_type);
+
+  $entity_type->set('translatable', TRUE);
+  $keys = $entity_type->getKeys();
+  $keys['langcode'] = 'langcode';
+  $entity_type->set('entity_keys', $keys);
+  //$entity_type->setHandlerClass('storage_schema', LibraryItemStorageSchema::class);
+
+  $entity_definition_update_manager->updateEntityType($entity_type);
+
+  $langcode_field = BaseFieldDefinition::create('language')
+    ->setLabel(t('Language'))
+    ->setDisplayOptions('view', [
+      'region' => 'hidden',
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'language_select',
+      'weight' => 2,
+    ])
+    ->setRevisionable(TRUE)
+    ->setTranslatable(TRUE);
+
+
+  $default_langcode_field = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Default translation'))
+    ->setDescription(t('A flag indicating whether this is the default translation.'))
+    ->setTranslatable(TRUE)
+    ->setRevisionable(TRUE)
+    ->setDefaultValue(TRUE);
+
+  $entity_definition_update_manager->installFieldStorageDefinition('langcode', $entity_type->id(), 'paragraphs_library', $langcode_field);
+  $entity_definition_update_manager->installFieldStorageDefinition('default_langcode', $entity_type->id(), 'paragraphs_library', $default_langcode_field);
+
+  \Drupal::entityManager()->clearCachedDefinitions();
+  foreach ($library_values as $library_value) {
+    $library_value['paragraphs'] = [
+      'target_id' => $library_value['paragraphs__target_id'],
+      'target_revision_id' => $library_value['paragraphs__target_revision_id']
+    ];
+    unset($library_value['paragraphs__target_id']);
+    unset($library_value['paragraphs__target_revision_id']);
+    LibraryItem::create($library_value)->save();
+  }
+}
+
+/**
+ * Set library item's paragraph field required.
+ */
+function paragraphs_library_update_8002() {
+  if ($field = FieldConfig::load('paragraph.from_library.field_reusable_paragraph')) {
+    $field->setRequired(TRUE)->save();
+  }
+}
+
+/**
+ * Add revision log field.
+ */
+function paragraphs_library_update_8003() {
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $entity_type = $entity_definition_update_manager->getEntityType('paragraphs_library_item');
+
+  $storage_definition = BaseFieldDefinition::create('string_long')
+    ->setLabel(t('Revision log message'))
+    ->setDescription(t('The log entry explaining the changes in this revision.'))
+    ->setRevisionable(TRUE)
+    ->setDisplayOptions('form', [
+      'type' => 'string_textarea',
+      'weight' => 25,
+      'settings' => [
+        'rows' => 4,
+      ],
+    ]);
+
+  \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition(
+      'revision_log',
+      $entity_type->id(),
+      'paragraphs_library_item',
+      $storage_definition
+    );
+}
+
+/**
+ * Make the label revisionable.
+ */
+function paragraphs_library_update_8004() {
+  $database = \Drupal::database();
+  $column_schema = [
+    'type' => 'varchar',
+    'length' => 255,
+    'binary' => FALSE,
+    'not null' => FALSE,
+  ];
+  $database->schema()->addField('paragraphs_library_item_revision_field_data', 'label', $column_schema);
+
+  $result = $database->query('SELECT id, langcode, label FROM {paragraphs_library_item_field_data}');
+  foreach ($result as $row) {
+    $database->update('paragraphs_library_item_revision_field_data')
+      ->fields([
+        'label' => $row->label,
+      ])
+      ->condition('id', $row->id)
+      ->condition('langcode', $row->langcode)
+      ->execute();
+  }
+
+  // Update the field storage repository.
+  \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
+  $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $storage_definition = $definition_update_manager->getFieldStorageDefinition('label', 'paragraphs_library_item');
+  $storage_definition->setRevisionable(TRUE);
+  \Drupal::service('entity.last_installed_schema.repository')->setLastInstalledFieldStorageDefinition($storage_definition);
+
+  // Update the stored field schema.
+  // @todo: There has to be a better way to do this.
+  $key = 'paragraphs_library_item.field_schema_data.label';
+  $field_schema = \Drupal::keyValue('entity.storage_schema.sql')->get($key);
+  $field_schema['paragraphs_library_item_revision_field_data']['fields']['label'] = $column_schema;
+  \Drupal::keyValue('entity.storage_schema.sql')->set($key, $field_schema);
+}
+
+/**
+ * Add author and revision fields.
+ */
+function paragraphs_library_update_8005() {
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $entity_type = $entity_definition_update_manager->getEntityType('paragraphs_library_item');
+  $revision_metadata_keys = $entity_type->get('revision_metadata_keys');
+  $revision_metadata_keys += [
+    'revision_created' => 'revision_created',
+    'revision_user' => 'revision_uid',
+    'revision_log_message' => 'revision_log'
+  ];
+  $entity_type->set('revision_metadata_keys', $revision_metadata_keys);
+  $entity_definition_update_manager->updateEntityType($entity_type);
+  $uid = BaseFieldDefinition::create('entity_reference')
+    ->setLabel(t('Authored by'))
+    ->setDescription(t('The user ID of the library item author.'))
+    ->setRevisionable(TRUE)
+    ->setSetting('target_type', 'user')
+    ->setSetting('handler', 'default')
+    ->setDefaultValueCallback('Drupal\paragraphs_library\Entity\LibraryItem::getCurrentUserId')
+    ->setTranslatable(TRUE)
+    ->setDisplayOptions('form', [
+      'region' => 'hidden',
+      'weight' => 0,
+    ])
+    ->setDisplayConfigurable('form', TRUE);
+
+  $created = BaseFieldDefinition::create('created')
+    ->setLabel(t('Revision create time'))
+    ->setDescription(t('The time that the current revision was created.'))
+    ->setRevisionable(TRUE);
+
+  $revision_uid = BaseFieldDefinition::create('entity_reference')
+    ->setLabel(t('Revision user'))
+    ->setDescription(t('The user ID of the author of the current revision.'))
+    ->setSetting('target_type', 'user')
+    ->setRevisionable(TRUE);
+
+  $has_content_translation_uid_field = \Drupal::moduleHandler()->moduleExists('content_translation') && $entity_definition_update_manager->getFieldStorageDefinition('content_translation_uid', $entity_type->id());
+  if ($has_content_translation_uid_field) {
+    $uid->setInitialValueFromField('content_translation_uid');
+    $revision_uid->setInitialValueFromField('content_translation_uid');
+  }
+  else {
+    $uid->setInitialValue(0);
+    $revision_uid->setInitialValue(0);
+  }
+
+  $entity_definition_update_manager->installFieldStorageDefinition('uid', $entity_type->id(), 'paragraphs_library', $uid);
+  $entity_definition_update_manager->installFieldStorageDefinition('revision_created', $entity_type->id(), 'paragraphs_library', $created);
+  $entity_definition_update_manager->installFieldStorageDefinition('revision_uid', $entity_type->id(), 'paragraphs_library', $revision_uid);
+
+  $database = \Drupal::database();
+  $result = $database->query('SELECT revision_id, MIN(changed) as changed FROM {paragraphs_library_item_field_data} GROUP BY revision_id');
+  foreach ($result as $row) {
+    $database->update('paragraphs_library_item_revision')
+      ->fields([
+        'revision_created' => $row->changed,
+      ])
+      ->condition('revision_id', $row->revision_id)
+      ->execute();
+  }
+
+  // Uninstall the 'content_translation_uid' field if needed.
+  if ($has_content_translation_uid_field) {
+    // First we have to remove the field data.
+    $database->update($entity_type->getDataTable())
+      ->fields(['content_translation_uid' => NULL])
+      ->execute();
+    $database->update($entity_type->getRevisionDataTable())
+      ->fields(['content_translation_uid' => NULL])
+      ->execute();
+
+    $content_translation_status = $entity_definition_update_manager->getFieldStorageDefinition('content_translation_uid', $entity_type->id());
+    $entity_definition_update_manager->uninstallFieldStorageDefinition($content_translation_status);
+  }
+
+}
+
+/**
+ * Add a publishing status field.
+ */
+function paragraphs_library_update_8006() {
+  $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  // Add the published entity key.
+  $entity_type = $definition_update_manager->getEntityType('paragraphs_library_item');
+  $entity_keys = $entity_type->getKeys();
+  $entity_keys['published'] = 'status';
+  $entity_type->set('entity_keys', $entity_keys);
+  $definition_update_manager->updateEntityType($entity_type);
+
+  // Add the publishing status field.
+  $status = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Published'))
+    ->setRevisionable(TRUE)
+    ->setTranslatable(TRUE)
+    ->setDefaultValue(TRUE)
+    ->setDisplayOptions('form', [
+      'type' => 'boolean_checkbox',
+      'settings' => [
+        'display_label' => TRUE,
+      ],
+      'weight' => 3,
+    ])
+    ->setDisplayConfigurable('form', TRUE);
+
+  $has_content_translation_status_field = \Drupal::moduleHandler()->moduleExists('content_translation') && $definition_update_manager->getFieldStorageDefinition('content_translation_status', $entity_type->id());
+  $database = \Drupal::database();
+  if ($has_content_translation_status_field) {
+    // Make sure that there are no NULL values.
+    $database->update($entity_type->getDataTable())
+      ->fields(['content_translation_status' => 1])
+      ->isNull('content_translation_status')
+      ->execute();
+    $database->update($entity_type->getRevisionDataTable())
+      ->fields(['content_translation_status' => 1])
+      ->isNull('content_translation_status')
+      ->execute();
+
+    $status->setInitialValueFromField('content_translation_status');
+  }
+  else {
+    $status->setInitialValue(TRUE);
+  }
+  $definition_update_manager->installFieldStorageDefinition('status', $entity_type->id(), 'paragraphs_library', $status);
+
+  // Uninstall the 'content_translation_status' field if needed.
+  if ($has_content_translation_status_field) {
+    $database->update($entity_type->getDataTable())
+      ->fields(['content_translation_status' => NULL])
+      ->execute();
+    $database->update($entity_type->getRevisionDataTable())
+      ->fields(['content_translation_status' => NULL])
+      ->execute();
+
+    $content_translation_status = $definition_update_manager->getFieldStorageDefinition('content_translation_status', $entity_type->id());
+    $definition_update_manager->uninstallFieldStorageDefinition($content_translation_status);
+  }
+}
+
+/**
+ * Enable "Usage" tab on library items.
+ */
+function paragraphs_library_update_8101() {
+  $entity_usage_config = \Drupal::configFactory()->getEditable('entity_usage.settings');
+  $tabs_enabled = $entity_usage_config->get('local_task_enabled_entity_types');
+  if (is_array($tabs_enabled) && !in_array('paragraphs_library_item', $tabs_enabled)) {
+    $tabs_enabled[] = 'paragraphs_library_item';
+    $entity_usage_config->set('local_task_enabled_entity_types', $tabs_enabled)
+      ->save();
+  }
+}

@@ -1,0 +1,263 @@
+<?php
+/**
+ * @file
+ * Allow views to be used instead of default Drupal behavior on
+ * taxonomy term pages.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\views\Views;
+use Drupal\Component\Utility\Unicode;
+
+/**
+ * Helper function to construct the forms for both term and vocab edit forms.
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function _tvi_settings_form(&$form, FormStateInterface $form_state) {
+  $entity = $form_state->getBuildInfo()['callback_object']->getEntity();
+  $entity_type = $entity->getEntityType()->id();
+
+  $config = Drupal::configFactory()->getEditable('tvi.' . $entity_type . '.' . $entity->id());
+
+  $values = $form_state->getValues();
+  $views = Views::getEnabledViews();
+  $view_options = ['' => ' - Select a View -'];
+  $display_options = ['' => ' - Select a View Display -'];
+  $default_display = '';
+
+  foreach ($views as $view) {
+    $view_options[$view->id()] = $view->label();
+  }
+
+  if (isset($values['tvi_view'])) {
+    $display_options += tvi_get_view_displays($values['tvi_view']);
+  }
+  elseif ($config !== NULL) {
+    $view = $config->get('view');
+    $view_display = $config->get('view_display');
+
+    if (isset($view)) {
+      $display_options += tvi_get_view_displays($view);
+    }
+
+    if (isset($view_display)) {
+      $default_display = $view_display;
+    }
+  }
+
+  $form['tvi'] = [
+    '#type' => 'details',
+    '#title' => t('Taxonomy Views Integrator Settings'),
+    '#open' => TRUE,
+  ];
+
+  $form['tvi']['tvi_enable_override'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Enable taxonomy views integrator to override presentation.'),
+    '#default_value' => $config->get('enable_override'),
+  ];
+
+  $form['tvi']['tvi_view'] = [
+    '#type' => 'select',
+    '#title' => 'Using the view',
+    '#default_value' => $config->get('view'),
+    '#options' => $view_options,
+    '#states' => [
+      'visible' => [
+        ':input[name="tvi_enable_override"]' => ['checked' => TRUE],
+      ]
+    ],
+    '#ajax' => [
+      'callback' => 'tvi_view_display_ajax_handler',
+      'event' => 'change',
+      'wrapper' => 'tvi-view-display',
+      'progress' => [
+        'type' => 'throbber',
+      ],
+    ],
+  ];
+
+  $form['tvi']['tvi_view_display'] = [
+    '#type' => 'select',
+    '#title' => 'With this view display',
+    '#description' => t('The view display that you want to use from the selected view.'),
+    '#default_value' => $default_display,
+    '#options' => $display_options,
+    '#states' => [
+      'visible' => [
+        ':input[name="tvi_enable_override"]' => ['checked' => TRUE],
+      ]
+    ],
+    '#prefix' => '<div id="tvi-view-display">',
+    '#suffix' => '</div>',
+  ];
+
+  $form['tvi']['tvi_inherit_settings'] = [
+    '#id' => 'tvi-inherit-check',
+    '#type' => 'checkbox',
+    '#title' => t('Child terms will use these settings.'),
+    '#default_value' => $config->get('inherit_settings'),
+    '#description' => t('Checking this field will allow you to define a view used by the current term and display on all of its children, unless they have their own settings configured.'),
+    '#states' => [
+      'disabled' => [
+        ':input[name="tvi_enable_override"]' => ['checked' => FALSE],
+      ],
+      'visible' => [
+        ':input[name="tvi_enable_override"]' => ['checked' => TRUE],
+      ]
+    ],
+  ];
+
+  $form['tvi']['tvi_pass_arguments'] = [
+    '#id' => 'tvi-pass-arguments',
+    '#type' => 'checkbox',
+    '#title' => t('Pass all arguments to views.'),
+    '#description' => t('Enable this checkbox, and your views display will receive all arguments going after /taxonomy/term/ in the path. If disabled, your views display will only receive tid, and tid_depth.'),
+    '#default_value' => $config->get('pass_arguments'),
+    '#states' => [
+      'disabled' => [
+        ':input[name="tvi_enable_override"]' => ['checked' => FALSE],
+      ],
+      'visible' => [
+        ':input[name="tvi_enable_override"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  if ($entity_type == 'taxonomy_term') {
+    $form['tvi']['#description'] = t('Override the default presentation this term page.');
+    $form['tvi']['tvi_view']['#description'] = t('The default view to use for this term page.');
+  }
+
+  if ($entity_type == 'taxonomy_vocabulary') {
+    $form['tvi']['#description'] = t('Override the default presentation for terms in this vocabulary.');
+    $form['tvi']['tvi_view']['#description'] = t('The default view to use for this term page.');
+  }
+
+  $form['#validate'][] = 'tvi_form_config_validate';
+  $form['actions']['submit']['#submit'][] = 'tvi_submit_handler';
+}
+
+/**
+ * Validate that if enable override is ticked off, that we have values for the view.
+ * Due to bug(s) in #states array, we can't have required fields that are hidden.
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function tvi_form_config_validate($form, FormStateInterface $form_state) {
+  $values = $form_state->getValues();
+
+  if ($values['tvi_enable_override']) {
+    if (!Unicode::strlen($values['tvi_view'])) {
+      $form_state->setError($form['tvi']['tvi_view'], t('To override the term presentation, you must specify a view.'));
+    }
+
+    if (!Unicode::strlen($values['tvi_view_display'])) {
+      $form_state->setError($form['tvi']['tvi_view_display'], t('To override the term presentation, you must specify a view display.'));
+    }
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function tvi_form_taxonomy_term_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $entity = $form_state->getBuildInfo()['callback_object']->getEntity();
+
+  if ($entity->id() !== null && Drupal::currentUser()->hasPermission('define view for terms in ' . $entity->getVocabularyId())) {
+    _tvi_settings_form($form, $form_state, $entity);
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function tvi_form_taxonomy_vocabulary_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $entity = $form_state->getBuildInfo()['callback_object']->getEntity();
+
+  if ($entity->id() !== null && Drupal::currentUser()->hasPermission('define view for vocabulary ' . $entity->id())) {
+    _tvi_settings_form($form, $form_state, $entity);
+  }
+}
+
+/**
+ * AJAX handler for vocabulary and term forms.
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @return mixed
+ */
+function tvi_view_display_ajax_handler($form, FormStateInterface $form_state) {
+  $form['tvi']['tvi_view_display']['#value'] = '';
+  $form_state->setRebuild();
+  return $form['tvi']['tvi_view_display'];
+}
+
+/**
+ * Return an array of displays for a given view id.
+ * @param $view_id
+ * @return array
+ */
+function tvi_get_view_displays($view_id) {
+  $display_options = [];
+  $view = Drupal::entityTypeManager()->getStorage('view')->load($view_id);
+
+  if ($view) {
+    foreach ($view->get('display') as $display) {
+      $display_options[$display['id']] = $display['display_title'] . ' (' . $display['display_plugin'] . ')';
+    }
+  }
+
+  return $display_options;
+}
+
+/**
+ * Submit handler attached to term and vocabulary forms.
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function tvi_submit_handler($form, FormStateInterface $form_state) {
+  $entity = $form_state->getBuildInfo()['callback_object']->getEntity();
+  $entity_type = $entity->getEntityType()->id();
+  $form_values = $form_state->getValues();
+
+  if ($form_values['tvi_enable_override']) {
+    Drupal::configFactory()
+      ->getEditable('tvi.' . $entity_type . '.' . $entity->id())
+      ->set('enable_override', $form_values['tvi_enable_override'])
+      ->set('view', $form_values['tvi_view'])
+      ->set('view_display', $form_values['tvi_view_display'])
+      ->set('inherit_settings', $form_values['tvi_inherit_settings'])
+      ->set('pass_arguments', $form_values['tvi_pass_arguments'])
+      ->save();
+  } else {
+    Drupal::configFactory()
+      ->getEditable('tvi.' . $entity_type . '.' . $entity->id())
+      ->delete();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ * Remove TVI settings when vocabularies are deleted.
+ * @param EntityInterface $entity
+ */
+function tvi_taxonomy_vocabulary_delete(EntityInterface $entity) {
+  Drupal::configFactory()->getEditable('tvi.taxonomy_vocabulary.' . $entity->id())->delete();
+}
+
+/**
+ * Implements hook_taxonomy_term_delete().
+ * Remove TVI settings when terms are deleted.
+ * @param EntityInterface $entity
+ */
+function tvi_taxonomy_term_delete(EntityInterface $entity) {
+  Drupal::configFactory()->getEditable('tvi.taxonomy_term.' . $entity->id())->delete();
+}

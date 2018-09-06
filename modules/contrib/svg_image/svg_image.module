@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * @file
+ * Contains main functions and hooks for svg_image module.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\svg_image\Plugin\Field\FieldFormatter\SvgImageFormatter;
+use Drupal\svg_image\Plugin\Field\FieldWidget\SvgImageWidget;
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function svg_image_field_widget_info_alter(array &$info) {
+  $info['image_image']['class'] = SvgImageWidget::class;
+}
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function svg_image_field_formatter_info_alter(array &$info) {
+  $info['image']['class'] = SvgImageFormatter::class;
+}
+
+/**
+ * Provides image file dimensions.
+ *
+ * @param \Drupal\file\Entity\File $file
+ *   SVG file.
+ *
+ * @return array
+ *   Dimensions array.
+ */
+function svg_image_get_image_file_dimensions(File $file) {
+  $image = \Drupal::getContainer()->get('image.factory')->get($file->getFileUri());
+
+  $variables = [];
+
+  if ($image->isValid()) {
+    $variables['width'] = $image->getWidth();
+    $variables['height'] = $image->getHeight();
+  }
+  else {
+    // Set default width and height values.
+    $variables['width'] = $variables['height'] = 64;
+    // We can find out only dimensions of the SVG files.
+    if (svg_image_is_file_svg($file)) {
+      // Parse SVG as XML.
+      $fileContents = file_get_contents($file->getFileUri());
+      // In some cases file could be not available for the loading. It could be
+      // deleted from the files folder physically, moved to other place or
+      // permissions will not allow to read it. In this case we will just skip
+      // dimensions discovering.
+      if ($fileContents) {
+        $svg = simplexml_load_string($fileContents);
+        $neededVariables = ['width', 'height'];
+
+        if ($svg) {
+          foreach ($svg->attributes() as $attribute => $value) {
+            if (in_array($attribute, $neededVariables)) {
+              $variables[$attribute] = (integer) $value;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return $variables;
+}
+
+/**
+ * Checks if current file is SVG image.
+ *
+ * @param \Drupal\file\Entity\File $file
+ *   File to check.
+ *
+ * @return bool
+ *   TRUE if is SVG, FALSE otherwise.
+ */
+function svg_image_is_file_svg(File $file) {
+  return $file->getMimeType() === 'image/svg+xml';
+}

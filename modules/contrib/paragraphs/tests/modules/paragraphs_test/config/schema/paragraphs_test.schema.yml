@@ -1,0 +1,15 @@
+paragraphs.behavior.settings.test_text_color:
+  type: paragraphs.behavior.settings_base
+  mapping:
+    default_color:
+      type: string
+      label: Default color
+paragraphs.behavior.settings.test_field_selection:
+  type: paragraphs.behavior.settings_base
+  mapping:
+    field_selection:
+      type: string
+      label: Field names
+    field_selection_filter:
+      type: string
+      label: Filtered field names

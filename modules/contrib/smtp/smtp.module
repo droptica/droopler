@@ -1,0 +1,95 @@
+<?php
+
+/**
+ * @file
+ * Enables Drupal to send e-mail directly to an SMTP server.
+ *
+ * This module uses a customized extract of the PHPMailer
+ * library (originally by Brent R. Matzelle, now maintained
+ *  by Codeworx Tech.) relicensed from LGPL to GPL, included
+ * as a part of the module.
+ *
+ * Overriding mail handling in Drupal to make SMTP the default
+ * transport layer, requires to change the 'system.mail.interface'
+ * default value array('default' => 'Drupal\Core\Mail\PhpMail').
+ * This module uses array('default' => 'SMTPMailSystem').
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function smtp_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.smtp':
+      return t('Allow for site emails to be sent through an SMTP server of your choice.');
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function smtp_menu() {
+  $items['admin/config/system/smtp'] = [
+    'title' => 'SMTP Authentication Support',
+    'description' => 'Allow for site emails to be sent through an SMTP server of your choice.',
+    'route_name' => 'smtp.config',
+  ];
+  return $items;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function smtp_mail($key, &$message, $params) {
+  if ($key == 'smtp-test') {
+    $message['subject'] = $params['subject'];
+    $message['body'] = $params['body'];
+  }
+}
+
+/**
+ * Implementation of hook_queue_info().
+ */
+function smtp_queue_info() {
+  $queues['smtp_send_queue'] = [
+    'worker callback' => 'smtp_send_queue_runner',
+    'cron' => [
+      'time' => 60, // This is the max run time per cron run in seconds.
+    ],
+  ];
+  return $queues;
+}
+
+/**
+ * smtp_send_queue queuer.
+ */
+function smtp_send_queue($mailerObj) {
+  $queue = Drupal::queue('smtp_send_queue');
+  $queue->createItem($mailerObj);
+}
+
+function smtp_send_queue_runner($variables) {
+  _smtp_mailer_send($variables);
+}
+
+function _smtp_mailer_send($variables) {
+  $mailer = $variables['mailer'];
+  $to = $variables['to'];
+  $from = $variables['from'];
+
+  $logger = \Drupal::logger('smtp');
+
+  // Let the people know what is going on.
+  $logger->info('Sending mail to: @to', ['@to' => $to]);
+
+  // Try to send e-mail. If it fails, set watchdog entry.
+  if (!$mailer->Send()) {
+    $logger->error('Error sending e-mail from @from to @to: @error_message', ['@from' => $from, '@to' => $to, '@error_message' => $mailer->ErrorInfo]);
+    return FALSE;
+  }
+
+  $mailer->SmtpClose();
+  return TRUE;
+}

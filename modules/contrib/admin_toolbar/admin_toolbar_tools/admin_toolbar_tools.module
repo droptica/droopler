@@ -1,0 +1,632 @@
+<?php
+
+/**
+ * @file
+ * Provides extra menu links for the core drupal toolbar.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_toolbar().
+ */
+function admin_toolbar_tools_toolbar() {
+  $items = [];
+  $items['admin_toolbar_tools'] = [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'link',
+      '#attributes' => [
+        'class' => ['toolbar-icon', 'toolbar-icon-admin-toolbar-tools-help'],
+      ],
+    ],
+    '#attached' => ['library' => ['admin_toolbar_tools/toolbar.icon']],
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_help().
+ */
+function admin_toolbar_tools_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.admin_toolbar_tools':
+      $output = '';
+      $output .= '<p>';
+      $output .= t('The Admin Toolbar Extra Tools module comes packaged with the <a href=":admin-toolbar">Admin Toolbar</a> module and adds functionality to it. The additional functionality is accessed thru extra links on the main administration Toolbar. Some links to Admin Toolbar Extra Tools administration pages are located at the bottom of this page.</a>', [':admin-toolbar' => Url::fromRoute('help.page', ['name' => 'admin_toolbar'])->toString()]);
+      $output .= '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<p>' . t('To use Admin Toolbar Extra Tools just install it like any other module. There is no other configuration required.') . '</p>';
+
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
+  $moduleHandler = \Drupal::moduleHandler();
+  $entityTypeManager = \Drupal::entityTypeManager();
+  $routeProvider = \Drupal::service('router.route_provider');
+  $routes = [];
+  foreach ($routeProvider->getAllRoutes() as $route_name => $route) {
+    $routes[] = $route_name;
+  }
+
+  $entityTypes = $entityTypeManager->getDefinitions();
+  $content_entities = [];
+  foreach ($entityTypes as $key => $entityType) {
+    if ($entityType->getBundleEntityType() && ($entityType->get('field_ui_base_route') != '')) {
+      $content_entities[$key] = [
+        'content_entity' => $key,
+        'content_entity_bundle' => $entityType->getBundleEntityType(),
+      ];
+    }
+  }
+
+  // Adding a menu link to clean the Views cache.
+  if ($moduleHandler->moduleExists('views')) {
+    $links['admin_toolbar_tools.flush_views'] = [
+      'title' => t('Flush views cache'),
+      'route_name' => 'admin_toolbar_tools.flush_views',
+      'menu_name' => 'admin',
+      'parent' => 'admin_toolbar_tools.flush',
+    ];
+    // Adding a menu link to Files.
+    if ($moduleHandler->moduleExists('file') && in_array('view.files.page_1', $routes)) {
+      $links['admin_toolbar_tools.view.files'] = [
+        'title' => t('Files'),
+        'route_name' => 'view.files.page_1',
+        'menu_name' => 'admin',
+        'parent' => 'system.admin_content',
+      ];
+    }
+  }
+
+  // Adds common links to entities.
+  foreach ($content_entities as $entities) {
+    $content_entity_bundle = $entities['content_entity_bundle'];
+    $content_entity = $entities['content_entity'];
+    foreach ($entityTypeManager->getStorage($content_entity_bundle)->loadMultiple() as $machine_name => $bundle) {
+      // Normally, the edit form for the bundle would be its root link.
+      $content_entity_bundle_root = NULL;
+      if (in_array('entity.' . $content_entity_bundle . '.overview_form', $routes)) {
+        // Some bundles have an overview/list form that make a better root link.
+        $content_entity_bundle_root = 'entity.' . $content_entity_bundle . '.overview_form.' . $machine_name;
+        $links[$content_entity_bundle_root] = [
+          'title' => t($bundle->label()),
+          'route_name' => 'entity.' . $content_entity_bundle . '.overview_form',
+          'menu_name' => 'admin',
+          'parent' => 'entity.' . $content_entity_bundle . '.collection',
+          'route_parameters' => [$content_entity_bundle => $machine_name],
+        ];
+      }
+      if (in_array('entity.' . $content_entity_bundle . '.edit_form', $routes)) {
+        $key = 'entity.' . $content_entity_bundle . '.edit_form.' . $machine_name;
+        $links[$key] = [
+          'title' => t($bundle->label()),
+          'route_name' => 'entity.' . $content_entity_bundle . '.edit_form',
+          'menu_name' => 'admin',
+          'parent' => 'entity.' . $content_entity_bundle . '.collection',
+          'route_parameters' => [$content_entity_bundle => $machine_name],
+        ];
+        if (empty($content_entity_bundle_root)) {
+          $content_entity_bundle_root = $key;
+        }
+        else {
+          $links[$key]['parent'] = $content_entity_bundle_root;
+          $links[$key]['title'] = t('Edit');
+        }
+      }
+      if ($moduleHandler->moduleExists('field_ui')) {
+        if (in_array('entity.' . $content_entity . '.field_ui_fields', $routes)) {
+          $links['entity.' . $content_entity . '.field_ui_fields' . $machine_name] = [
+            'title' => t('Manage fields'),
+            'route_name' => 'entity.' . $content_entity . '.field_ui_fields',
+            'menu_name' => 'admin',
+            'parent' => $content_entity_bundle_root,
+            'route_parameters' => [$content_entity_bundle => $machine_name],
+            'weight' => 1,
+          ];
+        }
+        if (in_array('entity.entity_form_display.' . $content_entity . '.default', $routes)) {
+          $links['entity.entity_form_display.' . $content_entity . '.default' . $machine_name] = [
+            'title' => t('Manage form display'),
+            'route_name' => 'entity.entity_form_display.' . $content_entity . '.default',
+            'menu_name' => 'admin',
+            'parent' => $content_entity_bundle_root,
+            'route_parameters' => [$content_entity_bundle => $machine_name],
+            'weight' => 2,
+          ];
+        }
+        if (in_array('entity.entity_view_display.' . $content_entity . '.default', $routes)) {
+          $links['entity.entity_view_display.' . $content_entity . '.default.' . $machine_name] = [
+            'title' => t('Manage display'),
+            'route_name' => 'entity.entity_view_display.' . $content_entity . '.default',
+            'menu_name' => 'admin',
+            'parent' => $content_entity_bundle_root,
+            'route_parameters' => [$content_entity_bundle => $machine_name],
+            'weight' => 3,
+          ];
+        }
+      }
+      if ($moduleHandler->moduleExists('devel') && in_array('entity.' . $content_entity_bundle . '.devel_load', $routes)) {
+        $links['entity.' . $content_entity_bundle . '.devel_load.' . $machine_name] = [
+          'title' => t('Devel'),
+          'route_name' => 'entity.' . $content_entity_bundle . '.devel_load',
+          'menu_name' => 'admin',
+          'parent' => $content_entity_bundle_root,
+          'route_parameters' => [$content_entity_bundle => $machine_name],
+          'weight' => 4,
+        ];
+      }
+      if (in_array('entity.' . $content_entity_bundle . '.delete_form', $routes)) {
+        $links['entity.' . $content_entity_bundle . '.delete_form.' . $machine_name] = [
+          'title' => t('Delete'),
+          'route_name' => 'entity.' . $content_entity_bundle . '.delete_form',
+          'menu_name' => 'admin',
+          'parent' => $content_entity_bundle_root,
+          'route_parameters' => [$content_entity_bundle => $machine_name],
+          'weight' => 5,
+        ];
+      }
+    }
+  }
+
+  // Add user links.
+  $links['user.admin_create'] = [
+    'title' => t('Add a new user'),
+    'route_name' => 'user.admin_create',
+    'menu_name' => 'admin',
+    'parent' => 'entity.user.collection',
+  ];
+  $links['user.admin_permissions'] = [
+    'title' => t('Permissions'),
+    'route_name' => 'user.admin_permissions',
+    'menu_name' => 'admin',
+    'parent' => 'entity.user.collection',
+  ];
+  $links['entity.user_role.collection'] = [
+    'title' => t('Roles'),
+    'route_name' => 'entity.user_role.collection',
+    'menu_name' => 'admin',
+    'parent' => 'entity.user.collection',
+  ];
+  $links['admin_toolbar_tools.user.logout'] = [
+    'title' => t('Logout'),
+    'route_name' => 'user.logout',
+    'parent' => 'admin_toolbar_tools.help',
+    'weight' => 10,
+  ];
+  $links['user.role_add'] = [
+    'title' => t('Add a new role'),
+    'route_name' => 'user.role_add',
+    'menu_name' => 'admin',
+    'parent' => 'entity.user_role.collection',
+    'weight' => -5,
+  ];
+  if ($moduleHandler->moduleExists('field_ui')) {
+    $links['entity.user.field_ui_fields_'] = [
+      'title' => t('Manage fields'),
+      'route_name' => 'entity.user.field_ui_fields',
+      'menu_name' => 'admin',
+      'parent' => 'entity.user.admin_form',
+    ];
+    $links['entity.entity_form_display.user.default_'] = [
+      'title' => t('Manage form display'),
+      'route_name' => 'entity.entity_form_display.user.default',
+      'menu_name' => 'admin',
+      'parent' => 'entity.user.admin_form',
+    ];
+    $links['entity.entity_view_display.user.default_'] = [
+      'title' => t('Manage display'),
+      'route_name' => 'entity.entity_view_display.user.default',
+      'menu_name' => 'admin',
+      'parent' => 'entity.user.admin_form',
+    ];
+  }
+  foreach (user_roles() as $role) {
+    $links['entity.user_role.edit_form.' . $role->id()] = [
+      'title' => t($role->label()),
+      'route_name' => 'entity.user_role.edit_form',
+      'menu_name' => 'admin',
+      'parent' => 'entity.user_role.collection',
+      'route_parameters' => ['user_role' => $role->id()],
+    ];
+    $links['entity.user_role.edit_permissions_form.' . $role->id()] = [
+      'title' => t('Edit permissions'),
+      'route_name' => 'entity.user_role.edit_permissions_form',
+      'menu_name' => 'admin',
+      'parent' => 'entity.user_role.edit_form.' . $role->id(),
+      'route_parameters' => ['user_role' => $role->id()],
+    ];
+    $links['entity.user_role.delete_form.' . $role->id()] = [
+      'title' => t('Delete'),
+      'route_name' => 'entity.user_role.delete_form',
+      'menu_name' => 'admin',
+      'parent' => 'entity.user_role.edit_form.' . $role->id(),
+      'route_parameters' => ['user_role' => $role->id()],
+    ];
+    if ($moduleHandler->moduleExists('devel')) {
+      $links['entity.user_role.devel_load.' . $role->id()] = [
+        'title' => t('Devel'),
+        'route_name' => 'entity.user_role.devel_load',
+        'menu_name' => 'admin',
+        'parent' => 'entity.user_role.edit_form.' . $role->id(),
+        'route_parameters' => ['user_role' => $role->id()],
+      ];
+    }
+  }
+
+  if ($moduleHandler->moduleExists('node')) {
+    $links['admin_toolbar_tools.add_content'] = $links['node.add_page'];
+    $links['admin_toolbar_tools.add_content']['parent'] = 'system.admin_content';
+    $links['node.type_add'] = [
+      'title' => t('Add content type'),
+      'route_name' => 'node.type_add',
+      'menu_name' => 'admin',
+      'parent' => 'entity.node_type.collection',
+      'weight' => -5,
+    ];
+    // Add node links for each content type.
+    foreach ($entityTypeManager->getStorage('node_type')->loadMultiple() as $type) {
+      $links['node.add.' . $type->id()] = [
+        'title' => t($type->label()),
+        'route_name' => 'node.add',
+        'parent' => 'admin_toolbar_tools.add_content',
+        'route_parameters' => ['node_type' => $type->id()],
+      ];
+    }
+  }
+
+  if ($moduleHandler->moduleExists('field_ui')) {
+    $links['field_ui.entity_form_mode_add'] = [
+      'title' => t('Add new form mode'),
+      'route_name' => 'field_ui.entity_form_mode_add',
+      'menu_name' => 'admin',
+      'parent' => 'entity.entity_form_mode.collection',
+    ];
+    $links['field_ui.entity_view_mode_add'] = [
+      'title' => t('Add new view mode'),
+      'route_name' => 'field_ui.entity_view_mode_add',
+      'menu_name' => 'admin',
+      'parent' => 'entity.entity_view_mode.collection',
+    ];
+  }
+
+  if ($moduleHandler->moduleExists('taxonomy')) {
+    $links['entity.taxonomy_vocabulary.add_form'] = [
+      'title' => t('Add vocabulary'),
+      'route_name' => 'entity.taxonomy_vocabulary.add_form',
+      'menu_name' => 'admin',
+      'parent' => 'entity.taxonomy_vocabulary.collection',
+      'weight' => -5,
+    ];
+  }
+
+  if ($moduleHandler->moduleExists('menu_ui')) {
+    $links['entity.menu.add_form'] = [
+      'title' => t('Add menu'),
+      'route_name' => 'entity.menu.add_form',
+      'menu_name' => 'admin',
+      'parent' => 'entity.menu.collection',
+      'weight' => -50,
+    ];
+    // Adds links to /admin/structure/menu.
+    foreach (menu_ui_get_menus() as $machine_name => $label) {
+      $links['entity.menu.edit_form.' . $machine_name] = [
+        'title' => t($label),
+        'route_name' => 'entity.menu.edit_form',
+        'menu_name' => 'admin',
+        'parent' => 'entity.menu.collection',
+        'route_parameters' => ['menu' => $machine_name],
+      ];
+      $links['entity.menu.delete_form.' . $machine_name] = [
+        'title' => t('Delete'),
+        'route_name' => 'entity.menu.delete_form',
+        'menu_name' => 'admin',
+        'parent' => 'entity.menu.edit_form.' . $machine_name,
+        'route_parameters' => ['menu' => $machine_name],
+      ];
+      if ($moduleHandler->moduleExists('devel')) {
+        $links['entity.menu.devel_load.' . $machine_name] = [
+          'title' => t('Devel'),
+          'route_name' => 'entity.menu.devel_load',
+          'menu_name' => 'admin',
+          'parent' => 'entity.menu.edit_form.' . $machine_name,
+          'route_parameters' => ['menu' => $machine_name],
+        ];
+      }
+      $links['entity.menu.add_link_form.' . $machine_name] = [
+        'title' => t('Add link'),
+        'route_name' => 'entity.menu.add_link_form',
+        'menu_name' => 'admin',
+        'parent' => 'entity.menu.edit_form.' . $machine_name,
+        'route_parameters' => ['menu' => $machine_name],
+      ];
+    }
+  }
+
+  // If module block_content is enabled.
+  if ($moduleHandler->moduleExists('block_content')) {
+    $links['block_content.add_page'] = [
+      'title' => t('Add custom block'),
+      'route_name' => 'block_content.add_page',
+      'menu_name' => 'admin',
+      'parent' => 'block.admin_display',
+      'weight' => -100,
+    ];
+    $links['entity.block_content.collection'] = [
+      'title' => t('Custom block library'),
+      'route_name' => 'entity.block_content.collection',
+      'menu_name' => 'admin',
+      'parent' => 'block.admin_display',
+    ];
+    $links['entity.block_content_type.collection'] = [
+      'title' => t('Types'),
+      'route_name' => 'entity.block_content_type.collection',
+      'menu_name' => 'admin',
+      'parent' => 'block.admin_display',
+    ];
+  }
+
+  // If module Contact is enabled.
+  if ($moduleHandler->moduleExists('contact')) {
+    $links['contact.form_add'] = [
+      'title' => t('Add contact form'),
+      'route_name' => 'contact.form_add',
+      'menu_name' => 'admin',
+      'parent' => 'entity.contact_form.collection',
+      'weight' => -5,
+    ];
+  }
+
+  // If module Update Manager is enabled.
+  if ($moduleHandler->moduleExists('update')) {
+    $links['update.module_update'] = [
+      'title' => t('Update'),
+      'route_name' => 'update.module_update',
+      'menu_name' => 'admin',
+      'parent' => 'system.modules_list',
+    ];
+    $links['update.module_install'] = [
+      'title' => t('Install new module'),
+      'route_name' => 'update.module_install',
+      'menu_name' => 'admin',
+      'parent' => 'system.modules_list',
+    ];
+  }
+
+  // If module Devel is enabled.
+  if ($moduleHandler->moduleExists('devel')) {
+    $links['admin_development'] = [
+      'title' => t('Development'),
+      'route_name' => 'system.admin_config_development',
+      'menu_name' => 'admin',
+      'parent' => 'admin_toolbar_tools.help',
+      'weight' => '-8',
+    ];
+    $links['admin_toolbar_tools.devel.admin_settings'] = [
+      'title' => t('Devel settings'),
+      'route_name' => 'devel.admin_settings',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+      'weight' => '-1',
+    ];
+    if ($moduleHandler->moduleExists('webprofiler')) {
+      $links['admin_toolbar_tools.devel.webprofiler'] = [
+        'title' => t('Web Profiler settings'),
+        'route_name' => 'webprofiler.settings',
+        'menu_name' => 'admin',
+        'parent' => 'admin_development',
+      ];
+    }
+    $links['admin_toolbar_tools.devel.configs_list'] = [
+      'title' => t('Config editor'),
+      'route_name' => 'devel.configs_list',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+    $links['admin_toolbar_tools.devel.reinstall'] = [
+      'title' => t('Reinstall modules'),
+      'route_name' => 'devel.reinstall',
+      'parent' => 'admin_development',
+    ];
+    $links['admin_toolbar_tools.devel.menu_rebuild'] = [
+      'title' => t('Rebuild menu'),
+      'route_name' => 'devel.menu_rebuild',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+    $links['admin_toolbar_tools.devel.state_system_page'] = [
+      'title' => t('State editor'),
+      'route_name' => 'devel.state_system_page',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+    $links['admin_toolbar_tools.devel.theme_registry'] = [
+      'title' => t('Theme registry'),
+      'route_name' => 'devel.theme_registry',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+    $links['admin_toolbar_tools.devel.entity_info_page'] = [
+      'title' => t('Entity Info'),
+      'route_name' => 'devel.entity_info_page',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+    $links['admin_toolbar_tools.devel.execute_php'] = [
+      'title' => t('Execute PHP Code'),
+      'route_name' => 'devel.execute_php',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+    $links['admin_toolbar_tools.devel.session'] = [
+      'title' => t('Session viewer'),
+      'route_name' => 'devel.session',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+    $links['admin_toolbar_tools.devel.elements_page'] = [
+      'title' => t('Form API field types'),
+      'route_name' => 'devel.elements_page',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+    // Menu link for the Toolbar module.
+    $links['admin_toolbar_tools.toolbar.settings'] = [
+      'title' => t('Toolbar settings'),
+      'route_name' => 'devel.toolbar.settings_form',
+      'menu_name' => 'admin',
+      'parent' => 'devel.admin_settings',
+    ];
+  }
+
+  // If module Views Ui enabled.
+  if ($moduleHandler->moduleExists('views_ui')) {
+    $links['admin_toolbar_tools.views_ui.add'] = [
+      'title' => t('Add new view'),
+      'route_name' => 'views_ui.add',
+      'menu_name' => 'admin',
+      'parent' => 'entity.view.collection',
+      'weight' => -5,
+    ];
+    $links['admin_toolbar_tools.views_ui.field_list'] = [
+      'title' => t('Used in views'),
+      'route_name' => 'views_ui.reports_fields',
+      'menu_name' => 'admin',
+      'parent' => 'entity.field_storage_config.collection',
+    ];
+  }
+
+  $links['admin_toolbar_tools.system.theme_settings'] = [
+    'title' => t('Settings'),
+    'route_name' => 'system.theme_settings',
+    'menu_name' => 'admin',
+    'parent' => 'system.themes_page',
+  ];
+
+  if ($moduleHandler->moduleExists('webprofiler')) {
+    $links['admin_toolbar_tools.devel.webprofiler'] = [
+      'title' => t('Webprofiler settings'),
+      'route_name' => 'webprofiler.settings',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+  }
+
+  if ($moduleHandler->moduleExists('update')) {
+    $links['update.theme_install_'] = [
+      'title' => t('Install new theme'),
+      'route_name' => 'update.theme_install',
+      'menu_name' => 'admin',
+      'parent' => 'system.themes_page',
+    ];
+    $links['update.theme_update_'] = [
+      'title' => t('Update'),
+      'route_name' => 'update.theme_update',
+      'menu_name' => 'admin',
+      'parent' => 'system.themes_page',
+    ];
+    // Lists installed themes.
+    $installed_themes = admin_toolbar_tools_installed_themes();
+    foreach ($installed_themes as $key_theme => $label_theme) {
+      $links['system.theme_settings_theme.' . $key_theme] = [
+        'title' => t($label_theme),
+        'route_name' => 'system.theme_settings_theme',
+        'menu_name' => 'admin',
+        'parent' => 'system.theme_settings_',
+        'route_parameters' => [
+          'theme' => $key_theme,
+        ],
+      ];
+    }
+  }
+
+  // If module Language enabled.
+  if ($moduleHandler->moduleExists('language')) {
+    $links['admin_toolbar_tools.language.negotiation'] = [
+      'title' => t('Detection and selection'),
+      'route_name' => 'language.negotiation',
+      'menu_name' => 'admin',
+      'parent' => 'entity.configurable_language.collection',
+    ];
+  }
+
+  // If module Media enabled.
+  if ($moduleHandler->moduleExists('media')) {
+    $links['admin_toolbar_tools.add_media'] = [
+      'title' => t('Add media'),
+      'route_name' => 'entity.media.add_page',
+      'menu_name' => 'admin',
+      'parent' => 'system.admin_content',
+    ];
+    // Add node links for each media type.
+    foreach (\Drupal::entityTypeManager()->getStorage('media_type')->loadMultiple() as $type) {
+      $links['media.add.' . $type->id()] = [
+        'title' => t($type->label()),
+        'route_name' => 'entity.media.add_form',
+        'parent' => 'admin_toolbar_tools.add_media',
+        'route_parameters' => ['media_type' => $type->id()],
+      ];
+    }
+  }
+
+  // If module Config enabled.
+  if ($moduleHandler->moduleExists('config')) {
+    $links['admin_toolbar_tools.config.import'] = [
+      'title' => t('Import'),
+      'route_name' => 'config.import_full',
+      'menu_name' => 'admin',
+      'parent' => 'config.sync',
+      'weight' => 1,
+    ];
+    $links['admin_toolbar_tools.config.export'] = [
+      'title' => t('Export'),
+      'route_name' => 'config.export_full',
+      'menu_name' => 'admin',
+      'parent' => 'config.sync',
+      'weight' => 2,
+    ];
+  }
+}
+
+/**
+ * Return installed themes.
+ *
+ * @return array
+ *   An array of friendly theme names, keyed by the machine name.
+ */
+function admin_toolbar_tools_installed_themes() {
+  $themeHandler = \Drupal::service('theme_handler');
+  $all_themes = $themeHandler->listInfo();
+  $themes_installed = [];
+  foreach ($all_themes as $key_theme => $theme) {
+    if ($themeHandler->hasUi($key_theme)) {
+      $themes_installed[$key_theme] = $themeHandler->getName($key_theme);
+    }
+  }
+
+  return $themes_installed;
+}
+
+/**
+ * Get all links related to entity.
+ *
+ * @param string $entity_type_id
+ *   The machine name for the entity type.
+ *
+ * @return array
+ *   The links for the entity type.
+ */
+function admin_toolbar_tools_get_links($entity_type_id) {
+  $entity = \Drupal::entityTypeManager()->getDefinition($entity_type_id);
+  // Get all links related to entity.
+  $links = $entity->getLinkTemplates();
+
+  return $links;
+}
