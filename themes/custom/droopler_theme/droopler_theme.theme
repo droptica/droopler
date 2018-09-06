@@ -54,8 +54,11 @@ function droopler_theme_preprocess_page(&$variables) {
     'role' => ['main'],
   ];
 
-  // Make some exceptions for nodes with paragraphs.
-  if (!empty($variables['node']) && in_array($variables['node']->getType(), ['content_page', 'blog_post'])) {
+  // Make some exceptions for nodes with paragraphs or pages of given route.
+  $currentRoute = \Drupal::routeMatch()->getRouteName();
+  $nodeCheck = !empty($variables['node']) && in_array($variables['node']->getType(), ['content_page', 'blog_post']);
+  $routeCheck = $currentRoute == 'd_p_subscribe_file.downloadfile.checkLink';
+  if ($nodeCheck || $routeCheck) {
     $main_attributes['class'] = ['container-fluid'];
     $main_content_attributes['class'] = ['main-content'];
   }
