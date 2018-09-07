@@ -8,9 +8,10 @@ dependencies:
     - field.field.node.d_product.field_product_image
     - field.field.node.d_product.field_tags
     - node.type.d_product
+    - responsive_image.styles.product_thumbnail
   module:
     - link
-    - svg_image
+    - responsive_image
     - text
     - user
 id: node.d_product.default
@@ -49,14 +50,10 @@ content:
     weight: 102
     label: above
     settings:
-      svg_attributes:
-        width: ''
-        height: ''
-      svg_render_as_image: true
-      image_style: ''
-      image_link: ''
+      responsive_image_style: product_thumbnail
+      image_link: content
     third_party_settings: {  }
-    type: image
+    type: responsive_image
     region: content
   field_tags:
     weight: 104

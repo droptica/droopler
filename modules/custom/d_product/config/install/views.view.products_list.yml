@@ -50,7 +50,17 @@ display:
               secondary_label: 'Advanced options'
               autosubmit: true
               autosubmit_exclude_textfield: false
-              autosubmit_hide: false
+              autosubmit_hide: true
+            aggregated_field:
+              bef_format: default
+              slider_options:
+                bef_slider_min: null
+                bef_slider_max: null
+                bef_slider_step: !!float 1
+                bef_slider_animate: ''
+                bef_slider_orientation: ''
+              more_options:
+                is_secondary: false
           text_input_required_format: full_html
       pager:
         type: mini
@@ -139,8 +149,76 @@ display:
           use_highlighting: false
           multi_type: separator
           multi_separator: ', '
-      filters: {  }
-      sorts: {  }
+      filters:
+        aggregated_field:
+          id: aggregated_field
+          table: search_api_index_product_index
+          field: aggregated_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: aggregated_field_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: aggregated_field_op
+            identifier: aggregated_field
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_text
+      sorts:
+        title:
+          id: title
+          table: search_api_index_product_index
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: true
+          expose:
+            label: Title
+          plugin_id: search_api
+        search_api_id:
+          id: search_api_id
+          table: search_api_index_product_index
+          field: search_api_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
       header: {  }
       footer: {  }
       empty: {  }
@@ -148,11 +226,18 @@ display:
       arguments: {  }
       display_extenders: {  }
       title: Products
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
+        - url
         - url.query_args
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
       tags: {  }
   products_list:
     display_plugin: page
@@ -167,9 +252,13 @@ display:
         type: none
       defaults:
         cache: false
+      exposed_block: true
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
+        - url
         - url.query_args
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
       tags: {  }

@@ -6,18 +6,18 @@ dependencies:
     - views.view.products_list
   module:
     - search_api
-id: product_categories_taxonomy_term_name
-name: 'Product categories » Taxonomy term » Name'
-url_alias: product_categories_taxonomy_term_name
+id: tags_taxonomy_term_name
+name: 'Tags » Taxonomy term » Name'
+url_alias: tags_taxonomy_term_name
 weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: name
+field_identifier: name_1
 facet_source_id: 'search_api:views_page__products_list__products_list'
 widget:
   type: links
   config:
-    show_numbers: true
+    show_numbers: false
     soft_limit: 0
     soft_limit_settings:
       show_less_label: 'Show less'

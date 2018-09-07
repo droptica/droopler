@@ -9,29 +9,21 @@ dependencies:
     - field.field.node.d_product.field_product_image
     - field.field.node.d_product.field_tags
     - node.type.d_product
+    - responsive_image.styles.product_thumbnail
   module:
     - link
-    - svg_image
-    - text
+    - responsive_image
     - user
 id: node.d_product.teaser
 targetEntityType: node
 bundle: d_product
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 2
-    settings:
-      trim_length: 250
-    third_party_settings: {  }
-    region: content
   field_d_product_link:
     type: link
-    weight: 3
+    weight: 2
     region: content
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
@@ -43,24 +35,21 @@ content:
     type: entity_reference_label
     weight: 1
     region: content
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
   field_product_image:
-    type: image
+    type: responsive_image
     weight: 0
     region: content
-    label: above
+    label: hidden
     settings:
-      svg_attributes:
-        width: ''
-        height: ''
-      svg_render_as_image: true
-      image_style: ''
-      image_link: ''
+      responsive_image_style: product_thumbnail
+      image_link: content
     third_party_settings: {  }
 hidden:
+  body: true
   field_tags: true
   langcode: true
   links: true
