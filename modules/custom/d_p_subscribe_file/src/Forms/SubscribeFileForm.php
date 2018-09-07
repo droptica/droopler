@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\Core\Link;
 use Drupal\d_p_subscribe_file\Entity\SubscribeFileEntity;
-use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\ParagraphInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -20,6 +20,13 @@ class SubscribeFileForm extends FormBase {
    * @var \Drupal\Core\Session\AccountInterface|\Drupal\Core\Session\AnonymousUserSession
    */
   protected $accountProxy;
+
+  /**
+   * Loaded paragraph entity.
+   *
+   * @var \Drupal\paragraphs\ParagraphInterface
+   */
+  protected $paragraph;
 
   public function __construct(AccountProxy $accountProxy) {
     $this->accountProxy = $accountProxy->getAccount();
@@ -35,16 +42,29 @@ class SubscribeFileForm extends FormBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Setter for paragraph property.
+   *
+   * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+   *   Loaded paragraph entity.
    */
-  public function getFormId() {
-    return 'd_p_subscribe_file_form';
+  public function setParagraph(ParagraphInterface $paragraph) {
+    $this->paragraph = $paragraph;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, $paragraph = NULL) {
+  public function getFormId() {
+    return 'd_p_subscribe_file_form_' . $this->paragraph->id();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state) {
+    if(empty($this->paragraph)) {
+      return $form;
+    }
     $form['name'] = [
       '#type' => 'textfield',
       '#title_display' => 'invisible',
@@ -61,6 +81,12 @@ class SubscribeFileForm extends FormBase {
       '#attributes' => ['placeholder' => $this->t('Enter you email to get download link')],
     ];
 
+    $file = $this->paragraph->get('field_file_download')->getValue();
+    $form['file_id'] = [
+      '#type' => 'value',
+      '#value' => $file[0]['target_id']
+    ];
+
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $paragraph->get('field_d_p_sf_download_button')->value,
@@ -68,8 +94,8 @@ class SubscribeFileForm extends FormBase {
 
     // Keep compatibility with older Droopler.
     // Check field existence first.
-    if ($paragraph->hasField('field_d_p_sf_consent')) {
-      $consents = $paragraph->get('field_d_p_sf_consent')->getValue();
+    if ($this->paragraph->hasField('field_d_p_sf_consent')) {
+      $consents = $this->paragraph->get('field_d_p_sf_consent')->getValue();
       foreach ($consents as $key => $consent) {
         $form["consent_$key"] = [
           '#type' => 'checkbox',
@@ -79,10 +105,10 @@ class SubscribeFileForm extends FormBase {
       }
     }
 
-    $file = $paragraph->get('field_file_download');
-    $file_id = $file->getValue();
-    $form_state->setTemporaryValue('paragraph_id', $paragraph->id());
-    $form_state->setTemporaryValue('file_id', $file_id[0]['target_id']);
+    $form['#attributes'] = [
+      'class' => ['d-p-subscribe-file-form'],
+    ];
+
     return $form;
   }
 
@@ -92,10 +118,7 @@ class SubscribeFileForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     // Save entity
-    $temporary = $form_state->getTemporary();
-    $file_id = $temporary['file_id'];
-    $paragraph_id = $temporary['paragraph_id'];
-    $paragraph = Paragraph::load($paragraph_id);
+    $file_id = $form_state->getValue('file_id');
     $link_hash = md5(rand() . time());
     $file_hash = md5(rand() . time());
     $contact = SubscribeFileEntity::create([
@@ -108,19 +131,19 @@ class SubscribeFileForm extends FormBase {
     $contact->save();
 
     // Send mail with link
-    $button_text = $paragraph->get('field_d_p_sf_download_button')->getValue();
+    $button_text = $this->paragraph->get('field_d_p_sf_download_button')->getValue();
     $link_options = [
       'absolute' => TRUE,
       'attributes' => ['class' => 'btn-primary btn-orange']
     ];
-    $download_link = Link::createFromRoute($button_text[0]['value'], 'd_p_subscribe_file.downloadfile.checkLink', ['paragraph_id' => $paragraph_id, 'link_hash' => $link_hash], $link_options);
+    $download_link = Link::createFromRoute($button_text[0]['value'], 'd_p_subscribe_file.downloadfile.checkLink', ['paragraph_id' => $this->paragraph->id(), 'link_hash' => $link_hash], $link_options);
     $rendered_download_link = $download_link->toString()->getGeneratedLink();
     if ($this->accountProxy->hasPermission('Administer site configuration')) {
       drupal_set_message($download_link->getUrl()->toString());
     }
 
     $display_settings = ['label' => 'hidden',];
-    $body = $paragraph->get('field_d_p_sf_mail_body')->view($display_settings);
+    $body = $this->paragraph->get('field_d_p_sf_mail_body')->view($display_settings);
     $body[0]['#text'] = str_replace("[download-button]", $rendered_download_link, $body[0]['#text']);
 
     $mailManager = \Drupal::service('plugin.manager.mail');
