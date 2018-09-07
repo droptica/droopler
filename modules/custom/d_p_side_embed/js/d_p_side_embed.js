@@ -14,7 +14,6 @@
           width: $wrapper.width(),
           height: $wrapper.height()
         };
-        console.log(wrapperDimensions);
         var videoDimensions = {
           width: $wrapper.height() * aspectRatio.horizontal,
           height: $wrapper.height()
