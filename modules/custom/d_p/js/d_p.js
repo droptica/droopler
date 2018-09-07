@@ -4,11 +4,14 @@
   Drupal.behaviors.d_p_banner = {
     attach: function (context, settings) {
 
-      $(document).ready(function () {
-        d_p_resize_image(true);
-        $(window).resize(function () {
+      d_p_resize_image(true);
+
+      var resizeTimer;
+      $(window).on('resize', function(e) {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
           d_p_resize_image(false);
-        });
+        }, 1000);
       });
 
       /**
