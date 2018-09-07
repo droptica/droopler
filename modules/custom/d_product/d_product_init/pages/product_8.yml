@@ -1,0 +1,30 @@
+info:
+  type: d_product
+  title: Chocolate cookies
+field_product_image:
+  type: image
+  data: demo_business_4.jpg
+body:
+  type: text
+  data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
+    a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
+    Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: blog_posts_category
+    terms:
+      - Food
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Food
+      - Bakery
+      - Moto
+field_d_product_link:
+  type: cta
+  data:
+    link: https://www.ebay.com/sch/i.html?_nkw=bread
+    text: Buy now

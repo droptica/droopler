@@ -1,0 +1,30 @@
+info:
+  type: d_product
+  title: Steering wheel
+field_product_image:
+  type: image
+  data: demo_car_6.jpg
+body:
+  type: text
+  data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
+    a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
+    Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: blog_posts_category
+    terms:
+      - Car Parts
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Interior
+      - Car
+      - Moto
+field_d_product_link:
+  type: cta
+  data:
+    link: https://www.ebay.com/b/Car-Truck-Lighting-Lamps/33707/bn_557923
+    text: Buy now

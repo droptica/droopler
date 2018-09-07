@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function d_product_init_install() {
+  $path = drupal_get_path('module', 'd_product_init') . '/pages';
+  $structure = [];
+  $structure['product_1'] = ['file' => "$path/product_1.yml"];
+  $structure['product_2'] = ['file' => "$path/product_2.yml"];
+  $structure['product_3'] = ['file' => "$path/product_3.yml"];
+  $structure['product_4'] = ['file' => "$path/product_4.yml"];
+  $structure['product_5'] = ['file' => "$path/product_5.yml"];
+  $structure['product_6'] = ['file' => "$path/product_6.yml"];
+  $structure['product_7'] = ['file' => "$path/product_7.yml"];
+  $structure['product_8'] = ['file' => "$path/product_8.yml"];
+  $structure['product_9'] = ['file' => "$path/product_9.yml"];
+  $structure['product_10'] = ['file' => "$path/product_10.yml"];
+  $structure['product_11'] = ['file' => "$path/product_11.yml"];
+  $structure['product_12'] = ['file' => "$path/product_12.yml"];
+
+  d_content_init_add_nodes($structure);
+}
