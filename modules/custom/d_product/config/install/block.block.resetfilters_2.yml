@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - d_product
+  theme:
+    - droopler_subtheme
+id: resetfilters_2
+theme: droopler_subtheme
+region: facets_left
+weight: -1
+provider: null
+plugin: reset_button
+settings:
+  id: reset_button
+  label: 'Reset Filters'
+  provider: d_product
+  label_display: '0'
+visibility: {  }

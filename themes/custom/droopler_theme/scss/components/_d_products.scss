@@ -1,9 +1,16 @@
 // Filters
 
 $d-product-facets-header: 1.20rem !default;
+$d-product-teaser-header: 1.40rem !default;
 
 @mixin facet-header {
   font-size: $d-product-facets-header;
+  color: $color-menelaus;
+
+}
+
+@mixin product-teaser-header {
+  font-size: $d-product-teaser-header;
   color: $color-menelaus;
 
 }
@@ -48,7 +55,7 @@ $d-product-facets-header: 1.20rem !default;
 }
 
 @mixin search-field-default {
-  border-radius: 5px;
+  border-radius: 0px;
   border: 0;
   padding-right: 50px;
   background-color: $color-leto;
@@ -68,7 +75,7 @@ $d-product-facets-header: 1.20rem !default;
       a {
         border: 2px solid $color-diomedes;
         letter-spacing: 1px;
-        padding: 7px 15px;
+        padding: 7px 10px;
         &:hover,
         &:active {
           border: 2px solid $color-patroclus;
@@ -110,35 +117,24 @@ $d-product-facets-header: 1.20rem !default;
   }
   .select2-container--default {
     width: 100% !important;
-    border-radius: 5px;
-
     &.select2-container--open {
       .select2-selection--single {
-        background-color: $color-neptune;
-        border-color: $color-mercury;
-
         .select2-selection__rendered {
-          color: $color-mercury;
+          color: $color-troilus;
           justify-content: flex-end;
         }
       }
     }
     .select2-selection--single {
-      background-color: transparent;
-      border-color: transparent;
-
+      border-radius: 0;
+      border-color: $color-hecuba;
       .select2-selection__rendered {
-        display: flex;
-        font-size: 17px;
-        align-content: end;
-        color: $color-juno;
-
-        justify-content: flex-end;
-        padding: 10px 60px 10px 20px;
-
+        color: $color-hecuba;
+        font-size: 16px;
+        padding: 10px 60px 7px 20px;
         @include media-breakpoint-down(sm) {
           justify-content: left;
-          color: $color-themis;
+          color: $color-hecuba;
         }
       }
 
@@ -197,22 +193,65 @@ $d-product-facets-header: 1.20rem !default;
 
 // Page Products
 // Facets && filers
+.top-product-info {
+  margin-bottom: 24px;
+  .product-item-counter {
+    padding-top: 26px;
+    height: 26px;
+    font-size: 19px;
+  }
+}
+.view-products-list {
+  .view-content {
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+}
 
 .product-listing {
   .views-exposed-form {
+    width: 100%;
     .form-submit,
     .form-type-textfield, .form-actions {
       display: none;
     }
+    @include btn-select2;
+  }
+}
+.products-list-teaser {
+  .node--view-mode-teaser {
+    cursor: pointer;
+    height: 100%;;
+    border-top: 1px solid;
+    .product-teaser-content {
+      padding: 24px;
+      font-size: 20px;
+    }
+    h2 {
+      @include product-teaser-header;
+    }
+    .node__content {
+      margin: 0;
+    }
+  }
+  &:nth-child(odd) {
+    padding-right: 0;
+  }
+  &:nth-child(even) {
+    padding-left: 0;
+    border-left: 1px solid;
   }
 }
 .filters {
   .region-facets-left {
+    margin-top: 21px;
     h2.search {
       color: $color-patroclus;
       font-size: 28px;
       font-weight: normal;
       letter-spacing: 1px;
+      padding-bottom: 4px;
     }
 
     .views-exposed-form {

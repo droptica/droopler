@@ -3,7 +3,7 @@
   Drupal.behaviors.sm_nice_select = {
     attach: function (context, settings) {
 
-      $('.select-nice:not(.processed)').each(function () {
+      $('.block-views-exposed-filter-blockproducts-list-products-list #edit-sort-by:not(.processed)').each(function () {
         $(this).addClass('processed');
 
         $(this).select2({

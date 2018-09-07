@@ -11,7 +11,6 @@ dependencies:
     - node.type.d_product
     - responsive_image.styles.product_thumbnail
   module:
-    - link
     - responsive_image
     - user
 id: node.d_product.teaser
@@ -19,25 +18,13 @@ targetEntityType: node
 bundle: d_product
 mode: teaser
 content:
-  field_d_product_link:
-    type: link
-    weight: 2
-    region: content
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
   field_product_categories:
     type: entity_reference_label
     weight: 1
     region: content
     label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
   field_product_image:
     type: responsive_image
@@ -46,10 +33,11 @@ content:
     label: hidden
     settings:
       responsive_image_style: product_thumbnail
-      image_link: content
+      image_link: ''
     third_party_settings: {  }
 hidden:
   body: true
+  field_d_product_link: true
   field_tags: true
   langcode: true
   links: true

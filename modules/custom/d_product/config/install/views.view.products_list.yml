@@ -195,18 +195,6 @@ display:
             group_items: {  }
           plugin_id: search_api_text
       sorts:
-        title:
-          id: title
-          table: search_api_index_product_index
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: true
-          expose:
-            label: Title
-          plugin_id: search_api
         search_api_id:
           id: search_api_id
           table: search_api_index_product_index
@@ -214,10 +202,22 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
-          exposed: false
+          order: DESC
+          exposed: true
           expose:
-            label: ''
+            label: 'Item ID'
+          plugin_id: search_api
+        title:
+          id: title
+          table: search_api_index_product_index
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: true
+          expose:
+            label: Title
           plugin_id: search_api
       header: {  }
       footer: {  }
@@ -230,6 +230,7 @@ display:
         operator: AND
         groups:
           1: AND
+      use_ajax: false
     cache_metadata:
       max-age: -1
       contexts:
