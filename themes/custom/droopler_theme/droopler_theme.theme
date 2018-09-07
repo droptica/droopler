@@ -221,3 +221,21 @@ function droopler_theme_preprocess_pager(&$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function droopler_theme_preprocess_views_mini_pager(&$variables) {
+  // Next.
+  if (isset($variables['items']['next'])) {
+    $variables['items']['next']['attributes'] = new Attribute([
+      'class' => ['page-link'],
+    ]);
+  }
+  // Previous.
+  if (isset($variables['items']['previous'])) {
+    $variables['items']['previous']['attributes'] = new Attribute([
+      'class' => ['page-link'],
+    ]);
+  }
+}
