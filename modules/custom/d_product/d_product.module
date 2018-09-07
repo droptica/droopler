@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * File containing d_product module.
+ */
+
+/**
+ * implement hook_preprocess_HOOK.
+ */
+function d_product_preprocess_node(&$variables) {
+  if (isset($variables['view_mode']) && $variables['view_mode'] == 'teaser') {
+    if (isset($variables['node'])) {
+      $node = $variables['node'];
+      if ($node->getType() == 'd_product') {
+        if (isset($variables['content']['field_product_image'][0])) {
+          $variables['main_image'] = $variables['content']['field_product_image'][0];
+          unset($variables['content']['field_product_image']);
+        }
+
+        if (isset($variables['content']['field_d_product_link'])) {
+          $variables['link'] = $variables['content']['field_d_product_link'];
+          unset($variables['content']['field_d_product_link']);
+        }
+      }
+    }
+  }
+}
+
+function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-products-list-products-list') {
+    $form['aggregated_field']['#attributes']['placeholder'] = t('Search products...');
+    $form['sort_by']['#title'] = '';
+    $form['sort_by']['#attributes']['placeholder'] = t('Placeholder');
+    $query = \Drupal::request()->query->all();
+    if (isset($query['f'])) {
+      foreach ($query['f'] as $key => $value) {
+        $form['f[' . $key . ']'] = array(
+          '#type' => 'hidden',
+          '#value' => $value,
+          '#weight' => -1,
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_product_preprocess_page(&$variables) {
+  if (isset($variables['node'])) {
+    return;
+  }
+  $variables['#attached']['library'][] = 'd_product/d_product_select';
+}
