@@ -1,4 +1,4 @@
-# Droopler template for new project #
+# Droopler template for new project # 
 <img src="https://demo.droopler.com/themes/custom/droopler_subtheme/logo.png" width=300 alt="Droopler Logo" />
 
 ## What is Droopler? ##
