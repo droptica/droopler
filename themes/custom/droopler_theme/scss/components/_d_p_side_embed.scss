@@ -5,6 +5,7 @@
 // Colour variables used in this paragraph.
 $d-p-side-embed-background-color: $color-agamemnon !default;
 $d-p-side-embed-background-color-secondary: darken($d-p-side-embed-background-color, 15%) !default;
+$d-p-side-embed-embed-background-color: $color-cassandra !default;
 $d-p-side-embed-text-color: $color-odysseus !default;
 $d-p-side-embed-link-color: $color-nestor !default;
 $d-p-side-embed-link-hover-color: darken($d-p-side-embed-link-color, 5%) !default;
@@ -65,6 +66,7 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     padding-right: 0;
     position: relative;
     height: $d-p-side-embed-desktop-height;
+    background: $d-p-side-embed-embed-background-color;
 
     > * {
       position: absolute;
@@ -78,9 +80,13 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      &.facebook-video {
+      &.facebook-embed {
         position: static;
         max-width: 100%;
+      }
+      .vimeo-embed,
+      &.vimeo-embed {
+        z-index: 2;
       }
     }
   }
