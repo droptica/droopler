@@ -89,7 +89,7 @@ class SubscribeFileForm extends FormBase {
 
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => $paragraph->get('field_d_p_sf_download_button')->value,
+      '#value' => $this->paragraph->get('field_d_p_sf_download_button')->value,
     ];
 
     // Keep compatibility with older Droopler.
