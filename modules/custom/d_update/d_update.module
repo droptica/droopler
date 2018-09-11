@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * d_update module.
+ */
+
+use Drupal\Core\Url;
+use Symfony\Component\Yaml\Yaml;
+use Drupal\d_update\Entity\Update;
+use Drupal\d_update\UpdateChecklist;
+
+/**
+ * Implements hook_checklistapi_checklist_info().
+ */
+function d_update_checklistapi_checklist_info() {
+
+  $definitions = [];
+  $definitions['d_update'] = [
+    '#title' => t('Droopler update instructions'),
+    '#path' => '/admin/config/development/droopler-update',
+    '#description' => t('Provides steps to keep your Droopler site up to date.'),
+    '#callback' => 'd_update_checklistapi_checklist_items',
+  ];
+
+  return $definitions;
+}
+
+/**
+ * Implements a callback d_update_checklistapi_checklist_info().
+ *
+ * @return array
+ *   Return the items for the d_update list.
+ */
+function d_update_checklistapi_checklist_items() {
+  $tasks = Yaml::parse(file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml'));
+
+  foreach ($tasks as $version => $updates) {
+    foreach ($updates as $key => $update) {
+      if (is_array($update)) {
+        $entry = Update::load($key);
+        $status = ($entry && $entry->wasSuccessfulByHook()) ? TRUE : FALSE;
+        if ($status && !empty($update['#description_successful'])) {
+          $tasks[$version][$key]['#description'] .= $update['#description_successful'];
+        }
+        elseif (!$status && !empty($update['#description_failed'])) {
+          $tasks[$version][$key]['#description'] .= $update['#description_failed'];
+        }
+      }
+    }
+  }
+
+  array_walk_recursive($tasks, function (&$value, $key) {
+    if ($key == '#url') {
+      $value = Url::fromUri($value);
+      if ($value->isExternal()) {
+        $value->setOption('attributes', ['target' => '_blank']);
+      }
+    }
+    elseif (in_array($key, ['#title', '#weight'])) {
+      $value = t($value);
+    }
+  });
+
+  return array_reverse($tasks);
+}
