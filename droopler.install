@@ -170,3 +170,13 @@ function droopler_update_8102() {
     _droopler_import_config($module, $config);
   }
 }
+
+/**
+ * Install checklist API module.
+ */
+function droopler_update_8103() {
+  $modules = [
+    'checklistapi',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
+}
