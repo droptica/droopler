@@ -130,3 +130,13 @@ function droopler_update_8101() {
   // Install config.
   _droopler_import_config('d_content', 'field.field.node.content_page.field_page_section');
 }
+
+/**
+ * Install checklist API.
+ */
+function droopler_update_8104() {
+  $modules = [
+    'checklistapi',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
+}
