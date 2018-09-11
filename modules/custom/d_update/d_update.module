@@ -8,6 +8,7 @@
 use Drupal\Core\Url;
 use Symfony\Component\Yaml\Yaml;
 use Drupal\d_update\Entity\Update;
+use Drupal\d_update\UpdateChecklist;
 
 /**
  * Implements hook_checklistapi_checklist_info().
@@ -62,50 +63,4 @@ function d_update_checklistapi_checklist_items() {
   });
 
   return array_reverse($tasks);
-}
-
-/**
- * Implements hook_toolbar().
- */
-function d_update_toolbar() {
-  if (!\Drupal::service('d_update.update_checklist')->isAvailable()) {
-    return [];
-  }
-
-  $user = \Drupal::currentUser();
-
-  /** @var Drupal\checklistapi\ChecklistapiChecklist $checklist */
-  $checklist = checklistapi_checklist_load('d_update');
-
-  $items = [];
-  // We are varying our cache by path and by permission.
-  $items['d_update'] = [
-    '#cache' => [
-      'keys' => ['toolbar', 'droopler', 'update'],
-      'contexts' => ['user.permissions'],
-    ],
-  ];
-
-  \Drupal::service('renderer')->addCacheableDependency($items['d_update'], $checklist->config);
-
-  if ($checklist->getPercentComplete() != 100 && $user->hasPermission('view d_update checklistapi checklist')) {
-    $items['d_update'] += [
-      '#type' => 'toolbar_item',
-      'tab' => [
-        '#type' => 'link',
-        '#title' => t('Pending Droopler updates'),
-        '#url' => Url::fromRoute($checklist->getRouteName()),
-        '#attributes' => [
-          'class' => ['toolbar-icon', 'toolbar-icon-droopler-updater'],
-          'aria-pressed' => 'false',
-        ],
-      ],
-      '#weight' => 500,
-      '#attached' => [
-        'library' => [
-        ],
-      ],
-    ];
-  }
-  return $items;
 }

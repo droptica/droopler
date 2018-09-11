@@ -22,4 +22,8 @@ function d_update_install() {
       about updates in the drupal admin pages.'
     );
   }
+  finally {
+    $status = TRUE;
+    \Drupal::service('d_update.update_checklist')->markAllUpdates($status);
+  }
 }
