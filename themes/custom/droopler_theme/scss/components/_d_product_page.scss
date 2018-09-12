@@ -1,0 +1,21 @@
+.node--type-d-product {
+  .main-content {
+    .node__content {
+      .header {
+
+      }
+      .section-images {
+        float: none;
+        @include media-breakpoint-up(lg) {
+          float: left;
+        }
+      }
+      .section-data {
+        display: block;
+        @include media-breakpoint-up(lg) {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
