@@ -2,12 +2,27 @@
   .main-content {
     .node__content {
       .header {
-
+        .title {
+          @include media-breakpoint-up(md) {
+            float: left;
+          }
+        }
+        .buy-link {
+          @include media-breakpoint-up(md) {
+            display: inline-block;
+            text-align: right;
+          }
+        }
       }
       .section-images {
         float: none;
         @include media-breakpoint-up(lg) {
           float: left;
+        }
+        .slider-main {
+          img {
+            height: auto;
+          }
         }
       }
       .section-data {
