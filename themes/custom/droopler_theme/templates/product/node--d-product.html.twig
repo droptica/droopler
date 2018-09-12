@@ -73,6 +73,19 @@
 %}
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    {{ content }}
+    <div class="header">
+      <div class="title">
+        {{ label }}
+      </div>
+      <div class="buy-link">
+        {{ content.field_d_product_link }}
+      </div>
+    </div>
+    <div class="section-images col-md-8 col-xs-12">
+      {{ content.field_product_image }}
+    </div>
+    <div class="section-data col-md-4 col-xs-12">
+      {{ content|without('field_product_image', 'field_d_product_link') }}
+    </div>
   </div>
 </article>

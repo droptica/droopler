@@ -18,3 +18,12 @@ d_product_select:
     - core/jquery
     - core/drupal
     - d_product/select2_box
+
+d_product_slider:
+  version: VERSION
+  js:
+    js/d_product_slider.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - d_p_carousel/slick
