@@ -170,3 +170,14 @@ function droopler_update_8102() {
     _droopler_import_config($module, $config);
   }
 }
+
+/**
+ * Install geysir module.
+ */
+function droopler_update_8103() {
+  // Install modules.
+  $modules = [
+    'geysir',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
+}
