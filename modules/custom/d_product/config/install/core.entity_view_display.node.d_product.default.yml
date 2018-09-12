@@ -22,12 +22,12 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     region: content
   field_d_product_link:
-    weight: 105
+    weight: 5
     label: above
     settings:
       trim_length: 80
@@ -39,7 +39,7 @@ content:
     type: link
     region: content
   field_product_categories:
-    weight: 103
+    weight: 3
     label: above
     settings:
       link: true
@@ -47,7 +47,7 @@ content:
     type: entity_reference_label
     region: content
   field_product_image:
-    weight: 102
+    weight: 1
     label: above
     settings:
       responsive_image_style: product_thumbnail
@@ -56,7 +56,7 @@ content:
     type: responsive_image
     region: content
   field_tags:
-    weight: 104
+    weight: 4
     label: above
     settings:
       link: true
@@ -64,7 +64,7 @@ content:
     type: entity_reference_label
     region: content
   links:
-    weight: 100
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
