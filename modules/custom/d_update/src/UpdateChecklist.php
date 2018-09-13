@@ -11,7 +11,7 @@ use Drupal\d_update\Entity\Update;
 /**
  * Update checklist service.
  *
- * @package Drupal\thunder_updater
+ * @package Drupal\d_update
  */
 class UpdateChecklist {
 
@@ -141,6 +141,8 @@ class UpdateChecklist {
    *   Keys for update entries.
    * @param bool $status
    *   Status that should be set.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function setSuccessfulByHook(array $keys, $status = TRUE) {
     foreach ($keys as $key) {
@@ -166,8 +168,8 @@ class UpdateChecklist {
    */
   protected function checkListPoints(array $names) {
 
-    /** @var \Drupal\Core\Config\Config $drooplerUpdateConfig*/
-    $drooplerUpdateConfig= $this->configFactory
+    /* @var \Drupal\Core\Config\Config $drooplerUpdateConfig */
+    $drooplerUpdateConfig = $this->configFactory
       ->getEditable('checklistapi.progress.d_update');
 
     $user = $this->account->id();
@@ -198,8 +200,8 @@ class UpdateChecklist {
    */
   protected function checkAllListPoints($status = TRUE) {
 
-    /** @var \Drupal\Core\Config\Config $drooplerUpdateConfig*/
-    $drooplerUpdateConfig= $this->configFactory
+    /* @var \Drupal\Core\Config\Config $drooplerUpdateConfig */
+    $drooplerUpdateConfig = $this->configFactory
       ->getEditable('checklistapi.progress.d_update');
 
     $user = $this->account->id();
