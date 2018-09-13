@@ -38,17 +38,20 @@
     }
   }
 
+  .slick-prev,
+  .slick-next {
+    &:before {
+      font-size: 36px;
+    }
+  }
   .slick-prev {
     padding-left: 5px;
     margin-left: 40px;
-    padding-right: 15px;
     z-index: 999;
-    &:before {
-
-    }
   }
   .slick-next {
     padding-right: 5px;
     margin-right: 40px;
+    right: 0;
   }
 }

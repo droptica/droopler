@@ -2,15 +2,32 @@
   .main-content {
     .node__content {
       .header {
+        margin: 0 0 20px 0;
         .title {
           @include media-breakpoint-up(md) {
             float: left;
+          }
+          h2 {
+            font-size: 1.8rem;
+            @include media-breakpoint-up(md) {
+              font-size: 2rem;
+            }
           }
         }
         .buy-link {
           @include media-breakpoint-up(md) {
             display: inline-block;
             text-align: right;
+          }
+          a {
+            @extend .btn;
+            @extend .btn-primary;
+            min-width: 12rem;
+            padding: 12px;
+            position: relative;
+            @include media-breakpoint-between(md, md) {
+              right: 88px;
+            }
           }
         }
       }
@@ -20,15 +37,37 @@
           float: left;
         }
         .slider-main {
-          img {
-            height: auto;
+          a {
+            &:focus {
+              outline: none;
+            }
+            img {
+              height: auto;
+            }
           }
         }
       }
       .section-data {
         display: block;
+        margin: 30px 0 0 0;
         @include media-breakpoint-up(lg) {
           display: inline-block;
+        }
+        .field__label {
+          font-size: 1.2rem;
+          font-weight: 700;
+          line-height: 1.2rem;
+          color: $black;
+          margin: 0 0 10px 0;
+        }
+        .field--name-field-product-categories,
+        .field--name-field-tags {
+          .field__label {
+            margin: 0 0 5px 0;
+          }
+          .field__items {
+            font-size: 16px;
+          }
         }
       }
     }
