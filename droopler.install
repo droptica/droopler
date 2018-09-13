@@ -97,6 +97,8 @@ function droopler_install_tasks() {
  * Droopler 1.3 Updates.
  */
 function droopler_update_8101() {
+  $updater = \Drupal::service('d_update');
+
   // Install modules.
   $modules = [
     'd_p_counters',
@@ -107,21 +109,21 @@ function droopler_update_8101() {
     'colorbox',
     'd_p_help',
   ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
+  $updater->installModules($modules);
 
   // Install config.
-  _droopler_import_config('d_content', 'field.field.node.content_page.field_page_section');
+  $updater->importConfig('d_content', 'field.field.node.content_page.field_page_section');
 }
 
 /**
  * Droopler 1.4 Updates.
  */
-function droopler_update_8103() {
+function droopler_update_8107() {
   $updater = \Drupal::service('d_update');
 
   // Mark 1.3 update as successfull.
   $oldUpdates = [];
-  for ($i = 0; $i <= 6; $i++) {
+  for ($i = 0; $i <= 7; $i++) {
     $oldUpdates[] = 'droopler__droopler_update_8101_' . $i;
   }
   $updater->checklist()->markUpdatesSuccessful($oldUpdates);
@@ -148,7 +150,7 @@ function droopler_update_8103() {
   }
 
   // Update blog post config.
-  if ($updater->importConfig('core.entity_view_display.node.blog_post.thumbnail', 'd_blog')) {
+  if ($updater->importConfig('d_blog', 'core.entity_view_display.node.blog_post.thumbnail')) {
     $updater->checklist()->markUpdatesSuccessful(['droopler__droopler_update_8102_3']);
   } else {
     $updater->checklist()->markUpdatesFailed(['droopler__droopler_update_8102_3']);
