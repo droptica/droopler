@@ -8,7 +8,6 @@
 use Drupal\Core\Url;
 use Symfony\Component\Yaml\Yaml;
 use Drupal\d_update\Entity\Update;
-use Drupal\d_update\UpdateChecklist;
 
 /**
  * Implements hook_checklistapi_checklist_info().
@@ -63,4 +62,78 @@ function d_update_checklistapi_checklist_items() {
   });
 
   return array_reverse($tasks);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_update_preprocess_menu__toolbar(&$variables) {
+  if ($variables['menu_name'] !== 'admin') {
+    return;
+  }
+  if (empty($variables['items']['d_update.admin_update'])) {
+    return;
+  }
+  if (d_update_update_link_is_active()) {
+    if (d_update_system_has_pending_updates()) {
+      // In this stage title is already a string, so we need to call __toString.
+      $variables['items']['d_update.admin_update']['title'] = t('Droopler Update')->__toString();
+      // We need to rewrite current url options to hold classes etc.
+      $options = $variables['items']['d_update.admin_update']['url']->getOptions();
+      $variables['items']['d_update.admin_update']['url'] = Url::fromRoute('system.db_update')->setOptions($options);
+    }
+  }
+  else {
+    unset($variables['items']['d_update.admin_update']);
+  }
+
+  $variables['#cache']['max-age'] = 0;
+  $variables['#attached']['library'][] = 'd_update/droopler';
+}
+
+/**
+ * Control visibility of the update button.
+ *
+ * @return bool
+ *   return true if checklist has any pending updates
+ *   or update.php execution is required, return false otherwise
+ */
+function d_update_update_link_is_active() {
+  $system_has_pending_updates = d_update_system_has_pending_updates();
+  $checklist_has_pending_updates = d_update_checklist_has_pending_updates();
+
+  return $system_has_pending_updates || $checklist_has_pending_updates;
+}
+
+/**
+ * Check for pending updates from checklist.
+ *
+ * @return bool
+ *   return true if checklist is completed in 100%
+ *   return false otherwise or if checklist service is not available
+ */
+function d_update_checklist_has_pending_updates() {
+  if (!\Drupal::service('d_update.update_checklist')->isAvailable()) {
+    return FALSE;
+  }
+  /** @var Drupal\checklistapi\ChecklistapiChecklist $checklist */
+  $checklist = checklistapi_checklist_load('d_update');
+
+  return $checklist->getPercentComplete() != 100;
+}
+
+/**
+ * Check for pending update.php execution.
+ *
+ * @return bool
+ *   return true if there are some pending updates, false otherwise
+ */
+function d_update_system_has_pending_updates() {
+  $systemManager = \Drupal::service('system.manager')->listRequirements();
+  $update = $systemManager['update'];
+  if (empty($update['severity'])) {
+    return FALSE;
+  }
+
+  return $update['severity'] == REQUIREMENT_ERROR;
 }

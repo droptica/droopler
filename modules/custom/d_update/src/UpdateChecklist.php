@@ -174,25 +174,21 @@ class UpdateChecklist {
    */
   protected function checkListPoints(array $names) {
 
-    /** @var \Drupal\Core\Config\Config $thunderUpdaterConfig */
-    $thunderUpdaterConfig = $this->configFactory
-      ->getEditable('checklistapi.progress.d_update');
-
+    /* @var \Drupal\Core\Config\Config $drooplerUpdateConfig */
+    $drooplerUpdateConfig = $this->configFactory->getEditable('checklistapi.progress.d_update');
     $user = $this->account->id();
     $time = time();
-
     foreach ($names as $name) {
-      if ($thunderUpdaterConfig && !$thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name")) {
-        $thunderUpdaterConfig
+      if ($drooplerUpdateConfig&& !$drooplerUpdateConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name")) {
+        $drooplerUpdateConfig
           ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name", [
             '#completed' => time(),
             '#uid' => $user,
           ]);
       }
     }
-
-    $thunderUpdaterConfig
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
+    $drooplerUpdateConfig
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($drooplerUpdateConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user)
       ->save();
@@ -205,44 +201,38 @@ class UpdateChecklist {
    *   Checkboxes enabled or disabled.
    */
   protected function checkAllListPoints($status = TRUE) {
-
-    /** @var \Drupal\Core\Config\Config $thunderUpdaterConfig */
-    $thunderUpdaterConfig = $this->configFactory
+    /* @var \Drupal\Core\Config\Config $drooplerUpdateConfig */
+    $drooplerUpdateConfig = $this->configFactory
       ->getEditable('checklistapi.progress.d_update');
-
     $user = $this->account->id();
     $time = time();
-
-    $thunderUpdaterConfig
+    $drooplerUpdateConfig
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user);
-
     $exclude = [
       '#title',
       '#description',
       '#weight',
     ];
-
     foreach ($this->updateChecklist->items as $versionItems) {
       foreach ($versionItems as $itemName => $item) {
         if (!in_array($itemName, $exclude)) {
           if ($status) {
-            $thunderUpdaterConfig
+            $drooplerUpdateConfig
               ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$itemName", [
                 '#completed' => $time,
                 '#uid' => $user,
               ]);
           }
           else {
-            $thunderUpdaterConfig
+            $drooplerUpdateConfig
               ->clear(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$itemName");
           }
         }
       }
     }
-
-    $thunderUpdaterConfig
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($thunderUpdaterConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
+    $drooplerUpdateConfig
+      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($drooplerUpdateConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
       ->save();
   }
 
