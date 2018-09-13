@@ -83,6 +83,8 @@ class UpdateChecklist {
    *   Array of update ids.
    * @param bool $checkListPoints
    *   Indicates the corresponding checkbox should be checked.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function markUpdatesSuccessful(array $names, $checkListPoints = TRUE) {
     if ($this->updateChecklist === FALSE) {
@@ -101,6 +103,8 @@ class UpdateChecklist {
    *
    * @param array $names
    *   Array of update ids.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function markUpdatesFailed(array $names) {
     if ($this->updateChecklist === FALSE) {
@@ -115,6 +119,8 @@ class UpdateChecklist {
    *
    * @param bool $status
    *   Checkboxes enabled or disabled.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function markAllUpdates($status = TRUE) {
     if ($this->updateChecklist === FALSE) {
@@ -169,12 +175,9 @@ class UpdateChecklist {
   protected function checkListPoints(array $names) {
 
     /* @var \Drupal\Core\Config\Config $drooplerUpdateConfig */
-    $drooplerUpdateConfig = $this->configFactory
-      ->getEditable('checklistapi.progress.d_update');
-
+    $drooplerUpdateConfig = $this->configFactory->getEditable('checklistapi.progress.d_update');
     $user = $this->account->id();
     $time = time();
-
     foreach ($names as $name) {
       if ($drooplerUpdateConfig&& !$drooplerUpdateConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name")) {
         $drooplerUpdateConfig
@@ -184,7 +187,6 @@ class UpdateChecklist {
           ]);
       }
     }
-
     $drooplerUpdateConfig
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($drooplerUpdateConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
@@ -199,24 +201,19 @@ class UpdateChecklist {
    *   Checkboxes enabled or disabled.
    */
   protected function checkAllListPoints($status = TRUE) {
-
     /* @var \Drupal\Core\Config\Config $drooplerUpdateConfig */
     $drooplerUpdateConfig = $this->configFactory
       ->getEditable('checklistapi.progress.d_update');
-
     $user = $this->account->id();
     $time = time();
-
     $drooplerUpdateConfig
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user);
-
     $exclude = [
       '#title',
       '#description',
       '#weight',
     ];
-
     foreach ($this->updateChecklist->items as $versionItems) {
       foreach ($versionItems as $itemName => $item) {
         if (!in_array($itemName, $exclude)) {
@@ -234,7 +231,6 @@ class UpdateChecklist {
         }
       }
     }
-
     $drooplerUpdateConfig
       ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($drooplerUpdateConfig->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
       ->save();

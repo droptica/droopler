@@ -4,8 +4,6 @@
  * Install, update and uninstall functions for the profilename install profile.
  */
 
-use Drupal\Core\Config\FileStorage;
-
 /**
  * Implements hook_install().
  *
@@ -96,25 +94,11 @@ function droopler_install_tasks() {
 }
 
 /**
- * Import a config file.
- * @todo To be moved to a new manager class.
- *
- * @param string $module
- *  Module name.
- * @param string $name
- *  Config file name without .yml extension.
- */
-function _droopler_import_config($module, $name) {
-  $config_path = drupal_get_path('module', $module) . '/config/install';
-  $source = new FileStorage($config_path);
-  $config_storage = \Drupal::service('config.storage');
-  $config_storage->write($name, $source->read($name));
-}
-
-/**
  * Droopler 1.3 Updates.
  */
 function droopler_update_8101() {
+  $updater = \Drupal::service('d_update');
+
   // Install modules.
   $modules = [
     'd_p_counters',
@@ -125,18 +109,54 @@ function droopler_update_8101() {
     'colorbox',
     'd_p_help',
   ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
+  $updater->installModules($modules);
 
   // Install config.
-  _droopler_import_config('d_content', 'field.field.node.content_page.field_page_section');
+  $updater->importConfig('d_content', 'field.field.node.content_page.field_page_section');
 }
 
 /**
- * Install new user role editor.
+ * Droopler 1.4 Updates.
  */
-function droopler_update_8102() {
-  _droopler_import_config('d_content', 'user.role.d_editor');
+function droopler_update_8107() {
+  $updater = \Drupal::service('d_update');
 
+  // Mark 1.3 update as successfull.
+  $oldUpdates = [];
+  for ($i = 0; $i <= 7; $i++) {
+    $oldUpdates[] = 'droopler__droopler_update_8101_' . $i;
+  }
+  $updater->checklist()->markUpdatesSuccessful($oldUpdates);
+
+  // Install checklistapi module.
+  if ($updater->installModules(['checklistapi'])) {
+    $updater->checklist()->markUpdatesSuccessful(['droopler__droopler_update_8102_0']);
+  } else {
+    $updater->checklist()->markUpdatesFailed(['droopler__droopler_update_8102_0']);
+  }
+
+  // Install d_update module.
+  if ($updater->installModules(['d_update'])) {
+    $updater->checklist()->markUpdatesSuccessful(['droopler__droopler_update_8102_1']);
+  } else {
+    $updater->checklist()->markUpdatesFailed(['droopler__droopler_update_8102_1']);
+  }
+
+  // Install editor role.
+  if ($updater->importConfig('d_content', 'user.role.d_editor')) {
+    $updater->checklist()->markUpdatesSuccessful(['droopler__droopler_update_8102_2']);
+  } else {
+    $updater->checklist()->markUpdatesFailed(['droopler__droopler_update_8102_2']);
+  }
+
+  // Update blog post config.
+  if ($updater->importConfig('d_blog', 'core.entity_view_display.node.blog_post.thumbnail')) {
+    $updater->checklist()->markUpdatesSuccessful(['droopler__droopler_update_8102_3']);
+  } else {
+    $updater->checklist()->markUpdatesFailed(['droopler__droopler_update_8102_3']);
+  }
+
+  // Update fields config.
   $configs = [
     'field.field.paragraph.d_p_carousel.field_d_icon' => 'd_p_carousel',
     'field.field.paragraph.d_p_carousel_item.field_d_image' => 'd_p_carousel',
@@ -166,17 +186,9 @@ function droopler_update_8102() {
     'field.field.paragraph.d_p_tiles.field_d_image' => 'd_p_tiles',
   ];
 
-  foreach ($configs as $config => $module) {
-    _droopler_import_config($module, $config);
+  if ($updater->importConfigs($configs)) {
+    $updater->checklist()->markUpdatesSuccessful(['droopler__droopler_update_8102_4']);
+  } else {
+    $updater->checklist()->markUpdatesFailed(['droopler__droopler_update_8102_4']);
   }
-}
-
-/**
- * Install checklist API module.
- */
-function droopler_update_8103() {
-  $modules = [
-    'checklistapi',
-  ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
 }
