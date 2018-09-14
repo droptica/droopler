@@ -9,6 +9,7 @@ use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_theme().
@@ -133,11 +134,67 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
 /**
  * Implements hook_form_alter().
  */
-function d_p_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'contact_message_contact_form_form') {
-    unset($form['actions']['preview']);
-    $form['name']['#type'] = 'textfield';
-    $form['mail']['#type'] = 'textfield';
+function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'contact_message_contact_form_form':
+      unset($form['actions']['preview']);
+      $form['name']['#type'] = 'textfield';
+      $form['mail']['#type'] = 'textfield';
+      break;
+
+    case 'geysir.modal.add_select_type_form':
+      $rootPath = getcwd();
+      $baseUrl = \Drupal::service('router.request_context')->getBaseUrl;
+      $modulePath = drupal_get_path('module', 'd_p');
+      foreach ($form['description'] as $paragraphName => $attributes) {
+        $fileServerPath = $rootPath . '/' . $modulePath . '/images/' . $paragraphName . '.png';
+        if (file_exists($fileServerPath)) {
+          $fileUrl = $baseUrl . $modulePath . '/images/' . $paragraphName . '.png';
+          $form['description'][$paragraphName]['#src'] = $fileUrl;
+        }
+      }
+      break;
   }
 }
 
+/**
+ * Implements hook_toolbar().
+ */
+function d_p_toolbar() {
+  $items = [];
+  $items['geysir_toggle'] = [
+    '#cache' => [
+      'contexts' => [
+        'user.permissions',
+      ],
+    ],
+  ];
+
+  if (!\Drupal::currentUser()->hasPermission('geysir manage paragraphs from front-end')) {
+    return $items;
+  }
+
+  $items['geysir_toggle'] += [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'html_tag',
+      '#tag' => 'button',
+      '#value' => t('Paragraph overlay'),
+      '#attributes' => [
+        'class' => ['toolbar-icon', 'toolbar-icon-geysir-toggle', 'is-active'],
+        'aria-pressed' => 'true',
+        'type' => 'button',
+      ],
+    ],
+    '#wrapper_attributes' => [
+      'class' => ['hidden', 'd-p-toolbar-tab'],
+    ],
+    '#attached' => [
+      'library' => [
+        'd_p/d_p.geysir_toggle',
+      ],
+    ],
+  ];
+
+  return $items;
+}

@@ -1,0 +1,47 @@
+.geysir-field-paragraph-wrapper {
+
+  .wrapper-d_p_group_of_text_blocks,
+  .wrapper-d_p_group_of_counters,
+  .wrapper-d_p_carousel {
+
+    .background-image {
+      z-index: auto !important;
+
+      .backstretch {
+        z-index: 0 !important;
+      }
+    }
+
+    .slick-list {
+      z-index: 1;
+    }
+
+    + .geysir-field-paragraph-links {
+
+      > .edit,
+      > .delete {
+        top: 15%;
+      }
+    }
+  }
+}
+
+#geysir-modal,
+#geysir-modal-form {
+
+  .tabledrag-handle .handle {
+    box-sizing: content-box;
+  }
+
+  .form-actions {
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    min-width: 0;
+  }
+}
+
+.ui-dialog #geysir-modal .ajax-progress-throbber {
+  background-image: url(../../../../../../../core/misc/loading-small.gif);
+}
