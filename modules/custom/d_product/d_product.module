@@ -5,6 +5,10 @@
  * File containing d_product module.
  */
 
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
+
 /**
  * implement hook_preprocess_HOOK.
  */
@@ -58,4 +62,49 @@ function d_product_preprocess_page(&$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_product_preprocess_field(&$variables) {
+  $variables['is_product'] = FALSE;
 
+  if ($variables['element']['#bundle'] == 'd_product') {
+    $variables['is_product'] = TRUE;
+    $items = $variables['element']['#items'];
+    switch ($variables['field_name']) {
+      case 'field_tags':
+        $variables['links'] = d_product_generate_term_links($items, 'tags_taxonomy_term_name');
+        break;
+
+      case 'field_product_categories':
+        $variables['links'] = d_product_generate_term_links($items, 'product_categories_taxonomy_term_name');
+        break;
+    }
+  }
+}
+
+/**
+ * Create custom term links.
+ *
+ * @param $items array
+ *   Store term ids.
+ * @param $element string
+ *   Facet path element.
+ * @return array
+ *   Generated links.
+ */
+function d_product_generate_term_links($items, $element) {
+  $links = [];
+  foreach ($items as $term_obj) {
+    $tid = $term_obj->getValue();
+    $term = Term::load($tid['target_id']);
+    $name = $term->getName();
+    $options = array(
+      'query'    => ['f[0]' => $element . ':' . strtolower($name)],
+    );
+    $link = Link::fromTextAndUrl(t($name), Url::fromUri('internal:/products', $options))->toString();
+    $links[] = $link;
+  }
+
+  return $links;
+}
