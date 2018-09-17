@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.product_thumbnail_pc
+  theme:
+    - droopler_theme
+id: product_thumbnail
+label: 'Product thumbnail'
+image_style_mappings:
+  -
+    breakpoint_id: droopler_theme.extra
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: product_thumbnail_pc
+breakpoint_group: droopler_theme
+fallback_image_style: product_thumbnail_pc
