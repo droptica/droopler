@@ -18,8 +18,7 @@
 ] %}
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
-    <div class="container">
-      {{ content }}
-    </div>
+    <h2 class="search">{{ 'Search:'|trans }}</h2>
+    {{ content }}
   </div>
 {% endif %}

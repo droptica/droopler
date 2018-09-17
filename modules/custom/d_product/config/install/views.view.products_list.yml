@@ -78,7 +78,7 @@ display:
           items_per_page: 10
           offset: 0
           id: 0
-          total_pages: null
+          total_pages: 0
           tags:
             previous: ‹‹
             next: ››
@@ -218,7 +218,19 @@ display:
           order: DESC
           exposed: true
           expose:
-            label: 'Item ID'
+            label: 'Newly Added'
+          plugin_id: search_api
+        title_1:
+          id: title_1
+          table: search_api_index_product_index
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: true
+          expose:
+            label: 'Title Ascending'
           plugin_id: search_api
         title:
           id: title
@@ -230,7 +242,7 @@ display:
           order: DESC
           exposed: true
           expose:
-            label: Title
+            label: 'Title Descending'
           plugin_id: search_api
       header: {  }
       footer: {  }

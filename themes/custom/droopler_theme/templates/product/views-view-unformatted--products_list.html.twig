@@ -15,14 +15,10 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
-<div class="row">
   {% for row in rows %}
   {% if (loop.index0 % 2 == 0) and not loop.first %}
-</div>
-<div class="row">
   {% endif %}
   <div class="col-md-6 products-list-teaser">
     {{ row.content }}
   </div>
   {% endfor %}
-</div>

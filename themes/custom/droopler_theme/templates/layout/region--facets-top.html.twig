@@ -12,14 +12,15 @@
  * @see template_preprocess_region()
  */
 #}
-{% set classes = [
-  'region',
-  'region-' ~ region|clean_class,
-] %}
+{%
+  set classes = [
+    'region',
+    'region-' ~ region|clean_class,
+    'container',
+  ]
+%}
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
-    <div class="container">
-      {{ content }}
-    </div>
+    {{ content }}
   </div>
 {% endif %}

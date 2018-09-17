@@ -126,18 +126,23 @@
               <a id="main-content" tabindex="-1"></a>
               <div class="container">
                 <div class="row">
-                  <div class="col-md-3 filters">
+                  <div class="col-lg-3 filters">
+                    {% if page.facets_left_top %}
+                      {{ page.facets_left_top }}
+                    {% endif %}
                     {{ page.facets_left }}
                   </div>
-                  <div class="col-md-9 product-listing">
-                    <div class="top-product-info row">
-                      <div class="col-sm-8 product-item-counter">
+                  <div class="col-lg-9 product-listing">
+                    <div class="top-product-info">
+                      <div class="d-none d-lg-block col-sm-6 col-lg-8 product-item-counter">
                         {%  if pager_total_items %}
                           <strong>{{ pager_total_items }} </strong> {{ 'Products'|trans }}
                         {% endif %}
                       </div>
-                      <div class="col-sm-4">
-                        {{ page.facets_top }}
+                      <div class="col-lg-4 top-product-info-sort-wrapper">
+                        <div class="row">
+                          {{ page.facets_top }}
+                        </div>
                       </div>
                     </div>
 
