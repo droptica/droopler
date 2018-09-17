@@ -5,19 +5,15 @@ dependencies:
     - d_product
   theme:
     - droopler_subtheme
-id: resetfilters_2
+id: mobilefilterssubmit
 theme: droopler_subtheme
 region: facets_left
-weight: -3
+weight: 0
 provider: null
-plugin: reset_button
+plugin: mobile_filters_submit
 settings:
-  id: reset_button
-  label: 'Reset Filters'
+  id: mobile_filters_submit
+  label: 'Mobile filters submit'
   provider: d_product
   label_display: '0'
-  button_text: Reset
-  button_class: 'btn btn-outline-primary btn-sm'
-  button_target: /products
-  button_icon_class: 'fas fa-times'
 visibility: {  }
