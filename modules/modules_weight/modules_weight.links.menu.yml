@@ -1,0 +1,13 @@
+modules_weight.list_page:
+  title: 'Modules Weight'
+  parent: system.admin_config_system
+  description: 'Page with the module list'
+  route_name: modules_weight.list_page
+  weight: 99
+
+modules_weight.modules_weight_admin_settings:
+  title: 'Settings'
+  parent: modules_weight.list_page
+  description: 'Modules Weight Settings'
+  route_name: modules_weight.modules_weight_admin_settings
+  weight: 99

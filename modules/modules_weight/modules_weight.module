@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Contains modules_weight.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function modules_weight_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help.
+    case 'help.page.modules_weight':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Sometimes we need to modify modules execution order, and some people could write a code that execute the query to modify the weight of a module in the system table, some one might go straight to his favorite SQL client and modify the record directly. This module provides an interface to reorder the weight modules.') . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Configuring the module') . '</dt>';
+      $output .= '<dd>' . t('You can manage the module settings from the <a href=":config-page">Modules Weight Settings</a> page. For this you need the <em>Administer Modules Weight</em> permission.', [':config-page' => Url::fromRoute('modules_weight.modules_weight_admin_settings')->toString()]) . '</dd>';
+      $output .= '<dt>' . t('Changing the modules weight') . '</dt>';
+      $output .= '<dd>' . t('You can select the weight for all the installed and compatible modules according to the module settings from the <a href=":config-page">Modules Weight</a> page. For this you need the <em>Administer Modules Weight</em> permission.', [':config-page' => Url::fromRoute('modules_weight.list_page')->toString()]) . '</dd>';
+      $output .= '</dl>';
+
+      return $output;
+  }
+}

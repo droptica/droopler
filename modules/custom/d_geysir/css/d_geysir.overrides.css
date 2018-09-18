@@ -1,0 +1,53 @@
+/* Disable secondary paragraphs. */
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-wrapper {
+  outline: none !important;
+}
+
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-wrapper:after,
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-wrapper .geysir-field-paragraph-links {
+  display: none !important;
+}
+
+/* Hide geysir on node teasers. */
+.node--view-mode-teaser .geysir-field-paragraph-links {
+  display: none !important;
+}
+
+/* Fix interaction with backstretch library. */
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_text_blocks .background-image,
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_counters .background-image,
+.geysir-field-paragraph-wrapper .wrapper-d_p_carousel .background-image {
+  z-index: auto !important;
+}
+
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_text_blocks .background-image .backstretch,
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_counters .background-image .backstretch,
+.geysir-field-paragraph-wrapper .wrapper-d_p_carousel .background-image .backstretch {
+  z-index: 0 !important;
+}
+
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_text_blocks .slick-list,
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_counters .slick-list,
+.geysir-field-paragraph-wrapper .wrapper-d_p_carousel .slick-list {
+  z-index: 1;
+}
+
+/* Fix modal styles. */
+#geysir-modal .tabledrag-handle .handle,
+#geysir-modal-form .tabledrag-handle .handle {
+  box-sizing: content-box;
+}
+
+#geysir-modal .tabledrag-handle .form-actions,
+#geysir-modal-form .tabledrag-handle .form-actions {
+  margin-bottom: 15px;
+}
+
+#geysir-modal .btn,
+#geysir-modal-form .btn {
+  min-width: 0;
+}
+
+.ui-dialog #geysir-modal .ajax-progress-throbber {
+  background-image: url(../images/loading-small.gif);
+}

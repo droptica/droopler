@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains d_paragraphs.module..
+ * Contains d_paragraphs.module.
  */
 
 use Drupal\file\Entity\File;
@@ -141,60 +141,5 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['name']['#type'] = 'textfield';
       $form['mail']['#type'] = 'textfield';
       break;
-
-    case 'geysir.modal.add_select_type_form':
-      $rootPath = getcwd();
-      $baseUrl = \Drupal::service('router.request_context')->getBaseUrl;
-      $modulePath = drupal_get_path('module', 'd_p');
-      foreach ($form['description'] as $paragraphName => $attributes) {
-        $fileServerPath = $rootPath . '/' . $modulePath . '/images/' . $paragraphName . '.png';
-        if (file_exists($fileServerPath)) {
-          $fileUrl = $baseUrl . $modulePath . '/images/' . $paragraphName . '.png';
-          $form['description'][$paragraphName]['#src'] = $fileUrl;
-        }
-      }
-      break;
   }
-}
-
-/**
- * Implements hook_toolbar().
- */
-function d_p_toolbar() {
-  $items = [];
-  $items['geysir_toggle'] = [
-    '#cache' => [
-      'contexts' => [
-        'user.permissions',
-      ],
-    ],
-  ];
-
-  if (!\Drupal::currentUser()->hasPermission('geysir manage paragraphs from front-end')) {
-    return $items;
-  }
-
-  $items['geysir_toggle'] += [
-    '#type' => 'toolbar_item',
-    'tab' => [
-      '#type' => 'html_tag',
-      '#tag' => 'button',
-      '#value' => t('Paragraph overlay'),
-      '#attributes' => [
-        'class' => ['toolbar-icon', 'toolbar-icon-geysir-toggle', 'is-active'],
-        'aria-pressed' => 'true',
-        'type' => 'button',
-      ],
-    ],
-    '#wrapper_attributes' => [
-      'class' => ['hidden', 'd-p-toolbar-tab'],
-    ],
-    '#attached' => [
-      'library' => [
-        'd_p/d_p.geysir_toggle',
-      ],
-    ],
-  ];
-
-  return $items;
 }
