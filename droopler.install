@@ -130,3 +130,10 @@ function droopler_update_8101() {
   // Install config.
   _droopler_import_config('d_content', 'field.field.node.content_page.field_page_section');
 }
+
+/**
+ * Install new user role editor.
+ */
+function droopler_update_8102() {
+  _droopler_import_config('d_content', 'user.role.d_editor');
+}
