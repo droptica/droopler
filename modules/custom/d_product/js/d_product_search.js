@@ -2,6 +2,17 @@
 
   'use strict';
 
+  Drupal.behaviors.search_page_actions = {
+    attach: function (context, settings) {
+
+      // Auto submit on sort by change.
+      $("form#views-exposed-form-products-list-products-list select").change(function() {
+        $("form#views-exposed-form-products-list-products-list").submit();
+      });
+
+    }
+  };
+
   Drupal.behaviors.mobile_filters = {
     attach: function (context, settings) {
 
