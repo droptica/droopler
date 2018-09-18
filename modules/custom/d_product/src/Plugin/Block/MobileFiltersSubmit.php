@@ -3,6 +3,7 @@
 namespace Drupal\d_product\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Provides a 'MobileFiltersSubmit' Block.
@@ -18,16 +19,45 @@ class MobileFiltersSubmit extends BlockBase {
   /**
    * {@inheritdoc}
    */
+  public function blockForm($form, FormStateInterface $form_state)
+  {
+    $form['button_text'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Button text'),
+      '#default_value' => $this->configuration['button_text'] ?? 'Close Filters',
+    );
+
+    $form['button_class'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Button class'),
+      '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary',
+    );
+
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockSubmit($form, FormStateInterface $formState)
+  {
+    $this->configuration['button_text'] = $formState->getValue('button_text');
+    $this->configuration['button_class'] = $formState->getValue('button_class');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function build() {
     return [
       'inside' => [
         '#type' => 'html_tag',
         '#tag' => 'button',
-        '#value' => $this->t('Close Filters'),
+        '#value' => $this->t($this->configuration['button_text']),
         '#attributes' => [
-          'class' => ['mobile-filter-close'],
+          'class' => ['mobile-filter-close', $this->configuration['button_class']],
           'type' => ['button'],
-//          'data-toggle' => ['collapse'],
           'data-target' => ['.region-sidebar-left'],
           'aria-expanded' => ['false'],
           'aria-controls' => ['.region-sidebar-left'],
@@ -40,7 +70,6 @@ class MobileFiltersSubmit extends BlockBase {
         '#attributes' => [
           'class' => ['mobile-filter-close-top', 'd-none'],
           'type' => ['button'],
-//          'data-toggle' => ['collapse'],
           'data-target' => ['.region-sidebar-left'],
           'aria-expanded' => ['false'],
           'aria-controls' => ['.region-sidebar-left'],
