@@ -1,8 +1,32 @@
 .node--type-d-product {
   .main-content {
     .node__content {
+
+      @include media-breakpoint-up(lg) {
+        .header .title {
+          padding-right: 30px;
+        }
+      }
+      .section-data {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .section-images {
+        padding-left: 0;
+        @include media-breakpoint-down(md) {
+          padding-right: 0;
+        }
+      }
+
       .header {
         margin: 0 0 20px 0;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        @include media-breakpoint-down(md) {
+          flex-direction: column;
+        }
+
         .title {
           @include media-breakpoint-up(md) {
             float: left;
@@ -17,14 +41,12 @@
         .buy-link {
           @include media-breakpoint-up(md) {
             display: inline-block;
-            text-align: right;
           }
           a {
             @extend .btn;
             @extend .btn-primary;
             min-width: 12rem;
             padding: 12px;
-            position: relative;
             @include media-breakpoint-between(md, md) {
               right: 88px;
             }
