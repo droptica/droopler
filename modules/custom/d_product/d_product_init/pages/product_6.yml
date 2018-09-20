@@ -3,7 +3,15 @@ info:
   title: Fresh Rye Bread
 field_product_image:
   type: image
-  data: demo_business_3.jpg
+  data:
+    - file: demo_business_3.jpg
+      alt: 2x2 Title / Subtitle
+    - file: demo_business_1.jpg
+      alt: Title / Subtitle
+    - file: demo_business_2.jpg
+      alt: Title / Subtitle
+    - file: demo_business_4.jpg
+      alt: Title / Subtitle
 body:
   type: text
   data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
@@ -12,7 +20,7 @@ body:
 field_product_categories:
   type: taxonomy
   data:
-    vid: blog_posts_category
+    vid: d_product_categories
     terms:
       - Food
 field_tags:

@@ -22,6 +22,11 @@ function d_product_preprocess_node(&$variables) {
           unset($variables['content']['field_product_image']);
         }
 
+          if (isset($variables['content']['field_product_categories'][0])) {
+              $variables['category'] = $variables['content']['field_product_categories'];
+              unset($variables['content']['field_product_categories']);
+          }
+
         if (isset($variables['content']['field_d_product_link'])) {
           $variables['link'] = $variables['content']['field_d_product_link'];
           unset($variables['content']['field_d_product_link']);

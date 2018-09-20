@@ -25,13 +25,13 @@ class ResetButton extends BlockBase {
     $form['button_text'] = array(
       '#type' => 'textfield',
       '#title' => t('Button text'),
-      '#default_value' => $this->configuration['button_text'] ?? 'Reset',
+      '#default_value' => $this->configuration['button_text'] ?? 'Reset Filters',
     );
 
     $form['button_class'] = array(
       '#type' => 'textfield',
       '#title' => t('Button class'),
-      '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary btn-sm',
+      '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary btn-sm btn-reset',
     );
 
     $form['button_target'] = array(

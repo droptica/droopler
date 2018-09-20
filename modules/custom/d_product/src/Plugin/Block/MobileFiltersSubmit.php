@@ -30,7 +30,7 @@ class MobileFiltersSubmit extends BlockBase {
     $form['button_class'] = array(
       '#type' => 'textfield',
       '#title' => t('Button class'),
-      '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary',
+      '#default_value' => $this->configuration['button_class'] ?? 'btn btn-primary',
     );
 
 

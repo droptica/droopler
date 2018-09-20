@@ -1,9 +1,17 @@
 info:
   type: d_product
-  title: Classic Wooden Violin
+  title: Classic Antique Violin Handmade Wooden Coffin Case for restoration
 field_product_image:
   type: image
-  data: demo_event_4.jpg
+  data:
+    - file: demo_event_4.jpg
+      alt: 2x2 Title / Subtitle
+    - file: demo_event_2.jpg
+      alt: Title / Subtitle
+    - file: demo_event_3.jpg
+      alt: Title / Subtitle
+    - file: demo_event_1.jpg
+      alt: Title / Subtitle
 body:
   type: text
   data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
@@ -12,7 +20,7 @@ body:
 field_product_categories:
   type: taxonomy
   data:
-    vid: blog_posts_category
+    vid: d_product_categories
     terms:
       - Musical instruments
 field_tags:

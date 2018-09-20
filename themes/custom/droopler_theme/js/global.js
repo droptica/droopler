@@ -22,6 +22,25 @@
         }
       });
 
+      $( window ).resize(function() {
+        clampTitle();
+      });
+      clampTitle();
+
+      /**
+       * Triger title to 2 lines and add ... .
+       */
+      function clampTitle() {
+        var containers = document.querySelectorAll('.product-teaser-content .node__title');
+        Array.prototype.forEach.call(containers, function (container) {
+          var p = container.querySelector('span');
+          var divh = container.clientHeight;
+          while (p.offsetHeight > divh) {
+            p.textContent = p.textContent.replace(/\W*\s(\S)*$/, '...');
+          }
+        });
+      }
+
       // Enable hover on dropdowns.
       $("#header .dropdown, .language-switcher-language-url").hover(function() {
         // We don't manipulate on default "show" class here.

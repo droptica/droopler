@@ -133,16 +133,14 @@
                     {{ page.facets_left }}
                   </div>
                   <div class="col-lg-9 product-listing">
-                    <div class="top-product-info">
+                    <div class="top-product-info row">
                       <div class="d-none d-lg-block col-sm-6 col-lg-8 product-item-counter">
                         {%  if pager_total_items %}
                           <strong>{{ pager_total_items }} </strong> {{ 'Products'|trans }}
                         {% endif %}
                       </div>
                       <div class="col-lg-4 top-product-info-sort-wrapper">
-                        <div class="row">
                           {{ page.facets_top }}
-                        </div>
                       </div>
                     </div>
 

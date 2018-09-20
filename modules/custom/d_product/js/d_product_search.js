@@ -15,9 +15,9 @@
 
   Drupal.behaviors.mobile_filters = {
     attach: function (context, settings) {
-
+      $( ".region-facets-left" ).after( "<div class='close-area'></div>" );
       var $button = $('.top-product-info .block-mobile-filters button.mobile-filter');
-      var $buttonClose = $('.region-facets-left button.mobile-filter-close');
+      var $buttonClose = $('.region-facets-left button.mobile-filter-close, .close-area');
 
       $button.click(context, function () {
         $('.region-facets-left').css('left', "0");
