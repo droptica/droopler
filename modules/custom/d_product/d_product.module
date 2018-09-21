@@ -80,11 +80,14 @@ function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form
         if ($node->bundle() == 'd_product' && $check) {
           $alias = $node->toUrl()->setAbsolute()->toString();
           $subject = t(
-            'I would like to ask about product "@title"',
+            'I would like to ask about product @title',
             ['@title' => $node->getTitle()]
           );
+          $subject = $subject->render();
+          $subject = strlen($subject) > 100 ? substr($subject,0,97)."..." : $subject;
+
           $message = t(
-            'I would like to ask about "@title", link - @link ',
+            'I would like to ask about @title, link - @link ',
             ['@title' => $node->getTitle(), '@link' => $alias]
           );
           $form['subject']['widget'][0]['value']['#default_value'] = $subject;
