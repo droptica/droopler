@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * Show node title only if 'pagetitle' block is visible for this content type.
+ */
+function d_content_preprocess_node(&$variables) {
+  if ($variables['view_mode'] == 'full') {
+    $bundle = $variables['node']->bundle();
+    $variables['show_node_title'] = TRUE;
+
+    $pagetitle_block = \Drupal::entityTypeManager()
+      ->getStorage('block')
+      ->load('pagetitle');
+    $visibility = $pagetitle_block->getVisibility();
+
+    if ($pagetitle_block->status() == TRUE && isset($visibility['entity_bundle:node'])) {
+      $selected_content_types = $visibility['entity_bundle:node']['bundles'];
+      $show_block = in_array($bundle, $selected_content_types) ? TRUE : FALSE;
+
+      if ($visibility['entity_bundle:node']['negate']) {
+        $show_block = !$show_block;
+      }
+      $variables['show_node_title'] = $show_block;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_content_preprocess_page(&$variables) {
+  if (isset($variables['node'])) {
+    $bundles_to_remove_pagetitle_block_from = ['blog_post'];
+    $bundle = $variables['node']->bundle();
+
+    if(in_array($bundle, $bundles_to_remove_pagetitle_block_from)) {
+      unset($variables['page']['content']['pagetitle']);
+    }
+  }
+}
