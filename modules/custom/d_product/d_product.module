@@ -7,7 +7,9 @@
 
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\User;
 
 /**
  * implement hook_preprocess_HOOK.
@@ -34,8 +36,23 @@ function d_product_preprocess_node(&$variables) {
       }
     }
   }
+  if (isset($variables['view_mode']) && $variables['view_mode'] == 'full') {
+    $node = $variables['node'];
+    if ($node->hasField('field_d_ask_for_product')) {
+      $field_d_ask_for_product = $node->get('field_d_ask_for_product');
+      $field_d_ask_for_product = $field_d_ask_for_product->getValue();
+      if (isset($field_d_ask_for_product[0]['value']) && $field_d_ask_for_product[0]['value'] == 1) {
+        $variables['link_ask_for_product'] = d_product_generate_ask_product_link(
+          $node
+        );
+      }
+    }
+  }
 }
 
+/**
+ * Implements hook_form_alter().
+ */
 function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-products-list-products-list') {
     $form['aggregated_field']['#attributes']['placeholder'] = t('Search products...');
@@ -50,6 +67,29 @@ function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form
           '#value' => $value,
           '#weight' => -1,
         );
+      }
+    }
+  }
+  if ($form_id == 'contact_message_feedback_form') {
+    if (isset($_GET['product'])) {
+      $nid = $_GET['product'];
+      $node = Node::load($nid);
+      if ($node) {
+        $user = User::load(\Drupal::currentUser()->id());
+        $check = $node->access('view', $user);
+        if ($node->bundle() == 'd_product' && $check) {
+          $alias = $node->toUrl()->setAbsolute()->toString();
+          $subject = t(
+            'I would like to ask about product "@title"',
+            ['@title' => $node->getTitle()]
+          );
+          $message = t(
+            'I would like to ask about "@title", link - @link ',
+            ['@title' => $node->getTitle(), '@link' => $alias]
+          );
+          $form['subject']['widget'][0]['value']['#default_value'] = $subject;
+          $form['message']['widget'][0]['value']['#default_value'] = $message;
+        }
       }
     }
   }
@@ -113,6 +153,23 @@ function d_product_generate_term_links($items, $element) {
   }
 
   return $links;
+}
+
+/**
+ * Create ask_product_link.
+ *
+ * @param $node
+ *
+ * @return \Drupal\Core\GeneratedLink
+ */
+function d_product_generate_ask_product_link($node) {
+  $name = 'Ask for product';
+  $options = ['query' => ['product' => $node->id()]];
+  $link = Link::fromTextAndUrl(
+    t($name),
+    Url::fromUri('internal:/contact#contact-message-feedback-form', $options)
+  )->toString();
+  return $link;
 }
 
 /**

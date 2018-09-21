@@ -60,32 +60,38 @@
  */
 #}
 
-{%
-  set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'clearfix',
-  ]
-%}
+{% set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  'clearfix',
+] %}
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    <div class="header">
-      <div class="title">
-        <h2>{{ label }}</h2>
+    <div class="row">
+      <div class="section-images col-lg-8 col-md-12">
+        <div class="header">
+          <div class="title">
+            <h2>{{ label }}</h2>
+          </div>
+        </div>
+        {{ content.field_product_image }}
       </div>
-      <div class="buy-link">
-        {{ content.field_d_product_link }}
+      <div class="section-data col-lg-4 col-md-12">
+        <div class="products-links row">
+            <div class="buy-link col-sm-6 col-lg-12">
+              {{ content.field_d_product_link }}
+            </div>
+            <div class="ask-link col-sm-6 col-lg-12">
+             {{ link_ask_for_product }}
+            </div>
+        </div>
+
+        {{ content|without('field_product_image', 'field_d_product_link', 'field_d_ask_for_product') }}
       </div>
-    </div>
-    <div class="section-images col-lg-8 col-md-12">
-      {{ content.field_product_image }}
-    </div>
-    <div class="section-data col-lg-4 col-md-12">
-      {{ content|without('field_product_image', 'field_d_product_link') }}
     </div>
   </div>
 </article>

@@ -1,36 +1,10 @@
 .node--type-d-product {
   .main-content {
     .node__content {
-
-      @include media-breakpoint-up(lg) {
-        .header .title {
-          padding-right: 30px;
-        }
-      }
-      .section-data {
-        padding-left: 0;
-        padding-right: 0;
-      }
-      .section-images {
-        padding-left: 0;
-        @include media-breakpoint-down(md) {
-          padding-right: 0;
-        }
-      }
-
       .header {
-        margin: 0 0 20px 0;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        @include media-breakpoint-down(md) {
-          flex-direction: column;
-        }
-
         .title {
-          @include media-breakpoint-up(md) {
-            float: left;
-          }
+          margin-bottom: 21px;
+          margin-top: 8px;
           h2 {
             font-size: 1.8rem;
             @include media-breakpoint-up(md) {
@@ -38,26 +12,8 @@
             }
           }
         }
-        .buy-link {
-          @include media-breakpoint-up(md) {
-            display: inline-block;
-          }
-          a {
-            @extend .btn;
-            @extend .btn-primary;
-            min-width: 12rem;
-            padding: 12px;
-            @include media-breakpoint-between(md, md) {
-              right: 88px;
-            }
-          }
-        }
       }
       .section-images {
-        float: none;
-        @include media-breakpoint-up(lg) {
-          float: left;
-        }
         .slider-main {
           a {
             &:focus {
@@ -71,9 +27,8 @@
       }
       .section-data {
         display: block;
-        margin: 30px 0 0 0;
         @include media-breakpoint-up(lg) {
-          display: inline-block;
+          padding-left: 0;
         }
         .field__label {
           font-size: 1.2rem;
@@ -93,6 +48,27 @@
           }
           .field__items {
             font-size: 16px;
+          }
+        }
+        .products-links {
+          margin-bottom: 30px;
+          .ask-link,
+          .field--name-field-d-product-link {
+            a {
+              @extend .btn;
+              @extend .btn-primary;
+              width: 100%;
+              padding: 12px;
+              min-width: 7rem;
+            }
+          }
+          .ask-link {
+            a {
+              @extend .btn-outline-primary;
+            }
+          }
+          @include media-breakpoint-down(md) {
+            margin-top: 20px;
           }
         }
       }

@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.full
     - field.field.node.d_product.body
+    - field.field.node.d_product.field_d_ask_for_product
     - field.field.node.d_product.field_d_product_link
     - field.field.node.d_product.field_product_categories
     - field.field.node.d_product.field_product_image
@@ -26,6 +27,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_d_ask_for_product:
+    type: boolean
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
   field_d_product_link:
     weight: 5
     label: hidden

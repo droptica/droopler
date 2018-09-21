@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.d_product.body
+    - field.field.node.d_product.field_d_ask_for_product
     - field.field.node.d_product.field_d_product_link
     - field.field.node.d_product.field_product_categories
     - field.field.node.d_product.field_product_image
@@ -28,6 +29,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  field_d_ask_for_product:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_d_product_link:
     weight: 9
     settings:

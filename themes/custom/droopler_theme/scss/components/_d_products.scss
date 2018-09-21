@@ -76,7 +76,7 @@ $d-product-filters-group-margin: 45px;
 @mixin search-field-default {
   border-radius: 0px;
   border: 0;
-  padding: 16px 48px 12px 17px;
+  padding: 16px 49px 11px 23px;
   background-color: $color-leto;
   background-size: 26px;
   background-image: url('/profiles/contrib/droopler/themes/custom/droopler_theme/images/search.svg');
@@ -151,7 +151,7 @@ $d-product-filters-group-margin: 45px;
       .select2-selection__rendered {
         color: $color-hecuba;
         font-size: 16px;
-        padding: 9px 62px 7px 23px;
+        padding: 10px 62px 10px 23px;
         @include media-breakpoint-down(sm) {
           justify-content: left;
           color: $color-hecuba;
@@ -210,9 +210,8 @@ $d-product-filters-group-margin: 45px;
   align-items: end;
 
   .product-item-counter {
-    height: 26px;
     font-size: 19px;
-    padding-top: 28px;
+    padding-top: 21px;
   }
 }
 
@@ -343,10 +342,11 @@ $d-product-filters-group-margin: 45px;
   }
 
   .region-facets-left-top {
-    margin-top: 21px;
+    margin-top: -1px;
     margin-bottom: 55px;
     @include media-breakpoint-down(md) {
       margin-bottom: 25px;
+      margin-top: 0;
     }
     h2.search {
       color: $color-aeneas;
@@ -370,12 +370,18 @@ $d-product-filters-group-margin: 45px;
     .block.block-facet-blocktags-taxonomy-term-name {
       .content {
         margin-top: 31px;
+        @include media-breakpoint-down(md) {
+          margin-top: 5px;
+        }
         @include links-as-tags;
       }
     }
 
     .block-facets.block-facet--links {
       margin-top: $d-product-filters-group-margin;
+      @include media-breakpoint-down(md) {
+        margin-top: 5px;
+      }
       @include filters-facets-link;
     }
 
@@ -389,13 +395,21 @@ $d-product-filters-group-margin: 45px;
       align-items: center;
       flex-wrap: wrap;
       margin-top: $d-product-filters-group-margin;
+      @include media-breakpoint-down(md) {
+        margin-top: 5px;
+      }
 
-      &#block-resetfilters:after {
-        content: " ";
-        display: block;
-        width: 100%;
-        margin-top: 30px;
-        border-bottom: $d-product-view-border;
+      &#block-resetfilters {
+        @include media-breakpoint-down(md) {
+          display: none;
+        }
+        &:after {
+          content: " ";
+          display: block;
+          width: 100%;
+          margin-top: 30px;
+          border-bottom: $d-product-view-border;
+        }
       }
       h2 {
         margin-bottom: 0;
@@ -427,15 +441,9 @@ $d-product-filters-group-margin: 45px;
   width: 100% !important;
   padding: 15px 15px !important;
 
-  @include media-breakpoint-down(xs) {
+  @include media-breakpoint-down(sm) {
     top: 70px;
   }
-}
-
-.mobile-filter {
-  @extend .d-lg-none;
-  transition: none !important;
-  overflow: hidden;
 }
 
 .top-product-info {
@@ -443,84 +451,96 @@ $d-product-filters-group-margin: 45px;
     width: 100%;
   }
 
-  .mobile-filter {
-    height: 50px;
-    text-transform: capitalize;
-    text-align: left;
-    font-size: 17px;
-    letter-spacing: 0;
-    padding: 0 20px;
-    position: relative;
-    color: $color-serpedon;
-    border-color: $color-serpedon;
-    &:hover {
-      color: $white;
-      background: $color-serpedon;
-    }
-
-    @include media-breakpoint-down(md) {
-      min-width: 220px;
+  .block-mobile-filters {
+    float: left;
+    @include media-breakpoint-down(sm) {
+      float: left;
+      text-align: center;
+      width: calc(50% - 25px);
     }
     @include media-breakpoint-down(sm) {
-      min-width: 100%;
-      width: 100%;
+      width: 50px;
     }
 
-    &:active {
-      background-color: inherit;
-    }
-
-    &:hover {
-      &:after {
-        background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-white.svg);
+    .mobile-filter {
+      @extend .d-lg-none;
+      transition: none !important;
+      overflow: hidden;
+      height: 50px;
+      text-transform: capitalize;
+      text-align: left;
+      font-size: 17px;
+      letter-spacing: 0;
+      padding: 0 20px;
+      position: relative;
+      color: $color-serpedon;
+      border-color: $color-serpedon;
+      &:hover {
+        color: $white;
+        background: $color-serpedon;
       }
-    }
 
-    &:after {
-      position: absolute;
-      content: "";
-      background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel.svg);
-      background-repeat: no-repeat;
-      background-position: right top 0;
-      width: 30px;
-      height: 25px;
-      right: 15px;
-    }
-    &.mobile-filters-active {
-      &:after {
-        background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-thicked.svg);
+      @include media-breakpoint-down(md) {
+        min-width: 220px;
       }
+      @include media-breakpoint-down(sm) {
+        min-width: 100%;
+        width: 100%;
+      }
+
+      &:active {
+        background-color: inherit;
+      }
+
       &:hover {
         &:after {
-          background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-thicked-white.svg);
+          background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-white.svg);
         }
       }
-    }
 
-    .mobile-filters-counter {
-      text-indent: -9999px;
-      height: 10px;
-      white-space: nowrap;
-      display: inline-block;
-      overflow: hidden;
-      position: absolute;
-      border-radius: 5px;
-      background-color: red;
-      top: 7px;
-      right: 20px;
-      width: 10px;
-      margin-right: -5px;
-      z-index: 90;
+      &:after {
+        position: absolute;
+        content: "";
+        background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel.svg);
+        background-repeat: no-repeat;
+        background-position: right top 0;
+        width: 30px;
+        height: 25px;
+        right: 15px;
+      }
+      &.mobile-filters-active {
+        &:after {
+          background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-thicked.svg);
+        }
+        &:hover {
+          &:after {
+            background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-thicked-white.svg);
+          }
+        }
+      }
+      @include media-breakpoint-down(sm) {
+        font-size: 0;
+        &:after {
+          right: 10px;
+          top: 13px;
+        }
+      }
+      .mobile-filters-counter {
+        text-indent: -9999px;
+        height: 10px;
+        white-space: nowrap;
+        display: inline-block;
+        overflow: hidden;
+        position: absolute;
+        border-radius: 5px;
+        background-color: red;
+        top: 7px;
+        right: 20px;
+        width: 10px;
+        margin-right: -5px;
+        z-index: 90;
+      }
     }
-  }
-}
-
-.block-mobile-filters {
-  float: left;
-  @include media-breakpoint-down(sm) {
-    float: left;
-    text-align: center;
-    width: calc(50% - 20px);
   }
 }
 
@@ -676,8 +696,12 @@ body:not(.scrolled-buttons) {
     }
     @include media-breakpoint-down(sm) {
       min-width: 180px;
-      width: calc(50% - 20px);
+      width: calc(50% - 25px);
       float: right;
+    }
+    @include media-breakpoint-down(sm) {
+      min-width: 200px;
+      width: calc(100% - 65px);
     }
 
     .bootstrap-select {
