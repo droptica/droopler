@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\d_update\Entity\UpdateInterface.
+ */
+
 namespace Drupal\d_update\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;

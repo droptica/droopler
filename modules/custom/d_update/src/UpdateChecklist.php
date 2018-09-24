@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\d_update\UpdateChecklist.
+ */
+
 namespace Drupal\d_update;
 
 use Drupal\checklistapi\ChecklistapiChecklist;

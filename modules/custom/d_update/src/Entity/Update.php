@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\d_update\Entity\Update.
+ */
+
 namespace Drupal\d_update\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -115,6 +120,7 @@ class Update extends ContentEntityBase implements UpdateInterface {
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))
       ->setDescription(t('The language code of Update entity.'));
+
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));

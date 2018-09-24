@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\d_update\Updater.
+ */
+
 namespace Drupal\d_update;
 
 use Drupal\Core\Extension\ModuleInstallerInterface;
@@ -132,7 +137,7 @@ class Updater {
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
   public function installModules(array $modules, $enableDependencies = TRUE) {
-    if(empty($modules) || !is_array($modules)) {
+    if (empty($modules) || !is_array($modules)) {
       return FALSE;
     }
 
@@ -141,6 +146,7 @@ class Updater {
     if ($missing_modules = array_diff_key($modules, $moduleData)) {
       return FALSE;
     }
+
     return $this->moduleInstaller->install($modules, $enableDependencies);
   }
 

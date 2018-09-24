@@ -1,9 +1,8 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: mmagdziarek
- * Date: 13.09.18
- * Time: 14:36
+ * @file
+ * Contains \Drupal\d_update\ConfigManager.
  */
 
 namespace Drupal\d_update;
@@ -52,7 +51,8 @@ class ConfigManager {
   public function compare($configName, $hash = NULL) {
     if (empty($hash)) {
       return TRUE;
-    } else {
+    }
+    else {
       return $this->generateHashFromDatabase($configName) == $hash;
     }
   }
