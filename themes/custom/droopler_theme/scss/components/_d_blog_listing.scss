@@ -66,6 +66,7 @@ $d-blog-article-row-min-height: 420px !default;
     font-size: $d-blog-pagination-font-size;
 
     li {
+      &.pager__item--ellipsis,
       a {
         padding: $d-blog-pagination-padding-between-elements;
         color: $d-blog-padding-link-color;

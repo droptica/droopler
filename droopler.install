@@ -136,4 +136,37 @@ function droopler_update_8101() {
  */
 function droopler_update_8102() {
   _droopler_import_config('d_content', 'user.role.d_editor');
+
+  $configs = [
+    'field.field.paragraph.d_p_carousel.field_d_icon' => 'd_p_carousel',
+    'field.field.paragraph.d_p_carousel_item.field_d_image' => 'd_p_carousel',
+    'field.field.node.blog_post.field_blog_main_image' => 'd_blog',
+    'field.field.paragraph.d_p_blog_image.field_d_image' => 'd_blog',
+    'field.field.paragraph.d_p_banner.field_d_icon' => 'd_p_banner',
+    'field.field.paragraph.d_p_banner.field_d_image_background' => 'd_p_banner',
+    'field.field.paragraph.d_p_group_of_counters.field_d_icon' => 'd_p_counters',
+    'field.field.paragraph.d_p_group_of_counters.field_d_image_background' => 'd_p_counters',
+    'field.field.paragraph.d_p_form.field_d_icon' => 'd_p_form',
+    'field.field.paragraph.d_p_form.field_d_image_background' => 'd_p_form',
+    'field.field.paragraph.d_p_gallery.field_d_icon' => 'd_p_gallery',
+    'field.field.paragraph.d_p_gallery.field_d_image' => 'd_p_gallery',
+    'field.field.paragraph.d_p_side_embed.field_d_icon' => 'd_p_side_embed',
+    'field.field.paragraph.d_p_side_image.field_d_icon' => 'd_p_side_image',
+    'field.field.paragraph.d_p_side_image.field_d_image_background' => 'd_p_side_image',
+    'field.field.paragraph.d_p_side_tiles.field_d_icon' => 'd_p_side_tiles',
+    'field.field.paragraph.d_p_side_tiles.field_d_image' => 'd_p_side_tiles',
+    'field.field.paragraph.d_p_subscribe_file.field_d_icon' => 'd_p_subscribe_file',
+    'field.field.paragraph.d_p_subscribe_file.field_d_image_background' => 'd_p_subscribe_file',
+    'field.field.paragraph.d_p_group_of_text_blocks.field_d_icon' => 'd_p_text_blocks',
+    'field.field.paragraph.d_p_single_text_block.field_d_icon' => 'd_p_text_blocks',
+    'field.field.paragraph.d_p_text_paged.field_d_icon' => 'd_p_text_paged',
+    'field.field.paragraph.d_p_text_with_bckg.field_d_icon' => 'd_p_text_with_bckg',
+    'field.field.paragraph.d_p_text_with_bckg.field_d_image_background' => 'd_p_text_with_bckg',
+    'field.field.paragraph.d_p_tiles.field_d_icon' => 'd_p_tiles',
+    'field.field.paragraph.d_p_tiles.field_d_image' => 'd_p_tiles',
+  ];
+
+  foreach ($configs as $config => $module) {
+    _droopler_import_config($module, $config);
+  }
 }
