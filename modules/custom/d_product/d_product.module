@@ -15,10 +15,11 @@ use Drupal\user\Entity\User;
  * implement hook_preprocess_HOOK.
  */
 function d_product_preprocess_node(&$variables) {
-  if (isset($variables['view_mode']) && $variables['view_mode'] == 'teaser') {
-    if (isset($variables['node'])) {
-      $node = $variables['node'];
-      if ($node->getType() == 'd_product') {
+  $node = $variables['node'];
+  if ($node->getType() == 'd_product') {
+    if (isset($variables['view_mode']) && $variables['view_mode'] == 'teaser') {
+      if (isset($variables['node'])) {
+
         if (isset($variables['content']['field_product_image'][0])) {
           $variables['main_image'] = $variables['content']['field_product_image'][0];
           unset($variables['content']['field_product_image']);
@@ -35,16 +36,14 @@ function d_product_preprocess_node(&$variables) {
         }
       }
     }
-  }
-  if (isset($variables['view_mode']) && $variables['view_mode'] == 'full') {
-    $node = $variables['node'];
-    if ($node->hasField('field_d_ask_for_product')) {
-      $field_d_ask_for_product = $node->get('field_d_ask_for_product');
-      $field_d_ask_for_product = $field_d_ask_for_product->getValue();
-      if (isset($field_d_ask_for_product[0]['value']) && $field_d_ask_for_product[0]['value'] == 1) {
-        $variables['link_ask_for_product'] = d_product_generate_ask_product_link(
-          $node
-        );
+
+    if (isset($variables['view_mode']) && $variables['view_mode'] == 'full') {
+      if ($node->hasField('field_d_ask_for_product')) {
+        $field_d_ask_for_product = $node->get('field_d_ask_for_product');
+        $field_d_ask_for_product = $field_d_ask_for_product->getValue();
+        if (isset($field_d_ask_for_product[0]['value']) && $field_d_ask_for_product[0]['value'] == 1) {
+          $variables['link_ask_for_product'] = d_product_generate_ask_product_link($node);
+        }
       }
     }
   }
@@ -54,6 +53,8 @@ function d_product_preprocess_node(&$variables) {
  * Implements hook_form_alter().
  */
 function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  // Add placeholder to contact form.
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-products-list-products-list') {
     $form['aggregated_field']['#attributes']['placeholder'] = t('Search products...');
     $form['sort_by']['#title'] = '';
@@ -62,15 +63,22 @@ function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form
     $query = \Drupal::request()->query->all();
     if (isset($query['f'])) {
       foreach ($query['f'] as $key => $value) {
-        $form['f[' . $key . ']'] = array(
+        $form['f[' . $key . ']'] = [
           '#type' => 'hidden',
           '#value' => $value,
           '#weight' => -1,
-        );
+        ];
       }
     }
   }
   if ($form_id == 'contact_message_feedback_form') {
+
+    // Disable Cache on contact page.
+    $form['#cache'] = [
+      'contexts' => [],
+      'max-age' => 0,
+    ];
+    // Autofill contact form.
     if (isset($_GET['product'])) {
       $nid = $_GET['product'];
       $node = Node::load($nid);
@@ -103,7 +111,7 @@ function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form
  */
 function d_product_preprocess_page(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
-  if (stripos($route_name, 'view.products_list') !== false ) {
+  if (stripos($route_name, 'view.products_list') !== FALSE) {
     global $pager_total_items;
     $variables['pager_total_items'] = reset($pager_total_items);
     $variables['#attached']['library'][] = 'd_product/d_product_select';
@@ -122,11 +130,17 @@ function d_product_preprocess_field(&$variables) {
     $items = $variables['element']['#items'];
     switch ($variables['field_name']) {
       case 'field_tags':
-        $variables['links'] = d_product_generate_term_links($items, 'tags_taxonomy_term_name');
+        $variables['links'] = d_product_generate_term_links(
+          $items,
+          'tags_taxonomy_term_name'
+        );
         break;
 
       case 'field_product_categories':
-        $variables['links'] = d_product_generate_term_links($items, 'product_categories_taxonomy_term_name');
+        $variables['links'] = d_product_generate_term_links(
+          $items,
+          'product_categories_taxonomy_term_name'
+        );
         break;
     }
   }
@@ -139,6 +153,7 @@ function d_product_preprocess_field(&$variables) {
  *   Store term ids.
  * @param $element string
  *   Facet path element.
+ *
  * @return array
  *   Generated links.
  */
@@ -148,10 +163,13 @@ function d_product_generate_term_links($items, $element) {
     $tid = $term_obj->getValue();
     $term = Term::load($tid['target_id']);
     $name = $term->getName();
-    $options = array(
-      'query'    => ['f[0]' => $element . ':' . strtolower($name)],
-    );
-    $link = Link::fromTextAndUrl(t($name), Url::fromUri('internal:/products', $options))->toString();
+    $options = [
+      'query' => ['f[0]' => $element . ':' . strtolower($name)],
+    ];
+    $link = Link::fromTextAndUrl(
+      t($name),
+      Url::fromUri('internal:/products', $options)
+    )->toString();
     $links[] = $link;
   }
 
