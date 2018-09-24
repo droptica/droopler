@@ -178,6 +178,7 @@ function droopler_update_8103() {
   // Install modules.
   $modules = [
     'geysir',
+    'd_geysir'
   ];
   \Drupal::service('module_installer')->install($modules, TRUE);
 }

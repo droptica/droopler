@@ -85,4 +85,3 @@ function d_geysir_toolbar() {
 function d_geysir_preprocess_page(&$variables) {
   $variables['#attached']['library'][] =  'd_geysir/overrides';
 }
-
