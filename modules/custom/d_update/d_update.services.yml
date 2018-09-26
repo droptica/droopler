@@ -1,0 +1,10 @@
+services:
+  d_update.config_manager:
+    class: Drupal\d_update\ConfigManager
+  d_update.update_checklist:
+    class: Drupal\d_update\UpdateChecklist
+    arguments: ['@config.factory', '@module_handler', '@current_user']
+  d_update:
+    class: Drupal\d_update\Updater
+    arguments: ['@module_installer', '@config.storage', '@d_update.config_manager', '@d_update.update_checklist']
+    
