@@ -211,7 +211,7 @@ $d-product-filters-group-margin: 45px;
 
   .product-item-counter {
     font-size: 19px;
-    padding-top: 21px;
+    padding-top: 23px;
   }
 }
 
@@ -394,7 +394,7 @@ $d-product-filters-group-margin: 45px;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      margin-top: $d-product-filters-group-margin;
+      margin-top: 25px;
       @include media-breakpoint-down(md) {
         margin-top: 5px;
       }
@@ -616,7 +616,6 @@ body:not(.scrolled-buttons) {
         button {
           text-indent: -9999px;
         }
-        //margin-left: -10px;
       }
       .views-exposed-form {
         float: right !important;
