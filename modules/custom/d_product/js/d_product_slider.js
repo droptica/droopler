@@ -52,7 +52,7 @@
       return;
     }
     var childElements = targetTag.find('img').length;
-    if( childElements <= 4 ) {
+    if (childElements <= 4) {
       targetTag.removeClass('slick-track').addClass('slick-track-const');
     }
   }

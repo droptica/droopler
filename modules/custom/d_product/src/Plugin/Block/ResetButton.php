@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Provides a 'Hello' Block.
+ * Provides a 'Reset button' Block.
  *
  * @Block(
  *   id = "reset_button",
@@ -20,31 +20,30 @@ class ResetButton extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function blockForm($form, FormStateInterface $form_state)
-  {
-    $form['button_text'] = array(
+  public function blockForm($form, FormStateInterface $form_state) {
+    $form['button_text'] = [
       '#type' => 'textfield',
       '#title' => t('Button text'),
       '#default_value' => $this->configuration['button_text'] ?? 'Reset Filters',
-    );
+    ];
 
-    $form['button_class'] = array(
+    $form['button_class'] = [
       '#type' => 'textfield',
       '#title' => t('Button class'),
       '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary btn-sm btn-reset',
-    );
+    ];
 
-    $form['button_target'] = array(
+    $form['button_target'] = [
       '#type' => 'textfield',
       '#title' => t('Button target'),
-      '#default_value' =>  $this->configuration['button_target'] ?? '/products',
-    );
+      '#default_value' => $this->configuration['button_target'] ?? '/products',
+    ];
 
-    $form['button_icon_class'] = array(
+    $form['button_icon_class'] = [
       '#type' => 'textfield',
       '#title' => t('Button icon class'),
-      '#default_value' =>  $this->configuration['button_icon_class'] ?? 'fas fa-times',
-    );
+      '#default_value' => $this->configuration['button_icon_class'] ?? 'fas fa-times',
+    ];
 
     return $form;
   }
@@ -52,12 +51,16 @@ class ResetButton extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function blockSubmit($form, FormStateInterface $formState)
-  {
+  public function blockSubmit($form, FormStateInterface $formState) {
     $this->configuration['button_text'] = $formState->getValue('button_text');
     $this->configuration['button_class'] = $formState->getValue('button_class');
-    $this->configuration['button_target'] = '/' . ltrim($formState->getValue('button_target'), '/');
-    $this->configuration['button_icon_class'] = $formState->getValue('button_icon_class');
+    $this->configuration['button_target'] = '/' . ltrim(
+        $formState->getValue('button_target'),
+        '/'
+      );
+    $this->configuration['button_icon_class'] = $formState->getValue(
+      'button_icon_class'
+    );
   }
 
   /**
@@ -68,9 +71,9 @@ class ResetButton extends BlockBase {
     if (!isset($_REQUEST['f'])) {
       return [
         '#markup' => '',
-        '#cache' => array(
-          'contexts' => array('url.query_args:f'),
-        ),
+        '#cache' => [
+          'contexts' => ['url.query_args:f'],
+        ],
       ];
     }
 
@@ -82,7 +85,7 @@ class ResetButton extends BlockBase {
         '#tag' => 'span',
         '#attributes' => [
           'class' => $this->configuration['button_icon_class'],
-        ]
+        ],
       ];
     }
 
@@ -99,10 +102,10 @@ class ResetButton extends BlockBase {
           'target' => '_self',
         ],
         '#url' => URL::fromUserInput($this->configuration['button_target']),
-        '#cache' => array(
-          'contexts' => array('url.query_args:f'),
-        ),
-      ]
+        '#cache' => [
+          'contexts' => ['url.query_args:f'],
+        ],
+      ],
     ];
   }
 }

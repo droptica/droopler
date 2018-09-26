@@ -19,19 +19,18 @@ class MobileFilters extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function blockForm($form, FormStateInterface $form_state)
-  {
-    $form['button_text'] = array(
+  public function blockForm($form, FormStateInterface $form_state) {
+    $form['button_text'] = [
       '#type' => 'textfield',
       '#title' => t('Button text'),
       '#default_value' => $this->configuration['button_text'] ?? 'Filters',
-    );
+    ];
 
-    $form['button_class'] = array(
+    $form['button_class'] = [
       '#type' => 'textfield',
       '#title' => t('Button class'),
       '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary',
-    );
+    ];
 
     return $form;
   }
@@ -39,8 +38,7 @@ class MobileFilters extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function blockSubmit($form, FormStateInterface $formState)
-  {
+  public function blockSubmit($form, FormStateInterface $formState) {
     $this->configuration['button_text'] = $formState->getValue('button_text');
     $this->configuration['button_class'] = $formState->getValue('button_class');
   }
@@ -56,7 +54,11 @@ class MobileFilters extends BlockBase {
         '#tag' => 'button',
         '#value' => $this->t($this->configuration['button_text']),
         '#attributes' => [
-          'class' => ['mobile-filter', 'collapsed',  $this->configuration['button_class'] ],
+          'class' => [
+            'mobile-filter',
+            'collapsed',
+            $this->configuration['button_class'],
+          ],
           'type' => ['button'],
           'data-target' => ['.region-sidebar-left'],
           'aria-expanded' => ['false'],
