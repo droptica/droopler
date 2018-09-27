@@ -67,7 +67,6 @@ class ResetButton extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-
     if (!isset($_REQUEST['f'])) {
       return [
         '#markup' => '',
@@ -78,7 +77,6 @@ class ResetButton extends BlockBase {
     }
 
     $link_content_markups = [];
-
     if (!empty($this->configuration['button_icon_class'])) {
       $link_content_markups[] = [
         '#type' => 'html_tag',
