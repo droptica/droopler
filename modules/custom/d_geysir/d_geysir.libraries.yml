@@ -1,0 +1,21 @@
+overrides:
+  version: VERSION
+  css:
+    theme:
+      css/d_geysir.overrides.css: {}
+  dependencies:
+    - geysir/geysir
+
+toggle_link:
+  version: VERSION
+  js:
+    js/d_geysir.toggle.js: {}
+  css:
+    theme:
+      css/d_geysir.toggle.css: {}
+  dependencies:
+    - geysir/geysir
+    - core/jquery
+    - core/jquery.once
+    - core/jquery.cookie
+    - core/drupal

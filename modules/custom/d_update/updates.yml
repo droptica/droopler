@@ -65,3 +65,13 @@ v1.4:
     '#title': 'Update fields configuration.'
     '#description': '<p>Various improvements to the fields.</p>'
     '#description_failed': '<p><strong>Installation failed</strong>, please try to run database update manually.</p>'
+  droopler__droopler_update_8102_5:
+    '#title': 'Install "geysir" module.'
+    '#description': '<p>Adds a nice overlay for editing Paragraphs.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+    extension_page: { '#text': 'Enable "geysir" module', '#url': 'internal:/admin/modules' }
+  droopler__droopler_update_8102_6:
+    '#title': 'Install "d_geysir" module.'
+    '#description': '<p>Modifies Geysir to work with Droopler.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+    extension_page: { '#text': 'Enable "d_geysir" module', '#url': 'internal:/admin/modules' }

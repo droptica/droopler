@@ -226,6 +226,15 @@ function droopler_update_8102() {
   ];
   $values['droopler__droopler_update_8102_4'] = $updater->importConfigs($configs);
 
+  // Install geysir and d_geysir modules.
+  $modules = [
+    'geysir',
+    'd_geysir'
+  ];
+  $moduleInstaller->install($modules, TRUE);
+  $values['droopler__droopler_update_8102_5'] = TRUE;
+  $values['droopler__droopler_update_8102_6'] = TRUE;
+
   $progress = [
     'v1.3' => [],
     'v1.4' => $values,
