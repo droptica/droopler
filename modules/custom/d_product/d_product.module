@@ -5,6 +5,7 @@
  * File containing d_product module.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
@@ -12,7 +13,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 
 /**
- * implement hook_preprocess_HOOK.
+ * Implements hook_preprocess_HOOK.
  */
 function d_product_preprocess_node(&$variables) {
   $node = $variables['node'];
@@ -52,7 +53,7 @@ function d_product_preprocess_node(&$variables) {
 /**
  * Implements hook_form_alter().
  */
-function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function d_product_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   // Add placeholder to contact form.
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-products-list-products-list') {
@@ -92,7 +93,7 @@ function d_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form
             ['@title' => $node->getTitle()]
           );
           $subject = $subject->render();
-          $subject = strlen($subject) > 100 ? substr($subject,0,97)."..." : $subject;
+          $subject = strlen($subject) > 100 ? substr($subject, 0, 97) . "..." : $subject;
 
           $message = t(
             'I would like to ask about @title, link - @link ',

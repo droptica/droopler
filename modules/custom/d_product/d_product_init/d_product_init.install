@@ -1,7 +1,13 @@
 <?php
+/**
+ * @file
+ * Install, update and uninstall functions for the d_product_init module.
+ */
 
 /**
  * Implements hook_install().
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_product_init_install() {
   $path = drupal_get_path('module', 'd_product_init') . '/pages';
