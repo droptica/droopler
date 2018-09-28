@@ -11,6 +11,9 @@
     attach: function (context, settings) {
       var cookieName = 'd_geysir_toggle';
 
+      // Turn off Geysir on blog.
+      $('.node--type-blog-post .geysir-field-paragraph-wrapper').addClass('permanently-disabled');
+
       /**
        * Function for changing button state.
        *
