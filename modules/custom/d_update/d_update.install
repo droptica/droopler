@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * d_updater install hooks.
+ */
+
+use Drupal\Core\Extension\MissingDependencyException;
+
+/**
+ * Install d_update.
+ */
+function d_update_install() {
+  $logger = \Drupal::logger('d_update');
+
+  try {
+    \Drupal::service('module_installer')->install(['checklistapi']);
+  }
+  catch (MissingDependencyException $e) {
+    $logger->warning(
+      'Could not install Checklist API module. You will not see information 
+      about updates in the drupal admin pages.'
+    );
+  }
+  finally {
+    $status = TRUE;
+    \Drupal::service('d_update.update_checklist')->markAllUpdates($status);
+  }
+}

@@ -91,10 +91,14 @@ function d_content_init_fill_field($entity, $name, $value) {
       $entity->set($name, $value['data']);
       break;
     case 'cta':
-      $entity->set($name, [
+      $entity_attributes = [
         'title' => $value['data']['text'],
         'uri' => $value['data']['link'],
-      ]);
+      ];
+      if (isset($value['data']['options'])) {
+        $entity_attributes['options'] = $value['data']['options'];
+      }
+      $entity->set($name, $entity_attributes);
       break;
     case 'file':
     case 'image':
