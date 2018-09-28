@@ -115,6 +115,8 @@ function _droopler_import_config($module, $name) {
  * Droopler 1.3 Updates.
  */
 function droopler_update_8101() {
+  $moduleInstaller = \Drupal::service('module_installer');
+
   // Install modules.
   $modules = [
     'd_p_counters',
@@ -125,48 +127,122 @@ function droopler_update_8101() {
     'colorbox',
     'd_p_help',
   ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
+  $moduleInstaller->install($modules, TRUE);
 
   // Install config.
   _droopler_import_config('d_content', 'field.field.node.content_page.field_page_section');
 }
 
 /**
- * Install new user role editor.
+ * Droopler 1.4 Updates.
  */
 function droopler_update_8102() {
-  _droopler_import_config('d_content', 'user.role.d_editor');
+  $values = [];
 
+  // Install checklistapi and d_update modules.
+  $moduleInstaller = \Drupal::service('module_installer');
+  $modules = [
+    'checklistapi',
+    'd_update'
+  ];
+  $moduleInstaller->install($modules, TRUE);
+
+  $updater = \Drupal::service('d_update');
+  $values['droopler__droopler_update_8102_0'] = TRUE;
+  $values['droopler__droopler_update_8102_1'] = TRUE;
+
+  // Install editor role.
   $configs = [
-    'field.field.paragraph.d_p_carousel.field_d_icon' => 'd_p_carousel',
-    'field.field.paragraph.d_p_carousel_item.field_d_image' => 'd_p_carousel',
-    'field.field.node.blog_post.field_blog_main_image' => 'd_blog',
-    'field.field.paragraph.d_p_blog_image.field_d_image' => 'd_blog',
-    'field.field.paragraph.d_p_banner.field_d_icon' => 'd_p_banner',
-    'field.field.paragraph.d_p_banner.field_d_image_background' => 'd_p_banner',
-    'field.field.paragraph.d_p_group_of_counters.field_d_icon' => 'd_p_counters',
-    'field.field.paragraph.d_p_group_of_counters.field_d_image_background' => 'd_p_counters',
-    'field.field.paragraph.d_p_form.field_d_icon' => 'd_p_form',
-    'field.field.paragraph.d_p_form.field_d_image_background' => 'd_p_form',
-    'field.field.paragraph.d_p_gallery.field_d_icon' => 'd_p_gallery',
-    'field.field.paragraph.d_p_gallery.field_d_image' => 'd_p_gallery',
-    'field.field.paragraph.d_p_side_embed.field_d_icon' => 'd_p_side_embed',
-    'field.field.paragraph.d_p_side_image.field_d_icon' => 'd_p_side_image',
-    'field.field.paragraph.d_p_side_image.field_d_image_background' => 'd_p_side_image',
-    'field.field.paragraph.d_p_side_tiles.field_d_icon' => 'd_p_side_tiles',
-    'field.field.paragraph.d_p_side_tiles.field_d_image' => 'd_p_side_tiles',
-    'field.field.paragraph.d_p_subscribe_file.field_d_icon' => 'd_p_subscribe_file',
-    'field.field.paragraph.d_p_subscribe_file.field_d_image_background' => 'd_p_subscribe_file',
-    'field.field.paragraph.d_p_group_of_text_blocks.field_d_icon' => 'd_p_text_blocks',
-    'field.field.paragraph.d_p_single_text_block.field_d_icon' => 'd_p_text_blocks',
-    'field.field.paragraph.d_p_text_paged.field_d_icon' => 'd_p_text_paged',
-    'field.field.paragraph.d_p_text_with_bckg.field_d_icon' => 'd_p_text_with_bckg',
-    'field.field.paragraph.d_p_text_with_bckg.field_d_image_background' => 'd_p_text_with_bckg',
-    'field.field.paragraph.d_p_tiles.field_d_icon' => 'd_p_tiles',
-    'field.field.paragraph.d_p_tiles.field_d_image' => 'd_p_tiles',
+    'd_content' => [
+      'user.role.d_editor' => '',
+    ],
+  ];
+  $values['droopler__droopler_update_8102_2'] = $updater->importConfigs($configs);
+
+  // Update blog post config.
+  $configs = [
+    'd_blog' => [
+      'core.entity_view_display.node.blog_post.thumbnail' => '3bda6b387de39f3e2acb1ecae6caa4aa',
+    ],
+  ];
+  $values['droopler__droopler_update_8102_3'] = $updater->importConfigs($configs);
+
+  // Update fields config.
+  $configs = [
+    'd_p_carousel' => [
+      'field.field.paragraph.d_p_carousel.field_d_icon' => '',
+      'field.field.paragraph.d_p_carousel_item.field_d_image' => '',
+    ],
+    'd_blog' => [
+      'field.field.node.blog_post.field_blog_main_image' => '',
+      'field.field.paragraph.d_p_blog_image.field_d_image' => '',
+    ],
+    'd_p_banner' => [
+      'field.field.paragraph.d_p_banner.field_d_icon' => '',
+      'field.field.paragraph.d_p_banner.field_d_image_background' => '',
+    ],
+    'd_p_counters' => [
+      'field.field.paragraph.d_p_group_of_counters.field_d_icon' => '',
+      'field.field.paragraph.d_p_group_of_counters.field_d_image_background' => '',
+    ],
+    'd_p_form' => [
+      'field.field.paragraph.d_p_form.field_d_icon' => '',
+      'field.field.paragraph.d_p_form.field_d_image_background' => '',
+    ],
+    'd_p_gallery' => [
+      'field.field.paragraph.d_p_gallery.field_d_icon' => '',
+      'field.field.paragraph.d_p_gallery.field_d_image' => '',
+    ],
+    'd_p_side_embed' => [
+      'field.field.paragraph.d_p_side_embed.field_d_icon' => '',
+    ],
+    'd_p_side_image' => [
+      'field.field.paragraph.d_p_side_image.field_d_icon' => '',
+      'field.field.paragraph.d_p_side_image.field_d_image_background' => '',
+    ],
+    'd_p_side_tiles' => [
+      'field.field.paragraph.d_p_side_tiles.field_d_icon' => '',
+      'field.field.paragraph.d_p_side_tiles.field_d_image' => '',
+    ],
+    'd_p_subscribe_file' => [
+      'field.field.paragraph.d_p_subscribe_file.field_d_icon' => '',
+      'field.field.paragraph.d_p_subscribe_file.field_d_image_background' => '',
+    ],
+    'd_p_text_blocks' => [
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_icon' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_icon' => '',
+    ],
+    'd_p_text_paged' => [
+      'field.field.paragraph.d_p_text_paged.field_d_icon' => '',
+    ],
+    'd_p_text_with_bckg' => [
+      'field.field.paragraph.d_p_text_with_bckg.field_d_icon' => '',
+      'field.field.paragraph.d_p_text_with_bckg.field_d_image_background' => '',
+    ],
+    'd_p_tiles' => [
+      'field.field.paragraph.d_p_tiles.field_d_icon' => '',
+      'field.field.paragraph.d_p_tiles.field_d_image' => '',
+    ],
+  ];
+  $values['droopler__droopler_update_8102_4'] = $updater->importConfigs($configs);
+
+  // Install geysir and d_geysir modules.
+  $modules = [
+    'geysir',
+    'd_geysir'
+  ];
+  $moduleInstaller->install($modules, TRUE);
+  $values['droopler__droopler_update_8102_5'] = TRUE;
+  $values['droopler__droopler_update_8102_6'] = TRUE;
+
+  $progress = [
+    'v1.3' => [],
+    'v1.4' => $values,
   ];
 
-  foreach ($configs as $config => $module) {
-    _droopler_import_config($module, $config);
+  // Mark 1.3 update as successfull.
+  for ($i = 0; $i <= 7; $i++) {
+    $progress['v1.3']['droopler__droopler_update_8101_' . $i] = TRUE;
   }
+  $updater->checklist()->saveProgress($progress);
 }

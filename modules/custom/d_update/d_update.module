@@ -1,0 +1,136 @@
+<?php
+
+/**
+ * @file
+ * d_update module.
+ */
+
+use Drupal\Core\Url;
+use Symfony\Component\Yaml\Yaml;
+use Drupal\d_update\Entity\Update;
+
+/**
+ * Implements hook_checklistapi_checklist_info().
+ */
+function d_update_checklistapi_checklist_info() {
+
+  $definitions = [];
+  $definitions['d_update'] = [
+    '#title' => t('Droopler update instructions'),
+    '#path' => '/admin/config/development/droopler-update',
+    '#description' => t('Provides steps to keep your Droopler site up to date.'),
+    '#callback' => 'd_update_checklistapi_checklist_items',
+  ];
+
+  return $definitions;
+}
+
+/**
+ * Implements a callback d_update_checklistapi_checklist_info().
+ *
+ * @return array
+ *   Return the items for the d_update list.
+ */
+function d_update_checklistapi_checklist_items() {
+  $tasks = Yaml::parse(file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml'));
+
+  foreach ($tasks as $version => $updates) {
+    foreach ($updates as $key => $update) {
+      if (is_array($update)) {
+        $entry = Update::load($key);
+        $status = ($entry && $entry->wasSuccessfulByHook()) ? TRUE : FALSE;
+        if ($status && !empty($update['#description_successful'])) {
+          $tasks[$version][$key]['#description'] .= $update['#description_successful'];
+        }
+        elseif (!$status && !empty($update['#description_failed'])) {
+          $tasks[$version][$key]['#description'] .= $update['#description_failed'];
+        }
+      }
+    }
+  }
+
+  array_walk_recursive($tasks, function (&$value, $key) {
+    if ($key == '#url') {
+      $value = Url::fromUri($value);
+      if ($value->isExternal()) {
+        $value->setOption('attributes', ['target' => '_blank']);
+      }
+    }
+    elseif (in_array($key, ['#title', '#weight'])) {
+      $value = t($value);
+    }
+  });
+
+  return array_reverse($tasks);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_update_preprocess_menu__toolbar(&$variables) {
+  if (empty($variables['items']['d_update.admin_update'])) {
+    return;
+  }
+  if (d_update_update_link_is_active()) {
+    if (d_update_system_has_pending_updates()) {
+      // In this stage title is already a string, so we need to call __toString.
+      $variables['items']['d_update.admin_update']['title'] = t('Droopler Update')->__toString();
+      // We need to rewrite current url options to hold classes etc.
+      $options = $variables['items']['d_update.admin_update']['url']->getOptions();
+      $variables['items']['d_update.admin_update']['url'] = Url::fromRoute('system.db_update')->setOptions($options);
+    }
+  }
+  else {
+    unset($variables['items']['d_update.admin_update']);
+  }
+
+  $variables['#cache']['max-age'] = 0;
+  $variables['#attached']['library'][] = 'd_update/droopler';
+}
+
+/**
+ * Control visibility of the update button.
+ *
+ * @return bool
+ *   return true if checklist has any pending updates
+ *   or update.php execution is required, return false otherwise
+ */
+function d_update_update_link_is_active() {
+  $system_has_pending_updates = d_update_system_has_pending_updates();
+  $checklist_has_pending_updates = d_update_checklist_has_pending_updates();
+
+  return $system_has_pending_updates || $checklist_has_pending_updates;
+}
+
+/**
+ * Check for pending updates from checklist.
+ *
+ * @return bool
+ *   return true if checklist is completed in 100%
+ *   return false otherwise or if checklist service is not available
+ */
+function d_update_checklist_has_pending_updates() {
+  if (!\Drupal::service('d_update.update_checklist')->isAvailable()) {
+    return FALSE;
+  }
+  /** @var Drupal\checklistapi\ChecklistapiChecklist $checklist */
+  $checklist = checklistapi_checklist_load('d_update');
+
+  return $checklist->getPercentComplete() != 100;
+}
+
+/**
+ * Check for pending update.php execution.
+ *
+ * @return bool
+ *   return true if there are some pending updates, false otherwise
+ */
+function d_update_system_has_pending_updates() {
+  $systemManager = \Drupal::service('system.manager')->listRequirements();
+  $update = $systemManager['update'];
+  if (empty($update['severity'])) {
+    return FALSE;
+  }
+
+  return $update['severity'] == REQUIREMENT_ERROR;
+}
