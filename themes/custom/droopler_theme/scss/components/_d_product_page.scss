@@ -3,8 +3,8 @@
     .node__content {
       .header {
         .title {
-          margin-bottom: 21px;
-          margin-top: 8px;
+          margin-top: 0.8rem;
+          margin-bottom: 1.3rem;
           h2 {
             font-size: 1.8rem;
             @include media-breakpoint-up(md) {
@@ -35,7 +35,7 @@
           font-weight: 700;
           line-height: 1.2rem;
           color: $black;
-          margin: 0 0 10px 0;
+          margin: 0 0 0.6rem 0;
         }
         .field__item {
           font-size: 1rem;
@@ -43,22 +43,19 @@
         }
         .field--name-field-product-categories,
         .field--name-field-tags {
-          .field__label {
-            margin: 0 0 5px 0;
-          }
           .field__items {
-            font-size: 16px;
+            font-size: 1rem;
           }
         }
         .products-links {
-          margin-bottom: 30px;
+          margin-bottom: 2rem;
           .ask-link,
           .field--name-field-d-product-link {
             a {
               @extend .btn;
               @extend .btn-primary;
               width: 100%;
-              padding: 12px;
+              padding: 0.9rem;
               min-width: 7rem;
             }
           }
@@ -68,7 +65,7 @@
             }
           }
           @include media-breakpoint-down(md) {
-            margin-top: 20px;
+            margin-top: 1.2rem;
           }
         }
       }
