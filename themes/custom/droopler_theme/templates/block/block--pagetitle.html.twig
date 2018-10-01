@@ -13,9 +13,9 @@
 ]
 %}
 <div{{ attributes.addClass(classes) }}>
-  <div class="row">
+  <div class="container">
   {% block content %}
-    <div{{ content_attributes.addClass('content', 'col-xs-12') }}>
+    <div{{ content_attributes.addClass('row', 'col-12') }}>
       {{ content }}
     </div>
   {% endblock %}
