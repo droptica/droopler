@@ -97,11 +97,7 @@
           {% endblock %}
 
           {{ metadata }}
-
-          {%  if show_node_title %}
-            <h1 class="col-md-8 col-xs-12">{{ node.title.value }} </h1>
-          {% endif %}
-
+          <h1 class="col-md-8 col-xs-12">{{ node.title.value }} </h1>
           {{ content.field_blog_category }}
         </div>
       {% endif %}

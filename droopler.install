@@ -170,10 +170,3 @@ function droopler_update_8102() {
     _droopler_import_config($module, $config);
   }
 }
-
-/**
- * Enable 'pagetitle' block.
- */
-function droopler_update_8103() {
-  _droopler_import_config('d_content', 'block.block.pagetitle');
-}
