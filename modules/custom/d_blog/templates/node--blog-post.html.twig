@@ -8,8 +8,6 @@
      Only "getter" methods (method names starting with "get", "has", or "is")
      and a few common methods such as "id" and "label" are available. Calling
      other methods (such as node.delete) will result in an exception.
- * - show_node_title: Flag for title element. Will be true if title should be
- *   displayed.
  * - label: The title of the node.
  * - content: All node items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
@@ -97,7 +95,9 @@
           {% endblock %}
 
           {{ metadata }}
+
           <h1 class="col-md-8 col-xs-12">{{ node.title.value }} </h1>
+
           {{ content.field_blog_category }}
         </div>
       {% endif %}
