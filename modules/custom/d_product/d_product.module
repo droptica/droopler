@@ -118,6 +118,14 @@ function d_product_preprocess_page(&$variables) {
     $variables['#attached']['library'][] = 'd_product/d_product_select';
     $variables['#attached']['library'][] = 'd_product/d_product_searches';
   }
+
+  // Remove title block from product page.
+  if (stripos($route_name, 'entity.node.canonical') !== FALSE) {
+    $node = $variables['node'];
+    if ($node && $node->getType() == 'd_product' && isset($variables['page']['content']['pagetitle'])) {
+      $variables['page']['content']['pagetitle']['#access'] = FALSE;
+    }
+  }
 }
 
 /**
