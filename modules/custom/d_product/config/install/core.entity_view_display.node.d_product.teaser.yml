@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.d_product.body
+    - field.field.node.d_product.field_d_ask_for_product
+    - field.field.node.d_product.field_d_product_link
+    - field.field.node.d_product.field_product_categories
+    - field.field.node.d_product.field_product_image
+    - field.field.node.d_product.field_tags
+    - node.type.d_product
+    - responsive_image.styles.product_thumbnail
+  module:
+    - responsive_image
+    - user
+id: node.d_product.teaser
+targetEntityType: node
+bundle: d_product
+mode: teaser
+content:
+  field_product_categories:
+    type: entity_reference_label
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_product_image:
+    type: responsive_image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      responsive_image_style: product_thumbnail
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_d_ask_for_product: true
+  field_d_product_link: true
+  field_tags: true
+  langcode: true
+  links: true

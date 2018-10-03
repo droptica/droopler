@@ -1,0 +1,37 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the d_product_init module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_product_init_install() {
+  $path = drupal_get_path('module', 'd_product_init') . '/pages';
+  $structure = [];
+  $structure['product_1'] = ['file' => "$path/product_1.yml"];
+  $structure['product_2'] = ['file' => "$path/product_2.yml"];
+  $structure['product_3'] = ['file' => "$path/product_3.yml"];
+  $structure['product_4'] = ['file' => "$path/product_4.yml"];
+  $structure['product_5'] = ['file' => "$path/product_5.yml"];
+  $structure['product_6'] = ['file' => "$path/product_6.yml"];
+  $structure['product_7'] = ['file' => "$path/product_7.yml"];
+  $structure['product_8'] = ['file' => "$path/product_8.yml"];
+  $structure['product_9'] = ['file' => "$path/product_9.yml"];
+  $structure['product_10'] = ['file' => "$path/product_10.yml"];
+  $structure['product_11'] = ['file' => "$path/product_11.yml"];
+  $structure['product_12'] = ['file' => "$path/product_12.yml"];
+  $structure['product_13'] = ['file' => "$path/product_13.yml"];
+  $structure['product_14'] = ['file' => "$path/product_14.yml"];
+  $structure['product_15'] = ['file' => "$path/product_15.yml"];
+  $structure['product_16'] = ['file' => "$path/product_16.yml"];
+  $structure['product_17'] = ['file' => "$path/product_17.yml"];
+  $structure['product_18'] = ['file' => "$path/product_18.yml"];
+  $structure['product_19'] = ['file' => "$path/product_19.yml"];
+  $structure['product_20'] = ['file' => "$path/product_20.yml"];
+
+  d_content_init_add_nodes($structure);
+}

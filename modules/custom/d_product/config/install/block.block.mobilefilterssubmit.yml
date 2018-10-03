@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - d_product
+  theme:
+    - droopler_subtheme
+id: mobilefilterssubmit
+theme: droopler_subtheme
+region: facets_left
+weight: 0
+provider: null
+plugin: mobile_filters_submit
+settings:
+  id: mobile_filters_submit
+  label: 'Mobile filters submit'
+  provider: d_product
+  label_display: '0'
+  button_text: 'Close Filters'
+  button_class: 'btn btn-primary'
+visibility: {  }
