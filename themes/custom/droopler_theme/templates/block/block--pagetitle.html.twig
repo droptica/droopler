@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Droopler's theme implementation for a pagetitle block.
+ *
+ #}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'container',
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div class="container">
+  {% block content %}
+    <div{{ content_attributes.addClass('row', 'col-12') }}>
+      {{ content }}
+    </div>
+  {% endblock %}
+  </div>
+</div>

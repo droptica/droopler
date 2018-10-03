@@ -279,6 +279,48 @@ display:
       display_extenders: {  }
       path: blog
       rendering_language: '***LANGUAGE_language_interface***'
+      title: Blog
+      defaults:
+        title: false
+        arguments: false
+      arguments:
+        tid:
+          id: tid
+          table: taxonomy_index
+          field: tid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: true
+          title: '{{ arguments.tid }}'
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          add_table: false
+          require_value: false
+          reduce_duplicates: false
+          plugin_id: taxonomy_index_tid
     cache_metadata:
       max-age: -1
       contexts:
