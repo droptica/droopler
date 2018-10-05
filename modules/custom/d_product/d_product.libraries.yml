@@ -1,0 +1,37 @@
+select2_box:
+  remote: https://github.com/WeCodePixels/theia-sticky-sidebar
+  version: 1.7
+  license:
+    name: MIT
+    gpl-compatible: false
+  js:
+    /libraries/select2/dist/js/select2.js: { minified: true }
+  css:
+    theme:
+      /libraries/select2/dist/css/select2.css: { minified: true }
+
+d_product_select:
+  version: 1.0
+  js:
+    js/nice_select.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - d_product/select2_box
+
+d_product_slider:
+  version: VERSION
+  js:
+    js/d_product_slider.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - d_p_carousel/slick
+
+d_product_searches:
+  version: VERSION
+  js:
+    js/d_product_search.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

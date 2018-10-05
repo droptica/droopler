@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - d_product
+  theme:
+    - droopler_subtheme
+id: mobilefilters
+theme: droopler_subtheme
+region: facets_top
+weight: -6
+provider: null
+plugin: mobile_filters
+settings:
+  id: mobile_filters
+  label: 'Mobile filters'
+  provider: d_product
+  label_display: '0'
+  button_text: Filters
+  button_class: 'btn btn-outline-primary'
+visibility: {  }

@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - d_product
+  theme:
+    - droopler_subtheme
+id: resetfilters
+theme: droopler_subtheme
+region: facets_left
+weight: -6
+provider: null
+plugin: reset_button
+settings:
+  id: reset_button
+  label: Filters
+  provider: d_product
+  label_display: visible
+  button_text: 'Reset Filters'
+  button_class: 'btn btn-outline-primary btn-sm btn-reset'
+  button_target: /products
+  button_icon_class: 'fas fa-times'
+visibility: {  }

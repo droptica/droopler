@@ -11,7 +11,10 @@ function d_blog_theme($existing, $type, $theme, $path) {
     'node__blog_post' => [
       'base hook' => 'node',
     ],
-    'node__view__blog_listing' => [
+    'node__blog_post__thumbnail' => [
+      'base hook' => 'node',
+    ],
+    'node__blog_post__teaser' => [
       'base hook' => 'node',
     ],
     'paragraph__d_p_blog_image' => [
@@ -23,7 +26,7 @@ function d_blog_theme($existing, $type, $theme, $path) {
     'page__blog' => [
       'base hook' => 'page',
     ],
-    'page__taxonomy__term' => [
+    'page__taxonomy__term__blog_posts_category' => [
       'base hook' => 'page',
     ],
     'pager__blog_listing__page' => [

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.tags_taxonomy_term_name
+  module:
+    - facets
+  theme:
+    - droopler_subtheme
+id: tagstaxonomytermname
+theme: droopler_subtheme
+region: facets_left
+weight: -4
+provider: null
+plugin: 'facet_block:tags_taxonomy_term_name'
+settings:
+  id: 'facet_block:tags_taxonomy_term_name'
+  label: 'Tags:'
+  provider: facets
+  label_display: visible
+  block_id: tagstaxonomytermname
+visibility: {  }
