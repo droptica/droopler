@@ -7,3 +7,12 @@ d_p:
     - core/jquery
     - core/jquery.once
     - core/drupal
+
+d_p_admin:
+  version: VERSION
+  css:
+    layout:
+      css/d_p_admin.css: {}
+  dependencies:
+    - paragraphs/drupal.paragraphs.admin
+    - paragraphs/drupal.paragraphs.widget

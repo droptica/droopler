@@ -18,3 +18,10 @@ function d_p_gallery_theme($existing, $type, $theme, $path) {
     ]
   ];
 }
+
+/**
+ * Implements hook_d_p_placeholder_alter().
+ */
+function d_p_gallery_d_p_placeholder_alter(array &$paragraph_list) {
+  $a=2;
+}
