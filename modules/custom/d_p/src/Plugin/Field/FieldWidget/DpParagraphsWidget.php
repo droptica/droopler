@@ -104,16 +104,19 @@ class DpParagraphsWidget extends paragraphs\Plugin\Field\FieldWidget\InlineParag
           '#attributes' => ['class' => ['icon-placeholder']],
           '#weight' => -1,
           'icon' => [
-            '#markup' => '<img src="/' . $paragraphs[$id]['icon'] . '" />',
+            '#markup' => '<img src="' . $paragraphs[$id]['icon'] . '" />',
           ],
         ];
       }
-      if (isset($paragraphs[$id]['title'])) {
-        $element['paragraph_title'] = [
-          '#weight' => -1001,
-          '#markup' => '<h5>' . $paragraphs[$id]['title'] . '</h5>',
-        ];
-      }
+      $bundle = $element['top']['paragraph_type_title']['info']['#markup'];
+      unset($element['top']['paragraph_type_title']);
+
+      $title = !empty($paragraphs[$id]['title']) ? '<b>' . $paragraphs[$id]['title'] . '</b> - ' . $bundle : $bundle;
+
+      $element['paragraph_title'] = [
+        '#weight' => -1001,
+        '#markup' => '<h5>' . $title . '</h5>',
+      ];
     }
 
     return $element;

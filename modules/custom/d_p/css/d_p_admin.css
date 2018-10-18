@@ -1,11 +1,62 @@
-.icon-placeholder {
-  margin-right: 1rem;
-}
-
-.icon-placeholder img {
-  max-width: 15rem;
+.js .field--widget-droopler-paragraphs .icon-placeholder img {
+  max-width: 6rem;
 }
 
 .js .field--widget-droopler-paragraphs .paragraphs-collapsed-description {
-  height: 7.538em;
+  height: 4.538em;
+}
+
+.js .field--widget-droopler-paragraphs h5 {
+  font-weight: inherit;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.js .field--widget-droopler-paragraphs .dropbutton-wrapper {
+  display: inline-flex;
+  padding-right: 0em;
+  margin-right: 0em;
+  /* Override 600px breakpoint from core. */
+  width: auto;
+}
+
+.js .field--widget-droopler-paragraphs .dropbutton-wrapper {
+  display: inline-flex;
+  padding-right: 0em;
+  margin-right: 0em;
+  /* Override 600px breakpoint from core. */
+  width: auto;
+}
+
+.js .field--widget-droopler-paragraphs .dropbutton-widget {
+  position: relative;
+}
+
+.js .field--widget-droopler-paragraphs .field-multiple-table {
+  margin-bottom: 10px;
+}
+
+.js .field--widget-droopler-paragraphs td {
+  padding: 10px 0px 10px 0px;
+}
+
+.js .field--widget-droopler-paragraphs .field-multiple-drag {
+  vertical-align: top;
+}
+.js .field--widget-droopler-paragraphs .draggable .tabledrag-handle {
+  padding-right: 0;
+  margin-left: 0;
+}
+.js .field--widget-droopler-paragraphs .tabledrag-handle .handle {
+  margin-left: 0;
+  margin-right: 0;
+  padding-right: 0.2em;
+}
+.js .field--widget-droopler-paragraphs .delta-order {
+  padding-right: 10px;
+  text-align: right;
+}
+
+.js .paragraphs-collapsed-description:after {
+  height: 4.538em;
 }

@@ -6,10 +6,6 @@
  * Contains d_paragraphs_banner.module..
  */
 
-use Drupal\Core\StreamWrapper\PrivateStream;
-use Drupal\file\Entity\File;
-use Drupal\image\Entity\ImageStyle;
-
 /**
  * Implements hook_preprocess_HOOK().
  */
@@ -47,62 +43,10 @@ function d_p_banner_theme($existing, $type, $theme, $path) {
 function d_p_banner_d_p_placeholder_alter(array &$paragraph_list, $paragraphs_entity) {
   if ($paragraphs_entity->bundle() == 'd_p_banner') {
     $title = $paragraphs_entity->get('field_d_main_title');
-    $title = $title->getValue()[0]['value'];
+    $title = isset($title->getValue()[0]['value']) ? $title->getValue()[0]['value'] : NULL ;
+    $background = d_p_get_background_link($paragraphs_entity);
     $paragraph_list[$paragraphs_entity->id()] = [
       'title' => $title,
-      'icon' => $place_holder_link = drupal_get_path('module', 'd_p_banner') . '/placeholder.jpg',
-    ];
-
-
-    if ($paragraphs_entity->hasField('field_d_image_background')) {
-      $background = $paragraphs_entity->get('field_d_image_background')->getValue();
-
-      if (isset($background[0]['target_id'])) {
-        $image_file = File::load($background[0]['target_id']);
-        $styles = ImageStyle::loadMultiple($styles_ids);
-        foreach ($styles as $style) {
-          $image_uri = $image_file->getFileUri();
-          $effects = $style->getEffects();
-          $effect = $effects->getInstanceIds('image_scale');
-          $image_scale = $style->getEffect(reset($effect));
-          $conf = $image_scale->getConfiguration();
-          if (isset($conf['data']['width']) && !empty($conf['data']['width'])) {
-            $width = $conf['data']['width'];
-            $urls[] = [
-              'url' => file_url_transform_relative(
-                $style->buildUrl($image_uri)
-              ),
-              'width' => $width,
-            ];
-          }
-          elseif ($style->getName() == 'responsive_image_768_banner') {
-            $width = '768';
-            $urls[] = [
-              'url' => $style->buildUrl($image_uri, TRUE),
-              'width' => $width,
-            ];
-          }
-        }
-        unset($variables['content']['field_d_image_background']);
-
-        if ($js) {
-          $variables['#attached']['drupalSettings']['image_background']['paragraph-' . $bundle . '-' . $paragraph->id(
-          )] = $urls;
-        }
-        else {
-          $variables['images'] = $urls;
-        }
-      }
-    }
-
-
-    $urls = NULL;
-    $paragraph = $variables['paragraph'];
-
-
-
-
-
-
+      'icon' => isset($background) ? $background : '/' . drupal_get_path('module', 'd_p') . '/images/d_p_banner.png'];
   }
 }

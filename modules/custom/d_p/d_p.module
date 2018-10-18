@@ -143,3 +143,21 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       break;
   }
 }
+
+/**
+ * @param \Drupal\paragraphs\Entity\Paragraph $paragraphs_entity
+ *
+ * @return string
+ */
+function d_p_get_background_link(\Drupal\paragraphs\Entity\Paragraph $paragraphs_entity) {
+  if ($paragraphs_entity->hasField('field_d_image_background')) {
+    $background = $paragraphs_entity->get('field_d_image_background')
+      ->getValue();
+    if (isset($background[0]['target_id'])) {
+      $image_file = File::load($background[0]['target_id']);
+      $style = ImageStyle::load('icon_placeholder');
+      $image_uri = $image_file->getFileUri();
+      return file_url_transform_relative($style->buildUrl($image_uri));
+    }
+  }
+}

@@ -37,5 +37,12 @@ function d_p_text_with_bckg_theme($existing, $type, $theme, $path) {
  * Implements hook_d_p_placeholder_alter().
  */
 function d_p_text_with_bckg_d_p_placeholder_alter(array &$paragraph_list, $paragraphs_entity) {
-
+  if ($paragraphs_entity->bundle() == 'd_p_text_with_bckg') {
+    $title = $paragraphs_entity->get('field_d_main_title');
+    $title = isset($title->getValue()[0]['value']) ? $title->getValue()[0]['value'] : NULL ;
+    $background = d_p_get_background_link($paragraphs_entity);
+    $paragraph_list[$paragraphs_entity->id()] = [
+      'title' => $title,
+      'icon' => isset($background) ? $background : '/' . drupal_get_path('module', 'd_p') . '/images/d_p_text_with_bckg.png'];
+  }
 }
