@@ -35,6 +35,8 @@ $d-blog-block-category-font-size-mobile: 0.625rem !default;
 $d-blog-image-margin: 2.1875rem auto !default;
 $d-blog-paragraph-text-margin: 1.5625rem auto !default;
 $d-blog-text-font-size-desktop: 1.25rem !default;
+$d-blog-text-font-size-mobile: 1.07083125rem !default;
+
 $d-blog-text-width-mobile: 85% !default;
 $d-blog-header-text-distance-from-bottom: -0.25rem !default;
 $d-blog-header-text-distance-from-top-mobile: 40% !default;
@@ -227,6 +229,8 @@ $d-blog-size-of-large-desktop: 1400px !default;
   @include media-breakpoint-down(sm) {
     .field--name-field-d-long-text {
       width: $d-blog-text-width-mobile;
+      font-size: $d-blog-text-font-size-mobile;
+
       h2 {
         font-size: $d-blog-header-h2-font-size-blog-text-mobile;
       }
@@ -238,6 +242,12 @@ $d-blog-size-of-large-desktop: 1400px !default;
       img {
         width: 100%;
       }
+    }
+    .field--name-field-blog-sections {
+      p {
+        font-size: $d-blog-text-font-size-mobile;
+      }
+
     }
   }
 
