@@ -17,11 +17,11 @@
 #}
 <div class="row">
   {% for row in rows %}
-  {% if (loop.index0 % 2 == 0) and not loop.first %}
+  {% if (loop.index0 % 3 == 0) and not loop.first %}
 </div>
 <div class="row">
   {% endif %}
-  <div class="col-md-6 products-list-teaser">
+  <div class="col-md-6 col-lg-4 products-list-teaser">
     {{ row.content }}
   </div>
   {% endfor %}

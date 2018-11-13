@@ -265,11 +265,23 @@ $d-product-filters-group-margin: 3rem;
     transition: 0.3s;
   }
   margin-bottom: 1.875rem;
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-between(sm, md) {
     &:nth-child(odd) {
       padding-right: 1rem;
     }
     &:nth-child(even) {
+      padding-left: 1rem;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    &:nth-child(1) {
+      padding-right: 1rem;
+    }
+    &:nth-child(even) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    &:nth-child(3) {
       padding-left: 1rem;
     }
   }
