@@ -39,6 +39,7 @@ $d-p-text-paged-first-margin-top: 2% !default;
   .field--name-field-d-long-text {
     p {
       color: $d-p-text-paged-color;
+      word-wrap: break-word;
     }
 
     &:before {
