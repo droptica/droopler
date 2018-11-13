@@ -265,7 +265,7 @@ $d-product-filters-group-margin: 3rem;
     transition: 0.3s;
   }
   margin-bottom: 1.875rem;
-  @include media-breakpoint-between(sm, md) {
+  @include media-breakpoint-only(md) {
     &:nth-child(odd) {
       padding-right: 1rem;
     }
@@ -274,15 +274,16 @@ $d-product-filters-group-margin: 3rem;
     }
   }
   @include media-breakpoint-up(lg) {
-    &:nth-child(1) {
-      padding-right: 1rem;
+    &:nth-child(3n+1) {
+      padding-right: 0.5rem;
     }
-    &:nth-child(even) {
-      padding-left: 1rem;
-      padding-right: 1rem;
+    &:nth-child(3n-1) {
+      // 30px is the standard bootstrap padding for .col
+      padding-left: calc(30px/2 + 0.25rem);
+      padding-right: calc(30px/2 + 0.25rem);
     }
-    &:nth-child(3) {
-      padding-left: 1rem;
+    &:nth-child(3n) {
+      padding-left: 0.5rem;
     }
   }
 
