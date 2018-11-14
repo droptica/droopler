@@ -278,9 +278,8 @@ $d-product-filters-group-margin: 3rem;
       padding-right: 0.5rem;
     }
     &:nth-child(3n-1) {
-      // 30px is the standard bootstrap padding for .col
-      padding-left: calc(30px/2 + 0.25rem);
-      padding-right: calc(30px/2 + 0.25rem);
+      padding-left: calc(#{$grid-gutter-width}/4 + 0.25rem);
+      padding-right: calc(#{$grid-gutter-width}/4 + 0.25rem);
     }
     &:nth-child(3n) {
       padding-left: 0.5rem;
