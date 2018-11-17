@@ -44,7 +44,7 @@ function d_blog_install() {
 /**
  * Droopler 1.4 Updates.
  */
-function d_blog_droopler_update_8101() {
+function d_blog_update_8101() {
   // We do not put this into standard Droopler update flow.
   try {
     d_blog_add_translation('Blog text', 'Blog tekst', 'pl');
