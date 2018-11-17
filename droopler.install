@@ -232,10 +232,8 @@ function droopler_update_8102() {
     'd_geysir'
   ];
   $moduleInstaller->install($modules, TRUE);
-
   $values['droopler__droopler_update_8102_5'] = TRUE;
   $values['droopler__droopler_update_8102_6'] = TRUE;
-  $values['droopler__droopler_update_8102_7'] = TRUE;
 
   $progress = [
     'v1.3' => [],
