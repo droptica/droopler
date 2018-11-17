@@ -5,6 +5,7 @@
  */
 
 use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Extension\MissingDependencyException;
 
 /**
  * Implements hook_install().
@@ -139,17 +140,26 @@ function droopler_update_8101() {
 function droopler_update_8102() {
   $values = [];
 
-  // Install checklistapi and d_update modules.
+  /** @var Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
-  $modules = [
-    'checklistapi',
-    'd_update'
-  ];
-  $moduleInstaller->install($modules, TRUE);
 
+  // Install checklistapi and d_update modules.
+  try {
+    $modules = [
+      'checklistapi',
+      'd_update'
+    ];
+    $result = $moduleInstaller->install($modules, TRUE);
+    $values['droopler__droopler_update_8102_0'] = $result;
+    $values['droopler__droopler_update_8102_1'] = $result;
+  }
+  catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8102_0'] = FALSE;
+    $values['droopler__droopler_update_8102_1'] = FALSE;
+  }
+
+  /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
-  $values['droopler__droopler_update_8102_0'] = TRUE;
-  $values['droopler__droopler_update_8102_1'] = TRUE;
 
   // Install editor role.
   $configs = [
@@ -227,13 +237,27 @@ function droopler_update_8102() {
   $values['droopler__droopler_update_8102_4'] = $updater->importConfigs($configs);
 
   // Install geysir and d_geysir modules.
-  $modules = [
-    'geysir',
-    'd_geysir'
+  try {
+    $modules = [
+      'geysir',
+      'd_geysir'
+    ];
+    $result = $moduleInstaller->install($modules, TRUE);
+    $values['droopler__droopler_update_8102_5'] = $result;
+    $values['droopler__droopler_update_8102_6'] = $result;
+  }
+  catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8102_5'] = FALSE;
+    $values['droopler__droopler_update_8102_6'] = FALSE;
+  }
+
+  // Update blog post metatags.
+  $configs = [
+    'd_blog' => [
+      'metatag.metatag_defaults.node__blog_post' => '',
+    ],
   ];
-  $moduleInstaller->install($modules, TRUE);
-  $values['droopler__droopler_update_8102_5'] = TRUE;
-  $values['droopler__droopler_update_8102_6'] = TRUE;
+  $values['droopler__droopler_update_8102_7'] = $updater->importConfigs($configs);
 
   $progress = [
     'v1.3' => [],
