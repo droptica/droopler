@@ -162,7 +162,7 @@ function droopler_update_8102() {
   // Update blog post config.
   $configs = [
     'd_blog' => [
-      'core.entity_view_display.node.blog_post.thumbnail' => '3bda6b387de39f3e2acb1ecae6caa4aa',
+      'core.entity_view_display.node.blog_post.thumbnail' => '',
     ],
   ];
   $values['droopler__droopler_update_8102_3'] = $updater->importConfigs($configs);
