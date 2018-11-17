@@ -303,7 +303,7 @@ function d_content_init_create_all() {
   // Set default structure.
   $path = drupal_get_path('module', 'd_content_init') . '/pages';
   $structure = [
-    'homepage' => ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => 10],
+    'homepage' => ['file' => "$path/homepage.yml"],
     'examples' => ['file' => "$path/examples.yml", 'link' => 'Examples', 'weight' => 20, 'children' => [
       'business' => ['file' => "$path/business.yml", 'link' => 'Local Business Website', 'weight' => 10],
       'event' => ['file' => "$path/event.yml", 'link' => 'Event Website', 'weight' => 20],
