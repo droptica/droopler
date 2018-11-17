@@ -143,9 +143,6 @@ function droopler_update_8102() {
   /** @var Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
   $moduleInstaller = \Drupal::service('module_installer');
 
-  /** @var Drupal\d_update\Updater $updater */
-  $updater = \Drupal::service('d_update');
-
   // Install checklistapi and d_update modules.
   try {
     $modules = [
@@ -160,6 +157,9 @@ function droopler_update_8102() {
     $values['droopler__droopler_update_8102_0'] = FALSE;
     $values['droopler__droopler_update_8102_1'] = FALSE;
   }
+
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
 
   // Install editor role.
   $configs = [
