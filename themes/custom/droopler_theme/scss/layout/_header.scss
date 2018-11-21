@@ -34,6 +34,20 @@ header.header {
       max-width: $logo-md-width;
     }
   }
+
+  @include media-breakpoint-only(lg) {
+    .navbar-brand {
+      max-width: initial;
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+    a.site-logo {
+      max-width: $logo-md-width;
+    }
+  }
+
   @include media-breakpoint-down(md) {
     min-height: $header-mobile-height;
 
