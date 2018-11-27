@@ -173,6 +173,7 @@ function droopler_update_8102() {
   $configs = [
     'd_blog' => [
       'core.entity_view_display.node.blog_post.thumbnail' => '',
+      'core.entity_view_mode.node.thumbnail' => '',
     ],
   ];
   $values['droopler__droopler_update_8102_3'] = $updater->importConfigs($configs);
