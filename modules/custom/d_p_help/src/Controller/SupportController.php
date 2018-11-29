@@ -21,8 +21,8 @@ class SupportController extends ControllerBase {
     $output .= '<h3>' . t('Support') . '</h3>';
     $output .= '<p>' . t('Do You need support with Droopler? -  <a href=":link">Droptica.com</a>.', [':link' => 'https://droptica.com']) . '</p>';
     $output .= '<h3>' . t('Github') . '</h3>';
-    $output .= '<p>' . t('<a href=":link">https://github.com/droptica/droopler_project</a> - Boilerplate for new projects based on Droopler. If you wish to use Droopler - fork (or download) this repository. It contains a minimum set of code to start your new website.', [':link' => ' https://github.com/droptica/droopler_project']) . '</p>';
-    $output .= '<p>' . t('<a href=":link">https://github.com/droptica/droopler</a> - This is Drupal installation profile.', [':link' => ' https://github.com/droptica/droopler_project']) . '</p>';
+    $output .= '<p>' . t('<a href=":link">https://github.com/droptica/droopler_project</a> - Boilerplate for new projects based on Droopler. If you wish to use Droopler - fork (or download) this repository. It contains a minimum set of code to start your new website.', [':link' => 'https://github.com/droptica/droopler_project']) . '</p>';
+    $output .= '<p>' . t('<a href=":link">https://github.com/droptica/droopler</a> - This is Drupal installation profile.', [':link' => 'https://github.com/droptica/droopler']) . '</p>';
     return [
       '#type' => 'markup',
       '#markup' => '<div class="container">' . $output . '</div>',

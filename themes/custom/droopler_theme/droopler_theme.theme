@@ -56,7 +56,7 @@ function droopler_theme_preprocess_page(&$variables) {
 
   // Make some exceptions for nodes with paragraphs or pages of given route.
   $currentRoute = \Drupal::routeMatch()->getRouteName();
-  $nodeCheck = !empty($variables['node']) && in_array($variables['node']->getType(), ['content_page', 'blog_post']);
+  $nodeCheck = !empty($variables['node']) && method_exists($variables['node'], 'getType') && in_array($variables['node']->getType(), ['content_page', 'blog_post']);
   $routeCheck = $currentRoute == 'd_p_subscribe_file.downloadfile.checkLink';
   if ($nodeCheck || $routeCheck) {
     $main_attributes['class'] = ['container-fluid'];
