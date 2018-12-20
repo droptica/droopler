@@ -1,5 +1,5 @@
 # Droopler profile for Drupal 8 #
-<img src="https://demo.droopler.com/themes/custom/droopler_subtheme/logo.png" width=300 alt="Droopler Logo" />
+<img src="https://demo.droopler.com/themes/custom/droopler_subtheme/logo.svg" width=300 alt="Droopler Logo" />
 
 ## What is Droopler? ##
 Droopler is a Drupal 8 profile designed to kickstart a new webpage in a few minutes. It's based on the latest frontend technologies, including Bootstrap 4. The maintainer of Droopler is [Droptica](https://droptica.com).
@@ -20,7 +20,7 @@ The Droopler profile should be installed via Composer. We recommend using [Droop
 
 ```json
 "require": {
-  "droptica/droopler": "^8.1.3"
+  "droptica/droopler": "^8.1.4"
 }
 ```
 
