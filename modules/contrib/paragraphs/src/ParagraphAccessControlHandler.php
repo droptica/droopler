@@ -78,8 +78,11 @@ class ParagraphAccessControlHandler extends EntityAccessControlHandler implement
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    // Allowed when nobody implements.
-    return AccessResult::allowed();
+    // Allow paragraph entities to be created in the context of entity forms.
+    if (\Drupal::requestStack()->getCurrentRequest()->getRequestFormat() === 'html') {
+      return AccessResult::allowed()->addCacheContexts(['request_format']);
+    }
+    return AccessResult::neutral()->addCacheContexts(['request_format']);
   }
 
 }

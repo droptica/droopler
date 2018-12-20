@@ -149,15 +149,21 @@ class PathautoBulkUpdateForm extends FormBase {
   public static function batchFinished($success, $results, $operations) {
     if ($success) {
       if ($results['updates']) {
-        drupal_set_message(\Drupal::translation()->formatPlural($results['updates'], 'Generated 1 URL alias.', 'Generated @count URL aliases.'));
+        \Drupal::service('messenger')->addMessage(\Drupal::translation()
+          ->formatPlural($results['updates'], 'Generated 1 URL alias.', 'Generated @count URL aliases.'));
       }
       else {
-        drupal_set_message(t('No new URL aliases to generate.'));
+        \Drupal::service('messenger')
+          ->addMessage(t('No new URL aliases to generate.'));
       }
     }
     else {
       $error_operation = reset($operations);
-      drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+      \Drupal::service('messenger')
+        ->addMessage(t('An error occurred while processing @operation with arguments : @args'), [
+          '@operation' => $error_operation[0],
+          '@args' => print_r($error_operation[0]),
+        ]);
     }
   }
 

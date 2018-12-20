@@ -69,7 +69,7 @@ class FeaturesController implements ContainerInjectionInterface {
         throw new AccessDeniedHttpException();
       }
 
-      $request = new Request(array('file' => $uri));
+      $request = new Request(['file' => $uri]);
       return $this->fileDownloadController->download($request, 'temporary');
     }
   }

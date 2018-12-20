@@ -273,4 +273,24 @@ class GlobalRedirectTest extends WebTestBase {
 
     $this->assertEqual($headers[0][':status'], $expected_ending_status);
   }
+
+  /**
+   * @inheritdoc}
+   */
+  protected function drupalHead($path, array $options = [], array $headers = []) {
+    // Always just use getAbsolutePath() so that generating the link does not
+    // alter special requests.
+    $url = $this->getAbsoluteUrl($path);
+    $out = $this->curlExec([CURLOPT_NOBODY => TRUE, CURLOPT_URL => $url, CURLOPT_HTTPHEADER => $headers]);
+    // Ensure that any changes to variables in the other thread are picked up.
+    $this->refreshVariables();
+
+    if ($this->dumpHeaders) {
+      $this->verbose('GET request to: ' . $path .
+        '<hr />Ending URL: ' . $this->getUrl() .
+        '<hr />Headers: <pre>' . Html::escape(var_export(array_map('trim', $this->headers), TRUE)) . '</pre>');
+    }
+
+    return $out;
+  }
 }

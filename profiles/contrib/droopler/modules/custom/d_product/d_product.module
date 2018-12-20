@@ -1,0 +1,220 @@
+<?php
+
+/**
+ * @file
+ * File containing d_product module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_preprocess_HOOK.
+ */
+function d_product_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  if ($node->getType() == 'd_product') {
+    if (isset($variables['view_mode']) && $variables['view_mode'] == 'teaser') {
+      if (isset($variables['node'])) {
+
+        if (isset($variables['content']['field_product_image'][0])) {
+          $variables['main_image'] = $variables['content']['field_product_image'][0];
+          unset($variables['content']['field_product_image']);
+        }
+
+        if (isset($variables['content']['field_product_categories'][0])) {
+          $variables['category'] = $variables['content']['field_product_categories'];
+          unset($variables['content']['field_product_categories']);
+        }
+
+        if (isset($variables['content']['field_d_product_link'])) {
+          $variables['link'] = $variables['content']['field_d_product_link'];
+          unset($variables['content']['field_d_product_link']);
+        }
+      }
+    }
+
+    if (isset($variables['view_mode']) && $variables['view_mode'] == 'full') {
+      if ($node->hasField('field_d_ask_for_product')) {
+        $field_d_ask_for_product = $node->get('field_d_ask_for_product');
+        $field_d_ask_for_product = $field_d_ask_for_product->getValue();
+        if (isset($field_d_ask_for_product[0]['value']) && $field_d_ask_for_product[0]['value'] == 1) {
+          $variables['link_ask_for_product'] = d_product_generate_ask_product_link($node);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function d_product_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Add placeholder to contact form.
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-products-list-products-list') {
+    $form['aggregated_field']['#attributes']['placeholder'] = t('Search products...');
+    $form['sort_by']['#title'] = '';
+    $form['sort_by']['#attributes']['placeholder'] = t('Placeholder');
+    unset($form['sort_order']);
+    $query = \Drupal::request()->query->all();
+    if (isset($query['f'])) {
+      foreach ($query['f'] as $key => $value) {
+        $form['f[' . $key . ']'] = [
+          '#type' => 'hidden',
+          '#value' => $value,
+          '#weight' => -1,
+        ];
+      }
+    }
+  }
+  if ($form_id == 'contact_message_feedback_form') {
+
+    // Disable Cache on contact page.
+    $form['#cache'] = [
+      'contexts' => [],
+      'max-age' => 0,
+    ];
+    // Autofill contact form.
+    if (isset($_GET['product'])) {
+      $nid = $_GET['product'];
+      $node = Node::load($nid);
+      if ($node) {
+        $user = User::load(\Drupal::currentUser()->id());
+        $check = $node->access('view', $user);
+        if ($node->bundle() == 'd_product' && $check) {
+          $alias = $node->toUrl()->setAbsolute()->toString();
+          $subject = t(
+            'I would like to ask about product @title',
+            ['@title' => $node->getTitle()]
+          );
+          $subject = $subject->render();
+          $subject = strlen($subject) > 100 ? substr($subject, 0, 97) . "..." : $subject;
+
+          $message = t(
+            'I would like to ask about @title, link - @link ',
+            ['@title' => $node->getTitle(), '@link' => $alias]
+          );
+          $form['subject']['widget'][0]['value']['#default_value'] = $subject;
+          $form['message']['widget'][0]['value']['#default_value'] = $message;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_product_preprocess_page(&$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (stripos($route_name, 'view.products_list') !== FALSE) {
+    global $pager_total_items;
+    $variables['pager_total_items'] = reset($pager_total_items);
+    $variables['#attached']['library'][] = 'd_product/d_product_select';
+    $variables['#attached']['library'][] = 'd_product/d_product_searches';
+  }
+
+  // Remove title block from product page.
+  if (stripos($route_name, 'entity.node.canonical') !== FALSE) {
+    $node = $variables['node'];
+    if ($node && $node->getType() == 'd_product' && isset($variables['page']['content']['pagetitle'])) {
+      $variables['page']['content']['pagetitle']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_product_preprocess_field(&$variables) {
+  $variables['is_product'] = FALSE;
+
+  if ($variables['element']['#bundle'] == 'd_product' && $variables['element']['#view_mode'] != 'teaser') {
+    $variables['is_product'] = TRUE;
+    $items = $variables['element']['#items'];
+    switch ($variables['field_name']) {
+      case 'field_tags':
+        $variables['links'] = d_product_generate_term_links(
+          $items,
+          'tags_taxonomy_term_name'
+        );
+        break;
+
+      case 'field_product_categories':
+        $variables['links'] = d_product_generate_term_links(
+          $items,
+          'product_categories_taxonomy_term_name'
+        );
+        break;
+    }
+  }
+}
+
+/**
+ * Create custom term links.
+ *
+ * @param $items array
+ *   Store term ids.
+ * @param $element string
+ *   Facet path element.
+ *
+ * @return array
+ *   Generated links.
+ */
+function d_product_generate_term_links($items, $element) {
+  $links = [];
+  foreach ($items as $term_obj) {
+    $tid = $term_obj->getValue();
+    $term = Term::load($tid['target_id']);
+    $name = $term->getName();
+    $options = [
+      'query' => ['f[0]' => $element . ':' . strtolower($name)],
+    ];
+    $link = Link::fromTextAndUrl(
+      t($name),
+      Url::fromUri('internal:/products', $options)
+    )->toString();
+    $links[] = $link;
+  }
+
+  return $links;
+}
+
+/**
+ * Create ask_product_link.
+ *
+ * @param $node
+ *
+ * @return \Drupal\Core\GeneratedLink
+ */
+function d_product_generate_ask_product_link($node) {
+  $name = 'Ask for product';
+  $options = ['query' => ['product' => $node->id()]];
+  $link = Link::fromTextAndUrl(
+    t($name),
+    Url::fromUri('internal:/contact#contact-message-feedback-form', $options)
+  )->toString();
+  return $link;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_product_preprocess_pager(&$variables) {
+
+  if (isset($variables['theme_hook_original']) && $variables['theme_hook_original'] == 'pager__products_list') {
+    global $pager_total;
+    $pages_count = reset($pager_total);
+    if (isset($variables['items']['pages'][$pages_count])) {
+      unset($variables['items']['last']);
+    }
+    if (isset($variables['items']['last'])) {
+      $variables['items']['last']['text'] = $pages_count;
+    }
+  }
+}

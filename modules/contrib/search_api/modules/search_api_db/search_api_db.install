@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Database Search module.
+ */
+
+use Drupal\Core\Database\Database;
+use Drupal\Core\Database\SchemaObjectExistsException;
+use Drupal\Core\Utility\UpdateException;
+
+/**
+ * Reduces the length of sort-value columns for fulltext fields to 30.
+ */
+function search_api_db_update_8101() {
+  // @see https://www.drupal.org/node/2862289
+  $key_value = \Drupal::keyValue('search_api_db.indexes');
+
+  foreach ($key_value->getAll() as $db_info) {
+    // Use the correct database from the server's backend configuration.
+    $database = \Drupal::config('search_api.server.' . $db_info['server'])
+      ->get('backend_config.database');
+    if (!$database) {
+      continue;
+    }
+    list($key, $target) = explode(':', $database, 2);
+    $schema = Database::getConnection($target, $key)->schema();
+
+    $table = $db_info['index_table'];
+    foreach ($db_info['field_tables'] as $field_info) {
+      $column = $field_info['column'];
+      if ($field_info['type'] === 'text'
+          && $schema->fieldExists($table, $column)) {
+        $spec = [
+          'type' => 'varchar',
+          'length' => 30,
+          'description' => "The field's value for this item",
+        ];
+        $schema->changeField($table, $column, $column, $spec);
+      }
+    }
+  }
+
+  return t('Fulltext field database columns updated.');
+}
+
+/**
+ * Adds primary keys to denormalized index tables.
+ */
+function search_api_db_update_8102() {
+  // @see https://www.drupal.org/node/2884451
+  $key_value = \Drupal::keyValue('search_api_db.indexes');
+
+  foreach ($key_value->getAll() as $db_info) {
+    // Use the correct database from the server's backend configuration.
+    $database = \Drupal::config('search_api.server.' . $db_info['server'])
+      ->get('backend_config.database');
+    if (!$database) {
+      continue;
+    }
+    list($key, $target) = explode(':', $database, 2);
+    $schema = Database::getConnection($target, $key)->schema();
+
+    $table = $db_info['index_table'];
+    try {
+      $schema->addPrimaryKey($table, ['item_id']);
+    }
+    catch (SchemaObjectExistsException $e) {
+      // Primary key was already added, maybe by a conscientious site admin.
+      // Nothing to do here in that case.
+    }
+    catch (\Exception $e) {
+      throw new UpdateException("Could not add a primary key to table {{$table}}: " . $e->getMessage(), 0, $e);
+    }
+  }
+
+  return t('Primary keys added to all denormalized index tables.');
+}
+
+/**
+ * Converts the old "partial_matches" option to the new "matching" option.
+ */
+function search_api_db_update_8103() {
+  // @see https://www.drupal.org/project/search_api/issues/2971033
+
+  $config_factory = \Drupal::configFactory();
+  $count = 0;
+  foreach ($config_factory->listAll('search_api.server.') as $server_id) {
+    $server = $config_factory->getEditable($server_id);
+    if ($server->get('backend') !== 'search_api_db') {
+      continue;
+    }
+
+    ++$count;
+    $config = $server->get('backend_config') ?: [];
+    $config['matching'] = empty($config['partial_matches']) ? 'words' : 'partial';
+    unset($config['partial_matches']);
+    $server->set('backend_config', $config);
+    // Mark the resulting configuration as trusted data. This avoids issues
+    // with future schema changes.
+    $server->save(TRUE);
+  }
+
+  if ($count) {
+    return \Drupal::translation()
+      ->formatPlural($count, 'Updated 1 server.', 'Updated @count servers.');
+  }
+  return NULL;
+}

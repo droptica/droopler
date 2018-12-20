@@ -5,7 +5,6 @@
  */
 namespace Masterminds\HTML5\Tests\Parser;
 
-use Masterminds\HTML5\Parser\StringInputStream;
 use Masterminds\HTML5\Parser\Scanner;
 use Masterminds\HTML5\Parser\Tokenizer;
 use Masterminds\HTML5\Parser\DOMTreeBuilder;
@@ -16,14 +15,14 @@ use Masterminds\HTML5\Parser\DOMTreeBuilder;
 class DOMTreeBuilderTest extends \Masterminds\HTML5\Tests\TestCase
 {
     protected $errors = array();
+
     /**
      * Convenience function for parsing.
      */
     protected function parse($string, array $options = array())
     {
         $treeBuilder = new DOMTreeBuilder(false, $options);
-        $input = new StringInputStream($string);
-        $scanner = new Scanner($input);
+        $scanner = new Scanner($string);
         $parser = new Tokenizer($scanner, $treeBuilder);
 
         $parser->parse();
@@ -38,8 +37,7 @@ class DOMTreeBuilderTest extends \Masterminds\HTML5\Tests\TestCase
     protected function parseFragment($string)
     {
         $treeBuilder = new DOMTreeBuilder(true);
-        $input = new StringInputStream($string);
-        $scanner = new Scanner($input);
+        $scanner = new Scanner($string);
         $parser = new Tokenizer($scanner, $treeBuilder);
 
         $parser->parse();
@@ -600,8 +598,7 @@ class DOMTreeBuilderTest extends \Masterminds\HTML5\Tests\TestCase
         $is = new InstructionProcessorMock();
         $treeBuilder->setInstructionProcessor($is);
 
-        $input = new StringInputStream($string);
-        $scanner = new Scanner($input);
+        $scanner = new Scanner($string);
         $parser = new Tokenizer($scanner, $treeBuilder);
 
         $parser->parse();
@@ -642,5 +639,67 @@ EOM;
 
         $this->assertSame(3, $dom->getElementById('first')->getElementsByTagName('option')->length);
         $this->assertSame(2, $dom->getElementById('second')->getElementsByTagName('option')->length);
+    }
+
+    public function testVoidTag() {
+        $html = <<<EOM
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>testVoidTag</title>
+        <meta>
+        <meta>
+    </head>
+    <body></body>
+</html>
+EOM;
+
+        $dom = $this->parse($html);
+        $this->assertSame(2, $dom->getElementsByTagName('meta')->length);
+        $this->assertSame(0, $dom->getElementsByTagName('meta')->item(0)->childNodes->length);
+        $this->assertSame(0, $dom->getElementsByTagName('meta')->item(1)->childNodes->length);
+    }
+
+    public function testIgnoreSelfClosingTag() {
+        $html = <<<EOM
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>testIllegalSelfClosingTag</title>
+    </head>
+    <body>
+        <div /><span>Hello, World!</span></div>
+    </body>
+</html>
+EOM;
+
+        $dom = $this->parse($html);
+        $this->assertSame(1, $dom->getElementsByTagName('div')->item(0)->childNodes->length);
+    }
+
+    public function testIAudioInParagraph() {
+        $html = <<<EOM
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>testIllegalSelfClosingTag</title>
+    </head>
+    <body>
+    <p>
+        <audio preload="none" controls="controls">
+            <source src="https://example.com/test.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+        </audio>
+     </p>
+    </body>
+</html>>
+</html>
+EOM;
+
+        $dom = $this->parse($html);
+        $audio = $dom->getElementsByTagName('audio')->item(0);
+
+        $this->assertSame('p', $audio->parentNode->nodeName);
+        $this->assertSame(3, $audio->childNodes->length);
     }
 }

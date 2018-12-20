@@ -17,11 +17,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class MetatagViewsController extends ControllerBase {
 
   /**
+   * The Views storage interface.
+   *
    * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $viewStorage;
 
   /**
+   * The Metatag manager interface.
+   *
    * @var \Drupal\metatag\MetatagManagerInterface
    */
   protected $metatagManager;

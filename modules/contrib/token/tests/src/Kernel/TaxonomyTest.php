@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\token\Kernel;
 
-use Drupal\Component\Utility\Unicode;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\Core\Url;
@@ -13,6 +13,7 @@ use Drupal\Core\Url;
  * @group token
  */
 class TaxonomyTest extends KernelTestBase {
+
   protected $vocab;
 
   /**
@@ -101,19 +102,19 @@ class TaxonomyTest extends KernelTestBase {
 
   function addVocabulary(array $vocabulary = []) {
     $vocabulary += [
-      'name' => Unicode::strtolower($this->randomMachineName(5)),
+      'name' => mb_strtolower($this->randomMachineName(5)),
       'nodes' => ['article' => 'article'],
     ];
-    $vocabulary = entity_create('taxonomy_vocabulary', $vocabulary)->save();
+    $vocabulary = Vocabulary::create($vocabulary)->save();
     return $vocabulary;
   }
 
   function addTerm($vocabulary, array $term = []) {
     $term += [
-      'name' => Unicode::strtolower($this->randomMachineName(5)),
+      'name' => mb_strtolower($this->randomMachineName(5)),
       'vid' => $vocabulary->id(),
     ];
-    $term = entity_create('taxonomy_term', $term);
+    $term = Term::create($term);
     $term->save();
     return $term;
   }
@@ -147,5 +148,7 @@ class TaxonomyTest extends KernelTestBase {
 
     // Expect the parent term to be in the specified language.
     $this->assertTokens('term', ['term' => $child_term], ['parents' => 'german-parent-term'], ['langcode' => 'de']);
+    $this->assertTokens('term', ['term' => $child_term], ['root' => 'german-parent-term'], ['langcode' => 'de']);
   }
+
 }

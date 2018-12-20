@@ -3,8 +3,10 @@
 namespace Drupal\paragraphs_type_permissions\Tests;
 
 use Drupal\field_ui\Tests\FieldUiTestTrait;
+use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\paragraphs\Tests\Classic\ParagraphsCoreVersionUiTestTrait;
 use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\paragraphs\FunctionalJavascript\ParagraphsTestBaseTrait;
 use Drupal\user\Entity\Role;
 
 /**
@@ -14,7 +16,7 @@ use Drupal\user\Entity\Role;
  */
 class ParagraphsTypePermissionsTest extends WebTestBase {
 
-  use FieldUiTestTrait, ParagraphsCoreVersionUiTestTrait;
+  use FieldUiTestTrait, ParagraphsCoreVersionUiTestTrait, ParagraphsTestBaseTrait;
 
   /**
    * Modules to enable.
@@ -22,11 +24,13 @@ class ParagraphsTypePermissionsTest extends WebTestBase {
    * @var array
    */
   public static $modules = array(
-    'node',
-    'paragraphs_demo',
-    'field',
+    'content_translation',
     'image',
+    'field',
     'field_ui',
+    'block',
+    'language',
+    'node',
     'paragraphs_type_permissions',
   );
 
@@ -35,6 +39,64 @@ class ParagraphsTypePermissionsTest extends WebTestBase {
    */
   protected function setUp() {
     parent::setUp();
+    $this->drupalPlaceBlock('system_breadcrumb_block');
+    ConfigurableLanguage::create(['id' => 'de', 'label' => '1German'])->save();
+    ConfigurableLanguage::create(['id' => 'fr', 'label' => '2French'])->save();
+    $this->addParagraphedContentType('paragraphed_content_demo', 'field_paragraphs_demo');
+    $admin_user = $this->drupalCreateUser(array(
+      'administer site configuration',
+      'administer content translation',
+      'administer languages',
+      'administer node fields',
+      'administer content types',
+      'administer paragraphs types',
+      'administer node form display',
+      'administer paragraph fields',
+      'administer paragraph form display',
+    ));
+    $this->drupalLogin($admin_user);
+    $this->addParagraphsType('nested_paragraph');
+    $this->addParagraphsField('nested_paragraph', 'field_paragraphs_demo', 'paragraph');
+    $this->addParagraphsType('images');
+    static::fieldUIAddNewField('admin/structure/paragraphs_type/images', 'images_demo', 'Images', 'image', ['cardinality' => -1], ['settings[alt_field]' => FALSE]);
+    $this->addParagraphsType('text_image');
+    static::fieldUIAddNewField('admin/structure/paragraphs_type/text_image', 'image_demo', 'Images', 'image', [], ['settings[alt_field]' => FALSE]);
+    static::fieldUIAddNewField('admin/structure/paragraphs_type/text_image', 'text_demo', 'Text', 'text_long', [], []);
+    $this->addParagraphsType('text');
+    static::fieldUIAddExistingField('admin/structure/paragraphs_type/text', 'field_text_demo', 'Text', []);
+    $edit = [
+      'entity_types[node]' => TRUE,
+      'entity_types[paragraph]' => TRUE,
+      'settings[node][paragraphed_content_demo][translatable]' => TRUE,
+      'settings[node][paragraphed_content_demo][fields][field_paragraphs_demo]' => FALSE,
+      'settings[paragraph][images][translatable]' => TRUE,
+      'settings[paragraph][text_image][translatable]' => TRUE,
+      'settings[paragraph][text][translatable]' => TRUE,
+      'settings[paragraph][nested_paragraph][translatable]' => TRUE,
+      'settings[paragraph][nested_paragraph][fields][field_paragraphs_demo]' => FALSE,
+      'settings[paragraph][nested_paragraph][settings][language][language_alterable]' => TRUE,
+      'settings[paragraph][images][fields][field_images_demo]' => TRUE,
+      'settings[paragraph][text_image][fields][field_image_demo]' => TRUE,
+      'settings[paragraph][text_image][fields][field_text_demo]' => TRUE,
+      'settings[node][paragraphed_content_demo][settings][language][language_alterable]' => TRUE
+    ];
+    $this->drupalPostForm('admin/config/regional/content-language', $edit, t('Save configuration'));
+
+    $display_options = [
+      'type' => 'image',
+      'settings' => ['image_style' => 'medium', 'image_link' => 'file'],
+    ];
+    $display = entity_get_display('paragraph', 'images', 'default');
+    $display->setComponent('field_images_demo', $display_options)
+      ->save();
+
+    $display_options = [
+      'type' => 'image',
+      'settings' => ['image_style' => 'large', 'image_link' => 'file'],
+    ];
+    $display = entity_get_display('paragraph', 'text_image', 'default');
+    $display->setComponent('field_image_demo', $display_options)
+      ->save();
   }
 
   /**
@@ -60,7 +122,7 @@ class ParagraphsTypePermissionsTest extends WebTestBase {
 
     // Enable the publish/unpublish checkbox fields.
     $paragraph_types = [
-      'image_text',
+      'text_image',
       'images',
       'text',
     ];
@@ -74,9 +136,9 @@ class ParagraphsTypePermissionsTest extends WebTestBase {
 
     // Create a node with some Paragraph types.
     $this->drupalGet('node/add/paragraphed_content_demo');
-    $this->drupalPostForm(NULL, NULL, t('Add Image + Text'));
-    $this->drupalPostForm(NULL, NULL, t('Add Images'));
-    $this->drupalPostForm(NULL, NULL, t('Add Text'));
+    $this->drupalPostForm(NULL, NULL, t('Add text_image'));
+    $this->drupalPostForm(NULL, NULL, t('Add images'));
+    $this->drupalPostForm(NULL, NULL, t('Add text'));
 
     $image_text = $this->drupalGetTestFiles('image')[0];
     $this->drupalPostForm(NULL, [
@@ -97,8 +159,8 @@ class ParagraphsTypePermissionsTest extends WebTestBase {
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
 
     // Get the images data to check for their presence.
-    $image_text_tag = '/files/styles/large/public/image-test_0.png?itok=';
-    $images_tag = '/files/styles/medium/public/image-test_0_0.png?itok=';
+    $image_text_tag = '/files/styles/large/public/' . date('Y-m') . '/image-test.png?itok=';
+    $images_tag = '/files/styles/medium/public/' . date('Y-m') . '/image-test_0.png?itok=';
 
     // Check that all paragraphs are shown for admin user.
     $this->assertRaw($image_text_tag);
@@ -152,7 +214,7 @@ class ParagraphsTypePermissionsTest extends WebTestBase {
     // 'Text' paragraph contents.
     /** @var \Drupal\user\RoleInterface $anonymous_role */
     $anonymous_role = Role::load('anonymous');
-    $anonymous_role->grantPermission('view paragraph content image_text');
+    $anonymous_role->grantPermission('view paragraph content text_image');
     $anonymous_role->grantPermission('view paragraph content text');
     $anonymous_role->save();
 
@@ -160,7 +222,7 @@ class ParagraphsTypePermissionsTest extends WebTestBase {
     // 'Images' paragraph contents.
     /** @var \Drupal\user\RoleInterface $authenticated_role */
     $authenticated_role = Role::load('authenticated');
-    $authenticated_role->grantPermission('view paragraph content image_text');
+    $authenticated_role->grantPermission('view paragraph content text_image');
     $authenticated_role->grantPermission('view paragraph content images');
     $authenticated_role->save();
 
@@ -180,7 +242,7 @@ class ParagraphsTypePermissionsTest extends WebTestBase {
     $this->assertNoText('Paragraph type Text');
 
     // Check the authenticated user with edit permission.
-    $authenticated_role->grantPermission('update paragraph content image_text');
+    $authenticated_role->grantPermission('update paragraph content text_image');
     $authenticated_role->grantPermission('bypass node access');
     $authenticated_role->save();
     $this->drupalLogin($authenticated_user);

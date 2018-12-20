@@ -22,8 +22,11 @@ function d_p_subscribe_file_preprocess_paragraph(&$variables) {
       $styles_ids[] = 'responsive_image_768_banner';
       d_p_generate_image_set($variables, $styles_ids, $bundle);
       $variables['#attached']['library'][] = 'd_p_subscribe_file/d_p_subscribe_file';
-      $form = \Drupal::formBuilder()
-        ->getForm('Drupal\d_p_subscribe_file\Forms\SubscribeFileForm', $paragraph);
+
+      $formClass = \Drupal::service('class_resolver')->getInstanceFromDefinition('Drupal\d_p_subscribe_file\Forms\SubscribeFileForm');
+      $formClass->setParagraph($paragraph);
+      $form = \Drupal::formBuilder()->getForm($formClass);
+
       $variables['additional_info'] = $variables['content']['field_d_p_sf_additional_info'];
       unset($variables['content']['field_d_p_sf_additional_info']);
       $variables['subscribe_file_form'] = $form;

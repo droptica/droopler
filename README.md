@@ -1,5 +1,5 @@
-# Droopler template for new project # 
-<img src="https://demo.droopler.com/themes/custom/droopler_subtheme/logo.png" width=300 alt="Droopler Logo" />
+# Droopler template for new project #
+<img src="https://demo.droopler.com/themes/custom/droopler_subtheme/logo.svg" width=300 alt="Droopler Logo" />
 
 ## What is Droopler? ##
 Droopler is a Drupal 8 profile designed to kickstart a new webpage in a few minutes. It's based on the latest frontend technologies, including Bootstrap 4. The maintainer of Droopler is [Droptica](https://droptica.com).
@@ -24,17 +24,16 @@ This code includes:
 
 ## How to build the website? ##
 
-First download this repository and set webserver's web root to **/web** directory. Then perform the folowing steps:
-
 **1) Run Composer**
 
 ```sh
-$ composer install
+$ composer create-project droptica/droopler-project droopler
+$ cd droopler
 $ composer drupal-scaffold
 $ composer install
 ```
 
-No, it's not a mistake. Run the composer twice to put some external assets into proper directories. The scaffold thing between makes sure that all files are on their place.
+The *composer install* must be run here to put some external assets into proper directories. The scaffold command makes sure that all files like *index.php* are on their place.
 
 **2) Run npm**
 

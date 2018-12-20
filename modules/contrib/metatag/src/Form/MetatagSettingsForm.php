@@ -4,7 +4,6 @@ namespace Drupal\metatag\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\metatag\Form\MetatagDefaultsForm;
 
 /**
  * Defines the configuration export form.

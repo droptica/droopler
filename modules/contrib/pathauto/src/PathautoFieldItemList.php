@@ -7,7 +7,7 @@ use Drupal\path\Plugin\Field\FieldType\PathFieldItemList;
 class PathautoFieldItemList extends PathFieldItemList {
 
   /**
-   * @inheritDoc
+   * @{inheritdoc}
    */
   protected function delegateMethod($method) {
     // @todo Workaround until this is fixed, see
@@ -27,7 +27,7 @@ class PathautoFieldItemList extends PathFieldItemList {
   }
 
   /**
-   * @inheritDoc
+   * @{inheritdoc}
    */
   protected function computeValue() {
     parent::computeValue();

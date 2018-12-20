@@ -61,6 +61,11 @@ class ParagraphsContentModerationTest extends JavascriptTestBase {
     $this->addParagraphsType('text');
     $this->addFieldtoParagraphType('text', 'field_text', 'text');
 
+    $this->createEditorialWorkflow('paragraphed_moderated_test');
+    $type_plugin = $this->workflow->getTypePlugin();
+    $type_plugin->addEntityTypeAndBundle('paragraphs_library_item', 'paragraphs_library_item');
+    $this->workflow->save();
+
     $this->adminUser = $this->drupalCreateUser([
       'access administration pages',
       'view any unpublished content',
@@ -68,15 +73,16 @@ class ParagraphsContentModerationTest extends JavascriptTestBase {
       'revert all revisions',
       'view latest version',
       'view any unpublished content',
-      'use editorial transition create_new_draft',
-      'use editorial transition publish',
-      'use editorial transition archived_published',
-      'use editorial transition archived_draft',
-      'use editorial transition archive',
+      'use ' . $this->workflow->id() . ' transition create_new_draft',
+      'use ' . $this->workflow->id() . ' transition publish',
+      'use ' . $this->workflow->id() . ' transition archived_published',
+      'use ' . $this->workflow->id() . ' transition archived_draft',
+      'use ' . $this->workflow->id() . ' transition archive',
       'administer nodes',
       'bypass node access',
       'administer paragraphs library',
       'access paragraphs_library_items entity browser pages',
+      'administer workflows'
     ]);
 
     $this->editorUser = $this->drupalCreateUser([
@@ -84,11 +90,11 @@ class ParagraphsContentModerationTest extends JavascriptTestBase {
       'view all revisions',
       'view any unpublished content',
       'view latest version',
-      'use editorial transition create_new_draft',
-      'use editorial transition publish',
-      'use editorial transition archived_published',
-      'use editorial transition archived_draft',
-      'use editorial transition archive',
+      'use ' . $this->workflow->id() . ' transition create_new_draft',
+      'use ' . $this->workflow->id() . ' transition publish',
+      'use ' . $this->workflow->id() . ' transition archived_published',
+      'use ' . $this->workflow->id() . ' transition archived_draft',
+      'use ' . $this->workflow->id() . ' transition archive',
       'access paragraphs_library_items entity browser pages',
       'create paragraph library item',
       'create paragraphed_moderated_test content',
@@ -106,12 +112,6 @@ class ParagraphsContentModerationTest extends JavascriptTestBase {
     $this->drupalPlaceBlock('local_tasks_block');
     $this->drupalPlaceBlock('local_actions_block');
     $this->drupalPlaceBlock('page_title_block');
-
-    $workflow = Workflow::load('editorial');
-    $type_plugin = $workflow->getTypePlugin();
-    $type_plugin->addEntityTypeAndBundle('node', 'paragraphed_moderated_test');
-    $type_plugin->addEntityTypeAndBundle('paragraphs_library_item', 'paragraphs_library_item');
-    $workflow->save();
 
     $this->drupalLogin($this->adminUser);
   }
@@ -404,6 +404,14 @@ class ParagraphsContentModerationTest extends JavascriptTestBase {
       ->condition($library_item->getEntityType()->getKey('id'), $library_item->id())
       ->execute();
     $this->assertEquals(6, count($library_items));
+
+    // Assert that Paragraph types cannot be selected in the UI.
+    $this->drupalLogin($this->adminUser);
+    $this->drupalGet('admin/config/workflow/workflows/manage/' . $this->workflow->id());
+    $assert_session->pageTextNotContains('Paragraph types');
+    $assert_session->pageTextContains('Content types');
+    $assert_session->elementNotExists('css', 'a[href$="' . $this->workflow->id() . '/type/paragraph"]');
+    $assert_session->elementExists('css', 'a[href$="' . $this->workflow->id() . '/type/node"]');
   }
 
   /**

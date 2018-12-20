@@ -1,9 +1,13 @@
 {
     "name": "doctrine/common",
     "type": "library",
-    "description": "Common Library for Doctrine projects",
-    "keywords": ["collections", "spl", "eventmanager", "annotations", "persistence"],
-    "homepage": "https://www.doctrine-project.org",
+    "description": "PHP Doctrine Common project is a library that provides additional functionality that other Doctrine projects depend on such as better reflection support, persistence interfaces, proxies, event system and much more.",
+    "keywords": [
+        "php",
+        "common",
+        "doctrine"
+    ],
+    "homepage": "https://www.doctrine-project.org/projects/common.html",
     "license": "MIT",
     "authors": [
         {"name": "Guilherme Blanco", "email": "guilhermeblanco@gmail.com"},
@@ -22,7 +26,7 @@
         "doctrine/annotations": "^1.0",
         "doctrine/event-manager": "^1.0",
         "doctrine/reflection": "^1.0",
-        "doctrine/persistence": "^1.0"
+        "doctrine/persistence": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.3",
@@ -42,7 +46,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.9.x-dev"
+            "dev-master": "2.10.x-dev"
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Drupal\features\Plugin\FeaturesAssignment;
 
-use Drupal\component\Utility\Unicode;
+use Drupal\Component\Utility\Unicode;
 use Drupal\features\FeaturesAssignmentMethodBase;
 
 /**
@@ -37,7 +37,7 @@ class FeaturesAssignmentBaseType extends FeaturesAssignmentMethodBase {
     foreach ($config_collection as $item_name => $item) {
       if (in_array($item->getType(), $config_base_types)) {
         if (is_null($this->featuresManager->findPackage($item->getShortName())) && !$item->getPackage()) {
-          $description = $this->t('Provides @label @type and related configuration.', array('@label' => $item->getLabel(), '@type' => Unicode::strtolower($config_types[$item->getType()])));
+          $description = $this->t('Provides @label @type and related configuration.', ['@label' => $item->getLabel(), '@type' => Unicode::strtolower($config_types[$item->getType()])]);
           if (isset($item->getData()['description'])) {
             $description .= ' ' . $item->getData()['description'];
           }
@@ -59,7 +59,7 @@ class FeaturesAssignmentBaseType extends FeaturesAssignmentMethodBase {
     foreach ($content_base_types as $entity_type_id) {
       if (!isset($packages[$entity_type_id]) && isset($entity_types[$entity_type_id])) {
         $label = $entity_types[$entity_type_id]->getLabel();
-        $description = $this->t('Provide @label related configuration.', array('@label' => $label));
+        $description = $this->t('Provide @label related configuration.', ['@label' => $label]);
         $this->featuresManager->initPackage($entity_type_id, $label, $description, 'module', $current_bundle);
       }
     }

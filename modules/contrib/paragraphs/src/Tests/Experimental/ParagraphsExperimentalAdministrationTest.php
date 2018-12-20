@@ -146,7 +146,7 @@ class ParagraphsExperimentalAdministrationTest extends ParagraphsExperimentalTes
 
     // Assert suggested 'Add a paragraph type' link when there is no type yet.
     $this->drupalGet('admin/structure/paragraphs_type');
-    $this->assertText('There is no Paragraphs type yet.');
+    $this->assertText('There are no paragraphs type entities yet.');
     $this->drupalGet('admin/structure/types/manage/paragraphs/fields/add-field');
     $edit = [
       'new_storage_type' => 'field_ui:entity_reference_revisions:paragraph',

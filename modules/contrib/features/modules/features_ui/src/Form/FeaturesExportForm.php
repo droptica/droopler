@@ -139,10 +139,10 @@ class FeaturesExportForm extends FormBase {
     // callback.
     $form['#packages'] = $packages;
     $form['#profile_package'] = $current_bundle->getProfileName();
-    $form['header'] = array(
+    $form['header'] = [
       '#type' => 'container',
-      '#attributes' => array('class' => 'features-header'),
-    );
+      '#attributes' => ['class' => 'features-header'],
+    ];
 
     $bundle_options = $this->assigner->getBundleOptions();
 
@@ -153,29 +153,29 @@ class FeaturesExportForm extends FormBase {
 
     $form['#prefix'] = '<div id="edit-features-wrapper">';
     $form['#suffix'] = '</div>';
-    $form['header']['bundle'] = array(
+    $form['header']['bundle'] = [
       '#title' => $this->t('Bundle'),
       '#type' => 'select',
       '#options' => $bundle_options,
       '#default_value' => $current_bundle->getMachineName(),
       '#prefix' => '<div id="edit-package-set-wrapper">',
       '#suffix' => '</div>',
-      '#ajax' => array(
+      '#ajax' => [
         'callback' => '::updatePreview',
         'wrapper' => 'edit-features-preview-wrapper',
-      ),
-      '#attributes' => array(
+      ],
+      '#attributes' => [
         'data-new-package-set' => 'status',
-      ),
-    );
+      ],
+    ];
 
     $form['preview'] = $this->buildListing($packages, $current_bundle);
 
-    $form['#attached'] = array(
-      'library' => array(
+    $form['#attached'] = [
+      'library' => [
         'features_ui/drupal.features_ui.admin',
-      ),
-    );
+      ],
+    ];
 
     if (\Drupal::currentUser()->hasPermission('export configuration')) {
       // Offer available generation methods.
@@ -183,24 +183,24 @@ class FeaturesExportForm extends FormBase {
       // Sort generation methods by weight.
       uasort($generation_info, '\Drupal\Component\Utility\SortArray::sortByWeightElement');
 
-      $form['description'] = array(
+      $form['description'] = [
         '#markup' => '<p>' . $this->t('Use an export method button below to generate the selected features.') . '</p>',
-      );
+      ];
 
-      $form['actions'] = array('#type' => 'actions', '#tree' => TRUE);
+      $form['actions'] = ['#type' => 'actions', '#tree' => TRUE];
       foreach ($generation_info as $method_id => $method) {
-        $form['actions'][$method_id] = array(
+        $form['actions'][$method_id] = [
           '#type' => 'submit',
           '#name' => $method_id,
-          '#value' => $this->t('@name', array('@name' => $method['name'])),
-          '#attributes' => array(
+          '#value' => $this->t('@name', ['@name' => $method['name']]),
+          '#attributes' => [
             'title' => Html::escape($method['description']),
-          ),
-        );
+          ],
+        ];
       }
     }
 
-    $form['#pre_render'][] = array(get_class($this), 'preRenderRemoveInvalidCheckboxes');
+    $form['#pre_render'][] = [get_class($this), 'preRenderRemoveInvalidCheckboxes'];
 
     return $form;
   }
@@ -230,16 +230,16 @@ class FeaturesExportForm extends FormBase {
    */
   protected function buildListing(array $packages, FeaturesBundleInterface $bundle) {
 
-    $header = array(
-      'name' => array('data' => $this->t('Feature')),
-      'machine_name' => array('data' => $this->t('')),
-      'details' => array('data' => $this->t('Description'), 'class' => array(RESPONSIVE_PRIORITY_LOW)),
-      'version' => array('data' => $this->t('Version'), 'class' => array(RESPONSIVE_PRIORITY_LOW)),
-      'status' => array('data' => $this->t('Status'), 'class' => array(RESPONSIVE_PRIORITY_LOW)),
-      'state' => array('data' => $this->t('State'), 'class' => array(RESPONSIVE_PRIORITY_LOW)),
-    );
+    $header = [
+      'name' => ['data' => $this->t('Feature')],
+      'machine_name' => ['data' => $this->t('')],
+      'details' => ['data' => $this->t('Description'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+      'version' => ['data' => $this->t('Version'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+      'status' => ['data' => $this->t('Status'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+      'state' => ['data' => $this->t('State'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+    ];
 
-    $options = array();
+    $options = [];
     $first = TRUE;
     foreach ($packages as $package) {
       if ($first && $package->getStatus() == FeaturesManagerInterface::STATUS_NO_EXPORT) {
@@ -250,25 +250,25 @@ class FeaturesExportForm extends FormBase {
           continue;
         }
         $first = FALSE;
-        $options[] = array(
-          'name' => array(
+        $options[] = [
+          'name' => [
             'data' => $this->t('The following packages are not exported.'),
             'class' => 'features-export-header-row',
             'colspan' => 6,
-          ),
-        );
+          ],
+        ];
       }
       $options[$package->getMachineName()] = $this->buildPackageDetail($package, $bundle);
     }
 
-    $element = array(
+    $element = [
       '#type' => 'tableselect',
       '#header' => $header,
       '#options' => $options,
-      '#attributes' => array('class' => array('features-listing')),
+      '#attributes' => ['class' => ['features-listing']],
       '#prefix' => '<div id="edit-features-preview-wrapper">',
       '#suffix' => '</div>',
-    );
+    ];
 
     return $element;
   }
@@ -287,12 +287,12 @@ class FeaturesExportForm extends FormBase {
   protected function buildPackageDetail(Package $package, FeaturesBundleInterface $bundle) {
     $config_collection = $this->featuresManager->getConfigCollection();
 
-    $url = Url::fromRoute('features.edit', array('featurename' => $package->getMachineName()));
+    $url = Url::fromRoute('features.edit', ['featurename' => $package->getMachineName()]);
 
-    $element['name'] = array(
+    $element['name'] = [
       'data' => \Drupal::l($package->getName(), $url),
-      'class' => array('feature-name'),
-    );
+      'class' => ['feature-name'],
+    ];
     $machine_name = $package->getMachineName();
     // Except for the 'unpackaged' pseudo-package, display the full name, since
     // that's what will be generated.
@@ -300,128 +300,128 @@ class FeaturesExportForm extends FormBase {
       $machine_name = $bundle->getFullName($machine_name);
     }
     $element['machine_name'] = $machine_name;
-    $element['status'] = array(
+    $element['status'] = [
       'data' => $this->featuresManager->statusLabel($package->getStatus()),
-      'class' => array('column-nowrap'),
-    );
+      'class' => ['column-nowrap'],
+    ];
     // Use 'data' instead of plain string value so a blank version doesn't
     // remove column from table.
-    $element['version'] = array(
+    $element['version'] = [
       'data' => Html::escape($package->getVersion()),
-      'class' => array('column-nowrap'),
-    );
+      'class' => ['column-nowrap'],
+    ];
     $overrides = $this->featuresManager->detectOverrides($package);
     $new_config = $this->featuresManager->detectNew($package);
-    $conflicts = array();
-    $missing = array();
-    $moved = array();
+    $conflicts = [];
+    $missing = [];
+    $moved = [];
 
     if ($package->getStatus() == FeaturesManagerInterface::STATUS_NO_EXPORT) {
-      $overrides = array();
-      $new_config = array();
+      $overrides = [];
+      $new_config = [];
     }
     // Bundle package configuration by type.
-    $package_config = array();
+    $package_config = [];
     foreach ($package->getConfig() as $item_name) {
       if (isset($config_collection[$item_name])) {
         $item = $config_collection[$item_name];
-        $package_config[$item->getType()][] = array(
+        $package_config[$item->getType()][] = [
           'name' => Html::escape($item_name),
           'label' => Html::escape($item->getLabel()),
           'class' => in_array($item_name, $overrides) ? 'features-override' :
             (in_array($item_name, $new_config) ? 'features-detected' : ''),
-        );
+        ];
       }
     }
     // Conflict config from other modules.
     foreach ($package->getConfigOrig() as $item_name) {
       if (!isset($config_collection[$item_name])) {
         $missing[] = $item_name;
-        $package_config['missing'][] = array(
+        $package_config['missing'][] = [
           'name' => Html::escape($item_name),
           'label' => Html::escape($item_name),
           'class' => 'features-missing',
-        );
+        ];
       }
       elseif (!in_array($item_name, $package->getConfig())) {
         $item = $config_collection[$item_name];
         if (empty($item->getProvider())) {
           $conflicts[] = $item_name;
           $package_name = !empty($item->getPackage()) ? $item->getPackage() : $this->t('PACKAGE NOT ASSIGNED');
-          $package_config[$item->getType()][] = array(
+          $package_config[$item->getType()][] = [
             'name' => Html::escape($package_name),
             'label' => Html::escape($item->getLabel()),
             'class' => 'features-conflict',
-          );
+          ];
         }
         else {
           $moved[] = $item_name;
           $package_name = !empty($item->getPackage()) ? $item->getPackage() : $this->t('PACKAGE NOT ASSIGNED');
-          $package_config[$item->getType()][] = array(
-            'name' => $this->t('Moved to @package', array('@package' => $package_name)),
+          $package_config[$item->getType()][] = [
+            'name' => $this->t('Moved to @package', ['@package' => $package_name]),
             'label' => Html::escape($item->getLabel()),
             'class' => 'features-moved',
-          );
+          ];
         }
       }
     }
     // Add dependencies.
-    $package_config['dependencies'] = array();
+    $package_config['dependencies'] = [];
     foreach ($package->getDependencies() as $dependency) {
-      $package_config['dependencies'][] = array(
+      $package_config['dependencies'][] = [
         'name' => $dependency,
-        'label' => $this->moduleHandler->getName($dependency),
+        'label' => $this->moduleHandler->moduleExists($dependency) ? $this->moduleHandler->getName($dependency) : $dependency,
         'class' => '',
-      );
+      ];
     }
 
     $class = '';
     $state_links = [];
     if (!empty($conflicts)) {
-      $state_links[] = array(
+      $state_links[] = [
         '#type' => 'link',
         '#title' => $this->t('Conflicts'),
-        '#url' => Url::fromRoute('features.edit', array('featurename' => $package->getMachineName())),
-        '#attributes' => array('class' => array('features-conflict')),
-      );
+        '#url' => Url::fromRoute('features.edit', ['featurename' => $package->getMachineName()]),
+        '#attributes' => ['class' => ['features-conflict']],
+      ];
     }
     if (!empty($overrides)) {
-      $state_links[] = array(
+      $state_links[] = [
         '#type' => 'link',
         '#title' => $this->featuresManager->stateLabel(FeaturesManagerInterface::STATE_OVERRIDDEN),
-        '#url' => Url::fromRoute('features.diff', array('featurename' => $package->getMachineName())),
-        '#attributes' => array('class' => array('features-override')),
-      );
+        '#url' => Url::fromRoute('features.diff', ['featurename' => $package->getMachineName()]),
+        '#attributes' => ['class' => ['features-override']],
+      ];
     }
     if (!empty($new_config)) {
-      $state_links[] = array(
+      $state_links[] = [
         '#type' => 'link',
         '#title' => $this->t('New detected'),
-        '#url' => Url::fromRoute('features.diff', array('featurename' => $package->getMachineName())),
-        '#attributes' => array('class' => array('features-detected')),
-      );
+        '#url' => Url::fromRoute('features.diff', ['featurename' => $package->getMachineName()]),
+        '#attributes' => ['class' => ['features-detected']],
+      ];
     }
     if (!empty($missing) && ($package->getStatus() == FeaturesManagerInterface::STATUS_INSTALLED)) {
-      $state_links[] = array(
+      $state_links[] = [
         '#type' => 'link',
         '#title' => $this->t('Missing'),
-        '#url' => Url::fromRoute('features.edit', array('featurename' => $package->getMachineName())),
-        '#attributes' => array('class' => array('features-missing')),
-      );
+        '#url' => Url::fromRoute('features.edit', ['featurename' => $package->getMachineName()]),
+        '#attributes' => ['class' => ['features-missing']],
+      ];
     }
     if (!empty($moved)) {
-      $state_links[] = array(
+      $state_links[] = [
         '#type' => 'link',
         '#title' => $this->t('Moved'),
-        '#url' => Url::fromRoute('features.edit', array('featurename' => $package->getMachineName())),
-        '#attributes' => array('class' => array('features-moved')),
-      );
+        '#url' => Url::fromRoute('features.edit', ['featurename' => $package->getMachineName()]),
+        '#attributes' => ['class' => ['features-moved']],
+      ];
     }
     if (!empty($state_links)) {
-      $element['state'] = array(
+      $element['state'] = [
         'data' => $state_links,
-        'class' => array('column-nowrap'),
-      );
+        'class' => ['column-nowrap'],
+      ];
     }
     else {
       $element['state'] = '';
@@ -473,7 +473,7 @@ class FeaturesExportForm extends FormBase {
     );
     $details['table'] = array(
       '#type' => 'details',
-      '#title' => array('#markup' => $this->t('Included configuration')),
+      '#title' => $this->t('Included configuration'),
       '#description' => array('data' => $element['table']),
     );
     $element['details'] = array(

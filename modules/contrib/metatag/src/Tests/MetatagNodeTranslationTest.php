@@ -45,6 +45,9 @@ class MetatagNodeTranslationTest extends WebTestBase {
    */
   protected $adminUser;
 
+  /**
+   * Setup basic environment.
+   */
   protected function setUp() {
     parent::setUp();
 

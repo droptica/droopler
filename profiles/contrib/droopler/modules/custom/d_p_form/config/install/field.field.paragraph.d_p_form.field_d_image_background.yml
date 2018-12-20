@@ -24,7 +24,7 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: 'backgrounds/[current-page:url:args:value:0]_[current-page:url:args:value:1]'
+  file_directory: 'backgrounds/[current-date:custom:Y-m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''

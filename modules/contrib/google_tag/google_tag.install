@@ -25,9 +25,9 @@ function google_tag_requirements($phase) {
     }
   }
   if ($phase == 'runtime' || $phase == 'update' || $phase == 'install') {
+    $phase == 'install' ? require_once __DIR__ . '/google_tag.module' : '';
     // Adapted from system_requirements().
     $directory = 'public://google_tag';
-    $phase == 'install' ? module_load_include('module', 'google_tag') : '';
     if (!is_dir($directory) || !_google_tag_is_writable($directory) || !_google_tag_is_executable($directory)) {
       __file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
     }

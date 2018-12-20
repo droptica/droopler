@@ -15,9 +15,9 @@ function features_help($route_name, RouteMatchInterface $route_match) {
     case 'help.page.features':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Features module provides a user interface for exporting bundles of configuration into modules. For more information, see the online documentation for <a href=":url">Features module</a>', array(
+      $output .= '<p>' . t('The Features module provides a user interface for exporting bundles of configuration into modules. For more information, see the online documentation for <a href=":url">Features module</a>', [
         ':url' => 'http://drupal.org/node/2404427',
-      )) . '</p>';
+      ]) . '</p>';
       return $output;
   }
 }
@@ -37,9 +37,9 @@ function features_file_download($uri) {
     // "export configuration" permission, token is validated by the controller.
     // @see \Drupal\features\Controller\FeaturesController::downloadExport()
     if ($route == 'features.export_download') {
-      return array(
+      return [
         'Content-disposition' => 'attachment; filename="' . $target . '"',
-      );
+      ];
     }
   }
 }

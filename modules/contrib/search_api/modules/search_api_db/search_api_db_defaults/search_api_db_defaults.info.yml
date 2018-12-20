@@ -1,0 +1,20 @@
+type: module
+name: Database Search Defaults
+description: Enable this module for a best-practice default setup of Search API with the Database backend. After installation it is recommended to uninstall this module again for performance reasons. The provided configuration will not be removed.
+package: Search
+# core: 8.x
+dependencies:
+  - drupal:comment
+  - drupal:field
+  - drupal:image
+  - drupal:node
+  - drupal:text
+  - drupal:user
+  - drupal:views
+  - search_api:search_api_db
+
+# Information added by Drupal.org packaging script on 2018-11-18
+version: '8.x-1.11'
+core: '8.x'
+project: 'search_api'
+datestamp: 1542564486

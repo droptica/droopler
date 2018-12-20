@@ -35,3 +35,20 @@ function config_update_ui_help($route_name, RouteMatchInterface $route_match) {
       return '<p>' . t('Most configuration is organized into a hierarchy of settings; at a minimum, it is a one-level hierarchy where each setting has a name and a value, and the hierarchy comes in when some of the settings have multiple components.') . '</p><p>' . t('Configuration items are normalized and formatted before computing differences. The normalization step alphabetizes the components at each level of the hierarchy, and removes a few components whose differences should be ignored, such as the UUID. The formatting step shows the full hierarchy of each configuration value with :: separators for the hierarchy levels, and a : separator between the lowest-level setting name and the value, so that in a line-by-line diff you can always see which values are actually different. Green lines with + signs have been added, and yellow lines with - signs have been removed.') . '</p><p>' . t('Note that differences are considering the base configuration, without overrides from your settings.php file, or translations.') . '</p>';
   }
 }
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function config_update_ui_menu_links_discovered_alter(&$links) {
+  if (\Drupal::moduleHandler()->moduleExists('admin_toolbar_tools')) {
+    // Add the Updates report link to the Tools menu, but only if the
+    // Admin Toolbar Extra Tools module is present.
+    $links['admin_toolbar_tools.config.update'] = [
+      'title' => t('Updates report'),
+      'route_name' => 'config_update_ui.report',
+      'menu_name' => 'admin',
+      'parent' => 'config.sync',
+      'weight' => 3,
+    ];
+  }
+}

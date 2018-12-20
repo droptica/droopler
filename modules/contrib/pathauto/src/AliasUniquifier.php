@@ -38,7 +38,7 @@ class AliasUniquifier implements AliasUniquifierInterface {
   /**
    * The route provider service.
    *
-   * @var \Drupal\Core\Routing\RouteProviderInterface.
+   * @var \Drupal\Core\Routing\RouteProviderInterface
    */
   protected $routeProvider;
 
@@ -60,6 +60,8 @@ class AliasUniquifier implements AliasUniquifierInterface {
    *   The module handler.
    * @param \Drupal\Core\Routing\RouteProviderInterface $route_provider
    *   The route provider service.
+   * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
+   *   The alias manager.
    */
   public function __construct(ConfigFactoryInterface $config_factory, AliasStorageHelperInterface $alias_storage_helper, ModuleHandlerInterface $module_handler, RouteProviderInterface $route_provider, AliasManagerInterface $alias_manager) {
     $this->configFactory = $config_factory;

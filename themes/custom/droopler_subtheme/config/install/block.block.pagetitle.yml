@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - ctools
+  theme:
+  - droopler_subtheme
+id: pagetitle
+theme: droopler_subtheme
+region: content
+weight: -2
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      blog_post: blog_post
+      content_page: content_page
+    negate: true
+    context_mapping:
+      node: '@node.node_route_context:node'

@@ -807,7 +807,7 @@ class DateTimePlusTest extends TestCase {
   public function testValidateFormat() {
     // Check that an input that does not strictly follow the input format will
     // produce the desired date. In this case the year string '11' doesn't
-    // precisely match the 'Y' formater parameter, but PHP will parse it
+    // precisely match the 'Y' formatter parameter, but PHP will parse it
     // regardless. However, when formatted with the same string, the year will
     // be output with four digits. With the ['validate_format' => FALSE]
     // $settings, this will not thrown an exception.
@@ -889,6 +889,31 @@ class DateTimePlusTest extends TestCase {
     }
     $date = new DateTimePlus('now', 'Australia/Sydney');
     $date->setTimezone(new \DateTimeZone('America/New_York'))->nonexistent();
+  }
+
+  /**
+   * @covers ::getPhpDateTime
+   */
+  public function testGetPhpDateTime() {
+    $new_york = new \DateTimeZone('America/New_York');
+    $berlin = new \DateTimeZone('Europe/Berlin');
+
+    // Test retrieving a cloned copy of the wrapped \DateTime object, and that
+    // altering it does not change the DateTimePlus object.
+    $datetimeplus = DateTimePlus::createFromFormat('Y-m-d H:i:s', '2017-07-13 22:40:00', $new_york, ['langcode' => 'en']);
+    $this->assertEquals(1500000000, $datetimeplus->getTimestamp());
+    $this->assertEquals('America/New_York', $datetimeplus->getTimezone()->getName());
+
+    $datetime = $datetimeplus->getPhpDateTime();
+    $this->assertInstanceOf('DateTime', $datetime);
+    $this->assertEquals(1500000000, $datetime->getTimestamp());
+    $this->assertEquals('America/New_York', $datetime->getTimezone()->getName());
+
+    $datetime->setTimestamp(1400000000)->setTimezone($berlin);
+    $this->assertEquals(1400000000, $datetime->getTimestamp());
+    $this->assertEquals('Europe/Berlin', $datetime->getTimezone()->getName());
+    $this->assertEquals(1500000000, $datetimeplus->getTimestamp());
+    $this->assertEquals('America/New_York', $datetimeplus->getTimezone()->getName());
   }
 
 }

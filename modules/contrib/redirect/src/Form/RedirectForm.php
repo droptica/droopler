@@ -50,7 +50,7 @@ class RedirectForm extends ContentEntityForm {
           $redirect->setRedirect($redirect_url, $redirect_query, $redirect_options);
         }
         catch (MatchingRouteNotFoundException $e) {
-          drupal_set_message(t('Invalid redirect URL %url provided.', array('%url' => $redirect_url)), 'warning');
+          drupal_set_message($this->t('Invalid redirect URL %url provided.', array('%url' => $redirect_url)), 'warning');
         }
       }
 
@@ -71,15 +71,15 @@ class RedirectForm extends ContentEntityForm {
       foreach (\Drupal::languageManager()->getLanguages(LanguageInterface::STATE_CONFIGURABLE) as $langcode => $language) {
         $form['language']['widget'][0]['value']['#options'][$langcode] = $language->getName();
       }
-      $form['language']['widget'][0]['value']['#options'][LanguageInterface::LANGCODE_NOT_SPECIFIED] = t('- All languages -');
+      $form['language']['widget'][0]['value']['#options'][LanguageInterface::LANGCODE_NOT_SPECIFIED] = $this->t('- All languages -');
     }
 
     $default_code = $redirect->getStatusCode() ? $redirect->getStatusCode() : \Drupal::config('redirect.settings')->get('default_status_code');
 
     $form['status_code'] = array(
       '#type' => 'select',
-      '#title' => t('Redirect status'),
-      '#description' => t('You can find more information about HTTP redirect status codes at <a href="@status-codes">@status-codes</a>.', array('@status-codes' => 'http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection')),
+      '#title' => $this->t('Redirect status'),
+      '#description' => $this->t('You can find more information about HTTP redirect status codes at <a href="@status-codes">@status-codes</a>.', array('@status-codes' => 'http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection')),
       '#default_value' => $default_code,
       '#options' => redirect_status_code_options(),
     );
@@ -96,13 +96,13 @@ class RedirectForm extends ContentEntityForm {
     $redirect = $form_state->getValue(array('redirect_redirect', 0));
 
     if ($source['path'] == '<front>') {
-      $form_state->setErrorByName('redirect_source', t('It is not allowed to create a redirect from the front page.'));
+      $form_state->setErrorByName('redirect_source', $this->t('It is not allowed to create a redirect from the front page.'));
     }
     if (strpos($source['path'], '#') !== FALSE) {
-      $form_state->setErrorByName('redirect_source', t('The anchor fragments are not allowed.'));
+      $form_state->setErrorByName('redirect_source', $this->t('The anchor fragments are not allowed.'));
     }
     if (strpos($source['path'], '/') === 0) {
-      $form_state->setErrorByName('redirect_source', t('The url to redirect from should not start with a forward slash (/).'));
+      $form_state->setErrorByName('redirect_source', $this->t('The url to redirect from should not start with a forward slash (/).'));
     }
 
     try {
@@ -113,7 +113,7 @@ class RedirectForm extends ContentEntityForm {
       // a valid route. Otherwise the validation will fail on the redirect path
       // being an invalid route.
       if ($source_url->toString() == $redirect_url->toString()) {
-        $form_state->setErrorByName('redirect_redirect', t('You are attempting to redirect the page to itself. This will result in an infinite loop.'));
+        $form_state->setErrorByName('redirect_redirect', $this->t('You are attempting to redirect the page to itself. This will result in an infinite loop.'));
       }
     }
     catch (\InvalidArgumentException $e) {
@@ -133,7 +133,7 @@ class RedirectForm extends ContentEntityForm {
     if (!empty($redirects)) {
       $redirect = array_shift($redirects);
       if ($this->entity->isNew() || $redirect->id() != $this->entity->id()) {
-        $form_state->setErrorByName('redirect_source', t('The source path %source is already being redirected. Do you want to <a href="@edit-page">edit the existing redirect</a>?',
+        $form_state->setErrorByName('redirect_source', $this->t('The source path %source is already being redirected. Do you want to <a href="@edit-page">edit the existing redirect</a>?',
           array(
             '%source' => $source['path'],
             '@edit-page' => $redirect->url('edit-form'))));
@@ -146,7 +146,7 @@ class RedirectForm extends ContentEntityForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     $this->entity->save();
-    drupal_set_message(t('The redirect has been saved.'));
+    drupal_set_message($this->t('The redirect has been saved.'));
     $form_state->setRedirect('redirect.list');
   }
 }

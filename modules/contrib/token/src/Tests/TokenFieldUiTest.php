@@ -2,6 +2,8 @@
 
 namespace Drupal\token\Tests;
 
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\NodeType;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
@@ -41,45 +43,45 @@ class TokenFieldUiTest extends TokenTestBase {
     ]);
     $node_type->save();
 
-    entity_create('field_storage_config', [
+    FieldStorageConfig::create([
       'field_name' => 'field_body',
       'entity_type' => 'node',
       'type' => 'text_with_summary',
     ])->save();
-    entity_create('field_config', [
+    FieldConfig::create([
       'field_name' => 'field_body',
       'label' => 'Body',
       'entity_type' => 'node',
       'bundle' => 'article',
     ])->save();
-    entity_create('field_storage_config', [
+    FieldStorageConfig::create([
       'field_name' => 'field_image',
       'entity_type' => 'node',
       'type' => 'image',
     ])->save();
-    entity_create('field_config', [
+    FieldConfig::create([
       'field_name' => 'field_image',
       'label' => 'Image',
       'entity_type' => 'node',
       'bundle' => 'article',
     ])->save();
-    entity_create('field_storage_config', [
+    FieldStorageConfig::create([
       'field_name' => 'field_image_2',
       'entity_type' => 'node',
       'type' => 'image',
     ])->save();
-    entity_create('field_config', [
+    FieldConfig::create([
       'field_name' => 'field_image_2',
       'label' => 'Image 2',
       'entity_type' => 'node',
       'bundle' => 'article',
     ])->save();
-    entity_create('field_storage_config', [
+    FieldStorageConfig::create([
       'field_name' => 'multivalued_field_image',
       'entity_type' => 'node',
       'type' => 'image',
     ])->save();
-    entity_create('field_config', [
+    FieldConfig::create([
       'field_name' => 'multivalued_field_image',
       'label' => 'Multivalued field image',
       'entity_type' => 'node',

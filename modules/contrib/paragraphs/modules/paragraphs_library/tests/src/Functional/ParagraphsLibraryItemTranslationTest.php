@@ -119,7 +119,7 @@ class ParagraphsLibraryItemTranslationTest extends BrowserTestBase {
     $node = $this->drupalGetNodeByTitle('EN Title');
     $this->drupalGet('node/' . $node->id() . '/edit');
     $page->pressButton('Promote to library');
-    $assert_session->fieldValueEquals('Reusable paragraph (all languages)', 'text: EN Library text (1)');
+    $assert_session->fieldValueEquals('Reusable paragraph', 'text: EN Library text (1)');
     $this->drupalPostForm(NULL, NULL, 'Save');
 
     $assert_session->pageTextContains('EN Title');

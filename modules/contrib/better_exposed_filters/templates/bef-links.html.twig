@@ -1,0 +1,21 @@
+{%
+  set classes = [
+    'bef-links',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% set current_nesting_level = 0 %}
+  {% for child in children %}
+    {% set item = attribute(element, child) %}
+    {% if child in selected %}
+      {% set item = item|merge({'#attributes': {'class': 'bef-link-active'}}) %}
+    {% endif %}
+    {% if isNested %}
+      {% set new_nesting_level = attribute(depth, child) %}
+      {% include '@better_exposed_filters/bef-nested-elements.html.twig' %}
+      {% set current_nesting_level = new_nesting_level %}
+    {% else %}
+      {{ item }}
+    {% endif %}
+  {% endfor %}
+</div>

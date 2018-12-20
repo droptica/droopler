@@ -116,4 +116,5 @@ class UnitTest extends KernelTestBase {
     $this->assertNull($this->tokenService->getTokenInfo('user_role', 'url'));
     $this->assertNull($this->tokenService->getTypeInfo('user_role'));
   }
+
 }

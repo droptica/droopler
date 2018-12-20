@@ -429,7 +429,7 @@ class Package {
       $this->setBundle($features_info['bundle']);
     }
     $this->setRequired(isset($features_info['required']) ? $features_info['required'] : false);
-    $this->setExcluded(isset($features_info['excluded']) ? $features_info['excluded'] : array());
+    $this->setExcluded(isset($features_info['excluded']) ? $features_info['excluded'] : []);
 
     return $this;
   }

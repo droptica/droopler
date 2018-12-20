@@ -11,13 +11,13 @@ use Drupal\Core\Entity\TypedData\EntityDataDefinitionInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\Element;
 use Drupal\Component\Utility\Crypt;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\TypedData\DataReferenceDefinitionInterface;
 use Drupal\Core\Url;
 use Drupal\field\FieldStorageConfigInterface;
 use Drupal\menu_link_content\MenuLinkContentInterface;
 use Drupal\node\Entity\Node;
+use Drupal\node\Entity\NodeType;
 use Drupal\node\NodeInterface;
 use Drupal\system\Entity\Menu;
 use Drupal\user\UserInterface;
@@ -90,7 +90,7 @@ function token_token_info_alter(&$info) {
     if (!isset($info['tokens'][$token_type]['url'])) {
       $info['tokens'][$token_type]['url'] = [
         'name' => t('URL'),
-        'description' => t('The URL of the @entity.', ['@entity' => Unicode::strtolower($entity_info->getLabel())]),
+        'description' => t('The URL of the @entity.', ['@entity' => mb_strtolower($entity_info->getLabel())]),
         'module' => 'token',
         'type' => 'url',
       ];
@@ -99,8 +99,8 @@ function token_token_info_alter(&$info) {
     // Add [entity:original] tokens if they do not already exist.
     if (!isset($info['tokens'][$token_type]['original'])) {
       $info['tokens'][$token_type]['original'] = [
-        'name' => t('Original @entity', ['@entity' => Unicode::strtolower($entity_info->getLabel())]),
-        'description' => t('The original @entity data if the @entity is being updated or saved.', ['@entity' => Unicode::strtolower($entity_info->getLabel())]),
+        'name' => t('Original @entity', ['@entity' => mb_strtolower($entity_info->getLabel())]),
+        'description' => t('The original @entity data if the @entity is being updated or saved.', ['@entity' => mb_strtolower($entity_info->getLabel())]),
         'module' => 'token',
         'type' => $token_type,
       ];
@@ -481,6 +481,7 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
         case 'log':
           $replacements[$original] = (string) $node->revision_log->value;
           break;
+
         case 'content-type':
           $type_name = \Drupal::entityTypeManager()->getStorage('node_type')->load($node->getType())->label();
           $replacements[$original] = $type_name;
@@ -492,7 +493,7 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
     if (($parent_tokens = \Drupal::token()->findWithPrefix($tokens, 'source')) && $source_node = $node->getUntranslated()) {
       $replacements += \Drupal::token()->generate('node', $parent_tokens, ['node' => $source_node], $options, $bubbleable_metadata);
     }
-    if (($node_type_tokens = \Drupal::token()->findWithPrefix($tokens, 'content-type')) && $node_type = node_type_load($node->bundle())) {
+    if (($node_type_tokens = \Drupal::token()->findWithPrefix($tokens, 'content-type')) && $node_type = NodeType::load($node->bundle())) {
       $replacements += \Drupal::token()->generate('content-type', $node_type_tokens, ['node_type' => $node_type], $options, $bubbleable_metadata);
     }
     if (($url_tokens = \Drupal::token()->findWithPrefix($tokens, 'url'))) {
@@ -510,12 +511,15 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
         case 'name':
           $replacements[$original] = $node_type->label();
           break;
+
         case 'machine-name':
           $replacements[$original] = $node_type->id();
           break;
+
         case 'description':
           $replacements[$original] = $node_type->getDescription();
           break;
+
         case 'node-count':
           $count = \Drupal::entityQueryAggregate('node')
             ->aggregate('nid', 'COUNT')
@@ -523,6 +527,7 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
             ->execute();
           $replacements[$original] = (int) $count;
           break;
+
         case 'edit-url':
           $replacements[$original] = $node_type->toUrl('edit-form', $url_options)->toString();
           break;
@@ -554,6 +559,7 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
           $parents = $term_storage->loadAllParents($term->id());
           $root_term = end($parents);
           if ($root_term->id() != $term->id()) {
+            $root_term = \Drupal::service('entity.repository')->getTranslationFromContext($root_term, $langcode);
             $replacements[$original] = $root_term->label();
           }
           break;
@@ -588,6 +594,7 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
         case 'machine-name':
           $replacements[$original] = $vocabulary->id();
           break;
+
         case 'edit-url':
           $replacements[$original] = Url::fromRoute('entity.taxonomy_vocabulary.edit_form', ['taxonomy_vocabulary' => $vocabulary->id()], $url_options)->toString();
           break;
@@ -605,10 +612,12 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
           $basename = pathinfo($file->uri->value, PATHINFO_BASENAME);
           $replacements[$original] = $basename;
           break;
+
         case 'extension':
           $extension = pathinfo($file->uri->value, PATHINFO_EXTENSION);
           $replacements[$original] = $extension;
           break;
+
         case 'size-raw':
           $replacements[$original] = (int) $file->filesize->value;
           break;
@@ -685,24 +694,28 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
         case 'id':
           $replacements[$original] = $link->getPluginId();
           break;
+
         case 'title':
           $replacements[$original] = token_menu_link_translated_title($link, $langcode);
           break;
+
         case 'url':
           $replacements[$original] = $link->getUrlObject()->setAbsolute()->toString();
           break;
-        case 'parent':
 
+        case 'parent':
           /** @var \Drupal\Core\Menu\MenuLinkInterface $parent */
           if ($link->getParent() && $parent = $menu_link_manager->createInstance($link->getParent())) {
             $replacements[$original] = token_menu_link_translated_title($parent, $langcode);
           }
           break;
+
         case 'parents':
           if ($parents = token_menu_link_load_all_parents($link->getPluginId(), $langcode)) {
             $replacements[$original] = token_render_array($parents, $options);
           }
           break;
+
         case 'root';
           if ($link->getParent() && $parent_ids = array_keys(token_menu_link_load_all_parents($link->getPluginId(), $langcode))) {
             $root = $menu_link_manager->createInstance(array_shift($parent_ids));
@@ -745,18 +758,27 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
             $replacements[$original] = token_render_array_value($title);
           }
           break;
+
         case 'url':
           $bubbleable_metadata->addCacheContexts(['url.path']);
           try {
             $url = Url::createFromRequest($request)->setOptions($url_options);
           }
           catch (\Exception $e) {
-            // Url::createFromRequest() can fail, e.g. on 404 pages, fall back
-            // the <current> route.
-            $url = Url::fromUserInput($request->getPathInfo(), $url_options);
+            // Url::createFromRequest() can fail, e.g. on 404 pages.
+            // Fall back and try again with Url::fromUserInput().
+            try {
+              $url = Url::fromUserInput($request->getPathInfo(), $url_options);
+            }
+            catch (\Exception $e) {
+              // Instantiation would fail again on malformed urls.
+            }
           }
-          $replacements[$original] = $url->toString();
+          if (isset($url)) {
+            $replacements[$original] = $url->toString();
+          }
           break;
+
         case 'page-number':
           if ($page = $request->query->get('page')) {
             // @see PagerDefault::execute()
@@ -795,13 +817,19 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
 
     // Chained token relationships.
     if ($url_tokens = \Drupal::token()->findWithPrefix($tokens, 'url')) {
+      $url = NULL;
       try {
         $url = Url::createFromRequest($request)->setOptions($url_options);
       }
       catch (\Exception $e) {
-        // Url::createFromRequest() can fail, e.g. on 404 pages, fall back
-        // the <current> route.
-        $url = Url::fromUserInput($request->getPathInfo(), $url_options);
+        // Url::createFromRequest() can fail, e.g. on 404 pages.
+        // Fall back and try again with Url::fromUserInput().
+        try {
+          $url = Url::fromUserInput($request->getPathInfo(), $url_options);
+        }
+        catch (\Exception $e) {
+          // Instantiation would fail again on malformed urls.
+        }
       }
       // Add cache contexts to ensure this token functions on a per-path basis
       $bubbleable_metadata->addCacheContexts(['url.path']);
@@ -827,29 +855,34 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
           $value = !($url->getOption('alias')) ? \Drupal::service('path.alias_manager')->getAliasByPath($path, $langcode) : $path;
           $replacements[$original] = $value;
           break;
+
         case 'alias':
           // @deprecated
           $alias = \Drupal::service('path.alias_manager')->getAliasByPath($path, $langcode);
           $replacements[$original] = $alias;
           break;
+
         case 'absolute':
           $replacements[$original] = $url->setAbsolute()->toString();
           break;
+
         case 'relative':
           $replacements[$original] = $url->setAbsolute(FALSE)->toString();
           break;
+
         case 'brief':
           $replacements[$original] = preg_replace(['!^https?://!', '!/$!'], '', $url->setAbsolute()->toString());
           break;
+
         case 'unaliased':
           $unaliased = clone $url;
           $replacements[$original] = $unaliased->setAbsolute()->setOption('alias', TRUE)->toString();
           break;
+
         case 'args':
           $value = !($url->getOption('alias')) ? \Drupal::service('path.alias_manager')->getAliasByPath($path, $langcode) : $path;
           $replacements[$original] = token_render_array(explode('/', $value), $options);
           break;
-
       }
     }
 
@@ -874,9 +907,8 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
     foreach ($tokens as $name => $original) {
       switch ($name) {
         case 'url':
-          $entity_has_url = !$entity->isNew() && $entity->hasLinkTemplate('canonical');
-          if (_token_module($type, 'url') == 'token' && $entity_has_url && $url = $entity->toUrl('canonical')->toString()) {
-            $replacements[$original] = $url;
+          if (_token_module($type, 'url') === 'token' && !$entity->isNew() && $entity->hasLinkTemplate('canonical')) {
+            $replacements[$original] = $entity->toUrl('canonical')->toString();
           }
           break;
 
@@ -926,21 +958,26 @@ function token_tokens($type, array $tokens, array $data = [], array $options = [
           $value = is_array($value) ? $renderer->renderPlain($value) : (string) $value;
           $replacements[$original] = $value;
           break;
+
         case 'last':
           $value = $array[$keys[count($keys) - 1]];
           $value = is_array($value) ? $renderer->renderPlain($value) : (string) $value;
-          $replacements[$original] =$value;
+          $replacements[$original] = $value;
           break;
+
         case 'count':
           $replacements[$original] = count($keys);
           break;
+
         case 'keys':
           $replacements[$original] = token_render_array($keys, $options);
           break;
+
         case 'reversed':
           $reversed = array_reverse($array, TRUE);
           $replacements[$original] = token_render_array($reversed, $options);
           break;
+
         case 'join':
           $replacements[$original] = token_render_array($array, ['join' => ''] + $options);
           break;
@@ -1079,7 +1116,7 @@ function book_tokens($type, $tokens, array $data = [], array $options = [], Bubb
     }
   }
   // Book tokens.
-  else if ($type == 'book' && !empty($data['book'])) {
+  elseif ($type == 'book' && !empty($data['book'])) {
     $book = $data['book']->book;
 
     if (!empty($book['bid'])) {
@@ -1091,12 +1128,14 @@ function book_tokens($type, $tokens, array $data = [], array $options = [], Bubb
           case 'title':
             $replacements[$original] = $book_node->getTitle();
             break;
+
           case 'parent':
             if (!empty($book['pid'])) {
               $parent_node = Node::load($book['pid']);
               $replacements[$original] = $parent_node->getTitle();
             }
             break;
+
           case 'parents':
             if ($parents = token_book_load_all_parents($book)) {
               $replacements[$original] = token_render_array($parents, $options);
@@ -1464,7 +1503,7 @@ function field_token_info_alter(&$info) {
         $info['tokens'][$field_token_name]['date']['name'] .= ' ' . t('format');
         $info['tokens'][$field_token_name]['date']['type'] = 'date';
       }
-      if ($field->getType() == 'daterange') {
+      if ($field->getType() == 'daterange' || $field->getType() == 'date_recur') {
         $info['tokens'][$field_token_name]['start_date'] = $info['tokens'][$field_token_name]['value'];
         $info['tokens'][$field_token_name]['start_date']['name'] .= ' ' . t('format');
         $info['tokens'][$field_token_name]['start_date']['type'] = 'date';
@@ -1594,7 +1633,7 @@ function field_tokens($type, $tokens, array $data = [], array $options = [], Bub
       }
       // Handle [entity:field_name:value] and [entity:field_name:0:value]
       // tokens.
-      else if ($field_tokens = \Drupal::token()->findWithPrefix($tokens, $field_name)) {
+      elseif ($field_tokens = \Drupal::token()->findWithPrefix($tokens, $field_name)) {
         $property_token_data = [
           'field_property' => TRUE,
           $data['entity_type'] . '-' . $field_name => $entity->$field_name,
@@ -1692,7 +1731,8 @@ function field_tokens($type, $tokens, array $data = [], array $options = [], Bub
                 case 'mimetype':
                   $replacements[$original] = $image->getMimeType();
                   break;
-                case 'filesize' :
+
+                case 'filesize':
                   $replacements[$original] = $image->getFileSize();
                   break;
               }
@@ -1700,11 +1740,11 @@ function field_tokens($type, $tokens, array $data = [], array $options = [], Bub
           }
         }
       }
-      elseif (in_array($field_item->getFieldDefinition()->getType(), ['datetime', 'daterange']) && in_array($property_name, ['date', 'start_date', 'end_date']) && !empty($field_item->$property_name)) {
-        $timestamp = $field_item->$property_name->getTimestamp();
+      elseif (in_array($field_item->getFieldDefinition()->getType(), ['datetime', 'daterange', 'date_recur']) && in_array($property_name, ['date', 'start_date', 'end_date']) && !empty($field_item->$property_name)) {
+        $timestamp = $field_item->{$property_name}->getTimestamp();
         // If the token is an exact match for the property or the delta and the
         // property, use the timestamp as-is.
-        if($property_name == $token || "$delta:$property_name" == $token) {
+        if ($property_name == $token || "$delta:$property_name" == $token) {
           $replacements[$original] = $timestamp;
         }
         else {

@@ -12,11 +12,15 @@ use Drupal\Console\Core\Utils\TwigRenderer;
 class MetatagGroupGenerator extends Generator {
 
   /**
+   * The console manager.
+   *
    * @var \Drupal\Console\Extension\Manager
    */
   protected $extensionManager;
 
   /**
+   * The twig renderer.
+   *
    * @var \Drupal\Console\Core\Utils\TwigRenderer
    */
   protected $renderer;
@@ -24,8 +28,10 @@ class MetatagGroupGenerator extends Generator {
   /**
    * MetatagGroupGenerator constructor.
    *
-   * @param Drupal\Console\Extension\Manager $extensionManager
-   * @param Drupal\Console\Core\Utils\TwigRenderer $renderer
+   * @param \Drupal\Console\Extension\Manager $extensionManager
+   *   An extension manager.
+   * @param \Drupal\Console\Core\Utils\TwigRenderer $renderer
+   *   Twig renderer.
    */
   public function __construct(Manager $extensionManager, TwigRenderer $renderer) {
     $this->extensionManager = $extensionManager;
@@ -38,12 +44,19 @@ class MetatagGroupGenerator extends Generator {
    * Generator plugin.
    *
    * @param string $base_class
+   *   Base class.
    * @param string $module
+   *   Module name.
    * @param string $label
+   *   Group label.
    * @param string $description
+   *   Group description.
    * @param string $plugin_id
+   *   Plugin ID.
    * @param string $class_name
+   *   Class name.
    * @param string $weight
+   *   Group weight.
    */
   public function generate($base_class, $module, $label, $description, $plugin_id, $class_name, $weight) {
     $parameters = [

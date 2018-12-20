@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\token\Kernel;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\taxonomy\VocabularyInterface;
 
@@ -58,7 +58,7 @@ class EntityTest extends KernelTestBase {
     // Test that when we send the mis-matched entity type into
     // Drupal\Core\Utility\Token::replace() that we still get the tokens
     // replaced.
-    $vocabulary = entity_load('taxonomy_vocabulary', 'tags');
+    $vocabulary = Vocabulary::load('tags');
     $term = $this->addTerm($vocabulary);
     $this->assertIdentical(\Drupal::token()->replace('[vocabulary:name]', ['taxonomy_vocabulary' => $vocabulary]), $vocabulary->label());
     $this->assertIdentical(\Drupal::token()->replace('[term:name][term:vocabulary:name]', ['taxonomy_term' => $term]), $term->label() . $vocabulary->label());
@@ -66,10 +66,10 @@ class EntityTest extends KernelTestBase {
 
   function addTerm(VocabularyInterface $vocabulary, array $term = []) {
     $term += [
-      'name' => Unicode::strtolower($this->randomMachineName(5)),
+      'name' => mb_strtolower($this->randomMachineName(5)),
       'vid' => $vocabulary->id(),
     ];
-    $term = entity_create('taxonomy_term', $term);
+    $term = Term::create($term);
     $term->save();
     return $term;
   }
@@ -91,7 +91,7 @@ class EntityTest extends KernelTestBase {
 
     // Emulate the original entity property that would be available from
     // node_save() and change the title for the node.
-    $node->original = entity_load_unchanged('node', $node->id());
+    $node->original = \Drupal::entityTypeManager()->getStorage('node')->loadUnchanged($node->id());
     $node->title = 'New title';
 
     $tokens = [
@@ -102,4 +102,5 @@ class EntityTest extends KernelTestBase {
     ];
     $this->assertTokens('node', ['node' => $node], $tokens);
   }
+
 }

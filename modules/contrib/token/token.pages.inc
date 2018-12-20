@@ -53,7 +53,7 @@ function template_preprocess_token_tree_link(&$variables) {
       'draggable' => TRUE,
       'autoResize' => FALSE,
     ]),
-   ];
+  ];
 
   $variables['link'] = Link::createFromRoute($variables['text'], 'token.tree', [], $variables['options'])->toRenderable();
   $variables['url'] = new Url('token.tree', [], $variables['options']);

@@ -3,6 +3,8 @@
 namespace Drupal\entity_reference_revisions;
 
 use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FieldItemListTranslationChangesInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\EntityReferenceFieldItemList;
@@ -120,6 +122,30 @@ class EntityReferenceRevisionsFieldItemList extends EntityReferenceFieldItemList
       );
     }
     return $default_value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasAffectingChanges(FieldItemListInterface $original_items, $langcode) {
+    // If there are fewer items, then it is a change.
+    if (count($this) < count($original_items)) {
+      return TRUE;
+    }
+
+    foreach ($this as $delta => $item) {
+      // If this is a different entity, then it is an affecting change.
+      if (!$original_items->offsetExists($delta) || $item->target_id != $original_items[$delta]->target_id) {
+        return TRUE;
+      }
+      // If it is the same entity, only consider it as having affecting changes
+      // if the target entity itself has changes.
+      if ($item->entity && $item->entity->hasTranslation($langcode) && $item->entity->getTranslation($langcode)->hasTranslationChanges()) {
+        return TRUE;
+      }
+    }
+
+    return FALSE;
   }
 
 }

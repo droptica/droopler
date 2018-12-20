@@ -11,6 +11,7 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\Context\Context;
 use Drupal\Core\Plugin\ContextAwarePluginBase;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\pathauto\AliasTypeBatchUpdateInterface;
 use Drupal\pathauto\AliasTypeInterface;
 use Drupal\pathauto\PathautoState;
@@ -25,6 +26,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class EntityAliasTypeBase extends ContextAwarePluginBase implements AliasTypeInterface, AliasTypeBatchUpdateInterface, ContainerFactoryPluginInterface {
+
+  use MessengerTrait;
 
   /**
    * The module handler service.
@@ -151,12 +154,15 @@ class EntityAliasTypeBase extends ContextAwarePluginBase implements AliasTypeInt
       case 'create':
         $query->isNull('ua.source');
         break;
+
       case 'update':
         $query->isNotNull('ua.source');
         break;
+
       case 'all':
         // Nothing to do. We want all paths.
         break;
+
       default:
         // Unknown action. Abort!
         return;
@@ -182,7 +188,7 @@ class EntityAliasTypeBase extends ContextAwarePluginBase implements AliasTypeInt
 
     $updates = $this->bulkUpdate($ids);
     $context['sandbox']['count'] += count($ids);
-    $context['sandbox']['current'] = max($ids);
+    $context['sandbox']['current'] = !empty($ids) ? max($ids) : 0;
     $context['results']['updates'] += $updates;
     $context['message'] = $this->t('Updated alias for %label @id.', array('%label' => $entity_type->getLabel(), '@id' => end($ids)));
 
@@ -255,7 +261,7 @@ class EntityAliasTypeBase extends ContextAwarePluginBase implements AliasTypeInt
    *   An optional array of additional options.
    *
    * @return int
-   *  The number of updated URL aliases.
+   *   The number of updated URL aliases.
    */
   protected function bulkUpdate(array $ids, array $options = array()) {
     $options += array('message' => FALSE);
@@ -274,7 +280,10 @@ class EntityAliasTypeBase extends ContextAwarePluginBase implements AliasTypeInt
     }
 
     if (!empty($options['message'])) {
-      drupal_set_message(\Drupal::translation()->formatPlural(count($ids), 'Updated 1 %label URL alias.', 'Updated @count %label URL aliases.'), array('%label' => $this->getLabel()));
+      $this->messenger->addMessage($this->translationManager
+        ->formatPlural(count($ids), 'Updated 1 %label URL alias.', 'Updated @count %label URL aliases.'), [
+          '%label' => $this->getLabel(),
+        ]);
     }
 
     return $updates;
@@ -329,6 +338,5 @@ class EntityAliasTypeBase extends ContextAwarePluginBase implements AliasTypeInt
     $this->context[$name] = new Context($this->getContextDefinition($name), $value);
     return $this;
   }
-
 
 }

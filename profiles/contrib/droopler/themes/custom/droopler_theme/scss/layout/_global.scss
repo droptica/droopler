@@ -36,6 +36,8 @@ $light-gray-background: $color-hector !default;
   }
   a:not(.btn) {
     @include font-links;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 }
 .no-padding {

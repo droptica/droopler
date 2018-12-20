@@ -1,0 +1,57 @@
+entity.facets_facet.collection:
+  path: '/admin/config/search/facets'
+  defaults:
+    _title: 'Facets'
+    _entity_list: 'facets_facet'
+  requirements:
+    _entity_create_access: 'facets_facet'
+
+entity.facets_facet.add_form:
+  path: '/admin/config/search/facets/add-facet'
+  defaults:
+    _entity_form: 'facets_facet.default'
+  requirements:
+    _entity_create_access: 'facets_facet'
+
+entity.facets_facet.edit_form:
+  path: '/admin/config/search/facets/{facets_facet}/edit'
+  defaults:
+    _entity_form: 'facets_facet.edit'
+  requirements:
+    _entity_access: 'facets_facet.edit'
+
+entity.facets_facet.delete_form:
+  path: '/admin/config/search/facets/{facets_facet}/delete'
+  defaults:
+    _entity_form: 'facets_facet.delete'
+  requirements:
+    _entity_access: 'facets_facet.delete'
+
+entity.facets_facet.settings_form:
+  path: '/admin/config/search/facets/{facets_facet}/settings'
+  defaults:
+    _entity_form: 'facets_facet.settings'
+  requirements:
+    _entity_access: 'facets_facet.edit'
+
+entity.facets_facet.clone_form:
+  path: '/admin/config/search/facets/{facets_facet}/clone'
+  defaults:
+    _entity_form: 'facets_facet.clone'
+  requirements:
+    _entity_access: 'facets_facet.edit'
+
+entity.facets_facet_source.edit_form:
+  path: '/admin/config/search/facets/facet-sources/{facets_facet_source}/edit'
+  defaults:
+    _controller: '\Drupal\facets\Controller\FacetSourceController::facetSourceConfigForm'
+    _title: 'Edit facet source configuration'
+  requirements:
+    _entity_create_access: 'facets_facet'
+
+facets.block.ajax:
+  path: '/facets-block-ajax'
+  defaults:
+    _controller: '\Drupal\facets\Controller\FacetBlockAjaxController::ajaxFacetBlockView'
+  requirements:
+    _access: 'TRUE'

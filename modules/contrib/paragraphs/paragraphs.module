@@ -239,6 +239,17 @@ function paragraphs_form_language_content_settings_form_alter(&$form, \Drupal\Co
       }
     }
   }
+
+  // Update the description on the hide untranslatable fields checkbox.
+  if (isset($form['settings']['paragraph'])) {
+    $paragraph_untranslatable_hide_description = t('Paragraph types that are used in moderated content requires non-translatable fields to be edited in the original language form and this must be checked.');
+    foreach (Element::children($form['settings']['paragraph']) as $bundle) {
+      if (!empty($form['settings']['paragraph'][$bundle]['settings']['content_translation']['untranslatable_fields_hide'])) {
+        $form['settings']['paragraph'][$bundle]['settings']['content_translation']['untranslatable_fields_hide']['#description'] = $paragraph_untranslatable_hide_description;
+      }
+    }
+  }
+
   $form['settings']['paragraphs_message'] = array(
     '#type' => 'container',
     '#markup' => $message_text,
@@ -344,13 +355,22 @@ function paragraphs_preprocess_field_multiple_value_form(&$variables) {
       ];
       unset($variables['table']['#rows'][0]);
     }
+
+    // Add the paragraph type as a class to every row.
+    if (isset($variables['element'][0]['#paragraph_type'])) {
+      foreach ($variables['table']['#rows'] as $key => $row) {
+        if (isset($row['data'][1]['data']['#paragraph_type'])) {
+          $variables['table']['#rows'][$key]['class'][] = 'paragraph-type--' . str_replace('_', '-', $row['data'][1]['data']['#paragraph_type']);
+        }
+      }
+    }
   }
 
   // Remove the drag handler if we are translating, if the field's cardinality
   // is 1 or if there are no paragraphs added. Passing through this will not
   // only remove the drag handler but also the order column that is empty when
   // no paragraphs are added and when the field is single value.
-  if ((isset($variables['element']['#allow_reference_changes']) && !$variables['element']['#allow_reference_changes']) || $variables['element']['#cardinality'] == 1 || count($variables['table']['#rows']) == 0) {
+  if ((isset($variables['element']['#allow_reference_changes']) && !$variables['element']['#allow_reference_changes']) || (isset($variables['element']['#cardinality']) && $variables['element']['#cardinality'] == 1) || (isset($variables['table']['#rows']) && count($variables['table']['#rows']) == 0)) {
     if (isset($variables['table']['#tabledrag'])) {
       // Remove the tabledrag.
       unset($variables['table']['#tabledrag']);
@@ -485,6 +505,15 @@ function paragraphs_migration_plugins_alter(array &$migrations) {
       }
     }
   }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function paragraphs_entity_type_alter(array &$entity_types) {
+  /** @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  // Remove the handler class for moderation as it is managed by the host.
+  $entity_types['paragraph']->setHandlerClass('moderation', '');
 }
 
 /**

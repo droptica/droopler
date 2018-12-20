@@ -2,6 +2,7 @@
 
 namespace Drupal\redirect_404\Tests;
 
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 use Drupal\language\Entity\ConfigurableLanguage;
@@ -88,14 +89,14 @@ class Fix404RedirectUILanguageTest extends Redirect404TestBase {
     // Check if we generate correct Add redirect url and if the form is
     // pre-filled.
     $destination = Url::fromRoute('redirect_404.fix_404')->getInternalPath();
-    $options = [
-      'query' => [
-        'source' => 'testing',
-        'language' => 'fr',
-        'destination' => $destination,
-      ]
+    $expected_query = [
+      'destination' => $destination,
+      'language' => 'fr',
+      'source' => 'testing',
     ];
-    $this->assertUrl('admin/config/search/redirect/add', $options);
+    $parsed_url = UrlHelper::parse($this->getUrl());
+    $this->assertEqual(Url::fromRoute('redirect.add')->setAbsolute()->toString(), $parsed_url['path']);
+    $this->assertEqual($expected_query, $parsed_url['query']);
     $this->assertFieldByName('redirect_source[0][path]', 'testing');
     $this->assertOptionSelected('edit-language-0-value', 'fr');
     // Save the redirect.
@@ -177,14 +178,14 @@ class Fix404RedirectUILanguageTest extends Redirect404TestBase {
 
     // Assign a redirect to 'testing1'.
     $this->clickLink('Add redirect');
-    $options = [
-      'query' => [
-        'source' => 'testing1',
-        'language' => 'en',
-        'destination' => $destination,
-      ]
+    $expected_query = [
+      'destination' => $destination,
+      'language' => 'en',
+      'source' => 'testing1',
     ];
-    $this->assertUrl('admin/config/search/redirect/add', $options);
+    $parsed_url = UrlHelper::parse($this->getUrl());
+    $this->assertEqual(Url::fromRoute('redirect.add')->setAbsolute()->toString(), $parsed_url['path']);
+    $this->assertEqual($expected_query, $parsed_url['query']);
     $this->assertFieldByName('redirect_source[0][path]', 'testing1');
     $this->assertOptionSelected('edit-language-0-value', 'en');
     $edit = ['redirect_redirect[0][uri]' => '/node'];

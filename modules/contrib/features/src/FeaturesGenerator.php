@@ -69,13 +69,13 @@ class FeaturesGenerator implements FeaturesGeneratorInterface {
    * {@inheritdoc}
    */
   public function reset() {
-    $this->methods = array();
+    $this->methods = [];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function applyGenerationMethod($method_id, array $packages = array(), FeaturesBundleInterface $bundle = NULL) {
+  public function applyGenerationMethod($method_id, array $packages = [], FeaturesBundleInterface $bundle = NULL) {
     $method = $this->getGenerationMethodInstance($method_id);
     $method->prepare($packages, $bundle);
     return $method->generate($packages, $bundle);
@@ -107,7 +107,7 @@ class FeaturesGenerator implements FeaturesGeneratorInterface {
    */
   protected function getGenerationMethodInstance($method_id) {
     if (!isset($this->methods[$method_id])) {
-      $instance = $this->generatorManager->createInstance($method_id, array());
+      $instance = $this->generatorManager->createInstance($method_id, []);
       $instance->setFeaturesManager($this->featuresManager);
       $instance->setAssigner($this->assigner);
       $this->methods[$method_id] = $instance;
@@ -118,7 +118,7 @@ class FeaturesGenerator implements FeaturesGeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  public function generatePackages($method_id, FeaturesBundleInterface $bundle, array $package_names = array()) {
+  public function generatePackages($method_id, FeaturesBundleInterface $bundle, array $package_names = []) {
     $this->featuresManager->setPackageBundleNames($bundle, $package_names);
     return $this->generate($method_id, $bundle, $package_names);
   }
@@ -144,7 +144,7 @@ class FeaturesGenerator implements FeaturesGeneratorInterface {
    *   - 'message': a message about the result of the operation.
    *   - 'variables': an array of substitutions to be used in the message.
    */
-  protected function generate($method_id, FeaturesBundleInterface $bundle, array $package_names = array()) {
+  protected function generate($method_id, FeaturesBundleInterface $bundle, array $package_names = []) {
     $packages = $this->featuresManager->getPackages();
 
     // Filter out the packages that weren't requested.

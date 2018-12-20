@@ -1,0 +1,15 @@
+id: search_api_db_test_autocomplete
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.database_search_index
+label: Autocomplete test module search
+index_id: database_search_index
+suggester_settings:
+  server:
+    fields: {  }
+search_settings:
+  'search_api_db_test_autocomplete': {  }
+options:
+  show_count: true

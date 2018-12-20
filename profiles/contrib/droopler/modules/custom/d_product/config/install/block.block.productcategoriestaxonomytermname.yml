@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.product_categories_taxonomy_term_name
+  module:
+    - facets
+  theme:
+    - droopler_subtheme
+id: productcategoriestaxonomytermname
+theme: droopler_subtheme
+region: facets_left
+weight: -5
+provider: null
+plugin: 'facet_block:product_categories_taxonomy_term_name'
+settings:
+  id: 'facet_block:product_categories_taxonomy_term_name'
+  label: Categories
+  provider: facets
+  label_display: visible
+  block_id: productcategoriestaxonomytermname
+visibility: {  }

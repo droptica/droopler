@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a Geysir Field Paragraph Wrapper.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   - id: The paragraph ID.
+ *   - bundle: The type of the paragraph, for example, "image" or "text".
+ *   - authorid: The user ID of the paragraph author.
+ *   - createdtime: Formatted creation date. Preprocess functions can
+ *     reformat it by calling format_date() with the desired parameters on
+ *     $variables['paragraph']->getCreatedTime().
+ * - content: The rendered paragraph and all eventual other children.
+ *   Use {{ content }} to print them all, or print a subset such as
+ *   {{ content.field_example }}. Use {{ content|without('field_example') }}
+ *   to temporarily suppress the printing of a given child element.
+ * - links: The Geysir Field Paragraph links.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - geysir-field-paragraph-wrapper: The current template type (also known as a "theming hook").
+ *
+ * @see template_preprocess_geysir_field_paragraph_wrapper()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes }}>
+  {{ content }}
+  {{ links }}
+</div>

@@ -1,0 +1,5 @@
+services:
+  access_check.checklistapi:
+    class: Drupal\checklistapi\Access\ChecklistapiAccessCheck
+    tags:
+      - { name: access_check, applies_to: _checklistapi_access }

@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\link_attributes\Functional;
 
+use Drupal\node\Entity\Node;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Component\Utility\Unicode;
 use Drupal\field_ui\Tests\FieldUiTestTrait;
@@ -55,7 +56,11 @@ class LinkAttributesFieldTest extends BrowserTestBase {
     // Add a link field to the newly-created type.
     $label = $this->randomMachineName();
     $field_name = Unicode::strtolower($label);
-    $this->fieldUIAddNewField($type_path, $field_name, $label, 'link');
+    $storage_settings = ['cardinality' => 'number', 'cardinality_number' => 2];
+    $this->fieldUIAddNewField($type_path, $field_name, $label, 'link', $storage_settings);
+
+    // Manually clear cache on the tester side.
+    \Drupal::entityManager()->clearCachedFieldDefinitions();
 
     // Change the link widget and enable some attributes.
     \Drupal::entityTypeManager()
@@ -85,5 +90,34 @@ class LinkAttributesFieldTest extends BrowserTestBase {
     // Class attribute.
     $attribute_class = 'field_' . $field_name . '[0][options][attributes][class]';
     $web_assert->fieldExists($attribute_class);
+
+    // Create a node.
+    $edit = [
+      'title[0][value]' => 'A multi field link test',
+      'field_' . $field_name . '[0][title]' => 'Link One',
+      'field_' . $field_name . '[0][uri]' => '<front>',
+      'field_' . $field_name . '[0][options][attributes][class]' => 'class-one class-two',
+      'field_' . $field_name . '[1][title]' => 'Link Two',
+      'field_' . $field_name . '[1][uri]' => '<front>',
+      'field_' . $field_name . '[1][options][attributes][class]' => 'class-three class-four',
+    ];
+    $this->drupalPostForm($add_path, $edit, t('Save'));
+    $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
+
+    // Load the field values.
+    $field_values = $node->get('field_' . $field_name)->getValue();
+
+    $expected_link_one = [
+      'class-one',
+      'class-two',
+    ];
+    $this->assertEquals($expected_link_one, $field_values[0]['options']['attributes']['class']);
+
+    $expected_link_two = [
+      'class-three',
+      'class-four',
+    ];
+    $this->assertEquals($expected_link_two, $field_values[1]['options']['attributes']['class']);
+
   }
 }

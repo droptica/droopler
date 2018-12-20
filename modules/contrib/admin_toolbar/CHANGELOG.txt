@@ -1,3 +1,21 @@
+Admin Toolbar 8.x-1.25, 2018-11-22
+----------------------------------
+Changes since 8.x-1.24:
+
+- #3012102 by tikaszvince, Jody Lynn, adriancid, grahl, jigarius: Provider
+  property missing on link definition.
+- #3010451 by epowelljr, adriancid: Improve the admin_toolbar module
+  description.
+- #2958415 by adriancid, romainj, Prashant.c, harshita29: Replace usages of the
+  deprecated drupal_set_message() function.
+- #2996485 by idebr, adriancid: Remove unused function 
+  admin_toolbar_tools_get_links().
+- #2989281 by JKerschner, adriancid: Consistently use $entityTypeManager.
+- #2985106 by Eli-T, adriancid, eme: Add ability to hide Drupal.org links
+  exposed by admin_toolbar_tools from certain users.
+- #2938884 by Spurlos, bdanin, romainj, purdy_nc, adriancid: A non-existent 
+  route breaks the site.
+
 Admin Toolbar 8.x-1.24, 2018-05-28
 ----------------------------------
 Changes since 8.x-1.23:

@@ -30,7 +30,7 @@ class PathautoUiTest extends WebTestBase {
   protected $adminUser;
 
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
   function setUp() {
     parent::setUp();

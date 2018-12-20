@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\token\Tests;
+
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\block_content\Entity\BlockContentType;
 

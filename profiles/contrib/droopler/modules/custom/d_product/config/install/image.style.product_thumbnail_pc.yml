@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: product_thumbnail_pc
+label: 'Product thumbnail (479×286)'
+effects:
+  84dfa457-a4b6-432a-816c-86f4bf674617:
+    uuid: 84dfa457-a4b6-432a-816c-86f4bf674617
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 479
+      height: 286
+      anchor: center-center

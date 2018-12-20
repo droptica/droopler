@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\RfcLogLevel;
-use Drupal\Core\Path\AliasManager;
+use Drupal\Core\Path\AliasManagerInterface;
 use Drupal\Core\PathProcessor\InboundPathProcessorInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Url;
@@ -81,7 +81,7 @@ class RedirectRequestSubscriber implements EventSubscriberInterface {
    *   The language manager service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config
    *   The config.
-   * @param \Drupal\Core\Path\AliasManager $alias_manager
+   * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
    *   The alias manager service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler service.
@@ -92,7 +92,7 @@ class RedirectRequestSubscriber implements EventSubscriberInterface {
    * @param \Symfony\Component\Routing\RequestContext
    *   Request context.
    */
-  public function __construct(RedirectRepository $redirect_repository, LanguageManagerInterface $language_manager, ConfigFactoryInterface $config, AliasManager $alias_manager, ModuleHandlerInterface $module_handler, EntityManagerInterface $entity_manager, RedirectChecker $checker, RequestContext $context, InboundPathProcessorInterface $path_processor) {
+  public function __construct(RedirectRepository $redirect_repository, LanguageManagerInterface $language_manager, ConfigFactoryInterface $config, AliasManagerInterface $alias_manager, ModuleHandlerInterface $module_handler, EntityManagerInterface $entity_manager, RedirectChecker $checker, RequestContext $context, InboundPathProcessorInterface $path_processor) {
     $this->redirectRepository = $redirect_repository;
     $this->languageManager = $language_manager;
     $this->config = $config->get('redirect.settings');
@@ -126,9 +126,19 @@ class RedirectRequestSubscriber implements EventSubscriberInterface {
     // Get URL info and process it to be used for hash generation.
     parse_str($request->getQueryString(), $request_query);
 
-    // Do the inbound processing so that for example language prefixes are
-    // removed.
-    $path = $this->pathProcessor->processInbound($request->getPathInfo(), $request);
+    if (strpos($request->getPathInfo(), '/system/files/') === 0 && !$request->query->has('file')) {
+      // Private files paths are split by the inbound path processor and the
+      // relative file path is moved to the 'file' query string parameter. This
+      // is because the route system does not allow an arbitrary amount of
+      // parameters. We preserve the path as is returned by the request object.
+      // @see \Drupal\system\PathProcessor\PathProcessorFiles::processInbound()
+      $path = $request->getPathInfo();
+    }
+    else {
+      // Do the inbound processing so that for example language prefixes are
+      // removed.
+      $path = $this->pathProcessor->processInbound($request->getPathInfo(), $request);
+    }
     $path = trim($path, '/');
 
     $this->context->fromRequest($request);

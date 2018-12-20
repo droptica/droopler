@@ -115,8 +115,9 @@ class MetatagMobileTagsTest extends MetatagTagsTestBase {
   }
 
   /**
-   * Implements {tag_name}TestValueAttribute() for
-   * 'android-app-link-alternative'.
+   * Implements {tag_name}TestValueAttribute().
+   *
+   * For 'android-app-link-alternative'.
    */
   private function androidAppLinkAlternativeTestValueAttribute() {
     return 'href';

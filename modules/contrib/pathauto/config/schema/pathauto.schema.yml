@@ -22,14 +22,17 @@ pathauto.settings:
       type: boolean
     reduce_ascii:
       type: boolean
-    ignore_words:
-      type: string
     case:
       type: boolean
     ignore_words:
       type: string
     update_action:
       type: integer
+    safe_tokens:
+      label: Tokens that are safe to use and do not need to be cleaned.
+      type: sequence
+      sequence:
+        type: string
 
 action.configuration.pathauto_update_alias:
   type: action_configuration_default

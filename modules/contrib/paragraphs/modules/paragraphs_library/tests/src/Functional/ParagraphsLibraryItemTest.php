@@ -291,8 +291,8 @@ class ParagraphsLibraryItemTest extends BrowserTestBase {
 
     $assert_session->elementContains('css', 'table tbody tr td:nth-child(1)', 'Test content &gt; field_paragraphs');
     $assert_session->elementContains('css', 'table tbody tr td:nth-child(2)', 'Paragraph');
-    $assert_session->elementContains('css', 'table tbody tr td:nth-child(3)', 'en');
-    $assert_session->elementContains('css', 'table tbody tr td:nth-child(5)', 'Reusable paragraph');
+    $assert_session->elementContains('css', 'table tbody tr td:nth-child(3)', 'English');
+    $assert_session->elementContains('css', 'table tbody tr td:nth-child(4)', 'Reusable paragraph');
 
     // Assert breadcrumb.
     $assert_session->elementContains('css', '.breadcrumb ol li:nth-child(1)', 'Home');

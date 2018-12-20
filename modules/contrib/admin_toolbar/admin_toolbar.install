@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Admin Toolbar module.
+ */
+
+/**
+ * Rebuild routes to mitigate issue 2938884.
+ *
+ * @see https://www.drupal.org/project/admin_toolbar/issues/2938884
+ */
+function admin_toolbar_update_8001() {
+  // Rebuilding the route cache.
+  \Drupal::service("router.builder")->rebuild();
+}

@@ -1,0 +1,148 @@
+plugin.plugin_configuration.facets_processor.*:
+  type: config_object
+
+plugin.plugin_configuration.facets_processor.count_widget_widget_order:
+  type: mapping
+  label: 'Count widget order'
+  mapping:
+    sort:
+      type: string
+      label: sort order
+
+plugin.plugin_configuration.facets_processor.display_value_widget_order:
+  type: mapping
+  label: 'Display value widget order'
+  mapping:
+    sort:
+      type: string
+      label: sort order
+
+plugin.plugin_configuration.facets_processor.translate_entity:
+  type: mapping
+  label: 'Translate entity'
+  mapping:
+    sort:
+      type: boolean
+      label: translate entity
+
+plugin.plugin_configuration.facets_processor.term_weight_widget_order:
+  type: mapping
+  label: 'Display term widget order'
+  mapping:
+    sort:
+      type: string
+      label: sort order
+
+plugin.plugin_configuration.facets_processor.exclude_specified_items:
+  type: mapping
+  label: 'Exclude specified items'
+  mapping:
+    exclude:
+      type: string
+      label: Exclude
+    regex:
+      type: boolean
+      label: Regex
+
+plugin.plugin_configuration.facets_processor.raw_value_widget_order:
+  type: mapping
+  label: 'Raw value widget order'
+  mapping:
+    sort:
+      type: string
+      label: sort order
+
+plugin.plugin_configuration.facets_processor.active_widget_order:
+  type: mapping
+  label: 'Active widget order'
+  mapping:
+    sort:
+      type: string
+      label: sort order
+
+plugin.plugin_configuration.facets_processor.count_widget_order:
+  type: mapping
+  label: 'Active widget order'
+  mapping:
+    sort:
+      type: string
+      label: sort order
+
+plugin.plugin_configuration.facets_processor.count_limit:
+  type: mapping
+  label: 'Count limit widget'
+  mapping:
+    minimum_items:
+      type: integer
+      label: 'Mimimum amount of items to show.'
+    maximum_items:
+      type: integer
+      label: 'Maximum amount of items to show.'
+
+plugin.plugin_configuration.facets_processor.boolean_item:
+  type: mapping
+  label: 'Boolean processor'
+  mapping:
+    on_value:
+      type: label
+      label: 'On value'
+    off_value:
+      type: label
+      label: 'Off value'
+
+plugin.plugin_configuration.facets_processor.dependent_processor:
+  type: sequence
+  label: 'Dependent facet processor'
+  sequence:
+    type: mapping
+    label: Mapping for a processor
+    mapping:
+      enable:
+        type: boolean
+        label: 'Enable for this facet'
+      condition:
+        type: string
+        label: 'Type of condition'
+      values:
+        type: label
+        label: 'The value of the condition'
+      negate:
+        type: boolean
+        label: 'Should the condition be negated'
+
+plugin.plugin_configuration.facets_processor.date_item:
+  type: mapping
+  label: 'Date item processor'
+  mapping:
+    date_display:
+      type: string
+      label: 'Date display'
+    granularity:
+      type: integer
+      label: 'Granularity'
+    date_format:
+      type: string
+      label: 'Date format'
+
+plugin.plugin_configuration.facets_processor.granularity_item:
+  type: mapping
+  label: 'Granular item processor'
+  mapping:
+    granularity:
+      type: integer
+      label: 'Granularity'
+    min_value:
+      type: integer
+      label: 'Minimum value'
+    max_value:
+      type: integer
+      label: 'Maximum value'
+    include_lower:
+      type: boolean
+      label: 'Include lower bounds'
+    include_upper:
+      type: boolean
+      label: 'Include upper bounds'
+    include_edges:
+      type: boolean
+      label: 'Include first lower and last upper bound'

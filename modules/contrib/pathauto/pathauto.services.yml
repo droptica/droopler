@@ -15,7 +15,7 @@ services:
     arguments: ['@config.factory', '@pathauto.alias_storage_helper','@module_handler', '@router.route_provider', '@path.alias_manager']
   pathauto.verbose_messenger:
     class: Drupal\pathauto\VerboseMessenger
-    arguments: ['@config.factory', '@current_user']
+    arguments: ['@config.factory', '@current_user', '@messenger']
   plugin.manager.alias_type:
     class: Drupal\pathauto\AliasTypeManager
     parent: default_plugin_manager

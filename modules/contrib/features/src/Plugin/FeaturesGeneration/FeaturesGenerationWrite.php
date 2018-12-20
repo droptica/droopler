@@ -101,7 +101,7 @@ class FeaturesGenerationWrite extends FeaturesGenerationMethodBase implements Co
   /**
    * {@inheritdoc}
    */
-  public function generate(array $packages = array(), FeaturesBundleInterface $bundle = NULL) {
+  public function generate(array $packages = [], FeaturesBundleInterface $bundle = NULL) {
     // If no packages were specified, get all packages.
     if (empty($packages)) {
       $packages = $this->featuresManager->getPackages();

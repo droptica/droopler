@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display source summary block.
+ *
+ * Available variables:
+ * - count: A themed message with the total number of result. Themers can theme
+ *   this variable by overriding 'facets-source-summary-count' theme.
+ * - items: An array of themed facet summary info. Each item can be themed by
+ *   overriding 'facets-source-summary-facet' theme.
+ */
+#}
+{% if count %}
+    {{ count }}
+{% endif %}
+{% if items %}
+    <ul>
+        {% for item in items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    {{ "not filtered"|t }}
+{% endif %}

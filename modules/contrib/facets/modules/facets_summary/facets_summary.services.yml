@@ -1,0 +1,10 @@
+services:
+  plugin.manager.facets_summary.processor:
+    class: Drupal\facets_summary\Processor\ProcessorPluginManager
+    arguments: ['@container.namespaces', '@cache.discovery', '@module_handler', '@string_translation']
+  facets_summary.manager:
+    class: Drupal\facets_summary\FacetsSummaryManager\DefaultFacetsSummaryManager
+    arguments:
+      - '@plugin.manager.facets.facet_source'
+      - '@plugin.manager.facets_summary.processor'
+      - '@facets.manager'

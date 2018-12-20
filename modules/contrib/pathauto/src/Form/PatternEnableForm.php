@@ -44,7 +44,9 @@ class PatternEnableForm extends EntityConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->entity->enable()->save();
-    drupal_set_message($this->t('Enabled pattern %label.', array('%label' => $this->entity->label())));
+    $this->messenger()->addMessage($this->t('Enabled pattern %label.', [
+      '%label' => $this->entity->label(),
+    ]));
 
     $form_state->setRedirectUrl($this->getCancelUrl());
   }

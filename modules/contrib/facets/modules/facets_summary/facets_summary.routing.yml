@@ -1,0 +1,27 @@
+entity.facets_summary.add_form:
+  path: '/admin/config/search/facets/add-facet-summary'
+  defaults:
+    _entity_form: 'facets_summary.default'
+  requirements:
+    _entity_create_access: 'facets_summary'
+
+entity.facets_summary.delete_form:
+  path: '/admin/config/search/facets/facet-summary/{facets_summary}/delete'
+  defaults:
+    _entity_form: 'facets_summary.delete'
+  requirements:
+    _entity_access: 'facets_summary.delete'
+
+entity.facets_summary.edit_form:
+  path: '/admin/config/search/facets/facet-summary/{facets_summary}/edit'
+  defaults:
+    _entity_form: 'facets_summary.edit'
+  requirements:
+    _entity_create_access: 'facets_summary'
+
+entity.facets_summary.settings_form:
+  path: '/admin/config/search/facets/facet-summary/{facets_summary}/settings'
+  defaults:
+    _entity_form: 'facets_summary.settings'
+  requirements:
+    _entity_access: 'facets_summary.edit'

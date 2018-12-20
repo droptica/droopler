@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Contains hook implementations for the Search API Views Test module.
+ */
+
+use Drupal\search_api\Query\QueryInterface;
+
+/**
+ * Implements hook_search_api_query_alter().
+ *
+ * Prints the contents of the "search_api_retrieved_field_values" query option
+ * to the page (if present) so it can be checked by the testing code.
+ */
+function search_api_test_views_search_api_query_alter(QueryInterface $query) {
+  $fields = $query->getOption('search_api_retrieved_field_values');
+  if ($fields) {
+    \Drupal::messenger()->addStatus("'" . implode("' '", $fields) . "'");
+  }
+}

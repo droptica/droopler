@@ -78,7 +78,7 @@ class Symfony_DI_PhpDumper_Test_Rot13Parameters extends Container
     protected function getContainer_EnvVarProcessorsLocatorService()
     {
         return $this->services['container.env_var_processors_locator'] = new \Symfony\Component\DependencyInjection\ServiceLocator(array('rot13' => function () {
-            return ${($_ = isset($this->services['Symfony\Component\DependencyInjection\Tests\Dumper\Rot13EnvVarProcessor']) ? $this->services['Symfony\Component\DependencyInjection\Tests\Dumper\Rot13EnvVarProcessor'] : $this->services['Symfony\Component\DependencyInjection\Tests\Dumper\Rot13EnvVarProcessor'] = new \Symfony\Component\DependencyInjection\Tests\Dumper\Rot13EnvVarProcessor()) && false ?: '_'};
+            return ${($_ = isset($this->services['Symfony\Component\DependencyInjection\Tests\Dumper\Rot13EnvVarProcessor']) ? $this->services['Symfony\Component\DependencyInjection\Tests\Dumper\Rot13EnvVarProcessor'] : ($this->services['Symfony\Component\DependencyInjection\Tests\Dumper\Rot13EnvVarProcessor'] = new \Symfony\Component\DependencyInjection\Tests\Dumper\Rot13EnvVarProcessor())) && false ?: '_'};
         }));
     }
 
@@ -133,7 +133,7 @@ class Symfony_DI_PhpDumper_Test_Rot13Parameters extends Container
     /**
      * Computes a dynamic parameter.
      *
-     * @param string The name of the dynamic parameter to load
+     * @param string $name The name of the dynamic parameter to load
      *
      * @return mixed The value of the dynamic parameter
      *

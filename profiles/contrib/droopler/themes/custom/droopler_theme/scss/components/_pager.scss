@@ -1,0 +1,9 @@
+nav .pagination {
+  justify-content: center;
+
+  .pager__item--ellipsis,
+  .pager__item--current {
+    @extend .page-link;
+    cursor: default;
+  }
+}

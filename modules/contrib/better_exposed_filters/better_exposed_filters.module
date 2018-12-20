@@ -1,0 +1,317 @@
+<?php
+/**
+ * @file
+ * Allows the use of checkboxes, radio buttons or hidden fields for exposed
+ * Views filters.
+ */
+
+use Drupal\Core\Url;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function better_exposed_filters_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the better_exposed_filters module.
+    case 'help.page.better_exposed_filters':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Better Exposed Filters (BEF) modifies the use of Views by replacing the \'single\'  or \'multi\' <em>select boxes</em> with <em>radio buttons or checkboxes</em>. Views offers the ability to expose filters to the end user. When you expose a filter, you allow the user to interact with the view making it easy to build an advanced search.  Better Exposed Filters gives you greater control over the rendering of exposed filters. For more information, see the <a href=":online">online documentation for the Better Exposed Filters module</a>.', [':online' => 'https://www.drupal.org/node/766974']) . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dt>' . t('Editing or Creating Views') . '</dt>';
+      $output .= '<dd>' . t('Better Exposed Filters is used on <a href=":views">Views</a> that use an exposed filter.  Views filters are used to reduce the result set of a View to a manageable amount of data. BEF only operates on fields that have a limited number of options such as <a href=":node">Node</a>:Type or <a href=":taxonomy">Taxonomy</a>:TermID.', [':views' => Url::fromRoute('help.page', ['name' => 'views'])->toString(), ':node' => Url::fromRoute('help.page', ['name' => 'node'])->toString(), ':taxonomy' => (\Drupal::moduleHandler()->moduleExists('taxonomy')) ? Url::fromRoute('help.page', ['name' => 'taxonomy'])->toString() : '#']) . '</dd>';
+      $output .= '<dt>' . t('Styling Better Exposed Filters') . '</dt>';
+      $output .= '<dd>' . t('BEF provides some additional HTML structure to help you style your exposed filters. For some common examples see the <a href=":doco">online documentation</a>.', [':doco' => 'https://www.drupal.org/node/766974']) . '</dd>';
+      return $output;
+    break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function better_exposed_filters_theme($existing, $type, $theme, $path) {
+  return array(
+    'bef_checkboxes' => [
+      'render element' => 'element',
+    ],
+    'bef_radios' => [
+      'render element' => 'element',
+    ],
+    'bef_links' => [
+      'render element' => 'element',
+    ],
+    'bef_hidden' => [
+      'render element' => 'element',
+    ],
+    'bef_tree' => [
+      'variables' => [],
+    ],
+    'bef_secondary_exposed_elements' => [
+      'variables' => [],
+    ],
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function better_exposed_filters_form_views_ui_config_item_form_alter(&$form, FormStateInterface $form_state) {
+  // Checks if Token module is enabled.
+  if (!\Drupal::moduleHandler()->moduleExists('token')) {
+    $text = t('Enable the Token module to allow token replacement in this field.');
+    if (empty($form['options']['expose']['description']['#description'])) {
+      $form['options']['expose']['description']['#description'] = $text;
+    }
+    else {
+      $form['options']['expose']['description']['#description'] .= " $text";
+    }
+    return;
+  }
+  // Adds global token replacements, if available.
+  $text = t('Tokens are allowed in this field. Replacement options can be found in the "Global replacement patterns" section, below.');
+  if (empty($form['options']['expose']['description']['#description'])) {
+    $form['options']['expose']['description']['#description'] = $text;
+  }
+  else {
+    $form['options']['expose']['description']['#description'] .= " $text";
+  }
+  $form['options']['expose']['global_replacement_tokens'] = [
+    '#title' => t('Global replacement patterns (for description field only)'),
+    '#type' => 'details',
+    '#weight' => 151,
+  ];
+  $form['options']['expose']['global_replacement_tokens']['list'] = [
+    '#theme' => 'token_tree_link',
+    '#token_types' => [],
+  ];
+}
+
+/******************************************************************************
+ * Preprocess functions for BEF themed elements.
+ ******************************************************************************/
+
+function template_preprocess_bef_checkboxes(&$variables) {
+  $variables['children'] = Element::children($variables['element']);
+  $variables['hasSelectAllNone'] = !empty($variables['element']['#bef_select_all_none']) ? TRUE : FALSE;
+  $variables['hasSelectAllNoneNested'] = !empty($variables['element']['#bef_select_all_none_nested']) ? TRUE : FALSE;
+  _bef_preprocess_nested_elements($variables);
+}
+
+function template_preprocess_bef_radios(&$variables) {
+  $variables['children'] = Element::children($variables['element']);
+  _bef_preprocess_nested_elements($variables);
+}
+
+/**
+ * Implements hook_template_preprocess_default_variables_alter().
+ */
+function template_preprocess_bef_hidden(&$variables) {
+  $element = $variables['element'];
+
+  // bef_hidden is only used for multi-select elements being converted to
+  // hidden.
+  $variables['isMultiple'] = TRUE;
+  $variables['selected'] = empty($element['#value']) ? $element['#default_value'] : $element['#value'];
+  $variables['hiddenElements'] = [];
+  foreach ($element['#options'] as $value => $label) {
+    $variables['hiddenElements'][$value] = [
+      '#type' => 'hidden',
+      '#value' => $value,
+      '#name' => $element['#name'] . '[]',
+    ];
+  }
+
+  // @todo:
+  // Check for optgroups.  Put subelements in the $element_set array and add a
+  // group heading. Otherwise, just add the element to the set.
+  //$element_set = array();
+  //if (is_array($elem)) {
+  //  $element_set = $elem;
+  //}
+  //else {
+  //  $element_set[$option] = $elem;
+  //}
+}
+
+function template_preprocess_bef_links(&$variables) {
+  // Collect some variables before we start tweaking the element.
+  $element = &$variables['element'];
+  $options = $element['#options'];
+  $name = $element['#name'];
+
+  // Get the query string arguments from the current request.
+  $existingQuery = \Drupal::service('request_stack')->getCurrentRequest()->query->all();
+
+  // Remove page parameter from query.
+  unset($existingQuery['page']);
+
+  // Pass currently selected values for this filter to the template as an array.
+  $variables['selected'] = $element['#value'];
+  if (!is_array($variables['selected'])) {
+    $variables['selected'] = [$variables['selected']];
+  }
+
+  $variables['links'] = [];
+  foreach ($options as $optionValue => $optionLabel) {
+    // Build a new Url object for each link since the query string changes with
+    // each option.
+    /** @var Drupal\Core\Url $url */
+    $url = clone($element['#bef_path']);
+
+    // Allow visitors to toggle a filter setting on and off. This is not as
+    // simple as setOptions('foo', '') as that still leaves an entry which is
+    // rendered rather than removing the entry from the query string altogether.
+    // Calling $url->setOption() still leaves a value behind. Instead we work
+    // with the entire options array and remove items from it as needed.
+    $urlOptions = $url->getOptions();
+
+    if ($element['#multiple']) {
+      $selectedValues = $element['#value'];
+
+      $newQuery = isset($existingQuery[$name]) ? $existingQuery[$name] : [];
+      if (in_array($optionValue, $selectedValues)) {
+        // Allow users to toggle an option using the same link.
+        $newQuery = array_filter($newQuery, function ($value) use ($selectedValues) {
+          return !in_array($value, $selectedValues);
+        });
+      }
+      else {
+        $newQuery[] = $optionValue;
+      }
+      if (empty($newQuery)) {
+        unset($urlOptions['query'][$name]);
+      }
+      else {
+        $urlOptions['query'][$name] = $newQuery;
+      }
+    }
+    else {
+      if ($optionValue == $element['#value']) {
+        // Allow toggle link functionality -- click the same link to turn an
+        // option on or off.
+        $newQuery = $existingQuery;
+        unset($newQuery[$name]);
+        if (empty($newQuery)) {
+          // Remove the query string completely.
+          unset($urlOptions['query']);
+        }
+        else {
+          $urlOptions['query'] = $newQuery;
+        }
+      }
+      else {
+        $urlOptions['query'] = $existingQuery;
+        $urlOptions['query'][$name] = $optionValue;
+      }
+    }
+
+    // Add our updated options to the Url object.
+    $url->setOptions($urlOptions);
+
+    // Provide the Twig template with an array of links.
+    $variables['links'][$optionValue] = [
+      '#type' => 'link',
+      '#title' => $optionLabel,
+      '#theme_wrappers' => ['container'],
+      '#url' => $url,
+    ];
+  }
+
+  // Handle nested links. But first add the links as children to the element
+  // for consistent processing between checkboxes/radio buttons and links.
+  $variables['element'] = array_replace($variables['element'], $variables['links']);
+  $variables['children'] = Element::children($variables['element']);
+  _bef_preprocess_nested_elements($variables);
+}
+
+/**
+ * Prepares variables for views exposed form templates.
+ *
+ * Default template: views-exposed-form.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - form: A render element representing the form.
+ */
+function better_exposed_filters_preprocess_views_exposed_form(&$variables) {
+  // Checks if Token module is enabled.
+  if (!\Drupal::moduleHandler()->moduleExists('token')) {
+    return;
+  }
+  // Replaces tokens in description field of the exposed filter.
+  foreach ($variables['form']['#info'] as $name => &$info) {
+    if (isset($info['description']) && isset($variables['form'][explode('filter-', $name)[1]]['#description'])) {
+      $info['description'] = \Drupal::service('token')->replace($info['description']);
+      $variables['form'][explode('filter-', $name)[1]]['#description'] = $info['description'];
+    }
+  }
+}
+
+/******************************************************************************
+ * Utility functions for BEF themed elements.
+ ******************************************************************************/
+
+/**
+ * Internal function to provide information the templates for rendering nested
+ * elements. Adds 'is_nested' and 'depth' to $variables. Requires 'children' to
+ * be set in $variables before being called.
+ *
+ * @param array $variables
+ */
+function _bef_preprocess_nested_elements(array &$variables) {
+  if (empty($variables['element']['#bef_nested'])) {
+    return;
+  }
+
+  // Provide a hierarchical info on the element children for the template to
+  // render as a nested <ul>. Views prepends '-' characters for each level of
+  // depth in the vocabulary. Store that information, but remove the hyphens as
+  // we don't want to display them.
+  $variables['isNested'] = TRUE;
+  $variables['depth'] = [];
+  foreach ($variables['children'] as $child) {
+    if ($child == 'All') {
+      // For non-required filters, put the any/all option at the root.
+      $variables['depth'][$child] = 0;
+      // And don't change the text as it defaults to "- Any -" and we do not
+      // want to remove the leading hyphens.
+      continue;
+    }
+
+    $original = $variables['element'][$child]['#title'];
+    $variables['element'][$child]['#title'] = ltrim($original, '-');
+    $variables['depth'][$child] = strlen($original) - strlen($variables['element'][$child]['#title']);
+  }
+}
+
+/**
+ * Unpacks sort_by and sort_order from the sort_bef_combine element.
+ *
+ * @param $form
+ * @param \FormStateInterface $form_state
+ */
+function bef_sort_combine_submit($form, FormStateInterface $form_state) {
+  $sortBy = $sortOrder = '';
+  $combined = $form_state->getValue('sort_bef_combine');
+  if (!empty($combined)) {
+    list($sortBy, $sortOrder) = explode(' ', $combined);
+  }
+  $form_state->setValue('sort_by', $sortBy);
+  $form_state->setValue('sort_order', $sortOrder);
+
+  // And pass this along to Views.
+  //views_exposed_form_submit($form, $form_state);
+}
+
+/**
+ * Return whether or not the slider has been selected for the given filter.
+ */
+function _better_exposed_filters_slider_selected($element, &$form_state) {
+  return (isset($element['#bef_filter_id']) &&
+          isset($form_state['values']['exposed_form_options']['bef'][$element['#bef_filter_id']]['bef_format']) &&
+          $form_state['values']['exposed_form_options']['bef'][$element['#bef_filter_id']]['bef_format'] == 'bef_slider');
+}

@@ -23,7 +23,6 @@ class ParagraphsExperimentalWidgetElementsTest extends JavascriptTestBase {
   public static $modules = [
     'node',
     'paragraphs',
-    'paragraphs_demo',
     'field',
     'field_ui',
     'block',
@@ -33,16 +32,12 @@ class ParagraphsExperimentalWidgetElementsTest extends JavascriptTestBase {
   ];
 
   /**
-   * {@inheritdoc}
-   */
-  protected function setUp() {
-    parent::setUp();
-  }
-
-  /**
    * Test paragraphs drag handler during translation.
    */
   public function testDragHandler() {
+    $this->addParagraphedContentType('paragraphed_content_demo', 'field_paragraphs_demo');
+    $this->addParagraphsType('text');
+    $this->addFieldtoParagraphType('text', 'field_text_demo', 'text');
     $this->loginAsAdmin([
       'administer site configuration',
       'create paragraphed_content_demo content',
@@ -55,9 +50,11 @@ class ParagraphsExperimentalWidgetElementsTest extends JavascriptTestBase {
     ]);
     ConfigurableLanguage::createFromLangcode('sr')->save();
     $edit = [
-      'settings[paragraph][nested_paragraph][translatable]' => TRUE,
-      'settings[paragraph][nested_paragraph][settings][language][language_alterable]' => TRUE,
-      'settings[paragraph][images][fields][field_images_demo]' => TRUE,
+      'entity_types[paragraph]' => TRUE,
+      'entity_types[node]' => TRUE,
+      'settings[node][paragraphed_content_demo][translatable]' => TRUE,
+      'settings[paragraph][text][translatable]' => TRUE,
+      'settings[paragraph][text][settings][language][language_alterable]' => TRUE,
     ];
     $this->drupalPostForm('admin/config/regional/content-language', $edit, t('Save configuration'));
     $settings = [
@@ -70,7 +67,7 @@ class ParagraphsExperimentalWidgetElementsTest extends JavascriptTestBase {
     $this->drupalGet('node/add/paragraphed_content_demo');
     $page->pressButton('Add Paragraph');
     $this->assertSession()->assertWaitOnAjaxRequest();
-    $page->pressButton('Text');
+    $page->pressButton('text');
     $this->assertSession()->assertWaitOnAjaxRequest();
     // Assert the draghandle is visible.
     $style_selector = $page->find('css', '.tabledrag-handle');

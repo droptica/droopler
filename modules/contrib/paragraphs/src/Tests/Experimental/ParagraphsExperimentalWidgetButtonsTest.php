@@ -211,7 +211,6 @@ class ParagraphsExperimentalWidgetButtonsTest extends ParagraphsExperimentalTest
     $this->assertNoField('edit-field-paragraphs-1-top-actions-dropdown-actions-test-button');
 
     // Check that "Duplicate" is hidden during translation.
-    $this->drupalPostAjaxForm(NULL, [], 'field_paragraphs_0_edit');
     $this->assertNoField('field_paragraphs_0_duplicate');
     $this->assertNoRaw('value="Duplicate"');
   }

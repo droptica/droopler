@@ -5,6 +5,7 @@ namespace Drupal\config_update;
 use Drupal\Component\Diff\Diff;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
+use Drupal\Core\Serialization\Yaml;
 
 /**
  * Provides methods related to config differences.
@@ -14,7 +15,7 @@ class ConfigDiffer implements ConfigDiffInterface {
   use StringTranslationTrait;
 
   /**
-   * List of elements to ignore when comparing config.
+   * List of elements to ignore on top level when comparing config.
    *
    * @var string[]
    *
@@ -46,7 +47,7 @@ class ConfigDiffer implements ConfigDiffInterface {
    * @param \Drupal\Core\StringTranslation\TranslationInterface $translation
    *   String translation service.
    * @param string[] $ignore
-   *   Config components to ignore.
+   *   Config components to ignore at the top level.
    * @param string $hierarchy_prefix
    *   Prefix to use in diffs for array hierarchy.
    * @param string $value_prefix
@@ -62,9 +63,9 @@ class ConfigDiffer implements ConfigDiffInterface {
   /**
    * Normalizes config for comparison.
    *
-   * Recursively removes elements in the ignore list from configuration,
-   * as well as empty array values, and sorts at each level by array key, so
-   * that config from different storage can be compared meaningfully.
+   * Removes elements in the ignore list from the top level of configuration,
+   * and at each level of the array, removes empty arrays and sorts by array
+   * key, so that config from different storage can be compared meaningfully.
    *
    * @param array|null $config
    *   Configuration array to normalize.
@@ -80,27 +81,40 @@ class ConfigDiffer implements ConfigDiffInterface {
       return [];
     }
 
-    // Remove "ignore" elements.
+    // Remove "ignore" elements, only at the top level.
     foreach ($this->ignore as $element) {
       unset($config[$element]);
     }
 
-    // Recursively normalize remaining elements, if they are arrays.
-    foreach ($config as $key => $value) {
+    // Recursively normalize and return.
+    return $this->normalizeArray($config);
+  }
+
+  /**
+   * Recursively sorts an array by key, and removes empty arrays.
+   *
+   * @param array $array
+   *   An array to normalize.
+   *
+   * @return array
+   *   An array that is sorted by key, at each level of the array, with empty
+   *   arrays removed.
+   */
+  protected function normalizeArray(array $array) {
+    foreach ($array as $key => $value) {
       if (is_array($value)) {
-        $new = $this->normalize($value);
+        $new = $this->normalizeArray($value);
         if (count($new)) {
-          $config[$key] = $new;
+          $array[$key] = $new;
         }
         else {
-          unset($config[$key]);
+          unset($array[$key]);
         }
       }
     }
 
-    // Sort and return.
-    ksort($config);
-    return $config;
+    ksort($array);
+    return $array;
   }
 
   /**
@@ -157,11 +171,8 @@ class ConfigDiffer implements ConfigDiffInterface {
           $lines[] = $line;
         }
       }
-      elseif (is_null($value)) {
-        $lines[] = $section_prefix . $this->valuePrefix . $this->t('(NULL)');
-      }
       else {
-        $lines[] = $section_prefix . $this->valuePrefix . $value;
+        $lines[] = $section_prefix . $this->valuePrefix . Yaml::encode($value);
       }
     }
 

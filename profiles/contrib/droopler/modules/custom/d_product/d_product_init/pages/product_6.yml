@@ -1,0 +1,38 @@
+info:
+  type: d_product
+  title: Fresh Rye Bread
+field_product_image:
+  type: image
+  data:
+    - file: demo_business_3.jpg
+      alt: Title / Subtitle
+    - file: demo_business_1.jpg
+      alt: Title / Subtitle
+    - file: demo_business_2.jpg
+      alt: Title / Subtitle
+    - file: demo_business_4.jpg
+      alt: Title / Subtitle
+body:
+  type: text
+  data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
+    a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
+    Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: d_product_categories
+    terms:
+      - Food
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Food
+      - Bakery
+      - Moto
+field_d_product_link:
+  type: cta
+  data:
+    link: http://example.com/
+    text: Buy now

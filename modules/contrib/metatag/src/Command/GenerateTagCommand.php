@@ -32,42 +32,52 @@ class GenerateTagCommand extends Command {
   use ConfirmationTrait;
 
   /**
+   * The Metatag manager.
+   *
    * @var \Drupal\metatag\MetatagManager
    */
   protected $metatagManager;
 
   /**
+   * The Metatag tag generator.
+   *
    * @var \Drupal\metatag\Generator\MetatagTagGenerator
    */
   protected $generator;
 
   /**
+   * An extension manager.
+   *
    * @var \Drupal\Console\Extension\Manager
    */
   protected $extensionManager;
 
   /**
+   * The string converter.
+   *
    * @var \Drupal\Console\Core\Utils\StringConverter
    */
   protected $stringConverter;
 
   /**
+   * The console chain queue.
+   *
    * @var \Drupal\Console\Core\Utils\ChainQueue
    */
   protected $chainQueue;
 
   /**
-   * GenerateTagCommand constructor.
+   * The GenerateTagCommand constructor.
    *
-   * @param Drupal\metatag\MetatagManager $metatagManager
+   * @param \Drupal\metatag\MetatagManager $metatagManager
    *   The metatag manager object.
-   * @param Drupal\metatag\Generator\MetatagTagGenerator $generator
+   * @param \Drupal\metatag\Generator\MetatagTagGenerator $generator
    *   The tag generator object.
-   * @param Drupal\Console\Extension\Manager $extensionManager
+   * @param \Drupal\Console\Extension\Manager $extensionManager
    *   The extension manager object.
-   * @param Drupal\Console\Core\Utils\StringConverter $stringConverter
+   * @param \Drupal\Console\Core\Utils\StringConverter $stringConverter
    *   The string converter object.
-   * @param Drupal\Console\Core\Utils\ChainQueue $chainQueue
+   * @param \Drupal\Console\Core\Utils\ChainQueue $chainQueue
    *   The chain queue object.
    */
   public function __construct(

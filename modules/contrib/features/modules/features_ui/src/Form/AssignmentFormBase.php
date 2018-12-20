@@ -77,19 +77,19 @@ abstract class AssignmentFormBase extends FormBase {
     $options = $this->featuresManager->listConfigTypes($bundles_only);
 
     if (!isset($form['types'])) {
-      $form['types'] = array(
+      $form['types'] = [
         '#type' => 'container',
         '#tree' => TRUE,
-      );
+      ];
     }
 
-    $form['types']['config'] = array(
+    $form['types']['config'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Configuration types'),
-      '#description' => !empty($description) ? $description : $this->t('Select types of configuration that should be considered @type types.', array('@type' => $type)),
+      '#description' => !empty($description) ? $description : $this->t('Select types of configuration that should be considered @type types.', ['@type' => $type]),
       '#options' => $options,
       '#default_value' => $defaults,
-    );
+    ];
   }
 
   /**
@@ -98,13 +98,13 @@ abstract class AssignmentFormBase extends FormBase {
   protected function setContentTypeSelect(&$form, $defaults, $type, $exclude_has_config_bundles = TRUE) {
     $entity_types = $this->entityTypeManager->getDefinitions();
 
-    $has_config_bundle = array();
+    $has_config_bundle = [];
     foreach ($entity_types as $definition) {
       if ($entity_type_id = $definition->getBundleOf()) {
         $has_config_bundle[] = $entity_type_id;
       }
     }
-    $options = array();
+    $options = [];
 
     foreach ($entity_types as $entity_type_id => $entity_type) {
       if (!$entity_type instanceof ContentEntityTypeInterface) {
@@ -120,19 +120,19 @@ abstract class AssignmentFormBase extends FormBase {
     uasort($options, 'strnatcasecmp');
 
     if (!isset($form['types'])) {
-      $form['types'] = array(
+      $form['types'] = [
         '#type' => 'container',
         '#tree' => TRUE,
-      );
+      ];
     }
 
-    $form['types']['content'] = array(
+    $form['types']['content'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Content entity types'),
-      '#description' => $this->t('Select content entity types that should be considered @type types.', array('@type' => $type)),
+      '#description' => $this->t('Select content entity types that should be considered @type types.', ['@type' => $type]),
       '#options' => $options,
       '#default_value' => $defaults,
-    );
+    ];
   }
 
   /**
@@ -142,25 +142,25 @@ abstract class AssignmentFormBase extends FormBase {
     $assignment_info = $this->assigner->getAssignmentMethods();
     if (isset($method_id) && isset($assignment_info[$method_id])) {
       $method = $assignment_info[$method_id];
-      $form['help_text'] = array(
+      $form['help_text'] = [
         '#markup' => $method['description'],
         '#prefix' => '<p class="messages messages--status">',
         '#suffix' => '</p>',
         '#weight' => -99,
-      );
+      ];
     }
 
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['submit'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#button_type' => 'primary',
       '#value' => $this->t('Save settings'),
-    );
+    ];
     $form['#attributes']['class'][] = 'features-assignment-settings-form';
-    $form['#attached'] = array(
-      'library' => array(
+    $form['#attached'] = [
+      'library' => [
         'features_ui/drupal.features_ui.admin',
-    ));
+    ]];
   }
 
   /**
@@ -170,7 +170,7 @@ abstract class AssignmentFormBase extends FormBase {
    *   The form state.
    */
   protected function setRedirect(FormStateInterface $form_state) {
-    $form_state->setRedirect('features.assignment', array('bundle_name' => $this->currentBundle->getMachineName()));
+    $form_state->setRedirect('features.assignment', ['bundle_name' => $this->currentBundle->getMachineName()]);
   }
 
 }

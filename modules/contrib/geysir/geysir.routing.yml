@@ -1,0 +1,113 @@
+geysir.delete_form:
+  path: 'geysir/delete/{parent_entity_type}/{parent_entity_bundle}/{parent_entity_revision}/{field}/{field_wrapper_id}/{delta}/{paragraph}/{paragraph_revision}'
+  defaults:
+    _entity_form: 'paragraph.geysir_delete'
+  requirements:
+    _permission: 'geysir manage paragraphs from front-end'
+  options:
+    _admin_route: TRUE
+    parameters:
+      paragraph:
+        type: 'entity:paragraph'
+      paragraph_revision:
+        type: 'entity_revision:paragraph'
+geysir.edit_form:
+  path: 'geysir/edit/{parent_entity_type}/{parent_entity_bundle}/{parent_entity_revision}/{field}/{field_wrapper_id}/{delta}/{paragraph}/{paragraph_revision}'
+  defaults:
+    _entity_form: 'paragraph.geysir_edit'
+  requirements:
+    _permission: 'geysir manage paragraphs from front-end'
+  options:
+    _admin_route: TRUE
+    parameters:
+      paragraph:
+        type: 'entity:paragraph'
+      paragraph_revision:
+        type: 'entity_revision:paragraph'
+geysir.modal.delete_form:
+  path: 'geysir/modal/delete/{parent_entity_type}/{parent_entity_bundle}/{parent_entity_revision}/{field}/{field_wrapper_id}/{delta}/{paragraph}/{paragraph_revision}/{js}'
+  defaults:
+    _title: 'Delete'
+    _controller: '\Drupal\geysir\Controller\GeysirModalController::delete'
+  requirements:
+    _permission: 'geysir manage paragraphs from front-end'
+    js: 'nojs|ajax'
+  options:
+    _admin_route: TRUE
+    parameters:
+      paragraph:
+        type: 'entity:paragraph'
+      paragraph_revision:
+        type: 'entity_revision:paragraph'
+geysir.modal.edit_form:
+  path: 'geysir/modal/edit/{parent_entity_type}/{parent_entity_bundle}/{parent_entity_revision}/{field}/{field_wrapper_id}/{delta}/{paragraph}/{paragraph_revision}/{js}'
+  defaults:
+    _title: 'Edit'
+    _controller: '\Drupal\geysir\Controller\GeysirModalController::edit'
+  requirements:
+    _permission: 'geysir manage paragraphs from front-end'
+    js: 'nojs|ajax'
+  options:
+    _admin_route: TRUE
+    parameters:
+      paragraph:
+        type: 'entity:paragraph'
+      paragraph_revision:
+        type: 'entity_revision:paragraph'
+geysir.modal.add_form:
+  path: 'geysir/modal/add/{parent_entity_type}/{parent_entity_bundle}/{parent_entity_revision}/{field}/{field_wrapper_id}/{delta}/{paragraph}/{paragraph_revision}/{position}/{js}/{bundle}'
+  defaults:
+    _title: 'Add'
+    _controller: '\Drupal\geysir\Controller\GeysirModalController::add'
+    bundle: NULL
+  requirements:
+    _permission: 'geysir manage paragraphs from front-end'
+    js: 'nojs|ajax'
+  options:
+    _admin_route: TRUE
+    parameters:
+      paragraph:
+        type: 'entity:paragraph'
+      paragraph_revision:
+              type: 'entity_revision:paragraph'
+geysir.cut:
+  path: 'geysir/cut/{parent_entity_type}/{parent_entity_bundle}/{parent_entity_revision}/{field}/{field_wrapper_id}/{delta}/{paragraph_to_cut}/{paragraph_revision}/{js}'
+  defaults:
+    _title: 'Cut'
+    _controller: '\Drupal\geysir\Controller\GeysirCutPasteController::cut'
+  requirements:
+    _permission: 'geysir manage paragraphs from front-end'
+    js: 'nojs|ajax'
+  options:
+    _admin_route: TRUE
+    parameters:
+      paragraph_to_cut:
+        type: 'entity:paragraph'
+      paragraph_revision:
+        type: 'entity_revision:paragraph'
+geysir.paste:
+  path: 'geysir/paste/{parent_entity_type}/{parent_entity_bundle}/{parent_entity_revision}/{field}/{field_wrapper_id}/{delta}/{position}/{paragraph_to_paste}/{paragraph_revision}/{js}'
+  defaults:
+    _title: 'Paste'
+    _controller: '\Drupal\geysir\Controller\GeysirCutPasteController::paste'
+  requirements:
+    _permission: 'geysir manage paragraphs from front-end'
+    js: 'nojs|ajax'
+  options:
+    _admin_route: TRUE
+    parameters:
+      paragraph_to_paste:
+        type: 'entity:paragraph'
+      paragraph_revision:
+        type: 'entity_revision:paragraph'
+geysir.modal.add_form_first:
+  path: 'geysir/modal/add/{parent_entity_type}/{parent_entity_bundle}/{parent_entity_revision}/{field}/{field_wrapper_id}/{delta}/{position}/{js}/{bundle}'
+  defaults:
+    _title: 'Add'
+    _controller: '\Drupal\geysir\Controller\GeysirModalController::addFirst'
+    bundle: NULL
+  requirements:
+    _permission: 'geysir manage paragraphs from front-end'
+    js: 'nojs|ajax'
+  options:
+    _admin_route: TRUE

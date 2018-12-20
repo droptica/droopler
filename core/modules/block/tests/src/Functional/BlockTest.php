@@ -146,7 +146,7 @@ class BlockTest extends BlockTestBase {
       $block_name = 'system_powered_by_block';
       $add_url = Url::fromRoute('block.admin_add', [
         'plugin_id' => $block_name,
-        'theme' => $default_theme
+        'theme' => $default_theme,
       ]);
       $links = $this->xpath('//a[contains(@href, :href)]', [':href' => $add_url->toString()]);
       $this->assertEqual(1, count($links), 'Found one matching link.');
@@ -236,6 +236,30 @@ class BlockTest extends BlockTestBase {
     $this->assertRaw(t('The block %name has been removed.', ['%name' => $block->label()]));
     $this->assertUrl('admin');
     $this->assertNoRaw($block->id());
+  }
+
+  /**
+   * Tests the block operation links.
+   */
+  public function testBlockOperationLinks() {
+    $this->drupalGet('admin/structure/block');
+    // Go to the select block form.
+    $this->clickLink('Place block');
+    // Select the first available block.
+    $this->clickLink('Place block');
+    // Finally place the block
+    $this->submitForm([], 'Save block');
+
+    $url = $this->getUrl();
+    $parsed = parse_url($url);
+    $this->assertContains('block-placement', $parsed['query']);
+
+    $this->clickLink('Remove');
+    $this->submitForm([], 'Remove');
+
+    $url = $this->getUrl();
+    $parsed = parse_url($url);
+    $this->assertTrue(empty($parsed['query']));
   }
 
   /**
@@ -537,14 +561,14 @@ class BlockTest extends BlockTestBase {
 
     $this->assertEqual($block->getVisibility()['user_role']['roles'], [
       $role1->id() => $role1->id(),
-      $role2->id() => $role2->id()
+      $role2->id() => $role2->id(),
     ]);
 
     $role1->delete();
 
     $block = Block::load($block->id());
     $this->assertEqual($block->getVisibility()['user_role']['roles'], [
-      $role2->id() => $role2->id()
+      $role2->id() => $role2->id(),
     ]);
   }
 

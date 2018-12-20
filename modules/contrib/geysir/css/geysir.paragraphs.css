@@ -1,0 +1,212 @@
+*[data-geysir-field-paragraph-field-wrapper] .field--item,
+.geysir-field-paragraph-wrapper > * {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+.geysir-field-paragraph-wrapper {
+  position: relative;
+  clear: both;
+}
+
+.geysir-field-paragraph-wrapper:hover {
+  outline: 5px solid rgba(85, 142, 213, 0.5);
+}
+
+.geysir-field-paragraph-wrapper:hover:after {
+  background-color: rgba(85, 142, 213, 0.5);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.geysir-field-paragraph-wrapper:hover .geysir-field-paragraph-wrapper:hover {
+  outline-color: rgba(0, 0, 0, 0.5);
+}
+
+.geysir-field-paragraph-links {
+  display: none;
+  margin: 0;
+  padding: 0;
+  position: static;
+}
+
+.geysir-field-paragraph-wrapper:hover .geysir-field-paragraph-links {
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+}
+
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-links li {
+  z-index: 101;
+}
+
+.geysir-field-paragraph-wrapper > .geysir-field-paragraph-links li {
+  z-index: 100;
+}
+
+.geysir-field-paragraph-links li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+}
+
+.geysir-field-paragraph-links li.edit {
+  top: 50%;
+  transform: translate(75%, -50%);
+}
+
+.geysir-field-paragraph-links li.delete {
+  top: 50%;
+  transform: translate(-175%, -50%);
+}
+
+.geysir-field-paragraph-links li.cut {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.geysir-field-paragraph-links li.add-before,
+.geysir-field-paragraph-links li.add-after {
+  transform: translateX(-50%);
+}
+
+.geysir-field-paragraph-links li.add-after {
+  bottom: -23px;
+}
+
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-wrapper .geysir-field-paragraph-links li.add-after {
+  bottom: auto;
+  top: 50%;
+  transform: translate(250%, -50%);
+}
+
+.geysir-field-paragraph-links li.add-before {
+  top: -23px;
+}
+
+.geysir-field-paragraph-links li.paste-after,
+.geysir-field-paragraph-links li.paste-before {
+  display: none;
+  margin: 0 0 0 -20px;
+  position: absolute;
+  left: 50%;
+}
+
+.geysir-field-paragraph-links li.paste-after {
+  bottom: -23px;
+}
+
+.geysir-field-paragraph-links li.paste-before {
+  top: -23px;
+}
+
+.geysir-field-paragraph-links.geysir-field-paragraph-add-first {
+  display: block;
+}
+.geysir-field-paragraph-links.geysir-field-paragraph-add-first li.add-before {
+  margin-top: 40px;
+  position: relative;
+}
+
+.geysir-cut-paste .geysir-field-paragraph-links li {
+  display: none;
+}
+
+.geysir-cut-paste .geysir-field-paragraph-links li.paste-after,
+.geysir-cut-paste .geysir-field-paragraph-links li.paste-before {
+  display: block;
+}
+
+.geysir-cut-paste .geysir-cut-paste-disabled .geysir-field-paragraph-links li.paste-after,
+.geysir-cut-paste .geysir-cut-paste-disabled .geysir-field-paragraph-links li.paste-before {
+  display: none;
+}
+
+.geysir-field-paragraph-wrapper.geysir-cut-paste-disabled {
+  outline: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+.geysir-field-paragraph-wrapper.geysir-cut-paste-disabled:after {
+  background-color: rgba(0, 0, 0, 0.1);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-wrapper .geysir-field-paragraph-links li.add-before {
+  top: 50%;
+  transform: translate(-350%, -50%);
+}
+
+.geysir-field-paragraph-links .ajax-progress {
+  left: 50%;
+  margin: -5px 0 0 -8px;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+}
+
+.geysir-field-paragraph-links .ajax-progress-throbber .throbber {
+  display: block;
+  height: 13px;
+  padding: 0;
+  width: 17px;
+}
+
+.geysir-field-paragraph-links a {
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  border: 2px solid #558ed5;
+  border-radius: 50%;
+  color: #558ed5;
+  display: block;
+  font-weight: bold;
+  height: 40px;
+  padding: 0;
+  text-indent: -9999px;
+  width: 40px;
+}
+
+.geysir-field-paragraph-links a:hover {
+  background-color: #f78a5f;
+  border-color: #f78a5f;
+  box-shadow: 0 0 5px #000;
+  color: #fff;
+}
+
+.geysir-field-paragraph-links li.add-after a,
+.geysir-field-paragraph-links li.add-before a {
+  background-image: url(../images/geysir-add.svg);
+}
+
+.geysir-field-paragraph-links li.cut a {
+  background-image: url(../images/geysir-scissors.svg);
+}
+
+.geysir-field-paragraph-links li.delete a {
+  background-image: url(../images/geysir-trash.svg);
+}
+
+.geysir-field-paragraph-links li.edit a {
+  background-image: url(../images/geysir-pencil.svg);
+}
+
+.geysir-field-paragraph-links li.paste-after a,
+.geysir-field-paragraph-links li.paste-before a {
+  background-image: url(../images/geysir-paste.svg);
+}

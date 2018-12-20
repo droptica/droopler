@@ -9,6 +9,7 @@ use Drupal\Core\Config\StorageInterface;
 use Drupal\features\Exception\DomainException;
 use Drupal\features\Exception\InvalidArgumentException;
 use Drupal\features\FeaturesAssignerInterface;
+use Drupal\features\FeaturesBundleInterface;
 use Drupal\features\FeaturesGeneratorInterface;
 use Drupal\features\FeaturesManagerInterface;
 use Drupal\features\Plugin\FeaturesGeneration\FeaturesGenerationWrite;
@@ -246,7 +247,7 @@ class FeaturesCommands extends DrushCommands {
   public function listPackages($package_name = NULL, $options = self::OPTIONS_LIST) {
     $assigner = $this->featuresOptions($options);
     $current_bundle = $assigner->getBundle();
-    $namespace = $current_bundle->isDefault() ? '' : $current_bundle->getMachineName();
+    $namespace = $current_bundle->isDefault() ? FeaturesBundleInterface::DEFAULT_BUNDLE : $current_bundle->getMachineName();
 
     $manager = $this->manager;
     $packages = $manager->getPackages();
@@ -312,7 +313,7 @@ class FeaturesCommands extends DrushCommands {
   public function importAll($options = self::OPTIONS_IMPORT_ALL) {
     $assigner = $this->featuresOptions($options);
     $currentBundle = $assigner->getBundle();
-    $namespace = $currentBundle->isDefault() ? '' : $currentBundle->getMachineName();
+    $namespace = $currentBundle->isDefault() ? FeaturesBundleInterface::DEFAULT_BUNDLE : $currentBundle->getMachineName();
 
     $manager = $this->manager;
     $packages = $manager->getPackages();

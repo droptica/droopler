@@ -57,4 +57,5 @@ class ArrayTest extends KernelTestBase {
     ];
     $this->assertTokens('array', ['array' => $array], $tokens);
   }
+
 }

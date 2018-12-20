@@ -89,7 +89,7 @@ class ConfigLister implements ConfigListInterface {
 
     // Calculate and return the list.
     foreach ($this->entityManager->getDefinitions() as $entity_type => $definition) {
-      if ($definition->isSubclassOf('Drupal\Core\Config\Entity\ConfigEntityInterface')) {
+      if ($definition->entityClassImplements('Drupal\Core\Config\Entity\ConfigEntityInterface')) {
         $this->definitions[$entity_type] = $definition;
         $prefix = $definition->getConfigPrefix();
         $this->typesByPrefix[$prefix] = $entity_type;

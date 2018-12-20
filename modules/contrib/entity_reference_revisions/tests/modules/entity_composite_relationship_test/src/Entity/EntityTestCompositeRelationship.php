@@ -18,6 +18,7 @@ use Drupal\entity_test\Entity\EntityTestMulRev;
  *   revision_table = "entity_test_composite_revision",
  *   data_table = "entity_test_composite_field_data",
  *   revision_data_table = "entity_test_composite_field_revision",
+ *   content_translation_ui_skip = TRUE,
  *   translatable = TRUE,
  *   entity_revision_parent_type_field = "parent_type",
  *   entity_revision_parent_id_field = "parent_id",

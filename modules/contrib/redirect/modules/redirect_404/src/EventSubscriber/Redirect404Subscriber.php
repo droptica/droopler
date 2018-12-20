@@ -2,7 +2,6 @@
 
 namespace Drupal\redirect_404\EventSubscriber;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Path\PathMatcherInterface;
@@ -106,11 +105,11 @@ class Redirect404Subscriber implements EventSubscriberInterface {
       $path = $this->currentPath->getPath();
 
       // Ignore paths specified in the redirect settings.
-      if ($pages = Unicode::strtolower($this->config->get('pages'))) {
+      if ($pages = mb_strtolower($this->config->get('pages'))) {
         // Do not trim a trailing slash if that is the complete path.
         $path_to_match = $path === '/' ? $path : rtrim($path, '/');
 
-        if ($this->pathMatcher->matchPath(Unicode::strtolower($path_to_match), $pages)) {
+        if ($this->pathMatcher->matchPath(mb_strtolower($path_to_match), $pages)) {
           return;
         }
       }

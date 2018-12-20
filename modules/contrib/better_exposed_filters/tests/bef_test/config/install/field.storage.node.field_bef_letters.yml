@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+  enforced:
+    module:
+      - bef_test
+id: node.field_bef_letters
+field_name: field_bef_letters
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: a
+      label: Aardvark
+    -
+      value: b
+      label: 'Bumble & the Bee'
+    -
+      value: c
+      label: 'Le Chimpanzé'
+    -
+      value: d
+      label: Donkey
+    -
+      value: e
+      label: Elephant
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

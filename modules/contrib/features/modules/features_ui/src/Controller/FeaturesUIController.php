@@ -58,14 +58,14 @@ class FeaturesUIController implements ContainerInjectionInterface {
    *   List of auto-detected config items, keyed by type and short name.
    */
   public function detect($name) {
-    $detected = array();
+    $detected = [];
     $this->assigner->assignConfigPackages();
     $config_collection = $this->featuresManager->getConfigCollection();
 
     $items = $_POST['items'];
     if (!empty($items)) {
-      $excluded = (!empty($_POST['excluded'])) ? $_POST['excluded'] : array();
-      $selected = array();
+      $excluded = (!empty($_POST['excluded'])) ? $_POST['excluded'] : [];
+      $selected = [];
       foreach ($items as $key) {
         preg_match('/^([^\[]+)(\[.+\])?\[(.+)\]\[(.+)\]$/', $key, $matches);
         if (!empty($matches[1]) && !empty($matches[4])) {
@@ -76,7 +76,7 @@ class FeaturesUIController implements ContainerInjectionInterface {
           }
         }
       }
-      $detected = !empty($selected) ? $this->getConfigDependents($selected, $name) : array();
+      $detected = !empty($selected) ? $this->getConfigDependents($selected, $name) : [];
       $detected = array_merge($detected, $selected);
     }
 
@@ -112,7 +112,7 @@ class FeaturesUIController implements ContainerInjectionInterface {
 
     // Add any existing auto-detected items already in the package config
     $this->package = $packages[$package_name];
-    $package_config = isset($this->package) ? $this->package->getConfig() : array();
+    $package_config = isset($this->package) ? $this->package->getConfig() : [];
     $package_config = !empty($package_config) ? array_unique(array_merge($package_config, $item_names)) : $item_names;
     foreach ($package_config as $config_name) {
       if (!$config_collection[$config_name]->getPackageExcluded()) {
@@ -177,7 +177,7 @@ class FeaturesUIController implements ContainerInjectionInterface {
    *   An encoding map.
    */
   protected function domEncodeMap() {
-    return array(
+    return [
       ':' => '__' . ord(':') . '__',
       '/' => '__' . ord('/') . '__',
       ',' => '__' . ord(',') . '__',
@@ -187,7 +187,7 @@ class FeaturesUIController implements ContainerInjectionInterface {
       '%' => '__' . ord('%') . '__',
       ')' => '__' . ord(')') . '__',
       '(' => '__' . ord('(') . '__',
-    );
+    ];
   }
 
 }

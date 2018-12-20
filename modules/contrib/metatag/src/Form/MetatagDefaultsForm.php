@@ -299,7 +299,7 @@ class MetatagDefaultsForm extends EntityForm {
   /**
    * Returns the text label for the entity type specified.
    *
-   * @param Drupal\Core\Entity\EntityTypeInterface $entityType
+   * @param \Drupal\Core\Entity\EntityTypeInterface $entityType
    *   The entity type to process.
    *
    * @return string

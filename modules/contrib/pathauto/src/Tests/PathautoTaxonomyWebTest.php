@@ -27,7 +27,7 @@ class PathautoTaxonomyWebTest extends WebTestBase {
   protected $adminUser;
 
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
   function setUp() {
     parent::setUp();
@@ -44,7 +44,6 @@ class PathautoTaxonomyWebTest extends WebTestBase {
 
     $this->createPattern('taxonomy_term', '/[term:vocabulary]/[term:name]');
   }
-
 
   /**
    * Basic functional testing of Pathauto with taxonomy terms.

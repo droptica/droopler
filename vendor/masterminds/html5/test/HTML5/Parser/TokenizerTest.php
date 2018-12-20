@@ -2,7 +2,6 @@
 namespace Masterminds\HTML5\Tests\Parser;
 
 use Masterminds\HTML5\Parser\UTF8Utils;
-use Masterminds\HTML5\Parser\StringInputStream;
 use Masterminds\HTML5\Parser\Scanner;
 use Masterminds\HTML5\Parser\Tokenizer;
 
@@ -447,9 +446,10 @@ class TokenizerTest extends \Masterminds\HTML5\Tests\TestCase
         );
         foreach ($selfClose as $test => $expects) {
             $events = $this->parse($test);
-            $this->assertEquals(3, $events->depth(), "Counting events for '$test'" . print_r($events, true));
+            $this->assertEquals(2, $events->depth(), "Counting events for '$test'" . print_r($events, true));
             $this->assertEventEquals('startTag', $expects, $events->get(0));
-            $this->assertEventEquals('endTag', $expects, $events->get(1));
+            $event = $events->get(0);
+            $this->assertTrue($event['data'][2]);
         }
 
         $bad = array(
@@ -735,7 +735,7 @@ class TokenizerTest extends \Masterminds\HTML5\Tests\TestCase
                 true
             )
         );
-        $this->isAllGood('startTag', 3, $withEnd);
+        $this->isAllGood('startTag', 2, $withEnd);
 
         // Cause a parse error.
         $bad = array(
@@ -959,8 +959,7 @@ class TokenizerTest extends \Masterminds\HTML5\Tests\TestCase
     protected function createTokenizer($string, $debug = false)
     {
         $eventHandler = new EventStack();
-        $stream = new StringInputStream($string);
-        $scanner = new Scanner($stream);
+        $scanner = new Scanner($string);
 
         $scanner->debug = $debug;
 

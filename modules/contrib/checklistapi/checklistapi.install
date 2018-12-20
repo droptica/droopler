@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Checklist API module.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\checklistapi\ChecklistapiChecklist;
+
+/**
+ * Update saved progress configuration to new schema.
+ */
+function checklistapi_update_8001() {
+  $definitions = checklistapi_get_checklist_info();
+  foreach ($definitions as $id => $definition) {
+    $checklist = checklistapi_checklist_load($id);
+
+    $config = $checklist->config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY);
+    $config['#items'] = [];
+
+    $groups = $checklist->items;
+    foreach (Element::children($groups) as $group_key) {
+      $group = $groups[$group_key];
+      // Loop through items.
+      foreach (Element::children($group) as $item_key) {
+        if ($config[$item_key]) {
+          $config['#items'][$item_key] = $config[$item_key];
+        }
+        unset($config[$item_key]);
+      }
+    }
+
+    $checklist->config->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY, $config)
+      ->save();
+  }
+
+}

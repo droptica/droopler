@@ -8,7 +8,7 @@ use Drupal\migrate_drupal\Plugin\migrate\field\FieldPluginBase;
 /**
  * Field Plugin for field collection migrations.
  *
- * @todo Implement ::processFieldValues()
+ * @todo Implement ::defineValueProcessPipeline()
  * @see https://www.drupal.org/project/paragraphs/issues/2911244
  *
  * @MigrateField(
@@ -32,19 +32,7 @@ class FieldCollection extends FieldPluginBase {
    * {@inheritdoc}
    */
   public function processFieldFormatter(MigrationInterface $migration) {
-
-    $view_mode = [
-      'field_collection' => [
-        'plugin' => 'paragraphs_process_on_value',
-        'source_value' => 'type',
-        'expected_value' => 'field_collection',
-        'process' => [
-          'plugin' => 'get',
-          'source' => 'formatter/settings/view_mode',
-        ],
-      ],
-    ];
-    $migration->mergeProcessOfProperty('options/settings/view_mode', $view_mode);
+    $this->addViewModeProcess($migration);
 
     // Workaround for Drupal 8.4. In D8.5+ this should only call the parent.
     // @todo Remove all but parent call after Drupal 8.6 is released.
@@ -54,12 +42,24 @@ class FieldCollection extends FieldPluginBase {
     // @see https://www.drupal.org/project/drupal/issues/2843617
     $process = $migration->getProcess();
     if (is_array($process['options/type'][0]['source'])) {
+      // Backwards compatibility with D8.5.
+      // @todo replace with parent::alterFieldFormatterMigration
+      // @see https://www.drupal.org/project/paragraphs/issues/2994933
+      // @see https://www.drupal.org/node/2944598
       parent::processFieldFormatter($migration);
     }
     else {
       $options_type[0]['map']['field_collection_view'] = 'entity_reference_revisions_entity_view';
       $migration->mergeProcessOfProperty('options/type', $options_type);
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function alterFieldFormatterMigration(MigrationInterface $migration) {
+    $this->addViewModeProcess($migration);
+    parent::alterFieldFormatterMigration($migration);
   }
 
   /**
@@ -84,6 +84,13 @@ class FieldCollection extends FieldPluginBase {
    * {@inheritdoc}
    */
   public function processField(MigrationInterface $migration) {
+    $this->alterFieldMigration($migration);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function alterFieldMigration(MigrationInterface $migration) {
     $settings = [
       'field_collection' => [
         'plugin' => 'field_collection_field_settings',
@@ -96,12 +103,40 @@ class FieldCollection extends FieldPluginBase {
    * {@inheritdoc}
    */
   public function processFieldInstance(MigrationInterface $migration) {
+    $this->alterFieldInstanceMigration($migration);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function alterFieldInstanceMigration(MigrationInterface $migration) {
     $settings = [
       'field_collection' => [
         'plugin' => 'field_collection_field_instance_settings',
       ],
     ];
     $migration->mergeProcessOfProperty('settings', $settings);
+  }
+
+  /**
+   * Adds process for view mode settings.
+   *
+   * @param \Drupal\migrate\Plugin\MigrationInterface $migration
+   *   The migration.
+   */
+  protected function addViewModeProcess(MigrationInterface $migration) {
+    $view_mode = [
+      'field_collection' => [
+        'plugin' => 'paragraphs_process_on_value',
+        'source_value' => 'type',
+        'expected_value' => 'field_collection',
+        'process' => [
+          'plugin' => 'get',
+          'source' => 'formatter/settings/view_mode',
+        ],
+      ],
+    ];
+    $migration->mergeProcessOfProperty('options/settings/view_mode', $view_mode);
   }
 
 }

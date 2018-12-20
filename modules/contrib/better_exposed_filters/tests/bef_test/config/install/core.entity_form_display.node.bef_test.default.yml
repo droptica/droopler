@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.bef_test.body
+    - field.field.node.bef_test.field_bef_boolean
+    - field.field.node.bef_test.field_bef_email
+    - field.field.node.bef_test.field_bef_integer
+    - field.field.node.bef_test.field_bef_letters
+    - field.field.node.bef_test.field_bef_location
+    - node.type.bef_test
+  module:
+    - path
+  enforced:
+    module:
+      - bef_test
+_core:
+  default_config_hash: R0o7gr9BG9vh0chu8DVw6qiEdviHNnz3BBYqkG8No6Q
+id: node.bef_test.default
+targetEntityType: node
+bundle: bef_test
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+  field_bef_boolean:
+    weight: 31
+    settings:
+      display_label: false
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_bef_email:
+    weight: 33
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+  field_bef_integer:
+    weight: 34
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_bef_letters:
+    weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_bef_location:
+    weight: 36
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true

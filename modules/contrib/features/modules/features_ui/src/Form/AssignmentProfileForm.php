@@ -27,32 +27,32 @@ class AssignmentProfileForm extends AssignmentFormBase {
 
     $this->setConfigTypeSelect($form, $settings['types']['config'], $this->t('profile'));
 
-    $form['curated'] = array(
+    $form['curated'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Add commonly-needed configuration'),
       '#default_value' => $settings['curated'],
       '#description' => $this->t('Select this option to add a curated list of commonly-needed configuration including cron- and theme-related settings to the install profile.'),
-    );
+    ];
 
     $standard_settings = $settings['standard'];
 
-    $form['standard'] = array(
+    $form['standard'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Crib from the Standard profile'),
       '#tree' => TRUE,
-    );
-    $form['standard']['files'] = array(
+    ];
+    $form['standard']['files'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Crib code'),
       '#default_value' => $standard_settings['files'],
       '#description' => $this->t('Select this option to add configuration and other files to the optional install profile from the Drupal core Standard install profile. Without these additions, a generated install profile will be missing some important initial setup.'),
-    );
-    $form['standard']['dependencies'] = array(
+    ];
+    $form['standard']['dependencies'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Crib dependencies'),
       '#default_value' => $standard_settings['dependencies'],
       '#description' => $this->t('Select this option to add module and theme dependencies from the Standard install profile.'),
-    );
+    ];
 
     $this->setActions($form, self::METHOD_ID);
 

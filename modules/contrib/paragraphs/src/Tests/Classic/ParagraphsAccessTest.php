@@ -4,6 +4,8 @@ namespace Drupal\paragraphs\Tests\Classic;
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\field_ui\Tests\FieldUiTestTrait;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\user\RoleInterface;
 use Drupal\user\Entity\Role;
 
@@ -22,8 +24,13 @@ class ParagraphsAccessTest extends ParagraphsTestBase {
    * @var array
    */
   public static $modules = array(
+    'content_translation',
     'image',
-    'paragraphs_demo',
+    'field',
+    'field_ui',
+    'block',
+    'language',
+    'node'
   );
 
   /**
@@ -31,6 +38,44 @@ class ParagraphsAccessTest extends ParagraphsTestBase {
    */
   protected function setUp() {
     parent::setUp();
+    ConfigurableLanguage::create(['id' => 'de', 'label' => '1German'])->save();
+    ConfigurableLanguage::create(['id' => 'fr', 'label' => '2French'])->save();
+    $this->addParagraphedContentType('paragraphed_content_demo', 'field_paragraphs_demo');
+    $this->loginAsAdmin([
+      'administer site configuration',
+      'administer content translation',
+      'administer languages',
+    ]);
+    $this->addParagraphsType('nested_paragraph');
+    $this->addParagraphsField('nested_paragraph', 'field_paragraphs_demo', 'paragraph');
+    $this->addParagraphsType('images');
+    static::fieldUIAddNewField('admin/structure/paragraphs_type/images', 'images_demo', 'Images', 'image', ['cardinality' => -1], ['settings[alt_field]' => FALSE]);
+    $this->addParagraphsType('text_image');
+    static::fieldUIAddNewField('admin/structure/paragraphs_type/text_image', 'image_demo', 'Images', 'image', ['cardinality' => -1], ['settings[alt_field]' => FALSE]);
+    static::fieldUIAddNewField('admin/structure/paragraphs_type/text_image', 'text_demo', 'Text', 'text_long', [], []);
+    $this->addParagraphsType('text');
+    static::fieldUIAddExistingField('admin/structure/paragraphs_type/text', 'field_text_demo', 'Text', []);
+    $edit = [
+      'entity_types[node]' => TRUE,
+      'entity_types[paragraph]' => TRUE,
+      'settings[node][paragraphed_content_demo][translatable]' => TRUE,
+      'settings[node][paragraphed_content_demo][fields][field_paragraphs_demo]' => FALSE,
+      'settings[paragraph][images][translatable]' => TRUE,
+      'settings[paragraph][text_image][translatable]' => TRUE,
+      'settings[paragraph][text][translatable]' => TRUE,
+      'settings[paragraph][nested_paragraph][translatable]' => TRUE,
+      'settings[paragraph][nested_paragraph][fields][field_paragraphs_demo]' => FALSE,
+      'settings[paragraph][nested_paragraph][settings][language][language_alterable]' => TRUE,
+      'settings[paragraph][images][fields][field_images_demo]' => TRUE,
+      'settings[paragraph][text_image][fields][field_image_demo]' => TRUE,
+      'settings[paragraph][text_image][fields][field_text_demo]' => TRUE,
+      'settings[node][paragraphed_content_demo][settings][language][language_alterable]' => TRUE
+    ];
+    $this->drupalPostForm('admin/config/regional/content-language', $edit, t('Save configuration'));
+
+    $view_display = entity_get_display('paragraph', 'images', 'default')
+      ->setComponent('field_images_demo', ['settings' => ['image_style' => 'medium']]);
+    $view_display->save();
   }
 
   /**
@@ -70,7 +115,7 @@ class ParagraphsAccessTest extends ParagraphsTestBase {
     $this->drupalGet('node/add/paragraphed_content_demo');
 
     // Add a new paragraphs images item.
-    $this->drupalPostForm(NULL, NULL, t('Add Images'));
+    $this->drupalPostForm(NULL, NULL, t('Add images'));
 
     $images = $this->drupalGetTestFiles('image');
 
@@ -91,7 +136,8 @@ class ParagraphsAccessTest extends ParagraphsTestBase {
 
     $this->drupalPostForm(NULL, $edit, t('Upload'));
     $this->drupalPostForm(NULL,  [], t('Preview'));
-    $img1_url = file_create_url(\Drupal::token()->replace('private://privateImage.jpg'));
+    $image_style = ImageStyle::load('medium');
+    $img1_url = $image_style->buildUrl('private://' . date('Y-m') . '/privateImage.jpg');
     $image_url = file_url_transform_relative($img1_url);
     $this->assertRaw($image_url, 'Image was found in preview');
     $this->clickLink(t('Back to content editing'));
@@ -104,7 +150,7 @@ class ParagraphsAccessTest extends ParagraphsTestBase {
     // Check the text and image after publish.
     $this->assertRaw($image_url, 'Image was found in content');
 
-    $this->drupalGet($image_url);
+    $this->drupalGet($img1_url);
     $this->assertResponse(200, 'Image could be downloaded');
 
     // Logout to become anonymous.
@@ -112,19 +158,19 @@ class ParagraphsAccessTest extends ParagraphsTestBase {
 
     // @todo Requesting the same $img_url again triggers a caching problem on
     // drupal.org test bot, thus we request a different file here.
-    $img_url = file_create_url(\Drupal::token()->replace('private://privateImage2.jpg'));
+    $img_url = $image_style->buildUrl('private://' . date('Y-m') . '/privateImage2.jpg');
     $image_url = file_url_transform_relative($img_url);
     // Check the text and image after publish. Anonymous should not see content.
     $this->assertNoRaw($image_url, 'Image was not found in content');
 
-    $this->drupalGet($image_url);
+    $this->drupalGet($img_url);
     $this->assertResponse(403, 'Image could not be downloaded');
 
     // Login as admin with no delete permissions.
     $this->loginAsAdmin($admin_user);
     // Create a new demo node.
     $this->drupalGet('node/add/paragraphed_content_demo');
-    $this->drupalPostForm(NULL, NULL, t('Add Text'));
+    $this->drupalPostForm(NULL, NULL, t('Add text'));
     $this->assertText('Text');
     $edit = [
       'title[0][value]' => 'delete_permissions',

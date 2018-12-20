@@ -1,0 +1,55 @@
+facets_summary.facets_summary.*:
+  type: config_entity
+  label : 'Facet'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    name:
+      type: label
+      label: 'Name'
+    facet_source_id:
+      type: string
+      label: 'Facet source id'
+    processor_configs:
+      type: sequence
+      label: 'Processor settings'
+      sequence:
+        type: mapping
+        label: 'A processor'
+        mapping:
+          processor_id:
+            type: string
+            label: 'The plugin ID of the processor'
+          weights:
+            type: sequence
+            label: 'The processors weight for this stage'
+            sequence:
+              type: string
+              label: 'the weight'
+          settings:
+            type: plugin.plugin_configuration.facets_summary_processor.[%parent.processor_id]
+    facets:
+      type: sequence
+      label: 'Facets configuration'
+      sequence:
+        type: mapping
+        label: 'Facet'
+        mapping:
+          checked:
+            type: boolean
+            label: 'Is this facet enabled'
+          label:
+            type: string
+            label: 'Label'
+            translatable: true
+          separator:
+            type: string
+            label: 'Results separator'
+            translatable: true
+          show_count:
+            type: boolean
+            label: 'Show count on items'
+          weight:
+            type: integer
+            label: 'Facet Weight'

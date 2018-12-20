@@ -53,6 +53,7 @@ trait FieldCollectionSourceData {
           'module' => 'field_collection',
           'active' => '1',
           'data' => 'serialized field collection field data',
+          'translatable' => '1',
         ],
       ],
       'field_config_instance' => [
@@ -62,6 +63,7 @@ trait FieldCollectionSourceData {
           'bundle' => 'field_field_collection_field',
           'data' => 'Serialized Instance Data',
           'deleted' => '0',
+          'field_id' => '1',
         ],
       ],
       'field_revision_field_text' => [

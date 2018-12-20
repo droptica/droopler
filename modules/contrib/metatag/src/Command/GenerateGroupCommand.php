@@ -30,28 +30,34 @@ class GenerateGroupCommand extends Command {
   use ConfirmationTrait;
 
   /**
+   * The metatag group generator.
+   *
    * @var \Drupal\metatag\Generator\MetatagGroupGenerator
    */
   protected $generator;
 
   /**
+   * The console extension manager.
+   *
    * @var \Drupal\Console\Extension\Manager
    */
   protected $extensionManager;
 
   /**
+   * The console chain queue.
+   *
    * @var \Drupal\Console\Core\Utils\ChainQueue
    */
   protected $chainQueue;
 
   /**
-   * GenerateTagCommand constructor.
+   * The GenerateTagCommand constructor.
    *
-   * @param Drupal\metatag\Generator\MetatagGroupGenerator $generator
+   * @param \Drupal\metatag\Generator\MetatagGroupGenerator $generator
    *   The generator object.
-   * @param Drupal\Console\Extension\Manager $extensionManager
+   * @param \Drupal\Console\Extension\Manager $extensionManager
    *   The extension manager object.
-   * @param Drupal\Console\Core\Utils\ChainQueue $chainQueue
+   * @param \Drupal\Console\Core\Utils\ChainQueue $chainQueue
    *   The chain queue object.
    */
   public function __construct(

@@ -50,6 +50,17 @@ class TokenTreeController extends ControllerBase {
     $build['#cache']['contexts'][] = 'url.query_args:options';
     $build['#title'] = $this->t('Available tokens');
 
+    // If this is an AJAX/modal request, add a wrapping div to the contents so
+    // that Drupal.behaviors.tokenTree and Drupal.behaviors.tokenAttach can
+    // stil find the elements they need to.
+    // @see https://www.drupal.org/project/token/issues/2994671
+    // @see https://www.drupal.org/node/2940704
+    // @see http://danielnouri.org/notes/2011/03/14/a-jquery-find-that-also-finds-the-root-element/
+    if ($request->isXmlHttpRequest()) {
+      $build['#prefix'] = '<div>';
+      $build['#suffix'] = '</div>';
+    }
+
     return $build;
   }
 

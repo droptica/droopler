@@ -2,9 +2,13 @@
 
 namespace Drupal\layout_builder\EventSubscriber;
 
+use Drupal\block_content\Access\RefinableDependentAccessInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Render\PreviewFallbackInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\layout_builder\Access\LayoutPreviewAccessAllowed;
 use Drupal\layout_builder\Event\SectionComponentBuildRenderArrayEvent;
 use Drupal\layout_builder\LayoutBuilderEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -56,6 +60,24 @@ class BlockComponentRenderArray implements EventSubscriberInterface {
       return;
     }
 
+    // Set block access dependency even if we are not checking access on
+    // this level. The block itself may render another
+    // RefinableDependentAccessInterface object and need to pass on this value.
+    if ($block instanceof RefinableDependentAccessInterface) {
+      $contexts = $event->getContexts();
+      if (isset($contexts['layout_builder.entity'])) {
+        if ($entity = $contexts['layout_builder.entity']->getContextValue()) {
+          if ($event->inPreview()) {
+            // If previewing in Layout Builder allow access.
+            $block->setAccessDependency(new LayoutPreviewAccessAllowed());
+          }
+          else {
+            $block->setAccessDependency($entity);
+          }
+        }
+      }
+    }
+
     // Only check access if the component is not being previewed.
     if ($event->inPreview()) {
       $access = AccessResult::allowed()->setCacheMaxAge(0);
@@ -78,6 +100,9 @@ class BlockComponentRenderArray implements EventSubscriberInterface {
         '#weight' => $event->getComponent()->getWeight(),
         'content' => $block->build(),
       ];
+      if ($event->inPreview() && Element::isEmpty($build['content']) && $block instanceof PreviewFallbackInterface) {
+        $build['content']['#markup'] = $block->getPreviewFallbackString();
+      }
       $event->setBuild($build);
     }
   }

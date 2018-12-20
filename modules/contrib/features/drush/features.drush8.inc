@@ -6,6 +6,7 @@
  */
 
 use Drupal\features\ConfigurationItem;
+use Drupal\features\FeaturesBundleInterface;
 use Drupal\features\FeaturesManagerInterface;
 use Drupal\features\Plugin\FeaturesGeneration\FeaturesGenerationWrite;
 use Drupal\Component\Diff\DiffFormatter;
@@ -14,118 +15,118 @@ use Drupal\Component\Diff\DiffFormatter;
  * Implements hook_drush_command().
  */
 function features_drush_command() {
-  $items = array();
+  $items = [];
 
-  $items['features-status'] = array(
+  $items['features-status'] = [
     'description' => 'Display current Features settings.',
-    'aliases' => array('fs'),
-  );
+    'aliases' => ['fs'],
+  ];
 
-  $items['features-list-packages'] = array(
+  $items['features-list-packages'] = [
     'description' => 'Display a list of all existing features and packages available to be generated.  If a package name is provided as an argument, then all of the configuration objects assigned to that package will be listed.',
-    'examples' => array(
+    'examples' => [
       "drush features-list-packages" => 'Display a list of all existing featurea and packages available to be generated.',
       "drush features-list-packages 'example_article'" => "Display a list of all configuration objects assigned to the 'example_article' package.",
-    ),
-    'arguments' => array(
+    ],
+    'arguments' => [
       'package' => 'The package to list. Optional; if specified, lists all configuration objects assigned to that package. If no package is specified, lists all of the features.',
-    ),
-    'outputformat' => array(
+    ],
+    'outputformat' => [
       'default' => 'table',
       'pipe-format' => 'list',
-      'field-labels' => array(
+      'field-labels' => [
         'name' => 'Name',
         'machine_name' => 'Machine name',
         'status' => 'Status',
         'version' => 'Version',
         'state' => 'State',
         'object' => 'Configuration object',
-      ),
+      ],
       'output-data-type' => 'format-table',
-    ),
-    'aliases' => array('fl'),
-  );
+    ],
+    'aliases' => ['fl'],
+  ];
 
-  $items['features-import-all'] = array(
+  $items['features-import-all'] = [
     'description' => 'Import module config from all installed features.',
-    'examples' => array(
+    'examples' => [
       "drush features-import-all" => 'Import module config from all installed features.',
-    ),
-    'aliases' => array('fra', 'fia', 'fim-all'),
-  );
+    ],
+    'aliases' => ['fra', 'fia', 'fim-all'],
+  ];
 
-  $items['features-export'] = array(
+  $items['features-export'] = [
     'description' => "Export the configuration on your site into a custom module.",
-    'arguments' => array(
+    'arguments' => [
       'package' => 'A space delimited list of features to export.',
-    ),
-    'options' => array(
+    ],
+    'options' => [
       'add-profile' => 'Package features into an install profile.',
-    ),
-    'examples' => array(
+    ],
+    'examples' => [
       "drush features-export" => 'Export all available packages.',
       "drush features-export example_article example_page" => "Export the example_article and example_page packages.",
       "drush features-export --add-profile" => "Export all available packages and add them to an install profile.",
-    ),
+    ],
     // Add previous "fu" alias for compatibility.
-    'aliases' => array('fex', 'fu', 'fua', 'fu-all'),
-  );
+    'aliases' => ['fex', 'fu', 'fua', 'fu-all'],
+  ];
 
-  $items['features-add'] = array(
+  $items['features-add'] = [
     'description' => "Add a config item to a feature package.",
-    'arguments' => array(
+    'arguments' => [
       'feature' => 'Feature package to export and add config to.',
       'components' => 'Patterns of config to add, see features-components for the format of patterns.',
-    ),
-    'aliases' => array('fa', 'fe'),
-  );
+    ],
+    'aliases' => ['fa', 'fe'],
+  ];
 
-  $items['features-components'] = array(
+  $items['features-components'] = [
     'description' => 'List features components.',
-    'arguments' => array(
+    'arguments' => [
       'patterns' => 'The features components type to list. Omit this argument to list all components.',
-    ),
-    'options' => array(
-      'exported' => array(
+    ],
+    'options' => [
+      'exported' => [
         'description' => 'Show only components that have been exported.',
-      ),
-      'not-exported' => array(
+      ],
+      'not-exported' => [
         'description' => 'Show only components that have not been exported.',
-      ),
-    ),
-    'aliases' => array('fc'),
-  );
+      ],
+    ],
+    'aliases' => ['fc'],
+  ];
 
-  $items['features-diff'] = array(
+  $items['features-diff'] = [
     'description' => "Show the difference between the active config and the default config stored in a feature package.",
-    'arguments' => array(
+    'arguments' => [
       'feature' => 'The feature in question.',
-    ),
-    'options' => array(
+    ],
+    'options' => [
       'ctypes' => 'Comma separated list of component types to limit the output to. Defaults to all types.',
       'lines' => 'Generate diffs with <n> lines of context instead of the usual two.',
-    ),
-    'aliases' => array('fd'),
-  );
+    ],
+    'aliases' => ['fd'],
+  ];
 
-  $items['features-import'] = array(
+  $items['features-import'] = [
     'description' => "Import a module config into your site.",
-    'arguments' => array(
+    'arguments' => [
       'feature' => 'A space delimited list of features or feature:component pairs to import.',
-    ),
-    'options' => array(
+    ],
+    'options' => [
       'force' => "Force import even if config is not overridden.",
-    ),
-    'examples' => array(
+    ],
+    'examples' => [
       'drush features-import foo:node.type.page foo:taxonomy.vocabulary.tags bar' => 'Import node and taxonomy config of feature "foo". Import all config of feature "bar".',
-    ),
-    'aliases' => array('fim', 'fr'),
-  );
+    ],
+    'aliases' => ['fim', 'fr'],
+  ];
 
   foreach ($items as $name => &$item) {
-    $item['options']['bundle'] = array(
+    $item['options']['bundle'] = [
       'description' => 'Use a specific bundle namespace.',
-    );
+    ];
   }
 
   return $items;
@@ -145,7 +146,7 @@ function _drush_features_options() {
   if (!empty($bundle_name)) {
     $bundle = $assigner->applyBundle($bundle_name);
     if ($bundle->getMachineName() != $bundle_name) {
-      drush_log(dt('Bundle @name not found. Using default.', array('@name' => $bundle_name)), 'warning');
+      drush_log(dt('Bundle @name not found. Using default.', ['@name' => $bundle_name]), 'warning');
     }
   }
   else {
@@ -172,13 +173,13 @@ function drush_features_status() {
   }
   else {
     drush_print(dt('Current bundle: @name (@machine_name)',
-      array(
+      [
         '@name' => $current_bundle->getName(),
         '@machine_name' => $current_bundle->getMachineName(),
-      )));
+      ]));
   }
-  drush_print(dt('Export folder: @folder', array('@folder' => $export_settings['folder'])));
-  $dt_args = array('@methods' => implode(', ', array_keys($methods)));
+  drush_print(dt('Export folder: @folder', ['@folder' => $export_settings['folder']]));
+  $dt_args = ['@methods' => implode(', ', array_keys($methods))];
   drush_print(dt('The following assignment methods are enabled:'));
   drush_print(dt('  @methods', $dt_args));
 
@@ -204,18 +205,18 @@ function drush_features_status() {
 function drush_features_list_packages($package_name = '') {
   $assigner = _drush_features_options();
   $current_bundle = $assigner->getBundle();
-  $namespace = $current_bundle->isDefault() ? '' : $current_bundle->getMachineName();
+  $namespace = $current_bundle->isDefault() ? FeaturesBundleInterface::DEFAULT_BUNDLE : $current_bundle->getMachineName();
 
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
   $packages = $manager->getPackages();
 
   $packages = $manager->filterPackages($packages, $namespace);
-  $result = array();
+  $result = [];
 
   // If no package was specified, list all packages.
   if (empty($package_name)) {
-    drush_hide_output_fields(array('object'));
+    drush_hide_output_fields(['object']);
     foreach ($packages as $package) {
       $overrides = $manager->detectOverrides($package);
       $state = $package->getState();
@@ -223,7 +224,7 @@ function drush_features_list_packages($package_name = '') {
         $state = FeaturesManagerInterface::STATE_OVERRIDDEN;
       }
 
-      $result[$package->getMachineName()] = array(
+      $result[$package->getMachineName()] = [
         'name' => $package->getName(),
         'machine_name' => $package->getMachineName(),
         'status' => $manager->statusLabel($package->getStatus()),
@@ -231,7 +232,7 @@ function drush_features_list_packages($package_name = '') {
         'state' => ($state != FeaturesManagerInterface::STATE_DEFAULT)
           ? $manager->stateLabel($state)
           : '',
-      );
+      ];
     }
     return $result;
   }
@@ -239,17 +240,17 @@ function drush_features_list_packages($package_name = '') {
   else {
     foreach ($packages as $package) {
       if ($package->getMachineName() == $package_name) {
-        drush_hide_output_fields(array(
+        drush_hide_output_fields([
           'machine_name',
           'name',
           'status',
           'version',
           'state',
-        ));
+        ]);
         foreach ($package->getConfig() as $item_name) {
-          $result[$item_name] = array(
+          $result[$item_name] = [
             'object' => $item_name,
-          );
+          ];
         }
         return $result;
       }
@@ -258,7 +259,7 @@ function drush_features_list_packages($package_name = '') {
   }
 
   // If no matching package found, return an error.
-  drush_log(dt('Package "@package" not found.', array('@package' => $package_name)), 'warning');
+  drush_log(dt('Package "@package" not found.', ['@package' => $package_name]), 'warning');
   return FALSE;
 }
 
@@ -269,13 +270,13 @@ function drush_features_list_packages($package_name = '') {
 function drush_features_import_all() {
   $assigner = _drush_features_options();
   $current_bundle = $assigner->getBundle();
-  $namespace = $current_bundle->isDefault() ? '' : $current_bundle->getMachineName();
+  $namespace = $current_bundle->isDefault() ? FeaturesBundleInterface::DEFAULT_BUNDLE : $current_bundle->getMachineName();
 
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
   $packages = $manager->getPackages();
   $packages = $manager->filterPackages($packages, $namespace);
-  $overridden = array();
+  $overridden = [];
 
   foreach ($packages as $package) {
     $overrides = $manager->detectOverrides($package);
@@ -317,13 +318,13 @@ function drush_features_export($packages = NULL) {
   $all_packages = $manager->getPackages();
   foreach ($packages as $name) {
     if (!isset($all_packages[$name])) {
-      return drush_set_error('', dt("The package @name does not exist.", array('@name' => $name)));
+      return drush_set_error('', dt("The package @name does not exist.", ['@name' => $name]));
     }
   }
 
   if (empty($packages)) {
     $packages = $all_packages;
-    $dt_args = array('@modules' => implode(', ', array_keys($packages)));
+    $dt_args = ['@modules' => implode(', ', array_keys($packages))];
     drush_print(dt('The following extensions will be exported: @modules', $dt_args));
     if (!drush_confirm(dt('Do you really want to continue?'))) {
       return drush_user_abort('Aborting.');
@@ -333,7 +334,7 @@ function drush_features_export($packages = NULL) {
   // If any packages exist, confirm before overwriting.
   if ($existing_packages = $manager->listPackageDirectories($packages, $current_bundle)) {
     foreach ($existing_packages as $name => $directory) {
-      drush_print(dt("The extension @name already exists at @directory.", array('@name' => $name, '@directory' => $directory)));
+      drush_print(dt("The extension @name already exists at @directory.", ['@name' => $name, '@directory' => $directory]));
     }
     // Apparently, format_plural is not always available.
     if (count($existing_packages) == 1) {
@@ -379,9 +380,9 @@ function drush_features_add() {
       return drush_set_error('', 'No components supplied.');
     }
     $components = _drush_features_component_list();
-    $options = array(
+    $options = [
       'exported' => FALSE,
-    );
+    ];
 
     $filtered_components = _drush_features_component_filter($components, $args, $options);
     $items = $filtered_components['components'];
@@ -390,11 +391,11 @@ function drush_features_add() {
       return drush_set_error('', 'No components to add.');
     }
 
-    $packages = array($module);
+    $packages = [$module];
     // If any packages exist, confirm before overwriting.
     if ($existing_packages = $manager->listPackageDirectories($packages)) {
       foreach ($existing_packages as $name => $directory) {
-        drush_print(dt("The extension @name already exists at @directory.", array('@name' => $name, '@directory' => $directory)));
+        drush_print(dt("The extension @name already exists at @directory.", ['@name' => $name, '@directory' => $directory]));
       }
       // Apparently, format_plural is not always available.
       if (count($existing_packages) == 1) {
@@ -410,7 +411,7 @@ function drush_features_add() {
     else {
       $package = $manager->initPackage($module, NULL, '', 'module', $current_bundle);
       list($full_name, $path) = $manager->getExportInfo($package, $current_bundle);
-      drush_print(dt('Will create a new extension @name in @directory', array('@name' => $full_name, '@directory' => $path)));
+      drush_print(dt('Will create a new extension @name in @directory', ['@name' => $full_name, '@directory' => $path]));
       if (!drush_confirm(dt('Do you really want to continue?'))) {
         drush_die('Aborting.');
       }
@@ -452,15 +453,15 @@ function drush_features_components() {
       return;
     }
 
-    $args = ($choice == 0) ? array('*') : array($types[$choice]);
+    $args = ($choice == 0) ? ['*'] : [$types[$choice]];
   }
-  $options = array(
+  $options = [
     'provided by' => TRUE,
-  );
-  if (drush_get_option(array('exported', 'e'), NULL)) {
+  ];
+  if (drush_get_option(['exported', 'e'], NULL)) {
     $options['not exported'] = FALSE;
   }
-  elseif (drush_get_option(array('not-exported', 'o'), NULL)) {
+  elseif (drush_get_option(['not-exported', 'o'], NULL)) {
     $options['exported'] = FALSE;
   }
 
@@ -496,7 +497,7 @@ function drush_features_diff() {
 
   $feature = $manager->loadPackage($module, TRUE);
   if (empty($feature)) {
-    drush_log(dt('No such feature is available: @module', array('@module' => $module)), 'error');
+    drush_log(dt('No such feature is available: @module', ['@module' => $module]), 'error');
     return;
   }
 
@@ -521,7 +522,7 @@ function drush_features_diff() {
   $overrides = array_merge($overrides, $missing);
 
   if (empty($overrides)) {
-    drush_print(dt('Active config matches stored config for @module.', array('@module' => $module)));
+    drush_print(dt('Active config matches stored config for @module.', ['@module' => $module]));
   }
   else {
     /** @var \Drupal\config_update\ConfigDiffInterface $config_diff */
@@ -538,20 +539,20 @@ function drush_features_diff() {
       $message = '';
       if (in_array($name, $missing)) {
         $message = sprintf($red, t('(missing from active)'));
-        $extension = array();
+        $extension = [];
       }
       else {
         $active = $manager->getActiveStorage()->read($name);
         $extension = $manager->getExtensionStorages()->read($name);
         if (empty($extension)) {
-          $extension = array();
+          $extension = [];
           $message = sprintf($green, t('(not exported)'));
         }
         $diff = $config_diff->diff($extension, $active);
         $rows = explode("\n", $formatter->format($diff));
       }
       drush_print();
-      drush_print(dt("Config @name @message", array('@name' => $name, '@message' => $message)));
+      drush_print(dt("Config @name @message", ['@name' => $name, '@message' => $message]));
       if (!empty($extension)) {
         foreach ($rows as $row) {
           if (strpos($row, '>') === 0) {
@@ -588,7 +589,7 @@ function drush_features_import() {
     $manager = \Drupal::service('features.manager');
 
     // Parse list of arguments.
-    $modules = array();
+    $modules = [];
     foreach ($args as $arg) {
       $arg = explode(':', $arg);
       $module = array_shift($arg);
@@ -602,7 +603,7 @@ function drush_features_import() {
         }
         elseif ($modules[$module] !== TRUE) {
           if (!isset($modules[$module])) {
-            $modules[$module] = array();
+            $modules[$module] = [];
           }
           $modules[$module][] = $component;
         }
@@ -692,7 +693,7 @@ function drush_features_import() {
 function _drush_features_build_config(array $items) {
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
-  $result = array();
+  $result = [];
   foreach ($items as $config_type => $item) {
     foreach ($item as $item_name => $title) {
       $result[] = $manager->getFullName($config_type, $item_name);
@@ -705,7 +706,7 @@ function _drush_features_build_config(array $items) {
  * Returns a listing of all known components, indexed by source.
  */
 function _drush_features_component_list() {
-  $result = array();
+  $result = [];
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
   $config = $manager->getConfigCollection();
@@ -718,13 +719,13 @@ function _drush_features_component_list() {
 /**
  * Filters components by patterns.
  */
-function _drush_features_component_filter($all_components, $patterns = array(), $options = array()) {
-  $options += array(
+function _drush_features_component_filter($all_components, $patterns = [], $options = []) {
+  $options += [
     'exported' => TRUE,
     'not exported' => TRUE,
     'provided by' => FALSE,
-  );
-  $pool = array();
+  ];
+  $pool = [];
   // Maps exported components to feature modules.
   $components_map = _drush_features_get_component_map();
   // First filter on exported state.
@@ -753,11 +754,11 @@ function _drush_features_component_filter($all_components, $patterns = array(), 
     $state_string = 'exported';
   }
 
-  $selected = array();
+  $selected = [];
   foreach ($patterns as $pattern) {
     // Rewrite * to %. Let users use both as wildcard.
-    $pattern = strtr($pattern, array('*' => '%'));
-    $sources = array();
+    $pattern = strtr($pattern, ['*' => '%']);
+    $sources = [];
     list($source_pattern, $component_pattern) = explode(':', $pattern, 2);
     // If source is empty, use a pattern.
     if ($source_pattern == '') {
@@ -767,8 +768,8 @@ function _drush_features_component_filter($all_components, $patterns = array(), 
       $component_pattern = '%';
     }
 
-    $preg_source_pattern = strtr(preg_quote($source_pattern, '/'), array('%' => '.*'));
-    $preg_component_pattern = strtr(preg_quote($component_pattern, '/'), array('%' => '.*'));
+    $preg_source_pattern = strtr(preg_quote($source_pattern, '/'), ['%' => '.*']);
+    $preg_component_pattern = strtr(preg_quote($component_pattern, '/'), ['%' => '.*']);
     // If it isn't a pattern, but a simple string, we don't anchor the
     // pattern. This allows for abbreviating. Otherwise, we do, as this seems
     // more natural for patterns.
@@ -778,7 +779,7 @@ function _drush_features_component_filter($all_components, $patterns = array(), 
     if (strpos($component_pattern, '%') !== FALSE) {
       $preg_component_pattern = '^' . $preg_component_pattern . '$';
     }
-    $matches = array();
+    $matches = [];
 
     // Find the sources.
     $all_sources = array_keys($pool);
@@ -789,20 +790,20 @@ function _drush_features_component_filter($all_components, $patterns = array(), 
       // use that, or error out.
       if (count($matches) > 1 and $preg_source_pattern[0] != '^') {
         if (in_array($source_pattern, $matches)) {
-          $matches = array($source_pattern);
+          $matches = [$source_pattern];
         }
         else {
-          return drush_set_error('', dt('Ambiguous source "@source", matches @matches', array(
+          return drush_set_error('', dt('Ambiguous source "@source", matches @matches', [
             '@source' => $source_pattern,
             '@matches' => implode(', ', $matches),
-          )));
+          ]));
         }
       }
       // Loose the indexes preg_grep preserved.
       $sources = array_values($matches);
     }
     else {
-      return drush_set_error('', dt('No @state sources match "@source"', array('@state' => $state_string, '@source' => $source_pattern)));
+      return drush_set_error('', dt('No @state sources match "@source"', ['@state' => $state_string, '@source' => $source_pattern]));
     }
 
     // Now find the components.
@@ -817,17 +818,17 @@ function _drush_features_component_filter($all_components, $patterns = array(), 
         // use that, or error out.
         if (count($matches) > 1 and $preg_component_pattern[0] != '^') {
           if (in_array($component_pattern, $matches)) {
-            $matches = array($component_pattern);
+            $matches = [$component_pattern];
           }
           else {
-            return drush_set_error('', dt('Ambiguous component "@component", matches @matches', array(
+            return drush_set_error('', dt('Ambiguous component "@component", matches @matches', [
               '@component' => $component_pattern,
               '@matches' => implode(', ', $matches),
-            )));
+            ]));
           }
         }
         if (!is_array($selected[$source])) {
-          $selected[$source] = array();
+          $selected[$source] = [];
         }
         $selected[$source] += array_intersect_key($pool[$source], array_flip($matches));
       }
@@ -835,11 +836,11 @@ function _drush_features_component_filter($all_components, $patterns = array(), 
         // No matches. If the source was a pattern, just carry on, else
         // error out. Allows for patterns like :*field*
         if ($preg_source_pattern[0] != '^') {
-          return drush_set_error('', dt('No @state @source components match "@component"', array(
+          return drush_set_error('', dt('No @state @source components match "@component"', [
             '@state' => $state_string,
             '@component' => $component_pattern,
             '@source' => $source,
-          )));
+          ]));
         }
       }
     }
@@ -847,7 +848,7 @@ function _drush_features_component_filter($all_components, $patterns = array(), 
 
   // Lastly, provide feature module information on the selected components, if
   // requested.
-  $provided_by = array();
+  $provided_by = [];
   if ($options['provided by'] && $options['exported']) {
     foreach ($selected as $source => $components) {
       foreach ($components as $name => $title) {
@@ -859,17 +860,17 @@ function _drush_features_component_filter($all_components, $patterns = array(), 
     }
   }
 
-  return array(
+  return [
     'components' => $selected,
     'sources' => $provided_by,
-  );
+  ];
 }
 
 /**
  * Provides a component to feature map (port of features_get_component_map).
  */
 function _drush_features_get_component_map() {
-  $result = array();
+  $result = [];
   /** @var \Drupal\features\FeaturesManagerInterface $manager */
   $manager = \Drupal::service('features.manager');
   // Recalc full config list without running assignments.
@@ -881,7 +882,7 @@ function _drush_features_get_component_map() {
     $short_name = $item->getShortName();
     $name = $item->getName();
     if (!isset($result[$type][$short_name])) {
-      $result[$type][$short_name] = array();
+      $result[$type][$short_name] = [];
     }
     if (!empty($item->getPackage())) {
       $package = $packages[$item->getPackage()];
@@ -896,10 +897,10 @@ function _drush_features_get_component_map() {
  * Prints a list of filtered components.
  */
 function _drush_features_component_print($filtered_components) {
-  $rows = array(array(dt('Available sources')));
+  $rows = [[dt('Available sources')]];
   foreach ($filtered_components['components'] as $source => $components) {
     foreach ($components as $name => $value) {
-      $row = array($source . ':' . $name);
+      $row = [$source . ':' . $name];
       if (isset($filtered_components['sources'][$source . ':' . $name])) {
         $row[] = dt('Provided by') . ': ' . $filtered_components['sources'][$source . ':' . $name];
       }

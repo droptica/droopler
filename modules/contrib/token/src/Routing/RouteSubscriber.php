@@ -71,4 +71,5 @@ class RouteSubscriber extends RouteSubscriberBase {
     $events[RoutingEvents::ALTER] = array('onAlterRoutes', 100);
     return $events;
   }
+
 }

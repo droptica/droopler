@@ -1,0 +1,238 @@
+<?php
+
+/**
+ * @file
+ * An API for creating fillable, persistent checklists.
+ *
+ * Provides an interface for creating checklists that track progress with
+ * completion times and users.
+ */
+
+use Drupal\checklistapi\ChecklistapiChecklist;
+use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Access callback: Checks the current user's access to a given checklist.
+ *
+ * @param string $id
+ *   The checklist ID.
+ * @param string $operation
+ *   (optional) The operation to test access for. Accepted values are "view",
+ *   "edit", and "any". Defaults to "any".
+ *
+ * @return bool
+ *   Returns TRUE if the current user has access to perform a given operation on
+ *   the specified checklist, or FALSE if not.
+ *
+ * @throws InvalidArgumentException
+ *   Throws an exception if an unsupported operation is supplied.
+ */
+function checklistapi_checklist_access($id, $operation = 'any') {
+  $all_operations = ['view', 'edit', 'any'];
+  if (!in_array($operation, $all_operations)) {
+    throw new \InvalidArgumentException(sprintf('No such operation "%s"', $operation));
+  }
+
+  $current_user = \Drupal::currentUser();
+  $access['view'] = $current_user->hasPermission('view any checklistapi checklist') || $current_user->hasPermission("view {$id} checklistapi checklist");
+  $access['edit'] = $current_user->hasPermission('edit any checklistapi checklist') || $current_user->hasPermission("edit {$id} checklistapi checklist");
+  $access['any'] = $access['view'] || $access['edit'];
+  return $access[$operation];
+}
+
+/**
+ * Loads a checklist object.
+ *
+ * @param string $id
+ *   The checklist ID.
+ *
+ * @return Drupal\checklistapi\ChecklistapiChecklist|false
+ *   A fully-loaded checklist object, or FALSE if the checklist is not found.
+ */
+function checklistapi_checklist_load($id) {
+  $definition = checklistapi_get_checklist_info($id);
+  return ($definition) ? new ChecklistapiChecklist($definition) : FALSE;
+}
+
+/**
+ * Adds the checklist items to a given definition.
+ *
+ * @param array $definition
+ *   A checklist definition as returned from checklistapi_get_checklist_info().
+ *
+ * @return array
+ *   The checklist definition with checklist items added.
+ */
+function checklistapi_add_checklist_items(array $definition) {
+  if (!empty($definition['#callback']) && is_callable($definition['#callback'])) {
+    // Remove any checklist items from the original definition.
+    foreach (Element::children($definition) as $child) {
+      unset($definition[$child]);
+    }
+    // Invoke the callback function.
+    $definition += call_user_func($definition['#callback']);
+  }
+  return $definition;
+}
+
+/**
+ * Determines whether the current user is in compact mode.
+ *
+ * Compact mode shows checklist forms with less description text.
+ *
+ * Whether the user is in compact mode is determined by a cookie. If the user
+ * does not have the cookie, the setting defaults to off.
+ *
+ * @return bool
+ *   TRUE when in compact mode, or FALSE when in expanded mode.
+ */
+function checklistapi_compact_mode_is_on() {
+  // PHP converts dots into underscores in cookie names.
+  return (bool) \Drupal::request()->cookies->get('Drupal_visitor_checklistapi_compact_mode', FALSE);
+}
+
+/**
+ * Gets checklist definitions.
+ *
+ * @param string $id
+ *   (optional) A checklist ID. Defaults to NULL.
+ *
+ * @return array|false
+ *   The definition of the specified checklist, or FALSE if no such checklist
+ *   exists, or an array of all checklist definitions if none is specified.
+ */
+function checklistapi_get_checklist_info($id = NULL) {
+  $definitions = &drupal_static(__FUNCTION__);
+  if (!isset($definitions)) {
+    // Get definitions.
+    $definitions = \Drupal::moduleHandler()->invokeAll('checklistapi_checklist_info');
+    foreach ($definitions as $key => $value) {
+      $definitions[$key] = checklistapi_add_checklist_items($value);
+    }
+    $definitions = checklistapi_sort_array($definitions);
+    // Let other modules alter them.
+    \Drupal::moduleHandler()->alter('checklistapi_checklist_info', $definitions);
+    $definitions = checklistapi_sort_array($definitions);
+    // Inject checklist IDs.
+    foreach ($definitions as $key => $value) {
+      $definitions[$key] = ['#id' => $key] + $definitions[$key];
+    }
+  }
+  if (!empty($id)) {
+    return (!empty($definitions[$id])) ? $definitions[$id] : FALSE;
+  }
+  return $definitions;
+}
+
+/**
+ * Implements hook_help().
+ */
+function checklistapi_help($route_name, RouteMatchInterface $route_match) {
+  foreach (checklistapi_get_checklist_info() as $id => $definition) {
+    $checklist = new ChecklistapiChecklist($definition);
+    if ($checklist->getRouteName() == $route_name) {
+      // The checklist has help and the current user has access to view it.
+      if (!empty($definition['#help']) && checklistapi_checklist_access($id)) {
+        return $definition['#help'];
+      }
+      // Otherwise the loop can break early since only one checklist can occupy
+      // a given route.
+      else {
+        break;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_module_preinstall().
+ */
+function checklistapi_module_preinstall($module) {
+  drupal_static_reset('checklistapi_get_checklist_info');
+}
+
+/**
+ * Recursively sorts array elements by #weight.
+ *
+ * @param array $array
+ *   A nested array of elements and properties, such as the checklist
+ *   definitions returned by hook_checklistapi_checklist_info().
+ *
+ * @return array
+ *   The input array sorted recursively by #weight.
+ *
+ * @see checklistapi_get_checklist_info()
+ */
+function checklistapi_sort_array(array $array) {
+  $child_keys = Element::children($array);
+
+  if (!count($child_keys)) {
+    // No children to sort.
+    return $array;
+  }
+
+  $incrementer = 0;
+  $children = [];
+  foreach ($child_keys as $key) {
+    // Move child to a temporary array for sorting.
+    $children[$key] = $array[$key];
+    unset($array[$key]);
+    // Supply a default weight if missing or invalid.
+    if (empty($children[$key]['#weight']) || !is_numeric($children[$key]['#weight'])) {
+      $children[$key]['#weight'] = 0;
+    }
+    // Increase each weight incrementally to preserve the original order when
+    // not overridden. This accounts for undefined behavior in PHP's uasort()
+    // function when its comparison callback finds two values equal.
+    $children[$key]['#weight'] += ($incrementer++ / 1000);
+    // Descend into child.
+    $children[$key] = checklistapi_sort_array($children[$key]);
+  }
+  // Sort by weight.
+  uasort($children, ['Drupal\Component\Utility\SortArray', 'sortByWeightProperty']);
+  // Remove incremental weight hack.
+  foreach ($children as $key => $child) {
+    $children[$key]['#weight'] = floor($children[$key]['#weight']);
+  }
+  // Put children back in the main array.
+  $array += $children;
+
+  return $array;
+}
+
+/**
+ * Converts a string to lowerCamel case, suitably for a class property name.
+ *
+ * @param string $string
+ *   The input string.
+ *
+ * @return string
+ *   The input string converted to camelCase.
+ */
+function checklistapi_strtolowercamel($string) {
+  $string = str_replace('_', ' ', $string);
+  $string = ucwords($string);
+  $string = str_replace(' ', '', $string);
+  $string = Unicode::lcfirst($string);
+  return $string;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function checklistapi_theme() {
+  return [
+    'checklistapi_progress_bar' => [
+      'path' => drupal_get_path('module', 'checklistapi') . '/templates',
+      'template' => 'checklistapi-progress-bar',
+      'variables' => [
+        'message' => '',
+        'number_complete' => 0,
+        'number_of_items' => 0,
+        'percent_complete' => 0,
+      ],
+    ],
+  ];
+}

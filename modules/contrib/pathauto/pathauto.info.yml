@@ -6,6 +6,7 @@ type: module
 dependencies:
 - ctools:ctools
 - drupal:path
+- drupal:system (>=8.5)
 - token:token
 
 configure: entity.pathauto_pattern.collection
@@ -13,8 +14,8 @@ configure: entity.pathauto_pattern.collection
 recommends:
 - redirect:redirect
 
-# Information added by Drupal.org packaging script on 2018-04-22
-version: '8.x-1.2'
+# Information added by Drupal.org packaging script on 2018-09-08
+version: '8.x-1.3'
 core: '8.x'
 project: 'pathauto'
-datestamp: 1524421087
+datestamp: 1536407890

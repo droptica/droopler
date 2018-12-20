@@ -13,11 +13,25 @@ use Drupal\pathauto\AliasTypeManager;
  */
 class PathautoSettingsCacheTag implements EventSubscriberInterface {
 
+  /**
+   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
+   */
   protected $entityFieldManager;
+
+  /**
+   * The alias type manager.
+   *
+   * @var \Drupal\pathauto\AliasTypeManager
+   */
   protected $aliasTypeManager;
 
   /**
    * Constructs a PathautoSettingsCacheTag object.
+   *
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
+   *   The entity field manager.
+   * @param \Drupal\pathauto\AliasTypeManager $alias_type_manager
+   *   The alias type manager.
    */
   public function __construct(EntityFieldManagerInterface $entity_field_manager, AliasTypeManager $alias_type_manager) {
     $this->entityFieldManager = $entity_field_manager;

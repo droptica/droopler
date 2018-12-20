@@ -2,9 +2,9 @@
   'use strict';
   Drupal.behaviors.pathFieldsetSummaries = {
     attach: function (context) {
-      $('fieldset.path-form', context).drupalSetSummary(function (context) {
-        var path = $('.form-item-path-alias input', context).val();
-        var automatic = $('.form-item-path-pathauto input', context).attr('checked');
+      $(context).find('.path-form').drupalSetSummary(function (context) {
+        var path = $('.js-form-item-path-0-alias input', context).val();
+        var automatic = $('.js-form-item-path-0-pathauto input', context).prop('checked');
 
         if (automatic) {
           return Drupal.t('Automatic alias');

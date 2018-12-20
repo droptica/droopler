@@ -26,6 +26,8 @@ class MetatagViewsEditForm extends FormBase {
   protected $metatagManager;
 
   /**
+   * The Views manager.
+   *
    * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $viewsManager;

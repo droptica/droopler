@@ -3,6 +3,8 @@ status: true
 dependencies:
   config:
     - field.field.node.content_page.field_page_section
+    - field.field.node.content_page.field_teaser_image
+    - field.field.node.content_page.field_teaser_text
     - node.type.content_page
   module:
     - entity_reference_revisions
@@ -22,5 +24,7 @@ content:
     type: entity_reference_revisions_entity_view
     region: content
 hidden:
+  field_teaser_image: true
+  field_teaser_text: true
   langcode: true
   links: true

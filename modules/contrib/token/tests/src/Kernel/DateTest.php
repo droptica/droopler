@@ -32,4 +32,5 @@ class DateTest extends KernelTestBase {
 
     $this->assertTokens('date', ['date' => 453859200], $tokens);
   }
+
 }

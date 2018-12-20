@@ -12,11 +12,15 @@ use Drupal\Console\Core\Utils\TwigRenderer;
 class MetatagTagGenerator extends Generator {
 
   /**
+   * An extension manager.
+   *
    * @var \Drupal\Console\Extension\Manager
    */
   protected $extensionManager;
 
   /**
+   * The twig renderer.
+   *
    * @var \Drupal\Console\Core\Utils\TwigRenderer
    */
   protected $render;
@@ -24,8 +28,10 @@ class MetatagTagGenerator extends Generator {
   /**
    * MetatagTagGenerator constructor.
    *
-   * @param Drupal\Console\Extension\Manager $extensionManager
-   * @param Drupal\Console\Core\Utils\TwigRenderer $render
+   * @param \Drupal\Console\Extension\Manager $extensionManager
+   *   An extension manager.
+   * @param \Drupal\Console\Core\Utils\TwigRenderer $render
+   *   Twig renderer.
    */
   public function __construct(Manager $extensionManager, TwigRenderer $render) {
     $this->extensionManager = $extensionManager;
@@ -38,17 +44,29 @@ class MetatagTagGenerator extends Generator {
    * Generator plugin.
    *
    * @param string $base_class
+   *   Base class.
    * @param string $module
+   *   Module name.
    * @param string $name
+   *   Tag name.
    * @param string $label
+   *   Tag label.
    * @param string $description
+   *   Tag description.
    * @param string $plugin_id
+   *   Plugin ID.
    * @param string $class_name
+   *   Class name.
    * @param string $group
+   *   Tag group.
    * @param string $weight
+   *   Tag weight.
    * @param string $type
+   *   Tag type.
    * @param bool $secure
+   *   Is secure.
    * @param bool $multiple
+   *   Is multiple.
    */
   public function generate($base_class, $module, $name, $label, $description, $plugin_id, $class_name, $group, $weight, $type, $secure, $multiple) {
     $parameters = [

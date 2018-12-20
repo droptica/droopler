@@ -91,4 +91,35 @@ class RedirectUILanguageTest extends RedirectUITest {
     $this->assertRedirect('es/langpath', '/es/user', 'HTTP/1.1 301 Moved Permanently');
   }
 
+  /**
+   * Test editing the redirect language.
+   */
+  public function testEditRedirectLanguage() {
+    $this->drupalLogin($this->adminUser);
+
+    // Add a redirect for english.
+    $this->drupalPostForm('admin/config/search/redirect/add', array(
+      'redirect_source[0][path]' => 'langpath',
+      'redirect_redirect[0][uri]' => '/user',
+      'language[0][value]' => 'en',
+    ), t('Save'));
+
+    // Check redirect for english.
+    $this->assertRedirect('langpath', '/user', 'HTTP/1.1 301 Moved Permanently');
+
+    // Check that redirect for Germany is not working.
+    $this->assertRedirect('de/langpath', NULL, 'HTTP/1.1 404 Not Found');
+
+    // Edit the redirect and change the language.
+    $this->drupalGet('admin/config/search/redirect');
+    $this->clickLink('Edit');
+    $this->drupalPostForm(NULL, ['language[0][value]' => 'de'], t('Save'));
+
+    // Check redirect for english is NOT working now.
+    $this->assertRedirect('langpath', NULL, 'HTTP/1.1 404 Not Found');
+
+    // Check that redirect for Germany is now working.
+    $this->assertRedirect('de/langpath', '/de/user', 'HTTP/1.1 301 Moved Permanently');
+  }
+
 }

@@ -85,7 +85,7 @@ class PathautoSettingsFormWebTest extends WebTestBase {
   );
 
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
   function setUp() {
     parent::setUp();

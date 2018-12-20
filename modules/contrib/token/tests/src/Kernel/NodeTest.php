@@ -96,4 +96,5 @@ class NodeTest extends KernelTestBase {
     ];
     $this->assertTokens('node', ['node' => $article], $tokens);
   }
+
 }

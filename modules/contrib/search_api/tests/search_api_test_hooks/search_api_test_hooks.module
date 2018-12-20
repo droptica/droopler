@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Tests all the hooks defined by the Search API module.
+ */
+
+use Drupal\search_api\Query\QueryInterface;
+use Drupal\search_api\Query\ResultSetInterface;
+use Drupal\search_api\Utility\Utility;
+
+/**
+ * Implements hook_search_api_query_TAG_alter().
+ */
+function search_api_test_hooks_search_api_query_andrew_hill_alter(QueryInterface &$query) {
+  // Exclude the node with ID 2 from the search results.
+  $query->setOption('tag query alter hook', TRUE);
+  $index = $query->getIndex();
+  $fields = $index->getFields();
+  foreach ($index->getDatasources() as $datasource_id => $datasource) {
+    if ($datasource->getEntityTypeId() == 'node') {
+      $field = Utility::createCombinedId($datasource_id, 'nid');
+      if (isset($fields[$field])) {
+        $query->addCondition($field, 2, '<>');
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_search_api_results_TAG_alter().
+ */
+function search_api_test_hooks_search_api_results_andrew_hill_alter(ResultSetInterface &$results) {
+  \Drupal::messenger()->addStatus('Llama');
+}

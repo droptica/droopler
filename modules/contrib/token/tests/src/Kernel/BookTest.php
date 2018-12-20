@@ -104,4 +104,5 @@ class BookTest extends KernelTestBase {
     ];
     $this->assertTokens('node', ['node' => $page2], $tokens);
   }
+
 }

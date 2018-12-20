@@ -105,56 +105,63 @@ class MetatagFaviconsTagsTest extends MetatagTagsTestBase {
   }
 
   /**
-   * Implements {tag_name}TestOutputXpath() for
-   * 'apple_touch_icon_precomposed_114x114'.
+   * Implements {tag_name}TestOutputXpath().
+   *
+   * For 'apple_touch_icon_precomposed_114x114'.
    */
   private function appleTouchIconPrecomposed114x114TestOutputXpath() {
     return "//link[@rel='apple-touch-icon-precomposed' and @sizes='114x114']";
   }
 
   /**
-   * Implements {tag_name}TestOutputXpath() for
-   * 'apple_touch_icon_precomposed_120x120'.
+   * Implements {tag_name}TestOutputXpath().
+   *
+   * For 'apple_touch_icon_precomposed_120x120'.
    */
   private function appleTouchIconPrecomposed120x120TestOutputXpath() {
     return "//link[@rel='apple-touch-icon-precomposed' and @sizes='120x120']";
   }
 
   /**
-   * Implements {tag_name}TestOutputXpath() for
-   * 'apple_touch_icon_precomposed_144x144'.
+   * Implements {tag_name}TestOutputXpath().
+   *
+   * For 'apple_touch_icon_precomposed_144x144'.
    */
   private function appleTouchIconPrecomposed144x144TestOutputXpath() {
     return "//link[@rel='apple-touch-icon-precomposed' and @sizes='144x144']";
   }
 
   /**
-   * Implements {tag_name}TestOutputXpath() for
-   * 'apple_touch_icon_precomposed_152x152'.
+   * Implements {tag_name}TestOutputXpath().
+   *
+   * For 'apple_touch_icon_precomposed_152x152'.
    */
   private function appleTouchIconPrecomposed152x152TestOutputXpath() {
     return "//link[@rel='apple-touch-icon-precomposed' and @sizes='152x152']";
   }
 
   /**
-   * Implements {tag_name}TestOutputXpath() for
-   * 'apple_touch_icon_precomposed_180x180'.
+   * Implements {tag_name}TestOutputXpath().
+   *
+   * For 'apple_touch_icon_precomposed_180x180'.
    */
   private function appleTouchIconPrecomposed180x180TestOutputXpath() {
     return "//link[@rel='apple-touch-icon-precomposed' and @sizes='180x180']";
   }
 
   /**
-   * Implements {tag_name}TestOutputXpath() for
-   * 'apple_touch_icon_precomposed_72x72'.
+   * Implements {tag_name}TestOutputXpath().
+   *
+   * For 'apple_touch_icon_precomposed_72x72'.
    */
   private function appleTouchIconPrecomposed72x72TestOutputXpath() {
     return "//link[@rel='apple-touch-icon-precomposed' and @sizes='72x72']";
   }
 
   /**
-   * Implements {tag_name}TestOutputXpath() for
-   * 'apple_touch_icon_precomposed_76x76'.
+   * Implements {tag_name}TestOutputXpath().
+   *
+   * For 'apple_touch_icon_precomposed_76x76'.
    */
   private function appleTouchIconPrecomposed76x76TestOutputXpath() {
     return "//link[@rel='apple-touch-icon-precomposed' and @sizes='76x76']";

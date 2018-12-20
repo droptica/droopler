@@ -49,6 +49,7 @@ interface PathautoGeneratorInterface {
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   An entity.
+   *
    * @return \Drupal\pathauto\PathautoPatternInterface|null
    */
   public function getPatternByEntity(EntityInterface $entity);

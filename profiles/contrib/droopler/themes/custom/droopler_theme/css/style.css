@@ -560,7 +560,7 @@ pre code {
   overflow-y: scroll;
 }
 
-.container, .alert {
+.container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
   width: 100%;
   padding-right: 30px;
   padding-left: 30px;
@@ -569,25 +569,25 @@ pre code {
 }
 
 @media (min-width: 576px) {
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     max-width: 540px;
   }
 }
 
 @media (min-width: 768px) {
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     max-width: 720px;
   }
 }
 
 @media (min-width: 992px) {
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     max-width: 960px;
   }
 }
 
 @media (min-width: 1200px) {
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     max-width: 1200px;
   }
 }
@@ -1997,11 +1997,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control:-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::-ms-input-placeholder {
   color: #6c757d;
   opacity: 1;
@@ -2069,12 +2064,16 @@ select.form-control:focus::-ms-value {
 .form-control-plaintext.form-control-sm, .input-group-sm > .form-control-plaintext.form-control,
 .input-group-sm > .input-group-prepend > .form-control-plaintext.input-group-text,
 .input-group-sm > .input-group-append > .form-control-plaintext.input-group-text,
-.input-group-sm > .input-group-prepend > .form-control-plaintext.btn, .d-p-banner .field--type-link .input-group-sm > .input-group-prepend > a.form-control-plaintext, .d-p-group-of-text-blocks > .field--type-link .input-group-sm > .input-group-prepend > a.form-control-plaintext, .d-p-text-with-bckg .field--type-link .input-group-sm > .input-group-prepend > a.form-control-plaintext,
-.input-group-sm > .input-group-append > .form-control-plaintext.btn, .d-p-banner .field--type-link .input-group-sm > .input-group-append > a.form-control-plaintext, .d-p-group-of-text-blocks > .field--type-link .input-group-sm > .input-group-append > a.form-control-plaintext, .d-p-text-with-bckg .field--type-link .input-group-sm > .input-group-append > a.form-control-plaintext, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control,
+.input-group-sm > .input-group-prepend > .form-control-plaintext.btn, .d-p-banner .field--type-link .input-group-sm > .input-group-prepend > a.form-control-plaintext, .d-p-group-of-text-blocks > .field--type-link .input-group-sm > .input-group-prepend > a.form-control-plaintext, .d-p-text-with-bckg .field--type-link .input-group-sm > .input-group-prepend > a.form-control-plaintext, .product-listing .pagination li .input-group-sm > .input-group-prepend > a.form-control-plaintext, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-sm > .input-group-prepend > a.form-control-plaintext,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-sm > .input-group-prepend > a.form-control-plaintext,
+.input-group-sm > .input-group-append > .form-control-plaintext.btn, .d-p-banner .field--type-link .input-group-sm > .input-group-append > a.form-control-plaintext, .d-p-group-of-text-blocks > .field--type-link .input-group-sm > .input-group-append > a.form-control-plaintext, .d-p-text-with-bckg .field--type-link .input-group-sm > .input-group-append > a.form-control-plaintext, .product-listing .pagination li .input-group-sm > .input-group-append > a.form-control-plaintext, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-sm > .input-group-append > a.form-control-plaintext,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-sm > .input-group-append > a.form-control-plaintext, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control,
 .input-group-lg > .input-group-prepend > .form-control-plaintext.input-group-text,
 .input-group-lg > .input-group-append > .form-control-plaintext.input-group-text,
-.input-group-lg > .input-group-prepend > .form-control-plaintext.btn, .d-p-banner .field--type-link .input-group-lg > .input-group-prepend > a.form-control-plaintext, .d-p-group-of-text-blocks > .field--type-link .input-group-lg > .input-group-prepend > a.form-control-plaintext, .d-p-text-with-bckg .field--type-link .input-group-lg > .input-group-prepend > a.form-control-plaintext,
-.input-group-lg > .input-group-append > .form-control-plaintext.btn, .d-p-banner .field--type-link .input-group-lg > .input-group-append > a.form-control-plaintext, .d-p-group-of-text-blocks > .field--type-link .input-group-lg > .input-group-append > a.form-control-plaintext, .d-p-text-with-bckg .field--type-link .input-group-lg > .input-group-append > a.form-control-plaintext {
+.input-group-lg > .input-group-prepend > .form-control-plaintext.btn, .d-p-banner .field--type-link .input-group-lg > .input-group-prepend > a.form-control-plaintext, .d-p-group-of-text-blocks > .field--type-link .input-group-lg > .input-group-prepend > a.form-control-plaintext, .d-p-text-with-bckg .field--type-link .input-group-lg > .input-group-prepend > a.form-control-plaintext, .product-listing .pagination li .input-group-lg > .input-group-prepend > a.form-control-plaintext, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-lg > .input-group-prepend > a.form-control-plaintext,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-lg > .input-group-prepend > a.form-control-plaintext,
+.input-group-lg > .input-group-append > .form-control-plaintext.btn, .d-p-banner .field--type-link .input-group-lg > .input-group-append > a.form-control-plaintext, .d-p-group-of-text-blocks > .field--type-link .input-group-lg > .input-group-append > a.form-control-plaintext, .d-p-text-with-bckg .field--type-link .input-group-lg > .input-group-append > a.form-control-plaintext, .product-listing .pagination li .input-group-lg > .input-group-append > a.form-control-plaintext, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-lg > .input-group-append > a.form-control-plaintext,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-lg > .input-group-append > a.form-control-plaintext {
   padding-right: 0;
   padding-left: 0;
 }
@@ -2082,8 +2081,10 @@ select.form-control:focus::-ms-value {
 .form-control-sm, .input-group-sm > .form-control,
 .input-group-sm > .input-group-prepend > .input-group-text,
 .input-group-sm > .input-group-append > .input-group-text,
-.input-group-sm > .input-group-prepend > .btn, .d-p-banner .field--type-link .input-group-sm > .input-group-prepend > a, .d-p-group-of-text-blocks > .field--type-link .input-group-sm > .input-group-prepend > a, .d-p-text-with-bckg .field--type-link .input-group-sm > .input-group-prepend > a,
-.input-group-sm > .input-group-append > .btn, .d-p-banner .field--type-link .input-group-sm > .input-group-append > a, .d-p-group-of-text-blocks > .field--type-link .input-group-sm > .input-group-append > a, .d-p-text-with-bckg .field--type-link .input-group-sm > .input-group-append > a {
+.input-group-sm > .input-group-prepend > .btn, .d-p-banner .field--type-link .input-group-sm > .input-group-prepend > a, .d-p-group-of-text-blocks > .field--type-link .input-group-sm > .input-group-prepend > a, .d-p-text-with-bckg .field--type-link .input-group-sm > .input-group-prepend > a, .product-listing .pagination li .input-group-sm > .input-group-prepend > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-sm > .input-group-prepend > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-sm > .input-group-prepend > a,
+.input-group-sm > .input-group-append > .btn, .d-p-banner .field--type-link .input-group-sm > .input-group-append > a, .d-p-group-of-text-blocks > .field--type-link .input-group-sm > .input-group-append > a, .d-p-text-with-bckg .field--type-link .input-group-sm > .input-group-append > a, .product-listing .pagination li .input-group-sm > .input-group-append > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-sm > .input-group-append > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-sm > .input-group-append > a {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -2101,8 +2102,10 @@ select.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.for
 .form-control-lg, .input-group-lg > .form-control,
 .input-group-lg > .input-group-prepend > .input-group-text,
 .input-group-lg > .input-group-append > .input-group-text,
-.input-group-lg > .input-group-prepend > .btn, .d-p-banner .field--type-link .input-group-lg > .input-group-prepend > a, .d-p-group-of-text-blocks > .field--type-link .input-group-lg > .input-group-prepend > a, .d-p-text-with-bckg .field--type-link .input-group-lg > .input-group-prepend > a,
-.input-group-lg > .input-group-append > .btn, .d-p-banner .field--type-link .input-group-lg > .input-group-append > a, .d-p-group-of-text-blocks > .field--type-link .input-group-lg > .input-group-append > a, .d-p-text-with-bckg .field--type-link .input-group-lg > .input-group-append > a {
+.input-group-lg > .input-group-prepend > .btn, .d-p-banner .field--type-link .input-group-lg > .input-group-prepend > a, .d-p-group-of-text-blocks > .field--type-link .input-group-lg > .input-group-prepend > a, .d-p-text-with-bckg .field--type-link .input-group-lg > .input-group-prepend > a, .product-listing .pagination li .input-group-lg > .input-group-prepend > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-lg > .input-group-prepend > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-lg > .input-group-prepend > a,
+.input-group-lg > .input-group-append > .btn, .d-p-banner .field--type-link .input-group-lg > .input-group-append > a, .d-p-group-of-text-blocks > .field--type-link .input-group-lg > .input-group-append > a, .d-p-text-with-bckg .field--type-link .input-group-lg > .input-group-append > a, .product-listing .pagination li .input-group-lg > .input-group-append > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-lg > .input-group-append > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-lg > .input-group-append > a {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
@@ -2469,7 +2472,8 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   }
 }
 
-.btn, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a {
+.btn, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a, .product-listing .pagination li a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a {
   display: inline-block;
   font-weight: 400;
   text-align: center;
@@ -2490,77 +2494,107 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-.btn:hover, .d-p-banner .field--type-link a:hover, .d-p-group-of-text-blocks > .field--type-link a:hover, .d-p-text-with-bckg .field--type-link a:hover, .btn:focus, .d-p-banner .field--type-link a:focus, .d-p-group-of-text-blocks > .field--type-link a:focus, .d-p-text-with-bckg .field--type-link a:focus {
+.btn:hover, .d-p-banner .field--type-link a:hover, .d-p-group-of-text-blocks > .field--type-link a:hover, .d-p-text-with-bckg .field--type-link a:hover, .product-listing .pagination li a:hover, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:hover,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:hover, .btn:focus, .d-p-banner .field--type-link a:focus, .d-p-group-of-text-blocks > .field--type-link a:focus, .d-p-text-with-bckg .field--type-link a:focus, .product-listing .pagination li a:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:focus {
   text-decoration: none;
 }
 
-.btn:focus, .d-p-banner .field--type-link a:focus, .d-p-group-of-text-blocks > .field--type-link a:focus, .d-p-text-with-bckg .field--type-link a:focus, .btn.focus, .d-p-banner .field--type-link a.focus, .d-p-group-of-text-blocks > .field--type-link a.focus, .d-p-text-with-bckg .field--type-link a.focus {
+.btn:focus, .d-p-banner .field--type-link a:focus, .d-p-group-of-text-blocks > .field--type-link a:focus, .d-p-text-with-bckg .field--type-link a:focus, .product-listing .pagination li a:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:focus, .btn.focus, .d-p-banner .field--type-link a.focus, .d-p-group-of-text-blocks > .field--type-link a.focus, .d-p-text-with-bckg .field--type-link a.focus, .product-listing .pagination li a.focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a.focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a.focus {
   outline: 0;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.25);
           box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.25);
 }
 
-.btn.disabled, .d-p-banner .field--type-link a.disabled, .d-p-group-of-text-blocks > .field--type-link a.disabled, .d-p-text-with-bckg .field--type-link a.disabled, .btn:disabled, .d-p-banner .field--type-link a:disabled, .d-p-group-of-text-blocks > .field--type-link a:disabled, .d-p-text-with-bckg .field--type-link a:disabled {
+.btn.disabled, .d-p-banner .field--type-link a.disabled, .d-p-group-of-text-blocks > .field--type-link a.disabled, .d-p-text-with-bckg .field--type-link a.disabled, .product-listing .pagination li a.disabled, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a.disabled,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a.disabled, .btn:disabled, .d-p-banner .field--type-link a:disabled, .d-p-group-of-text-blocks > .field--type-link a:disabled, .d-p-text-with-bckg .field--type-link a:disabled, .product-listing .pagination li a:disabled, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:disabled,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:disabled {
   opacity: 0.65;
 }
 
-.btn:not(:disabled):not(.disabled), .d-p-banner .field--type-link a:not(:disabled):not(.disabled), .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled), .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled) {
+.btn:not(:disabled):not(.disabled), .d-p-banner .field--type-link a:not(:disabled):not(.disabled), .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled), .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled), .product-listing .pagination li a:not(:disabled):not(.disabled), .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled),
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
 
-.btn:not(:disabled):not(.disabled):active, .d-p-banner .field--type-link a:not(:disabled):not(.disabled):active, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled):active, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active, .d-p-banner .field--type-link a:not(:disabled):not(.disabled).active, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled).active, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled).active {
+.btn:not(:disabled):not(.disabled):active, .d-p-banner .field--type-link a:not(:disabled):not(.disabled):active, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled):active, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled):active, .product-listing .pagination li a:not(:disabled):not(.disabled):active, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled):active,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active, .d-p-banner .field--type-link a:not(:disabled):not(.disabled).active, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled).active, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled).active, .product-listing .pagination li a:not(:disabled):not(.disabled).active, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled).active,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:not(:disabled):not(.disabled).active {
   background-image: none;
 }
 
-a.btn.disabled, .d-p-banner .field--type-link a.disabled, .d-p-group-of-text-blocks > .field--type-link a.disabled, .d-p-text-with-bckg .field--type-link a.disabled,
+a.btn.disabled, .d-p-banner .field--type-link a.disabled, .d-p-group-of-text-blocks > .field--type-link a.disabled, .d-p-text-with-bckg .field--type-link a.disabled, .product-listing .pagination li a.disabled, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a.disabled,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a.disabled,
 fieldset:disabled a.btn,
 fieldset:disabled .d-p-banner .field--type-link a,
 .d-p-banner .field--type-link fieldset:disabled a,
 fieldset:disabled .d-p-group-of-text-blocks > .field--type-link a,
 .d-p-group-of-text-blocks > .field--type-link fieldset:disabled a,
 fieldset:disabled .d-p-text-with-bckg .field--type-link a,
-.d-p-text-with-bckg .field--type-link fieldset:disabled a {
+.d-p-text-with-bckg .field--type-link fieldset:disabled a,
+fieldset:disabled .product-listing .pagination li a,
+.product-listing .pagination li fieldset:disabled a,
+fieldset:disabled .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link fieldset:disabled a,
+fieldset:disabled .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link fieldset:disabled a {
   pointer-events: none;
 }
 
-.btn-primary, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a {
+.btn-primary, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a {
   color: #fff;
   background-color: #ec6d06;
   border-color: #ec6d06;
 }
 
-.btn-primary:hover, .d-p-banner .field--type-link a:hover, .d-p-group-of-text-blocks > .field--type-link a:hover, .d-p-text-with-bckg .field--type-link a:hover {
+.btn-primary:hover, .d-p-banner .field--type-link a:hover, .d-p-group-of-text-blocks > .field--type-link a:hover, .d-p-text-with-bckg .field--type-link a:hover, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:hover,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:hover {
   color: #fff;
   background-color: #c75c05;
   border-color: #ba5605;
 }
 
-.btn-primary:focus, .d-p-banner .field--type-link a:focus, .d-p-group-of-text-blocks > .field--type-link a:focus, .d-p-text-with-bckg .field--type-link a:focus, .btn-primary.focus, .d-p-banner .field--type-link a.focus, .d-p-group-of-text-blocks > .field--type-link a.focus, .d-p-text-with-bckg .field--type-link a.focus {
+.btn-primary:focus, .d-p-banner .field--type-link a:focus, .d-p-group-of-text-blocks > .field--type-link a:focus, .d-p-text-with-bckg .field--type-link a:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:focus, .btn-primary.focus, .d-p-banner .field--type-link a.focus, .d-p-group-of-text-blocks > .field--type-link a.focus, .d-p-text-with-bckg .field--type-link a.focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a.focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a.focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.5);
           box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.5);
 }
 
-.btn-primary.disabled, .d-p-banner .field--type-link a.disabled, .d-p-group-of-text-blocks > .field--type-link a.disabled, .d-p-text-with-bckg .field--type-link a.disabled, .btn-primary:disabled, .d-p-banner .field--type-link a:disabled, .d-p-group-of-text-blocks > .field--type-link a:disabled, .d-p-text-with-bckg .field--type-link a:disabled {
+.btn-primary.disabled, .d-p-banner .field--type-link a.disabled, .d-p-group-of-text-blocks > .field--type-link a.disabled, .d-p-text-with-bckg .field--type-link a.disabled, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a.disabled,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a.disabled, .btn-primary:disabled, .d-p-banner .field--type-link a:disabled, .d-p-group-of-text-blocks > .field--type-link a:disabled, .d-p-text-with-bckg .field--type-link a:disabled, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:disabled,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:disabled {
   color: #fff;
   background-color: #ec6d06;
   border-color: #ec6d06;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active, .d-p-banner .field--type-link a:not(:disabled):not(.disabled):active, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled):active, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .d-p-banner .field--type-link a:not(:disabled):not(.disabled).active, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled).active, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active, .d-p-banner .field--type-link a:not(:disabled):not(.disabled):active, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled):active, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled):active, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled):active,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .d-p-banner .field--type-link a:not(:disabled):not(.disabled).active, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled).active, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled).active, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled).active,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle,
 .d-p-banner .field--type-link .show > a.dropdown-toggle,
 .d-p-group-of-text-blocks > .field--type-link .show > a.dropdown-toggle,
-.d-p-text-with-bckg .field--type-link .show > a.dropdown-toggle {
+.d-p-text-with-bckg .field--type-link .show > a.dropdown-toggle,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .show > a.dropdown-toggle,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .show > a.dropdown-toggle {
   color: #fff;
   background-color: #ba5605;
   border-color: #ae5004;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active:focus, .d-p-banner .field--type-link a:not(:disabled):not(.disabled):active:focus, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled):active:focus, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .d-p-banner .field--type-link a:not(:disabled):not(.disabled).active:focus, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled).active:focus, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus, .d-p-banner .field--type-link a:not(:disabled):not(.disabled):active:focus, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled):active:focus, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled):active:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled):active:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .d-p-banner .field--type-link a:not(:disabled):not(.disabled).active:focus, .d-p-group-of-text-blocks > .field--type-link a:not(:disabled):not(.disabled).active:focus, .d-p-text-with-bckg .field--type-link a:not(:disabled):not(.disabled).active:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled).active:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:not(:disabled):not(.disabled).active:focus,
 .show > .btn-primary.dropdown-toggle:focus,
 .d-p-banner .field--type-link .show > a.dropdown-toggle:focus,
 .d-p-group-of-text-blocks > .field--type-link .show > a.dropdown-toggle:focus,
-.d-p-text-with-bckg .field--type-link .show > a.dropdown-toggle:focus {
+.d-p-text-with-bckg .field--type-link .show > a.dropdown-toggle:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .show > a.dropdown-toggle:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .show > a.dropdown-toggle:focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.5);
           box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.5);
 }
@@ -2817,38 +2851,40 @@ fieldset:disabled .d-p-text-with-bckg .field--type-link a,
           box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 
-.btn-outline-primary {
+.btn-outline-primary, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a {
   color: #ec6d06;
   background-color: transparent;
   background-image: none;
   border-color: #ec6d06;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-primary:hover, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:hover {
   color: #fff;
   background-color: #ec6d06;
   border-color: #ec6d06;
 }
 
-.btn-outline-primary:focus, .btn-outline-primary.focus {
+.btn-outline-primary:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:focus, .btn-outline-primary.focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a.focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.5);
           box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.5);
 }
 
-.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+.btn-outline-primary.disabled, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a.disabled, .btn-outline-primary:disabled, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:disabled {
   color: #ec6d06;
   background-color: transparent;
 }
 
-.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
-.show > .btn-outline-primary.dropdown-toggle {
+.btn-outline-primary:not(:disabled):not(.disabled):active, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .show > a.dropdown-toggle {
   color: #fff;
   background-color: #ec6d06;
   border-color: #ec6d06;
 }
 
-.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-outline-primary.dropdown-toggle:focus {
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-primary.dropdown-toggle:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .show > a.dropdown-toggle:focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.5);
           box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.5);
 }
@@ -3129,14 +3165,16 @@ fieldset:disabled .d-p-text-with-bckg .field--type-link a,
   color: #6c757d;
 }
 
-.btn-lg, .btn-group-lg > .btn, .d-p-banner .field--type-link .btn-group-lg > a, .d-p-group-of-text-blocks > .field--type-link .btn-group-lg > a, .d-p-text-with-bckg .field--type-link .btn-group-lg > a {
+.btn-lg, .btn-group-lg > .btn, .d-p-banner .field--type-link .btn-group-lg > a, .d-p-group-of-text-blocks > .field--type-link .btn-group-lg > a, .d-p-text-with-bckg .field--type-link .btn-group-lg > a, .product-listing .pagination li .btn-group-lg > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-lg > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-lg > a {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem;
 }
 
-.btn-sm, .btn-group-sm > .btn, .d-p-banner .field--type-link .btn-group-sm > a, .d-p-group-of-text-blocks > .field--type-link .btn-group-sm > a, .d-p-text-with-bckg .field--type-link .btn-group-sm > a {
+.btn-sm, .btn-group-sm > .btn, .d-p-banner .field--type-link .btn-group-sm > a, .d-p-group-of-text-blocks > .field--type-link .btn-group-sm > a, .d-p-text-with-bckg .field--type-link .btn-group-sm > a, .product-listing .pagination li .btn-group-sm > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-sm > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-sm > a, .product-listing .pagination li a {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -3378,42 +3416,64 @@ tbody.collapse.show {
   vertical-align: middle;
 }
 
-.btn-group > .btn, .d-p-banner .field--type-link .btn-group > a, .d-p-group-of-text-blocks > .field--type-link .btn-group > a, .d-p-text-with-bckg .field--type-link .btn-group > a,
+.btn-group > .btn, .d-p-banner .field--type-link .btn-group > a, .d-p-group-of-text-blocks > .field--type-link .btn-group > a, .d-p-text-with-bckg .field--type-link .btn-group > a, .product-listing .pagination li .btn-group > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > a,
 .btn-group-vertical > .btn,
 .d-p-banner .field--type-link .btn-group-vertical > a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a,
-.d-p-text-with-bckg .field--type-link .btn-group-vertical > a {
+.d-p-text-with-bckg .field--type-link .btn-group-vertical > a,
+.product-listing .pagination li .btn-group-vertical > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a {
   position: relative;
   -webkit-box-flex: 0;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
 }
 
-.btn-group > .btn:hover, .d-p-banner .field--type-link .btn-group > a:hover, .d-p-group-of-text-blocks > .field--type-link .btn-group > a:hover, .d-p-text-with-bckg .field--type-link .btn-group > a:hover,
+.btn-group > .btn:hover, .d-p-banner .field--type-link .btn-group > a:hover, .d-p-group-of-text-blocks > .field--type-link .btn-group > a:hover, .d-p-text-with-bckg .field--type-link .btn-group > a:hover, .product-listing .pagination li .btn-group > a:hover, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > a:hover,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > a:hover,
 .btn-group-vertical > .btn:hover,
 .d-p-banner .field--type-link .btn-group-vertical > a:hover,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a:hover,
-.d-p-text-with-bckg .field--type-link .btn-group-vertical > a:hover {
+.d-p-text-with-bckg .field--type-link .btn-group-vertical > a:hover,
+.product-listing .pagination li .btn-group-vertical > a:hover,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a:hover,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a:hover {
   z-index: 1;
 }
 
-.btn-group > .btn:focus, .d-p-banner .field--type-link .btn-group > a:focus, .d-p-group-of-text-blocks > .field--type-link .btn-group > a:focus, .d-p-text-with-bckg .field--type-link .btn-group > a:focus, .btn-group > .btn:active, .d-p-banner .field--type-link .btn-group > a:active, .d-p-group-of-text-blocks > .field--type-link .btn-group > a:active, .d-p-text-with-bckg .field--type-link .btn-group > a:active, .btn-group > .btn.active, .d-p-banner .field--type-link .btn-group > a.active, .d-p-group-of-text-blocks > .field--type-link .btn-group > a.active, .d-p-text-with-bckg .field--type-link .btn-group > a.active,
+.btn-group > .btn:focus, .d-p-banner .field--type-link .btn-group > a:focus, .d-p-group-of-text-blocks > .field--type-link .btn-group > a:focus, .d-p-text-with-bckg .field--type-link .btn-group > a:focus, .product-listing .pagination li .btn-group > a:focus, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > a:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > a:focus, .btn-group > .btn:active, .d-p-banner .field--type-link .btn-group > a:active, .d-p-group-of-text-blocks > .field--type-link .btn-group > a:active, .d-p-text-with-bckg .field--type-link .btn-group > a:active, .product-listing .pagination li .btn-group > a:active, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > a:active,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > a:active, .btn-group > .btn.active, .d-p-banner .field--type-link .btn-group > a.active, .d-p-group-of-text-blocks > .field--type-link .btn-group > a.active, .d-p-text-with-bckg .field--type-link .btn-group > a.active, .product-listing .pagination li .btn-group > a.active, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > a.active,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > a.active,
 .btn-group-vertical > .btn:focus,
 .d-p-banner .field--type-link .btn-group-vertical > a:focus,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a:focus,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical > a:focus,
+.product-listing .pagination li .btn-group-vertical > a:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a:focus,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a:focus,
 .btn-group-vertical > .btn:active,
 .d-p-banner .field--type-link .btn-group-vertical > a:active,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a:active,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical > a:active,
+.product-listing .pagination li .btn-group-vertical > a:active,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a:active,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a:active,
 .btn-group-vertical > .btn.active,
 .d-p-banner .field--type-link .btn-group-vertical > a.active,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a.active,
-.d-p-text-with-bckg .field--type-link .btn-group-vertical > a.active {
+.d-p-text-with-bckg .field--type-link .btn-group-vertical > a.active,
+.product-listing .pagination li .btn-group-vertical > a.active,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a.active,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a.active {
   z-index: 1;
 }
 
-.btn-group .btn + .btn, .btn-group .d-p-banner .field--type-link a + .btn, .d-p-banner .field--type-link .btn-group a + .btn, .btn-group .d-p-group-of-text-blocks > .field--type-link a + .btn, .d-p-group-of-text-blocks > .field--type-link .btn-group a + .btn, .btn-group .d-p-text-with-bckg .field--type-link a + .btn, .d-p-text-with-bckg .field--type-link .btn-group a + .btn, .btn-group .d-p-banner .field--type-link .btn + a, .d-p-banner .field--type-link .btn-group .btn + a, .btn-group .d-p-banner .field--type-link a + a, .d-p-banner .field--type-link .btn-group a + a, .btn-group .d-p-group-of-text-blocks > .field--type-link .btn + a, .d-p-group-of-text-blocks > .field--type-link .btn-group .btn + a, .btn-group .d-p-group-of-text-blocks > .field--type-link a + a, .d-p-group-of-text-blocks > .field--type-link .btn-group a + a, .btn-group .d-p-text-with-bckg .field--type-link .btn + a, .d-p-text-with-bckg .field--type-link .btn-group .btn + a, .btn-group .d-p-text-with-bckg .field--type-link a + a, .d-p-text-with-bckg .field--type-link .btn-group a + a,
+.btn-group .btn + .btn, .btn-group .d-p-banner .field--type-link a + .btn, .d-p-banner .field--type-link .btn-group a + .btn, .btn-group .d-p-group-of-text-blocks > .field--type-link a + .btn, .d-p-group-of-text-blocks > .field--type-link .btn-group a + .btn, .btn-group .d-p-text-with-bckg .field--type-link a + .btn, .d-p-text-with-bckg .field--type-link .btn-group a + .btn, .btn-group .product-listing .pagination li a + .btn, .product-listing .pagination li .btn-group a + .btn, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + .btn, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group a + .btn, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + .btn, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group a + .btn, .btn-group .d-p-banner .field--type-link .btn + a, .d-p-banner .field--type-link .btn-group .btn + a, .btn-group .d-p-banner .field--type-link a + a, .d-p-banner .field--type-link .btn-group a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-banner .field--type-link a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-banner .field--type-link a + a, .btn-group .d-p-group-of-text-blocks > .field--type-link .btn + a, .d-p-group-of-text-blocks > .field--type-link .btn-group .btn + a, .btn-group .d-p-group-of-text-blocks > .field--type-link a + a, .d-p-group-of-text-blocks > .field--type-link .btn-group a + a, .btn-group .product-listing .pagination li .d-p-group-of-text-blocks > .field--type-link a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-group-of-text-blocks > .field--type-link a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-group-of-text-blocks > .field--type-link a + a, .btn-group .d-p-text-with-bckg .field--type-link .btn + a, .d-p-text-with-bckg .field--type-link .btn-group .btn + a, .btn-group .d-p-text-with-bckg .field--type-link a + a, .d-p-text-with-bckg .field--type-link .btn-group a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-text-with-bckg .field--type-link a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-text-with-bckg .field--type-link a + a, .btn-group .product-listing .pagination li .btn + a, .product-listing .pagination li .btn-group .btn + a, .btn-group .product-listing .pagination li a + a, .product-listing .pagination li .btn-group a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .product-listing .pagination li a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .product-listing .pagination li a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group .d-p-banner .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group .d-p-group-of-text-blocks > .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group .d-p-text-with-bckg .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group .product-listing .pagination li a + a, .btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group .ask-link a + a,
+.btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group .d-p-banner .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group .d-p-group-of-text-blocks > .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group .d-p-text-with-bckg .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group .product-listing .pagination li a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group .field--name-field-d-product-link a + a,
+.btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group a + a,
 .btn-group .btn + .btn-group,
 .btn-group .d-p-banner .field--type-link a + .btn-group,
 .d-p-banner .field--type-link .btn-group a + .btn-group,
@@ -3421,6 +3481,12 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .btn-group a + .btn-group,
 .btn-group .d-p-text-with-bckg .field--type-link a + .btn-group,
 .d-p-text-with-bckg .field--type-link .btn-group a + .btn-group,
+.btn-group .product-listing .pagination li a + .btn-group,
+.product-listing .pagination li .btn-group a + .btn-group,
+.btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + .btn-group,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group a + .btn-group,
+.btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + .btn-group,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group a + .btn-group,
 .btn-group .btn-group + .btn,
 .btn-group .d-p-banner .field--type-link .btn-group + a,
 .d-p-banner .field--type-link .btn-group .btn-group + a,
@@ -3428,6 +3494,12 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .btn-group .btn-group + a,
 .btn-group .d-p-text-with-bckg .field--type-link .btn-group + a,
 .d-p-text-with-bckg .field--type-link .btn-group .btn-group + a,
+.btn-group .product-listing .pagination li .btn-group + a,
+.product-listing .pagination li .btn-group .btn-group + a,
+.btn-group .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group .btn-group + a,
+.btn-group .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group .btn-group + a,
 .btn-group .btn-group + .btn-group,
 .btn-group-vertical .btn + .btn,
 .btn-group-vertical .d-p-banner .field--type-link a + .btn,
@@ -3436,18 +3508,55 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical a + .btn,
 .btn-group-vertical .d-p-text-with-bckg .field--type-link a + .btn,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical a + .btn,
+.btn-group-vertical .product-listing .pagination li a + .btn,
+.product-listing .pagination li .btn-group-vertical a + .btn,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + .btn,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical a + .btn,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + .btn,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical a + .btn,
 .btn-group-vertical .d-p-banner .field--type-link .btn + a,
 .d-p-banner .field--type-link .btn-group-vertical .btn + a,
 .btn-group-vertical .d-p-banner .field--type-link a + a,
 .d-p-banner .field--type-link .btn-group-vertical a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-banner .field--type-link a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-banner .field--type-link a + a,
 .btn-group-vertical .d-p-group-of-text-blocks > .field--type-link .btn + a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical .btn + a,
 .btn-group-vertical .d-p-group-of-text-blocks > .field--type-link a + a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical a + a,
+.btn-group-vertical .product-listing .pagination li .d-p-group-of-text-blocks > .field--type-link a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-group-of-text-blocks > .field--type-link a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-group-of-text-blocks > .field--type-link a + a,
 .btn-group-vertical .d-p-text-with-bckg .field--type-link .btn + a,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical .btn + a,
 .btn-group-vertical .d-p-text-with-bckg .field--type-link a + a,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-text-with-bckg .field--type-link a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-text-with-bckg .field--type-link a + a,
+.btn-group-vertical .product-listing .pagination li .btn + a,
+.product-listing .pagination li .btn-group-vertical .btn + a,
+.btn-group-vertical .product-listing .pagination li a + a,
+.product-listing .pagination li .btn-group-vertical a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .product-listing .pagination li a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .product-listing .pagination li a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical .btn + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical .d-p-banner .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical .d-p-group-of-text-blocks > .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical .d-p-text-with-bckg .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical .product-listing .pagination li a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical .ask-link a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical .btn + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical .d-p-banner .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical .d-p-group-of-text-blocks > .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical .d-p-text-with-bckg .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical .product-listing .pagination li a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical .field--name-field-d-product-link a + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical a + a,
 .btn-group-vertical .btn + .btn-group,
 .btn-group-vertical .d-p-banner .field--type-link a + .btn-group,
 .d-p-banner .field--type-link .btn-group-vertical a + .btn-group,
@@ -3455,6 +3564,12 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical a + .btn-group,
 .btn-group-vertical .d-p-text-with-bckg .field--type-link a + .btn-group,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical a + .btn-group,
+.btn-group-vertical .product-listing .pagination li a + .btn-group,
+.product-listing .pagination li .btn-group-vertical a + .btn-group,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + .btn-group,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical a + .btn-group,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + .btn-group,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical a + .btn-group,
 .btn-group-vertical .btn-group + .btn,
 .btn-group-vertical .d-p-banner .field--type-link .btn-group + a,
 .d-p-banner .field--type-link .btn-group-vertical .btn-group + a,
@@ -3462,6 +3577,12 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical .btn-group + a,
 .btn-group-vertical .d-p-text-with-bckg .field--type-link .btn-group + a,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical .btn-group + a,
+.btn-group-vertical .product-listing .pagination li .btn-group + a,
+.product-listing .pagination li .btn-group-vertical .btn-group + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical .btn-group + a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical .btn-group + a,
 .btn-group-vertical .btn-group + .btn-group {
   margin-left: -0.125rem;
 }
@@ -3481,24 +3602,33 @@ tbody.collapse.show {
   width: auto;
 }
 
-.btn-group > .btn:first-child, .d-p-banner .field--type-link .btn-group > a:first-child, .d-p-group-of-text-blocks > .field--type-link .btn-group > a:first-child, .d-p-text-with-bckg .field--type-link .btn-group > a:first-child {
+.btn-group > .btn:first-child, .d-p-banner .field--type-link .btn-group > a:first-child, .d-p-group-of-text-blocks > .field--type-link .btn-group > a:first-child, .d-p-text-with-bckg .field--type-link .btn-group > a:first-child, .product-listing .pagination li .btn-group > a:first-child, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > a:first-child,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > a:first-child {
   margin-left: 0;
 }
 
-.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .d-p-banner .field--type-link .btn-group > a:not(:last-child):not(.dropdown-toggle), .d-p-group-of-text-blocks > .field--type-link .btn-group > a:not(:last-child):not(.dropdown-toggle), .d-p-text-with-bckg .field--type-link .btn-group > a:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .d-p-banner .field--type-link .btn-group > a:not(:last-child):not(.dropdown-toggle), .d-p-group-of-text-blocks > .field--type-link .btn-group > a:not(:last-child):not(.dropdown-toggle), .d-p-text-with-bckg .field--type-link .btn-group > a:not(:last-child):not(.dropdown-toggle), .product-listing .pagination li .btn-group > a:not(:last-child):not(.dropdown-toggle), .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > a:not(:last-child):not(.dropdown-toggle),
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > a:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn-group:not(:last-child) > .btn,
 .d-p-banner .field--type-link .btn-group > .btn-group:not(:last-child) > a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group > .btn-group:not(:last-child) > a,
-.d-p-text-with-bckg .field--type-link .btn-group > .btn-group:not(:last-child) > a {
+.d-p-text-with-bckg .field--type-link .btn-group > .btn-group:not(:last-child) > a,
+.product-listing .pagination li .btn-group > .btn-group:not(:last-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > .btn-group:not(:last-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > .btn-group:not(:last-child) > a {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.btn-group > .btn:not(:first-child), .d-p-banner .field--type-link .btn-group > a:not(:first-child), .d-p-group-of-text-blocks > .field--type-link .btn-group > a:not(:first-child), .d-p-text-with-bckg .field--type-link .btn-group > a:not(:first-child),
+.btn-group > .btn:not(:first-child), .d-p-banner .field--type-link .btn-group > a:not(:first-child), .d-p-group-of-text-blocks > .field--type-link .btn-group > a:not(:first-child), .d-p-text-with-bckg .field--type-link .btn-group > a:not(:first-child), .product-listing .pagination li .btn-group > a:not(:first-child), .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > a:not(:first-child),
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > a:not(:first-child),
 .btn-group > .btn-group:not(:first-child) > .btn,
 .d-p-banner .field--type-link .btn-group > .btn-group:not(:first-child) > a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group > .btn-group:not(:first-child) > a,
-.d-p-text-with-bckg .field--type-link .btn-group > .btn-group:not(:first-child) > a {
+.d-p-text-with-bckg .field--type-link .btn-group > .btn-group:not(:first-child) > a,
+.product-listing .pagination li .btn-group > .btn-group:not(:first-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group > .btn-group:not(:first-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group > .btn-group:not(:first-child) > a {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -3512,12 +3642,12 @@ tbody.collapse.show {
   margin-left: 0;
 }
 
-.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .d-p-banner .field--type-link .btn-group-sm > a + .dropdown-toggle-split, .d-p-group-of-text-blocks > .field--type-link .btn-group-sm > a + .dropdown-toggle-split, .d-p-text-with-bckg .field--type-link .btn-group-sm > a + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .d-p-banner .field--type-link .btn-group-sm > a + .dropdown-toggle-split, .d-p-group-of-text-blocks > .field--type-link .btn-group-sm > a + .dropdown-toggle-split, .d-p-text-with-bckg .field--type-link .btn-group-sm > a + .dropdown-toggle-split, .product-listing .pagination li .btn-group-sm > a + .dropdown-toggle-split, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-sm > a + .dropdown-toggle-split, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-sm > a + .dropdown-toggle-split, .product-listing .pagination li a + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
 }
 
-.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .d-p-banner .field--type-link .btn-group-lg > a + .dropdown-toggle-split, .d-p-group-of-text-blocks > .field--type-link .btn-group-lg > a + .dropdown-toggle-split, .d-p-text-with-bckg .field--type-link .btn-group-lg > a + .dropdown-toggle-split {
+.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .d-p-banner .field--type-link .btn-group-lg > a + .dropdown-toggle-split, .d-p-group-of-text-blocks > .field--type-link .btn-group-lg > a + .dropdown-toggle-split, .d-p-text-with-bckg .field--type-link .btn-group-lg > a + .dropdown-toggle-split, .product-listing .pagination li .btn-group-lg > a + .dropdown-toggle-split, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-lg > a + .dropdown-toggle-split, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-lg > a + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
@@ -3535,64 +3665,94 @@ tbody.collapse.show {
           justify-content: center;
 }
 
-.btn-group-vertical .btn, .btn-group-vertical .d-p-banner .field--type-link a, .d-p-banner .field--type-link .btn-group-vertical a, .btn-group-vertical .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical a, .btn-group-vertical .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .btn-group-vertical a,
+.btn-group-vertical .btn, .btn-group-vertical .d-p-banner .field--type-link a, .d-p-banner .field--type-link .btn-group-vertical a, .btn-group-vertical .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical a, .btn-group-vertical .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .btn-group-vertical a, .btn-group-vertical .product-listing .pagination li a, .product-listing .pagination li .btn-group-vertical a, .btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical a,
+.btn-group-vertical .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical a,
 .btn-group-vertical .btn-group {
   width: 100%;
 }
 
-.btn-group-vertical > .btn + .btn, .d-p-banner .field--type-link .btn-group-vertical > a + .btn, .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a + .btn, .d-p-text-with-bckg .field--type-link .btn-group-vertical > a + .btn, .d-p-banner .field--type-link .btn-group-vertical > .btn + a, .d-p-banner .field--type-link .btn-group-vertical > a + a, .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > .btn + a, .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a + a, .d-p-text-with-bckg .field--type-link .btn-group-vertical > .btn + a, .d-p-text-with-bckg .field--type-link .btn-group-vertical > a + a,
+.btn-group-vertical > .btn + .btn, .d-p-banner .field--type-link .btn-group-vertical > a + .btn, .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a + .btn, .d-p-text-with-bckg .field--type-link .btn-group-vertical > a + .btn, .product-listing .pagination li .btn-group-vertical > a + .btn, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a + .btn, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a + .btn, .d-p-banner .field--type-link .btn-group-vertical > .btn + a, .d-p-banner .field--type-link .btn-group-vertical > a + a, .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > .btn + a, .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a + a, .d-p-text-with-bckg .field--type-link .btn-group-vertical > .btn + a, .d-p-text-with-bckg .field--type-link .btn-group-vertical > a + a, .product-listing .pagination li .btn-group-vertical > .btn + a, .product-listing .pagination li .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a + a, .product-listing .pagination li .btn-group-vertical > a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-banner .field--type-link .btn-group-vertical > a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-text-with-bckg .field--type-link .btn-group-vertical > a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .product-listing .pagination li .btn-group-vertical > a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-banner .field--type-link .btn-group-vertical > a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-text-with-bckg .field--type-link .btn-group-vertical > a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .product-listing .pagination li .btn-group-vertical > a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a + a,
 .btn-group-vertical > .btn + .btn-group,
 .d-p-banner .field--type-link .btn-group-vertical > a + .btn-group,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a + .btn-group,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical > a + .btn-group,
+.product-listing .pagination li .btn-group-vertical > a + .btn-group,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a + .btn-group,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a + .btn-group,
 .btn-group-vertical > .btn-group + .btn,
 .d-p-banner .field--type-link .btn-group-vertical > .btn-group + a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > .btn-group + a,
 .d-p-text-with-bckg .field--type-link .btn-group-vertical > .btn-group + a,
+.product-listing .pagination li .btn-group-vertical > .btn-group + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > .btn-group + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > .btn-group + a,
 .btn-group-vertical > .btn-group + .btn-group {
   margin-top: -0.125rem;
   margin-left: 0;
 }
 
-.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .d-p-banner .field--type-link .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle), .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle), .d-p-text-with-bckg .field--type-link .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle),
+.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .d-p-banner .field--type-link .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle), .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle), .d-p-text-with-bckg .field--type-link .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle), .product-listing .pagination li .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle), .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle),
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a:not(:last-child):not(.dropdown-toggle),
 .btn-group-vertical > .btn-group:not(:last-child) > .btn,
 .d-p-banner .field--type-link .btn-group-vertical > .btn-group:not(:last-child) > a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > .btn-group:not(:last-child) > a,
-.d-p-text-with-bckg .field--type-link .btn-group-vertical > .btn-group:not(:last-child) > a {
+.d-p-text-with-bckg .field--type-link .btn-group-vertical > .btn-group:not(:last-child) > a,
+.product-listing .pagination li .btn-group-vertical > .btn-group:not(:last-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > .btn-group:not(:last-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > .btn-group:not(:last-child) > a {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.btn-group-vertical > .btn:not(:first-child), .d-p-banner .field--type-link .btn-group-vertical > a:not(:first-child), .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a:not(:first-child), .d-p-text-with-bckg .field--type-link .btn-group-vertical > a:not(:first-child),
+.btn-group-vertical > .btn:not(:first-child), .d-p-banner .field--type-link .btn-group-vertical > a:not(:first-child), .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > a:not(:first-child), .d-p-text-with-bckg .field--type-link .btn-group-vertical > a:not(:first-child), .product-listing .pagination li .btn-group-vertical > a:not(:first-child), .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > a:not(:first-child),
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > a:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) > .btn,
 .d-p-banner .field--type-link .btn-group-vertical > .btn-group:not(:first-child) > a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-vertical > .btn-group:not(:first-child) > a,
-.d-p-text-with-bckg .field--type-link .btn-group-vertical > .btn-group:not(:first-child) > a {
+.d-p-text-with-bckg .field--type-link .btn-group-vertical > .btn-group:not(:first-child) > a,
+.product-listing .pagination li .btn-group-vertical > .btn-group:not(:first-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-vertical > .btn-group:not(:first-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-vertical > .btn-group:not(:first-child) > a {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-.btn-group-toggle > .btn, .d-p-banner .field--type-link .btn-group-toggle > a, .d-p-group-of-text-blocks > .field--type-link .btn-group-toggle > a, .d-p-text-with-bckg .field--type-link .btn-group-toggle > a,
+.btn-group-toggle > .btn, .d-p-banner .field--type-link .btn-group-toggle > a, .d-p-group-of-text-blocks > .field--type-link .btn-group-toggle > a, .d-p-text-with-bckg .field--type-link .btn-group-toggle > a, .product-listing .pagination li .btn-group-toggle > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-toggle > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-toggle > a,
 .btn-group-toggle > .btn-group > .btn,
 .d-p-banner .field--type-link .btn-group-toggle > .btn-group > a,
 .d-p-group-of-text-blocks > .field--type-link .btn-group-toggle > .btn-group > a,
-.d-p-text-with-bckg .field--type-link .btn-group-toggle > .btn-group > a {
+.d-p-text-with-bckg .field--type-link .btn-group-toggle > .btn-group > a,
+.product-listing .pagination li .btn-group-toggle > .btn-group > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-toggle > .btn-group > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-toggle > .btn-group > a {
   margin-bottom: 0;
 }
 
-.btn-group-toggle > .btn input[type="radio"], .d-p-banner .field--type-link .btn-group-toggle > a input[type="radio"], .d-p-group-of-text-blocks > .field--type-link .btn-group-toggle > a input[type="radio"], .d-p-text-with-bckg .field--type-link .btn-group-toggle > a input[type="radio"],
+.btn-group-toggle > .btn input[type="radio"], .d-p-banner .field--type-link .btn-group-toggle > a input[type="radio"], .d-p-group-of-text-blocks > .field--type-link .btn-group-toggle > a input[type="radio"], .d-p-text-with-bckg .field--type-link .btn-group-toggle > a input[type="radio"], .product-listing .pagination li .btn-group-toggle > a input[type="radio"], .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-toggle > a input[type="radio"], .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-toggle > a input[type="radio"],
 .btn-group-toggle > .btn input[type="checkbox"],
 .d-p-banner .field--type-link .btn-group-toggle > a input[type="checkbox"],
 .d-p-group-of-text-blocks > .field--type-link .btn-group-toggle > a input[type="checkbox"],
 .d-p-text-with-bckg .field--type-link .btn-group-toggle > a input[type="checkbox"],
+.product-listing .pagination li .btn-group-toggle > a input[type="checkbox"],
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-toggle > a input[type="checkbox"],
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-toggle > a input[type="checkbox"],
 .btn-group-toggle > .btn-group > .btn input[type="radio"],
 .d-p-banner .field--type-link .btn-group-toggle > .btn-group > a input[type="radio"],
 .d-p-group-of-text-blocks > .field--type-link .btn-group-toggle > .btn-group > a input[type="radio"],
 .d-p-text-with-bckg .field--type-link .btn-group-toggle > .btn-group > a input[type="radio"],
+.product-listing .pagination li .btn-group-toggle > .btn-group > a input[type="radio"],
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-toggle > .btn-group > a input[type="radio"],
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-toggle > .btn-group > a input[type="radio"],
 .btn-group-toggle > .btn-group > .btn input[type="checkbox"],
 .d-p-banner .field--type-link .btn-group-toggle > .btn-group > a input[type="checkbox"],
 .d-p-group-of-text-blocks > .field--type-link .btn-group-toggle > .btn-group > a input[type="checkbox"],
-.d-p-text-with-bckg .field--type-link .btn-group-toggle > .btn-group > a input[type="checkbox"] {
+.d-p-text-with-bckg .field--type-link .btn-group-toggle > .btn-group > a input[type="checkbox"],
+.product-listing .pagination li .btn-group-toggle > .btn-group > a input[type="checkbox"],
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn-group-toggle > .btn-group > a input[type="checkbox"],
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn-group-toggle > .btn-group > a input[type="checkbox"] {
   position: absolute;
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
@@ -3680,19 +3840,28 @@ tbody.collapse.show {
   display: flex;
 }
 
-.input-group-prepend .btn, .input-group-prepend .d-p-banner .field--type-link a, .d-p-banner .field--type-link .input-group-prepend a, .input-group-prepend .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .input-group-prepend a, .input-group-prepend .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .input-group-prepend a,
+.input-group-prepend .btn, .input-group-prepend .d-p-banner .field--type-link a, .d-p-banner .field--type-link .input-group-prepend a, .input-group-prepend .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .input-group-prepend a, .input-group-prepend .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .input-group-prepend a, .input-group-prepend .product-listing .pagination li a, .product-listing .pagination li .input-group-prepend a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend a,
+.input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend a,
 .input-group-append .btn,
 .input-group-append .d-p-banner .field--type-link a,
 .d-p-banner .field--type-link .input-group-append a,
 .input-group-append .d-p-group-of-text-blocks > .field--type-link a,
 .d-p-group-of-text-blocks > .field--type-link .input-group-append a,
 .input-group-append .d-p-text-with-bckg .field--type-link a,
-.d-p-text-with-bckg .field--type-link .input-group-append a {
+.d-p-text-with-bckg .field--type-link .input-group-append a,
+.input-group-append .product-listing .pagination li a,
+.product-listing .pagination li .input-group-append a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append a {
   position: relative;
   z-index: 2;
 }
 
-.input-group-prepend .btn + .btn, .input-group-prepend .d-p-banner .field--type-link a + .btn, .d-p-banner .field--type-link .input-group-prepend a + .btn, .input-group-prepend .d-p-group-of-text-blocks > .field--type-link a + .btn, .d-p-group-of-text-blocks > .field--type-link .input-group-prepend a + .btn, .input-group-prepend .d-p-text-with-bckg .field--type-link a + .btn, .d-p-text-with-bckg .field--type-link .input-group-prepend a + .btn, .input-group-prepend .d-p-banner .field--type-link .btn + a, .d-p-banner .field--type-link .input-group-prepend .btn + a, .input-group-prepend .d-p-banner .field--type-link a + a, .d-p-banner .field--type-link .input-group-prepend a + a, .input-group-prepend .d-p-group-of-text-blocks > .field--type-link .btn + a, .d-p-group-of-text-blocks > .field--type-link .input-group-prepend .btn + a, .input-group-prepend .d-p-group-of-text-blocks > .field--type-link a + a, .d-p-group-of-text-blocks > .field--type-link .input-group-prepend a + a, .input-group-prepend .d-p-text-with-bckg .field--type-link .btn + a, .d-p-text-with-bckg .field--type-link .input-group-prepend .btn + a, .input-group-prepend .d-p-text-with-bckg .field--type-link a + a, .d-p-text-with-bckg .field--type-link .input-group-prepend a + a,
+.input-group-prepend .btn + .btn, .input-group-prepend .d-p-banner .field--type-link a + .btn, .d-p-banner .field--type-link .input-group-prepend a + .btn, .input-group-prepend .d-p-group-of-text-blocks > .field--type-link a + .btn, .d-p-group-of-text-blocks > .field--type-link .input-group-prepend a + .btn, .input-group-prepend .d-p-text-with-bckg .field--type-link a + .btn, .d-p-text-with-bckg .field--type-link .input-group-prepend a + .btn, .input-group-prepend .product-listing .pagination li a + .btn, .product-listing .pagination li .input-group-prepend a + .btn, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + .btn, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend a + .btn, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + .btn, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend a + .btn, .input-group-prepend .d-p-banner .field--type-link .btn + a, .d-p-banner .field--type-link .input-group-prepend .btn + a, .input-group-prepend .d-p-banner .field--type-link a + a, .d-p-banner .field--type-link .input-group-prepend a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-banner .field--type-link a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-banner .field--type-link a + a, .input-group-prepend .d-p-group-of-text-blocks > .field--type-link .btn + a, .d-p-group-of-text-blocks > .field--type-link .input-group-prepend .btn + a, .input-group-prepend .d-p-group-of-text-blocks > .field--type-link a + a, .d-p-group-of-text-blocks > .field--type-link .input-group-prepend a + a, .input-group-prepend .product-listing .pagination li .d-p-group-of-text-blocks > .field--type-link a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-group-of-text-blocks > .field--type-link a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-group-of-text-blocks > .field--type-link a + a, .input-group-prepend .d-p-text-with-bckg .field--type-link .btn + a, .d-p-text-with-bckg .field--type-link .input-group-prepend .btn + a, .input-group-prepend .d-p-text-with-bckg .field--type-link a + a, .d-p-text-with-bckg .field--type-link .input-group-prepend a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-text-with-bckg .field--type-link a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-text-with-bckg .field--type-link a + a, .input-group-prepend .product-listing .pagination li .btn + a, .product-listing .pagination li .input-group-prepend .btn + a, .input-group-prepend .product-listing .pagination li a + a, .product-listing .pagination li .input-group-prepend a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .product-listing .pagination li a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .product-listing .pagination li a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend .d-p-banner .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend .d-p-group-of-text-blocks > .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend .d-p-text-with-bckg .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend .product-listing .pagination li a + a, .input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend .ask-link a + a,
+.input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend .btn + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend .d-p-banner .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend .d-p-group-of-text-blocks > .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend .d-p-text-with-bckg .field--type-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend .product-listing .pagination li a + a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend .field--name-field-d-product-link a + a,
+.input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend a + a,
 .input-group-prepend .btn + .input-group-text,
 .input-group-prepend .d-p-banner .field--type-link a + .input-group-text,
 .d-p-banner .field--type-link .input-group-prepend a + .input-group-text,
@@ -3700,6 +3869,12 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .input-group-prepend a + .input-group-text,
 .input-group-prepend .d-p-text-with-bckg .field--type-link a + .input-group-text,
 .d-p-text-with-bckg .field--type-link .input-group-prepend a + .input-group-text,
+.input-group-prepend .product-listing .pagination li a + .input-group-text,
+.product-listing .pagination li .input-group-prepend a + .input-group-text,
+.input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + .input-group-text,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend a + .input-group-text,
+.input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + .input-group-text,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend a + .input-group-text,
 .input-group-prepend .input-group-text + .input-group-text,
 .input-group-prepend .input-group-text + .btn,
 .input-group-prepend .d-p-banner .field--type-link .input-group-text + a,
@@ -3708,6 +3883,12 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .input-group-prepend .input-group-text + a,
 .input-group-prepend .d-p-text-with-bckg .field--type-link .input-group-text + a,
 .d-p-text-with-bckg .field--type-link .input-group-prepend .input-group-text + a,
+.input-group-prepend .product-listing .pagination li .input-group-text + a,
+.product-listing .pagination li .input-group-prepend .input-group-text + a,
+.input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-text + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-prepend .input-group-text + a,
+.input-group-prepend .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-text + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-prepend .input-group-text + a,
 .input-group-append .btn + .btn,
 .input-group-append .d-p-banner .field--type-link a + .btn,
 .d-p-banner .field--type-link .input-group-append a + .btn,
@@ -3715,18 +3896,55 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .input-group-append a + .btn,
 .input-group-append .d-p-text-with-bckg .field--type-link a + .btn,
 .d-p-text-with-bckg .field--type-link .input-group-append a + .btn,
+.input-group-append .product-listing .pagination li a + .btn,
+.product-listing .pagination li .input-group-append a + .btn,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + .btn,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append a + .btn,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + .btn,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append a + .btn,
 .input-group-append .d-p-banner .field--type-link .btn + a,
 .d-p-banner .field--type-link .input-group-append .btn + a,
 .input-group-append .d-p-banner .field--type-link a + a,
 .d-p-banner .field--type-link .input-group-append a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-banner .field--type-link a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-banner .field--type-link a + a,
 .input-group-append .d-p-group-of-text-blocks > .field--type-link .btn + a,
 .d-p-group-of-text-blocks > .field--type-link .input-group-append .btn + a,
 .input-group-append .d-p-group-of-text-blocks > .field--type-link a + a,
 .d-p-group-of-text-blocks > .field--type-link .input-group-append a + a,
+.input-group-append .product-listing .pagination li .d-p-group-of-text-blocks > .field--type-link a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-group-of-text-blocks > .field--type-link a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-group-of-text-blocks > .field--type-link a + a,
 .input-group-append .d-p-text-with-bckg .field--type-link .btn + a,
 .d-p-text-with-bckg .field--type-link .input-group-append .btn + a,
 .input-group-append .d-p-text-with-bckg .field--type-link a + a,
 .d-p-text-with-bckg .field--type-link .input-group-append a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .d-p-text-with-bckg .field--type-link a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .d-p-text-with-bckg .field--type-link a + a,
+.input-group-append .product-listing .pagination li .btn + a,
+.product-listing .pagination li .input-group-append .btn + a,
+.input-group-append .product-listing .pagination li a + a,
+.product-listing .pagination li .input-group-append a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .product-listing .pagination li a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .product-listing .pagination li a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .btn + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append .btn + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append .d-p-banner .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append .d-p-group-of-text-blocks > .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append .d-p-text-with-bckg .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append .product-listing .pagination li a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append .ask-link a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .btn + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append .btn + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append .d-p-banner .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append .d-p-group-of-text-blocks > .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append .d-p-text-with-bckg .field--type-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append .product-listing .pagination li a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append .field--name-field-d-product-link a + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append a + a,
 .input-group-append .btn + .input-group-text,
 .input-group-append .d-p-banner .field--type-link a + .input-group-text,
 .d-p-banner .field--type-link .input-group-append a + .input-group-text,
@@ -3734,6 +3952,12 @@ tbody.collapse.show {
 .d-p-group-of-text-blocks > .field--type-link .input-group-append a + .input-group-text,
 .input-group-append .d-p-text-with-bckg .field--type-link a + .input-group-text,
 .d-p-text-with-bckg .field--type-link .input-group-append a + .input-group-text,
+.input-group-append .product-listing .pagination li a + .input-group-text,
+.product-listing .pagination li .input-group-append a + .input-group-text,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a + .input-group-text,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append a + .input-group-text,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a + .input-group-text,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append a + .input-group-text,
 .input-group-append .input-group-text + .input-group-text,
 .input-group-append .input-group-text + .btn,
 .input-group-append .d-p-banner .field--type-link .input-group-text + a,
@@ -3741,7 +3965,13 @@ tbody.collapse.show {
 .input-group-append .d-p-group-of-text-blocks > .field--type-link .input-group-text + a,
 .d-p-group-of-text-blocks > .field--type-link .input-group-append .input-group-text + a,
 .input-group-append .d-p-text-with-bckg .field--type-link .input-group-text + a,
-.d-p-text-with-bckg .field--type-link .input-group-append .input-group-text + a {
+.d-p-text-with-bckg .field--type-link .input-group-append .input-group-text + a,
+.input-group-append .product-listing .pagination li .input-group-text + a,
+.product-listing .pagination li .input-group-append .input-group-text + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-text + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group-append .input-group-text + a,
+.input-group-append .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-text + a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group-append .input-group-text + a {
   margin-left: -0.125rem;
 }
 
@@ -3778,33 +4008,47 @@ tbody.collapse.show {
   margin-top: 0;
 }
 
-.input-group > .input-group-prepend > .btn, .d-p-banner .field--type-link .input-group > .input-group-prepend > a, .d-p-group-of-text-blocks > .field--type-link .input-group > .input-group-prepend > a, .d-p-text-with-bckg .field--type-link .input-group > .input-group-prepend > a,
+.input-group > .input-group-prepend > .btn, .d-p-banner .field--type-link .input-group > .input-group-prepend > a, .d-p-group-of-text-blocks > .field--type-link .input-group > .input-group-prepend > a, .d-p-text-with-bckg .field--type-link .input-group > .input-group-prepend > a, .product-listing .pagination li .input-group > .input-group-prepend > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group > .input-group-prepend > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group > .input-group-prepend > a,
 .input-group > .input-group-prepend > .input-group-text,
 .input-group > .input-group-append:not(:last-child) > .btn,
 .d-p-banner .field--type-link .input-group > .input-group-append:not(:last-child) > a,
 .d-p-group-of-text-blocks > .field--type-link .input-group > .input-group-append:not(:last-child) > a,
 .d-p-text-with-bckg .field--type-link .input-group > .input-group-append:not(:last-child) > a,
+.product-listing .pagination li .input-group > .input-group-append:not(:last-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group > .input-group-append:not(:last-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group > .input-group-append:not(:last-child) > a,
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
 .d-p-banner .field--type-link .input-group > .input-group-append:last-child > a:not(:last-child):not(.dropdown-toggle),
 .d-p-group-of-text-blocks > .field--type-link .input-group > .input-group-append:last-child > a:not(:last-child):not(.dropdown-toggle),
 .d-p-text-with-bckg .field--type-link .input-group > .input-group-append:last-child > a:not(:last-child):not(.dropdown-toggle),
+.product-listing .pagination li .input-group > .input-group-append:last-child > a:not(:last-child):not(.dropdown-toggle),
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group > .input-group-append:last-child > a:not(:last-child):not(.dropdown-toggle),
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group > .input-group-append:last-child > a:not(:last-child):not(.dropdown-toggle),
 .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.input-group > .input-group-append > .btn, .d-p-banner .field--type-link .input-group > .input-group-append > a, .d-p-group-of-text-blocks > .field--type-link .input-group > .input-group-append > a, .d-p-text-with-bckg .field--type-link .input-group > .input-group-append > a,
+.input-group > .input-group-append > .btn, .d-p-banner .field--type-link .input-group > .input-group-append > a, .d-p-group-of-text-blocks > .field--type-link .input-group > .input-group-append > a, .d-p-text-with-bckg .field--type-link .input-group > .input-group-append > a, .product-listing .pagination li .input-group > .input-group-append > a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group > .input-group-append > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group > .input-group-append > a,
 .input-group > .input-group-append > .input-group-text,
 .input-group > .input-group-prepend:not(:first-child) > .btn,
 .d-p-banner .field--type-link .input-group > .input-group-prepend:not(:first-child) > a,
 .d-p-group-of-text-blocks > .field--type-link .input-group > .input-group-prepend:not(:first-child) > a,
 .d-p-text-with-bckg .field--type-link .input-group > .input-group-prepend:not(:first-child) > a,
+.product-listing .pagination li .input-group > .input-group-prepend:not(:first-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group > .input-group-prepend:not(:first-child) > a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group > .input-group-prepend:not(:first-child) > a,
 .input-group > .input-group-prepend:not(:first-child) > .input-group-text,
 .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
 .d-p-banner .field--type-link .input-group > .input-group-prepend:first-child > a:not(:first-child),
 .d-p-group-of-text-blocks > .field--type-link .input-group > .input-group-prepend:first-child > a:not(:first-child),
 .d-p-text-with-bckg .field--type-link .input-group > .input-group-prepend:first-child > a:not(:first-child),
+.product-listing .pagination li .input-group > .input-group-prepend:first-child > a:not(:first-child),
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .input-group > .input-group-prepend:first-child > a:not(:first-child),
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .input-group > .input-group-prepend:first-child > a:not(:first-child),
 .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -4162,7 +4406,7 @@ tbody.collapse.show {
   padding: 0.5rem 1rem;
 }
 
-.navbar > .container, .navbar > .alert,
+.navbar > .container, .navbar > .alert, .filters .region-facets-left.navbar > .block:not(.block-mobile-filters-submit),
 .navbar > .container-fluid {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4259,7 +4503,7 @@ tbody.collapse.show {
 }
 
 @media (max-width: 575.98px) {
-  .navbar-expand-sm > .container, .navbar-expand-sm > .alert,
+  .navbar-expand-sm > .container, .navbar-expand-sm > .alert, .filters .region-facets-left.navbar-expand-sm > .block:not(.block-mobile-filters-submit),
   .navbar-expand-sm > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -4293,7 +4537,7 @@ tbody.collapse.show {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
-  .navbar-expand-sm > .container, .navbar-expand-sm > .alert,
+  .navbar-expand-sm > .container, .navbar-expand-sm > .alert, .filters .region-facets-left.navbar-expand-sm > .block:not(.block-mobile-filters-submit),
   .navbar-expand-sm > .container-fluid {
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
@@ -4315,7 +4559,7 @@ tbody.collapse.show {
 }
 
 @media (max-width: 767.98px) {
-  .navbar-expand-md > .container, .navbar-expand-md > .alert,
+  .navbar-expand-md > .container, .navbar-expand-md > .alert, .filters .region-facets-left.navbar-expand-md > .block:not(.block-mobile-filters-submit),
   .navbar-expand-md > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -4349,7 +4593,7 @@ tbody.collapse.show {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
-  .navbar-expand-md > .container, .navbar-expand-md > .alert,
+  .navbar-expand-md > .container, .navbar-expand-md > .alert, .filters .region-facets-left.navbar-expand-md > .block:not(.block-mobile-filters-submit),
   .navbar-expand-md > .container-fluid {
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
@@ -4371,7 +4615,7 @@ tbody.collapse.show {
 }
 
 @media (max-width: 991.98px) {
-  .navbar-expand-lg > .container, .navbar-expand-lg > .alert,
+  .navbar-expand-lg > .container, .navbar-expand-lg > .alert, .filters .region-facets-left.navbar-expand-lg > .block:not(.block-mobile-filters-submit),
   .navbar-expand-lg > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -4405,7 +4649,7 @@ tbody.collapse.show {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
-  .navbar-expand-lg > .container, .navbar-expand-lg > .alert,
+  .navbar-expand-lg > .container, .navbar-expand-lg > .alert, .filters .region-facets-left.navbar-expand-lg > .block:not(.block-mobile-filters-submit),
   .navbar-expand-lg > .container-fluid {
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
@@ -4427,7 +4671,7 @@ tbody.collapse.show {
 }
 
 @media (max-width: 1199.98px) {
-  .navbar-expand-xl > .container, .navbar-expand-xl > .alert,
+  .navbar-expand-xl > .container, .navbar-expand-xl > .alert, .filters .region-facets-left.navbar-expand-xl > .block:not(.block-mobile-filters-submit),
   .navbar-expand-xl > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -4461,7 +4705,7 @@ tbody.collapse.show {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
-  .navbar-expand-xl > .container, .navbar-expand-xl > .alert,
+  .navbar-expand-xl > .container, .navbar-expand-xl > .alert, .filters .region-facets-left.navbar-expand-xl > .block:not(.block-mobile-filters-submit),
   .navbar-expand-xl > .container-fluid {
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
@@ -4492,7 +4736,7 @@ tbody.collapse.show {
           justify-content: flex-start;
 }
 
-.navbar-expand > .container, .navbar-expand > .alert,
+.navbar-expand > .container, .navbar-expand > .alert, .filters .region-facets-left.navbar-expand > .block:not(.block-mobile-filters-submit),
 .navbar-expand > .container-fluid {
   padding-right: 0;
   padding-left: 0;
@@ -4519,7 +4763,7 @@ tbody.collapse.show {
   padding-left: 0.5rem;
 }
 
-.navbar-expand > .container, .navbar-expand > .alert,
+.navbar-expand > .container, .navbar-expand > .alert, .filters .region-facets-left.navbar-expand > .block:not(.block-mobile-filters-submit),
 .navbar-expand > .container-fluid {
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
@@ -4939,7 +5183,8 @@ tbody.collapse.show {
   border-radius: 0.25rem;
 }
 
-.page-link {
+.page-link, nav .pagination .pager__item--ellipsis,
+nav .pagination .pager__item--current {
   position: relative;
   display: block;
   padding: 0.5rem 0.75rem;
@@ -4950,43 +5195,50 @@ tbody.collapse.show {
   border: 1px solid #dee2e6;
 }
 
-.page-link:hover {
+.page-link:hover, nav .pagination .pager__item--ellipsis:hover,
+nav .pagination .pager__item--current:hover {
   color: #1660a4;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
 
-.page-link:focus {
+.page-link:focus, nav .pagination .pager__item--ellipsis:focus,
+nav .pagination .pager__item--current:focus {
   z-index: 2;
   outline: 0;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.25);
           box-shadow: 0 0 0 0.2rem rgba(236, 109, 6, 0.25);
 }
 
-.page-link:not(:disabled):not(.disabled) {
+.page-link:not(:disabled):not(.disabled), nav .pagination .pager__item--ellipsis:not(:disabled):not(.disabled),
+nav .pagination .pager__item--current:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
 
-.page-item:first-child .page-link {
+.page-item:first-child .page-link, .page-item:first-child nav .pagination .pager__item--ellipsis, nav .pagination .page-item:first-child .pager__item--ellipsis,
+.page-item:first-child nav .pagination .pager__item--current, nav .pagination .page-item:first-child .pager__item--current {
   margin-left: 0;
   border-top-left-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
 }
 
-.page-item:last-child .page-link {
+.page-item:last-child .page-link, .page-item:last-child nav .pagination .pager__item--ellipsis, nav .pagination .page-item:last-child .pager__item--ellipsis,
+.page-item:last-child nav .pagination .pager__item--current, nav .pagination .page-item:last-child .pager__item--current {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
 
-.page-item.active .page-link {
+.page-item.active .page-link, .page-item.active nav .pagination .pager__item--ellipsis, nav .pagination .page-item.active .pager__item--ellipsis,
+.page-item.active nav .pagination .pager__item--current, nav .pagination .page-item.active .pager__item--current {
   z-index: 1;
   color: #fff;
   background-color: #ec6d06;
   border-color: #ec6d06;
 }
 
-.page-item.disabled .page-link {
+.page-item.disabled .page-link, .page-item.disabled nav .pagination .pager__item--ellipsis, nav .pagination .page-item.disabled .pager__item--ellipsis,
+.page-item.disabled nav .pagination .pager__item--current, nav .pagination .page-item.disabled .pager__item--current {
   color: #6c757d;
   pointer-events: none;
   cursor: auto;
@@ -4994,34 +5246,40 @@ tbody.collapse.show {
   border-color: #dee2e6;
 }
 
-.pagination-lg .page-link {
+.pagination-lg .page-link, .pagination-lg nav .pagination .pager__item--ellipsis, nav .pagination .pagination-lg .pager__item--ellipsis,
+.pagination-lg nav .pagination .pager__item--current, nav .pagination .pagination-lg .pager__item--current {
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
   line-height: 1.5;
 }
 
-.pagination-lg .page-item:first-child .page-link {
+.pagination-lg .page-item:first-child .page-link, .pagination-lg .page-item:first-child nav .pagination .pager__item--ellipsis, nav .pagination .pagination-lg .page-item:first-child .pager__item--ellipsis,
+.pagination-lg .page-item:first-child nav .pagination .pager__item--current, nav .pagination .pagination-lg .page-item:first-child .pager__item--current {
   border-top-left-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
 }
 
-.pagination-lg .page-item:last-child .page-link {
+.pagination-lg .page-item:last-child .page-link, .pagination-lg .page-item:last-child nav .pagination .pager__item--ellipsis, nav .pagination .pagination-lg .page-item:last-child .pager__item--ellipsis,
+.pagination-lg .page-item:last-child nav .pagination .pager__item--current, nav .pagination .pagination-lg .page-item:last-child .pager__item--current {
   border-top-right-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem;
 }
 
-.pagination-sm .page-link {
+.pagination-sm .page-link, .pagination-sm nav .pagination .pager__item--ellipsis, nav .pagination .pagination-sm .pager__item--ellipsis,
+.pagination-sm nav .pagination .pager__item--current, nav .pagination .pagination-sm .pager__item--current {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
 }
 
-.pagination-sm .page-item:first-child .page-link {
+.pagination-sm .page-item:first-child .page-link, .pagination-sm .page-item:first-child nav .pagination .pager__item--ellipsis, nav .pagination .pagination-sm .page-item:first-child .pager__item--ellipsis,
+.pagination-sm .page-item:first-child nav .pagination .pager__item--current, nav .pagination .pagination-sm .page-item:first-child .pager__item--current {
   border-top-left-radius: 0.2rem;
   border-bottom-left-radius: 0.2rem;
 }
 
-.pagination-sm .page-item:last-child .page-link {
+.pagination-sm .page-item:last-child .page-link, .pagination-sm .page-item:last-child nav .pagination .pager__item--ellipsis, nav .pagination .pagination-sm .page-item:last-child .pager__item--ellipsis,
+.pagination-sm .page-item:last-child nav .pagination .pager__item--current, nav .pagination .pagination-sm .page-item:last-child .pager__item--current {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
@@ -5042,7 +5300,7 @@ tbody.collapse.show {
   display: none;
 }
 
-.btn .badge, .d-p-banner .field--type-link a .badge, .d-p-group-of-text-blocks > .field--type-link a .badge, .d-p-text-with-bckg .field--type-link a .badge {
+.btn .badge, .d-p-banner .field--type-link a .badge, .d-p-group-of-text-blocks > .field--type-link a .badge, .d-p-text-with-bckg .field--type-link a .badge, .product-listing .pagination li a .badge, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a .badge, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a .badge {
   position: relative;
   top: -1px;
 }
@@ -6612,7 +6870,7 @@ button.bg-dark:focus {
 }
 
 @media (min-width: 992px) {
-  .d-lg-none {
+  .d-lg-none, .top-product-info .block-mobile-filters .mobile-filter {
     display: none !important;
   }
   .d-lg-inline {
@@ -9179,7 +9437,7 @@ a.text-dark:hover, a.text-dark:focus {
   body {
     min-width: 992px !important;
   }
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     min-width: 992px !important;
   }
   .navbar {
@@ -9224,7 +9482,7 @@ html {
           box-sizing: inherit;
 }
 
-.container, .alert {
+.container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
   width: 100%;
   padding-right: 30px;
   padding-left: 30px;
@@ -9233,25 +9491,25 @@ html {
 }
 
 @media (min-width: 576px) {
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     max-width: 540px;
   }
 }
 
 @media (min-width: 768px) {
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     max-width: 720px;
   }
 }
 
 @media (min-width: 992px) {
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     max-width: 960px;
   }
 }
 
 @media (min-width: 1200px) {
-  .container, .alert {
+  .container, .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
     max-width: 1200px;
   }
 }
@@ -10446,7 +10704,7 @@ html {
 }
 
 @media (min-width: 992px) {
-  .d-lg-none {
+  .d-lg-none, .top-product-info .block-mobile-filters .mobile-filter {
     display: none !important;
   }
   .d-lg-inline {
@@ -11674,6 +11932,10 @@ template {
 
 .page-wrapper a:not(.btn) {
   font-size: 1rem;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 
 @media (max-width: 991.98px) {
@@ -12090,6 +12352,38 @@ body {
   clear: none;
   font-size: 1em;
   line-height: 1.6;
+}
+
+.node--view-mode-thumbnail h2 {
+  margin-top: 0;
+  padding-top: 0.5em;
+}
+
+.node--view-mode-thumbnail h2 a {
+  color: #000;
+}
+
+.node--view-mode-thumbnail .node__meta {
+  padding-left: 0;
+}
+
+.node--view-mode-thumbnail .node__content {
+  clear: none;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.node--view-mode-thumbnail .node__content .field--type-image {
+  float: none;
+}
+
+.node--view-mode-thumbnail .nav-link {
+  padding-left: 0;
+}
+
+.node--view-mode-thumbnail .nav-link.node-readmore {
+  text-transform: uppercase;
 }
 
 /* Node metadata styles. */
@@ -13021,7 +13315,8 @@ Components Buttons, links
 
 Styleguide 2.banner.celina
 */
-.btn, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a {
+.btn, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a, .product-listing .pagination li a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a {
   font-size: 0.94rem;
   text-transform: uppercase;
   font-weight: bold;
@@ -13031,17 +13326,20 @@ Styleguide 2.banner.celina
 }
 
 @media (max-width: 767.98px) {
-  .btn, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a {
+  .btn, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a, .product-listing .pagination li a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+  .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a {
     font-size: 0.8125rem;
   }
 }
 
-.btn:hover, .d-p-banner .field--type-link a:hover, .d-p-group-of-text-blocks > .field--type-link a:hover, .d-p-text-with-bckg .field--type-link a:hover {
+.btn:hover, .d-p-banner .field--type-link a:hover, .d-p-group-of-text-blocks > .field--type-link a:hover, .d-p-text-with-bckg .field--type-link a:hover, .product-listing .pagination li a:hover, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a:hover,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a:hover {
   text-decoration: none;
 }
 
 @media (max-width: 767.98px) {
-  .btn, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a {
+  .btn, .d-p-banner .field--type-link a, .d-p-group-of-text-blocks > .field--type-link a, .d-p-text-with-bckg .field--type-link a, .product-listing .pagination li a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+  .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a {
     min-width: 16rem;
   }
 }
@@ -13054,6 +13352,10 @@ Styleguide 2.9
 label {
   margin-bottom: 0.4rem;
   font-size: 0.85em;
+}
+
+label.form-check-label a:not(.btn) {
+  font-size: 1em;
 }
 
 .form-control {
@@ -13094,6 +13396,17 @@ input:-ms-input-placeholder {
 input:-moz-placeholder {
   /* Firefox 18- */
   font-weight: normal;
+}
+
+nav .pagination {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+nav .pagination .pager__item--ellipsis,
+nav .pagination .pager__item--current {
+  cursor: default;
 }
 
 /*
@@ -13617,16 +13930,16 @@ Form paragraph.
 
 Styleguide components.d_p.form
 */
-.paragraph-form {
+.paragraph-d-form {
   padding-top: 5%;
   padding-bottom: 5%;
 }
 
-.paragraph-form form {
+.paragraph-d-form form {
   margin: 0;
 }
 
-.paragraph-form h2 {
+.paragraph-d-form h2 {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 10%;
@@ -13635,24 +13948,25 @@ Styleguide components.d_p.form
 }
 
 @media (max-width: 991.98px) {
-  .paragraph-form h2 {
+  .paragraph-d-form h2 {
     font-size: 2rem;
   }
 }
 
-.paragraph-form .field--name-field-d-icon {
+.paragraph-d-form .field--name-field-d-icon {
   text-align: center;
 }
 
-.paragraph-form .form-actions {
+.paragraph-d-form .form-actions {
   text-align: center;
 }
 
-.paragraph-form .form-actions .btn, .paragraph-form .form-actions .d-p-banner .field--type-link a, .d-p-banner .field--type-link .paragraph-form .form-actions a, .paragraph-form .form-actions .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .paragraph-form .form-actions a, .paragraph-form .form-actions .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .paragraph-form .form-actions a {
+.paragraph-d-form .form-actions .btn, .paragraph-d-form .form-actions .d-p-banner .field--type-link a, .d-p-banner .field--type-link .paragraph-d-form .form-actions a, .paragraph-d-form .form-actions .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .paragraph-d-form .form-actions a, .paragraph-d-form .form-actions .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .paragraph-d-form .form-actions a, .paragraph-d-form .form-actions .product-listing .pagination li a, .product-listing .pagination li .paragraph-d-form .form-actions a, .paragraph-d-form .form-actions .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .paragraph-d-form .form-actions a,
+.paragraph-d-form .form-actions .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .paragraph-d-form .form-actions a {
   margin-top: 1rem;
 }
 
-.paragraph-form label {
+.paragraph-d-form label {
   color: black;
 }
 
@@ -13758,10 +14072,20 @@ Styleguide components.d_p.form
 }
 
 .d-p-side-embed-wrapper .d-p-side-embed-embed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-left: 0;
   padding-right: 0;
   position: relative;
   height: auto;
+  background: black;
 }
 
 .d-p-side-embed-wrapper .d-p-side-embed-embed > * {
@@ -13785,6 +14109,15 @@ Styleguide components.d_p.form
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.d-p-side-embed-wrapper .d-p-side-embed-embed > *.facebook-embed {
+  position: static;
+  max-width: 100%;
+}
+
+.d-p-side-embed-wrapper .d-p-side-embed-embed > * .vimeo-embed, .d-p-side-embed-wrapper .d-p-side-embed-embed > *.vimeo-embed {
+  z-index: 2;
 }
 
 @media (max-width: 767.98px) {
@@ -14432,6 +14765,10 @@ Styleguide 2.banner.calina
 
 .text-page .field--name-field-d-long-text p {
   color: #727272;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 
 .text-page .field--name-field-d-long-text:before {
@@ -14899,6 +15236,7 @@ Styleguide components.d_p.d_p_text_with_bckg
 @media (max-width: 767.98px) {
   .node--type-blog-post .field--name-field-d-long-text {
     width: 85%;
+    font-size: 1.07083rem;
   }
   .node--type-blog-post .field--name-field-d-long-text h2 {
     font-size: 1.375rem;
@@ -14908,6 +15246,9 @@ Styleguide components.d_p.d_p_text_with_bckg
   }
   .node--type-blog-post .field--name-field-d-image img {
     width: 100%;
+  }
+  .node--type-blog-post .field--name-field-blog-sections p {
+    font-size: 1.07083rem;
   }
 }
 
@@ -14959,25 +15300,29 @@ Styleguide components.d_p.d_p_text_with_bckg
   font-size: 1.25rem;
 }
 
-.view-blog-listing .pager li, .view-blog-listing .pagination li {
+.view-blog-listing .pager li.pager__item--ellipsis,
+.view-blog-listing .pager li a, .view-blog-listing .pagination li.pager__item--ellipsis,
+.view-blog-listing .pagination li a {
   padding: 1.875rem;
-}
-
-.view-blog-listing .pager li a, .view-blog-listing .pagination li a {
   color: #979797;
+  background: none;
+  border: none;
 }
 
 .view-blog-listing .pager .pager__item--next, .view-blog-listing .pager .pager__item--last, .view-blog-listing .pager .pager__item--previous, .view-blog-listing .pager .pager__item--first, .view-blog-listing .pagination .pager__item--next, .view-blog-listing .pagination .pager__item--last, .view-blog-listing .pagination .pager__item--previous, .view-blog-listing .pagination .pager__item--first {
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
   display: inline;
 }
 
-.view-blog-listing .pager .pager__item--next, .view-blog-listing .pagination .pager__item--next {
+.view-blog-listing .pager .pager__item--next a, .view-blog-listing .pager .pager__item--last a, .view-blog-listing .pager .pager__item--previous a, .view-blog-listing .pager .pager__item--first a, .view-blog-listing .pagination .pager__item--next a, .view-blog-listing .pagination .pager__item--last a, .view-blog-listing .pagination .pager__item--previous a, .view-blog-listing .pagination .pager__item--first a {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
+
+.view-blog-listing .pager .pager__item--next a, .view-blog-listing .pagination .pager__item--next a {
   padding-left: 1.25rem;
 }
 
-.view-blog-listing .pager .pager__item--previous, .view-blog-listing .pagination .pager__item--previous {
+.view-blog-listing .pager .pager__item--previous a, .view-blog-listing .pagination .pager__item--previous a {
   padding-right: 1.25rem;
 }
 
@@ -15043,34 +15388,34 @@ Styleguide components.d_p.d_p_text_with_bckg
   }
 }
 
-.node--view-mode-teaser {
+.node--view-mode-teaser.node--type-blog-post {
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
 }
 
-.node--view-mode-teaser .field--name-field-blog-category {
+.node--view-mode-teaser.node--type-blog-post .field--name-field-blog-category {
   display: inline;
 }
 
-.node--view-mode-teaser .field--name-field-blog-category .field__item {
+.node--view-mode-teaser.node--type-blog-post .field--name-field-blog-category .field__item {
   display: inline;
 }
 
-.node--view-mode-teaser .field--name-field-blog-category .field__item:after {
+.node--view-mode-teaser.node--type-blog-post .field--name-field-blog-category .field__item:after {
   content: ', ';
 }
 
-.node--view-mode-teaser .field--name-field-blog-category .field__item:last-child:after {
+.node--view-mode-teaser.node--type-blog-post .field--name-field-blog-category .field__item:last-child:after {
   content: '';
 }
 
-.node--view-mode-teaser.node--sticky {
+.node--view-mode-teaser.node--type-blog-post.node--sticky {
   padding: 0 30px 10px;
 }
 
 @media (max-width: 767.98px) {
-  .node--view-mode-teaser.node--sticky {
+  .node--view-mode-teaser.node--type-blog-post.node--sticky {
     padding: 0 30px;
     margin-bottom: 0;
     margin-top: 0;
@@ -15078,13 +15423,13 @@ Styleguide components.d_p.d_p_text_with_bckg
   }
 }
 
-.node--view-mode-teaser .node_blog_post_title {
+.node--view-mode-teaser.node--type-blog-post .node_blog_post_title {
   text-align: left;
   padding-left: 0;
   word-wrap: break-word;
 }
 
-.node--view-mode-teaser .node_blog_post_title:after {
+.node--view-mode-teaser.node--type-blog-post .node_blog_post_title:after {
   content: ' ';
   display: block;
   width: 3.125rem;
@@ -15095,63 +15440,63 @@ Styleguide components.d_p.d_p_text_with_bckg
   margin-bottom: 0.625rem;
 }
 
-.node--view-mode-teaser .node__meta {
+.node--view-mode-teaser.node--type-blog-post .node__meta {
   margin-top: 30px;
   padding-left: 0;
   color: #969696;
 }
 
-.node--view-mode-teaser .node__meta a {
+.node--view-mode-teaser.node--type-blog-post .node__meta a {
   color: #969696;
 }
 
-.node--view-mode-teaser .nav-link {
+.node--view-mode-teaser.node--type-blog-post .nav-link {
   padding-left: 0;
 }
 
-.node--view-mode-teaser .node-readmore {
+.node--view-mode-teaser.node--type-blog-post .node-readmore {
   text-transform: uppercase;
 }
 
-.node--view-mode-teaser .title-row {
+.node--view-mode-teaser.node--type-blog-post .title-row {
   display: none;
 }
 
 @media (max-width: 767.98px) {
-  .node--view-mode-teaser .title-row-for-mobile {
+  .node--view-mode-teaser.node--type-blog-post .title-row-for-mobile {
     padding-left: 30px;
   }
-  .node--view-mode-teaser .node-readmore {
+  .node--view-mode-teaser.node--type-blog-post .node-readmore {
     margin-bottom: 15px;
     font-size: 0.9375rem;
   }
-  .node--view-mode-teaser .node_blog_post_title {
+  .node--view-mode-teaser.node--type-blog-post .node_blog_post_title {
     font-size: 1.0625rem;
   }
-  .node--view-mode-teaser .node_blog_post_title:after {
+  .node--view-mode-teaser.node--type-blog-post .node_blog_post_title:after {
     margin-top: 0.75rem;
   }
 }
 
 @media (min-width: 576px) {
-  .node--view-mode-teaser .article-row {
+  .node--view-mode-teaser.node--type-blog-post .article-row {
     min-height: 420px;
   }
-  .node--view-mode-teaser .node_blog_post_title {
+  .node--view-mode-teaser.node--type-blog-post .node_blog_post_title {
     font-size: 2.375rem;
     padding-top: 18px;
   }
-  .node--view-mode-teaser .node__content {
+  .node--view-mode-teaser.node--type-blog-post .node__content {
     padding: 0;
     margin: 43px 0;
   }
-  .node--view-mode-teaser .field--name-field-blog-teaser p {
+  .node--view-mode-teaser.node--type-blog-post .field--name-field-blog-teaser p {
     font-size: 1rem;
   }
-  .node--view-mode-teaser .inline__links {
+  .node--view-mode-teaser.node--type-blog-post .inline__links {
     margin-top: 21px;
   }
-  .node--view-mode-teaser .field--name-field-blog-main-image img {
+  .node--view-mode-teaser.node--type-blog-post .field--name-field-blog-main-image img {
     width: 600px;
     -o-object-fit: cover;
        object-fit: cover;
@@ -15159,88 +15504,1326 @@ Styleguide components.d_p.d_p_text_with_bckg
 }
 
 @media (min-width: 768px) {
-  .node--view-mode-teaser .field--name-field-blog-main-image {
+  .node--view-mode-teaser.node--type-blog-post .field--name-field-blog-main-image {
     margin-bottom: 15px;
   }
 }
 
 @media (min-width: 1200px) {
-  .node--view-mode-teaser .title-row-for-mobile {
+  .node--view-mode-teaser.node--type-blog-post .title-row-for-mobile {
     display: none;
   }
-  .node--view-mode-teaser .blog-main-image-row {
+  .node--view-mode-teaser.node--type-blog-post .blog-main-image-row {
     padding-right: 0;
   }
-  .node--view-mode-teaser .title-row {
+  .node--view-mode-teaser.node--type-blog-post .title-row {
     display: block;
     margin-top: 73px;
   }
-  .node--view-mode-teaser .article-row {
+  .node--view-mode-teaser.node--type-blog-post .article-row {
     min-height: 520px;
   }
-  .node--view-mode-teaser .node_blog_post_title {
+  .node--view-mode-teaser.node--type-blog-post .node_blog_post_title {
     padding-top: 37px;
   }
-  .node--view-mode-teaser .node__content {
+  .node--view-mode-teaser.node--type-blog-post .node__content {
     padding: 0;
     margin: 43px 0;
   }
-  .node--view-mode-teaser .field--name-field-blog-teaser p {
+  .node--view-mode-teaser.node--type-blog-post .field--name-field-blog-teaser p {
     margin: 43px 0;
   }
-  .node--view-mode-teaser .field--name-field-blog-main-image img {
+  .node--view-mode-teaser.node--type-blog-post .field--name-field-blog-main-image img {
     height: 480px;
   }
 }
 
-header .site-logo img {
+.x-mark {
+  padding-right: 1.125rem;
+  background-image: url("/profiles/contrib/droopler/themes/custom/droopler_theme/images/x.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: bottom;
+}
+
+.top-product-info {
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+}
+
+.top-product-info .product-item-counter {
+  font-size: 1.2rem;
+  padding-top: 1.4rem;
+}
+
+.view-products-list .view-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: -0.625rem -0.3125rem 0 -0.3125rem;
+}
+
+.product-listing .views-exposed-form {
+  width: 100%;
+  margin-bottom: 0;
+  outline: 0;
+}
+
+.product-listing .views-exposed-form .form-submit,
+.product-listing .views-exposed-form .form-type-textfield, .product-listing .views-exposed-form .form-actions {
+  display: none;
+}
+
+.product-listing .views-exposed-form * {
+  height: 100%;
+  margin-bottom: 0;
+  outline: 0;
+}
+
+.product-listing .views-exposed-form .select2-container--default {
+  width: 100% !important;
+}
+
+.product-listing .views-exposed-form .select2-container--default.select2-container--open .select2-selection--single .select2-selection__rendered {
+  color: #4c4c4c;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.product-listing .views-exposed-form .select2-container--default .select2-selection--single {
+  border-radius: 0;
+  border-color: #727272;
+}
+
+.product-listing .views-exposed-form .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #727272;
+  font-size: 1rem;
+  padding: 0.625rem 4rem 0.625rem 1.5rem;
+}
+
+@media (max-width: 767.98px) {
+  .product-listing .views-exposed-form .select2-container--default .select2-selection--single .select2-selection__rendered {
+    -webkit-box-pack: left;
+        -ms-flex-pack: left;
+            justify-content: left;
+    color: #727272;
+  }
+}
+
+.product-listing .views-exposed-form .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100%;
+  background-image: url("/profiles/contrib/droopler/themes/custom/droopler_theme/images/arrow.svg");
+  background-size: 1.75rem;
+  background-repeat: no-repeat;
+  background-position: right;
+  display: inline-block;
+  width: 1.875rem;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: none;
+  border-right: none;
+  margin-right: 0.875rem;
+  border-left: none;
+}
+
+.product-listing .views-exposed-form .select2-container--default .select2-selection--single .select2-selection__arrow b {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .product-listing .views-exposed-form .select2-container--default .select2-selection--single {
+    background-color: transparent;
+    border: 2px solid #d3d3d3;
+  }
+  .product-listing .views-exposed-form .select2-container--default .select2-selection--single .select2-selection__rendered {
+    -webkit-box-align: left;
+        -ms-flex-align: left;
+            align-items: left;
+  }
+}
+
+.product-listing .pagination {
+  margin-top: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.product-listing .pagination li {
+  margin-right: 0.3125rem;
+}
+
+.product-listing .pagination li a {
+  min-width: auto;
+  width: auto;
+  color: #727272;
+  font-weight: normal;
+  line-height: 1;
+  padding: 0.5625rem 0.6875rem;
+  border-radius: 0;
+}
+
+.product-listing .pagination li.active a {
+  border: 1px solid #d3d3d3;
+}
+
+.product-listing .pagination li.pager__item--ellipsis {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.products-list-teaser {
+  margin-bottom: 1.875rem;
+}
+
+.products-list-teaser:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .products-list-teaser:nth-child(odd) {
+    padding-right: 1rem;
+  }
+  .products-list-teaser:nth-child(even) {
+    padding-left: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .products-list-teaser:nth-child(3n+1) {
+    padding-right: 0.5rem;
+  }
+  .products-list-teaser:nth-child(3n-1) {
+    padding-left: calc(60px/4 + 0.25rem);
+    padding-right: calc(60px/4 + 0.25rem);
+  }
+  .products-list-teaser:nth-child(3n) {
+    padding-left: 0.5rem;
+  }
+}
+
+.products-list-teaser .node--view-mode-teaser {
+  border: 1px solid #d3d3d3;
+  cursor: pointer;
+  height: 100%;
+  -webkit-box-shadow: 0 0 0.625rem -0.1875rem #8e8a89;
+          box-shadow: 0 0 0.625rem -0.1875rem #8e8a89;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
+}
+
+.products-list-teaser .node--view-mode-teaser .product-teaser-content {
+  padding: 0.75rem .25rem 0 1rem;
+  font-size: 14px;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.products-list-teaser .node--view-mode-teaser h2 {
+  max-height: 3rem;
+  overflow: hidden;
+  font-size: 1.2rem;
+  color: #196dba;
+  padding-top: 3px;
+  margin-bottom: 0;
+  letter-spacing: 0.5px;
+}
+
+.products-list-teaser .node--view-mode-teaser .node__content {
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+}
+
+.products-list-teaser .node--view-mode-teaser .node__content img {
+  width: 100%;
+}
+
+.products-list-teaser .node--view-mode-teaser .field--type-entity-reference {
+  margin-bottom: 0;
+}
+
+.products-list-teaser .product-preview-btn {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  min-width: auto;
+  -ms-flex-item-align: end;
+      align-self: end;
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .products-list-teaser .product-preview-btn {
+    min-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .filters .region-facets-left .container, .filters .region-facets-left .alert, .filters .region-facets-left > .block:not(.block-mobile-filters-submit) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.filters .region-facets-left-top {
+  margin-top: -1px;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 991.98px) {
+  .filters .region-facets-left-top {
+    margin-bottom: 2rem;
+    margin-top: 0;
+  }
+}
+
+.filters .region-facets-left-top h2.search {
+  color: #8e8a89;
+  font-size: .75rem;
+  font-weight: normal;
+  padding-bottom: 0.5rem;
+}
+
+.filters .region-facets-left-top .views-exposed-form .form-type-select,
+.filters .region-facets-left-top .views-exposed-form .form-submit {
+  display: none;
+}
+
+.filters .region-facets-left h2,
+.filters .region-facets-left-top h2 {
+  font-size: 1.2rem;
+  color: #196dba;
+  letter-spacing: 0.5px;
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content {
+  margin-top: 2rem;
+}
+
+@media (max-width: 991.98px) {
+  .filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content,
+  .filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content {
+    margin-top: 0.3rem;
+  }
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul {
+  list-style-type: none;
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li {
+  display: inline-block;
+  line-height: normal;
+  padding: 0 0.375rem 1.125rem 0;
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li a,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li a {
+  font-size: 0.875rem;
+  border: 0.0625rem solid #d3d7d9;
+  letter-spacing: 1px;
+  padding: 0.4375rem 0.625rem;
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li a:hover, .filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li a:active,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li a:hover,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li a:active {
+  border: 0.0625rem solid #979797;
+  background: #f1f1f1;
+  color: #7a7a7a;
+  text-decoration: none;
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li a:hover .facet-item__value, .filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li a:active .facet-item__value,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li a:hover .facet-item__value,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li a:active .facet-item__value {
+  text-decoration: none;
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li a.is-active,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li a.is-active {
+  border: 0.0625rem solid #979797;
+  background-color: #f1f1f1;
+  text-decoration: none;
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li a.is-active .facet-item__status,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li a.is-active .facet-item__status {
+  font-size: 100%;
+  padding-right: 0.3125rem;
+}
+
+.filters .region-facets-left .block.block-facet-blocktags-taxonomy-term-name .content ul li a.is-active:hover .facet-item__value,
+.filters .region-facets-left-top .block.block-facet-blocktags-taxonomy-term-name .content ul li a.is-active:hover .facet-item__value {
+  text-decoration: none;
+}
+
+.filters .region-facets-left .block-facets.block-facet--links,
+.filters .region-facets-left-top .block-facets.block-facet--links {
+  margin-top: 3rem;
+}
+
+@media (max-width: 991.98px) {
+  .filters .region-facets-left .block-facets.block-facet--links,
+  .filters .region-facets-left-top .block-facets.block-facet--links {
+    margin-top: 0.3125rem;
+  }
+}
+
+.filters .region-facets-left .block-facets.block-facet--links ul,
+.filters .region-facets-left-top .block-facets.block-facet--links ul {
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 767.98px) {
+  .filters .region-facets-left .block-facets.block-facet--links ul li,
+  .filters .region-facets-left-top .block-facets.block-facet--links ul li {
+    padding-bottom: 0.625rem;
+  }
+}
+
+.filters .region-facets-left .block-facets.block-facet--links ul li a,
+.filters .region-facets-left-top .block-facets.block-facet--links ul li a {
+  text-transform: capitalize;
+  color: #979797;
+  letter-spacing: 1px;
+}
+
+.filters .region-facets-left .block-facets.block-facet--links ul li a.is-active,
+.filters .region-facets-left-top .block-facets.block-facet--links ul li a.is-active {
+  color: #4c4c4c;
+  text-decoration: none;
+}
+
+@media (max-width: 767.98px) {
+  .filters .region-facets-left .block-facets.block-facet--links ul li a .facet-item__value,
+  .filters .region-facets-left-top .block-facets.block-facet--links ul li a .facet-item__value {
+    font-size: 1rem;
+  }
+}
+
+.filters .region-facets-left .block-facets.block-facet--links ul li a .facet-item__count,
+.filters .region-facets-left-top .block-facets.block-facet--links ul li a .facet-item__count {
+  float: right;
+}
+
+@media (max-width: 767.98px) {
+  .filters .region-facets-left .block-facets.block-facet--links ul li a .facet-item__count,
+  .filters .region-facets-left-top .block-facets.block-facet--links ul li a .facet-item__count {
+    font-size: 1rem;
+  }
+}
+
+.filters .region-facets-left .block-facets.block-facet--links ul li a .js-facet-deactivate,
+.filters .region-facets-left-top .block-facets.block-facet--links ul li a .js-facet-deactivate {
+  font-weight: bold;
+  padding-right: 0.3125rem;
+  font-size: 110%;
+  text-decoration: none;
+  top: 1px;
+  position: relative;
+}
+
+.filters .region-facets-left .block-facets.block-facet--links ul li a:hover .facet-item__value,
+.filters .region-facets-left-top .block-facets.block-facet--links ul li a:hover .facet-item__value {
+  text-decoration: underline;
+}
+
+.filters .region-facets-left .form-item-aggregated-field .form-control,
+.filters .region-facets-left-top .form-item-aggregated-field .form-control {
+  border-radius: 0;
+  border: 0;
+  padding: 1rem 3.125rem 0.75rem 1.5rem;
+  background-color: #f1f1f1;
+  background-size: 1.625rem;
+  background-image: url("/profiles/contrib/droopler/themes/custom/droopler_theme/images/search.svg");
+  background-repeat: no-repeat;
+  background-position: right 17px center;
+}
+
+.filters .region-facets-left .block-d-product.block-reset-button,
+.filters .region-facets-left-top .block-d-product.block-reset-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-top: 1.563rem;
+}
+
+@media (max-width: 991.98px) {
+  .filters .region-facets-left .block-d-product.block-reset-button,
+  .filters .region-facets-left-top .block-d-product.block-reset-button {
+    margin-top: 0.3125rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .filters .region-facets-left .block-d-product.block-reset-button#block-resetfilters,
+  .filters .region-facets-left-top .block-d-product.block-reset-button#block-resetfilters {
+    display: none;
+  }
+}
+
+.filters .region-facets-left .block-d-product.block-reset-button#block-resetfilters:after,
+.filters .region-facets-left-top .block-d-product.block-reset-button#block-resetfilters:after {
+  content: " ";
+  display: block;
+  width: 100%;
+  margin-top: 1.875rem;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.filters .region-facets-left .block-d-product.block-reset-button h2,
+.filters .region-facets-left-top .block-d-product.block-reset-button h2 {
+  margin-bottom: 0;
+}
+
+.filters .region-facets-left .block-d-product.block-reset-button .content,
+.filters .region-facets-left-top .block-d-product.block-reset-button .content {
+  margin-left: auto;
+}
+
+@media (max-width: 1199.98px) {
+  .filters .region-facets-left .block-d-product.block-reset-button .content,
+  .filters .region-facets-left-top .block-d-product.block-reset-button .content {
+    margin-left: initial;
+    margin-top: 1rem;
+  }
+}
+
+.filters .region-facets-left .block-d-product.block-reset-button .content .btn, .filters .region-facets-left .block-d-product.block-reset-button .content .d-p-banner .field--type-link a, .d-p-banner .field--type-link .filters .region-facets-left .block-d-product.block-reset-button .content a, .filters .region-facets-left .block-d-product.block-reset-button .content .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .filters .region-facets-left .block-d-product.block-reset-button .content a, .filters .region-facets-left .block-d-product.block-reset-button .content .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .filters .region-facets-left .block-d-product.block-reset-button .content a, .filters .region-facets-left .block-d-product.block-reset-button .content .product-listing .pagination li a, .product-listing .pagination li .filters .region-facets-left .block-d-product.block-reset-button .content a, .filters .region-facets-left .block-d-product.block-reset-button .content .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .filters .region-facets-left .block-d-product.block-reset-button .content a,
+.filters .region-facets-left .block-d-product.block-reset-button .content .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .filters .region-facets-left .block-d-product.block-reset-button .content a,
+.filters .region-facets-left-top .block-d-product.block-reset-button .content .btn,
+.filters .region-facets-left-top .block-d-product.block-reset-button .content .d-p-banner .field--type-link a,
+.d-p-banner .field--type-link .filters .region-facets-left-top .block-d-product.block-reset-button .content a,
+.filters .region-facets-left-top .block-d-product.block-reset-button .content .d-p-group-of-text-blocks > .field--type-link a,
+.d-p-group-of-text-blocks > .field--type-link .filters .region-facets-left-top .block-d-product.block-reset-button .content a,
+.filters .region-facets-left-top .block-d-product.block-reset-button .content .d-p-text-with-bckg .field--type-link a,
+.d-p-text-with-bckg .field--type-link .filters .region-facets-left-top .block-d-product.block-reset-button .content a,
+.filters .region-facets-left-top .block-d-product.block-reset-button .content .product-listing .pagination li a,
+.product-listing .pagination li .filters .region-facets-left-top .block-d-product.block-reset-button .content a,
+.filters .region-facets-left-top .block-d-product.block-reset-button .content .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link .filters .region-facets-left-top .block-d-product.block-reset-button .content a,
+.filters .region-facets-left-top .block-d-product.block-reset-button .content .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .filters .region-facets-left-top .block-d-product.block-reset-button .content a {
+  min-width: auto;
+}
+
+.filters .btn-reset {
+  letter-spacing: 0.08rem;
+  font-size: 0.75rem;
+  padding: 0.375rem 1.125rem;
+  border-radius: 0;
+}
+
+.top-product-info .region-facets-top {
+  width: 100%;
+}
+
+.top-product-info .block-mobile-filters {
+  float: left;
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .block-mobile-filters {
+    float: left;
+    text-align: center;
+    width: calc(50% - 1.563rem);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .block-mobile-filters {
+    width: 3.125rem;
+  }
+}
+
+.top-product-info .block-mobile-filters .mobile-filter {
+  -webkit-transition: none !important;
+  transition: none !important;
+  overflow: hidden;
+  height: 3.125rem;
+  text-transform: capitalize;
+  text-align: left;
+  font-size: 1rem;
+  letter-spacing: 0;
+  padding: 0 1.25rem;
+  position: relative;
+  color: #39b54a;
+  border-color: #39b54a;
+}
+
+.top-product-info .block-mobile-filters .mobile-filter:hover {
+  color: #fff;
+  background: #39b54a;
+}
+
+@media (max-width: 991.98px) {
+  .top-product-info .block-mobile-filters .mobile-filter {
+    min-width: 13.75rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .block-mobile-filters .mobile-filter {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+.top-product-info .block-mobile-filters .mobile-filter:active {
+  background-color: inherit;
+}
+
+.top-product-info .block-mobile-filters .mobile-filter:hover:after {
+  background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-white.svg);
+}
+
+.top-product-info .block-mobile-filters .mobile-filter:after {
+  position: absolute;
+  content: "";
+  background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel.svg);
+  background-repeat: no-repeat;
+  background-position: right top 0;
+  width: 1.875rem;
+  height: 1.563rem;
+  right: 0.9375rem;
+}
+
+.top-product-info .block-mobile-filters .mobile-filter.mobile-filters-active:after {
+  background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-thicked.svg);
+}
+
+.top-product-info .block-mobile-filters .mobile-filter.mobile-filters-active:hover:after {
+  background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-thicked-white.svg);
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .block-mobile-filters .mobile-filter {
+    font-size: 0;
+  }
+  .top-product-info .block-mobile-filters .mobile-filter:after {
+    right: 0.625rem;
+    top: 0.8125rem;
+  }
+}
+
+.top-product-info .block-mobile-filters .mobile-filter .mobile-filters-counter {
+  text-indent: -9999px;
+  height: 0.625rem;
+  white-space: nowrap;
+  display: inline-block;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 0.3125rem;
+  background-color: red;
+  top: 0.4375rem;
+  right: 1.25rem;
+  width: 0.625rem;
+  margin-right: -0.3125rem;
+  z-index: 90;
+}
+
+.navigation-bar-visible .mobile-filter:after {
+  background: none;
+}
+
+.region-facets-left-top .form-type-select,
+.region-facets-left-top .form-submit,
+.top-product-info .form-type-textfield,
+.top-product-info .form-actions {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .dropdown-menu.show {
+    right: -0.125rem;
+    width: auto !important;
+  }
+}
+
+body:not(.scrolled-buttons) .top-product-info .region-facets-top {
+  padding: 0;
+}
+
+@media (max-width: 991.98px) {
+  body.scrolled-buttons .top-product-info {
+    background-color: #65e2ff;
+    top: 0;
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    width: 100% !important;
+    padding: 1rem 1rem !important;
+  }
+}
+
+@media (max-width: 991.98px) and (max-width: 767.98px) {
+  body.scrolled-buttons .top-product-info {
+    top: 4.375rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  body.scrolled-buttons .top-product-info .block-mobile-filters,
+  body.scrolled-buttons .top-product-info .views-exposed-form {
+    margin-bottom: 0;
+  }
+  body.scrolled-buttons .top-product-info .block-mobile-filters .mobile-filter,
+  body.scrolled-buttons .top-product-info .views-exposed-form .mobile-filter {
+    float: left;
+    min-width: 4rem;
+    -webkit-transition: none;
+    transition: none;
+  }
+  body.scrolled-buttons .top-product-info .block-mobile-filters .mobile-filter:after,
+  body.scrolled-buttons .top-product-info .views-exposed-form .mobile-filter:after {
+    background-position: center top;
+  }
+  body.scrolled-buttons .top-product-info .block-mobile-filters .mobile-filter .mobile-filters-counter,
+  body.scrolled-buttons .top-product-info .views-exposed-form .mobile-filter .mobile-filters-counter {
+    right: 1.5rem;
+  }
+  body.scrolled-buttons .top-product-info .block-mobile-filters .bootstrap-select .dropdown-toggle::after,
+  body.scrolled-buttons .top-product-info .views-exposed-form .bootstrap-select .dropdown-toggle::after {
+    background-position: left top;
+  }
+  body.scrolled-buttons .top-product-info .block-mobile-filters {
+    float: left;
+    padding-right: 0.625rem;
+  }
+  body.scrolled-buttons .top-product-info .block-mobile-filters button {
+    text-indent: -9999px;
+  }
+  body.scrolled-buttons .top-product-info .views-exposed-form {
+    float: right !important;
+    width: auto !important;
+    min-width: auto !important;
+  }
+  body.scrolled-buttons .top-product-info .views-exposed-form .filter-option {
+    display: none;
+  }
+  body.scrolled-buttons .top-product-info .views-exposed-form .select2 {
+    min-width: .75rem !important;
+  }
+  body.scrolled-buttons .top-product-info .views-exposed-form .select2 .select2-selection--single {
+    width: 4rem !important;
+    float: right;
+  }
+  body.scrolled-buttons .top-product-info .views-exposed-form .select2 .select2-selection__rendered {
+    display: none !important;
+  }
+  body.scrolled-buttons .top-product-info .views-exposed-form .content .select2-container--default .select2-selection--single .select2-selection__arrow {
+    width: .75rem;
+    background-position: center;
+    margin-right: 0;
+  }
+  body.scrolled-buttons.toolbar-fixed .top-product-info {
+    top: 1.875rem;
+  }
+  body.scrolled-buttons .select2-dropdown--below {
+    border-top-left-radius: 0.3125rem !important;
+  }
+  body.scrolled-buttons .select2-dropdown--below:before {
+    width: calc(100% - 4rem);
+    background: black;
+    margin: 0 0 0 0.125rem;
+    height: 1px;
+  }
+  body.scrolled-buttons .select2-dropdown--below li[aria-selected="true"] {
+    display: block !important;
+  }
+}
+
+.top-product-info {
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .top-product-info {
+    padding: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .top-product-info {
+    padding: 0;
+  }
+}
+
+.top-product-info .views-exposed-form {
+  float: right;
+  min-width: 19.13rem;
+  width: auto;
+}
+
+@media (max-width: 991.98px) {
+  .top-product-info .views-exposed-form {
+    height: 3.125rem;
+    border-radius: 0.25rem;
+    min-width: 13.75px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form {
+    min-width: 180px;
+    width: calc(50% - 1.5rem);
+    float: right;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form {
+    min-width: 200px;
+    width: calc(100% - 4rem);
+  }
+}
+
+.top-product-info .views-exposed-form .bootstrap-select {
+  width: 100% !important;
+}
+
+.top-product-info .views-exposed-form .bootstrap-select .dropdown-menu.show .inner.show {
+  overflow: hidden;
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .bootstrap-select .btn, .top-product-info .views-exposed-form .bootstrap-select .d-p-banner .field--type-link a, .d-p-banner .field--type-link .top-product-info .views-exposed-form .bootstrap-select a, .top-product-info .views-exposed-form .bootstrap-select .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .top-product-info .views-exposed-form .bootstrap-select a, .top-product-info .views-exposed-form .bootstrap-select .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .top-product-info .views-exposed-form .bootstrap-select a, .top-product-info .views-exposed-form .bootstrap-select .product-listing .pagination li a, .product-listing .pagination li .top-product-info .views-exposed-form .bootstrap-select a, .top-product-info .views-exposed-form .bootstrap-select .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .top-product-info .views-exposed-form .bootstrap-select a,
+  .top-product-info .views-exposed-form .bootstrap-select .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .top-product-info .views-exposed-form .bootstrap-select a {
+    min-width: 13.75rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .bootstrap-select .filter-option {
+    width: auto;
+    padding: 0.8125rem 0;
+    left: 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+.top-product-info .views-exposed-form .bootstrap-select.show .dropdown-toggle {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@media (min-width: 768px) {
+  .top-product-info .views-exposed-form .bootstrap-select.show .dropdown-toggle:hover {
+    background-color: #fff;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .bootstrap-select.show .dropdown-toggle {
+    border: none;
+  }
+}
+
+.top-product-info .views-exposed-form .bootstrap-select .dropdown-toggle {
+  height: 3.125rem;
+  border: 0.125rem solid transparent;
+}
+
+.top-product-info .views-exposed-form .bootstrap-select .dropdown-toggle::after {
+  border-bottom: none;
+}
+
+.top-product-info .views-exposed-form .bootstrap-select .dropdown-toggle:hover {
+  background-color: inherit;
+}
+
+.top-product-info .views-exposed-form .bootstrap-select div.dropdown-menu {
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: 0;
+  padding: 0;
+  z-index: 9;
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .bootstrap-select div.dropdown-menu {
+    width: 222px;
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    -webkit-transform: translate3d(-1px, 2.875rem, 0px) !important;
+            transform: translate3d(-1px, 2.875rem, 0px) !important;
+  }
+}
+
+.top-product-info .views-exposed-form .bootstrap-select div.dropdown-menu::before {
+  content: '';
+  width: 16.25rem;
+  display: block;
+  height: 0.125rem;
+  margin: 0.1875rem auto;
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .bootstrap-select div.dropdown-menu::before {
+    width: 6.25rem;
+    height: 0.0625rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .bootstrap-select .dropdown-menu li a {
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.top-product-info .views-exposed-form .bootstrap-select .dropdown-menu li a .text {
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .bootstrap-select .dropdown-menu li a {
+    padding: 0.625rem 0;
+  }
+}
+
+.top-product-info .views-exposed-form .bootstrap-select .dropdown-menu li:last-child {
+  padding-bottom: 0.125rem;
+}
+
+.top-product-info .views-exposed-form .content {
+  margin-bottom: 0;
+  outline: 0;
+}
+
+.top-product-info .views-exposed-form .content * {
+  height: 100%;
+  margin-bottom: 0;
+  outline: 0;
+}
+
+.top-product-info .views-exposed-form .content .select2-container--default {
+  width: 100% !important;
+}
+
+.top-product-info .views-exposed-form .content .select2-container--default.select2-container--open .select2-selection--single .select2-selection__rendered {
+  color: #4c4c4c;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.top-product-info .views-exposed-form .content .select2-container--default .select2-selection--single {
+  border-radius: 0;
+  border-color: #727272;
+}
+
+.top-product-info .views-exposed-form .content .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #727272;
+  font-size: 1rem;
+  padding: 0.625rem 4rem 0.625rem 1.5rem;
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .content .select2-container--default .select2-selection--single .select2-selection__rendered {
+    -webkit-box-pack: left;
+        -ms-flex-pack: left;
+            justify-content: left;
+    color: #727272;
+  }
+}
+
+.top-product-info .views-exposed-form .content .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100%;
+  background-image: url("/profiles/contrib/droopler/themes/custom/droopler_theme/images/arrow.svg");
+  background-size: 1.75rem;
+  background-repeat: no-repeat;
+  background-position: right;
+  display: inline-block;
+  width: 1.875rem;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: none;
+  border-right: none;
+  margin-right: 0.875rem;
+  border-left: none;
+}
+
+.top-product-info .views-exposed-form .content .select2-container--default .select2-selection--single .select2-selection__arrow b {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .top-product-info .views-exposed-form .content .select2-container--default .select2-selection--single {
+    background-color: transparent;
+    border: 2px solid #d3d3d3;
+  }
+  .top-product-info .views-exposed-form .content .select2-container--default .select2-selection--single .select2-selection__rendered {
+    -webkit-box-align: left;
+        -ms-flex-align: left;
+            align-items: left;
+  }
+}
+
+@media (min-width: 768px) {
+  .top-product-info .views-exposed-form .content .select2 {
+    margin-top: 0.125rem;
+  }
+}
+
+.top-product-info .top-product-info-sort-wrapper > .row {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@media (max-width: 991.98px) {
+  .region-facets-left {
+    height: 100%;
+    width: 85%;
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: -100%;
+    overflow: auto;
+    background-color: #f1f1f1;
+    overflow-x: hidden;
+    padding-top: 10%;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.navigation-bar-visible {
+  overflow: hidden;
+}
+
+.navigation-bar-visible .bootstrap-select {
+  z-index: 0;
+}
+
+.navigation-bar-visible .bootstrap-select .dropdown-menu.show {
+  width: calc(100% + 0.125rem) !important;
+}
+
+.navigation-bar-visible .block-mobile-filters-submit {
+  display: block !important;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1030;
+  margin-bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 2rem;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  background-color: #4c4c4c;
+}
+
+.navigation-bar-visible .block-mobile-filters-submit .content {
+  background-color: #1a6dbb;
+  padding: 1.5rem 0;
+  float: none;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .block-mobile-filters-submit {
+    display: none;
+  }
+}
+
+.close-area {
+  display: none;
+}
+
+.navigation-bar-visible .close-area {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  cursor: pointer;
+  display: block;
+}
+
+.view-product-images {
+  overflow: hidden;
+}
+
+.view-product-images .slider-main {
+  margin: 0 0 1.5rem 0;
+}
+
+.view-product-images .slider-main .img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.view-product-images .slider-nav .slick-track,
+.view-product-images .slider-nav .slick-track-const {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.view-product-images .slider-nav .slick-list {
+  margin-left: -0.7rem;
+  margin-right: -0.7rem;
+  padding: 0 !important;
+}
+
+.view-product-images .slider-nav .slick-list img:hover {
+  cursor: pointer;
+}
+
+.view-product-images .slider-nav .slick-list .slick-track-const {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100% !important;
+  -webkit-transform: none !important;
+          transform: none !important;
+}
+
+.view-product-images .slider-nav .slick-list .slick-slide.slick-current {
+  outline: 0;
+}
+
+.view-product-images .slick-prev {
+  z-index: 100;
+  height: 2.5rem;
+  width: 2.5rem;
+  background: #fff;
+  opacity: 0.95;
+  padding-left: 0.3rem;
+  margin-left: 1rem;
+  z-index: 999;
+  left: 0;
+}
+
+.view-product-images .slick-prev:hover {
+  opacity: 1;
+}
+
+.view-product-images .slick-prev::before {
+  content: " ";
+  width: 0.8rem;
+  height: 0.8rem;
+  border-right: 0.125rem solid;
+  border-top: 0.125rem solid;
+  border-color: #4c4c4c;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  z-index: 3;
+}
+
+.view-product-images .slick-prev::before {
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.view-product-images .slick-next {
+  z-index: 100;
+  height: 2.5rem;
+  width: 2.5rem;
+  background: #fff;
+  opacity: 0.95;
+  padding-right: 0.3rem;
+  margin-right: 1rem;
+  right: 0;
+}
+
+.view-product-images .slick-next:hover {
+  opacity: 1;
+}
+
+.view-product-images .slick-next::before {
+  content: " ";
+  width: 0.8rem;
+  height: 0.8rem;
+  border-right: 0.125rem solid;
+  border-top: 0.125rem solid;
+  border-color: #4c4c4c;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  z-index: 3;
+}
+
+.node--type-d-product .main-content .node__content .header .title {
+  margin-top: 0.8rem;
+  margin-bottom: 1.3rem;
+}
+
+.node--type-d-product .main-content .node__content .header .title h1 {
+  font-size: 1.8rem;
+}
+
+@media (min-width: 768px) {
+  .node--type-d-product .main-content .node__content .header .title h1 {
+    font-size: 2rem;
+  }
+}
+
+.node--type-d-product .main-content .node__content .section-images .slider-main a:focus {
+  outline: none;
+}
+
+.node--type-d-product .main-content .node__content .section-images .slider-main a img {
+  height: auto;
+}
+
+.node--type-d-product .main-content .node__content .section-data {
+  display: block;
+}
+
+@media (min-width: 992px) {
+  .node--type-d-product .main-content .node__content .section-data {
+    padding-left: 0;
+  }
+}
+
+.node--type-d-product .main-content .node__content .section-data .field__label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2rem;
+  color: #000;
+  margin: 0 0 0.6rem 0;
+}
+
+.node--type-d-product .main-content .node__content .section-data .field__item {
+  font-size: 1rem;
+  padding-bottom: 1rem;
+}
+
+.node--type-d-product .main-content .node__content .section-data .field--name-field-product-categories .field__items,
+.node--type-d-product .main-content .node__content .section-data .field--name-field-tags .field__items {
+  font-size: 1rem;
+}
+
+.node--type-d-product .main-content .node__content .section-data .products-links {
+  margin-bottom: 2rem;
+}
+
+.node--type-d-product .main-content .node__content .section-data .products-links .ask-link a,
+.node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a {
+  width: 100%;
+  padding: 0.9rem;
+  min-width: 7rem;
+}
+
+@media (max-width: 991.98px) {
+  .node--type-d-product .main-content .node__content .section-data .products-links {
+    margin-top: 1.2rem;
+  }
+}
+
+header.header .site-logo img {
   max-width: 100%;
   max-height: 5rem;
 }
 
-header .region-primary-menu .navbar {
+header.header .region-primary-menu .navbar {
   padding: 0.5rem 0;
 }
 
-header .region-primary-menu #block-mainnavigation, header .region-primary-menu #block-languageswitcher {
+header.header .region-primary-menu #block-mainnavigation, header.header .region-primary-menu #block-languageswitcher {
   display: inline-block;
 }
 
 @media (max-width: 991.98px) {
-  header .region-primary-menu #block-mainnavigation, header .region-primary-menu #block-languageswitcher {
+  header.header .region-primary-menu #block-mainnavigation, header.header .region-primary-menu #block-languageswitcher {
     display: block;
   }
 }
 
-header .navbar-brand {
+header.header .navbar-brand {
   max-width: 20rem;
 }
 
 @media (max-width: 1199.98px) {
-  header .navbar-brand {
+  header.header .navbar-brand {
     max-width: 13.5rem;
   }
 }
 
 @media (max-width: 991.98px) {
-  header {
+  header.header {
     min-height: 4.5rem;
   }
-  header .navbar-brand {
+  header.header .navbar-brand {
     top: 0;
     z-index: 1;
     max-width: 12rem;
     padding-left: 1rem;
   }
-  header .navbar-brand .site-logo img {
+  header.header .navbar-brand .site-logo img {
     max-width: 100%;
     width: auto;
     max-height: 3.875rem;
   }
-  header .navbar-brand .site-logo img.logo-svg {
+  header.header .navbar-brand .site-logo img.logo-svg {
     height: 100%;
   }
-  header .navbar {
+  header.header .navbar {
     width: 100%;
     padding: 0;
   }
@@ -15315,7 +16898,8 @@ footer .region-footer-main .block {
   background: white;
 }
 
-.download-page a.btn, .download-page .d-p-banner .field--type-link a, .d-p-banner .field--type-link .download-page a, .download-page .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .download-page a, .download-page .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .download-page a {
+.download-page a.btn, .download-page .d-p-banner .field--type-link a, .d-p-banner .field--type-link .download-page a, .download-page .d-p-group-of-text-blocks > .field--type-link a, .d-p-group-of-text-blocks > .field--type-link .download-page a, .download-page .d-p-text-with-bckg .field--type-link a, .d-p-text-with-bckg .field--type-link .download-page a, .download-page .product-listing .pagination li a, .product-listing .pagination li .download-page a, .download-page .node--type-d-product .main-content .node__content .section-data .products-links .ask-link a, .node--type-d-product .main-content .node__content .section-data .products-links .ask-link .download-page a,
+.download-page .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link a, .node--type-d-product .main-content .node__content .section-data .products-links .field--name-field-d-product-link .download-page a {
   margin: 3.125rem auto;
 }
 

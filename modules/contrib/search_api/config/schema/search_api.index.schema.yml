@@ -1,0 +1,96 @@
+search_api.index.*:
+  type: config_entity
+  label : 'Search index'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    name:
+      type: label
+      label: Name'
+    description:
+      type: text
+      label: 'Description'
+    read_only:
+      type: boolean
+      label: 'Read-only'
+    field_settings:
+      type: sequence
+      label: 'Indexed fields'
+      orderby: key
+      sequence:
+        type: mapping
+        label: field
+        mapping:
+          label:
+            type: string
+            label: 'A label for the field'
+          datasource_id:
+            type: string
+            label: 'The datasource ID of the field'
+          property_path:
+            type: string
+            label: 'The property path of the field'
+          type:
+            type: string
+            label: 'The data type of the field'
+          boost:
+            type: float
+            label: 'The boost of the field'
+          configuration:
+            type: search_api.property_configuration.[%parent.property_path]
+          indexed_locked:
+            type: boolean
+            label: 'Whether the field is locked or can be removed'
+          type_locked:
+            type: boolean
+            label: 'Whether the field''s data type is locked or can be changed'
+          hidden:
+            type: boolean
+            label: 'Whether the field should appear in the UI'
+          dependencies:
+            type: config_dependencies
+            label: 'The field''s dependencies'
+    datasource_settings:
+      type: sequence
+      label: 'Datasource settings'
+      orderby: key
+      sequence:
+        type: plugin.plugin_configuration.search_api_datasource.[%key]
+        label: 'The configuration for a single datasource'
+    processor_settings:
+      type: sequence
+      label: 'Processor settings'
+      orderby: key
+      sequence:
+        type: plugin.plugin_configuration.search_api_processor.[%key]
+        label: 'The configuration for a single processor'
+    tracker_settings:
+      type: sequence
+      label: 'Tracker settings'
+      orderby: key
+      sequence:
+        type: plugin.plugin_configuration.search_api_tracker.[%key]
+        label: 'The configuration for the tracker'
+    options:
+      type: mapping
+      label: 'Options'
+      mapping:
+        cron_limit:
+          type: integer
+          label: 'Cron batch size'
+        index_directly:
+          type: boolean
+          label: 'Index items immediately'
+    server:
+      type: string
+      label: 'Server ID'
+    status:
+      type: boolean
+      label: 'Status'
+    langcode:
+      type: string
+      label: 'Language code'
+    dependencies:
+      type: config_dependencies
+      label: 'Dependencies'

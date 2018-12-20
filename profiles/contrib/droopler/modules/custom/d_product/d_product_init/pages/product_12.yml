@@ -1,0 +1,40 @@
+info:
+  type: d_product
+  title: Aluminum Rim 18 BMW Series 3 M 2005-2010 After FL
+field_product_image:
+  type: image
+  data:
+    - file: demo_car_7.jpg
+      alt: Title / Subtitle
+    - file: demo_car_2.jpg
+      alt: Title / Subtitle
+    - file: demo_car_1.jpg
+      alt: Title / Subtitle
+    - file: demo_car_6.jpg
+      alt: Title / Subtitle
+    - file: demo_car_5.jpg
+      alt: Title / Subtitle
+body:
+  type: text
+  data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
+    a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
+    Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: d_product_categories
+    terms:
+      - Car Parts
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Cars
+      - Wheels
+      - Moto
+field_d_product_link:
+  type: cta
+  data:
+    link: http://example.com/
+    text: Buy now

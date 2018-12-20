@@ -1,0 +1,10 @@
+id: inconsistent_search_server
+name: 'Inconsistent search server'
+description: 'A server used for testing'
+backend: search_api_test
+backend_config: {  }
+status: false
+langcode: en
+dependencies:
+  module:
+    - search_api_test

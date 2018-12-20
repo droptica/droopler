@@ -143,6 +143,7 @@ class ParagraphsExperimentalDragAndDropModeTest extends BrowserTestBase {
 
     // Check the new structure of the node and its paragraphs.
     \Drupal::entityTypeManager()->getStorage('node')->resetCache();
+    \Drupal::entityTypeManager()->getStorage('paragraph')->resetCache();
     $node = Node::load($node->id());
     $this->assertEquals(count($node->get('field_paragraphs')), 2);
 
@@ -241,6 +242,7 @@ class ParagraphsExperimentalDragAndDropModeTest extends BrowserTestBase {
     // Check that the parent of the text paragraph is the second paragraph
     // container.
     \Drupal::entityTypeManager()->getStorage('node')->resetCache();
+    \Drupal::entityTypeManager()->getStorage('paragraph')->resetCache();
     $node = Node::load($node->id());
     $this->assertEquals(count($node->get('field_paragraphs')), 2);
 
@@ -470,6 +472,7 @@ class ParagraphsExperimentalDragAndDropModeTest extends BrowserTestBase {
     // Check that the parent of the text paragraph is the second paragraph
     // container.
     \Drupal::entityTypeManager()->getStorage('node')->resetCache();
+    \Drupal::entityTypeManager()->getStorage('paragraph')->resetCache();
     $node = Node::load($node->id());
     $this->assertEquals(count($node->get('field_paragraphs')), 2);
 
@@ -564,6 +567,7 @@ class ParagraphsExperimentalDragAndDropModeTest extends BrowserTestBase {
     // Check that the parent of the text paragraph is the second paragraph
     // container.
     \Drupal::entityTypeManager()->getStorage('node')->resetCache();
+    \Drupal::entityTypeManager()->getStorage('paragraph')->resetCache();
     $node = Node::load($node->id());
     $this->assertEquals(count($node->get('field_paragraphs')), 3);
 
@@ -656,6 +660,7 @@ class ParagraphsExperimentalDragAndDropModeTest extends BrowserTestBase {
     // Check that the parent of the text paragraph is the second paragraph
     // container.
     \Drupal::entityTypeManager()->getStorage('node')->resetCache();
+    \Drupal::entityTypeManager()->getStorage('paragraph')->resetCache();
     $node = Node::load($node->id());
     $this->assertEquals(count($node->get('field_paragraphs')), 1);
 
@@ -743,6 +748,7 @@ class ParagraphsExperimentalDragAndDropModeTest extends BrowserTestBase {
 
     // Check the new structure of the node and its paragraphs.
     \Drupal::entityTypeManager()->getStorage('node')->resetCache();
+    \Drupal::entityTypeManager()->getStorage('paragraph')->resetCache();
     $node = Node::load($node->id());
     $this->assertEquals(3, count($node->get('field_paragraphs')));
 
@@ -846,6 +852,7 @@ class ParagraphsExperimentalDragAndDropModeTest extends BrowserTestBase {
 
     // Check the new structure of the node and its paragraphs.
     \Drupal::entityTypeManager()->getStorage('node')->resetCache();
+    \Drupal::entityTypeManager()->getStorage('paragraph')->resetCache();
     $node = Node::load($node->id());
     $this->assertEquals(1, count($node->get('field_paragraphs')));
 

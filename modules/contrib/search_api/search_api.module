@@ -1,0 +1,672 @@
+<?php
+
+/**
+ * @file
+ * Provides a rich framework for creating searches.
+ */
+
+use Drupal\comment\Entity\Comment;
+use Drupal\Core\Config\ConfigImporter;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+use Drupal\search_api\Entity\Index;
+use Drupal\search_api\IndexInterface;
+use Drupal\search_api\Plugin\search_api\datasource\ContentEntity;
+use Drupal\search_api\Plugin\search_api\datasource\ContentEntityTaskManager;
+use Drupal\search_api\Plugin\search_api\datasource\EntityDatasourceInterface;
+use Drupal\search_api\Plugin\views\argument\SearchApiTerm as TermArgument;
+use Drupal\search_api\Plugin\views\filter\SearchApiTerm as TermFilter;
+use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\search_api\SearchApiException;
+use Drupal\search_api\Task\IndexTaskManager;
+use Drupal\views\ViewEntityInterface;
+
+/**
+ * Implements hook_help().
+ */
+function search_api_help($route_name) {
+  switch ($route_name) {
+    case 'search_api.overview':
+      $message = t('Below is a list of indexes grouped by the server they are associated with. A server is the definition of the actual indexing, querying and storage engine (for example, an Apache Solr server, the database, …). An index defines the indexed content (for example, all content and all comments on "Article" posts).');
+
+      $search_module_warning = _search_api_search_module_warning();
+      if ($search_module_warning) {
+        $message = "<p>$message</p><p>$search_module_warning</p>";
+      }
+      return $message;
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * This will first execute pending tasks (if there are any). After that, items
+ * will be indexed on all enabled indexes with a non-zero cron limit. Indexing
+ * will run for the time set in the cron_worker_runtime config setting
+ * (defaulting to 15 seconds), but will at least index one batch of items on
+ * each index.
+ */
+function search_api_cron() {
+  // Execute pending server tasks.
+  \Drupal::getContainer()->get('search_api.server_task_manager')->execute();
+
+  // Load all enabled, not read-only indexes.
+  $conditions = [
+    'status' => TRUE,
+  ];
+  $index_storage = \Drupal::entityTypeManager()->getStorage('search_api_index');
+  /** @var \Drupal\search_api\IndexInterface[] $indexes */
+  $indexes = $index_storage->loadByProperties($conditions);
+  if (!$indexes) {
+    return;
+  }
+
+  // Add items to the tracking system for all indexes for which this hasn't
+  // happened yet.
+  $task_manager = \Drupal::getContainer()->get('search_api.task_manager');
+  foreach ($indexes as $index_id => $index) {
+    $conditions = [
+      'type' => IndexTaskManager::TRACK_ITEMS_TASK_TYPE,
+      'index_id' => $index_id,
+    ];
+    $task_manager->executeSingleTask($conditions);
+
+    // Filter out read-only indexes here, since we want to have tracking but not
+    // index items for them.
+    if ($index->isReadOnly()) {
+      unset($indexes[$index_id]);
+    }
+  }
+
+  // Now index items.
+  // Remember servers which threw an exception.
+  $ignored_servers = [];
+
+  // Continue indexing, one batch from each index, until the time is up, but at
+  // least index one batch per index.
+  $settings = \Drupal::config('search_api.settings');
+  $default_cron_limit = $settings->get('default_cron_limit');
+  $end = time() + $settings->get('cron_worker_runtime');
+  $first_pass = TRUE;
+  while (TRUE) {
+    if (!$indexes) {
+      break;
+    }
+    foreach ($indexes as $id => $index) {
+      if (!$first_pass && time() >= $end) {
+        break 2;
+      }
+      if (!empty($ignored_servers[$index->getServerId()])) {
+        continue;
+      }
+
+      $limit = $index->getOption('cron_limit', $default_cron_limit);
+      $num = 0;
+      if ($limit) {
+        try {
+          $num = $index->indexItems($limit);
+          if ($num) {
+            $variables = [
+              '@num' => $num,
+              '%name' => $index->label(),
+            ];
+            \Drupal::service('logger.channel.search_api')->info('Indexed @num items for index %name.', $variables);
+          }
+        }
+        catch (SearchApiException $e) {
+          // Exceptions will probably be caused by the server in most cases.
+          // Therefore, don't index for any index on this server.
+          $ignored_servers[$index->getServerId()] = TRUE;
+          $vars['%index'] = $index->label();
+          watchdog_exception('search_api', $e, '%type while trying to index items on %index: @message in %function (line %line of %file).', $vars);
+        }
+      }
+      if (!$num) {
+        // Couldn't index any items => stop indexing for this index in this
+        // cron run.
+        unset($indexes[$id]);
+      }
+    }
+    $first_pass = FALSE;
+  }
+}
+
+/**
+ * Implements hook_hook_info().
+ */
+function search_api_hook_info() {
+  $hooks = [
+    'search_api_backend_info_alter',
+    'search_api_server_features_alter',
+    'search_api_datasource_info_alter',
+    'search_api_processor_info_alter',
+    'search_api_data_type_info_alter',
+    'search_api_parse_mode_info_alter',
+    'search_api_tracker_info_alter',
+    'search_api_displays_alter',
+    'search_api_field_type_mapping_alter',
+    'search_api_views_handler_mapping_alter',
+    'search_api_views_field_handler_mapping_alter',
+    'search_api_index_items_alter',
+    'search_api_items_indexed',
+    'search_api_query_alter',
+    // Unfortunately, it's not possible to add hook infos for hooks with
+    // "wildcards".
+    // 'search_api_query_TAG_alter',
+    'search_api_results_alter',
+    // 'search_api_results_TAG_alter',
+    'search_api_index_reindex',
+  ];
+  $info = [
+    'group' => 'search_api',
+  ];
+  return array_fill_keys($hooks, $info);
+}
+
+/**
+ * Implements hook_config_import_steps_alter().
+ */
+function search_api_config_import_steps_alter(&$sync_steps, ConfigImporter $config_importer) {
+  $new = $config_importer->getUnprocessedConfiguration('create');
+  $changed = $config_importer->getUnprocessedConfiguration('update');
+  $new_or_changed = array_merge($new, $changed);
+  $prefix = \Drupal::entityTypeManager()->getDefinition('search_api_index')->getConfigPrefix() . '.';
+  $prefix_length = strlen($prefix);
+  foreach ($new_or_changed as $config_id) {
+    if (substr($config_id, 0, $prefix_length) === $prefix) {
+      $sync_steps[] = ['Drupal\search_api\Task\IndexTaskManager', 'processIndexTasks'];
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ *
+ * Adds entries for all languages of the new entity to the tracking table for
+ * each index that tracks entities of this type.
+ *
+ * By setting the $entity->search_api_skip_tracking property to a true-like
+ * value before this hook is invoked, you can prevent this behavior and make the
+ * Search API ignore this new entity.
+ *
+ * Note that this function implements tracking only on behalf of the "Content
+ * Entity" datasource defined in this module, not for entity-based datasources
+ * in general. Datasources defined by other modules still have to implement
+ * their own mechanism for tracking new/updated/deleted entities.
+ *
+ * @see \Drupal\search_api\Plugin\search_api\datasource\ContentEntity
+ */
+function search_api_entity_insert(EntityInterface $entity) {
+  // Check if the entity is a content entity.
+  if (!($entity instanceof ContentEntityInterface) || $entity->search_api_skip_tracking) {
+    return;
+  }
+  $indexes = ContentEntity::getIndexesForEntity($entity);
+  if (!$indexes) {
+    return;
+  }
+
+  // Compute the item IDs for all languages of the entity.
+  $item_ids = [];
+  $entity_id = $entity->id();
+  foreach (array_keys($entity->getTranslationLanguages()) as $langcode) {
+    $item_ids[] = $entity_id . ':' . $langcode;
+  }
+  $datasource_id = 'entity:' . $entity->getEntityTypeId();
+  foreach ($indexes as $index) {
+    $filtered_item_ids = ContentEntity::filterValidItemIds($index, $datasource_id, $item_ids);
+    $index->trackItemsInserted($datasource_id, $filtered_item_ids);
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ *
+ * Updates the corresponding tracking table entries for each index that tracks
+ * this entity.
+ *
+ * Also takes care of new or deleted translations.
+ *
+ * By setting the $entity->search_api_skip_tracking property to a true-like
+ * value before this hook is invoked, you can prevent this behavior and make the
+ * Search API ignore this update.
+ *
+ * Note that this function implements tracking only on behalf of the "Content
+ * Entity" datasource defined in this module, not for entity-based datasources
+ * in general. Datasources defined by other modules still have to implement
+ * their own mechanism for tracking new/updated/deleted entities.
+ *
+ * @see \Drupal\search_api\Plugin\search_api\datasource\ContentEntity
+ */
+function search_api_entity_update(EntityInterface $entity) {
+  // Check if the entity is a content entity.
+  if (!($entity instanceof ContentEntityInterface) || $entity->search_api_skip_tracking) {
+    return;
+  }
+  $indexes = ContentEntity::getIndexesForEntity($entity);
+  if (!$indexes) {
+    return;
+  }
+
+  // Compare old and new languages for the entity to identify inserted,
+  // updated and deleted translations (and, therefore, search items).
+  $entity_id = $entity->id();
+  $inserted_item_ids = [];
+  $updated_item_ids = $entity->getTranslationLanguages();
+  $deleted_item_ids = [];
+  $old_translations = $entity->original->getTranslationLanguages();
+  foreach ($old_translations as $langcode => $language) {
+    if (!isset($updated_item_ids[$langcode])) {
+      $deleted_item_ids[] = $langcode;
+    }
+  }
+  foreach ($updated_item_ids as $langcode => $language) {
+    if (!isset($old_translations[$langcode])) {
+      unset($updated_item_ids[$langcode]);
+      $inserted_item_ids[] = $langcode;
+    }
+  }
+
+  $datasource_id = 'entity:' . $entity->getEntityTypeId();
+  $combine_id = function ($langcode) use ($entity_id) {
+    return $entity_id . ':' . $langcode;
+  };
+  $inserted_item_ids = array_map($combine_id, $inserted_item_ids);
+  $updated_item_ids = array_map($combine_id, array_keys($updated_item_ids));
+  $deleted_item_ids = array_map($combine_id, $deleted_item_ids);
+  foreach ($indexes as $index) {
+    if ($inserted_item_ids) {
+      $filtered_item_ids = ContentEntity::filterValidItemIds($index, $datasource_id, $inserted_item_ids);
+      $index->trackItemsInserted($datasource_id, $filtered_item_ids);
+    }
+    if ($updated_item_ids) {
+      $index->trackItemsUpdated($datasource_id, $updated_item_ids);
+    }
+    if ($deleted_item_ids) {
+      $index->trackItemsDeleted($datasource_id, $deleted_item_ids);
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ *
+ * Deletes all entries for this entity from the tracking table for each index
+ * that tracks this entity type.
+ *
+ * By setting the $entity->search_api_skip_tracking property to a true-like
+ * value before this hook is invoked, you can prevent this behavior and make the
+ * Search API ignore this deletion. (Note that this might lead to stale data in
+ * the tracking table or on the server, since the item will not removed from
+ * there (if it has been added before).)
+ *
+ * Note that this function implements tracking only on behalf of the "Content
+ * Entity" datasource defined in this module, not for entity-based datasources
+ * in general. Datasources defined by other modules still have to implement
+ * their own mechanism for tracking new/updated/deleted entities.
+ *
+ * @see \Drupal\search_api\Plugin\search_api\datasource\ContentEntity
+ */
+function search_api_entity_delete(EntityInterface $entity) {
+  // Check if the entity is a content entity.
+  if (!($entity instanceof ContentEntityInterface) || $entity->search_api_skip_tracking) {
+    return;
+  }
+  $indexes = ContentEntity::getIndexesForEntity($entity);
+  if (!$indexes) {
+    return;
+  }
+
+  // Remove the search items for all the entity's translations.
+  $item_ids = [];
+  $entity_id = $entity->id();
+  foreach (array_keys($entity->getTranslationLanguages()) as $langcode) {
+    $item_ids[] = $entity_id . ':' . $langcode;
+  }
+  $datasource_id = 'entity:' . $entity->getEntityTypeId();
+  foreach ($indexes as $index) {
+    $index->trackItemsDeleted($datasource_id, $item_ids);
+  }
+}
+
+/**
+ * Implements hook_node_access_records_alter().
+ *
+ * Marks the node and its comments changed for indexes that use the "Content
+ * access" processor.
+ */
+function search_api_node_access_records_alter(array &$grants, NodeInterface $node) {
+  /** @var \Drupal\search_api\IndexInterface $index */
+  foreach (Index::loadMultiple() as $index) {
+    if (!$index->hasValidTracker() || !$index->status()) {
+      continue;
+    }
+    if (!$index->isValidProcessor('content_access')) {
+      continue;
+    }
+
+    foreach ($index->getDatasources() as $datasource_id => $datasource) {
+      switch ($datasource->getEntityTypeId()) {
+        case 'node':
+          // Don't index the node if search_api_skip_tracking is set on it.
+          if ($node->search_api_skip_tracking) {
+            continue 2;
+          }
+          $item_id = $datasource->getItemId($node->getTypedData());
+          if ($item_id !== NULL) {
+            $index->trackItemsUpdated($datasource_id, [$item_id]);
+          }
+          break;
+
+        case 'comment':
+          if (!isset($comments)) {
+            $entity_query = \Drupal::entityQuery('comment');
+            $entity_query->condition('entity_id', (int) $node->id());
+            $entity_query->condition('entity_type', 'node');
+            $comment_ids = $entity_query->execute();
+            /** @var \Drupal\comment\CommentInterface[] $comments */
+            $comments = Comment::loadMultiple($comment_ids);
+          }
+          $item_ids = [];
+          foreach ($comments as $comment) {
+            $item_id = $datasource->getItemId($comment->getTypedData());
+            if ($item_id !== NULL) {
+              $item_ids[] = $item_id;
+            }
+          }
+          if ($item_ids) {
+            $index->trackItemsUpdated($datasource_id, $item_ids);
+          }
+          break;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function search_api_theme() {
+  return [
+    'search_api_admin_fields_table' => [
+      'render element' => 'element',
+      'function' => 'theme_search_api_admin_fields_table',
+      'file' => 'search_api.theme.inc',
+    ],
+    'search_api_admin_data_type_table' => [
+      'variables' => [
+        'data_types' => [],
+        'fallback_mapping' => []
+      ],
+      'function' => 'theme_search_api_admin_data_type_table',
+      'file' => 'search_api.theme.inc',
+    ],
+    'search_api_form_item_list' => [
+      'render element' => 'element',
+      'function' => 'theme_search_api_form_item_list',
+      'file' => 'search_api.theme.inc',
+    ],
+    'search_api_server' => [
+      'variables' => ['server' => NULL],
+      'function' => 'theme_search_api_server',
+      'file' => 'search_api.theme.inc',
+    ],
+    'search_api_index' => [
+      'variables' => [
+        'index' => NULL,
+        'server_count' => NULL,
+        'server_count_error' => NULL,
+      ],
+      'function' => 'theme_search_api_index',
+      'file' => 'search_api.theme.inc',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for type "search_api_index".
+ *
+ * Implemented on behalf of the "entity" datasource plugin.
+ *
+ * @see \Drupal\search_api\Plugin\search_api\datasource\ContentEntity
+ */
+function search_api_search_api_index_update(IndexInterface $index) {
+  if (!$index->status() || empty($index->original)) {
+    return;
+  }
+  /** @var \Drupal\search_api\IndexInterface $original */
+  $original = $index->original;
+  if (!$original->status()) {
+    return;
+  }
+
+  foreach ($index->getDatasources() as $datasource_id => $datasource) {
+    if ($datasource->getBaseId() != 'entity'
+      || !($datasource instanceof EntityDatasourceInterface)
+      || !$original->isValidDatasource($datasource_id)) {
+      continue;
+    }
+    $old_datasource = $original->getDatasource($datasource_id);
+    $old_config = $old_datasource->getConfiguration();
+    $new_config = $datasource->getConfiguration();
+
+    if ($old_config != $new_config) {
+      // Bundles and languages share the same structure, so changes can be
+      // processed in a unified way.
+      $tasks = [];
+      $insert_task = ContentEntityTaskManager::INSERT_ITEMS_TASK_TYPE;
+      $delete_task = ContentEntityTaskManager::DELETE_ITEMS_TASK_TYPE;
+      $settings = [];
+      $entity_type = \Drupal::entityTypeManager()
+        ->getDefinition($datasource->getEntityTypeId());
+      if ($entity_type->hasKey('bundle')) {
+        $settings['bundles'] = $datasource->getBundles();
+      }
+      if ($entity_type->isTranslatable()) {
+        $settings['languages'] = \Drupal::languageManager()->getLanguages();
+      }
+
+      // Determine which bundles/languages have been newly selected or
+      // deselected and then assign them to the appropriate actions depending
+      // on the current "default" setting.
+      foreach ($settings as $setting => $all) {
+        $old_selected = array_flip($old_config[$setting]['selected']);
+        $new_selected = array_flip($new_config[$setting]['selected']);
+
+        // First, check if the "default" setting changed and invert the checked
+        // items for the old config, so the following comparison makes sense.
+        if ($old_config[$setting]['default'] != $new_config[$setting]['default']) {
+          $old_selected = array_diff_key($all, $old_selected);
+        }
+
+        $newly_selected = array_keys(array_diff_key($new_selected, $old_selected));
+        $newly_unselected = array_keys(array_diff_key($old_selected, $new_selected));
+        if ($new_config[$setting]['default']) {
+          $tasks[$insert_task][$setting] = $newly_unselected;
+          $tasks[$delete_task][$setting] = $newly_selected;
+        }
+        else {
+          $tasks[$insert_task][$setting] = $newly_selected;
+          $tasks[$delete_task][$setting] = $newly_unselected;
+        }
+      }
+
+      // This will keep only those tasks where at least one of "bundles" or
+      // "languages" is non-empty.
+      $tasks = array_filter($tasks, 'array_filter');
+      $task_manager = \Drupal::getContainer()
+        ->get('search_api.task_manager');
+      foreach ($tasks as $task => $data) {
+        $data += [
+          'datasource' => $datasource_id,
+          'page' => 0,
+        ];
+        $task_manager->addTask($task, NULL, $index, $data);
+      }
+
+      // If we added any new tasks, set a batch for them. (If we aren't in a
+      // form submission, this will just be ignored.)
+      if ($tasks) {
+        $task_manager->setTasksBatch([
+          'index_id' => $index->id(),
+          'type' => array_keys($tasks),
+        ]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_plugins_argument_alter().
+ */
+function search_api_views_plugins_argument_alter(array &$plugins) {
+  // We have to include the term argument handler like this, since adding it
+  // directly (i.e., with an annotation) would cause fatal errors on sites
+  // without the Taxonomy module.
+  if (\Drupal::moduleHandler()->moduleExists('taxonomy')) {
+    $plugins['search_api_term'] = [
+      'plugin_type' => 'argument',
+      'id' => 'search_api_term',
+      'class' => TermArgument::class,
+      'provider' => 'search_api',
+    ];
+  }
+}
+
+/**
+ * Implements hook_views_plugins_filter_alter().
+ */
+function search_api_views_plugins_filter_alter(array &$plugins) {
+  // We have to include the term filter handler like this, since adding it
+  // directly (i.e., with an annotation) would cause fatal errors on sites
+  // without the Taxonomy module.
+  if (\Drupal::moduleHandler()->moduleExists('taxonomy')) {
+    $plugins['search_api_term'] = [
+      'plugin_type' => 'filter',
+      'id' => 'search_api_term',
+      'class' => TermFilter::class,
+      'provider' => 'search_api',
+    ];
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for type "view".
+ */
+function search_api_view_insert(ViewEntityInterface $view) {
+  _search_api_view_crud_event($view);
+
+  // Disable Views' default caching mechanisms on Search API views.
+  $displays = $view->get('display');
+  if ($displays['default']['display_options']['query']['type'] === 'search_api_query') {
+    $change = FALSE;
+    foreach ($displays as $id => $display) {
+      if (isset($display['display_options']['cache']['type']) && in_array($display['display_options']['cache']['type'], ['tag', 'time'])) {
+        $displays[$id]['display_options']['cache']['type'] = 'none';
+        $change = TRUE;
+      }
+    }
+
+    if ($change) {
+      $warning = t('The selected caching mechanism does not work with views on Search API indexes. Please either use one of the Search API-specific caching options or "None". Caching was turned off for this view.');
+      \Drupal::messenger()->addWarning($warning);
+      $view->set('display', $displays);
+      $view->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for type "view".
+ */
+function search_api_view_update(ViewEntityInterface $view) {
+  _search_api_view_crud_event($view);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for type "view".
+ */
+function search_api_view_delete(ViewEntityInterface $view) {
+  _search_api_view_crud_event($view);
+}
+
+/**
+ * Reacts to a view CRUD event.
+ *
+ * @param \Drupal\views\ViewEntityInterface $view
+ *   The view that was created, changed or deleted.
+ */
+function _search_api_view_crud_event(ViewEntityInterface $view) {
+  // Whenever a view is created, updated (displays might have been added or
+  // removed) or deleted, we need to clear our cached display definitions.
+  if (SearchApiQuery::getIndexFromTable($view->get('base_table'))) {
+    \Drupal::getContainer()
+      ->get('plugin.manager.search_api.display')
+      ->clearCachedDefinitions();
+  }
+}
+
+/**
+ * Retrieves the allowed values for a list field instance.
+ *
+ * @param string $entity_type
+ *   The entity type to which the field is attached.
+ * @param string $bundle
+ *   The bundle to which the field is attached.
+ * @param string $field_name
+ *   The field's field name.
+ *
+ * @return array|null
+ *   An array of allowed values in the form key => label, or NULL.
+ *
+ * @see _search_api_views_handler_adjustments()
+ */
+function _search_api_views_get_allowed_values($entity_type, $bundle, $field_name) {
+  $field_manager = \Drupal::getContainer()->get('entity_field.manager');
+  $field_definitions = $field_manager->getFieldDefinitions($entity_type, $bundle);
+  if (!empty($field_definitions[$field_name])) {
+    /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
+    $field_definition = $field_definitions[$field_name];
+    $options = $field_definition->getSetting('allowed_values');
+    if ($options) {
+      return $options;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for form "views_ui_edit_display_form".
+ */
+function search_api_form_views_ui_edit_display_form_alter(&$form, FormStateInterface $form_state) {
+  // Disable Views' default caching mechanisms on Search API views.
+  $displays = $form_state->getStorage()['view']->get('display');
+  if ($displays['default']['display_options']['query']['type'] === 'search_api_query') {
+    unset($form['options']['cache']['type']['#options']['tag']);
+    unset($form['options']['cache']['type']['#options']['time']);
+  }
+}
+
+/**
+ * Returns a warning message if the Core Search module is enabled.
+ *
+ * @return string|null
+ *   A warning message if needed, NULL otherwise.
+ *
+ * @see search_api_install()
+ * @see search_api_requirements()
+ */
+function _search_api_search_module_warning() {
+  if (\Drupal::moduleHandler()->moduleExists('search')) {
+    $args = [
+      ':url' => Url::fromRoute('system.modules_uninstall')->toString(),
+      ':documentation' => 'https://www.drupal.org/node/2010146#core-search',
+    ];
+    return t('The default Drupal core Search module is still enabled. If you are using Search API, you probably want to <a href=":url">uninstall</a> the Search module for performance reasons. For more information see <a href=":documentation">the Search API handbook</a>.', $args);
+  }
+  return NULL;
+}

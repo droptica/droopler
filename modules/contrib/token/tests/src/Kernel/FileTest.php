@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\token\Kernel;
 
+use Drupal\file\Entity\File;
 /**
  * Tests file tokens.
  *
@@ -26,7 +27,7 @@ class FileTest extends KernelTestBase {
 
   function testFileTokens() {
     // Create a test file object.
-    $file = entity_create('file', [
+    $file = File::create([
       'fid' => 1,
       'filename' => 'test.png',
       'filesize' => 100,
@@ -52,4 +53,5 @@ class FileTest extends KernelTestBase {
     ];
     $this->assertTokens('file', ['file' => $file], $tokens);
   }
+
 }

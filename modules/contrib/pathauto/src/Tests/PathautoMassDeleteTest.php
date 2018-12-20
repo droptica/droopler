@@ -49,9 +49,8 @@ class PathautoMassDeleteTest extends WebTestBase {
    */
   protected $terms;
 
-
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
   function setUp() {
     parent::setUp();
@@ -136,14 +135,16 @@ class PathautoMassDeleteTest extends WebTestBase {
    * Helper function to generate aliases.
    */
   function generateAliases() {
-    // Delete all aliases to avoid duplicated aliases. They will be recreated below.
+    // Delete all aliases to avoid duplicated aliases. They will be recreated
+    // below.
     $this->deleteAllAliases();
 
     // We generate a bunch of aliases for nodes, users and taxonomy terms. If
     // the entities are already created we just update them, otherwise we create
     // them.
     if (empty($this->nodes)) {
-      // Create a large number of nodes (100+) to make sure that the batch code works.
+      // Create a large number of nodes (100+) to make sure that the batch code
+      // works.
       for ($i = 1; $i <= 105; $i++) {
         // Set the alias of two nodes manually.
         $settings = ($i > 103) ? ['path' => ['alias' => "/custom_alias_$i", 'pathauto' => PathautoState::SKIP]] : [];

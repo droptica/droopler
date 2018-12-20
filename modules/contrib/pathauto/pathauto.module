@@ -99,7 +99,7 @@ function pathauto_entity_update(EntityInterface $entity) {
 }
 
 /**
- * Implements hook_entity_update().
+ * Implements hook_entity_delete().
  */
 function pathauto_entity_delete(EntityInterface $entity) {
   if ($entity->hasLinkTemplate('canonical') && $entity instanceof ContentEntityInterface && $entity->hasField('path')) {

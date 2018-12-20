@@ -33,7 +33,7 @@ class DownloadFile extends ControllerBase {
     $file_hash = $entity->get('file_hash')->get(0)->getValue();
     $link_options = [
       'absolute' => TRUE,
-      'attributes' => ['class' => 'btn-primary btn-orange']
+      'attributes' => ['class' => 'btn btn-primary btn-orange']
     ];
 
     // Generate download link/

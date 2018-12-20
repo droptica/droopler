@@ -324,7 +324,7 @@ class EntityReferenceRevisionsItem extends EntityReferenceItem implements Option
       $original_langcodes = array_keys($parent_entity->original->getTranslationLanguages());
       if ($removed_langcodes = array_diff($original_langcodes, $langcodes)) {
         foreach ($removed_langcodes as $removed_langcode) {
-          if ($entity->hasTranslation($removed_langcode)) {
+          if ($entity->hasTranslation($removed_langcode)  && $entity->getUntranslated()->language()->getId() != $removed_langcode) {
             $entity->removeTranslation($removed_langcode);
           }
         }
@@ -372,6 +372,7 @@ class EntityReferenceRevisionsItem extends EntityReferenceItem implements Option
     $all_revisions = \Drupal::entityQuery($host->getEntityTypeId())
       ->condition($field_name, $child->getRevisionId())
       ->allRevisions()
+      ->accessCheck(FALSE)
       ->execute();
 
     if (count($all_revisions) > 1) {

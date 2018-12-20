@@ -1,7 +1,7 @@
 <?php
 
 namespace Drupal\pathauto\Tests;
-use Drupal\Component\Utility\Unicode;
+
 use Drupal\simpletest\WebTestBase;
 use Drupal\views\Views;
 
@@ -29,7 +29,7 @@ class PathautoUserWebTest extends WebTestBase {
   protected $adminUser;
 
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
   function setUp() {
     parent::setUp();
@@ -46,7 +46,6 @@ class PathautoUserWebTest extends WebTestBase {
 
     $this->createPattern('user', '/users/[user:name]');
   }
-
 
   /**
    * Basic functional testing of Pathauto with users.
@@ -71,7 +70,6 @@ class PathautoUserWebTest extends WebTestBase {
     $view->initDisplay();
     $view->preview('page_1');
 
-
     foreach ($view->result as $key => $row) {
       if ($view->field['name']->getValue($row) == $account->getUsername()) {
         break;
@@ -85,7 +83,7 @@ class PathautoUserWebTest extends WebTestBase {
     $this->drupalPostForm('admin/people', $edit, t('Apply to selected items'));
     $this->assertText('Update URL alias was applied to 1 item.');
 
-    $this->assertEntityAlias($account, '/users/' . Unicode::strtolower($account->getUsername()));
+    $this->assertEntityAlias($account, '/users/' . mb_strtolower($account->getUsername()));
     $this->assertEntityAlias($this->adminUser, '/user/' . $this->adminUser->id());
   }
 

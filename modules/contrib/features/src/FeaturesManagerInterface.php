@@ -328,7 +328,7 @@ interface FeaturesManagerInterface {
    * @return array
    *   Array of package directories keyed by package machine name.
    */
-  public function listPackageDirectories(array $machine_names = array(), FeaturesBundleInterface $bundle = NULL);
+  public function listPackageDirectories(array $machine_names = [], FeaturesBundleInterface $bundle = NULL);
 
   /**
    * Assigns a set of configuration items to a given package or profile.
@@ -414,7 +414,7 @@ interface FeaturesManagerInterface {
    *
    * @fixme Should this be moved to the package object or a related helper?
    */
-  public function mergeInfoArray(array $info1, array $info2, array $keys = array());
+  public function mergeInfoArray(array $info1, array $info2, array $keys = []);
 
   /**
    * Lists the types of configuration available on the site.

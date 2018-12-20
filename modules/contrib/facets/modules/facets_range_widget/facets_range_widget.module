@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Contains install hooks for facets range widget.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function facets_range_widget_requirements() {
+  $library_name = 'jquery-ui-slider-pips';
+  $library_path = '/libraries/' . $library_name;
+  $library_exists = (file_exists(DRUPAL_ROOT . $library_path)) ? TRUE : FALSE;
+
+  $requirements = [];
+  if (!$library_exists) {
+    $arguments = [
+      ':docs' => 'https://www.drupal.org/docs/8/theming-drupal-8/adding-stylesheets-css-and-javascript-js-to-a-drupal-8-theme#external',
+      ':readme' => 'http://cgit.drupalcode.org/facets/tree/modules/facets_range_widget/README.txt',
+    ];
+    $requirements['facets_range_widget_pips_slider'] = [
+      'title' => t('Facets range slider'),
+      'value' => t('The jquery ui slider pips library is not installed.'),
+      'severity' => REQUIREMENT_ERROR,
+      'description' => t('The range slider library is not installed, check the <a href=":readme">README.txt for more information</a> and <a href=":docs">the documentation for information on how to install a library</a>.', $arguments),
+    ];
+  }
+
+  return $requirements;
+}

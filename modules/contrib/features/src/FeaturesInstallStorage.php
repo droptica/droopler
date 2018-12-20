@@ -66,7 +66,7 @@ class FeaturesInstallStorage extends ExtensionInstallStorage {
    */
   public function getAllFolders() {
     if (!isset($this->folders)) {
-      $this->folders = array();
+      $this->folders = [];
       $this->folders += $this->getCoreNames();
 
       $install_profile = Settings::get('install_profile');
@@ -117,8 +117,8 @@ class FeaturesInstallStorage extends ExtensionInstallStorage {
         // CHANGED START: Put Features modules first in list returned.
         // to allow features to override config provided by other extensions.
         $featuresManager = \Drupal::service('features.manager');
-        $features_list = array();
-        $module_list = array();
+        $features_list = [];
+        $module_list = [];
         foreach (array_keys($module_list_scan) as $module) {
           if ($featuresManager->isFeatureModule($module_list_scan[$module])) {
             $features_list[$module] = $module_list_scan[$module];
@@ -150,7 +150,7 @@ class FeaturesInstallStorage extends ExtensionInstallStorage {
             $profile_list = $listing->scan('profile');
           }
           if (isset($profile_list[$profile])) {
-            $profile_folders = $this->getComponentNames(array($profile_list[$profile]));
+            $profile_folders = $this->getComponentNames([$profile_list[$profile]]);
             $this->folders = $profile_folders + $this->folders;
           }
         }

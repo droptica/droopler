@@ -24,4 +24,5 @@ class RandomTest extends KernelTestBase {
       $this->assertNotIdentical($first_set[$token], $second_set[$token]);
     }
   }
+
 }

@@ -1,0 +1,14 @@
+type: module
+name: 'Search API'
+description: 'Provides a generic framework for modules offering search capabilities.'
+package: Search
+# core: 8.x
+configure: search_api.overview
+dependencies:
+  - drupal:system (>=8.5)
+
+# Information added by Drupal.org packaging script on 2018-11-18
+version: '8.x-1.11'
+core: '8.x'
+project: 'search_api'
+datestamp: 1542564486

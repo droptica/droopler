@@ -221,6 +221,12 @@ class ParagraphsLibraryItemTest extends ParagraphsExperimentalTestBase {
     $this->assertLink('Manage fields');
     $this->assertLink('Manage form display');
     $this->assertLink('Manage display');
+    // Assert that users can create fields to
+    $this->clickLink('Manage fields');
+    $this->clickLink(t('Add field'));
+    $this->assertResponse(200);
+    $this->assertNoErrorsLogged();
+    $this->assertNoText('plugin does not exist');
     $this->drupalGet('admin/config/content');
     $this->clickLink('Paragraphs library item settings');
   }

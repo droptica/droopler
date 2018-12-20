@@ -1,0 +1,5 @@
+services:
+  d_content.route_subscriber:
+    class: Drupal\d_content\Routing\ContactAlterRouteSubscriber
+    tags:
+      - { name: event_subscriber }

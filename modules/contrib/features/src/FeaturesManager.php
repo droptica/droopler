@@ -39,7 +39,7 @@ class FeaturesManager implements FeaturesManagerInterface {
   /**
    * The extension storages.
    *
-   * @var \Drupal\features\FeaturesExtensionStoragesInterface
+   * @var \Drupal\features\FeaturesExtensionStoragesByDirectoryInterface
    */
   protected $extensionStorages;
 
@@ -148,7 +148,7 @@ class FeaturesManager implements FeaturesManagerInterface {
     $this->configFactory = $config_factory;
     $this->configReverter = $config_reverter;
     $this->settings = $config_factory->getEditable('features.settings');
-    $this->extensionStorages = new FeaturesExtensionStorages($this->configStorage);
+    $this->extensionStorages = new FeaturesExtensionStoragesByDirectory($this->configStorage);
     $this->extensionStorages->addStorage(InstallStorage::CONFIG_INSTALL_DIRECTORY);
     $this->extensionStorages->addStorage(InstallStorage::CONFIG_OPTIONAL_DIRECTORY);
     $this->packages = [];
@@ -196,10 +196,10 @@ class FeaturesManager implements FeaturesManagerInterface {
    * {@inheritdoc}
    */
   public function getConfigType($fullname) {
-    $result = array(
+    $result = [
       'type' => '',
       'name_short' => '',
-    );
+    ];
     $prefix = FeaturesManagerInterface::SYSTEM_SIMPLE_CONFIG . '.';
     if (strpos($fullname, $prefix) !== FALSE) {
       $result['type'] = FeaturesManagerInterface::SYSTEM_SIMPLE_CONFIG;
@@ -320,7 +320,7 @@ class FeaturesManager implements FeaturesManagerInterface {
    * {@inheritdoc}
    */
   public function filterPackages(array $packages, $namespace = '', $only_exported = FALSE) {
-    $result = array();
+    $result = [];
     /** @var \Drupal\features\Package $package */
     foreach ($packages as $key => $package) {
       // A package matches the namespace if:
@@ -417,7 +417,7 @@ class FeaturesManager implements FeaturesManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function listPackageDirectories(array $machine_names = array(), FeaturesBundleInterface $bundle = NULL) {
+  public function listPackageDirectories(array $machine_names = [], FeaturesBundleInterface $bundle = NULL) {
     if (empty($machine_names)) {
       $machine_names = array_keys($this->getPackages());
     }
@@ -438,7 +438,7 @@ class FeaturesManager implements FeaturesManagerInterface {
       return in_array($module->getName(), $machine_names);
     });
 
-    $directories = array();
+    $directories = [];
     foreach ($modules as $module) {
       $directories[$module->getName()] = $module->getPath();
     }
@@ -546,7 +546,7 @@ class FeaturesManager implements FeaturesManagerInterface {
    * @param array $module_list
    * @return array $dependencies
    */
-  protected function getConfigDependency(ConfigurationItem $config, $module_list = array()) {
+  protected function getConfigDependency(ConfigurationItem $config, $module_list = []) {
     $dependencies = [];
     $type = $config->getType();
 
@@ -737,7 +737,7 @@ class FeaturesManager implements FeaturesManagerInterface {
       $packages = $this->getPackages();
     }
     else {
-      $packages = array($package);
+      $packages = [$package];
     }
     $module_list = $this->moduleHandler->getModuleList();
     $config_collection = $this->getConfigCollection();
@@ -940,7 +940,7 @@ class FeaturesManager implements FeaturesManagerInterface {
     }
 
     if ($package->getConfig()) {
-      foreach (array('excluded', 'required') as $constraint) {
+      foreach (['excluded', 'required'] as $constraint) {
         if (!empty($package->{'get' . $constraint}())) {
           $features_info[$constraint] = $package->{'get' . $constraint}();
         }
@@ -957,7 +957,7 @@ class FeaturesManager implements FeaturesManagerInterface {
     // The name and description need to be cast as strings from the
     // TranslatableMarkup objects returned by t() to avoid raising an
     // InvalidDataTypeException on Yaml serialization.
-    foreach (array('name', 'description') as $key) {
+    foreach (['name', 'description'] as $key) {
       $info[$key] = (string) $info[$key];
     }
 
@@ -1008,7 +1008,7 @@ class FeaturesManager implements FeaturesManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function mergeInfoArray(array $info1, array $info2, array $keys = array()) {
+  public function mergeInfoArray(array $info1, array $info2, array $keys = []) {
     // If keys were specified, use only those.
     if (!empty($keys)) {
       $info2 = array_intersect_key($info2, array_fill_keys($keys, NULL));
@@ -1061,7 +1061,7 @@ class FeaturesManager implements FeaturesManagerInterface {
    * {@inheritdoc}
    */
   public function listExistingConfig($installed = FALSE, FeaturesBundleInterface $bundle = NULL) {
-    $config = array();
+    $config = [];
     $existing = $this->getFeaturesModules($bundle, $installed);
     foreach ($existing as $extension) {
       // Keys are configuration item names and values are providing extension
@@ -1150,6 +1150,7 @@ class FeaturesManager implements FeaturesManagerInterface {
       $dependency_manager = $this->getFeaturesConfigDependencyManager();
       // List configuration provided by installed features.
       $existing_config = $this->listExistingConfig(NULL);
+      $existing_config_by_directory = $this->extensionStorages->listAllByDirectory();
       foreach (array_keys($config_types) as $config_type) {
         $config = $this->listConfigByType($config_type);
         foreach ($config as $item_name => $label) {
@@ -1162,7 +1163,7 @@ class FeaturesManager implements FeaturesManagerInterface {
             'type' => $config_type,
             'dependents' => array_keys($dependency_manager->getDependentEntities('config', $name)),
             // Default to the install directory.
-            'subdirectory' => InstallStorage::CONFIG_INSTALL_DIRECTORY,
+            'subdirectory' => isset($existing_config_by_directory[$name]) ? $existing_config_by_directory[$name] : InstallStorage::CONFIG_INSTALL_DIRECTORY,
             'package' => '',
             'providerExcluded' => NULL,
             'provider' => isset($existing_config[$name]) ? $existing_config[$name] : NULL,
@@ -1211,7 +1212,7 @@ class FeaturesManager implements FeaturesManagerInterface {
       $path = dirname($extension_path);
     }
 
-    return array($full_name, $path);
+    return [$full_name, $path];
   }
 
   /**
@@ -1221,11 +1222,11 @@ class FeaturesManager implements FeaturesManagerInterface {
     /** @var \Drupal\config_update\ConfigDiffInterface $config_diff */
     $config_diff = \Drupal::service('config_update.config_diff');
 
-    $different = array();
+    $different = [];
     foreach ($feature->getConfig() as $name) {
       $active = $this->configStorage->read($name);
       $extension = $this->extensionStorages->read($name);
-      $extension = !empty($extension) ? $extension : array();
+      $extension = !empty($extension) ? $extension : [];
       if (($include_new || !empty($extension)) && !$config_diff->same($extension, $active)) {
         $different[] = $name;
       }
@@ -1241,7 +1242,7 @@ class FeaturesManager implements FeaturesManagerInterface {
    * {@inheritdoc}
    */
   public function detectNew(Package $feature) {
-    $result = array();
+    $result = [];
     foreach ($feature->getConfig() as $name) {
       $extension = $this->extensionStorages->read($name);
       if (empty($extension)) {
@@ -1256,7 +1257,7 @@ class FeaturesManager implements FeaturesManagerInterface {
    */
   public function detectMissing(Package $feature) {
     $config = $this->getConfigCollection();
-    $result = array();
+    $result = [];
     foreach ($feature->getConfigOrig() as $name) {
       if (!isset($config[$name])) {
         $result[] = $name;
@@ -1269,8 +1270,8 @@ class FeaturesManager implements FeaturesManagerInterface {
    * {@inheritdoc}
    */
   public function reorderMissing(array $missing) {
-    $list = array();
-    $result = array();
+    $list = [];
+    $result = [];
     foreach ($missing as $full_name) {
       $this->addConfigList($full_name, $list);
     }

@@ -139,7 +139,7 @@ class ConfigRevertConfirmForm extends ConfirmFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->configRevert->revert($this->type, $this->name);
 
-    drupal_set_message($this->t('The configuration was reverted to its source.'));
+    $this->messenger()->addMessage($this->t('The configuration %item has been reverted to its source.', ['%item' => $this->name]));
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
 

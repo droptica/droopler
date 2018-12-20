@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1
+class ComposerStaticInitec72b12da9b56166936480f392c574a2
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -12,6 +12,7 @@ class ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -97,6 +98,11 @@ class ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1
         'M' => 
         array (
             'Masterminds\\' => 12,
+        ),
+        'J' => 
+        array (
+            'JakubOnderka\\PhpConsoleHighlighter\\' => 35,
+            'JakubOnderka\\PhpConsoleColor\\' => 29,
         ),
         'G' => 
         array (
@@ -301,6 +307,14 @@ class ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
+        'JakubOnderka\\PhpConsoleHighlighter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
+        ),
+        'JakubOnderka\\PhpConsoleColor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -401,17 +415,6 @@ class ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1
                 0 => __DIR__ . '/..' . '/stack/builder/src',
             ),
         ),
-        'J' => 
-        array (
-            'JakubOnderka\\PhpConsoleHighlighter' => 
-            array (
-                0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
-            ),
-            'JakubOnderka\\PhpConsoleColor' => 
-            array (
-                0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
-            ),
-        ),
         'E' => 
         array (
             'Egulias\\' => 
@@ -482,10 +485,10 @@ class ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit34642b1f1768d2aaea6ce47a03a567c1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitec72b12da9b56166936480f392c574a2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitec72b12da9b56166936480f392c574a2::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitec72b12da9b56166936480f392c574a2::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitec72b12da9b56166936480f392c574a2::$classMap;
 
         }, null, ClassLoader::class);
     }

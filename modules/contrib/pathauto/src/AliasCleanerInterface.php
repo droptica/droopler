@@ -72,8 +72,8 @@ interface AliasCleanerInterface {
   /**
    * Return an array of arrays for punctuation values.
    *
-   * Returns an array of arrays for punctuation values keyed by a name, including
-   * the value and a textual description.
+   * Returns an array of arrays for punctuation values keyed by a name,
+   * including the value and a textual description.
    * Can and should be expanded to include "all" non text punctuation values.
    *
    * @return array

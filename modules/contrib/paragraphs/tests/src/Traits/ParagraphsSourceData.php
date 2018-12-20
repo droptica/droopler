@@ -31,6 +31,14 @@ trait ParagraphsSourceData {
           'bundle' => 'paragraphs_field',
           'data' => 'Serialized Instance Data',
           'deleted' => '0',
+          'field_id' => '1',
+        ],
+      ],
+      'field_config' => [
+        [
+          'id' => '1',
+          'field_name' => 'field_text',
+          'translatable' => '1',
         ],
       ],
       'field_revision_field_text' => [

@@ -58,7 +58,7 @@ class RedirectSettingsForm extends ConfigFormBase {
     $form['globals']['redirect_route_normalizer_enabled'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Enforce clean and canonical URLs.'),
-      '#description' => $this->t('Enabling this will automatically redirect to the canonical URL of any page. That includes redirecting to an alias if existing, removing trainling slashes, ensure the language prefix is set and similar clean-up.'),
+      '#description' => $this->t('Enabling this will automatically redirect to the canonical URL of any page. That includes redirecting to an alias if existing, removing trailing slashes, ensure the language prefix is set and similar clean-up.'),
       '#default_value' => $config->get('route_normalizer_enabled'),
     );
     $form['globals']['redirect_ignore_admin_path'] = array(
@@ -87,7 +87,7 @@ class RedirectSettingsForm extends ConfigFormBase {
       }
     }
     $config->save();
-    drupal_set_message(t('Configuration was saved.'));
+    drupal_set_message($this->t('Configuration was saved.'));
   }
 
 }

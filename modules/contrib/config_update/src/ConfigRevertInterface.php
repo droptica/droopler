@@ -72,7 +72,7 @@ interface ConfigRevertInterface {
    *   The name of the config item, without the prefix.
    *
    * @return array
-   *   The configuration value.
+   *   The configuration value, or FALSE if it is not found.
    */
   public function getFromActive($type, $name);
 

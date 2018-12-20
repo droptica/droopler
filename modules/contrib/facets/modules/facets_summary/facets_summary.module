@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the facets summary module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function facets_summary_theme($existing, $type, $theme, $path) {
+  return [
+    'facets_summary' => [
+      'variables' => [
+        'count' => [],
+        'items' => [],
+      ],
+    ],
+    'facets_summary_count' => [
+      'variables' => [
+        'count' => NULL,
+      ],
+    ],
+    'facets_summary_facet' => [
+      'render element' => 'elements',
+      'variables' => [
+        'label' => NULL,
+        'separator' => '',
+        'items' => [],
+        'facet_id' => NULL,
+        'facet_admin_label' => NULL,
+      ],
+    ],
+    'facets_summary_facet_result' => [
+      'variables' => [
+        'label' => NULL,
+        'show_count' => FALSE,
+        'count' => NULL,
+        'facet_id' => NULL,
+      ],
+    ],
+    'facets_summary_empty' => [
+      'variables' => [
+        'message' => '',
+      ],
+    ],
+    'facets_summary_item_list' => [
+      'variables' => [
+        'items' => [],
+        'title' => '',
+        'list_type' => 'ul',
+        'wrapper_attributes' => [],
+        'attributes' => [],
+        'empty' => NULL,
+        'context' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function facets_summary_theme_suggestions_facets_summary_facet(array $variables) {
+  // Add suggestions as: facets-summary-facet--{facet_id}.
+  return ['facets_summary_facet__' . $variables['facet_id']];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function facets_summary_theme_suggestions_facets_summary_facet_result(array $variables) {
+  // Add suggestions as: facets-summary-facet-result--{facet_id}.
+  return [$variables['theme_hook_original'] . '__' . $variables['facet_id']];
+}
+
+/**
+ * Prepares variables for facets summary item list templates.
+ *
+ * Default template: facets-summary-item-list.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - items: An array of items to be displayed in the list. Each item can be
+ *     either a string or a render array. If #type, #theme, or #markup
+ *     properties are not specified for child render arrays, they will be
+ *     inherited from the parent list, allowing callers to specify larger
+ *     nested lists without having to explicitly specify and repeat the
+ *     render properties for all nested child lists.
+ *   - title: A title to be prepended to the list.
+ *   - list_type: The type of list to return (e.g. "ul", "ol").
+ *   - wrapper_attributes: HTML attributes to be applied to the list wrapper.
+ *
+ * @see https://www.drupal.org/node/1842756
+ */
+function facets_summary_preprocess_facets_summary_item_list(array &$variables) {
+  template_preprocess_item_list($variables);
+}

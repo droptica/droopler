@@ -17,9 +17,9 @@ class FeaturesConfigDependencyManager extends ConfigDependencyManager{
    * {@inheritdoc}
    */
   public function getDependentEntities($type, $name) {
-    $dependent_entities = array();
+    $dependent_entities = [];
 
-    $entities_to_check = array();
+    $entities_to_check = [];
     if ($type == 'config') {
       $entities_to_check[] = $name;
     }
@@ -42,7 +42,7 @@ class FeaturesConfigDependencyManager extends ConfigDependencyManager{
       // always after field storages. This is because field storages need to be
       // created before a field.
       $this->sorted_graph = $this->getGraph();
-      uasort($this->sorted_graph, array($this, 'sortGraph'));
+      uasort($this->sorted_graph, [$this, 'sortGraph']);
     }
     return array_replace(array_intersect_key($this->sorted_graph, $dependencies), $dependencies);
   }

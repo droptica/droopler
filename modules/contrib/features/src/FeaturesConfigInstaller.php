@@ -75,7 +75,7 @@ class FeaturesConfigInstaller extends ConfigInstaller {
     $features_config = array_keys($this->featuresManager->listExistingConfig());
     // Map array so we can use isset instead of in_array for faster access.
     $features_config = array_combine($features_config, $features_config);
-    $existing_configuration = array();
+    $existing_configuration = [];
     // Gather information about all the supported collections.
     $collection_info = $this->configManager->getConfigCollectionInfo();
 

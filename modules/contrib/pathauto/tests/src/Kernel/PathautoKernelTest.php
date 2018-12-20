@@ -3,7 +3,6 @@
 namespace Drupal\Tests\pathauto\Kernel;
 
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\language\Entity\ConfigurableLanguage;
@@ -285,7 +284,7 @@ class PathautoKernelTest extends KernelTestBase {
     $this->assertEntityAlias($node, '/content/second-title');
     $this->assertNoAliasExists(array('alias' => '/content/first-title'));
 
-    // Test PATHAUTO_UPDATE_ACTION_LEAVE
+    // Test PATHAUTO_UPDATE_ACTION_LEAVE.
     $config->set('update_action', PathautoGeneratorInterface::UPDATE_ACTION_LEAVE);
     $config->save();
     $node->setTitle('Third title');
@@ -323,8 +322,8 @@ class PathautoKernelTest extends KernelTestBase {
   }
 
   /**
-   * Test that \Drupal::service('pathauto.generator')->createEntityAlias() will not create an alias for a pattern
-   * that does not get any tokens replaced.
+   * Test that \Drupal::service('pathauto.generator')->createEntityAlias() will
+   * not create an alias for a pattern that does not get any tokens replaced.
    */
   public function testNoTokensNoAlias() {
     $this->installConfig(['filter']);
@@ -365,12 +364,11 @@ class PathautoKernelTest extends KernelTestBase {
   function testParentChildPathTokens() {
     // First create a field which will be used to create the path. It must
     // begin with a letter.
-
     $this->installEntitySchema('taxonomy_term');
 
     Vocabulary::create(['vid' => 'tags'])->save();
 
-    $fieldname = 'a' . Unicode::strtolower($this->randomMachineName());
+    $fieldname = 'a' . mb_strtolower($this->randomMachineName());
     $field_storage = FieldStorageConfig::create(['entity_type' => 'taxonomy_term', 'field_name' => $fieldname, 'type' => 'string']);
     $field_storage->save();
     $field = FieldConfig::create(['field_storage' => $field_storage, 'bundle' => 'tags']);
@@ -391,11 +389,11 @@ class PathautoKernelTest extends KernelTestBase {
     // Create the child term.
     $child = Term::create(['vid' => 'tags', $fieldname => $this->randomMachineName(), 'parent' => $parent, 'name' => $this->randomMachineName()]);
     $child->save();
-    $this->assertEntityAlias($child, '/' . Unicode::strtolower($parent->getName() . '/' . $child->$fieldname->value));
+    $this->assertEntityAlias($child, '/' . mb_strtolower($parent->getName() . '/' . $child->$fieldname->value));
 
     // Re-saving the parent term should not modify the child term's alias.
     $parent->save();
-    $this->assertEntityAlias($child, '/' . Unicode::strtolower($parent->getName() . '/' . $child->$fieldname->value));
+    $this->assertEntityAlias($child, '/' . mb_strtolower($parent->getName() . '/' . $child->$fieldname->value));
   }
 
   /**
@@ -506,7 +504,7 @@ class PathautoKernelTest extends KernelTestBase {
   }
 
   /**
-   * Tests that enabled entity types genrates the necessary fields and plugins.
+   * Tests that enabled entity types generates the necessary fields and plugins.
    */
   public function testSettingChangeInvalidatesCache() {
 

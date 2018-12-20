@@ -1,0 +1,132 @@
+# BEF general settings
+better_exposed_filters.general:
+  label: 'General BEF settings'
+  type: mapping
+  mapping:
+    allow_secondary:
+      type: boolean
+      label: 'Enable secondary exposed form options'
+    secondary_label:
+      type: label
+      label: 'Secondary options label'
+    autosubmit:
+      type: boolean
+      label: 'Autosubmit'
+    autosubmit_exclude_textfield:
+      type: boolean
+      label: 'Exclude Textfield'
+    autosubmit_hide:
+      type: boolean
+      label: 'Hide submit button'
+
+# BEF exposed sort settings
+better_exposed_filters.sort:
+  type: mapping
+  label: 'Exposed sort BEF settings'
+  mapping:
+    bef_format:
+      type: string
+      label: 'Display exposed sort options as'
+    advanced:
+      type: mapping
+      mapping:
+        collapsible:
+          type: boolean
+          label: 'Make sort options collapsible'
+        collapsible_label:
+          type: label
+          label: 'Collapsible details element title'
+        combine:
+          type: boolean
+          label: 'Combine sort order with sort by'
+        combine_rewrite:
+          type: text
+          label: 'Rewrite combined sort options'
+        reset:
+          type: boolean
+          label: 'Include reset sort option'
+        reset_label:
+          type: label
+          label: 'Reset sort label'
+        is_secondary:
+          type: boolean
+          label: 'Sort is a secondary option'
+
+# BEF exposed filter settings
+better_exposed_filters.*:
+  label: 'BEF filter settings'
+  type: mapping
+  mapping:
+    bef_format:
+      type: string
+      label: 'Display exposed filter as'
+    more_options:
+      label: 'More options'
+      type: mapping
+      mapping:
+        placeholder_text:
+          type: text
+          label: 'Placeholder text for text fields'
+        bef_select_all_none:
+          type: boolean
+          label: 'Add select all/none links'
+        bef_select_all_none_nested:
+          type: boolean
+          label: 'Add select all/none links for heirarchical filters'
+        bef_collapsible:
+          type: boolean
+          label: 'Place filter in a collapsible HTML element'
+        is_secondary:
+          type: boolean
+          label: 'This filter is a secondary option'
+        rewrite:
+          type: mapping
+          label: 'Rewrite filter options'
+          mapping:
+            filter_rewrite_values:
+              type: text
+              label: 'Rewrite filter option'
+    slider_options:
+      label: 'Slider options'
+      type: mapping
+      mapping:
+        bef_slider_min:
+          type: float
+          label: 'Silder min option'
+          translatable: true
+        bef_slider_max:
+          type: float
+          label: 'Silder max option'
+          translatable: true
+        bef_slider_step:
+          type: float
+          label: 'Silder step option'
+          translatable: true
+        bef_slider_animate:
+          type: string
+          label: 'Silder animate option'
+          translatable: true
+        bef_slider_orientation:
+          type: string
+          label: 'Silder orientation'
+          translatable: true
+
+# Schema for the Better Exposed Filters configuration files.
+views.exposed_form.bef:
+  type: views_exposed_form
+  label: 'Better Exposed Filters'
+  mapping:
+    input_required:
+      type: boolean
+      label: 'Input required before showing results'
+    text_input_required:
+      type: text
+      label: 'Text shown if a filter option has not been selected'
+    text_input_required_format:
+      type: text
+      label: 'Text format for the text_input_required field'
+    bef:
+      type: sequence
+      label: 'BEF Settings'
+      sequence:
+        type: better_exposed_filters.[%key]

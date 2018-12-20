@@ -1,0 +1,30 @@
+search_api.server.*:
+  type: config_entity
+  label : 'Search server'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    name:
+      type: label
+      label: 'Name'
+    description:
+      type: text
+      label: 'Description'
+    status:
+      type: boolean
+      label: 'Status'
+    backend:
+      type: string
+      label: 'Backend Plugin ID'
+    backend_config:
+      type: plugin.plugin_configuration.search_api_backend.[%parent.backend]
+    langcode:
+      type: string
+      label: 'Language code'
+    dependencies:
+      type: config_dependencies
+      label: 'Dependencies'
+
+plugin.plugin_configuration.search_api_backend.*:
+  type: mapping

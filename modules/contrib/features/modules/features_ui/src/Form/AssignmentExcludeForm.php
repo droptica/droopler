@@ -31,72 +31,72 @@ class AssignmentExcludeForm extends AssignmentFormBase {
     $this->setConfigTypeSelect($form, $settings['types']['config'], $this->t('exclude'), FALSE,
       $this->t("Select types of configuration that should be excluded from packaging."));
 
-    $form['curated'] = array(
+    $form['curated'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Exclude designated site-specific configuration'),
       '#default_value' => $curated_settings,
       '#description' => $this->t('Select this option to exclude a curated list of site-specific configuration from packaging.'),
-    );
+    ];
 
-    $form['module'] = array(
+    $form['module'] = [
       '#type' => 'fieldset',
       '#tree' => TRUE,
       '#title' => $this->t('Exclude configuration provided by modules'),
-    );
+    ];
 
-    $form['module']['installed'] = array(
+    $form['module']['installed'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Exclude installed module-provided entity configuration'),
       '#default_value' => $module_settings['installed'],
       '#description' => $this->t('Select this option to exclude configuration provided by INSTALLED modules from reassignment.'),
-      '#attributes' => array(
+      '#attributes' => [
         'data-module-installed' => 'status',
-      ),
-    );
+      ],
+    ];
 
-    $show_if_module_installed_checked = array(
-      'visible' => array(
-        ':input[data-module-installed="status"]' => array('checked' => TRUE),
-      ),
-    );
+    $show_if_module_installed_checked = [
+      'visible' => [
+        ':input[data-module-installed="status"]' => ['checked' => TRUE],
+      ],
+    ];
 
     $info = system_get_info('module', drupal_get_profile());
-    $form['module']['profile'] = array(
+    $form['module']['profile'] = [
       '#type' => 'checkbox',
       '#title' => $this->t("Don't exclude install profile's configuration"),
       '#default_value' => $module_settings['profile'],
-      '#description' => $this->t("Select this option to allow configuration provided by the site's install profile (%profile) to be reassigned.", array('%profile' => $info['name'])),
+      '#description' => $this->t("Select this option to allow configuration provided by the site's install profile (%profile) to be reassigned.", ['%profile' => $info['name']]),
       '#states' => $show_if_module_installed_checked,
-    );
+    ];
 
     $bundle_name = $this->currentBundle->getMachineName();
     $bundle_name = !empty($bundle_name) ? $bundle_name : $this->t('none');
-    $form['module']['namespace'] = array(
+    $form['module']['namespace'] = [
       '#type' => 'checkbox',
       '#title' => $this->t("Don't exclude non-installed configuration by namespace"),
       '#default_value' => $module_settings['namespace'],
-      '#description' => $this->t("Select this option to allow configuration provided by uninstalled modules with the bundle namespace (%namespace_*) to be reassigned.", array('%namespace' => $bundle_name)),
+      '#description' => $this->t("Select this option to allow configuration provided by uninstalled modules with the bundle namespace (%namespace_*) to be reassigned.", ['%namespace' => $bundle_name]),
       '#states' => $show_if_module_installed_checked,
-      '#attributes' => array(
+      '#attributes' => [
         'data-namespace' => 'status',
-      ),
-    );
+      ],
+    ];
 
-    $show_if_namespace_checked = array(
-      'visible' => array(
-        ':input[data-namespace="status"]' => array('checked' => TRUE),
-        ':input[data-module-installed="status"]' => array('checked' => TRUE),
-      ),
-    );
+    $show_if_namespace_checked = [
+      'visible' => [
+        ':input[data-namespace="status"]' => ['checked' => TRUE],
+        ':input[data-module-installed="status"]' => ['checked' => TRUE],
+      ],
+    ];
 
-    $form['module']['namespace_any'] = array(
+    $form['module']['namespace_any'] = [
       '#type' => 'checkbox',
       '#title' => $this->t("Don't exclude ANY configuration by namespace"),
       '#default_value' => $module_settings['namespace_any'],
       '#description' => $this->t("Select this option to allow configuration provided by ANY modules with the bundle namespace (%namespace_*) to be reassigned.
-        Warning: Can cause installed configuration to be reassigned to different packages.", array('%namespace' => $bundle_name)),
+        Warning: Can cause installed configuration to be reassigned to different packages.", ['%namespace' => $bundle_name]),
       '#states' => $show_if_namespace_checked,
-    );
+    ];
 
     $this->setActions($form, self::METHOD_ID);
 

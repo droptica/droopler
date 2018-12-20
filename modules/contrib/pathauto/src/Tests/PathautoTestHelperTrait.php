@@ -2,7 +2,6 @@
 
 namespace Drupal\pathauto\Tests;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Render\BubbleableMetadata;
@@ -34,7 +33,7 @@ trait PathautoTestHelperTrait {
     $type = ($entity_type_id == 'forum') ? 'forum' : 'canonical_entities:' . $entity_type_id;
 
     $pattern = PathautoPattern::create([
-      'id' => Unicode::strtolower($this->randomMachineName()),
+      'id' => mb_strtolower($this->randomMachineName()),
       'type' => $type,
       'pattern' => $pattern,
       'weight' => $weight,
@@ -51,7 +50,7 @@ trait PathautoTestHelperTrait {
    * @param string $entity_type
    *   The entity type ID.
    * @param string $bundle
-   *   The bundle
+   *   The bundle.
    */
   protected function addBundleCondition(PathautoPatternInterface $pattern, $entity_type, $bundle) {
     $plugin_id = $entity_type == 'node' ? 'node_type' : 'entity_bundle:' . $entity_type;
@@ -142,10 +141,11 @@ trait PathautoTestHelperTrait {
 
   /**
    * @param array $values
+   *
    * @return \Drupal\taxonomy\VocabularyInterface
    */
   public function addVocabulary(array $values = array()) {
-    $name = Unicode::strtolower($this->randomMachineName(5));
+    $name = mb_strtolower($this->randomMachineName(5));
     $values += array(
       'name' => $name,
       'vid' => $name,
@@ -158,7 +158,7 @@ trait PathautoTestHelperTrait {
 
   public function addTerm(VocabularyInterface $vocabulary, array $values = array()) {
     $values += array(
-      'name' => Unicode::strtolower($this->randomMachineName(5)),
+      'name' => mb_strtolower($this->randomMachineName(5)),
       'vid' => $vocabulary->id(),
     );
 

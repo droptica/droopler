@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Search API Taxonomy Term Handlers module.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_requirements().
+ */
+function search_api_views_taxonomy_requirements($phase) {
+  $requirements = [];
+
+  // We don't want to prevent update.php from running.
+  if ($phase !== 'update') {
+    $requirements['search_api_views_taxonomy'] = [
+      'title' => t('Search API Taxonomy Term Handlers'),
+      'value' => t('Out-dated'),
+      'description' => t('All functionality of the "Search API Taxonomy Term Handlers" module has been moved into the Search API module. You should <a href=":uninstall">uninstall this module</a>.', [
+        ':uninstall' => Url::fromRoute('system.modules_uninstall')->toString(),
+      ]),
+      'severity' => REQUIREMENT_WARNING,
+    ];
+  }
+
+  return $requirements;
+}

@@ -88,6 +88,7 @@ class PathautoState extends TypedData {
 
   /**
    * Returns the key value collection that should be used for the given entity.
+   *
    * @return string
    */
   protected function getCollection() {

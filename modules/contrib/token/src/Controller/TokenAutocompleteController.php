@@ -2,7 +2,6 @@
 
 namespace Drupal\token\Controller;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\token\TreeBuilderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -50,7 +49,7 @@ class TokenAutocompleteController extends ControllerBase {
 
     $matches = [];
 
-    if (!Unicode::strlen($filter)) {
+    if (!mb_strlen($filter)) {
       $matches["[{$token_type}:"] = 0;
     }
     else {

@@ -74,24 +74,3 @@ admin_toolbar_tools.flush_rendercache:
   route_name: admin_toolbar_tools.flush_rendercache
   parent: admin_toolbar_tools.flush
   menu_name: admin
-
-admin_toolbar_tools.drupalorg:
-  title: 'Drupal.org'
-  weight: -5
-  url: https://www.drupal.org
-  parent: admin_toolbar_tools.help
-  menu_name: admin
-
-admin_toolbar_tools.listchanges:
-  title: 'Change records for Drupal core'
-  weight: -6
-  url: https://www.drupal.org/list-changes
-  parent: admin_toolbar_tools.drupalorg
-  menu_name: admin
-
-admin_toolbar_tools.doc:
-  title: 'D8 API documentation'
-  weight: -5
-  url: https://api.drupal.org/api/drupal/8
-  parent: admin_toolbar_tools.drupalorg
-  menu_name: admin

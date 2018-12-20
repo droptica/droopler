@@ -193,7 +193,7 @@ class FeaturesBundle extends ConfigEntityBase implements FeaturesBundleInterface
    * {@inheritdoc}
    */
   public function getEnabledAssignments() {
-    $list = array();
+    $list = [];
     foreach ($this->assignments as $method_id => $method) {
       if ($method['enabled']) {
         $list[$method_id] = $method_id;
@@ -221,7 +221,7 @@ class FeaturesBundle extends ConfigEntityBase implements FeaturesBundleInterface
    * {@inheritdoc}
    */
   public function getAssignmentWeights() {
-    $list = array();
+    $list = [];
     foreach ($this->assignments as $method_id => $method) {
       $list[$method_id] = $method['weight'];
     }
@@ -275,7 +275,7 @@ class FeaturesBundle extends ConfigEntityBase implements FeaturesBundleInterface
       }
     }
     else {
-      $list = array();
+      $list = [];
       foreach (array_keys($this->assignments) as $method_id) {
         $list[$method_id] = $this->getAssignmentSettings($method_id);
       }

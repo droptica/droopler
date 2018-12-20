@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.d_product_categories
+id: taxonomy_term.d_product_categories
+target_entity_type_id: taxonomy_term
+target_bundle: d_product_categories
+default_langcode: site_default
+language_alterable: false

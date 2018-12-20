@@ -93,9 +93,8 @@ function hook_pathauto_is_alias_reserved($alias, $source, $langcode) {
  * This hook will only be called if a default pattern is configured (on
  * admin/config/search/path/patterns).
  *
- * @param string $pattern
- *   The alias pattern for Pathauto to pass to token_replace() to generate the
- *   URL alias.
+ * @param \Drupal\pathauto\PathautoPatternInterface $pattern
+ *   The Pathauto pattern to be used.
  * @param array $context
  *   An associative array of additional options, with the following elements:
  *   - 'module': The module or entity type being aliased.
@@ -103,14 +102,14 @@ function hook_pathauto_is_alias_reserved($alias, $source, $langcode) {
  *     aliased. Can be either 'insert', 'update', 'return', or 'bulkupdate'.
  *   - 'source': A string of the source path for the alias (e.g. 'node/1').
  *   - 'data': An array of keyed objects to pass to token_replace().
- *   - 'type': The sub-type or bundle of the object being aliased.
+ *   - 'bundle': The sub-type or bundle of the object being aliased.
  *   - 'language': A string of the language code for the alias (e.g. 'en').
  *     This can be altered by reference.
  */
-function hook_pathauto_pattern_alter(&$pattern, array $context) {
+function hook_pathauto_pattern_alter(\Drupal\pathauto\PathautoPatternInterface $pattern, array $context) {
   // Switch out any [node:created:*] tokens with [node:updated:*] on update.
   if ($context['module'] == 'node' && ($context['op'] == 'update')) {
-    $pattern = preg_replace('/\[node:created(\:[^]]*)?\]/', '[node:updated$1]', $pattern);
+    $pattern->setPattern(preg_replace('/\[node:created(\:[^]]*)?\]/', '[node:updated$1]', $pattern->getPattern()));
   }
 }
 
@@ -133,7 +132,7 @@ function hook_pathauto_pattern_alter(&$pattern, array $context) {
  *   - 'pattern': A string of the pattern used for aliasing the object.
  */
 function hook_pathauto_alias_alter(&$alias, array &$context) {
-  // Add a suffix so that all aliases get saved as 'content/my-title.html'
+  // Add a suffix so that all aliases get saved as 'content/my-title.html'.
   $alias .= '.html';
 
   // Force all aliases to be saved as language neutral.
@@ -143,7 +142,7 @@ function hook_pathauto_alias_alter(&$alias, array &$context) {
 /**
  * Alter the list of punctuation characters for Pathauto control.
  *
- * @param $punctuation
+ * @param array $punctuation
  *   An array of punctuation to be controlled by Pathauto during replacement
  *   keyed by punctuation name. Each punctuation record should be an array
  *   with the following key/value pairs:

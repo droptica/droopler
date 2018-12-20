@@ -1,0 +1,50 @@
+# Default config schema that all widgets can extend.
+facet.widget.default_config:
+  type: mapping
+  label: 'Default widget configuration'
+  mapping:
+    show_numbers:
+      type: boolean
+      label: 'Show counts'
+
+# Default schema for facet widgets of unknown type.
+facet.widget.config.*:
+  type: facet.widget.default_config
+
+# Config schema for dropdown, you can find the implementation in
+# Drupal\facets\Plugin\facets\widget\DropdownWidget. Options for this widget are
+# "show counts" and "default option label".
+facet.widget.config.dropdown:
+  type: facet.widget.default_config
+  label: 'Dropdown widget configuration'
+  mapping:
+    default_option_label:
+      type: label
+      label: 'Default option label'
+
+# Config schema for links, you can find the implementation in
+# Drupal\facets\Plugin\facets\widget\LinksWidget. Options for this widget are
+# "soft limit" and "show counts".
+facet.widget.config.links:
+  type: facet.widget.default_config
+  label: 'List of links widget configuration'
+  mapping:
+    soft_limit:
+      type: integer
+      label: 'Soft limit'
+    soft_limit_settings:
+      type: mapping
+      label: 'Soft limit settings'
+      mapping:
+        show_less_label:
+          type: label
+          label: 'Show less label'
+        show_more_label:
+          type: label
+          label: 'Show more label'
+
+# Config schema for checkbox, you can find the implementation in
+# Drupal\facets\Plugin\facets\widget\CheckboxWidget. Options for this widget are
+# "soft limit" and "show counts".
+facet.widget.config.checkbox:
+  type: facet.widget.config.links

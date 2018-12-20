@@ -71,7 +71,7 @@ class FeaturesAssignmentProfile extends FeaturesAssignmentMethodBase {
 
       // Only read in from the Standard profile if this profile doesn't already
       // exist.
-      $package_directories = $this->featuresManager->listPackageDirectories(array(), $current_bundle);
+      $package_directories = $this->featuresManager->listPackageDirectories([], $current_bundle);
       if (!isset($package_directories[$profile_name])) {
         $standard_directory = 'core/profiles/standard';
         // Conditionally add files from the 'standard' install profile.

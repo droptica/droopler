@@ -1,0 +1,10 @@
+plugin.plugin_configuration.facets_processor.invalid_qt:
+  type: config_object
+
+plugin.plugin_configuration.facets_processor.test_pre_query:
+  type: mapping
+  label: Configuration
+  mapping:
+    test_value:
+      type: label
+      label: The value used for testing

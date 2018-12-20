@@ -1,0 +1,107 @@
+/* Disable secondary paragraphs. */
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-wrapper {
+  outline: none !important;
+}
+
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-wrapper:after,
+.geysir-field-paragraph-wrapper .geysir-field-paragraph-wrapper .geysir-field-paragraph-links {
+  display: none !important;
+}
+
+/* Hide geysir on node teasers. */
+.node--view-mode-teaser .geysir-field-paragraph-links {
+  display: none !important;
+}
+
+/* Fix interaction with backstretch library. */
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_text_blocks .background-image,
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_counters .background-image,
+.geysir-field-paragraph-wrapper .wrapper-d_p_carousel .background-image {
+  z-index: auto !important;
+}
+
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_text_blocks .background-image .backstretch,
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_counters .background-image .backstretch,
+.geysir-field-paragraph-wrapper .wrapper-d_p_carousel .background-image .backstretch {
+  z-index: 0 !important;
+}
+
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_text_blocks .slick-list,
+.geysir-field-paragraph-wrapper .wrapper-d_p_group_of_counters .slick-list,
+.geysir-field-paragraph-wrapper .wrapper-d_p_carousel .slick-list {
+  z-index: 1;
+}
+
+/* Fix modal styles. */
+#geysir-modal .tabledrag-handle .handle,
+#geysir-modal-form .tabledrag-handle .handle {
+  box-sizing: content-box;
+}
+#geysir-modal .form-actions,
+#geysir-modal-form .form-actions {
+  margin-top: 1rem;
+}
+#geysir-modal .paragraph-form .form-actions,
+#geysir-modal-form .paragraph-form .form-actions {
+  margin-bottom: 1rem;
+}
+#geysir-modal .tabledrag-handle .form-actions,
+#geysir-modal-form .tabledrag-handle .form-actions {
+  margin-bottom: 15px;
+}
+#geysir-modal .btn,
+#geysir-modal-form .btn {
+  min-width: 0;
+}
+.ui-dialog #geysir-modal .ajax-progress-throbber {
+  background-image: url(../images/loading-small.gif);
+}
+#geysir-modal .form-actions .button--primary,
+#geysir-modal-form .form-actions .button--primary {
+  color: #fff;
+  background: #c75c05;
+  font-weight: bold;
+}
+#geysir-modal .form-actions .button,
+#geysir-modal-form .form-actions .button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 1.3rem;
+}
+#geysir-modal .field-multiple-table th h4,
+#geysir-modal-form .field-multiple-table th h4 {
+  color: white;
+  margin-bottom: 0;
+}
+#geysir-modal tr.draggable td:nth-child(2),
+#geysir-modal tr.draggable td:nth-child(3),
+#geysir-modal-form tr.draggable td:nth-child(2),
+#geysir-modal-form tr.draggable td:nth-child(3) {
+  padding: 10px;
+}
+#geysir-modal tr.draggable .image-widget,
+#geysir-modal-form tr.draggable .image-widget {
+  padding: 10px 0;
+}
+#geysir-modal .text-format-wrapper fieldset,
+#geysir-modal-form .text-format-wrapper fieldset {
+  margin-bottom: 0;
+}
+#geysir-modal .text-format-wrapper,
+#geysir-modal-form .text-format-wrapper {
+  margin-bottom: 2rem;
+}
+#geysir-modal .field--type-entity-reference-revisions,
+#geysir-modal-form .field--type-entity-reference-revisions {
+  margin-bottom: 2rem;
+}
+.node--type-blog-post #geysir-modal .field--name-field-d-image img,
+.node--type-blog-post #geysir-modal .field--name-field-d-long-text,
+.node--type-blog-post #geysir-modal-form .field--name-field-d-image img,
+.node--type-blog-post #geysir-modal-form .field--name-field-d-long-text {
+  width: auto;
+}
+#geysir-modal .geysirmodaladd-select-type-form,
+#geysir-modal-form .geysirmodaladd-select-type-form {
+  display: flex;
+  flex-wrap: wrap;
+}

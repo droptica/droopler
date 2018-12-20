@@ -285,8 +285,13 @@ function drush_config_update_ui_config_revert($name) {
 
   // The revert command needs the type and the unprefixed name.
   $type = $lister->getTypeNameByConfigName($name);
+  // The lister gives NULL if simple configuration, but the reverter expects
+  // 'system.simple' so we convert it.
+  if ($type === NULL) {
+    $type = 'system.simple';
+  }
   $shortname = $name;
-  if ($type && $type != 'system.simple') {
+  if ($type != 'system.simple') {
     $definition = $manager->getDefinition($type);
     $prefix = $definition->getConfigPrefix() . '.';
     if (strpos($name, $prefix) === 0) {

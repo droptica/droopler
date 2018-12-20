@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the DB Search Defaults module.
+ */
+
+use Drupal\search_api\IndexListBuilder;
+
+/**
+ * Implements hook_requirements().
+ */
+function search_api_db_defaults_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'install') {
+    $errors = IndexListBuilder::checkDefaultsModuleCanBeInstalled();
+    foreach ($errors as $type => $error) {
+      $requirements["search_api_db_defaults:$type"] = [
+        'severity' => REQUIREMENT_ERROR,
+        'description' => $error,
+      ];
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function search_api_db_defaults_install() {
+  // Clear the display plugin cache after installation so the plugin for the new
+  // view (display) gets found.
+  \Drupal::service('plugin.manager.search_api.display')
+    ->clearCachedDefinitions();
+}

@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * Contains d_geysir.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'geysir.modal.add_select_type_form':
+      $rootPath = getcwd();
+      $baseUrl = \Drupal::service('router.request_context')->getBaseUrl;
+      $modulePath = drupal_get_path('module', 'd_p');
+      foreach ($form['description'] as $paragraphName => $attributes) {
+        $fileServerPath = $rootPath . '/' . $modulePath . '/images/' . $paragraphName . '.png';
+        if (file_exists($fileServerPath)) {
+          $fileUrl = $baseUrl . $modulePath . '/images/' . $paragraphName . '.png';
+          $form['description'][$paragraphName]['#src'] = $fileUrl;
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_toolbar().
+ */
+function d_geysir_toolbar() {
+  $items = [];
+  $items['geysir_toggle'] = [
+    '#cache' => [
+      'contexts' => [
+        'user.permissions',
+      ],
+    ],
+  ];
+
+  $route = \Drupal::routeMatch()->getRouteObject();
+  $isAdmin = \Drupal::service('router.admin_context')->isAdminRoute($route);
+
+  if (!\Drupal::currentUser()->hasPermission('geysir manage paragraphs from front-end') || $isAdmin) {
+    return $items;
+  }
+
+  $items['geysir_toggle'] += [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'html_tag',
+      '#tag' => 'button',
+      '#value' => t('Paragraph overlay'),
+      '#attributes' => [
+        'aria-pressed' => 'true',
+        'type' => 'button',
+        'class' => [
+          'toolbar-icon',
+          'toolbar-icon-edit',
+          'toolbar-geysir-toggle',
+          'is-active'
+        ],
+      ],
+    ],
+    '#wrapper_attributes' => [
+      'class' => ['hidden', 'd-geysir-toolbar-tab'],
+    ],
+    '#attached' => [
+      'library' => [
+        'd_geysir/toggle_link',
+      ],
+    ],
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Using hook_preprocess_page().
+ */
+function d_geysir_preprocess_page(&$variables) {
+  $variables['#attached']['library'][] =  'd_geysir/overrides';
+}

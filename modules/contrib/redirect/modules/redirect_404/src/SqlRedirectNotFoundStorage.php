@@ -51,7 +51,7 @@ class SqlRedirectNotFoundStorage implements RedirectNotFoundStorageInterface {
    * {@inheritdoc}
    */
   public function logRequest($path, $langcode) {
-    if (Unicode::strlen($path) > static::MAX_PATH_LENGTH) {
+    if (mb_strlen($path) > static::MAX_PATH_LENGTH) {
       // Don't attempt to log paths that would result in an exception. There is
       // no point in logging truncated paths, as they cannot be used to build a
       // new redirect.

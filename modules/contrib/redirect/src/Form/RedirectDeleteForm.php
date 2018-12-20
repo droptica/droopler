@@ -34,7 +34,7 @@ class RedirectDeleteForm extends ContentEntityConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->entity->delete();
-    drupal_set_message(t('The redirect %redirect has been deleted.', array('%redirect' => $this->entity->getRedirectUrl()->toString())));
+    drupal_set_message($this->t('The redirect %redirect has been deleted.', array('%redirect' => $this->entity->getRedirectUrl()->toString())));
     $form_state->setRedirect('redirect.list');
   }
 

@@ -1,0 +1,31 @@
+# Schema for the configuration files of the Checklist API module.
+
+checklistapi.progress.*:
+  type: config_object
+  label: 'Checklist saved progress'
+  mapping:
+    progress:
+      type: mapping
+      label: 'The saved progress data.'
+      mapping:
+        '#changed':
+          type: integer
+          label: 'Last changed timestamp'
+        '#changed_by':
+          type: string
+          label: 'Last change user ID'
+        '#completed_items':
+          type: integer
+          label: 'Number of completed items'
+        '#items':
+          type: sequence
+          label: 'Checklist items'
+          sequence:
+            type: mapping
+            mapping:
+              '#completed':
+                type: integer
+                label: 'Completed timestamp'
+              '#uid':
+                type: string
+                label: 'Completed user ID'

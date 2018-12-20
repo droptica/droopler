@@ -44,7 +44,7 @@ class PathautoBulkUpdateTest extends WebTestBase {
   protected $patterns;
 
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
   function setUp() {
     parent::setUp();
@@ -103,7 +103,7 @@ class PathautoBulkUpdateTest extends WebTestBase {
     $this->assertText('No new URL aliases to generate.');
     $this->assertNoEntityAliasExists($new_node);
 
-    // Make sure existing aliases can be overriden.
+    // Make sure existing aliases can be overridden.
     $this->drupalPostForm('admin/config/search/path/settings', ['update_action' => PathautoGeneratorInterface::UPDATE_ACTION_DELETE], t('Save configuration'));
 
     // Patterns did not change, so no aliases should be regenerated.
@@ -111,16 +111,17 @@ class PathautoBulkUpdateTest extends WebTestBase {
     $this->drupalPostForm('admin/config/search/path/update_bulk', $edit, t('Update'));
     $this->assertText('No new URL aliases to generate.');
 
-    // Update the node pattern, and leave other patterns alone. Existing nodes should get a new alias,
-    // except the node above whose alias is manually set. Other aliases must be left alone.
+    // Update the node pattern, and leave other patterns alone. Existing nodes
+    // should get a new alias, except the node above whose alias is manually
+    // set. Other aliases must be left alone.
     $this->patterns['node']->delete();
     $this->patterns['node'] = $this->createPattern('node', '/archive/node-[node:nid]');
 
     $this->drupalPostForm('admin/config/search/path/update_bulk', $edit, t('Update'));
     $this->assertText('Generated 5 URL aliases.');
 
-    // Prevent existing aliases to be overriden. The bulk generate page should only offer
-    // to create an alias for paths which have none.
+    // Prevent existing aliases to be overridden. The bulk generate page should
+    // only offer to create an alias for paths which have none.
     $this->drupalPostForm('admin/config/search/path/settings', ['update_action' => PathautoGeneratorInterface::UPDATE_ACTION_NO_NEW], t('Save configuration'));
 
     $this->drupalGet('admin/config/search/path/update_bulk');

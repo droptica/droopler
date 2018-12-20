@@ -71,7 +71,7 @@ interface FeaturesGeneratorInterface {
    *   - 'message': a message about the result of the operation.
    *   - 'variables': an array of substitutions to be used in the message.
    */
-  public function applyGenerationMethod($method_id, array $packages = array(), FeaturesBundleInterface $bundle = NULL);
+  public function applyGenerationMethod($method_id, array $packages = [], FeaturesBundleInterface $bundle = NULL);
 
   /**
    * Responds to the submission of
@@ -98,6 +98,6 @@ interface FeaturesGeneratorInterface {
    *   Array of names of packages to be generated. If none are specified, all
    *   available packages will be added.
    */
-  public function generatePackages($method_id, FeaturesBundleInterface $bundle, array $package_names = array());
+  public function generatePackages($method_id, FeaturesBundleInterface $bundle, array $package_names = []);
 
 }

@@ -3,7 +3,6 @@
 namespace Drupal\Tests\config_update\Unit;
 
 use Drupal\config_update\ConfigDiffer;
-use Drupal\Tests\UnitTestCase;
 
 /**
  * Tests the \Drupal\config_update\ConfigDiffer class.
@@ -12,14 +11,7 @@ use Drupal\Tests\UnitTestCase;
  *
  * @coversDefaultClass \Drupal\config_update\ConfigDiffer
  */
-class ConfigDifferTest extends UnitTestCase {
-
-  /**
-   * The mock translation object.
-   *
-   * @var \Drupal\Core\StringTranslation\TranslationInterface
-   */
-  protected $stringTranslation;
+class ConfigDifferTest extends ConfigUpdateUnitTestBase {
 
   /**
    * The config differ to test.
@@ -32,12 +24,7 @@ class ConfigDifferTest extends UnitTestCase {
    * {@inheritdoc}
    */
   protected function setUp() {
-    $this->stringTranslation = $this->getMockBuilder('Drupal\Core\StringTranslation\TranslationInterface')->getMock();
-    $this->stringTranslation
-      ->method('t')
-      ->will($this->returnArgument(0));
-
-    $this->configDiffer = new ConfigDiffer($this->stringTranslation);
+    $this->configDiffer = new ConfigDiffer($this->getTranslationMock());
   }
 
   /**
@@ -59,13 +46,14 @@ class ConfigDifferTest extends UnitTestCase {
       'c' => [
         'd' => TRUE,
         'e' => FALSE,
+        'empty' => [],
       ],
     ];
-
     return [
       [$base, $base, TRUE],
 
-      // Add _core, omit uuid. Should match.
+      // Add _core, omit uuid at top level. Should match, as both are removed
+      // in normalization process.
       [
         $base,
         [
@@ -75,27 +63,30 @@ class ConfigDifferTest extends UnitTestCase {
           'c' => [
             'd' => TRUE,
             'e' => FALSE,
+            'empty' => [],
           ],
         ],
         TRUE,
       ],
 
-      // Change order. Should match.
+      // Change order in top and deep level. Should match.
       [
         $base,
         [
-          'a' => 'a',
           'uuid' => 'bar',
           'b' => 0,
+          'a' => 'a',
           'c' => [
-            'd' => TRUE,
             'e' => FALSE,
+            'empty' => [],
+            'd' => TRUE,
           ],
         ],
         TRUE,
       ],
 
-      // Change order and add _core in deeper level. Should match.
+      // Add _core in deeper level. Should not match, as this is removed
+      // only at the top level during normalization.
       [
         $base,
         [
@@ -103,12 +94,31 @@ class ConfigDifferTest extends UnitTestCase {
           'a' => 'a',
           'b' => 0,
           'c' => [
-            'e' => FALSE,
-            '_core' => 'foo',
+            '_core' => 'do-not-use-this-key',
             'd' => TRUE,
+            'e' => FALSE,
+            'empty' => [],
           ],
         ],
-        TRUE,
+        FALSE,
+      ],
+
+      // Add uuid in deeper level. Should not match, as this is removed
+      // only at the top level during normalization.
+      [
+        $base,
+        [
+          'uuid' => 'bar',
+          'a' => 'a',
+          'b' => 0,
+          'c' => [
+            'd' => TRUE,
+            'e' => FALSE,
+            'uuid' => 'important',
+            'empty' => [],
+          ],
+        ],
+        FALSE,
       ],
 
       // Omit a component. Should not match.
@@ -120,6 +130,7 @@ class ConfigDifferTest extends UnitTestCase {
           'c' => [
             'd' => TRUE,
             'e' => FALSE,
+            'empty' => [],
           ],
         ],
         FALSE,
@@ -135,6 +146,7 @@ class ConfigDifferTest extends UnitTestCase {
           'c' => [
             'd' => TRUE,
             'e' => FALSE,
+            'empty' => [],
           ],
           'f' => 'f',
         ],
@@ -152,6 +164,24 @@ class ConfigDifferTest extends UnitTestCase {
           'c' => [
             'd' => TRUE,
             'e' => FALSE,
+            'empty' => [],
+          ],
+        ],
+        FALSE,
+      ],
+
+      // 0 should not match NULL.
+      [
+        $base,
+        [
+          '_core' => 'foo',
+          'uuid' => 'bar',
+          'a' => 'a',
+          'b' => NULL,
+          'c' => [
+            'd' => TRUE,
+            'e' => FALSE,
+            'empty' => [],
           ],
         ],
         FALSE,
@@ -168,6 +198,7 @@ class ConfigDifferTest extends UnitTestCase {
           'c' => [
             'd' => TRUE,
             'e' => 'e',
+            'empty' => [],
           ],
         ],
         FALSE,
@@ -184,9 +215,28 @@ class ConfigDifferTest extends UnitTestCase {
           'c' => [
             'd' => 'd',
             'e' => FALSE,
+            'empty' => [],
           ],
         ],
         FALSE,
+      ],
+
+      // Add an empty array at top, and remove at lower level. Should still
+      // match.
+      [
+        $base,
+        [
+          '_core' => 'foo',
+          'uuid' => 'bar',
+          'a' => 'a',
+          'b' => 0,
+          'c' => [
+            'd' => TRUE,
+            'e' => FALSE,
+          ],
+          'empty_two' => [],
+        ],
+        TRUE,
       ],
     ];
   }
@@ -201,6 +251,7 @@ class ConfigDifferTest extends UnitTestCase {
       'id_to_remove' => 'test.remove.id',
       'type' => 'old_type',
       'true_value' => TRUE,
+      'null_value' => NULL,
       'nested_array' => [
         'flat_array' => [
           'value2',
@@ -216,6 +267,7 @@ class ConfigDifferTest extends UnitTestCase {
       'id' => 'test.config.id',
       'type' => 'new_type',
       'true_value' => FALSE,
+      'null_value' => FALSE,
       'nested_array' => [
         'flat_array' => [
           'value2',
@@ -284,12 +336,14 @@ class ConfigDifferTest extends UnitTestCase {
           'orig' => [
             'nested_array::flat_array::1 : value1',
             'nested_array::flat_array::2 : value3',
-            'true_value : 1',
+            'null_value : null',
+            'true_value : true',
             'type : old_type',
           ],
           'closing' => [
             'nested_array::flat_array::1 : value3',
-            'true_value : ',
+            'null_value : false',
+            'true_value : false',
             'type : new_type',
           ],
         ],

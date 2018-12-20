@@ -19,6 +19,15 @@ class FeaturesAssignerTest extends KernelTestBase {
   protected $strictConfigSchema = FALSE;
 
   /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+    // We need system.site in order to run $this->configImporter->import().
+    $this->installConfig('system');
+  }
+
+  /**
    * Test bundle auto-creation during config import.
    *
    * We check the case where the import also causes features to be installed,
@@ -41,7 +50,7 @@ class FeaturesAssignerTest extends KernelTestBase {
     // Uninstall modules.
     $installer->uninstall(['features', 'test_feature']);
 
-    // Restore the config from after install..
+    // Restore the config from after install.
     $this->configImporter()->import();
 
     // Find the auto-created bundle.

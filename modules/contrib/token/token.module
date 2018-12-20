@@ -6,7 +6,6 @@
  */
 
 use Drupal\Component\Render\PlainTextOutput;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
@@ -97,9 +96,9 @@ function token_form_block_form_alter(&$form, FormStateInterface $form_state) {
     '#token_types' => [],
   ];
   $rendered_token_tree = \Drupal::service('renderer')->render($token_tree);
-  $form['settings']['label']['#description'] =
-    t('This field supports tokens. @browse_tokens_link', ['@browse_tokens_link' => $rendered_token_tree])
-  ;
+  $form['settings']['label']['#description'] = t('This field supports tokens. @browse_tokens_link', [
+    '@browse_tokens_link' => $rendered_token_tree,
+  ]);
   $form['settings']['label']['#element_validate'][] = 'token_element_validate';
   $form['settings']['label'] += ['#token_types' => []];
 }
@@ -272,7 +271,7 @@ function _token_module($type, $name) {
 function token_element_validate($element, FormStateInterface $form_state) {
   $value = isset($element['#value']) ? $element['#value'] : $element['#default_value'];
 
-  if (!Unicode::strlen($value)) {
+  if (!mb_strlen($value)) {
     // Empty value needs no further validation since the element should depend
     // on using the '#required' FAPI property.
     return $element;
@@ -384,6 +383,7 @@ function token_form_user_admin_settings_alter(&$form, FormStateInterface $form_s
       case 'email_cancel_confirm':
         // Do nothing, but allow execution to continue.
         break;
+
       case 'email_activated':
       case 'email_blocked':
       case 'email_canceled':
@@ -391,6 +391,7 @@ function token_form_user_admin_settings_alter(&$form, FormStateInterface $form_s
         // sub-element, so switch to that element instead.
         $element = &$form[$key]['settings'];
         break;
+
       default:
         continue 2;
     }
@@ -779,7 +780,7 @@ function token_node_menu_link_submit($entity_type, NodeInterface $node, &$form, 
 function token_node_insert(NodeInterface $node) {
   if ($node->hasField('menu_link') && $menu_link = $node->menu_link->entity) {
     // Update the menu-link to point to the now saved node.
-    $menu_link->link = 'entity:node/' .  $node->id();
+    $menu_link->link = 'entity:node/' . $node->id();
     $menu_link->save();
   }
 }

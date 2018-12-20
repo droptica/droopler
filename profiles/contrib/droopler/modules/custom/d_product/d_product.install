@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the d_product module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function d_product_install() {
+  \Drupal::service('module_installer')->install(['d_product_init']);
+}

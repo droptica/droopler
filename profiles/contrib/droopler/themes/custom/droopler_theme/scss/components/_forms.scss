@@ -19,6 +19,9 @@ $form-email-margin-top: 0.25rem !default;
 label {
   margin-bottom: $form-label-margin-bottom;
   font-size: $form-label-font-size;
+  &.form-check-label a:not(.btn) {
+    font-size: 1em;
+  }
 }
 .form-control {
   padding: $form-control-padding;

@@ -17,27 +17,35 @@ use Drupal\views\ViewEntityInterface;
 class MetatagManager implements MetatagManagerInterface {
 
   /**
+   * The group plugin manager.
+   *
    * @var \Drupal\metatag\MetatagGroupPluginManager
    */
   protected $groupPluginManager;
 
   /**
+   * The tag plugin manager.
+   *
    * @var \Drupal\metatag\MetatagTagPluginManager
    */
   protected $tagPluginManager;
 
   /**
+   * The Metatag defaults.
+   *
    * @var array
    */
   protected $metatagDefaults;
 
   /**
+   * The Metatag token.
+   *
    * @var \Drupal\metatag\MetatagToken
    */
   protected $tokenService;
 
   /**
-   * Metatag logging channel.
+   * The Metatag logging channel.
    *
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
@@ -46,15 +54,15 @@ class MetatagManager implements MetatagManagerInterface {
   /**
    * Constructor for MetatagManager.
    *
-   * @param Drupal\metatag\MetatagGroupPluginManager $groupPluginManager
+   * @param \Drupal\metatag\MetatagGroupPluginManager $groupPluginManager
    *   The MetatagGroupPluginManager object.
-   * @param Drupal\metatag\MetatagTagPluginManager $tagPluginManager
+   * @param \Drupal\metatag\MetatagTagPluginManager $tagPluginManager
    *   The MetatagTagPluginMπanager object.
-   * @param Drupal\metatag\MetatagToken $token
+   * @param \Drupal\metatag\MetatagToken $token
    *   The MetatagToken object.
-   * @param Drupal\Core\Logger\LoggerChannelFactoryInterface $channelFactory
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $channelFactory
    *   The LoggerChannelFactoryInterface object.
-   * @param Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The EntityTypeManagerInterface object.
    */
   public function __construct(MetatagGroupPluginManager $groupPluginManager,
@@ -281,7 +289,13 @@ class MetatagManager implements MetatagManagerInterface {
   }
 
   /**
-   * Returns a list of the metatag fields on an entity.
+   * Returns a list of the Metatag fields on an entity.
+   *
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+   *   The entity to examine.
+   *
+   * @return array
+   *   The fields from the entity which are Metatag fields.
    */
   protected function getFields(ContentEntityInterface $entity) {
     $field_list = [];
@@ -311,12 +325,13 @@ class MetatagManager implements MetatagManagerInterface {
   /**
    * Returns a list of the meta tags with values from a field.
    *
-   * @param Drupal\Core\Entity\ContentEntityInterface $entity
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
    *   The ContentEntityInterface object.
    * @param string $field_name
    *   The name of the field to work on.
    *
    * @return array
+   *   Array of field tags.
    */
   protected function getFieldTags(ContentEntityInterface $entity, $field_name) {
     $tags = [];
@@ -332,10 +347,13 @@ class MetatagManager implements MetatagManagerInterface {
   }
 
   /**
+   * Returns default meta tags for an entity.
    *
-   *
-   * @param Drupal\Core\Entity\ContentEntityInterface $entity
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
    *   The entity to work on.
+   *
+   * @return array
+   *   The default meta tags appropriate for this entity.
    */
   public function getDefaultMetatags(ContentEntityInterface $entity = NULL) {
     // Get general global metatags.
@@ -373,7 +391,7 @@ class MetatagManager implements MetatagManagerInterface {
   }
 
   /**
-   *
+   * Returns global meta tags.
    *
    * @return array
    *   The global meta tags.
@@ -383,7 +401,7 @@ class MetatagManager implements MetatagManagerInterface {
   }
 
   /**
-   *
+   * Returns special meta tags.
    *
    * @return array
    *   The defaults for this page, if it's a special page.
@@ -405,9 +423,9 @@ class MetatagManager implements MetatagManagerInterface {
   }
 
   /**
+   * Returns default meta tags for an entity.
    *
-   *
-   * @param Drupal\Core\Entity\ContentEntityInterface $entity
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
    *   The entity to work with.
    *
    * @return array
@@ -527,6 +545,12 @@ class MetatagManager implements MetatagManagerInterface {
 
         if (!empty($output)) {
           $output = $tag->multiple() ? $output : [$output];
+
+          // Backwards compatibility for modules which don't support this logic.
+          if (isset($output['#tag'])) {
+            $output = [$output];
+          }
+
           foreach ($output as $index => $element) {
             // Add index to tag name as suffix to avoid having same key.
             $index_tag_name = $tag->multiple() ? $tag_name . '_' . $index : $tag_name;

@@ -37,7 +37,7 @@ interface FeaturesGenerationMethodInterface {
    * @return array
    *   An array of packages data.
    */
-  public function prepare(array &$packages = array(), FeaturesBundleInterface $bundle = NULL);
+  public function prepare(array &$packages = [], FeaturesBundleInterface $bundle = NULL);
 
   /**
    * Performs package generation.
@@ -56,7 +56,7 @@ interface FeaturesGenerationMethodInterface {
    *   - 'message': a message about the result of the operation.
    *   - 'variables': an array of substitutions to be used in the message.
    */
-  public function generate(array $packages = array(), FeaturesBundleInterface $bundle = NULL);
+  public function generate(array $packages = [], FeaturesBundleInterface $bundle = NULL);
 
   /**
    * Responds to the submission of

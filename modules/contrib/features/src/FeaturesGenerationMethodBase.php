@@ -65,7 +65,7 @@ abstract class FeaturesGenerationMethodBase implements FeaturesGenerationMethodI
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$packages = array(), FeaturesBundleInterface $bundle = NULL) {
+  public function prepare(array &$packages = [], FeaturesBundleInterface $bundle = NULL) {
     // If no packages were specified, get all packages.
     if (empty($packages)) {
       $packages = $this->featuresManager->getPackages();

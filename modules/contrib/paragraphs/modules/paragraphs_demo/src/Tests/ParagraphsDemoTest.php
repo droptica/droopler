@@ -2,7 +2,6 @@
 
 namespace Drupal\paragraphs_demo\Tests;
 
-use Drupal\filter\Entity\FilterFormat;
 use Drupal\paragraphs\Tests\Classic\ParagraphsCoreVersionUiTestTrait;
 use Drupal\simpletest\WebTestBase;
 
@@ -54,6 +53,12 @@ class ParagraphsDemoTest extends WebTestBase {
       'delete any paragraphed_content_demo content',
       'administer content translation',
       'create content translations',
+      'bypass node access',
+      'use editorial transition create_new_draft',
+      'use editorial transition publish',
+      'use editorial transition archived_published',
+      'use editorial transition archived_draft',
+      'use editorial transition archive',
       'administer languages',
       'administer content types',
       'administer node fields',
@@ -139,6 +144,7 @@ class ParagraphsDemoTest extends WebTestBase {
     $this->assertRaw('<h4 class="label">Paragraphs</h4>', 'Field name appears in the table header.');
     $edit = array(
       'title[0][value]' => 'Paragraph title',
+      'moderation_state[0][state]' => 'published',
       'field_paragraphs_demo[0][subform][field_text_demo][0][value]' => 'Paragraph text',
     );
     $this->drupalPostForm(NULL, $edit, t('Add User'));

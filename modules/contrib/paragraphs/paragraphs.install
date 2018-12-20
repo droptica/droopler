@@ -242,3 +242,17 @@ function paragraphs_update_8014() {
   $entity_definition_update_manager = \Drupal::service('entity.definition_update_manager');
   $entity_definition_update_manager->updateFieldStorageDefinition($entity_definition_update_manager->getFieldStorageDefinition('status', 'paragraph'));
 }
+
+/**
+ * Remove the base field overrides for moderation_state field.
+ */
+function paragraphs_update_8015() {
+  $config_factory = \Drupal::configFactory();
+  $names = $config_factory->listAll('core.base_field_override.paragraph.');
+  foreach ($names as $name) {
+    $config = $config_factory->getEditable($name);
+    if ($config->get('field_name') === 'moderation_state') {
+      $config->delete();
+    }
+  }
+}

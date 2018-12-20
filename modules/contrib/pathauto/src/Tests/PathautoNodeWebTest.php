@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\pathauto\Tests;
+
 use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\node\Entity\Node;
 use Drupal\pathauto\PathautoState;
@@ -30,7 +31,7 @@ class PathautoNodeWebTest extends WebTestBase {
   protected $adminUser;
 
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
   function setUp() {
     parent::setUp();
@@ -56,7 +57,8 @@ class PathautoNodeWebTest extends WebTestBase {
    * Tests editing nodes with different settings.
    */
   function testNodeEditing() {
-    // Ensure that the Pathauto checkbox is checked by default on the node add form.
+    // Ensure that the Pathauto checkbox is checked by default on the node add
+    // form.
     $this->drupalGet('node/add/page');
     $this->assertFieldChecked('edit-path-0-pathauto');
 

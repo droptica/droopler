@@ -29,26 +29,26 @@ class AssignmentAlterForm extends AssignmentFormBase {
     $uuid_setting = $settings['uuid'];
     $user_permissions_setting = $settings['user_permissions'];
 
-    $form['core'] = array(
+    $form['core'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Strip out <em>_core</em> property.'),
       '#default_value' => $core_setting,
       '#description' => $this->t('Select this option to remove the <em>_core</em> configuration property on export. This property is added by Drupal core when configuration is installed.'),
-    );
+    ];
 
-    $form['uuid'] = array(
+    $form['uuid'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Strip out <em>uuid</em> property.'),
       '#default_value' => $uuid_setting,
       '#description' => $this->t('Select this option to remove the <em>uuid</em> configuration property on export. This property is added by Drupal core when configuration is installed.'),
-    );
+    ];
 
-    $form['user_permissions'] = array(
+    $form['user_permissions'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Strip out user permissions.'),
       '#default_value' => $user_permissions_setting,
       '#description' => $this->t('Select this option to remove permissions from user roles on export.'),
-    );
+    ];
 
     $this->setActions($form, self::METHOD_ID);
 

@@ -2,13 +2,14 @@
 
 /**
  * @file
- * Contains d_paragraphs.module..
+ * Contains d_paragraphs.module.
  */
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_theme().
@@ -133,11 +134,12 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
 /**
  * Implements hook_form_alter().
  */
-function d_p_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'contact_message_contact_form_form') {
-    unset($form['actions']['preview']);
-    $form['name']['#type'] = 'textfield';
-    $form['mail']['#type'] = 'textfield';
+function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'contact_message_contact_form_form':
+      unset($form['actions']['preview']);
+      $form['name']['#type'] = 'textfield';
+      $form['mail']['#type'] = 'textfield';
+      break;
   }
 }
-
