@@ -54,11 +54,7 @@ function droopler_theme_preprocess_page(&$variables) {
     'role' => ['main'],
   ];
 
-  // Make some exceptions for nodes with paragraphs or pages of given route.
-  $currentRoute = \Drupal::routeMatch()->getRouteName();
-  $nodeCheck = !empty($variables['node']) && method_exists($variables['node'], 'getType') && in_array($variables['node']->getType(), ['content_page', 'blog_post']);
-  $routeCheck = $currentRoute == 'd_p_subscribe_file.downloadfile.checkLink';
-  if ($nodeCheck || $routeCheck) {
+  if (droopler_theme_is_special_route()) {
     $main_attributes['class'] = ['container-fluid'];
     $main_content_attributes['class'] = ['main-content'];
   }
@@ -188,7 +184,7 @@ function droopler_theme_preprocess_input(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_HOOK() for pager.
  */
 function droopler_theme_preprocess_pager(&$variables) {
   // Next.
@@ -226,7 +222,7 @@ function droopler_theme_preprocess_pager(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_HOOK() for mini pager.
  */
 function droopler_theme_preprocess_views_mini_pager(&$variables) {
   // Next.
@@ -252,4 +248,49 @@ function droopler_subtheme_preprocess_field(&$variables) {
     $slider = views_embed_view('product_images', 'block_1');
     $variables['slider'] = render($slider);
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for block.
+ */
+function droopler_theme_preprocess_block(&$variables) {
+  if ($variables['base_plugin_id'] == 'page_title_block') {
+    $variables['show_title'] = droopler_theme_show_title_block();
+
+    if (droopler_theme_is_special_route()) {
+      $variables['attributes']['class'][] = 'container';
+    }
+  }
+}
+
+/**
+ * Check if current route is node with paragraphs or other defined route.
+ *
+ * @return bool
+ *   True if it matches special criteria.
+ */
+function droopler_theme_is_special_route() {
+  $route = \Drupal::routeMatch();
+  $routeName = $route->getRouteName();
+  $node = $route->getParameter('node');
+  $nodeCheck = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
+  $routeCheck = $routeName == 'd_p_subscribe_file.downloadfile.checkLink';
+
+  return ($nodeCheck || $routeCheck);
+}
+
+/**
+ * Checks if title block should not be displayed.
+ *
+ * @return bool
+ *   True if it matches special criteria.
+ */
+function droopler_theme_show_title_block() {
+  $route = \Drupal::routeMatch();
+  $routeName = $route->getRouteName();
+  $node = $route->getParameter('node');
+  $nodeCheck = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
+  $routeCheck = $routeName == 'view.blog_listing.page_1';
+
+  return !($nodeCheck || $routeCheck);
 }
