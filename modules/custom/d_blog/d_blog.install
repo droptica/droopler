@@ -7,6 +7,7 @@ function d_blog_install() {
   \Drupal::service('entity.definition_update_manager')->applyUpdates();
 
   // Add Translation of pagination in blog.
+  /*
   try {
     d_blog_add_translation('Next', 'Dalej', 'pl');
     d_blog_add_translation('Previous', 'Wstecz', 'pl');
@@ -15,6 +16,7 @@ function d_blog_install() {
   catch (\Exception $e) {
     watchdog_exception('d_blog', $e);
   }
+  */
 
   // Add configuration to TVI module
   // Taxonomy Views Integrator
@@ -44,6 +46,7 @@ function d_blog_install() {
 /**
  * Droopler 1.4 Updates.
  */
+/*
 function d_blog_update_8101() {
   // We do not put this into standard Droopler update flow.
   try {
@@ -60,3 +63,7 @@ function d_blog_update_8101() {
     watchdog_exception('d_blog', $e);
   }
 }
+*/
+
+
+

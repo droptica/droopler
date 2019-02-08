@@ -71,6 +71,8 @@ function d_blog_preprocess_links(&$variables) {
  * @param $langcode
  * @throws \Drupal\locale\StringStorageException
  */
+
+/*
 function d_blog_add_translation($source_string, $translated_string, $langcode) {
   // Find existing source string.
   $storage = \Drupal::service('locale.storage');
@@ -88,6 +90,7 @@ function d_blog_add_translation($source_string, $translated_string, $langcode) {
     'translation' => $translated_string,
   ))->save();
 }
+*/
 
 /**
  * Implements hook_preprocess_responsive_image().
