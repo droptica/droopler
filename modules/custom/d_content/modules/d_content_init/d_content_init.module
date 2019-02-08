@@ -79,7 +79,7 @@ function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
 function d_content_init_fill_field($entity, $name, $value) {
 
   // Allow other init modules to add their fields types.
-  \Drupal::moduleHandler()->alter('fill_field', $node, $name, $value);
+  \Drupal::moduleHandler()->alter('fill_field', $entity, $name, $value);
 
   switch ($value['type']) {
     case 'text':
