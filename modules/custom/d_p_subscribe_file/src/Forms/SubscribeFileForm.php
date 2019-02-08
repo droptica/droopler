@@ -159,7 +159,7 @@ class SubscribeFileForm extends FormBase {
 
     $langcode = \Drupal::currentUser()->getPreferredLangcode();
     $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
-    if ($result) {
+    if ($result['result']) {
       drupal_set_message($this->t('We send download link, check Your e-mail.'));
     }
 
