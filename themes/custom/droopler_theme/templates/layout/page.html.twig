@@ -111,16 +111,18 @@
       </div>
     {% endblock %}
   {% endif %}
-  {% if page.admin_tabs %}
-    <div class="admin_tabs container">
-      {{ page.admin_tabs }}
-    </div>
+  {% if user.hasPermission('administer nodes') %}
+    {% if page.admin_tabs %}
+      <div class="admin_tabs container">
+        {{ page.admin_tabs }}
+      </div>
+    {% endif %}
   {% endif %}
   <div id="main-wrapper" class="layout-main-wrapper clearfix">
     {% block content %}
       <div{{ main_attributes }}>
         <div class="row clearfix">
-        {{ page.breadcrumb }}
+          {{ page.breadcrumb }}
           <main{{ main_content_attributes }}>
             <section class="section">
               <a id="main-content" tabindex="-1"></a>
