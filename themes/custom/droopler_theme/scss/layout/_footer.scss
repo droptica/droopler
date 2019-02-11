@@ -14,7 +14,7 @@ $footer-text-color: $white !default;
   }
 }
 @mixin font-footer-body {
-  font-size: $font-size-mdsm;
+  font-size: $font-family-base;
   @include media-breakpoint-down(sm) {
     font-size: $font-size-sm;
   }
