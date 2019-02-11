@@ -65,31 +65,6 @@ function d_blog_preprocess_links(&$variables) {
 }
 
 /**
- * Add translation.
- * @param $source_string
- * @param $translated_string
- * @param $langcode
- * @throws \Drupal\locale\StringStorageException
- */
-function d_blog_add_translation($source_string, $translated_string, $langcode) {
-  // Find existing source string.
-  $storage = \Drupal::service('locale.storage');
-  $string = $storage->findString(array('source' => $source_string));
-  if (is_null($string)) {
-    $string = new SourceString();
-    $string->setString($source_string);
-    $string->setStorage($storage);
-    $string->save();
-  }
-  // Create translation. If one already exists, it will be replaced.
-  $translation = $storage->createTranslation(array(
-    'lid' => $string->lid,
-    'language' => $langcode,
-    'translation' => $translated_string,
-  ))->save();
-}
-
-/**
  * Implements hook_preprocess_responsive_image().
  */
 function d_blog_preprocess_responsive_image(&$variables) {

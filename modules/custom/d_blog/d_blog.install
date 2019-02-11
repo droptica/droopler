@@ -6,16 +6,6 @@
 function d_blog_install() {
   \Drupal::service('entity.definition_update_manager')->applyUpdates();
 
-  // Add Translation of pagination in blog.
-  try {
-    d_blog_add_translation('Next', 'Dalej', 'pl');
-    d_blog_add_translation('Previous', 'Wstecz', 'pl');
-    d_blog_add_translation('Read Article...', 'Czytaj artykuł...', 'pl');
-  }
-  catch (\Exception $e) {
-    watchdog_exception('d_blog', $e);
-  }
-
   // Add configuration to TVI module
   // Taxonomy Views Integrator
   // Page of taxonomy blog_post is the same as view blog_listing.
@@ -39,24 +29,4 @@ function d_blog_install() {
     ->removeCustomLinks()
     ->addCustomLink('/some/view/page', ['priority' => 0.5])
     ->generateSitemap();
-}
-
-/**
- * Droopler 1.4 Updates.
- */
-function d_blog_update_8101() {
-  // We do not put this into standard Droopler update flow.
-  try {
-    d_blog_add_translation('Blog text', 'Blog tekst', 'pl');
-    d_blog_add_translation('Blog image', 'Blog obraz', 'pl');
-    d_blog_add_translation('Blog main image', 'Blog główny obraz', 'pl');
-    d_blog_add_translation('Blog sections', 'Sekcje bloga', 'pl');
-    d_blog_add_translation('Blog category', 'Kategoria bloga', 'pl');
-    d_blog_add_translation('Sample category', 'Przykładowa kategoria', 'pl');
-    d_blog_add_translation('Blog teaser', 'Krótki opis wpisu bloga', 'pl');
-    d_blog_add_translation('Image is on the width of the text', 'Obraz jest na szerokość tekstu', 'pl');
-    d_blog_add_translation('Image is on the full width of the screen', 'Obraz jest na całą szerokość ekranu', 'pl');
-  } catch (\Exception $e) {
-    watchdog_exception('d_blog', $e);
-  }
 }
