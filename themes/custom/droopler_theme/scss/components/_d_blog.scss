@@ -254,7 +254,7 @@ $d-blog-size-of-large-desktop: 1400px !default;
   @include media-breakpoint-up(lg) {
     .field--name-field-d-long-text {
       font-size: $d-blog-text-font-size-desktop;
-      p {
+      p, a{
         font-size: $d-blog-text-font-size-desktop;
       }
     }
