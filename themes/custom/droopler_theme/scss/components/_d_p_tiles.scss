@@ -5,6 +5,7 @@
 // Colour variables used in this paragraph
 $d-p-tiles-line-color: $color-agamemnon !default;
 $d-p-tiles-color: $color-hecuba !default;
+$d-p-tiles-bold-color: $color-troilus !default;
 $d-p-tiles-overlay-background: $color-cassandra !default;
 $d-p-tiles-overlay-color: $color-odysseus !default;
 $d-p-tiles-overlay-opacity: 0.6 !default;
@@ -34,6 +35,9 @@ $d-p-tiles-margin-bottom: 5% !default;
     p {
       color: $d-p-tiles-color;
       text-align: center;
+      b, strong {
+        color: $d-p-tiles-bold-color;
+      }
     }
 
     &:before {

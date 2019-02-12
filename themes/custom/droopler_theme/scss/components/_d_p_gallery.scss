@@ -5,6 +5,7 @@
 // Colour variables used in this paragraph
 $d-p-gallery-line-color: $color-agamemnon !default;
 $d-p-gallery-color: $color-hecuba !default;
+$d-p-gallery-bold-color: $color-troilus !default;
 
 // Margins, paddings and sizing.
 $d-p-gallery-line-margin-top: 1rem !default;
@@ -28,6 +29,9 @@ $d-p-gallery-margin-y: 5% !default;
     p {
       color: $d-p-gallery-color;
       text-align: center;
+      b, strong {
+        color: $d-p-gallery-bold-color;
+      }
     }
 
     &:before {
