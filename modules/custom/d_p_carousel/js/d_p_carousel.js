@@ -8,7 +8,7 @@
 
   Drupal.behaviors.d_p_carousel = {
     attach: function (context, settings) {
-      
+
       $('.field--name-field-d-p-cs-item-reference', context).each(function () {
         var cnt = $(this).find('.d-p-carousel-item').length;
 
@@ -17,7 +17,7 @@
           return;
         }
 
-        var id = $(this).closest('.paragraph').attr('data-id');
+          var id = $(this).closest('.paragraph').attr('data-id');
 
         $(this).slick({
           infinite: true,
@@ -43,7 +43,7 @@
                 slidesToShow: settings.d_p_carousel[id].columns_sm
               }
             }
-          ],
+          ]
         });
       });
     }

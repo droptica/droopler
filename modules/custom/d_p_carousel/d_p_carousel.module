@@ -29,53 +29,37 @@ function d_p_carousel_theme($existing, $type, $theme, $path)
  * @param array $variables
  *  Template variables.
  */
-function d_p_carousel_preprocess_field(&$variables)
-{
+function d_p_carousel_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_carousel') {
       if ($variables['field_name'] == 'field_d_p_cs_item_reference') {
         /**
          * @var \Drupal\paragraphs\Entity\Paragraph $paragraph
          */
+
         $paragraph = $variables['element']['#object'];
         $num_array = $paragraph->get('field_d_number')->getValue();
         $variables['column_classes'] = 'col-sm-4';
         if (!empty($num_array[0]['value'])) {
-          $columns = $num_array[0]['value'];
-          $columns_sm = min($columns, 2);
-          $num_items = count($variables['items']);
 
-          // MD/LG - special cases when there is one element or
-          // number of elements is smaller than number of columns.
-          if ($num_items === 1) {
-            $columns = 1;
-          }
-          elseif ($num_items <= $columns) {
-            $columns = $num_items - 1;
-          }
+          // Always display one column with one element
 
-          // SM - one or two columns.
-          if ($num_items <= $columns_sm) {
-            $columns_sm = 1;
-          }
+          $columns = 1;
 
           $variables['column_classes'] = [
-            'col-md-' . floor(12 / $columns),
-            'col-sm-' . floor(12 / $columns_sm),
-            'col-xs-12'
+            'col-12'
           ];
 
           $id = $paragraph->id();
           $variables['#attached']['drupalSettings']['d_p_carousel'][$id] = [
             'columns' => $columns,
-            'columns_sm' => $columns_sm,
-            'columns_xs' => 1,
           ];
         }
       }
     }
   }
 }
+
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -112,4 +96,32 @@ function d_p_carousel_preprocess_paragraph(&$variables)
   }
 }
 
+/**
+ * Implements hook_form_alter().
+ */
+function d_p_carousel_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  switch($form_id){
+    case 'node_content_page_form':
+      $form['field_page_section']['widget'][0]['subform']['field_d_p_cs_item_reference']['widget'][0]['subform']['field_d_image']['widget'][0]['#cardinality']= 1;
+      break;
+    case 'node_content_page_edit_form':
+
+      $widget = $form['field_page_section']['widget'];
+      $delta = range(0,$widget['#max_delta']);
+      if(!empty($widget)) {
+        foreach ($delta as $del) {
+          if(isset($widget[$del]['subform']['field_d_p_cs_item_reference'])){
+            $widget_sub = $widget[$del]['subform']['field_d_p_cs_item_reference']['widget'];
+            $delta_sub = range(0, $widget_sub['#max_delta']);
+            if (!empty($widget_sub)) {
+              foreach ($delta_sub as $del_sub) {
+                  unset($form['field_page_section']['widget'][$del]['subform']['field_d_p_cs_item_reference']['widget'][$del_sub]['subform']['field_d_image']['widget'][1]);
+              }
+            }
+          }
+        }
+      }
+      break;
+  }
+}
 
