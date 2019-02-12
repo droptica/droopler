@@ -7,7 +7,8 @@ Styleguide 2.banner.calina
 // Colour variables used in this paragraph
 $d-p-text-paged-subtitle-color: $color-agamemnon !default;
 $d-p-text-paged-line-color: $color-agamemnon !default;
-$d-p-text-paged-color: $color-troilus !default;
+$d-p-text-paged-color: $color-hecuba !default;
+$d-p-text-paged-bold-color: $color-troilus !default;
 
 // Margins, paddings and sizing.
 $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
@@ -41,6 +42,9 @@ $d-p-text-paged-first-margin-top: 2% !default;
       color: $d-p-text-paged-color;
       word-wrap: break-word;
       hyphens: auto;
+      b, strong {
+        color: $d-p-text-paged-bold-color;
+      }
     }
 
     &:before {
