@@ -119,18 +119,7 @@ function d_p_carousel_preprocess_paragraph(&$variables) {
  */
 function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
   switch ($form_id) {
-    case 'node_content_page_form':
-      $widget = $form['field_page_section']['widget'];
-      $delta = range(0, $widget['#max_delta']);
-      if (!empty($widget)) {
-        foreach ($delta as $del) {
-          if (isset($widget[$del]['subform']['field_d_p_cs_item_reference'])) {
-            $form['field_page_section']['widget'][$del]['subform']['field_d_p_cs_item_reference']['widget'][0]['subform']['field_d_image']['widget'][0]['#cardinality'] = 1;
-          }
-        }
-      }
-      break;
-    case 'node_content_page_edit_form':
+    case 'node_content_page_form' || 'node_content_page_edit_form':
       $widget = $form['field_page_section']['widget'];
       $delta = range(0, $widget['#max_delta']);
       if (!empty($widget)) {
