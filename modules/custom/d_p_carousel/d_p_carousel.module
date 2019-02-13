@@ -5,11 +5,12 @@
  * Contains d_p_carousel module with Carousel Paragraph.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Implements hook_theme().
  */
-function d_p_carousel_theme($existing, $type, $theme, $path)
-{
+function d_p_carousel_theme($existing, $type, $theme, $path) {
   return [
     'paragraph__d_p_carousel' => [
       'base hook' => 'paragraph',
@@ -41,18 +42,37 @@ function d_p_carousel_preprocess_field(&$variables) {
         $num_array = $paragraph->get('field_d_number')->getValue();
         $variables['column_classes'] = 'col-sm-4';
         if (!empty($num_array[0]['value'])) {
+          $columns = $num_array[0]['value'];
+          $columns_sm = min($columns, 2);
+          $num_items = count($variables['items']);
 
+          // MD/LG - special cases when there is one element or
+          // number of elements is smaller than number of columns.
+
+          if ($num_items === 1) {
+            $columns = 1;
+          }
+          elseif ($num_items <= $columns) {
+            $columns = $num_items - 1;
+          }
           // Always display one column with one element
-
+          // SM - one or two columns.
+          if ($num_items <= $columns_sm) {
+            $columns_sm = 1;
+          }
           $columns = 1;
 
           $variables['column_classes'] = [
-            'col-12'
+            'col-md-' . floor(12 / $columns),
+            'col-sm-' . floor(12 / $columns_sm),
+            'col-xs-12',
           ];
 
           $id = $paragraph->id();
           $variables['#attached']['drupalSettings']['d_p_carousel'][$id] = [
             'columns' => $columns,
+            'columns_sm' => $columns_sm,
+            'columns_xs' => 1,
           ];
         }
       }
@@ -67,8 +87,7 @@ function d_p_carousel_preprocess_field(&$variables) {
  * @param array $variables
  *  Template variables.
  */
-function d_p_carousel_preprocess_paragraph(&$variables)
-{
+function d_p_carousel_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
 
@@ -86,11 +105,11 @@ function d_p_carousel_preprocess_paragraph(&$variables)
        */
       $link = $paragraph->get('field_d_cta_link')->first();
       if (!is_null($link)) {
-        $variables['has_link'] = true;
+        $variables['has_link'] = TRUE;
         $variables['attributes']['href'][] = $link->getUrl()->toString();
       }
       else {
-        $variables['has_link'] = false;
+        $variables['has_link'] = FALSE;
       }
       break;
   }
@@ -99,27 +118,40 @@ function d_p_carousel_preprocess_paragraph(&$variables)
 /**
  * Implements hook_form_alter().
  */
-function d_p_carousel_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  switch($form_id){
+function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
+  switch ($form_id) {
     case 'node_content_page_form':
-      $form['field_page_section']['widget'][0]['subform']['field_d_p_cs_item_reference']['widget'][0]['subform']['field_d_image']['widget'][0]['#cardinality']= 1;
+      $form['field_page_section']['widget'][0]['subform']['field_d_p_cs_item_reference']['widget'][0]['subform']['field_d_image']['widget'][0]['#cardinality'] = 1;
       break;
     case 'node_content_page_edit_form':
-
       $widget = $form['field_page_section']['widget'];
-      $delta = range(0,$widget['#max_delta']);
-      if(!empty($widget)) {
+      $delta = range(0, $widget['#max_delta']);
+      if (!empty($widget)) {
         foreach ($delta as $del) {
-          if(isset($widget[$del]['subform']['field_d_p_cs_item_reference'])){
+          if (isset($widget[$del]['subform']['field_d_p_cs_item_reference'])) {
             $widget_sub = $widget[$del]['subform']['field_d_p_cs_item_reference']['widget'];
             $delta_sub = range(0, $widget_sub['#max_delta']);
             if (!empty($widget_sub)) {
               foreach ($delta_sub as $del_sub) {
-                  unset($form['field_page_section']['widget'][$del]['subform']['field_d_p_cs_item_reference']['widget'][$del_sub]['subform']['field_d_image']['widget'][1]);
+                unset($form['field_page_section']['widget'][$del]['subform']['field_d_p_cs_item_reference']['widget'][$del_sub]['subform']['field_d_image']['widget'][1]);
               }
             }
           }
         }
+      }
+      break;
+    case 'paragraph_d_p_carousel_geysir_modal_add_form':
+      $widget = $form['field_d_p_cs_item_reference']['widget'];
+      $delta = range(0, $widget['#max_delta']);
+      foreach ($delta as $del) {
+        unset($form['field_d_p_cs_item_reference']['widget'][$del]['subform']['field_d_image']['widget'][1]);
+      }
+      break;
+    case 'paragraph_d_p_carousel_geysir_modal_edit_form':
+      $widget = $form['field_d_p_cs_item_reference']['widget'];
+      $delta = range(0, $widget['#max_delta']);
+      foreach ($delta as $del) {
+        unset($form['field_d_p_cs_item_reference']['widget'][$del]['subform']['field_d_image']['widget'][1]);
       }
       break;
   }

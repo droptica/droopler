@@ -17,7 +17,7 @@
           return;
         }
 
-          var id = $(this).closest('.paragraph').attr('data-id');
+        var id = $(this).closest('.paragraph').attr('data-id');
 
         $(this).slick({
           infinite: true,
