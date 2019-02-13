@@ -119,7 +119,8 @@ function d_p_carousel_preprocess_paragraph(&$variables) {
  */
 function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
   switch ($form_id) {
-    case 'node_content_page_form' || 'node_content_page_edit_form':
+    case 'node_content_page_form':
+    case 'node_content_page_edit_form':
       $widget = $form['field_page_section']['widget'];
       $delta = range(0, $widget['#max_delta']);
       if (!empty($widget)) {
@@ -136,7 +137,8 @@ function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
         }
       }
       break;
-    case 'paragraph_d_p_carousel_geysir_modal_add_form' || 'paragraph_d_p_carousel_geysir_modal_edit_form':
+    case 'paragraph_d_p_carousel_geysir_modal_add_form':
+    case 'paragraph_d_p_carousel_geysir_modal_edit_form':
       $widget = $form['field_d_p_cs_item_reference']['widget'];
       $delta = range(0, $widget['#max_delta']);
       foreach ($delta as $del) {
