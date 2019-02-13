@@ -65,11 +65,11 @@
     <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
     {% if multiple %}
     <div class='carousel-itemes-wrapper row'>
-      {% endif %}
-      {% for item in items %}
-        <div{{ item.attributes.addClass('carousel-item-wrapper', column_class, 'col-xs-12') }}>{{ item.content }}</div>
-      {% endfor %}
-      {% if multiple %}
+    {% endif %}
+    {% for item in items %}
+      <div{{ item.attributes.addClass('carousel-item-wrapper', column_class, 'col-xs-12') }}>{{ item.content }}</div>
+    {% endfor %}
+    {% if multiple %}
     </div>
     {% endif %}
   </div>

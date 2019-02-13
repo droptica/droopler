@@ -55,7 +55,7 @@ function d_p_carousel_preprocess_field(&$variables) {
           elseif ($num_items <= $columns) {
             $columns = $num_items - 1;
           }
-          // Always display one column with one element
+
           // SM - one or two columns.
           if ($num_items <= $columns_sm) {
             $columns_sm = 1;
@@ -145,4 +145,3 @@ function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
       break;
   }
 }
-
