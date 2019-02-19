@@ -9,8 +9,6 @@ Styleguide 2.image-slide-banner
 $d-p-side-image-banner-background-color: $color-agamemnon !default;
 $d-p-side-image-banner-background-color-secondary: darken($d-p-side-image-banner-background-color, 15%) !default;
 $d-p-side-image-banner-text-color: $color-odysseus !default;
-$d-p-side-image-banner-link-color: $color-nestor !default;
-$d-p-side-image-banner-link-hover-color: darken($d-p-side-image-banner-link-color, 5%) !default;
 $d-p-side-image-line-color: $color-nestor !default;
 $d-p-side-image-header-color: $color-odysseus !default;
 
@@ -36,12 +34,6 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     }
     &:last-child:after {
       display: none;
-    }
-  }
-  a {
-    color: $d-p-side-image-banner-link-color;
-    &:hover {
-      color: $d-p-side-image-banner-link-hover-color;
     }
   }
   .d-image {

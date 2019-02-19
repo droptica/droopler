@@ -132,6 +132,31 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
 }
 
 /**
+ * Checks if given key exist in array.
+ *
+ * @param array $array
+ *   Source to search on.
+ * @param $key
+ *   Key to find.
+ *
+ * @return bool
+ *   TRUE if key exists, FALSE otherwise.
+ */
+function d_p_array_key_exists(array $array, $key) {
+  if (array_key_exists($key, $array)) {
+    return TRUE;
+  }
+  foreach ($array as $element) {
+    if (is_array($element)) {
+      if (d_p_array_key_exists($element, $key)) {
+        return TRUE;
+      }
+    }
+  }
+  return FALSE;
+}
+
+/**
  * Implements hook_form_alter().
  */
 function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -141,5 +166,10 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['name']['#type'] = 'textfield';
       $form['mail']['#type'] = 'textfield';
       break;
+  }
+  if (d_p_array_key_exists($form, 'field_d_cta_link')) {
+    if (empty($form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'])) {
+      $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+    }
   }
 }
