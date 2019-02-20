@@ -2,6 +2,7 @@ $d-blog-text-container-width: 35em !default;
 $d-blog-img-width-for-desktop: 41em !default; //make img width the sames as text for desktop
 
 $d-blog-font-color: $color-odysseus !default;
+$d-blog-font-bold-color: $color-troilus !default;
 $d-blog-headers-color: $color-cassandra !default;
 $d-blog-under-background-color: $color-cassandra !default; // color when image is not
 $d-blog-color-taxonomy-in-header: $color-aeneas !default;
@@ -171,6 +172,9 @@ $d-blog-size-of-large-desktop: 1400px !default;
 
     p {
       margin-bottom: $d-blog-margin-between-html-paragraphs;
+      b, strong {
+        color: $d-blog-font-bold-color;
+      }
     }
   }
 
@@ -246,6 +250,9 @@ $d-blog-size-of-large-desktop: 1400px !default;
     .field--name-field-blog-sections {
       p {
         font-size: $d-blog-text-font-size-mobile;
+        b, strong {
+          color: $d-blog-font-bold-color;
+        }
       }
 
     }
@@ -254,7 +261,7 @@ $d-blog-size-of-large-desktop: 1400px !default;
   @include media-breakpoint-up(lg) {
     .field--name-field-d-long-text {
       font-size: $d-blog-text-font-size-desktop;
-      p, a {
+      p, a, ul, li {
         font-size: $d-blog-text-font-size-desktop;
       }
     }
