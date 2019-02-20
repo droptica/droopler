@@ -8,6 +8,7 @@ use Drupal\views\EntityViewsData;
  * Provides Views data for Ktype entities.
  */
 class SubscribeFileViewsData extends EntityViewsData {
+
   /**
    * {@inheritdoc}
    */

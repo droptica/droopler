@@ -17,14 +17,14 @@ class ConfigManager {
   /**
    * Generates hash for the specified config.
    *
-   * @param string $configName
+   * @param string $config_name
    *   Full name of the config, eg node.type.content_page.
    *
    * @return bool|string
    *   Returns hash or false if there is no config with provided name.
    */
-  public function generateHashFromDatabase($configName) {
-    $config = \Drupal::config($configName)->getRawData();
+  public function generateHashFromDatabase($config_name) {
+    $config = \Drupal::config($config_name)->getRawData();
     if (empty($config)) {
       return FALSE;
     }
@@ -32,28 +32,29 @@ class ConfigManager {
     unset($config['uuid']);
     unset($config['lang']);
     unset($config['langcode']);
-    $configString = serialize($config);
+    $config_string = serialize($config);
 
-    return md5($configString);
+    return md5($config_string);
   }
 
   /**
    * Compares config name hash wit provided hash.
    *
-   * @param string $configName
+   * @param string $config_name
    *   Full name of the config, eg node.type.content_page.
    * @param string $hash
    *   Optional argument with hash.
    *
    * @return bool
-   *   Returns true if hashes are the same or hash was not provided, false on different hashes.
+   *   Returns true if hashes are the same or hash was not provided, false on
+   *   different hashes.
    */
-  public function compare($configName, $hash = NULL) {
+  public function compare($config_name, $hash = NULL) {
     if (empty($hash)) {
       return TRUE;
     }
     else {
-      return $this->generateHashFromDatabase($configName) == $hash;
+      return $this->generateHashFromDatabase($config_name) == $hash;
     }
   }
 
