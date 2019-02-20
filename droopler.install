@@ -116,7 +116,7 @@ function _droopler_import_config($module, $name) {
  * Droopler 1.3 Updates.
  */
 function droopler_update_8101() {
-  $moduleInstaller = \Drupal::service('module_installer');
+  $module_installer = \Drupal::service('module_installer');
 
   // Install modules.
   $modules = [
@@ -128,7 +128,7 @@ function droopler_update_8101() {
     'colorbox',
     'd_p_help',
   ];
-  $moduleInstaller->install($modules, TRUE);
+  $module_installer->install($modules, TRUE);
 
   // Install config.
   _droopler_import_config('d_content', 'field.field.node.content_page.field_page_section');
@@ -140,8 +140,8 @@ function droopler_update_8101() {
 function droopler_update_8102() {
   $values = [];
 
-  /** @var Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
-  $moduleInstaller = \Drupal::service('module_installer');
+  /** @var Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
 
   // Install checklistapi and d_update modules.
   try {
@@ -149,7 +149,7 @@ function droopler_update_8102() {
       'checklistapi',
       'd_update'
     ];
-    $result = $moduleInstaller->install($modules, TRUE);
+    $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_0'] = $result;
     $values['droopler__droopler_update_8102_1'] = $result;
   }
@@ -243,7 +243,7 @@ function droopler_update_8102() {
       'geysir',
       'd_geysir'
     ];
-    $result = $moduleInstaller->install($modules, TRUE);
+    $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_5'] = $result;
     $values['droopler__droopler_update_8102_6'] = $result;
   }
