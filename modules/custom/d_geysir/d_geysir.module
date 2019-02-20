@@ -43,7 +43,8 @@ function d_geysir_toolbar() {
   $route = \Drupal::routeMatch()->getRouteObject();
   $is_admin = \Drupal::service('router.admin_context')->isAdminRoute($route);
 
-  if (!\Drupal::currentUser()->hasPermission('geysir manage paragraphs from front-end') || $is_admin) {
+  if (!\Drupal::currentUser()
+      ->hasPermission('geysir manage paragraphs from front-end') || $is_admin) {
     return $items;
   }
 
@@ -60,7 +61,7 @@ function d_geysir_toolbar() {
           'toolbar-icon',
           'toolbar-icon-edit',
           'toolbar-geysir-toggle',
-          'is-active'
+          'is-active',
         ],
       ],
     ],
@@ -83,5 +84,5 @@ function d_geysir_toolbar() {
  * Using hook_preprocess_page().
  */
 function d_geysir_preprocess_page(&$variables) {
-  $variables['#attached']['library'][] =  'd_geysir/overrides';
+  $variables['#attached']['library'][] = 'd_geysir/overrides';
 }

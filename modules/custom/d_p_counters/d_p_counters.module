@@ -21,7 +21,7 @@ function d_p_counters_theme($existing, $type, $theme, $path) {
     ],
     'field__paragraph__field_d_main_title__d_p_single_counter' => [
       'base hook' => 'field',
-    ]
+    ],
   ];
 }
 
@@ -48,7 +48,8 @@ function d_p_counters_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_group_of_counters') {
       if ($variables['field_name'] == 'field_d_counter_reference') {
-        $num_array = $variables['element']['#object']->get('field_d_number')->getValue();
+        $num_array = $variables['element']['#object']->get('field_d_number')
+          ->getValue();
         $variables['column_class'] = 'col-sm-4';
         if (!empty($num_array[0]['value'])) {
           $columns = floor(12 / $num_array[0]['value']);

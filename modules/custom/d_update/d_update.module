@@ -77,7 +77,8 @@ function d_update_preprocess_menu__toolbar(&$variables) {
       $variables['items']['d_update.admin_update']['title'] = t('Droopler Update')->__toString();
       // We need to rewrite current url options to hold classes etc.
       $options = $variables['items']['d_update.admin_update']['url']->getOptions();
-      $variables['items']['d_update.admin_update']['url'] = Url::fromRoute('system.db_update')->setOptions($options);
+      $variables['items']['d_update.admin_update']['url'] = Url::fromRoute('system.db_update')
+        ->setOptions($options);
     }
   }
   else {

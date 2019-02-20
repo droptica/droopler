@@ -14,7 +14,7 @@ function d_p_text_blocks_theme($existing, $type, $theme, $path) {
       'base hook' => 'paragraph',
     ],
     'paragraph__d_p_single_text_block' => [
-        'base hook' => 'paragraph',
+      'base hook' => 'paragraph',
     ],
     'field__field_d_p_tb_block_reference' => [
       'base hook' => 'field',
@@ -29,7 +29,8 @@ function d_p_text_blocks_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_group_of_text_blocks') {
       if ($variables['field_name'] == 'field_d_p_tb_block_reference') {
-        $num_array = $variables['element']['#object']->get('field_d_number')->getValue();
+        $num_array = $variables['element']['#object']->get('field_d_number')
+          ->getValue();
         $variables['column_class'] = 'col-sm-4';
         if (!empty($num_array[0]['value'])) {
           $columns = floor(12 / $num_array[0]['value']);

@@ -23,7 +23,8 @@ function d_p_subscribe_file_preprocess_paragraph(&$variables) {
       d_p_generate_image_set($variables, $styles_ids, $bundle);
       $variables['#attached']['library'][] = 'd_p_subscribe_file/d_p_subscribe_file';
 
-      $form_class = \Drupal::service('class_resolver')->getInstanceFromDefinition('Drupal\d_p_subscribe_file\Forms\SubscribeFileForm');
+      $form_class = \Drupal::service('class_resolver')
+        ->getInstanceFromDefinition('Drupal\d_p_subscribe_file\Forms\SubscribeFileForm');
       $form_class->setParagraph($paragraph);
       $form = \Drupal::formBuilder()->getForm($form_class);
 
@@ -57,24 +58,24 @@ function d_p_subscribe_file_theme($existing, $type, $theme, $path) {
  * Implements hook_requirements.
  */
 function d_p_subscribe_file_requirements($phase) {
-  $requirements = array();
+  $requirements = [];
 
   if ($phase == 'runtime') {
     $private_path = PrivateStream::basePath();
     if ($private_path) {
-      $requirements['droopler'] = array(
+      $requirements['droopler'] = [
         'title' => t('droopler paragraphs'),
         'value' => t('Private file system path is set'),
-        'severity' => REQUIREMENT_INFO
-      );
+        'severity' => REQUIREMENT_INFO,
+      ];
     }
     else {
-      $requirements['droopler'] = array(
+      $requirements['droopler'] = [
         'title' => t('droopler paragraphs'),
         'value' => t('Private file system path is not set'),
         'severity' => REQUIREMENT_ERROR,
         'description' => t('You need set Private file system path. <a href=":prv-file">How to set the private files directory</a>.', [':prv-file' => 'https://www.drupal.org/node/2392959']),
-      );
+      ];
     }
   }
 
@@ -89,7 +90,10 @@ function d_p_subscribe_file_mail($key, &$message, $params) {
     case 'subscribe_form':
       $config = \Drupal::config('system.site');
       $message['from'] = $config->get('mail');
-      $message['subject'] = t('Hi, @name, Your @site Download Link', array('@name' => $params['name'], '@site' => $config->get('name')));
+      $message['subject'] = t('Hi, @name, Your @site Download Link', [
+        '@name' => $params['name'],
+        '@site' => $config->get('name'),
+      ]);
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
       $rendered = \Drupal::service('renderer')->render($params['body']);
       $message['body'][0] = \Drupal\Core\Render\Markup::create($rendered);
