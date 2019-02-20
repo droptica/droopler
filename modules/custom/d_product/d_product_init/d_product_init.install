@@ -11,7 +11,7 @@
  */
 function d_product_init_install() {
   $path = drupal_get_path('module', 'd_product_init') . '/pages';
-  $structure = [];
+  $structure = []; // @TODO: Loop?
   $structure['product_1'] = ['file' => "$path/product_1.yml"];
   $structure['product_2'] = ['file' => "$path/product_2.yml"];
   $structure['product_3'] = ['file' => "$path/product_3.yml"];
