@@ -51,9 +51,9 @@ class UpdateChecklist {
   /**
    * Update checklist constructor.
    *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   Config factory service.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   Module handler service.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user.
@@ -176,7 +176,7 @@ class UpdateChecklist {
    */
   protected function checkListPoints(array $names) {
 
-    /* @var \Drupal\Core\Config\Config $drooplerUpdateConfig */
+    /* @var \Drupal\Core\Config\Config $droopler_update_config */
     $droopler_update_config = $this->config_factory->getEditable('checklistapi.progress.d_update');
     $user = $this->account->id();
     $time = time();
@@ -203,7 +203,7 @@ class UpdateChecklist {
    *   Checkboxes enabled or disabled.
    */
   protected function checkAllListPoints($status = TRUE) {
-    $droopler_update_config = $this->configFactory
+    $droopler_update_config = $this->config_factory
       ->getEditable('checklistapi.progress.d_update');
     $user = $this->account->id();
     $time = time();
