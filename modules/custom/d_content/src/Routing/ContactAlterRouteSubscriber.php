@@ -12,6 +12,8 @@ use Symfony\Component\Routing\RouteCollection;
 
 /**
  * Listens to the dynamic route events.
+ * Releases '/contact' path originally taken by Drupal default webform
+ * for custom contact form, which path without altering would be '/contact-0'
  */
 class ContactAlterRouteSubscriber extends RouteSubscriberBase {
 
