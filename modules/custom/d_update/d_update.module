@@ -126,8 +126,8 @@ function d_update_checklist_has_pending_updates() {
  *   return true if there are some pending updates, false otherwise
  */
 function d_update_system_has_pending_updates() {
-  $systemManager = \Drupal::service('system.manager')->listRequirements();
-  $update = $systemManager['update'];
+  $system_manager = \Drupal::service('system.manager')->listRequirements();
+  $update = $system_manager['update'];
   if (empty($update['severity'])) {
     return FALSE;
   }
