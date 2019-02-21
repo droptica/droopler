@@ -135,7 +135,6 @@ function d_content_init_fill_field($entity, $name, $value) {
           $new_child['paragraph_type'] = $child['type'];
         }
         else {
-          // @TODO fix this ugly fix of incorrect structure in array
           $new_child['data'] = $child;
           $new_child['paragraph_type'] = $value['subtype'];
         }
