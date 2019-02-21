@@ -26,21 +26,21 @@ class Updater {
    *
    * @var \Drupal\Core\Extension\ModuleInstallerInterface
    */
-  protected $module_installer;
+  protected $moduleInstaller;
 
   /**
    * Config storage service.
    *
    * @var \Drupal\Core\Config\StorageInterface
    */
-  protected $config_storage;
+  protected $configStorage;
 
   /**
    * D update config manager service.
    *
    * @var \Drupal\d_update\ConfigManager
    */
-  protected $config_manager;
+  protected $configManager;
 
   /**
    * Update Checklist service.
@@ -65,9 +65,9 @@ class Updater {
                               StorageInterface $config_storage,
                               ConfigManager $config_manager,
                               UpdateChecklist $checklist) {
-    $this->module_installer = $module_installer;
-    $this->config_storage = $config_storage;
-    $this->config_manager = $config_manager;
+    $this->moduleInstaller = $module_installer;
+    $this->configStorage = $config_storage;
+    $this->configManager = $config_manager;
     $this->checklist = $checklist;
   }
 
@@ -96,11 +96,11 @@ class Updater {
     $config_path = drupal_get_path('module', $module) . '/config/install';
     $source = new FileStorage($config_path);
     $data = $source->read($name);
-    if (!$data || !$this->config_manager->compare($name, $hash)) {
+    if (!$data || !$this->configManager->compare($name, $hash)) {
       return FALSE;
     }
 
-    return $this->config_storage->write($name, $data);
+    return $this->configStorage->write($name, $data);
   }
 
   /**

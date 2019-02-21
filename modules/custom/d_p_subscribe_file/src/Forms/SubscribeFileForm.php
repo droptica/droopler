@@ -20,7 +20,7 @@ class SubscribeFileForm extends FormBase {
   /**
    * @var \Drupal\Core\Session\AccountInterface|\Drupal\Core\Session\AnonymousUserSession
    */
-  protected $account_proxy;
+  protected $accountProxy;
 
   /**
    * Loaded paragraph entity.
@@ -30,7 +30,7 @@ class SubscribeFileForm extends FormBase {
   protected $paragraph;
 
   public function __construct(AccountProxy $account_proxy) {
-    $this->account_proxy = $account_proxy->getAccount();
+    $this->accountProxy = $account_proxy->getAccount();
   }
 
   /**
@@ -143,7 +143,7 @@ class SubscribeFileForm extends FormBase {
       'link_hash' => $link_hash,
     ], $link_options);
     $rendered_download_link = $download_link->toString()->getGeneratedLink();
-    if ($this->account_proxy->hasPermission('Administer site configuration')) {
+    if ($this->accountProxy->hasPermission('Administer site configuration')) {
       drupal_set_message($download_link->getUrl()->toString());
     }
 

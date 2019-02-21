@@ -25,14 +25,14 @@ class UpdateChecklist {
    *
    * @var \Drupal\checklistapi\ChecklistapiChecklist
    */
-  protected $update_checklist;
+  protected $updateChecklist;
 
   /**
    * Site configFactory object.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
-  protected $config_factory;
+  protected $configFactory;
 
   /**
    * The account object.
@@ -46,7 +46,7 @@ class UpdateChecklist {
    *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
-  protected $module_handler;
+  protected $moduleHandler;
 
   /**
    * Update checklist constructor.
@@ -59,15 +59,15 @@ class UpdateChecklist {
    *   The current user.
    */
   public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, AccountInterface $account) {
-    $this->config_factory = $config_factory;
-    $this->module_handler = $module_handler;
+    $this->configFactory = $config_factory;
+    $this->moduleHandler = $module_handler;
     $this->account = $account;
 
-    if ($this->module_handler->moduleExists('checklistapi')) {
-      $this->update_checklist = checklistapi_checklist_load('d_update');
+    if ($this->moduleHandler->moduleExists('checklistapi')) {
+      $this->updateChecklist = checklistapi_checklist_load('d_update');
     }
     else {
-      $this->update_checklist = FALSE;
+      $this->updateChecklist = FALSE;
     }
   }
 
@@ -78,7 +78,7 @@ class UpdateChecklist {
    *   Returns if update checklist is available.
    */
   public function isAvailable() {
-    return boolval($this->update_checklist);
+    return boolval($this->updateChecklist);
   }
 
   /**
@@ -92,7 +92,7 @@ class UpdateChecklist {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function markUpdatesSuccessful(array $names, $check_list_points = TRUE) {
-    if ($this->update_checklist === FALSE) {
+    if ($this->updateChecklist === FALSE) {
       return;
     }
     $this->setSuccessfulByHook($names, TRUE);
@@ -110,7 +110,7 @@ class UpdateChecklist {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function markUpdatesFailed(array $names) {
-    if ($this->update_checklist === FALSE) {
+    if ($this->updateChecklist === FALSE) {
       return;
     }
     $this->setSuccessfulByHook($names, FALSE);
@@ -125,12 +125,12 @@ class UpdateChecklist {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function markAllUpdates($status = TRUE) {
-    if ($this->update_checklist === FALSE) {
+    if ($this->updateChecklist === FALSE) {
       return;
     }
 
     $keys = [];
-    foreach ($this->update_checklist->items as $version_items) {
+    foreach ($this->updateChecklist->items as $version_items) {
       foreach ($version_items as $key => $item) {
         if (is_array($item)) {
           $keys[] = $key;
@@ -177,7 +177,7 @@ class UpdateChecklist {
   protected function checkListPoints(array $names) {
 
     /* @var \Drupal\Core\Config\Config $droopler_update_config */
-    $droopler_update_config = $this->config_factory->getEditable('checklistapi.progress.d_update');
+    $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
     $user = $this->account->id();
     $time = time();
     foreach ($names as $name) {
@@ -203,7 +203,7 @@ class UpdateChecklist {
    *   Checkboxes enabled or disabled.
    */
   protected function checkAllListPoints($status = TRUE) {
-    $droopler_update_config = $this->config_factory
+    $droopler_update_config = $this->configFactory
       ->getEditable('checklistapi.progress.d_update');
     $user = $this->account->id();
     $time = time();
@@ -215,7 +215,7 @@ class UpdateChecklist {
       '#description',
       '#weight',
     ];
-    foreach ($this->update_checklist->items as $version_items) {
+    foreach ($this->updateChecklist->items as $version_items) {
       foreach ($version_items as $item_name => $item) {
         if (!in_array($item_name, $exclude)) {
           if ($status) {
@@ -262,7 +262,7 @@ class UpdateChecklist {
       'negative' => [],
     ];
 
-    $droopler_update_config = $this->config_factory->getEditable('checklistapi.progress.d_update');
+    $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
     $saved_progress = $droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY);
 
     foreach ($values as $group_key => $group) {
@@ -308,7 +308,7 @@ class UpdateChecklist {
       $num_changed_items,
       '%title progress has been saved. 1 item changed.',
       '%title progress has been saved. @count items changed.',
-      ['%title' => $this->update_checklist->title]
+      ['%title' => $this->updateChecklist->title]
     ));
   }
 
