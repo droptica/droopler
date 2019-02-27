@@ -8,7 +8,6 @@ $d-p-side-embed-background-color-secondary: darken($d-p-side-embed-background-co
 $d-p-side-embed-embed-background-color: $color-cassandra !default;
 $d-p-side-embed-text-color: $color-odysseus !default;
 $d-p-side-embed-link-color: $color-nestor !default;
-$d-p-side-embed-cta-link-color: $white !default;
 $d-p-side-embed-link-hover-color: darken($d-p-side-embed-link-color, 5%) !default;
 $d-p-side-embed-line-color: $color-nestor !default;
 $d-p-side-embed-header-color: $color-odysseus !default;
@@ -51,14 +50,11 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         display: none;
       }
     }
-    a {
+    a:not(.btn) {
       color: $d-p-side-embed-link-color;
       &:hover {
         color: $d-p-side-embed-link-hover-color;
       }
-    }
-    .btn {
-      color: $d-p-side-embed-cta-link-color;
     }
   }
 
