@@ -263,6 +263,9 @@ $d-blog-size-of-large-desktop: 1400px !default;
       font-size: $d-blog-text-font-size-desktop;
       p, a, ul, li {
         font-size: $d-blog-text-font-size-desktop;
+        b, strong {
+          color: $d-blog-font-bold-color;
+        }
       }
     }
 
