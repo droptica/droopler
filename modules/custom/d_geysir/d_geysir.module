@@ -13,7 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
 function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
     case 'geysir.modal.add_select_type_form':
-      $root_path = getcwd();
+      $root_path = DRUPAL_ROOT;
       $base_url = \Drupal::service('router.request_context')->getBaseUrl;
       $module_path = drupal_get_path('module', 'd_p');
       foreach ($form['description'] as $paragraph_name => $attributes) {
