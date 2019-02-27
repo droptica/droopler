@@ -77,7 +77,8 @@ function d_update_preprocess_menu__toolbar(&$variables) {
       $variables['items']['d_update.admin_update']['title'] = t('Droopler Update')->__toString();
       // We need to rewrite current url options to hold classes etc.
       $options = $variables['items']['d_update.admin_update']['url']->getOptions();
-      $variables['items']['d_update.admin_update']['url'] = Url::fromRoute('system.db_update')->setOptions($options);
+      $variables['items']['d_update.admin_update']['url'] = Url::fromRoute('system.db_update')
+        ->setOptions($options);
     }
   }
   else {
@@ -126,8 +127,8 @@ function d_update_checklist_has_pending_updates() {
  *   return true if there are some pending updates, false otherwise
  */
 function d_update_system_has_pending_updates() {
-  $systemManager = \Drupal::service('system.manager')->listRequirements();
-  $update = $systemManager['update'];
+  $system_manager = \Drupal::service('system.manager')->listRequirements();
+  $update = $system_manager['update'];
   if (empty($update['severity'])) {
     return FALSE;
   }

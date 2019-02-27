@@ -75,10 +75,12 @@ function d_blog_preprocess_responsive_image(&$variables) {
       foreach ($variables['sources'] as $k => $attribute) {
         /** @var \Drupal\Core\Template\Attribute $attribute */
         $source = preg_replace('/\s\d[xX]$/', '', $attribute->offsetGet('srcset'));
-        $variables['#attached']['html_head_link'][] = [[
-          'href' => $source,
-          'rel' => "droopler:$id:img$k"
-        ]];
+        $variables['#attached']['html_head_link'][] = [
+          [
+            'href' => $source,
+            'rel' => "droopler:$id:img$k"
+          ]
+        ];
       }
     }
   }

@@ -13,14 +13,14 @@ use Drupal\Core\Form\FormStateInterface;
 function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
     case 'geysir.modal.add_select_type_form':
-      $rootPath = getcwd();
-      $baseUrl = \Drupal::service('router.request_context')->getBaseUrl;
-      $modulePath = drupal_get_path('module', 'd_p');
-      foreach ($form['description'] as $paragraphName => $attributes) {
-        $fileServerPath = $rootPath . '/' . $modulePath . '/images/' . $paragraphName . '.png';
-        if (file_exists($fileServerPath)) {
-          $fileUrl = $baseUrl . $modulePath . '/images/' . $paragraphName . '.png';
-          $form['description'][$paragraphName]['#src'] = $fileUrl;
+      $root_path = getcwd();
+      $base_url = \Drupal::service('router.request_context')->getBaseUrl;
+      $module_path = drupal_get_path('module', 'd_p');
+      foreach ($form['description'] as $paragraph_name => $attributes) {
+        $file_server_path = $root_path . '/' . $module_path . '/images/' . $paragraph_name . '.png';
+        if (file_exists($file_server_path)) {
+          $file_url = $base_url . $module_path . '/images/' . $paragraph_name . '.png';
+          $form['description'][$paragraph_name]['#src'] = $file_url;
         }
       }
       break;
@@ -41,9 +41,10 @@ function d_geysir_toolbar() {
   ];
 
   $route = \Drupal::routeMatch()->getRouteObject();
-  $isAdmin = \Drupal::service('router.admin_context')->isAdminRoute($route);
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute($route);
 
-  if (!\Drupal::currentUser()->hasPermission('geysir manage paragraphs from front-end') || $isAdmin) {
+  if (!\Drupal::currentUser()
+      ->hasPermission('geysir manage paragraphs from front-end') || $is_admin) {
     return $items;
   }
 
@@ -60,7 +61,7 @@ function d_geysir_toolbar() {
           'toolbar-icon',
           'toolbar-icon-edit',
           'toolbar-geysir-toggle',
-          'is-active'
+          'is-active',
         ],
       ],
     ],
@@ -83,5 +84,5 @@ function d_geysir_toolbar() {
  * Using hook_preprocess_page().
  */
 function d_geysir_preprocess_page(&$variables) {
-  $variables['#attached']['library'][] =  'd_geysir/overrides';
+  $variables['#attached']['library'][] = 'd_geysir/overrides';
 }

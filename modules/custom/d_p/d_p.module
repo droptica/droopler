@@ -48,7 +48,7 @@ function d_p_responsive_style_ids() {
 function d_p_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
-  $paragraph_id = 'paragraph-' . $bundle .'-'. $paragraph->id();
+  $paragraph_id = 'paragraph-' . $bundle . '-' . $paragraph->id();
   $wrapper_attributes = [
     'id' => $paragraph_id,
     'class' => [
@@ -100,17 +100,23 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
       $conf = $image_scale->getConfiguration();
       if (isset($conf['data']['width']) && !empty($conf['data']['width'])) {
         $width = $conf['data']['width'];
-        $urls[] = ['url' => file_url_transform_relative($style->buildUrl($image_uri)), 'width' => $width];
+        $urls[] = [
+          'url' => file_url_transform_relative($style->buildUrl($image_uri)),
+          'width' => $width,
+        ];
       }
       elseif ($style->getName() == 'responsive_image_768_banner') {
         $width = '768';
-        $urls[] = ['url' => $style->buildUrl($image_uri, TRUE), 'width' => $width];
+        $urls[] = [
+          'url' => $style->buildUrl($image_uri, TRUE),
+          'width' => $width,
+        ];
       }
     }
     unset($variables['content']['field_d_image_background']);
 
     if ($js) {
-      $variables['#attached']['drupalSettings']['image_background']['paragraph-' . $bundle .'-'. $paragraph->id()] = $urls;
+      $variables['#attached']['drupalSettings']['image_background']['paragraph-' . $bundle . '-' . $paragraph->id()] = $urls;
     }
     else {
       $variables['images'] = $urls;
@@ -120,10 +126,12 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
     if (Settings::get('httrack_enabled', FALSE)) {
       if (!empty($urls)) {
         foreach ($urls as $k => $url) {
-          $variables['#attached']['html_head_link'][] = [[
-            'href' => $url['url'],
-            'rel' => "droopler:".$paragraph->id().":img$k"
-          ]];
+          $variables['#attached']['html_head_link'][] = [
+            [
+              'href' => $url['url'],
+              'rel' => "droopler:" . $paragraph->id() . ":img$k",
+            ],
+          ];
         }
       }
     }

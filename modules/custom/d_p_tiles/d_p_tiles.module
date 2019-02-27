@@ -17,7 +17,7 @@ function d_p_tiles_theme($existing, $type, $theme, $path) {
     ],
     'field__paragraph__field_d_image__d_p_tiles' => [
       'base hook' => 'field',
-    ]
+    ],
   ];
 }
 
@@ -44,7 +44,7 @@ function d_p_tiles_preprocess_paragraph(&$variables) {
 function d_p_tiles_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_tiles') {
-      switch($variables['field_name']) {
+      switch ($variables['field_name']) {
 
         case 'field_d_main_title':
         case 'field_d_long_text':
@@ -84,7 +84,7 @@ function d_p_tiles_preprocess_colorbox_formatter(&$variables) {
 
     $variables['image']['#alt'] = $alt;
     $variables['attributes']['title'] = '';
-    $variables['attributes']['data-cbox-img-attrs'] = json_encode([ 'alt' => $alt ]);
+    $variables['attributes']['data-cbox-img-attrs'] = json_encode(['alt' => $alt]);
     $variables['attributes']['data-cbox-title'] = $alt;
   }
 }

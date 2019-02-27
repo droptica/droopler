@@ -61,13 +61,13 @@ class Updater {
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
    */
-  public function __construct(ModuleInstallerInterface $moduleInstaller,
-                              StorageInterface $configStorage,
-                              ConfigManager $configManager,
+  public function __construct(ModuleInstallerInterface $module_installer,
+                              StorageInterface $config_storage,
+                              ConfigManager $config_manager,
                               UpdateChecklist $checklist) {
-    $this->moduleInstaller = $moduleInstaller;
-    $this->configStorage = $configStorage;
-    $this->configManager = $configManager;
+    $this->moduleInstaller = $module_installer;
+    $this->configStorage = $config_storage;
+    $this->configManager = $config_manager;
     $this->checklist = $checklist;
   }
 
@@ -93,11 +93,11 @@ class Updater {
    *   Returns if config was imported successfully.
    */
   public function importConfig($module, $name, $hash) {
-    $configPath = drupal_get_path('module', $module) . '/config/install';
-    $source = new FileStorage($configPath);
+    $config_path = drupal_get_path('module', $module) . '/config/install';
+    $source = new FileStorage($config_path);
     $data = $source->read($name);
     if (!$data || !$this->configManager->compare($name, $hash)) {
-      return false;
+      return FALSE;
     }
 
     return $this->configStorage->write($name, $data);
@@ -107,7 +107,8 @@ class Updater {
    * Import many config files at once.
    *
    * @param array $configs
-   *   Two dimensional array with structure "module_name" => ["config_file_name" => "config_hash"]
+   *   Two dimensional array with structure "module_name" =>
+   *   ["config_file_name" => "config_hash"]
    *
    * @return bool
    *  Returns if all of the configs were imported successfully.
@@ -115,12 +116,12 @@ class Updater {
   public function importConfigs(array $configs) {
     $status = [];
     foreach ($configs as $module => $config) {
-      foreach ($config as $configName => $configHash) {
-        $status[] = $this->importConfig($module, $configName, $configHash);
+      foreach ($config as $config_name => $config_hash) {
+        $status[] = $this->importConfig($module, $config_name, $config_hash);
       }
     }
 
-    return !in_array(false, $status);
+    return !in_array(FALSE, $status);
   }
 
   /**
@@ -136,18 +137,18 @@ class Updater {
    *
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
-  public function installModules(array $modules, $enableDependencies = TRUE) {
+  public function installModules(array $modules, $enable_dependencies = TRUE) {
     if (empty($modules) || !is_array($modules)) {
       return FALSE;
     }
 
-    $moduleData = system_rebuild_module_data();
+    $module_data = system_rebuild_module_data();
     $modules = array_combine($modules, $modules);
-    if ($missing_modules = array_diff_key($modules, $moduleData)) {
+    if ($missing_modules = array_diff_key($modules, $module_data)) {
       return FALSE;
     }
 
-    return $this->moduleInstaller->install($modules, $enableDependencies);
+    return $this->moduleInstaller->install($modules, $enable_dependencies);
   }
 
 }

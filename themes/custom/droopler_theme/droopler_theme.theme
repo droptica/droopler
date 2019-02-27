@@ -97,8 +97,8 @@ function droopler_theme_preprocess_form_element(&$variables) {
     $variables['input_title'] = $variables['label']['#title'];
   }
   if (!empty($variables['input_title'])) {
-    $allowedTags = '<p><a><img><span><blockquote><b><strong><i><em><u>';
-    $variables['input_title'] = strip_tags($variables['input_title'], $allowedTags);
+    $allowed_tags = '<p><a><img><span><blockquote><b><strong><i><em><u>';
+    $variables['input_title'] = strip_tags($variables['input_title'], $allowed_tags);
   }
   if (isset($variables['element']['#attributes'])) {
     $variables['input_attributes'] = new Attribute($variables['element']['#attributes']);
@@ -139,10 +139,10 @@ function droopler_theme_theme_suggestions_form_alter(array &$suggestions, array 
  * Implements hook_theme_suggestions_page_alter.
  */
 function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
-  $routeMatch = \Drupal::routeMatch();
-  if ($routeMatch->getRouteName() == 'entity.taxonomy_term.canonical') {
+  $route_match = \Drupal::routeMatch();
+  if ($route_match->getRouteName() == 'entity.taxonomy_term.canonical') {
     $storage = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term');
-    $tid = $routeMatch->getRawParameter('taxonomy_term');
+    $tid = $route_match->getRawParameter('taxonomy_term');
     $term = $storage->load($tid);
     $suggestions[] = 'page__taxonomy__term__' . $term->getVocabularyId();
   }
@@ -271,12 +271,12 @@ function droopler_theme_preprocess_block(&$variables) {
  */
 function droopler_theme_is_special_route() {
   $route = \Drupal::routeMatch();
-  $routeName = $route->getRouteName();
+  $route_name = $route->getRouteName();
   $node = $route->getParameter('node');
-  $nodeCheck = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
-  $routeCheck = $routeName == 'd_p_subscribe_file.downloadfile.checkLink';
+  $node_check = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
+  $route_check = $route_name == 'd_p_subscribe_file.downloadfile.checkLink';
 
-  return ($nodeCheck || $routeCheck);
+  return ($node_check || $route_check);
 }
 
 /**
@@ -287,10 +287,10 @@ function droopler_theme_is_special_route() {
  */
 function droopler_theme_show_title_block() {
   $route = \Drupal::routeMatch();
-  $routeName = $route->getRouteName();
+  $route_name = $route->getRouteName();
   $node = $route->getParameter('node');
-  $nodeCheck = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
-  $routeCheck = $routeName == 'view.blog_listing.page_1';
+  $node_check = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
+  $route_check = $route_name == 'view.blog_listing.page_1';
 
-  return !($nodeCheck || $routeCheck);
+  return !($node_check || $route_check);
 }

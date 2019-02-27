@@ -45,44 +45,44 @@ class SubscribeFileEntity extends ContentEntityBase implements ContentEntityInte
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('name'))
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '',
         'max_length' => 255,
         'text_processing' => 0,
-      ));
+      ]);
 
     $fields['mail'] = BaseFieldDefinition::create('string')
       ->setLabel(t('mail'))
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '',
         'max_length' => 255,
         'text_processing' => 0,
-      ));
+      ]);
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('created'));
 
     $fields['link_hash'] = BaseFieldDefinition::create('string')
       ->setLabel(t('link_hash'))
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '',
         'max_length' => 255,
         'text_processing' => 0,
-      ));
+      ]);
 
     $fields['file_hash'] = BaseFieldDefinition::create('string')
       ->setLabel(t('file_hash'))
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '',
         'max_length' => 255,
         'text_processing' => 0,
-      ));
+      ]);
 
     $fields['fid'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('fid'))
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => 0,
-      ));
+      ]);
 
     return $fields;
   }

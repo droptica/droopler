@@ -11,7 +11,7 @@
  */
 function d_p_form_options_list_alter(array &$options, array $context) {
   // Personal form makes error.
-  if (method_exists($context['fieldDefinition'], 'id')){
+  if (method_exists($context['fieldDefinition'], 'id')) {
     if ($context['fieldDefinition']->id() == 'paragraph.d_p_form.field_d_forms') {
       unset($options['personal']);
     }
