@@ -20,10 +20,17 @@ class ContactAlterRouteSubscriber extends RouteSubscriberBase {
    * {@inheritdoc}
    */
   public function alterRoutes(RouteCollection $collection) {
-    // Remove the /user/{user}/contact route.
+    // Remove the /contact route.
 
-    if ($route = $collection->get('entity.user.contact_form')) {
-      $collection->remove('entity.user.contact_form');
+    if ($route = $collection->get('contact.site_page')) {
+      $collection->remove('contact.site_page');
+    }
+
+    $moduleHandler = \Drupal::service('module_handler');
+    if (!($moduleHandler->moduleExists('contact'))){
+      if ($route = $collection->get('entity.user.contact_form')) {
+        $collection->remove('entity.user.contact_form');
+      }
     }
   }
 }
