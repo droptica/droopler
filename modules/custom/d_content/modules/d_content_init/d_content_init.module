@@ -94,6 +94,11 @@ function d_content_init_fill_field($entity, $name, $value) {
       $entity_attributes = [
         'title' => $value['data']['text'],
         'uri' => $value['data']['link'],
+        'options' => [
+          'attributes' => [
+            'class' => 'btn btn-primary',
+          ],
+        ],
       ];
       if (isset($value['data']['options'])) {
         $entity_attributes['options'] = $value['data']['options'];

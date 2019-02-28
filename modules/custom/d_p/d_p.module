@@ -10,6 +10,7 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Component\Utility\NestedArray;
 
 /**
  * Implements hook_theme().
@@ -149,5 +150,11 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['name']['#type'] = 'textfield';
       $form['mail']['#type'] = 'textfield';
       break;
+  }
+  $key_exists = NULL;
+  $value = NestedArray::getValue($form, ['field_d_cta_link'], $key_exists);
+  if ($key_exists) {
+    $value['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+    NestedArray::setValue($form, ['field_d_cta_link'], $value);
   }
 }

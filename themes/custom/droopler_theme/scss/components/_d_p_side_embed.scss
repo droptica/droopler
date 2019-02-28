@@ -50,7 +50,7 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         display: none;
       }
     }
-    a {
+    a:not(.btn) {
       color: $d-p-side-embed-link-color;
       &:hover {
         color: $d-p-side-embed-link-hover-color;

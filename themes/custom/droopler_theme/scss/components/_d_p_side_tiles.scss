@@ -49,7 +49,7 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
         display: none;
       }
     }
-    a {
+    a:not(.btn) {
       color: $d-p-side-tiles-link-color;
       &:hover {
         color: $d-p-side-tiles-link-hover-color;

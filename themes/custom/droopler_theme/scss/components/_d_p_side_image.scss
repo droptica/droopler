@@ -38,7 +38,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
       display: none;
     }
   }
-  a {
+  a:not(.btn) {
     color: $d-p-side-image-banner-link-color;
     &:hover {
       color: $d-p-side-image-banner-link-hover-color;
