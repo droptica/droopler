@@ -15,6 +15,7 @@ $d-p-gallery-margin-y: 5% !default;
 .paragraph--type--d-p-gallery {
   margin-top: $d-p-gallery-margin-y;
   margin-bottom: $d-p-gallery-margin-y;
+  text-align: center;
 
   h2 {
     @include font-main-header;
@@ -28,7 +29,6 @@ $d-p-gallery-margin-y: 5% !default;
   .field--name-field-d-long-text {
     p {
       color: $d-p-gallery-color;
-      text-align: center;
       b, strong {
         color: $d-p-gallery-bold-color;
       }
