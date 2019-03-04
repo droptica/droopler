@@ -29,6 +29,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
   background: $d-p-banner-background-overlay;
   color: $d-p-banner-text-color;
   z-index: 0;
+  text-align: center;
   .content > h2 {
     @include font-main-header-big;
     color: $d-p-banner-header-color;
@@ -58,6 +59,11 @@ $d-p-banner-subheader-opacity: 0.7 !default;
   h2 + .field--type-link,
   h3 + .field--type-link,
   .field--name-field-d-long-text {
+    p {
+      color: $d-p-banner-text-color;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
     &:before {
       @include decoration-header-line-main-center;
       background: $d-p-banner-line-color;

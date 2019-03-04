@@ -20,6 +20,7 @@ $d-p-text-paged-first-margin-top: 2% !default;
 .text-page {
   padding-top: $d-p-text-paged-padding-y;
   padding-bottom: $d-p-text-paged-padding-y;
+  text-align: center;
 
   > div > .field--name-field-d-icon {
     text-align: center;
@@ -36,7 +37,9 @@ $d-p-text-paged-first-margin-top: 2% !default;
     text-align: center;
     color: $d-p-text-paged-subtitle-color;
   }
-
+  .field--type-link {
+    text-align: center;
+  }
   .field--name-field-d-long-text {
     p {
       color: $d-p-text-paged-color;
