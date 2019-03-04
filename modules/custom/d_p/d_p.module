@@ -10,7 +10,6 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Component\Utility\NestedArray;
 
 /**
  * Implements hook_theme().
@@ -141,6 +140,22 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
 }
 
 /**
+ * Finds and replaces default value of class attribute in all fields of type field_d_cta_link.
+ *
+ * @param $form - Form array to search on.
+ */
+function edit_cta_link_default_class(&$form) {
+  foreach($form as &$subform) {
+    if (!is_object($subform) && isset($subform['field_d_cta_link'])) {
+      $subform['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+    }
+    if (is_array($subform)) {
+      edit_cta_link_default_class($subform);
+    }
+  }
+}
+
+/**
  * Implements hook_form_alter().
  */
 function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -151,10 +166,11 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['mail']['#type'] = 'textfield';
       break;
   }
-  $key_exists = NULL;
-  $value = NestedArray::getValue($form, ['field_d_cta_link'], $key_exists);
-  if ($key_exists) {
-    $value['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
-    NestedArray::setValue($form, ['field_d_cta_link'], $value);
+  $trigger_name = $form_state->getUserInput()['_triggering_element_name'] ?? NULL;
+  if (strpos($form_id, 'add') !== FALSE || strpos($trigger_name, 'add') !== FALSE) {
+    if (isset($form['field_d_cta_link'])) {
+      $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+    }
+    edit_cta_link_default_class($form);
   }
 }
