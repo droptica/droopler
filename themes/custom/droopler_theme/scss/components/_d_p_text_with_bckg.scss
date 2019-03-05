@@ -24,6 +24,7 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
 .d-p-text-with-bckg {
   background: $d-p-text-with-bckg-background-overlay;
   z-index: 0;
+  text-align: center;
 
   h2 {
     @include font-main-header;
@@ -39,13 +40,16 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
   }
   p {
     @include font-body-standard;
-    text-align: center;
     line-height: 1.7;
   }
 
   h2 + .field--type-link,
   h3 + .field--type-link,
   .field--name-field-d-long-text {
+    p {
+      word-wrap: break-word;
+      hyphens: auto;
+    }
     &:before {
       @include decoration-header-line-main-center;
       background: $d-p-text-with-bckg-line-color;

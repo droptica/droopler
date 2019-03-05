@@ -18,7 +18,7 @@ $d-p-tiles-margin-bottom: 5% !default;
 
 .paragraph--type--d-p-tiles {
   @include clearfix;
-
+  text-align: center;
   .paragraph-top-light & {
     margin-top: $d-p-tiles-margin-top;
   }
@@ -34,7 +34,6 @@ $d-p-tiles-margin-bottom: 5% !default;
   .field--name-field-d-long-text {
     p {
       color: $d-p-tiles-color;
-      text-align: center;
       b, strong {
         color: $d-p-tiles-bold-color;
       }

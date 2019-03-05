@@ -39,6 +39,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
 .paragraph--type--d-p-carousel {
   padding-top: $d-p-carousel-padding-y;
   padding-bottom: $d-p-carousel-padding-y;
+  text-align: center;
 
   @include media-breakpoint-down(md) {
     padding-top: $d-p-carousel-mobile-padding-y;
@@ -61,7 +62,15 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
   }
 
   .content > .field--name-field-d-long-text {
-    text-align: center;
+    p {
+      color: $d-p-carousel-item-text-color;
+      word-wrap: break-word;
+      hyphens: auto;
+
+      b, strong {
+        color: $d-p-carousel-item-text-bold-color;
+      }
+    }
   }
 
   .field--name-field-d-main-title + .field--name-field-d-p-cs-item-reference,
