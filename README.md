@@ -4,6 +4,7 @@
 ## What is Droopler? ##
 Droopler is a Drupal 8 profile designed to kickstart a new webpage in a few minutes. It's based on the latest frontend technologies, including Bootstrap 4. The maintainer of Droopler is [Droptica](https://droptica.com).
 
+
 * **Official website**: [droopler.com](https://droopler.com)
 * **Documentation**: [droopler.com/developers](https://droopler.com/developers)
 * **Demo**: [demo.droopler.com](https://demo.droopler.com)
@@ -62,18 +63,18 @@ $ gulp watch
 There are also other Gulp commands for theme developers, here's the full reference:
 
  - **gulp watch** - watches for changes in SCSS and JS and proceses them on the fly
- - **gulp compile** - cleans derivative files and compiles all SCSS/JS in the subtheme for DEV environment 
+ - **gulp compile** - cleans derivative files and compiles all SCSS/JS in the subtheme for DEV environment
  - **gulp dist** - cleans derivative files and compiles all SCSS/JS in the subtheme for PROD environment
  - **gulp clean** - cleans derivative files
  - **gulp-debug** - prints Gulp debug information, this comes in handy when something's not working
- 
+
 ## SCSS structure ##
 
  - **style.scss** - combines all SCSS code from base theme and subtheme
  - **print.scss** - combines all SCSS code for printing from base theme and subtheme
  - **config/** - the most important directory that contains the subtheme configuration - you can add your own config files like _foobar.scss, just refer to them in _all.scss.
  - **libraries/** - additional files needed by Drupal
- 
+
 You can use any SCSS structure you like. We recommend dividing files into **layout/** and **components/** directories. Just remember to include your files in **style.scss**.
 
 # SCSS Configuration ##
