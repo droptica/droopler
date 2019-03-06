@@ -118,7 +118,8 @@ class PhpTransliterationTest extends TestCase {
     $five_byte = html_entity_decode('&#x10330;&#x10338;', ENT_NOQUOTES, 'UTF-8');
 
     return [
-      // Each test case is (language code, input, output).
+      // Each test case is language code, input, output, unknown character, max
+      // length.
       // Test ASCII in English.
       ['en', $random, $random],
       // Test ASCII in some other language with no overrides.
@@ -142,26 +143,34 @@ class PhpTransliterationTest extends TestCase {
       // Test strings in some other languages.
       // Turkish, provided by drupal.org user Kartagis.
       ['tr', 'Abayı serdiler bize. Söyleyeceğim yüzlerine. Sanırım hepimiz aynı şeyi düşünüyoruz.', 'Abayi serdiler bize. Soyleyecegim yuzlerine. Sanirim hepimiz ayni seyi dusunuyoruz.'],
-      // Illegal/unknown unicode.
-      ['en', chr(0xF8) . chr(0x80) . chr(0x80) . chr(0x80) . chr(0x80), '?'],
       // Max length.
-      ['de', $two_byte, 'Ae Oe', '?', 5],
+      ['de', $two_byte, 'Ae Oe Ue A O aeoe', '?', 17],
+      // Do not split up the transliteration of a single character.
+      ['de', $two_byte, 'Ae Oe Ue A O aeoe', '?', 18],
+      // Illegal/unknown unicode.
+      ['en', chr(0xF8) . chr(0x80) . chr(0x80) . chr(0x80) . chr(0x80), '?????'],
+      ['en', chr(0xF8) . chr(0x80) . chr(0x80) . chr(0x80) . chr(0x80), '-----', '-'],
+      ['en', 'Hel' . chr(0x80) . 'o World', 'Hel?o World'],
+      ['en', 'Hell' . chr(0x80) . ' World', 'Hell? World'],
+      // Non default replacement.
+      ['en', chr(0x80) . 'ello World', '_ello World', '_'],
+      // Keep the original question marks.
+      ['en', chr(0xF8) . '?' . chr(0x80), '???'],
+      ['en', chr(0x80) . 'ello ? World?', '_ello ? World?', '_'],
+      ['pl', 'aąeę' . chr(0x80) . 'oółżźz ?', 'aaee?oolzzz ?'],
+      // Non-US-ASCII replacement.
+      ['en', chr(0x80) . 'ello World?', 'Oello World?', 'Ö'],
+      ['pl', chr(0x80) . 'óóść', 'ooosc', 'ó'],
+      // Ensure question marks are replaced when max length used.
+      ['en', chr(0x80) . 'ello ? World?', '_ello ?', '_', 7],
+      // Empty replacement.
+      ['en', chr(0x80) . 'ello World' . chr(0xF8), 'ello World', ''],
+      // Not affecting spacing from the beginning and end of a string.
+      ['en', ' Hello Abventor! ', ' Hello Abventor! '],
+      ['pl', ' Drupal Kraków Community', ' Drupal Krakow ', '?', 15],
+      // Keep many spaces between words.
+      ['en', 'Too    many    spaces between words !', 'Too    many    spaces between words !'],
     ];
-  }
-
-  /**
-   * Tests the transliteration with max length.
-   */
-  public function testTransliterationWithMaxLength() {
-    $transliteration = new PhpTransliteration();
-
-    // Test with max length, using German. It should never split up the
-    // transliteration of a single character.
-    $input = 'Ä Ö Ü Å Ø äöüåøhello';
-    $trunc_output = 'Ae Oe Ue A O aeoe';
-
-    $this->assertSame($trunc_output, $transliteration->transliterate($input, 'de', '?', 17), 'Truncating to 17 characters works');
-    $this->assertSame($trunc_output, $transliteration->transliterate($input, 'de', '?', 18), 'Truncating to 18 characters works');
   }
 
   /**

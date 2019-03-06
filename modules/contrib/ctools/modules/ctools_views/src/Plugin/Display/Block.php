@@ -2,11 +2,9 @@
 
 namespace Drupal\ctools_views\Plugin\Display;
 
-use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\Block\ViewsBlock;
 use Drupal\views\Plugin\views\display\Block as CoreBlock;
-use Drupal\views\Plugin\views\filter\InOperator;
 
 /**
  * Provides a Block display plugin that allows for greater control over Views
@@ -52,10 +50,14 @@ class Block extends CoreBlock {
     $options['configure_sorts'] = $this->t('Configure sorts');
     $form['allow']['#options'] = $options;
     // Update the items_per_page if set.
-    $defaults = array_filter($form['allow']['#default_value']);
-    if (isset($defaults['items_per_page'])) {
-      $defaults['items_per_page'] = 'items_per_page';
+    $defaults = [];
+    if (!empty($form['allow']['#default_value'])) {
+      $defaults = array_filter($form['allow']['#default_value']);
+      if (!empty($defaults['items_per_page'])) {
+        $defaults['items_per_page'] = 'items_per_page';
+      }
     }
+
     $form['allow']['#default_value'] = $defaults;
   }
 
@@ -157,7 +159,7 @@ class Block extends CoreBlock {
        if (!empty($allow_settings['sort_fields'])) {
           $form['override']['order_fields'][$field_name]['#attributes']['class'][] = 'draggable';
         }
-        $form['override']['order_fields'][$field_name]['#weight'] = !empty($block_configuration['fields'][$field_name]['weight']) ? $block_configuration['fields'][$field_name]['weight'] : '';
+        $form['override']['order_fields'][$field_name]['#weight'] = !empty($block_configuration['fields'][$field_name]['weight']) ? $block_configuration['fields'][$field_name]['weight'] : 0;
         if (!empty($allow_settings['hide_fields'])) {
           $form['override']['order_fields'][$field_name]['hide'] = [
             '#type' => 'checkbox',

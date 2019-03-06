@@ -1,5 +1,21 @@
 # Change Log
 
+### 2.11.2 - 1 Feb 2019
+
+- Fix handling of old caches from 2.11.1 that introduced upgrade errors.
+
+### 2.11.1 - 31 Jan 2019
+
+- Cache injected classes (#182)
+
+### 2.11.0 - 27 Jan 2019
+
+- Make injection of InputInterface / OutputInterface general-purpose (#179)
+
+### 2.10.2 - 20 Dec 2018
+
+- Fix commands that have a @param annotation for their InputInterface/OutputInterface params (#176)
+
 ### 2.10.1 - 13 Dec 2018
 
 - Add stdin handler convenience class

@@ -4,7 +4,6 @@ namespace Drupal\metatag;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
-use Drupal\metatag\Normalizer\FieldItemNormalizer;
 use Drupal\metatag\Normalizer\MetatagHalNormalizer;
 use Drupal\metatag\Normalizer\MetatagNormalizer;
 use Symfony\Component\DependencyInjection\Definition;
@@ -30,10 +29,6 @@ class MetatagServiceProvider extends ServiceProviderBase {
       $metatag_hal = new Definition(MetatagHalNormalizer::class);
       $metatag_hal->addTag('normalizer', ['priority' => 31]);
       $container->setDefinition('metatag.normalizer.metatag.hal', $metatag_hal);
-
-      $metatag_field = new Definition(FieldItemNormalizer::class);
-      $metatag_field->addTag('normalizer', ['priority' => 30]);
-      $container->setDefinition('metatag.normalizer.metatag_field', $metatag_field);
     }
   }
 

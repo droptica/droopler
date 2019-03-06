@@ -179,8 +179,8 @@
    * Extract the relative internal URL from an absolute internal URL.
    *
    * Examples:
-   * - http://mydomain.com/node/1 -> /node/1
-   * - http://example.com/foo/bar -> http://example.com/foo/bar
+   * - https://mydomain.com/node/1 -> /node/1
+   * - https://example.com/foo/bar -> https://example.com/foo/bar
    *
    * @param {string} url
    *   The web url to check.

@@ -525,6 +525,10 @@ Title Desc|Z -> A</pre> Leave the replacement text blank to remove an option alt
 
       $filter_form = array();
       $form_state = new FormState();
+
+      // Let form plugins know this is for exposed widgets.
+      $form_state->set('exposed', TRUE);
+
       /** @var \Drupal\views\Plugin\views\filter\FilterPluginBase $filter */
       $filter->buildExposedForm($filter_form, $form_state);
 
@@ -1220,7 +1224,9 @@ Title Desc|Z -> A</pre> Leave the replacement text blank to remove an option alt
             '#title' => $form['#info']["filter-$label"]['label'] ?: '',
             '#description' => $form['#info']["filter-$label"]['description'] ?: '',
             // Needed to keep styling consistent with other exposed options.
-            '#attributes' => array('class' => 'form-item'),
+            '#attributes' => [
+              'class' => ['form-item'],
+            ],
             '#value' => NULL,
           ],
         ];
@@ -1331,11 +1337,11 @@ Title Desc|Z -> A</pre> Leave the replacement text blank to remove an option alt
     if (!$reorder) {
       $order = array_keys($options);
     }
-    $lines = explode("\n", trim($rewriteSettings));
+    $lines = preg_split("/(\r\n|\n|\r)/", trim($rewriteSettings));
     foreach ($lines as $line) {
       list($search, $replace) = explode('|', $line);
       if (!empty($search)) {
-        $rewrites[$search] = $replace;
+        $rewrites[$search] = trim($replace);
         if ($reorder) {
           // Reorder options in the order they are specified in rewrites.
           // Collect the keys to use later.

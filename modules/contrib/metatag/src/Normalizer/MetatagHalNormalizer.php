@@ -19,7 +19,6 @@ class MetatagHalNormalizer extends MetatagNormalizer {
     $normalized = parent::normalize($field_item, $format, $context);
 
     // Mock the field array similar to the other fields.
-    // @see Drupal\hal\Normalizer\FieldItemNormalizer
     return [
       'metatag' => [$normalized],
     ];

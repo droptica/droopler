@@ -39,7 +39,7 @@ interface FormWizardInterface extends FormInterface {
   /**
    * The active SharedTempStore for this wizard.
    *
-   * @return \Drupal\user\SharedTempStore
+   * @return \Drupal\Core\TempStore\SharedTempStore
    */
   public function getTempstore();
 

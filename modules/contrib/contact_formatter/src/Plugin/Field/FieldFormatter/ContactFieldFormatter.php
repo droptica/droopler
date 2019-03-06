@@ -25,6 +25,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ContactFieldFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
 
   /**
+   * The renderer service.
+   *
    * @var \Drupal\Core\Render\RendererInterface
    */
   protected $renderer;
@@ -42,6 +44,10 @@ class ContactFieldFormatter extends FormatterBase implements ContainerFactoryPlu
    *   The formatter settings.
    * @param string $label
    *   The formatter label display setting.
+   * @param string $view_mode
+   *   The view mode that should be used to display.
+   * @param array $third_party_settings
+   *   Any third party settings.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
    * @param \Drupal\Core\Render\RendererInterface $renderer
@@ -93,7 +99,6 @@ class ContactFieldFormatter extends FormatterBase implements ContainerFactoryPlu
   public function settingsSummary() {
     $summary = [];
     // Implement settings summary.
-
     return $summary;
   }
 
@@ -106,13 +111,16 @@ class ContactFieldFormatter extends FormatterBase implements ContainerFactoryPlu
     foreach ($items as $delta => $item) {
       $message = \Drupal::entityTypeManager()
         ->getStorage('contact_message')
-        ->create(array(
+        ->create([
           'contact_form' => $item->getValue()['target_id'],
-      ));
+        ]);
 
-      $form = \Drupal::service('entity.form_builder')->getForm($message);
+      // Can't add Personal form.
+      if (!$message->isPersonal()) {
+        $form = \Drupal::service('entity.form_builder')->getForm($message);
 
-      $elements[$delta] = ['#markup' => $this->renderer->render($form)];
+        $elements[$delta] = ['#markup' => $this->renderer->render($form)];
+      }
     }
 
     return $elements;

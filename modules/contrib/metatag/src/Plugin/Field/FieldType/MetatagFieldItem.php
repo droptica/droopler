@@ -14,7 +14,10 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("Meta tags"),
  *   description = @Translation("This field stores code meta tags."),
  *   default_widget = "metatag_firehose",
- *   default_formatter = "metatag_empty_formatter"
+ *   default_formatter = "metatag_empty_formatter",
+ *   serialized_property_names = {
+ *     "value"
+ *   }
  * )
  */
 class MetatagFieldItem extends FieldItemBase {

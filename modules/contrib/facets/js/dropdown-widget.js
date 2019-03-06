@@ -68,7 +68,7 @@
           $option.attr('selected', 'selected');
           $link.find('.js-facet-deactivate').remove();
         }
-        $option.html($link.text());
+        $option.text($link.text());
         $dropdown.append($option);
       });
 

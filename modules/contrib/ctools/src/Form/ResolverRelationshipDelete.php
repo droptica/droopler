@@ -2,18 +2,17 @@
 
 namespace Drupal\ctools\Form;
 
-
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\ConfirmFormHelper;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\ctools\TypedDataResolver;
-use Drupal\user\SharedTempStoreFactory;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class ResolverRelationshipDelete extends ConfirmFormBase {
 
   /**
-   * @var \Drupal\user\SharedTempStoreFactory
+   * @var \Drupal\Core\TempStore\SharedTempStoreFactory
    */
   protected $tempstore;
 
@@ -41,14 +40,14 @@ abstract class ResolverRelationshipDelete extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('user.shared_tempstore'), $container->get('ctools.typed_data.resolver'));
+    return new static($container->get('tempstore.shared'), $container->get('ctools.typed_data.resolver'));
   }
 
   /**
-   * @param \Drupal\user\SharedTempStoreFactory $tempstore
+   * @param \Drupal\Core\TempStore\SharedTempStoreFactory $tempstore
    *   The shared tempstore.
    * @param \Drupal\ctools\TypedDataResolver $resolver
-   *   The the typed data resolver.
+   *   The typed data resolver.
    */
   public function __construct(SharedTempStoreFactory $tempstore, TypedDataResolver $resolver) {
     $this->tempstore = $tempstore;

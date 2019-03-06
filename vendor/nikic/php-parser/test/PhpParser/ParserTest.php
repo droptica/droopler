@@ -6,9 +6,8 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
-use PHPUnit\Framework\TestCase;
 
-abstract class ParserTest extends TestCase
+abstract class ParserTest extends \PHPUnit\Framework\TestCase
 {
     /** @returns Parser */
     abstract protected function getParser(Lexer $lexer);
@@ -167,6 +166,10 @@ EOC;
             ["namespace Foo;", ['kind' => Stmt\Namespace_::KIND_SEMICOLON]],
             ["namespace Foo {}", ['kind' => Stmt\Namespace_::KIND_BRACED]],
             ["namespace {}", ['kind' => Stmt\Namespace_::KIND_BRACED]],
+            ["(float) 5.0", ['kind' => Expr\Cast\Double::KIND_FLOAT]],
+            ["(double) 5.0", ['kind' => Expr\Cast\Double::KIND_DOUBLE]],
+            ["(real) 5.0", ['kind' => Expr\Cast\Double::KIND_REAL]],
+            [" (  REAL )  5.0", ['kind' => Expr\Cast\Double::KIND_REAL]],
         ];
     }
 }

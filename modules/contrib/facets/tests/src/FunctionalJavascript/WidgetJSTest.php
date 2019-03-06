@@ -153,7 +153,7 @@ class WidgetJSTest extends JsBase {
     $checkbox = $page->findField('item (3)');
     $checkbox->click();
     $current_url = $this->getSession()->getCurrentUrl();
-    $this->assertTrue(strpos($current_url, 'search-api-test-fulltext?f%5B0%5D=llama%253Aitem') !== FALSE);
+    $this->assertTrue(strpos($current_url, 'search-api-test-fulltext?f%5B0%5D=llama%3Aitem') !== FALSE);
   }
 
   /**
@@ -216,7 +216,7 @@ class WidgetJSTest extends JsBase {
     $dropdown->selectOption('item (3)');
     $this->getSession()->wait(6000, "window.location.search != ''");
     $current_url = $this->getSession()->getCurrentUrl();
-    $this->assertTrue(strpos($current_url, 'search-api-test-fulltext?f%5B0%5D=llama%253Aitem') !== FALSE);
+    $this->assertTrue(strpos($current_url, 'search-api-test-fulltext?f%5B0%5D=llama%3Aitem') !== FALSE);
   }
 
 }

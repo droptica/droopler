@@ -5,7 +5,6 @@ namespace Drupal\ctools_block\Plugin\Block;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
@@ -189,7 +188,7 @@ class EntityField extends BlockBase implements ContextAwarePluginInterface, Cont
     return [
       'formatter' => [
         'label' => 'above',
-        'type' => $field_type_definition['default_formatter'] ?: '',
+        'type' => isset($field_type_definition['default_formatter']) ? $field_type_definition['default_formatter'] : '',
         'settings' => [],
         'third_party_settings' => [],
         'weight' => 0,

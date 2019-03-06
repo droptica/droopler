@@ -61,7 +61,6 @@ class GoogleAnalyticsSearchTest extends WebTestBase {
     $search['keys'] = $this->randomMachineName(8);
 
     // Create a node to search for.
-    // Create a node.
     $edit = [];
     $edit['title[0][value]'] = 'This is a test title';
     $edit['body[0][value]'] = 'This test content contains ' . $search['keys'] . ' string.';

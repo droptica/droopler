@@ -18,6 +18,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class Taxonomy extends HierarchyPluginBase {
 
   /**
+   * Static cache for the nested children.
+   *
+   * @var array
+   */
+  protected $nestedChildren = [];
+
+  /**
+   * Static cache for the term parents.
+   *
+   * @var array
+   */
+  protected $termParents = [];
+
+  /**
    * The term storage.
    *
    * @var \Drupal\taxonomy\TermStorageInterface
@@ -69,6 +83,10 @@ class Taxonomy extends HierarchyPluginBase {
    * {@inheritdoc}
    */
   public function getNestedChildIds($id) {
+    if (isset($this->nestedChildren[$id])) {
+      return $this->nestedChildren[$id];
+    }
+
     $children = $this->termStorage->loadChildren($id);
     $children = array_filter(array_values(array_map(function ($it) {
       return $it->id();
@@ -78,7 +96,7 @@ class Taxonomy extends HierarchyPluginBase {
     foreach ($children as $child) {
       $subchilds = array_merge($subchilds, $this->getNestedChildIds($child));
     }
-    return array_merge($children, $subchilds);
+    return $this->nestedChildren[$id] = array_merge($children, $subchilds);
   }
 
   /**
@@ -106,11 +124,15 @@ class Taxonomy extends HierarchyPluginBase {
    *   Returns FALSE if no parent is found, else parent tid.
    */
   protected function taxonomyGetParent($tid) {
+    if (isset($this->termParents[$tid])) {
+      return $this->termParents[$tid];
+    }
+
     $parents = $this->termStorage->loadParents($tid);
     if (empty($parents)) {
       return FALSE;
     }
-    return reset($parents)->id();
+    return $this->termParents[$tid] = reset($parents)->id();
   }
 
 }

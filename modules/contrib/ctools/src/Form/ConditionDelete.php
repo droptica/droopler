@@ -8,13 +8,13 @@ use Drupal\Core\Form\ConfirmFormHelper;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\ctools\ConstraintConditionInterface;
-use Drupal\user\SharedTempStoreFactory;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class ConditionDelete extends ConfirmFormBase {
 
   /**
-   * @var \Drupal\user\SharedTempStoreFactory
+   * @var \Drupal\Core\TempStore\SharedTempStoreFactory
    */
   protected $tempstore;
 
@@ -42,7 +42,7 @@ abstract class ConditionDelete extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('user.shared_tempstore'), $container->get('plugin.manager.condition'));
+    return new static($container->get('tempstore.shared'), $container->get('plugin.manager.condition'));
   }
 
   function __construct(SharedTempStoreFactory $tempstore, PluginManagerInterface $manager) {

@@ -3,7 +3,7 @@
 namespace Drupal\ctools\Controller;
 
 use Drupal\Core\Controller\ControllerResolverInterface;
-use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\ctools\Wizard\WizardFactoryInterface;
@@ -14,11 +14,11 @@ use Drupal\ctools\Wizard\WizardFactoryInterface;
 class WizardEntityFormController extends WizardFormController {
 
   /**
-   * The entity manager service.
+   * The entity type manager.
    *
-   * @var \Drupal\Core\Entity\EntityManagerInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityManager;
+  protected $entityTypeManager;
 
   /**
    * @param \Drupal\Core\Controller\ControllerResolverInterface $controller_resolver
@@ -27,12 +27,12 @@ class WizardEntityFormController extends WizardFormController {
    *   The form builder.
    * @param \Drupal\ctools\Wizard\WizardFactoryInterface $wizard_factory
    *   The wizard factory.
-   * @param \Drupal\Core\Entity\EntityManagerInterface $manager
-   *   The entity manager.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
-  public function __construct(ControllerResolverInterface $controller_resolver, FormBuilderInterface $form_builder, WizardFactoryInterface $wizard_factory, EntityManagerInterface $manager) {
+  public function __construct(ControllerResolverInterface $controller_resolver, FormBuilderInterface $form_builder, WizardFactoryInterface $wizard_factory, EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($controller_resolver, $form_builder, $wizard_factory);
-    $this->entityManager = $manager;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -41,7 +41,7 @@ class WizardEntityFormController extends WizardFormController {
   protected function getFormArgument(RouteMatchInterface $route_match) {
     $form_arg = $route_match->getRouteObject()->getDefault('_entity_wizard');
     list($entity_type_id, $operation) = explode('.', $form_arg);
-    $definition = $this->entityManager->getDefinition($entity_type_id);
+    $definition = $this->entityTypeManager->getDefinition($entity_type_id);
     $handlers = $definition->getHandlerClasses();
     if (empty($handlers['wizard'][$operation])) {
       throw new \Exception(sprintf('Unsupported wizard operation %s', $operation));

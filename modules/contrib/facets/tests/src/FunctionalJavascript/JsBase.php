@@ -3,13 +3,13 @@
 namespace Drupal\Tests\facets\FunctionalJavascript;
 
 use Drupal\block\Entity\Block;
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\search_api\Entity\Index;
 
 /**
  * Tests for the JS that transforms widgets into form elements.
  */
-abstract class JsBase extends JavascriptTestBase {
+abstract class JsBase extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}

@@ -1,4 +1,5 @@
 <?php
+
 namespace Drupal\ctools\Wizard;
 
 interface WizardFactoryInterface {

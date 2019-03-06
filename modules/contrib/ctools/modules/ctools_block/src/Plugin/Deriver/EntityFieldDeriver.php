@@ -14,9 +14,9 @@ class EntityFieldDeriver extends EntityDeriverBase {
    * {@inheritdoc}
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
-    $entity_type_labels = $this->entityManager->getEntityTypeLabels();
-    foreach ($this->entityManager->getFieldMap() as $entity_type_id => $entity_field_map) {
-      foreach ($this->entityManager->getFieldStorageDefinitions($entity_type_id) as $field_storage_definition) {
+    $entity_type_labels = $this->entityTypeRepository->getEntityTypeLabels();
+    foreach ($this->entityFieldManager->getFieldMap() as $entity_type_id => $entity_field_map) {
+      foreach ($this->entityFieldManager->getFieldStorageDefinitions($entity_type_id) as $field_storage_definition) {
         $field_name = $field_storage_definition->getName();
 
         // The blocks are based on fields. However, we are looping through field
@@ -36,7 +36,7 @@ class EntityFieldDeriver extends EntityDeriverBase {
         else {
           // We take the field label used on the first bundle.
           $first_bundle = reset($field_info['bundles']);
-          $bundle_field_definitions = $this->entityManager->getFieldDefinitions($entity_type_id, $first_bundle);
+          $bundle_field_definitions = $this->entityFieldManager->getFieldDefinitions($entity_type_id, $first_bundle);
 
           // The field storage config may exist, but it's possible that no
           // fields are actually using it. If that's the case, skip to the next

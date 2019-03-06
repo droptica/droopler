@@ -7,7 +7,7 @@
  * Adds the required Javascript to all your Drupal pages to allow tracking by
  * the Google Analytics statistics package.
  *
- * @author: Alexander Hass <http://drupal.org/user/85918>
+ * @author: Alexander Hass <https://drupal.org/user/85918>
  */
 
 use Drupal\Component\Serialization\Json;
@@ -21,11 +21,6 @@ use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\google_analytics\Component\Render\GoogleAnalyticsJavaScriptSnippet;
-
-/**
- * Define the default file extension list that should be tracked as download.
- */
-define('GOOGLE_ANALYTICS_TRACKFILES_EXTENSIONS', '7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip');
 
 /**
  * Advertise the supported google analytics api details.
@@ -52,7 +47,7 @@ function google_analytics_help($route_name, RouteMatchInterface $route_match) {
       return $output;
 
     case 'google_analytics.admin_settings_form':
-      return t('<a href=":ga_url">Google Analytics</a> is a free (registration required) website traffic and marketing effectiveness service.', [':ga_url' => 'http://www.google.com/analytics/']);
+      return t('<a href=":ga_url">Google Analytics</a> is a free (registration required) website traffic and marketing effectiveness service.', [':ga_url' => 'https://marketingplatform.google.com/about/analytics/']);
   }
 }
 
@@ -142,12 +137,12 @@ function google_analytics_page_attachments(array &$page) {
         'error' => t('Error message'),
       ];
 
-      foreach (drupal_get_messages(NULL, FALSE) as $type => $messages) {
+      foreach (\Drupal::messenger()->all(NULL, FALSE) as $type => $messages) {
         // Track only the selected message types.
         if (in_array($type, $message_types)) {
           foreach ($messages as $message) {
             // @todo: Track as exceptions?
-            $message_events .= 'ga("send", "event", ' . Json::encode(t('Messages')) . ', ' . Json::encode($status_heading[$type]) . ', ' . Json::encode(strip_tags($message)) . ');';
+            $message_events .= 'ga("send", "event", ' . Json::encode(t('Messages')) . ', ' . Json::encode($status_heading[$type]) . ', ' . Json::encode(strip_tags((string) $message)) . ');';
           }
         }
       }
@@ -176,7 +171,7 @@ function google_analytics_page_attachments(array &$page) {
 
     // Track access denied (403) and file not found (404) pages.
     if ($status == '403') {
-      // See http://www.google.com/support/analytics/bin/answer.py?answer=86927
+      // See https://www.google.com/support/analytics/bin/answer.py?answer=86927
       $url_custom = '"' . $base_path . '403.html?page=" + document.location.pathname + document.location.search + "&from=" + document.referrer';
     }
     elseif ($status == '404') {
@@ -443,11 +438,12 @@ function google_analytics_user_profile_form_submit($form, FormStateInterface $fo
  */
 function google_analytics_cron() {
   $config = \Drupal::config('google_analytics.settings');
+  $request_time = \Drupal::time()->getRequestTime();
 
   // Regenerate the tracking code file every day.
-  if (REQUEST_TIME - \Drupal::state()->get('google_analytics.last_cache') >= 86400 && $config->get('cache')) {
+  if ($request_time - \Drupal::state()->get('google_analytics.last_cache') >= 86400 && $config->get('cache')) {
     _google_analytics_cache('https://www.google-analytics.com/analytics.js', TRUE);
-    \Drupal::state()->set('google_analytics.last_cache', REQUEST_TIME);
+    \Drupal::state()->set('google_analytics.last_cache', $request_time);
   }
 }
 

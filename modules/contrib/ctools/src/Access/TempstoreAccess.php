@@ -2,13 +2,12 @@
 
 namespace Drupal\ctools\Access;
 
-
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Routing\Access\AccessInterface as CoreAccessInterface;
 use Drupal\Core\Routing\RouteMatch;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\ctools\Access\AccessInterface as CToolsAccessInterface;
-use Drupal\user\SharedTempStoreFactory;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
 use Symfony\Component\Routing\Route;
 
 class TempstoreAccess implements CoreAccessInterface {
@@ -16,7 +15,7 @@ class TempstoreAccess implements CoreAccessInterface {
   /**
    * The shared tempstore factory.
    *
-   * @var \Drupal\user\SharedTempStoreFactory
+   * @var \Drupal\Core\TempStore\SharedTempStoreFactory
    */
   protected $tempstore;
 

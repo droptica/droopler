@@ -2,7 +2,6 @@
 
 namespace Drupal\ctools\Form;
 
-
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -12,6 +11,7 @@ use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Form\FormBuilder;
 
 abstract class ManageConditions extends FormBase {
 
@@ -21,16 +21,27 @@ abstract class ManageConditions extends FormBase {
   protected $manager;
 
   /**
+   * The builder of form.
+   *
+   * @var \Drupal\Core\Form\FormBuilder
+   */
+  protected $formBuilder;
+
+  /**
    * @var string
    */
   protected $machine_name;
 
   public static function create(ContainerInterface $container) {
-    return new static($container->get('plugin.manager.condition'));
+    return new static(
+      $container->get('plugin.manager.condition'),
+      $container->get('form_builder')
+    );
   }
 
-  function __construct(PluginManagerInterface $manager) {
+  function __construct(PluginManagerInterface $manager, FormBuilder $form_builder) {
     $this->manager = $manager;
+    $this->formBuilder = $form_builder;
   }
 
   /**
@@ -91,11 +102,18 @@ abstract class ManageConditions extends FormBase {
 
   public function add(array &$form, FormStateInterface $form_state) {
     $condition = $form_state->getValue('conditions');
-    $content = \Drupal::formBuilder()->getForm($this->getConditionClass(), $condition, $this->getTempstoreId(), $this->machine_name);
+    $content = $this->formBuilder->getForm($this->getConditionClass(), $condition, $this->getTempstoreId(), $this->machine_name);
     $content['#attached']['library'][] = 'core/drupal.dialog.ajax';
     $cached_values = $form_state->getTemporaryValue('wizard');
     list(, $route_parameters) = $this->getOperationsRouteInfo($cached_values, $this->machine_name, $form_state->getValue('conditions'));
-    $content['submit']['#attached']['drupalSettings']['ajax'][$content['submit']['#id']]['url'] = $this->url($this->getAddRoute($cached_values), $route_parameters, ['query' => [FormBuilderInterface::AJAX_FORM_REQUEST => TRUE]]);
+    $route_name = $this->getAddRoute($cached_values);
+    $route_options = [
+      'query' => [
+        FormBuilderInterface::AJAX_FORM_REQUEST => TRUE,
+      ],
+    ];
+    $url = Url::fromRoute($route_name, $route_parameters, $route_options);
+    $content['submit']['#attached']['drupalSettings']['ajax'][$content['submit']['#id']]['url'] = $url->toString();
     $response = new AjaxResponse();
     $response->addCommand(new OpenModalDialogCommand($this->t('Configure Required Context'), $content, array('width' => '700')));
     return $response;
@@ -186,7 +204,7 @@ abstract class ManageConditions extends FormBase {
    * Document the route name and parameters for edit/delete context operations.
    *
    * The route name returned from this method is used as a "base" to which
-   * ".edit" and ".delete" are appeneded in the getOperations() method.
+   * ".edit" and ".delete" are appended in the getOperations() method.
    * Subclassing '\Drupal\ctools\Form\ConditionConfigure' and
    * '\Drupal\ctools\Form\ConditionDelete' should set you up for using this
    * approach quite seamlessly.

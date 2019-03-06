@@ -13,11 +13,18 @@ use Drupal\block\Entity\Block;
  * Implements hook_update_dependencies().
  */
 function facets_update_dependencies() {
-  // block_content_update_8600() adds some fields to Blocks that makes
-  // facets_update_8006() fail if upgraded at the same time.
-  $dependencies['facets'][8006] = [
-    'block_content' => 8600,
-  ];
+  $dependencies = [];
+
+  if (version_compare(\Drupal::VERSION, '8.6', '>=')
+    && \Drupal::service('module_handler')->moduleExists('block_content')
+  ) {
+    // block_content_update_8600() adds some fields to Blocks that makes
+    // facets_update_8006() fail if upgraded at the same time.
+    $dependencies['facets'][8006] = [
+      'block_content' => 8600,
+    ];
+  }
+
   return $dependencies;
 }
 

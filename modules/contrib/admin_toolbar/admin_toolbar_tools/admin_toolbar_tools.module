@@ -48,13 +48,26 @@ function admin_toolbar_tools_help($route_name, RouteMatchInterface $route_match)
  * Implements hook_menu_links_discovered_alter().
  */
 function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
+  $languageManager = \Drupal::languageManager();
+  $config_override_language = $languageManager->getConfigOverrideLanguage();
+  $languageManager->setConfigOverrideLanguage($languageManager->getLanguage('en'));
+
   $moduleHandler = \Drupal::moduleHandler();
   $entityTypeManager = \Drupal::entityTypeManager();
   $routeProvider = \Drupal::service('router.route_provider');
-  $routes = [];
-  foreach ($routeProvider->getAllRoutes() as $route_name => $route) {
-    $routes[] = $route_name;
-  }
+
+  /**
+   * Determine if a route exists by name.
+   *
+   * @param $routeName
+   *   The name of the route to check.
+   *
+   * @return bool
+   *   Whether a route with that route name exists.
+   */
+  $routeExists = function ($routeName) use ($routeProvider) {
+    return (count($routeProvider->getRoutesByNames([$routeName])) === 1);
+  };
 
   $entityTypes = $entityTypeManager->getDefinitions();
   $content_entities = [];
@@ -77,7 +90,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
       'parent' => 'admin_toolbar_tools.flush',
     ];
     // Adding a menu link to Files.
-    if ($moduleHandler->moduleExists('file') && in_array('view.files.page_1', $routes)) {
+    if ($moduleHandler->moduleExists('file') && $routeExists('view.files.page_1')) {
       $links['admin_toolbar_tools.view.files'] = [
         'title' => t('Files'),
         'provider' => 'admin_toolbar_tools',
@@ -95,7 +108,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
     foreach ($entityTypeManager->getStorage($content_entity_bundle)->loadMultiple() as $machine_name => $bundle) {
       // Normally, the edit form for the bundle would be its root link.
       $content_entity_bundle_root = NULL;
-      if (in_array('entity.' . $content_entity_bundle . '.overview_form', $routes)) {
+      if ($routeExists('entity.' . $content_entity_bundle . '.overview_form')) {
         // Some bundles have an overview/list form that make a better root link.
         $content_entity_bundle_root = 'entity.' . $content_entity_bundle . '.overview_form.' . $machine_name;
         $links[$content_entity_bundle_root] = [
@@ -107,7 +120,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
           'route_parameters' => [$content_entity_bundle => $machine_name],
         ];
       }
-      if (in_array('entity.' . $content_entity_bundle . '.edit_form', $routes)) {
+      if ($routeExists('entity.' . $content_entity_bundle . '.edit_form')) {
         $key = 'entity.' . $content_entity_bundle . '.edit_form.' . $machine_name;
         $links[$key] = [
           'title' => t($bundle->label()),
@@ -126,7 +139,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
         }
       }
       if ($moduleHandler->moduleExists('field_ui')) {
-        if (in_array('entity.' . $content_entity . '.field_ui_fields', $routes)) {
+        if ($routeExists('entity.' . $content_entity . '.field_ui_fields')) {
           $links['entity.' . $content_entity . '.field_ui_fields' . $machine_name] = [
             'title' => t('Manage fields'),
             'provider' => 'admin_toolbar_tools',
@@ -137,7 +150,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
             'weight' => 1,
           ];
         }
-        if (in_array('entity.entity_form_display.' . $content_entity . '.default', $routes)) {
+        if ($routeExists('entity.entity_form_display.' . $content_entity . '.default')) {
           $links['entity.entity_form_display.' . $content_entity . '.default' . $machine_name] = [
             'title' => t('Manage form display'),
             'provider' => 'admin_toolbar_tools',
@@ -148,7 +161,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
             'weight' => 2,
           ];
         }
-        if (in_array('entity.entity_view_display.' . $content_entity . '.default', $routes)) {
+        if ($routeExists('entity.entity_view_display.' . $content_entity . '.default')) {
           $links['entity.entity_view_display.' . $content_entity . '.default.' . $machine_name] = [
             'title' => t('Manage display'),
             'provider' => 'admin_toolbar_tools',
@@ -160,7 +173,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
           ];
         }
       }
-      if ($moduleHandler->moduleExists('devel') && in_array('entity.' . $content_entity_bundle . '.devel_load', $routes)) {
+      if ($moduleHandler->moduleExists('devel') && $routeExists('entity.' . $content_entity_bundle . '.devel_load')) {
         $links['entity.' . $content_entity_bundle . '.devel_load.' . $machine_name] = [
           'title' => t('Devel'),
           'provider' => 'admin_toolbar_tools',
@@ -171,7 +184,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
           'weight' => 4,
         ];
       }
-      if (in_array('entity.' . $content_entity_bundle . '.delete_form', $routes)) {
+      if ($routeExists('entity.' . $content_entity_bundle . '.delete_form')) {
         $links['entity.' . $content_entity_bundle . '.delete_form.' . $machine_name] = [
           'title' => t('Delete'),
           'provider' => 'admin_toolbar_tools',
@@ -360,7 +373,7 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
         'parent' => 'entity.menu.edit_form.' . $machine_name,
         'route_parameters' => ['menu' => $machine_name],
       ];
-      if ($moduleHandler->moduleExists('devel')) {
+      if ($moduleHandler->moduleExists('devel') && $routeExists('entity.menu.devel_load')) {
         $links['entity.menu.devel_load.' . $machine_name] = [
           'title' => t('Devel'),
           'provider' => 'admin_toolbar_tools',
@@ -505,13 +518,6 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
       'menu_name' => 'admin',
       'parent' => 'admin_development',
     ];
-    $links['admin_toolbar_tools.devel.execute_php'] = [
-      'title' => t('Execute PHP Code'),
-      'provider' => 'admin_toolbar_tools',
-      'route_name' => 'devel.execute_php',
-      'menu_name' => 'admin',
-      'parent' => 'admin_development',
-    ];
     $links['admin_toolbar_tools.devel.session'] = [
       'title' => t('Session viewer'),
       'provider' => 'admin_toolbar_tools',
@@ -535,7 +541,24 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
       'parent' => 'devel.admin_settings',
     ];
   }
-
+  // If module Devel PHP is enabled.
+  if ($moduleHandler->moduleExists('devel_php') && $routeExists('devel_php.execute_php')) {
+    $links['admin_toolbar_tools.devel_php.execute_php'] = [
+      'title' => t('Execute PHP Code'),
+      'route_name' => 'devel_php.execute_php',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+  }
+  elseif ($moduleHandler->moduleExists('devel') && $routeExists('devel.execute_php')) {
+    $links['admin_toolbar_tools.devel.execute_php'] = [
+      'title' => t('Execute PHP Code'),
+      'provider' => 'admin_toolbar_tools',
+      'route_name' => 'devel.execute_php',
+      'menu_name' => 'admin',
+      'parent' => 'admin_development',
+    ];
+  }
   // If module Views Ui enabled.
   if ($moduleHandler->moduleExists('views_ui')) {
     $links['admin_toolbar_tools.views_ui.add'] = [
@@ -655,6 +678,8 @@ function admin_toolbar_tools_menu_links_discovered_alter(&$links) {
       'weight' => 2,
     ];
   }
+
+  $languageManager->setConfigOverrideLanguage($config_override_language);
 }
 
 /**

@@ -317,6 +317,11 @@ class LayoutBuilderTest extends BrowserTestBase {
     $page->fillField('id', 'myothermenu');
     $page->pressButton('Save');
 
+    $page->clickLink('Add link');
+    $page->fillField('title[0][value]', 'My link');
+    $page->fillField('link[0][uri]', '/');
+    $page->pressButton('Save');
+
     $this->drupalPostForm('admin/structure/types/manage/bundle_with_section_field/display', ['layout[enabled]' => TRUE], 'Save');
     $assert_session->linkExists('Manage layout');
     $this->clickLink('Manage layout');
@@ -475,6 +480,23 @@ class LayoutBuilderTest extends BrowserTestBase {
 
     // Verify that Changed block is present on second section.
     $assert_session->linkExists('Changed');
+  }
+
+  /**
+   * Tests that extra fields work before and after enabling Layout Builder.
+   */
+  public function testExtraFields() {
+    $assert_session = $this->assertSession();
+
+    $this->drupalLogin($this->drupalCreateUser(['administer node display']));
+
+    $this->drupalGet('node');
+    $assert_session->linkExists('Read more');
+
+    $this->drupalPostForm('admin/structure/types/manage/bundle_with_section_field/display/default', ['layout[enabled]' => TRUE], 'Save');
+
+    $this->drupalGet('node');
+    $assert_session->linkExists('Read more');
   }
 
   /**

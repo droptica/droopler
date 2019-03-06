@@ -28,6 +28,8 @@ class GoogleAnalyticsVisibilityRoles extends ProcessPluginBase implements Contai
   protected $moduleHandler;
 
   /**
+   * The migration process plugin.
+   *
    * The migration process plugin, configured for lookups in the d6_user_role
    * and d7_user_role migrations.
    *

@@ -31,7 +31,7 @@ This library provides routines to produce the Symfony\Component\Console\Command\
 This is a library intended to be used in some other project.  Require from your composer.json file:
 ```
     "require": {
-        "consolidation/annotated-command": "~2"
+        "consolidation/annotated-command": "^2"
     },
 ```
 
@@ -103,6 +103,7 @@ The hook **target** specifies which command or commands the hook will be attache
 
 - The command's primary name (e.g. `my:command`) or the command's method name (e.g. myCommand) will attach the hook to only that command.
 - An annotation (e.g. `@foo`) will attach the hook to any command that is annotated with the given label.
+- If the target is specified as `*`, then the hook will be attached to all commands.
 - If the target is omitted, then the hook will be attached to every command defined in the same class as the hook implementation.
 
 There are ten types of hooks in the command processing request flow:
@@ -468,6 +469,27 @@ If you want to use annotations, but still want access to the Symfony Command, e.
 
 It is also possible to add InputInterface and/or OutputInterface parameters to any annotated method of a command file (the parameters must go before command arguments).
 
+## Parameter Injection
+
+Just as this library will by default inject $input and/or $output at the head of the parameter list of any command function, it is also possible to add a handler to inject other objects as well.
+
+Given an implementation of SymfonyStyleInjector similar to the example below:
+```
+use Consolidation\AnnotatedCommand\ParameterInjector
+
+class SymfonyStyleInjector implements ParameterInjector
+{
+    public function get(CommandData $commandData, $interfaceName)
+    {
+        return new MySymfonyStyle($commandData->input(), $commandData->output());
+    }
+}
+```
+Then, an instance of 'MySymfonyStyle' will be provided to any command handler method that takes a SymfonyStyle parameter if the SymfonyStyleInjector is registered in your application's initialization code like so:
+```
+$commandProcessor->parameterInjection()->register('Symfony\Component\Console\Style\SymfonyStyle', new SymfonyStyleInjector);
+```
+
 ## Handling Standard Input
 
 Any Symfony command may use the provides StdinHandler to imlement commands that read from standard input.
@@ -477,7 +499,7 @@ Any Symfony command may use the provides StdinHandler to imlement commands that 
    * @command example
    * @option string $file
    * @default $file -
-   * /
+   */
   public function example(InputInterface $input)
   {
       $data = StdinHandler::selectStream($input, 'file')->contents();
@@ -571,7 +593,3 @@ CommandInfo alterers can adjust information about a command immediately before i
 ```
 public function alterCommandInfo(CommandInfo $commandInfo, $commandFileInstance);
 ```
-
-## Comparison to Existing Solutions
-
-The existing solutions used their own hand-rolled regex-based parsers to process the contents of the DocBlock comments. consolidation/annotated-command uses the [phpdocumentor/reflection-docblock](https://github.com/phpDocumentor/ReflectionDocBlock) project (which is itself a regex-based parser) to interpret DocBlock contents.

@@ -5,6 +5,7 @@ namespace Drupal\ctools\Wizard;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormState;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Drupal\Core\Render\Renderer;
 
 class WizardFactory implements WizardFactoryInterface {
 
@@ -23,14 +24,26 @@ class WizardFactory implements WizardFactoryInterface {
   protected $dispatcher;
 
   /**
+   * The object renderer.
+   *
+   * @var \Drupal\Core\Render\Renderer
+   */
+  protected $renderer;
+
+  /**
+   * The construct method.
+   *
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The form builder.
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
    *   The event dispatcher.
+   * @param \Drupal\Core\Render\Renderer $renderer
+   *   The object renderer.
    */
-  public function __construct(FormBuilderInterface $form_builder, EventDispatcherInterface $event_dispatcher) {
+  public function __construct(FormBuilderInterface $form_builder, EventDispatcherInterface $event_dispatcher, Renderer $renderer) {
     $this->builder = $form_builder;
     $this->dispatcher = $event_dispatcher;
+    $this->renderer = $renderer;
   }
 
   /**
@@ -42,9 +55,8 @@ class WizardFactory implements WizardFactoryInterface {
 
     if ($ajax) {
       $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
-      $status_messages = array('#type' => 'status_messages');
-      // @todo properly inject the renderer. Core should really be doing this work.
-      if ($messages = \Drupal::service('renderer')->renderRoot($status_messages)) {
+      $status_messages = ['#type' => 'status_messages'];
+      if ($messages = $this->renderer->renderRoot($status_messages)) {
         if (!empty($form['#prefix'])) {
           // Form prefix is expected to be a string. Prepend the messages to
           // that string.

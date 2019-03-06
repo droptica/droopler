@@ -84,6 +84,11 @@ use Drupal\user\UserInterface;
  *     "entity_view_display" = {
  *       "type" = "entity_reference_revisions_entity_view"
  *     }
+ *   },
+ *   serialized_field_property_names = {
+ *     "behavior_settings" = {
+ *       "value"
+ *     }
  *   }
  * )
  */

@@ -6,6 +6,21 @@
  */
 
 use Drupal\Core\Url;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ */
+function google_analytics_install() {
+  // Make the default install more user and GDPR friendly.
+  $role = Role::load('authenticated');
+  $role->grantPermission('opt-in or out of google analytics tracking');
+  $success = $role->save();
+  if ($success) {
+    $messenger = \Drupal::messenger();
+    $messenger->addMessage(t('Module %module granted %permission permission to authenticated users.', ['%module' => 'Google Analytics', '%permission' => t('Opt-in or out of tracking')]), 'status');
+  }
+}
 
 /**
  * Implements hook_uninstall().

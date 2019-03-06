@@ -6,7 +6,7 @@ use Drupal\Core\Plugin\Context\Context;
 use Drupal\Core\Plugin\Context\ContextDefinition;
 
 /**
- * @coversDefaultClass \Drupal\ctools\Plugin\RelationshipManagerInterface
+ * @coversDefaultClass \Drupal\ctools\Plugin\RelationshipManager
  * @group CTools
  */
 class RelationshipManagerTest extends RelationshipsTestBase {

@@ -9,6 +9,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Form\FormBuilder;
 
 abstract class RequiredContext extends FormBase {
 
@@ -16,6 +17,13 @@ abstract class RequiredContext extends FormBase {
    * @var \Drupal\Core\TypedData\TypedDataManager
    */
   protected $typedDataManager;
+
+  /**
+   * The builder of form.
+   *
+   * @var \Drupal\Core\Form\FormBuilder
+   */
+  protected $formBuilder;
 
   /**
    * @var string
@@ -26,11 +34,15 @@ abstract class RequiredContext extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('typed_data_manager'));
+    return new static(
+      $container->get('typed_data_manager'),
+      $container->get('form_builder')
+    );
   }
 
-  public function __construct(PluginManagerInterface $typed_data_manager) {
+  public function __construct(PluginManagerInterface $typed_data_manager, FormBuilder $form_builder) {
     $this->typedDataManager = $typed_data_manager;
+    $this->formBuilder = $form_builder;
   }
 
   /**
@@ -98,7 +110,7 @@ abstract class RequiredContext extends FormBase {
    */
   public function add(array &$form, FormStateInterface $form_state) {
     $context = $form_state->getValue('contexts');
-    $content = \Drupal::formBuilder()->getForm($this->getContextClass(), $context, $this->getTempstoreId(), $this->machine_name);
+    $content = $this->formBuilder->getForm($this->getContextClass(), $context, $this->getTempstoreId(), $this->machine_name);
     $content['#attached']['library'][] = 'core/drupal.dialog.ajax';
     $response = new AjaxResponse();
     $response->addCommand(new OpenModalDialogCommand($this->t('Configure Required Context'), $content, array('width' => '700')));
@@ -183,7 +195,7 @@ abstract class RequiredContext extends FormBase {
    * Document the route name and parameters for edit/delete context operations.
    *
    * The route name returned from this method is used as a "base" to which
-   * ".edit" and ".delete" are appeneded in the getOperations() method.
+   * ".edit" and ".delete" are appended in the getOperations() method.
    * Subclassing '\Drupal\ctools\Form\ContextConfigure' and
    * '\Drupal\ctools\Form\RequiredContextDelete' should set you up for using
    * this approach quite seamlessly.

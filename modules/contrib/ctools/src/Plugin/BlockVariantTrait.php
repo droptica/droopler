@@ -2,6 +2,9 @@
 
 namespace Drupal\ctools\Plugin;
 
+use Drupal\ctools\Event\BlockVariantEvent;
+use Drupal\ctools\Event\BlockVariantEvents;
+
 /**
  * Provides methods for \Drupal\ctools\Plugin\BlockVariantInterface.
  */
@@ -22,6 +25,13 @@ trait BlockVariantTrait {
   protected $blockPluginCollection;
 
   /**
+   * The event dispatcher.
+   *
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   */
+  protected $eventDispatcher;
+
+  /**
    * @see \Drupal\ctools\Plugin\BlockVariantInterface::getRegionNames()
    */
   abstract public function getRegionNames();
@@ -39,6 +49,12 @@ trait BlockVariantTrait {
   public function addBlock(array $configuration) {
     $configuration['uuid'] = $this->uuidGenerator()->generate();
     $this->getBlockCollection()->addInstanceId($configuration['uuid'], $configuration);
+
+    $block = $this->getBlock($configuration['uuid']);
+    // Allow modules to react to the change.
+    $event = new BlockVariantEvent($block, $this);
+    $this->eventDispatcher()->dispatch(BlockVariantEvents::ADD_BLOCK, $event);
+
     return $configuration['uuid'];
   }
 
@@ -46,7 +62,13 @@ trait BlockVariantTrait {
    * @see \Drupal\ctools\Plugin\BlockVariantInterface::removeBlock()
    */
   public function removeBlock($block_id) {
+    $block = $this->getBlock($block_id);
     $this->getBlockCollection()->removeInstanceId($block_id);
+
+    // Allow modules to react to the change.
+    $event = new BlockVariantEvent($block, $this);
+    $this->eventDispatcher()->dispatch(BlockVariantEvents::DELETE_BLOCK, $event);
+
     return $this;
   }
 
@@ -54,8 +76,14 @@ trait BlockVariantTrait {
    * @see \Drupal\ctools\Plugin\BlockVariantInterface::updateBlock()
    */
   public function updateBlock($block_id, array $configuration) {
-    $existing_configuration = $this->getBlock($block_id)->getConfiguration();
+    $block = $this->getBlock($block_id);
+    $existing_configuration = $block->getConfiguration();
     $this->getBlockCollection()->setInstanceConfiguration($block_id, $configuration + $existing_configuration);
+
+    // Allow modules to react to the change.
+    $event = new BlockVariantEvent($block, $this);
+    $this->eventDispatcher()->dispatch(BlockVariantEvents::UPDATE_BLOCK, $event);
+
     return $this;
   }
 
@@ -110,6 +138,18 @@ trait BlockVariantTrait {
       $this->blockPluginCollection = new BlockPluginCollection($this->getBlockManager(), $this->getBlockConfig());
     }
     return $this->blockPluginCollection;
+  }
+
+  /**
+   * Gets the event dispatcher.
+   *
+   * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   */
+  protected function eventDispatcher() {
+    if (!$this->eventDispatcher) {
+      $this->eventDispatcher = \Drupal::service('event_dispatcher');
+    }
+    return $this->eventDispatcher;
   }
 
   /**

@@ -426,7 +426,9 @@ function facets_form_facets_facet_form_alter(&$form, FormStateInterface $form_st
 function facets_theme_suggestions_facets_result_item(array $variables) {
   $suggestions = [];
   $facet = $variables['facet'];
-  $suggestions[] = 'facets_result_item__' . $facet->getWidget()['type'];
-  $suggestions[] = 'facets_result_item__' . $facet->getWidget()['type'] . '__' . $facet->id();
+  if ($facet instanceof FacetInterface) {
+    $suggestions[] = 'facets_result_item__' . $facet->getWidget()['type'];
+    $suggestions[] = 'facets_result_item__' . $facet->getWidget()['type'] . '__' . $facet->id();
+  }
   return $suggestions;
 }

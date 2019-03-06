@@ -3,6 +3,7 @@
 namespace Drupal\facets\Plugin\facets\query_type;
 
 use Drupal\facets\QueryType\QueryTypeRangeBase;
+use Drupal\facets\Result\Result;
 
 /**
  * Basic support for numeric facets grouping by a granularity value.
@@ -25,6 +26,39 @@ class SearchApiGranular extends QueryTypeRangeBase {
       'start' => $value,
       'stop' => (int) $value + $this->getGranularity(),
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function build() {
+    // If there were no results or no query object, we can't do anything.
+    if (empty($this->results)) {
+      return $this->facet;
+    }
+
+    $supportedFeatures = array_flip($this->query
+      ->getIndex()
+      ->getServerInstance()
+      ->getBackend()
+      ->getSupportedFeatures());
+
+    // Range grouping is supported.
+    if (isset($supportedFeatures['search_api_granular'])) {
+      $query_operator = $this->facet->getQueryOperator();
+      $facet_results = [];
+      foreach ($this->results as $result) {
+        if ($result['count'] || $query_operator == 'or') {
+          $result_filter = trim($result['filter'], '"');
+          $facet_results[] = new Result($this->facet, $result_filter, $result_filter, $result['count']);
+        }
+      }
+      $this->facet->setResults($facet_results);
+
+      return $this->facet;
+    }
+
+    return parent::build();
   }
 
   /**

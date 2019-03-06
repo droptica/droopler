@@ -2,18 +2,20 @@
 
 namespace Drupal\ctools_wizard_test\Form;
 
-
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\user\SharedTempStoreFactory;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Example form config entity.
+ */
 class ExampleConfigEntityExternalForm extends FormBase {
 
   /**
    * Tempstore factory.
    *
-   * @var \Drupal\user\SharedTempStoreFactory
+   * @var \Drupal\Core\TempStore\SharedTempStoreFactory
    */
   protected $tempstore;
 
@@ -21,8 +23,9 @@ class ExampleConfigEntityExternalForm extends FormBase {
    * Constructs a new ExampleConfigEntityExternalForm.
    *
    * @param \Drupal\ctools_wizard_test\Form\SharedTempStoreFactory $tempstore
+   *   Creates a shared temporary storage for a collection.
    */
-  function __construct(SharedTempStoreFactory $tempstore) {
+  public function __construct(SharedTempStoreFactory $tempstore) {
     $this->tempstore = $tempstore;
   }
 
@@ -30,7 +33,7 @@ class ExampleConfigEntityExternalForm extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('user.shared_tempstore'));
+    return new static($container->get('tempstore.shared'));
   }
 
   /**
@@ -63,4 +66,3 @@ class ExampleConfigEntityExternalForm extends FormBase {
   }
 
 }
-
