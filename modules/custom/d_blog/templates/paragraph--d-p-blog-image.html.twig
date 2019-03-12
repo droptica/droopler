@@ -42,7 +42,7 @@
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-  image_on_full_screen_width ? 'paragraph--full-screen-width'|clean_class,
+  paragraph.field_d_p_blog_image_full_width.value ? 'paragraph--full-screen-width'|clean_class,
 ] %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
