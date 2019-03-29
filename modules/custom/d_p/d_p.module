@@ -158,13 +158,15 @@ function edit_cta_link_default_class(&$form) {
 /**
  * Implements hook_form_alter().
  */
-function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  switch ($form_id) {
+function d_p_form_alter(&$form, $form_state, $form_id) {
+$form['#attached']['library'][] = 'd_p/d_p_ckeditor';
+switch ($form_id) {
     case 'contact_message_contact_form_form':
       unset($form['actions']['preview']);
       $form['name']['#type'] = 'textfield';
       $form['mail']['#type'] = 'textfield';
       break;
+
   }
   $trigger_name = $form_state->getUserInput()['_triggering_element_name'] ?? NULL;
   if (strpos($form_id, 'add') !== FALSE || strpos($trigger_name, 'add') !== FALSE) {

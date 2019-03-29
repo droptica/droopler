@@ -2,8 +2,13 @@ d_p:
   version: VERSION
   js:
     js/d_p.js: {}
+    js/d_p_ckeditor.js: {}
   dependencies:
     - droopler_theme/jquery-backstretch
     - core/jquery
     - core/jquery.once
     - core/drupal
+d_p_ckeditor:
+  version: VERSION
+  js:
+    js/d_p_ckeditor.js: {}
