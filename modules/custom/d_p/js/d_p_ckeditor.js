@@ -20,8 +20,6 @@
         }
       }
 
-      var interval = window.setTimeout(d_p_ckeditor, 500);
-
       function d_p_ckeditor(fade_in) {
         if (typeof CKEDITOR !== "undefined") {
           // Check if it is a geysir paragraph editor
