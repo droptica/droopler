@@ -20,10 +20,9 @@
         }
       }
 
-      var interval = window.setInterval(d_p_ckeditor, 500);
+      var interval = window.setTimeout(d_p_ckeditor, 500);
 
       function d_p_ckeditor(fade_in) {
-        fade_in = (fade_in == true) ? 500 : 0;
         if (typeof CKEDITOR !== "undefined") {
           // Check if it is a geysir paragraph editor
           if (document.getElementById('geysir-modal')) {
@@ -52,6 +51,8 @@
               }, 1300);
             }
           }
+        } else {
+          window.setTimeout(d_p_ckeditor, 500);
         }
       }
     }
