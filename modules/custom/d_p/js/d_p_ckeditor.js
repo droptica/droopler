@@ -4,9 +4,35 @@
     attach: function (context, settings) {
 
       d_p_ckeditor(true);
-      d_p_ckeditor_add_js(true);
 
-      function d_p_ckeditor_add_js(doc) {
+      function d_p_ckeditor_geysir() {
+        if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.children['geysir-modal-form'] !== 'undefined') {
+          if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document !== 'undefined') {
+            var doc = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document.$;
+            d_p_ckeditor_add_js(doc);
+          } else {
+            setTimeout(d_p_ckeditor_geysir, 500);
+          }
+        }
+      }
+
+      function d_p_ckeditor_notgeysir() {
+        for (var instanceName in CKEDITOR.instances) {
+          var element = CKEDITOR.instances[instanceName].element.$.parentElement.offsetParent.parentElement.classList;
+          // check if it is group of text-block from block-text-paragraph
+          if (!(element.contains('paragraph-type--d-p-single-text-block'))) {
+            if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document !== 'undefined') {
+              var doc = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document.$; //get CKE doc!
+              d_p_ckeditor_add_js(doc);
+            } else {
+              setTimeout(d_p_ckeditor_notgeysir, 500);
+            }
+          }
+        }
+      }
+
+      function d_p_ckeditor_add_js(val) {
+        var doc = val;
         var cssId = 'd_p_ckeditor';
         if (!doc.getElementById(cssId)) {
           // add css for cke_editable class in ckeditor
@@ -21,33 +47,14 @@
       }
 
       function d_p_ckeditor(fade_in) {
+        fade_in = (fade_in == true) ? 500 : 0;
         if (typeof CKEDITOR !== "undefined") {
           // Check if it is a geysir paragraph editor
           if (document.getElementById('geysir-modal')) {
-            setTimeout(function () {
-              try {
-                // Check if it is text-blocks-paragraph
-                if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.children['geysir-modal-form'] !== 'undefined') {
-                  var doc = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document.$; // get CKE doc!
-                  d_p_ckeditor_add_js(doc);
-                }
-              } catch (err) {
-                // Error handling
-              }
-            }, 1300);
-          } else {
+            d_p_ckeditor_geysir();
+          } else if (typeof CKEDITOR.instances !== "undefined") {
             // For editor paragraph check every instance of ckeditor
-            for (var instanceName in CKEDITOR.instances) {
-              setTimeout(function () {
-                var element = CKEDITOR.instances[instanceName].element.$.parentElement.offsetParent.parentElement.classList;
-
-                // check if it is group of text-block from block-text-paragraph
-                if (!(element.contains('paragraph-type--d-p-single-text-block'))) {
-                  var doc = CKEDITOR.instances[instanceName].document.$; // get CKE doc!
-                  d_p_ckeditor_add_js(doc);
-                }
-              }, 1300);
-            }
+            d_p_ckeditor_notgeysir();
           }
         } else {
           window.setTimeout(d_p_ckeditor, 500);
