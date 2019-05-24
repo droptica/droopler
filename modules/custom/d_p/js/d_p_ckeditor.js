@@ -31,8 +31,7 @@
         }
       }
 
-      function d_p_ckeditor_add_js(val) {
-        var doc = val;
+      function d_p_ckeditor_add_js(doc) {
         var cssId = 'd_p_ckeditor';
         if (!doc.getElementById(cssId)) {
           // add css for cke_editable class in ckeditor
