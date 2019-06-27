@@ -1,0 +1,10 @@
+popper:
+  version: VERSION
+  js:
+    libraries/popper.js/dist/umd/popper.min.js: { weight: -20 }
+
+jquery-backstretch:
+  js:
+    libraries/jquery-backstretch/src/jquery.backstretch.js: {}
+  dependencies:
+    - core/jquery

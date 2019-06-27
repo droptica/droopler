@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple example</title>
+
+  <style>
+    #test {
+      position: relative;
+      top: 2000px;
+      width: 10px;
+      height: 10px;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple example</h1>
+
+  <div id="test"></div>
+
+  <script src="../build/in-viewport.min.js"></script>
+  <script>
+  var el = document.getElementById('test');
+
+  var watcher = inViewport(el, function() {
+    alert('in viewport');
+  });
+  </script>
+</body>
+</html>

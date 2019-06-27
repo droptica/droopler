@@ -1,0 +1,27 @@
+{
+  "name": "in-viewport",
+  "version": "3.6.0",
+  "description": "Get a callback when an element enters the viewport (body) or a custom viewport",
+  "main": "./in-viewport.js",
+  "scripts": {
+    "build": "browserify ./in-viewport.js -s inViewport -p deumdify | ccjs - > build/in-viewport.min.js",
+    "watch": "watchify ./in-viewport.js -d -s inViewport -p deumdify -o build/in-viewport.min.js -v",
+    "dev": "npm run watch & DEBUG=zuul* zuul --local 8080 -- test/*.js",
+    "test": "npm run build && DEBUG=zuul* zuul --tunnel ngrok -- test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vvo/in-viewport.git"
+  },
+  "author": "Vincent Voyer <vincent.voyer@gmail.com> (http://github.com/vvo)",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "closurecompiler": "^1.5.2",
+    "deumdify": "^1.2.2",
+    "merge": "1.2.0",
+    "watchify": "^3.6.1",
+    "zuul": "^3.11.0",
+    "zuul-ngrok": "^4.0.0"
+  }
+}

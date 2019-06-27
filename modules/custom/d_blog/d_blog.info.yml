@@ -1,7 +1,7 @@
 name: d_blog
 description: 'Adds a blog to Droopler.'
 type: module
-core: 8.x
+# core: 8.x
 dependencies:
   - block
   - content_translation
@@ -24,7 +24,19 @@ dependencies:
   - tvi
   - user
   - views
-version: 8.x-1.4
+# version: 8.x-1.4
 package: Droopler
 interface translation project: d_blog
 interface translation server pattern: profiles/contrib/droopler/modules/custom/d_blog/translations/%project-%version.%language.po
+
+# Information added by Drupal.org packaging script on 2019-06-27
+# version: '8.x-6.03'
+# core: '8.x'
+# project: 'd_test'
+# datestamp: 1561673947
+
+# Information added by Drupal.org packaging script on 2019-06-27
+version: '8.x-6.04'
+core: '8.x'
+project: 'd_test'
+datestamp: 1561676638

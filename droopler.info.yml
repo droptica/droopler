@@ -1,7 +1,7 @@
 name: 'Droopler Profile'
 type: profile
 description: 'Ready to use site builder with paragraphs.'
-core: 8.x
+# core: 8.x
 dependencies:
   - admin_toolbar
   - admin_toolbar_tools
@@ -76,10 +76,15 @@ dependencies:
   - views
   - views_ui
 themes:
-  - droopler_subtheme
   - droopler_theme
   - seven
 distribution:
   name: 'Droopler Profile'
-version: 8.x-1.4
-project: 'droopler'
+# version: 8.x-1.4
+# project: 'droopler'
+
+# Information added by Drupal.org packaging script on 2019-06-27
+version: '8.x-6.04'
+core: '8.x'
+project: 'd_test'
+datestamp: 1561676638
