@@ -23,7 +23,7 @@ function droopler_dorg_subtheme_preprocess_page(&$variables) {
  * Implements hook_library_info_alter().
  */
 function droopler_dorg_subtheme_library_info_alter(&$libraries, $extension) {
-  $droopler_modules = ['droopler_theme', 'd_p', 'd_p_counters'];
+  $droopler_modules = ['droopler_theme', 'd_p', 'd_p_counters', 'd_p_carousel', 'd_p_side_tiles', 'd_p_tiles', 'colorbox'];
   if (in_array($extension, $droopler_modules)) {
     $profile_path = '/profiles/droopler';
     foreach ($libraries as $lib_key => $library) {
@@ -32,6 +32,14 @@ function droopler_dorg_subtheme_library_info_alter(&$libraries, $extension) {
           if (substr($key, 0, 10) === "/libraries") {
             $libraries[$lib_key]['js'][$profile_path . $key] = $lib;
             unset($libraries[$lib_key]['js'][$key]);
+          }
+        }
+      }
+      if (isset($libraries[$lib_key]['css']['component'])) {
+        foreach ($libraries[$lib_key]['css']['component'] as $key => $lib) {
+          if (substr($key, 0, 10) === "/libraries") {
+            $libraries[$lib_key]['css']['component'][$profile_path . $key] = $lib;
+            unset($libraries[$lib_key]['css']['component'][$key]);
           }
         }
       }
