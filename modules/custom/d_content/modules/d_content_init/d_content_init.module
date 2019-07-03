@@ -286,10 +286,11 @@ function d_content_init_add_nodes($structure) {
  *   A file entity, or FALSE on error.
  */
 function d_content_init_get_file($path, $dst_dir = NULL) {
+  $dst_dir = trim($dst_dir, '/');
   // Prepare destination directory.
   $directory = 'public://';
   if (!empty($dst_dir)) {
-    $directory .= trim($dst_dir, '/') . '/';
+    $directory .= $dst_dir . '/';
     if (!Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
       Drupal::logger('file')->warning('Directory %directory could not be created or is not accessible.', ['%directory' => $directory]);
       return FALSE;
