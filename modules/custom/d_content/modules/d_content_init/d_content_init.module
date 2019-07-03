@@ -5,6 +5,7 @@
  * d_content_init module.
  */
 
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
@@ -113,12 +114,13 @@ function d_content_init_fill_field($entity, $name, $value) {
           ['file' => $value['data']],
         ];
       }
+      $dst_dir = !empty($value['dst_dir']) ? $value['dst_dir'] : '';
       // Add all files.
       foreach ($value['data'] as $file) {
         /**
          * @var \Drupal\file\FileInterface $file_object
          */
-        $file_object = d_content_init_get_file($file['file']);
+        $file_object = d_content_init_get_file($file['file'], $dst_dir);
         if (!empty($file_object)) {
           $params = ["target_id" => $file_object->id()];
           if ($value['type'] == 'image') {
@@ -277,10 +279,23 @@ function d_content_init_add_nodes($structure) {
  *  File path:
  *  - "file.jpg" for files inside d_content_init
  *  - "example_init/file.jpg" for files inside example_init module
+ * @param string $dst_dir
+ *  File destination directory in public files directory.
  *
- * @return \Drupal\file\FileInterface
+ * @return \Drupal\file\FileInterface|FALSE
+ *   A file entity, or FALSE on error.
  */
-function d_content_init_get_file($path) {
+function d_content_init_get_file($path, $dst_dir = NULL) {
+  // Prepare destination directory.
+  $directory = 'public://';
+  if (!empty($dst_dir)) {
+    $directory .= trim($dst_dir, '/') . '/';
+    if (!Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
+      Drupal::logger('file')->warning('Directory %directory could not be created or is not accessible.', ['%directory' => $directory]);
+      return FALSE;
+    }
+  }
+
   // Check if image name contains module.
   $parts = explode('/', $path);
   if (count($parts) == 2) {
@@ -294,7 +309,7 @@ function d_content_init_get_file($path) {
 
   // Save the file.
   $data = file_get_contents("$dir/assets/$filename");
-  $image = file_save_data($data, 'public://' . $filename, FILE_EXISTS_REPLACE);
+  $image = file_save_data($data, $directory . $filename, FILE_EXISTS_REPLACE);
   return $image;
 }
 

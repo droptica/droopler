@@ -12,6 +12,7 @@ field_page_section:
       field_d_icon:
         type: image
         data: demo_beethoven.svg
+        dst_dir: demo
       field_d_main_title:
         type: text
         data: Beethoven Festival Europe
@@ -21,6 +22,7 @@ field_page_section:
       field_d_image_background:
         type: image
         data: demo_event_1.jpg
+        dst_dir: demo
       field_d_long_text:
         type: text_long
         data: <p>Event sites have to be breathtaking, but also easy to create. Droopler allows you to
@@ -42,6 +44,7 @@ field_page_section:
         - field_d_icon:
             type: image
             data: demo_face_1.png
+            dst_dir: demo
           field_d_main_title:
             type: text
             data: Amanda Doe
@@ -59,6 +62,7 @@ field_page_section:
         - field_d_icon:
             type: image
             data: demo_face_2.png
+            dst_dir: demo
           field_d_main_title:
             type: text
             data: John Smith
@@ -76,6 +80,7 @@ field_page_section:
         - field_d_icon:
             type: image
             data: demo_face_3.png
+            dst_dir: demo
           field_d_main_title:
             type: text
             data: Steven Kovalsky
@@ -98,6 +103,7 @@ field_page_section:
       field_d_image_background:
         type: image
         data: demo_event_2.jpg
+        dst_dir: demo
       field_d_p_si_image_side:
         type: text_select
         data: right
@@ -120,6 +126,7 @@ field_page_section:
       field_d_image_background:
         type: image
         data: demo_event_3.jpg
+        dst_dir: demo
       field_d_p_si_image_side:
         type: text_select
         data: left
@@ -172,6 +179,7 @@ field_page_section:
           alt: Concert Hall
         - file: demo_event_3.jpg
           alt: Concert Hall
+        dst_dir: demo
 
   - paragraph_type: d_p_carousel
     data:
@@ -190,6 +198,7 @@ field_page_section:
             data:
             - file: demo_logo1.svg
               alt: BTU
+            dst_dir: demo
           field_d_cta_link:
             type: cta
             data:
@@ -200,6 +209,7 @@ field_page_section:
             data:
             - file: demo_logo2.svg
               alt: Cube Inc.
+            dst_dir: demo
           field_d_cta_link:
             type: cta
             data:
@@ -210,6 +220,7 @@ field_page_section:
             data:
             - file: demo_logo3.svg
               alt: Atlantic Jetlines
+            dst_dir: demo
           field_d_cta_link:
             type: cta
             data:
@@ -220,6 +231,7 @@ field_page_section:
             data:
             - file: demo_logo4.svg
               alt: Rock World Cafe
+            dst_dir: demo
           field_d_cta_link:
             type: cta
             data:
@@ -230,6 +242,7 @@ field_page_section:
             data:
             - file: demo_logo5.svg
               alt: YETI
+            dst_dir: demo
           field_d_cta_link:
             type: cta
             data:
@@ -240,6 +253,7 @@ field_page_section:
             data:
             - file: demo_droopler.svg
               alt: Droopler
+            dst_dir: demo
           field_d_cta_link:
             type: cta
             data:
