@@ -114,7 +114,7 @@ function d_content_init_fill_field($entity, $name, $value) {
           ['file' => $value['data']],
         ];
       }
-      $dst_dir = !empty($value['dst_dir']) ? $value['dst_dir'] : '';
+      $dst_dir = $value['dst_dir'] ?? '';
       // Add all files.
       foreach ($value['data'] as $file) {
         /**
@@ -286,9 +286,9 @@ function d_content_init_add_nodes($structure) {
  *   A file entity, or FALSE on error.
  */
 function d_content_init_get_file($path, $dst_dir = NULL) {
-  $dst_dir = trim($dst_dir, '/');
   // Prepare destination directory.
   $directory = 'public://';
+  $dst_dir = trim($dst_dir, '/');
   if (!empty($dst_dir)) {
     $directory .= $dst_dir . '/';
     if (!Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
