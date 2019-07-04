@@ -15,8 +15,10 @@
 {% if show_title %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div{{ content_attributes.addClass('row', 'col-12') }}>
-        {{ content }}
+      <div class="row">
+        <div{{ content_attributes.addClass('col-12') }}>
+          {{ content }}
+        </div>
       </div>
     {% endblock %}
   </div>
