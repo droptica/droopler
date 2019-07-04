@@ -86,3 +86,25 @@ function d_geysir_toolbar() {
 function d_geysir_preprocess_page(&$variables) {
   $variables['#attached']['library'][] = 'd_geysir/overrides';
 }
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function d_geysir_module_implements_alter(&$implementations, $hook) {
+  // Move d_geysir implementation of hook_entity_type_build() to the end of list
+  // to override geysir_modal_edit form class.
+  if ($hook == 'entity_type_build') {
+    $group = $implementations['d_geysir'];
+    unset($implementations['d_geysir']);
+    $implementations['d_geysir'] = $group;
+  }
+}
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function d_geysir_entity_type_build(array &$entity_types) {
+  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  // Override geysir_modal_edit form class.
+  $entity_types['paragraph']->setFormClass('geysir_modal_edit', '\Drupal\d_geysir\Form\GeysirCustomModalParagraphForm');
+}
