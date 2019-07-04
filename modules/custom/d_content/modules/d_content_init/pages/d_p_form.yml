@@ -13,6 +13,7 @@ field_page_section:
       field_d_image_background:
         type: image
         data: demo_bg.jpg
+        dst_dir: demo
       field_d_main_title:
         type: text
         data: Form Paragraph
@@ -36,12 +37,14 @@ field_page_section:
       field_d_icon:
         type: image
         data: demo_droopler_white.svg
+        dst_dir: demo
       field_d_main_title:
         type: text
         data: Main Title
       field_d_image_background:
         type: image
         data: demo_business_4.jpg
+        dst_dir: demo
       field_d_forms:
         type: entity_reference
         data: feedback
