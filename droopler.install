@@ -41,13 +41,6 @@ function droopler_install() {
   // @TODO this should not really be here because this subtheme is not part
   // of the distribution
   $themes = \Drupal::service('theme_handler')->listInfo();
-  if(isset($themes[$current_subtheme])) {
-    \Drupal::configFactory()
-      ->getEditable('system.theme')
-      ->set('default', $current_subtheme)
-      ->set('admin', 'seven')
-      ->save();
-  }
 
   \Drupal::configFactory()
     ->getEditable('system.site')
@@ -61,6 +54,11 @@ function droopler_install() {
   // If subtheme is available install the blog.
   // @TODO this should not really be here because this subtheme is not part of the distribution
   if (isset($themes[$current_subtheme])) {
+    \Drupal::configFactory()
+      ->getEditable('system.theme')
+      ->set('default', $current_subtheme)
+      ->set('admin', 'seven')
+      ->save();
     \Drupal::service('module_installer')->install(['d_blog']);
     \Drupal::service('module_installer')->install(['d_blog_init']);
 
