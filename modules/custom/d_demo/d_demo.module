@@ -37,18 +37,3 @@ function d_demo_content_structure_alter(&$structure, $context) {
     $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40];
   }
 }
-
-/**
- * Implements hook_module_implements_alter().
- */
-function d_demo_module_implements_alter(&$implementations, $hook) {
-  // Move d_demo implementation of hook_content_structure_alter() to the
-  // beginning of the list to create homepage example as first node,
-  // otherwise it will not be set as site front page.
-  if ($hook == 'content_structure_alter') {
-    $group = $implementations['d_demo'];
-    $implementations = [
-        'd_demo' => $group,
-      ] + $implementations;
-  }
-}

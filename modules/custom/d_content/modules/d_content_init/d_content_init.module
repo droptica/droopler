@@ -227,6 +227,14 @@ function d_content_init_add_node($params) {
   $page_array = Yaml::decode(file_get_contents($params['file']));
   $nid = d_content_init_save_node($page_array);
 
+  // Set homepage.
+  if ($homepage = isset($page_array['info']['homepage'])) {
+    if ($homepage) {
+      $config = \Drupal::configFactory()->getEditable('system.site');
+      $config->set('page.front', '/node/' . $nid)->save();
+    }
+  }
+
   // If title is not empty add menu link.
   if (!empty($params['link'])) {
     $config = [
@@ -359,17 +367,4 @@ function d_content_init_recreate_content() {
   $storage->delete($entities);
 
   d_content_init_create_all();
-}
-
-/**
- * Install Demo module.
- */
-function d_content_init_enable_demo() {
-  $module_installer = \Drupal::service('module_installer');
-
-  // Install modules.
-  $modules = [
-    'd_demo',
-  ];
-  $module_installer->install($modules, TRUE);
 }
