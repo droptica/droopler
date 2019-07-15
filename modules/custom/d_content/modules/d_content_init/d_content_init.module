@@ -360,3 +360,16 @@ function d_content_init_recreate_content() {
 
   d_content_init_create_all();
 }
+
+/**
+ * Install Demo module.
+ */
+function d_content_init_enable_demo() {
+  $module_installer = \Drupal::service('module_installer');
+
+  // Install modules.
+  $modules = [
+    'd_demo',
+  ];
+  $module_installer->install($modules, TRUE);
+}
