@@ -10,4 +10,48 @@
  */
 function d_product_install() {
   \Drupal::service('module_installer')->install(['d_product_init']);
+
+  $theme = \Drupal::service('theme.manager')->getDefault();
+  \Drupal::configFactory()
+    ->getEditable('block.block.exposedformproducts_listproducts_list')
+    ->set('theme', $theme->getName())
+    ->set('region', 'facets_top')
+    ->set('status', TRUE)
+    ->save();
+
+  \Drupal::configFactory()
+    ->getEditable('block.block.mobilefilters')
+    ->set('theme', $theme->getName())
+    ->set('region', 'facets_top')
+    ->set('status', TRUE)
+    ->save();
+
+  \Drupal::configFactory()
+    ->getEditable('block.block.mobilefilterssubmit')
+    ->set('theme', $theme->getName())
+    ->set('region', 'facets_top')
+    ->set('status', TRUE)
+    ->save();
+
+  \Drupal::configFactory()
+    ->getEditable('block.block.productcategoriestaxonomytermname')
+    ->set('theme', $theme->getName())
+    ->set('region', 'facets_left')
+    ->set('status', TRUE)
+    ->save();
+
+  \Drupal::configFactory()
+    ->getEditable('block.block.resetfilters')
+    ->set('theme', $theme->getName())
+    ->set('region', 'facets_left')
+    ->set('status', TRUE)
+    ->save();
+
+  \Drupal::configFactory()
+    ->getEditable('block.block.resetfilters_2')
+    ->set('theme', $theme->getName())
+    ->set('region', 'facets_left')
+    ->set('status', TRUE)
+    ->save();
+
 }
