@@ -227,6 +227,14 @@ function d_content_init_add_node($params) {
   $page_array = Yaml::decode(file_get_contents($params['file']));
   $nid = d_content_init_save_node($page_array);
 
+  // Set homepage.
+  if ($homepage = isset($page_array['info']['homepage'])) {
+    if ($homepage) {
+      $config = \Drupal::configFactory()->getEditable('system.site');
+      $config->set('page.front', '/node/' . $nid)->save();
+    }
+  }
+
   // If title is not empty add menu link.
   if (!empty($params['link'])) {
     $config = [
