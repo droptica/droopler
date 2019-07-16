@@ -10,6 +10,8 @@ $d-p-banner-subheader-color: $color-odysseus !default;
 $d-p-banner-text-color: $color-odysseus !default;
 $d-p-banner-background-overlay: $color-cassandra !default;
 $d-p-banner-line-color: $color-odysseus !default;
+$d-p-banner-demo-background-color: $color-odysseus !default;
+$d-p-banner-demo-text-color: $color-cassandra !default;
 
 // Margins, paddings and sizes.
 $d-p-banner-text-line-height: 1.7 !default;
@@ -88,6 +90,26 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     @include media-breakpoint-down(sm) {
       padding-top: $d-p-banner-mobile-padding-top;
       padding-bottom: $d-p-banner-mobile-padding-bottom;
+    }
+  }
+
+  &.d-demo {
+    .content-wrapper {
+      width: 50%;
+      background: $d-p-banner-demo-background-color;
+      .content {
+        .field--name-field-d-main-title,
+        .field--name-field-d-subtitle {
+          color: $d-p-banner-demo-text-color;
+          text-align: left;
+        }
+        .field--name-field-d-cta-link {
+          text-align: left;
+        }
+        .field--name-field-d-cta-link::before {
+          content: none;
+        }
+      }
     }
   }
 }
