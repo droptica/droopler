@@ -91,11 +91,6 @@ function droopler_install_tasks() {
       'display_name' => t('Add footer'),
       'type' => 'normal',
     ],
-    'droopler_enable_demo' => [
-      'display' => TRUE,
-      'display_name' => t('Install Demo'),
-      'type' => 'normal',
-    ],
   ];
 
   return $tasks;
@@ -115,22 +110,6 @@ function _droopler_import_config($module, $name) {
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
   $config_storage->write($name, $source->read($name));
-}
-
-/**
- * Install Demo module.
- */
-function droopler_enable_demo() {
-  $module_installer = \Drupal::service('module_installer');
-
-  // Install modules.
-  $modules = [
-    'd_demo',
-  ];
-  $module_installer->install($modules, TRUE);
-
-  // Recreate content.
-  d_content_init_recreate_content();
 }
 
 /**

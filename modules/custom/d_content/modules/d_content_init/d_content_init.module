@@ -227,14 +227,6 @@ function d_content_init_add_node($params) {
   $page_array = Yaml::decode(file_get_contents($params['file']));
   $nid = d_content_init_save_node($page_array);
 
-  // Set homepage.
-  if ($homepage = isset($page_array['info']['homepage'])) {
-    if ($homepage) {
-      $config = \Drupal::configFactory()->getEditable('system.site');
-      $config->set('page.front', '/node/' . $nid)->save();
-    }
-  }
-
   // If title is not empty add menu link.
   if (!empty($params['link'])) {
     $config = [
@@ -312,9 +304,8 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
     $filename = $parts[1];
   }
   else {
-    // In case there is no module name specified in path, use placeholder file.
     $dir = drupal_get_path('module', 'd_content_init');
-    $filename = 'placeholder.png';
+    $filename = $path;
   }
 
   // Save the file.
@@ -330,7 +321,33 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
  */
 function d_content_init_create_all() {
   // Set default structure.
-  $structure = [];
+  $path = drupal_get_path('module', 'd_content_init') . '/pages';
+  $structure = [
+    'homepage' => ['file' => "$path/homepage.yml"],
+    'examples' => ['file' => "$path/examples.yml", 'link' => 'Examples', 'weight' => 20, 'children' => [
+      'business' => ['file' => "$path/business.yml", 'link' => 'Local Business Website', 'weight' => 10],
+      'event' => ['file' => "$path/event.yml", 'link' => 'Event Website', 'weight' => 20],
+      'product' => ['file' => "$path/product.yml", 'link' => 'Product Landing Page', 'weight' => 30],
+      'portfolio' => ['file' => "$path/portfolio.yml", 'link' => 'Portfolio Website', 'weight' => 40],
+      'educational' => ['file' => "$path/educational.yml", 'link' => 'Educational Website', 'weight' => 50],
+    ]],
+    'documentation' => ['file' => "$path/documentation.yml", 'link' => 'Docs', 'weight' => 30, 'children' => [
+      'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
+      'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
+      'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
+      'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
+      'd_p_sidebar_image' => ['file' => "$path/d_p_sidebar_image.yml", 'link' => 'Sidebar Image Paragraph', 'weight' => 40],
+      'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
+      'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
+      'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
+      'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
+      'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
+      'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
+      'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
+      'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
+    ]],
+    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
+  ];
 
   // Allow other modules to modify the structure.
   $context = 'all';
