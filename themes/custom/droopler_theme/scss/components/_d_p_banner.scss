@@ -32,6 +32,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
   color: $d-p-banner-text-color;
   z-index: 0;
   text-align: center;
+  $root: &;
   .content > h2 {
     @include font-main-header-big;
     color: $d-p-banner-header-color;
@@ -93,7 +94,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     }
   }
 
-  &.d-demo {
+  &--demo {
     .content-wrapper {
       width: 50%;
       background: $d-p-banner-demo-background-color;
