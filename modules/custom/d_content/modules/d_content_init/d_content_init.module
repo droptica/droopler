@@ -150,13 +150,12 @@ function d_content_init_fill_field($entity, $name, $value) {
       }
       break;
     case 'entity_reference':
-      $entity->set($name, $value['data']);
-      break;
     case 'boolean':
-      $entity->set($name, $value['data']);
-      break;
     case 'number':
       $entity->set($name, $value['data']);
+      break;
+    case 'color':
+      $entity->$name->appendItem($value['data']);
       break;
     case 'taxonomy':
       $vid = $value['data']['vid'];

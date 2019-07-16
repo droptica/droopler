@@ -20,12 +20,10 @@ bundle: d_p_single_text_block
 mode: default
 content:
   field_d_background_color:
-    weight: 4
-    settings:
-      placeholder_color: ''
-      placeholder_opacity: ''
+    weight: 5
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_default
+    type: color_field_widget_html5
     region: content
   field_d_cta_link:
     weight: 3
@@ -67,7 +65,7 @@ content:
     type: string_textfield
     region: content
   translation:
-    weight: 5
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }

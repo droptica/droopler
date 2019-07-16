@@ -99,3 +99,22 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 
   }
 }
+
+.single-boxes-wrapper {
+
+  .single-box-wrapper {
+    padding-left: 5px;
+    padding-right: 5px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+
+    .d-p-text-block {
+      padding: $grid-gutter-width/2;
+    }
+  }
+}

@@ -44,11 +44,17 @@
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
+
+{% if content.field_d_background_color %}
+  {% set attributes = attributes.setAttribute('style',
+    'background-color: ' ~ content.field_d_background_color.0['#markup']) %}
+{% endif %}
+
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       {% block content %}
-        {{ content }}
+        {{ content|without('field_d_background_color') }}
       {% endblock %}
     </div>
   </section>
