@@ -12,13 +12,6 @@ function d_demo_content_structure_alter(&$structure, $context) {
   $path = drupal_get_path('module', 'd_demo') . '/pages';
   if ($context == 'all') {
     $structure['homepage'] = ['file' => "$path/homepage.yml"];
-    $structure['examples'] = ['file' => "$path/examples.yml", 'link' => 'Examples', 'weight' => 20, 'children' => [
-      'business' => ['file' => "$path/business.yml", 'link' => 'Local Business Website', 'weight' => 10],
-      'event' => ['file' => "$path/event.yml", 'link' => 'Event Website', 'weight' => 20],
-      'product' => ['file' => "$path/product.yml", 'link' => 'Product Landing Page', 'weight' => 30],
-      'portfolio' => ['file' => "$path/portfolio.yml", 'link' => 'Portfolio Website', 'weight' => 40],
-      'educational' => ['file' => "$path/educational.yml", 'link' => 'Educational Website', 'weight' => 50],
-    ]];
     $structure['documentation'] = ['file' => "$path/documentation.yml", 'link' => 'Docs', 'weight' => 30, 'children' => [
       'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
       'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
@@ -35,5 +28,6 @@ function d_demo_content_structure_alter(&$structure, $context) {
       'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
     ]];
     $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40];
+    $structure['product'] = ['file' => "$path/product.yml", 'link' => 'Product', 'weight' => 41];
   }
 }
