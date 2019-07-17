@@ -47,16 +47,21 @@
   'paragraph-d-form',
   'background-image',
 ] %}
+{% set d_p_form_placement = d_p_form_placement|default('bottom') %}
+
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
         <div class="content-wrapper">
           <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-md-8">
+            <div class="row justify-content-center {{ d_p_form_placement }}">
+              <div class="col-md-5">
+                {{ content|without('field_d_forms') }}
+              </div>
+              <div class="col-md-7">
                 {% block content %}
-                  {{ content }}
+                  {{ content.field_d_forms }}
                 {% endblock %}
               </div>
             </div>
