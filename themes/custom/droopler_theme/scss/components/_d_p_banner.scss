@@ -10,7 +10,7 @@ $d-p-banner-subheader-color: $color-odysseus !default;
 $d-p-banner-text-color: $color-odysseus !default;
 $d-p-banner-background-overlay: $color-cassandra !default;
 $d-p-banner-line-color: $color-odysseus !default;
-$d-p-banner-demo-background-color: rgba(255, 255, 255, .7) !default;
+$d-p-banner-demo-background-color: rgba(255, 255, 255, .75) !default;
 $d-p-banner-demo-text-color: $color-cassandra !default;
 
 // Margins, paddings and sizes.
@@ -22,6 +22,8 @@ $d-p-banner-mobile-padding-top: 6.25rem !default;
 $d-p-banner-mobile-padding-bottom: 6.25rem !default;
 $d-p-banner-line-margin-top: $line-center-margin-top !default;
 $d-p-banner-line-margin-bottom: $line-center-margin-bottom !default;
+$d-p-banner-demo-content-spacing: 10% !default;
+$d-p-banner-demo-btn-spacing: 25px !default;
 
 // Other settings
 $d-p-banner-img-opacity: 0.5 !default;
@@ -33,6 +35,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
   z-index: 0;
   text-align: center;
   $root: &;
+
   .content > h2 {
     @include font-main-header-big;
     color: $d-p-banner-header-color;
@@ -96,19 +99,54 @@ $d-p-banner-subheader-opacity: 0.7 !default;
 
   &--demo {
     .content-wrapper {
-      width: 50%;
+      width: 100%;
       background: $d-p-banner-demo-background-color;
+      @include media-breakpoint-up(lg) {
+        width: 50%;
+      }
       .content {
+        padding-left: $d-p-banner-demo-content-spacing;
+        padding-right: $d-p-banner-demo-content-spacing;
         .field--name-field-d-main-title,
         .field--name-field-d-subtitle {
           color: $d-p-banner-demo-text-color;
-          text-align: left;
+          text-transform: none;
+          opacity: 1;
+          @include media-breakpoint-up(lg) {
+            text-align: left;
+          }
+        }
+        .field--name-field-d-subtitle {
+          font-weight: normal;
         }
         .field--name-field-d-cta-link {
-          text-align: left;
+          @include media-breakpoint-up(lg) {
+            text-align: left;
+          }
+          a {
+            margin: $d-p-banner-demo-btn-spacing 0 0 0;
+            @extend .btn;
+            @extend .btn-demo-primary;
+          }
         }
-        .field--name-field-d-cta-link::before {
-          content: none;
+        .field--name-field-d-main-title,
+        .field--name-field-d-subtitle,
+        .field--name-field-d-long-text,
+        .field--name-field-d-cta-link {
+          &::before {
+            background: $d-p-banner-background-overlay;
+            @include media-breakpoint-up(lg) {
+              margin-left: 0;
+            }
+          }
+        }
+        .field--name-field-d-long-text {
+          p {
+            color: $d-p-banner-demo-text-color;
+            @include media-breakpoint-up(lg) {
+              text-align: left;
+            }
+          }
         }
       }
     }
