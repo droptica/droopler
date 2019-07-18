@@ -59,12 +59,12 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
 {% set content_side_classes = [
   'd-p-side-embed-content',
-  embed_side == 'full' ? 'col-md-6 col-12' : 'col-md-6',
+  embed_side == 'full' ? 'col-md-6 col-12 p-md-0 d-flex justify-content-end' : 'col-md-6',
   'p-md-0',
 ] %}
 {% set content_fields_classes = [
   'd-p-side-embed-content-fields',
-  embed_side == 'full' ? 'w-100' : '',
+  embed_side == 'full' ? 'd-flex flex-column container-half' : '',
 ] %}
 
 {% block paragraph %}

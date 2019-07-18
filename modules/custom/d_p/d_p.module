@@ -179,19 +179,6 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 }
 
 /**
- * Implements hook_theme_suggestions_alter().
- */
-function d_p_theme_suggestions_paragraph_alter(array &$suggestions, array $variables, $hook) {
-  $current_path = \Drupal::service('path.current')->getPath();
-  $path_alias = str_replace('/', '', \Drupal::service('path.alias_manager')->getAliasByPath($current_path));
-  $paragraph = $variables['elements']['#paragraph'];
-  $bundle = $paragraph->bundle();
-
-  //@TODO: change it with class paragraph field. Future task.
-  $suggestions[] = 'paragraph__' . $bundle . '__path_' . $path_alias;
-}
-
-/**
  * Implements hook_field_widget_form_alter().
  */
 function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, &$context) {
