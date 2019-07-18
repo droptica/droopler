@@ -66,13 +66,16 @@
         $embed.closest('.d-p-side-embed-embed').addClass(embedType + '-wrapper');
 
         // Set proper height for full width embed element.
-        if ($(window).width() > 767) {
-          var $contentH = parseInt($this.find('.d-p-side-embed-content').innerHeight());
-          if (!isNaN($contentH)) {
-            var $height = $contentH + 300;
-            $this.find('.d-p-side-embed-embed').css('height', $height);
+        $(window).on("resize", function () {
+          if ($(window).width() > 767) {
+            var $contentH = parseInt($this.find('.embed-side-full .d-p-side-embed-content').innerHeight());
+            if (!isNaN($contentH)) {
+              var $height = $contentH + 300;
+              $this.find('.d-p-side-embed-embed').css('height', $height);
+            }
           }
-        }
+        }).resize();
+
       });
     }
   };
