@@ -50,7 +50,21 @@
 
 {% set d_p_form_placement = d_p_form_placement|default('bottom') %}
 
-{{ dump(d_p_form_placement) }}
+{% if d_p_form_placement == 'bottom' %}
+  {% set row_classes = '' %}
+  {% set content_classes = 'col-md-8' %}
+  {% set form_classes = 'col-md-8' %}
+{% endif %}
+{% if d_p_form_placement == 'right' %}
+  {% set row_classes = '' %}
+  {% set content_classes = 'col-md-5 col-12' %}
+  {% set form_classes = 'col-md-7 col-12' %}
+{% endif %}
+{% if d_p_form_placement == 'left' %}
+  {% set row_classes = '' %}
+  {% set content_classes = 'col-md-5 col-12 order-1 order-md-2' %}
+  {% set form_classes = 'col-md-7 col-12 order-md-1 order-2' %}
+{% endif %}
 
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
@@ -58,10 +72,13 @@
       <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
         <div class="content-wrapper">
           <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-md-8">
+            <div class="row justify-content-center {{ d_p_form_placement }} {{ row_classes }}">
+              <div class="content {{ content_classes }}">
+                {{ content|without('field_d_forms') }}
+              </div>
+              <div class="form {{ form_classes }}">
                 {% block content %}
-                  {{ content }}
+                  {{ content.field_d_forms }}
                 {% endblock %}
               </div>
             </div>
