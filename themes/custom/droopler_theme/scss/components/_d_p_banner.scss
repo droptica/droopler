@@ -10,8 +10,8 @@ $d-p-banner-subheader-color: $color-odysseus !default;
 $d-p-banner-text-color: $color-odysseus !default;
 $d-p-banner-background-overlay: $color-cassandra !default;
 $d-p-banner-line-color: $color-odysseus !default;
-$d-p-banner-helen-background-color: rgba(255, 255, 255, .75) !default;
-$d-p-banner-helen-text-color: $color-cassandra !default;
+$d-p-banner-half-transparent-background-color: rgba(255, 255, 255, .75) !default;
+$d-p-banner-half-transparent-text-color: $color-cassandra !default;
 
 // Margins, paddings and sizes.
 $d-p-banner-text-line-height: 1.7 !default;
@@ -22,8 +22,8 @@ $d-p-banner-mobile-padding-top: 6.25rem !default;
 $d-p-banner-mobile-padding-bottom: 6.25rem !default;
 $d-p-banner-line-margin-top: $line-center-margin-top !default;
 $d-p-banner-line-margin-bottom: $line-center-margin-bottom !default;
-$d-p-banner-helen-content-spacing: 10% !default;
-$d-p-banner-helen-btn-spacing: 25px !default;
+$d-p-banner-half-transparent-content-spacing: 10% !default;
+$d-p-banner-half-transparent-btn-spacing: 25px !default;
 
 // Other settings
 $d-p-banner-img-opacity: 0.5 !default;
@@ -100,16 +100,16 @@ $d-p-banner-subheader-opacity: 0.7 !default;
   &--half-transparent {
     .content-wrapper {
       width: 100%;
-      background: $d-p-banner-helen-background-color;
+      background: $d-p-banner-half-transparent-background-color;
       @include media-breakpoint-up(lg) {
         width: 50%;
       }
       .content {
-        padding-left: $d-p-banner-helen-content-spacing;
-        padding-right: $d-p-banner-helen-content-spacing;
+        padding-left: $d-p-banner-half-transparent-content-spacing;
+        padding-right: $d-p-banner-half-transparent-content-spacing;
         .field--name-field-d-main-title,
         .field--name-field-d-subtitle {
-          color: $d-p-banner-helen-text-color;
+          color: $d-p-banner-half-transparent-text-color;
           text-transform: none;
           opacity: 1;
           @include media-breakpoint-up(lg) {
@@ -124,9 +124,9 @@ $d-p-banner-subheader-opacity: 0.7 !default;
             text-align: left;
           }
           a {
-            margin: $d-p-banner-helen-btn-spacing 0 0 0;
+            margin: $d-p-banner-half-transparent-btn-spacing 0 0 0;
             @extend .btn;
-            @extend .btn-helen;
+            @extend .btn-danger;
           }
         }
         .field--name-field-d-main-title,
@@ -142,7 +142,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
         }
         .field--name-field-d-long-text {
           p {
-            color: $d-p-banner-helen-text-color;
+            color: $d-p-banner-half-transparent-text-color;
             @include media-breakpoint-up(lg) {
               text-align: left;
             }

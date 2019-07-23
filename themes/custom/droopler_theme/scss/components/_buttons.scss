@@ -9,8 +9,8 @@ $button-min-width: 18rem !default; // Minimum width of the button (desktop)
 $button-mobile-min-width: 16rem !default;  // Minimum width of the button (mobile)
 
 // Colors.
-$btn-helen-color: $color-helen !default;
-$btn-helen-hover-color: darken($btn-helen-color, 5%) !default;
+$btn-danger-color: $color-helen !default;
+$btn-danger-hover-color: darken($btn-danger-color, 5%) !default;
 
 // Standard Bootstrap button
 .btn {
@@ -23,13 +23,14 @@ $btn-helen-hover-color: darken($btn-helen-color, 5%) !default;
   }
 }
 
-.btn-helen {
+// Override bootstrap btn-danger.
+.btn-danger {
   color: $color-odysseus;
-  background-color: $btn-helen-color;
-  border-color: $btn-helen-color;
+  background-color: $btn-danger-color;
+  border-color: $btn-danger-color;
   &:hover {
     color: $color-odysseus;
-    background-color: $btn-helen-hover-color;
-    border-color: $btn-helen-hover-color;
+    background-color: $btn-danger-hover-color;
+    border-color: $btn-danger-hover-color;
   }
 }
