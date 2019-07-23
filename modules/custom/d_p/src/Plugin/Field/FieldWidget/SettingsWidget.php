@@ -33,12 +33,7 @@ class SettingsWidget extends WidgetBase {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
-    if (!empty($value)) {
-      $config = json_decode($value);
-    }
-    else {
-      $config = [];
-    }
+    $config = !empty($value) ? json_decode($value) : [];
 
     // Set up the form element for this widget.
     $element += [
