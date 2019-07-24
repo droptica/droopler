@@ -60,7 +60,7 @@ function d_demo_entity_presave(EntityInterface $entity) {
 
       // Get latest blog node nids.
       // Selected nodes are excluded from results.
-      $auto_values = \Drupal::service('d_demo.get_content')->getSortedContentByType('blog_post', 'created', 'ASC', $values);
+      $auto_values = \Drupal::service('d_demo.get_content')->getSortedContentByType('blog_post', 'created', 'DESC', $values);
       $merged_values = array_merge($values, $auto_values);
 
       $new_values = [];

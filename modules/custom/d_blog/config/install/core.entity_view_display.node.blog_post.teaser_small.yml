@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_small
+    - field.field.node.blog_post.field_blog_category
+    - field.field.node.blog_post.field_blog_main_image
+    - field.field.node.blog_post.field_blog_sections
+    - field.field.node.blog_post.field_blog_teaser
+    - image.style.gallery_thumbnail
+    - node.type.blog_post
+  module:
+    - svg_image
+    - user
+id: node.blog_post.teaser_small
+targetEntityType: node
+bundle: blog_post
+mode: teaser_small
+content:
+  field_blog_main_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: gallery_thumbnail
+      image_link: content
+      svg_render_as_image: '1'
+      svg_attributes:
+        width: ''
+        height: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  field_blog_category: true
+  field_blog_sections: true
+  field_blog_teaser: true
+  langcode: true
+  links: true
