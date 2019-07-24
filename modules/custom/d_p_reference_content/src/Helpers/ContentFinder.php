@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\d_demo\Helpers\ContentFinder.
+ * Contains \Drupal\d_p_reference_content\Helpers\ContentFinder.
  */
 
-namespace Drupal\d_demo\Helpers;
+namespace Drupal\d_p_reference_content\Helpers;
 
 use Drupal\Core\Database\Connection;
 

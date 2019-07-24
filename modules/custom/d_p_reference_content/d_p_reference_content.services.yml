@@ -1,0 +1,4 @@
+services:
+  d_p_reference_content.get_content:
+    class: Drupal\d_p_reference_content\Helpers\ContentFinder
+    arguments: ['@database']
