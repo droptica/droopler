@@ -11,11 +11,13 @@ $d-p-side-embed-link-color: $color-nestor !default;
 $d-p-side-embed-link-hover-color: darken($d-p-side-embed-link-color, 5%) !default;
 $d-p-side-embed-line-color: $color-nestor !default;
 $d-p-side-embed-header-color: $color-odysseus !default;
+$d-p-side-embed-full-text-color: $color-cassandra !default;
 
 // Margins, paddings and sizing.
 $d-p-side-embed-line-margin-top: 1.44rem !default;
 $d-p-side-embed-line-margin-bottom: 1.44rem !default;
-$d-p-side-embed-fields-padding-y: 7% !default;
+$d-p-side-embed-fields-padding-y: 30px !default;
+$d-p-side-embed-fields-padding-x: 30px !default;
 $d-p-side-embed-mobile-height: 18.75rem !default;
 $d-p-side-embed-text-desktop-padding-y: 2rem !default;
 $d-p-side-embed-text-mobile-padding: 7% !default;
@@ -25,12 +27,51 @@ $d-p-side-embed-mobile-height: 300px !default; // This value must be set, otherw
 $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of embed here.
 
 .d-p-side-embed-wrapper {
+  $root: &;
 
   &.embed-side-right {
     background: $d-p-side-embed-background-color;
   }
   &.embed-side-left {
     background: $d-p-side-embed-background-color-secondary;
+  }
+  &.embed-side-full {
+    position: relative;
+    .d-p-side-embed-embed {
+      width: 100%;
+      height: 320px;
+      @include media-breakpoint-up(md) {
+        height: 640px; // Default value. Dynamically defined in d_p_side_embed.js
+      }
+      &.google-maps-wrapper {
+        .google-maps-embed {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+    .d-p-side-embed-content {
+      position: relative;
+      background: $color-odysseus;
+      color: $d-p-side-embed-full-text-color;
+      @include media-breakpoint-up(md) {
+        position: absolute;
+        bottom: 50%;
+        transform: translateY(50%);
+      }
+      .d-p-side-embed-content-fields {
+        width: 600px; // Half of container.
+        padding-left: $d-p-side-embed-fields-padding-x;
+        padding-right: $d-p-side-embed-fields-padding-x;
+        .field--name-field-d-long-text,
+        .field--name-field-d-main-title {
+          color: $d-p-side-embed-full-text-color;
+          &::after {
+            content: none;
+          }
+        }
+      }
+    }
   }
 
   .d-p-side-embed-content {

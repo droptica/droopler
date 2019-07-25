@@ -10,6 +10,7 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\field\Entity\FieldConfig;
 
 /**
  * Implements hook_theme().
@@ -184,5 +185,22 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
     }
     edit_cta_link_default_class($form);
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, &$context) {
+  $field_definition = $context['items']->getFieldDefinition();
+
+  if ($field_definition instanceof FieldConfig) {
+    $config = $field_definition->id();
+    list ($entity_type, $bundle, $field_name) = explode('.', $config);
+
+    // Hide option "full" for other paragraphs.
+    if ($bundle != 'd_p_side_embed' && $field_name == 'field_d_p_si_image_side') {
+      unset($element['#options']['full']);
+    }
   }
 }
