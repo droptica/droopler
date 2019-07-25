@@ -10,6 +10,7 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\field\Entity\FieldConfig;
 
 /**
  * Implements hook_theme().
@@ -47,6 +48,13 @@ function d_p_responsive_style_ids() {
  */
 function d_p_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
+  foreach ($variables['content'] as $key => $field) {
+    if (isset($field['#field_type']) && $field['#field_type'] == 'field_p_configuration_storage') {
+      $settings = $paragraph->get($key)->getValue();
+      $settings = json_decode($settings[0]['value']);
+      unset($variables['content'][$key]);
+    }
+  }
   $bundle = $paragraph->bundle();
   $paragraph_id = 'paragraph-' . $bundle . '-' . $paragraph->id();
   $wrapper_attributes = [
@@ -55,6 +63,9 @@ function d_p_preprocess_paragraph(&$variables) {
       'wrapper-' . $bundle,
     ],
   ];
+  if (isset($settings->custom_class) && !empty($settings->custom_class)) {
+    $wrapper_attributes['class'][] = $settings->custom_class;
+  }
   $paragraph_attributes = [
     'data-id' => $paragraph_id,
   ];
@@ -176,5 +187,22 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
     }
     edit_cta_link_default_class($form);
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, &$context) {
+  $field_definition = $context['items']->getFieldDefinition();
+
+  if ($field_definition instanceof FieldConfig) {
+    $config = $field_definition->id();
+    list ($entity_type, $bundle, $field_name) = explode('.', $config);
+
+    // Hide option "full" for other paragraphs.
+    if ($bundle != 'd_p_side_embed' && $field_name == 'field_d_p_si_image_side') {
+      unset($element['#options']['full']);
+    }
   }
 }

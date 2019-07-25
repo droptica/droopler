@@ -5,6 +5,8 @@
  * d_demo module.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Implements hook_content_structure_alter().
  */
@@ -29,5 +31,53 @@ function d_demo_content_structure_alter(&$structure, $context) {
     ]];
     $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40];
     $structure['product'] = ['file' => "$path/product.yml", 'link' => 'Product', 'weight' => 41];
+  }
+}
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'contact_message_feedback_form':
+      unset($form['actions']['preview']);
+      foreach ($form as &$formElement) {
+        if (isset($formElement['#type'])) {
+          switch ($formElement['#type']) {
+            case 'text':
+            case 'textfield':
+            case 'email':
+              $formElement['#attributes']['placeholder'] = $formElement['#title'];
+              $formElement['#title_display'] = 'invisible';
+              break;
+            case 'item':
+            case 'container':
+              if (!empty($formElement['widget']['#title'])) {
+                $title = $formElement['widget']['#title'];
+                $formElement['widget'][0]['value']['#attributes']['placeholder'] = $title;
+                $formElement['widget'][0]['value']['#title_display'] = 'invisible';
+              }
+              break;
+          }
+        }
+      }
+
+      // Add wrapper for name and mail field.
+      $wrapper = [
+        '#type' => 'container',
+        '#weight' => -666,
+        '#attributes' => [
+          'class' => ['name-and-mail'],
+        ],
+      ];
+
+      $wrapper['name'] = $form['name'];
+      $wrapper['mail'] = $form['mail'];
+      $form['name_and_mail'] = $wrapper;
+      unset($form['name']);
+      unset($form['mail']);
+
+      break;
   }
 }

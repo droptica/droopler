@@ -13,6 +13,7 @@ $d-p-form-header-margin-bottom: 10% !default;
 $d-p-form-padding-top: 5% !default;
 $d-p-form-padding-bottom: 5% !default;
 $d-p-form-button-margin-top: 1rem !default;
+$d-p-form-copy-margin-left: 1.25rem !default;
 
 .paragraph-d-form {
   padding-top: $d-p-form-padding-top;
@@ -39,5 +40,48 @@ $d-p-form-button-margin-top: 1rem !default;
 
   label {
     color: $d-p-form-text-color;
+  }
+
+  .form-item-copy {
+    margin-left: $d-p-form-copy-margin-left;
+  }
+
+  .left,
+  .right {
+    .content {
+      @extend .mt-3
+    }
+    form {
+      .name-and-mail {
+        display: flex;
+        flex-direction: column;
+        @include media-breakpoint-up(md) {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .form-item-name,
+        .form-item-mail {
+          width: 100%;
+          @include media-breakpoint-up(md) {
+            width: 48%;
+          }
+        }
+      }
+    }
+  }
+  @include media-breakpoint-up(md) {
+    .right {
+      h2 {
+        text-align: left;
+      }
+    }
+    .left {
+      .content {
+        text-align: right;
+      }
+      h2 {
+        text-align: right;
+      }
+    }
   }
 }
