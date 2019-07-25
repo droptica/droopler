@@ -1,0 +1,18 @@
+// Margins, paddings and sizing.
+$d-p-reference-content-padding-y: 3.875rem;
+
+.d-p-reference-content-wrapper {
+  padding-top: $d-p-reference-content-padding-y;
+  padding-bottom: $d-p-reference-content-padding-y;
+  .node {
+    $root: &;
+
+    &--type-blog-post {
+      .field--name-field-blog-main-image {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
