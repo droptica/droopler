@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.d_p_banner.field_d_css_modifier
     - field.field.paragraph.d_p_banner.field_d_cta_link
     - field.field.paragraph.d_p_banner.field_d_icon
     - field.field.paragraph.d_p_banner.field_d_image_background
@@ -12,7 +11,6 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_banner
   module:
-    - d_p
     - link_attributes
     - svg_image
     - text
@@ -21,12 +19,6 @@ targetEntityType: paragraph
 bundle: d_p_banner
 mode: default
 content:
-  field_d_css_modifier:
-    weight: 7
-    settings: {  }
-    third_party_settings: {  }
-    type: field_d_p_set_settings
-    region: content
   field_d_cta_link:
     weight: 5
     settings:
