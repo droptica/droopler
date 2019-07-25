@@ -96,8 +96,11 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       padding-bottom: $d-p-banner-mobile-padding-bottom;
     }
   }
+}
 
-  &--half-transparent {
+// Styles for half-transparent modifier.
+.half-transparent {
+  .d-p-banner {
     .content-wrapper {
       width: 100%;
       background: $d-p-banner-half-transparent-background-color;
