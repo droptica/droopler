@@ -71,14 +71,14 @@
 ] %}
 
 <article{{ attributes.addClass(classes) }}>
-    <div class="position-relative">
+    <div class="d-flex flex-column box">
         {{ content.field_blog_main_image }}
-        <div class="position-absolute">
+        <div class="text-area">
             <h2{{ title_attributes.addClass('node__title') }}>
                 <a href="{{ url }}" rel="bookmark">{{ label }}</a>
             </h2>
             {{ content.field_blog_teaser }}
-            <a href="{{ url }}">{{ 'Learn more'|t }}</a>
+            <a href="{{ url }}" class="link">{{ 'Learn more'|t }}</a>
         </div>
     </div>
 

@@ -15,6 +15,8 @@ $d-blog-header-padding: 0.625rem !default;
 $d-blog-header-margin-mobile: 0.9375rem auto 0.9375rem !default;
 $d-blog-header-margin-tablet: 1.5625rem auto 1.375rem !default;
 $d-blog-header-margin-dekstop: 1.5625rem auto 2.1875rem !default;
+$d-blog-teaser-small-text-area-padding-xy: 30px !default;
+$d-blog-teaser-small-padding-y: 20px !default;
 $d-blog-header-desktop-font-size: 3rem !default;
 $d-blog-header-small-desktop-screen-font-size: 2.375rem !default;
 $d-blog-header-tablet-font-size: 1.625rem !default;
@@ -283,6 +285,35 @@ $d-blog-size-of-large-desktop: 1400px !default;
   @media all and (min-width: $d-blog-size-of-large-desktop)  {
     .blog_post_header {
       min-height: $d-blog-header-min-height-big-desktop;
+    }
+  }
+
+  &.node--view-mode-teaser-small {
+    .box {
+      .field--type-image {
+        margin: 0;
+      }
+      .text-area {
+        color: $color-odysseus;
+        background: $color-hecuba;
+        padding-top: 0;
+        padding-bottom: $d-blog-teaser-small-text-area-padding-xy;
+        padding-left: $d-blog-teaser-small-text-area-padding-xy;
+        padding-right: $d-blog-teaser-small-text-area-padding-xy;
+        .field--name-field-blog-teaser {
+          padding-bottom: $d-blog-teaser-small-padding-y;
+        }
+        a {
+          color: $color-odysseus;
+          &:hover {
+            color: $color-odysseus;
+          }
+          &.link {
+            text-transform: uppercase;
+            color: $color-patroclus;
+          }
+        }
+      }
     }
   }
 }
