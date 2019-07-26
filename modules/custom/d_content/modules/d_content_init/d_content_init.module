@@ -179,6 +179,12 @@ function d_content_init_fill_field($entity, $name, $value) {
         }
       }
       break;
+    case 'field_p_configuration_storage':
+      if (!empty($value['custom_class'])) {
+        $data = json_encode(['custom_class' => $value['custom_class']]);
+        $entity->set($name, $data);
+      }
+      break;
   }
 }
 

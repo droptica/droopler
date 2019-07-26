@@ -25,6 +25,11 @@ function droopler_install() {
     ->set('admin', 'seven')
     ->save();
 
+  \Drupal::configFactory()
+  ->getEditable('node.settings')
+    ->set('use_admin_theme', TRUE)
+    ->save();
+
   // @TODO this should not really be here because this subtheme is not part
   // of the distribution
   $themes = \Drupal::service('theme_handler')->listInfo();

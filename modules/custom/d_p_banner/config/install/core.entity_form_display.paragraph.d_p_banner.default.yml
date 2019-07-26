@@ -7,10 +7,12 @@ dependencies:
     - field.field.paragraph.d_p_banner.field_d_image_background
     - field.field.paragraph.d_p_banner.field_d_long_text
     - field.field.paragraph.d_p_banner.field_d_main_title
+    - field.field.paragraph.d_p_banner.field_d_settings
     - field.field.paragraph.d_p_banner.field_d_subtitle
     - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_banner
   module:
+    - d_p
     - link_attributes
     - svg_image
     - text
@@ -65,6 +67,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_d_settings:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: field_d_p_set_settings
     region: content
   field_d_subtitle:
     weight: 2
