@@ -81,3 +81,9 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
       break;
   }
 }
+/**
+ * Implements hook_preprocess_page().
+ */
+function d_demo_preprocess_page(&$variables) {
+//  $variables['#attached']['library'][] = 'd_demo/design';
+}
