@@ -7,8 +7,10 @@ dependencies:
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_main_title
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_number
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference
+    - field.field.paragraph.d_p_group_of_text_blocks.field_d_settings
     - paragraphs.paragraphs_type.d_p_group_of_text_blocks
   module:
+    - d_p
     - entity_reference_revisions
     - link
     - svg_image
@@ -59,5 +61,12 @@ content:
       link: ''
     third_party_settings: {  }
     region: content
+  field_d_settings:
+    type: field_configuration_formatter
+    weight: 4
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_d_number: true

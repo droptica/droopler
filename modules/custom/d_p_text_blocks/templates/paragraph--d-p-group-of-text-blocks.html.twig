@@ -40,7 +40,6 @@
 #}
 {% set classes = [
   'paragraph',
-  'container',
   'd-p-group-of-text-blocks',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
@@ -48,8 +47,15 @@
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
-      {% block content %}
-        {{ content }}
+      {% block paragrpah_content %}
+        <div class="container">
+          {{ content|without('field_d_p_tb_block_reference') }}
+        </div>
+      {% endblock %}
+      {% block tiles_content %}
+        <div class="d-p-tiles-wrapper">
+          {{ content.field_d_p_tb_block_reference }}
+        </div>
       {% endblock %}
     </div>
   </section>
