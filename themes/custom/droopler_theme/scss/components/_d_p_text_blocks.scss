@@ -83,9 +83,14 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 
 .full-width {
   .d-p-group-of-text-blocks {
-    .d-p-tiles-wrapper {
-      @extend .container-fluid;
-      max-width: unset;
+    .full-width-content {
+      @include media-breakpoint-down(md) {
+        @include make-container()
+      }
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+        max-width: 100%;
+      }
     }
   }
 }
@@ -93,17 +98,26 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 .with-tiles {
   .single-boxes-wrapper {
     .single-box-wrapper {
-      padding-left: 5px;
-      padding-right: 5px;
-    }
-    .single-box-wrapper:first-child {
-      padding-left: 0;
-    }
-    .single-box-wrapper:last-child {
-      padding-right: 0;
-    }
-    .single-box-wrapper .d-p-text-block {
-      padding: 20px;
+      padding: 0 5px;
+
+      .d-p-text-block {
+        padding: 20px;
+        @include media-breakpoint-down(md) {
+          margin-bottom: 10px;
+        }
+        @include media-breakpoint-down(xs) {
+          margin-bottom: 5px;
+        }
+      }
+
+      @include media-breakpoint-up(lg) {
+        &:first-child {
+          padding-left: 0;
+        }
+        &:last-child {
+          padding-right: 0;
+        }
+      }
     }
   }
 }
