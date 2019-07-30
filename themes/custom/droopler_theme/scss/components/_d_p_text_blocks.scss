@@ -118,6 +118,10 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
           padding-right: 0;
         }
       }
+
+      @include media-breakpoint-between(sm, md) {
+        @include make-col(6);
+      }
     }
   }
 }
