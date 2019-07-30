@@ -39,45 +39,74 @@ field_page_section:
         type: text_select
         data: right
 
-#  - paragraph_type: d_p_group_of_text_blocks
-#    data:
-#      field_d_number:
-#        type: number
-#        data: 4
-#      field_d_main_title:
-#        type: text
-#        data: Our locations
-#      field_d_p_tb_block_reference:
-#        type: paragraph_reference
-#        data:
-#          - field_d_main_title:
-#              type: text
-#              data: Location 1
-#            field_d_long_text:
-#              type: text_long
-#              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-#                tristique dui dignissim gravida.</p>
-#          - field_d_main_title:
-#              type: text
-#              data: Location 2
-#            field_d_long_text:
-#              type: text_long
-#              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-#                tristique dui dignissim gravida.</p>
-#          - field_d_main_title:
-#              type: text
-#              data: Location 3
-#            field_d_long_text:
-#              type: text_long
-#              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-#                tristique dui dignissim gravida.</p>
-#          - field_d_main_title:
-#              type: text
-#              data: Location 4
-#            field_d_long_text:
-#              type: text_long
-#              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-#                tristique dui dignissim gravida.</p>
+  - paragraph_type: d_p_group_of_text_blocks
+    data:
+      field_d_number:
+        type: number
+        data: 4
+      field_d_main_title:
+        type: text
+        data: Nasze lokalizacje
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-width with-tiles background-gray-light-2
+      field_d_p_tb_block_reference:
+        type: paragraph_reference
+        data:
+          - field_d_long_text:
+              type: text_long
+              data: <p>Wrocław HQ<br />Dunska 9<br />54-427 Wrocław<br />Polska</p>
+                <p>71 32 23 233</p>
+                <p>wroclaw@droptica.com</p>
+            field_d_main_title:
+              type: text
+              data: Wrocław
+            field_d_background_color:
+              type: color
+              data:
+                color: '#ffffff'
+                opacity: 1
+          - field_d_long_text:
+              type: text_long
+              data: <p>Gdańsk<br />Budowlanych 64D<br />80-298 Gdańsk<br />Polska</p>
+                <p>71 32 23 233</p>
+                <p>gdansk@droptica.com</p>
+            field_d_main_title:
+              type: text
+              data: Gdańsk
+            field_d_background_color:
+              type: color
+              data:
+                color: '#ffffff'
+                opacity: 1
+
+          - field_d_long_text:
+              type: text_long
+              data: <p>Oddział<br /> Warszawska 18<br />35-205 Rzeszów<br />Polska</p>
+                <p>71 32 23 233</p>
+                <p>rzeszow@droptica.com</p>
+            field_d_main_title:
+              type: text
+              data: Rzeszów
+            field_d_background_color:
+              type: color
+              data:
+                color: '#ffffff'
+                opacity: 1
+
+          - field_d_long_text:
+              type: text_long
+              data: <p>Oddział<br /> Warszawska 18<br />35-205 Rzeszów<br />Polska</p>
+                <p>71 32 23 233</p>
+                <p>rzeszow@droptica.com</p>
+            field_d_main_title:
+              type: text
+              data: Rzeszów
+            field_d_background_color:
+              type: color
+              data:
+                color: '#ffffff'
+                opacity: 1
 
   - paragraph_type: d_p_side_embed
     data:

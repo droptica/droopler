@@ -4,6 +4,7 @@
 
 // Colour variables used in this file.
 $light-gray-background: $color-hector !default;
+$light-gray-background-2: $color-paris !default;
 
 // Paddings, margins and heights.
 
@@ -56,6 +57,9 @@ $light-gray-background: $color-hector !default;
 .background {
   &-gray-light {
     background: $light-gray-background;
+  }
+  &-gray-light-2 {
+    background-color: $light-gray-background-2;
   }
 }
 
