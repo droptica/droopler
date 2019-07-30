@@ -32,11 +32,12 @@ content:
     type: image
     region: content
   field_blog_teaser:
-    type: text_default
+    type: text_trimmed
     weight: 1
     region: content
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 160
     third_party_settings: {  }
 hidden:
   field_blog_category: true
