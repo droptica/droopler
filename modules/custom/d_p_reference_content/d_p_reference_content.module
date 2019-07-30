@@ -6,41 +6,6 @@ use Drupal\field\Entity\FieldConfig;
 use \Drupal\Core\Template\Attribute;
 
 /**
- * Implements hook_entity_presave().
- */
-function d_p_reference_content_entity_presave(EntityInterface $entity) {
-  $type = $entity->bundle();
-  switch ($type) {
-    case 'd_p_reference_content':
-      if ($entity instanceof Paragraph) {
-        $reference_content = $entity->get('field_d_p_reference_content');
-        $values = $reference_content->getValue();
-
-        /** @var FieldConfig $def */
-        $def = $reference_content->getDataDefinition();
-        $cardinality = $def->getFieldStorageDefinition()->getCardinality();
-
-        // Get latest blog node nids.
-        // Selected nodes are excluded from results.
-        $auto_values = \Drupal::service('d_p_reference_content.get_content')
-          ->getSortedContentByType('blog_post', 'created', 'DESC', $values);
-        $merged_values = array_merge($values, $auto_values);
-
-        // Build an array with new values.
-        $new_values = [];
-        for ($i = 0; $i < $cardinality; $i++) {
-          $new_values[] = $merged_values[$i];
-        }
-
-        $entity->set('field_d_p_reference_content', $new_values);
-        $entity->setNewRevision(TRUE);
-      }
-
-      break;
-  }
-}
-
-/**
  * Implements hook_theme().
  */
 function d_p_reference_content_theme($existing, $type, $theme, $path) {
@@ -64,12 +29,42 @@ function d_p_reference_content_theme($existing, $type, $theme, $path) {
  * Implements hook_preprocess_HOOK().
  */
 function d_p_reference_content_preprocess_paragraph(&$variables) {
+  /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
 
   switch ($bundle) {
     case 'd_p_reference_content':
       $variables['d_p_reference_content_wrapper_attributes'] = new Attribute();
+
+      // Current manually values.
+      $reference_content = $paragraph->get('field_d_p_reference_content');
+      $values = $reference_content->getValue();
+
+      // Get max number of values.
+      /** @var FieldConfig $def */
+      $def = $reference_content->getDataDefinition();
+      $cardinality = $def->getFieldStorageDefinition()->getCardinality();
+
+      // Get latest blog node nids.
+      // Selected nodes are excluded from results.
+      $auto_values = \Drupal::service('d_p_reference_content.content_helper')
+        ->getSortedContentByType('blog_post', 'created', 'DESC', $values);
+      $merged_values = array_merge($values, $auto_values);
+
+      // Build an array with new values.
+      $new_values = [];
+      for ($i = 0; $i < $cardinality; $i++) {
+        $new_values[] = $merged_values[$i];
+      }
+
+      // Replace content.
+      \Drupal::service('d_p_reference_content.content_helper')
+        ->replaceContent($variables, 'node', 'teaser_small', 'field_d_p_reference_content', $new_values);
+
+      $variables['#cache']['tags'][] = 'node_list';
+
       break;
   }
+
 }

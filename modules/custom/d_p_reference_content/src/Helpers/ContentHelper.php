@@ -8,8 +8,9 @@
 namespace Drupal\d_p_reference_content\Helpers;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Entity\EntityTypeManager;
 
-class ContentFinder {
+class ContentHelper {
 
   /**
    * @var Connection $dbConnection
@@ -17,12 +18,19 @@ class ContentFinder {
   private $connection;
 
   /**
-   * ContentFinder constructor.
+   * @var EntityTypeManager $entityTypeManager
+   */
+  private $entityTypeManager;
+
+  /**
+   * ContentHelper constructor.
    *
    * @param Connection $connection
+   * @param EntityTypeManager $entityTypeManager
    */
-  public function __construct(Connection $connection) {
+  public function __construct(Connection $connection, EntityTypeManager $entityTypeManager) {
     $this->connection = $connection;
+    $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -58,6 +66,32 @@ class ContentFinder {
     $result = $this->excludeFromResults($data, $values);
 
     return $result;
+  }
+
+  /**
+   * Replace content.
+   *
+   * @param $variables
+   *   Variables array from preprocess.
+   * @param $entity_type
+   *   Entity type.
+   * @param $view_mode
+   *   Entity view mode.
+   * @param $field
+   *   Field name.
+   * @param $new_values
+   *   Array with new content values
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function replaceContent(&$variables, $entity_type, $view_mode, $field, $new_values) {
+    $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
+    $storage = $this->entityTypeManager->getStorage($entity_type);
+    foreach ($new_values as $key => $data) {
+      $node = $storage->load($data['target_id']);
+      $build = $view_builder->view($node, $view_mode);
+      $variables['content'][$field][$key] = $build;
+    }
   }
 
   /**
