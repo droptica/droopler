@@ -294,6 +294,9 @@ $d-blog-size-of-large-desktop: 1400px !default;
         margin: 0;
       }
       .text-area {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
         color: $color-odysseus;
         background: $color-hecuba;
         padding-top: 0;
@@ -302,13 +305,6 @@ $d-blog-size-of-large-desktop: 1400px !default;
         padding-right: $d-blog-teaser-small-text-area-padding-xy;
         .field--name-field-blog-teaser {
           padding-bottom: $d-blog-teaser-small-padding-y;
-          //min-height: 125px;
-          @include media-breakpoint-up(sm) {
-            //min-height: 145px;
-          }
-          @include media-breakpoint-up(xl) {
-            //min-height: 160px;
-          }
         }
         a {
           color: $color-odysseus;
