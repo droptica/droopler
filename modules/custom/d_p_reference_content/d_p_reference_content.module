@@ -41,20 +41,21 @@ function d_p_reference_content_preprocess_paragraph(&$variables) {
       $reference_content = $paragraph->get('field_d_p_reference_content');
       $values = $reference_content->getValue();
 
-      // Get max number of values.
-      /** @var FieldConfig $def */
-      $def = $reference_content->getDataDefinition();
-      $cardinality = $def->getFieldStorageDefinition()->getCardinality();
-
       // Get latest blog node nids.
       // Selected nodes are excluded from results.
       $auto_values = \Drupal::service('d_p_reference_content.content_helper')
         ->getSortedContentByType('blog_post', 'created', 'DESC', $values);
       $merged_values = array_merge($values, $auto_values);
 
+      // Get max number of values.
+      /** @var FieldConfig $def */
+      $def = $reference_content->getDataDefinition();
+      $cardinality = $def->getFieldStorageDefinition()->getCardinality();
+      $min = min(count($merged_values), $cardinality);
+
       // Build an array with new values.
       $new_values = [];
-      for ($i = 0; $i < $cardinality; $i++) {
+      for ($i = 0; $i < $min; $i++) {
         $new_values[] = $merged_values[$i];
       }
 

@@ -88,9 +88,12 @@ class ContentHelper {
     $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
     $storage = $this->entityTypeManager->getStorage($entity_type);
     foreach ($new_values as $key => $data) {
-      $node = $storage->load($data['target_id']);
-      $build = $view_builder->view($node, $view_mode);
-      $variables['content'][$field][$key] = $build;
+      if (!empty($data['target_id'])) {
+        if($node = $storage->load($data['target_id'])) {
+          $build = $view_builder->view($node, $view_mode);
+          $variables['content'][$field][$key] = $build;
+        }
+      }
     }
   }
 
