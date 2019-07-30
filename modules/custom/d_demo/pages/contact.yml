@@ -39,24 +39,6 @@ field_page_section:
         type: text_select
         data: right
 
-
-  - paragraph_type: d_p_side_embed
-    data:
-      field_d_main_title:
-        type: text
-        data: Find us
-      field_d_embed:
-        type: text_long
-        data: '<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10019.591321160302!2d16.973667!3d51.1103452!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2sie!4v1564423228931!5m2!1spl!2sie" frameborder="0" style="border:0" allowfullscreen></iframe>'
-      field_d_p_si_image_side:
-        type: text_select
-        data: full
-      field_d_long_text:
-        type: text_long
-        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
-          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
-          gravida blandit enim. Ut bibendum egestas sem.</p>
-
   - paragraph_type: d_p_group_of_text_blocks
     data:
       field_d_number:
@@ -126,7 +108,6 @@ field_page_section:
                 color: '#ffffff'
                 opacity: 1
 
-
   - paragraph_type: d_p_side_embed
     data:
       field_d_main_title:
@@ -134,14 +115,12 @@ field_page_section:
         data: Find us
       field_d_embed:
         type: text_long
-        data: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d641.7745766806183!2d21.998709365044974!3d50.04548530149786!2m3!1f0!2f39.177691919991204!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x473cfb1771f059ab%3A0x89f8cc7befb08e8a!2sWarszawska+18%2C+35-205+Rzesz%C3%B3w!5e1!3m2!1sen!2spl!4v1563191185493!5m2!1sen!2spl" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
+        data: '<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10019.591321160302!2d16.973667!3d51.1103452!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2sie!4v1564423228931!5m2!1spl!2sie" frameborder="0" style="border:0" allowfullscreen></iframe>'
       field_d_p_si_image_side:
         type: text_select
-        data: left
+        data: full
       field_d_long_text:
         type: text_long
         data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
           id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
-          gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus,
-          id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex.
-          Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>
+          gravida blandit enim. Ut bibendum egestas sem.</p>
