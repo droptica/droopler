@@ -46,30 +46,81 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
     padding-top: $d-p-text-blocks-group-mobile-padding-y;
     padding-bottom: $d-p-text-blocks-group-mobile-padding-y;
   }
-
-  & > .field--name-field-d-icon {
-    text-align: center;
-  }
-
-  & > h2 {
-    @include font-main-header;
-    text-align: center;
-    margin: $d-p-text-blocks-group-margin;
-    @include media-breakpoint-down(md) {
-      margin: $d-p-text-blocks-mobile-group-margin;
+  > .container {
+    > .field--name-field-d-icon {
+      text-align: center;
     }
-    &:after {
-      @include decoration-header-line-main-center;
-      background: $d-p-text-blocks-line-color;
-      margin: $d-p-text-blocks-group-line-margin;
-    }
-  }
-  > .field--type-link {
-    text-align: center;
-    a {
-      margin: $d-p-text-blocks-group-button-margin;
+
+    > h2 {
+      @include font-main-header;
+      text-align: center;
+      margin: $d-p-text-blocks-group-margin;
       @include media-breakpoint-down(md) {
-        margin: $d-p-text-blocks-mobile-group-button-margin;
+        margin: $d-p-text-blocks-mobile-group-margin;
+      }
+      &:after {
+        @include decoration-header-line-main-center;
+        background: $d-p-text-blocks-line-color;
+        margin: $d-p-text-blocks-group-line-margin;
+      }
+    }
+    > .field--type-link {
+      text-align: center;
+      a {
+        margin: $d-p-text-blocks-group-button-margin;
+        @include media-breakpoint-down(md) {
+          margin: $d-p-text-blocks-mobile-group-button-margin;
+        }
+      }
+    }
+  }
+
+  .d-p-tiles-wrapper {
+    @extend .container;
+  }
+
+}
+
+.full-width {
+  .d-p-group-of-text-blocks {
+    .full-width-content {
+      @include media-breakpoint-down(md) {
+        @include make-container()
+      }
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.with-tiles {
+  .single-boxes-wrapper {
+    .single-box-wrapper {
+      padding: 0 5px;
+
+      .d-p-text-block {
+        padding: 20px;
+        @include media-breakpoint-down(md) {
+          margin-bottom: 10px;
+        }
+        @include media-breakpoint-down(xs) {
+          margin-bottom: 5px;
+        }
+      }
+
+      @include media-breakpoint-up(lg) {
+        &:first-child {
+          padding-left: 0;
+        }
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      @include media-breakpoint-between(sm, md) {
+        @include make-col(6);
       }
     }
   }

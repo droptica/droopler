@@ -3,10 +3,12 @@ core: 8.x
 description: 'Provides a paragraph with multiple text blocks.'
 type: module
 dependencies:
+  - color_field
   - content_translation
   - d_p
   - entity_reference_revisions
   - field
+  - field_group
   - image
   - language
   - link
