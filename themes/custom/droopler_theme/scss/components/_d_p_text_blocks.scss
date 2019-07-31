@@ -81,20 +81,6 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 
 }
 
-.full-width {
-  .d-p-group-of-text-blocks {
-    .full-width-content {
-      @include media-breakpoint-down(md) {
-        @include make-container()
-      }
-      @include media-breakpoint-up(lg) {
-        width: 100%;
-        max-width: 100%;
-      }
-    }
-  }
-}
-
 .with-tiles {
   .single-boxes-wrapper {
     .single-box-wrapper {

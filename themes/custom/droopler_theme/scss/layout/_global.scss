@@ -66,3 +66,22 @@ $light-gray-background-2: $color-paris !default;
 body {
   -webkit-font-smoothing: antialiased;
 }
+
+.full-width {
+  .full-width-content {
+    @include media-breakpoint-up(lg) {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    &-desktop {
+      @include media-breakpoint-down(md) {
+        @include make-container()
+      }
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}

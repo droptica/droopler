@@ -184,3 +184,18 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
   }
 }
 
+.with-divider {
+  .carousel-item-wrapper {
+    &:after {
+      display: block;
+      width: 1px;
+      height: 100%;
+      background-color: #0a6eb4;
+      content: " ";
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
+}
