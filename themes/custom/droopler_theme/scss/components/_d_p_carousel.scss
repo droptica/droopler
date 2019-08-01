@@ -184,18 +184,21 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
   }
 }
 
-.with-divider {
-  .carousel-item-wrapper {
-    &:after {
-      display: block;
-      width: 1px;
-      height: 100%;
-      background-color: #0a6eb4;
-      content: " ";
-    }
 
-    &:last-child::after {
-      display: none;
-    }
+.full-width {
+
+  .slick-list {
+    width: 100%;
+  }
+
+  .slick-prev {
+    left: $d-p-carousel-arrow-size + 5px;
+  }
+  .slick-next {
+    right: $d-p-carousel-arrow-size + 5px;
+  }
+
+  .field--name-field-d-p-cs-item-reference {
+    @include make-row();
   }
 }

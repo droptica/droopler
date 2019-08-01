@@ -2,10 +2,6 @@
 //
 // Styleguide 3.1
 
-// Colour variables used in this file.
-$light-gray-background: $color-hector !default;
-$light-gray-background-2: $color-paris !default;
-
 // Paddings, margins and heights.
 
 #main {
@@ -54,34 +50,6 @@ $light-gray-background-2: $color-paris !default;
   @extend .container;
 }
 
-.background {
-  &-gray-light {
-    background: $light-gray-background;
-  }
-  &-gray-light-2 {
-    background-color: $light-gray-background-2;
-  }
-}
-
 body {
   -webkit-font-smoothing: antialiased;
-}
-
-.full-width {
-  .full-width-content {
-    @include media-breakpoint-up(lg) {
-      width: 100%;
-      max-width: 100%;
-    }
-
-    &-desktop {
-      @include media-breakpoint-down(md) {
-        @include make-container()
-      }
-      @include media-breakpoint-up(lg) {
-        width: 100%;
-        max-width: 100%;
-      }
-    }
-  }
 }

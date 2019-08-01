@@ -74,16 +74,10 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
       }
     }
   }
-
-  .d-p-tiles-wrapper {
-    @extend .container;
-  }
-
 }
 
 .with-tiles {
-  .single-boxes-wrapper {
-    .single-box-wrapper {
+  .list-item-wrapper {
       padding: 0 5px;
 
       .d-p-text-block {
@@ -109,7 +103,6 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
         @include make-col(6);
       }
     }
-  }
 }
 
 // Single box

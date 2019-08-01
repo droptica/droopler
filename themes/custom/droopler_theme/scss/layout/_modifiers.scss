@@ -1,0 +1,132 @@
+// Modifiers.
+//
+// Styleguide 3.1
+
+// Colour variables used in this file.
+$light-gray-background: $color-hector !default;
+$light-gray-background-2: $color-paris !default;
+$divider-background: $color-priam !default;
+
+.background {
+  &-gray-light {
+    background: $light-gray-background;
+  }
+  &-gray-light-2 {
+    background-color: $light-gray-background-2;
+  }
+}
+
+.full-width-content {
+  &, &-desktop {
+    @extend .container;
+  }
+}
+
+.full-width {
+  .full-width-content {
+    width: 100%;
+    max-width: 100%;
+
+    &-desktop {
+      @include media-breakpoint-down(md) {
+        @include make-container()
+      }
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .list-item-wrapper {
+      @include media-breakpoint-up(lg) {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.with-divider {
+
+  .slick-track {
+    height: 100%;
+  }
+
+  .list-item-wrapper {
+    &:before {
+      position: absolute;
+      background-color: $divider-background;
+      width: 1px;
+      height: 100%;
+      left: 0;
+      top: 0;
+      content: " ";
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    &[aria-hidden="false"]:before {
+      opacity: 1;
+    }
+
+    &:first-child::before,
+    &[aria-hidden="true"] + [aria-hidden="false"]:before,
+    &[aria-hidden="false"] + [aria-hidden="true"]:before {
+      display: none;
+    }
+  }
+}
+
+
+//.full-width {
+//  .full-width-content {
+//    @include media-breakpoint-up(lg) {
+//      width: 100%;
+//      max-width: 100%;
+//    }
+//
+//    &-desktop {
+//      @include media-breakpoint-down(md) {
+//        @include make-container()
+//      }
+//      @include media-breakpoint-up(lg) {
+//        width: 100%;
+//        max-width: 100%;
+//      }
+//    }
+//
+//    .list-item-wrapper {
+//      @include media-breakpoint-up(lg) {
+//        max-width: 100%;
+//      }
+//    }
+//  }
+//}
+//
+//.with-divider {
+//
+//  .slick-track {
+//    height: 100%;
+//  }
+//
+//  .carousel-item-wrapper {
+//    &:before {
+//      position: absolute;
+//      background-color: $divider-background;
+//      width: 1px;
+//      height: 100%;
+//      left: 0;
+//      top: 0;
+//      content: " ";
+//      opacity: 0;
+//      transition: opacity 0.25s;
+//    }
+//    &[aria-hidden="false"]:before {
+//      opacity: 1;
+//    }
+//
+//    &:first-child::before,
+//    &[aria-hidden="true"] + [aria-hidden="false"]:before,
+//    &[aria-hidden="false"] + [aria-hidden="true"]:before {
+//      display: none;
+//    }
+//  }
+//}
