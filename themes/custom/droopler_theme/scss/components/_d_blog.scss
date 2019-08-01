@@ -299,11 +299,12 @@ $d-blog-size-of-large-desktop: 1400px !default;
         flex: 1;
         color: $color-odysseus;
         background: $color-hecuba;
-        padding-top: 0;
+        padding-top: $d-blog-teaser-small-text-area-padding-xy;;
         padding-bottom: $d-blog-teaser-small-text-area-padding-xy;
         padding-left: $d-blog-teaser-small-text-area-padding-xy;
         padding-right: $d-blog-teaser-small-text-area-padding-xy;
         .field--name-field-blog-teaser {
+          padding-top: $d-blog-teaser-small-padding-y;
           padding-bottom: $d-blog-teaser-small-padding-y;
         }
         a {
@@ -315,6 +316,10 @@ $d-blog-size-of-large-desktop: 1400px !default;
             text-transform: uppercase;
             color: $color-patroclus;
           }
+        }
+        .node__title {
+          font-size: initial;
+          margin: 0;
         }
       }
     }
