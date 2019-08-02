@@ -51,9 +51,6 @@ function d_p_carousel_preprocess_field(&$variables) {
 
           if ($num_items === 1) {
             $columns = 1;
-//          }
-//          elseif ($num_items <= $columns) {
-//            $columns = $num_items - 1;
           }
 
           // SM - one or two columns.
