@@ -95,10 +95,12 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
 
     .slick-prev {
       left: (-1 * $d-p-carousel-arrow-size) - 5px;
+      z-index: 2;
     }
 
     .slick-next {
       right: (-1 * $d-p-carousel-arrow-size) - 5px;
+      z-index: 2;
     }
 
     .slick-arrow {
