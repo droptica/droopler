@@ -55,11 +55,6 @@ $divider-background: $color-priam !default;
       left: 0;
       top: 0;
       content: " ";
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-    &[aria-hidden="false"]:before {
-      opacity: 1;
     }
 
     &:first-child::before,
