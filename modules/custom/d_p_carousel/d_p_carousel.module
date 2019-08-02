@@ -5,7 +5,7 @@
  * Contains d_p_carousel module with Carousel Paragraph.
  */
 
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\d_p\Helper\ParagraphModifiersHelper;
 
 /**
  * Implements hook_theme().
@@ -39,6 +39,10 @@ function d_p_carousel_preprocess_field(&$variables) {
          */
 
         $paragraph = $variables['element']['#object'];
+
+        $paragraphModifiersHelper = new ParagraphModifiersHelper();
+        $paragraphModifiersHelper->analyzeParagraph($paragraph);
+
         $num_array = $paragraph->get('field_d_number')->getValue();
         $variables['column_classes'] = 'col-sm-4';
         if (!empty($num_array[0]['value'])) {
@@ -51,6 +55,9 @@ function d_p_carousel_preprocess_field(&$variables) {
 
           if ($num_items === 1) {
             $columns = 1;
+          }
+          elseif ($num_items <= $columns && !$paragraphModifiersHelper->hasClass('slider-desktop-off')) {
+            $columns = $num_items - 1;
           }
 
           // SM - one or two columns.

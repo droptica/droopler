@@ -11,6 +11,7 @@ use Drupal\Core\Template\Attribute;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\d_p\Helper\ParagraphModifiersHelper;
 
 /**
  * Implements hook_theme().
@@ -48,12 +49,12 @@ function d_p_responsive_style_ids() {
  */
 function d_p_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
-  foreach ($variables['content'] as $key => $field) {
-    if (isset($field['#field_type']) && $field['#field_type'] == 'field_p_configuration_storage') {
-      $settings = $paragraph->get($key)->getValue();
-      $settings = json_decode($settings[0]['value']);
-      unset($variables['content'][$key]);
-    }
+
+  $paragraphModifiersHelper = new ParagraphModifiersHelper();
+  $paragraphModifiersHelper->analyzeParagraph($paragraph);
+
+  if ($paragraphModifiersHelper->hasModifiers()) {
+    unset($variables['content'][$paragraphModifiersHelper->getSettingsFieldName()]);
   }
   $bundle = $paragraph->bundle();
   $paragraph_id = 'paragraph-' . $bundle . '-' . $paragraph->id();
@@ -63,8 +64,8 @@ function d_p_preprocess_paragraph(&$variables) {
       'wrapper-' . $bundle,
     ],
   ];
-  if (isset($settings->custom_class) && !empty($settings->custom_class)) {
-    $wrapper_attributes['class'][] = $settings->custom_class;
+  if ($paragraphModifiersHelper->hasCustomClasses()) {
+    $wrapper_attributes['class'][] = $paragraphModifiersHelper->getCustomClass();
   }
   $paragraph_attributes = [
     'data-id' => $paragraph_id,

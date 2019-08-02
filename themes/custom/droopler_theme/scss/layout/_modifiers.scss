@@ -16,14 +16,8 @@ $divider-background: $color-priam !default;
   }
 }
 
-.full-width-content {
-  &, &-desktop {
-    @extend .container;
-  }
-}
-
 .full-width {
-  .full-width-content {
+  .expandable-content {
     width: 100%;
     max-width: 100%;
 
@@ -33,10 +27,7 @@ $divider-background: $color-priam !default;
   }
 
   &.with-tiles {
-    .full-width-content {
-      @include media-breakpoint-down(md) {
-        @include make-container()
-      }
+    .expandable-content {
       @include media-breakpoint-up(lg) {
         width: 100%;
         max-width: 100%;
