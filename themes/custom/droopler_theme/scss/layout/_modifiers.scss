@@ -27,19 +27,23 @@ $divider-background: $color-priam !default;
     width: 100%;
     max-width: 100%;
 
-    &-desktop {
+    .list-item-wrapper {
+      max-width: 100%;
+    }
+  }
+
+  &.with-tiles {
+    .full-width-content {
       @include media-breakpoint-down(md) {
         @include make-container()
       }
       @include media-breakpoint-up(lg) {
         width: 100%;
         max-width: 100%;
-      }
-    }
 
-    .list-item-wrapper {
-      @include media-breakpoint-up(lg) {
-        max-width: 100%;
+        .list-item-wrapper {
+          max-width: 100%;
+        }
       }
     }
   }
@@ -74,59 +78,3 @@ $divider-background: $color-priam !default;
     }
   }
 }
-
-
-//.full-width {
-//  .full-width-content {
-//    @include media-breakpoint-up(lg) {
-//      width: 100%;
-//      max-width: 100%;
-//    }
-//
-//    &-desktop {
-//      @include media-breakpoint-down(md) {
-//        @include make-container()
-//      }
-//      @include media-breakpoint-up(lg) {
-//        width: 100%;
-//        max-width: 100%;
-//      }
-//    }
-//
-//    .list-item-wrapper {
-//      @include media-breakpoint-up(lg) {
-//        max-width: 100%;
-//      }
-//    }
-//  }
-//}
-//
-//.with-divider {
-//
-//  .slick-track {
-//    height: 100%;
-//  }
-//
-//  .carousel-item-wrapper {
-//    &:before {
-//      position: absolute;
-//      background-color: $divider-background;
-//      width: 1px;
-//      height: 100%;
-//      left: 0;
-//      top: 0;
-//      content: " ";
-//      opacity: 0;
-//      transition: opacity 0.25s;
-//    }
-//    &[aria-hidden="false"]:before {
-//      opacity: 1;
-//    }
-//
-//    &:first-child::before,
-//    &[aria-hidden="true"] + [aria-hidden="false"]:before,
-//    &[aria-hidden="false"] + [aria-hidden="true"]:before {
-//      display: none;
-//    }
-//  }
-//}
