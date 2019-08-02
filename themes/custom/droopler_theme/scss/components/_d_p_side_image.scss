@@ -18,7 +18,7 @@ $d-p-side-image-header-color: $color-odysseus !default;
 $d-p-side-image-line-margin-top: 1.44rem !default;
 $d-p-side-image-line-margin-bottom: 1.44rem !default;
 $d-p-side-image-mobile-height: 18.75rem !default;
-$d-p-side-image-banner-text-padding: 7% !default;
+$d-p-side-image-banner-text-padding: 13% !default;
 $d-p-side-image-banner-text-width: 35.625rem !default;
 $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and half of the screen
 
@@ -71,24 +71,49 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
       width: $d-p-side-image-banner-text-width;
     }
     .image-side {
-      &-right {
+      &-right,
+      &-right-wide {
         .d-image {
-          float: right;
+          position: absolute;
+          right: 0;
+          //float: right;
         }
         .container-half {
           padding-right: $d-p-side-image-banner-half-padding;
-          float: right;
+          //float: right;
+          margin-left: 0;
         }
       }
-      &-left {
+      &-left,
+      &-left-wide {
         .d-image {
-          float: left;
+          position: absolute;
+          //float: left;
+          left: 0;
         }
         .container-half {
           padding-left: $d-p-side-image-banner-half-padding;
-          float: left;
+          //float: left;
+          margin-right: 0;
+        }
+      }
+      &-left-wide {
+        .container-half {
+          padding-left: $d-p-side-image-banner-text-padding;
+        }
+      }
+      &-right-wide {
+        .container-half {
+          padding-right: $d-p-side-image-banner-text-padding;
         }
       }
     }
+  }
+}
+
+.user-background-defined {
+  .image-side-left,
+  .image-side-right {
+    background: none;
   }
 }

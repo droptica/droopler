@@ -64,6 +64,24 @@ function d_p_preprocess_paragraph(&$variables) {
       'wrapper-' . $bundle,
     ],
   ];
+
+  $paragraphFieldDefinitions = $paragraph->getFieldDefinitions();
+  /**
+   * @var FieldConfig $field
+   */
+  foreach ($paragraphFieldDefinitions as $fieldName => $fieldConfig) {
+    if ($fieldConfig->getType() == 'color_field_type') {
+      $field = $paragraph->get($fieldName);
+      if (!$field->isEmpty()) {
+        $wrapper_attributes['style'] = [
+          'background-color: ' . $field->first()->get('color')->getValue(),
+        ];
+        $wrapper_attributes['class'][] = 'user-background-defined';
+      }
+      unset($variables['content'][$fieldName]);
+    }
+  }
+
   if ($paragraphModifiersHelper->hasCustomClasses()) {
     $wrapper_attributes['class'][] = $paragraphModifiersHelper->getCustomClass();
   }
@@ -152,7 +170,8 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
 }
 
 /**
- * Finds and replaces default value of class attribute in all fields of type field_d_cta_link.
+ * Finds and replaces default value of class attribute in all fields of type
+ * field_d_cta_link.
  *
  * @param $form - Form array to search on.
  */
@@ -199,9 +218,23 @@ function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, 
     $config = $field_definition->id();
     list ($entity_type, $bundle, $field_name) = explode('.', $config);
 
-    // Hide option "full" for other paragraphs.
-    if ($bundle != 'd_p_side_embed' && $field_name == 'field_d_p_si_image_side') {
-      unset($element['#options']['full']);
+    if ($field_name == 'field_d_p_si_image_side') {
+      // Hide option "full" for other than embed paragraphs.
+      // Hide option "left-wide" and "right-wide" for other than side image paragraphs.
+      switch ($bundle) {
+        case 'd_p_side_image':
+          unset($element['#options']['full']);
+          break;
+        case 'd_p_side_tiles':
+          unset($element['#options']['full']);
+          unset($element['#options']['left-wide']);
+          unset($element['#options']['right-wide']);
+          break;
+        case 'd_p_side_embed':
+          unset($element['#options']['left-wide']);
+          unset($element['#options']['right-wide']);
+          break;
+      }
     }
   }
 }
