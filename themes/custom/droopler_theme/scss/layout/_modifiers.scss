@@ -6,6 +6,7 @@
 $light-gray-background: $color-hector !default;
 $light-gray-background-2: $color-paris !default;
 $divider-background: $color-priam !default;
+$section-main-title-line-alt-color: $color-helen !default;
 
 .background {
   &-gray-light {
@@ -13,6 +14,12 @@ $divider-background: $color-priam !default;
   }
   &-gray-light-2 {
     background-color: $light-gray-background-2;
+  }
+}
+
+.with-alt-line {
+  .paragraph .content > .field--name-field-d-main-title::after {
+    background: $section-main-title-line-alt-color;
   }
 }
 
