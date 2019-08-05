@@ -156,12 +156,14 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
  * @param $form - Form array to search on.
  */
 function edit_cta_link_default_class(&$form) {
-  foreach($form as &$subform) {
-    if (!is_object($subform) && !empty($subform['field_d_cta_link']) && is_array($subform['field_d_cta_link'])) {
-      $subform['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
-    }
-    if (is_array($subform)) {
-      edit_cta_link_default_class($subform);
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    foreach ($form as &$subform) {
+      if (!is_object($subform) && isset($subform['field_d_cta_link'])) {
+        $subform['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+      }
+      if (is_array($subform)) {
+        edit_cta_link_default_class($subform);
+      }
     }
   }
 }

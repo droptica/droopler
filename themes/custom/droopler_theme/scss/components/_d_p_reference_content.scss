@@ -1,0 +1,40 @@
+// Margins, paddings and sizing.
+$d-p-reference-content-padding-y: 3.875rem !default;
+$d-p-reference-content-items-padding-x: 5px !default;
+$d-p-reference-content-item-padding: 5px !default;
+$d-p-reference-content-content-padding: 5px !default;
+
+.d-p-reference-content-wrapper {
+  padding-top: $d-p-reference-content-padding-y;
+  padding-bottom: $d-p-reference-content-padding-y;
+  .field--wrapper {
+    @include media-breakpoint-down(lg) {
+      padding: 0 $d-p-reference-content-content-padding;
+    }
+    .field__item--wrapper {
+      padding: $d-p-reference-content-item-padding;
+      @include media-breakpoint-up(lg) {
+        &:first-child {
+          padding-left: 0;
+        }
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  .field--name-field-d-main-title {
+    margin-bottom: 40px;
+    &:after {
+      @include decoration-header-line-main-center;
+      background: $color-helen;
+    }
+  }
+  .field--name-field-d-cta-link {
+    margin-top: 50px;
+    a {
+      @extend .btn;
+      @extend .btn-danger;
+    }
+  }
+}
