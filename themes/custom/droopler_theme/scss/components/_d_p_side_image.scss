@@ -96,14 +96,21 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
           margin-right: 0;
         }
       }
+      &-left-wide,
+      &-right-wide {
+        .container-half {
+          padding-top: 2 * $d-p-side-image-banner-text-padding;
+          padding-bottom: 2 * $d-p-side-image-banner-text-padding;
+        }
+      }
       &-left-wide {
         .container-half {
-          padding-left: $d-p-side-image-banner-text-padding;
+          padding-left: 1.5 * $d-p-side-image-banner-text-padding;
         }
       }
       &-right-wide {
         .container-half {
-          padding-right: $d-p-side-image-banner-text-padding;
+          padding-right: 1.5 * $d-p-side-image-banner-text-padding;
         }
       }
     }

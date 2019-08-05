@@ -63,6 +63,24 @@ function d_p_preprocess_paragraph(&$variables) {
       'wrapper-' . $bundle,
     ],
   ];
+
+  $paragraphFieldDefinitions = $paragraph->getFieldDefinitions();
+  /**
+   * @var FieldConfig $field
+   */
+  foreach ($paragraphFieldDefinitions as $fieldName => $fieldConfig) {
+    if ($fieldConfig->getType() == 'color_field_type') {
+      $field = $paragraph->get($fieldName);
+      if (!$field->isEmpty()) {
+        $wrapper_attributes['style'] = [
+          'background-color: ' . $field->first()->get('color')->getValue(),
+        ];
+        $wrapper_attributes['class'][] = 'user-background-defined';
+      }
+      unset($variables['content'][$fieldName]);
+    }
+  }
+
   if ($paragraphModifiersHelper->hasCustomClasses()) {
     $wrapper_attributes['class'][] = $paragraphModifiersHelper->getCustomClass();
   }
