@@ -17,6 +17,9 @@ function d_blog_theme($existing, $type, $theme, $path) {
     'node__blog_post__teaser' => [
       'base hook' => 'node',
     ],
+    'node__blog_post__teaser_small' => [
+      'base hook' => 'node',
+    ],
     'paragraph__d_p_blog_image' => [
       'base hook' => 'paragraph',
     ],
