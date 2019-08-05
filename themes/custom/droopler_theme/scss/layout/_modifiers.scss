@@ -71,3 +71,15 @@ $section-main-title-line-alt-color: $color-helen !default;
     }
   }
 }
+
+.stacked {
+  &-top {
+    > .paragraph {
+      padding-top: 0;
+  }
+  &-bottom {
+    } > .paragraph {
+      padding-bottom: 0;
+    }
+  }
+}

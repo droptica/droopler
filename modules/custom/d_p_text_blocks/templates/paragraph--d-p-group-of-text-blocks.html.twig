@@ -49,12 +49,17 @@
     <div{{ attributes.addClass(classes) }}>
       {% block paragraph_content %}
         <div class="container">
-          {{ content|without('field_d_p_tb_block_reference') }}
+          {{ content|without('field_d_p_tb_block_reference', 'field_d_cta_link') }}
         </div>
       {% endblock %}
       {% block tiles_content %}
         <div class="d-p-tiles-wrapper container expandable-content">
           {{ content.field_d_p_tb_block_reference }}
+        </div>
+      {% endblock %}
+      {% block paragraph_cta_content %}
+        <div class="container">
+          {{ content.field_d_cta_link }}
         </div>
       {% endblock %}
     </div>
