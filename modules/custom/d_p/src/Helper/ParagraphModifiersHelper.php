@@ -3,6 +3,7 @@
 namespace Drupal\d_p\Helper;
 
 use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
+use Drupal\paragraphs\Entity\Paragraph;
 
 class ParagraphModifiersHelper {
 
@@ -17,12 +18,22 @@ class ParagraphModifiersHelper {
   protected $settingsFieldName;
 
   /**
+   * ParagraphModifiersHelper constructor.
+   *
+   * @param \Drupal\paragraphs\Entity\Paragraph $paragraph
+   *   Paragraph to be analyzed.
+   */
+  public function __construct(Paragraph $paragraph) {
+    $this->analyzeParagraph($paragraph);
+  }
+
+  /**
    * Analyze paragraph fields searching for field with settings.
    *
    * @param \Drupal\paragraphs\Entity\Paragraph $paragraph
    *   Paragraph to analyze.
    */
-  public function analyzeParagraph(\Drupal\paragraphs\Entity\Paragraph $paragraph) {
+  public function analyzeParagraph(Paragraph $paragraph) {
     $fieldsDefs = $paragraph->getFieldDefinitions();
     /**
      * @var string $fieldName
