@@ -89,12 +89,18 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
       margin-right: 0;
     }
 
+    .slick-list {
+      width: 100%;
+    }
+
     .slick-prev {
       left: (-1 * $d-p-carousel-arrow-size) - 5px;
+      z-index: 2;
     }
 
     .slick-next {
       right: (-1 * $d-p-carousel-arrow-size) - 5px;
+      z-index: 2;
     }
 
     .slick-arrow {
@@ -184,3 +190,15 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
   }
 }
 
+.full-width {
+
+  .field--name-field-d-p-cs-item-reference {
+    @include make-row();
+    .slick-prev {
+      left: $d-p-carousel-arrow-size + 5px;
+    }
+    .slick-next {
+      right: $d-p-carousel-arrow-size + 5px;
+    }
+  }
+}

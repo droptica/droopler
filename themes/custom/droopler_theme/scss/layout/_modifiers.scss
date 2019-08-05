@@ -1,0 +1,73 @@
+// Modifiers.
+//
+// Styleguide 3.1
+
+// Colour variables used in this file.
+$light-gray-background: $color-hector !default;
+$light-gray-background-2: $color-paris !default;
+$divider-background: $color-priam !default;
+$section-main-title-line-alt-color: $color-helen !default;
+
+.background {
+  &-gray-light {
+    background: $light-gray-background;
+  }
+  &-gray-light-2 {
+    background-color: $light-gray-background-2;
+  }
+}
+
+.with-alt-line {
+  .paragraph .content > .field--name-field-d-main-title::after {
+    background: $section-main-title-line-alt-color;
+  }
+}
+
+.full-width {
+  .expandable-content {
+    width: 100%;
+    max-width: 100%;
+
+    .list-item-wrapper {
+      max-width: 100%;
+    }
+  }
+
+  &.with-tiles {
+    .expandable-content {
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+        max-width: 100%;
+
+        .list-item-wrapper {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.with-divider {
+
+  .slick-track {
+    height: 100%;
+  }
+
+  .list-item-wrapper {
+    &:before {
+      position: absolute;
+      background-color: $divider-background;
+      width: 1px;
+      height: 100%;
+      left: 0;
+      top: 0;
+      content: " ";
+    }
+
+    &:first-child::before,
+    &[aria-hidden="true"] + [aria-hidden="false"]:before,
+    &[aria-hidden="false"] + [aria-hidden="true"]:before {
+      display: none;
+    }
+  }
+}

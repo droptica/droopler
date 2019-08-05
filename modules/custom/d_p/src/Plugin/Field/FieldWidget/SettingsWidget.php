@@ -20,9 +20,11 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class SettingsWidget extends WidgetBase {
 
+  const CSS_CLASS_SETTING_NAME = 'custom_class';
+
   private function getConfigOptions() {
     return [
-      'custom_class' => [
+      self::CSS_CLASS_SETTING_NAME => [
         'title' => $this->t('Custom Class'),
       ],
     ];
