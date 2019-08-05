@@ -34,7 +34,7 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
           case 'left-wide':
           case 'right-wide':
             $variables['image_class'] = 'col-md-7';
-            $variables['text_class'] = 'col-md-4';
+            $variables['text_class'] = 'col-md-5';
             break;
           case 'left':
           case 'right':

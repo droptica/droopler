@@ -18,8 +18,20 @@ $section-main-title-line-alt-color: $color-helen !default;
 }
 
 .with-alt-line {
-  .paragraph .content > .field--name-field-d-main-title::after {
-    background: $section-main-title-line-alt-color;
+  .paragraph {
+    .container > h2::after,
+    .container-half > .field--name-field-d-main-title::after,
+    .content > .field--name-field-d-main-title::after {
+      background: $section-main-title-line-alt-color;
+    }
+  }
+}
+.with-alt-text {
+  .paragraph {
+    .field--type-string,
+    .field--type-text-long {
+      color: $color-cassandra;
+    }
   }
 }
 

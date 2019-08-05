@@ -16,12 +16,20 @@ field_page_section:
         dst_dir: demo
       field_d_p_si_image_side:
         type: text_select
-        data: right
+        data: right-wide
       field_d_long_text:
         type: text_long
         data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
           id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
           gravida blandit enim.</p>
+      field_d_background_color:
+        type: color
+        data:
+          color: '#000000'
+          opacity: 1
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: with-alt-line
 
   - paragraph_type: d_p_form
     data:

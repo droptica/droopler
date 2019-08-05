@@ -48,10 +48,12 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     padding: 0;
     @include media-breakpoint-down(sm) {
       height: $d-p-side-image-mobile-height !important;
+      position: relative !important;
     }
   }
   .container-half {
-    padding: $d-p-side-image-banner-text-padding;
+    padding-top: $d-p-side-image-banner-text-padding;
+    padding-bottom: $d-p-side-image-banner-text-padding;
   }
   .image-side {
     &-right {
@@ -70,30 +72,27 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
       padding-left: ($grid-gutter-width / 2);
       width: $d-p-side-image-banner-text-width;
     }
+    .d-image {
+      position: absolute !important;
+    }
     .image-side {
       &-right,
       &-right-wide {
         .d-image {
-          position: absolute;
           right: 0;
-          //float: right;
         }
         .container-half {
           padding-right: $d-p-side-image-banner-half-padding;
-          //float: right;
           margin-left: 0;
         }
       }
       &-left,
       &-left-wide {
         .d-image {
-          position: absolute;
-          //float: left;
           left: 0;
         }
         .container-half {
           padding-left: $d-p-side-image-banner-half-padding;
-          //float: left;
           margin-right: 0;
         }
       }
