@@ -50,8 +50,7 @@ function d_p_responsive_style_ids() {
 function d_p_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
 
-  $paragraphModifiersHelper = new ParagraphModifiersHelper();
-  $paragraphModifiersHelper->analyzeParagraph($paragraph);
+  $paragraphModifiersHelper = new ParagraphModifiersHelper($paragraph);
 
   if ($paragraphModifiersHelper->hasModifiers()) {
     unset($variables['content'][$paragraphModifiersHelper->getSettingsFieldName()]);
