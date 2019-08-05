@@ -60,34 +60,36 @@
 {% set item_classes = [
     'd-flex',
     'field__item--wrapper',
+    'col-lg-3',
+    'col-sm-6',
+    'col-xs-12',
 ] %}
 
 {% set justify = [
     'justify-content-between',
 ] %}
 {% set spacing = [
-    'p-0'
+
 ] %}
 {% if items|length < 4 %}
     {% set justify = [
         'justify-content-center',
     ] %}
     {% set spacing = [
-        'pr-1',
-        'pl-1',
+
     ] %}
 {% endif %}
 
 {% if label_hidden %}
     {% if multiple %}
-        <div{{ attributes.addClass(classes, 'field__items', field_classes, justify) }}>
+        <div{{ attributes.addClass('field__items', field_classes, justify) }}>
             {% for item in items %}
                 <div{{ item.attributes.addClass(item_classes, spacing, 'field__item') }}>{{ item.content }}</div>
             {% endfor %}
         </div>
     {% else %}
         {% for item in items %}
-            <div{{ attributes.addClass(classes, 'field__item', field_classes, justify) }}>{{ item.content }}</div>
+            <div{{ attributes.addClass('field__item', field_classes, justify) }}>{{ item.content }}</div>
         {% endfor %}
     {% endif %}
 {% else %}

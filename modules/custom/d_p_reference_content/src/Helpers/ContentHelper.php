@@ -9,6 +9,7 @@ namespace Drupal\d_p_reference_content\Helpers;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\paragraphs\Entity\Paragraph;
 
 class ContentHelper {
 
@@ -85,12 +86,24 @@ class ContentHelper {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function replaceContent(&$variables, $entity_type, $view_mode, $field, $new_values) {
+    /** @var Paragraph $paragraph */
+    $paragraph = $variables['elements']['#paragraph'];
+    $paragraph->set($field, $new_values);
+
+    // Prepare view array without content.
+    $view = $paragraph->{$field}->view('default');
+    foreach ($new_values as $key => $data) {
+      unset($view[$key]);
+    }
+    $variables['content'][$field] = $view;
+
     $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
     $storage = $this->entityTypeManager->getStorage($entity_type);
     foreach ($new_values as $key => $data) {
       if (!empty($data['target_id'])) {
         if($node = $storage->load($data['target_id'])) {
           $build = $view_builder->view($node, $view_mode);
+          // Append element to paragraph content.
           $variables['content'][$field][$key] = $build;
         }
       }
