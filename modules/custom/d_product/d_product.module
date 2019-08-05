@@ -17,10 +17,9 @@ use Drupal\user\Entity\User;
  */
 function d_product_preprocess_node(&$variables) {
   $node = $variables['node'];
-  if ($node->getType() == 'd_product') {
-    if (isset($variables['view_mode']) && $variables['view_mode'] == 'teaser') {
-      if (isset($variables['node'])) {
-
+  if ($node->getType() == 'd_product' && isset($variables['view_mode'])) {
+    switch ($variables['view_mode']) {
+      case 'teaser':
         if (isset($variables['content']['field_product_image'][0])) {
           $variables['main_image'] = $variables['content']['field_product_image'][0];
           unset($variables['content']['field_product_image']);
@@ -35,17 +34,16 @@ function d_product_preprocess_node(&$variables) {
           $variables['link'] = $variables['content']['field_d_product_link'];
           unset($variables['content']['field_d_product_link']);
         }
-      }
-    }
-
-    if (isset($variables['view_mode']) && $variables['view_mode'] == 'full') {
-      if ($node->hasField('field_d_ask_for_product')) {
-        $field_d_ask_for_product = $node->get('field_d_ask_for_product');
-        $field_d_ask_for_product = $field_d_ask_for_product->getValue();
-        if (isset($field_d_ask_for_product[0]['value']) && $field_d_ask_for_product[0]['value'] == 1) {
-          $variables['link_ask_for_product'] = d_product_generate_ask_product_link($node);
+        break;
+      case 'full':
+        if ($node->hasField('field_d_ask_for_product')) {
+          $field_d_ask_for_product = $node->get('field_d_ask_for_product');
+          $field_d_ask_for_product = $field_d_ask_for_product->getValue();
+          if (isset($field_d_ask_for_product[0]['value']) && $field_d_ask_for_product[0]['value'] == 1) {
+            $variables['link_ask_for_product'] = d_product_generate_ask_product_link($node);
+          }
         }
-      }
+        break;
     }
   }
 }

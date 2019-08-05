@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: small_box_image
+label: 'Small box image'
+effects:
+  31603f4a-5fe2-4689-afd2-90e2030c102a:
+    uuid: 31603f4a-5fe2-4689-afd2-90e2030c102a
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 500
+      height: 360
+      anchor: center-center
