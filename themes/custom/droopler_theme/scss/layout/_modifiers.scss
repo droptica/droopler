@@ -119,6 +119,10 @@ $grid-border-width: 2px;
       }
       @include media-breakpoint-up(lg) {
         border-right: $grid-border-width $grid-border-type;
+
+        &.grid-row-end-item {
+          border-right: none;
+        }
       }
     }
 
