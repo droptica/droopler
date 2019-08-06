@@ -1,11 +1,12 @@
-name: d_p_text_blocks
+name: d_p_node
 core: 8.x
-description: 'Provides a paragraph with multiple text blocks.'
+description: 'Provides a paragraph with node reference.'
 type: module
 dependencies:
   - color_field
   - content_translation
   - d_p
+  - entity_reference_display
   - entity_reference_revisions
   - field
   - field_group
@@ -13,6 +14,7 @@ dependencies:
   - language
   - link
   - link_attributes
+  - node
   - paragraphs
   - svg_image
   - text

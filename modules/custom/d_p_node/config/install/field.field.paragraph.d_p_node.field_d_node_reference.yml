@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_d_node_reference
-    - node.type.d_product
     - paragraphs.paragraphs_type.d_p_node
 id: paragraph.d_p_node.field_d_node_reference
 field_name: field_d_node_reference
@@ -19,7 +18,8 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      d_product: d_product
+      blog_post: blog_post
+      content_page: content_page
     sort:
       field: _none
     auto_create: false
