@@ -7,6 +7,10 @@ $light-gray-background: $color-hector !default;
 $light-gray-background-2: $color-paris !default;
 $divider-background: $color-priam !default;
 $section-main-title-line-alt-color: $color-helen !default;
+$grid-border-color: $color-paris;
+$grid-border-type: solid $grid-border-color;
+$grid-border-width: 2px;
+
 
 .background {
   &-gray-light {
@@ -18,8 +22,11 @@ $section-main-title-line-alt-color: $color-helen !default;
 }
 
 .with-alt-line {
-  .paragraph .content > .field--name-field-d-main-title::after {
-    background: $section-main-title-line-alt-color;
+  .paragraph {
+    .content > .field--name-field-d-main-title::after,
+    h2.field--name-field-d-main-title::after {
+      background: $section-main-title-line-alt-color;
+    }
   }
 }
 
@@ -29,7 +36,7 @@ $section-main-title-line-alt-color: $color-helen !default;
     max-width: 100%;
 
     .list-item-wrapper {
-      max-width: 100%;
+      //max-width: 100%;
     }
   }
 
@@ -68,6 +75,55 @@ $section-main-title-line-alt-color: $color-helen !default;
     &[aria-hidden="true"] + [aria-hidden="false"]:before,
     &[aria-hidden="false"] + [aria-hidden="true"]:before {
       display: none;
+    }
+  }
+}
+
+.with-grid {
+  .expandable-content {
+    width: 100%;
+    max-width: 100%;
+
+    &:before,
+    &:after {
+      height: $grid-border-width;
+      background-color: $grid-border-color;
+      position: absolute;
+      width: 100%;
+      content: "";
+      left: 0;
+    }
+    &:after {
+      margin-top: -2px;
+    }
+
+    .single-boxes-wrapper {
+      justify-content: center;
+    }
+
+    .list-item-wrapper {
+      padding: 0;
+      border-bottom: $grid-border-width $grid-border-type;
+
+      &:last-child {
+        border: none;
+      }
+
+      @include media-breakpoint-between(sm, md) {
+        &:nth-child(2n+1) {
+          border-right: $grid-border-width $grid-border-type;
+        }
+        &:last-child {
+          border: none;
+        }
+      }
+      @include media-breakpoint-up(lg) {
+        border-right: $grid-border-width $grid-border-type;
+      }
+    }
+
+    .field--type-entity-reference {
+      margin: 0;
     }
   }
 }

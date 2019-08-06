@@ -4,6 +4,7 @@
  * @file
  * Contains d_paragraphs_text_blocks.module..
  */
+use Drupal\d_p\Helper\ParagraphModifiersHelper;
 
 /**
  * Implements hook_theme().
@@ -29,12 +30,25 @@ function d_p_text_blocks_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_group_of_text_blocks') {
       if ($variables['field_name'] == 'field_d_p_tb_block_reference') {
-        $num_array = $variables['element']['#object']->get('field_d_number')
-          ->getValue();
-        $variables['column_class'] = 'col-sm-4';
-        if (!empty($num_array[0]['value'])) {
-          $columns = floor(12 / $num_array[0]['value']);
-          $variables['column_class'] = 'col-sm-' . $columns;
+
+        $paragraph_modifiers_helper = new ParagraphModifiersHelper($variables['element']['#object']);
+
+        /** @var \Drupal\Core\Field\FieldItemList $num_field */
+        $num_field = $variables['element']['#object']->get('field_d_number');
+//          ->getValue();
+
+        $items_per_row = $num_field->isEmpty() ? 3 : $num_field->first()->get('value')->getValue();
+        $columns = floor(12 / $items_per_row);
+        $variables['column_class'] = 'col-sm-' . $columns;
+
+        if ($paragraph_modifiers_helper->hasClass('with-grid')) {
+          $variables['column_class'] = 'col-sm-6 col-lg-' . $columns;
+          foreach ($variables['items'] as $idx => $list_item) {
+            if ($idx == $items_per_row -1) {
+              /** @var \Drupal\Core\Template\Attribute $atr */
+              $variables['items'][$idx]['attributes']->addClass('grid-row-end-item');;
+            }
+          }
         }
       }
     }

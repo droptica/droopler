@@ -44,6 +44,11 @@
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
+
+{% if content.field_d_long_text|render %}
+  {% set classes = classes|merge(['with-long-text', 'text-center']) %}
+{% endif %}
+
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>

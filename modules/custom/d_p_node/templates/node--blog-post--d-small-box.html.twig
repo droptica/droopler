@@ -60,26 +60,7 @@
  */
 #}
 
-{%
-  set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'clearfix',
-  ]
-%}
-<div {{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    {{ content.field_blog_main_image }}
-    <div class="text-center product-teaser-content">
-      {{ title_prefix }}
-      <h2{{ title_attributes.addClass('node__title') }}>{{ label }}</h2>
-      {{ title_suffix }}
-      {{ content|without('field_blog_main_image') }}
-      <a href="{{ url }}" class="link">{{ 'Details'|t }}</a>
-    </div>
-  </div>
-</div>
+{% include "@d_p_node/d-small-box.html.twig" with {
+  image: content.field_blog_main_image.0,
+} %}
+{{ content|without('field_blog_main_image') }}

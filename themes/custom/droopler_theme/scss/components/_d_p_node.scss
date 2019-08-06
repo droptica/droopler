@@ -1,0 +1,27 @@
+/**
+ * Node reference paragraph.
+ */
+
+.paragraph--type--d-p-node {
+  height: 100%;
+
+  .small-box-wrapper {
+    padding: $grid-gutter-width / 2;
+
+    .node__title {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 20px;
+    }
+    .box-link {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+    }
+  }
+}
