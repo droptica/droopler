@@ -42,11 +42,19 @@ function d_p_text_blocks_preprocess_field(&$variables) {
         $variables['column_class'] = 'col-sm-' . $columns;
 
         if ($paragraph_modifiers_helper->hasClass('with-grid')) {
-          $variables['column_class'] = 'col-sm-6 col-lg-' . $columns;
+          $variables['column_class'] = '';
+
           foreach ($variables['items'] as $idx => $list_item) {
-            if ($idx == $items_per_row -1) {
-              /** @var \Drupal\Core\Template\Attribute $atr */
-              $variables['items'][$idx]['attributes']->addClass('grid-row-end-item');;
+            /** @var \Drupal\Core\Template\Attribute $atr */
+            $item_attributes = $variables['items'][$idx]['attributes'];
+            $item_attributes->addClass('col-sm-6');
+            if (($idx+1) % $items_per_row == 0) {
+              $item_attributes->addClass('grid-row-end-item');;
+            }
+            if (count($variables['items']) % $items_per_row != 0 && $idx >= count($variables['items']) - count($variables['items']) % $items_per_row) {
+              $item_attributes->addClass('col-lg-6');
+            } else {
+              $item_attributes->addClass('col-lg-' . $columns);
             }
           }
         }

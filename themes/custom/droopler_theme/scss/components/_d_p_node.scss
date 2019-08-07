@@ -2,26 +2,69 @@
  * Node reference paragraph.
  */
 
+// Colour variables used in this paragraph.
+$box-subtitle-color: $color-helen;
+
+// Margins, paddings and sizing.
+$box-content-max-width: 490px;
+$box-padding: $grid-gutter-width / 2;
+$box-large-padding: $grid-gutter-width;
+$box-image-padding-bottom: $grid-gutter-width / 2;
+$box-title-padding-bottom: 20px;
+$box-title-font-small-title: 2rem;
+$box-title-font-large-title: 3rem;
+$box-title-line-height: 1.2;
+$box-title-max-lines: 2;
+$box-subtitle-font-size: 14px;
+$box-subtitle-font-weight: bolder;
+$box-subtitle-letter-spacing: 1.4px;
+$box-subtitle-line-height: 1.5;
+
+
 .paragraph--type--d-p-node {
   height: 100%;
 
   .small-box-wrapper {
-    padding: $grid-gutter-width / 2;
+    padding: $box-padding;
 
-    .node__title {
+    .box-content-wrapper {
+      max-width: $box-content-max-width;
+      margin: 0 auto;
+    }
+
+    .box-image {
+      padding-bottom: $box-image-padding-bottom;
+    }
+
+    .box-title {
       width: 100%;
-      white-space: nowrap;
+      margin-bottom: $box-title-padding-bottom;
+
+      font-size: $box-title-font-small-title;
+      display: block;
+      display: -webkit-box;
+      max-height: $box-title-line-height * $box-title-max-lines * $box-title-font-small-title;
+      -webkit-line-clamp: $box-title-max-lines;
+      -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-bottom: 20px;
     }
-    .box-link {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
 
+    .box-subtitle {
+      color: $box-subtitle-color;
+      font-size: $box-subtitle-font-size;
+      letter-spacing: $box-subtitle-letter-spacing;
+      line-height: $box-subtitle-line-height;
+      font-weight: $box-subtitle-font-weight;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding: $box-large-padding;
+
+      .box-title {
+        font-size: $box-title-font-large-title;
+        max-height: $box-title-line-height * $box-title-max-lines * $box-title-font-large-title;
+      }
     }
   }
 }

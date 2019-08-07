@@ -74,15 +74,16 @@
 %}
 <div {{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('box-content-wrapper', 'clearfix') }}>
-    <a href="{{ url }}" class="box-link"></a>
     <div class="box-image">
       {{ image }}
     </div>
     <div class="box-text-content text-center">
-      {{ title_prefix }}
-      <h2{{ title_attributes.addClass('box-title') }}>{{ label }}</h2>
-      {{ title_suffix }}
-      <span class="bot-subtitle text-uppercase">{{ 'Details'|t }}</a>
+      <a href="{{ url }}" class="link">
+        {{ title_prefix }}
+        <h2{{ title_attributes.addClass('box-title') }}>{{ label }}</h2>
+        {{ title_suffix }}
+      </a>
+      <a href="{{ url }}" class="link"><span class="box-subtitle text-uppercase">{{ 'Details'|t }}</span></a>
     </div>
   </div>
 </div>
