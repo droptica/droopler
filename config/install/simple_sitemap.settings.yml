@@ -3,7 +3,7 @@ cron_generate: true
 cron_generate_interval: 0
 remove_duplicates: true
 skip_untranslated: true
-batch_process_limit: 1500
+generate_duration: 10000
 base_url: ''
 custom_links_include_images: false
 excluded_languages: {  }
@@ -11,3 +11,4 @@ enabled_entity_types:
   - node
   - taxonomy_term
   - menu_link_content
+default_variant: default
