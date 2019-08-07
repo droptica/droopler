@@ -45,7 +45,22 @@ $d-p-text-paged-line-margin-bottom: 1rem !default;
       text-align: center;
       color: $d-p-text-paged-subtitle-color;
     }
+  }
 
+  .paragraph--type--d-p-single-text-block::before {
+    position: absolute;
+    width: 50vw;
+    right: 0;
+    display: block;
+    height: 100%;
+    z-index: -1;
+    left: 0;
+    background: inherit;
+    content: ""
+  }
+
+  .expandable-content {
+    overflow: hidden;
   }
 
   .d-p-text-block {
