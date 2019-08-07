@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_side_by_side.field_d_long_text
+    - field.field.paragraph.d_p_side_by_side.field_d_main_title
+    - field.field.paragraph.d_p_side_by_side.field_d_settings
+    - field.field.paragraph.d_p_side_by_side.field_field_d_p_sbs_item_first
+    - field.field.paragraph.d_p_side_by_side.field_field_d_p_sbs_item_second
+    - paragraphs.paragraphs_type.d_p_side_by_side
+  module:
+    - entity_reference_revisions
+    - text
+id: paragraph.d_p_side_by_side.default
+targetEntityType: paragraph
+bundle: d_p_side_by_side
+mode: default
+content:
+  field_d_long_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_d_main_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_field_d_p_sbs_item_first:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_field_d_p_sbs_item_second:
+    type: entity_reference_revisions_entity_view
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_d_settings: true

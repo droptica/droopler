@@ -1,0 +1,70 @@
+/*
+Side by Side
+
+Styleguide 2.d_p_side_by_side
+*/
+
+// Colour variables used in this paragraph
+$d-p-text-paged-subtitle-color: $color-agamemnon !default;
+$d-p-text-paged-line-color: $color-agamemnon !default;
+$d-p-text-paged-color: $color-hecuba !default;
+$d-p-text-paged-bold-color: $color-troilus !default;
+
+// Margins, paddings and sizing.
+$d-p-text-paged-padding-y: 5% !default;
+$d-p-text-paged-first-margin-top: 2% !default;
+
+$d-p-text-paged-subtitle-margin-y: 2.125rem !default;
+$d-p-text-paged-line-margin-top: 1rem !default;
+$d-p-text-paged-line-margin-bottom: 1rem !default;
+
+.d-p-side-by-side {
+  padding-top: $d-p-text-paged-padding-y;
+  padding-bottom: $d-p-text-paged-padding-y;
+  text-align: center;
+
+  > div > .field--name-field-d-icon {
+    text-align: center;
+  }
+
+  > .text-content {
+    > h2 {
+      @include font-main-header;
+      text-align: center;
+
+      &:after {
+        @include decoration-header-line-main-center;
+        background: $d-p-carousel-line-color;
+        margin: $d-p-carousel-line-margin;
+      }
+    }
+
+    > .field--name-field-d-long-text {
+      margin: $d-p-text-paged-subtitle-margin-y 0;
+      @include font-subtitle;
+      text-align: center;
+      color: $d-p-text-paged-subtitle-color;
+    }
+
+  }
+
+  .d-p-text-block {
+    margin-bottom: 0;
+  }
+
+  .field--name-field-d-long-text {
+    p {
+      color: $d-p-text-paged-color;
+      word-wrap: break-word;
+      hyphens: auto;
+      b, strong {
+        color: $d-p-text-paged-bold-color;
+      }
+    }
+  }
+}
+
+// If this is the first paragraph - decrease top margin.
+.paragraph-sections > section:first-child > .text-page {
+  margin-top: $d-p-text-paged-first-margin-top;
+}

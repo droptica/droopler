@@ -10,6 +10,8 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_gallery
     - paragraphs.paragraphs_type.d_p_group_of_counters
     - paragraphs.paragraphs_type.d_p_group_of_text_blocks
+    - paragraphs.paragraphs_type.d_p_reference_content
+    - paragraphs.paragraphs_type.d_p_side_by_side
     - paragraphs.paragraphs_type.d_p_side_embed
     - paragraphs.paragraphs_type.d_p_side_image
     - paragraphs.paragraphs_type.d_p_side_tiles
@@ -37,9 +39,9 @@ settings:
       d_p_banner: d_p_banner
       d_p_form: d_p_form
       d_p_group_of_counters: d_p_group_of_counters
-      d_p_group_of_text_blocks: d_p_group_of_text_blocks
       d_p_carousel: d_p_carousel
       d_p_gallery: d_p_gallery
+      d_p_group_of_text_blocks: d_p_group_of_text_blocks
       d_p_side_image: d_p_side_image
       d_p_reference_content: d_p_reference_content
       d_p_subscribe_file: d_p_subscribe_file
@@ -47,6 +49,7 @@ settings:
       d_p_text_with_bckg: d_p_text_with_bckg
       d_p_side_embed: d_p_side_embed
       d_p_side_tiles: d_p_side_tiles
+      d_p_side_by_side: d_p_side_by_side
       d_p_tiles: d_p_tiles
     target_bundles_drag_drop:
       d_p_banner:
@@ -64,13 +67,13 @@ settings:
       d_p_group_of_counters:
         enabled: true
         weight: 17
-      d_p_group_of_text_blocks:
-        enabled: true
-        weight: 18
       d_p_carousel:
         enabled: true
         weight: 18
       d_p_gallery:
+        enabled: true
+        weight: 18
+      d_p_group_of_text_blocks:
         enabled: true
         weight: 18
       d_p_side_image:
@@ -103,6 +106,12 @@ settings:
       d_p_side_tiles:
         enabled: true
         weight: 30
+      d_p_node:
+        weight: 31
+        enabled: false
+      d_p_side_by_side:
+        enabled: true
+        weight: 33
       d_p_tiles:
         enabled: true
         weight: 36

@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function d_p_side_by_side_theme($existing, $type, $theme, $path) {
+  return [
+    'paragraph__d_p_side_by_side' => [
+      'base hook' => 'paragraph',
+    ],
+  ];
+}
