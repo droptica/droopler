@@ -35,7 +35,6 @@ function d_p_text_blocks_preprocess_field(&$variables) {
 
         /** @var \Drupal\Core\Field\FieldItemList $num_field */
         $num_field = $variables['element']['#object']->get('field_d_number');
-//          ->getValue();
 
         $items_per_row = $num_field->isEmpty() ? 3 : $num_field->first()->get('value')->getValue();
         $columns = floor(12 / $items_per_row);
