@@ -51,10 +51,12 @@ $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2;
     }
   }
 
-  .paragraph--type--d-p-single-text-block {
-    margin-bottom: 0;
+  .wrapper-d_p_single_text_block {
     padding: $d-p-side-by-side-text-box-padding-y 0;
     text-align: left;
+    display: flex;
+    align-items: center;
+    height: 100%;
 
     &::before {
       position: absolute;
@@ -71,6 +73,10 @@ $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2;
       @include media-breakpoint-up(sm) {
         width: 50vw;
       }
+    }
+
+    .d-p-text-block {
+      margin-bottom: 0;
     }
   }
 
