@@ -21,14 +21,27 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
     case 'd_p_side_image':
       $field_image_side = $paragraph->get('field_d_p_si_image_side')->get(0);
       if ($field_image_side) {
-        $image_side = $field_image_side->getValue();
+        $image_side = $field_image_side->get('value')->getValue();
         $wrapper_attributes = [
           'class' => [
-            'image-side-' . $image_side['value'],
+            'image-side-' . $image_side,
           ],
         ];
         $variables['d_p_side_image_attributes'] = new Attribute($wrapper_attributes);
         d_p_generate_image_set($variables, $styles_ids, $bundle);
+
+        switch ($image_side) {
+          case 'left-wide':
+          case 'right-wide':
+            $variables['image_class'] = 'col-md-6 col-lg-7';
+            $variables['text_class'] = 'col-md-6 col-lg-5';
+            break;
+          case 'left':
+          case 'right':
+          default:
+            $variables['image_class'] = $variables['text_class'] = 'col-md-6';
+            break;
+        }
       }
       break;
 

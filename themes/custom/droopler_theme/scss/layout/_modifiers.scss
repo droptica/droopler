@@ -29,6 +29,15 @@ $grid-border-width: 2px;
   }
 }
 
+.with-alt-text {
+  .paragraph {
+    .field--type-string,
+    .field--type-text-long {
+      color: $color-cassandra;
+    }
+  }
+}
+
 .full-width {
   .expandable-content {
     width: 100%;
