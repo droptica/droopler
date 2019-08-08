@@ -23,6 +23,9 @@ $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
 $d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto !default;
 $d-p-single-box-margin-bottom: 15% !default;
 
+$d-p-text-blocks-tiles-padding: 20px;
+$d-p-text-blocks-tiles-spacing: 5px;
+
 // Other settings.
 $d-p-single-text-box-cta-text-transform: uppercase !default;
 
@@ -92,15 +95,15 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 
 .with-tiles {
   .list-item-wrapper {
-    padding: 0 5px;
+    padding: 0 $d-p-text-blocks-tiles-spacing;
 
     .d-p-text-block {
-      padding: 20px;
+      padding: $d-p-text-blocks-tiles-padding;
       @include media-breakpoint-down(md) {
-        margin-bottom: 10px;
+        margin-bottom: 2 * $d-p-text-blocks-tiles-spacing;
       }
       @include media-breakpoint-down(xs) {
-        margin-bottom: 5px;
+        margin-bottom: $d-p-text-blocks-tiles-spacing;
       }
     }
 
@@ -143,7 +146,6 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 
   }
 }
-
 
 .with-grid {
   .single-box-wrapper {
