@@ -47,20 +47,24 @@
 {% set paragraph_classes = [
   'd-image',
   'background-image',
-  'col-md-6',
+  'h-100',
 ] %}
 {% set side_image_banner_wrapper_classes = [
   'd-p-side-image-banner-wrapper',
   'clearfix',
+  'position-relative',
 ] %}
 {% block paragraph %}
 <section {{ wrapper_attributes }}>
   <div{{ attributes.addClass(classes) }}>
     <div {{ d_p_side_image_attributes.addClass(side_image_banner_wrapper_classes) }}>
-      <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
-      </div>
-      <div class="container-half col-md-6">
-        {{ content }}
+      <div {{ paragraph_attributes.addClass(paragraph_classes, image_class) }}></div>
+      <div class="container">
+        <div class="row">
+          <div class="container-half {{ text_class }}">
+            {{ content }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
