@@ -19,6 +19,9 @@ header.header {
     .navbar {
       padding: $navbar-padding-y 0;
       &.navbar-we-mega-menu {
+        @include media-breakpoint-down(md) {
+          width: 250px;
+        }
         background-color: $color-odysseus;
         margin-bottom: 0;
         .we-mega-menu-li {
