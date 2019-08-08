@@ -92,31 +92,31 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 
 .with-tiles {
   .list-item-wrapper {
-      padding: 0 5px;
+    padding: 0 5px;
 
-      .d-p-text-block {
-        padding: 20px;
-        @include media-breakpoint-down(md) {
-          margin-bottom: 10px;
-        }
-        @include media-breakpoint-down(xs) {
-          margin-bottom: 5px;
-        }
+    .d-p-text-block {
+      padding: 20px;
+      @include media-breakpoint-down(md) {
+        margin-bottom: 10px;
       }
-
-      @include media-breakpoint-up(lg) {
-        &:first-child {
-          padding-left: 0;
-        }
-        &:last-child {
-          padding-right: 0;
-        }
-      }
-
-      @include media-breakpoint-between(sm, md) {
-        @include make-col(6);
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 5px;
       }
     }
+
+    @include media-breakpoint-up(lg) {
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    @include media-breakpoint-between(sm, md) {
+      @include make-col(6);
+    }
+  }
 }
 
 // Single box
@@ -141,5 +141,12 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
   a {
     @include text-transform($d-p-single-text-box-cta-text-transform)
 
+  }
+}
+
+
+.with-grid {
+  .single-box-wrapper {
+    padding: 0;
   }
 }
