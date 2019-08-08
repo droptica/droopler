@@ -16,17 +16,21 @@ header.header {
     max-height: $header-height - (2 * $navbar-padding-y);
   }
   .region-primary-menu {
-    .navbar {
-      padding: $navbar-padding-y 0;
-      &.navbar-we-mega-menu {
-        @include media-breakpoint-down(md) {
-          width: 250px;
-        }
-        background-color: $color-odysseus;
-        margin-bottom: 0;
-        .we-mega-menu-li {
-          background: $color-odysseus;
-          border: 0 none;
+    .region-we-mega-menu {
+      margin-bottom: 0;
+      .navbar {
+        padding: $navbar-padding-y 0;
+        &.navbar-we-mega-menu {
+          @include media-breakpoint-down(md) {
+            width: 250px;
+          }
+          background-color: $color-odysseus;
+          margin-bottom: 0;
+
+          .we-mega-menu-li {
+            background: $color-odysseus;
+            border: 0 none;
+          }
         }
       }
     }
@@ -47,7 +51,6 @@ header.header {
   }
   @include media-breakpoint-down(md) {
     min-height: $header-mobile-height;
-
     .navbar-brand {
       top: 0;
       z-index: 1;
@@ -64,9 +67,26 @@ header.header {
         }
       }
     }
-    .navbar {
+  }
+
+  .navbar {
+    @include media-breakpoint-down(md) {
       width: 100%;
       padding: 0;
+    }
+    margin-bottom: 0;
+    min-height: inherit;
+    border: none;
+    // Reset content added by we_megamenu.
+    &:after,
+    &:before {
+      content: none;
+    }
+    .container {
+      &:after,
+      &:before {
+        content: none;
+      }
     }
   }
 }
