@@ -18,17 +18,22 @@ $d-p-text-paged-subtitle-margin-y: 2.125rem !default;
 $d-p-text-paged-line-margin-top: 1rem !default;
 $d-p-text-paged-line-margin-bottom: 1rem !default;
 
-.d-p-side-by-side {
+.wrapper-d_p_side_by_side {
   padding-top: $d-p-text-paged-padding-y;
   padding-bottom: $d-p-text-paged-padding-y;
+}
+
+.d-p-side-by-side {
   text-align: center;
 
   > div > .field--name-field-d-icon {
     text-align: center;
   }
 
-  > .text-content {
-    > h2 {
+  .text-content {
+    padding-bottom: $d-p-text-paged-padding-y;
+
+    h2 {
       @include font-main-header;
       text-align: center;
 
@@ -39,7 +44,7 @@ $d-p-text-paged-line-margin-bottom: 1rem !default;
       }
     }
 
-    > .field--name-field-d-long-text {
+    .field--name-field-d-long-text {
       margin: $d-p-text-paged-subtitle-margin-y 0;
       @include font-subtitle;
       text-align: center;
@@ -47,25 +52,73 @@ $d-p-text-paged-line-margin-bottom: 1rem !default;
     }
   }
 
-  .paragraph--type--d-p-single-text-block::before {
-    position: absolute;
-    width: 50vw;
-    right: 0;
-    top: 0;
-    display: block;
-    height: 100vh;
-    z-index: -1;
-    left: 0;
-    background: inherit;
-    content: ""
+  .paragraph--type--d-p-single-text-block {
+    &::before {
+      position: absolute;
+      width: 100vw;
+      right: 0;
+      top: 0;
+      display: block;
+      height: 100%;
+      z-index: -1;
+      left: 0;
+      background: inherit;
+      content: "";
+
+      @include media-breakpoint-up(sm) {
+        width: 50vw;
+      }
+    }
+  }
+  .paragraph--type--d-p-node {
+    display: flex;
+    align-items: center;
   }
 
   .expandable-content {
     overflow: hidden;
+    position: relative;
   }
 
   .d-p-text-block {
     margin-bottom: 0;
+    padding: $grid-gutter-width 0;
+    text-align: left;
+  }
+
+  .field--name-field-field-d-p-sbs-item-first,
+  .field--name-field-field-d-p-sbs-item-second {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .geysir-field-paragraph-wrapper {
+      position: unset;
+      height: 100%;
+    }
+  }
+
+  @include media-breakpoint-between(sm, md) {
+    .paragraph--type--d-p-node {
+      margin: 0 0 - $grid-gutter-width/2;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .field--name-field-field-d-p-sbs-item-first {
+      padding-right: 30px;
+    }
+    .field--name-field-field-d-p-sbs-item-second {
+      padding-left: 30px;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    .field--name-field-field-d-p-sbs-item-first {
+      padding-right: 80px;
+    }
+    .field--name-field-field-d-p-sbs-item-second {
+      padding-left: 80px;
+    }
   }
 
   .field--name-field-d-long-text {
@@ -78,9 +131,4 @@ $d-p-text-paged-line-margin-bottom: 1rem !default;
       }
     }
   }
-}
-
-// If this is the first paragraph - decrease top margin.
-.paragraph-sections > section:first-child > .text-page {
-  margin-top: $d-p-text-paged-first-margin-top;
 }

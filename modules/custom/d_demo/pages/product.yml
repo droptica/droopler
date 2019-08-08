@@ -15,3 +15,56 @@ field_page_section:
 #        type: image
 #        data: d_demo/demo_educational_4.jpg
 #        dst_dir: demo
+
+  - paragraph_type: d_p_side_by_side
+    data:
+      field_d_main_title:
+        type: text
+        data: We are an exert n Electric engines
+      field_d_long_text:
+        type: text_long
+        data: <p>Experience marked by 20 years on the market<br />- wide range of products</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-width with-grid with-alt-line
+      field_field_d_p_sbs_item_first:
+        type: paragraph_reference
+        subtype: paragraphs_wrapper
+        data:
+          - type: d_p_node
+            data:
+              field_d_display_mode:
+                type: text_select
+                data: d_small_box
+              field_d_node_reference:
+                type: entity_reference
+                data:
+                  - target_id: 8
+      field_field_d_p_sbs_item_second:
+        type: paragraph_reference
+        subtype: paragraphs_wrapper
+        data:
+          - type: d_p_single_text_block
+            data:
+              field_d_main_title:
+                type: text
+                data: Centurion V750
+              field_d_long_text:
+                type: text_long
+                data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
+                  id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim.
+                  Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur
+                  consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo,
+                  eget faucibus mauris egestas.</p>
+                  <p><ul>
+                  <li>Lorem ipsum dolor sit amet</li>
+                  <li>Aliquam lorem diam</li>
+                  <li>Nulla porttitor lorem in erat</li>
+                  <li>Nam feugiat nulla pulvinar</li>
+                  </ul>
+                  </p>
+              field_d_background_color:
+                type: color
+                data:
+                  color: '#e4e4e4'
+                  opacity: 1

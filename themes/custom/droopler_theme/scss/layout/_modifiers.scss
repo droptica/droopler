@@ -82,6 +82,7 @@ $grid-border-width: 2px;
   .expandable-content {
     width: 100%;
     max-width: 100%;
+    position: relative;
 
     &:before,
     &:after {
@@ -90,6 +91,7 @@ $grid-border-width: 2px;
       position: absolute;
       width: 100%;
       content: "";
+      z-index: -2;
       left: 0;
     }
     &:after {
@@ -101,8 +103,11 @@ $grid-border-width: 2px;
     }
 
     .list-item-wrapper {
-      padding: 0;
       border-bottom: $grid-border-width $grid-border-type;
+
+      &.single-box-wrapper {
+        padding: 0;
+      }
 
       &:last-child {
         border: none;
