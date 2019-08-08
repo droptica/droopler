@@ -18,6 +18,14 @@ header.header {
   .region-primary-menu {
     .navbar {
       padding: $navbar-padding-y 0;
+      &.navbar-we-mega-menu {
+        background-color: $color-odysseus;
+        margin-bottom: 0;
+        .we-mega-menu-li {
+          background: $color-odysseus;
+          border: 0 none;
+        }
+      }
     }
     #block-mainnavigation, #block-languageswitcher {
       display: inline-block;
