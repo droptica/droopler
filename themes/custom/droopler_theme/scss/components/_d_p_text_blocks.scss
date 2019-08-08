@@ -25,6 +25,7 @@ $d-p-single-box-margin-bottom: 15% !default;
 
 $d-p-text-blocks-tiles-padding: 20px;
 $d-p-text-blocks-tiles-spacing: 5px;
+$d-p-text-blocks-grid-link-color: $color-helen;
 
 // Other settings.
 $d-p-single-text-box-cta-text-transform: uppercase !default;
@@ -143,12 +144,20 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
   }
   a {
     @include text-transform($d-p-single-text-box-cta-text-transform)
-
   }
 }
 
 .with-grid {
   .single-box-wrapper {
     padding: 0;
+
+    .d-p-text-block {
+      margin-bottom: 0;
+      padding: 60px;
+
+      a {
+        color: $d-p-text-blocks-grid-link-color;
+      }
+    }
   }
 }
