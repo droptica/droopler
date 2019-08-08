@@ -73,6 +73,16 @@ $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2;
       }
     }
   }
+
+  .field--name-field-field-d-p-sbs-item-first {
+    .paragraph--type--d-p-single-text-block {
+      &::before {
+        left: unset;
+        right: 0;
+      }
+    }
+  }
+
   .paragraph--type--d-p-node {
     display: flex;
     align-items: center;
