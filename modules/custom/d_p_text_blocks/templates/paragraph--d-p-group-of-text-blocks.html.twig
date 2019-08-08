@@ -44,17 +44,27 @@
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
+
+{% if content.field_d_long_text|render %}
+  {% set classes = classes|merge(['with-long-text', 'text-center']) %}
+{% endif %}
+
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       {% block paragraph_content %}
         <div class="container">
-          {{ content|without('field_d_p_tb_block_reference') }}
+          {{ content|without('field_d_p_tb_block_reference', 'field_d_cta_link') }}
         </div>
       {% endblock %}
       {% block tiles_content %}
         <div class="d-p-tiles-wrapper container expandable-content">
           {{ content.field_d_p_tb_block_reference }}
+        </div>
+      {% endblock %}
+      {% block paragraph_cta_content %}
+        <div class="container">
+          {{ content.field_d_cta_link }}
         </div>
       {% endblock %}
     </div>

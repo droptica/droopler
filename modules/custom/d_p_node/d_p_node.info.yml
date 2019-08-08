@@ -1,6 +1,6 @@
-name: d_p
+name: d_p_node
 core: 8.x
-description: 'Provides base paragraph features.'
+description: 'Provides a paragraph with node reference.'
 type: module
 dependencies:
   - color_field
@@ -8,15 +8,17 @@ dependencies:
   - d_p
   - entity_reference_display
   - entity_reference_revisions
-  - features
   - field
-  - file
+  - field_group
   - image
   - language
   - link
   - link_attributes
-  - options
+  - node
   - paragraphs
+  - svg_image
   - text
-package: Droopler
+  - user
+  - views
+package: Paragraphs
 version: 8.x-1.4
