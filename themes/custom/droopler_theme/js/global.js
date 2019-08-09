@@ -62,9 +62,13 @@
     }
   };
 
+  /**
+   * Adds additional div above the unpublished content.
+   * @type {{attach: Drupal.behaviors.droopler_unpublished.attach}}
+   */
   Drupal.behaviors.droopler_unpublished = {
     attach: function (context, settings) {
-      $("<div class=\"unpublished-message\">Unpublished</div>").insertBefore(".blog_post_header");
+      $('<div>').addClass('unpublished-message').text(Drupal.t('Unpublished')).insertBefore($('.node--unpublished', context));
     }
   };
 
