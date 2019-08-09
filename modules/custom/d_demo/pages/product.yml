@@ -45,14 +45,14 @@ field_page_section:
       data:
         field_d_main_title:
           type: text
-          data: We are an exert n Electric engines
+          data: We are an exert in Electric engines
         field_d_long_text:
           type: text_long
           data: <p>Experience marked by 20 years on the market<br />- wide range of products</p>
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-width with-grid with-alt-line
-        field_field_d_p_sbs_item_first:
+        field_d_p_sbs_items:
           type: paragraph_reference
           subtype: paragraphs_wrapper
           data:
@@ -65,10 +65,6 @@ field_page_section:
                   type: entity_reference
                   data:
                     - target_id: 8
-        field_field_d_p_sbs_item_second:
-          type: paragraph_reference
-          subtype: paragraphs_wrapper
-          data:
             - type: d_p_single_text_block
               data:
                 field_d_main_title:

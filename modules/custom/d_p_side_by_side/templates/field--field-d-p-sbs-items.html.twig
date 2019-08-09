@@ -48,29 +48,32 @@
   'field__label',
   label_display == 'visually_hidden' ? 'visually-hidden',
 ] %}
-{% if label_hidden %}
-  {% if multiple %}
-    <div{{ attributes.addClass(classes, 'items-wrapper row') }}>
-      {% for item in items %}
-        <div{{ item.attributes.addClass('list-item-wrapper', item_class, 'item-'~loop.index ) }}>{{ item.content }}</div>
-      {% endfor %}
-    </div>
-  {% else %}
-    {% for item in items %}
-      <div{{ attributes.addClass(classes, 'list-item-wrapper', item_class, 'item-'~loop.index) }}>{{ item.content }}</div>
-    {% endfor %}
-  {% endif %}
-{% else %}
-<div{{ attributes.addClass(classes) }}>
-  <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
-  {% if multiple %}
-  <div class='items-wrapper row'>
-    {% endif %}
-    {% for item in items %}
-      <div{{ item.attributes.addClass('list-item-wrapper', item_class, 'item-'~loop.index) }}>{{ item.content }}</div>
-    {% endfor %}
+
+<section class="row">
+  {% if label_hidden %}
     {% if multiple %}
+      <div{{ attributes.addClass(classes, 'items-wrapper d-flex flex-wrap') }}>
+        {% for item in items %}
+          <div{{ item.attributes.addClass('list-item-wrapper', item_class, 'item-'~loop.index ) }}>{{ item.content }}</div>
+        {% endfor %}
+      </div>
+    {% else %}
+      {% for item in items %}
+        <div{{ attributes.addClass(classes, 'list-item-wrapper', item_class, 'item-'~loop.index) }}>{{ item.content }}</div>
+      {% endfor %}
+    {% endif %}
+  {% else %}
+  <div{{ attributes.addClass(classes) }}>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    {% if multiple %}
+    <div class='items-wrapper d-flex flex-wrap'>
+      {% endif %}
+      {% for item in items %}
+        <div{{ item.attributes.addClass('list-item-wrapper', item_class, 'item-'~loop.index) }}>{{ item.content }}</div>
+      {% endfor %}
+      {% if multiple %}
+    </div>
+    {% endif %}
   </div>
   {% endif %}
-</div>
-{% endif %}
+</section>
