@@ -82,3 +82,7 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
       break;
   }
 }
+
+function d_demo_preprocess_page(&$variables) {
+
+}
