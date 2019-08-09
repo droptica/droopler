@@ -25,9 +25,12 @@ $d-p-single-box-margin-bottom: 15% !default;
 
 $d-p-text-blocks-tiles-padding: 20px !default;
 $d-p-text-blocks-tiles-spacing: 5px !default;
+$d-p-text-blocks-grid-link-color: $color-helen !default;
 
 // Other settings.
 $d-p-single-text-box-cta-text-transform: uppercase !default;
+$d-p-single-text-box-grid-image-padding-bottom: $grid-gutter-width / 2 !default;
+$d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Font mixins
 @mixin font-title-single-box {
@@ -143,12 +146,43 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
   }
   a {
     @include text-transform($d-p-single-text-box-cta-text-transform)
-
   }
 }
 
 .with-grid {
+  .geysir-field-paragraph-wrapper,
+  .wrapper-d_p_single_text_block {
+    height: 100%;
+  }
+
   .single-box-wrapper {
     padding: 0;
+
+    .d-p-text-block {
+      margin-bottom: 0;
+      padding: $d-p-single-text-box-grid-large-padding;
+      text-align: center;
+
+      .field--name-field-d-icon {
+        padding-bottom: $d-p-single-text-box-grid-image-padding-bottom;
+
+        img {
+          margin-bottom: 0;
+        }
+      }
+
+      .field--name-field-d-main-title {
+        @include font-small-box-title();
+
+        &::after {
+          display: none;
+        }
+      }
+
+      a {
+        @include font-subtitle-small-link();
+        @extend .text-danger;
+      }
+    }
   }
 }
