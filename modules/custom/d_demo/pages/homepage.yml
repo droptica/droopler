@@ -193,33 +193,66 @@ field_page_section:
         type: paragraph_reference
         subtype: paragraphs_wrapper
         data:
-          - type: d_p_node
+          - type: d_p_single_text_block
             data:
-              field_d_display_mode:
-                type: text_select
-                data: d_small_box
-              field_d_node_reference:
-                type: entity_reference
+              field_d_icon:
+                type: image
+                data: d_demo/demo_bagel.svg
+                dst_dir: demo
+              field_d_main_title:
+                type: text
+                data: for boats
+              field_d_cta_link:
+                type: cta
                 data:
-                  - target_id: 7
-          - type: d_p_node
+                  link: internal:/documentation/text-blocks-paragraph
+                  text: Details
+                  options: {  }
+              field_d_background_color:
+                type: color
+                data:
+                  color: '#ffffff'
+                  opacity: 1
+          - type: d_p_single_text_block
             data:
-              field_d_display_mode:
-                type: text_select
-                data: d_small_box
-              field_d_node_reference:
-                type: entity_reference
+              field_d_icon:
+                type: image
+                data: d_demo/demo_bagel.svg
+                dst_dir: demo
+              field_d_main_title:
+                type: text
+                data: for planes
+              field_d_cta_link:
+                type: cta
                 data:
-                  target_id: 8
-          - type: d_p_node
+                  link: internal:/documentation/text-blocks-paragraph
+                  text: Details
+                  options: {  }
+              field_d_background_color:
+                type: color
+                data:
+                  color: '#ffffff'
+                  opacity: 1
+          - type: d_p_single_text_block
             data:
-              field_d_display_mode:
-                type: text_select
-                data: d_small_box
-              field_d_node_reference:
-                type: entity_reference
+              field_d_icon:
+                type: image
+                data: d_demo/demo_bagel.svg
+                dst_dir: demo
+              field_d_main_title:
+                type: text
+                data: for cars
+              field_d_cta_link:
+                type: cta
                 data:
-                  target_id: 6
+                  link: internal:/documentation/text-blocks-paragraph
+                  text: Details
+                  options: {  }
+              field_d_background_color:
+                type: color
+                data:
+                  color: '#ffffff'
+                  opacity: 1
 
   - paragraph_type: d_p_reference_content
     data:
