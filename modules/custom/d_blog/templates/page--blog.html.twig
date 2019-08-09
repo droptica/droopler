@@ -71,18 +71,14 @@
           <div class="navbar-brand">
             {{ page.header }}
           </div>
-          {% if page.primary_menu or page.lang_menu %}
-            <nav class="navbar navbar-expand-lg">
-              <div class="collapse navbar-collapse" id="navbarNav">
+            {% if page.primary_menu or page.lang_menu %}
                 {% if page.primary_menu %}
-                  <div class="menu-region">{{ page.primary_menu }}</div>
+                    <div class="menu-region">{{ page.primary_menu }}</div>
                 {% endif %}
                 {% if  page.lang_menu %}
-                  <div class="lang-region">{{ page.lang_menu }}</div>
+                    <div class="lang-region">{{ page.lang_menu }}</div>
                 {% endif %}
-              </div>
-            </nav>
-          {% endif %}
+            {% endif %}
         </div>
       </nav>
     {% endblock %}
