@@ -2,17 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_field_d_p_sbs_item_first
+    - field.storage.paragraph.field_d_p_sbs_items
     - paragraphs.paragraphs_type.d_p_node
     - paragraphs.paragraphs_type.d_p_side_by_side
     - paragraphs.paragraphs_type.d_p_single_text_block
   module:
     - entity_reference_revisions
-id: paragraph.d_p_side_by_side.field_field_d_p_sbs_item_first
-field_name: field_field_d_p_sbs_item_first
+id: paragraph.d_p_side_by_side.field_d_p_sbs_items
+field_name: field_d_p_sbs_items
 entity_type: paragraph
 bundle: d_p_side_by_side
-label: 'First item'
+label: Items
 description: ''
 required: true
 translatable: false
