@@ -23,12 +23,14 @@ $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
 $d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto !default;
 $d-p-single-box-margin-bottom: 15% !default;
 
-$d-p-text-blocks-tiles-padding: 20px;
-$d-p-text-blocks-tiles-spacing: 5px;
-$d-p-text-blocks-grid-link-color: $color-helen;
+$d-p-text-blocks-tiles-padding: 20px !default;
+$d-p-text-blocks-tiles-spacing: 5px !default;
+$d-p-text-blocks-grid-link-color: $color-helen !default;
 
 // Other settings.
 $d-p-single-text-box-cta-text-transform: uppercase !default;
+$d-p-single-text-box-grid-image-padding-bottom: $grid-gutter-width / 2 !default;
+$d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Font mixins
 @mixin font-title-single-box {
@@ -148,15 +150,38 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
 }
 
 .with-grid {
+  .geysir-field-paragraph-wrapper,
+  .wrapper-d_p_single_text_block {
+    height: 100%;
+  }
+
   .single-box-wrapper {
     padding: 0;
 
     .d-p-text-block {
       margin-bottom: 0;
-      padding: 60px;
+      padding: $d-p-single-text-box-grid-large-padding
+      text-align: center;
+
+      .field--name-field-d-icon {
+        padding-bottom: $d-p-single-text-box-grid-image-padding-bottom;
+
+        img {
+          margin-bottom: 0;
+        }
+      }
+
+      .field--name-field-d-main-title {
+        @include font-small-box-title();
+
+        &::after {
+          display: none;
+        }
+      }
 
       a {
-        color: $d-p-text-blocks-grid-link-color;
+        @include font-subtitle-small-link();
+        @extend .text-danger;
       }
     }
   }
