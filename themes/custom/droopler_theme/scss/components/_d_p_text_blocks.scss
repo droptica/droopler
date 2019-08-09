@@ -74,7 +74,21 @@ $d-p-single-text-box-cta-text-transform: uppercase !default;
       }
     }
   }
+
+  &.with-long-text {
+    .field--name-field-d-main-title {
+      margin-bottom: inherit;
+
+      &::after {
+        @include decoration-header-line-main-center;
+      }
+    }
+    .field--name-field-d-long-text {
+      margin-bottom: $d-p-text-blocks-group-padding-y;
+    }
+  }
 }
+
 
 .with-tiles {
   .list-item-wrapper {
