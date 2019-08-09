@@ -100,28 +100,28 @@ $font-subtitle-line-height: 1.5 !default;
 }
 
 // Font for small box titles
-$box-title-padding-bottom: 20px !default;
-$box-title-font-small-title: 2rem !default;
-$box-title-font-large-title: 3rem !default;
-$box-title-line-height: 1.2 !default;
-$box-title-max-lines: 2 !default;
+$font-box-title-padding-bottom: 20px !default;
+$font-box-title-font-small-title: 2rem !default;
+$font-box-title-font-large-title: 3rem !default;
+$font-box-title-line-height: 1.2 !default;
+$font-box-title-max-lines: 2 !default;
 @mixin font-small-box-title {
   @include font-main-header();
   width: 100%;
-  margin-bottom: $box-title-padding-bottom;
+  margin-bottom: $font-box-title-padding-bottom;
   text-align: center;
 
-  font-size: $box-title-font-small-title;
+  font-size: $font-box-title-font-small-title;
   display: block;
   display: -webkit-box;
-  max-height: $box-title-line-height * $box-title-max-lines * $box-title-font-small-title;
-  -webkit-line-clamp: $box-title-max-lines;
+  max-height: $font-box-title-line-height * $font-box-title-max-lines * $font-box-title-font-small-title;
+  -webkit-line-clamp: $font-box-title-max-lines;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 
   @include media-breakpoint-up(xl) {
-    font-size: $box-title-font-large-title;
-    max-height: $box-title-line-height * $box-title-max-lines * $box-title-font-large-title;
+    font-size: $font-box-title-font-large-title;
+    max-height: $font-box-title-line-height * $font-box-title-max-lines * $font-box-title-font-large-title;
   }
 }
