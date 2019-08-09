@@ -7,9 +7,9 @@ $light-gray-background: $color-hector !default;
 $light-gray-background-2: $color-paris !default;
 $divider-background: $color-priam !default;
 $section-main-title-line-alt-color: $color-helen !default;
-$grid-border-color: $color-paris;
-$grid-border-type: solid $grid-border-color;
-$grid-border-width: 2px;
+$grid-border-color: $color-paris !default;
+$grid-border-type: solid $grid-border-color !default;
+$grid-border-width: 2px !default;
 
 .background {
   &-gray-light {
@@ -91,6 +91,7 @@ $grid-border-width: 2px;
   .expandable-content {
     width: 100%;
     max-width: 100%;
+    position: relative;
 
     &:before,
     &:after {
@@ -99,6 +100,7 @@ $grid-border-width: 2px;
       position: absolute;
       width: 100%;
       content: "";
+      z-index: -2;
       left: 0;
     }
     &:after {
@@ -110,7 +112,6 @@ $grid-border-width: 2px;
     }
 
     .list-item-wrapper {
-      padding: 0;
       border-bottom: $grid-border-width $grid-border-type;
 
       &:last-child {
