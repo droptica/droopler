@@ -5,7 +5,7 @@ Styleguide 2.d_p_side_by_side
 */
 
 // Colour variables used in this paragraph
-$d-p-side-by-side-line-color: $color-agamemnon;
+$d-p-side-by-side-line-color: $color-agamemnon !default;
 $d-p-side-by-side-color: $color-hecuba !default;
 $d-p-side-by-side-bold-color: $color-troilus !default;
 
@@ -15,9 +15,9 @@ $d-p-side-by-side-padding-y: 5% !default;
 $d-p-side-by-side-subtitle-margin-y: 2.125rem !default;
 $d-p-side-by-side-line-margin: $line-center-margin-top auto $line-center-margin-bottom auto !default;
 
-$d-p-side-by-side-content-padding-x: 7%;
-$d-p-side-by-side-text-box-padding-y: $grid-gutter-width;
-$d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2;
+$d-p-side-by-side-content-padding-x: 7% !default;
+$d-p-side-by-side-text-box-padding-y: $grid-gutter-width !default;
+$d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
 
 .wrapper-d_p_side_by_side {
   padding-top: $d-p-side-by-side-padding-y;
