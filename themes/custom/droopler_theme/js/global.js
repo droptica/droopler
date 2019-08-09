@@ -62,4 +62,10 @@
     }
   };
 
+  Drupal.behaviors.droopler_unpublished = {
+    attach: function (context, settings) {
+      $("<div class=\"unpublished-message\">Unpublished</div>").insertBefore(".blog_post_header");
+    }
+  };
+
 })(jQuery, Drupal);
