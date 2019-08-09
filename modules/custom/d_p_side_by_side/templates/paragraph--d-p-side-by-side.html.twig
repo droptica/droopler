@@ -50,20 +50,13 @@
     <div{{ attributes.addClass(classes) }}>
       {% block paragraph_content %}
         <div class="container text-center text-content">
-          {{ content|without('field_field_d_p_sbs_item_first', 'field_field_d_p_sbs_item_second') }}
+          {{ content|without('field_d_p_sbs_items') }}
         </div>
       {% endblock %}
       {% block tiles_content %}
         <div class="d-p-tiles-wrapper expandable-content">
           <div class="container">
-            <div class="row">
-              <div class="col-sm-6 list-item-wrapper">
-                {{ content.field_field_d_p_sbs_item_first }}
-              </div>
-              <div class="col-sm-6 list-item-wrapper">
-                {{ content.field_field_d_p_sbs_item_second }}
-              </div>
-            </div>
+            {{ content.field_d_p_sbs_items }}
           </div>
         </div>
       {% endblock %}

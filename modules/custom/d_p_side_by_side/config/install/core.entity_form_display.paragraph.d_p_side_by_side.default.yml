@@ -4,9 +4,8 @@ dependencies:
   config:
     - field.field.paragraph.d_p_side_by_side.field_d_long_text
     - field.field.paragraph.d_p_side_by_side.field_d_main_title
+    - field.field.paragraph.d_p_side_by_side.field_d_p_sbs_items
     - field.field.paragraph.d_p_side_by_side.field_d_settings
-    - field.field.paragraph.d_p_side_by_side.field_field_d_p_sbs_item_first
-    - field.field.paragraph.d_p_side_by_side.field_field_d_p_sbs_item_second
     - paragraphs.paragraphs_type.d_p_side_by_side
   module:
     - d_p
@@ -46,8 +45,7 @@ third_party_settings:
       region: content
     group_items:
       children:
-        - field_field_d_p_sbs_item_first
-        - field_field_d_p_sbs_item_second
+        - field_d_p_sbs_items
       parent_name: group_tabs
       weight: 7
       format_type: tab
@@ -80,35 +78,23 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_d_p_sbs_items:
+    type: entity_reference_paragraphs
+    weight: 12
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
   field_d_settings:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: field_d_p_set_settings
-    region: content
-  field_field_d_p_sbs_item_first:
-    type: entity_reference_paragraphs
-    weight: 9
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
-  field_field_d_p_sbs_item_second:
-    type: entity_reference_paragraphs
-    weight: 10
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
     region: content
 hidden:
   created: true
