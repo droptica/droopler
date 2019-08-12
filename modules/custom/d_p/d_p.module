@@ -87,9 +87,7 @@ function d_p_preprocess_paragraph(&$variables) {
       if (!$field->isEmpty()) {
         $uri = $paragraph->{$fieldName}->entity->getFileUri();
         $url = file_url_transform_relative(file_create_url($uri));
-        $wrapper_attributes['style'] = [
-          'background-image: url(' . $url . ')',
-        ];
+        $wrapper_attributes['data-background'] = [$url];
         $wrapper_attributes['class'][] = 'user-image-background';
       }
     }
@@ -112,7 +110,6 @@ function d_p_preprocess_paragraph(&$variables) {
       d_p_generate_image_set($variables, $styles_ids, $bundle);
 
       break;
-
   }
   $variables['#attached']['library'][] = 'd_p/d_p';
 }
