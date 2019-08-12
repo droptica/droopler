@@ -17,6 +17,7 @@ $d-p-side-embed-full-text-color: $color-cassandra !default;
 $d-p-side-embed-line-margin-top: 1.44rem !default;
 $d-p-side-embed-line-margin-bottom: 1.44rem !default;
 $d-p-side-embed-fields-padding-y: 7% !default;
+$d-p-side-embed-fields-full-padding-y: 30px !default;
 $d-p-side-embed-fields-padding-x: 30px !default;
 $d-p-side-embed-mobile-height: 18.75rem !default;
 $d-p-side-embed-text-desktop-padding-y: 2rem !default;
@@ -179,8 +180,8 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
       }
       &-full {
         .d-p-side-embed-content-fields {
-          padding-top: 30px;
-          padding-bottom: 30px;
+          padding-top: $d-p-side-embed-fields-full-padding-y;
+          padding-bottom: $d-p-side-embed-fields-full-padding-y;
         }
       }
     }
