@@ -77,6 +77,15 @@ $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
     .d-p-text-block {
       margin-bottom: 0;
     }
+
+    .field--name-field-d-cta-link {
+      a {
+        @extend .btn;
+        @extend .btn-danger;
+        @extend .mt-4;
+      }
+    }
+
   }
 
   .item-1 {

@@ -49,7 +49,7 @@
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       {% block content %}
-        {{ content|without('field_d_background_color') }}
+        {{ content|without('field_d_background_color', 'field_d_image_background') }}
       {% endblock %}
     </div>
   </section>
