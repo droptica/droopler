@@ -56,11 +56,11 @@
       var container = $('.d-p-side-by-side .items');
       container.find('.items-wrapper .list-item-wrapper').each(function (key, value) {
         var $this = $(this);
-        var $background_url = $this.find('.user-image-background').data('background');
-        var $prop = {
-          'background': 'url(' + $background_url + ')'
-        };
-        $this.find('.user-image-background').css('background-image', 'url(' + $background_url + ')').addClass('background-properties');
+        var $background = $this.find('.user-image-background');
+        var $background_url = $background.data('background');
+        // $background.find('.image-background-container')
+        //     .addClass('background-properties')
+        //     .css('background-image', 'url(' + $background_url + ')');
       });
     }
   };

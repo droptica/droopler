@@ -47,6 +47,7 @@
 
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
+    <div class="image-background-container"></div>
     <div{{ attributes.addClass(classes) }}>
       {% block content %}
         {{ content|without('field_d_background_color', 'field_d_image_background') }}
