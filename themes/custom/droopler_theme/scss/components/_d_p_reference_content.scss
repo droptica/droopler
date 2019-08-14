@@ -16,7 +16,6 @@ $d-p-reference-content-content-padding: 5px !default;
       padding: $d-p-reference-content-item-padding;
       @include media-breakpoint-up(lg) {
         &:first-child {
-          padding-left: 0;
           margin-left: $d-p-reference-content-item-margin;
         }
         &:last-child {
