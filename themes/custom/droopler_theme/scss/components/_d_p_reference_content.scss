@@ -2,6 +2,7 @@
 $d-p-reference-content-padding-y: 3.875rem !default;
 $d-p-reference-content-items-padding-x: 5px !default;
 $d-p-reference-content-item-padding: 5px !default;
+$d-p-reference-content-item-margin: -5px !default;
 $d-p-reference-content-content-padding: 5px !default;
 
 .d-p-reference-content-wrapper {
@@ -16,9 +17,10 @@ $d-p-reference-content-content-padding: 5px !default;
       @include media-breakpoint-up(lg) {
         &:first-child {
           padding-left: 0;
+          margin-left: $d-p-reference-content-item-margin;
         }
         &:last-child {
-          padding-right: 0;
+          margin-right: $d-p-reference-content-item-margin;
         }
       }
     }
