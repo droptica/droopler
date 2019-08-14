@@ -2,24 +2,27 @@
 $d-p-reference-content-padding-y: 3.875rem !default;
 $d-p-reference-content-items-padding-x: 5px !default;
 $d-p-reference-content-item-padding: 5px !default;
-$d-p-reference-content-item-margin: -5px !default;
+$d-p-reference-content-item-margin-left: -5px !default;
+$d-p-reference-content-item-margin-right: -10px !default;
 $d-p-reference-content-content-padding: 5px !default;
 
 .d-p-reference-content-wrapper {
   padding-top: $d-p-reference-content-padding-y;
   padding-bottom: $d-p-reference-content-padding-y;
   .field--wrapper {
+    overflow: hidden;
     @include media-breakpoint-down(lg) {
       padding: 0 $d-p-reference-content-content-padding;
     }
     .field__item--wrapper {
       padding: $d-p-reference-content-item-padding;
+      padding-left: 0;
       @include media-breakpoint-up(lg) {
         &:first-child {
-          margin-left: $d-p-reference-content-item-margin;
+          margin-left: $d-p-reference-content-item-margin-left;
         }
         &:last-child {
-          margin-right: $d-p-reference-content-item-margin;
+          margin-right: $d-p-reference-content-item-margin-right;
         }
       }
     }
