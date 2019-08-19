@@ -6,8 +6,9 @@
       d_p_ckeditor(true);
 
       function d_p_ckeditor_geysir() {
-        if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.children['geysir-modal-form'] !== 'undefined') {
+        if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.offsetParent.parentElement.offsetParent.children['geysir-modal-form'] !== 'undefined') {
           if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document !== 'undefined') {
+            d_p_add_reset_color_button();
             var doc = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document.$;
             d_p_ckeditor_add_js(doc);
           } else {
@@ -22,6 +23,7 @@
           // check if it is group of text-block from block-text-paragraph
           if (!(element.contains('paragraph-type--d-p-single-text-block'))) {
             if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document !== 'undefined') {
+                d_p_add_reset_color_button();
               var doc = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document.$; //get CKE doc!
               d_p_ckeditor_add_js(doc);
             } else {
@@ -29,6 +31,29 @@
             }
           }
         }
+      }
+
+      //Adding button next to choosing "Background color" to enable resetting to default color
+      function d_p_add_reset_color_button() {
+        if (document.getElementsByClassName('form-type-color').length !== 0) {
+          var colors = document.getElementsByClassName('form-type-color');
+          var button = document.createElement('button');
+          button.innerHTML = Drupal.t('Reset color');
+          button.id = 'reset-button';
+          button.classList = 'button js-form-submit form-submit btn btn-primary';
+          button.onclick = d_p_reset_color;
+          for (var i = 0; i < colors.length; i++) {
+            if (colors[i].getElementsByTagName('button').length === 0) {
+              colors[i].appendChild(button);
+            }
+          }
+        }
+      }
+
+      //Onclick 'reset-button' action that restores default value of background color
+      function d_p_reset_color(event) {
+        event.preventDefault();
+        event.target.previousElementSibling.value = '#000000';
       }
 
       function d_p_ckeditor_add_js(doc) {
