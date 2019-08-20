@@ -65,3 +65,10 @@ function d_blog_preprocess_responsive_image(&$variables) {
     }
   }
 }
+
+function d_blog_preprocess_page(&$variables){
+  if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical') {
+    $variables['term_id'] = \Drupal::routeMatch()->getRawParameter('taxonomy_term');
+    $variables['page']['content']['pagetitle']['#attributes']['class'] = array('blog-listing-main-header');;
+  }
+}
