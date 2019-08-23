@@ -18,21 +18,19 @@ class SocialMediaBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $body = "<div class='social-media-wrapper'>
-        <div class='follow-us'>Follow us</div>
-        <div class='icons-wrapper'>
-          <a href='#' class='icon icon-facebook-rect'></a><span> | </span>
-          <a href='#' class='icon icon-twitter-bird'></a><span> | </span>
-          <a href='#' class='icon icon-youtube'></a><span> | </span>
-          <a href='#' class='icon icon-instagram'></a><span> | </span>
-          <a href='#' class='icon icon-linkedin-rect'></a>
-        </div>
-        <div class='email'>
-            info@droopler.com
-        </div>
-</div>";
+    $mediaName = ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin'];
+    $links = [];
+    $config = \Drupal::config('d_social_media.settings');
+    foreach ($mediaName as $name) {
+      if (!empty($config->get("link_$name"))) {
+        $links[$name] = $config->get("link_$name");
+      }
+    }
+
     return [
-      '#markup' => $body,
+      '#theme' => 'social_media_theme',
+      '#show' => !empty($links),
+      '#links' => $links,
     ];
   }
 
