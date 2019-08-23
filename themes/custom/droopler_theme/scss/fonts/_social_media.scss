@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'social_media';
+  src: url($theme_path + '/fonts/social_media/social_media.eot'); /* IE9 Compat Modes */
+  src: url($theme_path + '/fonts/social_media/social_media.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url($theme_path + '/fonts/social_media/social_media.woff2') format('woff2'), /* Super Modern Browsers */
+  url($theme_path + '/fonts/social_media/social_media.woff') format('woff'), /* Pretty Modern Browsers */
+  url($theme_path + '/fonts/social_media/social_media.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url($theme_path + '/fonts/social_media/social_media.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "social_media";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.icon-facebook-rect:before { content: '\f301'; } /* '' */
+.icon-twitter-bird:before { content: '\f303'; } /* '' */
+.icon-linkedin-rect:before { content: '\f312'; } /* '' */
+.icon-youtube:before { content: '\f313'; } /* '' */
+.icon-instagram:before { content: '\f31e'; } /* '' */
+
+.social-media-wrapper {
+  .follow-us {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  .icons-wrapper {
+    .icon {
+      font-size: 150%;
+      padding: 10px;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    span {
+      opacity: 0.2;
+      font-size: 2rem;
+    }
+  }
+  .email {
+    margin-top: 50px;
+    font-size: 1rem;
+    text-decoration: underline;
+  }
+}
