@@ -23,7 +23,10 @@ class SocialMediaBlock extends BlockBase {
     $config = \Drupal::config('d_social_media.settings');
     foreach ($mediaName as $name) {
       if (!empty($config->get("link_$name"))) {
-        $links[$name] = $config->get("link_$name");
+        $links[] = [
+          'name' => $name,
+          'link' => $config->get("link_$name"),
+        ];
       }
     }
 
