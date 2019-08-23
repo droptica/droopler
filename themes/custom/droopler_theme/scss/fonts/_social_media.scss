@@ -48,16 +48,25 @@
     margin-bottom: 20px;
   }
   .icons-wrapper {
+    li {
+      display: inline-block;
+      &:after {
+        content: '|';
+        opacity: 0.2;
+        font-size: 2rem;
+      }
+    }
+    li.last-element {
+      &:after {
+        content: none;
+      }
+    }
     .icon {
       font-size: 150%;
       padding: 10px;
       &:hover {
         text-decoration: none;
       }
-    }
-    span {
-      opacity: 0.2;
-      font-size: 2rem;
     }
   }
   .email {

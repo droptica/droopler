@@ -2,12 +2,30 @@
   <div class='social-media-wrapper'>
     <div class='follow-us'>Follow us</div>
     <div class='icons-wrapper'>
+      <ul>
       {% for link in links %}
-        <a href='{{ link.link }}' class='icon icon-{{ link.name }}'></a><span> | </span>
+        <li><a href='{{ link.link }}' class='icon icon-{{ link.name }}'></a></li>
       {% endfor %}
+      </ul>
     </div>
     <div class='email'>
       info@droopler.com
     </div>
   </div>
 {% endif %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var lastElement = false;
+    var els = document.querySelectorAll('.social-media-wrapper ul li');
+    console.log(els);
+    for(var i = 0; i < els.length; i++){
+      var el = els[i]; // current element
+      if (lastElement && lastElement.offsetTop !== el.offsetTop) {
+        lastElement.className += " last-element";
+      }
+      lastElement = el;
+    }
+    els[els.length - 1].className += " last-element";
+  });
+</script>
