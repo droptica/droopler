@@ -4,18 +4,11 @@
  * Implements hook_install().
  */
 function d_demo_install() {
-  $data = [
-    "link_facebook" => "https://www.facebook.com/dropticacom/",
-    "link_twitter" => "https://twitter.com/droptica",
-    "link_youtube" => "https://www.youtube.com/channel/UCL_XD86NqAJppzw3w7QJqGw",
-    "link_instagram" => "https://www.instagram.com/droptica/",
-    "link_linkedin" => "https://www.linkedin.com/company/2947414",
-  ];
-  $connection = \Drupal::database();
-  $connection->update('config')
-    ->fields([
-      'data' => serialize($data),
-    ])
-    ->condition('name', 'd_social_media.settings')
-    ->execute();
+  $config = \Drupal::configFactory()->getEditable('d_social_media.settings')
+    ->set('link_facebook', 'https://www.facebook.com/dropticacom/')
+    ->set('link_twitter', 'https://twitter.com/droptica')
+    ->set('link_youtube', 'https://www.youtube.com/channel/UCL_XD86NqAJppzw3w7QJqGw')
+    ->set('link_instagram', 'https://www.instagram.com/droptica/')
+    ->set('link_linkedin', 'https://www.linkedin.com/company/2947414')
+    ->save();
 }
