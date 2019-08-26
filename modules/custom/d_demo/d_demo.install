@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Implements hook_install().
+ */
 function d_demo_install() {
   $data = [
     "link_facebook" => "https://www.facebook.com/dropticacom/",
