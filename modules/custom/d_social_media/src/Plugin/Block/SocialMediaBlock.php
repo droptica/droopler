@@ -32,6 +32,11 @@ class SocialMediaBlock extends BlockBase {
 
     return [
       '#theme' => 'social_media_theme',
+      '#attached' => [
+        'library' => [
+          'd_social_media/last-element-in-a-row',
+        ]
+      ],
       '#show' => !empty($links),
       '#links' => $links,
     ];
