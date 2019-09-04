@@ -11,7 +11,7 @@
         if ($body.hasClass('d-lang-added')) {
           return;
         }
-        var  $languageswitcher = $('#block-languageswitcher:not(dropdown)');
+        var  $languageswitcher = $('.block.block-language:not(dropdown)');
         var  $active_lang = $languageswitcher.find("ul li.is-active");
         var  active_lang_code = $active_lang.attr("hreflang");
         var  $div = $("<div>", {
