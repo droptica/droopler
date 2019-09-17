@@ -1,0 +1,13 @@
+{% if show %}
+  <div class='social-media-wrapper'>
+    <div class='follow-us'>Follow us</div>
+    <div class='icons-wrapper'>
+      <ul>
+      {% for link in links %}
+        <li><a href='{{ link.link }}' class='icon icon-{{ link.name }}' target="_blank"></a></li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+
