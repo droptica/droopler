@@ -1,0 +1,240 @@
+<?php
+
+/**
+ * @file
+ * Contains d_paragraphs.module.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Site\Settings;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\d_p\Helper\ParagraphModifiersHelper;
+
+/**
+ * Implements hook_theme().
+ */
+function d_p_theme($existing, $type, $theme, $path) {
+  return [
+    'field__field_d_main_title' => [
+      'base hook' => 'field',
+    ],
+    'field__field_d_subtitle' => [
+      'base hook' => 'field',
+    ],
+  ];
+}
+
+
+//@TODO should the helpers be a class?
+
+function d_p_responsive_style_ids() {
+
+  $styles_ids = [
+    'responsive_image_2000',
+    'responsive_image_768',
+    'responsive_image_992',
+    'responsive_image_1200',
+    'responsive_image_1600',
+    'responsive_image_2000',
+  ];
+
+  return $styles_ids;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_p_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+
+  $paragraphModifiersHelper = new ParagraphModifiersHelper($paragraph);
+
+  if ($paragraphModifiersHelper->hasModifiers()) {
+    unset($variables['content'][$paragraphModifiersHelper->getSettingsFieldName()]);
+  }
+  $bundle = $paragraph->bundle();
+  $paragraph_id = 'paragraph-' . $bundle . '-' . $paragraph->id();
+  $wrapper_attributes = [
+    'id' => $paragraph_id,
+    'class' => [
+      'wrapper-' . $bundle,
+    ],
+  ];
+
+  $paragraphFieldDefinitions = $paragraph->getFieldDefinitions();
+  /**
+   * @var FieldConfig $field
+   */
+  foreach ($paragraphFieldDefinitions as $fieldName => $fieldConfig) {
+    if ($fieldConfig->getType() == 'color_field_type') {
+      $field = $paragraph->get($fieldName);
+      if (!$field->isEmpty()) {
+        $wrapper_attributes['style'] = [
+          'background-color: ' . $field->first()->get('color')->getValue(),
+        ];
+        $wrapper_attributes['class'][] = 'user-background-defined';
+      }
+      unset($variables['content'][$fieldName]);
+    }
+
+    // Set background image if field is not empty.
+    // This overrides background color settings.
+    if ($fieldName == 'field_d_image_background' && $bundle == 'd_p_single_text_block') {
+      $field = $paragraph->get($fieldName);
+      if (!$field->isEmpty()) {
+        $uri = $paragraph->{$fieldName}->entity->getFileUri();
+        $url = file_url_transform_relative(file_create_url($uri));
+        $wrapper_attributes['data-background'] = [$url];
+        $wrapper_attributes['class'][] = 'user-image-background';
+      }
+    }
+
+
+  }
+
+  if ($paragraphModifiersHelper->hasCustomClasses()) {
+    $wrapper_attributes['class'][] = $paragraphModifiersHelper->getCustomClass();
+  }
+  $paragraph_attributes = [
+    'data-id' => $paragraph_id,
+  ];
+  $variables['wrapper_attributes'] = new Attribute($wrapper_attributes);
+  $variables['paragraph_attributes'] = new Attribute($paragraph_attributes);
+
+  $styles_ids = d_p_responsive_style_ids();
+  switch ($bundle) {
+    case 'd_p_banner':
+      unset($styles_ids['responsive_image_768']);
+      $styles_ids[] = 'responsive_image_768_banner';
+      d_p_generate_image_set($variables, $styles_ids, $bundle);
+
+      break;
+  }
+  $variables['#attached']['library'][] = 'd_p/d_p';
+}
+
+/**
+ * Conver d_image_background to resposive image set.
+ *
+ * @param $variables
+ *   $twig variables.
+ * @param $styles_ids
+ *   Array with styles to create.
+ * @param $bundle
+ *   Bundle paragraph
+ * @param $js
+ *   Send to drupal settings.
+ */
+function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
+  $urls = NULL;
+  $paragraph = $variables['paragraph'];
+  $background = $paragraph->get('field_d_image_background')->getValue();
+  if (isset($background[0]['target_id'])) {
+    $image_file = File::load($background[0]['target_id']);
+    $styles = ImageStyle::loadMultiple($styles_ids);
+    foreach ($styles as $style) {
+      $image_uri = $image_file->getFileUri();
+      $effects = $style->getEffects();
+      $effect = $effects->getInstanceIds('image_scale');
+      $image_scale = $style->getEffect(reset($effect));
+      $conf = $image_scale->getConfiguration();
+      if (isset($conf['data']['width']) && !empty($conf['data']['width'])) {
+        $width = $conf['data']['width'];
+        $urls[] = [
+          'url' => file_url_transform_relative($style->buildUrl($image_uri)),
+          'width' => $width,
+        ];
+      }
+      elseif ($style->getName() == 'responsive_image_768_banner') {
+        $width = '768';
+        $urls[] = [
+          'url' => $style->buildUrl($image_uri, TRUE),
+          'width' => $width,
+        ];
+      }
+    }
+    unset($variables['content']['field_d_image_background']);
+
+    if ($js) {
+      $variables['#attached']['drupalSettings']['image_background']['paragraph-' . $bundle . '-' . $paragraph->id()] = $urls;
+    }
+    else {
+      $variables['images'] = $urls;
+    }
+
+    // Generate a list of image links for httrack.
+    if (Settings::get('httrack_enabled', FALSE)) {
+      if (!empty($urls)) {
+        foreach ($urls as $k => $url) {
+          $variables['#attached']['html_head_link'][] = [
+            [
+              'href' => $url['url'],
+              'rel' => "droopler:" . $paragraph->id() . ":img$k",
+            ],
+          ];
+        }
+      }
+    }
+  }
+
+}
+
+/**
+ * Finds and replaces default value of class attribute in all fields of type field_d_cta_link.
+ *
+ * @param $form - Form array to search on.
+ */
+function edit_cta_link_default_class(&$form) {
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    foreach ($form as &$subform) {
+      if (!is_object($subform) && isset($subform['field_d_cta_link'])) {
+        $subform['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+      }
+      if (is_array($subform)) {
+        edit_cta_link_default_class($subform);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
+  switch ($form_id) {
+    case 'contact_message_contact_form_form':
+      unset($form['actions']['preview']);
+      $form['name']['#type'] = 'textfield';
+      $form['mail']['#type'] = 'textfield';
+      break;
+
+  }
+  $trigger_name = $form_state->getUserInput()['_triggering_element_name'] ?? NULL;
+  if (strpos($form_id, 'add') !== FALSE || strpos($trigger_name, 'add') !== FALSE) {
+    if (isset($form['field_d_cta_link'])) {
+      $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+    }
+    edit_cta_link_default_class($form);
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, &$context) {
+  $field_definition = $context['items']->getFieldDefinition();
+
+  if ($field_definition instanceof FieldConfig) {
+    $config = $field_definition->id();
+    list ($entity_type, $bundle, $field_name) = explode('.', $config);
+
+    // Hide option "full" for other paragraphs.
+    if ($bundle != 'd_p_side_embed' && $field_name == 'field_d_p_si_image_side') {
+      unset($element['#options']['full']);
+    }
+  }
+}
