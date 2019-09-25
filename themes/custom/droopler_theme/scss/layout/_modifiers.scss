@@ -10,6 +10,10 @@ $section-main-title-line-alt-color: $color-helen !default;
 $grid-border-color: $color-paris !default;
 $grid-border-type: solid $grid-border-color !default;
 $grid-border-width: 2px !default;
+$arrow-margin-right: 2% !default;
+$arrow-margin-top: 6% !default
+$arrow-border: 9px solid transparent;
+$arrow-down-color: lighten($color-helen, 10%);
 
 .background {
   &-gray-light {
@@ -140,3 +144,83 @@ $grid-border-width: 2px !default;
     }
   }
 }
+
+.with-price-stripe {
+  background-color: rgba(0,0,0, 0.57);
+  min-width:170px;
+  height: 100%;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  @include media-breakpoint-down(md) {
+    height: 100px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: unset;
+  }
+
+  .with-price-wrapper {
+    top: 50%;
+    color: $white;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%);
+    height: 100px;
+    width: 100%;
+    @include media-breakpoint-down(md) {
+      text-align: left;
+      height: 70px;
+      padding-left: 30px;
+      line-height: 35px;
+      display: inline-block;
+    }
+
+    .with-price-data {
+      display: block;
+      font-size: 4vh;
+      font-weight: bold;
+      clear: right;
+      padding-bottom: 3.8vh;
+      @include media-breakpoint-down(md) {
+        display: inline-block;
+        padding-right: 20px;
+        vertical-align: middle;
+        padding-bottom: unset;
+      }
+
+      .spinner-border {
+        font-size: 1rem;
+        color: $color-helen;
+        @include media-breakpoint-down(md) {
+          left: 30px;
+          margin-top: 20px;
+        }
+      }
+    }
+
+    .with-price-percentage {
+      font-size: 2.7vh;
+    }
+
+    .with-price-arrow {
+      width: 0;
+      height: 0;
+      display:inline-block;
+      margin-right: $arrow-margin-right;
+      margin-top: $arrow-margin-top;
+      border-left: $arrow-border;
+      border-right: $arrow-border;
+    }
+
+    .up {
+      border-bottom: 16px solid $color-serpedon;
+    }
+
+    .down {
+      border-top: 16px solid $arrow-down-color;
+    }
+  }
+}
+

@@ -34,7 +34,7 @@
                 "fade": fade_in,
               };
             }
-            
+
             var container_half_outer = $(this).next('.container-half').outerHeight();
             if (typeof container_half_outer !== 'undefined') {
               $(this).css('height', container_half_outer + 50 + 'px');
@@ -53,17 +53,19 @@
    */
   Drupal.behaviors.d_p_side_by_side = {
     attach: function (context, settings) {
-      var container = $('.d-p-side-by-side .items');
+      var container = $('.d-p-side-by-side .items', context);
+      container.css('max-width', 'unset');
       container.find('.items-wrapper .list-item-wrapper').each(function (key, value) {
         var $this = $(this);
-        var $background = $this.find('.user-image-background');
-        var $background_url = $background.data('background');
-        // $background.find('.image-background-container')
-        //     .addClass('background-properties')
-        //     .css('background-image', 'url(' + $background_url + ')');
+        if(typeof($this.find('.image-background-container'))) {
+          var $background = $this.find('.user-image-background').css('background-color', 'unset');
+          var $background_url = $background.data('background');
+          $background.find('.image-background-container')
+            .addClass('background-properties')
+            .css('background-image', 'url(' + $background_url + ')');
+        }
       });
     }
   };
-
 
 })(jQuery);
