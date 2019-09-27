@@ -1,3 +1,4 @@
+uuid: e20108cc-3ee1-4e66-be5c-703a31958427
 langcode: en
 status: true
 dependencies:
@@ -13,9 +14,12 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_single_text_block
   module:
     - color_field
+    - d_p
     - link_attributes
     - svg_image
     - text
+_core:
+  default_config_hash: PT5fSceki0ju9PZqZ0Ve9MLpkLRRu6lrbrYHSAJ086o
 id: paragraph.d_p_single_text_block.default
 targetEntityType: paragraph
 bundle: d_p_single_text_block
@@ -74,6 +78,12 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_d_settings:
+    type: field_d_p_set_settings
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   translation:
     weight: 4
     region: content

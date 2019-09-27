@@ -57,12 +57,8 @@
       container.css('max-width', 'unset');
       container.find('.items-wrapper .list-item-wrapper').each(function (key, value) {
         var $this = $(this);
-        if(typeof($this.find('.image-background-container'))) {
-          var $background = $this.find('.user-image-background').css('background-color', 'unset');
-          var $background_url = $background.data('background');
-          $background.find('.image-background-container')
-            .addClass('background-properties')
-            .css('background-image', 'url(' + $background_url + ')');
+        if (typeof($this.find('.image-background-container'))) {
+          $this.find('.user-image-background').css('background-color', 'unset');
         }
       });
     }

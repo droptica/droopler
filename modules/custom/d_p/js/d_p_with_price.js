@@ -21,7 +21,7 @@
                   $this.find('.with-price-arrow').removeClass('up').addClass('down');
                 }
               }
-            }else{
+            } else {
               if ($this.hasClass(cssClass)) {
                 $this.find('.with-price-data')[0].innerHTML = price;
                 $this.find('.with-price-percentage')[0].innerHTML = change + '%';

@@ -1,6 +1,11 @@
 (function ($) {
   'use strict';
 
+  /**
+   * Generate random prices and values of change (percentage) every 5 sec and pass optional css class
+   * to run global function setPrice() which displays those values
+   * in black stripe in d_p_single_text_block paragraphs that contain modifier class "with-price"
+   */
   Drupal.behaviors.d_demo_random_price = {
     attach: function (context, settings) {
       $(document).ready(function () {

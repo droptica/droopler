@@ -87,8 +87,5 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
  * Implements hook_attachments().
  */
 function d_demo_page_attachments (array &$page) {
-  if (!\Drupal ::currentUser() -> hasPermission('access d_demo')) {
-    return;
-  }
   $page['#attached']['library'][] = 'd_demo/d_demo_random_price';
 }

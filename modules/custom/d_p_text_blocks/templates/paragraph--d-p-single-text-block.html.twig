@@ -44,7 +44,12 @@
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
-
+{% set paragraph_classes = [
+  'd-image',
+  'background-image',
+  'background-properties',
+  'image-background-container',
+] %}
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     {% if with_price  %}
@@ -59,7 +64,7 @@
         </div>
       </div>
     {% endif %}
-    <div class="image-background-container"></div>
+    <div {{ paragraph_attributes.addClass(paragraph_classes, image_class) }} ></div>
     <div{{ attributes.addClass(classes) }}>
       {% block content %}
         {{ content|without('field_d_background_color', 'field_d_image_background') }}
