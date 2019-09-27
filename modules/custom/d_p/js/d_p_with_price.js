@@ -13,8 +13,8 @@
             var $this = $(this);
             if (cssClass == null) {
               if ($this.hasClass('with-price')) {
-                $this.find('.with-price-data')[0].innerHTML = price;
-                $this.find('.with-price-percentage')[0].innerHTML = change + '%';
+                $this.find('.with-price-data').html(price);
+                $this.find('.with-price-percentage').html(change + '%');'%';
                 if (change >= 0) {
                   $this.find('.with-price-arrow').removeClass('down').addClass('up');
                 } else {
@@ -23,8 +23,8 @@
               }
             } else {
               if ($this.hasClass(cssClass)) {
-                $this.find('.with-price-data')[0].innerHTML = price;
-                $this.find('.with-price-percentage')[0].innerHTML = change + '%';
+                $this.find('.with-price-data').html(price);
+                $this.find('.with-price-percentage').html(change + '%');
                 if (change >= 0) {
                   $this.find('.with-price-arrow').removeClass('down').addClass('up');
                 } else {
