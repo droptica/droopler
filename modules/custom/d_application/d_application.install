@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Re-import default config for a module
+ */
+function d_p_text_blocks_update_8001() {
+  $config_path = drupal_get_path('module', 'd_p_text_blocks') . '/config/install';
+  $config_source = new \Drupal\Core\Config\FileStorage($config_path);
+  \Drupal::service('config.installer')->installOptionalConfig($config_source);
+}
