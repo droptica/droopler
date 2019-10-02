@@ -62,6 +62,9 @@ function d_p_text_blocks_preprocess_field(&$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_paragraph().
+ */
 function d_p_text_blocks_preprocess_paragraph (&$variables) {
 
   $paragraph = $variables['paragraph'];
@@ -77,13 +80,10 @@ function d_p_text_blocks_preprocess_paragraph (&$variables) {
       }
       // Set background image if field is not empty.
       // This overrides background color settings.
-      $field_image = $paragraph->get('field_d_image_background') -> get(0);
+      $field_image = $paragraph->get('field_d_image_background')->get(0);
       if (!empty($field_image)) {
-
         d_p_generate_image_set($variables, $styles_ids, $bundle);
-
         $variables['image_class'] = $variables['text_class'] = 'col-md-12';
-
       }
       break;
   }
