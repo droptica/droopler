@@ -20,6 +20,8 @@ $d-p-banner-padding-top: 18.5% !default;
 $d-p-banner-padding-bottom: 14.5% !default;
 $d-p-banner-mobile-padding-top: 6.25rem !default;
 $d-p-banner-mobile-padding-bottom: 6.25rem !default;
+$d-p-banner-half-transparent-padding-top: 10% !default;
+$d-p-banner-half-transparent-padding-bottom: 10% !default;
 $d-p-banner-line-margin-top: $line-center-margin-top !default;
 $d-p-banner-line-margin-bottom: $line-center-margin-bottom !default;
 $d-p-banner-half-transparent-content-spacing: 10% !default;
@@ -104,6 +106,12 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     .content-wrapper {
       width: 100%;
       background: $d-p-banner-half-transparent-background-color;
+      padding-top: $d-p-banner-half-transparent-padding-top;
+      padding-bottom: $d-p-banner-half-transparent-padding-bottom;
+      @include media-breakpoint-down(sm) {
+        padding-top: $d-p-banner-mobile-padding-top;
+        padding-bottom: $d-p-banner-mobile-padding-bottom;
+      }
       @include media-breakpoint-up(lg) {
         width: 50%;
       }
