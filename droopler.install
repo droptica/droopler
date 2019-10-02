@@ -297,3 +297,13 @@ function droopler_update_8102() {
   }
   $updater->checklist()->saveProgress($progress);
 }
+
+
+/**
+ * Re-import default config for a module d_p_text_blocks
+ */
+function droopler_update_8103() {
+  $config_path = drupal_get_path('module', 'd_p_text_blocks') . '/config/install';
+  $config_source = new \Drupal\Core\Config\FileStorage($config_path);
+  \Drupal::service('config.installer')->installOptionalConfig($config_source);
+}

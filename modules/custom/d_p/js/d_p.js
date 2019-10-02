@@ -34,7 +34,7 @@
                 "fade": fade_in,
               };
             }
-            
+
             var container_half_outer = $(this).next('.container-half').outerHeight();
             if (typeof container_half_outer !== 'undefined') {
               $(this).css('height', container_half_outer + 50 + 'px');
@@ -45,4 +45,23 @@
       }
     }
   };
+
+  /**
+   * Changes for Side by Side paragraph.
+   *
+   * @type {{attach: Drupal.behaviors.d_p_side_by_side.attach}}
+   */
+  Drupal.behaviors.d_p_side_by_side = {
+    attach: function (context, settings) {
+      var container = $('.d-p-side-by-side .items', context);
+      container.css('max-width', 'unset');
+      container.find('.items-wrapper .list-item-wrapper').each(function (key, value) {
+        var $this = $(this);
+        if (typeof($this.find('.image-background-container'))) {
+          $this.find('.user-image-background').css('background-color', 'unset');
+        }
+      });
+    }
+  };
+
 })(jQuery);
