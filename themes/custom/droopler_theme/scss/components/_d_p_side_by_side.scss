@@ -82,25 +82,8 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
         font-size: $font-main-header-size;
       }
     }
-
-    .field--name-field-d-cta-link {
-      a {
-        @extend .btn;
-        @extend .btn-danger;
-        @extend .mt-4;
-      }
-    }
-
   }
 
-  .item-1 {
-    .user-background-defined {
-      &::before {
-        //left: unset;
-        //right: 0;
-      }
-    }
-  }
   .item-1,
   .item-2 {
     .user-image-background {
@@ -116,10 +99,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
         display: block;
         z-index: -1;
         &.background-properties {
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
+          background-size: cover;;
           background-position: center center;
           background-repeat: no-repeat;
         }

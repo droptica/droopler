@@ -14,6 +14,7 @@ $arrow-margin-right: 2% !default;
 $arrow-margin-top: 6% !default
 $arrow-border: 9px solid transparent;
 $arrow-down-color: lighten($color-helen, 10%);
+$stripe-background-color: rgba(0,0,0, 0.57);
 
 .background {
   &-gray-light {
@@ -146,14 +147,14 @@ $arrow-down-color: lighten($color-helen, 10%);
 }
 
 .with-price-stripe {
-  background-color: rgba(0,0,0, 0.57);
-  min-width:170px;
+  background-color: $stripe-background-color;
+  min-width: 170px;
   height: 100%;
   padding: 0;
   position: absolute;
   right: 0;
   @include media-breakpoint-down(md) {
-    height: 100px;
+    height: 70px;
     width: 100%;
     bottom: 0;
     left: 0;
@@ -207,7 +208,7 @@ $arrow-down-color: lighten($color-helen, 10%);
     .with-price-arrow {
       width: 0;
       height: 0;
-      display:inline-block;
+      display: inline-block;
       margin-right: $arrow-margin-right;
       margin-top: $arrow-margin-top;
       border-left: $arrow-border;

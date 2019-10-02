@@ -12,7 +12,7 @@
         var $wrapper = $('.wrapper-d_p_single_text_block');
         if ($wrapper.hasClass('with-price')) {
           setInterval(function () {
-              var number = (2000 + Math.floor(Math.random() * 1000)) / 100;
+              var number = ((2000 + Math.floor(Math.random() * 1000)) / 100).toFixed(2);
 
               if (localStorage.getItem('price')) {
                 var oldPrice = localStorage.getItem('price');
