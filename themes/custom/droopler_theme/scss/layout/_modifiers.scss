@@ -11,10 +11,10 @@ $grid-border-color: $color-paris !default;
 $grid-border-type: solid $grid-border-color !default;
 $grid-border-width: 2px !default;
 $arrow-margin-right: 2% !default;
-$arrow-margin-top: 6% !default
-$arrow-border: 9px solid transparent;
-$arrow-down-color: lighten($color-helen, 10%);
-$stripe-background-color: rgba(0,0,0, 0.57);
+$arrow-margin-top: 6% !default;
+$arrow-border: 9px solid transparent !default;
+$arrow-down-color: lighten($color-helen, 10%) !default;
+$stripe-background-color: rgba(0,0,0, 0.57) !default;
 
 .background {
   &-gray-light {
