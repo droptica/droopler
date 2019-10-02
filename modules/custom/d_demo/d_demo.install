@@ -4,7 +4,7 @@
  * Implements hook_install().
  */
 function d_demo_install() {
-  if (module_exists('d_social_media')) {
+  if (\Drupal::moduleHandler()->moduleExists('d_social_media')) {
     $config = \Drupal::configFactory()->getEditable('d_social_media.settings')
       ->set('link_facebook', 'https://www.facebook.com/dropticacom/')
       ->set('link_twitter', 'https://twitter.com/droptica')
