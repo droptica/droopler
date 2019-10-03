@@ -138,25 +138,23 @@
       <div class="{{ container }}">
         {{ page.footer_main }}
         {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
-          <div class="site-footer__top clearfix">
-            <div class="row">
-              {% for i, region in filled_regions %}
-                {% set classes = '' %}
-                {% if filled_regions|length == i + 1  %}
-                  {% if (i + 1) % 2 == 1 %}
-                    {% set classes = 'col' %}
-                  {% else %}
-                    {% set classes = 'col-6 col-xl' %}
-                  {% endif %}
+          <div class="site-footer-blocks row">
+            {% for i, region in filled_regions %}
+              {% set classes = '' %}
+              {% if filled_regions|length == i + 1  %}
+                {% if (i + 1) % 2 == 1 %}
+                  {% set classes = 'col' %}
                 {% else %}
-                  {% set classes = 'col-6 col-xl-2' %}
+                  {% set classes = 'col-6 col-xl' %}
                 {% endif %}
+              {% else %}
+                {% set classes = 'col-6 col-xl-2' %}
+              {% endif %}
 
-                <div class="{{ classes }}">
-                  {{ page[region] }}
-                </div>
-              {% endfor %}
-            </div>
+              <div class="{{ classes }}">
+                {{ page[region] }}
+              </div>
+            {% endfor %}
           </div>
         {% endif %}
       </div>
