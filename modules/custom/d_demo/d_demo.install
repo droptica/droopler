@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\block\Entity\Block;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 function footer_block_content()
 {
@@ -79,7 +80,7 @@ function footer_block_placement() {
       'block_content:7f414b97-d117-41a8-8563-619355aa5772',
     ],
     'footer_second' => [
-
+      'system_menu_block:footer_example_menu',
     ],
     'footer_third' => [
       'block_content:bc6831a2-adc3-46f4-b940-1ff1f9b9307f',
@@ -98,18 +99,7 @@ function footer_block_placement() {
   ];
 }
 
-/**
- * Implements hook_install().
- */
-function d_demo_install() {
-  $config = \Drupal::configFactory()->getEditable('d_social_media.settings')
-    ->set('link_facebook', 'https://www.facebook.com/dropticacom/')
-    ->set('link_twitter', 'https://twitter.com/droptica')
-    ->set('link_youtube', 'https://www.youtube.com/channel/UCL_XD86NqAJppzw3w7QJqGw')
-    ->set('link_instagram', 'https://www.instagram.com/droptica/')
-    ->set('link_linkedin', 'https://www.linkedin.com/company/2947414')
-    ->save();
-
+function create_footer_blocks() {
   foreach (footer_block_content() as $uuid => $content) {
     $storage = \Drupal::entityTypeManager()->getStorage('block_content');
     $entity = $storage->create($content + ['uuid' => $uuid]);
@@ -136,12 +126,72 @@ function d_demo_install() {
   }
 }
 
+function create_footer_menu() {
+  \Drupal::entityTypeManager()->getStorage('menu')->create([
+    'id' => 'footer_example_menu',
+    'label' => 'Footer example menu',
+    'description' => 'Footer example menu'
+  ])->save();
+
+  $links = [
+    'Home' => '/',
+    'About' => '/about',
+    'Services' => '/services',
+    'Gallery' => '/gallery',
+    'Contact' => '/contact',
+  ];
+
+  foreach ($links as $label => $location) {
+    MenuLinkContent::create([
+      'title' => $label,
+      'link' => ['uri' => 'internal:' . $location],
+      'menu_name' => 'footer_example_menu',
+      'expanded' => true
+    ])->save();
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function d_demo_install() {
+  $config = \Drupal::configFactory()->getEditable('d_social_media.settings')
+    ->set('link_facebook', 'https://www.facebook.com/dropticacom/')
+    ->set('link_twitter', 'https://twitter.com/droptica')
+    ->set('link_youtube', 'https://www.youtube.com/channel/UCL_XD86NqAJppzw3w7QJqGw')
+    ->set('link_instagram', 'https://www.instagram.com/droptica/')
+    ->set('link_linkedin', 'https://www.linkedin.com/company/2947414')
+    ->save();
+
+  create_footer_menu();
+  create_footer_blocks();
+}
+
 function d_demo_uninstall() {
+  // Delete blocks.
+  $i = 0;
+  foreach (footer_block_placement() as $region => $blocks) {
+    foreach ($blocks as $block) {
+      $block = Block::load("footer_demo_block_$i");
+      if ($block) {
+        $block->delete();
+      }
+      $i++;
+    }
+  }
+
+  // Delete custom block content.
   foreach (array_keys(footer_block_content()) as $uuid) {
     $entity = \Drupal::service('entity.repository')->loadEntityByUuid('block_content', $uuid);
     if ($entity) {
       $entity->delete();
     }
+  }
+
+  // Delete custom menu.
+  $menu = \Drupal::entityTypeManager()->getStorage('menu')->load('footer_example_menu');
+  if ($menu) {
+    $menu->delete();
   }
 }
 

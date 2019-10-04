@@ -4,7 +4,7 @@
 
 // Colour variables used in this file.
 $footer-background: $color-troilus !default;
-$footer-text-color: $white !default;
+$footer-text-color: $gray-300 !default;
 
 @mixin font-footer-header {
   font-size: $font-size-vlg;
@@ -43,6 +43,16 @@ footer {
       ul {
         list-style-type: none;
         padding: 0;
+        display: block;
+
+        li a {
+          background-color: $footer-background;
+          color: $footer-text-color;
+
+          &:hover {
+            color: lighten($footer-text-color, 10%);
+          }
+        }
       }
     }
   }
