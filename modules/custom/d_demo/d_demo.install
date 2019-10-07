@@ -3,7 +3,12 @@
 use Drupal\block\Entity\Block;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 
-function footer_block_content()
+/**
+ * Defines custom blocks' content.
+ *
+ * @return array Block content configuration
+ */
+function d_demo_footer_block_content()
 {
   return [
     'b9b4924d-e0d3-454f-95c0-b30b91001c51' => [
@@ -72,7 +77,12 @@ function footer_block_content()
   ];
 }
 
-function footer_block_placement() {
+/**
+ * Defines block placement in footer regions.
+ *
+ * @return array Block placement configuration
+ */
+function d_demo_footer_block_placement() {
   return [
     'footer_first' => [
       'block_content:b9b4924d-e0d3-454f-95c0-b30b91001c51',
@@ -99,15 +109,24 @@ function footer_block_placement() {
   ];
 }
 
-function create_footer_blocks() {
-  foreach (footer_block_content() as $uuid => $content) {
+/**
+ * Creates blocks and places them in configured regions.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_demo_create_footer_blocks() {
+  // Create custom block content.
+  foreach (d_demo_footer_block_content() as $uuid => $content) {
     $storage = \Drupal::entityTypeManager()->getStorage('block_content');
     $entity = $storage->create($content + ['uuid' => $uuid]);
     $entity->save();
   }
 
+  // Place blocks.
   $i = 0;
-  foreach (footer_block_placement() as $region => $blocks) {
+  foreach (d_demo_footer_block_placement() as $region => $blocks) {
     foreach ($blocks as $block) {
       Block::create([
         'id' => "footer_demo_block_$i",
@@ -126,7 +145,14 @@ function create_footer_blocks() {
   }
 }
 
-function create_footer_menu() {
+/**
+ * Creates a Menu example block to be placed in the footer.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_demo_create_footer_menu() {
   \Drupal::entityTypeManager()->getStorage('menu')->create([
     'id' => 'footer_example_menu',
     'label' => 'Footer example menu',
@@ -163,14 +189,17 @@ function d_demo_install() {
     ->set('link_linkedin', 'https://www.linkedin.com/company/2947414')
     ->save();
 
-  create_footer_menu();
-  create_footer_blocks();
+  d_demo_create_footer_menu();
+  d_demo_create_footer_blocks();
 }
 
+/**
+ * Implements hook_uninstall().
+ */
 function d_demo_uninstall() {
   // Delete blocks.
   $i = 0;
-  foreach (footer_block_placement() as $region => $blocks) {
+  foreach (d_demo_footer_block_placement() as $region => $blocks) {
     foreach ($blocks as $block) {
       $block = Block::load("footer_demo_block_$i");
       if ($block) {
@@ -181,7 +210,7 @@ function d_demo_uninstall() {
   }
 
   // Delete custom block content.
-  foreach (array_keys(footer_block_content()) as $uuid) {
+  foreach (array_keys(d_demo_footer_block_content()) as $uuid) {
     $entity = \Drupal::service('entity.repository')->loadEntityByUuid('block_content', $uuid);
     if ($entity) {
       $entity->delete();

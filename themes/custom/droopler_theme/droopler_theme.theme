@@ -69,7 +69,7 @@ function droopler_theme_preprocess_page(&$variables) {
   $footer_regions = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
   $filled_regions = [];
   foreach ($footer_regions as $region) {
-    if ($variables['page']['footer_' . $region]) {
+    if (!empty($variables['page']['footer_' . $region])) {
       $filled_regions[] = 'footer_' . $region;
     }
   }
