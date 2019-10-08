@@ -345,25 +345,6 @@ function d_content_init_create_all() {
 }
 
 /**
- * Add footer to the website.
- *
- * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
- * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
- * @throws \Drupal\Core\Entity\EntityStorageException
- */
-function d_content_init_add_footer() {
-  // Footer block.
-  $config = \Drupal::config('system.site');
-  $footer = [
-    'info' => 'Footer',
-    'type' => 'content_block',
-    'field_d_main_title' => $config->get('name'),
-    'field_d_long_text' => $config->get('slogan'),
-  ];
-  d_content_init_save_entity($footer, 'block_content', '092dd69e-c6c4-4f0a-9780-ec15b89ec5b5');
-}
-
-/**
  * Removes all the content and recreates it again.
  */
 function d_content_init_recreate_content() {
