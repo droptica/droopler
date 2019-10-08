@@ -141,16 +141,13 @@
           <div class="site-footer-blocks row">
             {% for i, region in filled_regions %}
               {% if filled_regions|length == i + 1  %}
-                {% if (i + 1) % 2 == 1 %}
-                  {% set classes = 'col' %}
-                {% else %}
-                  {% set classes = ['col-6', 'col-xl'] %}
-                {% endif %}
+                {% set classes = i is odd ? 'col' : ['col-6', 'col-xl'] %}
               {% else %}
                 {% set classes = ['col-6', 'col-xl-2'] %}
               {% endif %}
 
-              <div{{ attributes.addClass(classes) }}>
+              {% set footer_attributes = create_attribute() %}
+              <div{{ footer_attributes.addClass(classes) }}>
                 {{ page[region] }}
               </div>
             {% endfor %}
