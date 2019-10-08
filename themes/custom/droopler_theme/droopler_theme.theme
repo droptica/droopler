@@ -65,6 +65,15 @@ function droopler_theme_preprocess_page(&$variables) {
   $variables['main_attributes'] = new Attribute($main_attributes);
   $variables['main_content_attributes'] = new Attribute($main_content_attributes);
   $variables['content_attributes'] = new Attribute($content_attributes);
+
+  $footer_regions = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
+  $filled_regions = [];
+  foreach ($footer_regions as $region) {
+    if (!empty($variables['page']['footer_' . $region])) {
+      $filled_regions[] = 'footer_' . $region;
+    }
+  }
+  $variables['filled_regions'] = $filled_regions;
 }
 
 /**

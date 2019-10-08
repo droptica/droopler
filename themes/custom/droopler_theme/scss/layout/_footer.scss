@@ -4,7 +4,7 @@
 
 // Colour variables used in this file.
 $footer-background: $color-troilus !default;
-$footer-text-color: $white !default;
+$footer-text-color: $gray-300 !default;
 
 @mixin font-footer-header {
   font-size: $font-size-vlg;
@@ -14,7 +14,7 @@ $footer-text-color: $white !default;
   }
 }
 @mixin font-footer-body {
-  font-size: $font-family-base;
+  font-size: $font-size-base;
   @include media-breakpoint-down(sm) {
     font-size: $font-size-sm;
   }
@@ -24,7 +24,39 @@ $footer-text-color: $white !default;
 footer {
   &.site-footer {
     font-family: $font-family-base;
+
+    .block {
+      border: none;
+    }
+
+    .site-footer-blocks .region {
+      h2 {
+        @include font-footer-body;
+        font-weight: bold;
+        color: $footer-text-color;
+      }
+
+      .content {
+        color: $footer-text-color;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        display: block;
+
+        li a {
+          background-color: $footer-background;
+          color: $footer-text-color;
+
+          &:hover {
+            color: lighten($footer-text-color, 10%);
+          }
+        }
+      }
+    }
   }
+
   background: $footer-background;
   color: $footer-text-color;
   .region-footer-main {

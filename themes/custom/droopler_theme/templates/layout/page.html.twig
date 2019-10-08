@@ -138,16 +138,19 @@
       <div class="{{ container }}">
         {{ page.footer_main }}
         {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
-          <div class="site-footer__top clearfix">
-            {{ page.footer_first }}
-            {{ page.footer_second }}
-            {{ page.footer_third }}
-            {{ page.footer_fourth }}
-          </div>
-        {% endif %}
-        {% if page.footer_fifth %}
-          <div class="site-footer__bottom">
-            {{ page.footer_fifth }}
+          <div class="site-footer-blocks row">
+            {% for i, region in filled_regions %}
+              {% if filled_regions|length == i + 1  %}
+                {% set classes = i is odd ? 'col' : ['col-6', 'col-xl'] %}
+              {% else %}
+                {% set classes = ['col-6', 'col-xl-2'] %}
+              {% endif %}
+
+              {% set footer_attributes = create_attribute() %}
+              <div{{ footer_attributes.addClass(classes) }}>
+                {{ page[region] }}
+              </div>
+            {% endfor %}
           </div>
         {% endif %}
       </div>

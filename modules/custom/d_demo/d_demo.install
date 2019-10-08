@@ -1,16 +1,226 @@
 <?php
 
+use Drupal\block\Entity\Block;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+
+/**
+ * Defines custom blocks' content.
+ *
+ * @return array Block content configuration
+ */
+function d_demo_footer_block_content()
+{
+  return [
+    'b9b4924d-e0d3-454f-95c0-b30b91001c51' => [
+      'info' => 'Footer Office 1',
+      'type' => 'content_block',
+      'field_d_main_title' => 'HEADQUARTERS',
+      'field_d_long_text' => [
+        'value' => '<p>ul. Duńska 9<br>54-427 Wrocław<br>Polska</p>',
+        'format' => 'full_html',
+      ],
+    ],
+    '012d4f2b-220f-4166-ab7a-84191dba9449' => [
+      'info' => 'Footer Office 2',
+      'type' => 'content_block',
+      'field_d_main_title' => 'EAST OFFICE',
+      'field_d_long_text' => [
+        'value' => '<p>ul. Warszawska 18<br>35-202 Rzeszów<br>Polska</p>',
+        'format' => 'full_html',
+      ],
+    ],
+    '7f414b97-d117-41a8-8563-619355aa5772' => [
+      'info' => 'Footer Office 3',
+      'type' => 'content_block',
+      'field_d_main_title' => 'WEST OFFICE',
+      'field_d_long_text' => [
+        'value' => '<p>ul. Warszawska 18<br>35-202 Rzeszów<br>Polska</p>',
+        'format' => 'full_html',
+      ],
+    ],
+    'bc6831a2-adc3-46f4-b940-1ff1f9b9307f' => [
+      'info' => 'Footer Menu Engines',
+      'type' => 'content_block',
+      'field_d_main_title' => 'Engines',
+      'field_d_long_text' => [
+        'value' => '<ul><li>Lorem tortor</li><li>Fringilla sed</li><li>Vestibulum id</li><li>Eleifend</li><li>Varius in purus</li></ul>',
+        'format' => 'full_html',
+      ],
+    ],
+    '51c6b43b-1d38-41b8-a548-3651400be249' => [
+      'info' => 'Footer Menu Integer',
+      'type' => 'content_block',
+      'field_d_main_title' => 'Integer',
+      'field_d_long_text' => [
+        'value' => '<ul><li>Eleifend</li><li>Varius in purus</li><li>Integer</li></ul>',
+        'format' => 'full_html',
+      ],
+    ],
+    '387a89cf-03e8-4f0b-8805-a35c84acf7c7' => [
+      'info' => 'Footer Menu Quisque',
+      'type' => 'content_block',
+      'field_d_main_title' => 'Quisque',
+      'field_d_long_text' => [
+        'value' => '<ul><li>Lorem tortor</li><li>Fringilla sed</li><li>Vestibulum id</li><li>Eleifend</li><li>Varius in purus</li><li>Integer</li></ul>',
+        'format' => 'full_html',
+      ],
+    ],
+    '80b1af1f-d6c9-48a4-a248-f78bd16a2972' => [
+      'info' => 'Footer Menu Eleifend',
+      'type' => 'content_block',
+      'field_d_main_title' => 'Eleifend',
+      'field_d_long_text' => [
+        'value' => '<ul><li>Varius in purus</li><li>Integer</li></ul>',
+        'format' => 'full_html',
+      ],
+    ],
+  ];
+}
+
+/**
+ * Defines block placement in footer regions.
+ *
+ * @return array Block placement configuration
+ */
+function d_demo_footer_block_placement() {
+  return [
+    'footer_first' => [
+      'block_content:b9b4924d-e0d3-454f-95c0-b30b91001c51',
+      'block_content:012d4f2b-220f-4166-ab7a-84191dba9449',
+      'block_content:7f414b97-d117-41a8-8563-619355aa5772',
+    ],
+    'footer_second' => [
+      'system_menu_block:footer_example_menu',
+    ],
+    'footer_third' => [
+      'block_content:bc6831a2-adc3-46f4-b940-1ff1f9b9307f',
+      'block_content:51c6b43b-1d38-41b8-a548-3651400be249',
+    ],
+    'footer_fourth' => [
+      'block_content:387a89cf-03e8-4f0b-8805-a35c84acf7c7',
+      'block_content:80b1af1f-d6c9-48a4-a248-f78bd16a2972',
+    ],
+    'footer_fifth' => [
+      'block_content:bc6831a2-adc3-46f4-b940-1ff1f9b9307f',
+    ],
+    'footer_sixth' => [
+      'social_media_block'
+    ],
+  ];
+}
+
+/**
+ * Creates blocks and places them in configured regions.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_demo_create_footer_blocks() {
+  // Create custom block content.
+  foreach (d_demo_footer_block_content() as $uuid => $content) {
+    $storage = \Drupal::entityTypeManager()->getStorage('block_content');
+    $entity = $storage->create($content + ['uuid' => $uuid]);
+    $entity->save();
+  }
+
+  // Place blocks.
+  $i = 0;
+  foreach (d_demo_footer_block_placement() as $region => $blocks) {
+    foreach ($blocks as $block) {
+      Block::create([
+        'id' => "footer_demo_block_$i",
+        'plugin' => $block,
+        'region' => $region,
+        'weight' => 0,
+        'theme' => \Drupal::config('system.theme')->get('default'),
+        'settings' => [
+          'label' => "Demo Block $i",
+          'label_display' => FALSE,
+        ],
+      ])->save();
+
+      $i++;
+    }
+  }
+}
+
+/**
+ * Creates a Menu example block to be placed in the footer.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_demo_create_footer_menu() {
+  \Drupal::entityTypeManager()->getStorage('menu')->create([
+    'id' => 'footer_example_menu',
+    'label' => 'Footer example menu',
+    'description' => 'Footer example menu'
+  ])->save();
+
+  $links = [
+    'Home' => '/',
+    'About' => '/about',
+    'Services' => '/services',
+    'Gallery' => '/gallery',
+    'Contact' => '/contact',
+  ];
+
+  foreach ($links as $label => $location) {
+    MenuLinkContent::create([
+      'title' => $label,
+      'link' => ['uri' => 'internal:' . $location],
+      'menu_name' => 'footer_example_menu',
+      'expanded' => true
+    ])->save();
+  }
+}
+
 /**
  * Implements hook_install().
  */
 function d_demo_install() {
-  if (\Drupal::moduleHandler()->moduleExists('d_social_media')) {
-    $config = \Drupal::configFactory()->getEditable('d_social_media.settings')
-      ->set('link_facebook', 'https://www.facebook.com/dropticacom/')
-      ->set('link_twitter', 'https://twitter.com/droptica')
-      ->set('link_youtube', 'https://www.youtube.com/channel/UCL_XD86NqAJppzw3w7QJqGw')
-      ->set('link_instagram', 'https://www.instagram.com/droptica/')
-      ->set('link_linkedin', 'https://www.linkedin.com/company/2947414')
-      ->save();
-    }
+  $config = \Drupal::configFactory()->getEditable('d_social_media.settings')
+    ->set('link_facebook', 'https://www.facebook.com/dropticacom/')
+    ->set('link_twitter', 'https://twitter.com/droptica')
+    ->set('link_youtube', 'https://www.youtube.com/channel/UCL_XD86NqAJppzw3w7QJqGw')
+    ->set('link_instagram', 'https://www.instagram.com/droptica/')
+    ->set('link_linkedin', 'https://www.linkedin.com/company/2947414')
+    ->save();
+
+  d_demo_create_footer_menu();
+  d_demo_create_footer_blocks();
 }
+
+/**
+ * Implements hook_uninstall().
+ */
+function d_demo_uninstall() {
+  // Delete blocks.
+  $i = 0;
+  foreach (d_demo_footer_block_placement() as $region => $blocks) {
+    foreach ($blocks as $block) {
+      $block = Block::load("footer_demo_block_$i");
+      if ($block) {
+        $block->delete();
+      }
+      $i++;
+    }
+  }
+
+  // Delete custom block content.
+  foreach (array_keys(d_demo_footer_block_content()) as $uuid) {
+    $entity = \Drupal::service('entity.repository')->loadEntityByUuid('block_content', $uuid);
+    if ($entity) {
+      $entity->delete();
+    }
+  }
+
+  // Delete custom menu.
+  $menu = \Drupal::entityTypeManager()->getStorage('menu')->load('footer_example_menu');
+  if ($menu) {
+    $menu->delete();
+  }
+}
+
