@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.blog_posts_category.field_d_blog_category
     - taxonomy.vocabulary.blog_posts_category
   module:
     - path
@@ -20,14 +19,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_d_blog_category:
-    weight: 31
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   langcode:
     type: language_select
     weight: 2
