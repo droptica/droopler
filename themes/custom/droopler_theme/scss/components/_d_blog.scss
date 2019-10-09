@@ -45,19 +45,14 @@ $d-blog-header-text-distance-from-bottom: -0.25rem !default;
 $d-blog-header-text-distance-from-top-mobile: 40% !default;
 $d-blog-size-of-large-desktop: 1400px !default;
 
-.node--type-blog-post {
+article.node--type-blog-post {
 
-  #main {
-    margin: 0 ! important;
-    max-width: 100vw;
-  }
-
-  .node .field--type-image {
+  .field--type-image {
     float: none;
     margin-right: 0;
   }
 
-  .blog_post_header {
+  .blog-post-header {
     z-index: 1;
     min-height: $d-blog-header-min-height-mobile;
 
@@ -76,15 +71,20 @@ $d-blog-size-of-large-desktop: 1400px !default;
       }
     }
 
-    .blog_post_header_absolute_wrapper {
+    .blog-post-header-wrapper {
       color: $d-blog-font-color;
       position: absolute;
       bottom: $d-blog-header-text-distance-from-bottom;
-      width: 100%;
+      left: 50%;
       text-align: center;
-      padding-left: $d-blog-header-padding;
-      padding-right: $d-blog-header-padding;
+      //padding-left: $d-blog-header-padding;
+      //padding-right: $d-blog-header-padding;
       word-wrap: break-word;
+
+      .blog-post-header-wrapper-inner {
+        position: relative;
+        left: -50%;
+      }
 
       h1 {
         font-size: $d-blog-header-desktop-font-size;
@@ -129,7 +129,7 @@ $d-blog-size-of-large-desktop: 1400px !default;
     }
 
     @media all and (min-width: map-get($container-max-widths, xl))  and (max-width: $d-blog-size-of-large-desktop) {
-      .blog_post_header_absolute_wrapper {
+      .blog-post-header-wrapper {
         h1 {
           font-size: $d-blog-header-small-desktop-screen-font-size;
         }
@@ -137,7 +137,7 @@ $d-blog-size-of-large-desktop: 1400px !default;
     }
 
     @include media-breakpoint-down(lg) {
-      .blog_post_header_absolute_wrapper {
+      .blog-post-header-wrapper {
 
         bottom: 0;
         h1 {
@@ -157,8 +157,8 @@ $d-blog-size-of-large-desktop: 1400px !default;
   }
 
   @include media-breakpoint-down(xs)  {
-    .blog_post_header {
-      .blog_post_header_absolute_wrapper {
+    .blog-post-header {
+      .blog-post-header-wrapper {
         top: $d-blog-header-text-distance-from-top-mobile;
         transform: translateY(-50%);
         h1 {
@@ -277,13 +277,13 @@ $d-blog-size-of-large-desktop: 1400px !default;
   }
 
   @include media-breakpoint-up(xl) {
-    .blog_post_header {
+    .blog-post-header {
       min-height: $d-blog-header-min-height-small-desktop;
     }
   }
 
   @media all and (min-width: $d-blog-size-of-large-desktop)  {
-    .blog_post_header {
+    .blog-post-header {
       min-height: $d-blog-header-min-height-big-desktop;
     }
   }
