@@ -32,12 +32,26 @@ $submenu-mobile-background: $menu-mobile-link-border !default;
 
 $navbar-toggler-color: $color-agamemnon !default;
 
+$mega-menu-submenu-header-color: white !default;
+$mega-menu-submenu-color: white !default;
+$mega-menu-submenu-link-hover-color: darken($mega-menu-submenu-color, 25%) !default;
+
+$mega-menu-submenu-background-color: #262626 !default;
+
 // Font sizes
 $menu-font-size: $font-size-lg !default;
 $menu-mobile-font-size: $font-size-lg !default;
 $submenu-font-size: $font-size-base !default;
 $menu-dropdown-size: 2.3rem !default; // Size of the dropdown arrow
 $navbar-toggler-size: 2.3rem !default; // Size of the toggler arrow
+
+$mega-menu-submenu-font-family: "Lato" !default;
+$mega-menu-submenu-font-weight: bold !default;
+
+$mega-menu-submenu-font-size: 1rem !default;
+$mega-menu-submenu-header-font-family: $mega-menu-submenu-font-family !default;
+$mega-menu-submenu-header-font-weight: 400 !default;
+$mega-menu-submenu-header-font-size: 25px !default;
 
 // Paddings, margins and heights.
 $menu-dropdown-width: 4rem !default;  // Width of desktop dropdown icon (desktop)
@@ -53,10 +67,86 @@ $submenu-link-padding-x: 1.4rem !default; // Horizontal padding of submenu eleme
 $submenu-link-height: 2.9rem !default; // Height of links in submenu (desktop)
 $submenu-mobile-link-height: $menu-mobile-main-link-height !default; // Height of links in submenu (mobile)
 
+$mega-menu-submenu-padding: 2rem 15% !default;
+$mega-menu-submenu-link-padding-y: 9px !default;
+$mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
+
 // The main menu region for >= LG
 @include media-breakpoint-up(lg) {
   .region-primary-menu {
     height: $menu-main-link-height;
+
+    .navbar {
+      position: static;
+    }
+  }
+}
+
+// Mega menu
+.navbar-we-mega-menu {
+  @include media-breakpoint-up(lg) {
+    .we-mega-menu-ul {
+      position: static;
+
+      .we-mega-menu-li.dropdown-menu {
+        position: static;
+
+        .we-mega-menu-submenu {
+          position: absolute;
+          left: 0;
+          top: $header-height;
+          width: 100vw;
+
+          padding: $mega-menu-submenu-padding;
+
+          background-color: $mega-menu-submenu-background-color;
+
+          .block-inner {
+            font-family: $mega-menu-submenu-font-family;
+            font-weight: $mega-menu-submenu-font-weight;
+            font-size: $mega-menu-submenu-font-size;
+            color: $mega-menu-submenu-color;
+
+            h2 {
+              font-family: $mega-menu-submenu-header-font-family;
+              font-weight: $mega-menu-submenu-header-font-weight;
+              font-size: $mega-menu-submenu-header-font-size;
+              color: $mega-menu-submenu-header-color;
+              margin-bottom: $mega-menu-submenu-header-margin-bottom;
+            }
+
+            p {
+              padding: $mega-menu-submenu-link-padding-y 0;
+              margin-bottom: 0;
+            }
+
+            ul, ul.nav {
+              list-style-type: none;
+              padding-left: 0;
+              display: block;
+
+              li, li.nav-item {
+                padding: $mega-menu-submenu-link-padding-y 0;
+
+                a:hover {
+                  background-color: transparent;
+                  border: none;
+                  color: $mega-menu-submenu-link-hover-color;
+                }
+              }
+
+              li.nav-item a {
+                border: none;
+                font-family: $mega-menu-submenu-font-family;
+                font-weight: $mega-menu-submenu-font-weight;
+                color: $mega-menu-submenu-color;
+                padding: 0;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
