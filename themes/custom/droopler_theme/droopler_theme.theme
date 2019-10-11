@@ -7,6 +7,7 @@
 
 use Drupal\Core\Link;
 use Drupal\Core\Template\Attribute;
+use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
  * Implements hook_preprocess_HOOK() for HTML document templates.
@@ -293,4 +294,20 @@ function droopler_theme_show_title_block() {
   $route_check = $route_name == 'view.blog_listing.page_1';
 
   return !($node_check || $route_check);
+}
+
+function droopler_theme_preprocess_we_megamenu_li(&$variables) {
+  if (empty($variables['subtree'])) return;
+
+  $rows_content = $variables['content']['#item_config']->rows_content[0];
+  $mega = false;
+  foreach ($rows_content as $col) {
+    if (isset($col->col_content->block_id)) {
+      $mega = true;
+    }
+  }
+
+  if ($mega) {
+    $variables['attributes']['class'][] = 'mega';
+  }
 }
