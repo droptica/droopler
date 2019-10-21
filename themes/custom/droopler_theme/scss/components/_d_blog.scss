@@ -11,7 +11,6 @@ $d-blog-image-opacity-for-blog: 50% !default;
 
 $d-blog-margin-between-html-paragraphs: 1.5rem !default;
 $d-blog-margin-between-blog-sections: 3rem !default;
-$d-blog-header-padding: 0.625rem !default;
 $d-blog-header-margin-mobile: 0.9375rem auto 0.9375rem !default;
 $d-blog-header-margin-tablet: 1.5625rem auto 1.375rem !default;
 $d-blog-header-margin-dekstop: 1.5625rem auto 2.1875rem !default;
@@ -55,6 +54,7 @@ article.node--type-blog-post {
   .blog-post-header {
     z-index: 1;
     min-height: $d-blog-header-min-height-mobile;
+    overflow: hidden;
 
     img {
       min-height: $d-blog-image-header-min-height;
@@ -77,14 +77,8 @@ article.node--type-blog-post {
       bottom: $d-blog-header-text-distance-from-bottom;
       left: 50%;
       text-align: center;
-      //padding-left: $d-blog-header-padding;
-      //padding-right: $d-blog-header-padding;
       word-wrap: break-word;
-
-      .blog-post-header-wrapper-inner {
-        position: relative;
-        left: -50%;
-      }
+      transform: translateX(-50%);
 
       h1 {
         font-size: $d-blog-header-desktop-font-size;
@@ -160,7 +154,6 @@ article.node--type-blog-post {
     .blog-post-header {
       .blog-post-header-wrapper {
         top: $d-blog-header-text-distance-from-top-mobile;
-        transform: translateY(-50%);
         h1 {
           font-size: $d-blog-header-mobile-font-size;
           margin: $d-blog-header-margin-mobile;

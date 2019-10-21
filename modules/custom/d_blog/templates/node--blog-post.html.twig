@@ -75,25 +75,23 @@
     {{ content.field_blog_main_image }}
 
     <div class="blog-post-header-wrapper container">
-      <div class="blog-post-header-wrapper-inner container">
-        {% if display_submitted %}
-          <div class="node__meta">
-            {{ author_picture }}
+      {% if display_submitted %}
+        <div class="node__meta">
+          {{ author_picture }}
 
-            {% block submitted %}
-              <span{{ author_attributes }} class="author_attributes">
-                {% trans %}{{ author_name }} /  {{ date }}{% endtrans %}
-              </span>
-            {% endblock %}
+          {% block submitted %}
+            <span{{ author_attributes }} class="author_attributes">
+              {% trans %}{{ author_name }} /  {{ date }}{% endtrans %}
+            </span>
+          {% endblock %}
 
-            {{ metadata }}
+          {{ metadata }}
 
-            <h1{{ title_attributes.addClass('node__title') }}>{{ label }}</h1>
-          </div>
-        {% endif %}
+          <h1{{ title_attributes.addClass('node__title') }}>{{ label }}</h1>
+        </div>
+      {% endif %}
 
-        {{ content.field_blog_category }}
-      </div>
+      {{ content.field_blog_category }}
     </div>
   </header>
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
