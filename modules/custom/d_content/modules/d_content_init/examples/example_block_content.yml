@@ -1,0 +1,27 @@
+info:
+  type: block_content
+  bundle: content_block
+  title: 'Example content block'
+
+# Placement of the block in region.
+placement:
+  langcode: en
+  theme: droopler_subtheme
+  region: content
+  weight: 0
+  settings:
+    status: true
+    provider: block_content
+    label: 'Example block label'
+    label_display: 0
+
+# Content block fields.
+fields:
+  field_text:
+    type: text
+    data: 'Some text'
+  field_long_text:
+    type: text_long
+    data:
+      - value: "<p>Some long text value</p>"
+        format: full_html
