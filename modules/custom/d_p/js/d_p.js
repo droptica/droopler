@@ -54,7 +54,6 @@
   Drupal.behaviors.d_p_side_by_side = {
     attach: function (context, settings) {
       var container = $('.d-p-side-by-side .items', context);
-      container.css('max-width', 'unset');
       container.find('.items-wrapper .list-item-wrapper').each(function (key, value) {
         var $this = $(this);
         if (typeof($this.find('.image-background-container'))) {

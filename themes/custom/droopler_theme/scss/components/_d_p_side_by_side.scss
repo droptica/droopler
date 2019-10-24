@@ -94,12 +94,13 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
       .image-background-container {
         position: absolute;
         height: 100%;
+        min-width: 50vw;
         top: 0;
-        right: 0;
+        left: unset;
         display: block;
         z-index: -1;
         &.background-properties {
-          background-size: cover;;
+          background-size: cover;
           background-position: center center;
           background-repeat: no-repeat;
         }
@@ -109,14 +110,14 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   .item-1 {
     .user-image-background {
       .image-background-container {
-        left: 0;
+        right: 0;
       }
     }
   }
   .item-2 {
     .user-image-background {
       .image-background-container {
-        right: 0;
+        left: 0;
       }
     }
   }
