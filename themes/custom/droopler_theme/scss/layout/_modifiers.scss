@@ -15,6 +15,9 @@ $arrow-margin-top: 6% !default;
 $arrow-border: 9px solid transparent !default;
 $arrow-down-color: lighten($color-helen, 10%) !default;
 $stripe-background-color: rgba(0,0,0, 0.57) !default;
+$image-background-padding-y: 110px !default;
+$tile-title-padding-y: 70px !default;
+$tiles-spacing: 10px !default;
 
 .background {
   &-gray-light {
@@ -68,7 +71,6 @@ $stripe-background-color: rgba(0,0,0, 0.57) !default;
 }
 
 .with-divider {
-
   .slick-track {
     height: 100%;
   }
@@ -225,3 +227,55 @@ $stripe-background-color: rgba(0,0,0, 0.57) !default;
   }
 }
 
+.tile {
+  padding: $image-background-padding-y 0 $tile-title-padding-y 0;
+  position: sticky;
+  cursor: pointer;
+  transform: scale(1);
+  transition: 0.3s;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: $tiles-spacing;
+  }
+
+  &:before {
+    content: none;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+    transition: 0.3s;
+  }
+
+  .image-background-container {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    display: block;
+    z-index: -1;
+    &.background-properties {
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    &.background-image {
+      z-index: -1 !important;
+    }
+  }
+
+  .paragraph {
+    h2 {
+      text-align: center;
+      color: $white;
+      font-size: 4vh;
+      @include media-breakpoint-down(md) {
+        font-size: 3vh;
+      }
+      &:after {
+        background: $white;
+        margin: 7px auto;
+      }
+    }
+  }
+}
