@@ -92,7 +92,7 @@
 
   {% if page.highlighted %}
     <div class="highlighted">
-      <aside class="{{ container }} section clearfix" role="complementary">
+      <aside class="container section clearfix" role="complementary">
         {{ page.highlighted }}
       </aside>
     </div>
@@ -100,7 +100,7 @@
   {% if page.featured_top %}
     {% block featured %}
       <div class="featured-top">
-        <aside class="featured-top__inner section {{ container }} clearfix"
+        <aside class="featured-top__inner section container clearfix"
                role="complementary">
           {{ page.featured_top }}
         </aside>
@@ -131,7 +131,7 @@
   </div>
   {% if page.featured_bottom_first or page.featured_bottom_second or page.featured_bottom_third %}
     <div class="featured-bottom">
-      <aside class="{{ container }} clearfix" role="complementary">
+      <aside class="container clearfix" role="complementary">
         {{ page.featured_bottom_first }}
         {{ page.featured_bottom_second }}
         {{ page.featured_bottom_third }}
@@ -140,19 +140,22 @@
   {% endif %}
   <footer class="site-footer">
     {% block footer %}
-      <div class="{{ container }}">
+      <div class="container">
         {{ page.footer_main }}
         {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
-          <div class="site-footer__top clearfix">
-            {{ page.footer_first }}
-            {{ page.footer_second }}
-            {{ page.footer_third }}
-            {{ page.footer_fourth }}
-          </div>
-        {% endif %}
-        {% if page.footer_fifth %}
-          <div class="site-footer__bottom">
-            {{ page.footer_fifth }}
+          <div class="site-footer-blocks row">
+            {% for i, region in filled_regions %}
+              {% if filled_regions|length == i + 1  %}
+                {% set classes = i is odd ? 'col' : ['col-6', 'col-xl'] %}
+              {% else %}
+                {% set classes = ['col-6', 'col-xl-2'] %}
+              {% endif %}
+
+              {% set footer_attributes = create_attribute() %}
+              <div{{ footer_attributes.addClass(classes) }}>
+                {{ page[region] }}
+              </div>
+            {% endfor %}
           </div>
         {% endif %}
       </div>

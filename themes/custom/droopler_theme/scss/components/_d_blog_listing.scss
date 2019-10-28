@@ -29,6 +29,7 @@ $d-blog-teaser-blog-post-title-mobile: 1.0625rem !default;
 $d-blog-read-article-font-size: 0.9375rem !default;
 $d-blog-title-teaser-font-size-desktop: 2.375rem !default;
 $d-blog-title-teaser-padding-top-desktop: 18px !default;
+$d-blog-title-margin-bottom: 0px !default;
 $d-blog-teaser-text-padding-desktop-tab: 0 !default;
 $d-blog-teaser-text-margin-desktop-tab: 43px 0 !default;
 $d-blog-teaser-text-font-size-desktop: 1rem !default;
@@ -138,6 +139,10 @@ $d-blog-article-row-min-height: 420px !default;
 
   &:after {
     @include decoration-header-line-main-center;
+  }
+  h1 {
+    color: $color-odysseus;
+    margin-bottom: $d-blog-title-margin-bottom ;
   }
 }
 

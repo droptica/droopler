@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Droopler's theme implementation to display a node.
+ * Droopler's theme override to display a blog post.
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
@@ -71,19 +71,10 @@
 ] %}
 {% set date = node.created.value|date("d.m.Y") %}
 <article{{ attributes.addClass(classes) }}>
-  <header class="blog_post_header">
+  <header class="blog-post-header">
     {{ content.field_blog_main_image }}
 
-    <div class="blog_post_header_absolute_wrapper container-fluid">
-      {{ title_prefix }}
-      {% if not page %}
-        <h2{{ title_attributes.addClass('node__title') }}>
-          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-      {% endif %}
-
-      {{ title_suffix }}
-
+    <div class="blog-post-header-wrapper container">
       {% if display_submitted %}
         <div class="node__meta">
           {{ author_picture }}
@@ -96,11 +87,11 @@
 
           {{ metadata }}
 
-          <h1 class="col-md-8 col-xs-12">{{ node.title.value }} </h1>
-
-          {{ content.field_blog_category }}
+          <h1{{ title_attributes.addClass('node__title') }}>{{ label }}</h1>
         </div>
       {% endif %}
+
+      {{ content.field_blog_category }}
     </div>
   </header>
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>

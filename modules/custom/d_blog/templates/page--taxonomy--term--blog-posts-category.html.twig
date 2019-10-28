@@ -1,1 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override to display a blog taxonomy term.
+ *
+ * @see template_preprocess_page()
+ */
+#}
+
 {% extends "page--blog.html.twig" %}
+{% block content %}
+  <div{{ main_attributes.addClass('container-fluid').removeClass('container', 'py-4') }}>
+    <div class="row clearfix">
+      {{ page.breadcrumb }}
+      <main class="main-content">
+        <section class="section">
+          <a id="main-content" tabindex="-1"></a>
+          {{ page.content }}
+        </section>
+      </main>
+    </div>
+  </div>
+{% endblock %}
