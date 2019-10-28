@@ -172,15 +172,13 @@ abstract class ContentInitManagerBase {
    */
   protected function processField($field_name, array $field, EntityInterface &$entity) {
     if (!$entity->hasField($field_name)) {
-      // @todo: log list of the missing fields?
+      $this->logger->error($this->t('Missing field: @field', [
+        '@field' => $field_name,
+      ]));
       return FALSE;
     }
 
-    switch ($field['type']) {
-      default:
-        $entity->set($field_name, $field['data']);
-        break;
-    }
+    $entity->set($field_name, $field['data']);
     return $entity;
   }
 
