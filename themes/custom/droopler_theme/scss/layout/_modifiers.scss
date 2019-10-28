@@ -15,9 +15,11 @@ $arrow-margin-top: 6% !default;
 $arrow-border: 9px solid transparent !default;
 $arrow-down-color: lighten($color-helen, 10%) !default;
 $stripe-background-color: rgba(0,0,0, 0.57) !default;
-$image-background-padding-y: 110px !default;
-$tile-title-padding-y: 70px !default;
+$tile-padding-top: 110px !default;
+$tile-padding-bottom: 70px !default;
 $tiles-spacing: 10px !default;
+$tile-title-font-size-desktop: 4vh !default;
+$tile-title-font-size-mobile: 3vh !default;
 
 .background {
   &-gray-light {
@@ -228,8 +230,7 @@ $tiles-spacing: 10px !default;
 }
 
 .tile {
-  padding: $image-background-padding-y 0 $tile-title-padding-y 0;
-  position: sticky;
+  padding: $tile-padding-top 0 $tile-padding-bottom 0;
   cursor: pointer;
   transform: scale(1);
   transition: 0.3s;
@@ -267,13 +268,13 @@ $tiles-spacing: 10px !default;
   .paragraph {
     h2 {
       text-align: center;
-      color: $white;
-      font-size: 4vh;
+      color: $color-odysseus;
+      font-size: $tile-title-font-size-desktop;
       @include media-breakpoint-down(md) {
-        font-size: 3vh;
+        font-size: $tile-title-font-size-mobile;
       }
       &:after {
-        background: $white;
+        background: $color-odysseus;
         margin: 7px auto;
       }
     }
