@@ -1,0 +1,23 @@
+info:
+  type: block_content
+  bundle: content_block
+  title: 'Mega Menu Electric engines'
+
+# Placement of the block in region.
+placement:
+  langcode: en
+  theme: droopler_subtheme
+  settings:
+    status: true
+    provider: block_content
+
+# Content block fields.
+fields:
+  field_d_main_title:
+    type: text
+    data: 'Electric engines'
+  field_d_long_text:
+    type: text_long
+    data:
+      - value: "<ul><li>Lorem tortor</li><li>Dolor</li><li>Amet</li><li>Suspendisse</li></ul>"
+        format: full_html

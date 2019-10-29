@@ -31,7 +31,22 @@ function d_demo_content_structure_alter(&$structure, $context) {
       'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
       'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
     ]];
-    $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 30];
+    $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 30];
+    $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40];
+
+  }
+}
+
+/**
+ * Implements hook_block_structure_alter().
+ */
+function d_demo_block_structure_alter(&$structure, $context) {
+  $path = drupal_get_path('module', 'd_demo') . '/blocks';
+  if ($context == 'all') {
+    $structure['boats'] = ['file' => "$path/boats.yml"];
+    $structure['jet_engines'] = ['file' => "$path/jet_engines.yml"];
+    $structure['electric_engines'] = ['file' => "$path/electric_engines.yml"];
+    $structure['dolor'] = ['file' => "$path/dolor.yml"];
   }
 }
 
