@@ -307,15 +307,14 @@ function droopler_theme_show_title_block() {
 function droopler_theme_preprocess_we_megamenu_li(&$variables) {
   if (empty($variables['subtree'])) return;
 
-  $rows_content = $variables['content']['#item_config']->rows_content[0];
-  $mega = false;
-  foreach ($rows_content as $col) {
-    if (isset($col->col_content->block_id)) {
-      $mega = true;
-    }
-  }
+  if (isset($variables['content']['#item_config'])) {
+    $rows_content = $variables['content']['#item_config']->rows_content[0];
 
-  if ($mega) {
-    $variables['attributes']['class'][] = 'mega';
+    foreach ($rows_content as $col) {
+      if (isset($col->col_content->block_id)) {
+        $variables['attributes']['class'][] = 'mega';
+        break;
+      }
+    }
   }
 }
