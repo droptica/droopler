@@ -86,11 +86,11 @@ function droopler_install() {
  */
 function droopler_install_tasks() {
   $tasks = [
-    'd_content_init_create_all' => [
+    /*'d_content_init_create_all' => [
       'display' => TRUE,
       'display_name' => t('Init content'),
       'type' => 'normal',
-    ],
+    ],*/
     'droopler_enable_demo' => [
       'display' => TRUE,
       'display_name' => t('Install Demo'),
@@ -125,6 +125,8 @@ function droopler_enable_demo() {
 
   // Install modules.
   $modules = [
+    'd_product',
+    'd_product_init',
     'd_demo',
   ];
   $module_installer->install($modules, TRUE);
