@@ -8,25 +8,24 @@ field_page_section:
     data:
       field_d_main_title:
         type: text
-        data: Welcome to Droopler
+        data: Most efficient engines on the world
       field_d_subtitle:
         type: text
-        data: Build great websites quickly!
+        data: For cars, boats, planes and other
       field_d_image_background:
         type: image
-        data: d_demo/demo_droopler_bg.jpg
+        data: d_demo/d_demo_motor.jpg
         dst_dir: demo
       field_d_long_text:
         type: text_long
-        data: <p>Droopler is a modern and easy to use installation profile for Drupal 8.
-          This page contains a demo content that will help you understand Droopler better.
-          Just click around and see what you can use to build your website.</p>
+        data: <p>We produce the most powerful and efficient engines on the planet.
+          Check our incredible portfolio of different types of engines and choose the best option for you.</p>
       field_d_cta_link:
         type: cta
         data:
-          link: internal:/documentation
-          text: See yourself
-          class: btn-danger
+          link: internal:/product
+          text: Browse engines
+          class: btn btn-danger
       field_d_settings:
         type: field_p_configuration_storage
         custom_class: half-transparent
@@ -49,73 +48,87 @@ field_page_section:
           - field_d_image:
               type: image
               data:
-                - file: d_demo/demo_bag.svg
-                  alt: Bagel
+                - file: d_demo/d_demo_icon_download.svg
+                  alt: Download specs
               dst_dir: demo
             field_d_main_title:
               type: text
-              data: Lorem Ipsum
+              data: Download specs
             field_d_cta_link:
               type: cta
               data:
-                link: internal:/documentation/carousel-paragraph
-                text: Bagel
+                link: internal:/product
+                text: Download specs
           - field_d_image:
               type: image
               data:
-                - file: d_demo/demo_croissant.svg
-                  alt: Croissant
+                - file: d_demo/d_demo_icon_bag.svg
+                  alt: Find a job
               dst_dir: demo
             field_d_main_title:
               type: text
-              data: Dolor Amet
+              data: Find a job
             field_d_cta_link:
               type: cta
               data:
-                link: internal:/documentation/carousel-paragraph
-                text: Croissant
+                link: internal:/contact
+                text: Find a job
           - field_d_image:
               type: image
               data:
-                - file: d_demo/demo_bagel.svg
-                  alt: Bagel
+                - file: d_demo/d_demo_icon_cog.svg
+                  alt: Get support
               dst_dir: demo
             field_d_main_title:
               type: text
-              data: Lorem Ipsum
+              data: Get support
             field_d_cta_link:
               type: cta
               data:
-                link: internal:/documentation/carousel-paragraph
-                text: Bagel
+                link: internal:/contact
+                text: Get support
           - field_d_image:
               type: image
               data:
-                - file: d_demo/demo_croissant.svg
-                  alt: Croissant
+                - file: d_demo/d_demo_icon_file.svg
+                  alt: Find parts
               dst_dir: demo
             field_d_main_title:
               type: text
-              data: Dolor Amet
+              data: Find parts
             field_d_cta_link:
               type: cta
               data:
-                link: internal:/documentation/carousel-paragraph
-                text: Croissant
+                link: internal:/product
+                text: Find parts
           - field_d_image:
               type: image
               data:
-                - file: d_demo/demo_bagel.svg
-                  alt: Bagel
+                - file: d_demo/d_demo_icon_contact.svg
+                  alt: Contact us
               dst_dir: demo
             field_d_main_title:
               type: text
-              data: Lorem Ipsum
+              data: Contact us
             field_d_cta_link:
               type: cta
               data:
-                link: internal:/documentation/carousel-paragraph
-                text: Bagel
+                link: internal:/contact
+                text: Contact us
+          - field_d_image:
+              type: image
+              data:
+                - file: d_demo/d_demo_icon_more.svg
+                  alt: More
+              dst_dir: demo
+            field_d_main_title:
+              type: text
+              data: More
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/product
+                text: More
 
   - paragraph_type: d_p_group_of_text_blocks
     data:
@@ -127,15 +140,12 @@ field_page_section:
         data: Featured products
       field_d_long_text:
         type: text_long
-        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
-          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim.
-          Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur
-          consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo,
-          eget faucibus mauris egestas.</p>
+        data: <p>Since 2008, when company DrooplerEngines was founded, our engineers designed and produced many
+          world-class engines. Here we selected top of the top of our engines. Check their possibilities</p>
       field_d_cta_link:
         type: cta
         data:
-          link: internal:/documentation/text-blocks-paragraph
+          link: internal:/products
           text: View All
           options:
             attributes:
@@ -158,7 +168,7 @@ field_page_section:
               field_d_node_reference:
                 type: entity_reference
                 data:
-                  - target_id: 7
+                  target_id: 25
           - type: d_p_node
             data:
               field_d_display_mode:
@@ -167,7 +177,7 @@ field_page_section:
               field_d_node_reference:
                 type: entity_reference
                 data:
-                  target_id: 8
+                  target_id: 24
           - type: d_p_node
             data:
               field_d_display_mode:
@@ -176,7 +186,7 @@ field_page_section:
               field_d_node_reference:
                 type: entity_reference
                 data:
-                  target_id: 6
+                  target_id: 23
 
   - paragraph_type: d_p_side_by_side
     data:
@@ -191,7 +201,7 @@ field_page_section:
             data:
               field_d_main_title:
                 type: text
-                data: Solutions
+                data: Services
               field_d_background_color:
                 type: color
                 data:
@@ -201,11 +211,8 @@ field_page_section:
             data:
               field_d_long_text:
                 type: text_long
-                data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
-                  id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim.
-                  Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur
-                  consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo,
-                  eget faucibus mauris egestas.</p>
+                data: <p>In DrooplerEngines we not only produce world-class engines but also provide a lot
+                  of services related to engines. Check our services dedicated to your industry.</p>
               field_d_background_color:
                 type: color
                 data:
@@ -227,11 +234,11 @@ field_page_section:
             data:
               field_d_image_background:
                 type: image
-                data: d_demo/demo_car_1.jpg
+                data: d_demo/d_demo_tile_boat.jpg
                 dst_dir: demo
               field_d_main_title:
                 type: text
-                data: Boat engines
+                data: For boat manufacturers
               field_d_background_color:
                 type: color
                 data:
@@ -244,11 +251,11 @@ field_page_section:
             data:
               field_d_image_background:
                 type: image
-                data: d_demo/demo_car_2.jpg
+                data: d_demo/d_demo_tile_plane.jpg
                 dst_dir: demo
               field_d_main_title:
                 type: text
-                data: Plane engines
+                data: For airplane manufacturers
               field_d_background_color:
                 type: color
                 data:
@@ -261,11 +268,11 @@ field_page_section:
             data:
               field_d_image_background:
                 type: image
-                data: d_demo/demo_car_5.jpg
+                data: d_demo/d_demo_tile_car.jpg
                 dst_dir: demo
               field_d_main_title:
                 type: text
-                data: Electric engines
+                data: For car manufacturers
               field_d_background_color:
                 type: color
                 data:
@@ -278,11 +285,11 @@ field_page_section:
             data:
               field_d_image_background:
                 type: image
-                data: d_demo/demo_car_6.jpg
+                data: d_demo/d_demo_tile_spaceship.jpg
                 dst_dir: demo
               field_d_main_title:
                 type: text
-                data: Automotive engines
+                data: For space ship manufacturers
               field_d_background_color:
                 type: color
                 data:
@@ -311,17 +318,11 @@ field_page_section:
             data:
               field_d_icon:
                 type: image
-                data: d_demo/demo_bagel.svg
+                data: d_demo/d_demo_icon_boat.svg
                 dst_dir: demo
               field_d_main_title:
                 type: text
-                data: for boats
-              field_d_cta_link:
-                type: cta
-                data:
-                  link: internal:/documentation/text-blocks-paragraph
-                  text: Details
-                  options: {  }
+                data: Boatica
               field_d_background_color:
                 type: color
                 data:
@@ -331,17 +332,11 @@ field_page_section:
             data:
               field_d_icon:
                 type: image
-                data: d_demo/demo_bagel.svg
+                data: d_demo/d_demo_icon_plane.svg
                 dst_dir: demo
               field_d_main_title:
                 type: text
-                data: for planes
-              field_d_cta_link:
-                type: cta
-                data:
-                  link: internal:/documentation/text-blocks-paragraph
-                  text: Details
-                  options: {  }
+                data: Airplanes Pro
               field_d_background_color:
                 type: color
                 data:
@@ -351,17 +346,11 @@ field_page_section:
             data:
               field_d_icon:
                 type: image
-                data: d_demo/demo_bagel.svg
+                data: d_demo/d_demo_icon_car.svg
                 dst_dir: demo
               field_d_main_title:
                 type: text
-                data: for cars
-              field_d_cta_link:
-                type: cta
-                data:
-                  link: internal:/documentation/text-blocks-paragraph
-                  text: Details
-                  options: {  }
+                data: ABC Automotive
               field_d_background_color:
                 type: color
                 data:
@@ -378,8 +367,8 @@ field_page_section:
       field_d_cta_link:
         type: cta
         data:
-          link: internal:/examples/educational-website
-          text: Call To Action
+          link: internal:/blog
+          text: View all
 
   - paragraph_type: d_p_side_by_side
     data:
@@ -391,11 +380,11 @@ field_page_section:
             data:
               field_d_main_title:
                 type: text
-                data: Investor Relations
+                data: For investors
               field_d_cta_link:
                 type: cta
                 data:
-                  link: internal:/documentation/text-blocks-paragraph
+                  link: internal:/contact
                   text: Learn more
                   options:
                     attributes:
@@ -410,7 +399,7 @@ field_page_section:
                   opacity: 1
               field_d_image_background:
                 type: image
-                data: d_demo/demo_car_1.jpg
+                data: d_demo/d_demo_turbine.jpg
                 dst_dir: demo
               field_d_settings:
                 type: field_p_configuration_storage
@@ -423,7 +412,7 @@ field_page_section:
               field_d_cta_link:
                 type: cta
                 data:
-                  link: internal:/documentation/text-blocks-paragraph
+                  link: internal:/contact
                   text: Learn more
                   options:
                     attributes:
@@ -438,7 +427,7 @@ field_page_section:
                   opacity: 1
               field_d_image_background:
                 type: image
-                data: d_demo/demo_car_2.jpg
+                data: d_demo/d_demo_career.jpg
                 dst_dir: demo
               field_d_settings:
                 type: field_p_configuration_storage
