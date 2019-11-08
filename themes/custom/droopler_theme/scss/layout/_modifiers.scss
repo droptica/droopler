@@ -33,6 +33,7 @@ $tile-title-font-size-mobile: 3vh !default;
 .with-alt-line {
   .paragraph {
     .content > .field--name-field-d-main-title::after,
+    &.text-page .field--name-field-d-long-text:before,
     h2.field--name-field-d-main-title::after {
       background: $section-main-title-line-alt-color;
     }
@@ -278,5 +279,17 @@ $tile-title-font-size-mobile: 3vh !default;
         margin: 7px auto;
       }
     }
+  }
+}
+
+.no-padding-bottom {
+  .paragraph, & {
+    padding-bottom: 0 !important;
+  }
+}
+
+.no-padding-top {
+  .paragraph, & {
+    padding-top: 0 !important;
   }
 }

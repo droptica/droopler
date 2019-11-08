@@ -48,11 +48,6 @@
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
-      {% block paragraph_content %}
-        <div class="container text-center text-content">
-          {{ content|without('field_d_p_sbs_items') }}
-        </div>
-      {% endblock %}
       {% block tiles_content %}
         <div class="d-p-tiles-wrapper expandable-content">
           <div class="container items">
