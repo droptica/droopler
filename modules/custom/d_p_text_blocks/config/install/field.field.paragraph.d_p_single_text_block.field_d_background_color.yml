@@ -4,8 +4,6 @@ dependencies:
   config:
     - field.storage.paragraph.field_d_background_color
     - paragraphs.paragraphs_type.d_p_single_text_block
-  module:
-    - color_field
 id: paragraph.d_p_single_text_block.field_d_background_color
 field_name: field_d_background_color
 entity_type: paragraph
@@ -16,6 +14,5 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  opacity: 0
-field_type: color_field_type
+settings: {  }
+field_type: string
