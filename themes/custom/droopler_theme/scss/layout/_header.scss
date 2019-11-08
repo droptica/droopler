@@ -9,11 +9,13 @@ $logo-mobile-width: 12rem !default;
 $logo-mobile-padding-left: 1rem !default;
 $logo-md-width: 13.5rem !default;
 
-
 header.header {
   .site-logo img {
     max-width: 100%;
     max-height: $header-height - (2 * $navbar-padding-y);
+  }
+  .block-we-megamenu {
+    position: static;
   }
   .region-primary-menu {
     .region-we-mega-menu {
