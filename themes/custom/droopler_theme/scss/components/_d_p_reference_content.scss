@@ -17,11 +17,8 @@ $d-p-reference-content-content-padding: 5px !default;
     .field__item--wrapper {
       padding: 0 $d-p-reference-content-item-padding $d-p-reference-content-item-padding 0;
       @include media-breakpoint-up(lg) {
-        &:first-child {
-          margin-left: $d-p-reference-content-item-margin-left;
-        }
         &:last-child {
-          margin-right: $d-p-reference-content-item-margin-right;
+          padding-right: 0;
         }
       }
     }
