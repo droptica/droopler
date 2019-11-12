@@ -12,17 +12,13 @@ $d-p-reference-content-content-padding: 5px !default;
   .field--wrapper {
     overflow: hidden;
     @include media-breakpoint-down(lg) {
-      padding: 0 $d-p-reference-content-content-padding;
+      padding: 0 0 0 $d-p-reference-content-content-padding;
     }
     .field__item--wrapper {
-      padding: $d-p-reference-content-item-padding;
-      padding-left: 0;
+      padding: 0 $d-p-reference-content-item-padding $d-p-reference-content-item-padding 0;
       @include media-breakpoint-up(lg) {
-        &:first-child {
-          margin-left: $d-p-reference-content-item-margin-left;
-        }
         &:last-child {
-          margin-right: $d-p-reference-content-item-margin-right;
+          padding-right: 0;
         }
       }
     }
@@ -32,13 +28,6 @@ $d-p-reference-content-content-padding: 5px !default;
     &:after {
       @include decoration-header-line-main-center;
       background: $color-helen;
-    }
-  }
-  .field--name-field-d-cta-link {
-    margin-top: 50px;
-    a {
-      @extend .btn;
-      @extend .btn-danger;
     }
   }
 }
