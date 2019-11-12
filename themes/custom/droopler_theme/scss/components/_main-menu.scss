@@ -56,7 +56,7 @@ $submenu-mobile-link-height: $menu-mobile-main-link-height !default; // Height o
 // The main menu region for >= LG
 @include media-breakpoint-up(lg) {
   .region-primary-menu {
-    height: $menu-main-link-height;
+    min-height: $menu-main-link-height;
   }
 }
 

@@ -76,7 +76,10 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <nav class="navbar navbar-expand-lg">
-            <div class="collapse navbar-collapse" id="navbar-nav">
+            <div class="collapse navbar-collapse flex-column align-items-end" id="navbar-nav">
+              {% if page.secondary_menu %}
+                <div class="secondary-menu-region">{{ page.secondary_menu }}</div>
+              {% endif %}
               {% if page.primary_menu %}
                 <div class="menu-region">{{ page.primary_menu }}</div>
               {% endif %}
