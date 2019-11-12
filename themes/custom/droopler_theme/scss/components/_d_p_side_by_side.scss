@@ -20,13 +20,10 @@ $d-p-side-by-side-text-box-padding-y: $grid-gutter-width !default;
 $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
 $d-p-side-by-side-image-background-padding-y: 130px !default;
 
-.wrapper-d_p_side_by_side {
-  padding-top: $d-p-side-by-side-padding-y;
-  padding-bottom: $d-p-side-by-side-padding-y;
-}
-
 .d-p-side-by-side {
   text-align: center;
+  padding-top: $d-p-side-by-side-padding-y;
+  padding-bottom: $d-p-side-by-side-padding-y;
 
   > div > .field--name-field-d-icon {
     text-align: center;
