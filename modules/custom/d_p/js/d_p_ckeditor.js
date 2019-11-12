@@ -3,10 +3,12 @@
   Drupal.behaviors.customCKEditorConfig = {
     attach: function (context, settings) {
 
-      d_p_ckeditor(true);
+      $(context).ready(function() {
+        d_p_ckeditor(true);
+      })
 
       function d_p_ckeditor_geysir() {
-        if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.offsetParent.parentElement.offsetParent.children['geysir-modal-form'] !== 'undefined') {
+        if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.offsetParent.children['geysir-modal-form'] !== 'undefined') {
           if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document !== 'undefined') {
             d_p_add_reset_color_button();
             var doc = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document.$;
@@ -33,27 +35,49 @@
         }
       }
 
-      //Adding button next to choosing "Background color" to enable resetting to default color
+      // Add colorpicker and reset button, set background-color field to hidden.
       function d_p_add_reset_color_button() {
-        if (document.getElementsByClassName('form-type-color').length !== 0) {
-          var colors = document.getElementsByClassName('form-type-color');
+        if (document.getElementsByClassName('field--name-field-d-background-color').length !== 0) {
+          var colors = document.getElementsByClassName('field--name-field-d-background-color');
           var button = document.createElement('button');
           button.innerHTML = Drupal.t('Reset color');
           button.id = 'reset-button';
-          button.classList = 'button js-form-submit form-submit btn btn-primary';
-          button.onclick = d_p_reset_color;
+          button.classList = 'button js-form-submit form-submit btn btn-primary m-1';
+          $(button).click(function(e) {
+            e.preventDefault();
+            $(this).siblings('input[type=hidden]').val('');
+            $(this).siblings('input[type=color]').val('#ffffff').css('opacity', 0.3);
+            $(this).hide();
+          });
+
+          var colorpicker = document.createElement('input');
+          colorpicker.classList = 'm-1';
+          $(colorpicker).attr('type', 'color');
+          $(colorpicker).on('input', function(e) {
+            $(this).siblings('input[type=hidden]').val($(this).val());
+            $(this).css('opacity', 1);
+            $(this).siblings('button').show();
+          });
+
           for (var i = 0; i < colors.length; i++) {
-            if (colors[i].getElementsByTagName('button').length === 0) {
-              colors[i].appendChild(button);
+            var parent = colors[i].getElementsByTagName('fieldset')[0];
+            if (parent === undefined) {
+              parent = colors[i].getElementsByClassName('js-form-item')[0];
+            }
+            if (parent.getElementsByTagName('button').length === 0) {
+              var input = parent.getElementsByTagName('input')[0];
+              input.setAttribute('type', 'hidden');
+              parent.appendChild(colorpicker);
+              parent.appendChild(button);
+              $(colorpicker).val($(input).val() || '#ffffff').css('opacity', 1);
+              $(button).show();
+              if (!$(input).val()) {
+                $(button).hide();
+                $(colorpicker).css('opacity', 0.3);
+              }
             }
           }
         }
-      }
-
-      //Onclick 'reset-button' action that restores default value of background color
-      function d_p_reset_color(event) {
-        event.preventDefault();
-        event.target.previousElementSibling.value = '#000000';
       }
 
       function d_p_ckeditor_add_js(doc) {
