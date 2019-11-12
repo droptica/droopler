@@ -14,3 +14,13 @@ function d_social_media_theme($existing, $type, $theme, $path) {
     ],
    ];
 }
+
+/**
+ * Implements hook_block_structure_alter().
+ */
+function d_social_media_block_structure_alter(&$structure, $context) {
+  if ($context == 'all') {
+    $path = drupal_get_path('module', 'd_social_media') . '/blocks';
+    $structure['d_social_media_example'] = ['file' => "$path/d_social_media_example.yml"];
+  }
+}
