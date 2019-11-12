@@ -15,6 +15,11 @@ $arrow-margin-top: 6% !default;
 $arrow-border: 9px solid transparent !default;
 $arrow-down-color: lighten($color-helen, 10%) !default;
 $stripe-background-color: rgba(0,0,0, 0.57) !default;
+$tile-padding-top: 110px !default;
+$tile-padding-bottom: 70px !default;
+$tiles-spacing: 10px !default;
+$tile-title-font-size-desktop: 4vh !default;
+$tile-title-font-size-mobile: 3vh !default;
 
 .background {
   &-gray-light {
@@ -68,7 +73,6 @@ $stripe-background-color: rgba(0,0,0, 0.57) !default;
 }
 
 .with-divider {
-
   .slick-track {
     height: 100%;
   }
@@ -225,3 +229,54 @@ $stripe-background-color: rgba(0,0,0, 0.57) !default;
   }
 }
 
+.tile {
+  padding: $tile-padding-top 0 $tile-padding-bottom 0;
+  cursor: pointer;
+  transform: scale(1);
+  transition: 0.3s;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: $tiles-spacing;
+  }
+
+  &:before {
+    content: none;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+    transition: 0.3s;
+  }
+
+  .image-background-container {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    display: block;
+    z-index: -1;
+    &.background-properties {
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    &.background-image {
+      z-index: -1 !important;
+    }
+  }
+
+  .paragraph {
+    h2 {
+      text-align: center;
+      color: $color-odysseus;
+      font-size: $tile-title-font-size-desktop;
+      @include media-breakpoint-down(md) {
+        font-size: $tile-title-font-size-mobile;
+      }
+      &:after {
+        background: $color-odysseus;
+        margin: 7px auto;
+      }
+    }
+  }
+}

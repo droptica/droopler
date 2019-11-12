@@ -4,14 +4,13 @@
  * Implements hook_install().
  */
 function d_blog_install() {
-  \Drupal::service('entity.definition_update_manager')->applyUpdates();
-
   // Add configuration to TVI module
   // Taxonomy Views Integrator
   // Page of taxonomy blog_post is the same as view blog_listing.
   $entity_type = 'taxonomy_vocabulary';
   $entity_id = 'blog_posts_category';
 
+  // Enable TVI support.
   Drupal::configFactory()
     ->getEditable('tvi.' . $entity_type . '.' . $entity_id)
     ->set('enable_override', 1)
@@ -29,4 +28,11 @@ function d_blog_install() {
     ->removeCustomLinks()
     ->addCustomLink('/some/view/page', ['priority' => 0.5])
     ->generateSitemap();
+
+  // Setup Linkit to work with blog
+  $linkit = \Drupal::configFactory()->getEditable('linkit.linkit_profile.content_nodes');
+  $matchers = $linkit->get("matchers");
+  $keys = array_keys($matchers);
+  $uuid = reset($keys);
+  $linkit->set("matchers.$uuid.settings.bundles.blog_post", "blog_post")->save();
 }
