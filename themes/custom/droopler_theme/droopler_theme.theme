@@ -307,7 +307,7 @@ function droopler_theme_show_title_block() {
 function droopler_theme_preprocess_we_megamenu_li(&$variables) {
   if (empty($variables['subtree'])) return;
 
-  if (isset($variables['content']['#item_config'])) {
+  if (!empty($variables['content']['#item_config'])) {
     $rows_content = $variables['content']['#item_config']->rows_content[0];
 
     foreach ($rows_content as $col) {
