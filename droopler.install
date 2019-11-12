@@ -50,19 +50,11 @@ function droopler_install() {
   // Install init content. It will add an install task to be performed later.
   \Drupal::service('module_installer')->install(['d_content_init']);
 
-  // If subtheme is available install the blog.
-  // @TODO this should not really be here because this subtheme is not part of the distribution
-  if (isset($themes['droopler_subtheme'])) {
-    \Drupal::service('module_installer')->install(['d_blog']);
-    \Drupal::service('module_installer')->install(['d_blog_init']);
-
-    // Setup Linkit to work with blog
-    $linkit = \Drupal::configFactory()->getEditable('linkit.linkit_profile.content_nodes');
-    $matchers = $linkit->get("matchers");
-    $keys = array_keys($matchers);
-    $uuid = reset($keys);
-    $linkit->set("matchers.$uuid.settings.bundles.blog_post", "blog_post")->save();
-  }
+  // Enable blog and products by default.
+  \Drupal::service('module_installer')->install([
+    'd_blog',
+    'd_product'
+  ]);
 
   // Try to install custom init that alters the original one.
   try {
@@ -71,14 +63,6 @@ function droopler_install() {
   catch (\Drupal\Core\Extension\MissingDependencyException $e) {
     \Drupal::logger('droopler_install')->notice('Custom content init not detected.');
   }
-
-  // Apply updates.
-  try {
-    \Drupal::entityDefinitionUpdateManager()->applyUpdates();
-  }
-  catch (\Drupal\Core\Entity\EntityStorageException $e) {
-    watchdog_exception('droopler_install', $e);
-  }
 }
 
 /**
@@ -86,14 +70,14 @@ function droopler_install() {
  */
 function droopler_install_tasks() {
   $tasks = [
-    'd_content_init_create_all' => [
-      'display' => TRUE,
-      'display_name' => t('Init content'),
-      'type' => 'normal',
-    ],
     'droopler_enable_demo' => [
       'display' => TRUE,
       'display_name' => t('Install Demo'),
+      'type' => 'normal',
+    ],
+    'd_content_init_create_all' => [
+      'display' => TRUE,
+      'display_name' => t('Init content'),
       'type' => 'normal',
     ],
   ];
@@ -118,19 +102,15 @@ function _droopler_import_config($module, $name) {
 }
 
 /**
- * Install Demo module.
+ * Install all demo modules.
  */
 function droopler_enable_demo() {
-  $module_installer = \Drupal::service('module_installer');
-
-  // Install modules.
   $modules = [
+    'd_blog_init',
+    'd_product_init',
     'd_demo',
   ];
-  $module_installer->install($modules, TRUE);
-
-  // Recreate content.
-  d_content_init_recreate_content();
+  \Drupal::service('module_installer')->install($modules, TRUE);
 }
 
 /**

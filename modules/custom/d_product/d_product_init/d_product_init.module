@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Initialization of content for d_product module.
+ *
+ * d_product_init module.
+ */
+
+/**
+ * Alter content structure.
+ * Implements hook_content_structure_alter()
+ *
+ * @param $structure
+ *  The array with structure.
+ *
+ * @param $context
+ *  Which structure array is this?
+ */
+function d_product_init_content_structure_alter(&$structure, $context) {
+  $path = drupal_get_path('module', 'd_product_init') . '/pages';
+
+  if ($context == 'all') {
+    for ($i = 1; $i <= 3; $i++) {
+      $structure['product_' . $i] = ['file' => "$path/product_{$i}.yml"];
+    }
+  }
+}
+

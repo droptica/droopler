@@ -7,7 +7,7 @@ dependencies:
     - field.field.paragraph.d_p_reference_content.field_d_p_reference_content
     - paragraphs.paragraphs_type.d_p_reference_content
   module:
-    - link
+    - link_attributes
 id: paragraph.d_p_reference_content.default
 targetEntityType: paragraph
 bundle: d_p_reference_content
@@ -18,8 +18,15 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+      enabled_attributes:
+        id: false
+        name: false
+        target: true
+        rel: true
+        class: true
+        accesskey: false
     third_party_settings: {  }
-    type: link_default
+    type: link_attributes
     region: content
   field_d_main_title:
     weight: 0
