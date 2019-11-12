@@ -2,18 +2,19 @@ langcode: en
 status: true
 dependencies:
   module:
-    - color_field
     - paragraphs
 id: paragraph.field_d_background_color
 field_name: field_d_background_color
 entity_type: paragraph
-type: color_field_type
+type: string
 settings:
-  format: '#hexhex'
-module: color_field
+  max_length: 7
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true
 indexes: {  }
-persist_with_no_fields: false
+persist_with_no_fields: true
 custom_storage: false

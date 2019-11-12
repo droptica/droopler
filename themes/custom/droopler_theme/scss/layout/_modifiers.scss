@@ -34,6 +34,7 @@ $header-into-columns-padding-y: 3.875rem !default;
 .with-alt-line {
   .paragraph {
     .content > .field--name-field-d-main-title::after,
+    &.text-page .field--name-field-d-long-text:before,
     h2.field--name-field-d-main-title::after {
       background: $section-main-title-line-alt-color;
     }
@@ -305,4 +306,12 @@ $header-into-columns-padding-y: 3.875rem !default;
       }
     }
   }
+}
+
+.no-padding-bottom > .paragraph {
+  padding-bottom: 0;
+}
+
+.no-padding-top > .paragraph {
+  padding-top: 0;
 }
