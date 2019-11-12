@@ -304,16 +304,18 @@ function droopler_theme_show_title_block() {
   return !($node_check || $route_check);
 }
 
+/**
+ * Implements hook_preprocess_HOOK() for we_megamenu_li.
+ */
 function droopler_theme_preprocess_we_megamenu_li(&$variables) {
-  if (empty($variables['subtree'])) return;
-
-  if (!empty($variables['content']['#item_config'])) {
-    $rows_content = $variables['content']['#item_config']->rows_content[0];
-
-    foreach ($rows_content as $col) {
-      if (isset($col->col_content->block_id)) {
-        $variables['attributes']['class'][] = 'mega';
-        break;
+  if (isset($variables['content']['#item_config'])
+    && isset($variables['content']['#item_config']->rows_content)) {
+    foreach ($variables['content']['#item_config']->rows_content as $rows) {
+      foreach ($rows as $col) {
+        if (isset($col->col_content->block_id)) {
+          $variables['attributes']['class'][] = 'mega';
+          break;
+        }
       }
     }
   }
