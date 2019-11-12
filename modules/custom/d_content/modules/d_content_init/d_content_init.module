@@ -334,14 +334,18 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_create_all() {
-  // Set default structure.
-  $structure = [];
-
-  // Allow other modules to modify the structure.
+  $module_handler = \Drupal::moduleHandler();
   $context = 'all';
-  \Drupal::moduleHandler()->alter('content_structure', $structure, $context);
 
+  // Define content structure, allow other modules to modify it and create content.
+  $structure = [];
+  $module_handler->alter('content_structure', $structure, $context);
   d_content_init_add_nodes($structure);
+
+  // Define block structure, allow other modules to modify it and create blocks.
+  $structure = [];
+  $module_handler->alter('block_structure', $structure, $context);
+  Drupal::service('d_content_init.manager_block')->importFromFiles($structure);
 }
 
 /**

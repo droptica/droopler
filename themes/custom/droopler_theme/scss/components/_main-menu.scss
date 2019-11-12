@@ -32,12 +32,26 @@ $submenu-mobile-background: $menu-mobile-link-border !default;
 
 $navbar-toggler-color: $color-agamemnon !default;
 
+$mega-menu-submenu-header-color: white !default;
+$mega-menu-submenu-color: white !default;
+$mega-menu-submenu-link-hover-color: darken($mega-menu-submenu-color, 25%) !default;
+
+$mega-menu-submenu-background-color: #262626 !default;
+
 // Font sizes
 $menu-font-size: $font-size-lg !default;
 $menu-mobile-font-size: $font-size-lg !default;
 $submenu-font-size: $font-size-base !default;
 $menu-dropdown-size: 2.3rem !default; // Size of the dropdown arrow
 $navbar-toggler-size: 2.3rem !default; // Size of the toggler arrow
+
+$mega-menu-submenu-font-family: "Lato" !default;
+$mega-menu-submenu-font-weight: bold !default;
+
+$mega-menu-submenu-font-size: 1rem !default;
+$mega-menu-submenu-header-font-family: $mega-menu-submenu-font-family !default;
+$mega-menu-submenu-header-font-weight: 400 !default;
+$mega-menu-submenu-header-font-size: 25px !default;
 
 // Paddings, margins and heights.
 $menu-dropdown-width: 4rem !default;  // Width of desktop dropdown icon (desktop)
@@ -53,224 +67,126 @@ $submenu-link-padding-x: 1.4rem !default; // Horizontal padding of submenu eleme
 $submenu-link-height: 2.9rem !default; // Height of links in submenu (desktop)
 $submenu-mobile-link-height: $menu-mobile-main-link-height !default; // Height of links in submenu (mobile)
 
+$mega-menu-submenu-padding: 2rem 15% !default;
+$mega-menu-submenu-link-padding-y: 9px !default;
+$mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
+
 // The main menu region for >= LG
 @include media-breakpoint-up(lg) {
   .region-primary-menu {
-    min-height: $menu-main-link-height;
+    height: $menu-main-link-height;
+
+    .navbar {
+      position: static;
+    }
   }
 }
 
-// The main menu
-.main-menu {
-
-  // Menu link for >= LG
+.navbar-we-mega-menu {
   @include media-breakpoint-up(lg) {
-    &.navbar-nav {
+    ul.we-mega-menu-ul {
+      position: static;
 
-      // Menu <a> link (not submenu)
-      .nav-link {
-        font-size: $menu-font-size;
-        color: $menu-main-link-color;
-
-        // Remember about Bootstrap link padding.
-        line-height: $menu-main-link-height - (2 * $nav-link-padding-y);
-        height: $menu-main-link-height;
-        padding-left: $menu-main-link-padding-x;
-        padding-right: $menu-main-link-padding-x;
-
-        &:hover, &:focus {
-          color: $menu-main-link-hover-color;
-        }
-        &:active {
-          color: $menu-main-link-active-color;
-        }
-      }
-
-      // Menu <li> item with opened dropdown.
-      .menu-item--expanded {
-
-        padding-right: $menu-dropdown-width;
-
-        a.nav-link {
-          padding-right: 0;
-        }
-
-        // Menu item with expanded submenu.
-        .show {
-          a.nav-link {
-            &:focus, &:active {
-              outline: none;
-              -moz-outline-style: none
-            }
-          }
-        }
-
-        // Dropdown icon
-        .menu-dropdown-icon {
-          line-height: $menu-main-link-height - (2 * $nav-link-padding-y);
-          top: $nav-link-padding-y;
-          padding: 0;
-          width: $menu-dropdown-width;
-        }
-      }
-
-      // Submenu
-      .dropdown-menu {
-        padding: 0;
-        margin-top: -1 * ($menu-main-link-height / 5);
-        margin-left: $submenu-offset-left;
-        border-radius: 0;
-
-        // Submenu forced to show on hover
-        &.force-show {
-          display: block;
-        }
-
-        // Submenu item
-        .dropdown-item {
-          padding: 0;
-          &:active, &:hover, &.active:active, &.active:hover {
-            background: $submenu-link-hover-background;
-            a {
-              color: $submenu-link-hover-color;
-              text-decoration: none;
-            }
-          }
-          &.active {
-            background: transparent;
-          }
-          a {
-            color: $submenu-link-color;
-            font-size: $submenu-font-size;
-            padding: 0 $submenu-link-padding-x;
-            line-height: $submenu-link-height;
-            width: 100%;
-            display: block;
-          }
-        }
-      }
-    }
-  }
-
-  // Menu link for <= MD
-  @include media-breakpoint-down(md) {
-    &.navbar-nav {
-      background: $menu-mobile-background;
-
-      // Menu link (not submenu)
-      .nav-link {
-        color: $menu-mobile-link-color;
-        font-size: $menu-mobile-font-size;
-
-        //width: $menu-mobile-main-link-width;
-
-        border-bottom: 0.125rem solid $menu-mobile-link-border;
-        margin: 0 $menu-mobile-main-link-padding-x;
-        padding: 0;
-        line-height: $menu-mobile-main-link-height;
-        max-height: $menu-mobile-main-link-height;
-        text-align: center;
-      }
-
-      // Menu link with dropdown
-      .menu-item--expanded {
-        a.nav-link {
-          position: relative;
-
-          &:after {
-            // Position the icon as absolute
-            line-height: $menu-mobile-main-link-height;
-            max-height: $menu-mobile-main-link-height;
-            float: none;
-            position: absolute;
-            right: 0;
-            top: 0;
-          }
-        }
-        a.menu-dropdown-icon {
-          //right: (100% - $menu-mobile-main-link-width) / 2;
-          right: $menu-mobile-main-link-padding-x - $menu-dropdown-mobile-padding-x;
-          padding: 0 $menu-dropdown-mobile-padding-x;
-        }
-        &.show > a {
-            border-bottom: none;
-        }
-      }
-
-      // Last menu item
-      .nav-item:last-child {
-        .nav-link {
-          border-bottom: none;
-        }
-      }
-    }
-
-    // Dropdown menu
-    .dropdown-menu {
-      border: none;
-      padding: 0;
-
-      // Single <li>
-      .dropdown-item {
-        padding: 0;
-        background: $submenu-mobile-background;
-        list-style-type: none; // Leave for IE compatibility
-        list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7); // Leave for IE compatibility (css hack)
-
+      & > li.we-mega-menu-li {
         a {
-          font-size: $menu-mobile-font-size;
-          color: $menu-mobile-link-color;
-          border-bottom: 0.125rem solid $menu-mobile-background;
-          text-align: center;
-          line-height: $submenu-mobile-link-height;
-          max-height: $submenu-mobile-link-height;
-          margin: 0 $menu-mobile-main-link-padding-x;
-          padding: 0;
-          display: block;
+          background: transparent;
+        }
+        background: transparent;
+      }
 
-          &:hover, &:active, &:focus, .active {
-            text-decoration: none;
+      // Mega menu
+      li.we-mega-menu-li.dropdown-menu.mega {
+        position: static;
+
+        & > .we-mega-menu-submenu {
+          position: absolute;
+          left: 0;
+          top: $header-height;
+          width: 100vw;
+
+          padding: $mega-menu-submenu-padding;
+
+          background-color: $mega-menu-submenu-background-color;
+
+          .block-inner {
+            font-family: $mega-menu-submenu-font-family;
+            font-weight: $mega-menu-submenu-font-weight;
+            font-size: $mega-menu-submenu-font-size;
+            color: $mega-menu-submenu-color;
+
+
+            h2 {
+              font-family: $mega-menu-submenu-header-font-family;
+              font-weight: $mega-menu-submenu-header-font-weight;
+              font-size: $mega-menu-submenu-header-font-size;
+              color: $mega-menu-submenu-header-color;
+              margin-bottom: $mega-menu-submenu-header-margin-bottom;
+            }
+
+            p {
+              padding: $mega-menu-submenu-link-padding-y 0;
+              margin-bottom: 0;
+            }
+
+            ul, ul.nav {
+              list-style-type: none;
+              padding-left: 0;
+              display: block;
+
+              li, li.nav-item {
+                padding: $mega-menu-submenu-link-padding-y 0;
+
+                a:hover {
+                  background-color: transparent;
+                  border: none;
+                  color: $mega-menu-submenu-link-hover-color;
+                }
+              }
+
+              li.nav-item a {
+                border: none;
+                font-family: $mega-menu-submenu-font-family;
+                font-weight: $mega-menu-submenu-font-weight;
+                color: $mega-menu-submenu-color;
+                padding: 0;
+              }
+            }
           }
         }
+      }
 
-        &:last-child a {
-          border-bottom: none;
+      // Normal dropdown
+      li.we-mega-menu-li.dropdown-menu:not(.mega) {
+        & > .we-mega-menu-submenu {
+          padding: 0;
+          margin-left: $submenu-offset-left;
+          border-radius: 0;
+          white-space: nowrap;
+
+          // Submenu item
+          li.we-mega-menu-li {
+            padding: 0;
+            width: 100%;
+            &:active, &:hover, &.active:active, &.active:hover {
+              background: $submenu-link-hover-background;
+              a.we-mega-menu-li {
+                color: $submenu-link-hover-color;
+                text-decoration: none;
+              }
+            }
+            a.we-mega-menu-li {
+              color: $submenu-link-color;
+              font-size: $submenu-font-size;
+              padding: 0 $submenu-link-padding-x;
+              line-height: $submenu-link-height;
+              background: transparent;
+              width: 100%;
+              display: block;
+            }
+          }
         }
       }
     }
-  }
-
-  // Menu <li> with dropdown
-  .menu-item--expanded {
-
-    position: relative;
-
-    // Dropdown icon
-    .menu-dropdown-icon {
-      color: $menu-main-link-dropdown;
-      font-family: "fontello";
-      font-size: $menu-dropdown-size;
-      display: block;
-      position: absolute;
-      right: 0;
-      top: 0;
-      text-align: center;
-
-      &:before {
-        content: "\e804";
-      }
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
-
-    // Expanded submenu
-     &.show, &.force-show {
-       .menu-dropdown-icon:before {
-         content: "\e806";
-       }
-     }
   }
 }
 

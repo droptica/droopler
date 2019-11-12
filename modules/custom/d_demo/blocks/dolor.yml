@@ -1,0 +1,20 @@
+info:
+  type: block_content
+  bundle: content_block
+  title: 'Mega Menu Dolor'
+
+# Placement of the block in region.
+placement:
+  langcode: en
+  theme: droopler_subtheme
+  settings:
+    status: true
+    provider: block_content
+
+# Content block fields.
+fields:
+  field_d_long_text:
+    type: text_long
+    data:
+      - value: "<img src='/sites/default/files/styles/gallery_thumbnail/public/demo/demo_faces.jpg'/><h2>Dolor</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend porttitor urna, eget scelerisque odio mattis et. Sed scelerisque nisi sit amet tellus iaculis maximus.</p>"
+        format: full_html
