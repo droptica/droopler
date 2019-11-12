@@ -3,6 +3,7 @@
 namespace Drupal\d_content_init;
 
 use Drupal\Component\Serialization\SerializationInterface;
+use Drupal\Component\Uuid\UuidInterface;
 use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -16,6 +17,11 @@ use Drupal\we_megamenu\WeMegaMenuBuilder;
  * @package Drupal\d_content_init
  */
 class ContentInitManagerBlock extends ContentInitManagerBase {
+
+  /**
+   * @var \Drupal\Component\Uuid\UuidInterface
+   */
+  protected $uuid;
 
   /**
    * @var \Drupal\Core\Block\BlockManagerInterface
@@ -36,6 +42,8 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    *   Serialization interface.
    * @param \Drupal\Core\Logger\LoggerChannelFactory $logger_factory
    *   Logger channel factory.
+   * @param \Drupal\Component\Uuid\UuidInterface $uuid
+   *   UUID Interface.
    * @param \Drupal\Core\Block\BlockManagerInterface $block_manager
    *   Block manager interface.
    * @param ModuleHandlerInterface $module_handler
@@ -45,9 +53,11 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     EntityTypeManagerInterface $entity_manager,
     SerializationInterface $serialization,
     LoggerChannelFactory $logger_factory,
+    UuidInterface $uuid,
     BlockManagerInterface $block_manager,
     ModuleHandlerInterface $module_handler) {
     parent::__construct($entity_manager, $serialization, $logger_factory);
+    $this->uuid = $uuid;
     $this->blockManager = $block_manager;
     $this->moduleHandler = $module_handler;
   }
@@ -67,7 +77,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    */
   protected function createBlockPlugin(array $block) {
     $values = $this->getBaseBlockValues($block['info']);
-    $values['id'] = $values['id'] ?? 'block_plugin_' . time();
+    $values['id'] = $values['id'] ?? 'block_plugin_' . $this->uuid->generate();
     return $this->saveEntity('block', $values);
   }
 
