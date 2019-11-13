@@ -2,11 +2,10 @@ info:
   type: block_plugin
   plugin: 'social_media_block'
   langcode: en
-  theme: droopler_subtheme
-  region: footer_sixth
+  region: secondary_menu
   weight: 0
   settings:
     status: true
     provider: d_social_media
     label: 'Follow us'
-    label_display: 1
+    label_display: 0

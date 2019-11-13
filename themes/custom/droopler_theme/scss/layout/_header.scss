@@ -8,6 +8,7 @@ $logo-width: 20rem !default;
 $logo-mobile-width: 12rem !default;
 $logo-mobile-padding-left: 1rem !default;
 $logo-md-width: 13.5rem !default;
+$secondary-menu-link-colors: $color-iphis;
 
 header.header {
   .site-logo img {
@@ -78,6 +79,8 @@ header.header {
     margin-bottom: 0;
     min-height: inherit;
     border: none;
+    padding-left: 0;
+    padding-right: 0;
     // Reset content added by we_megamenu.
     &:after,
     &:before {
@@ -90,4 +93,19 @@ header.header {
       }
     }
   }
+
+  .secondary-menu-region {
+    p, a {
+      &:not(:hover) {
+        color: $secondary-menu-link-colors;
+      }
+    }
+
+    .social-media-wrapper {
+      ul li::after {
+        display: none;
+      }
+    }
+  }
+
 }

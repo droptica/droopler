@@ -8,6 +8,7 @@ use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 
@@ -34,6 +35,11 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
   protected $moduleHandler;
 
   /**
+   * @var \Drupal\Core\Extension\ThemeHandlerInterface
+   */
+  protected $themeHandler;
+
+  /**
    * ContentInitManagerBlock constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
@@ -48,6 +54,8 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    *   Block manager interface.
    * @param ModuleHandlerInterface $module_handler
    *   Module handler interface.
+   * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
+   *   Theme handler interface.
    */
   public function __construct(
     EntityTypeManagerInterface $entity_manager,
@@ -55,11 +63,13 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     LoggerChannelFactory $logger_factory,
     UuidInterface $uuid,
     BlockManagerInterface $block_manager,
-    ModuleHandlerInterface $module_handler) {
+    ModuleHandlerInterface $module_handler,
+    ThemeHandlerInterface $theme_handler) {
     parent::__construct($entity_manager, $serialization, $logger_factory);
     $this->uuid = $uuid;
     $this->blockManager = $block_manager;
     $this->moduleHandler = $module_handler;
+    $this->themeHandler = $theme_handler;
   }
 
   /**
@@ -78,6 +88,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
   protected function createBlockPlugin(array $block) {
     $values = $this->getBaseBlockValues($block['info']);
     $values['id'] = $values['id'] ?? 'block_plugin_' . $this->uuid->generate();
+    $this->getCurrentThemeIfNotDefined($values);
     return $this->saveEntity('block', $values);
   }
 
@@ -127,6 +138,8 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         'id' => 'block_content_' . $block_entity->uuid(),
         'plugin' => 'block_content:' . $block_entity->uuid(),
       ] + $this->getBaseBlockValues($block['placement']);
+
+      $this->getCurrentThemeIfNotDefined($values);
       return $this->saveEntity('block', $values);
     }
     return FALSE;
@@ -172,6 +185,8 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
       $parent_uuid = $this->searchForParentUuidInMegaMenuByTitle($menu_name, $parent_title);
 
       if ($parent_uuid) {
+        $this->getCurrentThemeIfNotDefined($block['we_megamenu']);
+
         $theme = $block['we_megamenu']['theme'];
         $col_config = $block['we_megamenu']['col_config'];
         $row = $block['we_megamenu']['row'];
@@ -261,4 +276,17 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     }
     return FALSE;
   }
+
+  /**
+   * Get current theme if has not been defined for this block.
+   *
+   * @param array $block_values
+   *   Block values.
+   */
+  protected function getCurrentThemeIfNotDefined(&$block_values) {
+    if (!isset($block_values['theme']) || empty($block_values['theme'])) {
+      $block_values['theme'] = $this->themeHandler->getDefault();
+    }
+  }
+
 }
