@@ -31,7 +31,31 @@ function d_demo_content_structure_alter(&$structure, $context) {
       'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
       'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
     ]];
-    $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 30];
+    $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 30];
+    $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40];
+
+  }
+}
+
+/**
+ * Implements hook_block_structure_alter().
+ */
+function d_demo_block_structure_alter(&$structure, $context) {
+  $path = drupal_get_path('module', 'd_demo') . '/blocks';
+  if ($context == 'all') {
+    $structure['boats'] = ['file' => "$path/mega_submenu_services_boats.yml"];
+    $structure['jet_engines'] = ['file' => "$path/mega_submenu_services_jet_engines.yml"];
+    $structure['electric_engines'] = ['file' => "$path/mega_submenu_services_electric_engines.yml"];
+    $structure['dolor'] = ['file' => "$path/mega_submenu_services_dolor.yml"];
+    $structure['footer_office_1'] = ['file' => "$path/footer_office_1.yml"];
+    $structure['footer_office_2'] = ['file' => "$path/footer_office_2.yml"];
+    $structure['footer_office_3'] = ['file' => "$path/footer_office_3.yml"];
+    $structure['footer_engines'] = ['file' => "$path/footer_engines.yml"];
+    $structure['footer_integer'] = ['file' => "$path/footer_integer.yml"];
+    $structure['footer_quisque'] = ['file' => "$path/footer_quisque.yml"];
+    $structure['footer_eleifend'] = ['file' => "$path/footer_eleifend.yml"];
+    $structure['footer_engines_5'] = ['file' => "$path/footer_engines_5.yml"];
+    $structure['footer_example_menu'] = ['file' => "$path/footer_example_menu.yml"];
   }
 }
 
