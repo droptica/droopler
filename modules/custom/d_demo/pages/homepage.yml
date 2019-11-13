@@ -188,36 +188,6 @@ field_page_section:
                 data:
                   target_id: 23
 
-  - paragraph_type: d_p_side_by_side
-    data:
-      field_d_settings:
-        type: field_p_configuration_storage
-        custom_class: full-width background-gray-light-2 with-alt-line
-      field_d_p_sbs_items:
-        type: paragraph_reference
-        subtype: paragraphs_wrapper
-        data:
-          - type: d_p_single_text_block
-            data:
-              field_d_main_title:
-                type: text
-                data: Services
-              field_d_background_color:
-                type: color
-                data:
-                  color: '#e4e4e4'
-                  opacity: 1
-          - type: d_p_single_text_block
-            data:
-              field_d_long_text:
-                type: text_long
-                data: <p>In DrooplerEngines we not only produce world-class engines but also provide a lot
-                  of services related to engines. Check our services dedicated to your industry.</p>
-              field_d_background_color:
-                type: color
-                data:
-                  color: '#e4e4e4'
-                  opacity: 1
   - paragraph_type: d_p_group_of_text_blocks
     data:
       field_d_number:
@@ -225,7 +195,14 @@ field_page_section:
         data: 4
       field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-tiles background-gray-light-2
+          custom_class: full-width with-tiles background-gray-light-2 header-into-columns with-alt-line
+      field_d_main_title:
+        type: text
+        data: Services
+      field_d_long_text:
+        type: text_long
+        data: <p>In DrooplerEngines we not only produce world-class engines but also provide a lot
+          of services related to engines. Check our services dedicated to your industry.</p>
       field_d_p_tb_block_reference:
         type: paragraph_reference
         subtype: paragraphs_wrapper

@@ -97,20 +97,34 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 
 .with-tiles {
+  @include media-breakpoint-down(md) {
+    .single-boxes-wrapper {
+      padding: 0 0 0 $d-p-text-blocks-tiles-spacing;
+    }
+  }
+
   .list-item-wrapper {
-    padding: 0 $d-p-text-blocks-tiles-spacing;
+    padding: 0 $d-p-text-blocks-tiles-spacing $d-p-text-blocks-tiles-spacing 0;
+
 
     .d-p-text-block {
       padding: $d-p-text-blocks-tiles-padding;
       @include media-breakpoint-down(md) {
-        margin-bottom: 2 * $d-p-text-blocks-tiles-spacing;
+        margin-bottom: 0;
       }
-      @include media-breakpoint-down(xs) {
-        margin-bottom: $d-p-text-blocks-tiles-spacing;
+    }
+
+    @include media-breakpoint-up(sm) {
+      > .geysir-field-paragraph-wrapper,
+      > .wrapper-d_p_single_text_block {
+          display: block;
+          height: 100%;
       }
     }
 
     @include media-breakpoint-up(lg) {
+      padding-bottom: 0;
+
       &:first-child {
         padding-left: 0;
       }
