@@ -30,6 +30,8 @@ $lang-dropdown-submenu-link-height: $submenu-link-height !default;
 $lang-dropdown-mobile-link-padding: 0.625rem !default;
 $lang-dropdown-mobile-padding: 1.25rem !default;
 
+$secondary-menu-lang-dropdown-height: 2.4rem !default;
+
 .block-language.dropdown {
 
   // Styling for desktop (>= LG)
@@ -154,6 +156,16 @@ $lang-dropdown-mobile-padding: 1.25rem !default;
           }
         }
       }
+    }
+  }
+}
+
+
+.region-secondary-menu {
+  .block-language.dropdown {
+    .dropdown-toggle {
+      line-height: $secondary-menu-lang-dropdown-height;
+      height: unset;
     }
   }
 }

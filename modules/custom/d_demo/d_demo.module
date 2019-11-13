@@ -57,6 +57,7 @@ function d_demo_block_structure_alter(&$structure, $context) {
     $structure['footer_engines_5'] = ['file' => "$path/footer_engines_5.yml"];
     $structure['footer_example_menu'] = ['file' => "$path/footer_example_menu.yml"];
     $structure['d_social_media_header'] = ['file' => "$path/d_social_media_header.yml"];
+    $structure['header_secondary_menu_lang_switcher'] = ['file' => "$path/demo_header_language_secondary_menu.yml"];
     $structure['d_social_media_footer'] = ['file' => "$path/d_social_media_footer.yml"];
   }
 }
