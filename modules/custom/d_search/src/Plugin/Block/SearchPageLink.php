@@ -25,7 +25,7 @@ class SearchPageLink extends BlockBase {
         '#type' => 'link',
         '#title' => 'Search',
         '#attributes' => [
-          'class' => 'search_page_link',
+          'class' => ['search-page-link'],
           'target' => '_self',
         ],
         '#url' => Url::fromRoute('search.view'),

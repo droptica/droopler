@@ -1,0 +1,19 @@
+// Colour variables used in this file.
+$d-search-page-link-color: $color-iphis;
+$d-search-page-link-color-hover: $link-hover-color;
+
+.block-search-page-link {
+  .search-page-link {
+    margin: 5px 10px 0 10px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    text-indent: -999px;
+    mask: url('/profiles/contrib/droopler/themes/custom/droopler_theme/images/search-icon.svg');
+    background-color: $d-search-page-link-color;
+
+    &:hover {
+      background-color: $d-search-page-link-color-hover;
+    }
+  }
+}

@@ -18,6 +18,9 @@ header.header {
   .block-we-megamenu {
     position: static;
   }
+  .region-secondary-menu {
+    display: flex;
+  }
   .region-primary-menu {
     .region-we-mega-menu {
       margin-bottom: 0;
@@ -102,8 +105,16 @@ header.header {
     }
 
     .social-media-wrapper {
-      ul li::after {
-        display: none;
+      ul {
+        padding: 0;
+        li {
+          &::after {
+            display: none;
+          }
+          a::before {
+            margin: 0;
+          }
+        }
       }
     }
   }

@@ -33,7 +33,6 @@ function d_demo_content_structure_alter(&$structure, $context) {
     ]];
     $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 30];
     $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40];
-
   }
 }
 
@@ -58,10 +57,9 @@ function d_demo_block_structure_alter(&$structure, $context) {
     $structure['footer_example_menu'] = ['file' => "$path/footer_example_menu.yml"];
     $structure['d_social_media_header'] = ['file' => "$path/d_social_media_header.yml"];
     $structure['d_social_media_footer'] = ['file' => "$path/d_social_media_footer.yml"];
-    $structure['d_social_media_footer'] = ['file' => "$path/header_search_link.yml"];
+    $structure['header_search_link'] = ['file' => "$path/header_search_link.yml"];
   }
 }
-
 
 /**
  * Implements hook_form_alter().
