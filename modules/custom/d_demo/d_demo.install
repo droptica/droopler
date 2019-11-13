@@ -48,6 +48,16 @@ function d_demo_install() {
     ->save();
 
   d_demo_create_footer_menu();
+
+  /** @var \Drupal\block\Entity\Block $languageSwitcherBlock */
+  $languageSwitcherBlock = Block::load('languageswitcher');
+
+  if ($languageSwitcherBlock) {
+    $languageSwitcherBlock
+      ->setRegion('secondary_menu')
+      ->setWeight(4)
+      ->save();
+  }
 }
 
 /**
