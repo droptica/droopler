@@ -68,7 +68,7 @@
   <header id="header" class="header" role="banner"
           aria-label="{{ 'Site header'|t }}">
     {% block head %}
-      <nav{{ navbar_attributes }}>
+      <nav{{ navbar_attributes.addClass('navbar-wrapper') }}>
         <div class="container no-padding-sm">
           <div class="navbar-brand d-flex align-items-center">
             {{ page.header }}

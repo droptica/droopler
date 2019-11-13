@@ -70,6 +70,10 @@ header.header {
       }
     }
   }
+  > nav.navbar-wrapper {
+    padding-top: $navbar-padding-y;
+    padding-bottom: $navbar-padding-y;
+  }
 
   .navbar {
     @include media-breakpoint-down(md) {
