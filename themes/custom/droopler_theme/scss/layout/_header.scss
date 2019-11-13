@@ -8,6 +8,7 @@ $logo-width: 20rem !default;
 $logo-mobile-width: 12rem !default;
 $logo-mobile-padding-left: 1rem !default;
 $logo-md-width: 13.5rem !default;
+$secondary-menu-link-colors: $color-iphis;
 
 header.header {
   .site-logo img {
@@ -94,6 +95,12 @@ header.header {
   }
 
   .secondary-menu-region {
+    p, a {
+      &:not(:hover) {
+        color: $secondary-menu-link-colors;
+      }
+    }
+
     .social-media-wrapper {
       ul li::after {
         display: none;

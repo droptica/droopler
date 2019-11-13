@@ -5,7 +5,7 @@
 // Colour variables used in this file.
 $light-gray-background: $color-hector !default;
 $light-gray-background-2: $color-paris !default;
-$divider-background: $color-priam !default;
+$divider-background: $color-iphis !default;
 $section-main-title-line-alt-color: $color-helen !default;
 $grid-border-color: $color-paris !default;
 $grid-border-type: solid $grid-border-color !default;
@@ -15,11 +15,12 @@ $arrow-margin-top: 6% !default;
 $arrow-border: 9px solid transparent !default;
 $arrow-down-color: lighten($color-helen, 10%) !default;
 $stripe-background-color: rgba(0,0,0, 0.57) !default;
-$tile-padding-top: 110px !default;
+$tile-padding-top: 70px !default;
 $tile-padding-bottom: 70px !default;
 $tiles-spacing: 10px !default;
 $tile-title-font-size-desktop: 4vh !default;
 $tile-title-font-size-mobile: 3vh !default;
+$header-into-columns-padding-y: 3.875rem !default;
 
 .background {
   &-gray-light {
@@ -33,6 +34,7 @@ $tile-title-font-size-mobile: 3vh !default;
 .with-alt-line {
   .paragraph {
     .content > .field--name-field-d-main-title::after,
+    &.text-page .field--name-field-d-long-text:before,
     h2.field--name-field-d-main-title::after {
       background: $section-main-title-line-alt-color;
     }
@@ -52,10 +54,6 @@ $tile-title-font-size-mobile: 3vh !default;
   .expandable-content {
     width: 100%;
     max-width: 100%;
-
-    .list-item-wrapper {
-      max-width: 100%;
-    }
   }
 
   &.with-tiles {
@@ -63,10 +61,7 @@ $tile-title-font-size-mobile: 3vh !default;
       @include media-breakpoint-up(lg) {
         width: 100%;
         max-width: 100%;
-
-        .list-item-wrapper {
-          max-width: 100%;
-        }
+        overflow: hidden;
       }
     }
   }
@@ -248,6 +243,12 @@ $tile-title-font-size-mobile: 3vh !default;
     transition: 0.3s;
   }
 
+  &.wrapper-d_p_single_text_block {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
   .image-background-container {
     position: absolute;
     height: 100%;
@@ -265,6 +266,10 @@ $tile-title-font-size-mobile: 3vh !default;
     }
   }
 
+  .d-p-text-block {
+    margin-bottom: 0;
+  }
+
   .paragraph {
     h2 {
       text-align: center;
@@ -279,4 +284,34 @@ $tile-title-font-size-mobile: 3vh !default;
       }
     }
   }
+}
+
+.header-into-columns {
+  .d-p-group-of-text-blocks {
+    @include media-breakpoint-up(md) {
+      .d-p-group-of-text-blocks-header-wrapper {
+        display: flex;
+        flex-direction: row;
+        margin-top: $header-into-columns-padding-y;
+        margin-bottom: $header-into-columns-padding-y;
+
+        > .field {
+          flex-basis: 100%;
+          text-align: left;
+          margin-bottom: 0;
+        }
+        .field--name-field-d-main-title::after {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+.no-padding-bottom > .paragraph {
+  padding-bottom: 0;
+}
+
+.no-padding-top > .paragraph {
+  padding-top: 0;
 }
