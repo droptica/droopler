@@ -102,10 +102,11 @@ $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-
         & > .we-mega-menu-submenu {
           position: absolute;
           left: 0;
-          top: $header-height;
+          top: 100%;
           width: 100vw;
           padding: $mega-menu-submenu-padding;
           background-color: $mega-menu-submenu-background-color;
+          margin-top: - 2 * $navbar-padding-y;
 
           .block-inner {
             font-family: $mega-menu-submenu-font-family;
