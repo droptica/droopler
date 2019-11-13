@@ -63,9 +63,5 @@ function d_demo_uninstall() {
   if ($menu) {
     $menu->delete();
   }
-
-  /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
-  $themeLogoService = \Drupal::service('d_demo.theme_logo');
-  $themeLogoService->unsetThemeDemoLogo();
 }
 
