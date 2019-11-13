@@ -8,7 +8,7 @@ placement:
   langcode: en
   theme: droopler_subtheme
   settings:
-    status: true
+    status: false
     provider: block_content
 
 # Content block fields.
@@ -21,3 +21,17 @@ fields:
     data:
       - value: "<ul><li>Lorem tortor</li><li>Dolor</li><li>Amet</li><li>Suspendisse</li><li>Maecenas</li><li>Malesuada elit</li></ul>"
         format: full_html
+
+# Mega menu configuration.
+we_megamenu:
+  menu_name: main
+  theme: droopler_subtheme
+  parent_title: "Services"
+  row: 0
+  col: 0
+  col_config:
+    hidewhencollapse: ""
+    type: "we-mega-menu-col"
+    width: 3
+    class: ""
+    block_title: 0

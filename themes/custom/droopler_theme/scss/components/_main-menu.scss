@@ -70,6 +70,7 @@ $submenu-mobile-link-height: $menu-mobile-main-link-height !default; // Height o
 $mega-menu-submenu-padding: 2rem 15% !default;
 $mega-menu-submenu-link-padding-y: 9px !default;
 $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
+$mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-y !default;
 
 // The main menu region for >= LG
 @include media-breakpoint-up(lg) {
@@ -103,9 +104,7 @@ $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !
           left: 0;
           top: $header-height;
           width: 100vw;
-
           padding: $mega-menu-submenu-padding;
-
           background-color: $mega-menu-submenu-background-color;
 
           .block-inner {
@@ -114,7 +113,6 @@ $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !
             font-size: $mega-menu-submenu-font-size;
             color: $mega-menu-submenu-color;
 
-
             h2 {
               font-family: $mega-menu-submenu-header-font-family;
               font-weight: $mega-menu-submenu-header-font-weight;
@@ -122,9 +120,14 @@ $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !
               color: $mega-menu-submenu-header-color;
               margin-bottom: $mega-menu-submenu-header-margin-bottom;
             }
+            .field--type-text-long {
+              h2 {
+                margin-top: $mega-menu-submenu-header-text-long-margin;
+              }
+            }
 
             p {
-              padding: $mega-menu-submenu-link-padding-y 0;
+              padding: 0 0 $mega-menu-submenu-link-padding-y 0;
               margin-bottom: 0;
             }
 
@@ -134,7 +137,7 @@ $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !
               display: block;
 
               li, li.nav-item {
-                padding: $mega-menu-submenu-link-padding-y 0;
+                padding: 0 0 $mega-menu-submenu-link-padding-y 0;
 
                 a:hover {
                   background-color: transparent;
