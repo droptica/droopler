@@ -26,7 +26,7 @@ function droopler_install() {
     ->save();
 
   \Drupal::configFactory()
-  ->getEditable('node.settings')
+    ->getEditable('node.settings')
     ->set('use_admin_theme', TRUE)
     ->save();
 
