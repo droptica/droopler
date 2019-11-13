@@ -42,7 +42,7 @@ class ThemeLogoService {
 
     $demoModulePath = $this->moduleHandler->getModule('d_demo')->getPath();
 
-    $this->setCurrentThemeDemoLogo('/' . $demoModulePath . '/assets/demo-logo.svg');
+    $this->setCurrentThemeDemoLogo($demoModulePath . '/assets/demo-logo.svg');
   }
 
   /**
