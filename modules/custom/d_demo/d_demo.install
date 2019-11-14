@@ -49,6 +49,10 @@ function d_demo_install() {
 
   d_demo_create_footer_menu();
 
+  /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
+  $themeLogoService = \Drupal::service('d_demo.theme_logo');
+  $themeLogoService->setThemeDemoLogo();
+
   /** @var \Drupal\block\Entity\Block $languageSwitcherBlock */
   $languageSwitcherBlock = Block::load('languageswitcher');
 
