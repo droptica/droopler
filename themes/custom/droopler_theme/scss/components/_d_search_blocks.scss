@@ -2,13 +2,18 @@
 $d-search-page-link-color: $color-iphis;
 $d-search-page-link-color-hover: $link-hover-color;
 
+// Margins, paddings and sizing.
+$d-search-page-link-margin: 5px 10px 0 10px;
+$d-search-page-link-size: 24px;
+$d-search-page-link-indent: -999px;
+
 .block-search-page-link {
   .search-page-link {
-    margin: 5px 10px 0 10px;
     display: block;
-    width: 24px;
-    height: 24px;
-    text-indent: -999px;
+    margin: $d-search-page-link-margin;
+    width: $d-search-page-link-size;
+    height: $d-search-page-link-size;
+    text-indent: $d-search-page-link-indent;
     mask: url('/profiles/contrib/droopler/themes/custom/droopler_theme/images/search-icon.svg');
     background-color: $d-search-page-link-color;
 
