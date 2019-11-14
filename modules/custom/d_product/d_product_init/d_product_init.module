@@ -21,9 +21,11 @@ function d_product_init_content_structure_alter(&$structure, $context) {
   $path = drupal_get_path('module', 'd_product_init') . '/pages';
 
   if ($context == 'all') {
+    $products = [];
     for ($i = 1; $i <= 3; $i++) {
-      $structure['product_' . $i] = ['file' => "$path/product_{$i}.yml"];
+      $products['product_' . $i] = ['file' => "$path/product_{$i}.yml", 'weight' => 0];
     }
+    $structure = $products + $structure;
   }
 }
 

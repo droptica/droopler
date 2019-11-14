@@ -168,7 +168,9 @@ field_page_section:
               field_d_node_reference:
                 type: entity_reference
                 data:
-                  target_id: 25
+                  target_search:
+                    title: "Classic Black Piano"
+                    type: d_product
           - type: d_p_node
             data:
               field_d_display_mode:
@@ -177,7 +179,9 @@ field_page_section:
               field_d_node_reference:
                 type: entity_reference
                 data:
-                  target_id: 24
+                  target_search:
+                    title: "Front Brown Natual Leather Seats for BMW Series 5 M 2012-2013 Before FL"
+                    type: d_product
           - type: d_p_node
             data:
               field_d_display_mode:
@@ -186,7 +190,9 @@ field_page_section:
               field_d_node_reference:
                 type: entity_reference
                 data:
-                  target_id: 23
+                  target_search:
+                    title: "High Class Classic Wooden Piano"
+                    type: d_product
 
   - paragraph_type: d_p_group_of_text_blocks
     data:
@@ -339,8 +345,8 @@ field_page_section:
       field_d_main_title:
         type: text
         data: Blog
-      field_d_p_reference_content:
-        type: entity_reference
+      # field_d_p_reference_content:
+      #   type: entity_reference
       field_d_cta_link:
         type: cta
         data:
