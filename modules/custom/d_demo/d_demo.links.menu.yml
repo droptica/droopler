@@ -2,27 +2,54 @@ d_demo.engines:
   title: 'Engines'
   description: 'List of engines'
   parent: main
-  route_name: '<front>'
+  route_name: '<none>'
   menu_name: main
   weight: -10
+  options:
+    fragment: 'engines'
 d_demo.engines_car:
-  title: 'Car engines'
+  title: 'Car Engines'
   description: 'List of car engines'
   parent: d_demo.engines
-  route_name: '<front>'
+  route_name: '<none>'
   menu_name: main
   weight: 0
+  options:
+    fragment: 'car-engines'
 d_demo.engines_boat:
-  title: 'Boat engines'
+  title: 'Boat Engines'
   description: 'List of boat engines'
   parent: d_demo.engines
-  route_name: '<front>'
+  route_name: '<none>'
   menu_name: main
   weight: 0
+  options:
+    fragment: 'boat-engines'
 d_demo.engines_aircraft:
-  title: 'Aircraft engines'
+  title: 'Aircraft Engines'
   description: 'List of aircraft engines'
   parent: d_demo.engines
-  route_name: '<front>'
+  route_name: '<none>'
   menu_name: main
   weight: 0
+  options:
+    fragment: 'aircraft-engines'
+
+d_demo.engines_car_diesel:
+  title: 'Diesel Engines'
+  description: 'List of diesel engines'
+  parent: d_demo.engines_car
+  route_name: '<none>'
+  menu_name: main
+  weight: 0
+  options:
+    fragment: 'diesel-engines'
+d_demo.engines_car_gasoline:
+  title: 'Gasoline Engines'
+  description: 'List of gasoline engines'
+  parent: d_demo.engines_car
+  route_name: '<none>'
+  menu_name: main
+  weight: 0
+  options:
+    fragment: 'gasoline-engines'

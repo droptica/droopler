@@ -72,8 +72,12 @@ $mega-menu-submenu-link-padding-y: 9px !default;
 $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
 $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-y !default;
 
-// The main menu region for >= LG
-@include media-breakpoint-up(lg) {
+$navbar-mobile-breakpoint: xl;
+$navbar-button-mobile-breakpoint: lg;
+
+
+// The main menu region for >= XL
+@include media-breakpoint-up($navbar-mobile-breakpoint) {
   .region-primary-menu {
     height: $menu-main-link-height;
 
@@ -84,7 +88,7 @@ $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-
 }
 
 .navbar-we-mega-menu {
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up($navbar-mobile-breakpoint) {
     ul.we-mega-menu-ul {
       position: static;
 
@@ -197,7 +201,7 @@ $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-
 button.navbar-toggler {
   display: none;
 }
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down($navbar-button-mobile-breakpoint) {
   button.navbar-toggler {
     display: block;
     z-index: 100;
@@ -231,6 +235,32 @@ button.navbar-toggler {
         content: "\e806";
         font-size: $menu-dropdown-size;
       }
+    }
+
+    &[aria-expanded="true"],
+    &.collapsing {
+      margin-right: 250px;
+      position: absolute;
+      right: 0;
+      transition: margin 100ms;
+    }
+
+  }
+
+  div#navbar-nav.collapsing
+  div#navbar-nav.show {
+    position: absolute !important;
+    width: 250px;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+    display: flex;
+    height: 100vh;
+    align-items: start;
+
+    .region-we-mega-menu {
+      padding: 0;
     }
   }
 }
