@@ -13,10 +13,10 @@ use Drupal\Core\Form\FormStateInterface;
 function d_demo_content_structure_alter(&$structure, $context) {
   $path = drupal_get_path('module', 'd_demo') . '/pages';
   if ($context == 'all') {
-    $structure['homepage'] = ['file' => "$path/homepage.yml"];
-    $structure['invest'] = ['file' => "$path/invest.yml", 'link' => 'Invest', 'weight' => 0];
-    $structure['product'] = ['file' => "$path/product.yml", 'link' => 'Product', 'weight' => 10];
-    $structure['documentation'] = ['file' => "$path/documentation.yml", 'link' => 'Docs', 'weight' => 20, 'children' => [
+    $structure['homepage'] = ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => -50];
+//    $structure['invest'] = ['file' => "$path/invest.yml", 'link' => 'Invest', 'weight' => 0];
+//    $structure['product'] = ['file' => "$path/product.yml", 'link' => 'Product', 'weight' => 10];
+    $structure['documentation'] = ['file' => "$path/documentation.yml", 'link' => 'Documentation', 'weight' => 30, 'children' => [
       'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
       'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
       'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
@@ -31,8 +31,8 @@ function d_demo_content_structure_alter(&$structure, $context) {
       'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
       'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
     ]];
-    $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 30];
-    $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40];
+    $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 20];
+//    $structure['contact'] = ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40];
   }
 }
 
@@ -113,4 +113,13 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
  */
 function d_demo_page_attachments (array &$page) {
   $page['#attached']['library'][] = 'd_demo/d_demo_random_price';
+}
+
+function d_demo_preprocess_page(&$variables) {
+
+}
+
+function d_demo_main_menu_alter() {
+  $mainMenu = Menu::load('main');
+
 }

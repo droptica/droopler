@@ -1,0 +1,28 @@
+d_demo.engines:
+  title: 'Engines'
+  description: 'List of engines'
+  parent: main
+  route_name: '<front>'
+  menu_name: main
+  weight: -10
+d_demo.engines_car:
+  title: 'Car engines'
+  description: 'List of car engines'
+  parent: d_demo.engines
+  route_name: '<front>'
+  menu_name: main
+  weight: 0
+d_demo.engines_boat:
+  title: 'Boat engines'
+  description: 'List of boat engines'
+  parent: d_demo.engines
+  route_name: '<front>'
+  menu_name: main
+  weight: 0
+d_demo.engines_aircraft:
+  title: 'Aircraft engines'
+  description: 'List of aircraft engines'
+  parent: d_demo.engines
+  route_name: '<front>'
+  menu_name: main
+  weight: 0

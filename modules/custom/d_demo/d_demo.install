@@ -2,6 +2,7 @@
 
 use Drupal\block\Entity\Block;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\system\Entity\Menu;
 
 /**
  * Creates a Menu example block to be placed in the footer.
@@ -34,6 +35,7 @@ function d_demo_create_footer_menu() {
     ])->save();
   }
 }
+
 
 /**
  * Implements hook_install().
