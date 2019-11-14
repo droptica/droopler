@@ -52,6 +52,16 @@ function d_demo_install() {
   /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
   $themeLogoService = \Drupal::service('d_demo.theme_logo');
   $themeLogoService->setThemeDemoLogo();
+
+  /** @var \Drupal\block\Entity\Block $languageSwitcherBlock */
+  $languageSwitcherBlock = Block::load('languageswitcher');
+
+  if ($languageSwitcherBlock) {
+    $languageSwitcherBlock
+      ->setRegion('secondary_menu')
+      ->setWeight(4)
+      ->save();
+  }
 }
 
 /**
