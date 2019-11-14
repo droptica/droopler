@@ -48,6 +48,10 @@ function d_demo_install() {
     ->save();
 
   d_demo_create_footer_menu();
+
+  /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
+  $themeLogoService = \Drupal::service('d_demo.theme_logo');
+  $themeLogoService->setThemeDemoLogo();
 }
 
 /**

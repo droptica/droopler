@@ -70,6 +70,10 @@ header.header {
       }
     }
   }
+  > nav.navbar-wrapper {
+    padding-top: $navbar-padding-y;
+    padding-bottom: $navbar-padding-y;
+  }
 
   .navbar {
     @include media-breakpoint-down(md) {
@@ -79,8 +83,7 @@ header.header {
     margin-bottom: 0;
     min-height: inherit;
     border: none;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
     // Reset content added by we_megamenu.
     &:after,
     &:before {

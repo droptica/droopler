@@ -115,10 +115,15 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     }
 
     @include media-breakpoint-up(sm) {
-      > .geysir-field-paragraph-wrapper,
-      > .wrapper-d_p_single_text_block {
+      > .geysir-field-paragraph-wrapper {
           display: block;
           height: 100%;
+      }
+      > .wrapper-d_p_single_text_block {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
       }
     }
 
