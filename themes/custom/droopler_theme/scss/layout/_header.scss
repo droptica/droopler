@@ -83,12 +83,21 @@ header.header {
     padding-bottom: $navbar-padding-y;
 
     @include media-breakpoint-down(lg) {
-      nav.navbar {
-        position: absolute !important;
+      nav.navbar-expand-xl {
+        position: fixed !important;
         right: 0;
-        width: 250px;
+        width: auto;
+        max-width: 250px;
         height: 100vh;
         top: 0;
+        z-index: 100;
+        background-color: white;
+        display: flex;
+        padding-top: 50px;
+
+        .navbar-collapse {
+          height: 100%;
+        }
       }
     }
   }
