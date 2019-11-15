@@ -35,6 +35,10 @@ header.header {
           width: 100%;
           left: 0;
 
+          @include media-breakpoint-down(lg) {
+            position: relative;
+          }
+
           .we-mega-menu-li {
             border: 0 none;
           }
