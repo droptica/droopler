@@ -27,13 +27,12 @@ header.header {
       padding: 0;
 
       .navbar {
-        padding: $navbar-padding-y 0;
+        padding: $navbar-padding-y 0 0;
         &.navbar-we-mega-menu {
           background-color: $color-odysseus;
           margin-bottom: 0;
           display: block;
           width: 100%;
-          position: relative;
           left: 0;
 
           .we-mega-menu-li {
@@ -80,17 +79,8 @@ header.header {
   }
   > nav.navbar-wrapper {
     padding-top: $navbar-padding-y;
-    padding-bottom: $navbar-padding-y;
-
-    @include media-breakpoint-down(lg) {
-      nav.navbar {
-        position: absolute !important;
-        right: 0;
-        width: 250px;
-        height: 100vh;
-        top: 0;
-      }
-    }
+    //padding-bottom: $navbar-padding-y;
+    padding-bottom: 0;
   }
   .navbar-expand-lg {
     padding-left: 0;

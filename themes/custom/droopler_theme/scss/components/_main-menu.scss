@@ -79,7 +79,7 @@ $navbar-button-mobile-breakpoint: lg;
 // The main menu region for >= XL
 @include media-breakpoint-up($navbar-mobile-breakpoint) {
   .region-primary-menu {
-    height: $menu-main-link-height;
+    //height: $menu-main-link-height;
 
     .navbar {
       position: static;
@@ -110,7 +110,7 @@ $navbar-button-mobile-breakpoint: lg;
           width: 100%;
           padding: $mega-menu-submenu-padding;
           background-color: $mega-menu-submenu-background-color;
-          margin-top: - 3 * $navbar-padding-y;
+          margin-top: - 20px;
 
           .block-inner {
             font-family: $mega-menu-submenu-font-family;
@@ -227,6 +227,7 @@ button.navbar-toggler {
     &[aria-expanded="false"] .navbar-toggler-icon:after {
       content: "\f008";
     }
+
     &[aria-expanded="true"] .navbar-toggler-icon {
       background: $menu-mobile-background;
 
@@ -238,27 +239,85 @@ button.navbar-toggler {
     }
 
     &[aria-expanded="true"],
-    &.collapsing {
+    &[aria-expanded="true"].collapsing {
       margin-right: 250px;
-      position: absolute;
+      position: fixed;
+      margin-top: 10px;
       right: 0;
-      transition: margin 100ms;
+      transition: margin-right 100ms;
+    }
+  }
+
+  button.navbar-toggler.collapsing[aria-expanded="false"] + nav.main-navbar,
+  button.navbar-toggler[aria-expanded="true"] + nav.main-navbar {
+    width: 250px !important;
+    display: block;
+  }
+  button.navbar-toggler.collapsing[aria-expanded="true"] + nav.main-navbar {
+    background-color: red !important;
+    width: 0 !important;
+  }
+
+  header.header > nav.navbar-wrapper {
+    @include media-breakpoint-down(lg) {
+      nav.main-navbar {
+        position: fixed !important;
+        width: 0;
+        right: 0;
+        top: 0;
+        z-index: 100;
+        background-color: white;
+        height: 100% !important;
+        align-items: start;
+        transition: width 100ms;
+
+        .navbar-inner {
+          padding-top: 25px;
+          border-left: 2px solid red;
+          height: 100%;
+        }
+
+        &.navbar-collapse2 {
+          //&.collapsing,
+          &.show {
+            width: 250px !important;
+          }
+        }
+
+        //&::before {
+        //  content: "x";
+        //  position: absolute;
+        //  width: 50px;
+        //  height: 50px;
+        //  background-color: red;
+        //  top: 50px;
+        //  margin-left: -55px;
+        //  left: auto;
+        //  display: flex;
+        //  justify-content: center;
+        //  align-items: center;
+        //}
+      }
+    }
+  }
+
+  body.toolbar-fixed {
+    nav.navbar-wrapper nav.main-navbar {
+      .navbar-inner {
+        padding-top: 50px;
+      }
     }
 
+    .toolbar-tray-open {
+
+      //.toolbar-horizontal {
+
+      //}
+    }
   }
 
   div#navbar-nav.collapsing
   div#navbar-nav.show {
-    position: absolute !important;
-    width: 250px;
-    right: 0;
-    top: 0;
-    z-index: 100;
-    background-color: white;
-    display: flex;
-    height: 100vh;
-    align-items: start;
-
     .region-we-mega-menu {
       padding: 0;
     }
