@@ -4,6 +4,56 @@ use Drupal\block\Entity\Block;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
+ * Creates menu with links, based on specified parameters.
+ *
+ * @param array $menu
+ *   Menu definition array.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_demo_create_menu_with_links(array $menu) {
+  \Drupal::entityTypeManager()->getStorage('menu')->create(
+    $menu['data']
+  )->save();
+
+  foreach ($menu['links'] as $key => $link) {
+    MenuLinkContent::create([
+      'title' => $link['title'],
+      'link' => ['uri' => 'internal:' . $link['url']],
+      'menu_name' => $menu['data']['id'],
+      'expanded' => $link['expanded'] ?? TRUE,
+      'weight' => $link['weight'] ?? $key,
+    ])->save();
+  }
+}
+
+/**
+ * Creates a secondary menu to be placed in the header.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_demo_create_secondary_menu() {
+  $secondary_menu = [
+    'data' => [
+      'id' => 'secondary_menu',
+      'label' => 'Secondary menu',
+      'description' => 'Secondary menu',
+    ],
+    'links' => [
+      ['title' => 'About Us', 'url' => '#'],
+      ['title' => 'For investors', 'url' => '#'],
+      ['title' => 'Careers', 'url' => '#'],
+      ['title' => 'Contact', 'url' => '/contact'],
+    ],
+  ];
+  d_demo_create_menu_with_links($secondary_menu);
+}
+
+/**
  * Creates a Menu example block to be placed in the footer.
  *
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
@@ -11,28 +61,21 @@ use Drupal\menu_link_content\Entity\MenuLinkContent;
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_demo_create_footer_menu() {
-  \Drupal::entityTypeManager()->getStorage('menu')->create([
-    'id' => 'footer_example_menu',
-    'label' => 'Footer example menu',
-    'description' => 'Footer example menu'
-  ])->save();
-
-  $links = [
-    'Home' => '/',
-    'About' => '/about',
-    'Services' => '/services',
-    'Gallery' => '/gallery',
-    'Contact' => '/contact',
+  $footer_menu = [
+    'data' => [
+      'id' => 'footer_example_menu',
+      'label' => 'Footer example menu',
+      'description' => 'Footer example menu'
+    ],
+    'links' => [
+      ['title' => 'Home', 'url' => '/'],
+      ['title' => 'About', 'url' => '/about'],
+      ['title' => 'Services', 'url' => '/services'],
+      ['title' => 'Gallery', 'url' => '/gallery'],
+      ['title' => 'Contact', 'url' => '/contact'],
+    ],
   ];
-
-  foreach ($links as $label => $location) {
-    MenuLinkContent::create([
-      'title' => $label,
-      'link' => ['uri' => 'internal:' . $location],
-      'menu_name' => 'footer_example_menu',
-      'expanded' => true
-    ])->save();
-  }
+  d_demo_create_menu_with_links($footer_menu);
 }
 
 /**
@@ -47,6 +90,7 @@ function d_demo_install() {
     ->set('link_linkedin', 'https://www.linkedin.com/company/2947414')
     ->save();
 
+  d_demo_create_secondary_menu();
   d_demo_create_footer_menu();
 
   /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
