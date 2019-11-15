@@ -54,31 +54,6 @@ function d_demo_create_secondary_menu() {
 }
 
 /**
- * Creates a Menu example block to be placed in the footer.
- *
- * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
- * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
- * @throws \Drupal\Core\Entity\EntityStorageException
- */
-function d_demo_create_footer_menu() {
-  $footer_menu = [
-    'data' => [
-      'id' => 'footer_example_menu',
-      'label' => 'Footer example menu',
-      'description' => 'Footer example menu'
-    ],
-    'links' => [
-      ['title' => 'Home', 'url' => '/'],
-      ['title' => 'About', 'url' => '/about'],
-      ['title' => 'Services', 'url' => '/services'],
-      ['title' => 'Gallery', 'url' => '/gallery'],
-      ['title' => 'Contact', 'url' => '/contact'],
-    ],
-  ];
-  d_demo_create_menu_with_links($footer_menu);
-}
-
-/**
  * Implements hook_install().
  */
 function d_demo_install() {
@@ -91,7 +66,6 @@ function d_demo_install() {
     ->save();
 
   d_demo_create_secondary_menu();
-  d_demo_create_footer_menu();
 
   /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
   $themeLogoService = \Drupal::service('d_demo.theme_logo');
