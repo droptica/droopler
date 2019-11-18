@@ -31,6 +31,7 @@ $menu-mobile-link-border: $color-menelaus !default;
 $submenu-mobile-background: $menu-mobile-link-border !default;
 
 $navbar-toggler-color: $color-agamemnon !default;
+$navbar-toggler-sidebar-spacing: 10px;
 
 $mega-menu-submenu-header-color: white !default;
 $mega-menu-submenu-color: white !default;
@@ -70,6 +71,8 @@ $mega-menu-submenu-padding: 2rem 15% !default;
 $mega-menu-submenu-link-padding-y: 9px !default;
 $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
 $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-y !default;
+
+$sidebar-animation-speed: 100ms;
 
 .navbar-inner {
   flex-direction: column;
@@ -229,7 +232,6 @@ button.navbar-toggler {
     &[aria-expanded="false"] .navbar-toggler-icon:after {
       content: "\f008";
     }
-
     &[aria-expanded="true"] .navbar-toggler-icon {
       background: $menu-mobile-background;
 
@@ -244,9 +246,9 @@ button.navbar-toggler {
     &[aria-expanded="true"].collapsing {
       margin-right: $navbar-mobile-sidebar-width;
       position: fixed;
-      margin-top: 10px;
+      margin-top: $navbar-toggler-sidebar-spacing;
       right: 0;
-      transition: margin-right 100ms;
+      transition: margin-right $sidebar-animation-speed;
     }
   }
 
@@ -267,14 +269,12 @@ button.navbar-toggler {
         right: 0;
         top: 0;
         z-index: 100;
-        background-color: white;
+        background-color: $color-odysseus;
         height: 100% !important;
         align-items: start;
-        transition: width 100ms;
+        transition: width $sidebar-animation-speed;
 
         .navbar-inner {
-          padding-top: 25px;
-          border-left: 2px solid red;
           height: 100%;
           display: flex;
           overflow-y: auto;
