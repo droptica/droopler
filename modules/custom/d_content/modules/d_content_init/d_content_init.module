@@ -150,6 +150,16 @@ function d_content_init_fill_field($entity, $name, $value) {
       }
       break;
     case 'entity_reference':
+      if (isset($value['data']['target_search'])) {
+        $target_entity_type = $value['data']['target_type'] ?? 'node';
+        if ($target_entity = d_content_init_find_entity_by_properties($value['data']['target_search'], $target_entity_type)) {
+          $entity->set($name, [['target_id' => $target_entity->id()]]);
+        }
+      }
+      else {
+        $entity->set($name, $value['data']);
+      }
+      break;
     case 'boolean':
     case 'number':
       $entity->set($name, $value['data']);
@@ -326,6 +336,27 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
   $data = file_get_contents("$dir/assets/$filename");
   $image = file_save_data($data, $directory . $filename, FILE_EXISTS_REPLACE);
   return $image;
+}
+
+/**
+ * Search for entity by its properties
+ *
+ * @param array $properties
+ *   Array of the properties.
+ * @param string $entity_type
+ *   Type of the entity to find.
+ *
+ * @return bool|\Drupal\Core\Entity\EntityInterface|FALSE
+ *   First found entity or FALSE.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function d_content_init_find_entity_by_properties(array $properties, $entity_type = 'node') {
+  $entities = \Drupal::entityTypeManager()
+    ->getStorage($entity_type)
+    ->loadByProperties($properties);
+  return $entities ? reset($entities) : FALSE;
 }
 
 /**
