@@ -3,7 +3,7 @@
 // Styleguide 3.3
 
 // Colour variables used in this file.
-$footer-background: $color-troilus !default;
+$footer-background: $color-cassandra !default;
 $footer-text-color: $color-thersites !default;
 $footer-header-color: $color-odysseus !default;
 $footer-header-margin: 0 0 1rem 0 !default;
@@ -25,7 +25,6 @@ $footer-link-hover: $color-odysseus !default;
     font-size: $font-size-sm;
   }
 }
-
 
 footer {
   &.site-footer {
@@ -107,6 +106,20 @@ footer {
     .block {
       text-align: center;
       border: 0;
+    }
+  }
+
+  .social-media-wrapper {
+    ul {
+      padding: 0;
+    }
+    .icons-wrapper {
+      .icon {
+        padding-left: 0;
+        &::before {
+          margin: 0;
+        }
+      }
     }
   }
 }
