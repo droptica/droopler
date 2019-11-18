@@ -107,7 +107,26 @@ header.header {
   }
   > nav.navbar-wrapper {
     padding-top: $navbar-padding-y;
-    padding-bottom: 0;
+    padding-bottom: $navbar-padding-y;
+
+    @include media-breakpoint-down(lg) {
+      nav.navbar-expand-xl {
+        position: fixed !important;
+        right: 0;
+        width: auto;
+        max-width: 250px;
+        height: 100vh;
+        top: 0;
+        z-index: 100;
+        background-color: white;
+        display: flex;
+        padding-top: 50px;
+
+        .navbar-collapse {
+          height: 100%;
+        }
+      }
+    }
   }
   .navbar-expand-lg {
     padding-left: 0;
