@@ -9,6 +9,9 @@ $logo-mobile-width: 12rem !default;
 $logo-mobile-padding-left: 1rem !default;
 $logo-md-width: 13.5rem !default;
 $secondary-menu-link-colors: $color-iphis !default;
+$secondary-menu-link-padding-top: 0.65rem !default;
+$secondary-menu-link-padding-bottom: 0.35rem !default;
+$header-menus-margin-spacing: 10px !default;
 
 header.header {
   .site-logo img {
@@ -20,7 +23,7 @@ header.header {
   }
   .region-primary-menu,
   .region-secondary-menu {
-    margin-top: 10px;
+    margin-top: $header-menus-margin-spacing;
   }
 
   .region-secondary-menu {
@@ -28,7 +31,8 @@ header.header {
     align-items: center;
 
     a.nav-link {
-      padding: 0.65rem 1rem 0.35rem;
+      padding-top: $secondary-menu-link-padding-top;
+      padding-bottom: $secondary-menu-link-padding-bottom;
     }
 
     ul {
@@ -36,7 +40,7 @@ header.header {
     }
 
     > * {
-      margin-left: 10px;
+      margin-left: $header-menus-margin-spacing;
 
       @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
         margin-left: 0;
@@ -57,7 +61,7 @@ header.header {
           display: block;
           width: 100%;
           left: 0;
-          //position: static;
+          position: static;
 
           @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
             position: relative;
@@ -75,10 +79,8 @@ header.header {
       }
     }
   }
-
   .navbar-brand {
     max-width: $logo-width;
-    margin-right: 0;
   }
   @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
     .navbar-brand {
@@ -108,10 +110,7 @@ header.header {
     padding-top: $navbar-padding-y;
     padding-bottom: 0;
   }
-  .navbar-expand-lg {
-    padding-left: 0;
-    padding-right: 0;
-  }
+
   .navbar {
     @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
       width: 100%;

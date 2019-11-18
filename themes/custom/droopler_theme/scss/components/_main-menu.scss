@@ -65,7 +65,6 @@ $menu-mobile-main-link-padding-x: 2.15rem !default; // Percentage width of menu 
 $submenu-offset-left: -1rem !default; // Move the submenu left or right (desktop)
 $submenu-link-padding-x: 1.4rem !default; // Horizontal padding of submenu element (desktop)
 $submenu-link-height: 2.9rem !default; // Height of links in submenu (desktop)
-$submenu-mobile-link-height: $menu-mobile-main-link-height !default; // Height of links in submenu (mobile)
 
 $mega-menu-submenu-padding: 2rem 15% !default;
 $mega-menu-submenu-link-padding-y: 9px !default;
@@ -88,20 +87,13 @@ $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-
         }
       }
 
-      & > li.we-mega-menu-li.dropdown-menu > a {
-        padding-right: 2.375rem;
-      }
-
       & > li.we-mega-menu-li,
       & > li.we-mega-menu-li.active-trail,
       & > li.we-mega-menu-li.active {
         a {
           text-transform: capitalize;
-          padding: 0.75rem 1.5625rem 0.75rem 1.5625rem;
-        }
-        a:hover,
-        a:focus {
-          color: $menu-main-link-hover-color;
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
         }
         background: transparent;
       }
@@ -110,19 +102,13 @@ $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-
         margin-right: -15px;
       }
 
-      & > li.we-mega-menu-li:hover {
-        a {
-          color: $menu-main-link-hover-color;
-        }
-      }
-
       // Mega menu
       li.we-mega-menu-li.dropdown-menu.mega {
         position: static;
 
         & > .we-mega-menu-submenu {
           position: absolute;
-          left: 1px;
+          left: 0;
           top: 100%;
           width: 100%;
           padding: $mega-menu-submenu-padding;
@@ -256,7 +242,7 @@ button.navbar-toggler {
 
     &[aria-expanded="true"],
     &[aria-expanded="true"].collapsing {
-      margin-right: 250px;
+      margin-right: $navbar-mobile-sidebar-width;
       position: fixed;
       margin-top: 10px;
       right: 0;
@@ -266,17 +252,17 @@ button.navbar-toggler {
 
   button.navbar-toggler.collapsing[aria-expanded="false"] + nav.main-navbar,
   button.navbar-toggler[aria-expanded="true"] + nav.main-navbar {
-    width: 250px !important;
+    width: $navbar-mobile-sidebar-width !important;
     display: block;
   }
   button.navbar-toggler.collapsing[aria-expanded="true"] + nav.main-navbar {
-    width: 0 !important;
+    width: 0;
   }
 
   header.header > nav.navbar-wrapper {
     @include media-breakpoint-down(lg) {
       nav.main-navbar {
-        position: fixed !important;
+        position: fixed;
         width: 0;
         right: 0;
         top: 0;
@@ -294,10 +280,8 @@ button.navbar-toggler {
           overflow-y: auto;
         }
 
-        &.navbar-collapse2 {
-          &.show {
-            width: 250px !important;
-          }
+        &.show {
+          width: $navbar-mobile-sidebar-width !important;
         }
       }
 
@@ -332,7 +316,7 @@ button.navbar-toggler {
     }
   }
 
-  div#navbar-nav.collapsing
+  div#navbar-nav.collapsing,
   div#navbar-nav.show {
     .region-we-mega-menu {
       padding: 0;
