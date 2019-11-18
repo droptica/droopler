@@ -9,10 +9,6 @@ $logo-mobile-width: 12rem !default;
 $logo-mobile-padding-left: 1rem !default;
 $logo-md-width: 13.5rem !default;
 $secondary-menu-link-colors: $color-iphis !default;
-$d-search-page-link-color-hover: $color-helen !default;
-
-$navbar-mobile-breakpoint-up: xl;
-$navbar-mobile-breakpoint-down: lg;
 
 header.header {
   .site-logo img {
@@ -22,18 +18,21 @@ header.header {
   .block-we-megamenu {
     position: static;
   }
+  .region-primary-menu,
+  .region-secondary-menu {
+    margin-top: 10px;
+  }
+
   .region-secondary-menu {
     display: flex;
     align-items: center;
 
-    a {
-      color: $d-search-page-link-color-hover;
+    a.nav-link {
+      padding: 0.65rem 1rem 0.35rem;
     }
 
-    @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-      ul {
-        margin-bottom: 0;
-      }
+    ul {
+      margin-bottom: 0;
     }
 
     > * {
@@ -58,11 +57,11 @@ header.header {
           display: block;
           width: 100%;
           left: 0;
+          //position: static;
 
           @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
             position: relative;
           }
-
           .we-mega-menu-li {
             border: 0 none;
           }
@@ -107,26 +106,7 @@ header.header {
   }
   > nav.navbar-wrapper {
     padding-top: $navbar-padding-y;
-    padding-bottom: $navbar-padding-y;
-
-    @include media-breakpoint-down(lg) {
-      nav.navbar-expand-xl {
-        position: fixed !important;
-        right: 0;
-        width: auto;
-        max-width: 250px;
-        height: 100vh;
-        top: 0;
-        z-index: 100;
-        background-color: white;
-        display: flex;
-        padding-top: 50px;
-
-        .navbar-collapse {
-          height: 100%;
-        }
-      }
-    }
+    padding-bottom: 0;
   }
   .navbar-expand-lg {
     padding-left: 0;

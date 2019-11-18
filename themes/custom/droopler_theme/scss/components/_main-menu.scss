@@ -17,8 +17,8 @@ Styleguide 2.1
 
 // Colour variables used in this component
 $menu-main-link-color: $color-priam !default;
-$menu-main-link-hover-color: $color-helen;
-$menu-main-link-active-color: darken($color-helen, 20%) !default;
+$menu-main-link-hover-color: darken($color-priam, 20%) !default;
+$menu-main-link-active-color: darken($color-priam, 20%) !default;
 $menu-main-link-dropdown: $color-hector !default; // Dropdown icon
 
 $submenu-link-color: $menu-main-link-color !default; // Submenu item text color
@@ -72,45 +72,48 @@ $mega-menu-submenu-link-padding-y: 9px !default;
 $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
 $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-y !default;
 
-$navbar-mobile-breakpoint: xl;
-$navbar-button-mobile-breakpoint: lg;
-
-
-// The main menu region for >= XL
-@include media-breakpoint-up($navbar-mobile-breakpoint) {
-  .region-primary-menu {
-    //height: $menu-main-link-height;
-
-    .navbar {
-      position: static;
-    }
-  }
-}
-
 .navbar-inner {
   flex-direction: column;
   align-items: flex-end;
 }
 
 .navbar-we-mega-menu {
-  @include media-breakpoint-up($navbar-mobile-breakpoint) {
+  @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
     ul.we-mega-menu-ul {
       position: static;
+
+      & > li.we-mega-menu-li:not(:hover) {
+        a {
+          background: transparent;
+        }
+      }
+
+      & > li.we-mega-menu-li.dropdown-menu > a {
+        padding-right: 2.375rem;
+      }
 
       & > li.we-mega-menu-li,
       & > li.we-mega-menu-li.active-trail,
       & > li.we-mega-menu-li.active {
-        a,
-        a:focus,
-        a:hover {
-          background: transparent;
+        a {
           text-transform: capitalize;
+          padding: 0.75rem 1.5625rem 0.75rem 1.5625rem;
         }
         a:hover,
         a:focus {
           color: $menu-main-link-hover-color;
         }
         background: transparent;
+      }
+
+      & > li.we-mega-menu-li:last-child {
+        margin-right: -15px;
+      }
+
+      & > li.we-mega-menu-li:hover {
+        a {
+          color: $menu-main-link-hover-color;
+        }
       }
 
       // Mega menu
@@ -214,7 +217,7 @@ $navbar-button-mobile-breakpoint: lg;
 button.navbar-toggler {
   display: none;
 }
-@include media-breakpoint-down($navbar-button-mobile-breakpoint) {
+@include media-breakpoint-down($navbar-mobile-breakpoint-down) {
   button.navbar-toggler {
     display: block;
     z-index: 100;
@@ -267,7 +270,6 @@ button.navbar-toggler {
     display: block;
   }
   button.navbar-toggler.collapsing[aria-expanded="true"] + nav.main-navbar {
-    background-color: red !important;
     width: 0 !important;
   }
 

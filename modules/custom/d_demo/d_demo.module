@@ -109,12 +109,3 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
 function d_demo_page_attachments (array &$page) {
   $page['#attached']['library'][] = 'd_demo/d_demo_random_price';
 }
-
-function d_demo_preprocess_page(&$variables) {
-
-}
-
-function d_demo_main_menu_alter() {
-  $mainMenu = Menu::load('main');
-
-}
