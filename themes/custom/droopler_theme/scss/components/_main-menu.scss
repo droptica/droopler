@@ -17,8 +17,8 @@ Styleguide 2.1
 
 // Colour variables used in this component
 $menu-main-link-color: $color-priam !default;
-$menu-main-link-hover-color: darken($color-priam, 20%) !default;
-$menu-main-link-active-color: darken($color-priam, 20%) !default;
+$menu-main-link-hover-color: $color-helen;
+$menu-main-link-active-color: darken($color-helen, 20%) !default;
 $menu-main-link-dropdown: $color-hector !default; // Dropdown icon
 
 $submenu-link-color: $menu-main-link-color !default; // Submenu item text color
@@ -87,14 +87,28 @@ $navbar-button-mobile-breakpoint: lg;
   }
 }
 
+.navbar-inner {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .navbar-we-mega-menu {
   @include media-breakpoint-up($navbar-mobile-breakpoint) {
     ul.we-mega-menu-ul {
       position: static;
 
-      & > li.we-mega-menu-li {
-        a {
+      & > li.we-mega-menu-li,
+      & > li.we-mega-menu-li.active-trail,
+      & > li.we-mega-menu-li.active {
+        a,
+        a:focus,
+        a:hover {
           background: transparent;
+          text-transform: capitalize;
+        }
+        a:hover,
+        a:focus {
+          color: $menu-main-link-hover-color;
         }
         background: transparent;
       }
@@ -110,7 +124,6 @@ $navbar-button-mobile-breakpoint: lg;
           width: 100%;
           padding: $mega-menu-submenu-padding;
           background-color: $mega-menu-submenu-background-color;
-          margin-top: - 20px;
 
           .block-inner {
             font-family: $mega-menu-submenu-font-family;
@@ -275,32 +288,36 @@ button.navbar-toggler {
           padding-top: 25px;
           border-left: 2px solid red;
           height: 100%;
+          display: flex;
+          overflow-y: auto;
         }
 
         &.navbar-collapse2 {
-          //&.collapsing,
           &.show {
             width: 250px !important;
           }
         }
-
-        //&::before {
-        //  content: "x";
-        //  position: absolute;
-        //  width: 50px;
-        //  height: 50px;
-        //  background-color: red;
-        //  top: 50px;
-        //  margin-left: -55px;
-        //  left: auto;
-        //  display: flex;
-        //  justify-content: center;
-        //  align-items: center;
-        //}
       }
 
-      .navbar-we-mega-menu .type-of-block {
-        display: block;
+      .secondary-menu-region {
+        order: 1;
+      }
+
+      .region-secondary-menu {
+        flex-direction: column;
+
+        nav ul li {
+          width: 100%;
+        }
+      }
+
+      .navbar-we-mega-menu {
+        .type-of-block {
+          display: block;
+        }
+        ul li {
+          width: 100%;
+        }
       }
     }
   }
