@@ -1,7 +1,7 @@
 info:
   type: block_content
   bundle: content_block
-  title: 'Footer Quisque'
+  title: 'Footer Services'
 
 # Placement of the block in region.
 placement:
@@ -11,16 +11,16 @@ placement:
   settings:
     status: true
     provider: block_content
-    label: 'Footer Quisque'
+    label: 'Footer Services'
     label_display: 0
 
 # Content block fields.
 fields:
   field_d_main_title:
     type: text
-    data: 'Quisque'
+    data: 'Services'
   field_d_long_text:
     type: text_long
     data:
-      - value: "<ul><li>Lorem tortor</li><li>Fringilla sed</li><li>Vestibulum id</li><li>Eleifend</li><li>Varius in purus</li><li>Integer</li></ul>"
+      - value: "<ul><li><a href='#' title='Car engines'>Car engines</a></li><li><a href='#' title='Boat engines'>Boat engines</a></li><li><a href='#' title='Aircraft engines'>Aircraft engines</a></li></ul>"
         format: full_html
