@@ -54,3 +54,8 @@
 body {
   -webkit-font-smoothing: antialiased;
 }
+
+.row::before, .row::after {
+  width: 0px;
+  height: 0px;
+}
