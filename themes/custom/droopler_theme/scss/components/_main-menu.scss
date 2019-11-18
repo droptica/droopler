@@ -17,18 +17,15 @@ Styleguide 2.1
 
 // Colour variables used in this component
 $menu-main-link-color: $color-priam !default;
-$menu-main-link-hover-color: darken($color-priam, 20%) !default;
-$menu-main-link-active-color: darken($color-priam, 20%) !default;
+$menu-main-link-active-color: $color-helen !default;
+$menu-main-link-hover-color: $menu-main-link-active-color !default;
 $menu-main-link-dropdown: $color-hector !default; // Dropdown icon
 
 $submenu-link-color: $menu-main-link-color !default; // Submenu item text color
-$submenu-link-hover-color: darken($color-priam, 20%) !default; // Submenu item hover color
-$submenu-link-hover-background: $color-andromache !default; // Submenu item hover color
+$submenu-link-hover-color: $color-helen !default; // Submenu item hover color
+$submenu-link-hover-background: transparent !default; // Submenu item hover color
 
 $menu-mobile-background: $color-agamemnon !default;
-$menu-mobile-link-color: $color-odysseus !default;
-$menu-mobile-link-border: $color-menelaus !default;
-$submenu-mobile-background: $menu-mobile-link-border !default;
 
 $navbar-toggler-color: $color-agamemnon !default;
 $navbar-toggler-sidebar-spacing: 10px;
@@ -36,19 +33,17 @@ $navbar-toggler-sidebar-spacing: 10px;
 $mega-menu-submenu-header-color: white !default;
 $mega-menu-submenu-color: white !default;
 $mega-menu-submenu-link-hover-color: darken($mega-menu-submenu-color, 25%) !default;
-
-$mega-menu-submenu-background-color: #262626 !default;
+$mega-menu-submenu-background-color: $color-acamas !default;
 
 // Font sizes
 $menu-font-size: $font-size-lg !default;
-$menu-mobile-font-size: $font-size-lg !default;
 $submenu-font-size: $font-size-base !default;
 $menu-dropdown-size: 2.3rem !default; // Size of the dropdown arrow
 $navbar-toggler-size: 2.3rem !default; // Size of the toggler arrow
 
-$mega-menu-submenu-font-family: "Lato" !default;
+$mega-menu-header-font-family: 'Lato', sans-serif !default;
+$mega-menu-submenu-font-family: $mega-menu-header-font-family;
 $mega-menu-submenu-font-weight: bold !default;
-
 $mega-menu-submenu-font-size: 1rem !default;
 $mega-menu-submenu-header-font-family: $mega-menu-submenu-font-family !default;
 $mega-menu-submenu-header-font-weight: 400 !default;
@@ -56,16 +51,14 @@ $mega-menu-submenu-header-font-size: 25px !default;
 
 // Paddings, margins and heights.
 $menu-dropdown-width: 4rem !default;  // Width of desktop dropdown icon (desktop)
-$menu-dropdown-mobile-padding-x: 1rem !default;  // Padding on both sides of dropdown icon (mobile)
 $menu-main-link-height: $header-height - (2 * $navbar-padding-y) !default;  // Height of menu item
-$menu-main-link-padding-x: 1.5rem !default; // Space on the right and left side of the link (desktop)
+$menu-main-link-padding-y: 0.75rem !default;
 $navbar-toggler-width: 5.625rem !default; // Width of mobile menu on/off toggler
 $navbar-toggler-height: $header-mobile-height !default; // Height of mobile menu on/off toggler
-$menu-mobile-main-link-height: 3.5rem !default;  // Height of menu item (mobile)
-$menu-mobile-main-link-padding-x: 2.15rem !default; // Percentage width of menu item, it should align with the toggler icon (mobile).
 $submenu-offset-left: -1rem !default; // Move the submenu left or right (desktop)
 $submenu-link-padding-x: 1.4rem !default; // Horizontal padding of submenu element (desktop)
 $submenu-link-height: 2.9rem !default; // Height of links in submenu (desktop)
+
 
 $mega-menu-submenu-padding: 2rem 15% !default;
 $mega-menu-submenu-link-padding-y: 9px !default;
@@ -84,21 +77,23 @@ $sidebar-animation-speed: 100ms;
     ul.we-mega-menu-ul {
       position: static;
 
-      & > li.we-mega-menu-li:not(:hover) {
-        a {
-          background: transparent;
-        }
-      }
-
       & > li.we-mega-menu-li,
       & > li.we-mega-menu-li.active-trail,
       & > li.we-mega-menu-li.active {
-        a {
-          text-transform: capitalize;
-          padding-top: 0.75rem;
-          padding-bottom: 0.75rem;
-        }
         background: transparent;
+        a {
+          background: transparent;
+          text-transform: capitalize;
+          padding-top: $menu-main-link-padding-y;
+          padding-bottom: $menu-main-link-padding-y;
+          font-family: $mega-menu-header-font-family;
+        }
+      }
+      li.we-mega-menu-li:hover {
+        background: transparent;
+        a {
+          color: $menu-main-link-hover-color;
+        }
       }
 
       & > li.we-mega-menu-li:last-child {
@@ -111,7 +106,7 @@ $sidebar-animation-speed: 100ms;
 
         & > .we-mega-menu-submenu {
           position: absolute;
-          left: 0;
+          left: 1px;
           top: 100%;
           width: 100%;
           padding: $mega-menu-submenu-padding;
@@ -182,7 +177,7 @@ $sidebar-animation-speed: 100ms;
             width: 100%;
             &:active, &:hover, &.active:active, &.active:hover {
               background: $submenu-link-hover-background;
-              a.we-mega-menu-li {
+              > a.we-mega-menu-li {
                 color: $submenu-link-hover-color;
                 text-decoration: none;
               }
@@ -205,6 +200,12 @@ $sidebar-animation-speed: 100ms;
 
 button.navbar-toggler {
   display: none;
+}
+
+header.header > nav.navbar-wrapper {
+  nav.main-navbar {
+    position: static;
+  }
 }
 @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
   button.navbar-toggler {
@@ -262,48 +263,46 @@ button.navbar-toggler {
   }
 
   header.header > nav.navbar-wrapper {
-    @include media-breakpoint-down(lg) {
-      nav.main-navbar {
-        position: fixed;
-        width: 0;
-        right: 0;
-        top: 0;
-        z-index: 100;
-        background-color: $color-odysseus;
-        height: 100% !important;
-        align-items: start;
-        transition: width $sidebar-animation-speed;
+    nav.main-navbar {
+      position: fixed;
+      width: 0;
+      right: 0;
+      top: 0;
+      z-index: 100;
+      background-color: $color-odysseus;
+      height: 100% !important;
+      align-items: start;
+      transition: width $sidebar-animation-speed;
 
-        .navbar-inner {
-          height: 100%;
-          display: flex;
-          overflow-y: auto;
-        }
-
-        &.show {
-          width: $navbar-mobile-sidebar-width !important;
-        }
+      .navbar-inner {
+        height: 100%;
+        display: flex;
+        overflow-y: auto;
       }
 
-      .secondary-menu-region {
-        order: 1;
+      &.show {
+        width: $navbar-mobile-sidebar-width !important;
       }
+    }
 
-      .region-secondary-menu {
-        flex-direction: column;
+    .secondary-menu-region {
+      order: 1;
+    }
 
-        nav ul li {
-          width: 100%;
-        }
+    .region-secondary-menu {
+      flex-direction: column;
+
+      nav ul li {
+        width: 100%;
       }
+    }
 
-      .navbar-we-mega-menu {
-        .type-of-block {
-          display: block;
-        }
-        ul li {
-          width: 100%;
-        }
+    .navbar-we-mega-menu {
+      .type-of-block {
+        display: block;
+      }
+      ul li {
+        width: 100%;
       }
     }
   }
