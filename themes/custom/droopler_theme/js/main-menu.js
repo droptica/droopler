@@ -17,7 +17,7 @@
       }
 
       if ($titles.length) {
-        var breakpointDesktop = 992;
+        var breakpointDesktop = 1200;
         var visibleClass = '.visible-content';
         var blockContentClass = '.field--name-field-d-long-text';
         var $contents = $titles.next(blockContentClass);
