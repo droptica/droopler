@@ -5,8 +5,9 @@ Styleguide components.d_p.form
 */
 
 // Colors.
-$d-p-form-header-color: $color-cassandra !default;
-$d-p-form-text-color: $color-cassandra !default;
+$d-p-form-header-color: $color-odysseus !default;
+$d-p-form-text-color: $color-odysseus !default;
+$d-p-form-background: $color-agamemnon !default;
 
 // Margins, paddings and sizes.
 $d-p-form-header-margin-bottom: 10% !default;
@@ -18,6 +19,7 @@ $d-p-form-copy-margin-left: 1.25rem !default;
 .paragraph-d-form {
   padding-top: $d-p-form-padding-top;
   padding-bottom: $d-p-form-padding-bottom;
+  color: $d-p-form-text-color;
 
   form {
     margin: 0;
@@ -34,12 +36,9 @@ $d-p-form-copy-margin-left: 1.25rem !default;
   .form-actions {
     text-align: center;
     .btn {
+      @extend .btn-secondary;
       margin-top: $d-p-form-button-margin-top;
     }
-  }
-
-  label {
-    color: $d-p-form-text-color;
   }
 
   .form-item-copy {
@@ -69,6 +68,16 @@ $d-p-form-copy-margin-left: 1.25rem !default;
       }
     }
   }
+
+  .backstretch {
+    background: $d-p-form-background;
+    .backstretch-item {
+      img {
+        opacity: 0.4;
+      }
+    }
+  }
+
   @include media-breakpoint-up(md) {
     .right {
       h2 {

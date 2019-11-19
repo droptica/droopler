@@ -325,7 +325,6 @@ function droopler_theme_preprocess_we_megamenu_li(&$variables) {
  * Implements hook_library_info_alter().
  */
 function droopler_theme_library_info_alter(&$libraries, $extension) {
-
   if ($extension == 'we_megamenu' && isset($libraries['form.we-mega-menu-frontend']['css']['theme'])) {
     $cssMegaMenu = $libraries['form.we-mega-menu-frontend']['css']['theme'];
 
