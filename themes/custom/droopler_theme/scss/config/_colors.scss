@@ -41,9 +41,9 @@ $black: #000 !default;
 // The Greeks
 // To use: Thersites Achaeans Myrmidons Diores Leitus
 
-$color-agamemnon: #196dba !default;
-$color-menelaus: #5d98ce !default;
-$color-nestor: #65e2ff !default;
+$color-agamemnon: #ac0000 !default; // Main color, it changes backgrounds, menu and link color.
+$color-menelaus: #5d98ce !default; // Mobile menu link border.
+$color-nestor: #ff9475 !default; // Alt lines, em text. bootstrap secondary.
 $color-odysseus: white !default;
 $color-diomedes: #d3d7d9 !default;
 $color-patroclus: #979797 !default;
@@ -57,16 +57,15 @@ $color-troilus: #4c4c4c !default;
 $color-cassandra: black !default;
 $color-andromache: #d2d2d2 !default;
 $color-aeneas: #8e8a89 !default;
-$color-memnon: #1a6dbb !default;
 $color-penthesilea: #969696 !default;
 $color-leto: #f1f1f1 !default;
 $color-serpedon: #39b54a !default;
 
 // The accents
-// To use: Iphis Clymene Phobos Deimos Apollo
+// To use: Helen Iphis Clymene Phobos Deimos Apollo
 $color-hector: #d3d3d3 !default;
-$color-achillies: #ec6d06 !default;
-$color-helen: #ac0000 !default;
+$color-achillies: $color-agamemnon !default; // Bootstrap primary color. By default equal to main color.
+$color-helen: #ac0000 !default; // TODO: to remove
 $color-paris: #e4e4e4 !default;
 $color-iphis: #ababab !default;
 
