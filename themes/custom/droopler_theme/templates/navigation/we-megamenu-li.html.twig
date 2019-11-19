@@ -1,0 +1,18 @@
+<li {{ attributes }}>
+  {% if href is empty %}
+    <span data-drupal-link-system-path="<front>" class="we-megamenu-nolink">{{ title }}</span>
+  {% else %}
+    <a class="we-mega-menu-li" title="{{ attribute(attributes, 'description') }}" href="{{ href }}" target="{{ attribute(attributes, 'data-target') }}">
+      {% if (attribute(attributes, 'data-icon') is defined and attribute(attributes, 'data-icon')|trim) %}
+        <i class="{{ attribute(attributes, 'data-icon') }}"></i>
+      {% endif %}
+
+      {{ title }}
+
+      {% if (attribute(attributes, 'data-caption') is defined and attribute(attributes, 'data-caption')|trim) %}
+        <span class="we-mega-menu-caption">{{ attribute(attributes, 'data-caption') }}</span>
+      {% endif %}
+    </a>
+  {% endif %}
+  {{ content }}
+</li>

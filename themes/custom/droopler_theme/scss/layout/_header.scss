@@ -82,6 +82,10 @@ header.header {
   }
   .navbar-brand {
     max-width: $logo-width;
+
+    @include media-breakpoint-only(lg) {
+      max-width: 0.75 * $logo-width;
+    }
   }
   @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
     .navbar-brand {

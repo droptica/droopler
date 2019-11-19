@@ -17,11 +17,10 @@
       }
 
       if ($titles.length) {
-        var breakpointDesktop = 1200;
+        var breakpointDesktop = 992;
         var visibleClass = '.visible-content';
         var blockContentClass = '.field--name-field-d-long-text';
         var $contents = $titles.next(blockContentClass);
-
         showHideBlockContents();
         $(window).resize(showHideBlockContents);
 
@@ -35,5 +34,34 @@
       }
     }
   };
+
+  Drupal.behaviors.mainMenuMobileNavbarListener = {
+    attach: function (context, settings) {
+      $('#navbar-main button.navbar-toggler').click(function() {
+      console.log('asd');
+        $('body').toggleClass('navbar-open');
+      });
+    }
+  };
+
+  Drupal.behaviors.mainMenuMobileSubmenuToggle = {
+    attach: function (context, settings) {
+      var $menuItems = $('.we-mega-menu-li.dropdown-menu', context);
+      var $links = $('> a.we-mega-menu-li', $menuItems);
+
+      if ($links.length) {
+        var blockContentClass = '.we-mega-menu-submenu';
+
+        $links.each(function() {
+          $(this).toggleClass('open', $(this).parent().is('.active'));
+        }).click(function() {
+          $(this).toggleClass('open').next(blockContentClass).slideToggle();
+
+          return false;
+        });
+      }
+    }
+  };
+
 
 })(jQuery, Drupal);

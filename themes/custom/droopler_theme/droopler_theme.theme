@@ -326,12 +326,19 @@ function droopler_theme_preprocess_we_megamenu_li(&$variables) {
  */
 function droopler_theme_library_info_alter(&$libraries, $extension) {
 
-  if ($extension == 'we_megamenu' && isset($libraries['form.we-mega-menu-frontend']['css']['theme'])) {
-    $cssMegaMenu = $libraries['form.we-mega-menu-frontend']['css']['theme'];
+  if ($extension == 'we_megamenu' && isset($libraries['form.we-mega-menu-frontend'])) {
+    $cssMegaMenu = $libraries['form.we-mega-menu-frontend']['css']['theme'] ?? [];
 
     foreach ($cssMegaMenu as $path => $properties) {
       if (stripos($path, 'bootstrap') !== FALSE) {
         unset($libraries['form.we-mega-menu-frontend']['css']['theme'][$path]);
+      }
+    }
+
+    $jsMegaMenu = $libraries['form.we-mega-menu-frontend']['js'] ?? [];
+    foreach ($jsMegaMenu as $path => $properties) {
+      if (stripos($path, 'we_megamenu_frontend.js') !== FALSE) {
+        unset($libraries['form.we-mega-menu-frontend']['js'][$path]);
       }
     }
   }
