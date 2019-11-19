@@ -242,15 +242,6 @@ header.header > nav.navbar-wrapper {
         font-size: $menu-dropdown-size;
       }
     }
-
-    &[aria-expanded="true"],
-    &[aria-expanded="true"].collapsing {
-      margin-right: $navbar-mobile-sidebar-width;
-      position: fixed;
-      margin-top: $navbar-toggler-sidebar-spacing;
-      right: 0;
-      transition: margin-right $sidebar-animation-speed;
-    }
   }
 
   button.navbar-toggler.collapsing[aria-expanded="false"] + nav.main-navbar,
@@ -264,13 +255,13 @@ header.header > nav.navbar-wrapper {
 
   header.header > nav.navbar-wrapper {
     nav.main-navbar {
-      position: fixed;
+      position: absolute;
       width: 0;
       right: 0;
-      top: 0;
+      top: 80px;
       z-index: 100;
       background-color: $color-odysseus;
-      height: 100% !important;
+      height: calc(100vh - 80px) !important;
       align-items: start;
       transition: width $sidebar-animation-speed;
 
@@ -278,10 +269,33 @@ header.header > nav.navbar-wrapper {
         height: 100%;
         display: flex;
         overflow-y: auto;
+        background-color: $color-odysseus;
       }
 
       &.show {
         width: $navbar-mobile-sidebar-width !important;
+      }
+    }
+
+    .region-primary-menu {
+      border-bottom: 1px solid red;
+      padding-bottom: 10px;
+    }
+    .region-secondary-menu .block-search-page-link {
+      border-top: 1px solid red;
+      border-bottom: 1px solid red;
+      margin: 10px 0 20px;
+      width: 100%;
+
+      .content {
+        display: flex;
+        justify-content: center;
+
+        a {
+          width: 100%;
+          mask-repeat: no-repeat;
+          mask-position: center;
+        }
       }
     }
 
@@ -305,6 +319,28 @@ header.header > nav.navbar-wrapper {
         width: 100%;
       }
     }
+
+    .we-mega-menu-ul.nav-tabs > .we-mega-menu-li,
+    .menu--secondary-menu .nav-item {
+      width: 100%;
+
+      > a {
+        text-transform: uppercase;
+        font-size: 16px;
+        font-family: "Lato";
+        padding: 15px;
+        background-color: transparent;
+        font-weight: normal;
+        color: #de0000;
+        text-shadow: none;
+      }
+      .we-mega-menu-submenu {
+        position: relative;
+        opacity: 1;
+        display: none;
+      }
+    }
+
   }
 
   body.toolbar-fixed {
