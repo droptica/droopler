@@ -34,6 +34,7 @@ function d_demo_content_structure_alter(&$structure, $context) {
     $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 20];
     $structure['invest'] = ['file' => "$path/invest.yml"];
     $structure['contact'] = ['file' => "$path/contact.yml"];
+    $structure['product'] = ['file' => "$path/product.yml"];
   }
 }
 
