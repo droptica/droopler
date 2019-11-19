@@ -25,7 +25,7 @@ $d-p-single-box-margin-bottom: 15% !default;
 
 $d-p-text-blocks-tiles-padding: 20px !default;
 $d-p-text-blocks-tiles-spacing: 5px !default;
-$d-p-text-blocks-grid-link-color: $color-helen !default;
+$d-p-text-blocks-grid-link-color: $color-agamemnon !default;
 
 // Other settings.
 $d-p-single-text-box-cta-text-transform: uppercase !default;
@@ -202,7 +202,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
       a {
         @include font-subtitle-small-link();
-        @extend .text-danger;
       }
     }
   }

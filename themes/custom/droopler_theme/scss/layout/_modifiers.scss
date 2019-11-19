@@ -6,14 +6,13 @@
 $light-gray-background: $color-hector !default;
 $light-gray-background-2: $color-paris !default;
 $divider-background: $color-iphis !default;
-$section-main-title-line-alt-color: $color-helen !default;
 $grid-border-color: $color-paris !default;
 $grid-border-type: solid $grid-border-color !default;
 $grid-border-width: 2px !default;
 $arrow-margin-right: 2% !default;
 $arrow-margin-top: 6% !default;
 $arrow-border: 9px solid transparent !default;
-$arrow-down-color: lighten($color-helen, 10%) !default;
+$arrow-down-color: lighten($color-achillies, 10%) !default;
 $stripe-background-color: rgba(0,0,0, 0.57) !default;
 $tile-padding-top: 70px !default;
 $tile-padding-bottom: 70px !default;
@@ -28,16 +27,6 @@ $header-into-columns-padding-y: 3.875rem !default;
   }
   &-gray-light-2 {
     background-color: $light-gray-background-2;
-  }
-}
-
-.with-alt-line {
-  .paragraph {
-    .content > .field--name-field-d-main-title::after,
-    &.text-page .field--name-field-d-long-text:before,
-    h2.field--name-field-d-main-title::after {
-      background: $section-main-title-line-alt-color;
-    }
   }
 }
 
@@ -192,7 +181,7 @@ $header-into-columns-padding-y: 3.875rem !default;
 
       .spinner-border {
         font-size: 1rem;
-        color: $color-helen;
+        color: $color-achillies;
         @include media-breakpoint-down(md) {
           left: 30px;
           margin-top: 20px;

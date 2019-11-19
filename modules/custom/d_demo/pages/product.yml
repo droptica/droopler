@@ -32,12 +32,12 @@ field_page_section:
               attributes:
                 class:
                   - "btn"
-                  - "btn-danger"
+                  - "btn-primary"
                   - "mt-4"
                 target: "_blank"
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: with-alt-line with-alt-text
+          custom_class: with-alt-text
 
     - paragraph_type: d_p_text_paged
       data:
@@ -47,15 +47,12 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: <p>Experience marked by 20 years on the market<br />- wide range of products</p>
-        field_d_settings:
-          type: field_p_configuration_storage
-          custom_class: with-alt-line
 
     - paragraph_type: d_p_side_by_side
       data:
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid with-alt-line no-padding-top
+          custom_class: full-width with-grid no-padding-top
         field_d_p_sbs_items:
           type: paragraph_reference
           subtype: paragraphs_wrapper

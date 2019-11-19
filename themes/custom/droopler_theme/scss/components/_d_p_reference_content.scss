@@ -1,17 +1,32 @@
+// Colors
+$d-p-reference-content-line-color: $color-agamemnon !default;
+
 // Margins, paddings and sizing.
-$d-p-reference-content-padding-y: 3.875rem !default;
+$d-p-reference-content-padding-top: 3.875rem !default;
+$d-p-reference-content-padding-bottom: 0 !default;
 $d-p-reference-content-items-padding-x: 5px !default;
 $d-p-reference-content-item-padding: 5px !default;
 $d-p-reference-content-item-margin-left: -5px !default;
 $d-p-reference-content-item-margin-right: -10px !default;
 $d-p-reference-content-content-padding: 5px !default;
+$d-p-reference-content-line-margin-top: 0.625rem !default;
+$d-p-reference-content-line-margin-bottom: 0.625rem !default;
 
 .d-p-reference-content-wrapper {
   overflow: hidden;
 
-  .field--name-field-d-p-reference-content {
-    padding-top: $d-p-reference-content-padding-y;
-    padding-bottom: $d-p-reference-content-padding-y;
+  > .field--name-field-d-main-title {
+    &:after {
+      @include decoration-header-line-main-center;
+      background: $d-p-reference-content-line-color;
+      margin-top: $d-p-reference-content-line-margin-top;
+      margin-bottom: $d-p-reference-content-line-margin-bottom;
+    }
+  }
+
+  > .field--name-field-d-p-reference-content {
+    padding-top: $d-p-reference-content-padding-top;
+    padding-bottom: $d-p-reference-content-padding-bottom;
 
     margin-right: -$d-p-reference-content-item-padding;
 
@@ -22,13 +37,6 @@ $d-p-reference-content-content-padding: 5px !default;
       }
       .field__item--wrapper {
         padding: 0 $d-p-reference-content-item-padding $d-p-reference-content-item-padding 0;
-      }
-    }
-    .field--name-field-d-main-title {
-      margin-bottom: 40px;
-      &:after {
-        @include decoration-header-line-main-center;
-        background: $color-helen;
       }
     }
   }
