@@ -321,8 +321,10 @@ header.header > nav.navbar-wrapper {
     }
 
     .we-mega-menu-ul.nav-tabs > .we-mega-menu-li,
+    .we-mega-menu-ul.nav-tabs > .we-mega-menu-li.active,
     .menu--secondary-menu .nav-item {
       width: 100%;
+      flex-wrap: wrap;
 
       > a {
         text-transform: uppercase;
@@ -331,13 +333,29 @@ header.header > nav.navbar-wrapper {
         padding: 15px;
         background-color: transparent;
         font-weight: normal;
-        color: #de0000;
+        color: #de0000 !important;
         text-shadow: none;
       }
+
+      .we-mega-menu-submenu-inner {
+        min-height: unset;
+      }
+
       .we-mega-menu-submenu {
-        position: relative;
+        position: unset;
         opacity: 1;
-        display: none;
+        visibility: visible;
+        display: block;
+        width: 100%;
+        flex-basis: 100%;
+        box-shadow: none;
+        border: 0;
+        top: 0;
+      }
+      div.collapse:not(.show) {
+        .we-mega-menu-submenu {
+          display: none;
+        }
       }
     }
 
