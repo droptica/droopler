@@ -12,7 +12,6 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_single_text_block
   module:
-    - color_field
     - d_p
     - link_attributes
     - svg_image
@@ -24,9 +23,11 @@ mode: default
 content:
   field_d_background_color:
     weight: 5
-    settings: {  }
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: color_field_widget_html5
+    type: string_textfield
     region: content
   field_d_cta_link:
     weight: 3
