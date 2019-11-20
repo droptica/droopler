@@ -30,11 +30,21 @@ $header-into-columns-padding-y: 3.875rem !default;
   }
 }
 
+.theme-invert,
 .with-alt-text {
   .paragraph {
     .field--type-string,
     .field--type-text-long {
       color: $color-cassandra;
+    }
+  }
+}
+.theme-invert {
+  .paragraph {
+    h2 {
+      &:after {
+        background: $color-agamemnon;
+      }
     }
   }
 }
