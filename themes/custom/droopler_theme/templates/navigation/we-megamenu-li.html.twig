@@ -12,6 +12,10 @@
       {% if (attribute(attributes, 'data-caption') is defined and attribute(attributes, 'data-caption')|trim) %}
         <span class="we-mega-menu-caption">{{ attribute(attributes, 'data-caption') }}</span>
       {% endif %}
+
+      {% if content %}
+        <span class="d-submenu-toggler"></span>
+      {% endif %}
     </a>
   {% endif %}
   {{ content }}
