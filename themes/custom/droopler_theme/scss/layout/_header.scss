@@ -8,7 +8,11 @@ $logo-width: 20rem !default;
 $logo-mobile-width: 12rem !default;
 $logo-mobile-padding-left: 1rem !default;
 $logo-md-width: 13.5rem !default;
-$secondary-menu-link-colors: $color-iphis;
+$secondary-menu-link-colors: $color-iphis !default;
+$secondary-menu-link-hover-colors: $color-achillies !default;
+$secondary-menu-link-padding-top: 0.65rem !default;
+$secondary-menu-link-padding-bottom: 0.35rem !default;
+$header-menus-margin-spacing: 10px !default;
 
 header.header {
   .site-logo img {
@@ -18,21 +22,51 @@ header.header {
   .block-we-megamenu {
     position: static;
   }
+  .region-primary-menu,
+  .region-secondary-menu {
+    margin-top: $header-menus-margin-spacing;
+  }
+
   .region-secondary-menu {
     display: flex;
+    align-items: center;
+
+    a.nav-link {
+      padding-top: $secondary-menu-link-padding-top;
+      padding-bottom: $secondary-menu-link-padding-bottom;
+    }
+
+    ul {
+      margin-bottom: 0;
+    }
+
+    > * {
+      margin-left: $header-menus-margin-spacing;
+
+      @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+        margin-left: 0;
+      }
+    }
   }
+
   .region-primary-menu {
     .region-we-mega-menu {
       margin-bottom: 0;
+      padding: 0;
+
       .navbar {
-        padding: $navbar-padding-y 0;
+        padding: $navbar-padding-y 0 0;
         &.navbar-we-mega-menu {
-          @include media-breakpoint-down(md) {
-            width: 250px;
-          }
           background-color: $color-odysseus;
           margin-bottom: 0;
+          display: block;
+          width: 100%;
+          left: 0;
+          position: static;
 
+          @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+            position: relative;
+          }
           .we-mega-menu-li {
             border: 0 none;
           }
@@ -41,7 +75,7 @@ header.header {
     }
     #block-mainnavigation, #block-languageswitcher {
       display: inline-block;
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
         display: block;
       }
     }
@@ -49,12 +83,12 @@ header.header {
   .navbar-brand {
     max-width: $logo-width;
   }
-  @include media-breakpoint-down(lg) {
+  @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
     .navbar-brand {
       max-width: $logo-md-width;
     }
   }
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
     min-height: $header-mobile-height;
     .navbar-brand {
       top: 0;
@@ -75,11 +109,11 @@ header.header {
   }
   > nav.navbar-wrapper {
     padding-top: $navbar-padding-y;
-    padding-bottom: $navbar-padding-y;
+    padding-bottom: 0;
   }
 
   .navbar {
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
       width: 100%;
       padding: 0;
     }
@@ -100,12 +134,10 @@ header.header {
     }
   }
 
-  .region-secondary-menu {
-    display: flex;
-  }
-
   .secondary-menu-region {
     p, a {
+      color: $secondary-menu-link-hover-colors;
+
       &:not(:hover) {
         color: $secondary-menu-link-colors;
       }

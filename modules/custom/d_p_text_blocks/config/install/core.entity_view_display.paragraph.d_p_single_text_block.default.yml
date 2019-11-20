@@ -11,7 +11,6 @@ dependencies:
     - field.field.paragraph.d_p_single_text_block.field_d_settings
     - paragraphs.paragraphs_type.d_p_single_text_block
   module:
-    - color_field
     - d_p
     - link
     - svg_image
@@ -25,10 +24,9 @@ content:
     weight: 4
     label: hidden
     settings:
-      opacity: '1'
-      format: rgb
+      link_to_entity: false
     third_party_settings: {  }
-    type: color_field_formatter_text
+    type: string
     region: content
   field_d_cta_link:
     weight: 3

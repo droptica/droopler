@@ -3,7 +3,7 @@
  */
 
 // Colour variables used in this paragraph.
-$box-subtitle-color: $color-helen !default;
+$box-subtitle-color: $color-achillies !default;
 
 // Margins, paddings and sizing.
 $box-content-max-width: 490px !default;
@@ -32,7 +32,7 @@ $box-image-padding-bottom: $grid-gutter-width / 2 !default;
 
     .box-subtitle {
       @include font-subtitle-small-link();
-      @extend .text-danger;
+      color: $box-subtitle-color;
     }
 
     @include media-breakpoint-up(xl) {
