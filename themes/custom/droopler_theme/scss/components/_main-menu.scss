@@ -122,6 +122,8 @@ $sidebar-animation-speed: 100ms !default;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  padding-top: $mobile-sidebar-items-spacing /2 ;
+  padding-bottom: $mobile-sidebar-items-spacing /2;
 
   &, a {
     color: black;
@@ -129,7 +131,6 @@ $sidebar-animation-speed: 100ms !default;
   a {
     padding-top: 0;
     padding-bottom: 0;
-    z-index: 300;
 
     &:hover {
       border: none;
