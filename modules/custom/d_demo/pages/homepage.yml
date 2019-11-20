@@ -8,10 +8,10 @@ field_page_section:
       data:
         field_d_main_title:
           type: text
-          data: The most efficient engines in the world
+          data: Most efficient engines on the world
         field_d_subtitle:
           type: text
-          data: For cars, boats, planes and spaceships
+          data: For cars, boats, planes and other
         field_d_image_background:
           type: image
           data: d_demo/d_demo_motor.jpg
@@ -25,7 +25,7 @@ field_page_section:
           data:
             link: internal:/product
             text: Browse engines
-            class: btn btn-primary
+            class: btn btn-danger
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: half-transparent
@@ -40,7 +40,7 @@ field_page_section:
           data: Top Actions
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-divider background-gray-light-2 slider-desktop-off
+          custom_class: full-width with-divider background-gray-light-2 slider-desktop-off with-alt-line
         field_d_p_cs_item_reference:
           type: paragraph_reference
           subtype: d_p_carousel_item
@@ -141,7 +141,7 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: <p>Since 2008, when company DrooplerEngines was founded, our engineers designed and produced many
-            world-class engines. Here we selected top of the top of our engines. Check their possibilities.</p>
+            world-class engines. Here we selected top of the top of our engines. Check their possibilities</p>
         field_d_cta_link:
           type: cta
           data:
@@ -151,11 +151,11 @@ field_page_section:
               attributes:
                 class:
                   - "btn"
-                  - "btn-primary"
+                  - "btn-danger"
                   - "mt-4"
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid
+          custom_class: full-width with-grid with-alt-line
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -201,7 +201,7 @@ field_page_section:
           data: 4
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-tiles background-gray-light-2 header-into-columns
+          custom_class: full-width with-tiles background-gray-light-2 header-into-columns with-alt-line
         field_d_main_title:
           type: text
           data: Services
@@ -223,8 +223,10 @@ field_page_section:
                   type: text
                   data: For boat manufacturers
                 field_d_background_color:
-                  type: text
-                  data: '#e4e4e4'
+                  type: color
+                  data:
+                    color: '#e4e4e4'
+                    opacity: 1
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: tile
@@ -238,8 +240,10 @@ field_page_section:
                   type: text
                   data: For airplane manufacturers
                 field_d_background_color:
-                  type: text
-                  data: '#e4e4e4'
+                  type: color
+                  data:
+                    color: '#e4e4e4'
+                    opacity: 1
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: tile
@@ -253,8 +257,10 @@ field_page_section:
                   type: text
                   data: For car manufacturers
                 field_d_background_color:
-                  type: text
-                  data: '#e4e4e4'
+                  type: color
+                  data:
+                    color: '#e4e4e4'
+                    opacity: 1
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: tile
@@ -266,10 +272,12 @@ field_page_section:
                   dst_dir: demo
                 field_d_main_title:
                   type: text
-                  data: For spaceship manufacturers
+                  data: For space ship manufacturers
                 field_d_background_color:
-                  type: text
-                  data: '#e4e4e4'
+                  type: color
+                  data:
+                    color: '#e4e4e4'
+                    opacity: 1
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: tile
@@ -284,7 +292,7 @@ field_page_section:
           data: Who uses our engines
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid
+          custom_class: full-width with-grid with-alt-line
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -297,10 +305,12 @@ field_page_section:
                   dst_dir: demo
                 field_d_main_title:
                   type: text
-                  data: Marine
+                  data: Boatica
                 field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                  type: color
+                  data:
+                    color: '#ffffff'
+                    opacity: 1
             - type: d_p_single_text_block
               data:
                 field_d_icon:
@@ -309,10 +319,12 @@ field_page_section:
                   dst_dir: demo
                 field_d_main_title:
                   type: text
-                  data: Aviation
+                  data: Airplanes Pro
                 field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                  type: color
+                  data:
+                    color: '#ffffff'
+                    opacity: 1
             - type: d_p_single_text_block
               data:
                 field_d_icon:
@@ -321,10 +333,12 @@ field_page_section:
                   dst_dir: demo
                 field_d_main_title:
                   type: text
-                  data: Automotive
+                  data: ABC Automotive
                 field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                  type: color
+                  data:
+                    color: '#ffffff'
+                    opacity: 1
 
     - paragraph_type: d_p_reference_content
       data:
@@ -340,7 +354,7 @@ field_page_section:
               attributes:
                 class:
                   - "btn"
-                  - "btn-primary"
+                  - "btn-danger"
                   - "mt-5"
 
     - paragraph_type: d_p_side_by_side
@@ -363,14 +377,16 @@ field_page_section:
                       attributes:
                         class:
                           - "btn"
-                          - "btn-primary"
+                          - "btn-danger"
                           - "mt-4"
                 field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                  type: color
+                  data:
+                    color: '#ffffff'
+                    opacity: 1
                 field_d_image_background:
                   type: image
-                  data: d_demo/d_demo_buildings.jpg
+                  data: d_demo/d_demo_turbine.jpg
                   dst_dir: demo
                 field_d_settings:
                   type: field_p_configuration_storage
@@ -389,11 +405,13 @@ field_page_section:
                       attributes:
                         class:
                           - "btn"
-                          - "btn-primary"
+                          - "btn-danger"
                           - "mt-4"
                 field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                  type: color
+                  data:
+                    color: '#ffffff'
+                    opacity: 1
                 field_d_image_background:
                   type: image
                   data: d_demo/d_demo_career.jpg
