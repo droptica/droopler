@@ -15,7 +15,7 @@
         var breakpointDesktop = 992;
         var blockContentClass = '.field--name-field-d-long-text';
 
-        $titles.click(function() {
+        $titles.once().click(function() {
           if (window.innerWidth < breakpointDesktop) {
             $(this).toggleClass('open').parent().find(blockContentClass).slideToggle();
 
@@ -29,7 +29,7 @@
   Drupal.behaviors.mainMenuMobileNavbarListener = {
     attach: function (context, settings) {
       $('#navbar-main button.navbar-toggler').click(function() {
-        $('body').toggleClass('navbar-open');
+        $('body').toggleClass('navbar-open', !$(this).is('[aria-expanded="true"]'));
       });
     }
   };
@@ -44,7 +44,7 @@
 
         $links.each(function() {
           $(this).toggleClass('open', $(this).parent().is('.active'));
-        }).find('.d-submenu-toggler').click(function() {
+        }).find('.d-submenu-toggler').once().click(function() {
           $(this).parent().toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
 
           return false;
