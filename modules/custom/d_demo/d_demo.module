@@ -45,10 +45,10 @@ function d_demo_content_structure_alter(&$structure, $context) {
 function d_demo_block_structure_alter(&$structure, $context) {
   $path = drupal_get_path('module', 'd_demo') . '/blocks';
   if ($context == 'all') {
-    $structure['boats'] = ['file' => "$path/mega_submenu_services_boats.yml"];
-    $structure['jet_engines'] = ['file' => "$path/mega_submenu_services_jet_engines.yml"];
-    $structure['electric_engines'] = ['file' => "$path/mega_submenu_services_electric_engines.yml"];
-    $structure['dolor'] = ['file' => "$path/mega_submenu_services_dolor.yml"];
+    $structure['cars'] = ['file' => "$path/mega_submenu_services_for_cars.yml"];
+    $structure['boats'] = ['file' => "$path/mega_submenu_services_for_boats.yml"];
+    $structure['aircrafts'] = ['file' => "$path/mega_submenu_services_for_aircrafts.yml"];
+    $structure['spacecrafts'] = ['file' => "$path/mega_submenu_services_for_spacecrafts.yml"];
     $structure['footer_office_1'] = ['file' => "$path/footer_office_1.yml"];
     $structure['footer_office_2'] = ['file' => "$path/footer_office_2.yml"];
     $structure['footer_engines'] = ['file' => "$path/footer_engines.yml"];

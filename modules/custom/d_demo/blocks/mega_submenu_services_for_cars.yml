@@ -1,7 +1,7 @@
 info:
   type: block_content
   bundle: content_block
-  title: 'Mega Menu Jet engines'
+  title: 'Mega Menu For Cars'
 
 # Placement of the block in region.
 placement:
@@ -14,11 +14,11 @@ placement:
 fields:
   field_d_main_title:
     type: text
-    data: 'Jet engines'
+    data: 'For cars'
   field_d_long_text:
     type: text_long
     data:
-      - value: "<ul><li>Lorem tortor</li><li>Dolor</li><li>Amet</li><li>Suspendisse</li><li>Maecenas</li></ul>"
+      - value: "<ul><li><a href='#'>Engine testing services</a></li><li><a href='/product'>Engine repair</a></li><li><a href='#'>Engine oil change</a></li</ul>"
         format: full_html
 
 # Mega menu configuration.
@@ -26,7 +26,7 @@ we_megamenu:
   menu_name: main
   parent_title: "Services"
   row: 0
-  col: 1
+  col: 0
   col_config:
     hidewhencollapse: ""
     type: "we-mega-menu-col"
