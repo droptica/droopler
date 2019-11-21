@@ -14,6 +14,8 @@ function d_demo_content_structure_alter(&$structure, $context) {
   $path = drupal_get_path('module', 'd_demo') . '/pages';
   if ($context == 'all') {
     $structure['homepage'] = ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => -50];
+    $structure['invest'] = ['file' => "$path/invest.yml"];
+    $structure['product'] = ['file' => "$path/product.yml"];
     $structure['documentation'] = ['file' => "$path/documentation.yml", 'link' => 'Documentation', 'weight' => 30, 'children' => [
       'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
       'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
