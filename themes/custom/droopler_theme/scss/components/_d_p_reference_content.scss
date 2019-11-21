@@ -1,6 +1,3 @@
-// Colors
-$d-p-reference-content-line-color: $color-agamemnon !default;
-
 // Margins, paddings and sizing.
 $d-p-reference-content-padding-top: 3.875rem !default;
 $d-p-reference-content-padding-bottom: 0 !default;
@@ -18,9 +15,8 @@ $d-p-reference-content-line-margin-bottom: 0.625rem !default;
   > .field--name-field-d-main-title {
     &:after {
       @include decoration-header-line-main-center;
-      background: $d-p-reference-content-line-color;
-      margin-top: $d-p-reference-content-line-margin-top;
-      margin-bottom: $d-p-reference-content-line-margin-bottom;
+      //margin-top: $d-p-reference-content-line-margin-top;
+      //margin-bottom: $d-p-reference-content-line-margin-bottom;
     }
   }
 

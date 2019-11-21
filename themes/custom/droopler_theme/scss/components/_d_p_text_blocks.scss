@@ -66,8 +66,8 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       }
       &:after {
         @include decoration-header-line-main-center;
-        background: $d-p-text-blocks-line-color;
-        margin: $d-p-text-blocks-group-line-margin;
+        //background: $d-p-text-blocks-line-color;
+        //margin: $d-p-text-blocks-group-line-margin;
       }
     }
     > .field--type-link {
@@ -153,9 +153,9 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     @include font-title-single-box;
     &:after {
       @include decoration-header-line;
-      background: $d-p-single-box-line-color;
-      margin-top: $d-p-single-box-line-margin-top;
-      margin-bottom: $d-p-single-box-line-margin-bottom;
+      //background: $d-p-single-box-line-color;
+      //margin-top: $d-p-single-box-line-margin-top;
+      //margin-bottom: $d-p-single-box-line-margin-bottom;
     }
   }
   p {

@@ -30,9 +30,9 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     text-align: left;
     &:after {
       @include decoration-header-line;
-      margin-top: $d-p-side-image-line-margin-top;
-      margin-bottom: $d-p-side-image-line-margin-bottom;
-      margin-background: $d-p-side-image-line-color;
+      //margin-top: $d-p-side-image-line-margin-top;
+      //margin-bottom: $d-p-side-image-line-margin-bottom;
+      //margin-background: $d-p-side-image-line-color;
     }
     &:last-child:after {
       display: none;

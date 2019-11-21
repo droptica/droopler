@@ -15,7 +15,7 @@ $d-p-carousel-padding-y: 5% !default;
 $d-p-carousel-mobile-padding-y: 5% !default;
 $d-p-carousel-items-margin-top: 2% !default;
 $d-p-carousel-mobile-items-margin-top: 3rem !default;
-$d-p-carousel-line-margin: $line-center-margin-top auto $line-center-margin-bottom auto !default;
+//$d-p-carousel-line-margin: $line-center-margin-top auto $line-center-margin-bottom auto !default;
 $d-p-carousel-item-line-margin-top: $line-left-margin-top !default;
 $d-p-carousel-item-line-margin-bottom: $line-left-margin-bottom !default;
 $d-p-carousel-item-image-margin-bottom: 1rem !default;
@@ -56,8 +56,8 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
 
     &:after {
       @include decoration-header-line-main-center;
-      background: $d-p-carousel-line-color;
-      margin: $d-p-carousel-line-margin;
+      //background: $d-p-carousel-line-color;
+      //margin: $d-p-carousel-line-margin;
     }
   }
 
@@ -155,9 +155,9 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
           }
           &:before {
             @include decoration-header-line-main-center;
-            background: $d-p-carousel-item-line-color;
-            margin-top: $d-p-carousel-item-line-margin-top;
-            margin-bottom: $d-p-carousel-item-line-margin-bottom;
+            //background: $d-p-carousel-item-line-color;
+            //margin-top: $d-p-carousel-item-line-margin-top;
+            //margin-bottom: $d-p-carousel-item-line-margin-bottom;
           }
         }
         .field--name-field-d-image {

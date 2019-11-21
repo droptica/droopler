@@ -9,9 +9,8 @@ $d-p-banner-header-color: $color-odysseus !default;
 $d-p-banner-subheader-color: $color-odysseus !default;
 $d-p-banner-text-color: $color-odysseus !default;
 $d-p-banner-background-overlay: $color-cassandra !default;
-$d-p-banner-line-color: $color-agamemnon !default;
 $d-p-banner-half-transparent-background-color: rgba(255, 255, 255, .75) !default;
-$d-p-banner-half-transparent-text-color: $color-cassandra !default;
+//$d-p-banner-half-transparent-text-color: $color-cassandra !default;
 
 // Margins, paddings and sizes.
 $d-p-banner-text-line-height: 1.7 !default;
@@ -73,9 +72,8 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     }
     &:before {
       @include decoration-header-line-main-center;
-      background: $d-p-banner-line-color;
-      margin-top: $d-p-banner-line-margin-top;
-      margin-bottom: $d-p-banner-line-margin-bottom;
+      //margin-top: $d-p-banner-line-margin-top;
+      //margin-bottom: $d-p-banner-line-margin-bottom;
     }
   }
   .backstretch-item {
@@ -119,7 +117,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
         padding-right: $d-p-banner-half-transparent-content-spacing;
         .field--name-field-d-main-title,
         .field--name-field-d-subtitle {
-          color: $d-p-banner-half-transparent-text-color;
+          //color: $d-p-banner-half-transparent-text-color;
           text-transform: none;
           opacity: 1;
           @include media-breakpoint-up(lg) {
@@ -149,11 +147,25 @@ $d-p-banner-subheader-opacity: 0.7 !default;
         }
         .field--name-field-d-long-text {
           p {
-            color: $d-p-banner-half-transparent-text-color;
+            //color: $d-p-banner-half-transparent-text-color;
             @include media-breakpoint-up(lg) {
               text-align: left;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+.theme-invert {
+  .d-p-banner {
+    .content-wrapper {
+      h2 + .field--type-link,
+      h3 + .field--type-link,
+      .field--name-field-d-long-text {
+        &:before {
+          background: $line-background-alter;
         }
       }
     }

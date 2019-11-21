@@ -20,6 +20,9 @@ $tiles-spacing: 10px !default;
 $tile-title-font-size-desktop: 4vh !default;
 $tile-title-font-size-mobile: 3vh !default;
 $header-into-columns-padding-y: 3.875rem !default;
+$theme-invert-text-color: $color-cassandra !default;
+$line-background-alter: $color-agamemnon !default;
+$line-left-margin-bottom: 0.625rem !default;
 
 .background {
   &-gray-light {
@@ -28,17 +31,29 @@ $header-into-columns-padding-y: 3.875rem !default;
   &-gray-light-2 {
     background-color: $light-gray-background-2;
   }
-}
 
-.theme-invert,
-.with-alt-text {
-  .paragraph {
-    .field--type-string,
-    .field--type-text-long {
-      color: $color-cassandra;
+  &-gray-light-2,
+  &-gray-light {
+    .paragraph  {
+      .field--name-field-d-main-title::after,
+      .field field--name-field-d-long-text::before {
+        background-color: $line-background-alter !important;
+      }
     }
   }
 }
+
+.theme-invert {
+  .paragraph {
+    .field--type-string,
+    .field--type-text-long {
+      &, p {
+        color: $color-cassandra;
+      }
+    }
+  }
+}
+
 .theme-invert {
   .paragraph {
     h2 {
@@ -301,7 +316,7 @@ $header-into-columns-padding-y: 3.875rem !default;
           margin-bottom: 0;
         }
         .field--name-field-d-main-title::after {
-          margin-left: 0;
+          margin: $line-left-margin-bottom auto $line-left-margin-bottom 0;
         }
       }
     }

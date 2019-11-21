@@ -84,9 +84,9 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
       text-align: left;
       &:after {
         @include decoration-header-line;
-        margin-top: $d-p-side-embed-line-margin-top;
-        margin-bottom: $d-p-side-embed-line-margin-bottom;
-        background: $d-p-side-embed-line-color;
+        //margin-top: $d-p-side-embed-line-margin-top;
+        //margin-bottom: $d-p-side-embed-line-margin-bottom;
+        //background: $d-p-side-embed-line-color;
       }
       &:last-child:after {
         display: none;

@@ -41,9 +41,9 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
       text-align: left;
       &:after {
         @include decoration-header-line;
-        margin-top: $d-p-side-tiles-line-margin-top;
-        margin-bottom: $d-p-side-tiles-line-margin-bottom;
-        background: $d-p-side-tiles-line-color;
+        //margin-top: $d-p-side-tiles-line-margin-top;
+        //margin-bottom: $d-p-side-tiles-line-margin-bottom;
+        //background: $d-p-side-tiles-line-color;
       }
       &:last-child:after {
         display: none;

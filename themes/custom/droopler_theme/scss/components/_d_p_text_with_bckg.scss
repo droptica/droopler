@@ -6,7 +6,6 @@ Styleguide components.d_p.d_p_text_with_bckg
 
 // Colour variables used in this paragraph.
 $d-p-text-with-bckg-background-overlay: $color-odysseus !default;
-$d-p-text-with-bckg-line-color: $line-background !default;
 $d-p-text-with-bckg-header-color: $color-cassandra !default;
 
 // Margins, paddings and sizing.
@@ -52,9 +51,8 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
     }
     &:before {
       @include decoration-header-line-main-center;
-      background: $d-p-text-with-bckg-line-color;
-      margin-top: $d-p-text-with-bckg-line-margin-top;
-      margin-bottom: $d-p-text-with-bckg-line-margin-bottom;
+      //margin-top: $d-p-text-with-bckg-line-margin-top;
+      //margin-bottom: $d-p-text-with-bckg-line-margin-bottom;
     }
   }
   .field--type-link {
