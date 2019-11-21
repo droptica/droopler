@@ -79,3 +79,36 @@ v1.4:
     '#title': 'Update blog post metatags.'
     '#description': '<p>Now the blog teaser is also a default meta description.</p>'
     '#description_failed': '<p><strong>Installation failed</strong>, please try to import the feature manually.</p>'
+v2.0:
+  '#title': 'Update to Droopler 2.0'
+  '#description': '<h3>Checkout new features for the major Droopler release:</h3>'
+  droopler__droopler_update_8103_0:
+    '#title': 'Install "entity_reference_display" and "we_megamenu" module.'
+    '#description': '<p>Enable advanced entity reference support and set up MegaMenu.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+    extension_page: { '#text': 'Enable "entity_reference_display" and "we_megamenu" modules', '#url': 'internal:/admin/modules' }
+  droopler__droopler_update_8103_1:
+    '#title': 'Add new field storage configuration.'
+    '#description': '<p>We added some new fields to Droopler 2.0, this is their declaration.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, please try to import the "d_p" feature manually.</p>'
+  droopler__droopler_update_8103_2:
+    '#title': 'Install new Droopler modules.'
+    '#description': '<p>Enable new modules: d_p_node, d_p_side_by_side, d_search, d_social_media, d_p_reference_content.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+    extension_page: { '#text': 'Enable d_p_node, d_p_side_by_side, d_search, d_social_media and d_p_reference_content modules', '#url': 'internal:/admin/modules' }
+  droopler__droopler_update_8103_3:
+    '#title': 'Add new field instances configuration.'
+    '#description': '<p>We added new fields to existing paragraphs, some config must be installed to enable them.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, please try to import the paragraph features manually.</p>'
+  droopler__droopler_update_8103_4:
+    '#title': 'Update existing field configuration.'
+    '#description': '<p>Some of Droopler fields changed, this is their new config.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, please try to import the paragraph features manually.</p>'
+  droopler__droopler_update_8103_5:
+    '#title': 'Update view modes for new and updated fields.'
+    '#description': '<p>Now when the field config is imported, we have to update the paragraph form and view modes.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, please try to import the paragraph features manually.</p>'
+  droopler__droopler_update_8103_6:
+    '#title': 'Import other configuration.'
+    '#description': '<p>Import unsorted configs..</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, please try to import the feature manually.</p>'
