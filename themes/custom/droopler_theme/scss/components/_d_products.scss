@@ -2,8 +2,8 @@
 
 $d-product-facets-header: 1.20rem !default;
 $d-product-teaser-header: 1.20rem !default;
-$d-product-view-border: 1px solid $color-hector;
-$d-product-filters-group-margin: 3rem;
+$d-product-view-border: 1px solid $color-hector !default;
+$d-product-filters-group-margin: 3rem !default;
 
 @mixin facet-header {
   font-size: $d-product-facets-header;

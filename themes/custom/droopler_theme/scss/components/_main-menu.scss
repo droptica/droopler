@@ -28,7 +28,7 @@ $submenu-link-hover-background: transparent !default; // Submenu item hover colo
 $menu-mobile-background: $color-agamemnon !default;
 
 $navbar-toggler-color: $color-agamemnon !default;
-$navbar-toggler-sidebar-spacing: 10px;
+$navbar-toggler-sidebar-spacing: 10px !default;
 
 $mega-menu-submenu-header-color: white !default;
 $mega-menu-submenu-color: white !default;
@@ -42,7 +42,7 @@ $menu-dropdown-size: 2.3rem !default; // Size of the dropdown arrow
 $navbar-toggler-size: 2.3rem !default; // Size of the toggler arrow
 
 $mega-menu-header-font-family: 'Lato', sans-serif !default;
-$mega-menu-submenu-font-family: $mega-menu-header-font-family;
+$mega-menu-submenu-font-family: $mega-menu-header-font-family !default;
 $mega-menu-submenu-font-weight: bold !default;
 $mega-menu-submenu-font-size: 1rem !default;
 $mega-menu-submenu-header-font-family: $mega-menu-submenu-font-family !default;
@@ -65,7 +65,7 @@ $mega-menu-submenu-link-padding-y: 9px !default;
 $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
 $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-y !default;
 
-$sidebar-animation-speed: 100ms;
+$sidebar-animation-speed: 100ms !default;
 
 .navbar-inner {
   flex-direction: column;
