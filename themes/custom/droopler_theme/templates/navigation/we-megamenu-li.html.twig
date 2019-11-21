@@ -1,3 +1,11 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for we-mega-menu list item.
+ * Adding custom toggler to link element.
+ */
+#}
+
 <li {{ attributes }}>
   {% if href is empty %}
     <span data-drupal-link-system-path="<front>" class="we-megamenu-nolink">{{ title }}</span>

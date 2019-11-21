@@ -26,6 +26,12 @@
     }
   };
 
+  /**
+   * Adds body tag class when mobile sidebar is opened.
+   * Required for disabling body scroll and adding overlay.
+   *
+   * @type {{attach: Drupal.behaviors.mainMenuMobileNavbarListener.attach}}
+   */
   Drupal.behaviors.mainMenuMobileNavbarListener = {
     attach: function (context, settings) {
       $('#navbar-main button.navbar-toggler').click(function() {
@@ -34,6 +40,11 @@
     }
   };
 
+  /**
+   * Adding toggle behavior for sidebar menu items having submenus.
+   *
+   * @type {{attach: Drupal.behaviors.mainMenuMobileSubmenuToggle.attach}}
+   */
   Drupal.behaviors.mainMenuMobileSubmenuToggle = {
     attach: function (context, settings) {
       var $menuItems = $('.we-mega-menu-li.dropdown-menu', context);
