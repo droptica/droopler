@@ -117,6 +117,9 @@ function d_product_preprocess_page(&$variables) {
     $variables['pager_total_items'] = reset($pager_total_items);
     $variables['#attached']['library'][] = 'd_product/d_product_select';
     $variables['#attached']['library'][] = 'd_product/d_product_searches';
+
+//    $variables['page']['content']['pagetitle']['#access'] = FALSE;
+
   }
 
   // Remove title block from product page.

@@ -68,6 +68,15 @@
 
 {% block content %}
 
+  <div class="container-fluid">
+    <div class="row clearfix">
+      {{ page.breadcrumb }}
+      <main class="main-content">
+        <h1 class="blog-listing-main-header">{{ page['#title'] }} </h1>
+      </main>
+    </div>
+  </div>
+
   <div{{ main_attributes }}>
     <div class="row clearfix">
     {{ page.breadcrumb }}
@@ -94,7 +103,7 @@
                   </div>
                 </div>
 
-                {{ page.content }}
+                {{ page.content|without('pagetitle') }}
               </div>
             </div>
           </div>
