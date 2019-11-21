@@ -1,7 +1,7 @@
 info:
   type: block_content
   bundle: content_block
-  title: 'Mega Menu Dolor'
+  title: 'Mega Menu For Boats'
 
 # Placement of the block in region.
 placement:
@@ -12,10 +12,13 @@ placement:
 
 # Content block fields.
 fields:
+  field_d_main_title:
+    type: text
+    data: 'For boats'
   field_d_long_text:
     type: text_long
     data:
-      - value: "<img src='/sites/default/files/styles/responsive_image_768/public/demo/d_demo_tile_plane.jpg'/><h2>Dolor</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend porttitor urna, eget scelerisque odio mattis et. Sed scelerisque nisi sit amet tellus iaculis maximus.</p>"
+      - value: "<ul><li><a href='#'>Regular servicing</a></li><li><a href='#'>Engine installation<a/></li><li><a href='#'>Engine repair and overhaul<a/></li></ul>"
         format: full_html
 
 # Mega menu configuration.
@@ -23,7 +26,7 @@ we_megamenu:
   menu_name: main
   parent_title: "Services"
   row: 0
-  col: 3
+  col: 1
   col_config:
     hidewhencollapse: ""
     type: "we-mega-menu-col"

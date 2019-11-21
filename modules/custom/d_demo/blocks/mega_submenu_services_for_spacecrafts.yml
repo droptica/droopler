@@ -1,7 +1,7 @@
 info:
   type: block_content
   bundle: content_block
-  title: 'Mega Menu Electric engines'
+  title: 'Mega Menu For Spacecrafts'
 
 # Placement of the block in region.
 placement:
@@ -12,13 +12,10 @@ placement:
 
 # Content block fields.
 fields:
-  field_d_main_title:
-    type: text
-    data: 'Electric engines'
   field_d_long_text:
     type: text_long
     data:
-      - value: "<ul><li><a href='/product'>Product<a/></li><li>Dolor</li><li>Amet</li><li>Suspendisse</li></ul>"
+      - value: "<img src='/profiles/contrib/droopler/modules/custom/d_demo/assets/d_demo_tile_plane.jpg'/><p>In DrooplerEngines we not only produce world-class engines but also provide a lot of services related to engines.</p>"
         format: full_html
 
 # Mega menu configuration.
@@ -26,11 +23,10 @@ we_megamenu:
   menu_name: main
   parent_title: "Services"
   row: 0
-  col: 2
+  col: 3
   col_config:
     hidewhencollapse: ""
     type: "we-mega-menu-col"
     width: 3
     class: ""
     block_title: 0
-
