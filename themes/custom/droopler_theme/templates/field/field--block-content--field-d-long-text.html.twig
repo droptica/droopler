@@ -1,11 +1,8 @@
-{% set attributes = attributes.addClass('clearfix', 'text-formatted') %}
+{% extends "field--text.html.twig" %}
 
-{% embed "field.html.twig" %}
+{% block content %}
+  <div class="field-content-wrapper">
+    {{ parent() }}
+  </div>
+{% endblock %}
 
-  {% block content %}
-    <div class="field-content-wrapper">
-      {{ parent() }}
-    </div>
-  {% endblock %}
-
-{% endembed %}
