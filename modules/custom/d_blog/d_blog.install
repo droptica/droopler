@@ -1,10 +1,4 @@
-<?php/**
- * Implements hook_install().
- */
-function d_p_node_install() {
-  \Drupal::service('entity.definition_update_manager')->applyUpdates();
-}
-
+<?php
 
 /**
  * Implements hook_install().
