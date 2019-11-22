@@ -112,12 +112,20 @@ class Updater {
       return FALSE;
     }
 
-    // If this is field storage, save it via field_storage_config, otherwise use default config storage.
     if (preg_match('/^field\.storage\./', $name)) {
+      // If this is field storage, save it via field_storage_config.
       return $this->entityTypeManager->getStorage('field_storage_config')
         ->create($data)
         ->save();
-    } else {
+    }
+    else if (preg_match('/^field\.field\./', $name)) {
+      // If this is field instance, save it via field_config.
+      return $this->entityTypeManager->getStorage('field_config')
+        ->create($data)
+        ->save();
+    }
+    else {
+      // Otherwise use plain config storage.
       return $this->configStorage->write($name, $data);
     }
 
