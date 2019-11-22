@@ -113,7 +113,7 @@ class Updater {
     }
 
     // If this is field storage, save it via field_storage_config, otherwise use default config storage.
-    if (preg_match('^field\.storage\.', $name)) {
+    if (preg_match('/^field\.storage\./', $name)) {
       return $this->entityTypeManager->getStorage('field_storage_config')
         ->create($data)
         ->save();
