@@ -170,6 +170,19 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
   }
 }
 
+.theme-invert {
+  .d-p-side-embed-content {
+    background: $color-odysseus;
+    color: $d-p-side-embed-full-text-color;
+    .d-p-side-embed-content-fields {
+      .field--name-field-d-long-text,
+      .field--name-field-d-main-title {
+        color: $d-p-side-embed-full-text-color;
+      }
+    }
+  }
+}
+
 // @TODO Introduce .paragraph-light and .paragraph-dark
 
 @include media-breakpoint-up(md) {
