@@ -68,12 +68,16 @@
 
 {% block content %}
 
-  <div class="container-fluid">
-    <div class="row clearfix">
-      {{ page.breadcrumb }}
-      <main class="main-content">
-        <h1 class="products-listing-main-header">{{ page['#title'] }} </h1>
-      </main>
+  <div class="main-header-wrapper">
+    <div class="container">
+      <div class="row clearfix">
+        <div class="col-12">
+
+          {{ page.breadcrumb }}
+          <h1 class="products-listing-main-header">{{ page['#title'] }} </h1>
+
+        </div>
+      </div>
     </div>
   </div>
 

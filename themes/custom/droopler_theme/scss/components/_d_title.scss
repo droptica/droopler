@@ -1,18 +1,28 @@
+// Big page header with h1 title.
+// Accepts background color, text color, padding top, padding bottom and header margin bottom.
 @mixin listing-main-header($background-color, $text-color, $padding-top, $padding-bottom, $header-margin-bottom) {
+  .page-wrapper .main-header-wrapper
+  {
 
-  background-color: $background-color;
-  color: $text-color;
-  padding-top: $padding-top;
-  padding-bottom: $padding-bottom;
-  text-transform: none;
-  text-align: center;
+    background-color: $background-color;
 
-  &:after {
-    @include decoration-header-line-main-center;
+    .blog-listing-main-header,
+    .products-listing-main-header
+    {
+      color: $text-color;
+      padding-top: $padding-top;
+      padding-bottom: $padding-bottom;
+      text-transform: none;
+      text-align: center;
+
+      &:after {
+        @include decoration-header-line-main-center;
+      }
+
+      h1 {
+        color: $text-color;
+        margin-bottom: $header-margin-bottom;
+      }
+    }
   }
-  h1 {
-    color: $text-color;
-    margin-bottom: $header-margin-bottom;
-  }
-
 }

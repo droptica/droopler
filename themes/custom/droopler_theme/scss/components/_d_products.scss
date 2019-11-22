@@ -1,6 +1,7 @@
 @import '_d_title';
 
 $d-product-listing-header-color: $color-agamemnon !default;
+$d-product-listing-header-text-color: $color-odysseus !default;
 $d-product-listing-padding-top: 120px !default;
 $d-product-listing-padding-bottom: 86px !default;
 $d-product-title-margin-bottom: 0px !default;
@@ -894,6 +895,6 @@ body:not(.scrolled-buttons) {
   }
 }
 
-.page-wrapper .products-listing-main-header {
-  @include listing-main-header($d-product-listing-header-color, $color-odysseus, $d-product-listing-padding-top, $d-product-listing-padding-bottom, $d-product-title-margin-bottom);
-}
+
+@include listing-main-header($d-product-listing-header-color, $d-product-listing-header-text-color, $d-product-listing-padding-top, $d-product-listing-padding-bottom, $d-product-title-margin-bottom);
+
