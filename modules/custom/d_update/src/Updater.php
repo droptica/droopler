@@ -7,10 +7,13 @@
 
 namespace Drupal\d_update;
 
+use Drupal\Core\Config\ConfigManagerInterface;
+use Drupal\Core\Config\StorageException;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
-use Drupal\d_update\ConfigManager;
+use Drupal\d_update\ConfigCompare;
 use Drupal\d_update\UpdateChecklist;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Config\FileStorage;
@@ -39,16 +42,23 @@ class Updater {
   protected $configStorage;
 
   /**
-   * Entity manager service.
+   * Entity type manager service.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
-   * D update config manager service.
+   * D update config compare service.
    *
-   * @var \Drupal\d_update\ConfigManager
+   * @var \Drupal\d_update\ConfigCompare
+   */
+  protected $configCompare;
+
+  /**
+   * Config manager service.
+   *
+   * @var \Drupal\Core\Config\ConfigManagerInterface
    */
   protected $configManager;
 
@@ -67,20 +77,24 @@ class Updater {
    * @param \Drupal\Core\Config\StorageInterface $config_storage
    *   Config storage service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   Config storage service.
-   * @param \Drupal\d_update\ConfigManager $config_manager
-   *   D Update Config manager service.
+   *   Entity type manager service.
+   * @param \Drupal\d_update\ConfigCompare $config_compare
+   *   D Update Config compare service.
+   * @param \Drupal\Core\Config\ConfigManagerInterface $config_manager
+   *   Config manager service.
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
    */
   public function __construct(ModuleInstallerInterface $module_installer,
                               StorageInterface $config_storage,
                               EntityTypeManagerInterface $entity_type_manager,
-                              ConfigManager $config_manager,
+                              ConfigCompare $config_compare,
+                              ConfigManagerInterface $config_manager,
                               UpdateChecklist $checklist) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
     $this->entityTypeManager = $entity_type_manager;
+    $this->configCompare = $config_compare;
     $this->configManager = $config_manager;
     $this->checklist = $checklist;
   }
@@ -110,34 +124,55 @@ class Updater {
     $config_path = drupal_get_path('module', $module) . '/config/install';
     $source = new FileStorage($config_path);
     $data = $source->read($name);
-    if (!$data || !$this->configManager->compare($name, $hash)) {
+    if (!$data) {
+      $this->getLogger('d_update')->error('Cannot find file for %config', [
+        '%config' => $name,
+      ]);
+      return FALSE;
+    }
+    if (!$this->configCompare->compare($name, $hash)) {
+      $this->getLogger('d_update')->warning('Detected changes in %config, aborting import...', [
+        '%config' => $name,
+      ]);
       return FALSE;
     }
 
-    if (preg_match('/^field\.storage\./', $name)) {
-      // If this is field storage, save it via field_storage_config.
-      $this->getLogger('d_update')->info('Creating field storage %config', [
-        '%config' => $name,
-      ]);
-      return $this->entityTypeManager->getStorage('field_storage_config')
-        ->create($data)
-        ->save();
-    }
-    else if (preg_match('/^field\.field\./', $name)) {
-      // If this is field instance, save it via field_config.
-      $this->getLogger('d_update')->info('Creating field instance %config', [
-        '%config' => $name,
-      ]);
-      return $this->entityTypeManager->getStorage('field_config')
-        ->create($data)
-        ->save();
+    if (preg_match('/^field\./', $name)) {
+      // If this is field config, handle it properly.
+      $entity_type = $this->configManager->getEntityTypeIdByName($name);
+      /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
+      $storage = $this->entityTypeManager->getStorage($entity_type);
+      $entity = $storage->createFromStorageRecord($data);
+      $entity->enforceIsNew(empty($hash));
+      try {
+        $entity->save();
+        $this->getLogger('d_update')->info('Successfully imported field config %config', [
+          '%config' => $name,
+        ]);
+        return TRUE;
+      }
+      catch (EntityStorageException $e) {
+        $this->getLogger('d_update')->error('Error while importing field config %config', [
+          '%config' => $name,
+        ]);
+        return FALSE;
+      }
     }
     else {
       // Otherwise use plain config storage.
-      $this->getLogger('d_update')->info('Importing config  %config', [
-        '%config' => $name,
-      ]);
-      return $this->configStorage->write($name, $data);
+      try {
+        $this->configStorage->write($name, $data);
+        $this->getLogger('d_update')->info('Successfully imported config %config', [
+          '%config' => $name,
+        ]);
+        return TRUE;
+      }
+      catch (StorageException $e) {
+        $this->getLogger('d_update')->error('Error while importing config %config', [
+          '%config' => $name,
+        ]);
+        return FALSE;
+      }
     }
 
   }

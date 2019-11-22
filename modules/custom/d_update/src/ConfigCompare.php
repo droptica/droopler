@@ -2,17 +2,17 @@
 
 /**
  * @file
- * Contains \Drupal\d_update\ConfigManager.
+ * Contains \Drupal\d_update\ConfigCompare.
  */
 
 namespace Drupal\d_update;
 
 /**
- * Config Manager service.
+ * Config Compare service.
  *
  * @package Drupal\d_update
  */
-class ConfigManager {
+class ConfigCompare {
 
   /**
    * Generates hash for the specified config.
