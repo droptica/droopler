@@ -5,6 +5,8 @@ Styleguide 2.d_p_side_by_side
 */
 
 // Colour variables used in this paragraph
+$d-p-side-by-side-line-color: $color-agamemnon !default;
+$d-p-side-by-side-line-color-inverted: $color-nestor !default;
 $d-p-side-by-side-color: $color-hecuba !default;
 $d-p-side-by-side-bold-color: $color-troilus !default;
 
@@ -34,7 +36,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
       @include font-main-header;
 
       &:after {
-        @include decoration-header-line-main-center;
+        @include decoration-header-line-main-center($d-p-side-by-side-line-color, $d-p-side-by-side-line-color-inverted);
       }
     }
 

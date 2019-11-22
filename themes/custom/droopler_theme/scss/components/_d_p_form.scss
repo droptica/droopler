@@ -9,6 +9,7 @@ $d-p-form-header-color: $color-odysseus !default;
 $d-p-form-text-color: $color-odysseus !default;
 $d-p-form-background: $color-agamemnon !default;
 $d-p-form-line-color: $color-nestor !default;
+$d-p-form-line-color-inverted: $color-agamemnon !default;
 
 // Margins, paddings and sizes.
 $d-p-form-header-margin-bottom: 10% !default;
@@ -25,19 +26,12 @@ $d-p-form-copy-margin-left: 1.25rem !default;
   form {
     margin: 0;
   }
-  h2.field--name-field-d-main-title {
+  .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
     color: $d-p-form-header-color;
     &:after {
-      @include decoration-header-line;
-      background-color: $d-p-form-line-color;
-    }
-  }
-
-  &.with-long-text {
-    h2.field--name-field-d-main-title:after {
-      margin-bottom: .625rem;
+      @include decoration-header-line($d-p-form-line-color, $d-p-form-line-color-inverted);
     }
   }
 

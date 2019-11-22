@@ -299,7 +299,6 @@ $line-left-margin-bottom: 0.625rem !default;
     }
   }
 }
-
 .header-into-columns {
   .d-p-group-of-text-blocks {
     @include media-breakpoint-up(md) {
@@ -314,8 +313,8 @@ $line-left-margin-bottom: 0.625rem !default;
           text-align: left;
           margin-bottom: 0;
         }
-        .field--name-field-d-main-title::after {
-          margin: $line-left-margin-bottom auto $line-left-margin-bottom 0;
+        h2.field--name-field-d-main-title::after {
+          margin: $line-left-margin-bottom auto $line-left-margin-bottom 0 !important;
         }
       }
     }

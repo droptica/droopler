@@ -8,6 +8,8 @@ Styleguide 2.8
 $d-p-single-box-text-color: $color-hecuba !default;
 $d-p-single-box-text-bold-color: $color-troilus !default;
 $d-p-single-box-line-color: $color-agamemnon !default;
+$d-p-text-blocks-line-color: $color-agamemnon !default;
+$d-p-text-blocks-line-color-inverted: $color-nestor !default;
 $d-p-text-blocks-background: $color-agamemnon !default;
 
 // Margins, paddings and sizing.
@@ -63,7 +65,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
         margin: $d-p-text-blocks-mobile-group-margin;
       }
       &:after {
-        @include decoration-header-line-main-center;
+        @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
     }
     > .field--type-link {
@@ -82,7 +84,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       margin-bottom: inherit;
 
       &::after {
-        @include decoration-header-line-main-center;
+        @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
     }
     .field--name-field-d-long-text {

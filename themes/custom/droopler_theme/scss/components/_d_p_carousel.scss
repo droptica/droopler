@@ -6,7 +6,9 @@ Components Carousel
 $d-p-carousel-item-text-color: $color-hecuba !default;
 $d-p_carousel-item-text-bold-color: $color-troilus !default;
 $d-p-carousel-item-line-color: $color-agamemnon !default;
+$d-p-carousel-item-line-color-inverted: $color-nestor !default;
 $d-p-carousel-line-color: $color-agamemnon !default;
+$d-p-carousel-line-color-inverted: $color-nestor !default;
 $d-p-carousel-background: $color-agamemnon !default;
 $d-p-carousel-arrow-color: $color-cassandra !default;
 
@@ -54,7 +56,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     text-align: center;
 
     &:after {
-      @include decoration-header-line-main-center;
+      @include decoration-header-line-main-center($d-p-carousel-line-color, $d-p-carousel-line-color-inverted);
     }
   }
 
@@ -151,7 +153,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
             }
           }
           &:before {
-            @include decoration-header-line-main-center;
+            @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);
           }
         }
         .field--name-field-d-image {

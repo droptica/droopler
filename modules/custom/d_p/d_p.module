@@ -87,7 +87,7 @@ function d_p_preprocess_paragraph(&$variables) {
     if ($fieldName == 'field_d_long_text') {
       $field = $paragraph->get($fieldName);
       if (!$field->isEmpty()) {
-        $paragraph_attributes['class'][] = 'with-long-text';
+        $wrapper_attributes['class'][] = 'with-long-text';
       }
     }
 

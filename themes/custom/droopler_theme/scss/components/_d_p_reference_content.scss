@@ -1,3 +1,7 @@
+// Colors
+$d-p-reference-content-line-color: $color-agamemnon !default;
+$d-p-reference-content-line-color-inverted: $color-nestor !default;
+
 // Margins, paddings and sizing.
 $d-p-reference-content-padding-top: 3.875rem !default;
 $d-p-reference-content-padding-bottom: 0 !default;
@@ -12,7 +16,7 @@ $d-p-reference-content-content-padding: 5px !default;
 
   > .field--name-field-d-main-title {
     &:after {
-      @include decoration-header-line-main-center;
+      @include decoration-header-line-main-center($d-p-reference-content-line-color, $d-p-reference-content-line-color-inverted);
     }
   }
 
