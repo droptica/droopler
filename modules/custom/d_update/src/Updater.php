@@ -9,6 +9,7 @@ namespace Drupal\d_update;
 
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Config\StorageInterface;
+use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\d_update\ConfigManager;
 use Drupal\d_update\UpdateChecklist;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -21,6 +22,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 class Updater {
 
   use StringTranslationTrait;
+  use LoggerChannelTrait;
 
   /**
    * Module installer service.
@@ -114,18 +116,27 @@ class Updater {
 
     if (preg_match('/^field\.storage\./', $name)) {
       // If this is field storage, save it via field_storage_config.
+      $this->getLogger('d_update')->info('Creating field storage %config', [
+        '%config' => $name,
+      ]);
       return $this->entityTypeManager->getStorage('field_storage_config')
         ->create($data)
         ->save();
     }
     else if (preg_match('/^field\.field\./', $name)) {
       // If this is field instance, save it via field_config.
+      $this->getLogger('d_update')->info('Creating field instance %config', [
+        '%config' => $name,
+      ]);
       return $this->entityTypeManager->getStorage('field_config')
         ->create($data)
         ->save();
     }
     else {
       // Otherwise use plain config storage.
+      $this->getLogger('d_update')->info('Importing config  %config', [
+        '%config' => $name,
+      ]);
       return $this->configStorage->write($name, $data);
     }
 
