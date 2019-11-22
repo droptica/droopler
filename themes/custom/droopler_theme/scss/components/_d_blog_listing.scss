@@ -2,6 +2,7 @@
 
 $d-blog-listing-header-color: $color-agamemnon !default;
 $d-blog-listing-header-text-color: $color-odysseus !default;
+$d-blog-listing-header-class: ".blog-listing-main-header";
 $d-blog-listing-taxonomy-link-color: $color-penthesilea !default;
 $d-blog-border-bottom-color: $color-diomedes !default;
 $d-blog-padding-link-color: $color-patroclus !default;
@@ -132,7 +133,7 @@ $d-blog-article-row-min-height: 420px !default;
   }
 }
 
-@include listing-main-header($d-blog-listing-header-color, $d-blog-listing-header-text-color, $d-blog-listing-padding-top, $d-blog-listing-padding-bottom, $d-blog-title-margin-bottom);
+@include listing-main-header($d-blog-listing-header-class, $d-blog-listing-header-color, $d-blog-listing-header-text-color, $d-blog-listing-padding-top, $d-blog-listing-padding-bottom, $d-blog-title-margin-bottom);
 
 .article-wrapper {
   border-bottom: $d-blog-article-border;
