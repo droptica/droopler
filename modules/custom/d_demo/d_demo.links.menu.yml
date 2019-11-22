@@ -4,14 +4,14 @@ d_demo.engines:
   parent: main
   route_name: '<none>'
   menu_name: main
-  weight: -10
+  weight: 0
   options:
     fragment: 'engines'
 d_demo.engines_car:
   title: 'Car Engines'
   description: 'List of car engines'
   parent: d_demo.engines
-  route_name: 'd_demo.car_engines'
+  route_name: '<none>'
   menu_name: main
   weight: 0
   options:
