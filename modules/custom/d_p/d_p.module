@@ -64,10 +64,6 @@ function d_p_preprocess_paragraph(&$variables) {
     ],
   ];
 
-  $paragraph_attributes = [
-    'data-id' => $paragraph_id,
-  ];
-
   $paragraphFieldDefinitions = $paragraph->getFieldDefinitions();
   /**
    * @var FieldConfig $field
@@ -100,12 +96,14 @@ function d_p_preprocess_paragraph(&$variables) {
       }
     }
 
-
   }
 
   if ($paragraphModifiersHelper->hasCustomClasses()) {
     $wrapper_attributes['class'][] = $paragraphModifiersHelper->getCustomClass();
   }
+  $paragraph_attributes = [
+    'data-id' => $paragraph_id,
+  ];
   $variables['wrapper_attributes'] = new Attribute($wrapper_attributes);
   $variables['paragraph_attributes'] = new Attribute($paragraph_attributes);
 
