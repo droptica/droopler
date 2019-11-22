@@ -8,7 +8,6 @@ Styleguide 2.8
 $d-p-single-box-text-color: $color-hecuba !default;
 $d-p-single-box-text-bold-color: $color-troilus !default;
 $d-p-single-box-line-color: $color-agamemnon !default;
-$d-p-text-blocks-line-color: $color-agamemnon !default;
 $d-p-text-blocks-background: $color-agamemnon !default;
 
 // Margins, paddings and sizing.
@@ -16,7 +15,6 @@ $d-p-text-blocks-group-padding-y: 3.875rem !default;
 $d-p-text-blocks-group-mobile-padding-y: 2rem !default;
 $d-p-text-blocks-group-margin: 0 0 5.5rem 0 !default;
 $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0 !default;
-$d-p-text-blocks-group-line-margin: 0.625rem auto !default;
 $d-p-single-box-line-margin-top: $line-left-margin-top !default;
 $d-p-single-box-line-margin-bottom: $line-left-margin-bottom !default;
 $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
@@ -66,8 +64,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       }
       &:after {
         @include decoration-header-line-main-center;
-        //background: $d-p-text-blocks-line-color;
-        //margin: $d-p-text-blocks-group-line-margin;
       }
     }
     > .field--type-link {
@@ -153,9 +149,9 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     @include font-title-single-box;
     &:after {
       @include decoration-header-line;
-      //background: $d-p-single-box-line-color;
-      //margin-top: $d-p-single-box-line-margin-top;
-      //margin-bottom: $d-p-single-box-line-margin-bottom;
+      background: $d-p-single-box-line-color;
+      margin-top: $d-p-single-box-line-margin-top;
+      margin-bottom: $d-p-single-box-line-margin-bottom;
     }
   }
   p {

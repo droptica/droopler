@@ -15,8 +15,6 @@ $d-p-side-image-line-color: $color-nestor !default;
 $d-p-side-image-header-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
-$d-p-side-image-line-margin-top: 1.44rem !default;
-$d-p-side-image-line-margin-bottom: 1.44rem !default;
 $d-p-side-image-mobile-height: 18.75rem !default;
 $d-p-side-image-banner-text-padding: 7% !default;
 $d-p-side-image-banner-text-width: 35.625rem !default;
@@ -30,9 +28,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     text-align: left;
     &:after {
       @include decoration-header-line;
-      //margin-top: $d-p-side-image-line-margin-top;
-      //margin-bottom: $d-p-side-image-line-margin-bottom;
-      //margin-background: $d-p-side-image-line-color;
+      background-color: $d-p-side-image-line-color;
     }
     &:last-child:after {
       display: none;

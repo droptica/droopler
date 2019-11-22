@@ -16,8 +16,6 @@ $d-p-side-tiles-overlay-color: $color-odysseus !default;
 $d-p-side-tiles-overlay-opacity: 0.6 !default;
 
 // Margins, paddings and sizing.
-$d-p-side-tiles-line-margin-top: 1.44rem !default;
-$d-p-side-tiles-line-margin-bottom: 1.44rem !default;
 $d-p-side-tiles-mobile-height: 18.75rem !default;
 $d-p-side-tiles-text-desktop-padding-y: 7% !default;
 $d-p-side-tiles-text-mobile-padding: 7% !default;
@@ -41,9 +39,7 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
       text-align: left;
       &:after {
         @include decoration-header-line;
-        //margin-top: $d-p-side-tiles-line-margin-top;
-        //margin-bottom: $d-p-side-tiles-line-margin-bottom;
-        //background: $d-p-side-tiles-line-color;
+        background: $d-p-side-tiles-line-color;
       }
       &:last-child:after {
         display: none;

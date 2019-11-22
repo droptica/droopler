@@ -14,8 +14,6 @@ $d-p-text-with-bckg-padding-top: 6.5% !default;
 $d-p-text-with-bckg-padding-bottom: 6.5% !default;
 $d-p-text-with-bckg-mobile-padding-top: 6.25rem !default;
 $d-p-text-with-bckg-mobile-padding-bottom: 6.25rem !default;
-$d-p-text-with-bckg-line-margin-top: $line-center-margin-top !default;
-$d-p-text-with-bckg-line-margin-bottom: $line-center-margin-bottom !default;
 
 // Other settings
 $d-p-text-with-bckg-img-opacity: 0.1 !default;
@@ -51,8 +49,6 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
     }
     &:before {
       @include decoration-header-line-main-center;
-      //margin-top: $d-p-text-with-bckg-line-margin-top;
-      //margin-bottom: $d-p-text-with-bckg-line-margin-bottom;
     }
   }
   .field--type-link {

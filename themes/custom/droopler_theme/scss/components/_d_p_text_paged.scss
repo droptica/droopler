@@ -6,14 +6,11 @@ Styleguide 2.banner.calina
 
 // Colour variables used in this paragraph
 $d-p-text-paged-subtitle-color: $color-agamemnon !default;
-$d-p-text-paged-line-color: $color-agamemnon !default;
 $d-p-text-paged-color: $color-hecuba !default;
 $d-p-text-paged-bold-color: $color-troilus !default;
 
 // Margins, paddings and sizing.
 $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
-$d-p-text-paged-line-margin-top: 1rem !default;
-$d-p-text-paged-line-margin-bottom: 1rem !default;
 $d-p-text-paged-padding-y: 5% !default;
 $d-p-text-paged-first-margin-top: 2% !default;
 
@@ -52,9 +49,6 @@ $d-p-text-paged-first-margin-top: 2% !default;
 
     &:before {
       @include decoration-header-line-main-center;
-      //background: $d-p-text-paged-line-color;
-      //margin-top: $d-p-text-paged-line-margin-top;
-      //margin-bottom: $d-p-text-paged-line-margin-bottom;
     }
   }
 }

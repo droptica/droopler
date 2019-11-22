@@ -6,8 +6,6 @@ $d-p-reference-content-item-padding: 5px !default;
 $d-p-reference-content-item-margin-left: -5px !default;
 $d-p-reference-content-item-margin-right: -10px !default;
 $d-p-reference-content-content-padding: 5px !default;
-$d-p-reference-content-line-margin-top: 0.625rem !default;
-$d-p-reference-content-line-margin-bottom: 0.625rem !default;
 
 .d-p-reference-content-wrapper {
   overflow: hidden;
@@ -15,8 +13,6 @@ $d-p-reference-content-line-margin-bottom: 0.625rem !default;
   > .field--name-field-d-main-title {
     &:after {
       @include decoration-header-line-main-center;
-      //margin-top: $d-p-reference-content-line-margin-top;
-      //margin-bottom: $d-p-reference-content-line-margin-bottom;
     }
   }
 

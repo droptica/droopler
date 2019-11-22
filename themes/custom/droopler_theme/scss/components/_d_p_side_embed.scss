@@ -9,13 +9,10 @@ $d-p-side-embed-embed-background-color: $color-cassandra !default;
 $d-p-side-embed-text-color: $color-odysseus !default;
 $d-p-side-embed-link-color: $color-nestor !default;
 $d-p-side-embed-link-hover-color: darken($d-p-side-embed-link-color, 5%) !default;
-$d-p-side-embed-line-color: $color-nestor !default;
 $d-p-side-embed-header-color: $color-odysseus !default;
 $d-p-side-embed-full-text-color: $color-cassandra !default;
 
 // Margins, paddings and sizing.
-$d-p-side-embed-line-margin-top: 1.44rem !default;
-$d-p-side-embed-line-margin-bottom: 1.44rem !default;
 $d-p-side-embed-fields-padding-y: 7% !default;
 $d-p-side-embed-fields-full-padding-y: 30px !default;
 $d-p-side-embed-fields-padding-x: 30px !default;
@@ -53,8 +50,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     }
     .d-p-side-embed-content {
       position: relative;
-      background: $color-odysseus;
-      color: $d-p-side-embed-full-text-color;
       @include media-breakpoint-up(md) {
         position: absolute;
         bottom: 50%;
@@ -64,13 +59,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         width: 600px; // Half of container.
         padding-left: $d-p-side-embed-fields-padding-x;
         padding-right: $d-p-side-embed-fields-padding-x;
-        .field--name-field-d-long-text,
-        .field--name-field-d-main-title {
-          color: $d-p-side-embed-full-text-color;
-          &::after {
-            content: none;
-          }
-        }
       }
     }
   }
@@ -84,9 +72,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
       text-align: left;
       &:after {
         @include decoration-header-line;
-        //margin-top: $d-p-side-embed-line-margin-top;
-        //margin-bottom: $d-p-side-embed-line-margin-bottom;
-        //background: $d-p-side-embed-line-color;
       }
       &:last-child:after {
         display: none;
@@ -183,6 +168,19 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
           padding-top: $d-p-side-embed-fields-full-padding-y;
           padding-bottom: $d-p-side-embed-fields-full-padding-y;
         }
+      }
+    }
+  }
+}
+
+.theme-invert {
+  .d-p-side-embed-content {
+    background: $color-odysseus;
+    color: $d-p-side-embed-full-text-color;
+    .d-p-side-embed-content-fields {
+      .field--name-field-d-long-text,
+      .field--name-field-d-main-title {
+        color: $d-p-side-embed-full-text-color;
       }
     }
   }
