@@ -1,0 +1,18 @@
+@mixin listing-main-header($background-color, $text-color, $padding-top, $padding-bottom, $header-margin-bottom) {
+
+  background-color: $background-color;
+  color: $text-color;
+  padding-top: $padding-top;
+  padding-bottom: $padding-bottom;
+  text-transform: none;
+  text-align: center;
+
+  &:after {
+    @include decoration-header-line-main-center;
+  }
+  h1 {
+    color: $text-color;
+    margin-bottom: $header-margin-bottom;
+  }
+
+}

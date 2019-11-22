@@ -1,5 +1,10 @@
-// Filters
+@import '_d_title';
 
+$d-product-listing-padding-top: 120px !default;
+$d-product-listing-padding-bottom: 86px !default;
+$d-product-title-margin-bottom: 0px !default;
+
+// Filters
 $d-product-facets-header: 1.20rem !default;
 $d-product-teaser-header: 1.20rem !default;
 $d-product-view-border: 1px solid $color-hector !default;
@@ -886,4 +891,8 @@ body:not(.scrolled-buttons) {
     cursor: pointer;
     display: block;
   }
+}
+
+.page-wrapper .products-listing-main-header {
+  @include listing-main-header($color-agamemnon, $color-odysseus, $d-product-listing-padding-top, $d-product-listing-padding-bottom, $d-product-title-margin-bottom);
 }
