@@ -297,7 +297,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
 
-  // Add new field storages (used by new modules).
+  // Add new fields to paragraphs.
   $configs = [
     'd_p' => [
       'field.storage.paragraph.field_d_background_color' => '',
@@ -305,27 +305,6 @@ function droopler_update_8103() {
       'field.storage.paragraph.field_d_node_reference' => '',
       'field.storage.paragraph.field_d_settings' => '',
     ],
-  ];
-  $values['droopler__droopler_update_8103_1'] = $updater->importConfigs($configs);
-
-  // Install Droopler modules.
-  try {
-    $modules = [
-      'd_p_node',
-      'd_p_side_by_side',
-      'd_search',
-      'd_social_media',
-      'd_p_reference_content',
-    ];
-    $result = $module_installer->install($modules, TRUE);
-    $values['droopler__droopler_update_8103_2'] = $result;
-  }
-  catch (MissingDependencyException $e) {
-    $values['droopler__droopler_update_8103_2'] = FALSE;
-  }
-
-  // Add new fields and update existing ones.
-  $configs = [
     'd_p_banner' => [
       'field.field.paragraph.d_p_banner.field_d_settings' => '',
     ],
@@ -352,7 +331,23 @@ function droopler_update_8103() {
       'field.field.paragraph.d_p_text_paged.field_d_settings' => '',
     ],
   ];
-  $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_1'] = $updater->importConfigs($configs);
+
+  // Install Droopler modules.
+  try {
+    $modules = [
+      'd_p_node',
+      'd_p_side_by_side',
+      'd_search',
+      'd_social_media',
+      'd_p_reference_content',
+    ];
+    $result = $module_installer->install($modules, TRUE);
+    $values['droopler__droopler_update_8103_2'] = $result;
+  }
+  catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8103_2'] = FALSE;
+  }
 
   // Update existing fields.
   $configs = [
@@ -366,7 +361,7 @@ function droopler_update_8103() {
       'field.field.paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference' => '97dd017b20ad8add96ea20e13bbdea39',
     ],
   ];
-  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
 
   // Update view modes for new and updated fields.
   $configs = [
@@ -397,7 +392,7 @@ function droopler_update_8103() {
       'core.entity_view_display.paragraph.d_p_text_paged.default' => 'f860332e18f47f8b1a38f8ceea9f4ce0',
     ],
   ];
-  $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
 
   // Update blog post config.
   $configs = [
@@ -429,7 +424,7 @@ function droopler_update_8103() {
       'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
     ],
   ];
-  $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
 
   $progress = [
     'v2.0' => $values,
