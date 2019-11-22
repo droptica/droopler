@@ -13,6 +13,7 @@ use Drupal\d_update\ConfigManager;
 use Drupal\d_update\UpdateChecklist;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Helper class to update configuration.
@@ -36,6 +37,13 @@ class Updater {
   protected $configStorage;
 
   /**
+   * Entity manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * D update config manager service.
    *
    * @var \Drupal\d_update\ConfigManager
@@ -52,21 +60,25 @@ class Updater {
   /**
    * Constructs the Updater.
    *
-   * @param \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller
+   * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
    *   Module installer service.
-   * @param \Drupal\Core\Config\StorageInterface $configStorage
+   * @param \Drupal\Core\Config\StorageInterface $config_storage
    *   Config storage service.
-   * @param \Drupal\d_update\ConfigManager $configManager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   Config storage service.
+   * @param \Drupal\d_update\ConfigManager $config_manager
    *   D Update Config manager service.
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
    */
   public function __construct(ModuleInstallerInterface $module_installer,
                               StorageInterface $config_storage,
+                              EntityTypeManagerInterface $entity_type_manager,
                               ConfigManager $config_manager,
                               UpdateChecklist $checklist) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
+    $this->entityTypeManager = $entity_type_manager;
     $this->configManager = $config_manager;
     $this->checklist = $checklist;
   }
@@ -100,7 +112,15 @@ class Updater {
       return FALSE;
     }
 
-    return $this->configStorage->write($name, $data);
+    // If this is field storage, save it via field_storage_config, otherwise use default config storage.
+    if (preg_match('^field\.storage\.', $name)) {
+      return $this->entityTypeManager->getStorage('field_storage_config')
+        ->create($data)
+        ->save();
+    } else {
+      return $this->configStorage->write($name, $data);
+    }
+
   }
 
   /**
