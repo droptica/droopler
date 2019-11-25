@@ -177,18 +177,19 @@ header.header > nav.navbar-wrapper {
       & > li.we-mega-menu-li.active-trail,
       & > li.we-mega-menu-li.active {
         background: transparent;
-        a {
+        a, span {
           background: transparent;
           text-transform: capitalize;
           padding-top: $menu-main-link-padding-y;
           padding-bottom: $menu-main-link-padding-y;
           font-family: $mega-menu-header-font-family;
           color: $menu-main-link-color;
+          font-size: $mega-menu-submenu-font-size;
         }
       }
       li.we-mega-menu-li:hover {
         background: transparent;
-        a {
+        a, span {
           color: $menu-main-link-hover-color;
         }
       }
@@ -247,7 +248,7 @@ header.header > nav.navbar-wrapper {
               li, li.nav-item {
                 padding: 0 0 $mega-menu-submenu-link-padding-y 0;
 
-                a {
+                a, span {
                   border: none;
                   font-family: $mega-menu-submenu-font-family;
                   font-weight: $mega-menu-submenu-font-weight;
@@ -288,7 +289,8 @@ header.header > nav.navbar-wrapper {
               }
             }
             &.dropdown-menu {
-              > a.we-mega-menu-li {
+              > a.we-mega-menu-li,
+              > span.we-megamenu-nolink {
                 &::before {
                   display: none;
                 }
@@ -310,7 +312,8 @@ header.header > nav.navbar-wrapper {
                 }
               }
             }
-            a.we-mega-menu-li {
+            a.we-mega-menu-li,
+            span.we-megamenu-nolink {
               color: $submenu-link-color;
               font-size: $submenu-font-size;
               font-weight: $mega-menu-submenu-font-weight;
@@ -370,8 +373,11 @@ header.header > nav.navbar-wrapper {
       padding-left: $menu-secondary-link-padding-x-tablet;
       padding-right: $menu-secondary-link-padding-x-tablet;
     }
-    .we-mega-menu-li > a.we-mega-menu-li {
-      padding: $menu-main-link-padding-tablet;
+    .we-mega-menu-li {
+      > a.we-mega-menu-li,
+      > span.we-megamenu-nolink {
+        padding: $menu-main-link-padding-tablet;
+      }
     }
     .social-media-wrapper .icons-wrapper {
       a.icon {
@@ -469,7 +475,9 @@ header.header > nav.navbar-wrapper {
       transition: width $sidebar-animation-speed;
 
       .dropdown-menu {
-        .we-mega-menu-li {
+        .we-mega-menu-li,
+        span.we-megamenu-nolink {
+
           a.we-mega-menu-li {
             padding-right: $mobile-sidebar-items-spacing/2;
           }
@@ -603,7 +611,7 @@ header.header > nav.navbar-wrapper {
     // Styling first level mega-menu items and secondary menu items.
     .we-mega-menu-ul.nav-tabs > .we-mega-menu-li,
     .menu--secondary-menu .nav-item {
-      > a {
+      > a, > span {
         text-transform: uppercase;
         font-size: $menu-font-size;
         line-height: $mega-menu-link-line-height;
@@ -616,7 +624,8 @@ header.header > nav.navbar-wrapper {
       }
 
       &.dropdown-menu {
-        a.we-mega-menu-li {
+        a.we-mega-menu-li,
+        span.we-megamenu-nolink {
           @include sublist-list-item();
 
           &::after {
