@@ -1,6 +1,6 @@
 info:
   type: content_page
-  title: Car engines
+  title: Gasoline Engines
 
 field_page_section:
   paragraphs:
@@ -8,24 +8,24 @@ field_page_section:
       data:
         field_d_main_title:
           type: text
-          data: 'Car engines'
+          data: 'Gasoline engines'
         field_d_image_background:
           type: image
-          data: d_demo/d_demo_car_engine.jpg
+          data: d_demo/d_demo_engine_car_4.jpg
           dst_dir: demo
         field_d_p_si_image_side:
           type: text_select
           data: right-wide
         field_d_long_text:
           type: text_long
-          data: '<p>We produce a wide range of car engines for both: diesel and gasoline.
-            We provide engines with low, medium power for cars and high power for sports vehicles.</p>'
+          data: '<p>We offer several models of gasoline engines for the automotive market.
+                    We manufacture complete sets of engines and also offer parts for petrol engines.</p>'
         field_d_background_color:
           type: text
           data: '#fff'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: with-alt-text
+          custom_class: theme-invert
 
     - paragraph_type: d_p_text_paged
       data:
@@ -38,20 +38,17 @@ field_page_section:
 
     - paragraph_type: d_p_side_image
       data:
-        field_d_main_title:
-          type: text
-          data: Centurion V750
         field_d_image_background:
           type: image
-          data: d_demo/d_demo_car_engine_centurion.jpg
+          data: d_demo/d_demo_engine_car_3.jpg
           dst_dir: demo
         field_d_p_si_image_side:
           type: text_select
           data: left
         field_d_long_text:
           type: text_long
-          data: <h3> Centurion V750 </h3>
-            <p>Excellent and powerful diesel engine for cars. A wide range of power.
+          data: <h3> Cobra 100 </h3>
+            <p>Excellent and powerful gasoline engine for cars. A wide range of power.
             Designed and created by a team of experienced mechanics and engineers.
             Perfect for small city cars and large SUVs.</p>
             <ul>
@@ -64,34 +61,38 @@ field_page_section:
         field_d_background_color:
           type: text
           data: '#dddddd'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-invert
 
-    - paragraph_type: d_p_text_paged
+    - paragraph_type: d_p_group_of_text_blocks
       data:
+        field_d_number:
+          type: number
+          data: 2
         field_d_main_title:
           type: text
-          data: Our services for car engines
-        field_d_long_text:
-          type: text_long
-          data: |
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul>
-                    <li>Change the engine oil</li>
-                    <li>Replace the oil filter</li>
-                    <li>Replace the spark plugs</li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul>
-                    <li>Inspect and replace the timing belt</li>
-                    <li>Check for any Error codes in the ECU</li>
-                    <li>Use scan tool read trouble code</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
+          data: Our services for gasoline engines
+        field_d_p_tb_block_reference:
+          type: paragraph_reference
+          data:
+            - field_d_long_text:
+                type: text_long
+                data: <p><ul>
+                  <li>Change the engine oil</li>
+                  <li>Replace the oil filter</li>
+                  <li>Replace the spark plugs</li>
+                  </ul></p>
+            - field_d_long_text:
+                type: text_long
+                data: <p><ul>
+                  <li>Inspect and replace the timing belt</li>
+                  <li>Check for any Error codes in the ECU</li>
+                  <li>Use scan tool read trouble code</li>
+                  </ul></p>
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: with-tiles theme-invert
 
     - paragraph_type: d_p_group_of_text_blocks
       data:
@@ -100,7 +101,7 @@ field_page_section:
           data: 3
         field_d_main_title:
           type: text
-          data: Related products
+          data: Other products
         field_d_cta_link:
           type: cta
           data:
