@@ -320,6 +320,9 @@ function droopler_update_8103() {
       'field.field.paragraph.d_p_side_image.field_d_background_color' => '',
       'field.field.paragraph.d_p_side_image.field_d_settings' => '',
     ],
+    'd_p_side_embed' => [
+      'field.field.paragraph.d_p_side_embed.field_d_settings' => '',
+    ],
     'd_p_text_blocks' => [
       'field.field.paragraph.d_p_group_of_text_blocks.field_d_long_text' => '',
       'field.field.paragraph.d_p_group_of_text_blocks.field_d_settings' => '',
@@ -354,11 +357,28 @@ function droopler_update_8103() {
     'd_content' => [
       'field.field.node.content_page.field_page_section' => '43d9f25fcb0715eea8a9465388491269',
     ],
+    'd_p_banner' => [
+      'field.field.paragraph.d_p_banner.field_d_cta_link' => '63fe174a22c312e28faf3bc9fa41ce44',
+    ],
     'd_p_side_image' => [
       'field.storage.paragraph.field_d_p_si_image_side' => '5d36513453cc08e7d015d68929ecddfc',
+      'field.field.paragraph.d_p_side_image.field_d_cta_link' => 'ce47d9abef098da38cc53064c01d06d6',
+    ],
+    'd_p_side_embed' => [
+      'field.field.paragraph.d_p_side_embed.field_d_cta_link' => '336654b916fc757f3af30239dc2d4976',
+    ],
+    'd_p_side_tiles' => [
+      'field.field.paragraph.d_p_side_tiles.field_d_cta_link' => 'ac8fc9a194d17951a86e0a68371c12bb',
     ],
     'd_p_text_blocks' => [
       'field.field.paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference' => '97dd017b20ad8add96ea20e13bbdea39',
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_cta_link' => '12e9dbc1863b7bddb7cb6632b1a6d361',
+    ],
+    'd_p_text_paged' => [
+      'field.field.paragraph.d_p_text_paged.field_d_cta_link' => 'ffda0c55cb64b91f1109971f67185970',
+    ],
+    'd_p_text_with_bckg' => [
+      'field.field.paragraph.d_p_text_with_bckg.field_d_cta_link' => '27dca2ddd6b10a8cff0ec8c787c3dd9f',
     ],
   ];
   $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
@@ -381,6 +401,10 @@ function droopler_update_8103() {
       'core.entity_form_display.paragraph.d_p_side_image.default' => '750726e0a68fe80a9520159cfdc04fd5',
       'core.entity_view_display.paragraph.d_p_side_image.default' => '8954de48057199341a186210809516d8',
     ],
+    'd_p_side_embed' => [
+      'core.entity_form_display.paragraph.d_p_side_embed.default' => 'a2e5aed533efb82c44b6bc4a3c01f2b7',
+      'core.entity_view_display.paragraph.d_p_side_embed.default' => 'e3b3ff4b69aa246e224901b5bbee6cfb',
+    ],
     'd_p_text_blocks' => [
       'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '5639c681e3d0fff46a032bd4ca1176d4',
       'core.entity_form_display.paragraph.d_p_single_text_block.default' => 'c7779dd94294f44c0ff6c58714c5003f',
@@ -396,8 +420,15 @@ function droopler_update_8103() {
 
   // Update misc config.
   $configs = [
+    'droopler' => [
+      'core.entity_form_display.contact_message.feedback.default' => '',
+      'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
+      'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
+      'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
+    ],
     'd_content' => [
       'core.entity_view_display.node.content_page.d_small_box' => '',
+      'simple_sitemap.bundle_settings.default.node.content_page' => '',
     ],
     'd_p_subscribe_file' => [
       'views.view.subscribe_file_paragraph' => '',
@@ -419,6 +450,7 @@ function droopler_update_8103() {
         'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
         'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
         'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
+        'simple_sitemap.bundle_settings.default.node.blog_post' => '',
       ],
     ];
     $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
@@ -436,6 +468,8 @@ function droopler_update_8103() {
         'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
         'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
         'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
+        'simple_sitemap.bundle_settings.default.node.d_product' => '',
+        'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
       ],
     ];
     $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
