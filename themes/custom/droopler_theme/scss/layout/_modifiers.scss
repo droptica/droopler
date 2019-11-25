@@ -20,6 +20,9 @@ $tiles-spacing: 10px !default;
 $tile-title-font-size-desktop: 4vh !default;
 $tile-title-font-size-mobile: 3vh !default;
 $header-into-columns-padding-y: 3.875rem !default;
+$theme-invert-text-color: $color-cassandra !default;
+$line-background-alter: $color-nestor !default;
+$two-columned-header-line-margin: 0.625rem !default;
 
 .background {
   &-gray-light {
@@ -28,22 +31,24 @@ $header-into-columns-padding-y: 3.875rem !default;
   &-gray-light-2 {
     background-color: $light-gray-background-2;
   }
-}
 
-.theme-invert,
-.with-alt-text {
-  .paragraph {
-    .field--type-string,
-    .field--type-text-long {
-      color: $color-cassandra;
+  &-gray-light-2,
+  &-gray-light {
+    .paragraph  {
+      .field--name-field-d-main-title::after,
+      .field field--name-field-d-long-text::before {
+        background-color: $line-background-alter !important;
+      }
     }
   }
 }
+
 .theme-invert {
   .paragraph {
-    h2 {
-      &:after {
-        background: $color-agamemnon;
+    .field--type-string,
+    .field--type-text-long {
+      &, p {
+        color: $color-cassandra;
       }
     }
   }
@@ -300,8 +305,8 @@ $header-into-columns-padding-y: 3.875rem !default;
           text-align: left;
           margin-bottom: 0;
         }
-        .field--name-field-d-main-title::after {
-          margin-left: 0;
+        h2.field--name-field-d-main-title::after {
+          margin: $two-columned-header-line-margin auto $two-columned-header-line-margin 0 !important;
         }
       }
     }

@@ -168,6 +168,11 @@ header.header > nav.navbar-wrapper {
         display: none;
       }
 
+
+      .we-mega-menu-submenu-inner {
+        display: block !important;
+      }
+
       & > li.we-mega-menu-li,
       & > li.we-mega-menu-li.active-trail,
       & > li.we-mega-menu-li.active {
@@ -308,6 +313,7 @@ header.header > nav.navbar-wrapper {
             a.we-mega-menu-li {
               color: $submenu-link-color;
               font-size: $submenu-font-size;
+              font-weight: $mega-menu-submenu-font-weight;
               padding: 0 $submenu-link-padding-x;
               line-height: $submenu-link-height;
               background: transparent;
@@ -541,7 +547,7 @@ header.header > nav.navbar-wrapper {
 
         h2 {
           font-size: 17px;
-          font-weight: normal;
+          font-weight: $mega-menu-submenu-font-weight;
           padding-top: $mobile-sidebar-submenu-spacing;
 
           &.field--name-field-d-main-title {
@@ -604,7 +610,7 @@ header.header > nav.navbar-wrapper {
         font-family: $mega-menu-submenu-font-family;
         padding: $mobile-sidebar-items-spacing/2 $mobile-sidebar-submenu-spacing;
         background-color: transparent;
-        font-weight: normal;
+        font-weight: $mega-menu-submenu-font-weight;
         color: $menu-main-link-active-color !important;
         text-shadow: none;
       }
