@@ -4,21 +4,21 @@ Components Boxes
 Styleguide 2.8
 */
 
-// Colour variables used in this paragraph.
+// Color variables used in this paragraph.
 $d-p-single-box-text-color: $color-hecuba !default;
 $d-p-single-box-text-bold-color: $color-troilus !default;
 $d-p-single-box-line-color: $color-agamemnon !default;
+$d-p-single-box-line-color-inverted: $color-nestor !default;
 $d-p-text-blocks-line-color: $color-agamemnon !default;
+$d-p-text-blocks-line-color-inverted: $color-nestor !default;
 $d-p-text-blocks-background: $color-agamemnon !default;
+$d-p-text-blocks-theme-invert-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-text-blocks-group-padding-y: 3.875rem !default;
 $d-p-text-blocks-group-mobile-padding-y: 2rem !default;
 $d-p-text-blocks-group-margin: 0 0 5.5rem 0 !default;
 $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0 !default;
-$d-p-text-blocks-group-line-margin: 0.625rem auto !default;
-$d-p-single-box-line-margin-top: $line-left-margin-top !default;
-$d-p-single-box-line-margin-bottom: $line-left-margin-bottom !default;
 $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
 $d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto !default;
 $d-p-single-box-margin-bottom: 15% !default;
@@ -65,9 +65,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
         margin: $d-p-text-blocks-mobile-group-margin;
       }
       &:after {
-        @include decoration-header-line-main-center;
-        background: $d-p-text-blocks-line-color;
-        margin: $d-p-text-blocks-group-line-margin;
+        @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
     }
     > .field--type-link {
@@ -86,7 +84,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       margin-bottom: inherit;
 
       &::after {
-        @include decoration-header-line-main-center;
+        @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
     }
     .field--name-field-d-long-text {
@@ -152,10 +150,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   h2 {
     @include font-title-single-box;
     &:after {
-      @include decoration-header-line;
-      background: $d-p-single-box-line-color;
-      margin-top: $d-p-single-box-line-margin-top;
-      margin-bottom: $d-p-single-box-line-margin-bottom;
+      @include decoration-header-line($d-p-single-box-line-color, $d-p-single-box-line-color-inverted);
     }
   }
   p {
@@ -203,6 +198,17 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       a {
         @include font-subtitle-small-link();
       }
+    }
+  }
+}
+
+.theme-invert {
+  .d-p-group-of-text-blocks {
+    background-color: $d-p-text-blocks-background;
+
+    h2.field--name-field-d-main-title,
+    .field--name-field-d-long-text {
+      color: $d-p-text-blocks-theme-invert-text-color;
     }
   }
 }

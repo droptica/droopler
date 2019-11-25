@@ -6,7 +6,9 @@ Components Carousel
 $d-p-carousel-item-text-color: $color-hecuba !default;
 $d-p_carousel-item-text-bold-color: $color-troilus !default;
 $d-p-carousel-item-line-color: $color-agamemnon !default;
+$d-p-carousel-item-line-color-inverted: $color-nestor !default;
 $d-p-carousel-line-color: $color-agamemnon !default;
+$d-p-carousel-line-color-inverted: $color-nestor !default;
 $d-p-carousel-background: $color-agamemnon !default;
 $d-p-carousel-arrow-color: $color-cassandra !default;
 
@@ -15,9 +17,6 @@ $d-p-carousel-padding-y: 5% !default;
 $d-p-carousel-mobile-padding-y: 5% !default;
 $d-p-carousel-items-margin-top: 2% !default;
 $d-p-carousel-mobile-items-margin-top: 3rem !default;
-$d-p-carousel-line-margin: $line-center-margin-top auto $line-center-margin-bottom auto !default;
-$d-p-carousel-item-line-margin-top: $line-left-margin-top !default;
-$d-p-carousel-item-line-margin-bottom: $line-left-margin-bottom !default;
 $d-p-carousel-item-image-margin-bottom: 1rem !default;
 $d-p-carousel-item-image-height: 200px !default;
 $d-p-carousel-item-mobile-image-height: 150px !default;
@@ -55,9 +54,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     text-align: center;
 
     &:after {
-      @include decoration-header-line-main-center;
-      background: $d-p-carousel-line-color;
-      margin: $d-p-carousel-line-margin;
+      @include decoration-header-line-main-center($d-p-carousel-line-color, $d-p-carousel-line-color-inverted);
     }
   }
 
@@ -154,10 +151,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
             }
           }
           &:before {
-            @include decoration-header-line-main-center;
-            background: $d-p-carousel-item-line-color;
-            margin-top: $d-p-carousel-item-line-margin-top;
-            margin-bottom: $d-p-carousel-item-line-margin-bottom;
+            @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);
           }
         }
         .field--name-field-d-image {

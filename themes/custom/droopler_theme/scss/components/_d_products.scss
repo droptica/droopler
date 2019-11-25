@@ -1,5 +1,10 @@
-// Filters
+$d-product-listing-header-background-color: $color-agamemnon !default;
+$d-product-listing-header-text-color: $color-odysseus !default;
+$d-product-listing-header-desktop-padding: 7.5rem 0 5.5rem 0 !default;
+$d-product-listing-header-mobile-padding: 4.5rem 0 2.5rem 0 !default;
+$d-product-listing-header-margin: 0px !default;
 
+// Filters
 $d-product-facets-header: 1.20rem !default;
 $d-product-teaser-header: 1.20rem !default;
 $d-product-view-border: 1px solid $color-hector !default;
@@ -198,6 +203,11 @@ $d-product-filters-group-margin: 3rem !default;
 }
 
 // Page Products
+// Title
+.products-header-wrapper {
+  @include listing-header($d-product-listing-header-background-color, $d-product-listing-header-text-color, $d-product-listing-header-desktop-padding, $d-product-listing-header-mobile-padding, $d-product-listing-header-margin);
+}
+
 // Facets && filers
 .top-product-info {
   margin-bottom: 1.5rem;
