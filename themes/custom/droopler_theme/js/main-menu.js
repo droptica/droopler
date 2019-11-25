@@ -61,11 +61,11 @@
             $toggler = $thisLink.find('.d-submenu-toggler');
           }
           $toggler.once().click(function() {
-            if ($(this).is('.d-submenu-toggler')) {
-              $(this).parent().toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
-            } else {
-              $(this).toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
+            var $linkItem = $(this);
+            if ($linkItem.is('.d-submenu-toggler')) {
+              $linkItem = $linkItem.parent();
             }
+            $linkItem.toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
 
             return false;
           });
