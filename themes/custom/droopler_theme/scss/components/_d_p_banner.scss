@@ -9,8 +9,8 @@ $d-p-banner-header-color: $color-odysseus !default;
 $d-p-banner-subheader-color: $color-odysseus !default;
 $d-p-banner-text-color: $color-odysseus !default;
 $d-p-banner-background-overlay: $color-cassandra !default;
-$d-p-banner-line-color: $color-agamemnon !default;
-$d-p-banner-line-color-inverted: $color-nestor !default;
+$d-p-banner-line-color: $color-nestor !default;
+$d-p-banner-line-color-inverted: $color-agamemnon !default;
 $d-p-banner-half-transparent-background-color: rgba(255, 255, 255, .75) !default;
 
 // Margins, paddings and sizes.
@@ -69,7 +69,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       word-wrap: break-word;
       hyphens: auto;
     }
-    &:before {
+    &::before {
       @include decoration-header-line-main-center($d-p-banner-line-color, $d-p-banner-line-color-inverted);
     }
   }
@@ -147,20 +147,6 @@ $d-p-banner-subheader-opacity: 0.7 !default;
               text-align: left;
             }
           }
-        }
-      }
-    }
-  }
-}
-
-.theme-invert {
-  .d-p-banner {
-    .content-wrapper {
-      h2 + .field--type-link,
-      h3 + .field--type-link,
-      .field--name-field-d-long-text {
-        &:before {
-          background: $d-p-banner-line-color;
         }
       }
     }
