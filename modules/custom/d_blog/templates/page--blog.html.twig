@@ -10,14 +10,18 @@
 {% extends "page.html.twig" %}
 
 {% block content %}
-  <div{{ main_attributes.addClass('container-fluid').removeClass('container', 'py-4') }}>
+  {% include "@droopler_theme/misc/listing-header.html.twig" with {
+    'header_class': 'blog-header-wrapper',
+    'title': page['#title']
+  } %}
+
+  <div{{ main_attributes }}>
     <div class="row clearfix">
       {{ page.breadcrumb }}
       <main class="main-content">
-        <h1 class="blog-listing-main-header">{{ page['#title'] }} </h1>
         <section class="section">
           <a id="main-content" tabindex="-1"></a>
-          {{ page.content }}
+          {{ page.content | without('pagetitle') }}
         </section>
       </main>
     </div>

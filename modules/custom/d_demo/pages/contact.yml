@@ -19,9 +19,8 @@ field_page_section:
         data: right-wide
       field_d_long_text:
         type: text_long
-        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
-          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
-          gravida blandit enim.</p>
+        data: <p>Our dedicated support and sales teams will answer any questions related to our products and services.
+          Please check our office addresses or send us an email.</p>
       field_d_background_color:
         type: text
         data: '#000000'
@@ -33,9 +32,7 @@ field_page_section:
         data: Contact Form
       field_d_long_text:
         type: text_long
-        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
-          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
-          gravida blandit enim. Ut bibendum egestas sem.</p>
+        data: <p>Please use our contact form to send us a message. We will contact you within 24 hours.</p>
       field_d_image_background:
         type: image
         data: d_demo/d_demo_architecture.jpg
@@ -63,7 +60,7 @@ field_page_section:
         data:
           - field_d_long_text:
               type: text_long
-              data: <p>Wrocław HQ<br />Dunska 9<br />54-427 Wrocław<br />Polska</p>
+              data: <p>Wrocław<br />Duńska 9<br />54-427 Wrocław<br />Polska</p>
                 <p>71 32 23 233</p>
                 <p>wroclaw@droptica.com</p>
             field_d_main_title:
@@ -87,7 +84,7 @@ field_page_section:
 
           - field_d_long_text:
               type: text_long
-              data: <p>Oddział<br /> Warszawska 18<br />35-205 Rzeszów<br />Polska</p>
+              data: <p>Rzeszów<br /> Warszawska 18<br />35-205 Rzeszów<br />Polska</p>
                 <p>71 32 23 233</p>
                 <p>rzeszow@droptica.com</p>
             field_d_main_title:
@@ -99,12 +96,12 @@ field_page_section:
 
           - field_d_long_text:
               type: text_long
-              data: <p>Oddział<br /> Warszawska 18<br />35-205 Rzeszów<br />Polska</p>
+              data: <p>Toruń<br /> Grudziądzka 46-48<br />87-100 Toruń<br />Polska</p>
                 <p>71 32 23 233</p>
-                <p>rzeszow@droptica.com</p>
+                <p>torun@droptica.com</p>
             field_d_main_title:
               type: text
-              data: Rzeszów
+              data: Toruń
             field_d_background_color:
               type: text
               data: '#ffffff'
@@ -122,6 +119,8 @@ field_page_section:
         data: full
       field_d_long_text:
         type: text_long
-        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
-          id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
-          gravida blandit enim. Ut bibendum egestas sem.</p>
+        data: <p>Check our office locations on the map.<br />
+          Check how to get to our offices.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-invert
