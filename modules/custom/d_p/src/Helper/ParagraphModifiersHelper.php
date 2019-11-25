@@ -42,9 +42,11 @@ class ParagraphModifiersHelper {
     foreach ($fieldsDefs as $fieldName => $field) {
       if ($field->getType() == 'field_p_configuration_storage') {
         $settings = $paragraph->get($fieldName)->getValue();
-        $settings = json_decode($settings[0]['value']);
-        $this->settingsFieldName = $fieldName;
-        $this->modifiers = $settings;
+        if (!empty($settings)) {
+          $settings = json_decode($settings[0]['value']);
+          $this->settingsFieldName = $fieldName;
+          $this->modifiers = $settings;
+        }
       }
     }
   }

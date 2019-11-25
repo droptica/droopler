@@ -137,20 +137,29 @@ class Updater {
       return FALSE;
     }
 
-    if (preg_match('/^(field|core.entity_form_display|core.entity_view_display)\./', $name)) {
+    if (preg_match('/^(field|core.entity_form_display|core.entity_view_display|core.entity_view_mode)\./', $name)) {
       // If this is field config, handle it properly.
       $entity_type = $this->configManager->getEntityTypeIdByName($name);
       /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
       $storage = $this->entityTypeManager->getStorage($entity_type);
+
+      // Try to load the existing config.
+      $existing = $storage->loadByProperties(array('id' => $data['id']));
+      if (!empty($existing)) {
+        // Set the proper UUID to avoid conflicts.
+        $data['uuid'] = $existing[$data['id']]->uuid();
+      }
+
       /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity */
       $entity = $storage->createFromStorageRecord($data);
-      // Try to load the existing config.
-      $existing = $storage->loadByProperties(array('id' => $entity->id()));
+
+      // If we need an update, we have to inform the storage about it.
       if (!empty($existing)) {
-        $entity->original = $existing[0];
+        $entity->original = $existing[$data['id']];
         $entity->enforceIsNew(FALSE);
       }
 
+      // Do the update.
       try {
         $entity->save();
         $this->getLogger('d_update')->info('Successfully imported field config %config', [

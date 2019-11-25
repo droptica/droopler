@@ -394,34 +394,55 @@ function droopler_update_8103() {
   ];
   $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
 
-  // Update blog post config.
+  // Update misc config.
   $configs = [
-    'd_blog' => [
-      'metatag.metatag_defaults.node__blog_post' => '3e869dc915abd86f66f9b2d46d4fee2a',
-      'core.entity_view_display.node.blog_post.d_small_box' => '',
-      'core.entity_view_display.node.blog_post.teaser_small' => '',
-      'core.entity_view_mode.node.teaser_small' => '',
-      'pathauto.pattern.node_blog_pattern' => '',
-      'responsive_image.styles.blog_images_style' => '5fffdeff846e07fe8c2e72f24ffab7f4',
-      'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
-      'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
-      'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
-    ],
     'd_content' => [
       'core.entity_view_display.node.content_page.d_small_box' => '',
     ],
     'd_p_subscribe_file' => [
       'views.view.subscribe_file_paragraph' => '',
     ],
-    'd_product' => [
-      'core.entity_view_display.node.d_product.d_small_box' => '',
-      'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
-      'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
-      'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
-      'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
-    ],
   ];
   $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
+
+  $module_handler = \Drupal::service('module_handler');
+  if ($module_handler->moduleExists('d_blog')) {
+    // Update d_blog config.
+    $configs = [
+      'd_blog' => [
+        'metatag.metatag_defaults.node__blog_post' => '3e869dc915abd86f66f9b2d46d4fee2a',
+        'core.entity_view_display.node.blog_post.d_small_box' => '',
+        'core.entity_view_mode.node.teaser_small' => '',
+        'core.entity_view_display.node.blog_post.teaser_small' => '',
+        'pathauto.pattern.node_blog_pattern' => '',
+        'responsive_image.styles.blog_images_style' => '5fffdeff846e07fe8c2e72f24ffab7f4',
+        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
+        'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
+        'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
+      ],
+    ];
+    $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8103_6'] = TRUE;
+  }
+
+  if ($module_handler->moduleExists('d_product')) {
+    // Update d_product config.
+    $configs = [
+      'd_product' => [
+        'core.entity_view_display.node.d_product.d_small_box' => '',
+        'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
+        'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
+        'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
+        'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
+      ],
+    ];
+    $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8103_7'] = TRUE;
+  }
 
   $progress = [
     'v2.0' => $values,
