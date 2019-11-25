@@ -4,7 +4,6 @@ info:
 
 field_page_section:
   paragraphs:
-
     - paragraph_type: d_p_side_embed
       data:
         field_d_main_title:
@@ -125,12 +124,18 @@ field_page_section:
           type: text_long
           data: <p>Get in touch for career or job-related questions,
             find company insights and updates or meet our employees.</p>
+        field_d_cta_link:
+          type: cta
+          data:
+            link: internal:/contact
+            text: CONTACT US
+            class: btn btn-primary
 
     - paragraph_type: d_p_subscribe_file
       data:
         field_d_main_title:
           type: text
-          data: Join our careers newsletter
+          data: Download our HR brochure
         field_d_image_background:
           type: image
           data: d_demo/demo_educational_4.jpg
@@ -144,7 +149,7 @@ field_page_section:
           data: I accept the <a href="#">Terms and Conditions</a>
         field_d_p_sf_download_button:
           type: text
-          data: SUBSCRIBE
+          data: GET DOWNLOAD LINK
         field_d_p_sf_download_page:
           type: text_long
           data: '<p>Text on the download page like: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
@@ -155,4 +160,4 @@ field_page_section:
             tristique dui dignissim gravida.</p><p>[download-button]</p>'
         field_d_long_text:
           type: text_long
-          data: '<p>Join our Career offers mailing list to receive monthly updates on job offers.</p>'
+          data: '<p>Find out more about our HR Department and recruitment process.</p>'
