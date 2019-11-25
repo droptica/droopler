@@ -68,18 +68,10 @@
 
 {% block content %}
 
-  <div class="main-header-wrapper">
-    <div class="container">
-      <div class="row clearfix">
-        <div class="col-12">
-
-          {{ page.breadcrumb }}
-          <h1 class="products-listing-main-header">{{ page['#title'] }} </h1>
-
-        </div>
-      </div>
-    </div>
-  </div>
+  {% include "@droopler_theme/misc/listing-header.html.twig" with {
+    'header_class': 'products-header-wrapper',
+    'title': page['#title']
+  } %}
 
   <div{{ main_attributes }}>
     <div class="row clearfix">

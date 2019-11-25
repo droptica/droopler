@@ -1,8 +1,5 @@
-@import '_d_title';
-
-$d-blog-listing-header-color: $color-agamemnon !default;
+$d-blog-listing-header-background-color: $color-agamemnon !default;
 $d-blog-listing-header-text-color: $color-odysseus !default;
-$d-blog-listing-header-class: ".blog-listing-main-header";
 $d-blog-listing-taxonomy-link-color: $color-penthesilea !default;
 $d-blog-border-bottom-color: $color-diomedes !default;
 $d-blog-padding-link-color: $color-patroclus !default;
@@ -15,8 +12,8 @@ $d-blog-pagination-next-prev-element-padding: 1.25rem !default;
 $d-blog-pagination-padding-between-pointers: 0.625rem !default;
 $d-blog-pagination-border: 2px solid $d-blog-listing-taxonomy-link-color !default;
 $d-blog-pagination-margin-bottom: 0 !default;
-$d-blog-listing-padding-top: 120px !default;
-$d-blog-listing-padding-bottom: 86px !default;
+$d-blog-listing-header-desktop-padding: 7.5rem 0 5.5rem 0 !default;
+$d-blog-listing-header-mobile-padding: 4.5rem 0 2.5rem 0 !default;
 $d-blog-article-border: 1px solid $d-blog-border-bottom-color !default;
 
 $d-blog-sticky-article-padding-desktop: 0 30px 10px !default;
@@ -33,7 +30,7 @@ $d-blog-teaser-blog-post-title-mobile: 1.0625rem !default;
 $d-blog-read-article-font-size: 0.9375rem !default;
 $d-blog-title-teaser-font-size-desktop: 2.375rem !default;
 $d-blog-title-teaser-padding-top-desktop: 18px !default;
-$d-blog-title-margin-bottom: 0px !default;
+$d-blog-listing-header-margin: 0px !default;
 $d-blog-teaser-text-padding-desktop-tab: 0 !default;
 $d-blog-teaser-text-margin-desktop-tab: 43px 0 !default;
 $d-blog-teaser-text-font-size-desktop: 1rem !default;
@@ -46,10 +43,16 @@ $d-blog-teaser-title-padding-desktop: 37px !default;
 $d-blog-teaser-title-margin-between-text-decoration-mobile: 0.75rem !default;
 $d-blog-teaser-min-height-desktop: 520px !default;
 $d-blog-teaser-image-height-desktop: 480px !default;
-$d-blog-margin-between-header-and-article-teasers: 40px !default;
+$d-blog-margin-between-header-and-article-teasers: 1rem !default;
 $d-blog-field-type-image-margin: 0 !default;
 $d-blog-article-row-min-height: 420px !default;
 
+// Listing header (for main view and taxonomy).
+.blog-header-wrapper {
+  @include listing-header($d-blog-listing-header-background-color, $d-blog-listing-header-text-color, $d-blog-listing-header-desktop-padding, $d-blog-listing-header-mobile-padding, $d-blog-listing-header-margin);
+}
+
+// Listing view.
 .view-blog-listing {
   margin-top: $d-blog-margin-between-header-and-article-teasers;
 
@@ -132,8 +135,6 @@ $d-blog-article-row-min-height: 420px !default;
     margin: $d-blog-teaser-margin;
   }
 }
-
-@include listing-main-header($d-blog-listing-header-class, $d-blog-listing-header-color, $d-blog-listing-header-text-color, $d-blog-listing-padding-top, $d-blog-listing-padding-bottom, $d-blog-title-margin-bottom);
 
 .article-wrapper {
   border-bottom: $d-blog-article-border;

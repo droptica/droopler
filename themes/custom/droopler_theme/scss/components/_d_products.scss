@@ -1,11 +1,8 @@
-@import '_d_title';
-
-$d-product-listing-header-color: $color-agamemnon !default;
+$d-product-listing-header-background-color: $color-agamemnon !default;
 $d-product-listing-header-text-color: $color-odysseus !default;
-$d-product-listing-padding-top: 120px !default;
-$d-product-listing-padding-bottom: 86px !default;
-$d-product-listing-header-class: ".products-listing-main-header";
-$d-product-title-margin-bottom: 0px !default;
+$d-product-listing-header-desktop-padding: 7.5rem 0 5.5rem 0 !default;
+$d-product-listing-header-mobile-padding: 4.5rem 0 2.5rem 0 !default;
+$d-product-listing-header-margin: 0px !default;
 
 // Filters
 $d-product-facets-header: 1.20rem !default;
@@ -206,6 +203,11 @@ $d-product-filters-group-margin: 3rem !default;
 }
 
 // Page Products
+// Title
+.products-header-wrapper {
+  @include listing-header($d-product-listing-header-background-color, $d-product-listing-header-text-color, $d-product-listing-header-desktop-padding, $d-product-listing-header-mobile-padding, $d-product-listing-header-margin);
+}
+
 // Facets && filers
 .top-product-info {
   margin-bottom: 1.5rem;
@@ -895,7 +897,3 @@ body:not(.scrolled-buttons) {
     display: block;
   }
 }
-
-
-@include listing-main-header($d-product-listing-header-class, $d-product-listing-header-color, $d-product-listing-header-text-color, $d-product-listing-padding-top, $d-product-listing-padding-bottom, $d-product-title-margin-bottom);
-
