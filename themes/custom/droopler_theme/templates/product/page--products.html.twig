@@ -68,6 +68,11 @@
 
 {% block content %}
 
+  {% include "@droopler_theme/misc/listing-header.html.twig" with {
+    'header_class': 'products-header-wrapper',
+    'title': page['#title']
+  } %}
+
   <div{{ main_attributes }}>
     <div class="row clearfix">
     {{ page.breadcrumb }}
@@ -94,7 +99,7 @@
                   </div>
                 </div>
 
-                {{ page.content }}
+                {{ page.content|without('pagetitle') }}
               </div>
             </div>
           </div>
