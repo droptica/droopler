@@ -7,6 +7,7 @@ $d-p-side-tiles-image-background-color: $color-odysseus !default;
 $d-p-side-tiles-text-background-color: $color-agamemnon !default;
 $d-p-side-tiles-text-background-color-secondary: darken($d-p-side-tiles-text-background-color, 15%) !default;
 $d-p-side-tiles-text-color: $color-odysseus !default;
+$d-p-side-tiles-theme-invert-text-color: $color-cassandra !default;
 $d-p-side-tiles-link-color: $color-nestor !default;
 $d-p-side-tiles-link-hover-color: darken($d-p-side-tiles-link-color, 5%) !default;
 $d-p-side-tiles-line-color: $color-nestor !default;
@@ -173,11 +174,11 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
 .theme-invert {
   .d-p-side-embed-content {
     background: $color-odysseus;
-    color: $d-p-side-embed-full-text-color;
+    color: $d-p-side-tiles-theme-invert-text-color;
     .d-p-side-embed-content-fields {
       .field--name-field-d-long-text,
       .field--name-field-d-main-title {
-        color: $d-p-side-embed-full-text-color;
+        color: $d-p-side-tiles-theme-invert-text-color;
       }
     }
   }
