@@ -8,8 +8,10 @@ dependencies:
     - field.field.paragraph.d_p_side_embed.field_d_long_text
     - field.field.paragraph.d_p_side_embed.field_d_main_title
     - field.field.paragraph.d_p_side_embed.field_d_p_si_image_side
+    - field.field.paragraph.d_p_side_embed.field_d_settings
     - paragraphs.paragraphs_type.d_p_side_embed
   module:
+    - d_p
     - link
     - svg_image
     - text
@@ -65,6 +67,13 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_d_settings:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: field_configuration_formatter
+    region: content
   field_d_subtitle:
     weight: 1
     label: hidden
@@ -75,3 +84,4 @@ content:
     region: content
 hidden:
   field_d_p_si_image_side: true
+  search_api_excerpt: true

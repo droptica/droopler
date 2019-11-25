@@ -64,8 +64,6 @@ function d_p_preprocess_paragraph(&$variables) {
     ],
   ];
 
-
-
   $paragraphFieldDefinitions = $paragraph->getFieldDefinitions();
   /**
    * @var FieldConfig $field
@@ -82,6 +80,13 @@ function d_p_preprocess_paragraph(&$variables) {
       unset($variables['content'][$fieldName]);
     }
 
+    if ($fieldName == 'field_d_long_text') {
+      $field = $paragraph->get($fieldName);
+      if (!$field->isEmpty()) {
+        $wrapper_attributes['class'][] = 'with-long-text';
+      }
+    }
+
    // Set background image if field is not empty.
     // This overrides background color settings.
     if ($fieldName == 'field_d_image_background' && $bundle == 'd_p_single_text_block') {
@@ -90,7 +95,6 @@ function d_p_preprocess_paragraph(&$variables) {
         $wrapper_attributes['class'][] = 'user-image-background';
       }
     }
-
 
   }
 
