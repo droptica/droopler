@@ -35,6 +35,13 @@ function d_demo_content_structure_alter(&$structure, $context) {
     $structure['contact'] = ['file' => "$path/contact.yml"];
     $structure['about_us'] = ['file' => "$path/about_us.yml"];
     $structure['careers'] = ['file' => "$path/careers.yml"];
+    $structure['engines_car'] = ['file' => "$path/engines_car.yml", 'link' => 'car-engines', 'title' => 'Car Engines', 'parent' => 'd_demo.engines', 'children' => [
+        'engines_car_diesel' => ['file' => "$path/engines_car_diesel.yml", 'link' => 'diesel-engines', 'title' => 'Diesel Engines', 'weight' => 0],
+        'engines_car_gasoline' => ['file' => "$path/engines_car_gasoline.yml", 'link' => 'gasoline-engines', 'title' => 'Gasoline Engines', 'weight' => 1]
+      ]
+    ];
+    $structure['engines_boat'] = ['file' => "$path/engines_boat.yml", 'link' => 'boat-engines', 'title' => 'Boat Engines', 'parent' => 'd_demo.engines'];
+    $structure['engines_aircraft'] = ['file' => "$path/engines_aircraft.yml", 'link' => 'aircraft-engines', 'title' => 'Aircraft Engines', 'parent' => 'd_demo.engines'];
   }
 }
 

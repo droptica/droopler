@@ -48,17 +48,27 @@
   Drupal.behaviors.mainMenuMobileSubmenuToggle = {
     attach: function (context, settings) {
       var $menuItems = $('.we-mega-menu-li.dropdown-menu', context);
-      var $links = $('> a.we-mega-menu-li', $menuItems);
+      var $links = $('> a.we-mega-menu-li, > span.we-megamenu-nolink', $menuItems);
 
       if ($links.length) {
         var blockContentClass = '.we-mega-menu-submenu';
 
         $links.each(function() {
-          $(this).toggleClass('open', $(this).parent().is('.active'));
-        }).find('.d-submenu-toggler').once().click(function() {
-          $(this).parent().toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
+          var $thisLink = $(this);
+          $thisLink.toggleClass('open', $thisLink.parent().is('.active'));
 
-          return false;
+          // The item can be <a> tag or just a <span> if no link available - thena the whole <span> is a toggler.
+          var $toggler = $thisLink.is('a') ? $thisLink.find('.d-submenu-toggler') : $thisLink;
+
+          $toggler.once().click(function() {
+            var $linkItem = $(this);
+            if ($linkItem.is('.d-submenu-toggler')) {
+              $linkItem = $linkItem.parent();
+            }
+            $linkItem.toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
+
+            return false;
+          });
         });
       }
     }
