@@ -87,8 +87,12 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
         @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
     }
-    .field--name-field-d-long-text {
-      margin-bottom: $d-p-text-blocks-group-padding-y;
+    .d-p-tiles-wrapper {
+      margin-top: $d-p-text-blocks-group-padding-y;
+
+      &:last-child {
+        margin-bottom: inherit;
+      }
     }
   }
 }

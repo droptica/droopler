@@ -58,9 +58,11 @@
         </div>
       {% endblock %}
       {% block tiles_content %}
-        <div class="d-p-tiles-wrapper container expandable-content">
-          {{ content.field_d_p_tb_block_reference }}
-        </div>
+        {% if paragraph.field_d_p_tb_block_reference.isEmpty() == false %}
+          <div class="d-p-tiles-wrapper container expandable-content 23">
+            {{ content.field_d_p_tb_block_reference }}
+          </div>
+        {% endif %}
       {% endblock %}
       {% block paragraph_cta_content %}
         <div class="container">
