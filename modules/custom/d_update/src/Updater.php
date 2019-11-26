@@ -121,14 +121,18 @@ class Updater {
    *   Returns if config was imported successfully.
    */
   public function importConfig($module, $name, $hash) {
-    $config_path = drupal_get_path('module', $module) . '/config/install';
-    $source = new FileStorage($config_path);
+    $config_path = drupal_get_path('module', $module) . '/config';
+    $source = new FileStorage($config_path . '/install');
+    $optional_source = new FileStorage($config_path . '/optional');
     $data = $source->read($name);
     if (!$data) {
-      $this->getLogger('d_update')->error('Cannot find file for %config', [
-        '%config' => $name,
-      ]);
-      return FALSE;
+      $data = $optional_source->read($name);
+      if (!$data) {
+        $this->getLogger('d_update')->error('Cannot find file for %config', [
+          '%config' => $name,
+        ]);
+        return FALSE;
+      }
     }
     if (!$this->configCompare->compare($name, $hash)) {
       $this->getLogger('d_update')->warning('Detected changes in %config, aborting import...', [
