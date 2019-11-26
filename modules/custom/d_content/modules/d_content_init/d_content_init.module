@@ -164,9 +164,6 @@ function d_content_init_fill_field($entity, $name, $value) {
     case 'number':
       $entity->set($name, $value['data']);
       break;
-    case 'color':
-      $entity->$name->appendItem($value['data']);
-      break;
     case 'taxonomy':
       $vid = $value['data']['vid'];
       foreach ($value['data']['terms'] as $term_name) {
