@@ -9,6 +9,8 @@ $d-product-facets-header: 1.20rem !default;
 $d-product-teaser-header: 1.20rem !default;
 $d-product-view-border: 1px solid $color-hector !default;
 $d-product-filters-group-margin: 3rem !default;
+$d-product-filters-mobile-color: $color-agamemnon !default;
+$d-product-filters-border: 2px solid $color-hector !default;
 
 @mixin facet-header {
   font-size: $d-product-facets-header;
@@ -185,7 +187,7 @@ $d-product-filters-group-margin: 3rem !default;
     @include media-breakpoint-down(sm) {
       .select2-selection--single {
         background-color: transparent;
-        border: 2px solid $color-hector;
+        border: $d-product-filters-border;
         .select2-selection__rendered {
           align-items: left;
         }
@@ -487,11 +489,11 @@ $d-product-filters-group-margin: 3rem !default;
       letter-spacing: 0;
       padding: 0 1.25rem;
       position: relative;
-      color: $color-serpedon;
-      border-color: $color-serpedon;
+      color: $d-product-filters-mobile-color;
+      border: $d-product-filters-border;
       &:hover {
         color: $white;
-        background: $color-serpedon;
+        background: $d-product-filters-mobile-color;
       }
 
       @include media-breakpoint-down(md) {
@@ -547,7 +549,7 @@ $d-product-filters-group-margin: 3rem !default;
         overflow: hidden;
         position: absolute;
         border-radius: 0.3125rem;
-        background-color: red;
+        background-color: $color-agamemnon;
         top: 0.4375rem;
         right: 1.25rem;
         width: 0.625rem;
