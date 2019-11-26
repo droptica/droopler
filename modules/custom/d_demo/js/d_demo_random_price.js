@@ -13,6 +13,7 @@
         if ($wrapper.hasClass('with-price')) {
           setInterval(function () {
               var number = ((2000 + Math.floor(Math.random() * 1000)) / 100).toFixed(2);
+              var timestamp = (Date.now()/1000) - Math.floor( Math.random() * 31 * 24 * 3600);
 
               if (localStorage.getItem('price')) {
                 var oldPrice = localStorage.getItem('price');
@@ -22,7 +23,7 @@
               }
               localStorage.setItem('price', number);
               var cssClass = 'testing';
-              setPrice(number, change, cssClass);
+              setPrice(number, change, timestamp, 'EUR', cssClass);
             },
             5000);
         }

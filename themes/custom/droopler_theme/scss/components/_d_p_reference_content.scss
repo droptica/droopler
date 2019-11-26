@@ -24,7 +24,10 @@ $d-p-reference-content-content-padding: 5px !default;
     padding-top: $d-p-reference-content-padding-top;
     padding-bottom: $d-p-reference-content-padding-bottom;
 
-    margin-right: -$d-p-reference-content-item-padding;
+
+    @include media-breakpoint-up(xl) {
+      margin-right: -$d-p-reference-content-item-padding;
+    }
 
     .field--wrapper {
       overflow: hidden;

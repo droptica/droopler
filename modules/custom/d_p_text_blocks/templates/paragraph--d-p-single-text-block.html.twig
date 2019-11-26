@@ -52,23 +52,29 @@
 ] %}
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
-    {% if with_price  %}
-      {{ attach_library('d_p/d_p_with_price') }}
-      <div class="with-price-stripe">
-        <div class="with-price-wrapper">
-          <span class="with-price-data">
-            <div class="spinner-border text-danger" role="status"><span class="sr-only">Loading...</span></div>
-          </span>
-          <span class="with-price-arrow"></span>
-          <span class="with-price-percentage"></span>
-        </div>
-      </div>
-    {% endif %}
     <div {{ paragraph_attributes.addClass(paragraph_classes, image_class) }} ></div>
     <div{{ attributes.addClass(classes) }}>
       {% block content %}
         {{ content|without('field_d_background_color', 'field_d_image_background') }}
       {% endblock %}
     </div>
+    {% if with_price  %}
+      {{ attach_library('d_p/d_p_with_price') }}
+      <div class="with-price-stripe">
+        <div class="with-price-wrapper">
+          <div class="with-price-data d-flex justify-content-center">
+            <span class="with-price-value">
+              <div class="spinner-border text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            </span>&nbsp;
+            <span class="with-price-currency"></span>
+          </div>
+          <div class="change d-flex align-items-baseline justify-content-center">
+            <span class="with-price-arrow"></span>
+            <span class="with-price-percentage"></span>
+          </div>
+          <div class="with-price-timestamp"></div>
+        </div>
+      </div>
+    {% endif %}
   </section>
 {% endblock paragraph %}
