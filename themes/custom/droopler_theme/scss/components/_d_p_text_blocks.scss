@@ -111,9 +111,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
     .d-p-text-block {
       padding: $d-p-text-blocks-tiles-padding;
-      @include media-breakpoint-down(md) {
-        margin-bottom: 0;
-      }
+      margin-bottom: 0;
     }
 
     @include media-breakpoint-up(sm) {
@@ -214,5 +212,11 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     .field--name-field-d-long-text {
       color: $d-p-text-blocks-theme-invert-text-color;
     }
+  }
+}
+
+.header-margin-none {
+  h2.field--name-field-d-main-title {
+    margin-bottom: inherit;
   }
 }
