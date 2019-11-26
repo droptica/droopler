@@ -56,10 +56,10 @@
         $links.each(function() {
           var $thisLink = $(this);
           $thisLink.toggleClass('open', $thisLink.parent().is('.active'));
-          var $toggler = $thisLink;
-          if ($thisLink.is('a')) {
-            $toggler = $thisLink.find('.d-submenu-toggler');
-          }
+
+          // The item can be <a> tag or just a <span> if no link available - thena the whole <span> is a toggler.
+          var $toggler = $thisLink.is('a') ? $thisLink.find('.d-submenu-toggler') : $thisLink;
+
           $toggler.once().click(function() {
             var $linkItem = $(this);
             if ($linkItem.is('.d-submenu-toggler')) {
