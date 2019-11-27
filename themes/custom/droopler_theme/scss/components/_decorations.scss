@@ -72,8 +72,8 @@ $line-thickness: 0.125rem !default;
 section .paragraph {
   h2.field--name-field-d-main-title:last-child {
     &::after {
-      margin-top: $line-center-margin-top;
-      margin-bottom: $line-center-margin-top;
+      margin-top: $line-center-margin-top !important;
+      margin-bottom: $line-center-margin-top !important;
     }
   }
 }
