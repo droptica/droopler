@@ -50,12 +50,6 @@ function droopler_install() {
   // Install init content. It will add an install task to be performed later.
   \Drupal::service('module_installer')->install(['d_content_init']);
 
-  // Enable blog and products by default.
-  \Drupal::service('module_installer')->install([
-    'd_blog',
-    'd_product'
-  ]);
-
   // Try to install custom init that alters the original one.
   try {
     \Drupal::service('module_installer')->install(['d_custom_init']);
@@ -70,6 +64,16 @@ function droopler_install() {
  */
 function droopler_install_tasks() {
   $tasks = [
+    'droopler_enable_blog' => [
+      'display' => TRUE,
+      'display_name' => t('Install d_blog'),
+      'type' => 'normal',
+    ],
+    'droopler_enable_product' => [
+      'display' => TRUE,
+      'display_name' => t('Install d_products'),
+      'type' => 'normal',
+    ],
     'droopler_enable_demo' => [
       'display' => TRUE,
       'display_name' => t('Install Demo'),
@@ -99,6 +103,28 @@ function _droopler_import_config($module, $name) {
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
   $config_storage->write($name, $source->read($name));
+}
+
+/**
+ * Install d_blog.
+ * This must be in a separate task because of dependency issues.
+ */
+function droopler_enable_blog() {
+  $modules = [
+    'd_blog',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
+}
+
+/**
+ * Install d_product.
+ * This must be in a separate task because of dependency issues.
+ */
+function droopler_enable_product() {
+  $modules = [
+    'd_product',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
 }
 
 /**
