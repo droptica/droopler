@@ -7,19 +7,17 @@ field_page_section:
       data:
         field_d_main_title:
           type: text
-          data: Relacje inwestorskie
+          data: For Investors
         field_d_image_background:
           type: image
-          data: d_demo/demo_business_3.jpg
+          data: d_demo/d_demo_investors_1.jpg
           dst_dir: demo
         field_d_p_si_image_side:
           type: text_select
           data: right-wide
         field_d_long_text:
           type: text_long
-          data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit,
-            id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et,
-            gravida blandit enim.</p>
+          data: <p>This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.</p>
         field_d_background_color:
           type: text
           data: '#ffffff'
@@ -34,7 +32,7 @@ field_page_section:
           data: 1
         field_d_main_title:
           type: text
-          data: Bieżąca cena
+          data: Stock market
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -55,7 +53,7 @@ field_page_section:
       data:
         field_d_main_title:
           type: text
-          data: Kalendarz
+          data: Investor Calendar
         field_d_long_text:
           type: text_long
           data: |
@@ -64,54 +62,48 @@ field_page_section:
                     <tr>
                         <th>Date</th>
                         <th>Title</th>
-                        <th>Type</th>
-                        <th>Place</th>
                     </tr>
                 </thead>
                 <tbody>
                   <tr>
-                      <td scope="row">02 May 2019</td>
-                      <td>Sprawozdanie  finansowe Grupy DropEngine (1 kw. 2019)</td>
-                      <td>Publikacja raportu okresowego</td>
-                      <td>online</td>
+                      <td scope="row">05.12.2019</td>
+                      <td>8th annual Global Market Conference</td>
                   </tr>
                   <tr>
-                     <td scope="row">11 May 2019</td>
-                     <td>Morgna Stnaley, EEMEA Cnference 2019</td>
-                     <td>Konferencjea dla inwestorów instytucjonalnych</td>
-                     <td>London</td>
+                     <td scope="row">17.12.2019</td>
+                     <td>The Investor Conference in London</td>
                   </tr>
                   <tr>
-                      <td scope="row">22 May 2019</td>
-                      <td>Sprawozdanie  finansowe Grupy DropEngine (1 kw. 2019)</td>
-                      <td>Publikacja raportu okresowego</td>
-                      <td>online</td>
-                  </tr>
-
-                  <tr>
-                      <td scope="row">02 June 2019</td>
-                      <td>Morgna Stnaley, EEMEA Cnference 2019</td>
-                      <td>Konferencjea dla inwestorów instytucjonalnych</td>
-                      <td>London</td>
+                      <td scope="row">2.01.2020</td>
+                      <td>Consolidated report for the 2010</td>
                   </tr>
                   <tr>
-                      <td scope="row">11 June 2019</td>
-                      <td>Sprawozdanie  finansowe Grupy DropEngine (1 kw. 2019)</td>
-                      <td>Publikacja raportu okresowego</td>
-                      <td>online</td>
+                      <td scope="row">13.02.2020</td>
+                      <td>Meeting with Investors in Paris</td>
                   </tr>
                   <tr>
-                      <td scope="row">22 June 2019</td>
-                      <td>Morgna Stnaley, EEMEA Cnference 2019</td>
-                      <td>Konferencjea dla inwestorów instytucjonalnych</td>
-                      <td>London</td>
+                      <td scope="row">15.03.2020</td>
+                      <td>Engine Producers Market Conference in Berlin</td>
                   </tr>
-
                   <tr>
-                      <td scope="row">10 July 2019</td>
-                      <td>Konferenca Wall Street w Karpaczu - XXIII edycja</td>
-                      <td>Konferencjea dla inwestorów instytucjonalnych</td>
-                      <td>Karpacz</td>
+                      <td scope="row">6.04.2020</td>
+                      <td>First Quarter 2019 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">23.05.2020</td>
+                      <td>The Investor Conference in Warsaw</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">4.07.2020</td>
+                      <td>Second Quarter 2019 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">19.09.2020</td>
+                      <td>The Investor Conference in London</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">5.10.2020</td>
+                      <td>Third Quarter 2019 Financial Results</td>
                   </tr>
                 </tbody>
             </table>
@@ -123,7 +115,7 @@ field_page_section:
       data:
         field_d_main_title:
           type: text
-          data: Raporty okresowe
+          data: Quarterly Reports
         field_d_long_text:
           type: text_long
           data: |
@@ -132,70 +124,40 @@ field_page_section:
                     <tr>
                         <th>Date</th>
                         <th>Code</th>
-                        <th>Title</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                   <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
+                      <td scope="row">Report Q4</td>
+                      <td>Drooplengines Reports Fourth Quarter 2019 Financial Results</td>
                   </tr>
                   <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
+                      <td scope="row">Report Q3</td>
+                      <td>Drooplengines Reports Third Quarter 2019 Financial Results</td>
                   </tr>
                   <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
+                      <td scope="row">Report Q2</td>
+                      <td>Drooplengines Reports Second Quarter 2019 Financial Results</td>
                   </tr>
                   <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
+                      <td scope="row">Report Q1</td>
+                      <td>Drooplengines Reports First Quarter 2019 Financial Results</td>
                   </tr>
                   <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
+                      <td scope="row">Report Q4</td>
+                      <td>Drooplengines Reports Fourth Quarter 2018 Financial Results</td>
                   </tr>
                   <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
+                      <td scope="row">Report Q3</td>
+                      <td>Drooplengines Reports Third Quarter 2018 Financial Results</td>
                   </tr>
                   <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
+                      <td scope="row">Report Q2</td>
+                      <td>Drooplengines Reports Second Quarter 2018 Financial Results</td>
                   </tr>
                   <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
-                  </tr>
-                  <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
-                  </tr>
-                  <tr>
-                      <td scope="row">25 03 2019</td>
-                      <td>RB 11/2019</td>
-                      <td>Wstępne wybrane skonsolidowane dane finansowe GK LPP za II kwartał i I półrocze 2019 roku</td>
-                      <td><a href="#"> Download </a></td>
+                      <td scope="row">Report Q1</td>
+                      <td>Drooplengines Reports First Quarter 2018 Financial Results</td>
                   </tr>
                 </tbody>
             </table>
@@ -208,10 +170,10 @@ field_page_section:
       data:
         field_d_main_title:
           type: text
-          data: Kontakt dla inwestorów
+          data: Contact for Investors
         field_d_image_background:
           type: image
-          data: d_demo/d_demo_car_engine.jpg
+          data: d_demo/d_demo_investors_2.jpg
           dst_dir: demo
         field_d_p_si_image_side:
           type: text_select
@@ -219,9 +181,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data:
-            <p>ul. Duńska 9<br>54-427 Wrocław<br>Polska</p>
-            <p>+48 71 32 23 233</p>
-            <p>inwestycje@dropbike.pl</p>
+            <p>John Smith</p>
+            <p>ul. Duńska 9<br>54-427 Wrocław</p>
+            <p>Mobile: +48 333 444 222</p>
         field_d_background_color:
           type: text
           data: '#fff'
