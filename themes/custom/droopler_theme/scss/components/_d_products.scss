@@ -207,7 +207,13 @@ $d-product-filters-border: 2px solid $color-hector !default;
 // Page Products
 // Title
 .products-header-wrapper {
-  @include listing-header($d-product-listing-header-background-color, $d-product-listing-header-text-color, $d-product-listing-header-desktop-padding, $d-product-listing-header-mobile-padding, $d-product-listing-header-margin);
+  @include listing-header(
+      $d-product-listing-header-background-color,
+      $d-product-listing-header-text-color,
+      $d-product-listing-header-desktop-padding,
+      $d-product-listing-header-mobile-padding,
+      $d-product-listing-header-margin
+  );
 }
 
 // Facets && filers
