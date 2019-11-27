@@ -252,7 +252,7 @@ function d_content_init_add_node($params) {
     $config = [
       'title' => $params['link'],
       'link' => ['uri' => 'entity:node/' . $nid],
-      'menu_name' => 'main',
+      'menu_name' => $params['menu'] ?? 'main',
       'weight' => $params['weight'],
       'expanded' => !empty($params['children'])
     ];
