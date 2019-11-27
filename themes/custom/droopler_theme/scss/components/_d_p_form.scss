@@ -31,7 +31,7 @@ $d-p-form-copy-margin-left: 1.25rem !default;
     text-align: center;
     color: $d-p-form-header-color;
     &:after {
-      @include decoration-header-line($d-p-form-line-color, $d-p-form-line-color-inverted);
+      @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
     }
   }
 
@@ -87,6 +87,9 @@ $d-p-form-copy-margin-left: 1.25rem !default;
     .right {
       h2 {
         text-align: left;
+        &::after {
+          margin-left: 0;
+        }
       }
     }
     .left {
@@ -95,6 +98,9 @@ $d-p-form-copy-margin-left: 1.25rem !default;
       }
       h2 {
         text-align: right;
+        &::after {
+          margin-right: 0;
+        }
       }
     }
   }

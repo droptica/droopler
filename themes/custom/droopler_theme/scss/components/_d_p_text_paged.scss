@@ -65,7 +65,7 @@ $d-p-text-paged-first-margin-top: 2% !default;
 
 
 .theme-invert {
-  .text-page {
+  > .text-page {
     background: $d-p-text-paged-theme-invert-background-color;
     color: $d-p-text-paged-theme-invert-text-color;
     .d-p-side-embed-content-fields {
