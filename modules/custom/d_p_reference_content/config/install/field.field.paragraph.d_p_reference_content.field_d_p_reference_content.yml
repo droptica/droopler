@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_d_p_reference_content
-    - node.type.blog_post
     - paragraphs.paragraphs_type.d_p_reference_content
 id: paragraph.d_p_reference_content.field_d_p_reference_content
 field_name: field_d_p_reference_content
@@ -19,7 +18,6 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      blog_post: blog_post
     sort:
       field: _none
     auto_create: false

@@ -27,11 +27,11 @@ function d_update_drush_command() {
  * Drush command logic for generating config hash.
  */
 function drush_d_update_generate_config_hash($opt = NULL) {
-  $check = \Drupal::hasService('d_update.config_manager');
+  $check = \Drupal::hasService('d_update.config_compare');
   if ($check == FALSE) {
     drush_print(dt('Service to generate hash is missing.'));
     return;
   }
-  $hash = \Drupal::service('d_update.config_manager')->generateHashFromDatabase($opt);
+  $hash = \Drupal::service('d_update.config_compare')->generateHashFromDatabase($opt);
   drush_print(dt('Hash for config @opt: ' . $hash, ['@opt' => $opt]));
 }
