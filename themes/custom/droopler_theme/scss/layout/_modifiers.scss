@@ -192,7 +192,11 @@ $two-columned-header-line-margin: 0.625rem !default;
 
         .with-price-data {
           padding-bottom: 3.8vh;
-          font-size: 4vh
+          font-size: 4vh;
+
+          @include media-breakpoint-down(md) {
+            padding-bottom: unset;
+          }
         }
         .with-price-currency,
         .with-price-timestamp {
@@ -200,6 +204,10 @@ $two-columned-header-line-margin: 0.625rem !default;
         }
         .with-price-percentage {
           color: $white;
+        }
+
+        .with-price-arrow {
+          margin-top: $arrow-margin-top;
         }
       }
 
@@ -242,7 +250,6 @@ $two-columned-header-line-margin: 0.625rem !default;
         height: 0;
         display: inline-block;
         margin-right: $arrow-margin-right;
-        margin-top: $arrow-margin-top;
         border-left: $arrow-border;
         border-right: $arrow-border;
 
