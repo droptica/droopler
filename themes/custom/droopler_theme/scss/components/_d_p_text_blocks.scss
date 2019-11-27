@@ -87,8 +87,12 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
         @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
     }
-    .field--name-field-d-long-text {
-      margin-bottom: $d-p-text-blocks-group-padding-y;
+    .d-p-tiles-wrapper {
+      margin-top: $d-p-text-blocks-group-padding-y;
+
+      &:last-child {
+        margin-bottom: inherit;
+      }
     }
   }
 }
@@ -107,9 +111,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
     .d-p-text-block {
       padding: $d-p-text-blocks-tiles-padding;
-      @include media-breakpoint-down(md) {
-        margin-bottom: 0;
-      }
+      margin-bottom: 0;
     }
 
     @include media-breakpoint-up(sm) {
@@ -212,3 +214,4 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     }
   }
 }
+
