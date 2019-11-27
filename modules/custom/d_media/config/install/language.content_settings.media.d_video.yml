@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.d_video
+id: media.d_video
+target_entity_type_id: media
+target_bundle: d_video
+default_langcode: site_default
+language_alterable: false
