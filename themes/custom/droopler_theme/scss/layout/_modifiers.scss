@@ -318,13 +318,13 @@ $two-columned-header-line-margin: 0.625rem !default;
   .paragraph {
     h2 {
       text-align: center;
-      color: $color-odysseus;
+      //color: $color-odysseus;
       font-size: $tile-title-font-size-desktop;
       @include media-breakpoint-down(md) {
         font-size: $tile-title-font-size-mobile;
       }
       &:after {
-        background: $color-odysseus;
+        //background: $color-odysseus;
         margin: 7px auto;
       }
     }

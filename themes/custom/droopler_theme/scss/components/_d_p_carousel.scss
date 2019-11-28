@@ -9,8 +9,10 @@ $d-p-carousel-item-line-color: $color-agamemnon !default;
 $d-p-carousel-item-line-color-inverted: $color-nestor !default;
 $d-p-carousel-line-color: $color-agamemnon !default;
 $d-p-carousel-line-color-inverted: $color-nestor !default;
-$d-p-carousel-background: $color-agamemnon !default;
+$d-p-carousel-background: $color-odysseus !default;
 $d-p-carousel-arrow-color: $color-cassandra !default;
+$d-p-carousel-background-theme-invert: $color-agamemnon !default;
+$d-p-carousel-theme-invert-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-carousel-padding-y: 5% !default;
@@ -195,4 +197,20 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
       right: $d-p-carousel-arrow-size + 5px;
     }
   }
+}
+
+.theme-invert {
+  &:not(.user-background-defined):not(.user-image-background) > .paragraph--type--d-p-carousel {
+    background-color: $d-p-carousel-background-theme-invert;
+  }
+
+  > .paragraph--type--d-p-carousel {
+    h2.field--name-field-d-main-title,
+    .field--name-field-d-long-text {
+      &, p {
+        color: $d-p-carousel-theme-invert-text-color;
+      }
+    }
+  }
+
 }

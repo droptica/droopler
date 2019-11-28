@@ -65,12 +65,15 @@ $d-p-text-paged-first-margin-top: 2% !default;
 
 
 .theme-invert {
-  > .text-page {
+  &:not(.user-background-defined):not(.user-image-background) > .text-page {
     background: $d-p-text-paged-theme-invert-background-color;
+  }
+  > .text-page {
     color: $d-p-text-paged-theme-invert-text-color;
-    .d-p-side-embed-content-fields {
-      .field--name-field-d-long-text,
-      .field--name-field-d-main-title {
+
+    .field--name-field-d-long-text,
+    .field--name-field-d-main-title {
+      &, p {
         color: $d-p-text-paged-theme-invert-text-color;
       }
     }

@@ -172,8 +172,11 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
 }
 
 .theme-invert {
-  > .d-p-side-tiles-banner {
+  &:not(.user-background-defined):not(.user-image-background) > .d-p-side-tiles-banner {
     background: $color-odysseus;
+  }
+
+  > .d-p-side-tiles-banner {
     color: $d-p-side-tiles-theme-invert-text-color;
     .d-p-side-embed-content-fields {
       .field--name-field-d-long-text,

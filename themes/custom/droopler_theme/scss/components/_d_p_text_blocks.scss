@@ -114,8 +114,9 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 
     .d-p-text-block {
-      padding: $d-p-text-blocks-tiles-padding;
+      padding: $d-p-text-blocks-tiles-padding 2* $d-p-text-blocks-tiles-padding;
       margin-bottom: 0;
+      width: 100%;
     }
 
     @include media-breakpoint-up(sm) {
@@ -210,7 +211,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 .theme-invert {
   > .d-p-group-of-text-blocks,
-  > .d-p-text-block {
+  &:not(.user-background-defined):not(.user-image-background) > .d-p-text-block {
     background-color: $d-p-text-blocks-background;
   }
 
