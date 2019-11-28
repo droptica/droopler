@@ -24,7 +24,7 @@ $d-p-side-tiles-text-mobile-padding: 7% !default;
 $d-p-side-tiles-text-width: 35.625rem !default;
 $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half of the screen
 
-.d-p-side-tiles-wrapper {
+.d-p-side-tiles-banner {
 
   background-color: $d-p-side-tiles-text-background-color;
 
@@ -172,7 +172,7 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
 }
 
 .theme-invert {
-  .d-p-side-embed-content {
+  > .d-p-side-tiles-banner {
     background: $color-odysseus;
     color: $d-p-side-tiles-theme-invert-text-color;
     .d-p-side-embed-content-fields {
