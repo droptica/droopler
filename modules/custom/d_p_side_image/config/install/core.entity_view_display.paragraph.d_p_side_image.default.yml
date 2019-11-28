@@ -20,7 +20,7 @@ bundle: d_p_side_image
 mode: default
 content:
   field_d_cta_link:
-    weight: 4
+    weight: 3
     label: hidden
     settings:
       trim_length: 80
@@ -46,21 +46,12 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_d_media_background:
-    type: entity_reference_entity_view
-    weight: 5
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    region: content
   field_d_media_icon:
     type: entity_reference_entity_view
-    weight: 6
-    label: above
+    weight: 0
+    label: hidden
     settings:
-      view_mode: default
+      view_mode: d_icon
       link: false
     third_party_settings: {  }
     region: content
@@ -74,6 +65,7 @@ content:
     region: content
 hidden:
   field_d_background_color: true
+  field_d_media_background: true
   field_d_p_si_image_side: true
   field_d_settings: true
   search_api_excerpt: true

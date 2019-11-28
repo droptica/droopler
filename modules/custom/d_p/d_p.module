@@ -135,18 +135,25 @@ function d_p_generate_image_set(&$variables, $styles_ids, $bundle, $js = TRUE) {
   $urls = NULL;
   $paragraph = $variables['paragraph'];
   if ($paragraph->hasField('field_d_image_background')) {
-    $background = $paragraph->get('field_d_image_background')->getValue();
+    $background = $paragraph->get('field_d_image_background')->first()->getValue();
   }
   else if ($paragraph->hasField('field_d_media_background')) {
     $media_entity = $paragraph->get('field_d_media_background')->entity;
-    $background = $media_entity->get('field_media_image')->getValue();
+    if ($media_entity) {
+      $background = $media_entity->get('field_media_image')->first()->getValue();
+    } else {
+      return;
+    }
   }
   else {
     return;
   }
 
-  if (isset($background[0]['target_id'])) {
-    $image_file = File::load($background[0]['target_id']);
+  if (isset($background['target_id'])) {
+    $image_file = File::load($background['target_id']);
+  }
+  else {
+    return;
   }
 
   $styles = ImageStyle::loadMultiple($styles_ids);

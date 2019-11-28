@@ -2,14 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.d_icon
     - field.field.media.d_image.field_media_image
     - media.type.d_image
   module:
     - svg_image
-id: media.d_image.default
+id: media.d_image.d_icon
 targetEntityType: media
 bundle: d_image
-mode: default
+mode: d_icon
 content:
   field_media_image:
     weight: 0

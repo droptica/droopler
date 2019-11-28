@@ -3,6 +3,7 @@ description: 'Provides Media configuration for Drupal 8'
 type: module
 core: 8.x
 dependencies:
+  - d_p
   - d_social_media
   - field
   - file
@@ -11,6 +12,7 @@ dependencies:
   - media
   - paragraphs
   - path
+  - responsive_image
   - svg_image
   - user
 package: Droopler

@@ -45,7 +45,7 @@ content:
     type: link_attributes
     region: content
   field_d_long_text:
-    weight: 2
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
@@ -53,7 +53,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: ''
@@ -62,14 +62,14 @@ content:
     region: content
   field_d_media_background:
     type: media_library_widget
-    weight: 9
+    weight: 1
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_d_media_icon:
     type: media_library_widget
-    weight: 10
+    weight: 0
     settings:
       media_types: {  }
     third_party_settings: {  }

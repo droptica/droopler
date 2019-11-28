@@ -63,7 +63,9 @@ $line-thickness: 0.125rem !default;
 }
 
 // Common field for paragraph icons.
-.node .field.field--name-field-d-icon {
+.node .field.field--name-field-d-icon,
+.node .field.field--name-field-d-media-icon,
+.node .field.field--name-field-d-media-icon .field--name-field-media-image {
     display: block;
     margin: 0;
     float: none;
