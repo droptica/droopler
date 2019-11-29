@@ -1,43 +1,59 @@
-<?php /** @noinspection PhpFullyQualifiedNameUsageInspection */
+<?php
 
 namespace Drupal\d_content_init;
 
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Serialization\SerializationInterface;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
+use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\media\Entity\Media;
 
 /**
- * Class ContentInitManagerMedia
+ * Class ContentInitManagerMedia.
  *
  * @package Drupal\d_content_init
  */
 class ContentInitManagerMedia extends ContentInitManagerBase {
 
   /**
-   * @var \Drupal\Core\Logger\LoggerChannelInterface
+   * @var \Drupal\Core\File\FileSystemInterface
    */
-  protected $logger;
+  protected $fileSystem;
 
   /**
-   * ContentInitManagerBase constructor.
+   * ContentInitManagerMedia constructor.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
    * @param \Drupal\Component\Serialization\SerializationInterface $serialization
    *   Serialization interface.
    * @param \Drupal\Core\Logger\LoggerChannelFactory $logger_factory
    *   Logger channel factory.
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+   *   Current user.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   Language manager.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   Module handler interface.
+   * @param \Drupal\Core\File\FileSystemInterface $file_system
+   *   File system.
    */
   public function __construct(
-    EntityTypeManagerInterface $entity_manager,
+    EntityTypeManagerInterface $entity_type_manager,
     SerializationInterface $serialization,
-    LoggerChannelFactory $logger_factory) {
-    $this->entityManager = $entity_manager;
-    $this->serialization = $serialization;
-    $this->logger = $logger_factory->get('d_content_init');
-
-    parent::__construct($entity_manager, $serialization, $logger_factory);
+    LoggerChannelFactory $logger_factory,
+    AccountProxyInterface $current_user,
+    LanguageManagerInterface $language_manager,
+    ModuleHandlerInterface $module_handler,
+    FileSystemInterface $file_system) {
+    parent::__construct($entity_type_manager, $serialization, $logger_factory, $current_user, $language_manager, $module_handler);
+    $this->fileSystem = $file_system;
   }
 
   /**
@@ -48,20 +64,28 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *
    * @return \Drupal\Core\Entity\EntityInterface
    *   Created media entity.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function createMediaImage(array $media_array) {
-    $media_entity = $this->saveEntity('media', [
-      'bundle' => 'd_image',
-      'uid' => \Drupal::currentUser()->id(),
-      'langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId(),
-      'fields' => $media_array['fields'],
-    ]);
-    $this->processFields($media_array,$media_entity);
-    return $media_entity;
+    try {
+      $media_entity = $this->saveEntity('media', [
+        'bundle' => 'd_image',
+        'uid' => $this->currentUser->id(),
+        'langcode' => $this->languageManager->getDefaultLanguage()->getId(),
+        'fields' => $media_array['fields'],
+      ]);
+      $this->processFields($media_array, $media_entity);
+      return $media_entity;
+    }
+    catch (PluginNotFoundException $e) {
+      $this->logger->error('Entity type "media" doesn\'t exist.');
+    }
+    catch (InvalidPluginDefinitionException $e) {
+      $this->logger->error('Entity type "media" storage handler couldn\'t be loaded.');
+    }
+    catch (EntityStorageException $e) {
+      $this->logger->error('Media entity couldn\'t be handled.');
+    }
+    return NULL;
   }
 
   /**
@@ -69,15 +93,12 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *
    * @param string $path
    *   Original file path.
-   * @param $destination_directory
+   * @param string $destination_directory
    *   Destination dir.
-   * @param $alt
+   * @param string $alt
    *   Alt text.
    *
    * @return \Drupal\Core\Entity\EntityInterface|void
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function createMediaImageFromFile($path, $destination_directory, $alt) {
     // Build file URI.
@@ -105,43 +126,116 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     }
     else {
       $this->logger->warning('Cannot save file @file', ['@file' => $path]);
-      return;
+      return NULL;
     }
+  }
+
+  /**
+   * Create a new media entity or return existing one based on image fid.
+   *
+   * @param integer $fid
+   *   File ID.
+   * @param string $alt
+   *   Alt text.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface|void
+   */
+  public function createMediaImageFromFid($fid, $alt) {
+    // Check if the media entity exists.
+    $existing = $this->getMediaImageByFid($fid);
+    if ($existing) {
+      return $existing;
+    }
+
+    // If such entity does not exist, add it and return.
+    return $this->createMediaImage([
+      'fields' => [
+        'field_media_image' => [
+          'data' => [
+            'target_id' => $fid,
+            'alt' => $alt,
+          ],
+        ],
+      ],
+    ]);
   }
 
   /**
    * Get media entity by the file URI.
    *
    * @param string $uri
+   *
    * @return \Drupal\Core\Entity\EntityInterface|void
    */
   protected function getMediaImageByUri($uri) {
-    return null;
+    try {
+      $query = $this->entityTypeManager->getStorage('media')->getQuery();
+      $query->condition('bundle', 'd_image');
+      $query->condition('field_media_image.0.entity.uri', $uri);
+      $entity_ids = $query->execute();
+      $mid = reset($entity_ids);
+      return $mid ? Media::load($mid) : NULL;
+    }
+    catch (PluginNotFoundException $e) {
+      $this->logger->error('Entity type "media" doesn\'t exist.');
+    }
+    catch (InvalidPluginDefinitionException $e) {
+      $this->logger->error('Entity type "media" storage handler couldn\'t be loaded.');
+    }
+    return NULL;
+  }
+
+  /**
+   * Get media entity by the file ID.
+   *
+   * @param integer $fid
+   *
+   * @return \Drupal\Core\Entity\EntityInterface|void
+   */
+  protected function getMediaImageByFid($fid) {
+    try {
+      $query = $this->entityTypeManager->getStorage('media')->getQuery();
+      $query->condition('bundle', 'd_image');
+      $query->condition('field_media_image', $fid);
+      $entity_ids = $query->execute();
+      $mid = reset($entity_ids);
+      return $mid ? Media::load($mid) : NULL;
+    }
+    catch (PluginNotFoundException $e) {
+      $this->logger->error('Entity type "media" doesn\'t exist.');
+    }
+    catch (InvalidPluginDefinitionException $e) {
+      $this->logger->error('Entity type "media" storage handler couldn\'t be loaded.');
+    }
+    return NULL;
   }
 
   /**
    * Move file to its destination.
    *
-   * @param $path
+   * @param string $path
    *   The original file path.
    *
-   * @param $uri
+   * @param string $uri
    *   The destination URI.
    *
    * @return \Drupal\file\FileInterface|false
    */
   protected function saveFile($path, $uri) {
+    if (!file_exists($path)) {
+      return NULL;
+    }
     $file_data = file_get_contents($path);
-    \Drupal::service('file_system')->prepareDirectory(dirname($uri), FileSystemInterface::CREATE_DIRECTORY);
+    $this->fileSystem->prepareDirectory(dirname($uri), FileSystemInterface::CREATE_DIRECTORY);
     return file_save_data($file_data, $uri,FileSystemInterface::EXISTS_REPLACE);
   }
 
   /**
-   * Get the file URI.
+   * Get the file target URI.
    *
    * @param string $path
    *   Full file path.
-   * @param $directory
+   * @param string $directory
    *   Optional subdirectory.
    *
    * @return string

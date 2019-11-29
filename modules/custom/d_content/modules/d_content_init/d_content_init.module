@@ -46,11 +46,11 @@ function d_content_init_save_node($node_to_create) {
 /**
  * Save an entity.
  *
- * @param $entity_to_create
+ * @param array $entity_to_create
  *  Array with entity.
- * @param $entity_type
+ * @param string $entity_type
  *  Entity type.
- * @param $uuid
+ * @param string $uuid
  *  UUID of entity.
  *
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
@@ -66,7 +66,7 @@ function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
 /**
  * Fill the field.
  *
- * @param Drupal\Core\Entity\ContentEntityBase $entity
+ * @param Drupal\Core\Entity\EntityInterface $entity
  *  Entity object to set fields.
  *
  * @param string $name
@@ -74,26 +74,39 @@ function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
  *
  * @param array $value
  *  Field array (type and value).
- *
- * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_fill_field($entity, $name, $value) {
+  // Allow other init modules to add their fields types.
+  \Drupal::moduleHandler()->alter('init_field', $entity, $name, $value);
+
+  // If the field was not processed by any alter, use a standard field "set".
+  if (empty($value['processed'])) {
+    $entity->set($name, $value['data']);
+  }
+}
+
+/**
+ * Implements hook_init_field_alter().
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ * @param string $name
+ * @param array $value
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_init_field_alter(&$entity, &$name, &$value) {
   /**
    * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
    */
   $media_manager =  Drupal::service('d_content_init.manager_media');
-
-  // Allow other init modules to add their fields types.
-  \Drupal::moduleHandler()->alter('fill_field', $entity, $name, $value);
 
   switch ($value['type']) {
     case 'text':
     case 'text_long':
       $entity->set($name, $value['data']);
       $entity->$name->format = 'full_html';
-      break;
-    case 'text_select':
-      $entity->set($name, $value['data']);
+      $value['processed'] = TRUE;
       break;
     case 'cta':
       $entity_attributes = [
@@ -109,6 +122,7 @@ function d_content_init_fill_field($entity, $name, $value) {
         $entity_attributes['options'] = $value['data']['options'];
       }
       $entity->set($name, $entity_attributes);
+      $value['processed'] = TRUE;
       break;
     case 'file':
     case 'image':
@@ -135,6 +149,7 @@ function d_content_init_fill_field($entity, $name, $value) {
           $entity->$name->appendItem($params);
         }
       }
+      $value['processed'] = TRUE;
       break;
     case 'paragraph_reference':
       if (empty($value['subtype'])) {
@@ -152,16 +167,26 @@ function d_content_init_fill_field($entity, $name, $value) {
         $child_paragraph = d_content_init_fill_paragraph($new_child);
         $entity->$name->appendItem($child_paragraph);
       }
+      $value['processed'] = TRUE;
       break;
     case 'media_image':
-      echo 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa';
       $destination_directory = $value['directory'] ?? '';
       foreach ($value['files'] as $file) {
         $path = d_content_init_parse_file_path($file['path'] ?? '');
         $alt = $file['alt'] ?? '';
         $media_entity = $media_manager->createMediaImageFromFile($path, $destination_directory, $alt);
-        $entity->$name->appendItem($media_entity);
+        if ($entity) {
+          $entity->$name->appendItem($media_entity);
+        }
+        else {
+          \Drupal::logger('d_content_init')->error('Empty media reference in entity #@id of type "@type" (field "@field").', [
+            '@id' => $entity->id(),
+            '@type' => $entity->getEntityType(),
+            '@field' => $name,
+          ]);
+        }
       }
+      $value['processed'] = TRUE;
       break;
     case 'entity_reference':
       if (isset($value['data']['target_search'])) {
@@ -169,14 +194,18 @@ function d_content_init_fill_field($entity, $name, $value) {
         if ($target_entity = d_content_init_find_entity_by_properties($value['data']['target_search'], $target_entity_type)) {
           $entity->set($name, [['target_id' => $target_entity->id()]]);
         }
+        else {
+          \Drupal::logger('d_content_init')->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
+            '@id' => $entity->id(),
+            '@type' => $entity->getEntityType(),
+            '@field' => $name,
+          ]);
+        }
       }
       else {
         $entity->set($name, $value['data']);
       }
-      break;
-    case 'boolean':
-    case 'number':
-      $entity->set($name, $value['data']);
+      $value['processed'] = TRUE;
       break;
     case 'taxonomy':
       $vid = $value['data']['vid'];
@@ -199,12 +228,14 @@ function d_content_init_fill_field($entity, $name, $value) {
           $entity->$name->appendItem($term->id());
         }
       }
+      $value['processed'] = TRUE;
       break;
     case 'field_p_configuration_storage':
       if (!empty($value['custom_class'])) {
         $data = json_encode(['custom_class' => $value['custom_class']]);
         $entity->set($name, $data);
       }
+      $value['processed'] = TRUE;
       break;
   }
 }
@@ -333,7 +364,8 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
 
   // Save the file.
   $data = file_get_contents(d_content_init_parse_file_path($path));
-  $image = file_save_data($data, $directory . $filename, FILE_EXISTS_REPLACE);
+  $filename = basename($path);
+  $image = file_save_data($data, $directory . $filename, FileSystemInterface::EXISTS_REPLACE);
   return $image;
 }
 
@@ -384,18 +416,27 @@ function d_content_init_create_all() {
   $context = 'all';
 
   // Define content structure, allow other modules to modify it and create content.
-  $structure = [];
-  $module_handler->alter('content_structure', $structure, $context);
-  d_content_init_add_nodes($structure);
+  $content_structure = [];
+  $module_handler->alter('content_structure', $content_structure, $context);
+  d_content_init_add_nodes($content_structure);
 
   // Define block structure, allow other modules to modify it and create blocks.
-  $structure = [];
-  $module_handler->alter('block_structure', $structure, $context);
-  Drupal::service('d_content_init.manager_block')->importFromFiles($structure);
+  $block_structure = [];
+  $module_handler->alter('block_structure', $block_structure, $context);
+  Drupal::service('d_content_init.manager_block')->importFromFiles($block_structure);
+
+  // Define media structure, allow other modules to modify it and create media entities.
+  $media_structure = [];
+  $module_handler->alter('media_structure', $media_structure, $context);
+  Drupal::service('d_content_init.manager_media')->importFromFiles($media_structure);
 }
 
 /**
  * Removes all the content and recreates it again.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_recreate_content() {
   $storage = \Drupal::entityTypeManager()->getStorage('node');
