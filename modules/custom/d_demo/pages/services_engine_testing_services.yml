@@ -1,0 +1,47 @@
+info:
+  type: content_page
+  title: Engine testing services
+field_page_section:
+  paragraphs:
+    - paragraph_type: d_p_banner
+      data:
+        field_d_main_title:
+          type: text
+          data: Engine testing services
+        field_d_image_background:
+          type: image
+          data: d_demo/d_demo_engine_testing_services_1.jpg
+          alt: Title / Subtitle
+          dst_dir: demo
+        field_d_cta_link:
+          type: cta
+          data:
+            link: internal:#
+            text: Read more
+            options:
+              attributes:
+                class:
+                  - "btn"
+                  - "btn-primary"
+                target: "_self"
+    - paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: Our services
+        field_d_long_text:
+          type: text_long
+          data: <p>Our testing services include deep dives into diesel, gasoline and natural gas fuel economy, onboard diagnostics, exhaust emissions, road load simulation, combustion studies, hybrid electric, and much more.</p>
+    - paragraph_type: d_p_form
+      data:
+        field_d_main_title:
+          type: text
+          data: Schedule a date and time for your service
+        field_d_image_background:
+          type: image
+          data: d_demo/d_demo_car_engine_contact.jpg
+          dst_dir: demo
+        field_d_forms:
+          type: entity_reference
+          data: feedback
+

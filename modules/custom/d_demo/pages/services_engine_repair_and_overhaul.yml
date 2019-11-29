@@ -1,0 +1,47 @@
+info:
+  type: content_page
+  title: Engine repair and overhaul
+field_page_section:
+  paragraphs:
+    - paragraph_type: d_p_banner
+      data:
+        field_d_main_title:
+          type: text
+          data: Engine repair and overhaul
+        field_d_image_background:
+          type: image
+          data: d_demo/d_demo_engine_repair_and_overhaul_1.jpg
+          dst_dir: demo
+        field_d_cta_link:
+          type: cta
+          data:
+            link: internal:#
+            text: Read more
+            options:
+              attributes:
+                class:
+                  - "btn"
+                  - "btn-primary"
+                target: "_self"
+    - paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: Our services
+        field_d_long_text:
+          type: text_long
+          data: <p>We offer regular servicing for our products to our customers who bought our motor engines for boats and yachts. We provide engine reviews and a basic range of services (for example oil replacement).</p>
+    - paragraph_type: d_p_form
+      data:
+        field_d_main_title:
+          type: text
+          data: Schedule a date and time for your service
+        field_d_image_background:
+          type: image
+          data: d_demo/d_demo_regular_servicing_2.jpg
+          dst_dir: demo
+        field_d_forms:
+          type: entity_reference
+          data: feedback
+
+

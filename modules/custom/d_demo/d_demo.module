@@ -32,6 +32,20 @@ function d_demo_content_structure_alter(&$structure, $context) {
       'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
     ]];
     $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 20];
+    $structure['services_engine_installation'] = ['file' => "$path/services_engine_installation.yml"];
+    $structure['services_engine_overhaul'] = ['file' => "$path/services_engine_overhaul.yml"];
+    $structure['services_monitoring_and_assessment'] = ['file' => "$path/services_monitoring_and_assessment.yml"];
+    $structure['services_engine_repair_and_overhaul'] = ['file' => "$path/services_engine_repair_and_overhaul.yml"];
+    $structure['services_engine_repair'] = ['file' => "$path/services_engine_repair.yml"];
+    $structure['services_engine_oil_change'] = ['file' => "$path/services_engine_oil_change.yml"];
+    $structure['services_engine_testing_services'] = ['file' => "$path/services_engine_testing_services.yml"];
+    $structure['services_for_aircrafts'] = ['file' => "$path/services_for_aircrafts.yml"];
+    $structure['services_for_boats'] = ['file' => "$path/services_for_boats.yml"];
+    $structure['services_for_cars'] = ['file' => "$path/services_for_cars.yml"];
+    $structure['services_regular_servicing '] = ['file' => "$path/services_regular_servicing.yml"];
+    $structure['services_ad_hoc_engine_repairs'] = ['file' => "$path/services_ad_hoc_engine_repairs.yml"];
+    $structure['services_regular_servicing'] = ['file' => "$path/services_regular_servicing.yml"];
+    $structure['services_for_spacecrafts'] = ['file' => "$path/services_for_spacecrafts.yml"];
     $structure['contact'] = ['file' => "$path/contact.yml"];
     $structure['about_us'] = ['file' => "$path/about_us.yml"];
     $structure['careers'] = ['file' => "$path/careers.yml"];
