@@ -8,10 +8,12 @@ field_page_section:
         field_d_main_title:
           type: text
           data: Relacje inwestorskie
-        field_d_image_background:
-          type: image
-          data: d_demo/demo_business_3.jpg
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/demo_business_3.jpg
+              alt: Business
         field_d_p_si_image_side:
           type: text_select
           data: right-wide
