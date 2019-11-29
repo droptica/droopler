@@ -506,17 +506,26 @@ function droopler_update_8103() {
 
   if ($module_handler->moduleExists('we_megamenu')) {
 
-    // Install Droopler modules.
-    try {
-      $modules = [
-        'd_menu',
+    $configs = [
+      'droopler' => [
+        'block.block.mainnavigation' => '',
+        'block.block.mainnavigation_2' => '',
+        ]
       ];
+
+    $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
+
+//    // Install Droopler modules.
+//    try {
+//      $modules = [
+//        'd_menu',
+//      ];
       $result = $module_installer->install($modules, TRUE);
-      $values['droopler__droopler_update_8103_8'] = $result;
-    }
-    catch (MissingDependencyException $e) {
-      $values['droopler__droopler_update_8103_8'] = FALSE;
-    }
+//      $values['droopler__droopler_update_8103_8'] = $result;
+//    }
+//    catch (MissingDependencyException $e) {
+//      $values['droopler__droopler_update_8103_8'] = FALSE;
+//    }
   }
 
   $progress = [
@@ -527,22 +536,31 @@ function droopler_update_8103() {
 }
 
 
-//
-///**
-// * Droopler 2.1 Updates.
-// */
-//function droopler_update_8104() {
-//  $module_handler = \Drupal::service('module_handler');
-//
-//  /** @var Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
-//  $module_installer = \Drupal::service('module_installer');
-//
-//  /** @var Drupal\d_update\Updater $updater */
-//  $updater = \Drupal::service('d_update');
-//  $values =[];
-//
-//  if ($module_handler->moduleExists('we_megamenu')) {
-//
+
+/**
+ * Droopler 2.1 Updates.
+ */
+function droopler_update_8104() {
+  $module_handler = \Drupal::service('module_handler');
+
+  /** @var Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+  $values =[];
+
+  if ($module_handler->moduleExists('we_megamenu')) {
+
+    $configs = [
+      'droopler' => [
+//        'block.block.mainnavigation' => '',
+        'block.block.mainnavigation_2' => '',
+      ]
+    ];
+
+    $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
+
 //    // Install Droopler modules.
 //    try {
 //      $modules = [
@@ -554,11 +572,11 @@ function droopler_update_8103() {
 //    catch (MissingDependencyException $e) {
 //      $values['droopler__droopler_update_8103_8'] = FALSE;
 //    }
-//  }
-//
-//  $progress = [
-//    'v2.0' => $values,
-//  ];
-//
-//  $updater->checklist()->saveProgress($progress);
-//}
+  }
+
+  $progress = [
+    'v2.0' => $values,
+  ];
+
+  $updater->checklist()->saveProgress($progress);
+}

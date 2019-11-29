@@ -165,7 +165,7 @@ class Updater {
 
       // Do the update.
       try {
-        $entity->save();
+        $entity->trustData()->save();
         $this->getLogger('d_update')->info('Successfully imported field config %config', [
           '%config' => $name,
         ]);
