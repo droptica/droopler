@@ -27,7 +27,7 @@ $d-p-side-embed-half-padding: 10% !default; // Spacing between content and half 
 $d-p-side-embed-mobile-height: 300px !default; // This value must be set, otherwise embed won't be visible.
 $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of embed here.
 
-.d-p-side-embed-wrapper {
+.d-p-side-embed .d-p-side-embed-wrapper {
   $root: &;
 
   &.embed-side-right {
@@ -177,8 +177,10 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 }
 
 .theme-invert {
-  .d-p-side-embed-content {
+  &:not(.user-background-defined):not(.user-image-background) .d-p-side-embed-content {
     background: $color-odysseus;
+  }
+  .d-p-side-embed-content {
     color: $d-p-side-embed-theme-invert-text-color;
     .d-p-side-embed-content-fields {
       .field--name-field-d-long-text,

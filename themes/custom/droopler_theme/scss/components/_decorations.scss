@@ -29,7 +29,7 @@ $line-thickness: 0.125rem !default;
   margin-top: $line-left-margin-top !important;
   margin-bottom: $line-left-margin-bottom !important;
 
-  .theme-invert & {
+  .theme-invert > & {
     background: $line-color-inverted;
   }
 }
@@ -47,7 +47,7 @@ $line-thickness: 0.125rem !default;
   margin-left: auto;
   margin-right: auto;
 
-  .theme-invert & {
+  .theme-invert > & {
     background: $line-color-inverted;
   }
 }
@@ -72,8 +72,8 @@ $line-thickness: 0.125rem !default;
 section .paragraph {
   h2.field--name-field-d-main-title:last-child {
     &::after {
-      margin-top: $line-center-margin-top;
-      margin-bottom: $line-center-margin-top;
+      margin-top: $line-center-margin-top !important;
+      margin-bottom: $line-center-margin-top !important;
     }
   }
 }

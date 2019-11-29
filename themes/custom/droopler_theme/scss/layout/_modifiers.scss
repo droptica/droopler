@@ -32,25 +32,13 @@ $two-columned-header-line-margin: 0.625rem !default;
   &-gray-light-2 {
     background-color: $light-gray-background-2;
   }
-
-  &-gray-light-2,
-  &-gray-light {
-    .paragraph  {
-      .field--name-field-d-main-title::after,
-      .field field--name-field-d-long-text::before {
-        background-color: $line-background-alter !important;
-      }
-    }
-  }
 }
 
 .theme-invert {
-  .paragraph {
+  > .paragraph {
     .field--type-string,
     .field--type-text-long {
-      &, p {
-        color: $color-cassandra;
-      }
+      color: $color-cassandra;
     }
   }
 }
@@ -330,13 +318,11 @@ $two-columned-header-line-margin: 0.625rem !default;
   .paragraph {
     h2 {
       text-align: center;
-      color: $color-odysseus;
       font-size: $tile-title-font-size-desktop;
       @include media-breakpoint-down(md) {
         font-size: $tile-title-font-size-mobile;
       }
       &:after {
-        background: $color-odysseus;
         margin: 7px auto;
       }
     }
