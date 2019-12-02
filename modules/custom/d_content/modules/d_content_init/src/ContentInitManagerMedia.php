@@ -226,7 +226,8 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
       return NULL;
     }
     $file_data = file_get_contents($path);
-    $this->fileSystem->prepareDirectory(dirname($uri), FileSystemInterface::CREATE_DIRECTORY);
+    $final_dir = dirname($uri);
+    $this->fileSystem->prepareDirectory($final_dir, FileSystemInterface::CREATE_DIRECTORY);
     return file_save_data($file_data, $uri,FileSystemInterface::EXISTS_REPLACE);
   }
 

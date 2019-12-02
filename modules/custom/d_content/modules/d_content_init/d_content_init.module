@@ -5,6 +5,7 @@
  * d_content_init module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
@@ -95,53 +96,59 @@ function d_content_init_fill_field($entity, $name, $value) {
  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function d_content_init_init_field_alter(&$entity, &$name, &$value) {
+function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$value) {
   /**
    * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
    */
   $media_manager =  Drupal::service('d_content_init.manager_media');
+  $type = $value['type'] ?? '';
+  $data = $value['data'] ?? [];
 
-  switch ($value['type']) {
+  // Alter fields by their type.
+  switch ($type) {
     case 'text':
     case 'text_long':
-      $entity->set($name, $value['data']);
+      $entity->set($name, $data);
       $entity->$name->format = 'full_html';
       $value['processed'] = TRUE;
       break;
     case 'cta':
       $entity_attributes = [
-        'title' => $value['data']['text'],
-        'uri' => $value['data']['link'],
+        'title' => $data['text'] ?? '',
+        'uri' => $data['link'] ?? '',
         'options' => [
           'attributes' => [
             'class' => 'btn btn-primary',
           ],
         ],
       ];
-      if (isset($value['data']['options'])) {
-        $entity_attributes['options'] = $value['data']['options'];
+      if (isset($data['options'])) {
+        $entity_attributes['options'] = $data['options'];
       }
       $entity->set($name, $entity_attributes);
       $value['processed'] = TRUE;
       break;
     case 'file':
     case 'image':
-      // Convert short format to full.
-      if (!is_array($value['data'])) {
-        $value['data'] = [
-          ['file' => $value['data']],
+      // Convert short format to full (keep backward compatibility).
+      if (!is_array($data)) {
+        $files = [
+          ['file' => $data],
         ];
       }
-      $dst_dir = $value['dst_dir'] ?? '';
+      else {
+        $files = $data;
+      }
+      $destination_dir = $value['dst_dir'] ?? '';
       // Add all files.
-      foreach ($value['data'] as $file) {
+      foreach ($files as $file) {
         /**
          * @var \Drupal\file\FileInterface $file_object
          */
-        $file_object = d_content_init_get_file($file['file'], $dst_dir);
+        $file_object = d_content_init_get_file($file['file'], $destination_dir);
         if (!empty($file_object)) {
           $params = ["target_id" => $file_object->id()];
-          if ($value['type'] == 'image') {
+          if ($type == 'image') {
             if (!empty($file['alt'])) {
               $params["alt"] = $file['alt'];
             }
@@ -155,14 +162,14 @@ function d_content_init_init_field_alter(&$entity, &$name, &$value) {
       if (empty($value['subtype'])) {
         $value['subtype'] = 'd_p_single_text_block';
       }
-      foreach ($value['data'] as $child) {
-        if($value['subtype'] == 'paragraphs_wrapper') {
-          $new_child['data'] = $child['data'];
-          $new_child['paragraph_type'] = $child['type'];
+      foreach ($data as $child) {
+        if ($value['subtype'] == 'paragraphs_wrapper') {
+          $new_child['data'] = $child['data'] ?? [];
+          $new_child['paragraph_type'] = $child['type'] ?? '';
         }
         else {
           $new_child['data'] = $child;
-          $new_child['paragraph_type'] = $value['subtype'];
+          $new_child['paragraph_type'] = $value['subtype'] ?? '';
         }
         $child_paragraph = d_content_init_fill_paragraph($new_child);
         $entity->$name->appendItem($child_paragraph);
@@ -171,7 +178,8 @@ function d_content_init_init_field_alter(&$entity, &$name, &$value) {
       break;
     case 'media_image':
       $destination_directory = $value['directory'] ?? '';
-      foreach ($value['files'] as $file) {
+      $files = $value['files'] ?? [];
+      foreach ($files as $file) {
         $path = d_content_init_parse_file_path($file['path'] ?? '');
         $alt = $file['alt'] ?? '';
         $media_entity = $media_manager->createMediaImageFromFile($path, $destination_directory, $alt);
@@ -189,9 +197,9 @@ function d_content_init_init_field_alter(&$entity, &$name, &$value) {
       $value['processed'] = TRUE;
       break;
     case 'entity_reference':
-      if (isset($value['data']['target_search'])) {
-        $target_entity_type = $value['data']['target_type'] ?? 'node';
-        if ($target_entity = d_content_init_find_entity_by_properties($value['data']['target_search'], $target_entity_type)) {
+      if (isset($data['target_search'])) {
+        $target_entity_type = $data['target_type'] ?? 'node';
+        if ($target_entity = d_content_init_find_entity_by_properties($data['target_search'], $target_entity_type)) {
           $entity->set($name, [['target_id' => $target_entity->id()]]);
         }
         else {
@@ -201,15 +209,12 @@ function d_content_init_init_field_alter(&$entity, &$name, &$value) {
             '@field' => $name,
           ]);
         }
+        $value['processed'] = TRUE;
       }
-      else {
-        $entity->set($name, $value['data']);
-      }
-      $value['processed'] = TRUE;
       break;
     case 'taxonomy':
-      $vid = $value['data']['vid'];
-      foreach ($value['data']['terms'] as $term_name) {
+      $vid = $data['vid'] ?? NULL;
+      foreach ($data['terms'] as $term_name) {
         $terms = taxonomy_term_load_multiple_by_name($term_name, $vid);
 
         if (empty($terms)) {
@@ -298,7 +303,7 @@ function d_content_init_add_node($params) {
       'title' => $params['link'],
       'link' => ['uri' => 'entity:node/' . $nid],
       'menu_name' => $params['menu'] ?? 'main',
-      'weight' => $params['weight'],
+      'weight' => $params['weight'] ?? 0,
       'expanded' => !empty($params['children'])
     ];
 
