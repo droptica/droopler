@@ -504,6 +504,17 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_7'] = TRUE;
   }
 
+  if ($module_handler->moduleExists('we_megamenu')) {
+
+    $configs = [
+      'droopler' => [
+        'block.block.mainnavigation' => '',
+        'block.block.mainnavigation_2' => '',
+        ]
+      ];
+    $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
+  }
+
   $progress = [
     'v2.0' => $values,
   ];

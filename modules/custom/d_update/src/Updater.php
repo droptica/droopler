@@ -141,25 +141,26 @@ class Updater {
       return FALSE;
     }
 
-    if (preg_match('/^(field|core.entity_form_display|core.entity_view_display|core.entity_view_mode)\./', $name)) {
+    $entity_type = $this->configManager->getEntityTypeIdByName($name);
+    if (!empty($entity_type)) {
       // If this is field config, handle it properly.
-      $entity_type = $this->configManager->getEntityTypeIdByName($name);
       /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
       $storage = $this->entityTypeManager->getStorage($entity_type);
 
       // Try to load the existing config.
-      $existing = $storage->loadByProperties(array('id' => $data['id']));
-      if (!empty($existing)) {
+      $id = $storage->getIDFromConfigName($name, $storage->getEntityType()->getConfigPrefix());
+      $existingEntity = $storage->load($id);
+      if (!empty($existingEntity)) {
         // Set the proper UUID to avoid conflicts.
-        $data['uuid'] = $existing[$data['id']]->uuid();
+        $data['uuid'] = $existingEntity->uuid();
       }
 
       /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity */
       $entity = $storage->createFromStorageRecord($data);
 
       // If we need an update, we have to inform the storage about it.
-      if (!empty($existing)) {
-        $entity->original = $existing[$data['id']];
+      if (!empty($existingEntity)) {
+        $entity->original = $existingEntity;
         $entity->enforceIsNew(FALSE);
       }
 
@@ -172,7 +173,7 @@ class Updater {
         return TRUE;
       }
       catch (EntityStorageException $e) {
-        $this->getLogger('d_update')->error('Error while importing field config %config', [
+        $this->getLogger('d_update')->error('Error while importing entity config %config', [
           '%config' => $name,
         ]);
         return FALSE;
