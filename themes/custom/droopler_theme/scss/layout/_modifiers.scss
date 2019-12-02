@@ -32,25 +32,13 @@ $two-columned-header-line-margin: 0.625rem !default;
   &-gray-light-2 {
     background-color: $light-gray-background-2;
   }
-
-  &-gray-light-2,
-  &-gray-light {
-    .paragraph  {
-      .field--name-field-d-main-title::after,
-      .field field--name-field-d-long-text::before {
-        background-color: $line-background-alter !important;
-      }
-    }
-  }
 }
 
 .theme-invert {
-  .paragraph {
+  > .paragraph {
     .field--type-string,
     .field--type-text-long {
-      &, p {
-        color: $color-cassandra;
-      }
+      color: $color-cassandra;
     }
   }
 }
@@ -192,7 +180,11 @@ $two-columned-header-line-margin: 0.625rem !default;
 
         .with-price-data {
           padding-bottom: 3.8vh;
-          font-size: 4vh
+          font-size: 4vh;
+
+          @include media-breakpoint-down(md) {
+            padding-bottom: unset;
+          }
         }
         .with-price-currency,
         .with-price-timestamp {
@@ -200,6 +192,10 @@ $two-columned-header-line-margin: 0.625rem !default;
         }
         .with-price-percentage {
           color: $white;
+        }
+
+        .with-price-arrow {
+          margin-top: $arrow-margin-top;
         }
       }
 
@@ -242,7 +238,6 @@ $two-columned-header-line-margin: 0.625rem !default;
         height: 0;
         display: inline-block;
         margin-right: $arrow-margin-right;
-        margin-top: $arrow-margin-top;
         border-left: $arrow-border;
         border-right: $arrow-border;
 
@@ -323,13 +318,11 @@ $two-columned-header-line-margin: 0.625rem !default;
   .paragraph {
     h2 {
       text-align: center;
-      color: $color-odysseus;
       font-size: $tile-title-font-size-desktop;
       @include media-breakpoint-down(md) {
         font-size: $tile-title-font-size-mobile;
       }
       &:after {
-        background: $color-odysseus;
         margin: 7px auto;
       }
     }

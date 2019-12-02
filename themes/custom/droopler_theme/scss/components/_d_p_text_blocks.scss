@@ -44,7 +44,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Group of text blocks with header and CTA
 .d-p-group-of-text-blocks {
-
   padding-top: $d-p-text-blocks-group-padding-y;
   padding-bottom: $d-p-text-blocks-group-padding-y;
 
@@ -64,9 +63,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       @include media-breakpoint-down(md) {
         margin: $d-p-text-blocks-mobile-group-margin;
       }
-      &:after {
-        @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
-      }
     }
     > .field--type-link {
       text-align: center;
@@ -79,12 +75,19 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     }
   }
 
-  &.with-long-text {
-    .field--name-field-d-main-title {
-      margin-bottom: inherit;
-
-      &::after {
+  .d-p-group-of-text-blocks-header-wrapper {
+    h2 {
+      &:after {
         @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
+      }
+    }
+  }
+
+  &.with-long-text {
+
+    *:not(section) {
+      .field--name-field-d-main-title {
+        margin-bottom: inherit;
       }
     }
     .d-p-tiles-wrapper {
@@ -95,6 +98,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       }
     }
   }
+
 }
 
 
@@ -110,8 +114,9 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 
     .d-p-text-block {
-      padding: $d-p-text-blocks-tiles-padding;
+      padding: $d-p-text-blocks-tiles-padding 2* $d-p-text-blocks-tiles-padding;
       margin-bottom: 0;
+      width: 100%;
     }
 
     @include media-breakpoint-up(sm) {
@@ -205,13 +210,20 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 }
 
 .theme-invert {
-  .d-p-group-of-text-blocks {
+  > .d-p-group-of-text-blocks,
+  &:not(.user-background-defined):not(.user-image-background) > .d-p-text-block {
     background-color: $d-p-text-blocks-background;
+  }
 
+  > .d-p-group-of-text-blocks .d-p-group-of-text-blocks-header-wrapper,
+  > .d-p-text-block {
     h2.field--name-field-d-main-title,
     .field--name-field-d-long-text {
-      color: $d-p-text-blocks-theme-invert-text-color;
+      &, p {
+        color: $d-p-text-blocks-theme-invert-text-color;
+      }
     }
   }
+
 }
 
