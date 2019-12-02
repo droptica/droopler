@@ -55,6 +55,11 @@ class Updater {
    */
   protected $configCompare;
 
+  /**
+   * Config manager service.
+   *
+   * @var \Drupal\Core\Config\ConfigManagerInterface
+   */
   protected $configManager;
 
   /**
@@ -160,7 +165,7 @@ class Updater {
 
       // Do the update.
       try {
-        $entity->trustData()->save();
+        $entity->save();
         $this->getLogger('d_update')->info('Successfully imported field config %config', [
           '%config' => $name,
         ]);
