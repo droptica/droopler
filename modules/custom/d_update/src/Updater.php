@@ -136,9 +136,9 @@ class Updater {
       return FALSE;
     }
 
-//    if (preg_match('/^(field|core.entity_form_display|core.entity_view_display|core.entity_view_mode)\./', $name)) {
+    $entity_type = $this->configManager->getEntityTypeIdByName($name);
+    if (!empty($entity_type)) {
       // If this is field config, handle it properly.
-      $entity_type = $this->configManager->getEntityTypeIdByName($name);
       /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
       $storage = $this->entityTypeManager->getStorage($entity_type);
 
@@ -172,23 +172,23 @@ class Updater {
         ]);
         return FALSE;
       }
-//    }
-//    else {
-//      // Otherwise use plain config storage.
-//      try {
-//        $this->configStorage->write($name, $data);
-//        $this->getLogger('d_update')->info('Successfully imported config %config', [
-//          '%config' => $name,
-//        ]);
-//        return TRUE;
-//      }
-//      catch (StorageException $e) {
-//        $this->getLogger('d_update')->error('Error while importing config %config', [
-//          '%config' => $name,
-//        ]);
-//        return FALSE;
-//      }
-//    }
+    }
+    else {
+      // Otherwise use plain config storage.
+      try {
+        $this->configStorage->write($name, $data);
+        $this->getLogger('d_update')->info('Successfully imported config %config', [
+          '%config' => $name,
+        ]);
+        return TRUE;
+      }
+      catch (StorageException $e) {
+        $this->getLogger('d_update')->error('Error while importing config %config', [
+          '%config' => $name,
+        ]);
+        return FALSE;
+      }
+    }
 
   }
 
