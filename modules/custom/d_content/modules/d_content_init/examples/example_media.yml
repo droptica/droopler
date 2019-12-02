@@ -1,0 +1,23 @@
+info:# Theme is optional, if will not be declared default theme will be taken.
+info:
+  type: block_plugin
+  plugin: 'we_megamenu_block:main'
+  langcode: en
+  theme: droopler_subtheme
+  region: primary_menu
+  weight: 0
+  settings:
+    status: true
+    provider: we_megamenu
+    label: 'Main navigation'
+    label_display: 0
+
+  # For images this must be set to media_image, it is not equal to media's bundle.
+  type: media_image
+
+fields:
+  # RAW field data to be sent to Entity create. Specify "target_id" and "alt" here.
+  field_media_image:
+    data:
+      - target_id: 9
+        alt: Centurion

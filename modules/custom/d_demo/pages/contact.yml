@@ -10,10 +10,12 @@ field_page_section:
       field_d_main_title:
         type: text
         data: Contact
-      field_d_image_background:
-        type: image
-        data: d_demo/d_demo_jet.jpg
-        dst_dir: demo
+      field_d_media_background:
+        type: media_image
+        directory: demo
+        files:
+          - path: d_demo/d_demo_jet.jpg
+            alt: Jet
       field_d_p_si_image_side:
         type: text_select
         data: right-wide

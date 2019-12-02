@@ -4,8 +4,12 @@ namespace Drupal\d_content_init;
 
 use Drupal\Component\Serialization\SerializationInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
@@ -20,7 +24,7 @@ abstract class ContentInitManagerBase {
   /**
    * @var \Drupal\Core\Entity\EntityTypeManager
    */
-  protected $entityManager;
+  protected $entityTypeManager;
 
   /**
    * @var \Drupal\Component\Serialization\SerializationInterface
@@ -33,22 +37,49 @@ abstract class ContentInitManagerBase {
   protected $logger;
 
   /**
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * ContentInitManagerBase constructor.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
    * @param \Drupal\Component\Serialization\SerializationInterface $serialization
    *   Serialization interface.
    * @param \Drupal\Core\Logger\LoggerChannelFactory $logger_factory
    *   Logger channel factory.
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+   *   Current user.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   Language manager.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   Module handler interface.
    */
   public function __construct(
-    EntityTypeManagerInterface $entity_manager,
+    EntityTypeManagerInterface $entity_type_manager,
     SerializationInterface $serialization,
-    LoggerChannelFactory $logger_factory) {
-    $this->entityManager = $entity_manager;
+    LoggerChannelFactory $logger_factory,
+    AccountProxyInterface $current_user,
+    LanguageManagerInterface $language_manager,
+    ModuleHandlerInterface $module_handler) {
+    $this->entityTypeManager = $entity_type_manager;
     $this->serialization = $serialization;
     $this->logger = $logger_factory->get('d_content_init');
+    $this->currentUser = $current_user;
+    $this->languageManager = $language_manager;
+    $this->moduleHandler = $module_handler;
   }
 
   /**
@@ -86,7 +117,11 @@ abstract class ContentInitManagerBase {
    */
   public function importFromFiles(array $structure) {
     foreach ($structure as $data) {
-      $this->importFromFile($data['file']);
+      if (!$this->importFromFile($data['file'])) {
+        $this->logger->error($this->t('Entity from @file was not created.', [
+          '@file' => $data['file'],
+        ]));
+      }
     }
   }
 
@@ -132,7 +167,7 @@ abstract class ContentInitManagerBase {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function saveEntity($entity_type, array $values) {
-    $storage = \Drupal::entityTypeManager()->getStorage($entity_type);
+    $storage = $this->entityTypeManager->getStorage($entity_type);
     $entity = $storage->create($values);
     $entity->save();
     return $entity;
@@ -145,15 +180,21 @@ abstract class ContentInitManagerBase {
    *   Block definition to process.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   Entity to operate on.
-   *
-   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function processFields(array $block, EntityInterface &$entity) {
-    if (isset($block['fields'])) {
-      foreach ($block['fields'] as $field_name => $field) {
-        $this->processField($field_name, $field, $entity);
+    try {
+      if (isset($block['fields'])) {
+        foreach ($block['fields'] as $field_name => $field) {
+          $this->processField($field_name, $field, $entity);
+        }
+        $entity->save();
       }
-      $entity->save();
+    }
+    catch (EntityStorageException $e) {
+      $this->logger->error('Unable to process fields for the entity #@id of type @type', [
+        '@id' => $entity->id(),
+        '@type' => $entity->getEntityType(),
+      ]);
     }
   }
 
@@ -178,7 +219,13 @@ abstract class ContentInitManagerBase {
       return FALSE;
     }
 
-    $entity->set($field_name, $field['data']);
+    // Allow other modules to alter
+    $this->moduleHandler->alter('init_field', $entity, $field_name, $field);
+
+    // If the field was not processed by any alter, use a standard field "set".
+    if (empty($field['processed'])) {
+      $entity->set($field_name, $field['data']);
+    }
     return $entity;
   }
 

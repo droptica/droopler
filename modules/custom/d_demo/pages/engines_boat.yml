@@ -9,10 +9,12 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Boat engines'
-        field_d_image_background:
-          type: image
-          data: d_demo/d_demo_engine_boat_1.jpg
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/d_demo_engine_boat_1.jpg
+              alt: Engine boat
         field_d_p_si_image_side:
           type: text_select
           data: right-wide
@@ -38,10 +40,12 @@ field_page_section:
 
     - paragraph_type: d_p_side_image
       data:
-        field_d_image_background:
-          type: image
-          data: d_demo/d_demo_engine_boat_2.jpg
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/d_demo_engine_boat_2.jpg
+              alt: Engine boat
         field_d_p_si_image_side:
           type: text_select
           data: left
