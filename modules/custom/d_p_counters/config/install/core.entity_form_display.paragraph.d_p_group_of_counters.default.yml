@@ -7,9 +7,11 @@ dependencies:
     - field.field.paragraph.d_p_group_of_counters.field_d_image_background
     - field.field.paragraph.d_p_group_of_counters.field_d_main_title
     - field.field.paragraph.d_p_group_of_counters.field_d_number
+    - field.field.paragraph.d_p_group_of_counters.field_d_settings
     - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_group_of_counters
   module:
+    - d_p
     - paragraphs
     - svg_image
 id: paragraph.d_p_group_of_counters.default
@@ -59,6 +61,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
+  field_d_settings:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: field_d_p_set_settings
     region: content
 hidden:
   created: true

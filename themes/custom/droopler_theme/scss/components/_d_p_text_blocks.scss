@@ -56,7 +56,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       text-align: center;
     }
 
-    > h2 {
+    > .field--name-field-d-main-title {
       @include font-main-header;
       text-align: center;
       margin: $d-p-text-blocks-group-margin;
@@ -76,7 +76,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   }
 
   .d-p-group-of-text-blocks-header-wrapper {
-    h2 {
+    .field--name-field-d-main-title {
       &:after {
         @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
@@ -154,7 +154,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 // Single box
 .d-p-text-block {
   margin-bottom: $d-p-single-box-margin-bottom;
-  h2 {
+  .field--name-field-d-main-title {
     @include font-title-single-box;
     &:after {
       @include decoration-header-line($d-p-single-box-line-color, $d-p-single-box-line-color-inverted);
@@ -217,7 +217,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
   > .d-p-group-of-text-blocks .d-p-group-of-text-blocks-header-wrapper,
   > .d-p-text-block {
-    h2.field--name-field-d-main-title,
+    .field--name-field-d-main-title,
     .field--name-field-d-long-text {
       &, p {
         color: $d-p-text-blocks-theme-invert-text-color;

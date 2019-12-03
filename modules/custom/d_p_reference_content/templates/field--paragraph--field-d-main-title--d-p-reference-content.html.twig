@@ -19,21 +19,9 @@
  * @see field.html.twig
  */
 #}
-{%
-set classes = [
-'field',
-'field--name-' ~ field_name|clean_class,
-'field--type-' ~ field_type|clean_class,
-'field--label-' ~ label_display,
-]
-%}
+{% extends "@d_p/field--field-d-main-title.html.twig" %}
+
 {% set title_classes = [
   'container',
   'text-center',
-]
-%}
-<h2{{ attributes.addClass(classes, title_classes) }}>
-  {%- for item in items -%}
-    {{ item.content }}
-  {%- endfor -%}
-</h2>
+] %}
