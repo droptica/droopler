@@ -32,7 +32,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   .text-content {
     padding-bottom: $d-p-side-by-side-padding-y;
 
-    h2 {
+    .field--name-field-d-main-title {
       @include font-main-header;
 
       &:after {
@@ -73,7 +73,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 
     .d-p-text-block {
       margin-bottom: 0;
-      h2 {
+      .field--name-field-d-main-title {
         font-size: $font-main-header-size;
       }
     }

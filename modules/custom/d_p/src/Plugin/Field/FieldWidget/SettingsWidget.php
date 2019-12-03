@@ -43,6 +43,7 @@ class SettingsWidget extends WidgetBase {
                 'd_p_carousel',
                 'd_p_side_embed',
                 'd_p_side_image',
+                'd_p_side_tiles',
               ]
             ]
           ],

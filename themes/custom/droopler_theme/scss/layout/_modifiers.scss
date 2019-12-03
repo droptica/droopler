@@ -316,7 +316,7 @@ $two-columned-header-line-margin: 0.625rem !default;
   }
 
   .paragraph {
-    h2 {
+    .field--name-field-d-main-title {
       text-align: center;
       font-size: $tile-title-font-size-desktop;
       @include media-breakpoint-down(md) {
@@ -343,7 +343,7 @@ $two-columned-header-line-margin: 0.625rem !default;
           text-align: left;
           margin-bottom: 0;
         }
-        h2.field--name-field-d-main-title::after {
+        .field--name-field-d-main-title::after {
           margin: $two-columned-header-line-margin auto $two-columned-header-line-margin 0 !important;
         }
       }
@@ -360,7 +360,7 @@ $two-columned-header-line-margin: 0.625rem !default;
 }
 
 section.header-margin-none {
-  h2.field--name-field-d-main-title {
+  .field--name-field-d-main-title {
     margin-bottom: inherit;
   }
 }
