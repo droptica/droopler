@@ -6,8 +6,8 @@ dependencies:
     - field.field.paragraph.d_p_form.field_d_layout_modifier
     - field.field.paragraph.d_p_form.field_d_long_text
     - field.field.paragraph.d_p_form.field_d_main_title
-    - field.field.paragraph.d_p_side_image.field_d_media_background
-    - field.field.paragraph.d_p_side_image.field_d_media_icon
+    - field.field.paragraph.d_p_form.field_d_media_background
+    - field.field.paragraph.d_p_form.field_d_media_icon
     - field.field.paragraph.d_p_form.field_d_settings
     - paragraphs.paragraphs_type.d_p_form
   module:
@@ -25,7 +25,7 @@ content:
     third_party_settings: {  }
     type: contact_field_formatter
     region: content
-  field_d_icon:
+  field_d_media_icon:
     type: entity_reference_entity_view
     weight: 0
     label: hidden

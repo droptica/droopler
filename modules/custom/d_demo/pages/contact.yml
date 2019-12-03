@@ -35,10 +35,12 @@ field_page_section:
       field_d_long_text:
         type: text_long
         data: <p>Please use our contact form to send us a message. We will contact you within 24 hours.</p>
-      field_d_image_background:
-        type: image
-        data: d_demo/d_demo_architecture.jpg
-        dst_dir: demo
+      field_d_media_background:
+        type: media_image
+        directory: demo
+        files:
+          - path: d_demo/d_demo_architecture.jpg
+            alt: Architecture
       field_d_forms:
         type: entity_reference
         data: feedback
