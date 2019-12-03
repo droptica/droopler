@@ -40,6 +40,7 @@ class SettingsWidget extends WidgetBase {
                 'd_p_text_paged',
                 'd_p_single_text_block',
                 'd_p_group_of_text_blocks',
+                'd_p_carousel',
               ]
             ]
           ],
@@ -49,6 +50,7 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_group_of_text_blocks',
+                'd_p_carousel',
               ]
             ]
           ],
@@ -58,6 +60,33 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_banner',
+              ]
+            ]
+          ],
+          'with-divider' => [
+            'title' => $this->t('Add dividers'),
+            'description' => $this->t('Add vertical lines between all elements.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_carousel',
+              ]
+            ]
+          ],
+          'background-gray-light-2' => [
+            'title' => $this->t('Gray background'),
+            'description' => $this->t('Change paragraph background to light gray.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_carousel',
+              ]
+            ]
+          ],
+          'slider-desktop-off' => [
+            'title' => $this->t('Turn off slider on desktop'),
+            'description' => $this->t('The slider will be visible only on tablet and mobile devices.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_carousel',
               ]
             ]
           ]
@@ -80,7 +109,7 @@ class SettingsWidget extends WidgetBase {
             'd_p_banner',
             'd_p_carousel',
             'd_p_carousel_item',
-            'd_p_form	',
+            'd_p_form',
             'd_p_gallery',
             'd_p_group_of_counters',
             'd_p_group_of_text_blocks',

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_settings
+    - paragraphs.paragraphs_type.d_p_group_of_counters
+  module:
+    - d_p
+id: paragraph.d_p_group_of_counters.field_d_settings
+field_name: field_d_settings
+entity_type: paragraph
+bundle: d_p_group_of_counters
+label: 'Paragraph settings'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: '{"custom_class":"","heading_type":"h2"}'
+default_value_callback: ''
+settings: {  }
+field_type: field_p_configuration_storage
