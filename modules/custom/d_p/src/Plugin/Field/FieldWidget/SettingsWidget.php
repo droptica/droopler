@@ -27,12 +27,16 @@ class SettingsWidget extends WidgetBase {
     return [
       self::CSS_CLASS_SETTING_NAME => [
         'title' => $this->t('Additional classes for the paragraph'),
+        'description' => $this->t('Please separate multiple classes by spaces.'),
         'type' => 'css',
+        'bundles' => ['paragraph' => ['all']],
         'modifiers' => [
           'theme-invert' => [
             'title' => $this->t('Inverted colors'),
+            'description' => $this->t('Toggle dark and light theme of the paragraph.'),
             'bundles' => [
               'paragraph' => [
+                'd_p_banner',
                 'd_p_text_paged',
                 'd_p_single_text_block',
                 'd_p_group_of_text_blocks',
@@ -41,9 +45,19 @@ class SettingsWidget extends WidgetBase {
           ],
           'full-width' => [
             'title' => $this->t('Full width'),
+            'description' => $this->t('Stretch this paragraph to 100% browser width.'),
             'bundles' => [
               'paragraph' => [
-                'd_p_group_of_text_blocks'
+                'd_p_group_of_text_blocks',
+              ]
+            ]
+          ],
+          'half-transparent' => [
+            'title' => $this->t('Half transparent'),
+            'description' => $this->t('Moves the text to the left and adds a transparent overlay.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_banner',
               ]
             ]
           ]
@@ -51,6 +65,7 @@ class SettingsWidget extends WidgetBase {
       ],
       self::HEADING_TYPE_SETTING_NAME => [
         'title' => $this->t('Heading type'),
+        'description' => $this->t('Select the type of heading to use with this paragraph.'),
         'type' => 'select',
         'options' => [
           'h1' => $this->t('H1'),
@@ -59,25 +74,52 @@ class SettingsWidget extends WidgetBase {
           'h4' => $this->t('H4'),
           'h5' => $this->t('H5'),
         ],
-        'default' => 'h2'
+        'default' => 'h2',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_banner',
+            'd_p_carousel',
+            'd_p_carousel_item',
+            'd_p_form	',
+            'd_p_gallery',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
+            'd_p_node',
+            'd_p_reference_content',
+            'd_p_side_embed',
+            'd_p_side_image',
+            'd_p_side_tiles',
+            'd_p_single_text_block',
+            'd_p_subscribe_file',
+            'd_p_text_paged',
+            'd_p_text_with_bckg',
+            'd_p_tiles'
+          ]
+        ],
       ],
     ];
   }
 
   /**
-   * Is the modifier available in current bundle?
+   * Is the element available in the bundle of widget's target?
    *
-   * @param array $modifier
-   *   The modifier definition.
+   * @param array $list
+   *   The form element bundle list, keyed by entity type and bundle, like $list['paragraph']['sample_paragraph'].
+   *   There is a magic "all" item, that means "available for all bundles of this entity type".
    *
    * @return bool
-   *   Returns TRUE if modifier is in bundle.
    */
-  protected function isModifierInBundle($modifier) {
+  protected function inBundle($list) {
     $entity_type = $this->fieldDefinition->getTargetEntityTypeId();
     $bundle = $this->fieldDefinition->getTargetBundle();
-    if (isset($modifier['bundles'][$entity_type])) {
-      return array_search($bundle, $modifier['bundles'][$entity_type]) !== FALSE;
+    if (isset($list[$entity_type])) {
+      if (array_search('all', $list[$entity_type]) !== FALSE) {
+        // Introduce "all" keyword to avoid listing all bundles.
+        return TRUE;
+      }
+      else {
+        return array_search($bundle, $list[$entity_type]) !== FALSE;
+      }
     }
     return FALSE;
   }
@@ -99,12 +141,17 @@ class SettingsWidget extends WidgetBase {
 
     $config_options = $this->getConfigOptions();
     foreach ($config_options as $key => $options) {
+      // If the widget is not available in the current bundle, just skip it.
+      if (!$this->inBundle($options['bundles'])) {
+        continue;
+      }
+      // Add widgets of different types.
       $value = $config->$key ?? '';
       switch ($options['type']) {
         case 'css':
           $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
           foreach ($options['modifiers'] as $class => $modifier) {
-            if (!$this->isModifierInBundle($modifier)) {
+            if (!$this->inBundle($modifier['bundles'])) {
               continue;
             }
             $class_key = array_search($class, $classes);
@@ -117,6 +164,7 @@ class SettingsWidget extends WidgetBase {
             }
             $element[$class] = [
               '#type' => 'checkbox',
+              '#description' => $modifier['description'] ?? '',
               '#title' => $modifier['title'],
               '#default_value' => $default_value,
               '#attributes' => ['data-modifier' => $class],
@@ -126,6 +174,7 @@ class SettingsWidget extends WidgetBase {
           $element[$key] = [
             '#type' => 'textfield',
             '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
             '#size' => 32,
             '#default_value' => join(' ', $classes),
           ];
@@ -138,6 +187,7 @@ class SettingsWidget extends WidgetBase {
           $element[$key] = [
             '#type' => 'select',
             '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
             '#options' => $options['options'],
             '#default_value' => empty($value) ? $options['default'] : $value,
           ];
@@ -150,6 +200,7 @@ class SettingsWidget extends WidgetBase {
           $element[$key] = [
             '#type' => 'textfield',
             '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
             '#size' => 32,
             '#default_value' => $value,
           ];
@@ -170,10 +221,13 @@ class SettingsWidget extends WidgetBase {
     $values = [];
     $config_options = $this->getConfigOptions();
     foreach ($config_options as $key => $options) {
+      if (!$this->inBundle($options['bundles'])) {
+        continue;
+      }
       if ($options['type'] === 'css') {
         $classes = preg_split("/[\s,]+/", $element[$key]['#value'], -1, PREG_SPLIT_NO_EMPTY);
         foreach ($options['modifiers'] as $class => $modifier) {
-          if ($element[$class]['#value'] && $this->isModifierInBundle($modifier)) {
+          if (!empty($element[$class]['#value']) && $this->inBundle($modifier['bundles'])) {
             $classes[] = $class;
           }
         }
