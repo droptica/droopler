@@ -25,7 +25,7 @@ field_page_section:
         field_d_cta_link:
           type: cta
           data:
-            link: internal:/product
+            link: internal:/products
             text: Browse engines
             class: btn btn-primary
         field_d_settings:
@@ -59,8 +59,9 @@ field_page_section:
               field_d_cta_link:
                 type: cta
                 data:
-                  link: internal:/product
+                  link: internal:/documentation
                   text: Download specs
+
             - field_d_image:
                 type: image
                 data:
@@ -73,8 +74,9 @@ field_page_section:
               field_d_cta_link:
                 type: cta
                 data:
-                  link: internal:/contact
+                  link: internal:/careers
                   text: Find a job
+
             - field_d_image:
                 type: image
                 data:
@@ -89,6 +91,7 @@ field_page_section:
                 data:
                   link: internal:/contact
                   text: Get support
+
             - field_d_image:
                 type: image
                 data:
@@ -101,8 +104,9 @@ field_page_section:
               field_d_cta_link:
                 type: cta
                 data:
-                  link: internal:/product
+                  link: internal:/products
                   text: Find parts
+
             - field_d_image:
                 type: image
                 data:
@@ -117,6 +121,7 @@ field_page_section:
                 data:
                   link: internal:/contact
                   text: Contact us
+
             - field_d_image:
                 type: image
                 data:
@@ -129,7 +134,7 @@ field_page_section:
               field_d_cta_link:
                 type: cta
                 data:
-                  link: internal:/product
+                  link: internal:/about-us
                   text: More
 
     - paragraph_type: d_p_group_of_text_blocks
@@ -227,6 +232,11 @@ field_page_section:
                 field_d_background_color:
                   type: text
                   data: '#e4e4e4'
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: internal:/boats
+                    text: For boat manufacturers
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: tile theme-invert
@@ -242,6 +252,11 @@ field_page_section:
                 field_d_background_color:
                   type: text
                   data: '#e4e4e4'
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: internal:/aircrafts
+                    text: For airplane manufacturers
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: tile theme-invert
@@ -257,6 +272,11 @@ field_page_section:
                 field_d_background_color:
                   type: text
                   data: '#e4e4e4'
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: internal:/cars
+                    text: For car manufacturers
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: tile theme-invert
@@ -272,6 +292,11 @@ field_page_section:
                 field_d_background_color:
                   type: text
                   data: '#e4e4e4'
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: internal:/spacecrafts
+                    text: For spaceship manufacturers
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: tile theme-invert
@@ -359,7 +384,7 @@ field_page_section:
                 field_d_cta_link:
                   type: cta
                   data:
-                    link: internal:/contact
+                    link: internal:/investor-relations
                     text: Learn more
                     options:
                       attributes:
@@ -385,7 +410,7 @@ field_page_section:
                 field_d_cta_link:
                   type: cta
                   data:
-                    link: internal:/contact
+                    link: internal:/careers
                     text: Learn more
                     options:
                       attributes:

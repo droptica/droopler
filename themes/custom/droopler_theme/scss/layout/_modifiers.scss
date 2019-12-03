@@ -270,7 +270,6 @@ $two-columned-header-line-margin: 0.625rem !default;
 
 .tile {
   padding: $tile-padding-top 0 $tile-padding-bottom 0;
-  cursor: pointer;
   transform: scale(1);
   transition: 0.3s;
 
@@ -324,6 +323,21 @@ $two-columned-header-line-margin: 0.625rem !default;
       }
       &:after {
         margin: 7px auto;
+      }
+    }
+  }
+
+  .field--type-link {
+    a {
+      &, &:active, &:hover {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: none;
+        border: none;
+        text-indent: -9999px;
       }
     }
   }

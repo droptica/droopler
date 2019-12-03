@@ -137,8 +137,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
           text-decoration: none;
         }
 
-        //margin-bottom: $d-p-carousel-item-margin-bottom;
-        h2.field--name-field-d-main-title {
+        .field--name-field-d-main-title {
           @include font-title-carousel-item;
           text-align: center;
         }
@@ -204,7 +203,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
   }
 
   > .paragraph--type--d-p-carousel {
-    h2.field--name-field-d-main-title,
+    .field--name-field-d-main-title,
     .field--name-field-d-long-text {
       &, p {
         color: $d-p-carousel-theme-invert-text-color;

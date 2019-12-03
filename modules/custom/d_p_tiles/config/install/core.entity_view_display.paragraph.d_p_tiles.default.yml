@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.d_p_tiles.field_d_image
     - field.field.paragraph.d_p_tiles.field_d_long_text
     - field.field.paragraph.d_p_tiles.field_d_main_title
+    - field.field.paragraph.d_p_tiles.field_d_settings
     - image.style.tiles_fullscreen
     - image.style.tiles_thumbnail
     - paragraphs.paragraphs_type.d_p_tiles
@@ -60,4 +61,6 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-hidden: {  }
+hidden:
+  field_d_settings: true
+  search_api_excerpt: true
