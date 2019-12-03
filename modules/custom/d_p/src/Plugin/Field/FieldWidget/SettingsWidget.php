@@ -41,6 +41,8 @@ class SettingsWidget extends WidgetBase {
                 'd_p_single_text_block',
                 'd_p_group_of_text_blocks',
                 'd_p_carousel',
+                'd_p_side_embed',
+                'd_p_side_image',
               ]
             ]
           ],
@@ -78,6 +80,7 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_carousel',
+                'd_p_group_of_text_blocks',
               ]
             ]
           ],
@@ -87,6 +90,42 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_carousel',
+              ]
+            ]
+          ],
+          'with-grid' => [
+            'title' => $this->t('Enable grid'),
+            'description' => $this->t('Adds a thin grid around all boxes.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_group_of_text_blocks',
+              ]
+            ]
+          ],
+          'tile' => [
+            'title' => $this->t('Turn into tile'),
+            'description' => $this->t('Stretch the background and turn the box into tile.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_single_text_block',
+              ]
+            ]
+          ],
+          'with-tiles' => [
+            'title' => $this->t('Enable tiles'),
+            'description' => $this->t('Enables tile view. You have to set all child boxes to tiles by adjusting their settings.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_group_of_text_blocks',
+              ]
+            ]
+          ],
+          'header-into-columns' => [
+            'title' => $this->t('Paragraph header in two columns'),
+            'description' => $this->t('Enable column mode: header on the left and description on the right.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_group_of_text_blocks',
               ]
             ]
           ]

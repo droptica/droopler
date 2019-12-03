@@ -69,7 +69,7 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
   .d-p-side-embed-content {
     color: $d-p-side-embed-text-color;
 
-    h2 {
+    .field--name-field-d-main-title {
       @include font-main-header;
       color: $d-p-side-embed-header-color;
       text-align: left;

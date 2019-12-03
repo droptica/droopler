@@ -15,6 +15,7 @@ $d-p-reference-content-content-padding: 5px !default;
   overflow: hidden;
 
   > .field--name-field-d-main-title {
+    @include font-main-header;
     &:after {
       @include decoration-header-line-main-center($d-p-reference-content-line-color, $d-p-reference-content-line-color-inverted);
     }

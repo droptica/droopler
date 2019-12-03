@@ -27,7 +27,7 @@ set classes = [
 'field--label-' ~ label_display,
 ]
 %}
-<{{ heading_tag | default('h2') }}{{ attributes.addClass(classes) }}>
+<{{ heading_tag | default('h2') }}{{ attributes.addClass(classes, title_classes) }}>
   {%- for item in items -%}
     {{ item.content }}
   {%- endfor -%}

@@ -5,6 +5,8 @@
  * File containing Counter Paragraph module
  */
 
+use Drupal\d_p\Helper\ParagraphModifiersHelper;
+
 /**
  * Implements hook_theme().
  */
@@ -48,12 +50,19 @@ function d_p_counters_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_group_of_counters') {
       if ($variables['field_name'] == 'field_d_counter_reference') {
+        // Set column layout.
         $num_array = $variables['element']['#object']->get('field_d_number')
           ->getValue();
         $variables['column_class'] = 'col-sm-4';
         if (!empty($num_array[0]['value'])) {
           $columns = floor(12 / $num_array[0]['value']);
           $variables['column_class'] = 'col-sm-' . $columns;
+        }
+
+        // Add custom classes.
+        foreach ($variables["items"] as &$item) {
+          $helper = new ParagraphModifiersHelper($item["content"]["#paragraph"]);
+          $item['attributes']->addClass($helper->getCustomClass());
         }
       }
     }
