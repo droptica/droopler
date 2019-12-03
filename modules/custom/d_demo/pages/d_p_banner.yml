@@ -34,10 +34,11 @@ field_page_section:
 
   - paragraph_type: d_p_banner
     data:
-      field_d_icon:
-        type: image
-        data: d_demo/demo_droopler_white.svg
-        dst_dir: demo
+      field_d_media_icon:
+        type: media_image
+        directory: demo
+        files:
+          - path: d_demo/demo_droopler_white.svg
       field_d_media_background:
         type: media_image
         directory: demo
