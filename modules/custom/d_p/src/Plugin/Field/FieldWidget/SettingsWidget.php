@@ -57,6 +57,30 @@ class SettingsWidget extends WidgetBase {
               ]
             ]
           ],
+          'no-padding-bottom' => [
+            'title' => $this->t('Disable bottom padding'),
+            'description' => $this->t('Set the bottom padding of the paragraph to zero.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_side_by_side',
+                'd_p_group_of_text_blocks',
+                'd_p_carousel',
+                'd_p_text_paged',
+              ]
+            ]
+          ],
+          'no-padding-top' => [
+            'title' => $this->t('Disable top padding'),
+            'description' => $this->t('Set the top padding of the paragraph to zero.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_side_by_side',
+                'd_p_group_of_text_blocks',
+                'd_p_carousel',
+                'd_p_text_paged',
+              ]
+            ]
+          ],
           'half-transparent' => [
             'title' => $this->t('Half transparent'),
             'description' => $this->t('Moves the text to the left and adds a transparent overlay.'),
@@ -129,11 +153,30 @@ class SettingsWidget extends WidgetBase {
                 'd_p_group_of_text_blocks',
               ]
             ]
-          ]
+          ],
+          'with-price' => [
+            'title' => $this->t('Enable price'),
+            'description' => $this->t('Show a dynamic price on the right, it requires a JS script to connect to a data source.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_single_text_block',
+              ]
+            ]
+          ],
+          'stripe-sidebar' => [
+            'title' => $this->t('Show the price in the sidebar'),
+            'description' => $this->t('Works only if "Enable price" is turned on. Enables a black sidebar on the right.'),
+            'bundles' => [
+              'paragraph' => [
+                'd_p_single_text_block',
+              ]
+            ]
+          ],
         ]
       ],
       self::HEADING_TYPE_SETTING_NAME => [
         'title' => $this->t('Heading type'),
+        'outside' => TRUE, // The widget is moved outside of field_d_settings form element.
         'description' => $this->t('Select the type of heading to use with this paragraph.'),
         'type' => 'select',
         'options' => [
@@ -290,13 +333,15 @@ class SettingsWidget extends WidgetBase {
     $values = [];
     $config_options = $this->getConfigOptions();
     foreach ($config_options as $key => $options) {
+      $value = $form_state->getValue(array_merge($element['#parents'], [$key]));
       if (!$this->inBundle($options['bundles'])) {
         continue;
       }
       if ($options['type'] === 'css') {
-        $classes = preg_split("/[\s,]+/", $element[$key]['#value'], -1, PREG_SPLIT_NO_EMPTY);
+        $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
         foreach ($options['modifiers'] as $class => $modifier) {
-          if (!empty($element[$class]['#value']) && $this->inBundle($modifier['bundles'])) {
+          $modifier_value = $element[$class]['#value'] ?? NULL;
+          if ($modifier_value && $this->inBundle($modifier['bundles'])) {
             $classes[] = $class;
           }
         }
@@ -304,7 +349,7 @@ class SettingsWidget extends WidgetBase {
         $values[$key] = join(' ', $classes);
       }
       else {
-        $values[$key] = $element[$key]['#value'];
+        $values[$key] = $value;
       }
     }
     $form_state->setValueForElement($element, json_encode($values));
