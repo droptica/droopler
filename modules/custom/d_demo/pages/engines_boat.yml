@@ -183,10 +183,12 @@ field_page_section:
 
     - paragraph_type: d_p_banner
       data:
-        field_d_image_background:
-          type: image
-          data: d_demo/d_demo_engine_boat_3.jpg
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/d_demo_engine_boat_3.jpg
+              alt: Boat Engine
         field_d_main_title:
           type: text
           data: IT'S TIME TO MAKE YOUR MOVE

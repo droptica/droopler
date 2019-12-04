@@ -8,11 +8,12 @@ field_page_section:
         field_d_main_title:
           type: text
           data: Engine testing services
-        field_d_image_background:
-          type: image
-          data: d_demo/d_demo_engine_testing_services_1.jpg
-          alt: Title / Subtitle
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/d_demo_engine_testing_services_1.jpg
+              alt: Engine
         field_d_cta_link:
           type: cta
           data:

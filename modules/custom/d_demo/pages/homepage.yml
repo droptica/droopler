@@ -12,10 +12,12 @@ field_page_section:
         field_d_subtitle:
           type: text
           data: For cars, boats, planes and spaceships
-        field_d_image_background:
-          type: image
-          data: d_demo/d_demo_motor.jpg
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/d_demo_motor.jpg
+              alt: Motor
         field_d_long_text:
           type: text_long
           data: <p>We produce the most powerful and efficient engines on the planet.

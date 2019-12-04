@@ -12,10 +12,12 @@ field_page_section:
       field_d_subtitle:
         type: text
         data: See what Droopler is capable of!
-      field_d_image_background:
-        type: image
-        data: d_demo/demo_educational_4.jpg
-        dst_dir: demo
+      field_d_media_background:
+        type: media_image
+        directory: demo
+        files:
+          - path: d_demo/demo_educational_4.jpg
+            alt: Education
       field_d_long_text:
         type: text_long
         data: <p class="text-align-center">Droopler utilizes Paragraphs to build content in a comfortable, Lego-like way.
