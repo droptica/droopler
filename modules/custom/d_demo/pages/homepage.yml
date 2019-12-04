@@ -45,12 +45,12 @@ field_page_section:
           type: paragraph_reference
           subtype: d_p_carousel_item
           data:
-            - field_d_image:
-                type: image
-                data:
-                  - file: d_demo/d_demo_icon_download.svg
+            - field_d_media_image:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_download.svg
                     alt: Download specs
-                dst_dir: demo
               field_d_main_title:
                 type: text
                 data: Download specs
@@ -60,12 +60,12 @@ field_page_section:
                   link: internal:/documentation
                   text: Download specs
 
-            - field_d_image:
-                type: image
-                data:
-                  - file: d_demo/d_demo_icon_bag.svg
+            - field_d_media_image:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_bag.svg
                     alt: Find a job
-                dst_dir: demo
               field_d_main_title:
                 type: text
                 data: Find a job
@@ -75,12 +75,12 @@ field_page_section:
                   link: internal:/careers
                   text: Find a job
 
-            - field_d_image:
-                type: image
-                data:
-                  - file: d_demo/d_demo_icon_cog.svg
+            - field_d_media_image:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_cog.svg
                     alt: Get support
-                dst_dir: demo
               field_d_main_title:
                 type: text
                 data: Get support
@@ -90,12 +90,12 @@ field_page_section:
                   link: internal:/contact
                   text: Get support
 
-            - field_d_image:
-                type: image
-                data:
-                  - file: d_demo/d_demo_icon_file.svg
+            - field_d_media_image:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_file.svg
                     alt: Find parts
-                dst_dir: demo
               field_d_main_title:
                 type: text
                 data: Find parts
@@ -105,10 +105,11 @@ field_page_section:
                   link: internal:/products
                   text: Find parts
 
-            - field_d_image:
-                type: image
-                data:
-                  - file: d_demo/d_demo_icon_contact.svg
+            - field_d_media_image:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_contact.svg
                     alt: Contact us
                 dst_dir: demo
               field_d_main_title:
@@ -120,10 +121,11 @@ field_page_section:
                   link: internal:/contact
                   text: Contact us
 
-            - field_d_image:
-                type: image
-                data:
-                  - file: d_demo/d_demo_icon_more.svg
+            - field_d_media_image:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_more.svg
                     alt: More
                 dst_dir: demo
               field_d_main_title:

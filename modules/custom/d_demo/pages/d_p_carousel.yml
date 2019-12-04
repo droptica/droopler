@@ -37,10 +37,12 @@ field_page_section:
 
   - paragraph_type: d_p_carousel
     data:
-      field_d_icon:
-        type: image
-        data: d_demo/demo_droopler.svg
-        dst_dir: demo
+      field_d_media_icon:
+        type: media_image
+        directory: demo
+        files:
+          - path: d_demo/demo_droopler.svg
+            alt: Droopler icon
       field_d_number:
         type: number
         data: 4
@@ -57,12 +59,12 @@ field_page_section:
         type: paragraph_reference
         subtype: d_p_carousel_item
         data:
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_bagel.svg
-              alt: Bagel
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_bagel.svg
+                alt: Bagel
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -75,12 +77,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Bagel
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_croissant.svg
-              alt: Croissant
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_croissant.svg
+                alt: Croissant
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -93,12 +95,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Croissant
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_bagel.svg
-              alt: Bagel
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_bagel.svg
+                alt: Bagel
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -111,12 +113,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Bagel
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_croissant.svg
-              alt: Croissant
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_croissant.svg
+                alt: Croissant
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -129,12 +131,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Croissant
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_bagel.svg
-              alt: Bagel
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_bagel.svg
+                alt: Bagel
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -147,12 +149,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Bagel
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_croissant.svg
-              alt: Croissant
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_croissant.svg
+                alt: Croissant
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -165,12 +167,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Croissant
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_bagel.svg
-              alt: Bagel
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_bagel.svg
+                alt: Bagel
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -183,12 +185,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Bagel
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_croissant.svg
-              alt: Croissant
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_croissant.svg
+                alt: Croissant
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -229,67 +231,67 @@ field_page_section:
         type: paragraph_reference
         subtype: d_p_carousel_item
         data:
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_logo1.svg
-              alt: BTU
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_logo1.svg
+                alt: BTU
           field_d_cta_link:
             type: cta
             data:
               link: internal:/examples/event-website
               text: BTU
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_logo2.svg
-              alt: Cube Inc.
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_logo2.svg
+                alt: Cube Inc.
           field_d_cta_link:
             type: cta
             data:
               link: internal:/examples/event-website
               text: Cube Inc.
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_logo3.svg
-              alt: Atlantic Jetlines
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_logo3.svg
+                alt: Atlantic Jetlines
           field_d_cta_link:
             type: cta
             data:
               link: internal:/examples/event-website
               text: Atlantic Jetlines
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_logo4.svg
-              alt: Rock World Cafe
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_logo4.svg
+                alt: Rock World Cafe
           field_d_cta_link:
             type: cta
             data:
               link: internal:/examples/event-website
               text: Rock World Cafe
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_logo5.svg
-              alt: YETI
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_logo5.svg
+                alt: YETI
           field_d_cta_link:
             type: cta
             data:
               link: internal:/examples/event-website
               text: YETI
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_droopler.svg
-              alt: Droopler
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_droopler.svg
+                alt: Droopler
           field_d_cta_link:
             type: cta
             data:
@@ -324,7 +326,12 @@ field_page_section:
         type: paragraph_reference
         subtype: d_p_carousel_item
         data:
-        - field_d_image:
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_droopler_white.svg
+                alt: Droopler icon
             type: image
             data:
             - file: d_demo/demo_face_2.png
@@ -338,12 +345,12 @@ field_page_section:
             data: <p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
               tristique dui dignissim gravida. Aenean feugiat dui sit amet condimentum volutpat.
               Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</em></p>
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_face_1.png
-              alt: Anna Novak
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_face_1.png
+                alt: Anna Novak
           field_d_main_title:
             type: text
             data: Anna Novak, Chief Architect of BTU
@@ -352,12 +359,12 @@ field_page_section:
             data: <p><em>Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend.
               Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna mi.
               Nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</em></p>
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_face_3.png
-              alt: Zhang San
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_face_3.png
+                alt: Zhang San
           field_d_main_title:
             type: text
             data: Zhang San, Atlantic Jetlines
@@ -385,10 +392,12 @@ field_page_section:
 
   - paragraph_type: d_p_carousel
     data:
-      field_d_icon:
-        type: image
-        data: d_demo/demo_droopler.svg
-        dst_dir: demo
+      field_d_media_icon:
+        type: media_image
+        directory: demo
+        files:
+          - path: d_demo/demo_droopler.svg
+            alt: Droopler icon
       field_d_number:
         type: number
         data: 4
@@ -405,12 +414,12 @@ field_page_section:
         type: paragraph_reference
         subtype: d_p_carousel_item
         data:
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_bagel.svg
-              alt: Bagel
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_bagel.svg
+                alt: Bagel
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -423,12 +432,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Bagel
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_croissant.svg
-              alt: Croissant
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_croissant.svg
+                alt: Croissant
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -441,12 +450,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Croissant
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_bagel.svg
-              alt: Bagel
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_bagel.svg
+                alt: Bagel
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -459,12 +468,12 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Bagel
-        - field_d_image:
-            type: image
-            data:
-            - file: d_demo/demo_croissant.svg
-              alt: Croissant
-            dst_dir: demo
+        - field_d_media_image:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_croissant.svg
+                alt: Croissant
           field_d_main_title:
             type: text
             data: Dolor Amet
