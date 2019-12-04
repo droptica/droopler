@@ -3,16 +3,15 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_carousel_item.field_d_cta_link
-    - field.field.paragraph.d_p_carousel_item.field_d_image
     - field.field.paragraph.d_p_carousel_item.field_d_long_text
     - field.field.paragraph.d_p_carousel_item.field_d_main_title
+    - field.field.paragraph.d_p_carousel_item.field_d_media_image
     - field.field.paragraph.d_p_carousel_item.field_d_settings
-    - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_carousel_item
   module:
     - d_p
     - link
-    - svg_image
+    - media_library
     - text
 id: paragraph.d_p_carousel_item.default
 targetEntityType: paragraph
@@ -27,13 +26,12 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
-  field_d_image:
+  field_d_media_image:
+    type: media_library_widget
     weight: 0
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      media_types: {  }
     third_party_settings: {  }
-    type: image_image
     region: content
   field_d_long_text:
     weight: 2
