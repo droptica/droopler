@@ -38,10 +38,12 @@ field_page_section:
         field_d_main_title:
           type: text
           data: Schedule a date and time for your service
-        field_d_image_background:
-          type: image
-          data: d_demo/d_demo_ad_hoc_enginge_repairs_2.jpg
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/d_demo_ad_hoc_enginge_repairs_2.jpg
+              alt: Repairs
         field_d_forms:
           type: entity_reference
           data: feedback

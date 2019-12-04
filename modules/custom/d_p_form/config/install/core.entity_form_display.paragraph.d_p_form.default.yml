@@ -3,17 +3,16 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_form.field_d_forms
-    - field.field.paragraph.d_p_form.field_d_icon
-    - field.field.paragraph.d_p_form.field_d_image_background
     - field.field.paragraph.d_p_form.field_d_layout_modifier
     - field.field.paragraph.d_p_form.field_d_long_text
     - field.field.paragraph.d_p_form.field_d_main_title
+    - field.field.paragraph.d_p_form.field_d_media_background
+    - field.field.paragraph.d_p_form.field_d_media_icon
     - field.field.paragraph.d_p_form.field_d_settings
-    - image.style.thumbnail
     - paragraphs.paragraphs_type.d_p_form
   module:
     - d_p
-    - svg_image
+    - media_library
     - text
 id: paragraph.d_p_form.default
 targetEntityType: paragraph
@@ -21,26 +20,24 @@ bundle: d_p_form
 mode: default
 content:
   field_d_forms:
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
-  field_d_icon:
+  field_d_media_icon:
+    type: media_library_widget
     weight: 0
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      media_types: {  }
     third_party_settings: {  }
-    type: image_image
     region: content
-  field_d_image_background:
-    weight: 5
+  field_d_media_background:
+    type: media_library_widget
+    weight: 1
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      media_types: {  }
     third_party_settings: {  }
-    type: image_image
     region: content
   field_d_layout_modifier:
     weight: 6
@@ -49,7 +46,7 @@ content:
     type: options_select
     region: content
   field_d_long_text:
-    weight: 2
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
@@ -57,7 +54,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: ''
