@@ -46,7 +46,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     padding-bottom: $d-p-carousel-mobile-padding-y;
   }
 
-  .field--name-field-d-icon {
+  .field--name-field-d-media-icon {
     text-align: center;
   }
 
@@ -154,7 +154,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
             @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);
           }
         }
-        .field--name-field-d-image {
+        .field--type-image {
           float: none;
           margin: 0 0 $d-p-carousel-item-image-margin-bottom 0;
           height: $d-p-carousel-item-image-height;

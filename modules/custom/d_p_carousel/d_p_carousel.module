@@ -140,13 +140,5 @@ function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
         }
       }
       break;
-    case 'paragraph_d_p_carousel_geysir_modal_add_form':
-    case 'paragraph_d_p_carousel_geysir_modal_edit_form':
-      $widget = $form['field_d_p_cs_item_reference']['widget'];
-      $delta = range(0, $widget['#max_delta']);
-      foreach ($delta as $del) {
-        unset($form['field_d_p_cs_item_reference']['widget'][$del]['subform']['field_d_image']['widget'][1]);
-      }
-      break;
   }
 }
