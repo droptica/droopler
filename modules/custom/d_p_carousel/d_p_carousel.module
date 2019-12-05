@@ -133,7 +133,7 @@ function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
             $delta_sub = range(0, $widget_sub['#max_delta']);
             if (!empty($widget_sub)) {
               foreach ($delta_sub as $del_sub) {
-                unset($form['field_page_section']['widget'][$del]['subform']['field_d_p_cs_item_reference']['widget'][$del_sub]['subform']['field_d_image']['widget'][1]);
+                $form['field_page_section']['widget'][$del]['subform']['field_d_p_cs_item_reference']['widget'][$del_sub]['subform']['field_d_media_image']['widget']['#cardinality'] = 1;
               }
             }
           }
@@ -145,7 +145,7 @@ function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
       $widget = $form['field_d_p_cs_item_reference']['widget'];
       $delta = range(0, $widget['#max_delta']);
       foreach ($delta as $del) {
-        unset($form['field_d_p_cs_item_reference']['widget'][$del]['subform']['field_d_image']['widget'][1]);
+        $form['field_d_p_cs_item_reference']['widget'][$del]['subform']['field_d_media_image']['widget']['#cardinality'] = 1;
       }
       break;
   }

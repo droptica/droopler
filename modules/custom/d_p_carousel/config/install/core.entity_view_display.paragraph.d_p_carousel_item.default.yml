@@ -15,15 +15,6 @@ targetEntityType: paragraph
 bundle: d_p_carousel_item
 mode: default
 content:
-  field_d_media_image:
-    type: entity_reference_entity_view
-    weight: 0
-    label: hidden
-    settings:
-      view_mode: d_p_carousel_image
-      link: false
-    third_party_settings: {  }
-    region: content
   field_d_long_text:
     weight: 2
     label: hidden
@@ -38,6 +29,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_d_media_image:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
     region: content
 hidden:
   field_d_cta_link: true
