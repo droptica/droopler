@@ -23,7 +23,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
 
 .d-p-side-image-banner {
   color: $d-p-side-image-banner-text-color;
-  h2 {
+  .field--name-field-d-main-title {
     @include font-main-header;
     color: $d_p_side-image-header-color;
     text-align: left;

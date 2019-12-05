@@ -72,7 +72,7 @@ $line-thickness: 0.125rem !default;
 }
 
 section .paragraph {
-  h2.field--name-field-d-main-title:last-child {
+  .field--name-field-d-main-title:last-child {
     &::after {
       margin-top: $line-center-margin-top !important;
       margin-bottom: $line-center-margin-top !important;
@@ -81,7 +81,7 @@ section .paragraph {
 }
 section .paragraph.with-long-text,
 section.with-long-text .paragraph {
-  h2.field--name-field-d-main-title::after,
+  .field--name-field-d-main-title::after,
   .field--name-field-d-long-text::before {
     margin-top: $line-center-with-long-text-margin-top;
     margin-bottom: $line-center-with-long-text-margin-bottom;
