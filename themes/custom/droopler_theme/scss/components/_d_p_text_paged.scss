@@ -28,7 +28,7 @@ $d-p-text-paged-first-margin-top: 2% !default;
     text-align: center;
   }
 
-  > div > h2 {
+  > div > .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
   }
@@ -72,6 +72,7 @@ $d-p-text-paged-first-margin-top: 2% !default;
     color: $d-p-text-paged-theme-invert-text-color;
 
     .field--name-field-d-long-text,
+    .field--name-field-d-subtitle,
     .field--name-field-d-main-title {
       &, p {
         color: $d-p-text-paged-theme-invert-text-color;

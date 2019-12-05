@@ -228,20 +228,90 @@ function edit_cta_link_default_class(&$form) {
  */
 function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
-  switch ($form_id) {
-    case 'contact_message_contact_form_form':
-      unset($form['actions']['preview']);
-      $form['name']['#type'] = 'textfield';
-      $form['mail']['#type'] = 'textfield';
-      break;
 
+  // Create heading type selector under the title.
+  if (isset($form["field_page_section"])) {
+    // Locate all paragraph subforms.
+    for ($i = 0; $i < $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
+      d_p_move_heading_type($form["field_page_section"]["widget"][$i]["subform"]);
+    }
   }
+  else {
+    d_p_move_heading_type($form);
+  }
+
+  // Add bootstrap classes to CTA by default.
   $trigger_name = $form_state->getUserInput()['_triggering_element_name'] ?? NULL;
   if (strpos($form_id, 'add') !== FALSE || strpos($trigger_name, 'add') !== FALSE) {
     if (isset($form['field_d_cta_link'])) {
       $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
     }
     edit_cta_link_default_class($form);
+  }
+}
+
+/**
+ * Move "heading_type" field from "Paragraph settings" under the main title.
+ *
+ * @param $form
+ *   The form that contains the d_settings field.
+ */
+function d_p_move_heading_type(&$form) {
+  if (isset($form["field_d_settings"]["widget"][0]["value"]) && isset($form["field_d_main_title"])) {
+    $widget = &$form["field_d_settings"]["widget"][0]["value"];
+    $widget['heading_type']['#weight'] = $form["field_d_main_title"]["#weight"] + 0.5;
+    $widget['heading_type']['#element_validate'] = ['d_p_heading_type_validate'];
+
+    // If field_d_main_title is in fieldgroup, locate it and move the heading_type under it.
+    if (isset($form["#group_children"]["field_d_main_title"])) {
+      $group = $form["#group_children"]["field_d_main_title"];
+      $form["#group_children"]['heading_type'] = $group;
+      $form[$group]['heading_type'] = $widget['heading_type'];
+    }
+    else {
+      $form['heading_type'] = $widget["heading_type"];
+    }
+    unset($widget["heading_type"]);
+  }
+}
+
+/**
+ * Custom validator for Heading Type.
+ *
+ * @param $element
+ * @param FormStateInterface $form_state
+ */
+function d_p_heading_type_validate($element, FormStateInterface $form_state) {
+  $parents = [];
+  foreach ($element["#parents"] as $index) {
+    if (!in_array($index, ['widget', 'heading_type', 'group_settings'], TRUE)) {
+      $parents[] = $index;
+    }
+  }
+  $parents[] = 'field_d_settings';
+  $current_settings = $form_state->getValue($parents);
+
+  // Inject heading_type settings into d_settings storage.
+  if (is_string($current_settings[0]['value'])) {
+    $decoded = json_decode($current_settings[0]['value'], TRUE) ;
+    $decoded['heading_type'] = $element["#value"];
+    $current_settings[0]['value'] = json_encode($decoded);
+  }
+  else {
+    $current_settings[0]['value']['heading_type'] = $element["#value"];
+  }
+  $form_state->setValue($parents, $current_settings);
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function d_p_module_implements_alter(&$implementations, $hook) {
+  // Form alter hook runs as last.
+  if ($hook == 'form_alter') {
+    $group = $implementations['d_p'];
+    unset($implementations['d_p']);
+    $implementations['d_p'] = $group;
   }
 }
 

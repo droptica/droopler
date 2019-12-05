@@ -24,7 +24,7 @@ $d-p-side-tiles-text-mobile-padding: 7% !default;
 $d-p-side-tiles-text-width: 35.625rem !default;
 $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half of the screen
 
-.d-p-side-tiles-banner {
+.d-p-side-tiles-wrapper {
 
   background-color: $d-p-side-tiles-text-background-color;
 
@@ -35,7 +35,7 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
   .d-p-side-tiles-content {
     color: $d-p-side-tiles-text-color;
 
-    h2 {
+    .field--name-field-d-main-title {
       @include font-main-header;
       color: $d-p-side-tiles-header-color;
       text-align: left;
@@ -172,13 +172,14 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
 }
 
 .theme-invert {
-  &:not(.user-background-defined):not(.user-image-background) > .d-p-side-tiles-banner {
+  &:not(.user-background-defined):not(.user-image-background) > .d-p-side-tiles-banner,
+  &:not(.user-background-defined):not(.user-image-background) > .d-p-side-tiles-banner .d-p-side-tiles-wrapper {
     background: $color-odysseus;
   }
 
   > .d-p-side-tiles-banner {
     color: $d-p-side-tiles-theme-invert-text-color;
-    .d-p-side-embed-content-fields {
+    .d-p-side-tiles-content-fields {
       .field--name-field-d-long-text,
       .field--name-field-d-main-title {
         color: $d-p-side-tiles-theme-invert-text-color;
