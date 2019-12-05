@@ -1,0 +1,144 @@
+/**
+ * @file
+ * Style overrides for Geysir.
+ */
+
+/* Hide geysir on node teasers. */
+.node--view-mode-teaser .geysir-field-paragraph-links {
+  display: none !important;
+}
+
+.geysir-field-paragraph-wrapper {
+  .geysir-field-paragraph-wrapper {
+    /* Disable nested paragraphs. */
+    outline: none !important;
+
+    .geysir-field-paragraph-links,
+    &:after {
+      display: none !important;
+    }
+  }
+
+  /* Fix interaction with backstretch library. */
+  .wrapper-d_p_group_of_text_blocks,
+  .wrapper-d_p_group_of_counters,
+  .wrapper-d_p_carousel {
+    .background-image {
+      z-index: auto !important;
+      .backstretch {
+        z-index: 0 !important;
+      }
+    }
+    .slick-list {
+      z-index: 1;
+    }
+  }
+}
+
+/* Fix modal styles. */
+#geysir-modal,
+#geysir-modal-form {
+  .paragraph-type-top {
+    .paragraph-type-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+  .form-control {
+    width: auto; // Do not span form controls to 100% width.
+  }
+  .tabledrag-handle .handle {
+    box-sizing: content-box;
+  }
+  .form-actions {
+    margin-top: 1rem;
+    .button--primary {
+      color: #fff;
+      background: $primary;
+      font-weight: bold;
+    }
+    .button {
+      padding: $input-btn-padding-x $input-btn-padding-y;
+      border-radius: $btn-border-radius;
+    }
+  }
+  .paragraph-form .form-actions {
+    margin-bottom: 1rem;
+  }
+  .tabledrag-handle .form-actions {
+    margin-bottom: 15px;
+  }
+  .btn {
+    min-width: 0;
+  }
+  .field-multiple-table {
+    th h4 {
+      color: white;
+      margin-bottom: 0;
+    }
+    tr.draggable {
+      td {
+        padding: 1rem;
+      }
+      .image-widget {
+        padding: 10px 0;
+      }
+    }
+  }
+  .text-format-wrapper {
+    margin-bottom: 2rem;
+    fieldset {
+      margin-bottom: 0;
+    }
+  }
+  .geysirmodaladd-select-type-form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .field--name-field-d-background-color .js-form-type-color input {
+    height: 35px;
+    max-width: 65px;
+    padding: 5px;
+  }
+  .field--widget-media-library-widget,
+  .field--name-field-d-settings,
+  .field--name-field-d-cta-link {
+    .fieldset-wrapper,
+    .details-wrapper {
+      border: $card-border-width solid $card-border-color;
+      padding: $card-spacer-y $card-spacer-x;
+    }
+    legend {
+      font-size: 1em;
+    }
+    details summary {
+      @extend .btn;
+      @extend .btn-dark;
+      @extend .btn-sm;
+    }
+    fieldset.form-item-field-d-settings-0-value-custom-class {
+      margin-top: 1rem;
+    }
+  }
+  .dropbutton button {
+    width: 100%;
+  }
+}
+
+.ui-dialog {
+  #geysir-modal {
+    .ajax-progress-throbber {
+      background-image: url(../images/loading-small.gif);
+    }
+  }
+}
+
+.node--type-blog-post {
+  #geysir-modal,
+  #geysir-modal-form {
+    .field--name-field-d-image img,
+    .field--name-field-d-long-text {
+      width: auto;
+    }
+  }
+}
