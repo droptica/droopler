@@ -97,10 +97,12 @@ field_page_section:
           data:
             - type: d_p_single_text_block
               data:
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_ad_hoc_enginge_repairs_1.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_ad_hoc_enginge_repairs_1.jpg
+                      alt: Engine
                 field_d_main_title:
                   type: text
                   data: Ad-hoc engine repairs
@@ -117,10 +119,12 @@ field_page_section:
                   custom_class: tile theme-invert
             - type: d_p_single_text_block
               data:
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_enginge_overhaul_1.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_enginge_overhaul_1.jpg
+                      alt: Engine
                 field_d_main_title:
                   type: text
                   data: Engine overhaul
@@ -137,10 +141,12 @@ field_page_section:
                   custom_class: tile theme-invert
             - type: d_p_single_text_block
               data:
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_monitoring_and_assessment.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_monitoring_and_assessment.jpg
+                      alt: Engine
                 field_d_main_title:
                   type: text
                   data: Monitoring and assessment
