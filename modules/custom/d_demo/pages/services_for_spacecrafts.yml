@@ -81,10 +81,12 @@ field_page_section:
 
     - paragraph_type: d_p_group_of_counters
       data:
-        field_d_image_background:
-          type: image
-          data: d_demo/demo_bg_2.jpg
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/demo_bg_2.jpg
+              alt: Abstract Background
         field_d_number:
           type: number
           data: 4
