@@ -140,18 +140,7 @@ field_page_section:
                   type: entity_reference
                   data:
                     target_search:
-                      title: "SuperJet Pro 2020"
-                      type: d_product
-            - type: d_p_node
-              data:
-                field_d_display_mode:
-                  type: text_select
-                  data: d_small_box
-                field_d_node_reference:
-                  type: entity_reference
-                  data:
-                    target_search:
-                      title: "Super Charged Engine"
+                      title: "Super Charged Engine v12"
                       type: d_product
             - type: d_p_node
               data:
@@ -163,6 +152,17 @@ field_page_section:
                   data:
                     target_search:
                       title: "Centurion 3000"
+                      type: d_product
+            - type: d_p_node
+              data:
+                field_d_display_mode:
+                  type: text_select
+                  data: d_small_box
+                field_d_node_reference:
+                  type: entity_reference
+                  data:
+                    target_search:
+                      title: "Marine-XT 550"
                       type: d_product
 
     - paragraph_type: d_p_reference_content
