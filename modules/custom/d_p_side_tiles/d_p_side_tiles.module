@@ -41,7 +41,7 @@ function d_p_side_tiles_theme($existing, $type, $theme, $path) {
     'paragraph__d_p_side_tiles' => [
       'base hook' => 'paragraph',
     ],
-    'field__paragraph__field_d_image__d_p_side_tiles' => [
+    'field__paragraph__field_d_media_image__d_p_side_tiles' => [
       'base hook' => 'field',
     ],
   ];
@@ -56,7 +56,7 @@ function d_p_side_tiles_preprocess_colorbox_formatter(&$variables) {
 
   // Detect custom sizes in ALTs.
   $fd = $variables['item']->getFieldDefinition();
-  if ($fd->id() == 'paragraph.d_p_side_tiles.field_d_image') {
+  if ($fd->id() == 'paragraph.d_p_side_tiles.field_d_media_image') {
     $variables['attributes']['data-cbox-title'] = $variables['attributes']['title'];
     $variables['attributes']['title'] = '';
   }
