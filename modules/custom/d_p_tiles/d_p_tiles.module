@@ -69,7 +69,19 @@ function d_p_tiles_preprocess_colorbox_formatter(&$variables) {
 
   // Detect custom sizes in ALTs.
   $fd = $variables['item']->getFieldDefinition();
-  if ($fd->id() == 'paragraph.d_p_tiles.field_d_media_image') {
+  $parentParagraph = NULL;
+  $currentEntity = $variables['entity'] ?? NULL;
+  if ($currentEntity && isset($currentEntity->_referringItem) && method_exists($currentEntity->_referringItem, 'getParent')) {
+    /** @var \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem $parentEntity */
+    $parentEntity = $currentEntity->_referringItem->getParent();
+
+    /** @var \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $fieldParent */
+    if ($fieldParent = $parentEntity->getParent()) {
+      $parentParagraph = $fieldParent->getEntity();
+    }
+  }
+
+  if ($fd->id() == 'paragraph.d_p_tiles.field_d_media_image' || ($parentParagraph && $parentParagraph->bundle() == 'd_p_tiles') ) {
     $alt = $variables['image']['#alt'];
     // In 1x1 just remove the text.
     if (strstr($alt, '1x1')) {
@@ -87,4 +99,8 @@ function d_p_tiles_preprocess_colorbox_formatter(&$variables) {
     $variables['attributes']['data-cbox-img-attrs'] = json_encode(['alt' => $alt]);
     $variables['attributes']['data-cbox-title'] = $alt;
   }
+}
+
+function d_p_titles_preprocess_html(&$variable) {
+  d_content_init_recreate_content();
 }
