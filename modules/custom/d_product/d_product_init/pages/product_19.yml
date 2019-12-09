@@ -1,20 +1,20 @@
 info:
   type: d_product
   title: Aluminum Rim 16 BMW Series 2 M 2001-2003
-field_product_image:
-  type: image
-  data:
-    - file: d_product_init/demo_car_7.jpg
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_product_init/demo_car_7.jpg
       alt: Title / Subtitle
-    - file: d_product_init/demo_car_2.jpg
+    - path: d_product_init/demo_car_2.jpg
       alt: Title / Subtitle
-    - file: d_product_init/demo_car_1.jpg
+    - path: d_product_init/demo_car_1.jpg
       alt: Title / Subtitle
-    - file: d_product_init/demo_car_6.jpg
+    - path: d_product_init/demo_car_6.jpg
       alt: Title / Subtitle
-    - file: d_product_init/demo_car_5.jpg
+    - path: d_product_init/demo_car_5.jpg
       alt: Title / Subtitle
-  dst_dir: demo
 body:
   type: text
   data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse

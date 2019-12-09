@@ -4,16 +4,15 @@ dependencies:
   config:
     - field.field.paragraph.d_p_single_text_block.field_d_background_color
     - field.field.paragraph.d_p_single_text_block.field_d_cta_link
-    - field.field.paragraph.d_p_single_text_block.field_d_icon
-    - field.field.paragraph.d_p_single_text_block.field_d_image_background
     - field.field.paragraph.d_p_single_text_block.field_d_long_text
     - field.field.paragraph.d_p_single_text_block.field_d_main_title
+    - field.field.paragraph.d_p_single_text_block.field_d_media_background
+    - field.field.paragraph.d_p_single_text_block.field_d_media_icon
     - field.field.paragraph.d_p_single_text_block.field_d_settings
     - paragraphs.paragraphs_type.d_p_single_text_block
   module:
     - d_p
     - link
-    - svg_image
     - text
 id: paragraph.d_p_single_text_block.default
 targetEntityType: paragraph
@@ -21,7 +20,7 @@ bundle: d_p_single_text_block
 mode: default
 content:
   field_d_background_color:
-    weight: 4
+    weight: 5
     label: hidden
     settings:
       link_to_entity: false
@@ -29,7 +28,7 @@ content:
     type: string
     region: content
   field_d_cta_link:
-    weight: 3
+    weight: 4
     label: hidden
     settings:
       trim_length: 80
@@ -40,53 +39,37 @@ content:
     third_party_settings: {  }
     type: link
     region: content
-  field_d_icon:
-    weight: 0
-    label: hidden
-    settings:
-      svg_attributes:
-        width: ''
-        height: ''
-      svg_render_as_image: true
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
-  field_d_image_background:
-    weight: 5
-    label: above
-    settings:
-      svg_attributes:
-        width: ''
-        height: ''
-      svg_render_as_image: true
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
   field_d_long_text:
-    weight: 2
+    weight: 3
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_d_main_title:
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
+  field_d_media_icon:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: d_icon
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   field_d_settings:
     type: field_configuration_formatter
     weight: 6
     region: content
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_d_media_background: true
   search_api_excerpt: true

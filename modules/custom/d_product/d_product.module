@@ -21,9 +21,9 @@ function d_product_preprocess_node(&$variables) {
     if (isset($variables['view_mode']) && $variables['view_mode'] == 'teaser') {
       if (isset($variables['node'])) {
 
-        if (isset($variables['content']['field_product_image'][0])) {
-          $variables['main_image'] = $variables['content']['field_product_image'][0];
-          unset($variables['content']['field_product_image']);
+        if (isset($variables['content']['field_d_product_media'][0])) {
+          $variables['main_image'] = $variables['content']['field_d_product_media'][0];
+          unset($variables['content']['field_d_product_media']);
         }
 
         if (isset($variables['content']['field_product_categories'][0])) {

@@ -22,7 +22,8 @@ function d_product_init_content_structure_alter(&$structure, $context) {
 
   if ($context == 'all') {
     $products = [];
-    for ($i = 1; $i <= 3; $i++) {
+    // Make product_1 as first on product list by decrement loop.
+    for ($i = 5; $i >= 1; $i--) {
       $products['product_' . $i] = ['file' => "$path/product_{$i}.yml", 'weight' => 0];
     }
     $structure = $products + $structure;

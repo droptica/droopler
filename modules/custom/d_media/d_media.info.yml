@@ -3,6 +3,7 @@ description: 'Provides Media configuration for Drupal 8'
 type: module
 core: 8.x
 dependencies:
+  - colorbox
   - content_translation
   - d_p
   - d_social_media
@@ -16,6 +17,6 @@ dependencies:
   - responsive_image
   - svg_image
   - user
-package: Droopler
+package: d
 core_incompatible: false
 version: 8.x-2.0

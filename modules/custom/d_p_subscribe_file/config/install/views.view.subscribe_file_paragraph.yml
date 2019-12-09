@@ -13,7 +13,6 @@ description: ''
 tag: ''
 base_table: d_p_subscribe_file
 base_field: id
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -405,6 +404,8 @@ display:
               administrator: '0'
               d_editor: '0'
             placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -447,6 +448,8 @@ display:
               administrator: '0'
               d_editor: '0'
             placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
