@@ -138,10 +138,12 @@ field_page_section:
         field_d_main_title:
           type: text
           data: Download our HR brochure
-        field_d_image_background:
-          type: image
-          data: d_demo/demo_educational_4.jpg
-          dst_dir: demo
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            - path:  d_demo/demo_educational_4.jpg
+              alt: Educational
         field_file_download:
           type: file
           data: d_demo/demo_file.zip
