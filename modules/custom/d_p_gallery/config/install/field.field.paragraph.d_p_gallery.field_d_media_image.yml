@@ -5,14 +5,14 @@ dependencies:
     - field.storage.paragraph.field_d_media_image
     - media.type.d_image
     - media.type.d_video
-    - paragraphs.paragraphs_type.d_p_carousel_item
-id: paragraph.d_p_carousel_item.field_d_media_image
+    - paragraphs.paragraphs_type.d_p_gallery
+id: paragraph.d_p_gallery.field_d_media_image
 field_name: field_d_media_image
 entity_type: paragraph
-bundle: d_p_carousel_item
-label: Image
+bundle: d_p_gallery
+label: image
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

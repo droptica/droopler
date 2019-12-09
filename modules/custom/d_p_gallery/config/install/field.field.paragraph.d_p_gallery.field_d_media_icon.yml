@@ -2,15 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_d_media_image
+    - field.storage.paragraph.field_d_media_icon
     - media.type.d_image
-    - media.type.d_video
-    - paragraphs.paragraphs_type.d_p_carousel_item
-id: paragraph.d_p_carousel_item.field_d_media_image
-field_name: field_d_media_image
+    - paragraphs.paragraphs_type.d_p_gallery
+id: paragraph.d_p_gallery.field_d_media_icon
+field_name: field_d_media_icon
 entity_type: paragraph
-bundle: d_p_carousel_item
-label: Image
+bundle: d_p_gallery
+label: Icon
 description: ''
 required: false
 translatable: false
@@ -21,10 +20,9 @@ settings:
   handler_settings:
     target_bundles:
       d_image: d_image
-      d_video: d_video
     sort:
       field: revision_created
       direction: DESC
     auto_create: false
-    auto_create_bundle: d_image
+    auto_create_bundle: ''
 field_type: entity_reference
