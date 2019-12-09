@@ -190,7 +190,7 @@ function d_product_generate_term_links($items, $element) {
  *
  * @param $node
  *
- * @return array
+ * @return \Drupal\Core\GeneratedLink
  */
 function d_product_generate_ask_product_link($node) {
   $name = 'Ask for product';
@@ -198,8 +198,7 @@ function d_product_generate_ask_product_link($node) {
   $link = Link::fromTextAndUrl(
     t($name),
     Url::fromUri('internal:/contact#contact-message-feedback-form', $options)
-  )->toRenderable();
-  $link['#attributes'] = ['class' => ['btn btn-outline-primary']];
+  )->toString();
   return $link;
 }
 
