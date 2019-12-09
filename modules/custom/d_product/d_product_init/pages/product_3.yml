@@ -1,33 +1,33 @@
 info:
   type: d_product
-  title: Centurion 3000
-field_d_product_media:
-  type: media_image
-  directory: demo
-  files:
-    - path: d_product_init/d_product_init_centurion-3000-1.jpg
+  title: Marine-XT 550
+field_product_image:
+  type: image
+  data:
+    - file: d_product_init/d_product_init_machine-xt-550-1.jpg
       alt: Title / Subtitle
-    - path: d_product_init/d_product_init_centurion-3000-2.jpg
+    - file: d_product_init/d_product_init_machine-xt-550-2.jpg
       alt: Title / Subtitle
-    - path: d_product_init/d_product_init_centurion-3000-3.jpg
+    - file: d_product_init/d_product_init_machine-xt-550-3.jpg
       alt: Title / Subtitle
+    - file: d_product_init/d_product_init_machine-xt-550-4.jpg
+      alt: Title / Subtitle
+  dst_dir: demo
 body:
   type: text
-  data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
-    a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
-    Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
+  data: Engine for small motor boats. Mounted outside the boat. 40 horsepower ensures excellent performance and low fuel consumption.
 field_product_categories:
   type: taxonomy
   data:
     vid: d_product_categories
     terms:
-      - Petrol Engines
+      - Boat engines
 field_tags:
   type: taxonomy
   data:
     vid: tags
     terms:
-      - Cars
+      - Airplanes
 field_d_product_link:
   type: cta
   data:

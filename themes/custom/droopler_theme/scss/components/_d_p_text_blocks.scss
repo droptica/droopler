@@ -119,6 +119,12 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       width: 100%;
     }
 
+    @include media-breakpoint-down(lg) {
+      .d-p-text-block {
+        padding: $d-p-text-blocks-tiles-padding;
+      }
+    }
+
     @include media-breakpoint-up(sm) {
       > .geysir-field-paragraph-wrapper {
           display: block;
