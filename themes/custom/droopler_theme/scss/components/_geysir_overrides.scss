@@ -36,8 +36,14 @@
 }
 
 /* Fix modal styles. */
+#media-library-wrapper,
 #geysir-modal,
 #geysir-modal-form {
+  .button-override {
+    @extend .btn;
+    @extend .btn-primary;
+    background-image: none;
+  }
   .paragraph-type-top {
     .paragraph-type-title {
       font-size: 1.2rem;
@@ -122,14 +128,6 @@
   }
   .dropbutton button {
     width: 100%;
-  }
-}
-
-.ui-dialog {
-  #geysir-modal {
-    .ajax-progress-throbber {
-      background-image: url(../images/loading-small.gif);
-    }
   }
 }
 
