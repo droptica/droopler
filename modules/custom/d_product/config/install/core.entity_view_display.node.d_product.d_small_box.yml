@@ -8,36 +8,30 @@ dependencies:
     - field.field.node.d_product.field_d_product_link
     - field.field.node.d_product.field_d_product_media
     - field.field.node.d_product.field_product_categories
-    - field.field.node.d_product.field_product_image
     - field.field.node.d_product.field_tags
     - image.style.small_box_image
     - node.type.d_product
   module:
-    - svg_image
+    - media
     - user
 id: node.d_product.d_small_box
 targetEntityType: node
 bundle: d_product
 mode: d_small_box
 content:
-  field_product_image:
-    weight: 0
+  field_d_product_media:
+    type: media_thumbnail
+    weight: 1
+    region: content
     label: hidden
     settings:
       image_style: small_box_image
       image_link: content
-      svg_render_as_image: '1'
-      svg_attributes:
-        width: ''
-        height: ''
     third_party_settings: {  }
-    type: image
-    region: content
 hidden:
   body: true
   field_d_ask_for_product: true
   field_d_product_link: true
-  field_d_product_media: true
   field_product_categories: true
   field_tags: true
   langcode: true

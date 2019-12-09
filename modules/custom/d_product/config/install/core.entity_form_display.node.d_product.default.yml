@@ -7,15 +7,12 @@ dependencies:
     - field.field.node.d_product.field_d_product_link
     - field.field.node.d_product.field_d_product_media
     - field.field.node.d_product.field_product_categories
-    - field.field.node.d_product.field_product_image
     - field.field.node.d_product.field_tags
-    - image.style.thumbnail
     - node.type.d_product
   module:
     - link
     - media_library
     - path
-    - svg_image
     - text
 id: node.d_product.default
 targetEntityType: node
@@ -63,14 +60,6 @@ content:
       match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
-    region: content
-  field_product_image:
-    weight: 6
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
     region: content
   field_tags:
     weight: 9

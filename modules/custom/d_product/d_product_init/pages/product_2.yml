@@ -1,16 +1,16 @@
 info:
   type: d_product
   title: Super Charged Engine
-field_product_image:
-  type: image
-  data:
-    - file: d_product_init/d_product_init_super-charged-engine-1.jpg
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_product_init/d_product_init_super-charged-engine-1.jpg
       alt: Title / Subtitle
-    - file: d_product_init/d_product_init_super-charged-engine-2.jpg
+    - path: d_product_init/d_product_init_super-charged-engine-2.jpg
       alt: Title / Subtitle
-    - file: d_product_init/d_product_init_super-charged-engine-3.jpg
+    - path: d_product_init/d_product_init_super-charged-engine-3.jpg
       alt: Title / Subtitle
-  dst_dir: demo
 body:
   type: text
   data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse

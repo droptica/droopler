@@ -8,12 +8,9 @@ dependencies:
     - field.field.node.d_product.field_d_product_link
     - field.field.node.d_product.field_d_product_media
     - field.field.node.d_product.field_product_categories
-    - field.field.node.d_product.field_product_image
     - field.field.node.d_product.field_tags
     - node.type.d_product
-    - responsive_image.styles.product_thumbnail
   module:
-    - responsive_image
     - user
 id: node.d_product.teaser
 targetEntityType: node
@@ -36,15 +33,6 @@ content:
     label: hidden
     settings:
       link: false
-    third_party_settings: {  }
-  field_product_image:
-    type: responsive_image
-    weight: 0
-    region: content
-    label: hidden
-    settings:
-      responsive_image_style: product_thumbnail
-      image_link: ''
     third_party_settings: {  }
 hidden:
   body: true

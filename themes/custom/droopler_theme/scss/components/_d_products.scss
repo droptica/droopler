@@ -234,6 +234,23 @@ $d-product-filters-border: 2px solid $color-hector !default;
     flex-wrap: wrap;
     margin: -0.625rem -0.3125rem 0 -0.3125rem;
   }
+  .field--type-image {
+    margin-right: 0;
+    img {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.view-product-images {
+  .slick-slide {
+    .field--type-image {
+      margin-right: 0;
+      img {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 
 .product-listing {
