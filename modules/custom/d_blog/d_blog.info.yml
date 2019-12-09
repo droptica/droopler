@@ -6,14 +6,15 @@ dependencies:
   - block
   - content_translation
   - ctools
+  - d_media
   - d_p
   - d_p_gallery
   - d_p_node
   - entity_reference_revisions
   - field
   - file
-  - image
   - language
+  - media_library
   - menu_ui
   - metatag
   - node
@@ -22,13 +23,12 @@ dependencies:
   - pathauto
   - responsive_image
   - simple_sitemap
-  - svg_image
   - taxonomy
   - text
   - tvi
   - user
   - views
-version: 8.x-1.4
+version: 8.x-2.0
 package: Droopler
 'interface translation project': d_blog
 'interface translation server pattern': profiles/contrib/droopler/modules/custom/d_blog/translations/%project-%version.%language.po
