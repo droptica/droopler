@@ -79,7 +79,7 @@ $mega-menu-submenu-link-padding-y: 9px !default;
 $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
 $mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-y !default;
 
-$sidebar-animation-speed: 100ms !default;
+$sidebar-animation-speed: 600ms !default;
 
 @mixin mobile-toggle() {
   display: flex;
@@ -393,15 +393,15 @@ header.header > nav.navbar-wrapper {
 
   // Mobile navigation overlay.
   body {
-    nav.main-navbar::before {
-      content: "";
+    nav#navbar-nav::before {
+      content: '';
       position: fixed;
       background-color: $mobile-navigation-overlay-color;
       width: 100%;
       height: 100%;
       left: 0;
       z-index: -1;
-      display: none;
+      display: block;
       opacity: 0;
       transition: opacity $sidebar-animation-speed;
     }
@@ -409,9 +409,7 @@ header.header > nav.navbar-wrapper {
     &.navbar-open {
       overflow: hidden;
 
-      nav.main-navbar::before {
-        content: "";
-        display: block;
+      nav#navbar-nav::before {
         opacity: 1;
       }
     }
@@ -452,28 +450,17 @@ header.header > nav.navbar-wrapper {
         font-size: $menu-dropdown-size;
       }
     }
-
-    &.collapsing[aria-expanded="false"] + nav.main-navbar,
-    &[aria-expanded="true"] + nav.main-navbar {
-      width: $navbar-mobile-sidebar-width !important;
-      display: block;
-    }
-    &.collapsing[aria-expanded="true"] + nav.main-navbar {
-      width: 0;
-    }
   }
 
   header.header > nav.navbar-wrapper {
     nav.main-navbar {
       position: absolute;
-      width: 0;
-      right: 0;
       top: 100%;
       z-index: 10;
-      background-color: $color-odysseus;
       height: calc(100vh - 100%) !important;
       align-items: start;
-      transition: width $sidebar-animation-speed;
+      pointer-events: none;
+      overflow: hidden;
 
       .dropdown-menu {
         .we-mega-menu-li,
@@ -496,15 +483,30 @@ header.header > nav.navbar-wrapper {
       }
 
       .navbar-inner {
-        height: 100%;
+        position: absolute;
+        right: -#{$navbar-mobile-sidebar-width};
         display: flex;
+        height: 100%;
+        width: $navbar-mobile-sidebar-width;
+        padding-bottom: $submenu-link-height;
         overflow-y: auto;
         background-color: $color-odysseus;
-        padding-bottom: $submenu-link-height;
+        transition: right $sidebar-animation-speed !important;
+
+      }
+
+      &.collapse:not(.show) {
+        display: block;
       }
 
       &.show {
-        width: $navbar-mobile-sidebar-width !important;
+        pointer-events: all;
+      }
+
+      &.collapsing.open, &.show {
+        .navbar-inner {
+          right: 0;
+        }
       }
     }
 
