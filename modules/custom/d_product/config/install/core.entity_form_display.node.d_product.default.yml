@@ -5,15 +5,14 @@ dependencies:
     - field.field.node.d_product.body
     - field.field.node.d_product.field_d_ask_for_product
     - field.field.node.d_product.field_d_product_link
+    - field.field.node.d_product.field_d_product_media
     - field.field.node.d_product.field_product_categories
-    - field.field.node.d_product.field_product_image
     - field.field.node.d_product.field_tags
-    - image.style.thumbnail
     - node.type.d_product
   module:
     - link
+    - media_library
     - path
-    - svg_image
     - text
 id: node.d_product.default
 targetEntityType: node
@@ -27,46 +26,48 @@ content:
       rows: 9
       summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
     region: content
   field_d_ask_for_product:
     type: boolean_checkbox
-    weight: 10
+    weight: 11
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_d_product_link:
-    weight: 9
+    weight: 10
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
     region: content
-  field_product_categories:
+  field_d_product_media:
+    type: media_library_widget
     weight: 7
     settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+      media_types: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
-  field_product_image:
-    weight: 6
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
-    region: content
-  field_tags:
+  field_product_categories:
     weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
