@@ -41,10 +41,12 @@ field_page_section:
 
   - paragraph_type: d_p_text_paged
     data:
-      field_d_icon:
-        type: image
-        data: d_demo/demo_droopler.svg
-        dst_dir: demo
+      field_d_media_icon:
+        type: media_image
+        directory: demo
+        files:
+          - path: d_demo/demo_droopler.svg
+            dst_dir: Droopler Logo
       field_d_main_title:
         type: text
         data: Main Title
