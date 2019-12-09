@@ -150,6 +150,11 @@ $two-columned-header-line-margin: 0.625rem !default;
       position: absolute;
       right: 0;
       top: 0;
+
+      @include media-breakpoint-down(lg) {
+        min-width: 135px;
+      }
+
       @include media-breakpoint-down(md) {
         height: 70px;
         width: 100%;

@@ -16,6 +16,7 @@ $d-p-side-by-side-padding-y: 5% !default;
 $d-p-side-by-side-subtitle-margin-y: 2.125rem !default;
 
 $d-p-side-by-side-content-padding-x: 7% !default;
+$d-p-side-by-side-content-padding-x-lg-item-1: 0 $d-p-side-by-side-content-padding-x 0 $grid-gutter-width !default;
 $d-p-side-by-side-text-box-padding-y: $grid-gutter-width !default;
 $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
 $d-p-side-by-side-image-background-padding-y: 130px !default;
@@ -27,6 +28,13 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 
   > div > .field--name-field-d-icon {
     text-align: center;
+  }
+
+  > .d-p-tiles-wrapper > .container {
+    @include media-breakpoint-down(lg) {
+      max-width: none;
+      width: 100%;
+    }
   }
 
   .text-content {
@@ -73,7 +81,16 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
     .d-p-text-block {
       margin-bottom: 0;
       .field--name-field-d-main-title {
+
         font-size: $font-main-header-size;
+
+        @include media-breakpoint-up(sm) {
+          font-size: $font-main-header-size-down;
+        }
+
+        @include media-breakpoint-up(md) {
+          font-size: $font-main-header-size;
+        }
       }
     }
   }
@@ -140,7 +157,11 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 
   .item-1 {
     @include media-breakpoint-up(md) {
-      padding-right: $d-p-side-by-side-content-padding-x;
+      padding-left: $d-p-side-by-side-content-padding-x;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: $d-p-side-by-side-content-padding-x-lg-item-1;
     }
   }
   .item-2 {
