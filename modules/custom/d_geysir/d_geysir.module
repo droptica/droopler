@@ -138,6 +138,8 @@ function d_geysir_entity_type_build(array &$entity_types) {
  * Implements hook_preprocess_media_library_item__widget().
  *
  * This targets each media item selected in an entity reference field.
+ *
+ * @see seven_preprocess_media_library_item__widget()
  */
 function d_geysir_preprocess_media_library_item__widget(array &$variables) {
   $variables['content']['remove_button']['#attributes']['class'][] = 'media-library-item__remove';
@@ -149,6 +151,8 @@ function d_geysir_preprocess_media_library_item__widget(array &$variables) {
  *
  * This targets each rendered media item in the grid display of the media
  * library's modal dialog.
+ *
+ * @see seven_preprocess_views_view_fields__media_library().
  */
 function d_geysir_preprocess_views_view_fields__media_library(array &$variables) {
   // Add classes to media rendered entity field so it can be targeted for
@@ -160,6 +164,8 @@ function d_geysir_preprocess_views_view_fields__media_library(array &$variables)
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * @see seven_form_media_library_add_form_alter().
  */
 function d_geysir_form_media_library_add_form_alter(array &$form, FormStateInterface $form_state) {
   $form['#attributes']['class'][] = 'media-library-add-form';
@@ -180,6 +186,8 @@ function d_geysir_form_media_library_add_form_alter(array &$form, FormStateInter
 
 /**
  * Implements hook_form_FORM_ID_alter().
+ *
+ * @see seven_form_media_library_add_form_upload_alter().
  */
 function d_geysir_form_media_library_add_form_upload_alter(array &$form, FormStateInterface $form_state) {
   $form['#attributes']['class'][] = 'media-library-add-form--upload';
@@ -191,6 +199,8 @@ function d_geysir_form_media_library_add_form_upload_alter(array &$form, FormSta
 
 /**
  * Implements hook_form_FORM_ID_alter().
+ *
+ * @see seven_form_media_library_add_form_oembed_alter().
  */
 function d_geysir_form_media_library_add_form_oembed_alter(array &$form, FormStateInterface $form_state) {
   $form['attributes']['class'][] = 'media-library-add-form--oembed';
@@ -209,6 +219,8 @@ function d_geysir_form_media_library_add_form_oembed_alter(array &$form, FormSta
  *
  * This targets each new, unsaved media item added to the media library, before
  * they are saved.
+ *
+ * @see seven_preprocess_item_list__media_library_add_form_media_list().
  */
 function d_geysir_preprocess_item_list__media_library_add_form_media_list(array &$variables) {
   foreach ($variables['items'] as &$item) {
@@ -232,6 +244,8 @@ function d_geysir_preprocess_item_list__media_library_add_form_media_list(array 
  *
  * This targets each pre-selected media item selected when adding new media in
  * the modal media library dialog.
+ *
+ * @see seven_preprocess_media_library_item__small().
  */
 function d_geysir_preprocess_media_library_item__small(array &$variables) {
   $variables['content']['select']['#attributes']['class'][] = 'media-library-item__click-to-select-checkbox';
@@ -242,6 +256,7 @@ function d_geysir_preprocess_media_library_item__small(array &$variables) {
  * lands.
  *
  * @see \Drupal\media_library\Plugin\Field\FieldWidget\MediaLibraryWidget::formElement()
+ * @see seven_preprocess_fieldset__media_library_widget
  */
 function d_geysir_preprocess_fieldset__media_library_widget(array &$variables) {
   if (isset($variables['prefix']['weight_toggle'])) {
@@ -255,6 +270,8 @@ function d_geysir_preprocess_fieldset__media_library_widget(array &$variables) {
 
 /**
  * Implements hook_views_pre_render().
+ *
+ * @see seven_views_pre_render();
  */
 function d_geysir_views_pre_render(ViewExecutable $view) {
   $add_classes = function (&$option, array $classes_to_add) {
@@ -312,6 +329,8 @@ function d_geysir_views_pre_render(ViewExecutable $view) {
  *
  * @todo Do this in the relevant template once
  *   https://www.drupal.org/project/drupal/issues/3088856 is resolved.
+ *
+ * @see classy_preprocess_links__media_library_menu().
  */
 function d_geysir_preprocess_links__media_library_menu(array &$variables) {
   foreach ($variables['links'] as &$link) {
