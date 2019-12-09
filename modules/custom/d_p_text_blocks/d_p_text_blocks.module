@@ -80,7 +80,7 @@ function d_p_text_blocks_preprocess_paragraph (&$variables) {
       }
       // Set background image if field is not empty.
       // This overrides background color settings.
-      $field_image = $paragraph->get('field_d_image_background')->get(0);
+      $field_image = $paragraph->get('field_d_media_background')->first();
       if (!empty($field_image)) {
         d_p_generate_image_set($variables, $styles_ids, $bundle);
         $variables['image_class'] = $variables['text_class'] = 'col-md-12';

@@ -224,10 +224,12 @@ field_page_section:
           data:
             - type: d_p_single_text_block
               data:
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_tile_boat.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_tile_boat.jpg
+                      alt: Boat
                 field_d_main_title:
                   type: text
                   data: For boat manufacturers
@@ -244,10 +246,12 @@ field_page_section:
                   custom_class: tile theme-invert
             - type: d_p_single_text_block
               data:
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_tile_plane.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_tile_plane.jpg
+                      alt: Airplane
                 field_d_main_title:
                   type: text
                   data: For airplane manufacturers
@@ -264,10 +268,12 @@ field_page_section:
                   custom_class: tile theme-invert
             - type: d_p_single_text_block
               data:
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_tile_car.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_tile_car.jpg
+                      alt: Car
                 field_d_main_title:
                   type: text
                   data: For car manufacturers
@@ -284,10 +290,12 @@ field_page_section:
                   custom_class: tile theme-invert
             - type: d_p_single_text_block
               data:
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_tile_spaceship.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_tile_spaceship.jpg
+                      alt: Spaceship
                 field_d_main_title:
                   type: text
                   data: For spaceship manufacturers
@@ -320,10 +328,12 @@ field_page_section:
           data:
             - type: d_p_single_text_block
               data:
-                field_d_icon:
-                  type: image
-                  data: d_demo/d_demo_icon_boat.svg
-                  dst_dir: demo
+                field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_icon_boat.svg
+                      alt: Boat icon
                 field_d_main_title:
                   type: text
                   data: Marine
@@ -332,10 +342,12 @@ field_page_section:
                   data: '#ffffff'
             - type: d_p_single_text_block
               data:
-                field_d_icon:
-                  type: image
-                  data: d_demo/d_demo_icon_plane.svg
-                  dst_dir: demo
+                field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_icon_plane.svg
+                      alt: Aircraft icon
                 field_d_main_title:
                   type: text
                   data: Aviation
@@ -344,10 +356,12 @@ field_page_section:
                   data: '#ffffff'
             - type: d_p_single_text_block
               data:
-                field_d_icon:
-                  type: image
-                  data: d_demo/d_demo_icon_car.svg
-                  dst_dir: demo
+                field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_icon_car.svg
+                      alt: Car icon
                 field_d_main_title:
                   type: text
                   data: Automotive
@@ -397,10 +411,12 @@ field_page_section:
                 field_d_background_color:
                   type: text
                   data: '#ffffff'
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_buildings.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_buildings.jpg
+                      alt: Buildings
                 field_d_settings:
                   type: field_p_configuration_storage
                   custom_class: with-price testing stripe-sidebar
@@ -423,9 +439,11 @@ field_page_section:
                 field_d_background_color:
                   type: text
                   data: '#ffffff'
-                field_d_image_background:
-                  type: image
-                  data: d_demo/d_demo_career.jpg
-                  dst_dir: demo
+                field_d_media_background:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/d_demo_career.jpg
+                      alt: Workers
                 field_d_settings:
                   type: field_p_configuration_storage

@@ -55,7 +55,7 @@
     <div {{ paragraph_attributes.addClass(paragraph_classes, image_class) }} ></div>
     <div{{ attributes.addClass(classes) }}>
       {% block content %}
-        {{ content|without('field_d_background_color', 'field_d_image_background') }}
+        {{ content|without('field_d_background_color') }}
       {% endblock %}
 
       {% if with_price  %}
