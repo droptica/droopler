@@ -69,19 +69,13 @@ function d_p_tiles_preprocess_colorbox_formatter(&$variables) {
 
   // Detect custom sizes in ALTs.
   $fd = $variables['item']->getFieldDefinition();
-  $parentParagraph = NULL;
-  $currentEntity = $variables['entity'] ?? NULL;
-  if ($currentEntity && isset($currentEntity->_referringItem) && method_exists($currentEntity->_referringItem, 'getParent')) {
-    /** @var \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem $parentEntity */
-    $parentEntity = $currentEntity->_referringItem->getParent();
 
-    /** @var \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $fieldParent */
-    if ($fieldParent = $parentEntity->getParent()) {
-      $parentParagraph = $fieldParent->getEntity();
-    }
-  }
+  /** @var \Drupal\d_p\Service\ParentParagraphService $parentEntityService */
+  $parentEntityService = Drupal::service('d_p.entity_parent_paragraph');
+  $paragraphFieldId = $parentEntityService->getParentParagraphFieldId($variables['entity']);
 
-  if ($fd->id() == 'paragraph.d_p_tiles.field_d_media_image' || ($parentParagraph && $parentParagraph->bundle() == 'd_p_tiles') ) {
+  if ($fd->id() == 'paragraph.d_p_tiles.field_d_media_image'
+    || ($paragraphFieldId && $paragraphFieldId == 'paragraph.d_p_tiles.field_d_media_image') ) {
     $alt = $variables['image']['#alt'];
     // In 1x1 just remove the text.
     if (strstr($alt, '1x1')) {
