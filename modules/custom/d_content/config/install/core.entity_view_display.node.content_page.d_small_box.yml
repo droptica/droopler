@@ -4,30 +4,26 @@ dependencies:
   config:
     - core.entity_view_mode.node.d_small_box
     - field.field.node.content_page.field_page_section
-    - field.field.node.content_page.field_teaser_image
+    - field.field.node.content_page.field_teaser_media_image
     - field.field.node.content_page.field_teaser_text
     - image.style.small_box_image
     - node.type.content_page
   module:
-    - svg_image
+    - media
     - user
 id: node.content_page.d_small_box
 targetEntityType: node
 bundle: content_page
 mode: d_small_box
 content:
-  field_teaser_image:
-    type: image
-    weight: 0
+  field_teaser_media_image:
+    type: media_thumbnail
+    weight: 1
     region: content
-    label: above
+    label: hidden
     settings:
       image_style: small_box_image
       image_link: content
-      svg_render_as_image: '1'
-      svg_attributes:
-        width: ''
-        height: ''
     third_party_settings: {  }
 hidden:
   field_page_section: true

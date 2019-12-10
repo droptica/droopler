@@ -4,13 +4,13 @@ dependencies:
   config:
     - core.entity_view_mode.node.thumbnail
     - field.field.node.blog_post.field_blog_category
-    - field.field.node.blog_post.field_blog_main_image
+    - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
     - image.style.responsive_image_768
     - node.type.blog_post
   module:
-    - svg_image
+    - media
     - text
     - user
 id: node.blog_post.thumbnail
@@ -26,31 +26,28 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_blog_main_image:
-    weight: 1
+  field_blog_media_main_image:
+    type: media_thumbnail
+    weight: 2
+    region: content
     label: hidden
     settings:
       image_style: responsive_image_768
       image_link: content
-      svg_render_as_image: '1'
-      svg_attributes:
-        width: ''
-        height: ''
     third_party_settings: {  }
-    type: image
-    region: content
   field_blog_teaser:
     type: text_default
-    weight: 2
+    weight: 3
     region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
   links:
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_blog_sections: true
   langcode: true
+  search_api_excerpt: true

@@ -4,10 +4,12 @@ info:
 uid:
   type: number
   data: 1
-field_blog_main_image:
-  type: image
-  data: d_blog_init/d_demo_factory.jpg
-  dst_dir: demo
+field_blog_media_main_image:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_blog_init/d_demo_factory.jpg
+      alt: Factory
 field_blog_teaser:
   type: text
   data: Finally we have another factory. Factory is located in Radom in Poland.

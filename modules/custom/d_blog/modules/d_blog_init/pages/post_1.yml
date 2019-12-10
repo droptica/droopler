@@ -4,10 +4,12 @@ info:
 uid:
   type: number
   data: 1
-field_blog_main_image:
-  type: image
-  data: d_blog_init/d_demo_mechanism.jpg
-  dst_dir: demo
+field_blog_media_main_image:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_blog_init/d_demo_mechanism.jpg
+      alt: Mechanism
 field_blog_teaser:
   type: text
   data: DrooplerEngines together with Airplanes Pro tested new aircraft
