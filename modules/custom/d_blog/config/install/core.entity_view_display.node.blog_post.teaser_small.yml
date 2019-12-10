@@ -4,7 +4,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser_small
     - field.field.node.blog_post.field_blog_category
-    - field.field.node.blog_post.field_blog_main_image
     - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
@@ -12,7 +11,6 @@ dependencies:
     - node.type.blog_post
   module:
     - media
-    - svg_image
     - text
     - user
 id: node.blog_post.teaser_small
@@ -20,19 +18,6 @@ targetEntityType: node
 bundle: blog_post
 mode: teaser_small
 content:
-  field_blog_main_image:
-    weight: 0
-    label: hidden
-    settings:
-      image_style: gallery_thumbnail
-      image_link: content
-      svg_render_as_image: '1'
-      svg_attributes:
-        width: ''
-        height: ''
-    third_party_settings: {  }
-    type: image
-    region: content
   field_blog_media_main_image:
     type: media_thumbnail
     weight: 1

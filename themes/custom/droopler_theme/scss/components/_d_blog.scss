@@ -43,11 +43,15 @@ $d-blog-header-text-distance-from-bottom: -0.25rem !default;
 $d-blog-header-text-distance-from-top-mobile: 40% !default;
 $d-blog-size-of-large-desktop: 1400px !default;
 
+.article.node--type-blog-post,
 article.node--type-blog-post {
 
   .field--type-image {
     float: none;
     margin-right: 0;
+  }
+  .field--type-entity-reference {
+    margin-bottom: 0;
   }
 
   .blog-post-header {
@@ -63,7 +67,6 @@ article.node--type-blog-post {
     position: relative;
     background-color: $d-blog-under-background-color;
 
-    .field--name-field-blog-main-image,
     .field--name-field-blog-media-main-image {
       img {
         z-index: -3;
@@ -174,7 +177,6 @@ article.node--type-blog-post {
   }
 
 
-  .field--name-field-blog-main-image,
   .field--name-field-blog-media-main-image  {
     img {
       width: 100vw;

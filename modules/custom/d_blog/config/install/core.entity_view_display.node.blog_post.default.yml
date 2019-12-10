@@ -3,15 +3,12 @@ status: true
 dependencies:
   config:
     - field.field.node.blog_post.field_blog_category
-    - field.field.node.blog_post.field_blog_main_image
     - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
     - node.type.blog_post
-    - responsive_image.styles.blog_images_style
   module:
     - entity_reference_revisions
-    - responsive_image
     - user
 id: node.blog_post.default
 targetEntityType: node
@@ -25,15 +22,6 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  field_blog_main_image:
-    weight: 2
-    label: hidden
-    settings:
-      responsive_image_style: blog_images_style
-      image_link: ''
-    third_party_settings: {  }
-    type: responsive_image
     region: content
   field_blog_media_main_image:
     type: entity_reference_entity_view

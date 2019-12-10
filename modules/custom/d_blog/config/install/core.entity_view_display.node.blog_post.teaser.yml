@@ -4,7 +4,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.blog_post.field_blog_category
-    - field.field.node.blog_post.field_blog_main_image
     - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
@@ -12,7 +11,6 @@ dependencies:
     - node.type.blog_post
   module:
     - media
-    - svg_image
     - text
     - user
 id: node.blog_post.teaser
@@ -27,19 +25,6 @@ content:
     label: hidden
     settings:
       link: true
-    third_party_settings: {  }
-  field_blog_main_image:
-    type: image
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      image_style: responsive_image_768
-      image_link: content
-      svg_attributes:
-        width: ''
-        height: ''
-      svg_render_as_image: true
     third_party_settings: {  }
   field_blog_media_main_image:
     type: media_thumbnail
