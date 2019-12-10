@@ -94,7 +94,3 @@ function d_p_tiles_preprocess_colorbox_formatter(&$variables) {
     $variables['attributes']['data-cbox-title'] = $alt;
   }
 }
-
-function d_p_titles_preprocess_html(&$variable) {
-  d_content_init_recreate_content();
-}
