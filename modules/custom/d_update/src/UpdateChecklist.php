@@ -10,6 +10,7 @@ namespace Drupal\d_update;
 use Drupal\checklistapi\ChecklistapiChecklist;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\d_update\Entity\Update;
 
@@ -19,6 +20,8 @@ use Drupal\d_update\Entity\Update;
  * @package Drupal\d_update
  */
 class UpdateChecklist {
+
+  use MessengerTrait;
 
   /**
    * The Checklist API object.
@@ -304,12 +307,13 @@ class UpdateChecklist {
 
     $droopler_update_config->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY, $progress)
       ->save();
-    drupal_set_message(\Drupal::translation()->formatPlural(
+    $message = \Drupal::translation()->formatPlural(
       $num_changed_items,
       '%title progress has been saved. 1 item changed.',
       '%title progress has been saved. @count items changed.',
       ['%title' => $this->updateChecklist->title]
-    ));
+    );
+    $this->messenger()->addStatus($message);
   }
 
 }
