@@ -163,31 +163,51 @@ function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array 
 function droopler_theme_preprocess_input(&$variables) {
   // For submit elements.
   if ($variables['element']['#type'] == 'submit') {
-    // If button has some class.
-    if (is_object($variables['attributes']['class'])) {
-      // If there is no .btn-{type} class.
-      if (empty(array_intersect([
-        'btn-primary',
-        'btn-secondary',
-        'btn-success',
-        'btn-warning',
-        'btn-danger',
-        'btn-link',
-      ], $variables['attributes']['class']->value()))
-      ) {
-        $variables['attributes']['class']->addClass('btn-primary');
-      }
-      // If there is no .btn class.
-      if (!in_array('btn', $variables['attributes']['class']->value())) {
-        $variables['attributes']['class']->addClass('btn');
-      }
-    }
-    // If there are no classes at all.
-    else {
-      $variables['attributes']['class'][] = 'btn';
-      $variables['attributes']['class'][] = 'btn-primary';
 
+    // If button has some class.
+    if (is_object($variables['attributes'])) {
+      $classes = $variables['attributes']['class']->value();
+    }
+    else {
+      $classes = $variables['attributes']['class'] ?? [];
+    }
+
+    // Skip when no-bootstrap class is set.
+    if (in_array('no-bootstrap', $classes)) {
+      return;
+    }
+
+    // If there is no .btn class - add it.
+    if (!in_array('btn', $classes)) {
+      $classes[] = 'btn';
+    }
+
+    // If there is no .btn-{type} class.
+    $btn_styles = [
+      'btn-primary',
+      'btn-secondary',
+      'btn-success',
+      'btn-warning',
+      'btn-danger',
+      'btn-link',
+    ];
+    if (empty(array_intersect($btn_styles, $classes))) {
+      $classes[] = 'btn-primary';
+    }
+
+    // Remove default .button class.
+    $key = array_search('button', $classes);
+    if ($key !== FALSE) {
+      unset($classes[$key]);
+    }
+
+    if (!is_object($variables['attributes'])) {
+      $variables['attributes']['class'] = $classes;
       $variables['attributes'] = new Attribute($variables['attributes']);
+    }
+    else {
+      $variables['attributes']->removeAttribute('class');
+      $variables['attributes']->addClass($classes);
     }
   }
 }
@@ -342,3 +362,4 @@ function droopler_theme_library_info_alter(&$libraries, $extension) {
     }
   }
 }
+

@@ -11,7 +11,7 @@
         var $button = $('<button/>')
           .html(Drupal.t('Reset color'))
           .attr('id', 'reset-button')
-          .addClass('button js-form-submit form-submit btn btn-primary m-1')
+          .addClass('button js-form-submit form-submit m-1')
           .click(function(e) {
           e.preventDefault();
           $(this).siblings('input[type=hidden]').val('');
