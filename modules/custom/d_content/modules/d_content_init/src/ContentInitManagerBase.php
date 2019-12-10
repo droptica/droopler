@@ -4,6 +4,7 @@ namespace Drupal\d_content_init;
 
 use Drupal\Component\Serialization\SerializationInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityPublishedInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -169,7 +170,9 @@ abstract class ContentInitManagerBase {
   protected function saveEntity($entity_type, array $values) {
     $storage = $this->entityTypeManager->getStorage($entity_type);
     $entity = $storage->create($values);
-    $entity->setPublished();
+    if ($entity instanceof EntityPublishedInterface) {
+      $entity->setPublished();
+    }
     $entity->save();
     return $entity;
   }
