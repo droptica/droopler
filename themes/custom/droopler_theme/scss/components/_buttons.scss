@@ -5,18 +5,13 @@ Styleguide 2.banner.celina
 */
 
 // Paddings and margins.
-$button-min-width: 18rem !default; // Minimum width of the button (desktop)
+$button-max-width: 18rem !default; // Minimum width of the button (desktop)
 
 // Standard Bootstrap button
 .btn {
   @include font-button;
   cursor: pointer;
-  max-width: 18rem;
+  max-width: $button-max-width;
   width: 100%;
-
-  @include media-breakpoint-up(lg) {
-    min-width: $button-min-width;
-    max-width: unset;
-  }
 }
 
