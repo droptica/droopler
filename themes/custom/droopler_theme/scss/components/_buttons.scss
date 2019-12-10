@@ -11,10 +11,12 @@ $button-min-width: 18rem !default; // Minimum width of the button (desktop)
 .btn {
   @include font-button;
   cursor: pointer;
-  white-space: nowrap;
+  max-width: 18rem;
+  width: 100%;
 
   @include media-breakpoint-up(lg) {
     min-width: $button-min-width;
+    max-width: unset;
   }
 }
 
