@@ -1,5 +1,4 @@
 $d-blog-text-container-width: 35em !default;
-$d-blog-img-width-for-desktop: 41em !default; //make img width the same as text for desktop
 
 $d-blog-font-color: $color-odysseus !default;
 $d-blog-font-bold-color: $color-troilus !default;
@@ -64,7 +63,8 @@ article.node--type-blog-post {
     position: relative;
     background-color: $d-blog-under-background-color;
 
-    .field--name-field-blog-main-image {
+    .field--name-field-blog-main-image,
+    .field--name-field-blog-media-main-image {
       img {
         z-index: -3;
         filter: opacity($d-blog-image-opacity-for-blog);
@@ -174,7 +174,8 @@ article.node--type-blog-post {
   }
 
 
-  .field--name-field-blog-main-image {
+  .field--name-field-blog-main-image,
+  .field--name-field-blog-media-main-image  {
     img {
       width: 100vw;
       height: 100%;
@@ -265,7 +266,7 @@ article.node--type-blog-post {
     }
 
     .field--name-field-d-media-image img {
-      width: $d-blog-img-width-for-desktop;
+      font-size: $d-blog-text-font-size-desktop;
     }
   }
 

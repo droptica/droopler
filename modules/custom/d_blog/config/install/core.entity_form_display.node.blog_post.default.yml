@@ -4,11 +4,13 @@ dependencies:
   config:
     - field.field.node.blog_post.field_blog_category
     - field.field.node.blog_post.field_blog_main_image
+    - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
     - image.style.thumbnail
     - node.type.blog_post
   module:
+    - media_library
     - paragraphs
     - path
     - svg_image
@@ -25,7 +27,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_blog_category:
-    weight: 13
+    weight: 14
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -38,9 +40,16 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
+  field_blog_media_main_image:
+    type: media_library_widget
+    weight: 12
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
   field_blog_sections:
     type: entity_reference_paragraphs
-    weight: 12
+    weight: 13
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -112,7 +121,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     region: content
     third_party_settings: {  }
   url_redirects:

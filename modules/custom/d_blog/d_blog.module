@@ -26,6 +26,9 @@ function d_blog_theme($existing, $type, $theme, $path) {
     'field__node__field_blog_main_image__blog_post' => [
       'base hook' => 'field',
     ],
+    'field__node__field_blog_media_main_image__blog_post' => [
+      'base hook' => 'field',
+    ],
     'page__blog' => [
       'base hook' => 'page',
     ],

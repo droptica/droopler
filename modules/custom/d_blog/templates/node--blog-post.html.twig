@@ -73,6 +73,7 @@
 <article{{ attributes.addClass(classes) }}>
   <header class="blog-post-header">
     {{ content.field_blog_main_image }}
+    {{ content.field_blog_media_main_image }}
 
     <div class="blog-post-header-wrapper container">
       {% if display_submitted %}
@@ -95,6 +96,6 @@
     </div>
   </header>
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    {{ content|without('field_blog_main_image', 'field_blog_category') }}
+    {{ content|without('field_blog_main_image', 'field_blog_media_main_image', 'field_blog_category') }}
   </div>
 </article>
