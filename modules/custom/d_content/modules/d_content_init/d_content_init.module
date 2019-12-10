@@ -236,9 +236,15 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       $value['processed'] = TRUE;
       break;
     case 'field_p_configuration_storage':
+      $data = [];
       if (!empty($value['custom_class'])) {
-        $data = json_encode(['custom_class' => $value['custom_class']]);
-        $entity->set($name, $data);
+        $data += ['custom_class' => $value['custom_class']];
+      }
+      if (!empty($value['heading_type'])) {
+        $data += ['heading_type' => $value['heading_type']];
+      }
+      if (!empty($data)) {
+        $entity->set($name, json_encode($data));
       }
       $value['processed'] = TRUE;
       break;
