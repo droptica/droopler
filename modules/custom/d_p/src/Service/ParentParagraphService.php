@@ -8,9 +8,13 @@ use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 class ParentParagraphService {
 
   /**
-   * @param $mediaEntity
+   * Returns referencing field id (Example: paragraph.d_p_tiles.field_d_media_image)
+   *
+   * @param \Drupal\Core\Entity\ContentEntityInterface $mediaEntity
+   *   Media Entity to get parent field info.
    *
    * @return int|string|null
+   *   Id of field referencing passed entity.
    */
   public function getParentParagraphFieldId($mediaEntity) {
     $parentField = $this->getReferencingField($mediaEntity);
@@ -26,9 +30,13 @@ class ParentParagraphService {
   }
 
   /**
+   * Method return referencing field for passed media entity.
+   *
    * @param \Drupal\Core\Entity\ContentEntityInterface $mediaEntity
+   *   Media Entity to get parent field info.
    *
    * @return EntityReferenceItem|null
+   *   Field referencing passed media entity.
    */
   protected function getReferencingField(ContentEntityInterface $mediaEntity) {
     if ($mediaEntity && isset($mediaEntity->_referringItem) && method_exists($mediaEntity->_referringItem, 'getParent')) {
