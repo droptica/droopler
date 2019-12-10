@@ -169,6 +169,7 @@ abstract class ContentInitManagerBase {
   protected function saveEntity($entity_type, array $values) {
     $storage = $this->entityTypeManager->getStorage($entity_type);
     $entity = $storage->create($values);
+    $entity->setPublished();
     $entity->save();
     return $entity;
   }
