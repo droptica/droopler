@@ -5,6 +5,8 @@
  * d_content_init module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
@@ -45,11 +47,11 @@ function d_content_init_save_node($node_to_create) {
 /**
  * Save an entity.
  *
- * @param $entity_to_create
+ * @param array $entity_to_create
  *  Array with entity.
- * @param $entity_type
+ * @param string $entity_type
  *  Entity type.
- * @param $uuid
+ * @param string $uuid
  *  UUID of entity.
  *
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
@@ -65,7 +67,7 @@ function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
 /**
  * Fill the field.
  *
- * @param Drupal\Core\Entity\ContentEntityBase $entity
+ * @param Drupal\Core\Entity\EntityInterface $entity
  *  Entity object to set fields.
  *
  * @param string $name
@@ -73,50 +75,80 @@ function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
  *
  * @param array $value
  *  Field array (type and value).
- *
- * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_fill_field($entity, $name, $value) {
-
   // Allow other init modules to add their fields types.
-  \Drupal::moduleHandler()->alter('fill_field', $node, $name, $value);
+  \Drupal::moduleHandler()->alter('init_field', $entity, $name, $value);
 
-  switch ($value['type']) {
+  // If the field was not processed by any alter, use a standard field "set".
+  if (empty($value['processed'])) {
+    $entity->set($name, $value['data']);
+  }
+}
+
+/**
+ * Implements hook_init_field_alter().
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ * @param string $name
+ * @param array $value
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$value) {
+  /**
+   * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
+   */
+  $media_manager =  Drupal::service('d_content_init.manager_media');
+  $type = $value['type'] ?? '';
+  $data = $value['data'] ?? [];
+
+  // Alter fields by their type.
+  switch ($type) {
     case 'text':
     case 'text_long':
-      $entity->set($name, $value['data']);
+      $entity->set($name, $data);
       $entity->$name->format = 'full_html';
-      break;
-    case 'text_select':
-      $entity->set($name, $value['data']);
+      $value['processed'] = TRUE;
       break;
     case 'cta':
       $entity_attributes = [
-        'title' => $value['data']['text'],
-        'uri' => $value['data']['link'],
+        'title' => $data['text'] ?? '',
+        'uri' => $data['link'] ?? '',
+        'options' => [
+          'attributes' => [
+            'class' => 'btn btn-primary',
+          ],
+        ],
       ];
-      if (isset($value['data']['options'])) {
-        $entity_attributes['options'] = $value['data']['options'];
+      if (isset($data['options'])) {
+        $entity_attributes['options'] = $data['options'];
       }
       $entity->set($name, $entity_attributes);
+      $value['processed'] = TRUE;
       break;
     case 'file':
     case 'image':
-      // Convert short format to full.
-      if (!is_array($value['data'])) {
-        $value['data'] = [
-          ['file' => $value['data']],
+      // Convert short format to full (keep backward compatibility).
+      if (!is_array($data)) {
+        $files = [
+          ['file' => $data],
         ];
       }
+      else {
+        $files = $data;
+      }
+      $destination_dir = $value['dst_dir'] ?? '';
       // Add all files.
-      foreach ($value['data'] as $file) {
+      foreach ($files as $file) {
         /**
          * @var \Drupal\file\FileInterface $file_object
          */
-        $file_object = d_content_init_get_file($file['file']);
+        $file_object = d_content_init_get_file($file['file'], $destination_dir);
         if (!empty($file_object)) {
           $params = ["target_id" => $file_object->id()];
-          if ($value['type'] == 'image') {
+          if ($type == 'image') {
             if (!empty($file['alt'])) {
               $params["alt"] = $file['alt'];
             }
@@ -124,37 +156,65 @@ function d_content_init_fill_field($entity, $name, $value) {
           $entity->$name->appendItem($params);
         }
       }
+      $value['processed'] = TRUE;
       break;
     case 'paragraph_reference':
       if (empty($value['subtype'])) {
         $value['subtype'] = 'd_p_single_text_block';
       }
-      foreach ($value['data'] as $child) {
-        if($value['subtype'] == 'paragraphs_wrapper') {
-          $new_child['data'] = $child['data'];
-          $new_child['paragraph_type'] = $child['type'];
+      foreach ($data as $child) {
+        if ($value['subtype'] == 'paragraphs_wrapper') {
+          $new_child['data'] = $child['data'] ?? [];
+          $new_child['paragraph_type'] = $child['type'] ?? '';
         }
         else {
-          // @TODO fix this ugly fix of incorrect structure in array
           $new_child['data'] = $child;
-          $new_child['paragraph_type'] = $value['subtype'];
+          $new_child['paragraph_type'] = $value['subtype'] ?? '';
         }
         $child_paragraph = d_content_init_fill_paragraph($new_child);
         $entity->$name->appendItem($child_paragraph);
       }
+      $value['processed'] = TRUE;
+      break;
+    case 'media_image':
+      $destination_directory = $value['directory'] ?? '';
+      $files = $value['files'] ?? [];
+      foreach ($files as $file) {
+        $path = d_content_init_parse_file_path($file['path'] ?? '');
+        $alt = $file['alt'] ?? '';
+        $media_entity = $media_manager->createMediaImageFromFile($path, $destination_directory, $alt);
+        if ($entity) {
+          $entity->$name->appendItem($media_entity);
+        }
+        else {
+          \Drupal::logger('d_content_init')->error('Empty media reference in entity #@id of type "@type" (field "@field").', [
+            '@id' => $entity->id(),
+            '@type' => $entity->getEntityType(),
+            '@field' => $name,
+          ]);
+        }
+      }
+      $value['processed'] = TRUE;
       break;
     case 'entity_reference':
-      $entity->set($name, $value['data']);
-      break;
-    case 'boolean':
-      $entity->set($name, $value['data']);
-      break;
-    case 'number':
-      $entity->set($name, $value['data']);
+      if (isset($data['target_search'])) {
+        $target_entity_type = $data['target_type'] ?? 'node';
+        if ($target_entity = d_content_init_find_entity_by_properties($data['target_search'], $target_entity_type)) {
+          $entity->set($name, [['target_id' => $target_entity->id()]]);
+        }
+        else {
+          \Drupal::logger('d_content_init')->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
+            '@id' => $entity->id(),
+            '@type' => $entity->getEntityType(),
+            '@field' => $name,
+          ]);
+        }
+        $value['processed'] = TRUE;
+      }
       break;
     case 'taxonomy':
-      $vid = $value['data']['vid'];
-      foreach ($value['data']['terms'] as $term_name) {
+      $vid = $data['vid'] ?? NULL;
+      foreach ($data['terms'] as $term_name) {
         $terms = taxonomy_term_load_multiple_by_name($term_name, $vid);
 
         if (empty($terms)) {
@@ -173,6 +233,20 @@ function d_content_init_fill_field($entity, $name, $value) {
           $entity->$name->appendItem($term->id());
         }
       }
+      $value['processed'] = TRUE;
+      break;
+    case 'field_p_configuration_storage':
+      $data = [];
+      if (!empty($value['custom_class'])) {
+        $data += ['custom_class' => $value['custom_class']];
+      }
+      if (!empty($value['heading_type'])) {
+        $data += ['heading_type' => $value['heading_type']];
+      }
+      if (!empty($data)) {
+        $entity->set($name, json_encode($data));
+      }
+      $value['processed'] = TRUE;
       break;
   }
 }
@@ -221,13 +295,21 @@ function d_content_init_add_node($params) {
   $page_array = Yaml::decode(file_get_contents($params['file']));
   $nid = d_content_init_save_node($page_array);
 
+  // Set homepage.
+  if ($homepage = isset($page_array['info']['homepage'])) {
+    if ($homepage) {
+      $config = \Drupal::configFactory()->getEditable('system.site');
+      $config->set('page.front', '/node/' . $nid)->save();
+    }
+  }
+
   // If title is not empty add menu link.
   if (!empty($params['link'])) {
     $config = [
       'title' => $params['link'],
       'link' => ['uri' => 'entity:node/' . $nid],
-      'menu_name' => 'main',
-      'weight' => $params['weight'],
+      'menu_name' => $params['menu'] ?? 'main',
+      'weight' => $params['weight'] ?? 0,
       'expanded' => !empty($params['children'])
     ];
 
@@ -273,10 +355,32 @@ function d_content_init_add_nodes($structure) {
  *  File path:
  *  - "file.jpg" for files inside d_content_init
  *  - "example_init/file.jpg" for files inside example_init module
+ * @param string $dst_dir
+ *  File destination directory in public files directory.
  *
- * @return \Drupal\file\FileInterface
+ * @return \Drupal\file\FileInterface|FALSE
+ *   A file entity, or FALSE on error.
  */
-function d_content_init_get_file($path) {
+function d_content_init_get_file($path, $dst_dir = NULL) {
+  // Prepare destination directory.
+  $directory = 'public://';
+  $dst_dir = trim($dst_dir, '/');
+  if (!empty($dst_dir)) {
+    $directory .= $dst_dir . '/';
+    if (!Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
+      Drupal::logger('file')->warning('Directory %directory could not be created or is not accessible.', ['%directory' => $directory]);
+      return FALSE;
+    }
+  }
+
+  // Save the file.
+  $data = file_get_contents(d_content_init_parse_file_path($path));
+  $filename = basename($path);
+  $image = file_save_data($data, $directory . $filename, FileSystemInterface::EXISTS_REPLACE);
+  return $image;
+}
+
+function d_content_init_parse_file_path($path) {
   // Check if image name contains module.
   $parts = explode('/', $path);
   if (count($parts) == 2) {
@@ -284,14 +388,33 @@ function d_content_init_get_file($path) {
     $filename = $parts[1];
   }
   else {
+    // In case there is no module name specified in path, use placeholder file.
     $dir = drupal_get_path('module', 'd_content_init');
-    $filename = $path;
+    $filename = 'placeholder.png';
   }
 
-  // Save the file.
-  $data = file_get_contents("$dir/assets/$filename");
-  $image = file_save_data($data, 'public://' . $filename, FILE_EXISTS_REPLACE);
-  return $image;
+  return "$dir/assets/$filename";
+}
+
+/**
+ * Search for entity by its properties
+ *
+ * @param array $properties
+ *   Array of the properties.
+ * @param string $entity_type
+ *   Type of the entity to find.
+ *
+ * @return bool|\Drupal\Core\Entity\EntityInterface|FALSE
+ *   First found entity or FALSE.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function d_content_init_find_entity_by_properties(array $properties, $entity_type = 'node') {
+  $entities = \Drupal::entityTypeManager()
+    ->getStorage($entity_type)
+    ->loadByProperties($properties);
+  return $entities ? reset($entities) : FALSE;
 }
 
 /**
@@ -300,63 +423,31 @@ function d_content_init_get_file($path) {
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_create_all() {
-  // Set default structure.
-  $path = drupal_get_path('module', 'd_content_init') . '/pages';
-  $structure = [
-    'homepage' => ['file' => "$path/homepage.yml"],
-    'examples' => ['file' => "$path/examples.yml", 'link' => 'Examples', 'weight' => 20, 'children' => [
-      'business' => ['file' => "$path/business.yml", 'link' => 'Local Business Website', 'weight' => 10],
-      'event' => ['file' => "$path/event.yml", 'link' => 'Event Website', 'weight' => 20],
-      'product' => ['file' => "$path/product.yml", 'link' => 'Product Landing Page', 'weight' => 30],
-      'portfolio' => ['file' => "$path/portfolio.yml", 'link' => 'Portfolio Website', 'weight' => 40],
-      'educational' => ['file' => "$path/educational.yml", 'link' => 'Educational Website', 'weight' => 50],
-    ]],
-    'documentation' => ['file' => "$path/documentation.yml", 'link' => 'Docs', 'weight' => 30, 'children' => [
-      'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
-      'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
-      'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
-      'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
-      'd_p_sidebar_image' => ['file' => "$path/d_p_sidebar_image.yml", 'link' => 'Sidebar Image Paragraph', 'weight' => 40],
-      'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
-      'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
-      'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
-      'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
-      'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
-      'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
-      'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
-      'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
-    ]],
-    'contact' => ['file' => "$path/contact.yml", 'link' => 'Contact', 'weight' => 40],
-  ];
-
-  // Allow other modules to modify the structure.
+  $module_handler = \Drupal::moduleHandler();
   $context = 'all';
-  \Drupal::moduleHandler()->alter('content_structure', $structure, $context);
 
-  d_content_init_add_nodes($structure);
-}
+  // Define content structure, allow other modules to modify it and create content.
+  $content_structure = [];
+  $module_handler->alter('content_structure', $content_structure, $context);
+  d_content_init_add_nodes($content_structure);
 
-/**
- * Add footer to the website.
- *
- * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
- * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
- * @throws \Drupal\Core\Entity\EntityStorageException
- */
-function d_content_init_add_footer() {
-  // Footer block.
-  $config = \Drupal::config('system.site');
-  $footer = [
-    'info' => 'Footer',
-    'type' => 'content_block',
-    'field_d_main_title' => $config->get('name'),
-    'field_d_long_text' => $config->get('slogan'),
-  ];
-  d_content_init_save_entity($footer, 'block_content', '092dd69e-c6c4-4f0a-9780-ec15b89ec5b5');
+  // Define block structure, allow other modules to modify it and create blocks.
+  $block_structure = [];
+  $module_handler->alter('block_structure', $block_structure, $context);
+  Drupal::service('d_content_init.manager_block')->importFromFiles($block_structure);
+
+  // Define media structure, allow other modules to modify it and create media entities.
+  $media_structure = [];
+  $module_handler->alter('media_structure', $media_structure, $context);
+  Drupal::service('d_content_init.manager_media')->importFromFiles($media_structure);
 }
 
 /**
  * Removes all the content and recreates it again.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_recreate_content() {
   $storage = \Drupal::entityTypeManager()->getStorage('node');

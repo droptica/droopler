@@ -20,14 +20,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_d_blog_category:
-    weight: 31
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   langcode:
     type: language_select
     weight: 2
@@ -49,7 +41,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
+    third_party_settings: {  }
   translation:
     weight: 10
     region: content
-hidden: {  }
+hidden:
+  field_d_blog_category: true

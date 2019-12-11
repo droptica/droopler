@@ -8,7 +8,8 @@ Styleguide 2.10
 $d-p-subscribe-color: $color-odysseus !default;
 $d-p-subscribe-header-color: $color-odysseus !default;
 $d-p-subscribe-background: $color-agamemnon !default;
-$d-p-subscribe-line-color: $line-background !default;
+$d-p-subscribe-line-color: $color-nestor !default;
+$d-p-subscribe-line-color-inverted: $line-background !default;
 
 // Padding, margins & sizing.
 $d-p-subscribe-form-margin: 2.2rem auto 1.25rem auto !default;
@@ -17,7 +18,6 @@ $d-p-subscribe-mobile-form-max-width: 31.25rem !default;
 $d-p-subscribe-mobile-form-margin-y: 3% !default;
 $d-p-subscribe-padding-y: 8% !default;
 $d-p-subscribe-line-margin-top: 1.45rem !default;
-$d-p-subscribe-line-margin-bottom: $line-center-margin-bottom !default;
 
 // Other settings.
 $d-p-subscribe-img-opacity: 0.4 !default;
@@ -83,20 +83,17 @@ $d-p-subscribe-img-opacity: 0.4 !default;
   a {
     color: $d-p-subscribe-color;
   }
-  .field--name-field-d-icon {
+  .field--name-field-d-media-icon {
     text-align: center;
   }
-  h2 {
+  .field--name-field-d-main-title {
     @include font-main-header;
     color: $d-p-subscribe-header-color;
     text-align: center;
 
     // Horizontal line
     &:after {
-      @include decoration-header-line-main-center;
-      margin-top: $d-p-subscribe-line-margin-top;
-      margin-bottom: $d-p-subscribe-line-margin-bottom;
-      color: $d-p-subscribe-line-color;
+      @include decoration-header-line-main-center($d-p-subscribe-line-color, $d-p-subscribe-line-color-inverted);
     }
   }
   p {

@@ -51,6 +51,7 @@
  * - page.footer_third: Items for the third footer column.
  * - page.footer_fourth: Items for the fourth footer column.
  * - page.footer_fifth: Items for the fifth footer column.
+ * - page.footer_sixth: Items for the footer_sixth footer column.
  * - page.breadcrumb: Items for the breadcrumb region.
  *
  * Theme variables:
@@ -63,125 +64,48 @@
  * @see html.html.twig
  */
 #}
-<div id="page-wrapper" class="page-wrapper">
-  <header id="header" class="header" role="banner"
-          aria-label="{{ 'Site header'|t }}">
-    {% block head %}
-      <nav{{ navbar_attributes }}>
-        <div class="container no-padding-sm">
-          <div class="navbar-brand">
-            {{ page.header }}
-          </div>
-          {% if page.primary_menu or page.lang_menu %}
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarNav" aria-controls="navbarNav"
-                    aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <nav class="navbar navbar-expand-lg">
-              <div class="collapse navbar-collapse" id="navbarNav">
-                {% if page.primary_menu %}
-                  <div class="menu-region">{{ page.primary_menu }}</div>
+{% extends "@droopler_theme/layout/page.html.twig" %}
+
+{% block content %}
+
+  {% include "@droopler_theme/misc/listing-header.html.twig" with {
+    'header_class': 'products-header-wrapper',
+    'title': page['#title']
+  } %}
+
+  <div{{ main_attributes }}>
+    <div class="row clearfix">
+    {{ page.breadcrumb }}
+      <main class="main-content">
+        <section class="section">
+          <a id="main-content" tabindex="-1"></a>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-3 filters">
+                {% if page.facets_left_top %}
+                  {{ page.facets_left_top }}
                 {% endif %}
-                {% if  page.lang_menu %}
-                  <div class="lang-region">{{ page.lang_menu }}</div>
-                {% endif %}
+                {{ page.facets_left }}
               </div>
-            </nav>
-          {% endif %}
-        </div>
-      </nav>
-    {% endblock %}
-  </header>
-
-  {% if page.highlighted %}
-    <div class="highlighted">
-      <aside class="{{ container }} section clearfix" role="complementary">
-        {{ page.highlighted }}
-      </aside>
-    </div>
-  {% endif %}
-  {% if page.featured_top %}
-    {% block featured %}
-      <div class="featured-top">
-        <aside class="featured-top__inner section {{ container }} clearfix"
-               role="complementary">
-          {{ page.featured_top }}
-        </aside>
-      </div>
-    {% endblock %}
-  {% endif %}
-  {% if page.admin_tabs %}
-    <div class="admin_tabs container">
-      {{ page.admin_tabs }}
-    </div>
-  {% endif %}
-  <div id="main-wrapper" class="layout-main-wrapper clearfix">
-    {% block content %}
-      <div{{ main_attributes }}>
-        <div class="row clearfix">
-        {{ page.breadcrumb }}
-          <main class="main-content">
-            <section class="section">
-              <a id="main-content" tabindex="-1"></a>
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-3 filters">
-                    {% if page.facets_left_top %}
-                      {{ page.facets_left_top }}
+              <div class="col-lg-9 product-listing">
+                <div class="top-product-info row">
+                  <div class="d-none d-lg-block col-sm-6 col-lg-8 product-item-counter">
+                    {%  if pager_total_items %}
+                      <strong>{{ pager_total_items }} </strong> {{ 'Products'|trans }}
                     {% endif %}
-                    {{ page.facets_left }}
                   </div>
-                  <div class="col-lg-9 product-listing">
-                    <div class="top-product-info row">
-                      <div class="d-none d-lg-block col-sm-6 col-lg-8 product-item-counter">
-                        {%  if pager_total_items %}
-                          <strong>{{ pager_total_items }} </strong> {{ 'Products'|trans }}
-                        {% endif %}
-                      </div>
-                      <div class="col-lg-4 top-product-info-sort-wrapper">
-                          {{ page.facets_top }}
-                      </div>
-                    </div>
-
-                    {{ page.content }}
+                  <div class="col-lg-4 top-product-info-sort-wrapper">
+                      {{ page.facets_top }}
                   </div>
                 </div>
-              </div>
-            </section>
-          </main>
-        </div>
-      </div>
-    {% endblock %}
-  </div>
-  {% if page.featured_bottom_first or page.featured_bottom_second or page.featured_bottom_third %}
-    <div class="featured-bottom">
-      <aside class="{{ container }} clearfix" role="complementary">
-        {{ page.featured_bottom_first }}
-        {{ page.featured_bottom_second }}
-        {{ page.featured_bottom_third }}
-      </aside>
-    </div>
-  {% endif %}
-  <footer class="site-footer">
-    {% block footer %}
-      <div class="{{ container }}">
-        {{ page.footer_main }}
-        {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
-          <div class="site-footer__top clearfix">
-            {{ page.footer_first }}
-            {{ page.footer_second }}
-            {{ page.footer_third }}
-            {{ page.footer_fourth }}
-          </div>
-        {% endif %}
-        {% if page.footer_fifth %}
-          <div class="site-footer__bottom">
-            {{ page.footer_fifth }}
-          </div>
-        {% endif %}
-      </div>
-    {% endblock %}
-  </footer>
 
-</div>
+                {{ page.content|without('pagetitle') }}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+{% endblock %}

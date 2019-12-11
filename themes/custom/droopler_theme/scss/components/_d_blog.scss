@@ -1,19 +1,20 @@
 $d-blog-text-container-width: 35em !default;
-$d-blog-img-width-for-desktop: 41em !default; //make img width the sames as text for desktop
 
 $d-blog-font-color: $color-odysseus !default;
+$d-blog-font-bold-color: $color-troilus !default;
 $d-blog-headers-color: $color-cassandra !default;
-$d-blog-under-background-color: $color-cassandra !default; // color when image is not
+$d-blog-under-background-color: $color-cassandra !default; // color when there's not image
 $d-blog-color-taxonomy-in-header: $color-aeneas !default;
 
 $d-blog-image-opacity-for-blog: 50% !default;
 
 $d-blog-margin-between-html-paragraphs: 1.5rem !default;
 $d-blog-margin-between-blog-sections: 3rem !default;
-$d-blog-header-padding: 0.625rem !default;
 $d-blog-header-margin-mobile: 0.9375rem auto 0.9375rem !default;
 $d-blog-header-margin-tablet: 1.5625rem auto 1.375rem !default;
 $d-blog-header-margin-dekstop: 1.5625rem auto 2.1875rem !default;
+$d-blog-teaser-small-text-area-padding-xy: 30px !default;
+$d-blog-teaser-small-padding-y: 20px !default;
 $d-blog-header-desktop-font-size: 3rem !default;
 $d-blog-header-small-desktop-screen-font-size: 2.375rem !default;
 $d-blog-header-tablet-font-size: 1.625rem !default;
@@ -42,21 +43,21 @@ $d-blog-header-text-distance-from-bottom: -0.25rem !default;
 $d-blog-header-text-distance-from-top-mobile: 40% !default;
 $d-blog-size-of-large-desktop: 1400px !default;
 
-.node--type-blog-post {
+.article.node--type-blog-post,
+article.node--type-blog-post {
 
-  #main {
-    margin: 0 ! important;
-    max-width: 100vw;
-  }
-
-  .node .field--type-image {
+  .field--type-image {
     float: none;
     margin-right: 0;
   }
+  .field--type-entity-reference {
+    margin-bottom: 0;
+  }
 
-  .blog_post_header {
+  .blog-post-header {
     z-index: 1;
     min-height: $d-blog-header-min-height-mobile;
+    overflow: hidden;
 
     img {
       min-height: $d-blog-image-header-min-height;
@@ -66,22 +67,21 @@ $d-blog-size-of-large-desktop: 1400px !default;
     position: relative;
     background-color: $d-blog-under-background-color;
 
-    .field--name-field-blog-main-image {
+    .field--name-field-blog-media-main-image {
       img {
         z-index: -3;
         filter: opacity($d-blog-image-opacity-for-blog);
       }
     }
 
-    .blog_post_header_absolute_wrapper {
+    .blog-post-header-wrapper {
       color: $d-blog-font-color;
       position: absolute;
       bottom: $d-blog-header-text-distance-from-bottom;
-      width: 100%;
+      left: 50%;
       text-align: center;
-      padding-left: $d-blog-header-padding;
-      padding-right: $d-blog-header-padding;
       word-wrap: break-word;
+      transform: translateX(-50%);
 
       h1 {
         font-size: $d-blog-header-desktop-font-size;
@@ -126,7 +126,7 @@ $d-blog-size-of-large-desktop: 1400px !default;
     }
 
     @media all and (min-width: map-get($container-max-widths, xl))  and (max-width: $d-blog-size-of-large-desktop) {
-      .blog_post_header_absolute_wrapper {
+      .blog-post-header-wrapper {
         h1 {
           font-size: $d-blog-header-small-desktop-screen-font-size;
         }
@@ -134,7 +134,7 @@ $d-blog-size-of-large-desktop: 1400px !default;
     }
 
     @include media-breakpoint-down(lg) {
-      .blog_post_header_absolute_wrapper {
+      .blog-post-header-wrapper {
 
         bottom: 0;
         h1 {
@@ -154,10 +154,9 @@ $d-blog-size-of-large-desktop: 1400px !default;
   }
 
   @include media-breakpoint-down(xs)  {
-    .blog_post_header {
-      .blog_post_header_absolute_wrapper {
+    .blog-post-header {
+      .blog-post-header-wrapper {
         top: $d-blog-header-text-distance-from-top-mobile;
-        transform: translateY(-50%);
         h1 {
           font-size: $d-blog-header-mobile-font-size;
           margin: $d-blog-header-margin-mobile;
@@ -171,11 +170,14 @@ $d-blog-size-of-large-desktop: 1400px !default;
 
     p {
       margin-bottom: $d-blog-margin-between-html-paragraphs;
+      b, strong {
+        color: $d-blog-font-bold-color;
+      }
     }
   }
 
 
-  .field--name-field-blog-main-image {
+  .field--name-field-blog-media-main-image  {
     img {
       width: 100vw;
       height: 100%;
@@ -187,14 +189,14 @@ $d-blog-size-of-large-desktop: 1400px !default;
     img {
       width: 100%;
     }
-    .field--name-field-d-image {
+    .field--name-field-d-media-image {
       img {
         width: 100vw;
       }
     }
   }
 
-  .field--name-field-d-image {
+  .field--name-field-d-media-image {
     margin: $d-blog-image-margin;
     display: block;
     img {
@@ -238,7 +240,7 @@ $d-blog-size-of-large-desktop: 1400px !default;
         font-size: $d-blog-smaller-header-font-size-blog-text-mobile;
       }
     }
-    .field--name-field-d-image {
+    .field--name-field-d-media-image {
       img {
         width: 100%;
       }
@@ -246,6 +248,9 @@ $d-blog-size-of-large-desktop: 1400px !default;
     .field--name-field-blog-sections {
       p {
         font-size: $d-blog-text-font-size-mobile;
+        b, strong {
+          color: $d-blog-font-bold-color;
+        }
       }
 
     }
@@ -254,25 +259,65 @@ $d-blog-size-of-large-desktop: 1400px !default;
   @include media-breakpoint-up(lg) {
     .field--name-field-d-long-text {
       font-size: $d-blog-text-font-size-desktop;
-      p {
+      p, a, ul, li {
         font-size: $d-blog-text-font-size-desktop;
+        b, strong {
+          color: $d-blog-font-bold-color;
+        }
       }
     }
 
-    .field--name-field-d-image img {
-      width: $d-blog-img-width-for-desktop;
+    .field--name-field-d-media-image img {
+      font-size: $d-blog-text-font-size-desktop;
     }
   }
 
   @include media-breakpoint-up(xl) {
-    .blog_post_header {
+    .blog-post-header {
       min-height: $d-blog-header-min-height-small-desktop;
     }
   }
 
   @media all and (min-width: $d-blog-size-of-large-desktop)  {
-    .blog_post_header {
+    .blog-post-header {
       min-height: $d-blog-header-min-height-big-desktop;
+    }
+  }
+
+  &.node--view-mode-teaser-small {
+    .box {
+      .field--type-image {
+        margin: 0;
+      }
+      .text-area {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        color: $color-odysseus;
+        background: $color-hecuba;
+        padding-top: $d-blog-teaser-small-text-area-padding-xy;;
+        padding-bottom: $d-blog-teaser-small-text-area-padding-xy;
+        padding-left: $d-blog-teaser-small-text-area-padding-xy;
+        padding-right: $d-blog-teaser-small-text-area-padding-xy;
+        .field--name-field-blog-teaser {
+          padding-top: $d-blog-teaser-small-padding-y;
+          padding-bottom: $d-blog-teaser-small-padding-y;
+        }
+        a {
+          color: $color-odysseus;
+          &:hover {
+            color: $color-odysseus;
+          }
+          &.link {
+            text-transform: uppercase;
+            color: $color-patroclus;
+          }
+        }
+        .node__title {
+          font-size: initial;
+          margin: 0;
+        }
+      }
     }
   }
 }

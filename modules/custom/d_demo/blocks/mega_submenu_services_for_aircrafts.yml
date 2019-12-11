@@ -1,0 +1,36 @@
+info:
+  type: block_content
+  bundle: content_block
+  title: 'Mega Menu For Aircrafts'
+
+# Placement of the block in region.
+placement:
+  langcode: en
+  settings:
+    status: false
+    provider: block_content
+
+# Content block fields.
+fields:
+  field_d_main_title:
+    type: text
+    data: 'For aircrafts'
+  field_d_long_text:
+    type: text_long
+    data:
+      - value: "<ul><li><a href='/ad-hoc-engine-repairs'>Ad-hoc engine repairs</a></li><li><a href='/engine-overhaul'>Engine overhaul</a></li><li><a href='/monitoring-and-assessment'>Monitoring and assessment</a></li></ul>"
+        format: full_html
+
+# Mega menu configuration.
+we_megamenu:
+  menu_name: main
+  parent_title: "Services"
+  row: 0
+  col: 2
+  col_config:
+    hidewhencollapse: ""
+    type: "we-mega-menu-col"
+    width: 3
+    class: ""
+    block_title: 0
+

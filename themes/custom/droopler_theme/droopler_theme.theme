@@ -54,11 +54,7 @@ function droopler_theme_preprocess_page(&$variables) {
     'role' => ['main'],
   ];
 
-  // Make some exceptions for nodes with paragraphs or pages of given route.
-  $currentRoute = \Drupal::routeMatch()->getRouteName();
-  $nodeCheck = !empty($variables['node']) && method_exists($variables['node'], 'getType') && in_array($variables['node']->getType(), ['content_page', 'blog_post']);
-  $routeCheck = $currentRoute == 'd_p_subscribe_file.downloadfile.checkLink';
-  if ($nodeCheck || $routeCheck) {
+  if (droopler_theme_is_special_route()) {
     $main_attributes['class'] = ['container-fluid'];
     $main_content_attributes['class'] = ['main-content'];
   }
@@ -69,6 +65,15 @@ function droopler_theme_preprocess_page(&$variables) {
   $variables['main_attributes'] = new Attribute($main_attributes);
   $variables['main_content_attributes'] = new Attribute($main_content_attributes);
   $variables['content_attributes'] = new Attribute($content_attributes);
+
+  $footer_regions = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
+  $filled_regions = [];
+  foreach ($footer_regions as $region) {
+    if (!empty($variables['page']['footer_' . $region])) {
+      $filled_regions[] = 'footer_' . $region;
+    }
+  }
+  $variables['filled_regions'] = $filled_regions;
 }
 
 /**
@@ -101,8 +106,8 @@ function droopler_theme_preprocess_form_element(&$variables) {
     $variables['input_title'] = $variables['label']['#title'];
   }
   if (!empty($variables['input_title'])) {
-    $allowedTags = '<p><a><img><span><blockquote><b><strong><i><em><u>';
-    $variables['input_title'] = strip_tags($variables['input_title'], $allowedTags);
+    $allowed_tags = '<p><a><img><span><blockquote><b><strong><i><em><u>';
+    $variables['input_title'] = strip_tags($variables['input_title'], $allowed_tags);
   }
   if (isset($variables['element']['#attributes'])) {
     $variables['input_attributes'] = new Attribute($variables['element']['#attributes']);
@@ -143,10 +148,10 @@ function droopler_theme_theme_suggestions_form_alter(array &$suggestions, array 
  * Implements hook_theme_suggestions_page_alter.
  */
 function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
-  $routeMatch = \Drupal::routeMatch();
-  if ($routeMatch->getRouteName() == 'entity.taxonomy_term.canonical') {
+  $route_match = \Drupal::routeMatch();
+  if ($route_match->getRouteName() == 'entity.taxonomy_term.canonical') {
     $storage = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term');
-    $tid = $routeMatch->getRawParameter('taxonomy_term');
+    $tid = $route_match->getRawParameter('taxonomy_term');
     $term = $storage->load($tid);
     $suggestions[] = 'page__taxonomy__term__' . $term->getVocabularyId();
   }
@@ -158,37 +163,57 @@ function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array 
 function droopler_theme_preprocess_input(&$variables) {
   // For submit elements.
   if ($variables['element']['#type'] == 'submit') {
-    // If button has some class.
-    if (is_object($variables['attributes']['class'])) {
-      // If there is no .btn-{type} class.
-      if (empty(array_intersect([
-        'btn-primary',
-        'btn-secondary',
-        'btn-success',
-        'btn-warning',
-        'btn-danger',
-        'btn-link',
-      ], $variables['attributes']['class']->value()))
-      ) {
-        $variables['attributes']['class']->addClass('btn-primary');
-      }
-      // If there is no .btn class.
-      if (!in_array('btn', $variables['attributes']['class']->value())) {
-        $variables['attributes']['class']->addClass('btn');
-      }
-    }
-    // If there are no classes at all.
-    else {
-      $variables['attributes']['class'][] = 'btn';
-      $variables['attributes']['class'][] = 'btn-primary';
 
+    // If button has some class.
+    if (is_object($variables['attributes'])) {
+      $classes = $variables['attributes']['class']->value();
+    }
+    else {
+      $classes = $variables['attributes']['class'] ?? [];
+    }
+
+    // Skip when no-bootstrap class is set.
+    if (in_array('no-bootstrap', $classes)) {
+      return;
+    }
+
+    // If there is no .btn class - add it.
+    if (!in_array('btn', $classes)) {
+      $classes[] = 'btn';
+    }
+
+    // If there is no .btn-{type} class.
+    $btn_styles = [
+      'btn-primary',
+      'btn-secondary',
+      'btn-success',
+      'btn-warning',
+      'btn-danger',
+      'btn-link',
+    ];
+    if (empty(array_intersect($btn_styles, $classes))) {
+      $classes[] = 'btn-primary';
+    }
+
+    // Remove default .button class.
+    $key = array_search('button', $classes);
+    if ($key !== FALSE) {
+      unset($classes[$key]);
+    }
+
+    if (!is_object($variables['attributes'])) {
+      $variables['attributes']['class'] = $classes;
       $variables['attributes'] = new Attribute($variables['attributes']);
+    }
+    else {
+      $variables['attributes']->removeAttribute('class');
+      $variables['attributes']->addClass($classes);
     }
   }
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_HOOK() for pager.
  */
 function droopler_theme_preprocess_pager(&$variables) {
   // Next.
@@ -226,7 +251,7 @@ function droopler_theme_preprocess_pager(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_HOOK() for mini pager.
  */
 function droopler_theme_preprocess_views_mini_pager(&$variables) {
   // Next.
@@ -246,10 +271,95 @@ function droopler_theme_preprocess_views_mini_pager(&$variables) {
 /**
  * Implements hook_preprocess_field() for HTML document templates.
  */
-function droopler_subtheme_preprocess_field(&$variables) {
-  if ($variables['field_name'] == 'field_product_image') {
+function droopler_theme_preprocess_field(&$variables) {
+  if ($variables['field_name'] == 'field_d_product_media') {
     $variables['#attached']['library'][] = 'd_product/d_product_slider';
     $slider = views_embed_view('product_images', 'block_1');
     $variables['slider'] = render($slider);
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for block.
+ */
+function droopler_theme_preprocess_block(&$variables) {
+  if ($variables['base_plugin_id'] == 'page_title_block') {
+    $variables['show_title'] = droopler_theme_show_title_block();
+
+    if (droopler_theme_is_special_route()) {
+      $variables['attributes']['class'][] = 'container';
+    }
+  }
+}
+
+/**
+ * Check if current route is node with paragraphs or other defined route.
+ *
+ * @return bool
+ *   True if it matches special criteria.
+ */
+function droopler_theme_is_special_route() {
+  $route = \Drupal::routeMatch();
+  $route_name = $route->getRouteName();
+  $node = $route->getParameter('node');
+  $node_check = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
+  $route_check = $route_name == 'd_p_subscribe_file.downloadfile.checkLink';
+
+  return ($node_check || $route_check);
+}
+
+/**
+ * Checks if title block should not be displayed.
+ *
+ * @return bool
+ *   True if it matches special criteria.
+ */
+function droopler_theme_show_title_block() {
+  $route = \Drupal::routeMatch();
+  $route_name = $route->getRouteName();
+  $node = $route->getParameter('node');
+  $node_check = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
+  $route_check = $route_name == 'view.blog_listing.page_1';
+
+  return !($node_check || $route_check);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for we_megamenu_li.
+ */
+function droopler_theme_preprocess_we_megamenu_li(&$variables) {
+  if (isset($variables['content']['#item_config'])
+    && isset($variables['content']['#item_config']->rows_content)) {
+    foreach ($variables['content']['#item_config']->rows_content as $rows) {
+      foreach ($rows as $col) {
+        if (isset($col->col_content->block_id)) {
+          $variables['attributes']['class'][] = 'mega';
+          break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function droopler_theme_library_info_alter(&$libraries, $extension) {
+  if ($extension == 'we_megamenu' && isset($libraries['form.we-mega-menu-frontend'])) {
+    $cssMegaMenu = $libraries['form.we-mega-menu-frontend']['css']['theme'] ?? [];
+
+    foreach ($cssMegaMenu as $path => $properties) {
+      if (stripos($path, 'bootstrap') !== FALSE) {
+        unset($libraries['form.we-mega-menu-frontend']['css']['theme'][$path]);
+      }
+    }
+
+    $jsMegaMenu = $libraries['form.we-mega-menu-frontend']['js'] ?? [];
+    foreach ($jsMegaMenu as $path => $properties) {
+      if (stripos($path, 'we_megamenu_frontend.js') !== FALSE) {
+        unset($libraries['form.we-mega-menu-frontend']['js'][$path]);
+      }
+    }
+  }
+}
+

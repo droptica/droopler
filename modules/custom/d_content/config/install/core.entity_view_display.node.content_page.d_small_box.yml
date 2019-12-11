@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.d_small_box
+    - field.field.node.content_page.field_page_section
+    - field.field.node.content_page.field_teaser_media_image
+    - field.field.node.content_page.field_teaser_text
+    - image.style.small_box_image
+    - node.type.content_page
+  module:
+    - media
+    - user
+id: node.content_page.d_small_box
+targetEntityType: node
+bundle: content_page
+mode: d_small_box
+content:
+  field_teaser_media_image:
+    type: media_thumbnail
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      image_style: small_box_image
+      image_link: content
+    third_party_settings: {  }
+hidden:
+  field_page_section: true
+  field_teaser_text: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

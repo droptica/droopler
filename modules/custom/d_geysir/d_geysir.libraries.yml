@@ -1,14 +1,15 @@
-overrides:
+media:
   version: VERSION
   css:
     theme:
-      css/d_geysir.overrides.css: {}
+      css/d_geysir.media.css: {}
   dependencies:
     - geysir/geysir
 
 toggle_link:
   version: VERSION
   js:
+    js/d_geysir.js: {}
     js/d_geysir.toggle.js: {}
   css:
     theme:

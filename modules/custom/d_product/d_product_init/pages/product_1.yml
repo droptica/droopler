@@ -1,40 +1,35 @@
 info:
   type: d_product
-  title: Front Brown Natual Leather Seats for BMW Series 5 M 2012-2013 Before FL
-field_product_image:
-  type: image
-  data:
-    - file: demo_car_5.jpg
+  title: Super Charged Engine v12
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_product_init/d_product_init_super-charged-engine-1.jpg
       alt: Title / Subtitle
-    - file: demo_car_2.jpg
+    - path: d_product_init/d_product_init_super-charged-engine-2.jpg
       alt: Title / Subtitle
-    - file: demo_car_1.jpg
+    - path: d_product_init/d_product_init_super-charged-engine-3.jpg
       alt: Title / Subtitle
-    - file: demo_car_6.jpg
-      alt: Title / Subtitle
-    - file: demo_car_7.jpg
+    - path: d_product_init/d_product_init_super-charged-engine-4.jpg
       alt: Title / Subtitle
 body:
   type: text
-  data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
-    a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
-    Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
+  data: Modern automotive engine for sports vehicles. Excellent performance with moderate fuel consumption.
 field_product_categories:
   type: taxonomy
   data:
     vid: d_product_categories
     terms:
-      - Car Parts
+      - Car Engines
 field_tags:
   type: taxonomy
   data:
     vid: tags
     terms:
-      - Seats
-      - Leather
-      - Moto
+      - Cars
 field_d_product_link:
   type: cta
   data:
-    link: http://example.com/
+    link: #
     text: Buy now

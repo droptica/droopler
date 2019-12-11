@@ -4,13 +4,17 @@ description: 'Provides a paragraph with subscribe file.'
 type: module
 dependencies:
   - content_translation
+  - d_media
   - d_p
+  - d_p_subscribe_file
   - field
   - file
-  - image
   - language
+  - media_library
   - paragraphs
-  - svg_image
   - text
+  - user
+  - views
 package: Paragraphs
-version: 8.x-1.4
+version: 8.x-2.0
+core_incompatible: false

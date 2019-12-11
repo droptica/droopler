@@ -1,5 +1,5 @@
 @mixin btn-slider-navigation-next {
-  z-index: 100;
+  z-index: 1;
   height: 2.5rem;
   width: 2.5rem;
   background: $white;
@@ -18,7 +18,7 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-    z-index: 3;
+    z-index: 1;
   }
 }
 
@@ -71,7 +71,6 @@
     @include btn-slider-navigation-prev();
     padding-left: 0.3rem;
     margin-left: 1rem;
-    z-index: 999;
     left: 0;
   }
   .slick-next {

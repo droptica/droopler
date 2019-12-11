@@ -6,11 +6,6 @@
 $node-thumbnail-title-link-color: $black !default;
 $node-thumbnail-margin-bottom: 15px !default;
 
-.node__content {
-  font-size: 1.071em;
-  margin-top: 10px;
-}
-
 /* View mode teaser styles. */
 .node--view-mode-teaser {
   border-bottom: 1px solid #d3d7d9;
@@ -91,10 +86,16 @@ $node-thumbnail-margin-bottom: 15px !default;
 }
 
 /* Unpublished node styles. */
-.node--unpublished {
-  padding: 20px 15px 0;
-}
 .node--unpublished .comment-text .comment-arrow {
   border-left: 1px solid #fff4f4;
   border-right: 1px solid #fff4f4;
+}
+.unpublished-message {
+  text-align: center;
+  background: $danger;
+  display: block;
+  color: $white;
+  font-weight: bold;
+  font-size: 3em;
+  opacity: 0.1;
 }

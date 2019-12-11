@@ -1,0 +1,27 @@
+info:
+  type: block_content
+  bundle: content_block
+  title: 'Footer Others'
+
+# Placement of the block in region.
+placement:
+  langcode: en
+  region: footer_fifth
+  weight: 0
+  settings:
+    status: true
+    provider: block_content
+    label: 'Footer Others'
+    label_display: 0
+
+# Content block fields.
+fields:
+  field_d_long_text:
+    type: text_long
+    data:
+      - value: <ul>
+            <li><a href='/products' title='Parts'>Parts</a></li>
+            <li><a href='/documentation' title='Documentation'>Documentation</a></li>
+            <li><a href='/blog' title='Knowledge'>Knowledge</a></li>
+          </ul>
+        format: full_html

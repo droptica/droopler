@@ -33,7 +33,7 @@ class DownloadFile extends ControllerBase {
     $file_hash = $entity->get('file_hash')->get(0)->getValue();
     $link_options = [
       'absolute' => TRUE,
-      'attributes' => ['class' => 'btn btn-primary btn-orange']
+      'attributes' => ['class' => 'btn btn-primary btn-orange'],
     ];
 
     // Generate download link/
@@ -43,7 +43,8 @@ class DownloadFile extends ControllerBase {
 
     // Generate download page with link.
     $display_settings = ['label' => 'hidden',];
-    $body = $paragraph->get('field_d_p_sf_download_page')->view($display_settings);
+    $body = $paragraph->get('field_d_p_sf_download_page')
+      ->view($display_settings);
     $body[0]['#text'] = str_replace("[download-button]", $rendered_download_link, $body[0]['#text']);
     return [
       '#theme' => 'd_p_subscribe_file_download_page',
@@ -53,8 +54,10 @@ class DownloadFile extends ControllerBase {
 
   /**
    * Get SubscribeFileEntity
+   *
    * @param $field_name
    * @param $field_value
+   *
    * @return \Drupal\Core\Entity\EntityInterface|mixed
    */
   private function getSubscribeFileEntity($field_name, $field_value) {
@@ -69,6 +72,7 @@ class DownloadFile extends ControllerBase {
 
   /**
    * Checking link was created before 24h.
+   *
    * @param $entity
    */
   private function checkLinkActive($entity) {
@@ -80,6 +84,7 @@ class DownloadFile extends ControllerBase {
 
   /**
    * Redirect to home page and show drupal message
+   *
    * @param $message
    */
   private function goHomeWithMessage($message) {

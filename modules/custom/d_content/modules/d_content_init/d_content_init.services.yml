@@ -1,0 +1,7 @@
+services:
+  d_content_init.manager_block:
+    class: Drupal\d_content_init\ContentInitManagerBlock
+    arguments: ['@entity_type.manager', '@serialization.yaml', '@logger.factory', '@current_user', '@language_manager', '@module_handler', '@uuid', '@plugin.manager.block', '@theme_handler']
+  d_content_init.manager_media:
+    class: Drupal\d_content_init\ContentInitManagerMedia
+    arguments: ['@entity_type.manager', '@serialization.yaml', '@logger.factory', '@current_user', '@language_manager', '@module_handler', '@file_system']

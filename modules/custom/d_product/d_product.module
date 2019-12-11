@@ -21,9 +21,9 @@ function d_product_preprocess_node(&$variables) {
     if (isset($variables['view_mode']) && $variables['view_mode'] == 'teaser') {
       if (isset($variables['node'])) {
 
-        if (isset($variables['content']['field_product_image'][0])) {
-          $variables['main_image'] = $variables['content']['field_product_image'][0];
-          unset($variables['content']['field_product_image']);
+        if (isset($variables['content']['field_d_product_media'][0])) {
+          $variables['main_image'] = $variables['content']['field_d_product_media'][0];
+          unset($variables['content']['field_d_product_media']);
         }
 
         if (isset($variables['content']['field_product_categories'][0])) {
@@ -190,7 +190,7 @@ function d_product_generate_term_links($items, $element) {
  *
  * @param $node
  *
- * @return \Drupal\Core\GeneratedLink
+ * @return array
  */
 function d_product_generate_ask_product_link($node) {
   $name = 'Ask for product';
@@ -198,7 +198,8 @@ function d_product_generate_ask_product_link($node) {
   $link = Link::fromTextAndUrl(
     t($name),
     Url::fromUri('internal:/contact#contact-message-feedback-form', $options)
-  )->toString();
+  )->toRenderable();
+  $link['#attributes'] = ['class' => ['btn btn-outline-primary']];
   return $link;
 }
 

@@ -1,0 +1,16 @@
+name: d_demo
+core: 8.x
+description: 'Module with demo content.'
+type: module
+package: Droopler
+version: 8.x-2.0
+dependencies:
+  - block
+  - d_content_init
+  - d_media
+  - d_p_reference_content
+  - d_social_media
+  - system
+  - we_megamenu
+libraries:
+  - droopler_theme/global-styling
