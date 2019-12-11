@@ -10,6 +10,7 @@ $d-p-side-embed-text-color: $color-odysseus !default;
 $d-p-side-embed-link-color: $color-nestor !default;
 $d-p-side-embed-link-hover-color: darken($d-p-side-embed-link-color, 5%) !default;
 $d-p-side-embed-line-color: $color-nestor !default;
+$d-p-side-embed-link-color-inverted: $color-agamemnon !default;
 $d-p-side-embed-line-color-inverted: $color-agamemnon !default;
 $d-p-side-embed-header-color: $color-odysseus !default;
 $d-p-side-embed-full-text-color: $color-cassandra !default;
@@ -37,6 +38,7 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     background: $d-p-side-embed-background-color-secondary;
   }
   &.embed-side-full {
+    background: $d-p-side-embed-background-color;
     position: relative;
     .d-p-side-embed-embed {
       width: 100%;
@@ -180,12 +182,19 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
   &:not(.user-background-defined):not(.user-image-background) .d-p-side-embed-content {
     background: $color-odysseus;
   }
-  .d-p-side-embed-content {
-    color: $d-p-side-embed-theme-invert-text-color;
-    .d-p-side-embed-content-fields {
-      .field--name-field-d-long-text,
-      .field--name-field-d-main-title {
-        color: $d-p-side-embed-theme-invert-text-color;
+  .d-p-side-embed-wrapper {
+    .d-p-side-embed-content {
+      color: $d-p-side-embed-theme-invert-text-color;
+
+      .d-p-side-embed-content-fields {
+        .field--name-field-d-long-text,
+        .field--name-field-d-main-title {
+          color: $d-p-side-embed-theme-invert-text-color;
+        }
+      }
+
+      a:not(.btn) {
+        color: $d-p-side-embed-link-color-inverted;
       }
     }
   }
