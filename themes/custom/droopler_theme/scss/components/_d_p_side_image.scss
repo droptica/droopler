@@ -52,10 +52,12 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     padding-bottom: $d-p-side-image-banner-text-padding;
   }
   .image-side {
-    &-right {
+    &-right,
+    &-right-wide {
       background: $d-p-side-image-banner-background-color;
     }
-    &-left {
+    &-left,
+    &-left-wide {
       background: $d-p-side-image-banner-background-color-secondary;
     }
   }
@@ -105,9 +107,14 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
   }
 }
 
+.theme-invert,
 .user-background-defined {
-  .image-side-left,
-  .image-side-right {
-    background: none;
+  .image-side {
+    &-left,
+    &-right {
+      &, &-wide {
+        background: none;
+      }
+    }
   }
 }
