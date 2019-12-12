@@ -62,6 +62,10 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       @include media-breakpoint-down(md) {
         margin: $d-p-text-blocks-mobile-group-margin;
       }
+
+      @at-root section.header-margin-none & {
+        margin-bottom: inherit;
+      }
     }
     > .field--type-link {
       text-align: center;
