@@ -85,6 +85,11 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     }
     a:not(.btn) {
       color: $d-p-side-embed-link-color;
+
+      @at-root .theme-invert & {
+        color: $d-p-side-embed-link-color-inverted;
+      }
+
       &:hover {
         color: $d-p-side-embed-link-hover-color;
       }
@@ -192,10 +197,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         .field--name-field-d-main-title {
           color: $d-p-side-embed-theme-invert-text-color;
         }
-      }
-
-      a:not(.btn) {
-        color: $d-p-side-embed-link-color-inverted;
       }
     }
   }
