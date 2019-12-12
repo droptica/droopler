@@ -66,6 +66,7 @@ class SettingsWidget extends WidgetBase {
                 'd_p_group_of_text_blocks',
                 'd_p_carousel',
                 'd_p_text_paged',
+                'd_p_reference_content',
               ]
             ]
           ],
@@ -78,6 +79,7 @@ class SettingsWidget extends WidgetBase {
                 'd_p_group_of_text_blocks',
                 'd_p_carousel',
                 'd_p_text_paged',
+                'd_p_reference_content',
               ]
             ]
           ],
@@ -106,6 +108,8 @@ class SettingsWidget extends WidgetBase {
               'paragraph' => [
                 'd_p_carousel',
                 'd_p_group_of_text_blocks',
+                'd_p_reference_content',
+                'd_p_text_paged',
               ]
             ]
           ],
