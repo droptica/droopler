@@ -142,21 +142,61 @@ $two-columned-header-line-margin: 0.625rem !default;
   flex-direction: column;
 
   &.stripe-sidebar {
+    @include media-breakpoint-up(lg) {
+      .item-1 & {
+        margin-right: 140px;
+      }
+      .item-2 & {
+        margin-left: 140px;
+      }
+    }
+
     .with-price-stripe {
       background-color: $stripe-background-color;
       min-width: 170px;
       height: 100%;
       padding: 0;
       position: absolute;
-      right: 0;
       top: 0;
+
+      .item-1 & {
+        right: 0;
+        @include media-breakpoint-down(md) {
+          right: 0;
+          .with-price-wrapper {
+            justify-content: flex-end;
+            padding-right: 7vw;
+          }
+        }
+        @include media-breakpoint-down(sm) {
+          padding-right: $grid-gutter-width / 2;
+        }
+      }
+      .item-2 & {
+        left: 0;
+        @include media-breakpoint-down(md) {
+          left: 0;
+          .with-price-wrapper {
+            justify-content: flex-start;
+            padding-left: 7vw;
+          }
+        }
+        @include media-breakpoint-down(sm) {
+          padding-left: $grid-gutter-width / 2;
+        }
+      }
+
       @include media-breakpoint-down(md) {
         height: 70px;
-        width: 100%;
+        width: 50vw;
         bottom: 0;
-        left: 0;
-        right: unset;
         top: unset;
+      }
+
+      @include media-breakpoint-down(xs) {
+        right: unset;
+        left: 0;
+        width: 100%;
       }
 
       .with-price-wrapper {
@@ -169,6 +209,7 @@ $two-columned-header-line-margin: 0.625rem !default;
         transform: translateY(-50%);
         height: 100px;
         width: 100%;
+
         @include media-breakpoint-down(md) {
           text-align: left;
           height: 70px;
@@ -176,6 +217,14 @@ $two-columned-header-line-margin: 0.625rem !default;
           line-height: 35px;
           display: flex;
           align-items: center;
+        }
+
+        @include media-breakpoint-down(xs) {
+          .item-1 &, .item-2 & {
+            justify-content: flex-start;
+            padding-right: $grid-gutter-width / 2;
+            padding-left: $grid-gutter-width / 2;
+          }
         }
 
         .with-price-data {
