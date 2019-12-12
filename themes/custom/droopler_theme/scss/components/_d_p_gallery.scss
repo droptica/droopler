@@ -19,6 +19,10 @@ $d-p-gallery-margin-y: 5% !default;
   .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
+
+    &::after {
+      @include decoration-header-line-main-center($d-p-gallery-line-color, $d-p-gallery-line-color-inverted);
+    }
   }
 
   .field--name-field-d-media-icon {
@@ -33,8 +37,19 @@ $d-p-gallery-margin-y: 5% !default;
       }
     }
 
-    &:before {
-      @include decoration-header-line-main-center($d-p-gallery-line-color, $d-p-gallery-line-color-inverted);
+  }
+
+  .with-long-text & {
+
+    .field--name-field-d-main-title {
+      &::after {
+        display: none;
+      }
+    }
+    .field--name-field-d-long-text {
+      &::before {
+        @include decoration-header-line-main-center($d-p-gallery-line-color, $d-p-gallery-line-color-inverted);
+      }
     }
   }
 
