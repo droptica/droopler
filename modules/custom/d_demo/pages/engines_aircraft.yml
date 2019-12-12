@@ -125,7 +125,6 @@ field_page_section:
                   - "btn"
                   - "btn-primary"
                   - "mt-4"
-                  - "mb-5"
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-width with-grid
@@ -183,7 +182,9 @@ field_page_section:
                   - "btn"
                   - "btn-primary"
                   - "mt-5"
-                  - "mb-5"
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: no-padding-top
 
     - paragraph_type: d_p_banner
       data:

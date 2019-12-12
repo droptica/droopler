@@ -29,6 +29,8 @@ function d_demo_content_structure_alter(&$structure, $context) {
       'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
       'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
       'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
+      'd_p_reference_content' => ['file' => "$path/d_p_reference_content.yml", 'link' => 'Reference Content Paragraph', 'weight' => 120],
+      'd_p_side_by_side' => ['file' => "$path/d_p_side_by_side.yml", 'link' => 'Side By Side Paragraph', 'weight' => 130],
     ]];
     $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 20];
     $structure['services_engine_installation'] = ['file' => "$path/services_engine_installation.yml"];

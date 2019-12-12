@@ -7,14 +7,8 @@ info:
 
 field_page_section:
   paragraphs:
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_bg.jpg
-            alt: Abstract background
       field_d_main_title:
         type: text
         data: Subscribe File Paragraph
@@ -23,13 +17,14 @@ field_page_section:
         data: Droopler Documentation
       field_d_settings:
         type: field_p_configuration_storage
+        custom_class: theme-invert
         heading_type: h1
 
   - paragraph_type: d_p_text_paged
     data:
       field_d_main_title:
         type: text
-        data: 'Full Example:'
+        data: 'Full Example'
       field_d_long_text:
         type: text_long
         data: <p>The Subscribe File Paragraph can come in handy when you need to share some file
@@ -52,7 +47,7 @@ field_page_section:
         type: media_image
         directory: demo
         files:
-          - path: d_demo/demo_educational_4.jpg
+          - path: d_demo/d_demo_enginge_overhaul_1.jpg
             alt: Educational
       field_file_download:
         type: file
@@ -85,7 +80,7 @@ field_page_section:
     data:
       field_d_main_title:
         type: text
-        data: 'Basic Example:'
+        data: 'Basic Example'
       field_d_long_text:
         type: text_long
         data: <p>There are lots of ways of configuring Subscribe File Paragraph.
@@ -97,7 +92,7 @@ field_page_section:
         type: media_image
         directory: demo
         files:
-          - path: d_demo/demo_educational_4.jpg
+          - path: d_demo/d_demo_buildings.jpg
             alt: Educational
       field_file_download:
         type: file

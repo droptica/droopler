@@ -58,10 +58,13 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
     > .field--name-field-d-main-title {
       @include font-main-header;
-      text-align: center;
       margin: $d-p-text-blocks-group-margin;
       @include media-breakpoint-down(md) {
         margin: $d-p-text-blocks-mobile-group-margin;
+      }
+
+      @at-root section.header-margin-none & {
+        margin-bottom: inherit;
       }
     }
     > .field--type-link {
@@ -76,6 +79,8 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   }
 
   .d-p-group-of-text-blocks-header-wrapper {
+    text-align: center;
+
     .field--name-field-d-main-title {
       &:after {
         @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
@@ -85,9 +90,9 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
   &.with-long-text {
 
-    *:not(section) {
+    .d-p-group-of-text-blocks-header-wrapper {
       .field--name-field-d-main-title {
-        margin-bottom: inherit;
+        margin-bottom: 0;
       }
     }
     .d-p-tiles-wrapper {

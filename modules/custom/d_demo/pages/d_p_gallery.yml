@@ -7,14 +7,8 @@ info:
 
 field_page_section:
   paragraphs:
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_bg.jpg
-            alt: Abstract background
       field_d_main_title:
         type: text
         data: Gallery Paragraph
@@ -23,19 +17,14 @@ field_page_section:
         data: Droopler Documentation
       field_d_settings:
         type: field_p_configuration_storage
+        custom_class: theme-invert
         heading_type: h1
 
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_blue.png
-            alt: Blue background
       field_d_main_title:
         type: text
-        data: 'Full Example:'
+        data: 'Full Example'
       field_d_long_text:
         type: text_long
         data: <p>The Gallery Paragraph is a significant part of Droopler. It allows you to arrange
@@ -43,6 +32,9 @@ field_page_section:
           icon and some description. The perfect number of items is 12. Why? On a desktop, there
           are four images in the row, on a tablet - three, on horizontal mobile - two and one
           for the smaller screens.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: background-gray-light-2
 
   - paragraph_type: d_p_gallery
     data:
@@ -66,47 +58,43 @@ field_page_section:
         type: media_image
         directory: demo
         files:
-          - path: d_demo/demo_car_1.jpg
-            alt: Car 1
-          - path: d_demo/demo_car_2.jpg
-            alt: Car 2
-          - path: d_demo/demo_car_5.jpg
-            alt: Car 3
-          - path: d_demo/demo_car_6.jpg
-            alt: Car 4
-          - path: d_demo/demo_car_7.jpg
-            alt: Car 5
-          - path: d_demo/demo_car_18.jpg
-            alt: Car 6
-          - path: d_demo/demo_educational_4.jpg
-            alt: Educational
-          - path: d_demo/demo_event_1.jpg
-            alt: Event
-          - path: d_demo/demo_business_1.jpg
-            alt: Business 1
-          - path: d_demo/demo_business_3.jpg
-            alt: Business 2
-          - path: d_demo/demo_business_4.jpg
-            alt: Business 3
-          - path: d_demo/demo_faces.jpg
-            alt: Faces
-        dst_dir: demo
+          - path: d_demo/d_demo_tile_spaceship.jpg
+            alt: Spaceship
+          - path: d_demo/d_demo_enginge_overhaul_1.jpg
+            alt: Engine
+          - path: d_demo/d_demo_car_engine_centurion.jpg
+            alt: Engine
+          - path: d_demo/d_demo_engine_boat_3.jpg
+            alt: Boat engine
+          - path: d_demo/d_demo_engine_boat_2.jpg
+            alt: Boat engine
+          - path: d_demo/d_demo_engine_airplane_2.jpg
+            alt: Airplane engine
+          - path: d_demo/d_demo_services_car.jpg
+            alt: Car
+          - path: d_demo/d_demo_services_spacecrafts.jpg
+            alt: Spacecraft
+          - path: d_demo/d_demo_engine_boat_1.jpg
+            alt: Boat engine
+          - path: d_demo/d_demo_engine_airplane_1.jpg
+            alt: Airplane
+          - path: d_demo/d_demo_ad_hoc_enginge_repairs_2.jpg
+            alt: Engine
+          - path: d_demo/d_demo_services_boat.jpg
+            alt: Boat
 
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_blue.png
-            alt: Blue background
       field_d_main_title:
         type: text
-        data: 'Basic Example:'
+        data: 'Basic Example'
       field_d_long_text:
         type: text_long
         data: <p>Let's simplify the gallery. It looks cool also without the icon and the description.
           Please notice that a smaller amount of items does not look nice on lower resolutions.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: background-gray-light-2
 
   - paragraph_type: d_p_gallery
     data:
@@ -117,12 +105,11 @@ field_page_section:
         type: media_image
         directory: demo
         files:
-          - path: d_demo/demo_car_1.jpg
-            alt: Car 1
-          - path: d_demo/demo_car_2.jpg
-            alt: Car 2
-          - path: d_demo/demo_car_5.jpg
-            alt: Car 3
-          - path: d_demo/demo_car_6.jpg
-            alt: Car 4
-        dst_dir: demo
+          - path: d_demo/d_demo_engine_oil_change_1.jpg
+            alt: Engine
+          - path: d_demo/d_demo_services_spacecrafts.jpg
+            alt: Spacecraft
+          - path: d_demo/d_demo_tile_car.jpg
+            alt: Car
+          - path: d_demo/d_demo_engine_car_4.jpg
+            alt: Engine

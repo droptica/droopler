@@ -239,3 +239,37 @@ field_page_section:
             data:
               link: internal:/documentation/tiles-paragraphs
               text: Learn more...
+        - field_d_media_icon:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_paragraph_reference_content.png
+                alt: Paragraph Reference Content Icon
+          field_d_main_title:
+            type: text
+            data: Reference Content Paragraph
+          field_d_long_text:
+            type: text_long
+            data: <p>This paragraph allows you to show a list of content, like latest blog posts.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/documentation/reference-content-paragraph
+              text: Learn more...
+        - field_d_media_icon:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/demo_paragraph_side_by_side.png
+                alt: Paragraph Side By Side Icon
+          field_d_main_title:
+            type: text
+            data: Side By Side Paragraph
+          field_d_long_text:
+            type: text_long
+            data: <p>This paragraph allows you put two pieces of content next to each other.</p>
+          field_d_cta_link:
+            type: cta
+            data:
+              link: internal:/documentation/side-by-side-paragraph
+              text: Learn more...

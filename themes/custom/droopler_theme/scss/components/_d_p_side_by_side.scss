@@ -15,7 +15,7 @@ $d-p-side-by-side-padding-y: 5% !default;
 
 $d-p-side-by-side-subtitle-margin-y: 2.125rem !default;
 
-$d-p-side-by-side-content-padding-x: 7% !default;
+$d-p-side-by-side-content-padding-x: 7vw !default;
 $d-p-side-by-side-text-box-padding-y: $grid-gutter-width !default;
 $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
 $d-p-side-by-side-image-background-padding-y: 130px !default;
@@ -72,6 +72,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 
     .d-p-text-block {
       margin-bottom: 0;
+      width: 100%;
       .field--name-field-d-main-title {
         font-size: $font-main-header-size;
       }
