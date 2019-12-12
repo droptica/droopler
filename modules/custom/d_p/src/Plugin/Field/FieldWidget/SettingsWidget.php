@@ -128,6 +128,7 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_group_of_text_blocks',
+                'd_p_side_by_side',
               ]
             ]
           ],
