@@ -1,39 +1,36 @@
 info:
   type: d_product
-  title: Classic Black Piano
-field_product_image:
-  type: image
-  data:
-    - file: demo_business_1.jpg
+  title: Centurion 3000
+
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_product_init/d_product_init_centurion-3000-1.jpg
       alt: Title / Subtitle
-    - file: demo_business_3.jpg
+    - path: d_product_init/d_product_init_centurion-3000-2.jpg
       alt: Title / Subtitle
-    - file: demo_business_2.jpg
+    - path: d_product_init/d_product_init_centurion-3000-3.jpg
       alt: Title / Subtitle
-    - file: demo_business_4.jpg
+    - path: d_product_init/d_product_init_centurion-3000-3.jpg
       alt: Title / Subtitle
-  dst_dir: demo
 body:
   type: text
-  data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
-    a pellentesque dui, non feils. Maecenas malesuada elit lecut felis, malesuada ultricies.
-    Curabur et ligule. Ut molestie a, ultricies porta una, fermatum in, dolor.
+  data: New engine for cars developed by top engineers and industry specialists. Ideal for city and off-road cars.
 field_product_categories:
   type: taxonomy
   data:
     vid: d_product_categories
     terms:
-      - Food
+      - Car engines
 field_tags:
   type: taxonomy
   data:
     vid: tags
     terms:
-      - Food
-      - Bakery
-      - Moto
+      - Cars
 field_d_product_link:
   type: cta
   data:
-    link: http://example.com/
+    link: #
     text: Buy now

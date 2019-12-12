@@ -7,6 +7,7 @@ Styleguide components.d_p.d_p_text_with_bckg
 // Colour variables used in this paragraph.
 $d-p-text-with-bckg-background-overlay: $color-odysseus !default;
 $d-p-text-with-bckg-line-color: $line-background !default;
+$d-p-text-with-bckg-line-color-inverted: $color-nestor !default;
 $d-p-text-with-bckg-header-color: $color-cassandra !default;
 
 // Margins, paddings and sizing.
@@ -15,8 +16,6 @@ $d-p-text-with-bckg-padding-top: 6.5% !default;
 $d-p-text-with-bckg-padding-bottom: 6.5% !default;
 $d-p-text-with-bckg-mobile-padding-top: 6.25rem !default;
 $d-p-text-with-bckg-mobile-padding-bottom: 6.25rem !default;
-$d-p-text-with-bckg-line-margin-top: $line-center-margin-top !default;
-$d-p-text-with-bckg-line-margin-bottom: $line-center-margin-bottom !default;
 
 // Other settings
 $d-p-text-with-bckg-img-opacity: 0.1 !default;
@@ -26,12 +25,12 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
   z-index: 0;
   text-align: center;
 
-  h2 {
+  .field--name-field-d-main-title {
     @include font-main-header;
     color: $d-p-text-with-bckg-header-color;
     text-align: center;
   }
-  .field--name-field-d-icon {
+  .field--name-field-d-media-icon {
     text-align: center;
   }
   h3.field--name-field-d-subtitle {
@@ -43,7 +42,7 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
     line-height: 1.7;
   }
 
-  h2 + .field--type-link,
+  .field--name-field-d-main-title + .field--type-link,
   h3 + .field--type-link,
   .field--name-field-d-long-text {
     p {
@@ -51,10 +50,7 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
       hyphens: auto;
     }
     &:before {
-      @include decoration-header-line-main-center;
-      background: $d-p-text-with-bckg-line-color;
-      margin-top: $d-p-text-with-bckg-line-margin-top;
-      margin-bottom: $d-p-text-with-bckg-line-margin-bottom;
+      @include decoration-header-line-main-center ($d-p-text-with-bckg-line-color, $d-p-text-with-bckg-line-color-inverted)
     }
   }
   .field--type-link {

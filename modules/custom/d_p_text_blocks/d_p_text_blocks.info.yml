@@ -4,15 +4,19 @@ description: 'Provides a paragraph with multiple text blocks.'
 type: module
 dependencies:
   - content_translation
+  - d_media
   - d_p
+  - d_p_node
   - entity_reference_revisions
   - field
+  - field_group
   - image
   - language
   - link
   - link_attributes
+  - media_library
   - paragraphs
-  - svg_image
   - text
 package: Paragraphs
-version: 8.x-1.4
+version: 8.x-2.0
+core_incompatible: false

@@ -5,39 +5,110 @@ Styleguide components.d_p.form
 */
 
 // Colors.
-$d-p-form-header-color: $color-cassandra !default;
-$d-p-form-text-color: $color-cassandra !default;
+$d-p-form-header-color: $color-odysseus !default;
+$d-p-form-text-color: $color-odysseus !default;
+$d-p-form-background: $color-agamemnon !default;
+$d-p-form-line-color: $color-nestor !default;
+$d-p-form-line-color-inverted: $color-agamemnon !default;
 
 // Margins, paddings and sizes.
 $d-p-form-header-margin-bottom: 10% !default;
 $d-p-form-padding-top: 5% !default;
 $d-p-form-padding-bottom: 5% !default;
 $d-p-form-button-margin-top: 1rem !default;
+$d-p-form-copy-margin-left: 1.25rem !default;
 
 .paragraph-d-form {
   padding-top: $d-p-form-padding-top;
   padding-bottom: $d-p-form-padding-bottom;
+  color: $d-p-form-text-color;
 
   form {
     margin: 0;
   }
-  h2 {
+  .field--name-field-d-main-title {
     @include font-main-header;
-    margin-bottom: $d-p-form-header-margin-bottom;
     text-align: center;
     color: $d-p-form-header-color;
+    &:after {
+      @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
+    }
   }
-  .field--name-field-d-icon {
+
+  .field--name-field-d-media-icon {
     text-align: center;
   }
   .form-actions {
     text-align: center;
     .btn {
+      @extend .btn-secondary;
       margin-top: $d-p-form-button-margin-top;
     }
   }
 
-  label {
-    color: $d-p-form-text-color;
+  .form-item-copy {
+    margin-left: $d-p-form-copy-margin-left;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    .content {
+      @extend .mt-3
+    }
+    form {
+      .name-and-mail {
+        display: flex;
+        flex-direction: column;
+        @include media-breakpoint-up(md) {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .form-item-name,
+        .form-item-mail {
+          width: 100%;
+          @include media-breakpoint-up(md) {
+            width: 48%;
+          }
+        }
+      }
+    }
+  }
+
+  .backstretch {
+    background: $d-p-form-background;
+    .backstretch-item {
+      img {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .right {
+      .content {
+        align-items: flex-start;
+      }
+      .field--name-field-d-main-title {
+        &::after {
+          margin-left: 0;
+        }
+      }
+    }
+    .left {
+      .content {
+        align-items: flex-end;
+        text-align: right;
+      }
+      .field--name-field-d-main-title {
+        &::after {
+          margin-right: 0;
+        }
+      }
+    }
   }
 }

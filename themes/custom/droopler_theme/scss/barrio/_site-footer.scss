@@ -77,15 +77,6 @@
 .site-footer .menu-item {
   padding: 0;
 }
-.site-footer .content ol:not(.menu),
-.site-footer .content ul:not(.menu) {
-  padding-left: 1.4em; /* LTR */
-}
-[dir="rtl"] .site-footer .content ol:not(.menu),
-[dir="rtl"] .site-footer .content ul:not(.menu) {
-  padding-right: 1.4em;
-  padding-left: 0;
-}
 .site-footer .content a,
 .site-footer .content a.is-active {
   color: #fcfcfc;
@@ -100,7 +91,6 @@
   margin: 20px 0;
   border: 1px solid #444;
   border-color: rgba(255, 255, 255, 0.1);
-  padding: 10px;
 }
 .site-footer table {
   font-size: 1em;

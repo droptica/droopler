@@ -20,7 +20,7 @@ The Droopler profile should be installed via Composer. We recommend using [Droop
 
 ```json
 "require": {
-  "droptica/droopler": "^8.1.4"
+  "droptica/droopler": "^8.2.0"
 }
 ```
 

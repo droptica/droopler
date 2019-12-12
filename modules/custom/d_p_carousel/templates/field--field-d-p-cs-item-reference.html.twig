@@ -56,22 +56,22 @@
   {% if multiple %}
     <div{{ attributes.addClass(classes, 'carousel-items-wrapper row') }}>
       {% for item in items %}
-        <div{{ item.attributes.addClass('carousel-item-wrapper', column_classes) }}>{{ item.content }}</div>
+        <div{{ item.attributes.addClass('carousel-item-wrapper list-item-wrapper', column_classes) }}>{{ item.content }}</div>
       {% endfor %}
     </div>
   {% else %}
     {% for item in items %}
-      <div{{ attributes.addClass(classes, 'carousel-item-wrapper', column_classes) }}>{{ item.content }}</div>
+      <div{{ attributes.addClass(classes, 'carousel-item-wrapper list-item-wrapper', column_classes) }}>{{ item.content }}</div>
     {% endfor %}
   {% endif %}
 {% else %}
   <div{{ attributes.addClass(classes) }}>
     <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
     {% if multiple %}
-      <div class='carousel-itemes-wrapper row'>
+      <div class='carousel-items-wrapper row'>
     {% endif %}
     {% for item in items %}
-      <div{{ item.attributes.addClass('carousel-item-wrapper', column_class, 'col-xs-12') }}>{{ item.content }}</div>
+      <div{{ item.attributes.addClass('carousel-item-wrapper list-item-wrapper', column_class, 'col-xs-12') }}>{{ item.content }}</div>
     {% endfor %}
     {% if multiple %}
       </div>

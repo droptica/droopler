@@ -15,7 +15,7 @@ function d_p_tiles_theme($existing, $type, $theme, $path) {
     'paragraph__d_p_tiles' => [
       'base hook' => 'paragraph',
     ],
-    'field__paragraph__field_d_image__d_p_tiles' => [
+    'field__paragraph__field_d_media_image__d_p_tiles' => [
       'base hook' => 'field',
     ],
   ];
@@ -52,7 +52,7 @@ function d_p_tiles_preprocess_field(&$variables) {
           $variables['attributes']['class'][] = 'container';
           break;
 
-        case 'field_d_image':
+        case 'field_d_media_image':
           $variables['wrapper_attributes'] = new Attribute();
           break;
       }
@@ -69,7 +69,13 @@ function d_p_tiles_preprocess_colorbox_formatter(&$variables) {
 
   // Detect custom sizes in ALTs.
   $fd = $variables['item']->getFieldDefinition();
-  if ($fd->id() == 'paragraph.d_p_tiles.field_d_image') {
+
+  /** @var \Drupal\d_p\Service\ParentParagraphService $parentEntityService */
+  $parentEntityService = Drupal::service('d_p.entity_parent_paragraph');
+  $paragraphFieldId = $parentEntityService->getParentParagraphFieldId($variables['entity']);
+
+  if ($fd->id() == 'paragraph.d_p_tiles.field_d_media_image'
+    || ($paragraphFieldId && $paragraphFieldId == 'paragraph.d_p_tiles.field_d_media_image') ) {
     $alt = $variables['image']['#alt'];
     // In 1x1 just remove the text.
     if (strstr($alt, '1x1')) {

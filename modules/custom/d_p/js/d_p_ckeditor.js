@@ -3,10 +3,12 @@
   Drupal.behaviors.customCKEditorConfig = {
     attach: function (context, settings) {
 
-      d_p_ckeditor(true);
+      $(context).ready(function() {
+        d_p_ckeditor(true);
+      })
 
       function d_p_ckeditor_geysir() {
-        if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.children['geysir-modal-form'] !== 'undefined') {
+        if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.offsetParent.children['geysir-modal-form'] !== 'undefined') {
           if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document !== 'undefined') {
             var doc = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].document.$;
             d_p_ckeditor_add_js(doc);

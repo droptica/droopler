@@ -1,0 +1,31 @@
+info:
+  type: block_content
+  bundle: content_block
+  title: 'Footer Services'
+
+# Placement of the block in region.
+placement:
+  langcode: en
+  region: footer_fourth
+  weight: 0
+  settings:
+    status: true
+    provider: block_content
+    label: 'Footer Services'
+    label_display: 0
+
+# Content block fields.
+fields:
+  field_d_main_title:
+    type: text
+    data: 'Services'
+  field_d_long_text:
+    type: text_long
+    data:
+      - value: <ul>
+            <li><a href='/cars' title='For cars'>For cars</a></li>
+            <li><a href='/boats' title='For boats'>For boats</a></li>
+            <li><a href='/aircrafts' title='For airplanes'>For airplanes</a></li>
+            <li><a href='/spacecrafts' title='For spacecrafts'>For spacecrafts</a></li>
+          </ul>
+        format: full_html

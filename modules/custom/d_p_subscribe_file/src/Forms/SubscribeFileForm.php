@@ -79,7 +79,7 @@ class SubscribeFileForm extends FormBase {
       '#title_display' => 'invisible',
       '#title' => $this->t('E-mail'),
       '#required' => TRUE,
-      '#attributes' => ['placeholder' => $this->t('Enter you email to get download link')],
+      '#attributes' => ['placeholder' => $this->t('Enter your email to get download link')],
     ];
 
     $file = $this->paragraph->get('field_file_download')->getValue();
@@ -91,6 +91,7 @@ class SubscribeFileForm extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->paragraph->get('field_d_p_sf_download_button')->value,
+      '#attributes' => ['class' => ['btn-secondary']],
     ];
 
     // Keep compatibility with older Droopler.

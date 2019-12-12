@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\Form\ViewsForm;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_form_alter().
@@ -25,6 +27,38 @@ function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       }
       break;
   }
+
+  $form_object = $form_state->getFormObject();
+  if ($form_object instanceof ViewsForm && strpos($form_object->getBaseFormId(), 'views_form_media_library') === 0) {
+    if (isset($form['header'])) {
+      $form['header']['#attributes']['class'][] = 'media-library-views-form__header';
+      $form['header']['media_bulk_form']['#attributes']['class'][] = 'media-library-views-form__bulk_form';
+    }
+    $form['actions']['submit']['#attributes']['class'] = ['media-library-select'];
+  }
+  // Add after build to add a CSS class to the form actions.
+  if ($form_id === 'views_exposed_form' && strpos($form['#id'], 'views-exposed-form-media-library-widget') === 0) {
+    $form['actions']['#attributes']['class'][] = 'media-library-view--form-actions';
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function d_geysir_page_attachments(array &$page) {
+  if (!\Drupal::currentUser()->hasPermission('geysir manage paragraphs from front-end')) {
+    return;
+  }
+
+  $page['#attached']['library'][] = 'd_geysir/media';;
+}
+
+/**
+ * Implements hook_field_widget_link_attributes_form_alter().
+ */
+function d_geysir_field_widget_link_attributes_form_alter(&$element, &$form_state, $context) {
+  // Link attributes always closed.
+  $element["options"]["attributes"]["#open"] = 0;
 }
 
 /**
@@ -79,15 +113,6 @@ function d_geysir_toolbar() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
- *
- * Using hook_preprocess_page().
- */
-function d_geysir_preprocess_page(&$variables) {
-  $variables['#attached']['library'][] = 'd_geysir/overrides';
-}
-
-/**
  * Implements hook_module_implements_alter().
  */
 function d_geysir_module_implements_alter(&$implementations, $hook) {
@@ -107,4 +132,208 @@ function d_geysir_entity_type_build(array &$entity_types) {
   /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
   // Override geysir_modal_edit form class.
   $entity_types['paragraph']->setFormClass('geysir_modal_edit', '\Drupal\d_geysir\Form\GeysirCustomModalParagraphForm');
+}
+
+/**
+ * Implements hook_preprocess_media_library_item__widget().
+ *
+ * This targets each media item selected in an entity reference field.
+ *
+ * @see seven_preprocess_media_library_item__widget()
+ */
+function d_geysir_preprocess_media_library_item__widget(array &$variables) {
+  $variables['content']['remove_button']['#attributes']['class'][] = 'media-library-item__remove';
+  $variables['content']['remove_button']['#attributes']['class'][] = 'no-bootstrap';
+}
+
+/**
+ * Implements hook_preprocess_views_view_fields().
+ *
+ * This targets each rendered media item in the grid display of the media
+ * library's modal dialog.
+ *
+ * @see seven_preprocess_views_view_fields__media_library().
+ */
+function d_geysir_preprocess_views_view_fields__media_library(array &$variables) {
+  // Add classes to media rendered entity field so it can be targeted for
+  // styling. Adding this class in a template is very difficult to do.
+  if (isset($variables['fields']['rendered_entity']->wrapper_attributes)) {
+    $variables['fields']['rendered_entity']->wrapper_attributes->addClass('media-library-item__click-to-select-trigger');
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * @see seven_form_media_library_add_form_alter().
+ */
+function d_geysir_form_media_library_add_form_alter(array &$form, FormStateInterface $form_state) {
+  $form['#attributes']['class'][] = 'media-library-add-form';
+
+  // If there are unsaved media items, apply styling classes to various parts
+  // of the form.
+  if (isset($form['media'])) {
+    $form['#attributes']['class'][] = 'media-library-add-form--with-input';
+
+    // Put a wrapper around the informational message above the unsaved media
+    // items.
+    $form['description']['#template'] = '<p class="media-library-add-form__description">{{ text }}</p>';
+  }
+  else {
+    $form['#attributes']['class'][] = 'media-library-add-form--without-input';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * @see seven_form_media_library_add_form_upload_alter().
+ */
+function d_geysir_form_media_library_add_form_upload_alter(array &$form, FormStateInterface $form_state) {
+  $form['#attributes']['class'][] = 'media-library-add-form--upload';
+
+  if (isset($form['container'])) {
+    $form['container']['#attributes']['class'][] = 'media-library-add-form__input-wrapper';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * @see seven_form_media_library_add_form_oembed_alter().
+ */
+function d_geysir_form_media_library_add_form_oembed_alter(array &$form, FormStateInterface $form_state) {
+  $form['attributes']['class'][] = 'media-library-add-form--oembed';
+
+  // If no media items have been added yet, add a couple of styling classes
+  // to the initial URL form.
+  if (isset($form['container'])) {
+    $form['container']['#attributes']['class'][] = 'media-library-add-form__input-wrapper';
+    $form['container']['url']['#attributes']['class'][] = 'media-library-add-form-oembed-url';
+    $form['container']['submit']['#attributes']['class'][] = 'media-library-add-form-oembed-submit';
+  }
+}
+
+/**
+ * Implements hook_preprocess_item_list__media_library_add_form_media_list().
+ *
+ * This targets each new, unsaved media item added to the media library, before
+ * they are saved.
+ *
+ * @see seven_preprocess_item_list__media_library_add_form_media_list().
+ */
+function d_geysir_preprocess_item_list__media_library_add_form_media_list(array &$variables) {
+  foreach ($variables['items'] as &$item) {
+    $item['value']['preview']['#attributes']['class'][] = 'media-library-add-form__preview';
+    $item['value']['fields']['#attributes']['class'][] = 'media-library-add-form__fields';
+    $item['value']['remove_button']['#attributes']['class'][] = 'media-library-add-form__remove-button';
+    $item['value']['remove_button']['#attributes']['class'][] = 'no-bootstrap';
+
+    // #source_field_name is set by AddFormBase::buildEntityFormElement()
+    // to help themes and form_alter hooks identify the source field.
+    $fields = &$item['value']['fields'];
+    $source_field_name = $fields['#source_field_name'];
+    if (isset($fields[$source_field_name])) {
+      $fields[$source_field_name]['#attributes']['class'][] = 'media-library-add-form__source-field';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_media_library_item__small().
+ *
+ * This targets each pre-selected media item selected when adding new media in
+ * the modal media library dialog.
+ *
+ * @see seven_preprocess_media_library_item__small().
+ */
+function d_geysir_preprocess_media_library_item__small(array &$variables) {
+  $variables['content']['select']['#attributes']['class'][] = 'media-library-item__click-to-select-checkbox';
+}
+
+/**
+ * @todo Remove this when https://www.drupal.org/project/drupal/issues/2999549
+ * lands.
+ *
+ * @see \Drupal\media_library\Plugin\Field\FieldWidget\MediaLibraryWidget::formElement()
+ * @see seven_preprocess_fieldset__media_library_widget
+ */
+function d_geysir_preprocess_fieldset__media_library_widget(array &$variables) {
+  if (isset($variables['prefix']['weight_toggle'])) {
+    $variables['prefix']['weight_toggle']['#attributes']['class'][] = 'media-library-widget__toggle-weight';
+  }
+  if (isset($variables['suffix']['open_button'])) {
+    $variables['suffix']['open_button']['#attributes']['class'][] = 'media-library-open-button';
+    $variables['suffix']['open_button']['#attributes']['class'][] = 'button-override';
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * @see seven_views_pre_render();
+ */
+function d_geysir_views_pre_render(ViewExecutable $view) {
+  $add_classes = function (&$option, array $classes_to_add) {
+    $classes = preg_split('/\s+/', $option);
+    $classes = array_filter($classes);
+    $classes = array_merge($classes, $classes_to_add);
+    $option = implode(' ', array_unique($classes));
+  };
+
+  if ($view->id() === 'media_library') {
+    if ($view->display_handler->options['defaults']['css_class']) {
+      $add_classes($view->displayHandlers->get('default')->options['css_class'], ['media-library-view']);
+    }
+    else {
+      $add_classes($view->display_handler->options['css_class'], ['media-library-view']);
+    }
+
+    if ($view->current_display === 'page') {
+      if (array_key_exists('media_bulk_form', $view->field)) {
+        $add_classes($view->field['media_bulk_form']->options['element_class'], ['media-library-item__click-to-select-checkbox']);
+      }
+      if (array_key_exists('rendered_entity', $view->field)) {
+        $add_classes($view->field['rendered_entity']->options['element_class'], ['media-library-item__content']);
+      }
+      if (array_key_exists('edit_media', $view->field)) {
+        $add_classes($view->field['edit_media']->options['alter']['link_class'], ['media-library-item__edit']);
+      }
+      if (array_key_exists('delete_media', $view->field)) {
+        $add_classes($view->field['delete_media']->options['alter']['link_class'], ['media-library-item__remove']);
+      }
+    }
+    elseif (strpos($view->current_display, 'widget') === 0) {
+      if (array_key_exists('rendered_entity', $view->field)) {
+        $add_classes($view->field['rendered_entity']->options['element_class'], ['media-library-item__content']);
+      }
+      if (array_key_exists('media_library_select_form', $view->field)) {
+        $add_classes($view->field['media_library_select_form']->options['element_wrapper_class'], ['media-library-item__click-to-select-checkbox']);
+      }
+
+      if ($view->display_handler->options['defaults']['css_class']) {
+        $add_classes($view->displayHandlers->get('default')->options['css_class'], ['media-library-view--widget']);
+      }
+      else {
+        $add_classes($view->display_handler->options['css_class'], ['media-library-view--widget']);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_links__media_library_menu().
+ *
+ * This targets the menu of available media types in the media library's modal
+ * dialog.
+ *
+ * @todo Do this in the relevant template once
+ *   https://www.drupal.org/project/drupal/issues/3088856 is resolved.
+ *
+ * @see classy_preprocess_links__media_library_menu().
+ */
+function d_geysir_preprocess_links__media_library_menu(array &$variables) {
+  foreach ($variables['links'] as &$link) {
+    $link['link']['#options']['attributes']['class'][] = 'media-library-menu__link';
+  }
 }

@@ -1,0 +1,20 @@
+// Big page header with h1 title.
+// Accepts background color, text color, padding, margin and optional line color.
+@mixin listing-header($background-color, $text-color, $desktop-padding, $mobile-padding, $margin, $line-color: $color-nestor) {
+  background-color: $background-color;
+  .main-header {
+    color: $text-color;
+    padding: $mobile-padding;
+    text-transform: none;
+    text-align: center;
+    margin: $margin;
+
+    @include media-breakpoint-up(md) {
+      padding: $desktop-padding;
+    }
+
+    &:after {
+      @include decoration-header-line-main-center($line-color, $background-color);
+    }
+  }
+}

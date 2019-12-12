@@ -47,9 +47,11 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
 %}
 {% block paragraph %}
-  <{% if has_link %}a{% else %}div{% endif %}{{ attributes.addClass(classes) }}>
-    {% block content %}
-      {{ content }}
-    {% endblock %}
-  </{% if has_link %}a{% else %}div{% endif %}>
+  <section {{ wrapper_attributes }}>
+    <{% if has_link %}a{% else %}div{% endif %}{{ attributes.addClass(classes) }}>
+      {% block content %}
+        {{ content }}
+      {% endblock %}
+    </{% if has_link %}a{% else %}div{% endif %}>
+  </section>
 {% endblock paragraph %}

@@ -4,6 +4,8 @@ description: 'Provides base paragraph features.'
 type: module
 dependencies:
   - content_translation
+  - d_p
+  - entity_reference_display
   - entity_reference_revisions
   - features
   - field
@@ -12,8 +14,11 @@ dependencies:
   - language
   - link
   - link_attributes
+  - node
   - options
   - paragraphs
   - text
 package: Droopler
-version: 8.x-1.4
+version: 8.x-2.0
+libraries:
+  - d_p/d_p_with_price

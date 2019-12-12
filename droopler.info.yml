@@ -20,10 +20,15 @@ dependencies:
   - d_content
   - d_geysir
   - d_lang_dropdown
+  - d_media
   - d_p
   - d_p_banner
+  - d_p_carousel
   - d_p_form
   - d_p_help
+  - d_p_node
+  - d_p_reference_content
+  - d_p_side_by_side
   - d_p_side_image
   - d_p_side_embed
   - d_p_side_tiles
@@ -34,6 +39,8 @@ dependencies:
   - d_p_tiles
   - d_p_counters
   - d_p_gallery
+  - d_search
+  - d_social_media
   - d_update
   - dblog
   - editor
@@ -52,6 +59,8 @@ dependencies:
   - link_attributes
   - linkit
   - locale
+  - media
+  - media_library
   - menu_link_attributes
   - menu_link_content
   - menu_ui
@@ -75,11 +84,13 @@ dependencies:
   - user
   - views
   - views_ui
+  - we_megamenu
 themes:
   - droopler_subtheme
   - droopler_theme
   - seven
 distribution:
   name: 'Droopler Profile'
-version: 8.x-1.4
+version: 8.x-2.0
 project: 'droopler'
+core_incompatible: false

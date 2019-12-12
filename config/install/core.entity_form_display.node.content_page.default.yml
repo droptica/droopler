@@ -2,22 +2,22 @@ langcode: en
 status: true
 dependencies:
   config:
-  - field.field.node.content_page.field_page_section
-  - field.field.node.content_page.field_teaser_image
-  - field.field.node.content_page.field_teaser_text
-  - image.style.thumbnail
-  - node.type.content_page
+    - field.field.node.content_page.field_page_section
+    - field.field.node.content_page.field_teaser_media_image
+    - field.field.node.content_page.field_teaser_text
+    - image.style.thumbnail
+    - node.type.content_page
   module:
-  - field_group
-  - paragraphs
-  - path
-  - svg_image
+    - field_group
+    - paragraphs
+    - path
+    - svg_image
 third_party_settings:
   field_group:
     group_seo:
       children:
-      - field_teaser_image
-      - field_teaser_text
+        - field_teaser_media_image
+        - field_teaser_text
       parent_name: ''
       weight: 8
       format_type: fieldset
@@ -51,14 +51,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_paragraphs
     region: content
-  field_teaser_image:
-    type: image_image
+  field_teaser_media_image:
+    type: media_library_widget
     weight: 9
-    region: content
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      media_types: {  }
     third_party_settings: {  }
+    region: content
   field_teaser_text:
     type: string_textarea
     weight: 10
@@ -121,6 +120,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     region: content
     third_party_settings: {  }
   url_redirects:

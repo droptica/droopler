@@ -1,18 +1,18 @@
 info:
   type: d_product
   title: Classic White Piano
-field_product_image:
-  type: image
-  data:
-    - file: demo_business_1.jpg
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_product_init/demo_business_1.jpg
       alt: Title / Subtitle
-    - file: demo_business_3.jpg
+    - path: d_product_init/demo_business_3.jpg
       alt: Title / Subtitle
-    - file: demo_business_2.jpg
+    - path: d_product_init/demo_business_2.jpg
       alt: Title / Subtitle
-    - file: demo_business_4.jpg
+    - path: d_product_init/demo_business_4.jpg
       alt: Title / Subtitle
-  dst_dir: demo
 body:
   type: text
   data: Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse
@@ -35,5 +35,5 @@ field_tags:
 field_d_product_link:
   type: cta
   data:
-    link: http://example.com/
+    link: #
     text: Buy now

@@ -4,40 +4,13 @@ Forms
 Styleguide 2.9
 */
 
-// Colour variables used used in this component.
-$form-control-border-color: $color-hecuba !default;
-
-// Margins, paddings and sizes.
-$form-label-margin-bottom: .4rem !default;
-$form-label-font-size: .85em !default;
-$form-control-padding: 1rem 1.5rem 0.8rem 1.5rem !default;
-$form-control-border-thickness: 0.063rem !default;
-$form-control-border-radius: 0 !default;
-$form-text-margin-top: 0.25rem !default;
-$form-email-margin-top: 0.25rem !default;
-
-label {
-  margin-bottom: $form-label-margin-bottom;
-  font-size: $form-label-font-size;
-  &.form-check-label a:not(.btn) {
-    font-size: 1em;
-  }
-}
-.form-control {
-  padding: $form-control-padding;
-  border: $form-control-border-thickness solid $form-control-border-color;
-  border-radius: $form-control-border-radius;
-}
-
-.form-text {
+// Fix Bootstrap's behavior with email and select fields.
+.form-select,
+.form-email {
   display: block;
   margin-top: $form-text-margin-top;
 }
 
-.form-email {
-  display: block;
-  margin-top: $form-email-margin-top;
-}
 input {
   font-weight: bold;
 }

@@ -5,7 +5,7 @@
  * Contains d_p_carousel module with Carousel Paragraph.
  */
 
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\d_p\Helper\ParagraphModifiersHelper;
 
 /**
  * Implements hook_theme().
@@ -39,6 +39,9 @@ function d_p_carousel_preprocess_field(&$variables) {
          */
 
         $paragraph = $variables['element']['#object'];
+
+        $paragraphModifiersHelper = new ParagraphModifiersHelper($paragraph);
+
         $num_array = $paragraph->get('field_d_number')->getValue();
         $variables['column_classes'] = 'col-sm-4';
         if (!empty($num_array[0]['value'])) {
@@ -52,7 +55,7 @@ function d_p_carousel_preprocess_field(&$variables) {
           if ($num_items === 1) {
             $columns = 1;
           }
-          elseif ($num_items <= $columns) {
+          elseif ($num_items <= $columns && !$paragraphModifiersHelper->hasClass('slider-desktop-off')) {
             $columns = $num_items - 1;
           }
 
@@ -118,6 +121,7 @@ function d_p_carousel_preprocess_paragraph(&$variables) {
  * Implements hook_form_alter().
  */
 function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
+
   switch ($form_id) {
     case 'node_content_page_form':
     case 'node_content_page_edit_form':
@@ -130,7 +134,7 @@ function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
             $delta_sub = range(0, $widget_sub['#max_delta']);
             if (!empty($widget_sub)) {
               foreach ($delta_sub as $del_sub) {
-                unset($form['field_page_section']['widget'][$del]['subform']['field_d_p_cs_item_reference']['widget'][$del_sub]['subform']['field_d_image']['widget'][1]);
+                $form['field_page_section']['widget'][$del]['subform']['field_d_p_cs_item_reference']['widget'][$del_sub]['subform']['field_d_media_image']['widget']['#cardinality'] = 1;
               }
             }
           }
@@ -142,7 +146,7 @@ function d_p_carousel_form_alter(&$form, $form_state, $form_id) {
       $widget = $form['field_d_p_cs_item_reference']['widget'];
       $delta = range(0, $widget['#max_delta']);
       foreach ($delta as $del) {
-        unset($form['field_d_p_cs_item_reference']['widget'][$del]['subform']['field_d_image']['widget'][1]);
+        $form['field_d_p_cs_item_reference']['widget'][$del]['subform']['field_d_media_image']['widget']['#cardinality'] = 1;
       }
       break;
   }

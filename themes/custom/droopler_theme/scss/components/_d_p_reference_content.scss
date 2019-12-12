@@ -1,0 +1,48 @@
+// Colors
+$d-p-reference-content-line-color: $color-agamemnon !default;
+$d-p-reference-content-line-color-inverted: $color-nestor !default;
+
+// Margins, paddings and sizing.
+$d-p-reference-content-wrapper-padding-y: 3.875rem !default;
+$d-p-reference-content-padding-top: 3.875rem !default;
+$d-p-reference-content-padding-bottom: 0 !default;
+$d-p-reference-content-items-padding-x: 5px !default;
+$d-p-reference-content-item-padding: 5px !default;
+$d-p-reference-content-item-margin-left: -5px !default;
+$d-p-reference-content-item-margin-right: -10px !default;
+$d-p-reference-content-content-padding: 5px !default;
+
+.d-p-reference-content {
+  padding-top: $d-p-reference-content-wrapper-padding-y;
+  padding-bottom: $d-p-reference-content-wrapper-padding-y;
+}
+.d-p-reference-content-wrapper {
+  overflow: hidden;
+
+  > .field--name-field-d-main-title {
+    @include font-main-header;
+    &:after {
+      @include decoration-header-line-main-center($d-p-reference-content-line-color, $d-p-reference-content-line-color-inverted);
+    }
+  }
+
+  > .field--name-field-d-p-reference-content {
+    padding-top: $d-p-reference-content-padding-top;
+    padding-bottom: $d-p-reference-content-padding-bottom;
+
+
+    @include media-breakpoint-up(xl) {
+      margin-right: -$d-p-reference-content-item-padding;
+    }
+
+    .field--wrapper {
+      overflow: hidden;
+      @include media-breakpoint-down(lg) {
+        padding: 0 0 0 $d-p-reference-content-content-padding;
+      }
+      .field__item--wrapper {
+        padding: 0 $d-p-reference-content-item-padding $d-p-reference-content-item-padding 0;
+      }
+    }
+  }
+}

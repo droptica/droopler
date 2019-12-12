@@ -51,6 +51,7 @@
  * - page.footer_third: Items for the third footer column.
  * - page.footer_fourth: Items for the fourth footer column.
  * - page.footer_fifth: Items for the fifth footer column.
+ * - page.footer_sixth: Items for the footer_sixth footer column.
  * - page.breadcrumb: Items for the breadcrumb region.
  *
  * Theme variables:
@@ -67,28 +68,27 @@
   <header id="header" class="header" role="banner"
           aria-label="{{ 'Site header'|t }}">
     {% block head %}
-      <nav{{ navbar_attributes }}>
-        <div class="container no-padding-sm">
-          <div class="navbar-brand">
+      <nav{{ navbar_attributes.addClass('navbar-wrapper') }}>
+        <div class="container no-padding-md">
+          <div class="navbar-brand d-flex align-items-center">
             {{ page.header }}
           </div>
-          {% if page.primary_menu or page.lang_menu %}
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarNav" aria-controls="navbarNav"
-                    aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <nav class="navbar navbar-expand-lg">
-              <div class="collapse navbar-collapse" id="navbarNav">
-                {% if page.primary_menu %}
-                  <div class="menu-region">{{ page.primary_menu }}</div>
-                {% endif %}
-                {% if  page.lang_menu %}
-                  <div class="lang-region">{{ page.lang_menu }}</div>
-                {% endif %}
-              </div>
-            </nav>
-          {% endif %}
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="navbar navbar-expand-lg main-navbar px-0 collapse ml-auto flex-column d-lg-flex" id="navbar-nav">
+            <div class="navbar-inner d-flex">
+              {% if page.secondary_menu %}
+                <div class="secondary-menu-region">{{ page.secondary_menu }}</div>
+              {% endif %}
+              {% if page.primary_menu %}
+                <div class="menu-region">{{ page.primary_menu }}</div>
+              {% endif %}
+              {% if  page.lang_menu %}
+                <div class="lang-region">{{ page.lang_menu }}</div>
+              {% endif %}
+            </div>
+          </nav>
         </div>
       </nav>
     {% endblock %}
@@ -96,7 +96,7 @@
 
   {% if page.highlighted %}
     <div class="highlighted">
-      <aside class="{{ container }} section clearfix" role="complementary">
+      <aside class="container section clearfix" role="complementary">
         {{ page.highlighted }}
       </aside>
     </div>
@@ -104,7 +104,7 @@
   {% if page.featured_top %}
     {% block featured %}
       <div class="featured-top">
-        <aside class="featured-top__inner section {{ container }} clearfix"
+        <aside class="featured-top__inner section container clearfix"
                role="complementary">
           {{ page.featured_top }}
         </aside>
@@ -135,32 +135,13 @@
   </div>
   {% if page.featured_bottom_first or page.featured_bottom_second or page.featured_bottom_third %}
     <div class="featured-bottom">
-      <aside class="{{ container }} clearfix" role="complementary">
+      <aside class="container clearfix" role="complementary">
         {{ page.featured_bottom_first }}
         {{ page.featured_bottom_second }}
         {{ page.featured_bottom_third }}
       </aside>
     </div>
   {% endif %}
-  <footer class="site-footer">
-    {% block footer %}
-      <div class="{{ container }}">
-        {{ page.footer_main }}
-        {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
-          <div class="site-footer__top clearfix">
-            {{ page.footer_first }}
-            {{ page.footer_second }}
-            {{ page.footer_third }}
-            {{ page.footer_fourth }}
-          </div>
-        {% endif %}
-        {% if page.footer_fifth %}
-          <div class="site-footer__bottom">
-            {{ page.footer_fifth }}
-          </div>
-        {% endif %}
-      </div>
-    {% endblock %}
-  </footer>
 
+  {% include '@droopler_theme/includes/footer.html.twig' %}
 </div>

@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.blog_posts_category.field_d_blog_category
     - taxonomy.vocabulary.blog_posts_category
   module:
     - path
@@ -40,7 +41,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
+    third_party_settings: {  }
   translation:
     weight: 10
     region: content
-hidden: {  }
+hidden:
+  field_d_blog_category: true

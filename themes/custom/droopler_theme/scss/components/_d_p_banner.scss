@@ -9,7 +9,9 @@ $d-p-banner-header-color: $color-odysseus !default;
 $d-p-banner-subheader-color: $color-odysseus !default;
 $d-p-banner-text-color: $color-odysseus !default;
 $d-p-banner-background-overlay: $color-cassandra !default;
-$d-p-banner-line-color: $color-odysseus !default;
+$d-p-banner-line-color: $color-nestor !default;
+$d-p-banner-line-color-inverted: $color-agamemnon !default;
+$d-p-banner-half-transparent-background-color: rgba(255, 255, 255, .75) !default;
 
 // Margins, paddings and sizes.
 $d-p-banner-text-line-height: 1.7 !default;
@@ -18,25 +20,29 @@ $d-p-banner-padding-top: 18.5% !default;
 $d-p-banner-padding-bottom: 14.5% !default;
 $d-p-banner-mobile-padding-top: 6.25rem !default;
 $d-p-banner-mobile-padding-bottom: 6.25rem !default;
-$d-p-banner-line-margin-top: $line-center-margin-top !default;
-$d-p-banner-line-margin-bottom: $line-center-margin-bottom !default;
+$d-p-banner-half-transparent-padding-top: 10% !default;
+$d-p-banner-half-transparent-padding-bottom: 10% !default;
+$d-p-banner-half-transparent-content-spacing: 10% !default;
+$d-p-banner-half-transparent-btn-spacing: 25px !default;
 
 // Other settings
 $d-p-banner-img-opacity: 0.5 !default;
 $d-p-banner-subheader-opacity: 0.7 !default;
 
-.d-p-banner {
+.paragraph--type--d-p-banner {
   background: $d-p-banner-background-overlay;
   color: $d-p-banner-text-color;
   z-index: 0;
   text-align: center;
-  .content > h2 {
+  $root: &;
+
+  .content > .field--name-field-d-main-title {
     @include font-main-header-big;
     color: $d-p-banner-header-color;
     text-align: center;
     text-transform: uppercase;
   }
-  .field--name-field-d-icon {
+  .field--name-field-d-media-icon {
     text-align: center;
   }
   h3.field--name-field-d-subtitle {
@@ -55,7 +61,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       margin-top: $d-p-banner-button-margin-top;
     }
   }
-  h2 + .field--type-link,
+  .field--name-field-d-main-title + .field--type-link,
   h3 + .field--type-link,
   .field--name-field-d-long-text {
     p {
@@ -63,11 +69,8 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       word-wrap: break-word;
       hyphens: auto;
     }
-    &:before {
-      @include decoration-header-line-main-center;
-      background: $d-p-banner-line-color;
-      margin-top: $d-p-banner-line-margin-top;
-      margin-bottom: $d-p-banner-line-margin-bottom;
+    &::before {
+      @include decoration-header-line-main-center($d-p-banner-line-color, $d-p-banner-line-color-inverted);
     }
   }
   .backstretch-item {
@@ -87,6 +90,76 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     @include media-breakpoint-down(sm) {
       padding-top: $d-p-banner-mobile-padding-top;
       padding-bottom: $d-p-banner-mobile-padding-bottom;
+    }
+  }
+}
+
+// Styles for half-transparent modifier.
+.half-transparent {
+  .d-p-banner {
+    .content-wrapper {
+      width: 100%;
+      background: $d-p-banner-half-transparent-background-color;
+      padding-top: $d-p-banner-half-transparent-padding-top;
+      padding-bottom: $d-p-banner-half-transparent-padding-bottom;
+      @include media-breakpoint-down(sm) {
+        padding-top: $d-p-banner-mobile-padding-top;
+        padding-bottom: $d-p-banner-mobile-padding-bottom;
+      }
+      @include media-breakpoint-up(lg) {
+        width: 50%;
+      }
+      .content {
+        padding-left: $d-p-banner-half-transparent-content-spacing;
+        padding-right: $d-p-banner-half-transparent-content-spacing;
+        .field--name-field-d-main-title,
+        .field--name-field-d-subtitle {
+          text-transform: none;
+          opacity: 1;
+          @include media-breakpoint-up(lg) {
+            text-align: left;
+          }
+        }
+        .field--name-field-d-subtitle {
+          font-weight: normal;
+        }
+        .field--name-field-d-cta-link {
+          @include media-breakpoint-up(lg) {
+            text-align: left;
+          }
+          a {
+            margin: $d-p-banner-half-transparent-btn-spacing 0 0 0;
+          }
+        }
+        .field--name-field-d-main-title,
+        .field--name-field-d-subtitle,
+        .field--name-field-d-long-text,
+        .field--name-field-d-cta-link {
+          &::before {
+            @include media-breakpoint-up(lg) {
+              margin-left: 0;
+            }
+          }
+        }
+        .field--name-field-d-long-text {
+          p {
+            @include media-breakpoint-up(lg) {
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.theme-invert {
+  > .d-p-banner {
+    .field--type-string,
+    .field--type-text-long {
+      &, p {
+        color: $color-cassandra;
+      }
     }
   }
 }

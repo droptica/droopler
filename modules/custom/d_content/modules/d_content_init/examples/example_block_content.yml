@@ -1,0 +1,44 @@
+info:
+  type: block_content
+  bundle: content_block
+  title: 'Example content block'
+
+# Placement of the block in region (optional).
+# Theme is optional, if will not be declared default theme will be taken.
+placement:
+  langcode: en
+  theme: droopler_subtheme
+  region: content
+  weight: 0
+  settings:
+    status: true
+    provider: block_content
+    label: 'Example block label'
+    label_display: 0
+
+# Content block fields (optional).
+fields:
+  field_text:
+    type: text
+    data: 'Some text'
+  field_long_text:
+    type: text_long
+    data:
+      - value: "<p>Some long text value</p>"
+        format: full_html
+
+# Mega menu configuration (optional).
+# Placement has to be defined to block be visible by we_megamenu.
+# Theme is optional, if will not be declared default theme will be taken.
+we_megamenu:
+  menu_name: main
+  theme: droopler_subtheme
+  parent_title: "Services"
+  row: 0
+  col: 0
+  col_config:
+    hidewhencollapse: ""
+    type: "we-mega-menu-col"
+    width: 3
+    class: ""
+    block_title: 0
