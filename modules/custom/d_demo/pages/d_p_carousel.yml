@@ -7,14 +7,8 @@ info:
 
 field_page_section:
   paragraphs:
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_bg.jpg
-            alt: Abstract background
       field_d_main_title:
         type: text
         data: Carousel Paragraph
@@ -23,16 +17,11 @@ field_page_section:
         data: Droopler Documentation
       field_d_settings:
         type: field_p_configuration_storage
+        custom_class: theme-invert
         heading_type: h1
 
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_blue.png
-            alt: Blue background
       field_d_main_title:
         type: text
         data: 'Full Example'
@@ -41,6 +30,9 @@ field_page_section:
         data: <p>Carousel Paragraph is another type of list. The items are sliding from
           right to left, one by one. You decide how many items are visible. Below you can
           see a full version of the carousel. With icon, description and fully equipped boxes.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: background-gray-light-2
 
   - paragraph_type: d_p_carousel
     data:
@@ -70,8 +62,8 @@ field_page_section:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_bagel.svg
-                alt: Bagel
+              - path: d_demo/d_demo_icon_car.svg
+                alt: Car icon
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -83,13 +75,13 @@ field_page_section:
             type: cta
             data:
               link: internal:/documentation/carousel-paragraph
-              text: Bagel
+              text: Car
         - field_d_media_image:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_croissant.svg
-                alt: Croissant
+              - path: d_demo/d_demo_icon_boat.svg
+                alt: Boat icon
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -101,13 +93,13 @@ field_page_section:
             type: cta
             data:
               link: internal:/documentation/carousel-paragraph
-              text: Croissant
+              text: Boat
         - field_d_media_image:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_bagel.svg
-                alt: Bagel
+              - path: d_demo/d_demo_icon_cog.svg
+                alt: Settings icon
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -119,13 +111,13 @@ field_page_section:
             type: cta
             data:
               link: internal:/documentation/carousel-paragraph
-              text: Bagel
+              text: Settings
         - field_d_media_image:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_croissant.svg
-                alt: Croissant
+              - path: d_demo/d_demo_icon_bag.svg
+                alt: Bag icon
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -137,13 +129,13 @@ field_page_section:
             type: cta
             data:
               link: internal:/documentation/carousel-paragraph
-              text: Croissant
+              text: Bag
         - field_d_media_image:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_bagel.svg
-                alt: Bagel
+              - path: d_demo/d_demo_icon_contact.svg
+                alt: Telephone icon
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -155,13 +147,13 @@ field_page_section:
             type: cta
             data:
               link: internal:/documentation/carousel-paragraph
-              text: Bagel
+              text: Telephone
         - field_d_media_image:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_croissant.svg
-                alt: Croissant
+              - path: d_demo/d_demo_icon_file.svg
+                alt: File icon
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -173,13 +165,13 @@ field_page_section:
             type: cta
             data:
               link: internal:/documentation/carousel-paragraph
-              text: Croissant
+              text: File
         - field_d_media_image:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_bagel.svg
-                alt: Bagel
+              - path: d_demo/d_demo_icon_plane.svg
+                alt: Plane icon
           field_d_main_title:
             type: text
             data: Lorem Ipsum
@@ -191,13 +183,13 @@ field_page_section:
             type: cta
             data:
               link: internal:/documentation/carousel-paragraph
-              text: Bagel
+              text: Plane
         - field_d_media_image:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_croissant.svg
-                alt: Croissant
+              - path: d_demo/d_demo_icon_download.svg
+                alt: Download icon
           field_d_main_title:
             type: text
             data: Dolor Amet
@@ -209,16 +201,10 @@ field_page_section:
             type: cta
             data:
               link: internal:/documentation/carousel-paragraph
-              text: Croissant
+              text: Download
 
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_blue.png
-            alt: Blue background
       field_d_main_title:
         type: text
         data: 'Logos Example'
@@ -227,6 +213,9 @@ field_page_section:
         data: <p>The Carousel is perfect for presenting a sliding list of logotypes. If you organize an event
           with the help of sponsors or cooperate with a lot of partners, you usually want to honor them on your
           website. Of course, you can wrap each item with a hyperlink.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: background-gray-light-2
 
   - paragraph_type: d_p_carousel
     data:
@@ -308,14 +297,8 @@ field_page_section:
               text: Droopler
 
 
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_blue.png
-            alt: Blue background
       field_d_main_title:
         type: text
         data: 'Opinions Example'
@@ -324,6 +307,9 @@ field_page_section:
         data: <p>Does only one item in the Carousel make sense at all? Of course! With one piece of content
           visible at the time, you can build a list of testimonials. The image field serves as a person's photo,
           and the description field holds the opinion.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: background-gray-light-2
 
   - paragraph_type: d_p_carousel
     data:
@@ -341,7 +327,7 @@ field_page_section:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_face_2.png
+              - path: d_demo/d_demo_face_1.png
                 alt: John Smith
           field_d_main_title:
             type: text
@@ -355,7 +341,7 @@ field_page_section:
             type: media_image
             directory: demo
             files:
-              - path: d_demo/demo_face_1.png
+              - path: d_demo/d_demo_face_2.png
                 alt: Anna Novak
           field_d_main_title:
             type: text
@@ -365,29 +351,9 @@ field_page_section:
             data: <p><em>Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend.
               Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna mi.
               Nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</em></p>
-        - field_d_media_image:
-            type: media_image
-            directory: demo
-            files:
-              - path: d_demo/demo_face_3.png
-                alt: Zhang San
-          field_d_main_title:
-            type: text
-            data: Zhang San, Atlantic Jetlines
-          field_d_long_text:
-            type: text_long
-            data: <p><em>Sagittis vitae et leo duis ut diam. Id ornare arcu odio ut. Accumsan sit amet nulla facilisi
-              morbi tempus iaculis urna. Nullam non nisi est sit amet facilisis magna etiam. Elementum facilisis leo
-              vel fringilla est ullamcorper eget nulla facilisi. Volutpat lacus laoreet non curabitur gravida arcu.</em></p>
 
-  - paragraph_type: d_p_text_with_bckg
+  - paragraph_type: d_p_text_paged
     data:
-      field_d_media_background:
-        type: media_image
-        directory: demo
-        files:
-          - path: d_demo/demo_blue.png
-            alt: Blue background
       field_d_main_title:
         type: text
         data: 'Columns Example'
@@ -397,6 +363,9 @@ field_page_section:
           There would be nothing to slide! Droopler is prepared for such edge cases. It automatically
           decreases column count to show a list as a slider. Look at the example below.
           There are four items in four columns, automatically fitted into three columns.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: background-gray-light-2
 
   - paragraph_type: d_p_carousel
     data:
@@ -422,75 +391,226 @@ field_page_section:
         type: paragraph_reference
         subtype: d_p_carousel_item
         data:
-        - field_d_media_image:
-            type: media_image
-            directory: demo
-            files:
-              - path: d_demo/demo_bagel.svg
-                alt: Bagel
-          field_d_main_title:
-            type: text
-            data: Lorem Ipsum
-          field_d_long_text:
-            type: text_long
-            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-              tristique dui dignissim gravida.</p>
-          field_d_cta_link:
-            type: cta
-            data:
-              link: internal:/documentation/carousel-paragraph
-              text: Bagel
-        - field_d_media_image:
-            type: media_image
-            directory: demo
-            files:
-              - path: d_demo/demo_croissant.svg
-                alt: Croissant
-          field_d_main_title:
-            type: text
-            data: Dolor Amet
-          field_d_long_text:
-            type: text_long
-            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-              tristique dui dignissim gravida.</p>
-          field_d_cta_link:
-            type: cta
-            data:
-              link: internal:/documentation/carousel-paragraph
-              text: Croissant
-        - field_d_media_image:
-            type: media_image
-            directory: demo
-            files:
-              - path: d_demo/demo_bagel.svg
-                alt: Bagel
-          field_d_main_title:
-            type: text
-            data: Lorem Ipsum
-          field_d_long_text:
-            type: text_long
-            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-              tristique dui dignissim gravida.</p>
-          field_d_cta_link:
-            type: cta
-            data:
-              link: internal:/documentation/carousel-paragraph
-              text: Bagel
-        - field_d_media_image:
-            type: media_image
-            directory: demo
-            files:
-              - path: d_demo/demo_croissant.svg
-                alt: Croissant
-          field_d_main_title:
-            type: text
-            data: Dolor Amet
-          field_d_long_text:
-            type: text_long
-            data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
-              tristique dui dignissim gravida.</p>
-          field_d_cta_link:
-            type: cta
-            data:
-              link: internal:/documentation/carousel-paragraph
-              text: Croissant
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_car.svg
+                  alt: Car icon
+            field_d_main_title:
+              type: text
+              data: Lorem Ipsum
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Car
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_boat.svg
+                  alt: Boat icon
+            field_d_main_title:
+              type: text
+              data: Dolor Amet
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Boat
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_cog.svg
+                  alt: Settings icon
+            field_d_main_title:
+              type: text
+              data: Lorem Ipsum
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Settings
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_bag.svg
+                  alt: Bag icon
+            field_d_main_title:
+              type: text
+              data: Dolor Amet
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Bag
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_contact.svg
+                  alt: Telephone icon
+            field_d_main_title:
+              type: text
+              data: Lorem Ipsum
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Telephone
+
+
+
+  - paragraph_type: d_p_text_paged
+    data:
+      field_d_main_title:
+        type: text
+        data: 'Full Width With Divider Example'
+      field_d_long_text:
+        type: text_long
+        data: <p>Choose the "With dividers" option to add a vertical border to all items. The background becomes dark,
+          the text is white now. Choose the "Full width" option to span the paragraph 100% width.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: background-gray-light-2
+
+  - paragraph_type: d_p_carousel
+    data:
+      field_d_media_icon:
+        type: media_image
+        directory: demo
+        files:
+          - path: d_demo/demo_droopler.svg
+            alt: Droopler icon
+      field_d_number:
+        type: number
+        data: 3
+      field_d_main_title:
+        type: text
+        data: Main Title
+      field_d_long_text:
+        type: text_long
+        data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+          tristique dui dignissim gravida. Duis tristique sem non interdum ultricies.
+          Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem.
+          Vestibulum non accumsan eros, sit amet tempus ex.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-width with-divider
+      field_d_p_cs_item_reference:
+        type: paragraph_reference
+        subtype: d_p_carousel_item
+        data:
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_car.svg
+                  alt: Car icon
+            field_d_main_title:
+              type: text
+              data: Lorem Ipsum
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Car
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_boat.svg
+                  alt: Boat icon
+            field_d_main_title:
+              type: text
+              data: Dolor Amet
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Boat
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_cog.svg
+                  alt: Settings icon
+            field_d_main_title:
+              type: text
+              data: Lorem Ipsum
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Settings
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_bag.svg
+                  alt: Bag icon
+            field_d_main_title:
+              type: text
+              data: Dolor Amet
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Bag
+          - field_d_media_image:
+              type: media_image
+              directory: demo
+              files:
+                - path: d_demo/d_demo_icon_contact.svg
+                  alt: Telephone icon
+            field_d_main_title:
+              type: text
+              data: Lorem Ipsum
+            field_d_long_text:
+              type: text_long
+              data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
+                tristique dui dignissim gravida.</p>
+            field_d_cta_link:
+              type: cta
+              data:
+                link: internal:/documentation/carousel-paragraph
+                text: Telephone
