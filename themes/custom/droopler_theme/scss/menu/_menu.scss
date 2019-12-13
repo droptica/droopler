@@ -1,0 +1,113 @@
+//.we-mega-menu-row {
+//  display: flex;
+//  flex-direction: column;
+//  @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+//    flex-direction: row;
+//  }
+//}
+
+nav.main-navbar .navbar-inner {
+  overflow: hidden;
+}
+
+li.we-mega-menu-li {
+  padding: 0;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  &.mega {
+    position: static;
+  }
+}
+
+a.we-mega-menu-li,
+span.we-mega-menu-nolink {
+  text-decoration: none;
+}
+
+.we-mega-menu-li {
+  margin: 0;
+
+  &.with-submenu {
+    top: initial;
+    display: flex;
+    flex-direction: column;
+
+    &.active-trail {
+      > .we-mega-menu-submenu > .we-mega-menu-submenu-inner {
+        display: block;
+      }
+    }
+  }
+}
+
+.type-of-block {
+  h2 + .field-content-wrapper {
+    @include sublist-background();
+
+    & > * {
+      display: none;
+    }
+  }
+
+  &.active-trail {
+    .field-content-wrapper > * {
+      display: block;
+    }
+  }
+}
+
+.we-mega-menu-submenu {
+  //display: none;
+
+  @include sublist-background();
+
+  .we-mega-menu-submenu-inner {
+    display: none;
+  }
+
+  .we-mega-menu-submenu {
+    top: 0;
+  }
+}
+
+.type-of-block,
+.with-submenu {
+  span.d-submenu-toggler {
+    @include mobile-toggle;
+  }
+
+  &.open, .open {
+    span.d-submenu-toggler {
+      @include mobile-toggle-open;
+    }
+  }
+}
+
+@include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+  .we-mega-menu-submenu {
+    position: absolute;
+    top: 100%;
+    display: none;
+
+    .we-mega-menu-submenu {
+      left: 100%;
+    }
+
+    .mega > & {
+      left: 0;
+      width: 100%;
+    }
+  }
+  .we-mega-menu-li:hover {
+    > .we-mega-menu-submenu {
+      display: block;
+      z-index: 1;
+    }
+  }
+
+  // This includes creation of grid for megamenu col classes: "span3"
+  @include views-grid();
+}
+

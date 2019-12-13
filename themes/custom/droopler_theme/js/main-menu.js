@@ -51,7 +51,7 @@
    */
   Drupal.behaviors.mainMenuMobileSubmenuToggle = {
     attach: function (context, settings) {
-      var $menuItems = $('.we-mega-menu-li.dropdown-menu', context);
+      var $menuItems = $('.we-mega-menu-li.with-submenu', context);
       var $links = $('> a.we-mega-menu-li, > span.we-megamenu-nolink', $menuItems);
 
       if ($links.length) {
@@ -78,5 +78,13 @@
     }
   };
 
+  Drupal.behaviors.mainMenuDeepActiveTrail = {
+    attach: function (context, settings) {
+      var $menu = $('nav.navbar', context);
+
+      $menu.find('a[href$="' + window.location.pathname + '"]').parents('ul').parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
+      $menu.find('a[href$="' + window.location.pathname + '"]').parents('.type-of-block').addClass('active-trail open');
+    }
+  }
 
 })(jQuery, Drupal);

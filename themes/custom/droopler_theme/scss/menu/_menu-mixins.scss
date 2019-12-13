@@ -1,0 +1,624 @@
+// ====================
+// Fonts Family
+// Input: $type (font-family)
+// Output: Font-family
+// ---
+@mixin wp-font($type) {
+  @if $type==font-body {
+    font-family: $font-body;
+    font-weight: $font-weight-body;
+  }
+
+  @else if $type==font-bold {
+    font-family: $font-bold;
+    font-weight: $font-weight-bold;
+  }
+
+  @else if $type==font-semibold {
+    font-family: $font-semibold;
+    font-weight: $font-weight-semibold;
+  }
+
+  @else if $type==font-light {
+    font-family: $font-light;
+    font-weight: $font-weight-light;
+  }
+}
+
+// ====================
+// Fonts Size Rem
+// Input: $type (Property css), $size (Value Px)
+// Output: $type: convert to $rem
+// ---
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return #{$remSize}rem;
+}
+
+// Ex: @include sizeRem(font-size, 10px);
+// ==> font-size: 0.625rem;
+// Ex: @include sizeRem(padding-top, 10px, true);
+// ==> padding-top: 0.625rem !important;
+@mixin sizeRem($type, $size, $important: false) {
+  @if $important {
+    #{$type}: calculateRem($size) !important;
+  }
+
+  @else {
+    #{$type}: calculateRem($size);
+  }
+}
+
+
+// ====================
+// Fonts Size Rem All (padding, margin,...)
+// Input: $type (Property css), $top (Value Px for top), $right (Value Px for right), ...
+// Output: $type: convert to $rem for top, right, bottom, left.
+// Ex: @include sizeRem(padding, 10px, 5px, 4px, 2px);
+// ==> padding: 0.625rem 0.3125rem 0.25rem 0.125rem;
+// Ex: @include sizeRem(padding, 10px, 5px, 4px, 2px, true);
+// ==> padding: 0.625rem 0.3125rem 0.25rem 0.125rem !important;
+// ---
+@mixin sizeRemAll($type, $top, $right, $bottom, $left, $important: false) {
+  @if $important {
+    #{$type}: calculateRem($top) calculateRem($right) calculateRem($bottom) calculateRem($left) !important;
+  }
+
+  @else {
+    #{$type}: calculateRem($top) calculateRem($right) calculateRem($bottom) calculateRem($left);
+  }
+}
+
+// ====================
+// Fonts Heade (padding, margin,...)
+// Input: $type (Property css), $top (Value Px for top), $right (Value Px for right), ...
+// Output: $type: convert to $rem for top, right, bottom, left.
+// ---
+@mixin headings {
+
+  @each $header,
+  $size in $list-header-size {
+
+    #{$header},
+    .#{$header} {
+      @include sizeRem(font-size, $size);
+    }
+  }
+
+  @each $header-line-height in $list-header-line-height {
+
+    #{$header-line-height},
+    .#{$header-line-height} {
+      line-height: 1.1;
+    }
+  }
+
+  @for $i from 1 through 6 {
+
+    h#{$i},
+    .h#{$i} {
+      color: $title-color;
+      @include sizeRemAll(margin, 0px, 0px, 20px, 0px);
+    }
+  }
+}
+
+// ====================
+// Mixins
+// ---
+@mixin clearfix {
+
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin border-radius-rem($size) {
+  -webkit-border-radius: calculateRem($size);
+  border-radius: calculateRem($size);
+}
+
+@mixin fontawesome {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ====================
+// Mixins Form
+// ---
+@mixin form-default-label {
+  label {
+    display: block;
+    @include sizeRem(margin-bottom, 5px);
+  }
+}
+
+@mixin form-default-input {
+  border: 1px solid rgba($title-color, .3);
+  @include border-radius-rem(3px);
+  background-color: $white-color;
+  color: $title-color;
+
+  &:focus {
+    border: 1px solid rgba($title-color, .6);
+    outline: none;
+  }
+}
+
+@mixin icons($name, $width, $height, $type: true) {
+  .#{$name} {
+    @include sizeRem(width, $width);
+    @include sizeRem(height, $height);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+  }
+
+  @if $type {
+    .#{$name} {
+      background-image: url('../images/#{$name}.svg');
+    }
+  }
+
+  @else {
+    .#{$name} {
+      background-image: url('../images/#{$name}.png');
+    }
+  }
+}
+
+// ====================
+// Mixins Buttons
+// ---
+@mixin btn {
+  display: inline-block;
+  @include border-radius-rem(5px);
+  @include sizeRem(font-size, 16px);
+  @include wp-font(font-bold);
+  @include sizeRemAll(padding, 9px, 25px, 9px, 25px);
+  background-color: $white-color;
+  color: $body-color;
+  @include transition(0.3s all);
+  line-height: 1.42857143;
+
+  &:hover,
+  &:focus {
+    background-color: $link-color;
+    color: $white-color;
+  }
+}
+
+@mixin btn-skin-default {
+  background-color: $bg-color;
+  color: $white-color;
+  border-color: $bg-color;
+
+  &:hover,
+  &:focus {
+    background: darken($bg-color, 10%);
+    color: $white-color;
+    border-color: darken($bg-color, 10%);
+  }
+}
+
+
+// ====================
+// Mixins Container bootstrap
+// ---
+@mixin container {
+  padding: {
+    @include sizeRem(left, 15px);
+    @include sizeRem(right, 15px);
+  }
+
+  margin: 0 auto;
+
+  @media (min-width: $desktop) {
+    width: 1170px;
+  }
+
+  @media (min-width: $tablet-ht) and (max-width: $desktop - 1) {
+    width: 970px;
+  }
+
+  @media (min-width: $tablet-vt) and (max-width: $tablet-ht - 1) {
+    width: 750px;
+  }
+}
+
+
+// ====================
+// Mixins Flex
+// ---
+@mixin flex-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin flex-col-xs {
+  -webkit-flex-basis: 0;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+@mixin flex-width-col-xs($val) {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 $val;
+  -ms-flex: 0 0 $val;
+  flex: 0 0 $val;
+  max-width: $val;
+}
+
+
+
+// ====================
+// View grid Custom
+// ---
+$item-start: 1;
+$item-end: 12;
+$class-grid : navbar-we-mega-menu;
+$flex-parent: we-mega-menu-row;
+$flex-item: span;
+$percent: 12;
+
+@mixin margin-parent {
+  margin: {
+    left: -1.06383%;
+    right: -1.06383%;
+  }
+}
+
+@mixin views-grid($type: flex) {
+  .#{$class-grid} {
+    .#{$flex-parent} {
+      @include margin-parent;
+
+      @if $type==flex {
+        @include flex-row;
+      }
+
+      >* {
+        @include flex-width-col-xs(100% - 2.12766%);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        margin: {
+          left: 1.06383%;
+          right: 1.06383%;
+        }
+      }
+    }
+  }
+
+  @for $i from $item-start through $item-end {
+    .#{$class-grid} {
+      .#{$flex-item}#{$i} {
+        @if $type==flex {
+          @include flex-width-col-xs(percentage($i / $percent) - 2.12766%);
+        }
+
+        @else if $type==width {
+          width: (percentage($i / $percent) - 2.12766%);
+        }
+      }
+    }
+  }
+}
+
+
+// ====================
+// Layout Header
+// ---
+@mixin flex-header($item-left, $item-right, $item-left-width, $item-right-width) {
+  display: flex;
+  @include align-items(center);
+
+  .#{$item-left} {
+    @include flex-width-col-xs($item-left-width);
+  }
+
+  .#{$item-right} {
+    @include flex-width-col-xs($item-right-width);
+    display: flex;
+    @include justify-content(flex-end);
+    @include align-items(center);
+  }
+}
+
+
+// ====================
+// Mixins Effect
+// ---
+
+// Fade
+@-webkit-keyframes fadeInFromNone {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeInFromNone {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeInFromNone {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInFromNone {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// Slide
+@-webkit-keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 20px, 0);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 20px, 0);
+    visibility: visible;
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+// Zoom
+@-webkit-keyframes zoomInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.1, .1, .1) translate3d(0, 1000px, 0);
+    transform: scale3d(.1, .1, .1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(.475, .475, .475) translate3d(0, -60px, 0);
+    transform: scale3d(.475, .475, .475) translate3d(0, -60px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+  }
+}
+
+// Elastic
+
+
+@-webkit-keyframes bounceInUp {
+
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100px, 0);
+    transform: translate3d(0, 100px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, -20px, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 10px, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, -5px, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bounceInUp {
+
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100px, 0);
+    transform: translate3d(0, 100px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, -20px, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 10px, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, -5px, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInRight {
+  -webkit-animation-name: slideInRight;
+  animation-name: slideInRight;
+}
+
+@mixin animated {
+  @include animation-fill-mode(both);
+  @include animation-duration(0.35s);
+  @include animation-timing-function(linear);
+}
+
+@mixin show-fade($class-show) {
+  display: none;
+
+  &.#{$class-show} {
+    display: block;
+    @include animated;
+    @include animation-name(fadeInFromNone);
+  }
+}
+
+// ====================
+// Mixins Effect
+// ---
+@mixin tb-megamenu-reset {
+  background-color: transparent;
+
+  .nav>li>a {
+    border-right: 0 none;
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+  }
+
+  .nav .open {
+
+    >a,
+    a:hover,
+    a:focus {
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+}
+
+// ====================
+// List item Horizontal
+// ---
+@mixin horizontal-list-item($padding: 4px, $direction: left) {
+  @include no-bullet;
+  white-space: nowrap;
+  @include float($direction);
+
+  @if $padding {
+    padding: {
+      @include sizeRem(left, $padding);
+      @include sizeRem(right, $padding);
+    }
+
+  ;
+
+    &:first-child #{if(support-legacy-browser("ie", "6", $threshold: $css-sel2-support-threshold), ", &.first", "")} {
+      padding-#{$direction}: 0;
+    }
+
+    &:last-child {
+      padding-#{opposite-position($direction)}: 0;
+    }
+
+    @if support-legacy-browser("ie", "7", $threshold: $css-sel2-support-threshold) {
+      &.last {
+        padding-#{opposite-position($direction)}: 0;
+      }
+    }
+  }
+}

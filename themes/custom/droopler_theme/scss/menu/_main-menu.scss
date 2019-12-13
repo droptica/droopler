@@ -94,6 +94,7 @@ $sidebar-animation-speed: 600ms !default;
     font-family: "fontello";
     content: "\e80d";
     padding: 0 10px;
+    line-height: initial;
   }
 }
 @mixin mobile-toggle-open() {
@@ -112,7 +113,7 @@ $sidebar-animation-speed: 600ms !default;
     background-color: $mega-menu-submenu-mobile-background-color;
     left: -50%;
     top: 0;
-    z-index: -1;
+    z-index: 0;
   }
   &::after {
     left: 50%;
@@ -124,11 +125,9 @@ $sidebar-animation-speed: 600ms !default;
   align-items: baseline;
   padding-top: $mobile-sidebar-items-spacing /2 ;
   padding-bottom: $mobile-sidebar-items-spacing /2;
-  line-height: 1.5;
 
   &, a {
     color: $menu-main-link-color;
-    line-height: unset;
   }
   a {
     padding-top: 0;
@@ -169,24 +168,30 @@ header.header > nav.navbar-wrapper {
         display: none;
       }
 
-
-      .we-mega-menu-submenu-inner {
-        display: block !important;
-      }
+      //.we-mega-menu-submenu-inner {
+      //  display: block !important;
+      //}
 
       & > li.we-mega-menu-li,
       & > li.we-mega-menu-li.active-trail,
       & > li.we-mega-menu-li.active {
         background: transparent;
+        display: flex;
+        min-width: initial;
+        padding: 0;
+
         a, span {
           background: transparent;
           text-transform: capitalize;
           padding-top: $menu-main-link-padding-y;
           padding-bottom: $menu-main-link-padding-y;
+          padding: $menu-main-link-padding-y 1.5625rem $menu-main-link-padding-y 1.5625rem;
           font-family: $mega-menu-header-font-family;
           color: $menu-main-link-color;
           font-size: $mega-menu-submenu-font-size;
+          font-weight: 700;
         }
+
       }
       li.we-mega-menu-li:hover {
         background: transparent;
@@ -200,19 +205,19 @@ header.header > nav.navbar-wrapper {
       }
 
       // Mega menu
-      li.we-mega-menu-li.dropdown-menu {
-        position: relative;
+      li.we-mega-menu-li.with-submenu {
+        //position: relative;
+        //
+        //&.mega {
+        //  position: static;
+        //}
 
-        &.mega {
-          position: static;
-        }
-
-        &.mega > .we-mega-menu-submenu {
-          position: absolute;
-          left: 1px;
-          top: 100%;
-          width: 100%;
-        }
+        //&.mega > .we-mega-menu-submenu {
+        //  position: absolute;
+        //  left: 0;
+        //  top: 100%;
+        //  width: 100%;
+        //}
         & > .we-mega-menu-submenu {
           padding: $mega-menu-submenu-padding;
           background-color: $mega-menu-submenu-background-color;
@@ -271,7 +276,7 @@ header.header > nav.navbar-wrapper {
       }
 
       // Normal dropdown
-      li.we-mega-menu-li.dropdown-menu:not(.mega) {
+      li.we-mega-menu-li.with-submenu:not(.mega) {
         & > .we-mega-menu-submenu {
           padding: 0;
           margin-left: $submenu-offset-left;
@@ -290,7 +295,7 @@ header.header > nav.navbar-wrapper {
                 text-decoration: none;
               }
             }
-            &.dropdown-menu {
+            &.with-submenu {
               > a.we-mega-menu-li,
               > span.we-megamenu-nolink {
                 &::before {
@@ -332,8 +337,8 @@ header.header > nav.navbar-wrapper {
       }
     }
 
-    .we-mega-menu-ul > .dropdown-menu > a,
-    .we-mega-menu-ul > .dropdown-menu > span,
+    .we-mega-menu-ul > .with-submenu > a,
+    .we-mega-menu-ul > .with-submenu > span,
     .menu--secondary-menu .nav-item a {
       padding: $menu-main-link-padding-desktop;
 
@@ -464,7 +469,7 @@ header.header > nav.navbar-wrapper {
       pointer-events: none;
       overflow: hidden;
 
-      .dropdown-menu {
+      .with-submenu {
         .we-mega-menu-li,
         span.we-megamenu-nolink {
 
@@ -477,14 +482,10 @@ header.header > nav.navbar-wrapper {
           }
 
           span.d-submenu-toggler {
-            @include mobile-toggle();
+            //@include mobile-toggle();
           }
 
-          &.open {
-            span.d-submenu-toggler {
-              @include mobile-toggle-open;
-            }
-          }
+
         }
       }
 
@@ -559,7 +560,7 @@ header.header > nav.navbar-wrapper {
         .block-inner {
           padding-left: $mobile-sidebar-submenu-spacing;
           padding-right: $mobile-sidebar-submenu-spacing;
-          overflow: hidden;
+          //overflow: hidden;
         }
 
         h2 {
@@ -585,9 +586,13 @@ header.header > nav.navbar-wrapper {
 
             @include sublist-background();
 
-            .field--name-field-d-long-text {
-              display: none;
-            }
+            //> * {
+            //  position: relative;
+            //}
+
+            //.field--name-field-d-long-text {
+            //  display: none;
+            //}
           }
         }
 
@@ -619,7 +624,7 @@ header.header > nav.navbar-wrapper {
     }
 
     // Styling first level mega-menu items and secondary menu items.
-    .we-mega-menu-ul.nav-tabs > .we-mega-menu-li,
+    .we-mega-menu-ul > .we-mega-menu-li,
     .menu--secondary-menu .nav-item {
       > a, > span {
         text-transform: uppercase;
@@ -633,7 +638,7 @@ header.header > nav.navbar-wrapper {
         text-shadow: none;
       }
 
-      &:not(.dropdown-menu) {
+      &:not(.with-submenu) {
         > a, > span {
           &:active, &:focus {
             color: $menu-main-link-color !important;
@@ -641,7 +646,7 @@ header.header > nav.navbar-wrapper {
         }
       }
 
-      &.dropdown-menu {
+      &.with-submenu {
         a.we-mega-menu-li,
         span.we-megamenu-nolink {
           @include sublist-list-item();
@@ -656,29 +661,19 @@ header.header > nav.navbar-wrapper {
         }
       }
 
-      &.active-trail,
-      &.active {
-        .we-mega-menu-submenu .we-mega-menu-submenu-inner {
-          display: block;
-        }
-      }
-
       .we-mega-menu-submenu {
-        display: block;
+        //display: block;
 
-        .we-mega-menu-submenu-inner {
-          display: none;
-        }
       }
 
       > .we-mega-menu-submenu {
-        background-color: $mega-menu-submenu-mobile-background-color
+        //@include sublist-background();
       }
 
       .we-mega-menu-li .we-mega-menu-submenu {
-        display: block;
+        //display: block;
 
-        @include sublist-background();
+        //@include sublist-background();
       }
     }
   }
