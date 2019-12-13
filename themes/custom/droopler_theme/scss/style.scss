@@ -53,10 +53,16 @@
 @import 'barrio/views';
 @import 'barrio/ui-dialog';
 @import 'components/decorations';
-@import 'components/main-menu';
 @import 'components/buttons.scss';
 @import 'components/forms';
 @import 'components/pager';
+
+// Menu Frontend
+//
+@import 'menu/main-menu';
+@import 'menu/menu-mixins';
+@import 'menu/menu';
+@import "menu/megamenu_overrides";
 
 // Paragraphs
 //
@@ -96,10 +102,3 @@
 @import 'layout/header';
 @import 'layout/footer';
 @import 'layout/download_page';
-
-// Menu Frontend
-//
-@import 'menu/main-menu';
-@import 'menu/menu-mixins';
-@import 'menu/menu';
-@import "menu/megamenu_overrides";
