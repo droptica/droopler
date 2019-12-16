@@ -5,6 +5,10 @@ li.we-mega-menu-li {
   position: relative;
   flex-direction: column;
 
+  @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+    width: 100%;
+  }
+
   &.mega {
     position: static;
   }
@@ -37,7 +41,7 @@ span.we-mega-menu-nolink {
   }
 }
 
-
+// Styling navigation mobile specific behavior.
 @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
   nav.main-navbar .navbar-inner {
     overflow: hidden;
@@ -79,10 +83,158 @@ span.we-mega-menu-nolink {
     }
 
     .field--name-field-d-main-title.open,
-    &.open, .open {
-      &, span.d-submenu-toggler {
-        @include mobile-toggle-open;
+    .we-megamenu-nolink.open span.d-submenu-toggler,
+    .we-mega-menu-li.open span.d-submenu-toggler {
+      @include mobile-toggle-open;
+    }
+  }
+
+  // Mobile navigation overlay.
+  body {
+    nav#navbar-nav::before {
+      content: '';
+      position: fixed;
+      background-color: $mobile-navigation-overlay-color;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      z-index: -1;
+      display: block;
+      opacity: 0;
+      transition: opacity $sidebar-animation-speed;
+    }
+
+    &.navbar-open {
+      overflow: hidden;
+
+      nav#navbar-nav::before {
+        opacity: 1;
       }
+    }
+  }
+
+  // Mobile Toggler and its relation to navbar wrapper.
+  button.navbar-toggler {
+    display: block;
+    z-index: 100;
+    width: $navbar-toggler-width;
+    height: $navbar-toggler-height;
+    padding: 0;
+    border: none;
+    border-radius: none;
+    outline: 0;
+
+    .navbar-toggler-icon {
+      width: $navbar-toggler-width;
+      height: $navbar-toggler-height;
+
+      &:after {
+        font-family: "fontello";
+        color: $navbar-toggler-color;
+        font-size: $navbar-toggler-size;
+        line-height: $navbar-toggler-height;
+        position: relative;
+      }
+    }
+
+    &[aria-expanded="false"] .navbar-toggler-icon:after {
+      content: "\f008";
+    }
+    &[aria-expanded="true"] .navbar-toggler-icon {
+      background: $menu-mobile-background;
+
+      &:after {
+        content: "\e802";
+        font-size: $menu-dropdown-size;
+      }
+    }
+  }
+
+
+  header.header > nav.navbar-wrapper {
+    nav.main-navbar {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      z-index: 10;
+      height: calc(100vh - 100%);
+      align-items: start;
+      pointer-events: none;
+      overflow: hidden;
+
+      .with-submenu {
+        .we-mega-menu-li,
+        span.we-megamenu-nolink {
+
+          a.we-mega-menu-li {
+            padding-right: $mobile-sidebar-items-spacing/2;
+
+            &:active, &:focus {
+              //color: $menu-main-link-active-color;
+            }
+          }
+        }
+      }
+
+      .navbar-inner {
+        position: absolute;
+        right: -#{$navbar-mobile-sidebar-width};
+        display: flex;
+        height: 100%;
+        width: $navbar-mobile-sidebar-width;
+        padding-bottom: $submenu-link-height;
+        overflow-y: auto;
+        background-color: $color-odysseus;
+        transition: right $sidebar-animation-speed;
+
+      }
+
+      &.collapse:not(.show) {
+        display: block;
+      }
+
+      &.show {
+        pointer-events: all;
+      }
+
+      &.collapsing.open, &.show {
+        .navbar-inner {
+          right: 0;
+        }
+      }
+    }
+
+    // Mobile borders and order for some elements in the sidebar
+    .region-primary-menu {
+      border-bottom: $mobile-sidebar-items-border;
+      padding-bottom: $mobile-sidebar-items-spacing;
+      margin-top: 0;
+    }
+
+    .region-secondary-menu {
+      flex-direction: column;
+
+      .block-search-page-link {
+        border-top: $mobile-sidebar-items-border;
+        border-bottom: $mobile-sidebar-items-border;
+        margin: $mobile-sidebar-items-spacing 0 2*$mobile-sidebar-items-spacing;
+        width: 100%;
+
+        .content {
+          display: flex;
+          justify-content: center;
+
+          a {
+            width: 100%;
+            mask-repeat: no-repeat;
+            mask-position: center;
+          }
+        }
+      }
+    }
+
+    .secondary-menu-region {
+      order: 1;
     }
   }
 }
