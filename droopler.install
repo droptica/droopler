@@ -30,14 +30,24 @@ function droopler_install() {
     ->set('use_admin_theme', TRUE)
     ->save();
 
-  // @TODO this should not really be here because this subtheme is not part
-  // of the distribution
-  $themes = \Drupal::service('theme_handler')->listInfo();
-  if(isset($themes['droopler_subtheme'])) {
+  try {
+    \Drupal::service('theme_installer')->install(['droopler_subtheme']);
+    $current_subtheme = 'droopler_subtheme';
+  }
+  catch (Exception $e) {
+    try {
+      \Drupal::service('theme_installer')->install(['droopler_dorg_subtheme']);
+      $current_subtheme = 'droopler_dorg_subtheme';
+    }
+    catch (Exception $e) {
+      \Drupal::logger('droopler_install')->warning('Droopler subtheme could not be installed.');
+    }
+  }
+
+  if (isset($current_subtheme) && isset($themes[$current_subtheme])) {
     \Drupal::configFactory()
       ->getEditable('system.theme')
-      ->set('default', 'droopler_subtheme')
-      ->set('admin', 'seven')
+      ->set('default', $current_subtheme)
       ->save();
   }
 
