@@ -5,7 +5,11 @@ dependencies:
     - facets.facet.tags_taxonomy_term_name
   module:
     - facets
+    - d_product
+  theme:
+    - droopler_theme
 id: tagstaxonomytermname
+theme: droopler_theme
 region: facets_left
 weight: -4
 provider: null
