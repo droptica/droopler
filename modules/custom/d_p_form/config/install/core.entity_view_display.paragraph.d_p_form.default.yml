@@ -25,15 +25,6 @@ content:
     third_party_settings: {  }
     type: contact_field_formatter
     region: content
-  field_d_media_icon:
-    type: entity_reference_entity_view
-    weight: 0
-    label: hidden
-    settings:
-      view_mode: d_icon
-      link: false
-    third_party_settings: {  }
-    region: content
   field_d_long_text:
     weight: 2
     label: visually_hidden
@@ -48,6 +39,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_d_media_icon:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: d_icon
+      link: false
+    third_party_settings: {  }
     region: content
 hidden:
   field_d_layout_modifier: true
