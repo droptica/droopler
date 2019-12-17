@@ -44,7 +44,7 @@
 
       // Close sidebar when clicked overflowed content.
       $('.main-navbar', context).click(function() {
-        $ ('#navbar-main button.navbar-toggler', context).click();
+        $ ('#navbar-main button.navbar-toggler:visible', context).click();
       });
     }
   };
@@ -87,9 +87,15 @@
     attach: function (context, settings) {
       var $menu = $('nav.navbar', context);
 
-      $menu.find('a[href$="' + window.location.pathname + '"]').addClass('active-menu-item').parents('ul').parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
-      $menu.find('a[href$="' + window.location.pathname + '"]').addClass('active-menu-item').parents('.type-of-block').addClass('active-trail open');
+      $menu.find('a[href$="' + window.location.pathname + '"]').each(function() {
+        var $matchingLinkTag = $(this);
+        $matchingLinkTag.addClass('active-menu-item');
+        // Some links are placed in basic submenus.
+        $matchingLinkTag.parents('ul').parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
+        // Some links are placed in mega menu blocks.
+        $matchingLinkTag.parents('.type-of-block').addClass('active-trail open');
+      });
     }
-  }
+  };
 
 })(jQuery, Drupal);
