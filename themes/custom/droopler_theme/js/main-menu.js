@@ -41,6 +41,11 @@
           $('.navbar').toggleClass('open', !$(this).is('[aria-expanded="true"]'));
         }
       });
+
+      // Close sidebar when clicked overflowed content.
+      $('.main-navbar', context).click(function() {
+        $ ('#navbar-main button.navbar-toggler', context).click();
+      });
     }
   };
 
@@ -82,8 +87,8 @@
     attach: function (context, settings) {
       var $menu = $('nav.navbar', context);
 
-      $menu.find('a[href$="' + window.location.pathname + '"]').parents('ul').parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
-      $menu.find('a[href$="' + window.location.pathname + '"]').parents('.type-of-block').addClass('active-trail open');
+      $menu.find('a[href$="' + window.location.pathname + '"]').addClass('active-menu-item').parents('ul').parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
+      $menu.find('a[href$="' + window.location.pathname + '"]').addClass('active-menu-item').parents('.type-of-block').addClass('active-trail open');
     }
   }
 

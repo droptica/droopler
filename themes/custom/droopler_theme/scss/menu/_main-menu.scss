@@ -19,23 +19,19 @@ Styleguide 2.1
 $menu-main-link-color: $color-cassandra !default;
 $menu-main-link-active-color: $color-achillies !default;
 $menu-main-link-hover-color: $menu-main-link-active-color !default;
-$menu-main-link-dropdown: $color-hector !default; // Dropdown icon
+$menu-main-link-dropdown: $color-acamas !default; // Dropdown icon
 
 $submenu-link-color: $color-odysseus !default; // Submenu item text color
 $submenu-link-hover-color: $color-achillies !default; // Submenu item hover color
 $submenu-link-hover-background: transparent !default; // Submenu item hover color
 
-$menu-mobile-background: transparent !default;
-
 $navbar-toggler-color: $color-agamemnon !default;
-$mobile-sidebar-items-border: 2px solid $color-iphis !default;
 
-$mega-menu-submenu-header-color: white !default;
-$mega-menu-submenu-color: $color-odysseus !default;
-$mega-menu-submenu-link-hover-color: $color-achillies !default;
-$mega-menu-submenu-background-color: $color-acamas !default;
-$mega-menu-submenu-mobile-background-color: rgba($color-cassandra, 0.1) !default;
+$menu-mobile-background: transparent !default;
+$mobile-sidebar-items-border: 2px solid $color-iphis !default;
+$mobile-menu-submenu-mobile-background-color: rgba($color-cassandra, 0.1) !default;
 $mobile-navigation-overlay-color: rgba($color-cassandra, 0.2) !default;
+$mobile-menu-submenu-link-color: $color-cassandra !default;
 
 // Font sizes
 $menu-font-size-mobile: $font-size-lg !default;
@@ -47,28 +43,27 @@ $navbar-toggler-size: 2.3rem !default; // Size of the toggler arrow
 $mega-menu-header-font-family: 'Lato', sans-serif !default;
 $mega-menu-submenu-font-family: $mega-menu-header-font-family !default;
 $mega-menu-submenu-font-weight: normal !default;
-$mega-menu-submenu-font-size: 1rem !default;
-$mega-menu-submenu-header-font-family: $mega-menu-submenu-font-family !default;
-$mega-menu-submenu-header-font-weight: 400 !default;
 $mega-menu-submenu-header-font-size: 25px !default;
 $mega-menu-link-line-height: 2rem !default;
 
 // Paddings, margins and heights.
 $menu-dropdown-width: 4rem !default;  // Width of desktop dropdown icon (desktop)
 $menu-main-link-height: $header-height - (2 * $navbar-padding-y) !default;  // Height of menu item
-$menu-main-link-padding-y: 0.75rem !default;
+//$menu-main-link-padding-y: 0.75rem !default;
 $menu-main-link-padding-desktop: 0 1.5625rem !default;
 $menu-main-link-padding-tablet: 0 1.2rem !default;
 $menu-secondary-link-padding-x-tablet: 0.9rem !default;
 $menu-secondary-social-icon-padding-tablet: 7px !default;
-$navbar-toggler-width: 5.625rem !default; // Width of mobile menu on/off toggler
+$navbar-toggler-width: $menu-dropdown-width !default; // Width of mobile menu on/off toggler
 $navbar-toggler-height: $header-mobile-height !default; // Height of mobile menu on/off toggler
-$navbar-toggler-sidebar-spacing: 10px !default;
+$submenu-toggler-size: 32px !default;
 $submenu-offset-left: -1rem !default; // Move the submenu left or right (desktop)
-$submenu-link-padding-x: 1.4rem !default; // Horizontal padding of submenu element (desktop)
 $submenu-link-height: 2.9rem !default; // Height of links in submenu (desktop)
 $mobile-sidebar-items-spacing: 10px !default;
 $mobile-sidebar-submenu-spacing: 15px !default;
+$mobile-submenu-padding: $mobile-sidebar-items-spacing $mobile-sidebar-submenu-spacing !default;
+$mobile-submenu-item-padding: $mobile-sidebar-items-spacing/2 0 !default;
+$submenu-dropdown-min-width: 12rem !default;
 
 $secondary-menu-link-colors: $color-iphis !default;
 $secondary-menu-link-hover-colors: $color-achillies !default;
@@ -76,7 +71,6 @@ $secondary-menu-link-hover-colors: $color-achillies !default;
 $mega-menu-submenu-padding: 2rem 15% !default;
 $mega-menu-submenu-link-padding-y: 9px !default;
 $mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
-$mega-menu-submenu-header-text-long-margin: 2 * $mega-menu-submenu-link-padding-y !default;
 
 $sidebar-animation-speed: 600ms !default;
 
@@ -87,14 +81,17 @@ $sidebar-animation-speed: 600ms !default;
   z-index: 100;
   position: relative;
   cursor: pointer;
-  //line-height: inherit;
-
 
   &::after {
     font-family: "fontello";
     content: "\e80d";
-    padding: 0 10px;
     line-height: initial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $submenu-toggler-size;
+    width: $submenu-toggler-size;
+    margin: -5px 0;
   }
 }
 @mixin mobile-toggle-open() {
@@ -104,13 +101,14 @@ $sidebar-animation-speed: 600ms !default;
 }
 @mixin sublist-background() {
   position: relative;
+  display: flex;
 
   &::before, &::after {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: $mega-menu-submenu-mobile-background-color;
+    background-color: $mobile-menu-submenu-mobile-background-color;
     left: -50%;
     top: 0;
     z-index: 0;
@@ -122,16 +120,26 @@ $sidebar-animation-speed: 600ms !default;
 @mixin sublist-list-item {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  line-height: 1.5;
+  height: 100%;
+  font-weight: $mega-menu-submenu-font-weight;
+  margin: 0;
+  padding: 5px 0;
+  font-size: $submenu-font-size;
+  color: $mobile-menu-submenu-link-color;
 
-  a {
-    padding-top: 0;
-    padding-bottom: 0;
+  @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+    color: $submenu-link-color;
+  }
 
-    &:hover {
+  &, a {
+    &:hover, &:active, &:focus, &.active-menu-item {
       border: none;
-      color: $menu-main-link-active-color;
+      color: $submenu-link-hover-color;
+      text-decoration: none;
     }
+
   }
 }
 @mixin mobile-menu-first-level-items {
@@ -162,7 +170,7 @@ header.header > nav.navbar-wrapper {
   }
 }
 
-// Styling first level mega-menu items and secondary menu items.
+// Styling first level main menu items
 .we-mega-menu-ul > li.we-mega-menu-li{
   > a, > span {
     @include mobile-menu-first-level-items;
@@ -185,10 +193,15 @@ header.header > nav.navbar-wrapper {
     }
   }
 }
+
+// Secondary menu
 .secondary-menu-region {
-  li.nav-item > a {
+  li.nav-item {
     @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
-      @include mobile-menu-first-level-items;
+      width: 100%;
+      > a {
+        @include mobile-menu-first-level-items;
+      }
     }
   }
 
@@ -197,12 +210,6 @@ header.header > nav.navbar-wrapper {
 
     &:hover {
       color: $secondary-menu-link-hover-colors;
-    }
-  }
-  @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-    .menu--secondary-menu .nav-item a {
-      padding: $menu-main-link-padding-desktop;
-      line-height: $submenu-link-height;
     }
   }
 
@@ -221,19 +228,13 @@ header.header > nav.navbar-wrapper {
   }
 }
 
-// Mega menu
+// Mega menu content
 .type-of-block {
   .block-inner {
 
     @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
-      padding-left: $mobile-sidebar-submenu-spacing;
-      padding-right: $mobile-sidebar-submenu-spacing;
-
       h2 + .field-content-wrapper {
-        padding-left: $mobile-sidebar-submenu-spacing;
         padding-top: 0;
-
-        @include sublist-background();
       }
 
       .field-content-wrapper {
@@ -242,9 +243,6 @@ header.header > nav.navbar-wrapper {
         .field--name-field-d-long-text {
           ul {
             padding-left: 0;
-            li {
-              @include sublist-list-item();
-            }
           }
         }
       }
@@ -260,15 +258,18 @@ header.header > nav.navbar-wrapper {
         }
       }
     }
+    h2 + .field-content-wrapper {
+      ul li a {
+        @include sublist-list-item();
+      }
+    }
 
     h2 {
-      font-size: $submenu-font-size;
-      font-weight: $mega-menu-submenu-header-font-weight;
-      padding-top: $mobile-sidebar-submenu-spacing;
+      @include sublist-list-item;
 
       @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
         font-size: $mega-menu-submenu-header-font-size;
-        color: $mega-menu-submenu-header-color;
+        color: $submenu-link-color;
         text-transform: uppercase;
         margin-bottom: $mega-menu-submenu-header-margin-bottom;
         padding-top: 0;
@@ -284,64 +285,10 @@ header.header > nav.navbar-wrapper {
       list-style-type: none;
       padding-left: 0;
       display: block;
-
-      li, li.nav-item {
-        padding: 0 0 $mega-menu-submenu-link-padding-y 0;
-      }
     }
   }
 }
 
-
-@include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-  .navbar-we-mega-menu {
-    ul.we-mega-menu-ul {
-      & > li.we-mega-menu-li:last-child {
-        margin-right: -15px;
-      }
-
-
-
-      // Normal dropdown
-      li.we-mega-menu-li.with-submenu:not(.mega) {
-        & > .we-mega-menu-submenu {
-          margin-left: $submenu-offset-left;
-          white-space: nowrap;
-
-          // Submenu item
-          li.we-mega-menu-li.with-submenu {
-            > a.we-mega-menu-li,
-            > span.we-megamenu-nolink {
-              //&::after {
-              //  color: $submenu-link-color;
-
-              .d-submenu-toggler {
-                @include mobile-toggle;
-                margin-right: -15px;
-              }
-
-                //content: "\e805";
-                //font-family: fontello;
-                ////background: none;
-                ////transform: none;
-                //margin-top: 0;
-                ////position: initial;
-                ////top: unset;
-                //opacity: 1;
-                //padding: 0;
-                //display: flex;
-                ////width: unset;
-                //font-size: inherit;
-                ////height: unset;
-              //}
-            }
-          }
-        }
-      }
-    }
-
-  }
-}
 
 @include media-breakpoint-only(lg) {
   .secondary-menu-region,
@@ -364,36 +311,3 @@ header.header > nav.navbar-wrapper {
     }
   }
 }
-
-@include media-breakpoint-down($navbar-mobile-breakpoint-down) {
-
-  header.header > nav.navbar-wrapper {
-
-    // Blocks in megamenu.
-    .navbar-we-mega-menu {
-      .type-of-block {
-
-
-        h2 {
-          //font-size: 17px;
-          //font-weight: $mega-menu-submenu-font-weight;
-          //
-
-          //&.field--name-field-d-main-title {
-          //  margin-bottom: 0;
-          //  padding: $mobile-sidebar-items-spacing/2 $mobile-sidebar-items-spacing/2 $mobile-sidebar-items-spacing/2 0px;
-          //}
-        }
-
-      }
-    }
-  }
-
-  div#navbar-nav.collapsing,
-  div#navbar-nav.show {
-    .region-we-mega-menu {
-      padding: 0;
-    }
-  }
-}
-

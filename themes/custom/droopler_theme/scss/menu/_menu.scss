@@ -53,6 +53,12 @@ span.we-mega-menu-nolink {
 
       & > * {
         display: none;
+        z-index: 1;
+        padding: $mobile-submenu-padding;
+      }
+
+      li.nav-item > a {
+        @include sublist-list-item();
       }
     }
 
@@ -66,8 +72,15 @@ span.we-mega-menu-nolink {
   .we-mega-menu-submenu {
     @include sublist-background();
 
+    li > a.we-mega-menu-li,
+    li > span.we-mega-menu-nolink {
+      @include sublist-list-item();
+    }
+
     .we-mega-menu-submenu-inner {
       display: none;
+      z-index: 1;
+      padding: $mobile-submenu-padding;
     }
 
     .we-mega-menu-submenu {
@@ -168,10 +181,6 @@ span.we-mega-menu-nolink {
 
           a.we-mega-menu-li {
             padding-right: $mobile-sidebar-items-spacing/2;
-
-            &:active, &:focus {
-              //color: $menu-main-link-active-color;
-            }
           }
         }
       }
@@ -245,11 +254,14 @@ span.we-mega-menu-nolink {
     top: 100%;
     display: none;
     padding: 0;
-    background-color: $mega-menu-submenu-background-color;
-    color: $mega-menu-submenu-color;
+    background-color: $menu-main-link-dropdown;
+    color: $submenu-link-color;
     font-family: $mega-menu-submenu-font-family;
     font-weight: $mega-menu-submenu-font-weight;
     border: none;
+    white-space: nowrap;
+    min-width: $submenu-dropdown-min-width;
+    margin-left: $submenu-offset-left;
 
     .we-mega-menu-submenu {
       left: 100%;
@@ -257,9 +269,20 @@ span.we-mega-menu-nolink {
       padding: 0;
     }
 
+    // Submenu item
+    li.we-mega-menu-li.with-submenu {
+      > a.we-mega-menu-li,
+      > span.we-megamenu-nolink {
+        .d-submenu-toggler {
+          @include mobile-toggle;
+          margin-right: -15px;
+        }
+      }
+    }
+
     a,
     span.we-mega-menu-nolink {
-      color: $mega-menu-submenu-color;
+      color: $submenu-link-color;
 
       &:hover {
         color: $menu-main-link-hover-color;
@@ -270,6 +293,8 @@ span.we-mega-menu-nolink {
     .mega > & {
       left: 0;
       width: 100%;
+      margin-left: 0;
+      white-space: normal;
     }
 
     .mega > & {
