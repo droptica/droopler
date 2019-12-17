@@ -1,4 +1,10 @@
+/**
+Menu general layout styling.
 
+Here are styles responsible mainly for setting some basic layout for mobile and desktop menu design.
+ */
+
+// Basic styling for menu list elements.
 li.we-mega-menu-li {
   padding: 0;
   display: flex;
@@ -14,11 +20,7 @@ li.we-mega-menu-li {
   }
 }
 
-a.we-mega-menu-li,
-span.we-mega-menu-nolink {
-  text-decoration: none;
-}
-
+// Tags <a> have the same class as <li> tags. That's why here are some different rules added:
 .we-mega-menu-li {
   margin: 0;
 
@@ -134,7 +136,7 @@ span.we-mega-menu-nolink {
     height: $navbar-toggler-height;
     padding: 0;
     border: none;
-    border-radius: none;
+    border-radius: unset;
     outline: 0;
 
     .navbar-toggler-icon {
@@ -164,6 +166,7 @@ span.we-mega-menu-nolink {
   }
 
 
+  // Mobile sidebar styling.
   header.header > nav.navbar-wrapper {
     nav.main-navbar {
       position: absolute;
@@ -219,7 +222,6 @@ span.we-mega-menu-nolink {
       padding-bottom: $mobile-sidebar-items-spacing;
       margin-top: 0;
     }
-
     .region-secondary-menu {
       flex-direction: column;
 
@@ -248,6 +250,7 @@ span.we-mega-menu-nolink {
   }
 }
 
+// Desktop main navigation submenus styling.
 @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
   .we-mega-menu-submenu {
     position: absolute;
@@ -319,4 +322,3 @@ span.we-mega-menu-nolink {
   // This includes creation of grid for megamenu col classes: "span3"
   @include views-grid();
 }
-

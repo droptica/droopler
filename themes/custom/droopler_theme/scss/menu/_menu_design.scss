@@ -137,9 +137,7 @@ $sidebar-animation-speed: 600ms !default;
     &:hover, &:active, &:focus, &.active-menu-item {
       border: none;
       color: $submenu-link-hover-color;
-      text-decoration: none;
     }
-
   }
 }
 @mixin mobile-menu-first-level-items {
@@ -167,6 +165,13 @@ button.navbar-toggler {
 header.header > nav.navbar-wrapper {
   nav.main-navbar {
     position: static;
+  }
+}
+
+a.we-mega-menu-li,
+span.we-mega-menu-nolink {
+  &, &:hover {
+    text-decoration: none;
   }
 }
 
