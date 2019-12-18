@@ -6,6 +6,10 @@
  */
 #}
 
+{% if attributes.hasClass('dropdown-menu') %}
+    {% set attributes = attributes.removeClass('dropdown-menu').addClass('with-submenu') %}
+{% endif %}
+
 <li {{ attributes }}>
   {% if href is empty %}
     <span data-drupal-link-system-path="<front>" class="we-megamenu-nolink">

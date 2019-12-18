@@ -43,6 +43,11 @@
           $('html, body').stop().animate({scrollTop: 0}, 500);
         }
       });
+
+      // Close sidebar when clicked overflowed content.
+      $('.main-navbar', context).click(function() {
+        $ ('#navbar-main button.navbar-toggler:visible', context).click();
+      });
     }
   };
 
@@ -53,7 +58,7 @@
    */
   Drupal.behaviors.mainMenuMobileSubmenuToggle = {
     attach: function (context, settings) {
-      var $menuItems = $('.we-mega-menu-li.dropdown-menu', context);
+      var $menuItems = $('.we-mega-menu-li.with-submenu', context);
       var $links = $('> a.we-mega-menu-li, > span.we-megamenu-nolink', $menuItems);
 
       if ($links.length) {
@@ -80,5 +85,19 @@
     }
   };
 
+  Drupal.behaviors.mainMenuDeepActiveTrail = {
+    attach: function (context, settings) {
+      var $menu = $('nav.navbar', context);
+
+      $menu.find('a[href$="' + window.location.pathname + '"]').each(function() {
+        var $matchingLinkTag = $(this);
+        $matchingLinkTag.addClass('active-menu-item');
+        // Some links are placed in basic submenus.
+        $matchingLinkTag.parents('ul').parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
+        // Some links are placed in mega menu blocks.
+        $matchingLinkTag.parents('.type-of-block').addClass('active-trail open');
+      });
+    }
+  };
 
 })(jQuery, Drupal);

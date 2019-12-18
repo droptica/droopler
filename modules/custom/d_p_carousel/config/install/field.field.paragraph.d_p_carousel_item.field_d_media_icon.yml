@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_d_media_image
+    - field.storage.paragraph.field_d_media_icon
     - media.type.d_image
     - media.type.d_video
     - paragraphs.paragraphs_type.d_p_carousel_item
-id: paragraph.d_p_carousel_item.field_d_media_image
-field_name: field_d_media_image
+id: paragraph.d_p_carousel_item.field_d_media_icon
+field_name: field_d_media_icon
 entity_type: paragraph
 bundle: d_p_carousel_item
 label: Image
