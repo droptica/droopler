@@ -17,13 +17,13 @@ $lang-dropdown-mobile-link-hover-color: lighten($lang-dropdown-mobile-link-color
 $lang-dropdown-mobile-header-color: $color-odysseus !default; // Color of active language in mobile lang menu
 
 // Font sizes.
-$lang-dropdown-link-font-size: $menu-font-size !default; // Font size of language link in main menu
+$lang-dropdown-link-font-size: $menu-font-size-mobile !default; // Font size of language link in main menu
 $lang-dropdown-size: $menu-dropdown-size !default; // Size of dropdown icon in lang menu
 $lang-dropdown-submenu-font-size: $submenu-font-size !default; // Font size in the lang submenu
 
 // Paddings and margins.
 $lang-dropdown-margin-left: 4.5rem !default;
-$lang-dropdown-link-padding-x: $submenu-link-padding-x !default;
+$lang-dropdown-link-padding-x: 1.4rem !default;
 $lang-dropdown-link-height: $menu-main-link-height !default;
 $lang-dropdown-dropdown-width: $menu-dropdown-width !default;  // Width of desktop dropdown
 $lang-dropdown-submenu-link-height: $submenu-link-height !default;
