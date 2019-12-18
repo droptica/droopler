@@ -103,7 +103,10 @@ header.header {
     }
   }
   > nav.navbar-wrapper {
-    padding-top: $navbar-padding-y;
+
+    @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+      padding-top: $navbar-padding-y;
+    }
     padding-bottom: 0;
   }
 
