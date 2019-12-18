@@ -121,6 +121,10 @@ li.we-mega-menu-li {
 
     &.navbar-open {
       overflow: hidden;
+      position: fixed;
+      width: 100%;
+      left: 0;
+      height: 100%;
 
       nav#navbar-nav::before {
         opacity: 1;
@@ -134,6 +138,7 @@ li.we-mega-menu-li {
     z-index: 100;
     width: $navbar-toggler-width;
     height: $navbar-toggler-height;
+    margin-right: $grid-gutter-width/4;
     padding: 0;
     border: none;
     border-radius: unset;
@@ -168,15 +173,19 @@ li.we-mega-menu-li {
 
   // Mobile sidebar styling.
   header.header > nav.navbar-wrapper {
+    position: unset;
+    > .container {
+      position: unset;
+    }
     nav.main-navbar {
       position: absolute;
-      top: 100%;
+      top: $header-mobile-height;
       right: 0;
       z-index: 10;
-      height: calc(100vh - 100%);
+      height: calc(100% - $header-mobile-height);
       align-items: start;
       pointer-events: none;
-      overflow: hidden;
+      overflow-x: hidden;
 
       .with-submenu {
         .we-mega-menu-li,
@@ -196,6 +205,7 @@ li.we-mega-menu-li {
         width: $navbar-mobile-sidebar-width;
         padding-bottom: $submenu-link-height;
         overflow-y: auto;
+        overflow-x: hidden;
         background-color: $color-odysseus;
         transition: right $sidebar-animation-speed;
 

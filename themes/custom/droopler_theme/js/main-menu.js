@@ -40,7 +40,7 @@
           $('body').toggleClass('navbar-open', !$(this).is('[aria-expanded="true"]'));
           $('.navbar').toggleClass('open', !$(this).is('[aria-expanded="true"]'));
 
-          $('html, body').stop().animate({scrollTop: 0}, 500);
+          $('html, body').animate({scrollTop: 0}, 500);
         }
       });
 
