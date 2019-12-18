@@ -39,6 +39,8 @@
         if((!$('body').hasClass('navbar-open') && !$('.navbar').hasClass('collapsing')) || ($('.navbar').hasClass('show'))) {
           $('body').toggleClass('navbar-open', !$(this).is('[aria-expanded="true"]'));
           $('.navbar').toggleClass('open', !$(this).is('[aria-expanded="true"]'));
+
+          $('html, body').stop().animate({scrollTop: 0}, 500);
         }
       });
     }
