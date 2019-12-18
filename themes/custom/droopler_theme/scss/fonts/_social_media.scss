@@ -1,13 +1,3 @@
-@font-face {
-  font-family: 'social_media';
-  src: url($theme_path + '/fonts/social_media/social_media.eot'); /* IE9 Compat Modes */
-  src: url($theme_path + '/fonts/social_media/social_media.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url($theme_path + '/fonts/social_media/social_media.woff2') format('woff2'), /* Super Modern Browsers */
-  url($theme_path + '/fonts/social_media/social_media.woff') format('woff'), /* Pretty Modern Browsers */
-  url($theme_path + '/fonts/social_media/social_media.ttf')  format('truetype'), /* Safari, Android, iOS */
-  url($theme_path + '/fonts/social_media/social_media.svg#svgFontName') format('svg'); /* Legacy iOS */
-}
-
 [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "social_media";
   font-style: normal;
