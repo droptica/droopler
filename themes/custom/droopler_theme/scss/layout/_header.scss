@@ -104,7 +104,7 @@ header.header {
   }
   > nav.navbar-wrapper {
 
-    @include media-breakpoint-down($navbar-mobile-breakpoint-up) {
+    @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
       padding-top: $navbar-padding-y;
     }
     padding-bottom: 0;

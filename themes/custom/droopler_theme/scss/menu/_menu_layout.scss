@@ -182,7 +182,7 @@ li.we-mega-menu-li {
       top: $header-mobile-height;
       right: 0;
       z-index: 10;
-      height: calc(100% - $header-mobile-height);
+      height: calc(100% - #{$header-mobile-height});
       align-items: start;
       pointer-events: none;
       overflow-x: hidden;
