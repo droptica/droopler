@@ -39,12 +39,17 @@
         if((!$('body').hasClass('navbar-open') && !$('.navbar').hasClass('collapsing')) || ($('.navbar').hasClass('show'))) {
           $('body').toggleClass('navbar-open', !$(this).is('[aria-expanded="true"]'));
           $('.navbar').toggleClass('open', !$(this).is('[aria-expanded="true"]'));
+
+          $('html, body').stop().animate({scrollTop: 0}, 500);
         }
       });
 
       // Close sidebar when clicked overflowed content.
-      $('.main-navbar', context).click(function() {
-        $ ('#navbar-main button.navbar-toggler:visible', context).click();
+      $('.main-navbar', context).click(function(e) {
+        var $clickTarget = $(e.target);
+        if ($clickTarget.parents('.navbar-inner').length == 0 && $clickTarget.is('.navbar-inner') == false) {
+          $ ('#navbar-main button.navbar-toggler:visible', context).click();
+        }
       });
     }
   };
@@ -66,10 +71,21 @@
           var $thisLink = $(this);
           $thisLink.toggleClass('open', $thisLink.parent().is('.active'));
 
-          // The item can be <a> tag or just a <span> if no link available - thena the whole <span> is a toggler.
-          var $toggler = $thisLink.is('a') ? $thisLink.find('.d-submenu-toggler') : $thisLink;
+          // The item can be <a> tag or just a <span> if no link available - then the whole <span> is a toggler.
+          var $expander = $thisLink;
+          var $collapser = $thisLink.is('a') ? $thisLink.find('.d-submenu-toggler') : $thisLink;
 
-          $toggler.once().click(function() {
+          $expander.once().click(function () {
+            var $linkItem = $(this);
+            if ($linkItem.is('a.open')) {
+              return true;
+            }
+            $linkItem.toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
+
+            return false;
+          });
+
+          $collapser.once().click(function() {
             var $linkItem = $(this);
             if ($linkItem.is('.d-submenu-toggler')) {
               $linkItem = $linkItem.parent();
@@ -87,11 +103,14 @@
     attach: function (context, settings) {
       var $menu = $('nav.navbar', context);
 
+      if (window.location.pathname == '/') {
+        return false;
+      }
       $menu.find('a[href$="' + window.location.pathname + '"]').each(function() {
         var $matchingLinkTag = $(this);
         $matchingLinkTag.addClass('active-menu-item');
         // Some links are placed in basic submenus.
-        $matchingLinkTag.parents('ul').parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
+        $matchingLinkTag.parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
         // Some links are placed in mega menu blocks.
         $matchingLinkTag.parents('.type-of-block').addClass('active-trail open');
       });
