@@ -1,0 +1,115 @@
+/**
+ * @file
+ * A shortcut to entire theme configuration.
+ */
+/**
+ * @file
+ * General styles for dropbuttons.
+ */
+.js .dropbutton-widget {
+  background-color: white;
+  border: 1px solid #cccccc;
+}
+
+.js .dropbutton-widget:hover {
+  border-color: #b8b8b8;
+}
+
+.dropbutton .dropbutton-action > * {
+  padding: 0.1em 0.5em;
+  white-space: nowrap;
+}
+
+.dropbutton .secondary-action {
+  border-top: 1px solid #e8e8e8;
+}
+
+.dropbutton-multiple .dropbutton {
+  border-right: 1px solid #e8e8e8;
+  /* LTR */
+}
+
+[dir="rtl"] .dropbutton-multiple .dropbutton {
+  border-left: 1px solid #e8e8e8;
+  border-right: 0 none;
+}
+
+.dropbutton-multiple .dropbutton .dropbutton-action > * {
+  margin-right: 0.25em;
+  /* LTR */
+}
+
+[dir="rtl"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
+  margin-left: 0.25em;
+  margin-right: 0;
+}
+
+/**
+ * @file
+ * Visual styles for Bartik's dropbutton component.
+ */
+.js .dropbutton-wrapper .dropbutton-widget {
+  /* This is required to win over specifity of .js td .dropbutton-widget */
+  position: relative;
+}
+
+.js .dropbutton-widget {
+  border: 1px solid;
+  border-color: #e4e4e4 #d2d2d2 #b4b4b4 #d2d2d2;
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#e8e8e8));
+  background-image: linear-gradient(to bottom, #f3f3f3, #e8e8e8);
+  color: #3a3a3a;
+  cursor: pointer;
+  text-align: center;
+  margin: 0.125em 0;
+  border-radius: 1em;
+  overflow: hidden;
+}
+
+.js .dropbutton-widget:hover {
+  border-color: #e4e4e4 #d2d2d2 #b4b4b4 #d2d2d2;
+}
+
+.js .dropbutton-widget .button {
+  border: none;
+  margin: 0;
+  padding: 0.32em 1em;
+  background: transparent none;
+}
+
+.js .dropbutton-multiple .dropbutton-widget .dropbutton-action a {
+  margin-right: 0;
+  /* LTR */
+}
+
+.js [dir="rtl"] .dropbutton-multiple .dropbutton-widget .dropbutton-action a {
+  margin-left: 0;
+}
+
+.js .dropbutton .secondary-action {
+  border-top-color: #ccc;
+}
+
+.js .dropbutton-toggle button {
+  background-color: #e8e8e8;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8e8), to(#d2d2d2));
+  background-image: linear-gradient(to bottom, #e8e8e8, #d2d2d2);
+}
+
+.js .dropbutton-toggle .dropbutton-arrow:hover {
+  background: #ccc;
+}
+
+.js .dropbutton a {
+  color: #3a3a3a;
+  border-bottom: 0 none;
+}
+
+.js .dropbutton .dropbutton-action:hover,
+.js .dropbutton a:hover {
+  background: #dedede;
+  border-bottom: 0 none;
+}
+
+/*# sourceMappingURL=../maps/libraries/dropbutton.css.map */
