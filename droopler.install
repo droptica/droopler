@@ -6,6 +6,7 @@
 
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\MissingDependencyException;
+use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
  * Implements hook_install().
@@ -145,9 +146,40 @@ function droopler_enable_subtheme() {
       ->set('default', 'droopler_subtheme')
       ->set('admin', 'seven')
       ->save();
+
+    // Additional operations after subtheme installation.
+    droopler_enable_subtheme_postprocess();
   }
   catch (Exception $e) {
     \Drupal::logger('droopler_install')->notice('No subtheme detected.');
+  }
+}
+
+/**
+ * Additional operations after subtheme installation.
+ *
+ * All those operations have to be executed after installation of the subtheme.
+ * We can think about to place them in the droopler_subtheme.install file when
+ * this functionality will be implemented.
+ *
+ * @see: https://www.drupal.org/project/drupal/issues/2652542
+ * @see: https://www.drupal.org/node/2937955
+ */
+function droopler_enable_subtheme_postprocess() {
+  // Set logo same as on base theme if custom path has been defined there.
+  $base_settings = Drupal::configFactory()->getEditable('droopler_theme.settings');
+  if (!$base_settings->get('logo.use_default')
+    && $logo_path = $base_settings->get('logo.path')) {
+    $current_settings = Drupal::configFactory()->getEditable('droopler_subtheme.settings');
+    $current_settings->set('logo.use_default', FALSE);
+    $current_settings->set('logo.path', $logo_path);
+    $current_settings->save();
+  }
+
+  // Copy configuration of the WeMegaMenu from base to subtheme.
+  if ($base_menu = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme')) {
+    WeMegaMenuBuilder::saveConfig('main', 'droopler_subtheme', json_encode($base_menu));
+    we_megamenu_flush_render_cache();
   }
 }
 
