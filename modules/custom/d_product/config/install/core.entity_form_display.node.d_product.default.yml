@@ -6,12 +6,14 @@ dependencies:
     - field.field.node.d_product.field_d_ask_for_product
     - field.field.node.d_product.field_d_product_link
     - field.field.node.d_product.field_d_product_media
+    - field.field.node.d_product.field_page_section
     - field.field.node.d_product.field_product_categories
     - field.field.node.d_product.field_tags
     - node.type.d_product
   module:
     - link
     - media_library
+    - paragraphs
     - path
     - text
 id: node.d_product.default
@@ -50,6 +52,25 @@ content:
     settings:
       media_types: {  }
     third_party_settings: {  }
+    region: content
+  field_page_section:
+    weight: 26
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed_expand_nested
+      closed_mode: preview
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+        add_above: add_above
+    third_party_settings: {  }
+    type: paragraphs
     region: content
   field_product_categories:
     weight: 8

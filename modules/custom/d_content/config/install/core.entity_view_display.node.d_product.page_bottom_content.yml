@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.d_small_box
+    - core.entity_view_mode.node.page_bottom_content
     - field.field.node.d_product.body
     - field.field.node.d_product.field_d_ask_for_product
     - field.field.node.d_product.field_d_product_link
@@ -10,30 +10,29 @@ dependencies:
     - field.field.node.d_product.field_page_section
     - field.field.node.d_product.field_product_categories
     - field.field.node.d_product.field_tags
-    - image.style.small_box_image
     - node.type.d_product
   module:
-    - media
+    - entity_reference_revisions
     - user
-id: node.d_product.d_small_box
+id: node.d_product.page_bottom_content
 targetEntityType: node
 bundle: d_product
-mode: d_small_box
+mode: page_bottom_content
 content:
-  field_d_product_media:
-    type: media_thumbnail
-    weight: 1
-    region: content
+  field_page_section:
+    weight: 0
     label: hidden
     settings:
-      image_style: small_box_image
-      image_link: content
+      view_mode: default
+      link: ''
     third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
 hidden:
   body: true
   field_d_ask_for_product: true
   field_d_product_link: true
-  field_page_section: true
+  field_d_product_media: true
   field_product_categories: true
   field_tags: true
   langcode: true

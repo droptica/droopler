@@ -8,8 +8,22 @@ dependencies:
   - ctools
   - d_media
   - d_p
+  - d_p_banner
+  - d_p_carousel
+  - d_p_counters
+  - d_p_form
   - d_p_gallery
   - d_p_node
+  - d_p_reference_content
+  - d_p_side_by_side
+  - d_p_side_embed
+  - d_p_side_image
+  - d_p_side_tiles
+  - d_p_subscribe_file
+  - d_p_text_blocks
+  - d_p_text_paged
+  - d_p_text_with_bckg
+  - d_p_tiles
   - entity_reference_revisions
   - field
   - file
@@ -32,7 +46,7 @@ dependencies:
   - user
   - views
 version: 8.x-2.0
-package: Droopler
+package: d
 'interface translation project': d_blog
 'interface translation server pattern': profiles/contrib/droopler/modules/custom/d_blog/translations/%project-%version.%language.po
 core_incompatible: false

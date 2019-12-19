@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:content_block:257d1b12-bd26-423c-8791-384a1ae61d74'
+  module:
+    - block_content
+  theme:
+    - droopler_subtheme
+id: block_content_257d1b12-bd26-423c-8791-384a1ae61d74
+theme: droopler_subtheme
+region: footer_third
+weight: 0
+provider: null
+plugin: 'block_content:257d1b12-bd26-423c-8791-384a1ae61d74'
+settings:
+  id: 'block_content:257d1b12-bd26-423c-8791-384a1ae61d74'
+  label: 'Footer Engines'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

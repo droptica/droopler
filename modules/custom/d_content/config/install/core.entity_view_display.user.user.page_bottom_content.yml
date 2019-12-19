@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.page_bottom_content
+    - field.field.user.user.field_profile_sections
+    - field.field.user.user.user_picture
+  module:
+    - entity_reference_revisions
+    - user
+id: user.user.page_bottom_content
+targetEntityType: user
+bundle: user
+mode: page_bottom_content
+content:
+  field_profile_sections:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  member_for: true
+  search_api_excerpt: true
+  user_picture: true

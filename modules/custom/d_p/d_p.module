@@ -351,4 +351,14 @@ function d_p_preprocess_field(&$variables) {
       $variables['heading_tag'] = $helper->getModifier(SettingsWidget::HEADING_TYPE_SETTING_NAME);
     }
   }
+
+
+//  if (empty($variables['field_type']) || $variables['field_type'] === 'entity_reference_revisions') {
+//    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+//    $entity = $variables["element"]["#object"];
+//    $entityTypes = $entity->getEntityType();
+//    if (!$entityTypes->getRevisionTable()) {
+//
+//    }
+//  }
 }

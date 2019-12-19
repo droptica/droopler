@@ -60,7 +60,8 @@
  */
 #}
 
-{% set classes = [
+{%
+  set classes = [
   'node',
   'node--type-' ~ node.bundle|clean_class,
   node.isPromoted() ? 'node--promoted',
@@ -68,31 +69,10 @@
   not node.isPublished() ? 'node--unpublished',
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   'clearfix',
-] %}
+]
+%}
 <article{{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('container', 'node__content', 'clearfix') }}>
-    <div class="row">
-      <div class="section-images col-lg-8 col-md-12">
-        <div class="header">
-          <div class="title">
-            <h1>{{ label }}</h1>
-          </div>
-        </div>
-        {{ content.field_d_product_media }}
-      </div>
-      <div class="section-data col-lg-4 col-md-12">
-        <div class="products-links row">
-            <div class="buy-link col-sm-6 col-lg-12">
-              {{ content.field_d_product_link }}
-            </div>
-            <div class="ask-link col-sm-6 col-lg-12">
-             {{ link_ask_for_product }}
-            </div>
-        </div>
-
-        {{ content|without('field_d_product_media', 'field_d_product_link', 'field_d_ask_for_product', 'field_page_section') }}
-      </div>
-    </div>
+  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+    {{ content }}
   </div>
-  {{ content.field_page_section }}
 </article>
