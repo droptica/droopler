@@ -1,0 +1,317 @@
+/*
+Components Main menu
+
+ul with main menu.
+
+Markup:
+<ul class="nav navbar-nav main-menu">
+  <li class="nav-item active"><a href="/en/node/1" class="nav-link active is-active" data-drupal-link-system-path="node/1">Home</a> </li>
+  <li class="nav-item"><a href="/node/2" class="nav-link">About</a></li>
+  <li class="nav-item"><a href="/node/3" class="nav-link">Services</a></li>
+  <li class="nav-item"><a href="/node/4" class="nav-link">Gallery</a></li>
+  <li class="nav-item"><a href="/node/5" class="nav-link">Contact</a></li>
+</ul>
+
+Styleguide 2.1
+*/
+
+// Colour variables used in this component
+$menu-main-link-color: $color-cassandra !default;
+$menu-main-link-active-color: $color-achillies !default;
+$menu-main-link-hover-color: $menu-main-link-active-color !default;
+$menu-main-link-dropdown: $color-acamas !default; // Dropdown icon
+
+$submenu-link-color: $color-odysseus !default; // Submenu item text color
+$submenu-link-hover-color: $color-nestor !default; // Submenu item hover color
+$submenu-link-hover-background: transparent !default; // Submenu item hover color
+
+$navbar-toggler-color: $color-agamemnon !default;
+
+$menu-mobile-background: transparent !default;
+$mobile-sidebar-items-border: 2px solid $color-iphis !default;
+$mobile-menu-submenu-mobile-background-color: rgba($color-cassandra, 0.1) !default;
+$mobile-navigation-overlay-color: rgba($color-cassandra, 0.2) !default;
+$mobile-menu-submenu-link-color: $color-cassandra !default;
+
+// Font sizes
+$menu-font-size-mobile: $font-size-lg !default;
+$menu-font-size-desktop: $font-size-base !default;
+$submenu-font-size: $font-size-base !default;
+$menu-dropdown-size: 2.3rem !default; // Size of the dropdown arrow
+$navbar-toggler-size: 2.3rem !default; // Size of the toggler arrow
+
+$mega-menu-header-font-family: 'Lato', sans-serif !default;
+$mega-menu-submenu-font-family: $mega-menu-header-font-family !default;
+$mega-menu-submenu-font-weight: normal !default;
+$mega-menu-submenu-header-font-size: 25px !default;
+$mega-menu-link-line-height: 2rem !default;
+
+// Paddings, margins and heights.
+$menu-dropdown-width: 4rem !default;  // Width of desktop dropdown icon (desktop)
+$menu-main-link-height: $header-height - (2 * $navbar-padding-y) !default;  // Height of menu item
+//$menu-main-link-padding-y: 0.75rem !default;
+$menu-main-link-padding-desktop: 0 1.5625rem !default;
+$menu-main-link-padding-tablet: 0 1.2rem !default;
+$menu-secondary-link-padding-x-tablet: 0.9rem !default;
+$menu-secondary-social-icon-padding-tablet: 7px !default;
+$navbar-toggler-width: $menu-dropdown-width !default; // Width of mobile menu on/off toggler
+$navbar-toggler-height: $header-mobile-height !default; // Height of mobile menu on/off toggler
+$submenu-toggler-size: 32px !default;
+$submenu-offset-left: -1rem !default; // Move the submenu left or right (desktop)
+$submenu-link-height: 2.9rem !default; // Height of links in submenu (desktop)
+$mobile-sidebar-items-spacing: 10px !default;
+$mobile-sidebar-submenu-spacing: 15px !default;
+$mobile-submenu-padding: $mobile-sidebar-items-spacing $mobile-sidebar-submenu-spacing !default;
+$mobile-submenu-item-padding: $mobile-sidebar-items-spacing/2 0 !default;
+$submenu-dropdown-min-width: 12rem !default;
+
+$secondary-menu-link-colors: $color-iphis !default;
+$secondary-menu-link-hover-colors: $color-achillies !default;
+
+$mega-menu-submenu-padding: 2rem 15% !default;
+$mega-menu-submenu-link-padding-y: 9px !default;
+$mega-menu-submenu-header-margin-bottom: 2 * $mega-menu-submenu-link-padding-y !default;
+
+$sidebar-animation-speed: 600ms !default;
+
+@mixin mobile-toggle() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  position: relative;
+  cursor: pointer;
+
+  &::after {
+    font-family: "fontello";
+    content: "\e80d";
+    line-height: initial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $submenu-toggler-size;
+    width: $submenu-toggler-size;
+    margin: -5px 0;
+  }
+}
+@mixin mobile-toggle-open() {
+  &::after {
+    content: "\e809";
+  }
+}
+@mixin sublist-background() {
+  position: relative;
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $mobile-menu-submenu-mobile-background-color;
+    left: -50%;
+    top: 0;
+    z-index: 0;
+  }
+  &::after {
+    left: 50%;
+  }
+}
+@mixin sublist-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.5;
+  height: 100%;
+  font-weight: $mega-menu-submenu-font-weight;
+  margin: 0;
+  padding: 5px 0;
+  font-size: $submenu-font-size;
+  color: $mobile-menu-submenu-link-color;
+
+  @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+    color: $submenu-link-color;
+  }
+
+  &, a {
+    &:hover, &:active, &:focus, &.active-menu-item {
+      border: none;
+      color: $submenu-link-hover-color;
+    }
+  }
+}
+@mixin mobile-menu-first-level-items {
+  text-transform: uppercase;
+  font-size: $menu-font-size-mobile;
+  line-height: $mega-menu-link-line-height;
+  font-family: $mega-menu-submenu-font-family;
+  padding: $mobile-sidebar-items-spacing/2 $mobile-sidebar-submenu-spacing;
+  font-weight: $mega-menu-submenu-font-weight;
+  color: $menu-main-link-active-color;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-inner {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+button.navbar-toggler {
+  display: none;
+}
+
+header.header > nav.navbar-wrapper {
+  nav.main-navbar {
+    position: static;
+  }
+}
+
+a.we-mega-menu-li,
+span.we-mega-menu-nolink {
+  &, &:hover {
+    text-decoration: none;
+  }
+}
+
+// Styling first level main menu items
+.we-mega-menu-ul > li.we-mega-menu-li{
+  > a, > span {
+    @include mobile-menu-first-level-items;
+
+    @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+      padding: $menu-main-link-padding-desktop;
+      line-height: $submenu-link-height;
+      color: $menu-main-link-color;
+      text-transform: capitalize;
+      font-weight: 700;
+      font-size: $menu-font-size-desktop;
+    }
+  }
+
+  @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+    &:hover {
+      &, > a, > span {
+        color: $menu-main-link-hover-color;
+      }
+    }
+  }
+}
+
+// Secondary menu
+.secondary-menu-region {
+  li.nav-item {
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+      width: 100%;
+      > a {
+        @include mobile-menu-first-level-items;
+      }
+    }
+  }
+
+  a {
+    color: $secondary-menu-link-colors;
+
+    &:hover {
+      color: $secondary-menu-link-hover-colors;
+    }
+  }
+
+  .social-media-wrapper {
+    ul {
+      padding: 0;
+      li {
+        &::after {
+          display: none;
+        }
+        a::before {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Mega menu content
+.type-of-block {
+  .block-inner {
+
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+      h2 + .field-content-wrapper {
+        padding-top: 0;
+      }
+
+      .field-content-wrapper {
+        padding-top: $mobile-sidebar-submenu-spacing;
+
+        .field--name-field-d-long-text {
+          ul {
+            padding-left: 0;
+          }
+        }
+      }
+      ul {
+        &.subul {
+          padding-left: $mobile-sidebar-submenu-spacing;
+          padding-right: $mobile-sidebar-submenu-spacing;
+          overflow: hidden;
+        }
+
+        li {
+          width: 100%;
+        }
+      }
+    }
+    h2 + .field-content-wrapper {
+      ul li a {
+        @include sublist-list-item();
+      }
+    }
+
+    h2 {
+      @include sublist-list-item;
+
+      @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+        font-size: $mega-menu-submenu-header-font-size;
+        color: $submenu-link-color;
+        text-transform: uppercase;
+        margin-bottom: $mega-menu-submenu-header-margin-bottom;
+        padding-top: 0;
+      }
+    }
+
+    p {
+      padding: $mega-menu-submenu-link-padding-y 0;
+      margin-bottom: 0;
+    }
+
+    ul, ul.nav {
+      list-style-type: none;
+      padding-left: 0;
+      display: block;
+    }
+  }
+}
+
+
+@include media-breakpoint-only(lg) {
+  .secondary-menu-region,
+  .region-primary-menu {
+    a.nav-link {
+      padding-left: $menu-secondary-link-padding-x-tablet;
+      padding-right: $menu-secondary-link-padding-x-tablet;
+    }
+    .we-mega-menu-li {
+      > a.we-mega-menu-li,
+      > span.we-megamenu-nolink {
+        padding: $menu-main-link-padding-tablet;
+      }
+    }
+    .social-media-wrapper .icons-wrapper {
+      a.icon {
+        font-size: 115%;
+        padding: $menu-secondary-social-icon-padding-tablet;
+      }
+    }
+  }
+}

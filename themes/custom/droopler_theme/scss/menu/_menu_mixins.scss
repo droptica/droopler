@@ -1,0 +1,70 @@
+/**
+Mixins file taken from we_megamenu module.
+
+Only few basic mixins taken to keep the primary functionality allowing user setting columns width for blocks in submenu.
+ */
+
+@mixin flex-width-col-xs($val) {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 $val;
+  -ms-flex: 0 0 $val;
+  flex: 0 0 $val;
+  max-width: $val;
+}
+
+
+// ====================
+// View grid Custom
+// ---
+$item-start: 1;
+$item-end: 12;
+$class-grid : navbar-we-mega-menu;
+$flex-parent: we-mega-menu-row;
+$flex-item: span;
+$percent: 12;
+
+@mixin margin-parent {
+  margin: {
+    left: -1.06383%;
+    right: -1.06383%;
+  }
+}
+
+@mixin views-grid($type: flex) {
+  .#{$class-grid} {
+    .#{$flex-parent} {
+      @include margin-parent;
+
+      @if $type==flex {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      >* {
+        @include flex-width-col-xs(100% - 2.12766%);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        margin: {
+          left: 1.06383%;
+          right: 1.06383%;
+        }
+      }
+    }
+  }
+
+  @for $i from $item-start through $item-end {
+    .#{$class-grid} {
+      .#{$flex-item}#{$i} {
+        @if $type==flex {
+          @include flex-width-col-xs(percentage($i / $percent) - 2.12766%);
+        }
+
+        @else if $type==width {
+          width: (percentage($i / $percent) - 2.12766%);
+        }
+      }
+    }
+  }
+}

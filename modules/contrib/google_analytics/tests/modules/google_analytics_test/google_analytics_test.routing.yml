@@ -1,7 +1,0 @@
-google_analytics_test.drupal_messenger_add_message:
-  path: '/google-analytics-test/drupal-messenger-add-message'
-  defaults:
-    _title: 'Set messages with Drupal::messenger()'
-    _controller: '\Drupal\google_analytics_test\Controller\GoogleAnalyticsTestController::drupalAddMessageTest'
-  requirements:
-    _access: 'TRUE'

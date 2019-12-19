@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_tb_block_reference
+    - paragraphs.paragraphs_type.d_p_group_of_text_blocks
+    - paragraphs.paragraphs_type.d_p_node
+    - paragraphs.paragraphs_type.d_p_single_text_block
+  module:
+    - entity_reference_revisions
+id: paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference
+field_name: field_d_p_tb_block_reference
+entity_type: paragraph
+bundle: d_p_group_of_text_blocks
+label: 'Attached blocks'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      d_p_single_text_block: d_p_single_text_block
+      d_p_node: d_p_node
+    target_bundles_drag_drop:
+      d_p_group_of_text_blocks:
+        weight: 7
+        enabled: false
+      d_p_single_text_block:
+        enabled: true
+        weight: 10
+      d_p_banner:
+        weight: 21
+        enabled: false
+      d_p_blog_image:
+        weight: 22
+        enabled: false
+      d_p_blog_text:
+        weight: 23
+        enabled: false
+      d_p_carousel:
+        weight: 24
+        enabled: false
+      d_p_carousel_item:
+        weight: 25
+        enabled: false
+      d_p_form:
+        weight: 26
+        enabled: false
+      d_p_gallery:
+        weight: 27
+        enabled: false
+      d_p_group_of_counters:
+        weight: 28
+        enabled: false
+      d_p_node:
+        enabled: true
+        weight: 30
+      d_p_reference_content:
+        weight: 31
+        enabled: false
+      d_p_side_embed:
+        weight: 32
+        enabled: false
+      d_p_side_image:
+        weight: 33
+        enabled: false
+      d_p_side_by_side:
+        weight: 33
+        enabled: false
+      d_p_side_tiles:
+        weight: 34
+        enabled: false
+      d_p_single_counter:
+        weight: 35
+        enabled: false
+      d_p_subscribe_file:
+        weight: 37
+        enabled: false
+      d_p_text_paged:
+        weight: 38
+        enabled: false
+      d_p_text_with_bckg:
+        weight: 39
+        enabled: false
+      d_p_tiles:
+        weight: 40
+        enabled: false
+field_type: entity_reference_revisions

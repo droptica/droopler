@@ -1,0 +1,86 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_side_by_side.field_d_long_text
+    - field.field.paragraph.d_p_side_by_side.field_d_main_title
+    - field.field.paragraph.d_p_side_by_side.field_d_p_sbs_items
+    - field.field.paragraph.d_p_side_by_side.field_d_settings
+    - paragraphs.paragraphs_type.d_p_side_by_side
+  module:
+    - d_p
+    - field_group
+    - paragraphs
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_settings
+        - group_items
+      parent_name: ''
+      weight: 3
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+      region: content
+    group_settings:
+      children:
+        - field_d_settings
+        - field_d_long_text
+        - field_d_main_title
+      parent_name: group_tabs
+      weight: 6
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Settings
+      region: content
+    group_items:
+      children:
+        - field_d_p_sbs_items
+      parent_name: group_tabs
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Items
+      region: content
+id: paragraph.d_p_side_by_side.default
+targetEntityType: paragraph
+bundle: d_p_side_by_side
+mode: default
+content:
+  field_d_p_sbs_items:
+    type: entity_reference_paragraphs
+    weight: 12
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_d_settings:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: field_d_p_set_settings
+    region: content
+hidden:
+  created: true
+  field_d_long_text: true
+  field_d_main_title: true
+  status: true

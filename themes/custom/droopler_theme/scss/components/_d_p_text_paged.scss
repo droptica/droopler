@@ -1,0 +1,82 @@
+/*
+Text page
+
+Styleguide 2.banner.calina
+*/
+
+// Colour variables used in this paragraph
+$d-p-text-paged-subtitle-color: $color-agamemnon !default;
+$d-p-text-paged-line-color: $color-agamemnon !default;
+$d-p-text-paged-line-color-inverted: $color-nestor !default;
+$d-p-text-paged-color: $color-hecuba !default;
+$d-p-text-paged-bold-color: $color-troilus !default;
+$d-p-text-paged-background-invert-color: $color-agamemnon !default;
+$d-p-text-paged-theme-invert-background-color: $color-agamemnon !default;
+$d-p-text-paged-theme-invert-text-color: $color-odysseus !default;
+
+// Margins, paddings and sizing.
+$d-p-text-paged-subtitle-margin-y: 1.125rem !default;
+$d-p-text-paged-padding-y: 5% !default;
+$d-p-text-paged-first-margin-top: 2% !default;
+
+.text-page {
+  padding-top: $d-p-text-paged-padding-y;
+  padding-bottom: $d-p-text-paged-padding-y;
+  text-align: center;
+
+  > div > .field--name-field-d-media-icon {
+    text-align: center;
+  }
+
+  > div > .field--name-field-d-main-title {
+    @include font-main-header;
+    text-align: center;
+  }
+
+  > div > h3.field--name-field-d-subtitle {
+    margin: $d-p-text-paged-subtitle-margin-y 0;
+    @include font-subtitle;
+    text-align: center;
+    color: $d-p-text-paged-subtitle-color;
+  }
+  .field--type-link {
+    text-align: center;
+  }
+  .field--name-field-d-long-text {
+    color: $d-p-text-paged-color;
+    p {
+      word-wrap: break-word;
+      hyphens: auto;
+      b, strong {
+        color: $d-p-text-paged-bold-color;
+      }
+    }
+
+    &:before {
+      @include decoration-header-line-main-center($d-p-text-paged-line-color, $d-p-text-paged-line-color-inverted)
+    }
+  }
+}
+
+// If this is the first paragraph - decrease top margin.
+.paragraph-sections > section:first-child > .text-page {
+  margin-top: $d-p-text-paged-first-margin-top;
+}
+
+
+.theme-invert {
+  &:not(.user-background-defined):not(.user-image-background) > .text-page {
+    background: $d-p-text-paged-theme-invert-background-color;
+  }
+  > .text-page {
+    color: $d-p-text-paged-theme-invert-text-color;
+
+    .field--name-field-d-long-text,
+    .field--name-field-d-subtitle,
+    .field--name-field-d-main-title {
+      &, p {
+        color: $d-p-text-paged-theme-invert-text-color;
+      }
+    }
+  }
+}

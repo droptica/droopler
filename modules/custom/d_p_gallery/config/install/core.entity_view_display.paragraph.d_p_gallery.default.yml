@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_gallery.field_d_long_text
+    - field.field.paragraph.d_p_gallery.field_d_main_title
+    - field.field.paragraph.d_p_gallery.field_d_media_icon
+    - field.field.paragraph.d_p_gallery.field_d_media_image
+    - field.field.paragraph.d_p_gallery.field_d_settings
+    - paragraphs.paragraphs_type.d_p_gallery
+  module:
+    - text
+id: paragraph.d_p_gallery.default
+targetEntityType: paragraph
+bundle: d_p_gallery
+mode: default
+content:
+  field_d_long_text:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_d_main_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_d_media_icon:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: d_icon
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_d_media_image:
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: gallery_item
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  field_d_settings: true
+  search_api_excerpt: true

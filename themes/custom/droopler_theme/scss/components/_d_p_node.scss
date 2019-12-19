@@ -1,0 +1,42 @@
+/**
+ * Node reference paragraph.
+ */
+
+// Colour variables used in this paragraph.
+$box-subtitle-color: $color-achillies !default;
+
+// Margins, paddings and sizing.
+$box-content-max-width: 490px !default;
+$box-padding: $grid-gutter-width / 2 !default;
+$box-large-padding: $grid-gutter-width !default;
+$box-image-padding-bottom: $grid-gutter-width / 2 !default;
+
+.paragraph--type--d-p-node {
+  height: 100%;
+
+  .small-box-wrapper {
+    padding: $box-padding;
+
+    .box-content-wrapper {
+      max-width: $box-content-max-width;
+      margin: 0 auto;
+    }
+
+    .box-image {
+      padding-bottom: $box-image-padding-bottom;
+    }
+
+    .box-title {
+      @include font-small-box-title();
+    }
+
+    .box-subtitle {
+      @include font-subtitle-small-link();
+      color: $box-subtitle-color;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding: $box-large-padding;
+    }
+  }
+}

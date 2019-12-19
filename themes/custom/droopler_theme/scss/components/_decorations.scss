@@ -1,0 +1,89 @@
+/*
+Decoration elements
+
+Styleguide 2.banner
+*/
+
+// Colour variables used in this component.
+$line-background: $color-agamemnon !default;
+$line-background-inverted: $color-nestor !default;
+
+// Margins, paddings and sizings.
+$line-left-margin-top: 1.25rem !default;
+$line-left-margin-bottom: 1.52rem !default;
+$line-center-margin-top: 0.625rem !default;
+$line-center-margin-bottom: 0.625rem !default;
+$line-center-with-long-text-margin-top: 1.375rem !default;
+$line-center-with-long-text-margin-bottom: 1.51rem !default;
+$line-width: 3.125rem !default;
+$line-thickness: 0.125rem !default;
+
+// Header underline aligned to the left
+@mixin decoration-header-line($line-color: $line-background, $line-color-inverted: $line-background-inverted) {
+  content: "";
+  display: block;
+  width: $line-width;
+  background: $line-color;
+  position: relative;
+  height: $line-thickness;
+  margin-top: $line-left-margin-top !important;
+  margin-bottom: $line-left-margin-bottom !important;
+
+  @at-root .theme-invert & {
+    background: $line-color-inverted;
+  }
+}
+
+// Header underline aligned to the center
+@mixin decoration-header-line-main-center($line-color: $line-background, $line-color-inverted: $line-background-inverted) {
+  content: "";
+  display: block;
+  width: $line-width;
+  background: $line-color;
+  position: relative;
+  height: $line-thickness;
+  margin-top: $line-center-margin-top;
+  margin-bottom: $line-center-margin-bottom;
+  margin-left: auto;
+  margin-right: auto;
+
+  @at-root .theme-invert & {
+    background: $line-color-inverted;
+  }
+}
+
+@mixin add-commas-to-elements {
+    &:after {
+        content: ', ';
+    }
+
+    &:last-child:after {
+        content: '';
+    }
+}
+
+// Common field for paragraph icons.
+.node .field.field--name-field-d-icon,
+.node .field.field--name-field-d-media-icon,
+.node .field.field--name-field-d-media-icon .field--name-field-media-image {
+    display: block;
+    margin: 0;
+    float: none;
+}
+
+section .paragraph {
+  .field--name-field-d-main-title:last-child {
+    &::after {
+      margin-top: $line-center-margin-top !important;
+      margin-bottom: $line-center-margin-top !important;
+    }
+  }
+}
+section .paragraph.with-long-text,
+section.with-long-text .paragraph {
+  .field--name-field-d-main-title::after,
+  .field--name-field-d-long-text::before {
+    margin-top: $line-center-with-long-text-margin-top;
+    margin-bottom: $line-center-with-long-text-margin-bottom;
+  }
+}

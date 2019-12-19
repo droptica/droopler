@@ -1,8 +1,0 @@
-services:
-  search_api.commands:
-    class: \Drupal\search_api\Commands\SearchApiCommands
-    arguments:
-      - '@entity_type.manager'
-      - '@module_handler'
-    tags:
-      - { name: drush.command }

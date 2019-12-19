@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_node.field_d_display_mode
+    - field.field.paragraph.d_p_node.field_d_node_reference
+    - paragraphs.paragraphs_type.d_p_node
+id: paragraph.d_p_node.default
+targetEntityType: paragraph
+bundle: d_p_node
+mode: default
+content:
+  field_d_display_mode:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_d_node_reference:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

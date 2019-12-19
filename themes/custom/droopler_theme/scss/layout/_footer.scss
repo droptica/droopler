@@ -1,0 +1,125 @@
+// Footer.
+//
+// Styleguide 3.3
+
+// Colour variables used in this file.
+$footer-background: $color-cassandra !default;
+$footer-text-color: $color-thersites !default;
+$footer-header-color: $color-odysseus !default;
+$footer-header-margin: 0 0 1rem 0 !default;
+$footer-menu-item-padding: 0 0 1rem 0 !default;
+$footer-list-item-padding: 0 0 0.2rem 0 !default;
+$footer-link-hover: $color-odysseus !default;
+
+@mixin font-footer-header {
+  font-size: $font-size-vlg;
+  text-transform: uppercase;
+  margin: $footer-header-margin;
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-mdlg;
+  }
+}
+@mixin font-footer-body {
+  font-size: $font-size-base;
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-sm;
+  }
+}
+
+footer {
+  &.site-footer {
+    font-family: $font-family-base;
+
+    .block {
+      border: none;
+    }
+
+    .site-footer-blocks .region {
+      h2 {
+        @include font-footer-body;
+        font-weight: bold;
+        color: $footer-header-color;
+        margin: $footer-header-margin;
+      }
+
+      .content {
+        color: $footer-text-color;
+      }
+
+      // Menu block.
+      .block-menu {
+        ul {
+          display: block;
+          li a {
+            padding: $footer-list-item-padding;
+            color: $footer-text-color;
+
+            &:hover, &:active, &:focus {
+              color: $color-odysseus;
+              background-color: transparent;
+            }
+          }
+        }
+        h2.sr-only ~ ul li a {
+          padding: $footer-menu-item-padding;
+          color: $color-odysseus;
+          font-weight: bold;
+        }
+      }
+
+      // Custom content block.
+      .block-block-content {
+        ul {
+          list-style-type: none;
+          padding: 0;
+          display: block;
+
+          li {
+            padding: $footer-list-item-padding;
+            a {
+              background-color: $footer-background;
+              color: $footer-text-color;
+
+              &:hover, &:active, &:focus {
+                color: $color-odysseus;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  background: $footer-background;
+  color: $footer-text-color;
+  .region-footer-main {
+    h2 {
+      @include font-footer-header;
+      color: $footer-text-color;
+    }
+    p {
+      @include font-footer-body;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .block {
+      text-align: center;
+      border: 0;
+    }
+  }
+
+  .social-media-wrapper {
+    ul {
+      padding: 0;
+    }
+    .icons-wrapper {
+      .icon {
+        padding-left: 0;
+        &::before {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
