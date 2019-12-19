@@ -54,11 +54,6 @@ function droopler_install() {
  */
 function droopler_install_tasks() {
   $tasks = [
-    'droopler_enable_subtheme' => [
-      'display' => TRUE,
-      'display_name' => t('Install and enable subtheme'),
-      'type' => 'normal',
-    ],
     'droopler_enable_blog' => [
       'display' => TRUE,
       'display_name' => t('Install d_blog'),
@@ -79,8 +74,12 @@ function droopler_install_tasks() {
       'display_name' => t('Init content'),
       'type' => 'normal',
     ],
+    'droopler_enable_subtheme' => [
+      'display' => TRUE,
+      'display_name' => t('Install and enable subtheme'),
+      'type' => 'normal',
+    ],
   ];
-
   return $tasks;
 }
 
