@@ -19,7 +19,6 @@ projects[google_analytics][version] = 2
 projects[google_tag][version] = 1
 projects[link_attributes][version] = 1
 projects[linkit][version] = 4
-projects[menu_link_attributes][version] = 1
 projects[metatag][version] = 1
 projects[paragraphs][version] = 1
 projects[pathauto][version] = 1
