@@ -354,4 +354,42 @@ function droopler_theme_library_info_alter(&$libraries, $extension) {
   if ($extension == 'we_megamenu' && isset($libraries['form.we-mega-menu-frontend'])) {
     unset($libraries['form.we-mega-menu-frontend']);
   }
+
+  // Make Droopler compatible with Drupal.org.
+  // Enable libraries in profile directory.
+  $profile_libraries_dir = drupal_get_path('profile', 'droopler') . '/libraries';
+  if (file_exists($profile_libraries_dir)) {
+    foreach ($libraries as $name => &$info) {
+      // Alter JS.
+      if (isset($info['js'])) {
+        droopler_theme_change_asset_location($profile_libraries_dir, $info['js']);
+      }
+      // Alter CSS.
+      if (isset($info['css'])) {
+        foreach ($info['css'] as $type => &$scripts) {
+          droopler_theme_change_asset_location($profile_libraries_dir, $scripts);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Take a list of assets and change their locations to profile directory if needed.
+ *
+ * @param string $profile_libraries_dir
+ *   The /libraries directory path inside the profile.
+ * @param array $assets
+ *   A list of assets.
+ */
+function droopler_theme_change_asset_location($profile_libraries_dir, array &$assets) {
+  foreach ($assets as $old_path => &$options) {
+    $new_path = preg_replace('|^/libraries/(.*)$|', '/' . $profile_libraries_dir . '/\\1', $old_path);
+    if ($new_path != $old_path) {
+      if (!file_exists(trim($old_path, '/')) && file_exists(trim($new_path, '/'))) {
+        unset($assets[$old_path]);
+        $assets[$new_path] = $options;
+      }
+    }
+  }
 }
