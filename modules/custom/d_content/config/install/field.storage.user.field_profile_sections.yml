@@ -3,11 +3,11 @@ status: true
 dependencies:
   module:
     - entity_reference_revisions
-    - node
     - paragraphs
-id: node.field_page_section
-field_name: field_page_section
-entity_type: node
+    - user
+id: user.field_profile_sections
+field_name: field_profile_sections
+entity_type: user
 type: entity_reference_revisions
 settings:
   target_type: paragraph

@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - d_p
+  theme:
+    - droopler_subtheme
+id: nodepagebottomcontent
+theme: droopler_subtheme
+region: page_bottom_content
+weight: 0
+provider: null
+plugin: node_page_bottom_content
+settings:
+  id: node_page_bottom_content
+  label: 'Node Page Bottom Content'
+  provider: d_p
+  label_display: '0'
+visibility: {  }
