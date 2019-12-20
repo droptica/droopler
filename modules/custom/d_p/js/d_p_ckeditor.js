@@ -42,7 +42,7 @@
           link.id = cssId;
           link.rel = 'stylesheet';
           link.type = 'text/css';
-          link.href = '/profiles/contrib/droopler/modules/custom/d_p/css/d_p_ckeditor.css';
+          link.href = '/profiles/droopler/modules/custom/d_p/css/d_p_ckeditor.css';
           head.appendChild(link);
         }
       }
