@@ -278,6 +278,8 @@ function droopler_theme_preprocess_field(&$variables) {
     $variables['slider'] = render($slider);
   }
 
+  // Here we're detecting paragraphs reference field and if parent entity has NO revisions,
+  // we're removing geyisr theme_wrapper, so there won't be empty overlay.
   if (empty($variables['field_type']) || $variables['field_type'] === 'entity_reference_revisions') {
     /** @var \Drupal\Core\Entity\EntityInterface $entity */
     $entity = $variables["element"]["#object"];
@@ -299,6 +301,7 @@ function droopler_theme_preprocess_field(&$variables) {
  */
 function droopler_theme_preprocess_links(&$variables) {
   if (!empty($variables['links']) && !empty($variables['attributes']['class'])) {
+    // Here we're detecting geysir links.
     $foundGeysirClassAttribute = FALSE;
     foreach ($variables['attributes']['class'] as $classAttribute) {
       if (stripos($classAttribute, 'geysir-field-paragraph-links') !== FALSE) {
@@ -307,9 +310,18 @@ function droopler_theme_preprocess_links(&$variables) {
       }
     }
 
+    // If found, we're checking if the request is send by layout builder OR if parent entity has NO revisions.
+    // In both cases, we're clearing the links table, so there won't be any errors while rendering them.
+    // This approach should be pointless when new versions of Paragraphs module be released.
     if ($foundGeysirClassAttribute) {
-      $currentRouteParameters = \Drupal::routeMatch()->getParameters()->all();
+      /** @var \Drupal\Core\Routing\RouteMatchInterface $routeMatch */
+      $routeMatch = \Drupal::routeMatch();
+      $currentRouteParameters = $routeMatch->getParameters()->all();
 
+      $routeName = $routeMatch->getRouteName();
+      if (stripos($routeName, 'layout_builder.') === 0 ) {
+        $variables['links'] = [];
+      }
       if (!empty($currentRouteParameters)) {
         foreach ($currentRouteParameters as $parameter) {
           /** EntityInterface $parameter */
@@ -323,20 +335,6 @@ function droopler_theme_preprocess_links(&$variables) {
            }
         }
       }
-//
-//      foreach ($variables['links'] as $key => $linkConfig) {
-//        if (!isset($linkConfig['link']['#url'])) {
-//          continue;
-//        }
-//        /** @var \Drupal\Core\Url $url */
-//        $url = $linkConfig['link']['#url'];
-//        $urlParameters = $url->getRouteParameters();
-//        foreach ($urlParameters as $name => $parameterValue) {
-//          if ($parameterValue === NULL ) {
-//            unset($variables['links'][$key]);
-//          }
-//        }
-//      }
     }
   }
 }
