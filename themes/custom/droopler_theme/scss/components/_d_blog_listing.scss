@@ -28,7 +28,7 @@ $d-blog-teaser-text-padding-left-mobile: 30px !default;
 $d-blog-margin-between-teaser-mobile: 15px !default;
 $d-blog-teaser-blog-post-title-mobile: 1.0625rem !default;
 $d-blog-read-article-font-size: 0.9375rem !default;
-$d-blog-title-teaser-font-size-desktop: 2.375rem !default;
+$d-blog-title-teaser-font-size-desktop: 1.3rem !default;
 $d-blog-title-teaser-padding-top-desktop: 18px !default;
 $d-blog-listing-header-margin: 0px !default;
 $d-blog-teaser-text-padding-desktop-tab: 0 !default;
@@ -230,8 +230,11 @@ $d-blog-article-row-min-height: 420px !default;
     }
 
     .node_blog_post_title {
-      font-size: $d-blog-title-teaser-font-size-desktop;
       padding-top: $d-blog-title-teaser-padding-top-desktop;
+
+      a {
+        font-size: $d-blog-title-teaser-font-size-desktop;
+      }
     }
 
     .node__content {
