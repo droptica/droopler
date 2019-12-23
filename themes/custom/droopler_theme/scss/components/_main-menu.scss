@@ -53,8 +53,8 @@ $mega-menu-submenu-header-font-size: 25px !default;
 $mega-menu-link-line-height: 2rem !default;
 
 // Paddings, margins and heights.
-$menu-dropdown-width: 4rem !default;  // Width of desktop dropdown icon (desktop)
-$menu-main-link-height: $header-height - (2 * $navbar-padding-y) !default;  // Height of menu item
+$menu-dropdown-width: 4rem !default; // Width of desktop dropdown icon (desktop)
+$menu-main-link-height: $header-height - (2 * $navbar-padding-y) !default; // Height of menu item
 $menu-main-link-padding-desktop: 1.125rem 1.5625rem !default;
 $menu-main-link-padding-tablet: 1.125rem 1.2rem !default;
 $menu-secondary-link-padding-x-tablet: 0.9rem !default;
@@ -96,11 +96,13 @@ $sidebar-animation-speed: 600ms !default;
     padding: 0 10px;
   }
 }
+
 @mixin mobile-toggle-open() {
   &::after {
     content: "\e809";
   }
 }
+
 @mixin sublist-background() {
   position: relative;
 
@@ -118,11 +120,12 @@ $sidebar-animation-speed: 600ms !default;
     left: 50%;
   }
 }
+
 @mixin sublist-list-item {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding-top: $mobile-sidebar-items-spacing /2 ;
+  padding-top: $mobile-sidebar-items-spacing /2;
   padding-bottom: $mobile-sidebar-items-spacing /2;
   line-height: 1.5;
 
@@ -178,6 +181,7 @@ header.header > nav.navbar-wrapper {
       & > li.we-mega-menu-li.active-trail,
       & > li.we-mega-menu-li.active {
         background: transparent;
+
         a, span {
           background: transparent;
           text-transform: capitalize;
@@ -188,8 +192,10 @@ header.header > nav.navbar-wrapper {
           font-size: $mega-menu-submenu-font-size;
         }
       }
+
       li.we-mega-menu-li:hover {
         background: transparent;
+
         a, span {
           color: $menu-main-link-hover-color;
         }
@@ -213,6 +219,7 @@ header.header > nav.navbar-wrapper {
           top: 100%;
           width: 100%;
         }
+
         & > .we-mega-menu-submenu {
           padding: $mega-menu-submenu-padding;
           background-color: $mega-menu-submenu-background-color;
@@ -230,6 +237,7 @@ header.header > nav.navbar-wrapper {
               color: $mega-menu-submenu-header-color;
               margin-bottom: $mega-menu-submenu-header-margin-bottom;
             }
+
             .field--type-text-long {
               h2 {
                 margin-top: $mega-menu-submenu-header-text-long-margin;
@@ -283,19 +291,23 @@ header.header > nav.navbar-wrapper {
           li.we-mega-menu-li {
             padding: 0;
             width: 100%;
+
             &:active, &:hover, &.active:active, &.active:hover {
               background: $submenu-link-hover-background;
+
               > a.we-mega-menu-li {
                 color: $submenu-link-hover-color;
                 text-decoration: none;
               }
             }
+
             &.dropdown-menu {
               > a.we-mega-menu-li,
               > span.we-megamenu-nolink {
                 &::before {
                   display: none;
                 }
+
                 &::after {
                   color: $submenu-link-color;
                   content: "\e805";
@@ -314,6 +326,7 @@ header.header > nav.navbar-wrapper {
                 }
               }
             }
+
             a.we-mega-menu-li,
             span.we-megamenu-nolink {
               color: $submenu-link-color;
@@ -356,10 +369,12 @@ header.header > nav.navbar-wrapper {
   .social-media-wrapper {
     ul {
       padding: 0;
+
       li {
         &::after {
           display: none;
         }
+
         a::before {
           margin: 0;
         }
@@ -375,12 +390,14 @@ header.header > nav.navbar-wrapper {
       padding-left: $menu-secondary-link-padding-x-tablet;
       padding-right: $menu-secondary-link-padding-x-tablet;
     }
+
     .we-mega-menu-li {
       > a.we-mega-menu-li,
       > span.we-megamenu-nolink {
         padding: $menu-main-link-padding-tablet;
       }
     }
+
     .social-media-wrapper .icons-wrapper {
       a.icon {
         font-size: 115%;
@@ -426,6 +443,7 @@ header.header > nav.navbar-wrapper {
     border: none;
     border-radius: none;
     outline: 0;
+    color: pink;
 
     .navbar-toggler-icon {
       width: $navbar-toggler-width;
@@ -443,6 +461,7 @@ header.header > nav.navbar-wrapper {
     &[aria-expanded="false"] .navbar-toggler-icon:after {
       content: "\f008";
     }
+
     &[aria-expanded="true"] .navbar-toggler-icon {
       background: $menu-mobile-background;
 
@@ -457,7 +476,6 @@ header.header > nav.navbar-wrapper {
     nav.main-navbar {
       position: absolute;
       top: 100%;
-      right: 0;
       z-index: 10;
       height: calc(100vh - 100%) !important;
       align-items: start;
@@ -509,7 +527,8 @@ header.header > nav.navbar-wrapper {
         pointer-events: all;
       }
 
-      &.collapsing.open, &.show {
+      /* &.collapsing.open,*/
+      &.open {
         .navbar-inner {
           right: 0;
         }
@@ -522,6 +541,7 @@ header.header > nav.navbar-wrapper {
       padding-bottom: $mobile-sidebar-items-spacing;
       margin-top: 0;
     }
+
     .region-secondary-menu {
       flex-direction: column;
 
@@ -547,6 +567,7 @@ header.header > nav.navbar-wrapper {
         }
       }
     }
+
     .secondary-menu-region {
       order: 1;
     }
@@ -597,6 +618,7 @@ header.header > nav.navbar-wrapper {
           .field--name-field-d-long-text {
             ul {
               padding-left: 0;
+
               li {
                 @include sublist-list-item();
               }
@@ -605,6 +627,7 @@ header.header > nav.navbar-wrapper {
         }
 
       }
+
       ul {
         &.subul {
           padding-left: $mobile-sidebar-submenu-spacing;
