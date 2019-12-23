@@ -30,6 +30,7 @@ $d-p-banner-img-opacity: 0.5 !default;
 $d-p-banner-subheader-opacity: 0.7 !default;
 
 .paragraph--type--d-p-banner {
+  position: relative;
   background: $d-p-banner-background-overlay;
   color: $d-p-banner-text-color;
   z-index: 0;
@@ -73,8 +74,31 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       @include decoration-header-line-main-center($d-p-banner-line-color, $d-p-banner-line-color-inverted);
     }
   }
-  .backstretch-item {
+  .background-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .field--type-entity-reference,
+    .field--type-image {
+      float: none;
+      margin: 0;
+    }
+    div {
+      height: 100%;
+    }
+    picture {
+      display: block;
+      height: 100%;
+    }
     img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
       opacity: $d-p-banner-img-opacity;
       @include media-breakpoint-down(sm) {
         max-width: none;
@@ -84,6 +108,8 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     }
   }
   .content-wrapper {
+    position: relative;
+    z-index: 2;
     width: 100%;
     padding-top: $d-p-banner-padding-top;
     padding-bottom: $d-p-banner-padding-bottom;

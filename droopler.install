@@ -521,3 +521,28 @@ function droopler_update_8103() {
 
   $updater->checklist()->saveProgress($progress);
 }
+
+/**
+ * Droopler 2.1 Updates.
+ */
+function droopler_update_8104() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  // Add and update configs for media.
+  $configs = [
+    'd_p_banner' => [
+      'core.entity_view_display.media.d_image.d_banner' => '',
+      'core.entity_view_display.paragraph.d_p_banner.default' => '',
+      'core.entity_view_mode.media.d_banner' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8104_0'] = $updater->importConfigs($configs);
+
+  $progress = [
+    'v2.1' => $values,
+  ];
+
+  $updater->checklist()->saveProgress($progress);
+}

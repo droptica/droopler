@@ -50,13 +50,16 @@
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
-      <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
-        <div class="content-wrapper">
-          <div class="content container">
-            {% block content %}
-              {{ content }}
-            {% endblock %}
-          </div>
+      <div class="background-wrapper">
+        {% block image %}
+          {{ content.group_d_banner_image }}
+        {% endblock %}
+      </div>
+      <div class="content-wrapper">
+        <div class="content container">
+          {% block content %}
+            {{ content.group_d_banner_content }}
+          {% endblock %}
         </div>
       </div>
     </div>
