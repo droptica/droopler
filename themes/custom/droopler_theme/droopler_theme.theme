@@ -278,8 +278,13 @@ function droopler_theme_preprocess_field(&$variables) {
     $variables['slider'] = render($slider);
   }
 
-  // Here we're detecting paragraphs reference field and if parent entity has NO revisions,
-  // we're removing geyisr theme_wrapper, so there won't be empty overlay.
+  /*
+   * This is required only until new version of Geysir module came
+   *  - which should fix the error with missing parent entity id in links parameters.
+   *
+   * Here we're detecting paragraphs reference field and if parent entity has NO revisions,
+   * we're removing geyisr theme_wrapper, so there won't be empty overlay.
+   */
   if (empty($variables['field_type']) || $variables['field_type'] === 'entity_reference_revisions') {
     /** @var \Drupal\Core\Entity\EntityInterface $entity */
     $entity = $variables["element"]["#object"];
@@ -300,6 +305,10 @@ function droopler_theme_preprocess_field(&$variables) {
  * Implements hook_preprocess_field() for HTML document templates.
  */
 function droopler_theme_preprocess_links(&$variables) {
+  /*
+   * This is required only until new version of Geysir module came
+   * - which should fix the error with missing parent entity id in links parameters.
+   */
   if (!empty($variables['links']) && !empty($variables['attributes']['class'])) {
     // Here we're detecting geysir links.
     $foundGeysirClassAttribute = FALSE;
@@ -310,9 +319,11 @@ function droopler_theme_preprocess_links(&$variables) {
       }
     }
 
-    // If found, we're checking if the request is send by layout builder OR if parent entity has NO revisions.
-    // In both cases, we're clearing the links table, so there won't be any errors while rendering them.
-    // This approach should be pointless when new versions of Paragraphs module be released.
+    /*
+     * If found, we're checking if the request is send by layout builder OR if parent entity has NO revisions.
+     * In both cases, we're clearing the links table, so there won't be any errors while rendering them.
+     * This approach should be pointless when new versions of Paragraphs module be released.
+     */
     if ($foundGeysirClassAttribute) {
       /** @var \Drupal\Core\Routing\RouteMatchInterface $routeMatch */
       $routeMatch = \Drupal::routeMatch();

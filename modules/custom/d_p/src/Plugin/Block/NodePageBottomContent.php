@@ -64,8 +64,7 @@ class NodePageBottomContent extends BlockBase implements ContainerFactoryPluginI
       $targetEntityViewDisplay = $entityDisplayRepository->getViewDisplay($entityTypeId, $targetEntity->bundle(), 'page_bottom_content');
       $id = $targetEntityViewDisplay->get('id');
       if ($id !== NULL ) {
-        $t = $viewBuilder->view($targetEntity, 'page_bottom_content');
-        return $t;
+        return $viewBuilder->view($targetEntity, 'page_bottom_content');
       }
     }
 
