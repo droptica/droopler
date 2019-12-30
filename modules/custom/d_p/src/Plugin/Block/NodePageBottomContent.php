@@ -53,9 +53,10 @@ class NodePageBottomContent extends BlockBase implements ContainerFactoryPluginI
     /** @var \Drupal\node\Entity\Node $currentNode */
     $currentNode = $this->routeMatch->getParameter('node');
 
-    if ( ($targetEntity = $currentUser) || ($targetEntity = $currentNode) ) {
+    if (($targetEntity = $currentUser) || ($targetEntity = $currentNode)) {
       $entityTypeId = $targetEntity->getEntityTypeId();
-      $viewBuilder = \Drupal::entityTypeManager()->getViewBuilder($entityTypeId);
+      $viewBuilder = \Drupal::entityTypeManager()
+        ->getViewBuilder($entityTypeId);
 
       /** @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entityDisplayRepository */
       $entityDisplayRepository = \Drupal::service('entity_display.repository');
@@ -63,7 +64,7 @@ class NodePageBottomContent extends BlockBase implements ContainerFactoryPluginI
       /** @var \Drupal\Core\Entity\Entity\EntityViewDisplay $targetEntityView */
       $targetEntityViewDisplay = $entityDisplayRepository->getViewDisplay($entityTypeId, $targetEntity->bundle(), 'page_bottom_content');
       $id = $targetEntityViewDisplay->get('id');
-      if ($id !== NULL ) {
+      if ($id !== NULL) {
         return $viewBuilder->view($targetEntity, 'page_bottom_content');
       }
     }
