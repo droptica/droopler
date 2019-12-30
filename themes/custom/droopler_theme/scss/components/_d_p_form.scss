@@ -18,10 +18,24 @@ $d-p-form-padding-bottom: 5% !default;
 $d-p-form-button-margin-top: 1rem !default;
 $d-p-form-copy-margin-left: 1.25rem !default;
 
+// Other settings
+$d-p-form-background-opacity: 0.4 !default;
+
 .paragraph-d-form {
+  position: relative;
   padding-top: $d-p-form-padding-top;
   padding-bottom: $d-p-form-padding-bottom;
   color: $d-p-form-text-color;
+  background: $d-p-form-background;
+
+  .d-media-background-wrapper {
+    opacity: $d-p-form-background-opacity;
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 2;
+  }
 
   form {
     margin: 0;
@@ -75,15 +89,6 @@ $d-p-form-copy-margin-left: 1.25rem !default;
             width: 48%;
           }
         }
-      }
-    }
-  }
-
-  .backstretch {
-    background: $d-p-form-background;
-    .backstretch-item {
-      img {
-        opacity: 0.4;
       }
     }
   }

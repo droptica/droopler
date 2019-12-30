@@ -531,12 +531,36 @@ function droopler_update_8104() {
 
   // Add and update configs for media.
   $configs = [
-    'd_p_banner' => [
+    'd_media' => [
       'responsive_image.styles.banner' => '',
+      'responsive_image.styles.responsive_background' => '',
       'core.entity_view_mode.media.d_banner' => '',
+      'core.entity_view_mode.media.d_responsive_background' => '',
       'core.entity_view_display.media.d_image.d_banner' => '',
       'core.entity_view_display.media.d_video.d_banner' => '',
+      'core.entity_view_display.media.d_image.d_responsive_background' => '',
+      'core.entity_view_display.media.d_video.d_responsive_background' => '',
+    ],
+    'd_p_banner' => [
       'core.entity_view_display.paragraph.d_p_banner.default' => '',
+    ],
+    'd_p_counters' => [
+      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '',
+    ],
+    'd_p_form' => [
+      'core.entity_view_display.paragraph.d_p_form.default' => '',
+    ],
+    'd_p_side_image' => [
+      'core.entity_view_display.paragraph.d_p_side_image.default' => '',
+    ],
+    'd_p_subscribe_file' => [
+      'core.entity_view_display.paragraph.d_p_subscribe_file.default' => '',
+    ],
+    'd_p_text_blocks' => [
+      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '',
+    ],
+    'd_p_text_with_bckg' => [
+      'core.entity_view_display.paragraph.d_p_text_with_bckg.default' => '',
     ],
   ];
 

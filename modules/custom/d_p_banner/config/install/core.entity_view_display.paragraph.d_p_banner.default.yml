@@ -38,7 +38,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: 'Banner content'
-    group_d_banner_image:
+    group_d_banner_background:
       children:
         - field_d_media_background
       parent_name: ''
@@ -55,14 +55,14 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'Banner image'
+      label: 'Banner background'
 id: paragraph.d_p_banner.default
 targetEntityType: paragraph
 bundle: d_p_banner
 mode: default
 content:
   field_d_cta_link:
-    weight: 5
+    weight: 7
     label: hidden
     settings:
       trim_length: 80
@@ -74,14 +74,14 @@ content:
     type: link
     region: content
   field_d_long_text:
-    weight: 4
+    weight: 6
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_d_main_title:
-    weight: 2
+    weight: 4
     label: hidden
     settings:
       link_to_entity: false
@@ -99,7 +99,7 @@ content:
     third_party_settings: {  }
   field_d_media_icon:
     type: entity_reference_entity_view
-    weight: 1
+    weight: 3
     label: hidden
     settings:
       view_mode: d_icon
@@ -107,7 +107,7 @@ content:
     third_party_settings: {  }
     region: content
   field_d_subtitle:
-    weight: 3
+    weight: 5
     label: hidden
     settings:
       link_to_entity: false

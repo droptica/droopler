@@ -26,7 +26,7 @@ $d-p-banner-half-transparent-content-spacing: 10% !default;
 $d-p-banner-half-transparent-btn-spacing: 25px !default;
 
 // Other settings
-$d-p-banner-img-opacity: 0.5 !default;
+$d-p-banner-background-opacity: 0.5 !default;
 $d-p-banner-subheader-opacity: 0.7 !default;
 
 .paragraph--type--d-p-banner {
@@ -74,53 +74,9 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       @include decoration-header-line-main-center($d-p-banner-line-color, $d-p-banner-line-color-inverted);
     }
   }
-
-
-  .background-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    .field--type-entity-reference,
-    .field--type-image {
-      float: none;
-      margin: 0;
-    }
-    div {
-      height: 100%;
-    }
-    picture {
-      display: block;
-      height: 100%;
-    }
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      opacity: $d-p-banner-img-opacity;
-      @include media-breakpoint-down(sm) {
-        max-width: none;
-        width: 100%;
-        overflow: hidden;
-      }
-    }
-    .video-embed {
-      width: 100%;
-      height: 100%;
-      &--cover {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
+  .d-media-background-wrapper {
+    opacity: $d-p-banner-background-opacity;
   }
-
-
   .content-wrapper {
     position: relative;
     z-index: 2;
