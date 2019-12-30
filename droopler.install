@@ -532,9 +532,11 @@ function droopler_update_8104() {
   // Add and update configs for media.
   $configs = [
     'd_p_banner' => [
-      'core.entity_view_display.media.d_image.d_banner' => '',
-      'core.entity_view_display.paragraph.d_p_banner.default' => '',
+      'responsive_image.styles.banner' => '',
       'core.entity_view_mode.media.d_banner' => '',
+      'core.entity_view_display.media.d_image.d_banner' => '',
+      'core.entity_view_display.media.d_video.d_banner' => '',
+      'core.entity_view_display.paragraph.d_p_banner.default' => '',
     ],
   ];
 

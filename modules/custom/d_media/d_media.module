@@ -5,3 +5,15 @@
  * Module file for d_media.
  */
 
+/**
+ * Implements hook_theme().
+ */
+function d_media_theme() {
+  return [
+    'd_media_video_embed' => [
+      'variables' => [
+        'attributes' => NULL,
+      ],
+    ],
+  ];
+}
