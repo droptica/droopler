@@ -662,6 +662,8 @@ function droopler_update_8105() {
     ],
   ];
 
+  $listOfMigratedFields = [];
+
   foreach ($fieldsToMigrate as $sourceFieldName => $targetFieldName) {
     $res = \Drupal::entityManager()
       ->getStorage('field_storage_config')
@@ -679,8 +681,14 @@ function droopler_update_8105() {
           'type' => $bundles,
         ]);
 
+      $errorsWhileMigrating = [];
+
       /** @var ContentEntityBase $entity */
       foreach ($entities as $entity) {
+        if (!$entity->hasField($sourceFieldName)) {
+          continue;
+        }
+
         /** @var FileFieldItemList $sourceField */
         $sourceField = $entity->get($sourceFieldName);
 
@@ -695,8 +703,11 @@ function droopler_update_8105() {
           foreach ($sourceValues as $sourceImage) {
             $media_entity = $media_manager->createMediaImageFromFid($sourceImage['target_id'], $sourceImage['alt']);
             $entity->get($entityTargetFieldName)->appendItem($media_entity);
+
           }
         } catch (InvalidArgumentException $e) {
+          $errorsWhileMigrating[$entity->bundle()][$sourceField] = $sourceFieldName;
+
           \Drupal::logger('droopler_update')->error('Exception while migrating media images for @sourceField to @targetField at @bundle @type.', [
             '@sourceField' => $sourceFieldName,
             '@targetField' => $entityTargetFieldName,
@@ -707,6 +718,31 @@ function droopler_update_8105() {
 
         $entity->save();
       }
+
+      foreach ($bundles as $migratedBundle) {
+        if (isset($errorsWhileMigrating[$migratedBundle][$sourceFieldName])) {
+          continue;
+        }
+        $listOfMigratedFields[$entityType][$migratedBundle][$sourceFieldName] = TRUE;
+      }
     }
   }
+
+  // Delete migrated fields.
+
+  /* @var $entityFieldManager EntityFieldManager */
+  $entityFieldManager = \Drupal::service('entity_field.manager');
+
+  foreach ($listOfMigratedFields as $entityType => $migratedBundles) {
+    foreach ($migratedBundles as $bundle => $migratedBundleFields) {
+      $bundleAllFields = $entityFieldManager->getFieldDefinitions($entityType, $bundle);
+
+      foreach ($migratedBundleFields as $fieldToDelete) {
+        if (isset($bundleAllFields[$fieldToDelete])) {
+          $bundleAllFields[$fieldToDelete]->delete();
+        }
+      }
+    }
+  }
+
 }
