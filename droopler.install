@@ -5,6 +5,8 @@
  */
 
 use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Drupal\Core\Extension\MissingDependencyException;
 
 /**
@@ -33,7 +35,7 @@ function droopler_install() {
   // @TODO this should not really be here because this subtheme is not part
   // of the distribution
   $themes = \Drupal::service('theme_handler')->listInfo();
-  if(isset($themes['droopler_subtheme'])) {
+  if (isset($themes['droopler_subtheme'])) {
     \Drupal::configFactory()
       ->getEditable('system.theme')
       ->set('default', 'droopler_subtheme')
@@ -53,9 +55,9 @@ function droopler_install() {
   // Try to install custom init that alters the original one.
   try {
     \Drupal::service('module_installer')->install(['d_custom_init']);
-  }
-  catch (\Drupal\Core\Extension\MissingDependencyException $e) {
-    \Drupal::logger('droopler_install')->notice('Custom content init not detected.');
+  } catch (\Drupal\Core\Extension\MissingDependencyException $e) {
+    \Drupal::logger('droopler_install')
+      ->notice('Custom content init not detected.');
   }
 }
 
@@ -91,12 +93,14 @@ function droopler_install_tasks() {
 
 /**
  * Import a config file.
- * @todo To be moved to a new manager class.
  *
  * @param string $module
  *  Module name.
  * @param string $name
  *  Config file name without .yml extension.
+ *
+ * @todo To be moved to a new manager class.
+ *
  */
 function _droopler_import_config($module, $name) {
   $config_path = drupal_get_path('module', $module) . '/config/install';
@@ -179,8 +183,7 @@ function droopler_update_8102() {
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_0'] = $result;
     $values['droopler__droopler_update_8102_1'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_0'] = FALSE;
     $values['droopler__droopler_update_8102_1'] = FALSE;
   }
@@ -273,8 +276,7 @@ function droopler_update_8102() {
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_5'] = $result;
     $values['droopler__droopler_update_8102_6'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_5'] = FALSE;
     $values['droopler__droopler_update_8102_6'] = FALSE;
   }
@@ -318,8 +320,7 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_0'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
 
@@ -394,8 +395,7 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_2'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_2'] = FALSE;
   }
 
@@ -531,8 +531,8 @@ function droopler_update_8103() {
       'droopler' => [
         'block.block.mainnavigation' => '',
         'block.block.mainnavigation_2' => '',
-        ]
-      ];
+      ],
+    ];
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
   }
 
@@ -546,7 +546,7 @@ function droopler_update_8103() {
 /**
  * Droopler 2.0 Media migrate.
  */
-function droopler_update_8106() {
+function droopler_update_8104() {
 
   //Import all target Media Fields
   /** @var Drupal\d_update\Updater $updater */
@@ -630,38 +630,83 @@ function droopler_update_8106() {
     $values['droopler__droopler_update_8104_2'] = TRUE;
   }
 
-//  // Migrate images to media fields.
-//  $fieldsToMigrate = [
-//    'field_d_icon' => 'field_d_media_icon',
-//    'field_d_image' => 'field_d_media_image',
-//    'field_d_image_background' => 'field_d_media_background',
-//    'field_blog_main_image' => 'field_blog_media_main_image',
-//    'field_teaser_image' => 'field_teaser_media_image',
-//  ];
-//  foreach ($fieldsToMigrate as $sourceField => $targetField) {
-//    $res = \Drupal::entityManager()->getStorage('field_storage_config')->loadByProperties([
-//      'field_name' => $sourceField,
-//    ]);
-//
-//    /** @var \Drupal\field\Entity\FieldStorageConfig $storage */
-//    foreach ($res as $storage) {
-//      $bundles = $storage->getBundles();
-//      $entityType = $storage->getTargetEntityTypeId();
-//
-//      $entities = \Drupal::entityTypeManager()
-//        ->getStorage($entityType)->loadByProperties([
-//          'type' => $bundles,
-//        ]);
-//
-//      foreach ($entities as $entity) {
-//
-//      }
-//    }
-//  }
 
   $progress = [
     'v2.0 - Media Migrate' => $values,
   ];
 
   $updater->checklist()->saveProgress($progress);
+}
+
+/**
+ * test hook update
+ */
+function droopler_update_8105() {
+
+  /**
+   * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
+   */
+  $media_manager =  Drupal::service('d_content_init.manager_media');
+
+  // Migrate images to media fields.
+  $fieldsToMigrate = [
+    'field_d_icon' => 'field_d_media_icon',
+    'field_d_image' => 'field_d_media_image',
+    'field_d_image_background' => 'field_d_media_background',
+    'field_blog_main_image' => 'field_blog_media_main_image',
+    'field_teaser_image' => 'field_teaser_media_image',
+  ];
+  $fieldsMigrationSpecialCases = [
+    'd_p_carousel' => [
+      'field_d_image' => 'field_d_media_icon',
+    ],
+  ];
+
+  foreach ($fieldsToMigrate as $sourceFieldName => $targetFieldName) {
+    $res = \Drupal::entityManager()
+      ->getStorage('field_storage_config')
+      ->loadByProperties([
+        'field_name' => $sourceFieldName,
+      ]);
+
+    /** @var \Drupal\field\Entity\FieldStorageConfig $storage */
+    foreach ($res as $storage) {
+      $bundles = $storage->getBundles();
+      $entityType = $storage->getTargetEntityTypeId();
+
+      $entities = \Drupal::entityTypeManager()
+        ->getStorage($entityType)->loadByProperties([
+          'type' => $bundles,
+        ]);
+
+      /** @var ContentEntityBase $entity */
+      foreach ($entities as $entity) {
+        /** @var FileFieldItemList $sourceField */
+        $sourceField = $entity->get($sourceFieldName);
+
+        if ($sourceField->isEmpty()) {
+          continue;
+        }
+        $entityTargetFieldName = isset($fieldsMigrationSpecialCases[$entity->bundle()][$sourceFieldName]) ? $fieldsMigrationSpecialCases[$entity->bundle()][$sourceFieldName] : $targetFieldName;
+
+        $sourceValues = $sourceField->getValue();
+
+        try {
+          foreach ($sourceValues as $sourceImage) {
+            $media_entity = $media_manager->createMediaImageFromFid($sourceImage['target_id'], $sourceImage['alt']);
+            $entity->get($entityTargetFieldName)->appendItem($media_entity);
+          }
+        } catch (InvalidArgumentException $e) {
+          \Drupal::logger('droopler_update')->error('Exception while migrating media images for @sourceField to @targetField at @bundle @type.', [
+            '@sourceField' => $sourceFieldName,
+            '@targetField' => $entityTargetFieldName,
+            '@bundle' => $entity->bundle(),
+            '@type' => $entityType,
+          ]);
+        }
+
+        $entity->save();
+      }
+    }
+  }
 }
