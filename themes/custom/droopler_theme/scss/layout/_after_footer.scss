@@ -1,0 +1,22 @@
+.after-footer {
+  .region-footer-main {
+    background-color: $color-hecuba;
+
+    ul.nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 50%;
+      margin: 0 auto;
+      list-style: none;
+
+      li {
+        a {
+          font-size: 1rem;
+          font-weight: bold;
+          color: $white;
+        }
+      }
+    }
+  }
+}
