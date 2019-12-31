@@ -546,24 +546,17 @@ function droopler_update_8103() {
 /**
  * Droopler 2.0 Media migrate.
  */
-function droopler_update_8104() {
-
-  $fieldsToMigrate = [
-    'field_d_icon' => 'field_d_media_icon',
-    'field_d_image' => 'field_d_media_image',
-    'field_d_image_background' => 'field_d_media_background',
-    'field_blog_main_image' => 'field_blog_media_main_image',
-    'field_teaser_image' => 'field_teaser_media_image',
-  ];
+function droopler_update_8106() {
 
   //Import all target Media Fields
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
   $configs = [
-//    'd_content' => [
-//      'field.field.node.content_page.field_teaser_media_image' => '',
-//    ],
+    'd_content' => [
+      'field.storage.node.field_teaser_media_image' => '',
+      'field.field.node.content_page.field_teaser_media_image' => '',
+    ],
     'd_p_banner' => [
       'field.field.paragraph.d_p_banner.field_d_media_background' => '',
       'field.field.paragraph.d_p_banner.field_d_media_icon' => '',
@@ -599,11 +592,11 @@ function droopler_update_8104() {
       'field.field.paragraph.d_p_subscribe_file.field_d_media_icon' => '',
       'field.field.paragraph.d_p_subscribe_file.field_d_media_background' => '',
     ],
-//    'd_p_group_of_text_blocks' => [
-//      'field.field.paragraph.d_p_group_of_text_blocks.field_d_media_icon' => '',
-//      'field.field.paragraph.d_p_single_text_block.field_d_media_background' => '',
-//      'field.field.paragraph.d_p_single_text_block.field_d_media_icon' => '',
-//    ],
+    'd_p_text_blocks' => [
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_media_background' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_media_icon' => '',
+    ],
     'd_p_text_paged' => [
       'field.field.paragraph.d_p_text_paged.field_d_media_icon' => '',
     ],
@@ -624,8 +617,11 @@ function droopler_update_8104() {
     // Update d_blog config.
     $configs = [
       'd_blog' => [
+        'core.entity_view_mode.media.d_blog_image' => '',
+        'core.entity_view_display.media.d_image.d_blog_image' => '',
+        'field.storage.node.field_blog_media_main_image' => '',
         'field.field.paragraph.d_p_blog_image.field_d_media_image' => '',
-//        'field.field.node.blog_post.field_blog_media_main_image' => '',
+        'field.field.node.blog_post.field_blog_media_main_image' => '',
       ],
     ];
     $values['droopler__droopler_update_8104_2'] = $updater->importConfigs($configs);
@@ -634,6 +630,14 @@ function droopler_update_8104() {
     $values['droopler__droopler_update_8104_2'] = TRUE;
   }
 
+//  // Migrate images to media fields.
+//  $fieldsToMigrate = [
+//    'field_d_icon' => 'field_d_media_icon',
+//    'field_d_image' => 'field_d_media_image',
+//    'field_d_image_background' => 'field_d_media_background',
+//    'field_blog_main_image' => 'field_blog_media_main_image',
+//    'field_teaser_image' => 'field_teaser_media_image',
+//  ];
 //  foreach ($fieldsToMigrate as $sourceField => $targetField) {
 //    $res = \Drupal::entityManager()->getStorage('field_storage_config')->loadByProperties([
 //      'field_name' => $sourceField,
