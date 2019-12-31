@@ -303,229 +303,250 @@ function droopler_update_8102() {
 /**
  * Droopler 2.0 Updates.
  */
-//function droopler_update_8103() {
-//  /** @var Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
-//  $module_installer = \Drupal::service('module_installer');
-//
-//  /** @var Drupal\d_update\Updater $updater */
-//  $updater = \Drupal::service('d_update');
-//
-//  // Install contrib modules.
-//  try {
-//    $modules = [
-//      'entity_reference_display',
-//      'we_megamenu',
-//    ];
-//    $result = $module_installer->install($modules, TRUE);
-//    $values['droopler__droopler_update_8103_0'] = $result;
-//  }
-//  catch (MissingDependencyException $e) {
-//    $values['droopler__droopler_update_8103_0'] = FALSE;
-//  }
-//
-//  // Add new fields to paragraphs.
-//  $configs = [
-//    'd_p' => [
-//      'field.storage.paragraph.field_d_background_color' => '',
-//      'field.storage.paragraph.field_d_display_mode' => '',
-//      'field.storage.paragraph.field_d_node_reference' => '',
-//      'field.storage.paragraph.field_d_settings' => '',
-//    ],
-//    'd_p_banner' => [
-//      'field.field.paragraph.d_p_banner.field_d_settings' => '',
-//    ],
-//    'd_p_carousel' => [
-//      'field.field.paragraph.d_p_carousel.field_d_settings' => '',
-//    ],
-//    'd_p_form' => [
-//      'field.storage.paragraph.field_d_layout_modifier' => '',
-//      'field.field.paragraph.d_p_form.field_d_layout_modifier' => '',
-//      'field.field.paragraph.d_p_form.field_d_long_text' => '',
-//    ],
-//    'd_p_side_image' => [
-//      'field.field.paragraph.d_p_side_image.field_d_background_color' => '',
-//      'field.field.paragraph.d_p_side_image.field_d_settings' => '',
-//    ],
-//    'd_p_side_embed' => [
-//      'field.field.paragraph.d_p_side_embed.field_d_settings' => '',
-//    ],
-//    'd_p_text_blocks' => [
-//      'field.field.paragraph.d_p_group_of_text_blocks.field_d_long_text' => '',
-//      'field.field.paragraph.d_p_group_of_text_blocks.field_d_settings' => '',
-//      'field.field.paragraph.d_p_single_text_block.field_d_background_color' => '',
-//      'field.field.paragraph.d_p_single_text_block.field_d_image_background' => '',
-//      'field.field.paragraph.d_p_single_text_block.field_d_settings' => '',
-//    ],
-//    'd_p_text_paged' => [
-//      'field.field.paragraph.d_p_text_paged.field_d_settings' => '',
-//    ],
-//  ];
-//  $values['droopler__droopler_update_8103_1'] = $updater->importConfigs($configs);
-//
-//  // Install Droopler modules.
-//  try {
-//    $modules = [
-//      'd_p_node',
-//      'd_p_side_by_side',
-//      'd_search',
-//      'd_social_media',
-//      'd_p_reference_content',
-//    ];
-//    $result = $module_installer->install($modules, TRUE);
-//    $values['droopler__droopler_update_8103_2'] = $result;
-//  }
-//  catch (MissingDependencyException $e) {
-//    $values['droopler__droopler_update_8103_2'] = FALSE;
-//  }
-//
-//  // Update existing fields.
-//  $configs = [
-//    'd_content' => [
-//      'field.field.node.content_page.field_page_section' => '43d9f25fcb0715eea8a9465388491269',
-//    ],
-//    'd_p_banner' => [
-//      'field.field.paragraph.d_p_banner.field_d_cta_link' => '63fe174a22c312e28faf3bc9fa41ce44',
-//    ],
-//    'd_p_side_image' => [
-//      'field.storage.paragraph.field_d_p_si_image_side' => '5d36513453cc08e7d015d68929ecddfc',
-//      'field.field.paragraph.d_p_side_image.field_d_cta_link' => 'ce47d9abef098da38cc53064c01d06d6',
-//    ],
-//    'd_p_side_embed' => [
-//      'field.field.paragraph.d_p_side_embed.field_d_cta_link' => '336654b916fc757f3af30239dc2d4976',
-//    ],
-//    'd_p_side_tiles' => [
-//      'field.field.paragraph.d_p_side_tiles.field_d_cta_link' => 'ac8fc9a194d17951a86e0a68371c12bb',
-//    ],
-//    'd_p_text_blocks' => [
-//      'field.field.paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference' => '97dd017b20ad8add96ea20e13bbdea39',
-//      'field.field.paragraph.d_p_group_of_text_blocks.field_d_cta_link' => '12e9dbc1863b7bddb7cb6632b1a6d361',
-//    ],
-//    'd_p_text_paged' => [
-//      'field.field.paragraph.d_p_text_paged.field_d_cta_link' => 'ffda0c55cb64b91f1109971f67185970',
-//    ],
-//    'd_p_text_with_bckg' => [
-//      'field.field.paragraph.d_p_text_with_bckg.field_d_cta_link' => '27dca2ddd6b10a8cff0ec8c787c3dd9f',
-//    ],
-//  ];
-//  $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
-//
-//  // Update view modes for new and updated fields.
-//  $configs = [
-//    'd_p_banner' => [
-//      'core.entity_form_display.paragraph.d_p_banner.default' => '897f699c224b580fc3744efcea5bfd65',
-//      'core.entity_view_display.paragraph.d_p_banner.default' => '0445e6e0cb15347d8a69d27b3e5716cf',
-//    ],
-//    'd_p_carousel' => [
-//      'core.entity_form_display.paragraph.d_p_carousel.default' => 'a619fe5018d18626fe0714a88e3e0408',
-//      'core.entity_view_display.paragraph.d_p_carousel.default' => '46f7bbecfd6d6d6efe8da68f95a26ec2',
-//    ],
-//    'd_p_form' => [
-//      'core.entity_form_display.paragraph.d_p_form.default' => '28c6c56d072013066b56426154171e19',
-//      'core.entity_view_display.paragraph.d_p_form.default' => '6b1812c3716590a66b0f20979fd1fb00',
-//    ],
-//    'd_p_side_image' => [
-//      'core.entity_form_display.paragraph.d_p_side_image.default' => '750726e0a68fe80a9520159cfdc04fd5',
-//      'core.entity_view_display.paragraph.d_p_side_image.default' => '8954de48057199341a186210809516d8',
-//    ],
-//    'd_p_side_embed' => [
-//      'core.entity_form_display.paragraph.d_p_side_embed.default' => 'a2e5aed533efb82c44b6bc4a3c01f2b7',
-//      'core.entity_view_display.paragraph.d_p_side_embed.default' => 'e3b3ff4b69aa246e224901b5bbee6cfb',
-//    ],
-//    'd_p_text_blocks' => [
-//      'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '5639c681e3d0fff46a032bd4ca1176d4',
-//      'core.entity_form_display.paragraph.d_p_single_text_block.default' => 'c7779dd94294f44c0ff6c58714c5003f',
-//      'core.entity_view_display.paragraph.d_p_group_of_text_blocks.default' => 'f76c231fa0f952111112b71d72a02123',
-//      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '761ff6fa4a0e4b78da1f0a0a2c05c951',
-//    ],
-//    'd_p_text_paged' => [
-//      'core.entity_form_display.paragraph.d_p_text_paged.default' => '4ef25a9f58e9a54bfd50eca73a3e5f22',
-//      'core.entity_view_display.paragraph.d_p_text_paged.default' => 'f860332e18f47f8b1a38f8ceea9f4ce0',
-//    ],
-//  ];
-//  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
-//
-//  // Update misc config.
-//  $configs = [
-//    'droopler' => [
-//      'core.entity_form_display.contact_message.feedback.default' => '',
-//      'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
-//      'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
-//      'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
-//    ],
-//    'd_content' => [
-//      'core.entity_view_display.node.content_page.d_small_box' => '',
-//      'simple_sitemap.bundle_settings.default.node.content_page' => '',
-//    ],
-//    'd_p_subscribe_file' => [
-//      'views.view.subscribe_file_paragraph' => '',
-//    ],
-//  ];
-//  $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
-//
-//  $module_handler = \Drupal::service('module_handler');
-//  if ($module_handler->moduleExists('d_blog')) {
-//    // Update d_blog config.
-//    $configs = [
-//      'd_blog' => [
-//        'metatag.metatag_defaults.node__blog_post' => '3e869dc915abd86f66f9b2d46d4fee2a',
-//        'core.entity_view_display.node.blog_post.d_small_box' => '',
-//        'core.entity_view_mode.node.teaser_small' => '',
-//        'core.entity_view_display.node.blog_post.teaser_small' => '',
-//        'pathauto.pattern.node_blog_pattern' => '',
-//        'responsive_image.styles.blog_images_style' => '5fffdeff846e07fe8c2e72f24ffab7f4',
-//        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
-//        'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
-//        'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
-//        'simple_sitemap.bundle_settings.default.node.blog_post' => '',
-//      ],
-//    ];
-//    $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
-//  }
-//  else {
-//    $values['droopler__droopler_update_8103_6'] = TRUE;
-//  }
-//
-//  if ($module_handler->moduleExists('d_product')) {
-//    // Update d_product config.
-//    $configs = [
-//      'd_product' => [
-//        'core.entity_view_display.node.d_product.d_small_box' => '',
-//        'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
-//        'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
-//        'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
-//        'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
-//        'simple_sitemap.bundle_settings.default.node.d_product' => '',
-//        'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
-//      ],
-//    ];
-//    $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
-//  }
-//  else {
-//    $values['droopler__droopler_update_8103_7'] = TRUE;
-//  }
-//
-//  if ($module_handler->moduleExists('we_megamenu')) {
-//
-//    $configs = [
-//      'droopler' => [
-//        'block.block.mainnavigation' => '',
-//        'block.block.mainnavigation_2' => '',
-//        ]
-//      ];
-//    $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
-//  }
-//
-//  $progress = [
-//    'v2.0' => $values,
-//  ];
-//
-//  $updater->checklist()->saveProgress($progress);
-//}
+function droopler_update_8103() {
+  /** @var Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  // Install contrib modules.
+  try {
+    $modules = [
+      'entity_reference_display',
+      'we_megamenu',
+    ];
+    $result = $module_installer->install($modules, TRUE);
+    $values['droopler__droopler_update_8103_0'] = $result;
+  }
+  catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8103_0'] = FALSE;
+  }
+
+  // Add new fields to paragraphs.
+  $configs = [
+    'd_p' => [
+      'field.storage.paragraph.field_d_background_color' => '',
+      'field.storage.paragraph.field_d_display_mode' => '',
+      'field.storage.paragraph.field_d_node_reference' => '',
+      'field.storage.paragraph.field_d_settings' => '',
+    ],
+    'd_p_banner' => [
+      'field.field.paragraph.d_p_banner.field_d_settings' => '',
+    ],
+    'd_p_carousel' => [
+      'field.field.paragraph.d_p_carousel.field_d_settings' => '',
+      'field.field.paragraph.d_p_carousel_item.field_d_settings' => '',
+    ],
+    'd_p_counters' => [
+      'field.field.paragraph.d_p_group_of_counters.field_d_settings' => '',
+      'field.field.paragraph.d_p_single_counter.field_d_settings' => '',
+    ],
+    'd_p_gallery' => [
+      'field.field.paragraph.d_p_gallery.field_d_settings' => '',
+    ],
+    'd_p_form' => [
+      'field.storage.paragraph.field_d_layout_modifier' => '',
+      'field.field.paragraph.d_p_form.field_d_layout_modifier' => '',
+      'field.field.paragraph.d_p_form.field_d_long_text' => '',
+      'field.field.paragraph.d_p_form.field_d_settings' => '',
+    ],
+    'd_p_side_image' => [
+      'field.field.paragraph.d_p_side_image.field_d_background_color' => '',
+      'field.field.paragraph.d_p_side_image.field_d_settings' => '',
+    ],
+    'd_p_side_tiles' => [
+      'field.field.paragraph.d_p_side_tiles.field_d_settings' => '',
+    ],
+    'd_p_subscribe_file' => [
+      'field.field.paragraph.d_p_subscribe_file.field_d_settings' => '',
+    ],
+    'd_p_side_embed' => [
+      'field.field.paragraph.d_p_side_embed.field_d_settings' => '',
+    ],
+    'd_p_text_blocks' => [
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_long_text' => '',
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_settings' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_background_color' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_image_background' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_settings' => '',
+    ],
+    'd_p_text_paged' => [
+      'field.field.paragraph.d_p_text_paged.field_d_settings' => '',
+    ],
+    'd_p_text_with_bckg' => [
+      'field.field.paragraph.d_p_text_with_bckg.field_d_settings' => '',
+    ],
+    'd_p_tiles' => [
+      'field.field.paragraph.d_p_tiles.field_d_settings' => '',
+    ],
+  ];
+  $values['droopler__droopler_update_8103_1'] = $updater->importConfigs($configs);
+
+  // Install Droopler modules.
+  try {
+    $modules = [
+      'd_p_node',
+      'd_p_side_by_side',
+      'd_search',
+      'd_social_media',
+      'd_p_reference_content',
+    ];
+    $result = $module_installer->install($modules, TRUE);
+    $values['droopler__droopler_update_8103_2'] = $result;
+  }
+  catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8103_2'] = FALSE;
+  }
+
+  // Update existing fields.
+  $configs = [
+    'd_content' => [
+      'field.field.node.content_page.field_page_section' => '43d9f25fcb0715eea8a9465388491269',
+    ],
+    'd_p_banner' => [
+      'field.field.paragraph.d_p_banner.field_d_cta_link' => '63fe174a22c312e28faf3bc9fa41ce44',
+    ],
+    'd_p_side_image' => [
+      'field.storage.paragraph.field_d_p_si_image_side' => '5d36513453cc08e7d015d68929ecddfc',
+      'field.field.paragraph.d_p_side_image.field_d_cta_link' => 'ce47d9abef098da38cc53064c01d06d6',
+    ],
+    'd_p_side_embed' => [
+      'field.field.paragraph.d_p_side_embed.field_d_cta_link' => '336654b916fc757f3af30239dc2d4976',
+    ],
+    'd_p_side_tiles' => [
+      'field.field.paragraph.d_p_side_tiles.field_d_cta_link' => 'ac8fc9a194d17951a86e0a68371c12bb',
+    ],
+    'd_p_text_blocks' => [
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference' => '97dd017b20ad8add96ea20e13bbdea39',
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_cta_link' => '12e9dbc1863b7bddb7cb6632b1a6d361',
+    ],
+    'd_p_text_paged' => [
+      'field.field.paragraph.d_p_text_paged.field_d_cta_link' => 'ffda0c55cb64b91f1109971f67185970',
+    ],
+    'd_p_text_with_bckg' => [
+      'field.field.paragraph.d_p_text_with_bckg.field_d_cta_link' => '27dca2ddd6b10a8cff0ec8c787c3dd9f',
+    ],
+  ];
+  $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
+
+  // Update view modes for new and updated fields.
+  $configs = [
+    'd_p_banner' => [
+      'core.entity_form_display.paragraph.d_p_banner.default' => '897f699c224b580fc3744efcea5bfd65',
+      'core.entity_view_display.paragraph.d_p_banner.default' => '0445e6e0cb15347d8a69d27b3e5716cf',
+    ],
+    'd_p_carousel' => [
+      'core.entity_form_display.paragraph.d_p_carousel.default' => 'a619fe5018d18626fe0714a88e3e0408',
+      'core.entity_view_display.paragraph.d_p_carousel.default' => '46f7bbecfd6d6d6efe8da68f95a26ec2',
+    ],
+    'd_p_form' => [
+      'core.entity_form_display.paragraph.d_p_form.default' => '28c6c56d072013066b56426154171e19',
+      'core.entity_view_display.paragraph.d_p_form.default' => '6b1812c3716590a66b0f20979fd1fb00',
+    ],
+    'd_p_side_image' => [
+      'core.entity_form_display.paragraph.d_p_side_image.default' => '750726e0a68fe80a9520159cfdc04fd5',
+      'core.entity_view_display.paragraph.d_p_side_image.default' => '8954de48057199341a186210809516d8',
+    ],
+    'd_p_side_embed' => [
+      'core.entity_form_display.paragraph.d_p_side_embed.default' => 'a2e5aed533efb82c44b6bc4a3c01f2b7',
+      'core.entity_view_display.paragraph.d_p_side_embed.default' => 'e3b3ff4b69aa246e224901b5bbee6cfb',
+    ],
+    'd_p_text_blocks' => [
+      'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '5639c681e3d0fff46a032bd4ca1176d4',
+      'core.entity_form_display.paragraph.d_p_single_text_block.default' => 'c7779dd94294f44c0ff6c58714c5003f',
+      'core.entity_view_display.paragraph.d_p_group_of_text_blocks.default' => 'f76c231fa0f952111112b71d72a02123',
+      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '761ff6fa4a0e4b78da1f0a0a2c05c951',
+    ],
+    'd_p_text_paged' => [
+      'core.entity_form_display.paragraph.d_p_text_paged.default' => '4ef25a9f58e9a54bfd50eca73a3e5f22',
+      'core.entity_view_display.paragraph.d_p_text_paged.default' => 'f860332e18f47f8b1a38f8ceea9f4ce0',
+    ],
+  ];
+  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
+
+  // Update misc config.
+  $configs = [
+    'droopler' => [
+      'core.entity_form_display.contact_message.feedback.default' => '',
+      'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
+      'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
+      'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
+    ],
+    'd_content' => [
+      'core.entity_view_display.node.content_page.d_small_box' => '',
+      'simple_sitemap.bundle_settings.default.node.content_page' => '',
+    ],
+    'd_p_subscribe_file' => [
+      'views.view.subscribe_file_paragraph' => '',
+    ],
+  ];
+  $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
+
+  $module_handler = \Drupal::service('module_handler');
+  if ($module_handler->moduleExists('d_blog')) {
+    // Update d_blog config.
+    $configs = [
+      'd_blog' => [
+        'metatag.metatag_defaults.node__blog_post' => '3e869dc915abd86f66f9b2d46d4fee2a',
+        'core.entity_view_display.node.blog_post.d_small_box' => '',
+        'core.entity_view_mode.node.teaser_small' => '',
+        'core.entity_view_display.node.blog_post.teaser_small' => '',
+        'pathauto.pattern.node_blog_pattern' => '',
+        'responsive_image.styles.blog_images_style' => '5fffdeff846e07fe8c2e72f24ffab7f4',
+        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
+        'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
+        'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
+        'simple_sitemap.bundle_settings.default.node.blog_post' => '',
+      ],
+    ];
+    $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8103_6'] = TRUE;
+  }
+
+  if ($module_handler->moduleExists('d_product')) {
+    // Update d_product config.
+    $configs = [
+      'd_product' => [
+        'core.entity_view_display.node.d_product.d_small_box' => '',
+        'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
+        'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
+        'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
+        'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
+        'simple_sitemap.bundle_settings.default.node.d_product' => '',
+        'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
+      ],
+    ];
+    $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8103_7'] = TRUE;
+  }
+
+  if ($module_handler->moduleExists('we_megamenu')) {
+
+    $configs = [
+      'droopler' => [
+        'block.block.mainnavigation' => '',
+        'block.block.mainnavigation_2' => '',
+        ]
+      ];
+    $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
+  }
+
+  $progress = [
+    'v2.0' => $values,
+  ];
+
+  $updater->checklist()->saveProgress($progress);
+}
 
 /**
  * Droopler 2.0 Media files import.
  */
-function droopler_update_8105() {
+function droopler_update_8104() {
 
   $fieldsToMigrate = [
     'field_d_icon' => 'field_d_media_icon',
@@ -535,7 +556,71 @@ function droopler_update_8105() {
     'field_teaser_image' => 'field_teaser_media_image',
   ];
 
-  //Import all target Fields
+  //Import all target Media Fields
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_blog' => [
+      'field.field.node.blog_post.field_blog_media_main_image' => '',
+      'field.field.paragraph.d_p_blog_image.field_d_media_image' => '',
+    ],
+    'd_content' => [
+      'field.field.node.content_page.field_teaser_media_image' => '',
+    ],
+    'd_p_banner' => [
+      'field.field.paragraph.d_p_banner.field_d_media_background' => '',
+      'field.field.paragraph.d_p_banner.field_d_media_icon' => '',
+    ],
+    'd_p_carousel' => [
+      'field.field.paragraph.d_p_carousel.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_carousel_item.field_d_media_icon' => '',
+    ],
+    'd_p_counters' => [
+      'field.field.paragraph.d_p_group_of_counters.field_d_media_background' => '',
+      'field.field.paragraph.d_p_group_of_counters.field_d_media_icon' => '',
+    ],
+    'd_p_gallery' => [
+      'field.field.paragraph.d_p_gallery.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_gallery.field_d_media_image' => '',
+    ],
+    'd_p_form' => [
+      'field.field.paragraph.d_p_form.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_form.field_d_media_background' => '',
+    ],
+    'd_p_side_embed' => [
+      'field.field.paragraph.d_p_side_embed.field_d_media_icon' => '',
+    ],
+    'd_p_side_image' => [
+      'field.field.paragraph.d_p_side_image.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_side_image.field_d_media_background' => '',
+    ],
+    'd_p_side_tiles' => [
+      'field.field.paragraph.d_p_side_tiles.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_side_tiles.field_d_media_image' => '',
+    ],
+    'd_p_subscribe_file' => [
+      'field.field.paragraph.d_p_subscribe_file.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_subscribe_file.field_d_media_background' => '',
+    ],
+    'd_p_group_of_text_blocks' => [
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_media_background' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_media_icon' => '',
+    ],
+    'd_p_text_paged' => [
+      'field.field.paragraph.d_p_text_paged.field_d_media_icon' => '',
+    ],
+    'd_p_text_with_bckg' => [
+      'field.field.paragraph.d_p_text_with_bckg.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_text_with_bckg.field_d_media_background' => '',
+    ],
+    'd_p_tiles' => [
+      'field.field.paragraph.d_p_tiles.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_tiles.field_d_media_image' => '',
+    ],
+  ];
+  $values['droopler__droopler_update_8104_1'] = $updater->importConfigs($configs);
 
   foreach ($fieldsToMigrate as $sourceField => $targetField) {
     $res = \Drupal::entityManager()->getStorage('field_storage_config')->loadByProperties([
@@ -557,6 +642,4 @@ function droopler_update_8105() {
       }
     }
   }
-//  $fs = new \Drupal\field\Entity\FieldStorageConfig();
-//  $fs->get
 }
