@@ -33,7 +33,7 @@ function droopler_install() {
   // @TODO this should not really be here because this subtheme is not part
   // of the distribution
   $themes = \Drupal::service('theme_handler')->listInfo();
-  if(isset($themes['droopler_subtheme'])) {
+  if (isset($themes['droopler_subtheme'])) {
     \Drupal::configFactory()
       ->getEditable('system.theme')
       ->set('default', 'droopler_subtheme')
@@ -53,9 +53,9 @@ function droopler_install() {
   // Try to install custom init that alters the original one.
   try {
     \Drupal::service('module_installer')->install(['d_custom_init']);
-  }
-  catch (\Drupal\Core\Extension\MissingDependencyException $e) {
-    \Drupal::logger('droopler_install')->notice('Custom content init not detected.');
+  } catch (\Drupal\Core\Extension\MissingDependencyException $e) {
+    \Drupal::logger('droopler_install')
+      ->notice('Custom content init not detected.');
   }
 }
 
@@ -91,12 +91,14 @@ function droopler_install_tasks() {
 
 /**
  * Import a config file.
- * @todo To be moved to a new manager class.
  *
  * @param string $module
  *  Module name.
  * @param string $name
  *  Config file name without .yml extension.
+ *
+ * @todo To be moved to a new manager class.
+ *
  */
 function _droopler_import_config($module, $name) {
   $config_path = drupal_get_path('module', $module) . '/config/install';
@@ -174,13 +176,12 @@ function droopler_update_8102() {
   try {
     $modules = [
       'checklistapi',
-      'd_update'
+      'd_update',
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_0'] = $result;
     $values['droopler__droopler_update_8102_1'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_0'] = FALSE;
     $values['droopler__droopler_update_8102_1'] = FALSE;
   }
@@ -268,13 +269,12 @@ function droopler_update_8102() {
   try {
     $modules = [
       'geysir',
-      'd_geysir'
+      'd_geysir',
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_5'] = $result;
     $values['droopler__droopler_update_8102_6'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_5'] = FALSE;
     $values['droopler__droopler_update_8102_6'] = FALSE;
   }
@@ -318,8 +318,7 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_0'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
 
@@ -373,8 +372,7 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_2'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_2'] = FALSE;
   }
 
@@ -510,10 +508,37 @@ function droopler_update_8103() {
       'droopler' => [
         'block.block.mainnavigation' => '',
         'block.block.mainnavigation_2' => '',
-        ]
-      ];
+      ],
+    ];
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
   }
+
+  //Install SEO contrib modules
+  try {
+    $advaggModules = [
+      'advagg',
+      'advagg_mod',
+      'advagg_js_minify',
+      'advagg_css_minify',
+    ];
+    $modules = [
+      'critical_css',
+      'page_cache',
+      'dynamic_page_cache',
+    ];
+    $result = $module_installer->install(array_merge($modules, $advaggModules), TRUE);
+    $values['droopler__droopler_update_8103_9'] = $result;
+  } catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8103_9'] = FALSE;
+  }
+  //Import advagg configs
+  $configs = [];
+  foreach ($advaggModules as $advaggModule) {
+    if ($module_handler->moduleExists($advaggModule)) {
+      $configs[$advaggModule] = [$advaggModule . 'settings.yml'];
+    }
+  }
+  $values['droopler__droopler_update_8103_10'] = $updater->importConfigs($configs);
 
   $progress = [
     'v2.0' => $values,
