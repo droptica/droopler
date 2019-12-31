@@ -38,7 +38,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   /**
    * The embed provider plugin manager.
    *
-   * @var \Drupal\d_media\ProviderManagerInterface
+   * @var \Drupal\d_media\Service\ProviderManagerInterface
    */
   protected $providerManager;
 
@@ -59,7 +59,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    *   The view mode.
    * @param array $third_party_settings
    *   Any third party settings.
-   * @param \Drupal\d_media\ProviderManagerInterface $provider_manager
+   * @param \Drupal\d_media\Service\ProviderManagerInterface $provider_manager
    *   The video embed provider manager.
    */
   public function __construct(
