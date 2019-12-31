@@ -161,10 +161,6 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
       $url .= "?$query";
     }
 
-    if (!empty($this->fragment)) {
-      $url .= '#' . $this->fragment;
-    }
-
     return $url;
   }
 
