@@ -2,8 +2,6 @@
 
 namespace Drupal\d_media\Plugin\Provider;
 
-use Drupal\d_media\ProviderPluginBase;
-
 /**
  * A Vimeo provider plugin.
  *
@@ -30,16 +28,19 @@ class Vimeo extends ProviderPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function getFragmentFromInput() {
-    $time_index = $this->getTimeIndex();
-    return $time_index ? sprintf('t=%s', $time_index) : '';
+  public function oEmbedData() {
+    return (object) json_decode(file_get_contents('http://vimeo.com/api/oembed.json?url=' . $this->getInput()));
   }
 
   /**
-   * {@inheritdoc}
+   * Get the fragment part of the video URL from user input.
+   *
+   * @return string|false
+   *   The fragment part of URL which hold time in seconds.
    */
-  public function oEmbedData() {
-    return (object) json_decode(file_get_contents('http://vimeo.com/api/oembed.json?url=' . $this->getInput()));
+  protected function getFragmentFromInput() {
+    $time_index = $this->getTimeIndex();
+    return $time_index ? sprintf('t=%s', $time_index) : FALSE;
   }
 
   /**
@@ -51,6 +52,38 @@ class Vimeo extends ProviderPluginBase {
   protected function getTimeIndex() {
     preg_match('/\#t=(?<time_index>(\d+)s)$/', $this->getInput(), $matches);
     return isset($matches['time_index']) ? $matches['time_index'] : FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function constructQuery() {
+    $query = $this->playerSettings;
+
+    // Add a background param handled by Vimeo.
+    // It allows for multiple Vimeo embeds to autoplay.
+    if (!empty($query['autoplay']) && !empty($query['loop']) && !empty($query['muted'])) {
+      unset($query['autoplay']);
+      unset($query['loop']);
+      unset($query['muted']);
+      $query['background'] = 1;
+    }
+
+    return http_build_query($query);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function constructSrc() {
+    $url = parent::constructSrc();
+
+    $fragment = $this->getFragmentFromInput();
+    if ($fragment) {
+      $url .= '#' . $fragment;
+    }
+
+    return $url;
   }
 
 }

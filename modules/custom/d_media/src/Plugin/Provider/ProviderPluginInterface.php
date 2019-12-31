@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\d_media;
+namespace Drupal\d_media\Plugin\Provider;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
 
@@ -40,22 +40,6 @@ interface ProviderPluginInterface extends PluginInspectionInterface {
    *   The ID in whatever format makes sense for the provider.
    */
   public static function getIdFromInput($input);
-
-  /**
-   * Get the fragment part of the video URL from user input.
-   *
-   * @return string
-   *   The fragment in whatever format makes sense for the provider.
-   */
-  public function getFragmentFromInput();
-
-  /**
-   * Get the name of the video.
-   *
-   * @return string
-   *   A name to represent the video for the given plugin.
-   */
-  public function getName();
 
   /**
    * Setter for player settings.

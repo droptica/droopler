@@ -1,17 +1,14 @@
 <?php
 
-namespace Drupal\d_media;
+namespace Drupal\d_media\Plugin\Provider;
 
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Template\Attribute;
-use GuzzleHttp\ClientInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * A base for the provider plugins.
  */
-abstract class ProviderPluginBase extends PluginBase implements ProviderPluginInterface, ContainerFactoryPluginInterface {
+abstract class ProviderPluginBase extends PluginBase implements ProviderPluginInterface {
 
   /**
    * An array of settings from formatter for player.
@@ -35,13 +32,6 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   protected $baseUrl;
 
   /**
-   * Fragment part of the URL.
-   *
-   * @var string
-   */
-  protected $fragment;
-
-  /**
    * The ID of the video.
    *
    * @var string
@@ -56,13 +46,6 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   protected $input;
 
   /**
-   * A http client.
-   *
-   * @var \GuzzleHttp\ClientInterface
-   */
-  protected $httpClient;
-
-  /**
    * Create a plugin with the given input.
    *
    * @param array $configuration
@@ -71,12 +54,10 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
    *   The plugin id.
    * @param array $plugin_definition
    *   The plugin definition.
-   * @param \GuzzleHttp\ClientInterface $http_client
-   *   An HTTP client.
    *
    * @throws \Exception
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, ClientInterface $http_client) {
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     if (!static::isApplicable($configuration['input'])) {
@@ -85,15 +66,6 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
 
     $this->input = $configuration['input'];
     $this->videoId = $this->getIdFromInput($configuration['input']);
-    $this->fragment = $this->getFragmentFromInput();
-    $this->httpClient = $http_client;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($configuration, $plugin_id, $plugin_definition, $container->get('http_client'));
   }
 
   /**
@@ -134,13 +106,6 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   /**
    * {@inheritdoc}
    */
-  public function getName() {
-    return $this->t('@provider Video (@id)', ['@provider' => $this->getPluginDefinition()['title'], '@id' => $this->getVideoId()]);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setPlayerSettings(array $settings) {
     $this->playerSettings = $settings;
   }
@@ -150,13 +115,6 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
    */
   public function setVideoSettings(array $settings) {
     $this->videoSettings = $settings;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFragmentFromInput() {
-    return '';
   }
 
   /**

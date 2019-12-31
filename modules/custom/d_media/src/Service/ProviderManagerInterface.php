@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\d_media;
+namespace Drupal\d_media\Service;
 
 /**
  * Interface for the class that gathers the provider plugins.
@@ -15,7 +15,7 @@ interface ProviderManagerInterface {
    * @param string $user_input
    *   The user input to test against the plugins.
    *
-   * @return \Drupal\d_media\ProviderPluginInterface|bool
+   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|bool
    *   The relevant plugin or FALSE on failure.
    */
   public function filterApplicableDefinitions(array $definitions, $user_input);
@@ -26,7 +26,7 @@ interface ProviderManagerInterface {
    * @param string $input
    *   Input provided from a field.
    *
-   * @return \Drupal\d_media\ProviderPluginInterface|bool
+   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|bool
    *   The loaded plugin.
    */
   public function loadProviderFromInput($input);

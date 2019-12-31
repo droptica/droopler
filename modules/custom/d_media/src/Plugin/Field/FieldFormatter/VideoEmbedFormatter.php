@@ -7,7 +7,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\d_media\ProviderManagerInterface;
+use Drupal\d_media\Service\ProviderManagerInterface;
 use Drupal\media\Entity\MediaType;
 use Drupal\media\Plugin\media\Source\OEmbedInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

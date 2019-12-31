@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\d_media;
+namespace Drupal\d_media\Service;
 
 use Drupal\Component\Plugin\Mapper\MapperInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
@@ -16,7 +16,7 @@ class ProviderManager extends DefaultPluginManager implements ProviderManagerInt
    * {@inheritdoc}
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
-    parent::__construct('Plugin/Provider', $namespaces, $module_handler, 'Drupal\d_media\ProviderPluginInterface', 'Drupal\d_media\Annotation\VideoEmbedProvider');
+    parent::__construct('Plugin/Provider', $namespaces, $module_handler, 'Drupal\d_media\Plugin\Provider\ProviderPluginInterface', 'Drupal\d_media\Annotation\VideoEmbedProvider');
   }
 
   /**
@@ -38,7 +38,6 @@ class ProviderManager extends DefaultPluginManager implements ProviderManagerInt
    */
   public function loadProviderFromInput($input) {
     $definition = $this->loadDefinitionFromInput($input);
-
     return $definition ? $this->createInstance($definition['id'], ['input' => $input]) : FALSE;
   }
 
