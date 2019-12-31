@@ -544,7 +544,7 @@ function droopler_update_8103() {
 }
 
 /**
- * Droopler 2.0 Media files import.
+ * Droopler 2.0 Media migrate.
  */
 function droopler_update_8104() {
 
@@ -561,13 +561,9 @@ function droopler_update_8104() {
   $updater = \Drupal::service('d_update');
 
   $configs = [
-    'd_blog' => [
-      'field.field.node.blog_post.field_blog_media_main_image' => '',
-      'field.field.paragraph.d_p_blog_image.field_d_media_image' => '',
-    ],
-    'd_content' => [
-      'field.field.node.content_page.field_teaser_media_image' => '',
-    ],
+//    'd_content' => [
+//      'field.field.node.content_page.field_teaser_media_image' => '',
+//    ],
     'd_p_banner' => [
       'field.field.paragraph.d_p_banner.field_d_media_background' => '',
       'field.field.paragraph.d_p_banner.field_d_media_icon' => '',
@@ -603,11 +599,11 @@ function droopler_update_8104() {
       'field.field.paragraph.d_p_subscribe_file.field_d_media_icon' => '',
       'field.field.paragraph.d_p_subscribe_file.field_d_media_background' => '',
     ],
-    'd_p_group_of_text_blocks' => [
-      'field.field.paragraph.d_p_group_of_text_blocks.field_d_media_icon' => '',
-      'field.field.paragraph.d_p_single_text_block.field_d_media_background' => '',
-      'field.field.paragraph.d_p_single_text_block.field_d_media_icon' => '',
-    ],
+//    'd_p_group_of_text_blocks' => [
+//      'field.field.paragraph.d_p_group_of_text_blocks.field_d_media_icon' => '',
+//      'field.field.paragraph.d_p_single_text_block.field_d_media_background' => '',
+//      'field.field.paragraph.d_p_single_text_block.field_d_media_icon' => '',
+//    ],
     'd_p_text_paged' => [
       'field.field.paragraph.d_p_text_paged.field_d_media_icon' => '',
     ],
@@ -622,24 +618,46 @@ function droopler_update_8104() {
   ];
   $values['droopler__droopler_update_8104_1'] = $updater->importConfigs($configs);
 
-  foreach ($fieldsToMigrate as $sourceField => $targetField) {
-    $res = \Drupal::entityManager()->getStorage('field_storage_config')->loadByProperties([
-      'field_name' => $sourceField,
-    ]);
 
-    /** @var \Drupal\field\Entity\FieldStorageConfig $storage */
-    foreach ($res as $storage) {
-      $bundles = $storage->getBundles();
-      $entityType = $storage->getTargetEntityTypeId();
-
-      $entities = \Drupal::entityTypeManager()
-        ->getStorage($entityType)->loadByProperties([
-          'type' => $bundles,
-        ]);
-
-      foreach ($entities as $entity) {
-
-      }
-    }
+  $module_handler = \Drupal::service('module_handler');
+  if ($module_handler->moduleExists('d_blog')) {
+    // Update d_blog config.
+    $configs = [
+      'd_blog' => [
+        'field.field.paragraph.d_p_blog_image.field_d_media_image' => '',
+//        'field.field.node.blog_post.field_blog_media_main_image' => '',
+      ],
+    ];
+    $values['droopler__droopler_update_8104_2'] = $updater->importConfigs($configs);
   }
+  else {
+    $values['droopler__droopler_update_8104_2'] = TRUE;
+  }
+
+//  foreach ($fieldsToMigrate as $sourceField => $targetField) {
+//    $res = \Drupal::entityManager()->getStorage('field_storage_config')->loadByProperties([
+//      'field_name' => $sourceField,
+//    ]);
+//
+//    /** @var \Drupal\field\Entity\FieldStorageConfig $storage */
+//    foreach ($res as $storage) {
+//      $bundles = $storage->getBundles();
+//      $entityType = $storage->getTargetEntityTypeId();
+//
+//      $entities = \Drupal::entityTypeManager()
+//        ->getStorage($entityType)->loadByProperties([
+//          'type' => $bundles,
+//        ]);
+//
+//      foreach ($entities as $entity) {
+//
+//      }
+//    }
+//  }
+
+  $progress = [
+    'v2.0 - Media Migrate' => $values,
+  ];
+
+  $updater->checklist()->saveProgress($progress);
 }
