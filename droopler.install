@@ -762,21 +762,10 @@ function droopler_update_8105() {
   $updater = \Drupal::service('d_update');
 
   $configs = [
-    'd_content' => [
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-    ],
     'd_p_banner' => [
       'core.entity_form_display.paragraph.d_p_banner.default' => '',
       'core.entity_view_display.paragraph.d_p_banner.default' => '',
       'paragraphs.paragraphs_type.d_p_banner' => '',
-      '' => '',
-      '' => '',
-      '' => '',
     ],
     'd_p_carousel' => [
       'core.entity_form_display.paragraph.d_p_carousel.default' => '',
@@ -824,48 +813,64 @@ function droopler_update_8105() {
       'paragraphs.paragraphs_type.d_p_side_tiles' => '',
     ],
     'd_p_subscribe_file' => [
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
+      'core.entity_form_display.paragraph.d_p_subscribe_file.default' => '',
+      'core.entity_view_display.paragraph.d_p_subscribe_file.default' => '',
+      'paragraphs.paragraphs_type.d_p_subscribe_file' => '',
     ],
     'd_p_text_blocks' => [
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
+      'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '',
+      'core.entity_form_display.paragraph.d_p_single_text_block.default' => '',
+      'core.entity_view_display.paragraph.d_p_group_of_text_blocks.default' => '',
+      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '',
+      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '',
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_number' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_cta_link' => '',
+      'paragraphs.paragraphs_type.d_p_group_of_text_blocks' => '',
+      'paragraphs.paragraphs_type.d_p_single_text_block' => '',
     ],
     'd_p_text_paged' => [
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
+      'core.entity_form_display.paragraph.d_p_text_paged.default' => '',
+      'core.entity_view_display.paragraph.d_p_text_paged.default' => '',
+      'paragraphs.paragraphs_type.d_p_text_paged' => '',
     ],
     'd_p_text_with_bckg' => [
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
+      'core.entity_form_display.paragraph.d_p_text_with_bckg.default' => '',
+      'core.entity_view_display.paragraph.d_p_text_with_bckg.default' => '',
+      'paragraphs.paragraphs_type.d_p_text_with_bckg' => '',
     ],
     'd_p_tiles' => [
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
-      '' => '',
+      'core.entity_form_display.paragraph.d_p_tiles.default' => '',
+      'core.entity_view_display.paragraph.d_p_tiles.default' => '',
     ],
   ];
 
   $values['droopler__droopler_update_8104_4'] = $updater->importConfigs($configs);
+
+
+  $module_handler = \Drupal::service('module_handler');
+  if ($module_handler->moduleExists('d_blog')) {
+    // Update d_blog config.
+    $configs = [
+      'd_blog' => [
+        'core.entity_form_display.node.blog_post.default' => '',
+        'core.entity_form_display.paragraph.d_p_blog_image.default' => '',
+        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => '',
+        'core.entity_view_display.node.blog_post.default' => '',
+        'core.entity_view_display.node.blog_post.teaser' => '',
+        'core.entity_view_display.node.blog_post.thumbnail' => '',
+        'core.entity_view_display.paragraph.d_p_blog_image.default' => '',
+        'core.entity_view_display.paragraph.d_p_blog_image.default' => '',
+        'field.field.paragraph.d_p_blog_text.field_d_long_text' => '',
+        'paragraphs.paragraphs_type.d_p_blog_image' => '',
+        'paragraphs.paragraphs_type.d_p_blog_text' => '',
+      ],
+    ];
+    $values['droopler__droopler_update_8104_5'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8104_5'] = TRUE;
+  }
+
 
   $progress = [
     'v2.0 - Media Migrate' => $values,
