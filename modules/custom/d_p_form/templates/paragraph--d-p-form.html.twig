@@ -45,7 +45,6 @@
 ] %}
 {% set paragraph_classes = [
   'paragraph-d-form',
-  'background-image',
 ] %}
 
 {% set d_p_form_placement = d_p_form_placement|default('bottom') %}
@@ -70,15 +69,22 @@
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
+        {% block background %}
+          {% include '@d_media/d-background-media.html.twig' with {
+            content: content.group_d_form_background
+          } only %}
+        {% endblock %}
         <div class="content-wrapper">
           <div class="container">
             <div class="row justify-content-center {{ d_p_form_placement }} {{ row_classes }}">
               <div class="content {{ content_classes }}">
-                {{ content|without('field_d_forms') }}
+                {% block content %}
+                  {{ content.group_d_form_content }}
+                {% endblock %}
               </div>
               <div class="form {{ form_classes }}">
-                {% block content %}
-                  {{ content.field_d_forms }}
+                {% block form %}
+                  {{ content.group_d_form_fields }}
                 {% endblock %}
               </div>
             </div>
