@@ -651,11 +651,12 @@ function droopler_update_8104() {
     ],
   ];
 
+  /** @var \Drupal\Core\Entity\EntityStorageInterface $fieldStorage */
+  $fieldStorage = \Drupal::entityTypeManager()->getStorage('field_storage_config');
+
   $listOfMigratedFields = [];
   foreach ($fieldsToMigrate as $sourceFieldName => $targetFieldName) {
-    $res = \Drupal::entityManager()
-      ->getStorage('field_storage_config')
-      ->loadByProperties([
+    $res = $fieldStorage->loadByProperties([
         'field_name' => $sourceFieldName,
       ]);
 
