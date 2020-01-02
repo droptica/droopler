@@ -3,6 +3,9 @@
 namespace Drupal\d_p\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -24,6 +27,16 @@ class NodePageBottomContent extends BlockBase implements ContainerFactoryPluginI
   protected $routeMatch;
 
   /**
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface
+   */
+  protected $entityDisplayRepository;
+
+  /**
    * NodePageBottomContent constructor.
    *
    * @param array $configuration
@@ -31,22 +44,32 @@ class NodePageBottomContent extends BlockBase implements ContainerFactoryPluginI
    * @param $plugin_definition
    * @param \Drupal\Core\Routing\RouteMatchInterface $routeMatch
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, RouteMatchInterface $routeMatch) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RouteMatchInterface $routeMatch, EntityDisplayRepositoryInterface $entityDisplayRepository, EntityTypeManagerInterface $entityTypeManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->routeMatch = $routeMatch;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->entityDisplayRepository = $entityDisplayRepository;
   }
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($configuration, $plugin_id, $plugin_definition, $container->get('current_route_match'));
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('current_route_match'),
+      $container->get('entity_display.repository'),
+      $container->get('entity_type.manager')
+    );
   }
 
   /**
    * {@inheritdoc}
    */
   public function build() {
+    $build = [];
 
     /** @var \Drupal\user\Entity\User $currentUser */
     $currentUser = $this->routeMatch->getParameter('user');
@@ -55,22 +78,17 @@ class NodePageBottomContent extends BlockBase implements ContainerFactoryPluginI
 
     if (($targetEntity = $currentUser) || ($targetEntity = $currentNode)) {
       $entityTypeId = $targetEntity->getEntityTypeId();
-      $viewBuilder = \Drupal::entityTypeManager()
-        ->getViewBuilder($entityTypeId);
+      $viewBuilder = $this->entityTypeManager->getViewBuilder($entityTypeId);
 
-      /** @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entityDisplayRepository */
-      $entityDisplayRepository = \Drupal::service('entity_display.repository');
-
-      /** @var \Drupal\Core\Entity\Entity\EntityViewDisplay $targetEntityView */
-      $targetEntityViewDisplay = $entityDisplayRepository->getViewDisplay($entityTypeId, $targetEntity->bundle(), 'page_bottom_content');
+      /** @var EntityViewDisplay $targetEntityView */
+      $targetEntityViewDisplay = $this->entityDisplayRepository->getViewDisplay($entityTypeId, $targetEntity->bundle(), 'page_bottom_content');
       $id = $targetEntityViewDisplay->get('id');
       if ($id !== NULL) {
-        return $viewBuilder->view($targetEntity, 'page_bottom_content');
+        $build = $viewBuilder->view($targetEntity, 'page_bottom_content');
       }
     }
 
-    return [
-    ];
+    return $build;
   }
 
   /**
