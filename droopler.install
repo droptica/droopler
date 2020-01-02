@@ -546,7 +546,6 @@ function droopler_update_8103() {
  * Droopler 2.0 Media migrate.
  */
 function droopler_update_8104() {
-
   //Import all target Media Fields
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
@@ -757,7 +756,6 @@ function droopler_update_8104() {
  * Droopler 2.0 Import all other modified configs after Media migrations.
  */
 function droopler_update_8105() {
-
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
