@@ -3,57 +3,32 @@ status: true
 dependencies:
   config:
     - field.field.media.d_video.field_media_oembed_video
-    - image.style.thumbnail
     - media.type.d_video
   module:
-    - media
-    - svg_image
-    - user
+    - d_media
 id: media.d_video.default
 targetEntityType: media
 bundle: d_video
 mode: default
 content:
-  created:
-    label: hidden
-    type: timestamp
-    weight: 0
-    region: content
-    settings:
-      date_format: medium
-      custom_date_format: ''
-      timezone: ''
-    third_party_settings: {  }
   field_media_oembed_video:
-    type: oembed
-    weight: 6
-    label: above
-    settings:
-      max_width: 0
-      max_height: 0
-    third_party_settings: {  }
-    region: content
-  thumbnail:
-    type: image
-    weight: 5
-    label: hidden
-    settings:
-      image_style: thumbnail
-      svg_attributes:
-        width: ''
-        height: ''
-      svg_render_as_image: true
-      image_link: ''
-    region: content
-    third_party_settings: {  }
-  uid:
-    label: hidden
-    type: author
+    type: d_video_embed
     weight: 0
-    region: content
-    settings: {  }
+    label: hidden
+    settings:
+      player_settings:
+        controls: '1'
+        autoplay: 0
+        loop: 0
+        muted: 0
+      video_settings:
+        cover: 0
     third_party_settings: {  }
+    region: content
 hidden:
+  created: true
   langcode: true
   name: true
   search_api_excerpt: true
+  thumbnail: true
+  uid: true
