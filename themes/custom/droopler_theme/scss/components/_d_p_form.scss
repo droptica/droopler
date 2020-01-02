@@ -39,6 +39,30 @@ $d-p-form-background-opacity: 0.4 !default;
 
   form {
     margin: 0;
+
+    .field--type-file.form-group {
+      margin-top: $d-p-form-button-margin-top;
+    }
+
+    .js-form-managed-file {
+      span.file {
+        padding-left: 0;
+        display: inline;
+
+        a {
+          @extend .btn;
+          @extend .btn-light;
+          text-transform: none;
+          background-color: $d-p-form-header-color;
+          max-width: 18rem;
+          width: 100%;
+          text-align: left;
+        }
+      }
+    }
+    .tabledrag-handle .handle {
+      display: inline;
+    }
   }
   .field--name-field-d-main-title {
     @include font-main-header;
