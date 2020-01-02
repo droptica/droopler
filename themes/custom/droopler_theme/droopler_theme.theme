@@ -284,6 +284,8 @@ function droopler_theme_preprocess_field(&$variables) {
    *
    * Here we're detecting paragraphs reference field and if parent entity has NO revisions,
    * we're removing geyisr theme_wrapper, so there won't be empty overlay.
+   *
+   * @todo: Remove when Geysir 8.x-1.2 comes out
    */
   if (empty($variables['field_type']) || $variables['field_type'] === 'entity_reference_revisions') {
     /** @var \Drupal\Core\Entity\EntityInterface $entity */
@@ -308,6 +310,8 @@ function droopler_theme_preprocess_links(&$variables) {
   /*
    * This is required only until new version of Geysir module came
    * - which should fix the error with missing parent entity id in links parameters.
+   *
+   * @todo: Remove when Geysir 8.x-1.2 comes out
    */
   if (!empty($variables['links']) && !empty($variables['attributes']['class'])) {
     // Here we're detecting geysir links.
