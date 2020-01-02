@@ -609,7 +609,6 @@ function droopler_update_8104() {
   ];
   $values['droopler__droopler_update_8104_1'] = $updater->importConfigs($configs);
 
-
   $module_handler = \Drupal::service('module_handler');
   if ($module_handler->moduleExists('d_blog')) {
     // Update d_blog config.
@@ -864,7 +863,6 @@ function droopler_update_8105() {
   else {
     $values['droopler__droopler_update_8104_5'] = TRUE;
   }
-
 
   $progress = [
     'v2.0 - Import modified configs' => $values,
