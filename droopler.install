@@ -637,7 +637,7 @@ function droopler_update_8104() {
   /**
    * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
    */
-  $media_manager =  Drupal::service('d_content_init.manager_media');
+  $media_manager = Drupal::service('d_content_init.manager_media');
 
   $fieldsToMigrate = [
     'field_d_icon' => 'field_d_media_icon',
@@ -697,12 +697,13 @@ function droopler_update_8104() {
         } catch (InvalidArgumentException $e) {
           $errorsWhileMigrating[$entity->bundle()][$sourceField] = $sourceFieldName;
 
-          \Drupal::logger('droopler_update')->error('Exception while migrating media images for @sourceField to @targetField at @bundle @type.', [
-            '@sourceField' => $sourceFieldName,
-            '@targetField' => $entityTargetFieldName,
-            '@bundle' => $entity->bundle(),
-            '@type' => $entityType,
-          ]);
+          \Drupal::logger('droopler_update')
+            ->error('Exception while migrating media images for @sourceField to @targetField at @bundle @type.', [
+              '@sourceField' => $sourceFieldName,
+              '@targetField' => $entityTargetFieldName,
+              '@bundle' => $entity->bundle(),
+              '@type' => $entityType,
+            ]);
         }
 
         $entity->save();
@@ -738,7 +739,7 @@ function droopler_update_8104() {
             '@oldField' => $fieldToDelete,
             '@newField' => $newFieldName,
             '@bundle' => $bundle,
-            '@type' => $entityType
+            '@type' => $entityType,
           ]);
         }
       }
@@ -753,116 +754,111 @@ function droopler_update_8104() {
 }
 
 /**
- * test hook update
+ * Droopler 2.0 Import all other modified configs after Media migrations.
  */
 function droopler_update_8105() {
 
-  //Import all target Media Fields
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
   $configs = [
     'd_p_banner' => [
-      'core.entity_form_display.paragraph.d_p_banner.default' => '',
-      'core.entity_view_display.paragraph.d_p_banner.default' => '',
-      'paragraphs.paragraphs_type.d_p_banner' => '',
+      'core.entity_form_display.paragraph.d_p_banner.default' => 'a4c8c186a27ad4ccbff3a7524ac5252d',
+      'core.entity_view_display.paragraph.d_p_banner.default' => '7954851d78e5560369191f7bb0a217da',
+      'paragraphs.paragraphs_type.d_p_banner' => '16d108c2d421a90beb935603c8c14a78',
     ],
     'd_p_carousel' => [
-      'core.entity_form_display.paragraph.d_p_carousel.default' => '',
-      'core.entity_form_display.paragraph.d_p_carousel_item.default' => '',
-      'core.entity_view_display.paragraph.d_p_carousel.default' => '',
-      'core.entity_view_display.paragraph.d_p_carousel_item.default' => '',
-      'field.field.paragraph.d_p_carousel.field_d_number' => '',
-      'field.field.paragraph.d_p_carousel.field_d_p_cs_item_reference' => '',
-      'field.field.paragraph.d_p_carousel_item.field_d_cta_link' => '',
-      'field.field.paragraph.d_p_carousel_item.field_d_long_text' => '',
-      'field.field.paragraph.d_p_carousel_item.field_d_main_title' => '',
-      'field.field.paragraph.d_p_carousel_item.field_d_main_title' => '',
-      'paragraphs.paragraphs_type.d_p_carousel_item' => '',
+      'core.entity_form_display.paragraph.d_p_carousel.default' => 'ec0b8d9cbea4de5fed7ff999402468a5',
+      'core.entity_form_display.paragraph.d_p_carousel_item.default' => '22fa1f375c118c22a0d61386f52eaeb4',
+      'core.entity_view_display.paragraph.d_p_carousel.default' => '8cb8deae472852b756d97e56492996ee',
+      'core.entity_view_display.paragraph.d_p_carousel_item.default' => '4841b060a4649cb5840a2fc7e05bdfd0',
+      'field.field.paragraph.d_p_carousel.field_d_number' => '3459b028f5d3fea96796761757ad4cd0',
+      'field.field.paragraph.d_p_carousel.field_d_p_cs_item_reference' => '37a919d8a4cd267ef42410e6024666ec',
+      'field.field.paragraph.d_p_carousel_item.field_d_cta_link' => 'b73a7558b7145e365336a4050799064a',
+      'field.field.paragraph.d_p_carousel_item.field_d_long_text' => 'e15fb286e519b0bac00257a2e90b6eba',
+      'field.field.paragraph.d_p_carousel_item.field_d_main_title' => '07a25e47268ef25afbfb57181c15aa81',
+      'paragraphs.paragraphs_type.d_p_carousel_item' => '5507c77f3f541f0a50d5803ed101abf3',
     ],
     'd_p_counters' => [
-      'core.entity_form_display.paragraph.d_p_group_of_counters.default' => '',
-      'core.entity_form_display.paragraph.d_p_single_counter.default' => '',
-      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '',
-      'core.entity_view_display.paragraph.d_p_single_counter.default' => '',
+      'core.entity_form_display.paragraph.d_p_group_of_counters.default' => '5463576b8024a2794ad29a12a893e138',
+      'core.entity_form_display.paragraph.d_p_single_counter.default' => 'e857d2f5142d2b0b29fc3c49f071eae6',
+      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => 'b112cb894119aa5637c5021448914b2d',
+      'core.entity_view_display.paragraph.d_p_single_counter.default' => '5c2e672831135b05edfe811e5c6c85d5',
     ],
     'd_p_gallery' => [
-      'core.entity_form_display.paragraph.d_p_gallery.default' => '',
-      'core.entity_view_display.paragraph.d_p_gallery.default' => '',
+      'core.entity_form_display.paragraph.d_p_gallery.default' => 'ef9210488f6c56af37b18aeb22914714',
+      'core.entity_view_display.paragraph.d_p_gallery.default' => 'e072d082233ce6dbff8fd347c9382e70',
     ],
     'd_p_form' => [
-      'core.entity_form_display.paragraph.d_p_form.default' => '',
-      'core.entity_view_display.paragraph.d_p_form.default' => '',
-      'field.field.paragraph.d_p_form.field_d_forms' => '',
-      'paragraphs.paragraphs_type.d_p_form' => '',
+      'core.entity_form_display.paragraph.d_p_form.default' => '19c0e40bdfb3f856e413f8c40655340b',
+      'core.entity_view_display.paragraph.d_p_form.default' => 'b09d791838a2220defbcff2690b44f67',
+      'field.field.paragraph.d_p_form.field_d_forms' => '5367bb67907496bca2fd3aa7b7821fd9',
+      'paragraphs.paragraphs_type.d_p_form' => 'a1af3a95ce7dccf84daab9985f10cfa1',
     ],
     'd_p_side_embed' => [
-      'core.entity_form_display.paragraph.d_p_side_embed.default' => '',
-      'core.entity_view_display.paragraph.d_p_side_embed.default' => '',
-      'field.field.paragraph.d_p_side_embed.field_d_embed' => '',
-      'paragraphs.paragraphs_type.d_p_side_embed' => '',
+      'core.entity_form_display.paragraph.d_p_side_embed.default' => '1ba5e544db6ef1b7725d78c1bb2b9362',
+      'core.entity_view_display.paragraph.d_p_side_embed.default' => 'baa0d764c5f07d841efc22e0b53ff81b',
+      'field.field.paragraph.d_p_side_embed.field_d_embed' => '10a700835004c1e0aa4dfbdad18aa427',
+      'paragraphs.paragraphs_type.d_p_side_embed' => '75fa8419ebbd3470c10021c3c20d59a9',
     ],
     'd_p_side_image' => [
-      'core.entity_form_display.paragraph.d_p_side_image.default' => '',
-      'core.entity_view_display.paragraph.d_p_side_image.default' => '',
-      'paragraphs.paragraphs_type.d_p_side_image' => '',
+      'core.entity_form_display.paragraph.d_p_side_image.default' => '7f55328a7cfeda5bfad62785f231b959',
+      'core.entity_view_display.paragraph.d_p_side_image.default' => '36085e90252d0487cb0c60c83280199b',
+      'paragraphs.paragraphs_type.d_p_side_image' => 'e6cc1ea4ff08ed70cc27dc190211f15f',
     ],
     'd_p_side_tiles' => [
-      'core.entity_form_display.paragraph.d_p_side_tiles.default' => '',
-      'core.entity_view_display.paragraph.d_p_side_tiles.default' => '',
-      'paragraphs.paragraphs_type.d_p_side_tiles' => '',
+      'core.entity_form_display.paragraph.d_p_side_tiles.default' => '55987245933128f7203534ff12f35de0',
+      'core.entity_view_display.paragraph.d_p_side_tiles.default' => 'cc5e369f8f733689f35ed7103969c3f6',
+      'paragraphs.paragraphs_type.d_p_side_tiles' => '51701e362646f0dcb3883f11f782601a',
     ],
     'd_p_subscribe_file' => [
-      'core.entity_form_display.paragraph.d_p_subscribe_file.default' => '',
-      'core.entity_view_display.paragraph.d_p_subscribe_file.default' => '',
-      'paragraphs.paragraphs_type.d_p_subscribe_file' => '',
+      'core.entity_form_display.paragraph.d_p_subscribe_file.default' => 'cda75fb4194deb6136547599542edd91',
+      'core.entity_view_display.paragraph.d_p_subscribe_file.default' => 'd7b6b79202744c3489c1efc5d10878c7',
+      'paragraphs.paragraphs_type.d_p_subscribe_file' => 'e873f19736da3ded747bb1ba90acaa9f',
     ],
     'd_p_text_blocks' => [
-      'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '',
-      'core.entity_form_display.paragraph.d_p_single_text_block.default' => '',
-      'core.entity_view_display.paragraph.d_p_group_of_text_blocks.default' => '',
-      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '',
-      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '',
-      'field.field.paragraph.d_p_group_of_text_blocks.field_d_number' => '',
-      'field.field.paragraph.d_p_single_text_block.field_d_cta_link' => '',
-      'paragraphs.paragraphs_type.d_p_group_of_text_blocks' => '',
-      'paragraphs.paragraphs_type.d_p_single_text_block' => '',
+      'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '6349b473b6d4229f3cd7acd75614e3de',
+      'core.entity_form_display.paragraph.d_p_single_text_block.default' => 'e66fbddb7ec04560475cf389ac539e75',
+      'core.entity_view_display.paragraph.d_p_group_of_text_blocks.default' => 'a105a69391e0f27ab008e62d7f86e32c',
+      'core.entity_view_display.paragraph.d_p_single_text_block.default' => 'dea7705821261b011c8bb7c71d0e1128',
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_number' => '4ba9ac76f80d4e632a294975430f98bd',
+      'field.field.paragraph.d_p_single_text_block.field_d_cta_link' => 'e56c150543215f50064247d4cf12abff',
+      'paragraphs.paragraphs_type.d_p_group_of_text_blocks' => '4e3c989a6f6e10da8e87c4ca326468e5',
+      'paragraphs.paragraphs_type.d_p_single_text_block' => 'a18af9bb4ad3860bdedec45fe54949f7',
     ],
     'd_p_text_paged' => [
-      'core.entity_form_display.paragraph.d_p_text_paged.default' => '',
-      'core.entity_view_display.paragraph.d_p_text_paged.default' => '',
-      'paragraphs.paragraphs_type.d_p_text_paged' => '',
+      'core.entity_form_display.paragraph.d_p_text_paged.default' => '8b931b691255866cc6638ec1966eaea3',
+      'core.entity_view_display.paragraph.d_p_text_paged.default' => '0397db2e6d6ed30522f39c36df45fc31',
+      'paragraphs.paragraphs_type.d_p_text_paged' => '27ec212324112d0f15b7c3f1ad1505b3',
     ],
     'd_p_text_with_bckg' => [
-      'core.entity_form_display.paragraph.d_p_text_with_bckg.default' => '',
-      'core.entity_view_display.paragraph.d_p_text_with_bckg.default' => '',
-      'paragraphs.paragraphs_type.d_p_text_with_bckg' => '',
+      'core.entity_form_display.paragraph.d_p_text_with_bckg.default' => '67d2f71ab563ad7380c57fdba47f2d63',
+      'core.entity_view_display.paragraph.d_p_text_with_bckg.default' => 'e1464182e4bdb8c7f6fa5c8c18d0d502',
+      'paragraphs.paragraphs_type.d_p_text_with_bckg' => 'f480ac5c97dfec4113f6702cb4cd6ae0',
     ],
     'd_p_tiles' => [
-      'core.entity_form_display.paragraph.d_p_tiles.default' => '',
-      'core.entity_view_display.paragraph.d_p_tiles.default' => '',
+      'core.entity_form_display.paragraph.d_p_tiles.default' => 'dbba5191a9b13ef65bee4ca102956a80',
+      'core.entity_view_display.paragraph.d_p_tiles.default' => '96616b3236a940249e4f420554893ce0',
     ],
   ];
-
   $values['droopler__droopler_update_8104_4'] = $updater->importConfigs($configs);
-
 
   $module_handler = \Drupal::service('module_handler');
   if ($module_handler->moduleExists('d_blog')) {
     // Update d_blog config.
     $configs = [
       'd_blog' => [
-        'core.entity_form_display.node.blog_post.default' => '',
-        'core.entity_form_display.paragraph.d_p_blog_image.default' => '',
-        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => '',
-        'core.entity_view_display.node.blog_post.default' => '',
-        'core.entity_view_display.node.blog_post.teaser' => '',
-        'core.entity_view_display.node.blog_post.thumbnail' => '',
-        'core.entity_view_display.paragraph.d_p_blog_image.default' => '',
-        'core.entity_view_display.paragraph.d_p_blog_image.default' => '',
-        'field.field.paragraph.d_p_blog_text.field_d_long_text' => '',
-        'paragraphs.paragraphs_type.d_p_blog_image' => '',
-        'paragraphs.paragraphs_type.d_p_blog_text' => '',
+        'core.entity_form_display.node.blog_post.default' => '2cf048fbadcd576c604bc3f403102caa',
+        'core.entity_form_display.paragraph.d_p_blog_image.default' => '9af22a1058bd4cf20c3e0f01e8c4674e',
+        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => '80050259f04971747c90d8bdc74f959a',
+        'core.entity_view_display.node.blog_post.default' => 'c5fe842501a2ae565fc022562ca43704',
+        'core.entity_view_display.node.blog_post.teaser' => '8bd7607d55d3ce1a184fc597bb24b18e',
+        'core.entity_view_display.node.blog_post.thumbnail' => '2c429f5ac1be793f63fd825b6f673e7f',
+        'core.entity_view_display.paragraph.d_p_blog_image.default' => '93fba5911dee499b3445dd056b223ea8',
+        'field.field.paragraph.d_p_blog_image.field_d_p_blog_image_full_width' => '44e7518a525650d7fba07a39c0f6525a',
+        'field.field.paragraph.d_p_blog_text.field_d_long_text' => '30d7f6455782c675beffff3ced195be8',
+        'paragraphs.paragraphs_type.d_p_blog_image' => '324d5e71b1e02bcc3c3294d5f88e6f94',
+        'paragraphs.paragraphs_type.d_p_blog_text' => '61152b0f5875e2f77e2600fa3581f880',
       ],
     ];
     $values['droopler__droopler_update_8104_5'] = $updater->importConfigs($configs);
@@ -873,7 +869,7 @@ function droopler_update_8105() {
 
 
   $progress = [
-    'v2.0 - Media Migrate' => $values,
+    'v2.0 - Import modified configs' => $values,
   ];
 
   $updater->checklist()->saveProgress($progress);
