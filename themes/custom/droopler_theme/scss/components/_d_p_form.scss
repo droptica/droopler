@@ -43,25 +43,66 @@ $d-p-form-background-opacity: 0.4 !default;
     .field--type-file.form-group {
       margin-top: $d-p-form-button-margin-top;
     }
-
+    small, label {
+       color: $d-p-form-header-color;
+    }
     .js-form-managed-file {
+      label.form-check-label {
+        display: flex;
+        align-items: center;
+        margin: 5px 1.25rem;
+        input {
+          margin-top: 0;
+        }
+      }
+
       span.file {
         padding-left: 0;
         display: inline;
+        max-width: 18rem;
+        width: 100%;
+        padding-left: 25px;
+        height: fit-content;
 
         a {
           @extend .btn;
           @extend .btn-light;
           text-transform: none;
           background-color: $d-p-form-header-color;
-          max-width: 18rem;
-          width: 100%;
           text-align: left;
+          width: 100%;
+        }
+      }
+      span.file + .form-type-textfield {
+        margin-top: 5px;
+      }
+      small.description {
+        &, > div {
+          margin-top: 10px;
         }
       }
     }
-    .tabledrag-handle .handle {
-      display: inline;
+    .draggable {
+      .js-form-managed-file {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .tabledrag-handle .handle {
+        display: inline;
+        background: none;
+        &:hover {
+          background: none;
+          &:after {
+            color: inherit;
+          }
+        }
+
+        &:after {
+          font-family: "fontello";
+          content: "\f047";
+          color: $d-p-form-header-color;
+        }
+      }
     }
   }
   .field--name-field-d-main-title {
