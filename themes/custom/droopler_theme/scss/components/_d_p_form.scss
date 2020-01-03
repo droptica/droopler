@@ -51,6 +51,7 @@ $d-p-form-background-opacity: 0.4 !default;
       margin-top: $d-p-form-small-labels-spacing;
       display: inline-block;
     }
+
     .js-form-managed-file {
       label.form-check-label {
         display: flex;
@@ -81,8 +82,8 @@ $d-p-form-background-opacity: 0.4 !default;
       .form-type-textfield {
         margin-top: $d-p-form-small-labels-spacing;
       }
-
     }
+
     .draggable {
       .js-form-managed-file {
         display: flex;
@@ -97,7 +98,6 @@ $d-p-form-background-opacity: 0.4 !default;
             color: inherit;
           }
         }
-
         &:after {
           font-family: "fontello";
           content: "\f047";
