@@ -8,6 +8,7 @@
 namespace Drupal\d_update;
 
 use Drupal\checklistapi\ChecklistapiChecklist;
+use Drupal\checklistapi\Storage\StateStorage;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -26,13 +27,20 @@ class UpdateChecklist {
    * @var \Drupal\checklistapi\ChecklistapiChecklist
    */
   protected $updateChecklist;
+//
+//  /**
+//   * Site configFactory object.
+//   *
+//   * @var \Drupal\Core\Config\ConfigFactoryInterface
+//   */
+//  protected $configFactory;
 
   /**
-   * Site configFactory object.
+   * ChecklistApi storage object.
    *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   * @var \Drupal\checklistapi\Storage\StateStorage
    */
-  protected $configFactory;
+  protected $checkListStateStorage;
 
   /**
    * The account object.
@@ -58,8 +66,10 @@ class UpdateChecklist {
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, AccountInterface $account) {
-    $this->configFactory = $config_factory;
+//  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, AccountInterface $account) {
+  public function __construct(StateStorage $stateStorage, ModuleHandlerInterface $module_handler, AccountInterface $account) {
+//    $this->configFactory = $config_factory;
+    $this->checkListStateStorage = $stateStorage->setChecklistId('d_update');
     $this->moduleHandler = $module_handler;
     $this->account = $account;
 
@@ -177,23 +187,34 @@ class UpdateChecklist {
   protected function checkListPoints(array $names) {
 
     /* @var \Drupal\Core\Config\Config $droopler_update_config */
-    $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
+//    $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
+    $currentProgress = $this->getChecklistSavedProgress();
     $user = $this->account->id();
     $time = time();
     foreach ($names as $name) {
-      if ($droopler_update_config && !$droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name")) {
-        $droopler_update_config
-          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name", [
-            '#completed' => time(),
-            '#uid' => $user,
-          ]);
+//      if ($droopler_update_config && !$droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name")) {
+      if (isset($currentProgress['#items'][$name])) {
+//        $droopler_update_config
+//          ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$name", [
+//            '#completed' => time(),
+//            '#uid' => $user,
+//          ]);
+        $currentProgress['#items'][$name] = [
+          '#completed' => $time,
+          '#uid' => $user,
+        ];
       }
     }
-    $droopler_update_config
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user)
-      ->save();
+
+    $currentProgress['#completed_items'] = count($currentProgress['#items']);
+    $currentProgress['#changed'] = $time;
+    $currentProgress['#changed_by'] = $user;
+    $this->setChecklistSavedProgress($currentProgress);
+//    $droopler_update_config
+//      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
+//      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
+//      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user)
+//      ->save();
   }
 
   /**
@@ -203,13 +224,17 @@ class UpdateChecklist {
    *   Checkboxes enabled or disabled.
    */
   protected function checkAllListPoints($status = TRUE) {
-    $droopler_update_config = $this->configFactory
-      ->getEditable('checklistapi.progress.d_update');
+//    $droopler_update_config = $this->configFactory
+//      ->getEditable('checklistapi.progress.d_update');
     $user = $this->account->id();
     $time = time();
-    $droopler_update_config
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user);
+    $currentProgress = $this->getChecklistSavedProgress();
+//    $droopler_update_config
+//      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed', $time)
+//      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#changed_by', $user);
+    $currentProgress['#changed'] = $time;
+    $currentProgress['#changed_by'] = $user;
+
     $exclude = [
       '#title',
       '#description',
@@ -219,22 +244,29 @@ class UpdateChecklist {
       foreach ($version_items as $item_name => $item) {
         if (!in_array($item_name, $exclude)) {
           if ($status) {
-            $droopler_update_config
-              ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$item_name", [
-                '#completed' => $time,
-                '#uid' => $user,
-              ]);
+//            $droopler_update_config
+//              ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$item_name", [
+//                '#completed' => $time,
+//                '#uid' => $user,
+//              ]);
+            $currentProgress['#items'][$item_name] = [
+              '#completed' => $time,
+              '#uid' => $user,
+            ];
           }
           else {
-            $droopler_update_config
-              ->clear(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$item_name");
+            unset($currentProgress['#items'][$item_name]);
+//            $droopler_update_config
+//              ->clear(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items.$item_name");
           }
         }
       }
     }
-    $droopler_update_config
-      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
-      ->save();
+    $currentProgress['#completed_items'] = count($currentProgress['#items']);
+    $this->setChecklistSavedProgress($currentProgress);
+//    $droopler_update_config
+//      ->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . '.#completed_items', count($droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY . ".#items")))
+//      ->save();
   }
 
   /**
@@ -262,8 +294,10 @@ class UpdateChecklist {
       'negative' => [],
     ];
 
-    $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
-    $saved_progress = $droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY);
+//    $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
+    $saved_progress = $this->getChecklistSavedProgress();
+//    $saved_progress = $droopler_update_config->get(ChecklistapiChecklist::PROGRESS_CONFIG_KEY);
+
 
     foreach ($values as $group_key => $group) {
       foreach ($group as $item_key => $item) {
@@ -302,8 +336,10 @@ class UpdateChecklist {
 
     ksort($progress);
 
-    $droopler_update_config->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY, $progress)
-      ->save();
+//    $droopler_update_config->set(ChecklistapiChecklist::PROGRESS_CONFIG_KEY, $progress)
+//      ->save();
+    $this->setChecklistSavedProgress($progress);
+
     drupal_set_message(\Drupal::translation()->formatPlural(
       $num_changed_items,
       '%title progress has been saved. 1 item changed.',
@@ -311,5 +347,16 @@ class UpdateChecklist {
       ['%title' => $this->updateChecklist->title]
     ));
   }
+
+  protected function getChecklistSavedProgress() {
+//    return $this->checkListStateStorage->setChecklistId('d_update')->getSavedProgress();
+    return $this->checkListStateStorage->getSavedProgress();
+  }
+
+  protected function setChecklistSavedProgress($progress) {
+//    return $this->checkListStateStorage->setChecklistId('d_update')->getSavedProgress();
+    $this->checkListStateStorage->setSavedProgress($progress);
+  }
+
 
 }
