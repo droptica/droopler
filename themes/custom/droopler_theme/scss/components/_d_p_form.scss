@@ -17,6 +17,7 @@ $d-p-form-padding-top: 5% !default;
 $d-p-form-padding-bottom: 5% !default;
 $d-p-form-button-margin-top: 1rem !default;
 $d-p-form-copy-margin-left: 1.25rem !default;
+$d-p-form-small-labels-spacing: 7px !default;
 
 // Other settings
 $d-p-form-background-opacity: 0.4 !default;
@@ -39,6 +40,71 @@ $d-p-form-background-opacity: 0.4 !default;
 
   form {
     margin: 0;
+
+    .field--type-file.form-group {
+      margin-top: $d-p-form-button-margin-top;
+    }
+    small, label {
+       color: $d-p-form-text-color;
+    }
+    small.description {
+      margin-top: $d-p-form-small-labels-spacing;
+      display: inline-block;
+    }
+
+    .js-form-managed-file {
+      label.form-check-label {
+        display: flex;
+        align-items: center;
+        margin: $d-p-form-small-labels-spacing $d-p-form-copy-margin-left;
+        input {
+          margin-top: 0;
+        }
+      }
+
+      span.file {
+        padding-left: 0;
+        display: inline;
+        max-width: $button-max-width;
+        width: 100%;
+        padding-left: $d-p-form-copy-margin-left;
+        height: fit-content;
+
+        a {
+          @extend .btn;
+          text-transform: none;
+          background-color: $d-p-form-text-color;
+          color: $d-p-form-background;
+          text-align: left;
+          width: 100%;
+        }
+      }
+      .form-type-textfield {
+        margin-top: $d-p-form-small-labels-spacing;
+      }
+    }
+
+    .draggable {
+      .js-form-managed-file {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .tabledrag-handle .handle {
+        display: inline;
+        background: none;
+        &:hover {
+          background: none;
+          &:after {
+            color: inherit;
+          }
+        }
+        &:after {
+          font-family: "fontello";
+          content: "\f047";
+          color: $d-p-form-text-color;
+        }
+      }
+    }
   }
   .field--name-field-d-main-title {
     @include font-main-header;
