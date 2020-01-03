@@ -515,10 +515,12 @@ function droopler_update_8103() {
       'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
       'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
       'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
+      'taxonomy.vocabulary.tags' => 'XXX',
     ],
     'd_content' => [
       'core.entity_view_display.node.content_page.d_small_box' => '',
       'simple_sitemap.bundle_settings.default.node.content_page' => '',
+      'metatag.metatag_defaults.node__content_page' => 'XXX',
     ],
     'd_p_subscribe_file' => [
       'views.view.subscribe_file_paragraph' => '',
@@ -541,6 +543,8 @@ function droopler_update_8103() {
         'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
         'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
         'simple_sitemap.bundle_settings.default.node.blog_post' => '',
+        'field.field.node.blog_post.field_blog_sections' => 'XXX',
+        'views.view.blog_listing' => 'XXX',
       ],
     ];
     $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
@@ -856,6 +860,10 @@ function droopler_update_8105() {
   $updater = \Drupal::service('d_update');
 
   $configs = [
+    'd_content' => [
+      'core.entity_form_display.node.content_page.default' => 'XXX',
+      'core.entity_view_display.node.content_page.default' => 'XXX',
+    ],
     'd_p_banner' => [
       'core.entity_form_display.paragraph.d_p_banner.default' => 'a4c8c186a27ad4ccbff3a7524ac5252d',
       'core.entity_view_display.paragraph.d_p_banner.default' => '7954851d78e5560369191f7bb0a217da',
