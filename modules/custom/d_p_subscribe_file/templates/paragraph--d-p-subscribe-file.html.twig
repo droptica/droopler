@@ -45,18 +45,23 @@
 ] %}
 {% set paragraph_classes = [
   'subscribe_file',
-  'background-image',
 ] %}
+
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
+        {% block background %}
+          {% include '@d_media/d-background-media.html.twig' with {
+            content: content.group_d_subscribe_background
+          } only %}
+        {% endblock %}
         <div class="content-wrapper">
           <div class="content container">
             {% block content %}
-              {{ content }}
+              {{ content.group_d_subscribe_content }}
               {{ subscribe_file_form }}
-              {{ additional_info }}
+              {{ content.group_d_subscribe_info }}
             {% endblock %}
           </div>
         </div>
