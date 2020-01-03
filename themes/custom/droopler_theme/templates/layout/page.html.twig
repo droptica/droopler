@@ -120,6 +120,7 @@
   {% endif %}
   <div id="main-wrapper" class="layout-main-wrapper clearfix">
     {% block content %}
+      {{ page.page_top_content }}
       <div{{ main_attributes }}>
         <div class="row clearfix">
           {{ page.breadcrumb }}
