@@ -21,7 +21,6 @@
     },
     "require": {
         "bower-asset/colorbox": "^1.6",
-        "bower-asset/lato-webfont": "^1.1",
         "bower-asset/masonry": "^4.2",
         "drupal/admin_toolbar": "^1.19",
         "drupal/better_exposed_filters": "^3.0",
@@ -57,6 +56,14 @@
         "npm-asset/popper.js": "1.12.3",
         "npm-asset/select2": "^4.0.4",
         "npm-asset/slick-carousel": "^1.8"
+    },
+    "replace": {
+        "bower-asset/desandro-matches-selector": "*",
+        "bower-asset/ev-emitter": "*",
+        "bower-asset/fizzy-ui-utils": "*",
+        "bower-asset/get-size": "*",
+        "bower-asset/jquery": "*",
+        "bower-asset/outlayer": "*"
     },
     "conflict": {
         "drupal/drupal": "*"

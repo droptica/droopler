@@ -5,6 +5,27 @@ global-styling:
       css/print.css: { media: print }
       css/style.css: {}
 
+# Lato font.
+lato:
+  version: VERSION
+  css:
+    theme:
+      fonts/lato/lato.css: {}
+
+# Custom Fontello font.
+fontello:
+  version: VERSION
+  css:
+    theme:
+      fonts/fontello/fontello.css: {}
+
+# Social media font.
+social_media:
+  version: VERSION
+  css:
+    theme:
+      fonts/social_media/social_media.css: {}
+
 global-js:
   version: VERSION
   js:
