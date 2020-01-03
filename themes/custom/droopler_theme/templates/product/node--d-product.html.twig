@@ -70,7 +70,7 @@
   'clearfix',
 ] %}
 <article{{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+  <div{{ content_attributes.addClass('container', 'node__content', 'clearfix') }}>
     <div class="row">
       <div class="section-images col-lg-8 col-md-12">
         <div class="header">
@@ -90,8 +90,9 @@
             </div>
         </div>
 
-        {{ content|without('field_d_product_media', 'field_d_product_link', 'field_d_ask_for_product') }}
+        {{ content|without('field_d_product_media', 'field_d_product_link', 'field_d_ask_for_product', 'field_page_section') }}
       </div>
     </div>
   </div>
+  {{ content.field_page_section }}
 </article>
