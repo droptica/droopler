@@ -17,6 +17,7 @@ $d-p-form-padding-top: 5% !default;
 $d-p-form-padding-bottom: 5% !default;
 $d-p-form-button-margin-top: 1rem !default;
 $d-p-form-copy-margin-left: 1.25rem !default;
+$d-p-form-small-labels-spacing: 7px !default;
 
 // Other settings
 $d-p-form-background-opacity: 0.4 !default;
@@ -44,13 +45,17 @@ $d-p-form-background-opacity: 0.4 !default;
       margin-top: $d-p-form-button-margin-top;
     }
     small, label {
-       color: $d-p-form-header-color;
+       color: $d-p-form-text-color;
+    }
+    small.description {
+      margin-top: $d-p-form-small-labels-spacing;
+      display: inline-block;
     }
     .js-form-managed-file {
       label.form-check-label {
         display: flex;
         align-items: center;
-        margin: 5px 1.25rem;
+        margin: $d-p-form-small-labels-spacing $d-p-form-copy-margin-left;
         input {
           margin-top: 0;
         }
@@ -59,28 +64,24 @@ $d-p-form-background-opacity: 0.4 !default;
       span.file {
         padding-left: 0;
         display: inline;
-        max-width: 18rem;
+        max-width: $button-max-width;
         width: 100%;
-        padding-left: 25px;
+        padding-left: 2*$d-p-form-copy-margin-left;
         height: fit-content;
 
         a {
           @extend .btn;
-          @extend .btn-light;
           text-transform: none;
-          background-color: $d-p-form-header-color;
+          background-color: $d-p-form-text-color;
+          color: $d-p-form-background;
           text-align: left;
           width: 100%;
         }
       }
-      span.file + .form-type-textfield {
-        margin-top: 5px;
+      .form-type-textfield {
+        margin-top: $d-p-form-small-labels-spacing;
       }
-      small.description {
-        &, > div {
-          margin-top: 10px;
-        }
-      }
+
     }
     .draggable {
       .js-form-managed-file {
@@ -100,7 +101,7 @@ $d-p-form-background-opacity: 0.4 !default;
         &:after {
           font-family: "fontello";
           content: "\f047";
-          color: $d-p-form-header-color;
+          color: $d-p-form-text-color;
         }
       }
     }
