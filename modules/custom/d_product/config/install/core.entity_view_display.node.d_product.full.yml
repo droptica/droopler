@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.d_product.field_tags
     - node.type.d_product
   module:
+    - entity_reference_revisions
     - link
     - media
     - text
@@ -59,6 +60,15 @@ content:
       image_style: ''
       image_link: ''
     third_party_settings: {  }
+  field_page_section:
+    type: entity_reference_revisions_entity_view
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
   field_product_categories:
     weight: 3
     label: above
@@ -81,6 +91,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_page_section: true
   langcode: true
   search_api_excerpt: true

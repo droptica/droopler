@@ -285,6 +285,81 @@ function droopler_theme_preprocess_field(&$variables) {
     $slider = views_embed_view('product_images', 'block_1');
     $variables['slider'] = render($slider);
   }
+
+  /*
+   * This is required only until new version of Geysir module came
+   *  - which should fix the error with missing parent entity id in links parameters.
+   *
+   * Here we're detecting paragraphs reference field and if parent entity has NO revisions,
+   * we're removing geyisr theme_wrapper, so there won't be empty overlay.
+   *
+   * @todo: Remove when Geysir 8.x-1.2 comes out
+   */
+  if (empty($variables['field_type']) || $variables['field_type'] === 'entity_reference_revisions') {
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+    $entity = $variables["element"]["#object"];
+    $entityTypes = $entity->getEntityType();
+    if (!$entityTypes->getRevisionTable() && !empty($variables['items'])) {
+      foreach ($variables['items'] as $delta => $itemConfig) {
+        if (!empty($itemConfig['content']['#theme_wrappers'])
+          && in_array('geysir_field_paragraph_wrapper', $itemConfig['content']['#theme_wrappers'])) {
+          unset($variables['items'][$delta]['content']['#theme_wrappers']);
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_field() for HTML document templates.
+ */
+function droopler_theme_preprocess_links(&$variables) {
+  /*
+   * This is required only until new version of Geysir module came
+   * - which should fix the error with missing parent entity id in links parameters.
+   *
+   * @todo: Remove when Geysir 8.x-1.2 comes out
+   */
+  if (!empty($variables['links']) && !empty($variables['attributes']['class'])) {
+    // Here we're detecting geysir links.
+    $foundGeysirClassAttribute = FALSE;
+    foreach ($variables['attributes']['class'] as $classAttribute) {
+      if (stripos($classAttribute, 'geysir-field-paragraph-links') !== FALSE) {
+        $foundGeysirClassAttribute = TRUE;
+        break;
+      }
+    }
+
+    /*
+     * If found, we're checking if the request is send by layout builder OR if parent entity has NO revisions.
+     * In both cases, we're clearing the links table, so there won't be any errors while rendering them.
+     * This approach should be pointless when new versions of Paragraphs module be released.
+     */
+    if ($foundGeysirClassAttribute) {
+      /** @var \Drupal\Core\Routing\RouteMatchInterface $routeMatch */
+      $routeMatch = \Drupal::routeMatch();
+      $currentRouteParameters = $routeMatch->getParameters()->all();
+
+      $routeName = $routeMatch->getRouteName();
+      if (stripos($routeName, 'layout_builder.') === 0 ) {
+        $variables['links'] = [];
+      }
+      if (!empty($currentRouteParameters)) {
+        foreach ($currentRouteParameters as $parameter) {
+          /** EntityInterface $parameter */
+          if ($parameter instanceof \Drupal\Core\Entity\EntityInterface) {
+            $parameterEntityRevisionTable1 = $parameter->getEntityType();
+            $parameterEntityRevisionTable = $parameter->getEntityType()->getRevisionTable();
+
+            if (empty($parameterEntityRevisionTable)) {
+              $variables['links'] = [];
+            }
+           }
+        }
+      }
+    }
+  }
 }
 
 /**
@@ -310,7 +385,7 @@ function droopler_theme_is_special_route() {
   $route = \Drupal::routeMatch();
   $route_name = $route->getRouteName();
   $node = $route->getParameter('node');
-  $node_check = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
+  $node_check = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post', 'd_product']));
   $route_check = $route_name == 'd_p_subscribe_file.downloadfile.checkLink';
 
   return ($node_check || $route_check);
