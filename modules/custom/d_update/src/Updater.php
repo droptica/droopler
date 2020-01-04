@@ -68,6 +68,11 @@ class Updater {
    */
   protected $checklist;
 
+  /**
+   * Modules Extensions List service.
+   *
+   * @var \Drupal\Core\Extension\ModuleExtensionList
+   */
   protected $moduleExtensionList;
 
   /**
