@@ -110,8 +110,8 @@ class Updater {
   /**
    * Import a config file.
    *
-   * @param string $module
-   *  Module name.
+   * @param string $source
+   *  Module/theme name.
    * @param string $name
    *  Config file name without .yml extension.
    * @param string $hash
@@ -120,8 +120,14 @@ class Updater {
    * @return bool
    *   Returns if config was imported successfully.
    */
-  public function importConfig($module, $name, $hash) {
-    $config_path = drupal_get_path('module', $module) . '/config';
+  public function importConfig($source, $name, $hash) {
+    // Try to get the config from module and theme.
+    try {
+      $config_path = drupal_get_path('module', $source) . '/config';
+    }
+    catch(\InvalidArgumentException $e) {
+      $config_path = drupal_get_path('theme', $source) . '/config';
+    }
     $source = new FileStorage($config_path . '/install');
     $optional_source = new FileStorage($config_path . '/optional');
     $data = $source->read($name);
@@ -202,7 +208,7 @@ class Updater {
    * Import many config files at once.
    *
    * @param array $configs
-   *   Two dimensional array with structure "module_name" =>
+   *   Two dimensional array with structure "theme_or_module_name" =>
    *   ["config_file_name" => "config_hash"]
    *
    * @return bool
@@ -210,9 +216,9 @@ class Updater {
    */
   public function importConfigs(array $configs) {
     $status = [];
-    foreach ($configs as $module => $config) {
+    foreach ($configs as $source => $config) {
       foreach ($config as $config_name => $config_hash) {
-        $status[] = $this->importConfig($module, $config_name, $config_hash);
+        $status[] = $this->importConfig($source, $config_name, $config_hash);
       }
     }
 
