@@ -473,44 +473,13 @@ function droopler_update_8103() {
   ];
   $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
 
-  // Update view modes for new and updated fields.
-  $configs = [
-    'd_p_carousel' => [
-      'core.entity_form_display.paragraph.d_p_carousel.default' => 'a619fe5018d18626fe0714a88e3e0408',
-      'core.entity_view_display.paragraph.d_p_carousel.default' => '46f7bbecfd6d6d6efe8da68f95a26ec2',
-    ],
-    'd_p_form' => [
-      'core.entity_form_display.paragraph.d_p_form.default' => '28c6c56d072013066b56426154171e19',
-      'core.entity_view_display.paragraph.d_p_form.default' => '6b1812c3716590a66b0f20979fd1fb00',
-    ],
-    'd_p_side_image' => [
-      'core.entity_form_display.paragraph.d_p_side_image.default' => '750726e0a68fe80a9520159cfdc04fd5',
-      'core.entity_view_display.paragraph.d_p_side_image.default' => '8954de48057199341a186210809516d8',
-    ],
-    'd_p_side_embed' => [
-      'core.entity_form_display.paragraph.d_p_side_embed.default' => 'a2e5aed533efb82c44b6bc4a3c01f2b7',
-      'core.entity_view_display.paragraph.d_p_side_embed.default' => 'e3b3ff4b69aa246e224901b5bbee6cfb',
-    ],
-    'd_p_text_blocks' => [
-      'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '5639c681e3d0fff46a032bd4ca1176d4',
-      'core.entity_form_display.paragraph.d_p_single_text_block.default' => 'c7779dd94294f44c0ff6c58714c5003f',
-      'core.entity_view_display.paragraph.d_p_group_of_text_blocks.default' => 'f76c231fa0f952111112b71d72a02123',
-      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '761ff6fa4a0e4b78da1f0a0a2c05c951',
-    ],
-    'd_p_text_paged' => [
-      'core.entity_form_display.paragraph.d_p_text_paged.default' => '4ef25a9f58e9a54bfd50eca73a3e5f22',
-      'core.entity_view_display.paragraph.d_p_text_paged.default' => 'f860332e18f47f8b1a38f8ceea9f4ce0',
-    ],
-  ];
-  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
-
   // Update misc config.
   $configs = [
     'droopler' => [
       'core.entity_form_display.contact_message.feedback.default' => '',
-      'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
-      'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
-      'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
+      //'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
+      //'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
+      //'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
       'taxonomy.vocabulary.tags' => '43f9e4a277457349d58cedb7bbe1dc76',
     ],
     'd_content' => [
@@ -521,9 +490,9 @@ function droopler_update_8103() {
     'd_p_subscribe_file' => [
       'views.view.subscribe_file_paragraph' => '',
     ],
-    'droopler_theme' => [
-      'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
-    ],
+    //'droopler_theme' => [
+    //  'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
+    //],
   ];
   $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
 
@@ -538,7 +507,7 @@ function droopler_update_8103() {
         'core.entity_view_display.node.blog_post.teaser_small' => '',
         'pathauto.pattern.node_blog_pattern' => '',
         'responsive_image.styles.blog_images_style' => '5fffdeff846e07fe8c2e72f24ffab7f4',
-        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
+        //'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
         'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
         'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
         'simple_sitemap.bundle_settings.default.node.blog_post' => '',
@@ -824,12 +793,12 @@ function droopler_update_8105() {
 
   $configs = [
     'd_content' => [
-      'core.entity_form_display.node.content_page.default' => '1c0f26044c8909486570524f0701a33b',
-      'core.entity_view_display.node.content_page.default' => '64fbb7aa487c2a449e0d140e951de52d',
+      'core.entity_form_display.node.content_page.default' => 'f865015c1a1baee972e8feb3d6c84d70',
+      'core.entity_view_display.node.content_page.default' => '025e73620b1650aa03db407271cfe82d',
     ],
     'd_p_banner' => [
-      'core.entity_form_display.paragraph.d_p_banner.default' => '897f699c224b580fc3744efcea5bfd65',
-      'core.entity_view_display.paragraph.d_p_banner.default' => '0445e6e0cb15347d8a69d27b3e5716cf',
+      'core.entity_form_display.paragraph.d_p_banner.default' => 'a4c8c186a27ad4ccbff3a7524ac5252d',
+      'core.entity_view_display.paragraph.d_p_banner.default' => '7954851d78e5560369191f7bb0a217da',
       'paragraphs.paragraphs_type.d_p_banner' => '16d108c2d421a90beb935603c8c14a78',
     ],
     'd_p_carousel' => [
