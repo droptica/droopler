@@ -475,10 +475,6 @@ function droopler_update_8103() {
 
   // Update view modes for new and updated fields.
   $configs = [
-    'd_p_banner' => [
-      'core.entity_form_display.paragraph.d_p_banner.default' => '897f699c224b580fc3744efcea5bfd65',
-      'core.entity_view_display.paragraph.d_p_banner.default' => '0445e6e0cb15347d8a69d27b3e5716cf',
-    ],
     'd_p_carousel' => [
       'core.entity_form_display.paragraph.d_p_carousel.default' => 'a619fe5018d18626fe0714a88e3e0408',
       'core.entity_view_display.paragraph.d_p_carousel.default' => '46f7bbecfd6d6d6efe8da68f95a26ec2',
@@ -515,15 +511,18 @@ function droopler_update_8103() {
       'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
       'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
       'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
-      'taxonomy.vocabulary.tags' => 'XXX',
+      'taxonomy.vocabulary.tags' => '43f9e4a277457349d58cedb7bbe1dc76',
     ],
     'd_content' => [
       'core.entity_view_display.node.content_page.d_small_box' => '',
       'simple_sitemap.bundle_settings.default.node.content_page' => '',
-      'metatag.metatag_defaults.node__content_page' => 'XXX',
+      'metatag.metatag_defaults.node__content_page' => 'e6d4f236df5d84f031d8edf6acfcd6da',
     ],
     'd_p_subscribe_file' => [
       'views.view.subscribe_file_paragraph' => '',
+    ],
+    'droopler_theme' => [
+      'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
     ],
   ];
   $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
@@ -543,8 +542,8 @@ function droopler_update_8103() {
         'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
         'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
         'simple_sitemap.bundle_settings.default.node.blog_post' => '',
-        'field.field.node.blog_post.field_blog_sections' => 'XXX',
-        'views.view.blog_listing' => 'XXX',
+        'field.field.node.blog_post.field_blog_sections' => '1f6100447b6fff05e8b60f6f23cfaea5',
+        'views.view.blog_listing' => 'e617972f67997f8d8f4c60eb29f49bd2',
       ],
     ];
     $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
@@ -556,14 +555,31 @@ function droopler_update_8103() {
   if ($module_handler->moduleExists('d_product')) {
     // Update d_product config.
     $configs = [
+      // @todo: move this
       'd_product' => [
+        'field.field.node.d_product.field_page_section' => '',
         'core.entity_view_display.node.d_product.d_small_box' => '',
         'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
         'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
         'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
+        'core.entity_form_display.node.d_product.default' => 'd9ad0308f61cbe59599fba0b84bb0d06',
+        'field.field.node.d_product.body' => '547a2357e689206be7d8743b90aa6be2',
+        'views.view.product_images' => '584b4d2edd9f9f620c9b00bbdbc79d27',
+        'views.view.products_list' => '15d1e18a472ae1ac14bcbecf69da96d0',
+        'core.entity_view_display.media.d_image.d_product_gallery' => '', // @todo: Watch for this one, probably should be at the end
+        'core.entity_view_mode.media.d_product_gallery' => '', // @todo: Watch for this one, probably should be at the end
+        'core.entity_view_display.media.d_image.d_product_image' => '', // @todo: Watch for this one, probably should be at the end
+        'core.entity_view_mode.media.d_product_image' => '', // @todo: Watch for this one, probably should be at the end
         'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
         'simple_sitemap.bundle_settings.default.node.d_product' => '',
         'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
+        // todo: risky ones, can break existing installations.
+        'block.block.mobilefilters' => '800905c90e8aebb5e1efa63150d1661e',
+        'block.block.mobilefilterssubmit' => 'cf04a4ce3efb8e1db0594b00949644a2',
+        'block.block.productcategoriestaxonomytermname' => '791b0420b472bb813403557acb2514c1',
+        'block.block.resetfilters_2' => 'f45e47fc43e155355fbdffa3fd1c5173',
+        'block.block.resetfilters' => '978cbc78d2875b9ec252b91b0347900d',
+        'block.block.tagstaxonomytermname' => '419c970f6ffd428be18f995df7b6c097',
       ],
     ];
     $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
@@ -575,8 +591,8 @@ function droopler_update_8103() {
   if ($module_handler->moduleExists('we_megamenu')) {
 
     $configs = [
-      'droopler' => [
-        'block.block.mainnavigation' => '',
+      'droopler_theme' => [
+        'block.block.mainnavigation' => '', // todo: watch out for this
         'block.block.mainnavigation_2' => '',
       ],
     ];
@@ -589,59 +605,6 @@ function droopler_update_8103() {
 
   $updater->checklist()->saveProgress($progress);
 }
-
-// Commented code due to it being merged later to the main update to 2.0.
-//
-///**
-// * Droopler 2.1 Updates.
-// */
-//function droopler_update_8104() {
-//  /** @var Drupal\d_update\Updater $updater */
-//  $updater = \Drupal::service('d_update');
-//
-//  // Add and update configs for media.
-//  $configs = [
-//    'd_media' => [
-//      'responsive_image.styles.banner' => '',
-//      'responsive_image.styles.responsive_background' => '',
-//      'core.entity_view_mode.media.d_banner' => '',
-//      'core.entity_view_mode.media.d_responsive_background' => '',
-//      'core.entity_view_display.media.d_image.d_banner' => '',
-//      'core.entity_view_display.media.d_video.d_banner' => '',
-//      'core.entity_view_display.media.d_image.d_responsive_background' => '',
-//      'core.entity_view_display.media.d_video.d_responsive_background' => '',
-//    ],
-//    'd_p_banner' => [
-//      'core.entity_view_display.paragraph.d_p_banner.default' => '',
-//    ],
-//    'd_p_counters' => [
-//      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '',
-//    ],
-//    'd_p_form' => [
-//      'core.entity_view_display.paragraph.d_p_form.default' => '',
-//    ],
-//    'd_p_side_image' => [
-//      'core.entity_view_display.paragraph.d_p_side_image.default' => '',
-//    ],
-//    'd_p_subscribe_file' => [
-//      'core.entity_view_display.paragraph.d_p_subscribe_file.default' => '',
-//    ],
-//    'd_p_text_blocks' => [
-//      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '',
-//    ],
-//    'd_p_text_with_bckg' => [
-//      'core.entity_view_display.paragraph.d_p_text_with_bckg.default' => '',
-//    ],
-//  ];
-//
-//  $values['droopler__droopler_update_8104_0'] = $updater->importConfigs($configs);
-//
-//  $progress = [
-//    'v2.1' => $values,
-//  ];
-//
-//  $updater->checklist()->saveProgress($progress);
-//}
 
 /**
  * Droopler 2.0 Media migrate.
@@ -861,12 +824,12 @@ function droopler_update_8105() {
 
   $configs = [
     'd_content' => [
-      'core.entity_form_display.node.content_page.default' => 'XXX',
-      'core.entity_view_display.node.content_page.default' => 'XXX',
+      'core.entity_form_display.node.content_page.default' => '1c0f26044c8909486570524f0701a33b',
+      'core.entity_view_display.node.content_page.default' => '64fbb7aa487c2a449e0d140e951de52d',
     ],
     'd_p_banner' => [
-      'core.entity_form_display.paragraph.d_p_banner.default' => 'a4c8c186a27ad4ccbff3a7524ac5252d',
-      'core.entity_view_display.paragraph.d_p_banner.default' => '7954851d78e5560369191f7bb0a217da',
+      'core.entity_form_display.paragraph.d_p_banner.default' => '897f699c224b580fc3744efcea5bfd65',
+      'core.entity_view_display.paragraph.d_p_banner.default' => '0445e6e0cb15347d8a69d27b3e5716cf',
       'paragraphs.paragraphs_type.d_p_banner' => '16d108c2d421a90beb935603c8c14a78',
     ],
     'd_p_carousel' => [
