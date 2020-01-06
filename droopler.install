@@ -477,6 +477,7 @@ function droopler_update_8103() {
   $configs = [
     'profile/droopler' => [
       'core.entity_form_display.contact_message.feedback.default' => '',
+      // @todo: These configs cause problems in logs, they must be double tested.
       //'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
       //'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
       //'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
@@ -490,11 +491,12 @@ function droopler_update_8103() {
     'd_p_subscribe_file' => [
       'views.view.subscribe_file_paragraph' => '',
     ],
-    //'droopler_theme' => [
+    // @todo: We must check the behavior of the language switcher after update.
+    //'theme/droopler_theme' => [
     //  'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
     //],
   ];
-  $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
 
   $module_handler = \Drupal::service('module_handler');
   if ($module_handler->moduleExists('d_blog')) {
@@ -507,12 +509,45 @@ function droopler_update_8103() {
         'core.entity_view_display.node.blog_post.teaser_small' => '',
         'pathauto.pattern.node_blog_pattern' => '',
         'responsive_image.styles.blog_images_style' => '5fffdeff846e07fe8c2e72f24ffab7f4',
-        //'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
         'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
         'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
         'simple_sitemap.bundle_settings.default.node.blog_post' => '',
         'field.field.node.blog_post.field_blog_sections' => '1f6100447b6fff05e8b60f6f23cfaea5',
         'views.view.blog_listing' => 'e617972f67997f8d8f4c60eb29f49bd2',
+      ],
+    ];
+    $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8103_5'] = TRUE;
+  }
+
+  if ($module_handler->moduleExists('d_product')) {
+    // Update d_product config.
+    $configs = [
+      'd_product' => [
+        'field.field.node.d_product.field_page_section' => '',
+        'core.entity_view_display.node.d_product.d_small_box' => '', // @todo: Check if this should be here
+        'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b', // @todo: Check if this should be here
+        'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a', // @todo: Check if this should be here
+        'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738', // @todo: Check if this should be here
+        'core.entity_form_display.node.d_product.default' => 'd9ad0308f61cbe59599fba0b84bb0d06', // @todo: Check if this should be here
+        'field.field.node.d_product.body' => '547a2357e689206be7d8743b90aa6be2',
+        'views.view.product_images' => '584b4d2edd9f9f620c9b00bbdbc79d27',
+        'views.view.products_list' => '15d1e18a472ae1ac14bcbecf69da96d0',
+        'core.entity_view_display.media.d_image.d_product_gallery' => '', // @todo: Check if this should be here
+        'core.entity_view_mode.media.d_product_gallery' => '', // @todo: Check if this should be here
+        'core.entity_view_display.media.d_image.d_product_image' => '', // @todo: Check if this should be here
+        'core.entity_view_mode.media.d_product_image' => '', // @todo: Check if this should be here
+        'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
+        'simple_sitemap.bundle_settings.default.node.d_product' => '',
+        'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
+        // todo: The updates below must be carefully tested, they can break existing sites (due to moved configs).
+        'block.block.mobilefilterssubmit' => 'cf04a4ce3efb8e1db0594b00949644a2',
+        'block.block.productcategoriestaxonomytermname' => '791b0420b472bb813403557acb2514c1',
+        'block.block.resetfilters_2' => 'f45e47fc43e155355fbdffa3fd1c5173',
+        'block.block.resetfilters' => '978cbc78d2875b9ec252b91b0347900d',
+        'block.block.tagstaxonomytermname' => '419c970f6ffd428be18f995df7b6c097',
       ],
     ];
     $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
@@ -521,52 +556,17 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_6'] = TRUE;
   }
 
-  if ($module_handler->moduleExists('d_product')) {
-    // Update d_product config.
+  if ($module_handler->moduleExists('we_megamenu')) {
     $configs = [
-      // @todo: move this
-      'd_product' => [
-        'field.field.node.d_product.field_page_section' => '',
-        'core.entity_view_display.node.d_product.d_small_box' => '',
-        'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
-        'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
-        'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
-        'core.entity_form_display.node.d_product.default' => 'd9ad0308f61cbe59599fba0b84bb0d06',
-        'field.field.node.d_product.body' => '547a2357e689206be7d8743b90aa6be2',
-        'views.view.product_images' => '584b4d2edd9f9f620c9b00bbdbc79d27',
-        'views.view.products_list' => '15d1e18a472ae1ac14bcbecf69da96d0',
-        'core.entity_view_display.media.d_image.d_product_gallery' => '', // @todo: Watch for this one, probably should be at the end
-        'core.entity_view_mode.media.d_product_gallery' => '', // @todo: Watch for this one, probably should be at the end
-        'core.entity_view_display.media.d_image.d_product_image' => '', // @todo: Watch for this one, probably should be at the end
-        'core.entity_view_mode.media.d_product_image' => '', // @todo: Watch for this one, probably should be at the end
-        'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
-        'simple_sitemap.bundle_settings.default.node.d_product' => '',
-        'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
-        // todo: risky ones, can break existing installations.
-        'block.block.mobilefilters' => '800905c90e8aebb5e1efa63150d1661e',
-        'block.block.mobilefilterssubmit' => 'cf04a4ce3efb8e1db0594b00949644a2',
-        'block.block.productcategoriestaxonomytermname' => '791b0420b472bb813403557acb2514c1',
-        'block.block.resetfilters_2' => 'f45e47fc43e155355fbdffa3fd1c5173',
-        'block.block.resetfilters' => '978cbc78d2875b9ec252b91b0347900d',
-        'block.block.tagstaxonomytermname' => '419c970f6ffd428be18f995df7b6c097',
+      'theme/droopler_theme' => [
+        'block.block.mainnavigation' => '',
+        'block.block.mainnavigation_2' => '',
       ],
     ];
     $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
   }
-  else {
-    $values['droopler__droopler_update_8103_7'] = TRUE;
-  }
 
-  if ($module_handler->moduleExists('we_megamenu')) {
-
-    $configs = [
-      'theme/droopler_theme' => [
-        'block.block.mainnavigation' => '', // todo: watch out for this
-        'block.block.mainnavigation_2' => '',
-      ],
-    ];
-    $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
-  }
+  // @todo: Set the above blocks also for subtheme, if it is enabled.
 
   $progress = [
     'v2.0' => $values,
@@ -749,6 +749,8 @@ function droopler_update_8104() {
     }
   }
 
+  $values['droopler__droopler_update_8104_3'] = TRUE;
+
   /**
    *  Delete migrated fields.
    */
@@ -766,7 +768,8 @@ function droopler_update_8104() {
 
           $newFieldName = isset($fieldsMigrationSpecialCases[$bundle][$fieldToDelete]) ? $fieldsMigrationSpecialCases[$bundle][$fieldToDelete] : $fieldsToMigrate[$fieldToDelete];
 
-          $values['droopler__droopler_update_8104_3'][] = t('Deleted @oldField field, it\'s values were migrated to @newField for all @bundle @type', [
+          \Drupal::logger('droopler_update')
+            ->info('Deleted @oldField field, it\'s values were migrated to @newField for all @bundle @type', [
             '@oldField' => $fieldToDelete,
             '@newField' => $newFieldName,
             '@bundle' => $bundle,
@@ -777,8 +780,10 @@ function droopler_update_8104() {
     }
   }
 
+  $values['droopler__droopler_update_8104_4'] = TRUE;
+
   $progress = [
-    'v2.0 - Media Migrate' => $values,
+    'v2.0' => $values,
   ];
 
   $updater->checklist()->saveProgress($progress);
@@ -875,7 +880,7 @@ function droopler_update_8105() {
       'core.entity_view_display.paragraph.d_p_tiles.default' => '96616b3236a940249e4f420554893ce0',
     ],
   ];
-  $values['droopler__droopler_update_8104_4'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8105_1'] = $updater->importConfigs($configs);
 
   $module_handler = \Drupal::service('module_handler');
   if ($module_handler->moduleExists('d_blog')) {
@@ -895,14 +900,14 @@ function droopler_update_8105() {
         'paragraphs.paragraphs_type.d_p_blog_text' => '61152b0f5875e2f77e2600fa3581f880',
       ],
     ];
-    $values['droopler__droopler_update_8104_5'] = $updater->importConfigs($configs);
+    $values['droopler__droopler_update_8105_2'] = $updater->importConfigs($configs);
   }
   else {
-    $values['droopler__droopler_update_8104_5'] = TRUE;
+    $values['droopler__droopler_update_8105_2'] = TRUE;
   }
 
   $progress = [
-    'v2.0 - Import modified configs' => $values,
+    'v2.0' => $values,
   ];
 
   $updater->checklist()->saveProgress($progress);
