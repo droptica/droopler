@@ -531,13 +531,14 @@ function droopler_update_8103() {
   } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_9'] = FALSE;
   }
-  //Import advagg configs
+  //Import seo configs
   $configs = [];
   foreach ($advaggModules as $advaggModule) {
     if ($module_handler->moduleExists($advaggModule)) {
       $configs[$advaggModule] = [$advaggModule . 'settings.yml'];
     }
   }
+  $configs['critical_css'] = ['critical_css.settings.yml'];
   $values['droopler__droopler_update_8103_10'] = $updater->importConfigs($configs);
 
   $progress = [
