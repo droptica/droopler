@@ -8,7 +8,7 @@ $after-footer-text-color: $color-odysseus !default;
 
   //Menu block from d_demo
   .region-footer-main {
-    background-color: $color-hecuba;
+    background-color: $after-footer-background-color;
 
     ul.nav {
       display: flex;
@@ -22,7 +22,7 @@ $after-footer-text-color: $color-odysseus !default;
         a {
           font-size: 1rem;
           font-weight: bold;
-          color: $white;
+          color: $after-footer-text-color;
         }
       }
     }
