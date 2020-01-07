@@ -7,10 +7,12 @@ dependencies:
     - field.field.node.d_product.field_d_ask_for_product
     - field.field.node.d_product.field_d_product_link
     - field.field.node.d_product.field_d_product_media
+    - field.field.node.d_product.field_page_section
     - field.field.node.d_product.field_product_categories
     - field.field.node.d_product.field_tags
     - node.type.d_product
   module:
+    - entity_reference_revisions
     - link
     - media
     - text
@@ -23,13 +25,13 @@ content:
   body:
     label: above
     type: text_default
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     region: content
   field_d_ask_for_product:
     type: boolean
-    weight: 7
+    weight: 6
     region: content
     label: hidden
     settings:
@@ -38,7 +40,7 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
   field_d_product_link:
-    weight: 6
+    weight: 5
     label: hidden
     settings:
       trim_length: 80
@@ -51,15 +53,24 @@ content:
     region: content
   field_d_product_media:
     type: media_thumbnail
-    weight: 2
+    weight: 1
     region: content
     label: hidden
     settings:
       image_style: ''
       image_link: ''
     third_party_settings: {  }
+  field_page_section:
+    type: entity_reference_revisions_entity_view
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
   field_product_categories:
-    weight: 4
+    weight: 3
     label: above
     settings:
       link: false
@@ -67,7 +78,7 @@ content:
     type: entity_reference_label
     region: content
   field_tags:
-    weight: 5
+    weight: 4
     label: above
     settings:
       link: false

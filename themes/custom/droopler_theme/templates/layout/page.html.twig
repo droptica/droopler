@@ -120,6 +120,7 @@
   {% endif %}
   <div id="main-wrapper" class="layout-main-wrapper clearfix">
     {% block content %}
+      {{ page.page_top_content }}
       <div{{ main_attributes }}>
         <div class="row clearfix">
           {{ page.breadcrumb }}
@@ -131,6 +132,7 @@
           </main>
         </div>
       </div>
+      {{ page.page_bottom_content }}
     {% endblock %}
   </div>
   {% if page.featured_bottom_first or page.featured_bottom_second or page.featured_bottom_third %}

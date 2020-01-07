@@ -6,4 +6,4 @@ services:
     arguments: ['@checklistapi_storage.state', '@module_handler', '@current_user']
   d_update:
     class: Drupal\d_update\Updater
-    arguments: ['@module_installer', '@config.storage', '@entity_type.manager',  '@d_update.config_compare', '@config.manager', '@d_update.update_checklist']
+    arguments: ['@module_installer', '@config.storage', '@entity_type.manager',  '@d_update.config_compare', '@config.manager', '@d_update.update_checklist', '@extension.list.module']
