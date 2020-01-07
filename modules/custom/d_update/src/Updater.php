@@ -10,11 +10,10 @@ namespace Drupal\d_update;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
-use Drupal\d_update\ConfigCompare;
-use Drupal\d_update\UpdateChecklist;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -70,6 +69,13 @@ class Updater {
   protected $checklist;
 
   /**
+   * Modules Extensions List service.
+   *
+   * @var \Drupal\Core\Extension\ModuleExtensionList
+   */
+  protected $moduleExtensionList;
+
+  /**
    * Constructs the Updater.
    *
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
@@ -84,19 +90,23 @@ class Updater {
    *   Config manager service.
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
+   * @param ModuleExtensionList $moduleExtensionList
+   *   Update Module Extension List service.
    */
   public function __construct(ModuleInstallerInterface $module_installer,
                               StorageInterface $config_storage,
                               EntityTypeManagerInterface $entity_type_manager,
                               ConfigCompare $config_compare,
                               ConfigManagerInterface $config_manager,
-                              UpdateChecklist $checklist) {
+                              UpdateChecklist $checklist,
+                              ModuleExtensionList $moduleExtensionList) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
     $this->entityTypeManager = $entity_type_manager;
     $this->configCompare = $config_compare;
     $this->configManager = $config_manager;
     $this->checklist = $checklist;
+    $this->moduleExtensionList = $moduleExtensionList;
   }
 
   /**
@@ -237,7 +247,7 @@ class Updater {
       return FALSE;
     }
 
-    $module_data = system_rebuild_module_data();
+    $module_data = $this->moduleExtensionList->getList();
     $modules = array_combine($modules, $modules);
     if ($missing_modules = array_diff_key($modules, $module_data)) {
       return FALSE;
