@@ -356,6 +356,9 @@ function droopler_update_8103() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
+  /** Migrate old saved checklist configs to new state storage. */
+  $updater->checklist()->migrateConfigProgressToStateProgress();
+
   // Install contrib modules.
   try {
     $modules = [
@@ -372,7 +375,6 @@ function droopler_update_8103() {
   $configs = [
     'd_p' => [
       'field.storage.paragraph.field_d_background_color' => '',
-      'field.storage.paragraph.field_d_display_mode' => '',
       'field.storage.paragraph.field_d_node_reference' => '',
       'field.storage.paragraph.field_d_settings' => '',
     ],
@@ -498,6 +500,7 @@ function droopler_update_8103() {
   ];
   $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
 
+  /** @var \Drupal\Core\Extension\ModuleHandler $module_handler */
   $module_handler = \Drupal::service('module_handler');
   if ($module_handler->moduleExists('d_blog')) {
     // Update d_blog config.
@@ -913,3 +916,4 @@ function droopler_update_8105() {
   $updater->checklist()->saveProgress($progress);
 
 }
+
