@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - we_megamenu
+  theme:
+    - droopler_theme
+id: mainnavigation_2
+theme: droopler_theme
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'we_megamenu_block:main'
+settings:
+  id: 'we_megamenu_block:main'
+  label: 'MegaMenu Main navigation'
+  provider: we_megamenu
+  label_display: '0'
+visibility: {  }
