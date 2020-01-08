@@ -568,6 +568,34 @@ function droopler_update_8103() {
 
   // @todo: Set the above blocks also for subtheme, if it is enabled.
 
+  //Install SEO contrib modules
+  try {
+    $advaggModules = [
+      'advagg',
+      'advagg_mod',
+      'advagg_js_minify',
+      'advagg_css_minify',
+    ];
+    $modules = [
+      'critical_css',
+      'page_cache',
+      'dynamic_page_cache',
+    ];
+    $result = $module_installer->install(array_merge($modules, $advaggModules), TRUE);
+    $values['droopler__droopler_update_8103_9'] = $result;
+  } catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8103_9'] = FALSE;
+  }
+  //Import seo configs
+  $configs = [];
+  foreach ($advaggModules as $advaggModule) {
+    if ($module_handler->moduleExists($advaggModule)) {
+      $configs[$advaggModule] = [$advaggModule . 'settings.yml'];
+    }
+  }
+  $configs['critical_css'] = ['critical_css.settings.yml'];
+  $values['droopler__droopler_update_8103_10'] = $updater->importConfigs($configs);
+
   $progress = [
     'v2.0' => $values,
   ];
