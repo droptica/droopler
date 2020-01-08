@@ -66,6 +66,7 @@
 
       if ($links.length) {
         var blockContentClass = '.we-mega-menu-submenu';
+        var $mainNavbar = $('.main-navbar');
 
         $links.each(function() {
           var $thisLink = $(this);
@@ -77,7 +78,7 @@
 
           $expander.once().click(function () {
             var $linkItem = $(this);
-            if ($linkItem.is('a.open')) {
+            if ($linkItem.is('a.open') || $mainNavbar.is(':not(.show)')) {
               return true;
             }
             $linkItem.toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
@@ -86,6 +87,9 @@
           });
 
           $collapser.once().click(function() {
+            if ($mainNavbar.is(':not(.show)')) {
+              return true;
+            }
             var $linkItem = $(this);
             if ($linkItem.is('.d-submenu-toggler')) {
               $linkItem = $linkItem.parent();
