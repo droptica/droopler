@@ -231,8 +231,9 @@ $d-blog-article-row-min-height: 420px !default;
 
     .node_blog_post_title {
       padding-top: $d-blog-title-teaser-padding-top-desktop;
+      font-size: $d-blog-title-teaser-font-size-desktop;
       a {
-        font-size: $d-blog-title-teaser-font-size-desktop;
+        font-size: inherit;
         span {
           display: block;
         }
