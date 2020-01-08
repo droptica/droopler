@@ -71,11 +71,14 @@ class UpdateChecklist {
    * @param \Drupal\checklistapi\Storage\StateStorage $state_storage
    *   Storage for checklist config.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, AccountInterface $account, StateStorage $state_storage) {
+  public function __construct(ConfigFactoryInterface $config_factory,
+                              ModuleHandlerInterface $module_handler,
+                              AccountInterface $account,
+                              StateStorage $state_storage) {
     $this->configFactory = $config_factory;
-    $this->checkListStateStorage = $state_storage->setChecklistId('d_update');
     $this->moduleHandler = $module_handler;
     $this->account = $account;
+    $this->checkListStateStorage = $state_storage->setChecklistId('d_update');
 
     if ($this->moduleHandler->moduleExists('checklistapi')) {
       $this->updateChecklist = checklistapi_checklist_load('d_update');
@@ -262,7 +265,7 @@ class UpdateChecklist {
     $num_changed_items = 0;
     $progress = $this->getChecklistSavedProgress();
 
-    if (empty($progress) ) {
+    if (empty($progress)) {
       $progress = [
         '#completed_items' => 0,
         '#items' => [],
@@ -315,14 +318,27 @@ class UpdateChecklist {
     $this->messenger()->addStatus($message);
   }
 
+  /**
+   * Getter for saved progress in checklist storage.
+   *
+   * @return mixed
+   */
   protected function getChecklistSavedProgress() {
     return $this->checkListStateStorage->getSavedProgress();
   }
 
+  /**
+   * Setter for saving progress to checklist storage.
+   *
+   * @param $progress
+   */
   protected function setChecklistSavedProgress($progress) {
     $this->checkListStateStorage->setSavedProgress($progress);
   }
 
+  /**
+   * Function copies checklist values stored old method to new checklist storage.
+   */
   public function migrateConfigProgressToStateProgress() {
     $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
     $config_key = defined(ChecklistapiChecklist::class . '::PROGRESS_CONFIG_KEY') ? ChecklistapiChecklist::PROGRESS_CONFIG_KEY : 'progress';
