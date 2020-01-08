@@ -353,14 +353,10 @@ function droopler_update_8103() {
   /** @var Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
   $module_installer = \Drupal::service('module_installer');
 
-  /** @var \Drupal\Core\Extension\ModuleHandler $module_handler */
-  $module_handler = \Drupal::service('module_handler');
-
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
-  $modulesList = $module_handler->getModuleList();
-
+  /** Migrate old saved checklist configs to new state storage. */
   $updater->checklist()->migrateConfigProgressToStateProgress();
 
   // Install contrib modules.
@@ -370,11 +366,7 @@ function droopler_update_8103() {
       'we_megamenu',
     ];
     $result = $module_installer->install($modules, TRUE);
-    if (!$result) {
-      $result = empty(array_diff($modules, array_keys($modulesList)));
-    }
     $values['droopler__droopler_update_8103_0'] = $result;
-//    drupal_flush_all_caches();
   } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
@@ -383,7 +375,6 @@ function droopler_update_8103() {
   $configs = [
     'd_p' => [
       'field.storage.paragraph.field_d_background_color' => '',
-//      'field.storage.paragraph.field_d_display_mode' => '',
       'field.storage.paragraph.field_d_node_reference' => '',
       'field.storage.paragraph.field_d_settings' => '',
     ],
@@ -509,6 +500,8 @@ function droopler_update_8103() {
   ];
   $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
 
+  /** @var \Drupal\Core\Extension\ModuleHandler $module_handler */
+  $module_handler = \Drupal::service('module_handler');
   if ($module_handler->moduleExists('d_blog')) {
     // Update d_blog config.
     $configs = [
@@ -811,9 +804,6 @@ function droopler_update_8105() {
       'core.entity_form_display.node.content_page.default' => 'f865015c1a1baee972e8feb3d6c84d70',
       'core.entity_view_display.node.content_page.default' => '025e73620b1650aa03db407271cfe82d',
     ],
-//    'd_p' => [
-//      'field.storage.paragraph.field_d_display_mode' => '',
-//    ],
     'd_p_banner' => [
       'core.entity_form_display.paragraph.d_p_banner.default' => 'a4c8c186a27ad4ccbff3a7524ac5252d',
       'core.entity_view_display.paragraph.d_p_banner.default' => '7954851d78e5560369191f7bb0a217da',
