@@ -530,18 +530,9 @@ function droopler_update_8103() {
     $configs = [
       'd_product' => [
         'field.field.node.d_product.field_page_section' => '',
-        'core.entity_view_display.node.d_product.d_small_box' => '',
-        'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
-        'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
-        'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
-        'core.entity_form_display.node.d_product.default' => 'd9ad0308f61cbe59599fba0b84bb0d06',
         'field.field.node.d_product.body' => '547a2357e689206be7d8743b90aa6be2',
         'views.view.product_images' => '584b4d2edd9f9f620c9b00bbdbc79d27',
         'views.view.products_list' => '15d1e18a472ae1ac14bcbecf69da96d0',
-        'core.entity_view_mode.media.d_product_gallery' => '',
-        'core.entity_view_display.media.d_image.d_product_gallery' => '',
-        'core.entity_view_mode.media.d_product_image' => '',
-        'core.entity_view_display.media.d_image.d_product_image' => '',
         'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
         'simple_sitemap.bundle_settings.default.node.d_product' => '',
         'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
@@ -907,6 +898,23 @@ function droopler_update_8105() {
   }
   else {
     $values['droopler__droopler_update_8105_2'] = TRUE;
+  }
+  if($module_handler->moduleExists('d_product')) {
+    $configs = [
+      'd_product' => [
+        'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
+        'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
+        'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
+        'core.entity_form_display.node.d_product.default' => 'd9ad0308f61cbe59599fba0b84bb0d06',
+        'core.entity_view_mode.media.d_product_gallery' => '',
+        'core.entity_view_display.media.d_image.d_product_gallery' => '',
+        'core.entity_view_mode.media.d_product_image' => '',
+        'core.entity_view_display.media.d_image.d_product_image' => '',
+        'core.entity_view_display.node.d_product.d_small_box' => '',
+      ],
+    ];
+  } else {
+    $values['droopler__droopler_update_8105_3'] = TRUE;
   }
 
   $progress = [
