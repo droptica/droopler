@@ -131,12 +131,16 @@ v2.0:
     '#title': 'Add media support to d_blog.'
     '#description': '<p>We added media support to Droopler blog module, now we have to import new fields.</p>'
     '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
-    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features/diff/d_blog' }
   droopler__droopler_update_8104_3:
+    '#title': 'Add media support to d_product.'
+    '#description': '<p>We added media support to Droopler product module, now we have to import new fields.</p>'
+    '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
+    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features/diff/d_product' }
+  droopler__droopler_update_8104_4:
     '#title': 'Migrate media fields.'
     '#description': '<p>Migrate the content of all image fields to Media.</p>'
     '#description_failed': '<p><strong>Migration failed</strong>, please run the updates again.</p>'
-  droopler__droopler_update_8104_4:
+  droopler__droopler_update_8104_5:
     '#title': 'Remove old image fields.'
     '#description': '<p>Remove all fields that are not needed anymore after migrating to media..</p>'
     '#description_failed': '<p><strong>Removal failed</strong>, please run the updates again.</p>'
