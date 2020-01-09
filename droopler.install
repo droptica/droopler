@@ -534,7 +534,7 @@ function droopler_update_8103() {
         'views.view.product_images' => '584b4d2edd9f9f620c9b00bbdbc79d27',
         'views.view.products_list' => '15d1e18a472ae1ac14bcbecf69da96d0',
         'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
-        'simple_sitemap.bundle_settings.default.node.d_product' => '',
+        'simple_sitemap.bundle_settings.node.d_product' => '',
         'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
         // todo: The updates below must be carefully tested, they can break existing sites (due to moved configs).
         'block.block.mobilefilterssubmit' => 'cf04a4ce3efb8e1db0594b00949644a2',
@@ -653,6 +653,19 @@ function droopler_update_8104() {
   else {
     $values['droopler__droopler_update_8104_2'] = TRUE;
   }
+  if ($module_handler->moduleExists('d_product')) {
+    // Update d_product config.
+    $configs = [
+      'd_blog' => [
+        'field.storage.node.field_d_product_media' => '',
+        'field.field.node.d_product.field_d_product_media' => '',
+      ],
+    ];
+    $values['droopler__droopler_update_8104_2'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8104_2'] = TRUE;
+  }
 
   /**
    * Migrate images to media fields.
@@ -669,6 +682,7 @@ function droopler_update_8104() {
     'field_d_image_background' => 'field_d_media_background',
     'field_blog_main_image' => 'field_blog_media_main_image',
     'field_teaser_image' => 'field_teaser_media_image',
+    'field_product_image' => 'field_d_product_media'
   ];
   $fieldsMigrationSpecialCases = [
     'd_p_carousel_item' => [
