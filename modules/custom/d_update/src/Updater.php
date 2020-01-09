@@ -7,6 +7,8 @@
 
 namespace Drupal\d_update;
 
+use Drupal;
+use Drupal\block\Entity\Block;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
@@ -153,9 +155,10 @@ class Updater {
       }
     }
     if (!$this->configCompare->compare($name, $hash)) {
-      $this->getLogger('d_update')->warning('Detected changes in %config, aborting import...', [
-        '%config' => $name,
-      ]);
+      $this->getLogger('d_update')
+        ->warning('Detected changes in %config, aborting import...', [
+          '%config' => $name,
+        ]);
       return FALSE;
     }
 
@@ -166,7 +169,8 @@ class Updater {
       $storage = $this->entityTypeManager->getStorage($entity_type);
 
       // Try to load the existing config.
-      $id = $storage->getIDFromConfigName($name, $storage->getEntityType()->getConfigPrefix());
+      $id = $storage->getIDFromConfigName($name, $storage->getEntityType()
+        ->getConfigPrefix());
       $existingEntity = $storage->load($id);
       if (!empty($existingEntity)) {
         // Set the proper UUID to avoid conflicts.
@@ -185,15 +189,16 @@ class Updater {
       // Do the update.
       try {
         $entity->save();
-        $this->getLogger('d_update')->info('Successfully imported field config %config', [
-          '%config' => $name,
-        ]);
+        $this->getLogger('d_update')
+          ->info('Successfully imported field config %config', [
+            '%config' => $name,
+          ]);
         return TRUE;
-      }
-      catch (EntityStorageException $e) {
-        $this->getLogger('d_update')->error('Error while importing entity config %config', [
-          '%config' => $name,
-        ]);
+      } catch (EntityStorageException $e) {
+        $this->getLogger('d_update')
+          ->error('Error while importing entity config %config', [
+            '%config' => $name,
+          ]);
         return FALSE;
       }
     }
@@ -201,15 +206,16 @@ class Updater {
       // Otherwise use plain config storage.
       try {
         $this->configStorage->write($name, $data);
-        $this->getLogger('d_update')->info('Successfully imported config %config', [
-          '%config' => $name,
-        ]);
+        $this->getLogger('d_update')
+          ->info('Successfully imported config %config', [
+            '%config' => $name,
+          ]);
         return TRUE;
-      }
-      catch (StorageException $e) {
-        $this->getLogger('d_update')->error('Error while importing config %config', [
-          '%config' => $name,
-        ]);
+      } catch (StorageException $e) {
+        $this->getLogger('d_update')
+          ->error('Error while importing config %config', [
+            '%config' => $name,
+          ]);
         return FALSE;
       }
     }
@@ -264,4 +270,41 @@ class Updater {
     return $this->moduleInstaller->install($modules, $enable_dependencies);
   }
 
+  /**
+   * Method creates new instance of existing blocks inside another theme.
+   *
+   * @param $subthemeName
+   *   Name of the subtheme to place block into.
+   *
+   * @param array $configs
+   *   List of blocks configs to instantiate.
+   */
+  public function instantiateBlocksForSubtheme($subthemeName, array $configs) {
+    foreach ($configs as $configName) {
+      $baseConfig = Drupal::config($configName)->getRawData();
+
+      $values = [
+        'id' => $baseConfig['id'] . '_' . $subthemeName,
+        'plugin' => $baseConfig['plugin'],
+        'region' => $baseConfig['region'],
+        'theme' => $subthemeName,
+        'settings' => [
+          'id' => $baseConfig['settings']['id'],
+          'label' => $baseConfig['settings']['label'],
+          'provider' => $baseConfig['settings']['provider'],
+          'label_display' => $baseConfig['settings']['label_display'],
+        ],
+      ];
+      $block = Block::create($values);
+
+      try {
+        $block->save();
+      } catch (EntityStorageException $e) {
+        $this->getLogger('d_update')
+          ->error('Error while instantiating block from %config', [
+            '%config' => $configName,
+          ]);
+      }
+    }
+  }
 }

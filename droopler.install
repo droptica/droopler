@@ -153,8 +153,7 @@ function droopler_enable_subtheme() {
 
     // Additional operations after subtheme installation.
     droopler_enable_subtheme_postprocess();
-  }
-  catch (Exception $e) {
+  } catch (Exception $e) {
     \Drupal::logger('droopler_install')->notice('No subtheme detected.');
   }
 }
@@ -171,10 +170,12 @@ function droopler_enable_subtheme() {
  */
 function droopler_enable_subtheme_postprocess() {
   // Set logo same as on base theme if custom path has been defined there.
-  $base_settings = Drupal::configFactory()->getEditable('droopler_theme.settings');
+  $base_settings = Drupal::configFactory()
+    ->getEditable('droopler_theme.settings');
   if (!$base_settings->get('logo.use_default')
     && $logo_path = $base_settings->get('logo.path')) {
-    $current_settings = Drupal::configFactory()->getEditable('droopler_subtheme.settings');
+    $current_settings = Drupal::configFactory()
+      ->getEditable('droopler_subtheme.settings');
     $current_settings->set('logo.use_default', FALSE);
     $current_settings->set('logo.path', $logo_path);
     $current_settings->save();
@@ -558,9 +559,12 @@ function droopler_update_8103() {
       ],
     ];
     $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
-  }
 
-  // @todo: Set the above blocks also for subtheme, if it is enabled.
+    if (\Drupal::service('theme_handler')
+        ->getDefault() === 'droopler_subtheme') {
+      $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
+    }
+  }
 
   $progress = [
     'v2.0' => $values,
@@ -682,7 +686,7 @@ function droopler_update_8104() {
     'field_d_image_background' => 'field_d_media_background',
     'field_blog_main_image' => 'field_blog_media_main_image',
     'field_teaser_image' => 'field_teaser_media_image',
-    'field_product_image' => 'field_d_product_media'
+    'field_product_image' => 'field_d_product_media',
   ];
   $fieldsMigrationSpecialCases = [
     'd_p_carousel_item' => [
@@ -691,13 +695,14 @@ function droopler_update_8104() {
   ];
 
   /** @var \Drupal\Core\Entity\EntityStorageInterface $fieldStorage */
-  $fieldStorage = \Drupal::entityTypeManager()->getStorage('field_storage_config');
+  $fieldStorage = \Drupal::entityTypeManager()
+    ->getStorage('field_storage_config');
 
   $listOfMigratedFields = [];
   foreach ($fieldsToMigrate as $sourceFieldName => $targetFieldName) {
     $res = $fieldStorage->loadByProperties([
-        'field_name' => $sourceFieldName,
-      ]);
+      'field_name' => $sourceFieldName,
+    ]);
 
     /** @var \Drupal\field\Entity\FieldStorageConfig $storage */
     foreach ($res as $storage) {
@@ -778,11 +783,11 @@ function droopler_update_8104() {
 
           \Drupal::logger('droopler_update')
             ->info('Deleted @oldField field, it\'s values were migrated to @newField for all @bundle @type', [
-            '@oldField' => $fieldToDelete,
-            '@newField' => $newFieldName,
-            '@bundle' => $bundle,
-            '@type' => $entityType,
-          ]);
+              '@oldField' => $fieldToDelete,
+              '@newField' => $newFieldName,
+              '@bundle' => $bundle,
+              '@type' => $entityType,
+            ]);
         }
       }
     }
@@ -913,7 +918,7 @@ function droopler_update_8105() {
   else {
     $values['droopler__droopler_update_8105_2'] = TRUE;
   }
-  if($module_handler->moduleExists('d_product')) {
+  if ($module_handler->moduleExists('d_product')) {
     $configs = [
       'd_product' => [
         'core.entity_view_mode.media.d_product_gallery' => 'e6d91a7c6004798c1f0b775638880d20',
@@ -928,7 +933,8 @@ function droopler_update_8105() {
       ],
     ];
     $values['droopler__droopler_update_8105_3'] = $updater->importConfigs($configs);
-  } else {
+  }
+  else {
     $values['droopler__droopler_update_8105_3'] = TRUE;
   }
 
