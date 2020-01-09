@@ -35,17 +35,16 @@
   Drupal.behaviors.mainMenuMobileNavbarListener = {
     attach: function (context, settings) {
       $ ('#navbar-main button.navbar-toggler', context).click(function() {
-        // Avoids classes toggle while collapsing.
-        var aria = $(this).attr('aria-expanded');
         if ((!$('body').hasClass('navbar-open') && !$('.navbar').hasClass('collapsing'))) {
           $('body').toggleClass('navbar-open');
           $('.navbar').toggleClass('open');
+          $('html, body').stop().animate({scrollTop: 0}, 500);
         }
         else {
           $('body').toggleClass('navbar-open');
           $('.navbar').toggleClass('open');
         }
-        $(this).attr('aria-expanded', (aria === 'false'));
+        $(this).attr('aria-expanded', ($(this).attr('aria-expanded') === 'false'));
       });
 
       // Close sidebar when clicked overflowed content.
