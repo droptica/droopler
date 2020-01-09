@@ -111,12 +111,9 @@
       </div>
     {% endblock %}
   {% endif %}
-  {% if user.hasPermission('administer nodes') %}
-    {% if page.admin_tabs %}
-      <div class="admin_tabs container">
-        {{ page.admin_tabs }}
-      </div>
-    {% endif %}
+
+  {% if page.admin_tabs %}
+    {{ page.admin_tabs }}
   {% endif %}
   <div id="main-wrapper" class="layout-main-wrapper clearfix">
     {% block content %}
