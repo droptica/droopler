@@ -28,7 +28,7 @@ $d-blog-teaser-text-padding-left-mobile: 30px !default;
 $d-blog-margin-between-teaser-mobile: 15px !default;
 $d-blog-teaser-blog-post-title-mobile: 1.0625rem !default;
 $d-blog-read-article-font-size: 0.9375rem !default;
-$d-blog-title-teaser-font-size-desktop: 2.375rem !default;
+$d-blog-title-teaser-font-size-desktop: 1.3rem !default;
 $d-blog-title-teaser-padding-top-desktop: 18px !default;
 $d-blog-listing-header-margin: 0px !default;
 $d-blog-teaser-text-padding-desktop-tab: 0 !default;
@@ -38,7 +38,7 @@ $d-blog-read-article-margin-top-desktop-tablet: 21px !default;
 $d-blog-teaser-image-width-tablet-desktop: 600px !default;
 $d-blog-teaser-image-margin-bottom-tablet: 15px !default;
 $d-blog-teaser-image-row-padding-desktop: 0 !default;
-$d-blog-teaser-title-margin-top-desktop: 73px !default;
+$d-blog-teaser-title-margin-top-desktop: 100px !default;
 $d-blog-teaser-title-padding-desktop: 37px !default;
 $d-blog-teaser-title-margin-between-text-decoration-mobile: 0.75rem !default;
 $d-blog-teaser-min-height-desktop: 520px !default;
@@ -230,8 +230,14 @@ $d-blog-article-row-min-height: 420px !default;
     }
 
     .node_blog_post_title {
-      font-size: $d-blog-title-teaser-font-size-desktop;
       padding-top: $d-blog-title-teaser-padding-top-desktop;
+      font-size: $d-blog-title-teaser-font-size-desktop;
+      a {
+        font-size: inherit;
+        span {
+          display: block;
+        }
+      }
     }
 
     .node__content {
