@@ -661,10 +661,10 @@ function droopler_update_8104() {
         'field.field.node.d_product.field_d_product_media' => '',
       ],
     ];
-    $values['droopler__droopler_update_8104_5'] = $updater->importConfigs($configs);
+    $values['droopler__droopler_update_8104_3'] = $updater->importConfigs($configs);
   }
   else {
-    $values['droopler__droopler_update_8104_5'] = TRUE;
+    $values['droopler__droopler_update_8104_3'] = TRUE;
   }
 
   /**
@@ -927,7 +927,7 @@ function droopler_update_8105() {
         'core.entity_view_display.node.d_product.d_small_box' => '75df7a1f59e107eab4f496ff7455bdea',
       ],
     ];
-    $values['droopler__droopler_update_8105_2'] = $updater->importConfigs($configs);
+    $values['droopler__droopler_update_8105_3'] = $updater->importConfigs($configs);
   } else {
     $values['droopler__droopler_update_8105_3'] = TRUE;
   }
