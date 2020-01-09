@@ -140,6 +140,10 @@ v2.0:
     '#title': 'Remove old image fields.'
     '#description': '<p>Remove all fields that are not needed anymore after migrating to media..</p>'
     '#description_failed': '<p><strong>Removal failed</strong>, please run the updates again.</p>'
+  droopler__droopler_update_8105_0:
+    '#title': 'Theme new regions.'
+    '#description': '<p>Add new regions to the theme.</p>'
+    '#description_failed': '<p><strong>Copy regions from droopler_theme.info.yml to droopler_subtheme.info.yml manually</strong></p>'
   droopler__droopler_update_8105_1:
     '#title': 'Update view modes for new and updated fields.'
     '#description': '<p>Now when the field config is imported, we have to update the paragraph form and view modes.</p>'
