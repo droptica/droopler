@@ -913,6 +913,7 @@ function droopler_update_8105() {
         'core.entity_view_display.node.d_product.d_small_box' => '',
       ],
     ];
+    $values['droopler__droopler_update_8105_2'] = $updater->importConfigs($configs);
   } else {
     $values['droopler__droopler_update_8105_3'] = TRUE;
   }
