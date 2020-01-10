@@ -5,7 +5,10 @@
  */
 
 use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Drupal\Core\Extension\MissingDependencyException;
+use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
  * Implements hook_install().
@@ -20,26 +23,9 @@ function droopler_install() {
   standard_install();
 
   \Drupal::configFactory()
-    ->getEditable('system.theme')
-    ->set('default', 'droopler_theme')
-    ->set('admin', 'seven')
-    ->save();
-
-  \Drupal::configFactory()
     ->getEditable('node.settings')
     ->set('use_admin_theme', TRUE)
     ->save();
-
-  // @TODO this should not really be here because this subtheme is not part
-  // of the distribution
-  $themes = \Drupal::service('theme_handler')->listInfo();
-  if(isset($themes['droopler_subtheme'])) {
-    \Drupal::configFactory()
-      ->getEditable('system.theme')
-      ->set('default', 'droopler_subtheme')
-      ->set('admin', 'seven')
-      ->save();
-  }
 
   \Drupal::configFactory()
     ->getEditable('system.site')
@@ -53,10 +39,17 @@ function droopler_install() {
   // Try to install custom init that alters the original one.
   try {
     \Drupal::service('module_installer')->install(['d_custom_init']);
+  } catch (\Drupal\Core\Extension\MissingDependencyException $e) {
+    \Drupal::logger('droopler_install')
+      ->notice('Custom content init not detected.');
   }
-  catch (\Drupal\Core\Extension\MissingDependencyException $e) {
-    \Drupal::logger('droopler_install')->notice('Custom content init not detected.');
-  }
+
+  // Set droopler_theme as default.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('default', 'droopler_theme')
+    ->set('admin', 'seven')
+    ->save();
 }
 
 /**
@@ -84,19 +77,25 @@ function droopler_install_tasks() {
       'display_name' => t('Init content'),
       'type' => 'normal',
     ],
+    'droopler_enable_subtheme' => [
+      'display' => TRUE,
+      'display_name' => t('Install and enable subtheme'),
+      'type' => 'normal',
+    ],
   ];
-
   return $tasks;
 }
 
 /**
  * Import a config file.
- * @todo To be moved to a new manager class.
  *
  * @param string $module
  *  Module name.
  * @param string $name
  *  Config file name without .yml extension.
+ *
+ * @todo To be moved to a new manager class.
+ *
  */
 function _droopler_import_config($module, $name) {
   $config_path = drupal_get_path('module', $module) . '/config/install';
@@ -125,6 +124,7 @@ function droopler_enable_product() {
     'd_product',
   ];
   \Drupal::service('module_installer')->install($modules, TRUE);
+  \Drupal::service('config.installer')->installOptionalConfig();
 }
 
 /**
@@ -137,6 +137,54 @@ function droopler_enable_demo() {
     'd_demo',
   ];
   \Drupal::service('module_installer')->install($modules, TRUE);
+}
+
+/**
+ * Enable subtheme.
+ */
+function droopler_enable_subtheme() {
+  try {
+    \Drupal::service('theme_installer')->install(['droopler_subtheme']);
+    \Drupal::configFactory()
+      ->getEditable('system.theme')
+      ->set('default', 'droopler_subtheme')
+      ->set('admin', 'seven')
+      ->save();
+
+    // Additional operations after subtheme installation.
+    droopler_enable_subtheme_postprocess();
+  }
+  catch (Exception $e) {
+    \Drupal::logger('droopler_install')->notice('No subtheme detected.');
+  }
+}
+
+/**
+ * Additional operations after subtheme installation.
+ *
+ * All those operations have to be executed after installation of the subtheme.
+ * We can think about to place them in the droopler_subtheme.install file when
+ * this functionality will be implemented.
+ *
+ * @see: https://www.drupal.org/project/drupal/issues/2652542
+ * @see: https://www.drupal.org/node/2937955
+ */
+function droopler_enable_subtheme_postprocess() {
+  // Set logo same as on base theme if custom path has been defined there.
+  $base_settings = Drupal::configFactory()->getEditable('droopler_theme.settings');
+  if (!$base_settings->get('logo.use_default')
+    && $logo_path = $base_settings->get('logo.path')) {
+    $current_settings = Drupal::configFactory()->getEditable('droopler_subtheme.settings');
+    $current_settings->set('logo.use_default', FALSE);
+    $current_settings->set('logo.path', $logo_path);
+    $current_settings->save();
+  }
+
+  // Copy configuration of the WeMegaMenu from base to subtheme.
+  if ($base_menu = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme')) {
+    WeMegaMenuBuilder::saveConfig('main', 'droopler_subtheme', json_encode($base_menu));
+    we_megamenu_flush_render_cache();
+  }
 }
 
 /**
@@ -174,13 +222,12 @@ function droopler_update_8102() {
   try {
     $modules = [
       'checklistapi',
-      'd_update'
+      'd_update',
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_0'] = $result;
     $values['droopler__droopler_update_8102_1'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_0'] = FALSE;
     $values['droopler__droopler_update_8102_1'] = FALSE;
   }
@@ -268,13 +315,12 @@ function droopler_update_8102() {
   try {
     $modules = [
       'geysir',
-      'd_geysir'
+      'd_geysir',
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_5'] = $result;
     $values['droopler__droopler_update_8102_6'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_5'] = FALSE;
     $values['droopler__droopler_update_8102_6'] = FALSE;
   }
@@ -310,6 +356,9 @@ function droopler_update_8103() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
+  /** Migrate old saved checklist configs to new state storage. */
+  $updater->checklist()->migrateConfigProgressToStateProgress();
+
   // Install contrib modules.
   try {
     $modules = [
@@ -318,8 +367,7 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_0'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
 
@@ -327,7 +375,6 @@ function droopler_update_8103() {
   $configs = [
     'd_p' => [
       'field.storage.paragraph.field_d_background_color' => '',
-      'field.storage.paragraph.field_d_display_mode' => '',
       'field.storage.paragraph.field_d_node_reference' => '',
       'field.storage.paragraph.field_d_settings' => '',
     ],
@@ -336,15 +383,30 @@ function droopler_update_8103() {
     ],
     'd_p_carousel' => [
       'field.field.paragraph.d_p_carousel.field_d_settings' => '',
+      'field.field.paragraph.d_p_carousel_item.field_d_settings' => '',
+    ],
+    'd_p_counters' => [
+      'field.field.paragraph.d_p_group_of_counters.field_d_settings' => '',
+      'field.field.paragraph.d_p_single_counter.field_d_settings' => '',
+    ],
+    'd_p_gallery' => [
+      'field.field.paragraph.d_p_gallery.field_d_settings' => '',
     ],
     'd_p_form' => [
       'field.storage.paragraph.field_d_layout_modifier' => '',
       'field.field.paragraph.d_p_form.field_d_layout_modifier' => '',
       'field.field.paragraph.d_p_form.field_d_long_text' => '',
+      'field.field.paragraph.d_p_form.field_d_settings' => '',
     ],
     'd_p_side_image' => [
       'field.field.paragraph.d_p_side_image.field_d_background_color' => '',
       'field.field.paragraph.d_p_side_image.field_d_settings' => '',
+    ],
+    'd_p_side_tiles' => [
+      'field.field.paragraph.d_p_side_tiles.field_d_settings' => '',
+    ],
+    'd_p_subscribe_file' => [
+      'field.field.paragraph.d_p_subscribe_file.field_d_settings' => '',
     ],
     'd_p_side_embed' => [
       'field.field.paragraph.d_p_side_embed.field_d_settings' => '',
@@ -353,11 +415,16 @@ function droopler_update_8103() {
       'field.field.paragraph.d_p_group_of_text_blocks.field_d_long_text' => '',
       'field.field.paragraph.d_p_group_of_text_blocks.field_d_settings' => '',
       'field.field.paragraph.d_p_single_text_block.field_d_background_color' => '',
-      'field.field.paragraph.d_p_single_text_block.field_d_image_background' => '',
       'field.field.paragraph.d_p_single_text_block.field_d_settings' => '',
     ],
     'd_p_text_paged' => [
       'field.field.paragraph.d_p_text_paged.field_d_settings' => '',
+    ],
+    'd_p_text_with_bckg' => [
+      'field.field.paragraph.d_p_text_with_bckg.field_d_settings' => '',
+    ],
+    'd_p_tiles' => [
+      'field.field.paragraph.d_p_tiles.field_d_settings' => '',
     ],
   ];
   $values['droopler__droopler_update_8103_1'] = $updater->importConfigs($configs);
@@ -373,8 +440,7 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_2'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_2'] = FALSE;
   }
 
@@ -409,59 +475,32 @@ function droopler_update_8103() {
   ];
   $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
 
-  // Update view modes for new and updated fields.
-  $configs = [
-    'd_p_banner' => [
-      'core.entity_form_display.paragraph.d_p_banner.default' => '897f699c224b580fc3744efcea5bfd65',
-      'core.entity_view_display.paragraph.d_p_banner.default' => '0445e6e0cb15347d8a69d27b3e5716cf',
-    ],
-    'd_p_carousel' => [
-      'core.entity_form_display.paragraph.d_p_carousel.default' => 'a619fe5018d18626fe0714a88e3e0408',
-      'core.entity_view_display.paragraph.d_p_carousel.default' => '46f7bbecfd6d6d6efe8da68f95a26ec2',
-    ],
-    'd_p_form' => [
-      'core.entity_form_display.paragraph.d_p_form.default' => '28c6c56d072013066b56426154171e19',
-      'core.entity_view_display.paragraph.d_p_form.default' => '6b1812c3716590a66b0f20979fd1fb00',
-    ],
-    'd_p_side_image' => [
-      'core.entity_form_display.paragraph.d_p_side_image.default' => '750726e0a68fe80a9520159cfdc04fd5',
-      'core.entity_view_display.paragraph.d_p_side_image.default' => '8954de48057199341a186210809516d8',
-    ],
-    'd_p_side_embed' => [
-      'core.entity_form_display.paragraph.d_p_side_embed.default' => 'a2e5aed533efb82c44b6bc4a3c01f2b7',
-      'core.entity_view_display.paragraph.d_p_side_embed.default' => 'e3b3ff4b69aa246e224901b5bbee6cfb',
-    ],
-    'd_p_text_blocks' => [
-      'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '5639c681e3d0fff46a032bd4ca1176d4',
-      'core.entity_form_display.paragraph.d_p_single_text_block.default' => 'c7779dd94294f44c0ff6c58714c5003f',
-      'core.entity_view_display.paragraph.d_p_group_of_text_blocks.default' => 'f76c231fa0f952111112b71d72a02123',
-      'core.entity_view_display.paragraph.d_p_single_text_block.default' => '761ff6fa4a0e4b78da1f0a0a2c05c951',
-    ],
-    'd_p_text_paged' => [
-      'core.entity_form_display.paragraph.d_p_text_paged.default' => '4ef25a9f58e9a54bfd50eca73a3e5f22',
-      'core.entity_view_display.paragraph.d_p_text_paged.default' => 'f860332e18f47f8b1a38f8ceea9f4ce0',
-    ],
-  ];
-  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
-
   // Update misc config.
   $configs = [
-    'droopler' => [
+    'profile/droopler' => [
       'core.entity_form_display.contact_message.feedback.default' => '',
-      'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
-      'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
-      'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
+      // @todo: These configs cause problems in logs, they must be double tested.
+      //'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
+      //'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
+      //'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
+      'taxonomy.vocabulary.tags' => '43f9e4a277457349d58cedb7bbe1dc76',
     ],
     'd_content' => [
       'core.entity_view_display.node.content_page.d_small_box' => '',
       'simple_sitemap.bundle_settings.default.node.content_page' => '',
+      'metatag.metatag_defaults.node__content_page' => 'e6d4f236df5d84f031d8edf6acfcd6da',
     ],
     'd_p_subscribe_file' => [
       'views.view.subscribe_file_paragraph' => '',
     ],
+    // @todo: We must check the behavior of the language switcher after update.
+    //'theme/droopler_theme' => [
+    //  'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
+    //],
   ];
-  $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
 
+  /** @var \Drupal\Core\Extension\ModuleHandler $module_handler */
   $module_handler = \Drupal::service('module_handler');
   if ($module_handler->moduleExists('d_blog')) {
     // Update d_blog config.
@@ -473,10 +512,36 @@ function droopler_update_8103() {
         'core.entity_view_display.node.blog_post.teaser_small' => '',
         'pathauto.pattern.node_blog_pattern' => '',
         'responsive_image.styles.blog_images_style' => '5fffdeff846e07fe8c2e72f24ffab7f4',
-        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => 'e79637d81c5d2bfbda6df4bac7ca43c7',
         'core.entity_view_display.taxonomy_term.blog_posts_category.default' => 'acbf5d2748f47042c1171e66d48d1dc9',
         'taxonomy.vocabulary.blog_posts_category' => 'f2aa866752d8525f4dda0da49e99953b',
         'simple_sitemap.bundle_settings.default.node.blog_post' => '',
+        'field.field.node.blog_post.field_blog_sections' => '1f6100447b6fff05e8b60f6f23cfaea5',
+        'views.view.blog_listing' => 'e617972f67997f8d8f4c60eb29f49bd2',
+      ],
+    ];
+    $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8103_5'] = TRUE;
+  }
+
+  if ($module_handler->moduleExists('d_product')) {
+    // Update d_product config.
+    $configs = [
+      'd_product' => [
+        'field.field.node.d_product.field_page_section' => 'b691ac5762c4b87ed40f125f1772d7c1',
+        'field.field.node.d_product.body' => '86148679c204177206e4aa1c7976a533',
+        'views.view.product_images' => 'e72d8ee10d2d1192ce439c1fdd7287cf',
+        'views.view.products_list' => '44b33ce68241349845d74959c90e5b72',
+        'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
+        'simple_sitemap.bundle_settings.node.d_product' => 'f8dcc16f0e902d016eb25ba28c27666c',
+        'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
+        // todo: The updates below must be carefully tested, they can break existing sites (due to moved configs).
+        'block.block.mobilefilterssubmit' => 'cf04a4ce3efb8e1db0594b00949644a2',
+        'block.block.productcategoriestaxonomytermname' => '791b0420b472bb813403557acb2514c1',
+        'block.block.resetfilters_2' => 'f45e47fc43e155355fbdffa3fd1c5173',
+        'block.block.resetfilters' => '978cbc78d2875b9ec252b91b0347900d',
+        'block.block.tagstaxonomytermname' => '419c970f6ffd428be18f995df7b6c097',
       ],
     ];
     $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
@@ -485,35 +550,17 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_6'] = TRUE;
   }
 
-  if ($module_handler->moduleExists('d_product')) {
-    // Update d_product config.
+  if ($module_handler->moduleExists('we_megamenu')) {
     $configs = [
-      'd_product' => [
-        'core.entity_view_display.node.d_product.d_small_box' => '',
-        'core.entity_view_display.node.d_product.default' => 'c4c770c7f830f5a335f1625c36fb034b',
-        'core.entity_view_display.node.d_product.full' => '6058af0248dddc6eafb22e6938f6c67a',
-        'core.entity_view_display.node.d_product.teaser' => '4457e626eccea06724b2d7532af23738',
-        'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
-        'simple_sitemap.bundle_settings.default.node.d_product' => '',
-        'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
+      'theme/droopler_theme' => [
+        'block.block.mainnavigation' => '',
+        'block.block.mainnavigation_2' => '',
       ],
     ];
     $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
   }
-  else {
-    $values['droopler__droopler_update_8103_7'] = TRUE;
-  }
 
-  if ($module_handler->moduleExists('we_megamenu')) {
-
-    $configs = [
-      'droopler' => [
-        'block.block.mainnavigation' => '',
-        'block.block.mainnavigation_2' => '',
-        ]
-      ];
-    $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
-  }
+  // @todo: Set the above blocks also for subtheme, if it is enabled.
 
   $progress = [
     'v2.0' => $values,
@@ -521,3 +568,375 @@ function droopler_update_8103() {
 
   $updater->checklist()->saveProgress($progress);
 }
+
+/**
+ * Droopler 2.0 Media migrate.
+ */
+function droopler_update_8104() {
+  //Import all target Media Fields
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_content' => [
+      'field.storage.node.field_teaser_media_image' => '',
+      'field.field.node.content_page.field_teaser_media_image' => '',
+    ],
+    'd_p_banner' => [
+      'field.field.paragraph.d_p_banner.field_d_media_background' => '',
+      'field.field.paragraph.d_p_banner.field_d_media_icon' => '',
+    ],
+    'd_p_carousel' => [
+      'field.field.paragraph.d_p_carousel.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_carousel_item.field_d_media_icon' => '',
+    ],
+    'd_p_counters' => [
+      'field.field.paragraph.d_p_group_of_counters.field_d_media_background' => '',
+      'field.field.paragraph.d_p_group_of_counters.field_d_media_icon' => '',
+    ],
+    'd_p_gallery' => [
+      'field.field.paragraph.d_p_gallery.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_gallery.field_d_media_image' => '',
+    ],
+    'd_p_form' => [
+      'field.field.paragraph.d_p_form.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_form.field_d_media_background' => '',
+    ],
+    'd_p_side_embed' => [
+      'field.field.paragraph.d_p_side_embed.field_d_media_icon' => '',
+    ],
+    'd_p_side_image' => [
+      'field.field.paragraph.d_p_side_image.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_side_image.field_d_media_background' => '',
+    ],
+    'd_p_side_tiles' => [
+      'field.field.paragraph.d_p_side_tiles.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_side_tiles.field_d_media_image' => '',
+    ],
+    'd_p_subscribe_file' => [
+      'field.field.paragraph.d_p_subscribe_file.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_subscribe_file.field_d_media_background' => '',
+    ],
+    'd_p_text_blocks' => [
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_media_background' => '',
+      'field.field.paragraph.d_p_single_text_block.field_d_media_icon' => '',
+    ],
+    'd_p_text_paged' => [
+      'field.field.paragraph.d_p_text_paged.field_d_media_icon' => '',
+    ],
+    'd_p_text_with_bckg' => [
+      'field.field.paragraph.d_p_text_with_bckg.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_text_with_bckg.field_d_media_background' => '',
+    ],
+    'd_p_tiles' => [
+      'field.field.paragraph.d_p_tiles.field_d_media_icon' => '',
+      'field.field.paragraph.d_p_tiles.field_d_media_image' => '',
+    ],
+  ];
+  $values['droopler__droopler_update_8104_1'] = $updater->importConfigs($configs);
+
+  $module_handler = \Drupal::service('module_handler');
+  if ($module_handler->moduleExists('d_blog')) {
+    // Update d_blog config.
+    $configs = [
+      'd_blog' => [
+        'core.entity_view_mode.media.d_blog_image' => '',
+        'core.entity_view_display.media.d_image.d_blog_image' => '',
+        'field.storage.node.field_blog_media_main_image' => '',
+        'field.field.paragraph.d_p_blog_image.field_d_media_image' => '',
+        'field.field.node.blog_post.field_blog_media_main_image' => '',
+      ],
+    ];
+    $values['droopler__droopler_update_8104_2'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8104_2'] = TRUE;
+  }
+  if ($module_handler->moduleExists('d_product')) {
+    // Update d_product config.
+    $configs = [
+      'd_product' => [
+        'field.storage.node.field_d_product_media' => '',
+        'field.field.node.d_product.field_d_product_media' => '',
+      ],
+    ];
+    $values['droopler__droopler_update_8104_3'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8104_3'] = TRUE;
+  }
+
+  /**
+   * Migrate images to media fields.
+   */
+
+  /**
+   * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
+   */
+  $media_manager = Drupal::service('d_content_init.manager_media');
+
+  $fieldsToMigrate = [
+    'field_d_icon' => 'field_d_media_icon',
+    'field_d_image' => 'field_d_media_image',
+    'field_d_image_background' => 'field_d_media_background',
+    'field_blog_main_image' => 'field_blog_media_main_image',
+    'field_teaser_image' => 'field_teaser_media_image',
+    'field_product_image' => 'field_d_product_media'
+  ];
+  $fieldsMigrationSpecialCases = [
+    'd_p_carousel_item' => [
+      'field_d_image' => 'field_d_media_icon',
+    ],
+  ];
+
+  /** @var \Drupal\Core\Entity\EntityStorageInterface $fieldStorage */
+  $fieldStorage = \Drupal::entityTypeManager()->getStorage('field_storage_config');
+
+  $listOfMigratedFields = [];
+  foreach ($fieldsToMigrate as $sourceFieldName => $targetFieldName) {
+    $res = $fieldStorage->loadByProperties([
+        'field_name' => $sourceFieldName,
+      ]);
+
+    /** @var \Drupal\field\Entity\FieldStorageConfig $storage */
+    foreach ($res as $storage) {
+      $bundles = $storage->getBundles();
+      $entityType = $storage->getTargetEntityTypeId();
+
+      $entities = \Drupal::entityTypeManager()
+        ->getStorage($entityType)->loadByProperties([
+          'type' => $bundles,
+        ]);
+
+      $errorsWhileMigrating = [];
+
+      /** @var ContentEntityBase $entity */
+      foreach ($entities as $entity) {
+        if (!$entity->hasField($sourceFieldName)) {
+          continue;
+        }
+
+        /** @var FileFieldItemList $sourceField */
+        $sourceField = $entity->get($sourceFieldName);
+
+        if ($sourceField->isEmpty()) {
+          continue;
+        }
+        $entityTargetFieldName = isset($fieldsMigrationSpecialCases[$entity->bundle()][$sourceFieldName]) ? $fieldsMigrationSpecialCases[$entity->bundle()][$sourceFieldName] : $targetFieldName;
+
+        $sourceValues = $sourceField->getValue();
+
+        try {
+          foreach ($sourceValues as $sourceImage) {
+            $media_entity = $media_manager->createMediaImageFromFid($sourceImage['target_id'], $sourceImage['alt']);
+            $entity->get($entityTargetFieldName)->appendItem($media_entity);
+
+          }
+        } catch (InvalidArgumentException $e) {
+          $errorsWhileMigrating[$entity->bundle()][$sourceField] = $sourceFieldName;
+
+          \Drupal::logger('droopler_update')
+            ->error('Exception while migrating media images for @sourceField to @targetField at @bundle @type.', [
+              '@sourceField' => $sourceFieldName,
+              '@targetField' => $entityTargetFieldName,
+              '@bundle' => $entity->bundle(),
+              '@type' => $entityType,
+            ]);
+        }
+
+        $entity->save();
+      }
+
+      foreach ($bundles as $migratedBundle) {
+        if (isset($errorsWhileMigrating[$migratedBundle][$sourceFieldName])) {
+          continue;
+        }
+        $listOfMigratedFields[$entityType][$migratedBundle][$sourceFieldName] = $sourceFieldName;
+      }
+    }
+  }
+
+  $values['droopler__droopler_update_8104_4'] = TRUE;
+
+  /**
+   *  Delete migrated fields.
+   */
+
+  /** @var $entityFieldManager EntityFieldManager */
+  $entityFieldManager = \Drupal::service('entity_field.manager');
+
+  foreach ($listOfMigratedFields as $entityType => $migratedBundles) {
+    foreach ($migratedBundles as $bundle => $migratedBundleFields) {
+      $bundleAllFields = $entityFieldManager->getFieldDefinitions($entityType, $bundle);
+
+      foreach ($migratedBundleFields as $fieldToDelete) {
+        if (isset($bundleAllFields[$fieldToDelete])) {
+          $bundleAllFields[$fieldToDelete]->delete();
+
+          $newFieldName = isset($fieldsMigrationSpecialCases[$bundle][$fieldToDelete]) ? $fieldsMigrationSpecialCases[$bundle][$fieldToDelete] : $fieldsToMigrate[$fieldToDelete];
+
+          \Drupal::logger('droopler_update')
+            ->info('Deleted @oldField field, it\'s values were migrated to @newField for all @bundle @type', [
+            '@oldField' => $fieldToDelete,
+            '@newField' => $newFieldName,
+            '@bundle' => $bundle,
+            '@type' => $entityType,
+          ]);
+        }
+      }
+    }
+  }
+
+  $values['droopler__droopler_update_8104_5'] = TRUE;
+
+  $progress = [
+    'v2.0' => $values,
+  ];
+
+  $updater->checklist()->saveProgress($progress);
+}
+
+/**
+ * Droopler 2.0 Import all other modified configs after Media migrations.
+ */
+function droopler_update_8105() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_content' => [
+      'core.entity_form_display.node.content_page.default' => 'f865015c1a1baee972e8feb3d6c84d70',
+      'core.entity_view_display.node.content_page.default' => '025e73620b1650aa03db407271cfe82d',
+    ],
+    'd_p_banner' => [
+      'core.entity_form_display.paragraph.d_p_banner.default' => 'a4c8c186a27ad4ccbff3a7524ac5252d',
+      'core.entity_view_display.paragraph.d_p_banner.default' => '7954851d78e5560369191f7bb0a217da',
+      'paragraphs.paragraphs_type.d_p_banner' => '16d108c2d421a90beb935603c8c14a78',
+    ],
+    'd_p_carousel' => [
+      'core.entity_form_display.paragraph.d_p_carousel.default' => 'ec0b8d9cbea4de5fed7ff999402468a5',
+      'core.entity_form_display.paragraph.d_p_carousel_item.default' => '22fa1f375c118c22a0d61386f52eaeb4',
+      'core.entity_view_display.paragraph.d_p_carousel.default' => '8cb8deae472852b756d97e56492996ee',
+      'core.entity_view_display.paragraph.d_p_carousel_item.default' => '4841b060a4649cb5840a2fc7e05bdfd0',
+      'field.field.paragraph.d_p_carousel.field_d_number' => '3459b028f5d3fea96796761757ad4cd0',
+      'field.field.paragraph.d_p_carousel.field_d_p_cs_item_reference' => '37a919d8a4cd267ef42410e6024666ec',
+      'field.field.paragraph.d_p_carousel_item.field_d_cta_link' => 'b73a7558b7145e365336a4050799064a',
+      'field.field.paragraph.d_p_carousel_item.field_d_long_text' => 'e15fb286e519b0bac00257a2e90b6eba',
+      'field.field.paragraph.d_p_carousel_item.field_d_main_title' => '07a25e47268ef25afbfb57181c15aa81',
+      'paragraphs.paragraphs_type.d_p_carousel_item' => '5507c77f3f541f0a50d5803ed101abf3',
+    ],
+    'd_p_counters' => [
+      'core.entity_form_display.paragraph.d_p_group_of_counters.default' => '5463576b8024a2794ad29a12a893e138',
+      'core.entity_form_display.paragraph.d_p_single_counter.default' => 'e857d2f5142d2b0b29fc3c49f071eae6',
+      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => 'b112cb894119aa5637c5021448914b2d',
+      'core.entity_view_display.paragraph.d_p_single_counter.default' => '5c2e672831135b05edfe811e5c6c85d5',
+    ],
+    'd_p_gallery' => [
+      'core.entity_form_display.paragraph.d_p_gallery.default' => 'ef9210488f6c56af37b18aeb22914714',
+      'core.entity_view_display.paragraph.d_p_gallery.default' => 'e072d082233ce6dbff8fd347c9382e70',
+    ],
+    'd_p_form' => [
+      'core.entity_form_display.paragraph.d_p_form.default' => '19c0e40bdfb3f856e413f8c40655340b',
+      'core.entity_view_display.paragraph.d_p_form.default' => 'b09d791838a2220defbcff2690b44f67',
+      'field.field.paragraph.d_p_form.field_d_forms' => '5367bb67907496bca2fd3aa7b7821fd9',
+      'paragraphs.paragraphs_type.d_p_form' => 'a1af3a95ce7dccf84daab9985f10cfa1',
+    ],
+    'd_p_side_embed' => [
+      'core.entity_form_display.paragraph.d_p_side_embed.default' => '1ba5e544db6ef1b7725d78c1bb2b9362',
+      'core.entity_view_display.paragraph.d_p_side_embed.default' => 'baa0d764c5f07d841efc22e0b53ff81b',
+      'field.field.paragraph.d_p_side_embed.field_d_embed' => '10a700835004c1e0aa4dfbdad18aa427',
+      'paragraphs.paragraphs_type.d_p_side_embed' => '75fa8419ebbd3470c10021c3c20d59a9',
+    ],
+    'd_p_side_image' => [
+      'core.entity_form_display.paragraph.d_p_side_image.default' => '7f55328a7cfeda5bfad62785f231b959',
+      'core.entity_view_display.paragraph.d_p_side_image.default' => '36085e90252d0487cb0c60c83280199b',
+      'paragraphs.paragraphs_type.d_p_side_image' => 'e6cc1ea4ff08ed70cc27dc190211f15f',
+    ],
+    'd_p_side_tiles' => [
+      'core.entity_form_display.paragraph.d_p_side_tiles.default' => '55987245933128f7203534ff12f35de0',
+      'core.entity_view_display.paragraph.d_p_side_tiles.default' => 'cc5e369f8f733689f35ed7103969c3f6',
+      'paragraphs.paragraphs_type.d_p_side_tiles' => '51701e362646f0dcb3883f11f782601a',
+    ],
+    'd_p_subscribe_file' => [
+      'core.entity_form_display.paragraph.d_p_subscribe_file.default' => 'cda75fb4194deb6136547599542edd91',
+      'core.entity_view_display.paragraph.d_p_subscribe_file.default' => 'd7b6b79202744c3489c1efc5d10878c7',
+      'paragraphs.paragraphs_type.d_p_subscribe_file' => 'e873f19736da3ded747bb1ba90acaa9f',
+    ],
+    'd_p_text_blocks' => [
+      'core.entity_form_display.paragraph.d_p_group_of_text_blocks.default' => '6349b473b6d4229f3cd7acd75614e3de',
+      'core.entity_form_display.paragraph.d_p_single_text_block.default' => 'e66fbddb7ec04560475cf389ac539e75',
+      'core.entity_view_display.paragraph.d_p_group_of_text_blocks.default' => 'a105a69391e0f27ab008e62d7f86e32c',
+      'core.entity_view_display.paragraph.d_p_single_text_block.default' => 'dea7705821261b011c8bb7c71d0e1128',
+      'field.field.paragraph.d_p_group_of_text_blocks.field_d_number' => '4ba9ac76f80d4e632a294975430f98bd',
+      'field.field.paragraph.d_p_single_text_block.field_d_cta_link' => 'e56c150543215f50064247d4cf12abff',
+      'paragraphs.paragraphs_type.d_p_group_of_text_blocks' => '4e3c989a6f6e10da8e87c4ca326468e5',
+      'paragraphs.paragraphs_type.d_p_single_text_block' => 'a18af9bb4ad3860bdedec45fe54949f7',
+    ],
+    'd_p_text_paged' => [
+      'core.entity_form_display.paragraph.d_p_text_paged.default' => '8b931b691255866cc6638ec1966eaea3',
+      'core.entity_view_display.paragraph.d_p_text_paged.default' => '0397db2e6d6ed30522f39c36df45fc31',
+      'paragraphs.paragraphs_type.d_p_text_paged' => '27ec212324112d0f15b7c3f1ad1505b3',
+    ],
+    'd_p_text_with_bckg' => [
+      'core.entity_form_display.paragraph.d_p_text_with_bckg.default' => '67d2f71ab563ad7380c57fdba47f2d63',
+      'core.entity_view_display.paragraph.d_p_text_with_bckg.default' => 'e1464182e4bdb8c7f6fa5c8c18d0d502',
+      'paragraphs.paragraphs_type.d_p_text_with_bckg' => 'f480ac5c97dfec4113f6702cb4cd6ae0',
+    ],
+    'd_p_tiles' => [
+      'core.entity_form_display.paragraph.d_p_tiles.default' => 'dbba5191a9b13ef65bee4ca102956a80',
+      'core.entity_view_display.paragraph.d_p_tiles.default' => '96616b3236a940249e4f420554893ce0',
+    ],
+  ];
+  $values['droopler__droopler_update_8105_1'] = $updater->importConfigs($configs);
+
+  $module_handler = \Drupal::service('module_handler');
+  if ($module_handler->moduleExists('d_blog')) {
+    // Update d_blog config.
+    $configs = [
+      'd_blog' => [
+        'core.entity_form_display.node.blog_post.default' => '2cf048fbadcd576c604bc3f403102caa',
+        'core.entity_form_display.paragraph.d_p_blog_image.default' => '9af22a1058bd4cf20c3e0f01e8c4674e',
+        'core.entity_form_display.taxonomy_term.blog_posts_category.default' => '80050259f04971747c90d8bdc74f959a',
+        'core.entity_view_display.node.blog_post.default' => 'c5fe842501a2ae565fc022562ca43704',
+        'core.entity_view_display.node.blog_post.teaser' => '8bd7607d55d3ce1a184fc597bb24b18e',
+        'core.entity_view_display.node.blog_post.thumbnail' => '2c429f5ac1be793f63fd825b6f673e7f',
+        'core.entity_view_display.paragraph.d_p_blog_image.default' => '93fba5911dee499b3445dd056b223ea8',
+        'field.field.paragraph.d_p_blog_image.field_d_p_blog_image_full_width' => '44e7518a525650d7fba07a39c0f6525a',
+        'field.field.paragraph.d_p_blog_text.field_d_long_text' => '30d7f6455782c675beffff3ced195be8',
+        'paragraphs.paragraphs_type.d_p_blog_image' => '324d5e71b1e02bcc3c3294d5f88e6f94',
+        'paragraphs.paragraphs_type.d_p_blog_text' => '61152b0f5875e2f77e2600fa3581f880',
+      ],
+    ];
+    $values['droopler__droopler_update_8105_2'] = $updater->importConfigs($configs);
+  }
+  else {
+    $values['droopler__droopler_update_8105_2'] = TRUE;
+  }
+  if($module_handler->moduleExists('d_product')) {
+    $configs = [
+      'd_product' => [
+        'core.entity_view_mode.media.d_product_gallery' => 'e6d91a7c6004798c1f0b775638880d20',
+        'core.entity_view_mode.media.d_product_image' => '8d6ee31ce888978b7c9631f34a0a2016',
+        'core.entity_view_display.node.d_product.default' => 'a0d2d78192365bf94fc77227ca32977b',
+        'core.entity_view_display.node.d_product.full' => '75ca2e619110a004551c62017b57ef26',
+        'core.entity_view_display.node.d_product.teaser' => '49134caf6f410df190d804b8e45aa6fc',
+        'core.entity_form_display.node.d_product.default' => 'e9a571594f7c8d01287e6cb310fde63b',
+        'core.entity_view_display.media.d_image.d_product_gallery' => '9cdfa90bad3f20b52b30234dd975db4d',
+        'core.entity_view_display.media.d_image.d_product_image' => '0e578ffb82c8481617ebe6db0d092e90',
+        'core.entity_view_display.node.d_product.d_small_box' => '75df7a1f59e107eab4f496ff7455bdea',
+      ],
+    ];
+    $values['droopler__droopler_update_8105_3'] = $updater->importConfigs($configs);
+  } else {
+    $values['droopler__droopler_update_8105_3'] = TRUE;
+  }
+
+  $progress = [
+    'v2.0' => $values,
+  ];
+
+  $updater->checklist()->saveProgress($progress);
+
+}
+
