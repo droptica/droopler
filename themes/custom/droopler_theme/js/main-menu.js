@@ -35,12 +35,11 @@
   Drupal.behaviors.mainMenuMobileNavbarListener = {
     attach: function (context, settings) {
       $ ('#navbar-main button.navbar-toggler', context).click(function() {
-        // Avoids classes toggle while collapsing.
-        if((!$('body').hasClass('navbar-open') && !$('.navbar').hasClass('collapsing')) || ($('.navbar').hasClass('show'))) {
-          $('body').toggleClass('navbar-open', !$(this).is('[aria-expanded="true"]'));
-          $('.navbar').toggleClass('open', !$(this).is('[aria-expanded="true"]'));
-
+        if (!$('.navbar').hasClass('collapsing')) {
+          $('body').toggleClass('navbar-open');
+          $('.navbar').toggleClass('open');
           $('html, body').stop().animate({scrollTop: 0}, 500);
+          $(this).attr('aria-expanded', ($(this).attr('aria-expanded') === 'false'));
         }
       });
 
