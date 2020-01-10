@@ -276,19 +276,11 @@ class Updater {
   public function instantiateBlocksForSubtheme($subthemeName, array $configs) {
     foreach ($configs as $configName) {
       $baseConfig = Drupal::config($configName)->getRawData();
-      $values = [
-        'id' => $baseConfig['id'] . '_' . $subthemeName,
-        'plugin' => $baseConfig['plugin'],
-        'region' => $baseConfig['region'],
-        'theme' => $subthemeName,
-        'settings' => [
-          'id' => $baseConfig['settings']['id'],
-          'label' => $baseConfig['settings']['label'],
-          'provider' => $baseConfig['settings']['provider'],
-          'label_display' => $baseConfig['settings']['label_display'],
-        ],
-      ];
-      $block = Block::create($values);
+      unset($baseConfig['uuid']);
+      $baseConfig['id'] = $baseConfig['id'] . '_' . $subthemeName;
+      $baseConfig['theme'] = $subthemeName;
+
+      $block = Block::create($baseConfig);
       try {
         $block->save();
       } catch (EntityStorageException $e) {
