@@ -101,11 +101,24 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
         }
       }
     }
+    .d-media-background-wrapper {
+      width: 50vw;
+      z-index: -1;
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+      }
+    }
   }
   .item-1 {
     .user-image-background {
       .image-background-container {
         right: 0;
+      }
+    }
+    .d-media-background-wrapper {
+      margin-left: calc(100% - 50vw);
+      @include media-breakpoint-down(sm) {
+        margin-left: unset;
       }
     }
   }
