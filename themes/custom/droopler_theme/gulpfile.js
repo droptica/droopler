@@ -9,48 +9,53 @@
  * - dist - compile PROD version of CSS & JS
  */
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var autoprefixer = require('gulp-autoprefixer');
-var watch = require('gulp-watch');
-var uglify = require('gulp-uglify');
-var pump = require('pump');
-var fs = require('fs');
-var rename = require("gulp-rename");
-var del = require('del');
-var runSequence = require('run-sequence');
-
-// Patterns
-var scss_pattern = '**/*.scss';
-var js_pattern = '*.js';
+let gulp = require('gulp'),
+  sass = require('gulp-sass'),
+  sourcemaps = require('gulp-sourcemaps'),
+  autoprefixer = require('gulp-autoprefixer'),
+  watch = require('gulp-watch'),
+  uglify = require('gulp-uglify'),
+  pump = require('pump'),
+  fs = require('fs'),
+  rename = require("gulp-rename"),
+  del = require('del'),
+  runSequence = require('run-sequence'),
+  cleanCss = require('gulp-clean-css');
 
 // Theme directory
-var theme_dir = '.';
+let theme_dir = '.';
 
 // Subdirectories
-var scss_dir = theme_dir + '/scss';
-var css_dir = theme_dir + '/css';
-var js_dir = theme_dir + '/js';
-var jsmin_dir = theme_dir + '/js/min';
+let scss_dir = theme_dir + '/scss';
+let css_dir = theme_dir + '/css';
+let js_dir = theme_dir + '/js';
+let jsmin_dir = theme_dir + '/js/min';
 
-// Inputs
-var scss_input = scss_dir + '/' + scss_pattern;
-var js_input = js_dir + '/' + js_pattern;
+const paths = {
+  scss: {
+    src: scss_dir + '/**/*.scss',
+    dest: css_dir,
+    bootstrap: './node_modules'
+  },
+  js: {
+    src: js_dir + '/*.js',
+    dest: js_dir + '/min'
+  }
+};
 
 // Dev SASS options
-var sassOptionsDev = {
+let sassOptionsDev = {
   errLogToConsole: true,
   outputStyle: 'expanded'
 };
 
 // Prod SASS options
-var sassOptionsProd = { 
-  outputStyle: 'compressed' 
+let sassOptionsProd = {
+  outputStyle: 'compressed'
 };
 
 // Autoprefixer options
-var autoprefixerOptions = {
+let autoprefixerOptions = {
   browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
 };
 
@@ -63,11 +68,11 @@ gulp.task('default', ['watch' /*, possible other tasks... */]);
 
 // Watch SASS & KSS & JS
 gulp.task('watch', ['sass:compile', 'js:compile'], function(callback) {
-  watch(scss_input, function(vinyl) {
+  watch(paths.scss.src, function(vinyl) {
     console.log('File ' + vinyl.path + ' changed, running tasks...');
     runSequence('sass:compile');
   });
-  watch(js_input, function(vinyl) {
+  watch(paths.js.src, function(vinyl) {
     console.log('File ' + vinyl.path + ' changed, running tasks...');
     runSequence('js:compile');
   });
@@ -97,14 +102,14 @@ gulp.task('debug', function() {
   } else {
     console.log('[WARNING] CSS directory does not exist. Please create it and don\'t tempt gulp to fail!');
   }
-  
+
   // Check for JS dir
   if (fs.existsSync(js_dir)) {
     console.log('[OK] JS directory exists.');
   } else {
     console.log('[ERROR] JS directory does not exist. Please create it!');
   }
-  
+
   // Check for JS MIN dir
   if (fs.existsSync(jsmin_dir)) {
     console.log('[OK] .min.js directory exists.');
@@ -138,12 +143,16 @@ gulp.task('dist', ['clean'], function (cb) {
 // Compile SASS
 gulp.task('sass:compile', function () {
   return gulp
-    .src(scss_input)
+    .src(paths.scss.src)
+    .pipe(sass({includePaths: paths.scss.bootstrap}))
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptionsDev).on('error', sass.logError))
     .pipe(autoprefixer(autoprefixerOptions))
     .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest(css_dir))
+    .pipe(gulp.dest(paths.scss.dest))
+    .pipe(cleanCss())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest(paths.scss.dest))
     // Release the pressure back and trigger flowing mode (drain)
     // See: http://sassdoc.com/gulp/#drain-event
     .resume();
@@ -152,19 +161,19 @@ gulp.task('sass:compile', function () {
 // Compile JS
 gulp.task('js:compile', function (cb) {
   pump([
-    gulp.src(js_input),
+    gulp.src(paths.js.src),
     sourcemaps.init(),
     uglify(),
     rename({ suffix: '.min' }),
     sourcemaps.write('.'),
-    gulp.dest(jsmin_dir)
+    gulp.dest(paths.js.dest)
   ], cb );
 });
 
 // Generate the production styles
 gulp.task('sass:dist', function () {
   return gulp
-  .src(scss_input)
+  .src(paths.scss.src)
   .pipe(sass(sassOptionsProd))
   .pipe(autoprefixer(autoprefixerOptions))
   .pipe(gulp.dest(css_dir));
