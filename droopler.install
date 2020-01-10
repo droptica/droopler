@@ -558,9 +558,12 @@ function droopler_update_8103() {
       ],
     ];
     $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
-  }
 
-  // @todo: Set the above blocks also for subtheme, if it is enabled.
+    if (\Drupal::service('theme_handler')
+        ->getDefault() === 'droopler_subtheme') {
+      $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
+    }
+  }
 
   $progress = [
     'v2.0' => $values,

@@ -264,4 +264,39 @@ class Updater {
     return $this->moduleInstaller->install($modules, $enable_dependencies);
   }
 
+  /**
+   * Method creates new instance of existing blocks inside another theme.
+   *
+   * @param $subthemeName
+   *   Name of the subtheme to place block into.
+   *
+   * @param array $configs
+   *   List of blocks configs to instantiate.
+   */
+  public function instantiateBlocksForSubtheme($subthemeName, array $configs) {
+    foreach ($configs as $configName) {
+      $baseConfig = Drupal::config($configName)->getRawData();
+      $values = [
+        'id' => $baseConfig['id'] . '_' . $subthemeName,
+        'plugin' => $baseConfig['plugin'],
+        'region' => $baseConfig['region'],
+        'theme' => $subthemeName,
+        'settings' => [
+          'id' => $baseConfig['settings']['id'],
+          'label' => $baseConfig['settings']['label'],
+          'provider' => $baseConfig['settings']['provider'],
+          'label_display' => $baseConfig['settings']['label_display'],
+        ],
+      ];
+      $block = Block::create($values);
+      try {
+        $block->save();
+      } catch (EntityStorageException $e) {
+        $this->getLogger('d_update')
+          ->error('Error while instantiating block from %config', [
+            '%config' => $configName,
+          ]);
+      }
+    }
+  }
 }
