@@ -387,7 +387,7 @@ function droopler_update_8103() {
 
   try {
     // Check if any 1.4 custom modules are not installed.
-    $modules = calculateModulesForInstall([
+    $modules = calculate_modules_for_install([
       'd_content',
       'd_geysir',
       'd_lang_dropdown',
@@ -976,7 +976,7 @@ function droopler_update_8105() {
  * @return array
  *   Array of modules that actually need installing.
  */
-function calculateModulesForInstall(array $modules) {
+function calculate_modules_for_install(array $modules) {
   $module_handler = \Drupal::service('module_handler');
   $modulesToInstall = [];
   foreach ($modules as $module) {
