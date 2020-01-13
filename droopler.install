@@ -372,6 +372,16 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
   // Install Droopler modules.
+  //Make sure that d_p and it's configuration are enabled and imported.
+  $module_installer->install(['d_p'], TRUE);
+  $updater->importConfigs([
+    'd_p' => [
+      'field.storage.paragraph.field_d_background_color' => '',
+      'field.storage.paragraph.field_d_node_reference' => '',
+      'field.storage.paragraph.field_d_settings' => '',
+    ],
+  ]);
+  //Get list of needed modules that are not installed.
   try {
     $modules = calculateModulesForInstall();
     /*    $modules = [
@@ -381,7 +391,6 @@ function droopler_update_8103() {
           'd_social_media',
           'd_p_reference_content',
         ];*/
-    var_dump($modules);
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_2'] = $result;
   } catch (MissingDependencyException $e) {
@@ -389,11 +398,6 @@ function droopler_update_8103() {
   }
   // Add new fields to paragraphs.
   $configs = [
-    'd_p' => [
-      'field.storage.paragraph.field_d_background_color' => '',
-      'field.storage.paragraph.field_d_node_reference' => '',
-      'field.storage.paragraph.field_d_settings' => '',
-    ],
     'd_p_banner' => [
       'field.field.paragraph.d_p_banner.field_d_settings' => '',
     ],
