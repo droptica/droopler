@@ -372,8 +372,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
   // Install Droopler modules.
-  //Make sure that d_p and it's configuration are enabled and imported.
-  $module_installer->install(['d_p'], TRUE);
+  // Import configs for d_p.
   $updater->importConfigs([
     'd_p' => [
       'field.storage.paragraph.field_d_background_color' => '',
@@ -381,9 +380,29 @@ function droopler_update_8103() {
       'field.storage.paragraph.field_d_settings' => '',
     ],
   ]);
-  //Get list of needed modules that are not installed.
+
   try {
-    $modules = calculateModulesForInstall();
+    // Check if any 1.4 custom modules are not installed.
+    $modules = calculateModulesForInstall([
+      'd_content',
+      'd_geysir',
+      'd_lang_dropdown',
+      'd_p',
+      'd_p_banner',
+      'd_p_form',
+      'd_p_help',
+      'd_p_side_image',
+      'd_p_side_embed',
+      'd_p_side_tiles',
+      'd_p_subscribe_file',
+      'd_p_text_blocks',
+      'd_p_text_paged',
+      'd_p_text_with_bckg',
+      'd_p_tiles',
+      'd_p_counters',
+      'd_p_gallery',
+      'd_update',
+    ]);
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_2'] = $result;
   } catch (MissingDependencyException $e) {
@@ -944,17 +963,22 @@ function droopler_update_8105() {
 
 }
 
-function calculateModulesForInstall() {
-  $instalationProfileInfo = \Drupal::service('extension.list.profile')
-    ->getExtensionInfo('droopler');
-  $modules = $instalationProfileInfo['install'];
+
+/**
+ * Returns a list of modules to install, based on the list of required modules.
+ *
+ * @param array $modules
+ *   Array of required modules
+ *
+ * @return array $modulesToInstall
+ *   Array of modules that actually need installing.
+ */
+function calculateModulesForInstall(array $modules) {
+  $module_handler = \Drupal::service('module_handler');
   $modulesToInstall = [];
   foreach ($modules as $module) {
-    if (strpos($module, 'd_') !== FALSE) {
-      $module_handler = \Drupal::service('module_handler');
-      if (!$module_handler->moduleExists($module)) {
-        $modulesToInstall[] = $module;
-      }
+    if (!$module_handler->moduleExists($module)) {
+      $modulesToInstall[] = $module;
     }
   }
 
