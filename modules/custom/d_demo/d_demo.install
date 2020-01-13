@@ -57,11 +57,11 @@ function d_demo_create_secondary_menu() {
  * Creates a menu to be placed after footer
  */
 
-function d_demo_create_after_footer_menu() {
-  $after_footer_menu = [
+function d_demo_create_bottom_footer_menu() {
+  $bottom_footer_menu = [
     'data' => [
-      'id' => 'after_footer_menu',
-      'label' => 'After footer menu',
+      'id' => 'bottom_footer_menu',
+      'label' => 'Bottom footer menu',
       'description' => 'Menu placed after footer',
     ],
     'links' => [
@@ -71,7 +71,7 @@ function d_demo_create_after_footer_menu() {
     ],
   ];
 
-  d_demo_create_menu_with_links($after_footer_menu);
+  d_demo_create_menu_with_links($bottom_footer_menu);
 }
 
 /**
@@ -87,7 +87,7 @@ function d_demo_install() {
     ->save();
 
   d_demo_create_secondary_menu();
-  d_demo_create_after_footer_menu();
+  d_demo_create_bottom_footer_menu();
 
   /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
   $themeLogoService = \Drupal::service('d_demo.theme_logo');
