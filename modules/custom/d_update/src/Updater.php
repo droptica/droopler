@@ -7,6 +7,8 @@
 
 namespace Drupal\d_update;
 
+use Drupal;
+use Drupal\block\Entity\Block;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
@@ -264,4 +266,32 @@ class Updater {
     return $this->moduleInstaller->install($modules, $enable_dependencies);
   }
 
+  /**
+   * Method creates new instance of existing blocks inside another theme.
+   *
+   * @param $subthemeName
+   *   Name of the subtheme to place block into.
+   *
+   * @param array $configs
+   *   List of blocks configs to instantiate.
+   */
+  public function instantiateBlocksForSubtheme($subthemeName, array $configs) {
+    foreach($configs as $baseTheme => $baseThemeConfigs) {
+      foreach ($baseThemeConfigs as $configName => $hash) {
+        $baseConfig = \Drupal::Config($configName)->getRawData();
+        unset($baseConfig['uuid']);
+        $baseConfig['id'] = $baseConfig['id'] . '_' . $subthemeName;
+        $baseConfig['theme'] = $subthemeName;
+        $block = Block::create($baseConfig);
+        try {
+          $block->save();
+        } catch (EntityStorageException $e) {
+          $this->getLogger('d_update')
+            ->error('Error while instantiating block from %config', [
+              '%config' => $configName,
+            ]);
+        }
+      }
+    }
+  }
 }
