@@ -375,8 +375,7 @@ function droopler_update_8103() {
   catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
-  // Install Droopler modules.
-  // Import configs for d_p.
+  // Import new configs for d_p.
   $updater->importConfigs([
     'd_p' => [
       'field.storage.paragraph.field_d_background_color' => '',
@@ -384,35 +383,51 @@ function droopler_update_8103() {
       'field.storage.paragraph.field_d_settings' => '',
     ],
   ]);
-
+  // Check if any 1.4 custom modules are not installed and install them.
   try {
-    // Check if any 1.4 custom modules are not installed.
     $modules = calculate_modules_for_install([
       'd_content',
       'd_geysir',
       'd_lang_dropdown',
       'd_p',
       'd_p_banner',
+      'd_p_carousel',
+      'd_p_counters',
       'd_p_form',
+      'd_p_gallery',
       'd_p_help',
-      'd_p_side_image',
       'd_p_side_embed',
+      'd_p_side_image',
       'd_p_side_tiles',
       'd_p_subscribe_file',
       'd_p_text_blocks',
       'd_p_text_paged',
       'd_p_text_with_bckg',
       'd_p_tiles',
-      'd_p_counters',
-      'd_p_gallery',
       'd_update',
     ]);
+    $values['droopler__droopler_update_8103_1'] = $module_installer->install($modules, TRUE);
+  }
+  catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8103_1'] = FALSE;
+  }
+
+  // Activate new 2.0 modules.
+  try {
+    $modules = [
+      'd_p_node',
+      'd_p_side_by_side',
+      'd_search',
+      'd_social_media',
+      'd_p_reference_content',
+    ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_2'] = $result;
   }
   catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_2'] = FALSE;
   }
+
   // Add new fields to paragraphs.
   $configs = [
     'd_p_banner' => [
@@ -464,7 +479,7 @@ function droopler_update_8103() {
       'field.field.paragraph.d_p_tiles.field_d_settings' => '',
     ],
   ];
-  $values['droopler__droopler_update_8103_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
 
 
   // Update existing fields.
@@ -496,7 +511,7 @@ function droopler_update_8103() {
       'field.field.paragraph.d_p_text_with_bckg.field_d_cta_link' => '27dca2ddd6b10a8cff0ec8c787c3dd9f',
     ],
   ];
-  $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
 
   // Update misc config.
   $configs = [
@@ -521,7 +536,7 @@ function droopler_update_8103() {
     //  'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
     //],
   ];
-  $values['droopler__droopler_update_8103_4'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
 
   /** @var \Drupal\Core\Extension\ModuleHandler $module_handler */
   $module_handler = \Drupal::service('module_handler');
@@ -542,10 +557,10 @@ function droopler_update_8103() {
         'views.view.blog_listing' => 'e617972f67997f8d8f4c60eb29f49bd2',
       ],
     ];
-    $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
+    $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
   }
   else {
-    $values['droopler__droopler_update_8103_5'] = TRUE;
+    $values['droopler__droopler_update_8103_6'] = TRUE;
   }
 
   if ($module_handler->moduleExists('d_product')) {
@@ -567,10 +582,10 @@ function droopler_update_8103() {
         'block.block.tagstaxonomytermname' => '419c970f6ffd428be18f995df7b6c097',
       ],
     ];
-    $values['droopler__droopler_update_8103_6'] = $updater->importConfigs($configs);
+    $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
   }
   else {
-    $values['droopler__droopler_update_8103_6'] = TRUE;
+    $values['droopler__droopler_update_8103_7'] = TRUE;
   }
 
   if ($module_handler->moduleExists('we_megamenu')) {
@@ -580,7 +595,7 @@ function droopler_update_8103() {
         'block.block.mainnavigation_2' => '',
       ],
     ];
-    $values['droopler__droopler_update_8103_7'] = $updater->importConfigs($configs);
+    $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
       ->getDefault() === 'droopler_subtheme') {
