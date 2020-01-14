@@ -88,36 +88,41 @@ v2.0:
     '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
     extension_page: { '#text': 'Enable "entity_reference_display" and "we_megamenu" modules', '#url': 'internal:/admin/modules' }
   droopler__droopler_update_8103_1:
-    '#title': 'Add new fields.'
-    '#description': '<p>We added some new fields to Droopler 2.0, now we have to import them.</p>'
-    '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
-    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
+    '#title': 'Enable missing Droopler modules from previous versions.'
+    '#description': '<p>Enable missing Droopler modules.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+    extension_page: { '#text': 'Enable missing modules', '#url': 'internal:/admin/modules' }
   droopler__droopler_update_8103_2:
     '#title': 'Install new Droopler modules.'
     '#description': '<p>Enable new modules: d_p_node, d_p_side_by_side, d_search, d_social_media, d_p_reference_content.</p>'
     '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
     extension_page: { '#text': 'Enable d_p_node, d_p_side_by_side, d_search, d_social_media and d_p_reference_content modules', '#url': 'internal:/admin/modules' }
   droopler__droopler_update_8103_3:
+    '#title': 'Add new fields.'
+    '#description': '<p>We added some new fields to Droopler 2.0, now we have to import them.</p>'
+    '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
+    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8103_4:
     '#title': 'Update existing field configuration.'
     '#description': '<p>Some of Droopler fields changed, this is their new config.</p>'
     '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
     extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
-  droopler__droopler_update_8103_4:
+  droopler__droopler_update_8103_5:
     '#title': 'Import other configuration.'
     '#description': '<p>Import unsorted configs.</p>'
     '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
     extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
-  droopler__droopler_update_8103_5:
+  droopler__droopler_update_8103_6:
     '#title': 'Import d_blog configuration.'
     '#description': '<p>Import d_blog module configuration if the module is enabled.</p>'
     '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
     extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features/diff/d_blog' }
-  droopler__droopler_update_8103_6:
+  droopler__droopler_update_8103_7:
     '#title': 'Import d_product configuration.'
     '#description': '<p>Import d_product module configuration if the module is enabled.</p>'
     '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
     extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features/diff/d_product' }
-  droopler__droopler_update_8103_7:
+  droopler__droopler_update_8103_8:
     '#title': 'Import Mega Menu blocks.'
     '#description': '<p>Import Mega Menu blocks to the theme.</p>'
     '#description_failed': '<p><strong>Import failed</strong>, please place "MegaMenu Main navigation" block manually in "Primary menu" region.</p>'
