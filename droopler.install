@@ -44,6 +44,10 @@ function droopler_install() {
       ->notice('Custom content init not detected.');
   }
 
+  // Remove footer menu menu to avoid fatal error while trying to edit it
+  // because of missing route.
+  \Drupal::configFactory()->getEditable('system.menu.footer')->delete();
+
   // Set droopler_theme as default.
   \Drupal::configFactory()
     ->getEditable('system.theme')
@@ -359,6 +363,10 @@ function droopler_update_8103() {
 
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
+
+  // Remove footer menu menu to avoid fatal error while trying to edit it
+  // because of missing route.
+  \Drupal::configFactory()->getEditable('system.menu.footer')->delete();
 
   /** Migrate old saved checklist configs to new state storage. */
   $updater->checklist()->migrateConfigProgressToStateProgress();
