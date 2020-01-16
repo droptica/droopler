@@ -72,7 +72,6 @@
   function watchFiles() {
     gulp.watch(scss_input, gulp.series(sassCompile));
     gulp.watch(js_input, gulp.series(jsCompile));
-    gulp.watch(base_js_input, gulp.series(jsCompile));
   }
 
   function debug() {
@@ -85,12 +84,6 @@
       console.log('[ERROR] Working directory does not exist. Maybe it is not mounted by docker? Or there is a misspell?');
     }
 
-    // Check of base theme dir is mounted
-    if (fs.existsSync(base_theme_dir)) {
-      console.log('[OK] Base theme directory exists.');
-    } else {
-      console.log('[ERROR] Base theme directory does not exist. Maybe it is not mounted by docker? Or there is a misspell?');
-    }
 
     // Check for SCSS dir
     if (fs.existsSync(scss_dir)) {
@@ -99,12 +92,6 @@
       console.log('[ERROR] SCSS directory does not exist. Create it and get to work!');
     }
 
-    // Check for base SCSS dir
-    if (fs.existsSync(base_scss_dir)) {
-      console.log('[OK] Base SCSS directory exists.');
-    } else {
-      console.log('[ERROR] Base SCSS directory does not exist. Create it and get to work!');
-    }
 
     // Check for CSS dir
     if (fs.existsSync(css_dir)) {
@@ -118,13 +105,6 @@
       console.log('[OK] JS directory exists.');
     } else {
       console.log('[ERROR] JS directory does not exist. Please create it!');
-    }
-
-    // Check for base JS dir
-    if (fs.existsSync(base_js_dir)) {
-      console.log('[OK] Base JS directory exists.');
-    } else {
-      console.log('[ERROR] Base JS directory does not exist. Please create it!');
     }
 
     // Check for JS MIN dir
