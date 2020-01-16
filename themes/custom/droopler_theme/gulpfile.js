@@ -38,7 +38,6 @@
   const css_dir = theme_dir + '/css';
   const js_dir = theme_dir + '/js';
   const jsmin_dir = theme_dir + '/js/min';
-  const base_jsmin_dir = theme_dir + '/js/min/base';
 
 
 
