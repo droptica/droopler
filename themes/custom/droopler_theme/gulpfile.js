@@ -5,9 +5,9 @@
  * Commands:
  * - (default) - watches for changes in CSS and JS, hit Ctrl-C to exit
  * - debug - check if all paths are well set
- * - clean - clean derivative CSS, JS
- * - compile - compile DEV version of CSS, JS
- * - dist - compile PROD version of CSS, JS
+ * - clean - clean derivative CSS & JS
+ * - compile - compile DEV version of CSS & JS
+ * - dist - compile PROD version of CSS & JS
  */
 
 (() => {
