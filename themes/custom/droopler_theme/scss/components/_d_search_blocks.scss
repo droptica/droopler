@@ -14,7 +14,7 @@ $d-search-page-link-indent: -999px !default;
     width: $d-search-page-link-size;
     height: $d-search-page-link-size;
     text-indent: $d-search-page-link-indent;
-    mask: url('/profiles/contrib/droopler/themes/custom/droopler_theme/images/search-icon.svg');
+    mask: url('#{$path-to-assets}/search-icon.svg');
     background-color: $d-search-page-link-color;
 
     &:hover {
