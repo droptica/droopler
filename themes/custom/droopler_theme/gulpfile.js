@@ -20,6 +20,8 @@ var fs = require('fs');
 var rename = require("gulp-rename");
 var del = require('del');
 var runSequence = require('run-sequence');
+var argv = require('yargs').argv;
+var sassVars = require('gulp-sass-vars');
 
 // Patterns
 var scss_pattern = '**/*.scss';
@@ -45,8 +47,8 @@ var sassOptionsDev = {
 };
 
 // Prod SASS options
-var sassOptionsProd = { 
-  outputStyle: 'compressed' 
+var sassOptionsProd = {
+  outputStyle: 'compressed'
 };
 
 // Autoprefixer options
@@ -97,14 +99,14 @@ gulp.task('debug', function() {
   } else {
     console.log('[WARNING] CSS directory does not exist. Please create it and don\'t tempt gulp to fail!');
   }
-  
+
   // Check for JS dir
   if (fs.existsSync(js_dir)) {
     console.log('[OK] JS directory exists.');
   } else {
     console.log('[ERROR] JS directory does not exist. Please create it!');
   }
-  
+
   // Check for JS MIN dir
   if (fs.existsSync(jsmin_dir)) {
     console.log('[OK] .min.js directory exists.');
@@ -137,8 +139,14 @@ gulp.task('dist', ['clean'], function (cb) {
 
 // Compile SASS
 gulp.task('sass:compile', function () {
+  let profileUrl = argv.profile_url;
+  let variables = {};
+  if (typeof profileUrl !== 'undefined') {
+    variables = {profile_path: profileUrl};
+  }
   return gulp
     .src(scss_input)
+    .pipe(sassVars(variables, { verbose: true }))
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptionsDev).on('error', sass.logError))
     .pipe(autoprefixer(autoprefixerOptions))
@@ -163,8 +171,14 @@ gulp.task('js:compile', function (cb) {
 
 // Generate the production styles
 gulp.task('sass:dist', function () {
+  let profileUrl = argv.profile_url;
+  let variables = {};
+  if (typeof profileUrl !== 'undefined') {
+    variables = {profile_path: profileUrl};
+  }
   return gulp
   .src(scss_input)
+  .pipe(sassVars(variables, { verbose: true }))
   .pipe(sass(sassOptionsProd))
   .pipe(autoprefixer(autoprefixerOptions))
   .pipe(gulp.dest(css_dir));
