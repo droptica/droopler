@@ -1,9 +1,8 @@
-
 /**
  * Gulpfile.js for Droopler theme.
  *
  * Commands:
- * - (default) - watches for changes in CSS and JS, hit Ctrl-C to exit
+ * - watch (default) - watches for changes in CSS and JS, hit Ctrl-C to exit
  * - debug - check if all paths are well set
  * - clean - clean derivative CSS & JS
  * - compile - compile DEV version of CSS & JS
@@ -24,6 +23,8 @@
   const fs = require('fs');
   const rename = require("gulp-rename");
   const del = require('del');
+  const argv = require('yargs').argv;
+  const sassVars = require('gulp-sass-vars');
 
 // Patterns
   const scss_pattern = '**/*.scss';
@@ -132,8 +133,14 @@
 
 // Compile SASS
   function sassCompile() {
+    let profileUrl = argv.profile_url;
+    let variables = {};
+    if (typeof profileUrl !== 'undefined') {
+      variables = {profile_path: profileUrl};
+    }
     return gulp
       .src(scss_input)
+      .pipe(sassVars(variables, { verbose: true }))
       .pipe(sourcemaps.init())
       .pipe(sass(sassOptionsDev).on('error', sass.logError))
       .pipe(autoprefixer(autoprefixerOptions))
@@ -160,8 +167,14 @@
 
 // Generate the production styles
   function sassDist() {
+    let profileUrl = argv.profile_url;
+    let variables = {};
+    if (typeof profileUrl !== 'undefined') {
+      variables = {profile_path: profileUrl};
+    }
     return gulp
       .src(scss_input)
+      .pipe(sassVars(variables, { verbose: true }))
       .pipe(sass(sassOptionsProd))
       .pipe(autoprefixer(autoprefixerOptions))
       .pipe(gulp.dest(css_dir));
