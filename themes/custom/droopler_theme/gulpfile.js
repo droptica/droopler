@@ -17,7 +17,6 @@
   const sass = require('gulp-sass');
   const sourcemaps = require('gulp-sourcemaps');
   const autoprefixer = require('gulp-autoprefixer');
-  const watch = require('gulp-watch');
   const uglify = require('gulp-uglify');
   const pump = require('pump');
   const fs = require('fs');
@@ -74,7 +73,7 @@
     gulp.watch(js_input, gulp.series(jsCompile));
   }
 
-  function debug() {
+  function debug(cb) {
     console.log('[OK] Working directory set: ' + theme_dir);
 
     // Check of theme dir is mounted
@@ -113,6 +112,7 @@
     } else {
       console.log('[WARNING] .min.js directory does not exist. Please create it and don\'t tempt gulp to fail!');
     }
+    cb()
   }
 
 
