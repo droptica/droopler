@@ -60,7 +60,6 @@
           .ask-link {
             a {
               @include button-outline-variant($color: $primary);
-             // @extend .btn-outline-primary;
             }
           }
           @include media-breakpoint-down(md) {
