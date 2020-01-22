@@ -31,8 +31,8 @@ global-js:
   js:
     js/min/global.min.js: {}
     js/min/main-menu.min.js: {}
-    /libraries/popper.js/dist/umd/popper.min.js: { weight: -20 } # Required by Bootstrap 4
-    js/min/bootstrap.min.js: {}
+    vendor/popper.js/dist/popper.min.js: { weight: -20 } # Required by Bootstrap 4
+    vendor/bootstrap/dist/js/bootstrap.min.js: {}
   dependencies:
     - core/jquery
     - core/jquery.once

@@ -38,6 +38,7 @@
   const css_dir = theme_dir + '/css';
   const js_dir = theme_dir + '/js';
   const jsmin_dir = theme_dir + '/js/min';
+  const vendor_dir = theme_dir + '/vendor';
 
 
 
@@ -124,8 +125,8 @@
     ], {force: true});
   }
 
-  const compile = gulp.parallel(sassCompile, jsCompile);
-  const dist = gulp.parallel(sassDist, jsCompile);
+  const compile = gulp.parallel(sassCompile, jsCopyLibs, jsCompile);
+  const dist = gulp.parallel(sassDist, jsCopyLibs, jsCompile);
 
 
 // HELPER TASKS
@@ -151,6 +152,14 @@
       .resume();
   }
 
+  function jsCopyLibs(cb) {
+    gulp.src([
+      "node_modules/bootstrap/**/*"
+    ]).pipe(gulp.dest(vendor_dir + '/bootstrap'), cb())
+    gulp.src([
+      "node_modules/popper.js/**/*"
+    ]).pipe(gulp.dest(vendor_dir + '/popper.js'), cb())
+  }
 
 // Compile JS
   function jsCompile(cb) {
@@ -183,6 +192,7 @@
   exports.compile = compile;
   exports.clean = clean;
   exports.debug = debug;
+  exports.jsCopyLibs = jsCopyLibs;
   exports.watch = watchFiles;
   exports.dist = dist;
   exports.sassCompile = sassCompile;
