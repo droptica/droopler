@@ -71,7 +71,7 @@ $d-p-form-background-opacity: 0.4 !default;
         height: fit-content;
 
         a {
-          @extend .btn;
+          @include make-btn;
           text-transform: none;
           background-color: $d-p-form-text-color;
           color: $d-p-form-background;
@@ -121,7 +121,7 @@ $d-p-form-background-opacity: 0.4 !default;
   .form-actions {
     text-align: center;
     .btn {
-      @extend .btn-secondary;
+      @include button-variant($background: $secondary, $border: $secondary);
       margin-top: $d-p-form-button-margin-top;
     }
   }
