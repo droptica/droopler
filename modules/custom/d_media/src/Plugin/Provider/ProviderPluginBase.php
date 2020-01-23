@@ -49,7 +49,7 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
    * Array of available image style effects for the spacer element.
    */
   const SCALE_AND_CROP_EFFECTS = [
-    'scale_and_crop',
+    'image_scale_and_crop',
     'focal_point_scale_and_crop',
   ];
 
@@ -102,23 +102,12 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
         ],
       ]),
     ];
+
+
     if (!empty($this->videoSettings['image_style'])) {
-      $imageStyleSetting = $this->videoSettings['image_style'];
-      $effects = \Drupal::service('entity.manager')
-        ->getStorage('image_style')
-        ->load($imageStyleSetting)->getEffects()->getConfiguration();
-      foreach ($effects as $effect) {
-        if (in_array($effect['id'], self::SCALE_AND_CROP_EFFECTS) && !empty($effect['data'])) {
-          $dimensions = [
-            'width' => $effect['data']['width'],
-            'height' => $effect['data']['height'],
-          ];
-        }
-      }
-      $output['#spacer_attributes'] = new Attribute([
-        'width' => $dimensions['width'],
-        'height' => $dimensions['height'],
-      ]);
+
+      $this->getSpacerAttributes($output);
+
     }
     if (!empty($this->videoSettings['cover'])) {
       $output['#attributes']->addClass('video-embed--cover');
@@ -198,6 +187,26 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   protected function calculateAspectRatio() {
     $video_data = $this->oEmbedData();
     return (isset($video_data->height) && isset($video_data->width)) ? $video_data->height / $video_data->width : 1;
+  }
+
+  /**
+   * Adds spacer attributes to the output based on selected image style.
+   *
+   * @param array $output
+   */
+  protected function getSpacerAttributes(array &$output) {
+    $imageStyleSetting = $this->videoSettings['image_style'];
+    $effects = \Drupal::service('entity.manager')
+      ->getStorage('image_style')
+      ->load($imageStyleSetting)->getEffects()->getConfiguration();
+    foreach ($effects as $effect) {
+      if (in_array($effect['id'], self::SCALE_AND_CROP_EFFECTS) && !empty($effect['data'])) {
+        $output['#spacer_attributes'] = new Attribute([
+          'width' => $effect['data']['width'],
+          'height' => $effect['data']['height'],
+        ]);
+      }
+    }
   }
 
 }

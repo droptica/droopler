@@ -237,9 +237,9 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   protected function addSettingsSummary($type, array &$summary) {
     $settings_values = $this->getSetting($type);
     foreach ($this->getSettingsDefinitions($type) as $setting_name => $setting) {
-
       $summary[] = $setting['#title'] . ': ' . $this->settingState($settings_values[$setting_name]);
     }
+
   }
 
   /**
@@ -311,7 +311,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
         $state = $this->t('enabled');
         break;
       default:
-        $state = $this->t($value);
+        $state = $value;
         break;
     }
 
