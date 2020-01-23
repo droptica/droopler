@@ -46,6 +46,14 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   protected $input;
 
   /**
+   * Array of available image style effects for the spacer element.
+   */
+  const SCALE_AND_CROP_EFFECTS = [
+    'scale_and_crop',
+    'focal_point_scale_and_crop',
+  ];
+
+  /**
    * Create a plugin with the given input.
    *
    * @param array $configuration
@@ -94,7 +102,24 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
         ],
       ]),
     ];
-
+    if (!empty($this->videoSettings['image_style'])) {
+      $imageStyleSetting = $this->videoSettings['image_style'];
+      $effects = \Drupal::service('entity.manager')
+        ->getStorage('image_style')
+        ->load($imageStyleSetting)->getEffects()->getConfiguration();
+      foreach ($effects as $effect) {
+        if (in_array($effect['id'], self::SCALE_AND_CROP_EFFECTS) && !empty($effect['data'])) {
+          $dimensions = [
+            'width' => $effect['data']['width'],
+            'height' => $effect['data']['height'],
+          ];
+        }
+      }
+      $output['#spacer_attributes'] = new Attribute([
+        'width' => $dimensions['width'],
+        'height' => $dimensions['height'],
+      ]);
+    }
     if (!empty($this->videoSettings['cover'])) {
       $output['#attributes']->addClass('video-embed--cover');
       $output['#attached']['library'][] = 'd_media/responsive-video';
