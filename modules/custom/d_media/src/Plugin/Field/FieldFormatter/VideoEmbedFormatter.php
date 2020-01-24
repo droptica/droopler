@@ -11,6 +11,8 @@ use Drupal\d_media\Service\ProviderManagerInterface;
 use Drupal\media\Entity\MediaType;
 use Drupal\media\Plugin\media\Source\OEmbedInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  * Plugin implementation of the 'd_video_embed' formatter.
@@ -70,10 +72,12 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
     $label,
     $view_mode,
     array $third_party_settings,
-    ProviderManagerInterface $provider_manager
+    ProviderManagerInterface $provider_manager,
+    EntityStorageInterface $image_style_storage
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
     $this->providerManager = $provider_manager;
+    $this->imageStyleStorage = $image_style_storage;
   }
 
   /**
@@ -88,7 +92,8 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
       $configuration['label'],
       $configuration['view_mode'],
       $configuration['third_party_settings'],
-      $container->get('d_media.video_provider_manager')
+      $container->get('d_media.video_provider_manager'),
+      $container->get('entity_type.manager')->getStorage('image_style')
     );
   }
 
@@ -122,16 +127,17 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    */
   public static function defaultSettings() {
     return parent::defaultSettings() + [
-      self::PLAYER_SETTINGS_CONFIG_NAME => [
-        'autoplay' => 0,
-        'loop' => 0,
-        'controls' => 0,
-        'muted' => 0,
-      ],
-      self::VIDEO_SETTINGS_CONFIG_NAME => [
-        'cover' => 0,
-      ],
-    ];
+        self::PLAYER_SETTINGS_CONFIG_NAME => [
+          'autoplay' => 0,
+          'loop' => 0,
+          'controls' => 0,
+          'muted' => 0,
+        ],
+        self::VIDEO_SETTINGS_CONFIG_NAME => [
+          'cover' => 0,
+          'image_style' => '',
+        ],
+      ];
   }
 
   /**
@@ -139,7 +145,6 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $form = parent::settingsForm($form, $form_state);
-
     // Player settings.
     $form[self::PLAYER_SETTINGS_CONFIG_NAME] = [
       '#type' => 'details',
@@ -207,12 +212,17 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   protected function addFormSettings($type, array &$form) {
     $settings_values = $this->getSetting($type);
     foreach ($this->getSettingsDefinitions($type) as $setting_name => $setting) {
-      $form[$type][$setting_name] = [
-        '#type' => 'checkbox',
-        '#title' => $setting['label'],
-        '#description' => $setting['description'],
-        '#default_value' => $settings_values[$setting_name],
-      ];
+      if (!isset($setting['#type']) || $setting['#type'] === 'checkbox') {
+        $form[$type][$setting_name] = [
+          '#type' => 'checkbox',
+          '#title' => $setting['#title'],
+          '#description' => $setting['description'],
+          '#default_value' => $settings_values[$setting_name],
+        ];
+      }
+      else {
+        $form[$type][$setting_name] = $setting;
+      }
     }
   }
 
@@ -227,8 +237,9 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   protected function addSettingsSummary($type, array &$summary) {
     $settings_values = $this->getSetting($type);
     foreach ($this->getSettingsDefinitions($type) as $setting_name => $setting) {
-      $summary[] = $setting['label'] . ': ' . $this->settingState($settings_values[$setting_name]);
+      $summary[] = $setting['#title'] . ': ' . $this->settingState($settings_values[$setting_name]);
     }
+
   }
 
   /**
@@ -244,26 +255,33 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
     $settings = [
       self::PLAYER_SETTINGS_CONFIG_NAME => [
         'autoplay' => [
-          'label' => $this->t('Autoplay'),
+          '#title' => $this->t('Autoplay'),
           'description' => $this->t('Should video start playing automatically.'),
         ],
         'loop' => [
-          'label' => $this->t('Loop'),
+          '#title' => $this->t('Loop'),
           'description' => $this->t('Should video repeat after it ends.'),
         ],
         'controls' => [
-          'label' => $this->t('Controls'),
+          '#title' => $this->t('Controls'),
           'description' => $this->t('Should video display controls such as play/pause and play bar.'),
         ],
         'muted' => [
-          'label' => $this->t('Muted'),
+          '#title' => $this->t('Muted'),
           'description' => $this->t('Should video be muted.'),
         ],
       ],
       self::VIDEO_SETTINGS_CONFIG_NAME => [
         'cover' => [
-          'label' => $this->t('Cover'),
+          '#title' => $this->t('Cover'),
           'description' => $this->t('Video will cover entire available area and crop to the center.'),
+        ],
+        'image_style' => [
+          '#title' => t('Image style'),
+          '#type' => 'select',
+          '#default_value' => $this->getSetting(self::VIDEO_SETTINGS_CONFIG_NAME)['image_style'],
+          '#empty_option' => t('None (original image)'),
+          '#options' => $this->imageStyleOptions(),
         ],
       ],
     ];
@@ -285,7 +303,37 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    *   The word describing setting state.
    */
   protected function settingState($value) {
-    return empty($value) ? $this->t('disabled') : $this->t('enabled');
+    switch ((string) $value) {
+      case '0':
+        $state = $this->t('disabled');
+        break;
+      case '1':
+        $state = $this->t('enabled');
+        break;
+      default:
+        $state = $value;
+        break;
+    }
+
+    return $state;
   }
 
+  /**
+   * Gets image styles option available for the field.
+   *
+   * @return array
+   */
+  private function imageStyleOptions() {
+    $styles = ImageStyle::loadMultiple();
+    $options = [];
+    foreach ($styles as $name => $style) {
+      $options[$name] = $style
+        ->label();
+    }
+    if (empty($options)) {
+      $options[''] = t('No defined styles');
+    }
+
+    return $options;
+  }
 }
