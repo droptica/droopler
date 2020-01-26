@@ -13,8 +13,6 @@
 @import 'mixins/title';
 
 // Fonts.
-@import 'fonts/fontello';
-@import '../../../../../../../libraries/lato-webfont/scss/lato-regular';
 @import 'fonts/social_media';
 
 // Layout.
@@ -53,16 +51,23 @@
 @import 'barrio/views';
 @import 'barrio/ui-dialog';
 @import 'components/decorations';
-@import 'components/main-menu';
 @import 'components/buttons.scss';
 @import 'components/forms';
 @import 'components/pager';
+
+
+// Menu Frontend
+//
+@import 'menu/menu_design';
+@import 'menu/menu_mixins';
+@import 'menu/menu_layout';
 
 // Paragraphs
 //
 //
 // Styleguide components.d_p
-@import 'components/d_lang-dropdown';  ;
+@import 'components/d_lang-dropdown';
+@import 'components/d_media';
 @import 'components/d_p_banner';
 @import 'components/d_p_carousel';
 @import 'components/d_p_counters';
@@ -86,7 +91,6 @@
 @import 'components/d_p_side_by_side';
 @import "components/_d_search_blocks";
 @import "components/geysir_overrides";
-@import "components/megamenu_overrides";
 
 // Layouts.
 //
@@ -96,4 +100,5 @@
 
 @import 'layout/header';
 @import 'layout/footer';
+@import 'layout/bottom_footer';
 @import 'layout/download_page';

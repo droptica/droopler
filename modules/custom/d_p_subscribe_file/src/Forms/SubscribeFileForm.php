@@ -145,7 +145,7 @@ class SubscribeFileForm extends FormBase {
     ], $link_options);
     $rendered_download_link = $download_link->toString()->getGeneratedLink();
     if ($this->accountProxy->hasPermission('Administer site configuration')) {
-      drupal_set_message($download_link->getUrl()->toString());
+      $this->messenger()->addStatus($download_link->getUrl()->toString());
     }
 
     $display_settings = ['label' => 'hidden',];
@@ -167,7 +167,7 @@ class SubscribeFileForm extends FormBase {
     $langcode = \Drupal::currentUser()->getPreferredLangcode();
     $result = $mail_manager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
     if ($result['result']) {
-      drupal_set_message($this->t('We send download link, check Your e-mail.'));
+      $this->messenger()->addStatus($this->t('We send download link, check Your e-mail.'));
     }
 
   }

@@ -27,20 +27,13 @@ function d_p_form_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
 
-  $styles_ids = d_p_responsive_style_ids();
-
   switch ($bundle) {
     case 'd_p_form':
-      unset($styles_ids['responsive_image_768']);
-      $styles_ids[] = 'responsive_image_768_banner';
-
       $field_form_layout_field = $paragraph->get('field_d_layout_modifier');
       if (!$field_form_layout_field->isEmpty()) {
         $form_side_value = $field_form_layout_field->first()->getValue();
         $variables['d_p_form_placement'] = $form_side_value['value'];
       }
-
-      d_p_generate_image_set($variables, $styles_ids, $bundle);
       break;
   }
 }

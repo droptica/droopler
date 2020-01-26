@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.d_p_side_by_side.field_d_long_text
     - field.field.paragraph.d_p_side_by_side.field_d_main_title
     - field.field.paragraph.d_p_side_by_side.field_d_p_sbs_items
     - field.field.paragraph.d_p_side_by_side.field_d_settings
@@ -27,9 +28,9 @@ third_party_settings:
       region: content
     group_settings:
       children:
-        - field_d_main_title
-        - field_d_long_text
         - field_d_settings
+        - field_d_long_text
+        - field_d_main_title
       parent_name: group_tabs
       weight: 6
       format_type: tab
@@ -80,5 +81,6 @@ content:
     region: content
 hidden:
   created: true
+  field_d_long_text: true
   field_d_main_title: true
   status: true

@@ -13,7 +13,6 @@ description: ''
 tag: ''
 base_table: search_api_index_product_index
 base_field: search_api_id
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -66,7 +65,7 @@ display:
               slider_options:
                 bef_slider_min: null
                 bef_slider_max: null
-                bef_slider_step: !!float 1
+                bef_slider_step: null
                 bef_slider_animate: ''
                 bef_slider_orientation: horizontal
               more_options:

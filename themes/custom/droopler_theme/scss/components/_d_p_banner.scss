@@ -26,10 +26,11 @@ $d-p-banner-half-transparent-content-spacing: 10% !default;
 $d-p-banner-half-transparent-btn-spacing: 25px !default;
 
 // Other settings
-$d-p-banner-img-opacity: 0.5 !default;
+$d-p-banner-background-opacity: 0.5 !default;
 $d-p-banner-subheader-opacity: 0.7 !default;
 
 .paragraph--type--d-p-banner {
+  position: relative;
   background: $d-p-banner-background-overlay;
   color: $d-p-banner-text-color;
   z-index: 0;
@@ -73,17 +74,12 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       @include decoration-header-line-main-center($d-p-banner-line-color, $d-p-banner-line-color-inverted);
     }
   }
-  .backstretch-item {
-    img {
-      opacity: $d-p-banner-img-opacity;
-      @include media-breakpoint-down(sm) {
-        max-width: none;
-        width: 100%;
-        overflow: hidden;
-      }
-    }
+  .d-media-background-wrapper {
+    opacity: $d-p-banner-background-opacity;
   }
   .content-wrapper {
+    position: relative;
+    z-index: 2;
     width: 100%;
     padding-top: $d-p-banner-padding-top;
     padding-bottom: $d-p-banner-padding-bottom;
