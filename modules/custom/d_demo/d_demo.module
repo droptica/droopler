@@ -57,6 +57,9 @@ function d_demo_content_structure_alter(&$structure, $context) {
     ];
     $structure['engines_boat'] = ['file' => "$path/engines_boat.yml", 'link' => 'Boat Engines', 'parent' => 'd_demo.engines'];
     $structure['engines_aircraft'] = ['file' => "$path/engines_aircraft.yml", 'link' => 'Aircraft Engines', 'parent' => 'd_demo.engines'];
+    $structure['gdpr'] = ['file' => "$path/gdpr.yml"];
+    $structure['terms_of_service'] = ['file' => "$path/terms_of_service.yml"];
+    $structure['privacy_policy'] = ['file' => "$path/privacy_policy.yml"];
   }
 }
 
@@ -80,6 +83,7 @@ function d_demo_block_structure_alter(&$structure, $context) {
     $structure['d_social_media_footer'] = ['file' => "$path/d_social_media_footer.yml"];
     $structure['header_search_link'] = ['file' => "$path/header_search_link.yml"];
     $structure['secondary_menu'] = ['file' => "$path/secondary_menu.yml"];
+    $structure['bottom_footer_menu'] = ['file' => "$path/bottom_footer_menu.yml"];
   }
 }
 

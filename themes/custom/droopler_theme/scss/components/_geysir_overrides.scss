@@ -18,30 +18,17 @@
       display: none !important;
     }
   }
-
-  /* Fix interaction with backstretch library. */
-  .wrapper-d_p_group_of_text_blocks,
-  .wrapper-d_p_group_of_counters,
-  .wrapper-d_p_carousel {
-    .background-image {
-      z-index: auto !important;
-      .backstretch {
-        z-index: 0 !important;
-      }
-    }
-    .slick-list {
-      z-index: 1;
-    }
-  }
 }
 
 /* Fix modal styles. */
+
 #media-library-wrapper,
 #geysir-modal,
 #geysir-modal-form {
   .button-override {
-    @extend .btn;
-    @extend .btn-primary;
+    @include make-btn;
+    @include button-variant($background: $primary, $border: $primary);
+    @include button-size($btn-padding-x, $btn-padding-y, $btn-font-size, $btn-line-height, $btn-border-radius);
     background-image: none;
   }
   .paragraph-type-top {
@@ -118,9 +105,11 @@
       font-size: 1em;
     }
     details summary {
-      @extend .btn;
-      @extend .btn-dark;
-      @extend .btn-sm;
+      @include make-btn;
+      @include button-variant($background: $dark, $border: $dark);
+      @include button-size($btn-padding-x-sm, $btn-padding-y-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+      display: inline-block;
+      text-align: center;
     }
     fieldset.form-item-field-d-settings-0-value-custom-class {
       margin-top: 1rem;
@@ -140,3 +129,4 @@
     }
   }
 }
+

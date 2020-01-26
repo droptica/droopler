@@ -21,6 +21,7 @@ $d-p-text-with-bckg-mobile-padding-bottom: 6.25rem !default;
 $d-p-text-with-bckg-img-opacity: 0.1 !default;
 
 .d-p-text-with-bckg {
+  position: relative;
   background: $d-p-text-with-bckg-background-overlay;
   z-index: 0;
   text-align: center;
@@ -59,17 +60,12 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
       margin-top: $d-p-text-with-bckg-button-margin-top;
     }
   }
-  .backstretch-item {
-    img {
-      opacity: $d-p-text-with-bckg-img-opacity;
-      @include media-breakpoint-down(sm) {
-        max-width: none;
-        width: 100%;
-        overflow: hidden;
-      }
-    }
+  .d-media-background-wrapper {
+    opacity: $d-p-text-with-bckg-img-opacity;
   }
   .content-wrapper {
+    position: relative;
+    z-index: 2;
     width: 100%;
     padding-top: $d-p-text-with-bckg-padding-top;
     padding-bottom: $d-p-text-with-bckg-padding-bottom;

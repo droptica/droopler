@@ -34,11 +34,8 @@ function d_p_counters_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
 
-  $styles_ids = d_p_responsive_style_ids();
-
   switch ($bundle) {
     case 'd_p_group_of_counters':
-      d_p_generate_image_set($variables, $styles_ids, $bundle);
       $variables['#attached']['library'][] = 'd_p_counters/d_p_counters';
   }
 }

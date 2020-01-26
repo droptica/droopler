@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\StreamWrapper\PrivateStream;
+use Drupal\d_p_subscribe_file\Forms\SubscribeFileForm;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -14,24 +15,15 @@ function d_p_subscribe_file_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
 
-  $styles_ids = d_p_responsive_style_ids();
-
   switch ($bundle) {
-
     case 'd_p_subscribe_file':
-      $styles_ids[] = 'responsive_image_768_banner';
-      d_p_generate_image_set($variables, $styles_ids, $bundle);
-      $variables['#attached']['library'][] = 'd_p_subscribe_file/d_p_subscribe_file';
-
       $form_class = \Drupal::service('class_resolver')
-        ->getInstanceFromDefinition('Drupal\d_p_subscribe_file\Forms\SubscribeFileForm');
+        ->getInstanceFromDefinition(SubscribeFileForm::class);
       $form_class->setParagraph($paragraph);
       $form = \Drupal::formBuilder()->getForm($form_class);
 
-      $variables['additional_info'] = $variables['content']['field_d_p_sf_additional_info'];
-      unset($variables['content']['field_d_p_sf_additional_info']);
       $variables['subscribe_file_form'] = $form;
-
+      $variables['#attached']['library'][] = 'd_p_subscribe_file/d_p_subscribe_file';
       break;
   }
 }

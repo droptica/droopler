@@ -15,6 +15,7 @@ $d-blog-header-margin-tablet: 1.5625rem auto 1.375rem !default;
 $d-blog-header-margin-dekstop: 1.5625rem auto 2.1875rem !default;
 $d-blog-teaser-small-text-area-padding-xy: 30px !default;
 $d-blog-teaser-small-padding-y: 20px !default;
+$d-blog-teaser-header-font-size: 1.3rem !default;
 $d-blog-header-desktop-font-size: 3rem !default;
 $d-blog-header-small-desktop-screen-font-size: 2.375rem !default;
 $d-blog-header-tablet-font-size: 1.625rem !default;
@@ -196,55 +197,65 @@ article.node--type-blog-post {
     }
   }
 
-  .field--name-field-d-media-image {
-    margin: $d-blog-image-margin;
-    display: block;
-    img {
-      width: $d-blog-text-container-width;
-      margin-left: auto;
-      margin-right: auto;
+  .paragraph--type--d-p-blog-image {
+    .field--name-field-d-media-image {
+      margin: $d-blog-image-margin;
       display: block;
-      height: auto;
+      img {
+        width: $d-blog-text-container-width;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        height: auto;
+      }
     }
   }
 
-  .field--name-field-d-long-text {
-    width: $d-blog-text-container-width;
-    margin: $d-blog-paragraph-text-margin;
-    display: block;
+  .paragraph--type--d-p-blog-text {
+    .field--name-field-d-long-text {
+      width: $d-blog-text-container-width;
+      margin: $d-blog-paragraph-text-margin;
+      display: block;
 
-    h1, h2, h3, h4, h5, h6 {
-      color: $d-blog-headers-color;
-      text-align: left;
-      font-weight: bold;
-    }
+      h1, h2, h3, h4, h5, h6 {
+        color: $d-blog-headers-color;
+        text-align: left;
+        font-weight: bold;
+      }
 
-    h1 {
-      font-size: $d-blog-header-desktop-font-size;
-    }
+      h1 {
+        font-size: $d-blog-header-desktop-font-size;
+      }
 
-    h2 {
-      font-size: $d-blog-header-h2-font-size-blog-text-desktop
+      h2 {
+        font-size: $d-blog-header-h2-font-size-blog-text-desktop
+      }
     }
   }
 
   @include media-breakpoint-down(sm) {
-    .field--name-field-d-long-text {
-      width: $d-blog-text-width-mobile;
-      font-size: $d-blog-text-font-size-mobile;
+    .paragraph--type--d-p-blog-text {
+      .field--name-field-d-long-text {
+        width: $d-blog-text-width-mobile;
+        font-size: $d-blog-text-font-size-mobile;
 
-      h2 {
-        font-size: $d-blog-header-h2-font-size-blog-text-mobile;
-      }
-      h3, h4, h5, h6 {
-        font-size: $d-blog-smaller-header-font-size-blog-text-mobile;
-      }
-    }
-    .field--name-field-d-media-image {
-      img {
-        width: 100%;
+        h2 {
+          font-size: $d-blog-header-h2-font-size-blog-text-mobile;
+        }
+        h3, h4, h5, h6 {
+          font-size: $d-blog-smaller-header-font-size-blog-text-mobile;
+        }
       }
     }
+
+    .paragraph--type--d-p-blog-image {
+      .field--name-field-d-media-image {
+        img {
+          width: 100%;
+        }
+      }
+    }
+
     .field--name-field-blog-sections {
       p {
         font-size: $d-blog-text-font-size-mobile;
@@ -257,18 +268,21 @@ article.node--type-blog-post {
   }
 
   @include media-breakpoint-up(lg) {
-    .field--name-field-d-long-text {
-      font-size: $d-blog-text-font-size-desktop;
-      p, a, ul, li {
+    .paragraph--type--d-p-blog-text {
+      .field--name-field-d-long-text {
         font-size: $d-blog-text-font-size-desktop;
-        b, strong {
-          color: $d-blog-font-bold-color;
+        p, a, ul, li {
+          font-size: $d-blog-text-font-size-desktop;
+          b, strong {
+            color: $d-blog-font-bold-color;
+          }
         }
       }
     }
-
-    .field--name-field-d-media-image img {
-      font-size: $d-blog-text-font-size-desktop;
+    .paragraph--type--d-p-blog-image {
+      .field--name-field-d-media-image img {
+        font-size: $d-blog-text-font-size-desktop;
+      }
     }
   }
 
@@ -305,6 +319,7 @@ article.node--type-blog-post {
         }
         a {
           color: $color-odysseus;
+          font-size: $d-blog-teaser-header-font-size;
           &:hover {
             color: $color-odysseus;
           }

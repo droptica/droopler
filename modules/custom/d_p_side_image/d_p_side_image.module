@@ -14,8 +14,6 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
 
-  $styles_ids = d_p_responsive_style_ids();
-
   switch ($bundle) {
 
     case 'd_p_side_image':
@@ -28,7 +26,6 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
           ],
         ];
         $variables['d_p_side_image_attributes'] = new Attribute($wrapper_attributes);
-        d_p_generate_image_set($variables, $styles_ids, $bundle);
 
         switch ($image_side) {
           case 'left-wide':
@@ -44,7 +41,6 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
         }
       }
       break;
-
   }
 
   $variables['#attached']['library'][] = 'd_p_side_image/d_p_side_image';

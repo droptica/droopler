@@ -45,16 +45,21 @@
 ] %}
 {% set paragraph_classes = [
   'd-p-text-with-bckg',
-  'background-image',
 ] %}
+
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
+        {% block background %}
+          {% include '@d_media/d-background-media.html.twig' with {
+            content: content.group_d_block_background
+          } only %}
+        {% endblock %}
         <div class="content-wrapper">
           <div class="content container">
             {% block content %}
-              {{ content }}
+              {{ content.group_d_block_content }}
             {% endblock %}
           </div>
         </div>

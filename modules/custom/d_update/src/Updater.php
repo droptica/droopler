@@ -7,14 +7,15 @@
 
 namespace Drupal\d_update;
 
+use Drupal;
+use Drupal\block\Entity\Block;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
-use Drupal\d_update\ConfigCompare;
-use Drupal\d_update\UpdateChecklist;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -70,6 +71,13 @@ class Updater {
   protected $checklist;
 
   /**
+   * Modules Extensions List service.
+   *
+   * @var \Drupal\Core\Extension\ModuleExtensionList
+   */
+  protected $moduleExtensionList;
+
+  /**
    * Constructs the Updater.
    *
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
@@ -84,19 +92,23 @@ class Updater {
    *   Config manager service.
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
+   * @param ModuleExtensionList $moduleExtensionList
+   *   Update Module Extension List service.
    */
   public function __construct(ModuleInstallerInterface $module_installer,
                               StorageInterface $config_storage,
                               EntityTypeManagerInterface $entity_type_manager,
                               ConfigCompare $config_compare,
                               ConfigManagerInterface $config_manager,
-                              UpdateChecklist $checklist) {
+                              UpdateChecklist $checklist,
+                              ModuleExtensionList $moduleExtensionList) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
     $this->entityTypeManager = $entity_type_manager;
     $this->configCompare = $config_compare;
     $this->configManager = $config_manager;
     $this->checklist = $checklist;
+    $this->moduleExtensionList = $moduleExtensionList;
   }
 
   /**
@@ -110,8 +122,8 @@ class Updater {
   /**
    * Import a config file.
    *
-   * @param string $module
-   *  Module name.
+   * @param string $source
+   *  Module/theme name.
    * @param string $name
    *  Config file name without .yml extension.
    * @param string $hash
@@ -120,8 +132,16 @@ class Updater {
    * @return bool
    *   Returns if config was imported successfully.
    */
-  public function importConfig($module, $name, $hash) {
-    $config_path = drupal_get_path('module', $module) . '/config';
+  public function importConfig($source, $name, $hash) {
+    // Parameter $source equal to "foo" means a module, "theme/foo" means a theme.
+    $source_type = 'module';
+    $parts = explode('/', $source);
+    if (count($parts) == 2) {
+      $source_type = $parts[0];
+      $source = $parts[1];
+    }
+    $config_path = drupal_get_path($source_type, $source) . '/config';
+
     $source = new FileStorage($config_path . '/install');
     $optional_source = new FileStorage($config_path . '/optional');
     $data = $source->read($name);
@@ -202,7 +222,7 @@ class Updater {
    * Import many config files at once.
    *
    * @param array $configs
-   *   Two dimensional array with structure "module_name" =>
+   *   Two dimensional array with structure "theme_or_module_name" =>
    *   ["config_file_name" => "config_hash"]
    *
    * @return bool
@@ -210,9 +230,9 @@ class Updater {
    */
   public function importConfigs(array $configs) {
     $status = [];
-    foreach ($configs as $module => $config) {
+    foreach ($configs as $source => $config) {
       foreach ($config as $config_name => $config_hash) {
-        $status[] = $this->importConfig($module, $config_name, $config_hash);
+        $status[] = $this->importConfig($source, $config_name, $config_hash);
       }
     }
 
@@ -237,7 +257,7 @@ class Updater {
       return FALSE;
     }
 
-    $module_data = system_rebuild_module_data();
+    $module_data = $this->moduleExtensionList->getList();
     $modules = array_combine($modules, $modules);
     if ($missing_modules = array_diff_key($modules, $module_data)) {
       return FALSE;
@@ -246,4 +266,32 @@ class Updater {
     return $this->moduleInstaller->install($modules, $enable_dependencies);
   }
 
+  /**
+   * Method creates new instance of existing blocks inside another theme.
+   *
+   * @param $subthemeName
+   *   Name of the subtheme to place block into.
+   *
+   * @param array $configs
+   *   List of blocks configs to instantiate.
+   */
+  public function instantiateBlocksForSubtheme($subthemeName, array $configs) {
+    foreach($configs as $baseTheme => $baseThemeConfigs) {
+      foreach ($baseThemeConfigs as $configName => $hash) {
+        $baseConfig = \Drupal::Config($configName)->getRawData();
+        unset($baseConfig['uuid']);
+        $baseConfig['id'] = $baseConfig['id'] . '_' . $subthemeName;
+        $baseConfig['theme'] = $subthemeName;
+        $block = Block::create($baseConfig);
+        try {
+          $block->save();
+        } catch (EntityStorageException $e) {
+          $this->getLogger('d_update')
+            ->error('Error while instantiating block from %config', [
+              '%config' => $configName,
+            ]);
+        }
+      }
+    }
+  }
 }

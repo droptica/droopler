@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.d_responsive_background
+    - field.field.media.d_video.field_media_oembed_video
+    - media.type.d_video
+  module:
+    - d_media
+id: media.d_video.d_responsive_background
+targetEntityType: media
+bundle: d_video
+mode: d_responsive_background
+content:
+  field_media_oembed_video:
+    type: d_video_embed
+    weight: 0
+    label: hidden
+    settings:
+      player_settings:
+        autoplay: '1'
+        loop: '1'
+        muted: '1'
+        controls: 0
+      video_settings:
+        cover: '1'
+        image_style: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

@@ -15,3 +15,9 @@ $button-max-width: 18rem !default; // Minimum width of the button (desktop)
   width: 100%;
 }
 
+@mixin make-btn() {
+  @include font-button;
+  cursor: pointer;
+  max-width: $button-max-width;
+  width: 100%;
+}

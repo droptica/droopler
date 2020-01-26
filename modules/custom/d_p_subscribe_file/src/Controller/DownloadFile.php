@@ -88,7 +88,7 @@ class DownloadFile extends ControllerBase {
    * @param $message
    */
   private function goHomeWithMessage($message) {
-    drupal_set_message($message);
+    $this->messenger()->addStatus($message);
     $url = Url::fromRoute('<front>');
     $response = new RedirectResponse($url->toString());
     $response->send();

@@ -218,7 +218,7 @@ li.we-mega-menu-li {
         pointer-events: all;
       }
 
-      &.collapsing.open, &.show {
+      &.open {
         .navbar-inner {
           right: 0;
         }
@@ -323,7 +323,7 @@ li.we-mega-menu-li {
     &:hover {
       > .we-mega-menu-submenu {
         display: block;
-        z-index: 1;
+        z-index: 2;
       }
     }
   }
