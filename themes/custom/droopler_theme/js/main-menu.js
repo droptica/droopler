@@ -5,6 +5,7 @@
 (function ($, Drupal) {
 
   "use strict";
+  var $clearStyling = false;
 
   Drupal.behaviors.mainMenuMobileOperations = {
     attach: function (context, settings) {
@@ -17,7 +18,11 @@
 
         $titles.once().click(function() {
           if (window.innerWidth < breakpointDesktop) {
-            $(this).toggleClass('open').parent().find(blockContentClass).slideToggle();
+            $(this).toggleClass('open').parent().find(blockContentClass).slideToggle('medium', function () {
+              if ($(this).is(':hidden')) {
+                $clearStyling = true;
+              }
+            });
 
             return false;
           }
@@ -80,7 +85,11 @@
             if ($linkItem.is('a.open') || $mainNavbar.is(':not(.show)')) {
               return true;
             }
-            $linkItem.toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
+            $linkItem.toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle('medium', function () {
+              if ($(this).is(':hidden')) {
+                $clearStyling = true;
+              }
+            });
 
             return false;
           });
@@ -93,7 +102,11 @@
             if ($linkItem.is('.d-submenu-toggler')) {
               $linkItem = $linkItem.parent();
             }
-            $linkItem.toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle();
+            $linkItem.toggleClass('open').next(blockContentClass).find('> .we-mega-menu-submenu-inner').slideToggle('medium', function () {
+              if ($(this).is(':hidden')) {
+                $clearStyling = true;
+              }
+            });
 
             return false;
           });
@@ -116,6 +129,18 @@
         $matchingLinkTag.parents('.we-mega-menu-li.with-submenu').addClass('active-trail open');
         // Some links are placed in mega menu blocks.
         $matchingLinkTag.parents('.type-of-block').addClass('active-trail open');
+      });
+    }
+  };
+
+  Drupal.behaviors.unsetHiddenNavElements = {
+    attach: function (context, settings) {
+      var $menu = $('nav.navbar', context);
+      $(window).resize(function() {
+        if (window.innerWidth > 992 && $clearStyling) {
+          $menu.find('[style*="display: none"]').removeAttr('style');
+          $clearStyling = false;
+        }
       });
     }
   };
