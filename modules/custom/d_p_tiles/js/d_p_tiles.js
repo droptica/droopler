@@ -12,8 +12,6 @@
 
       // Enable Masonry.
       $(document).ready(function() {
-        const selectElement = document.querySelector('.ice-cream');
-
         var $wrapper = $('.d-tiles, .d-side-tiles', context);
         var videoElements = $wrapper.find('.video-embed');
 
