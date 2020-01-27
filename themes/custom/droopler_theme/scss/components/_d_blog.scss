@@ -319,7 +319,6 @@ article.node--type-blog-post {
         }
         a {
           color: $color-odysseus;
-          font-size: $d-blog-teaser-header-font-size;
           &:hover {
             color: $color-odysseus;
           }
@@ -331,6 +330,9 @@ article.node--type-blog-post {
         .node__title {
           font-size: initial;
           margin: 0;
+          a {
+            font-size: $d-blog-teaser-header-font-size;
+          }
         }
       }
     }
