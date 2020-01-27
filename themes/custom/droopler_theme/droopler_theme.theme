@@ -25,6 +25,11 @@ function droopler_theme_preprocess_html(&$variables) {
   if (isset($path_args[0]) && isset($path_args[1]) && ($path_args[0] == 'user')) {
     $variables['attributes']['class'][] = 'page-user-' . $path_args[1];
   }
+  // Detect browser and attach browser specific libraries.
+  $browser = detect_browser();
+  if(!empty($browser) && $browser === 'Internet Explorer') {
+   $variables['#attached']['library'][] = 'droopler_theme/ie-compatibility';
+  }
 }
 
 /**
@@ -100,7 +105,8 @@ function droopler_theme_preprocess_form_element(&$variables) {
   elseif (is_object($variables['label']['#title'])) {
     if (method_exists($variables['label']['#title'], 'render')) {
       $variables['input_title'] = $variables['label']['#title']->render();
-    } else {
+    }
+    else {
       $variables['input_title'] = $variables['label']['#title'];
     }
   }
@@ -152,7 +158,8 @@ function droopler_theme_theme_suggestions_form_alter(array &$suggestions, array 
 function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
   $route_match = \Drupal::routeMatch();
   if ($route_match->getRouteName() == 'entity.taxonomy_term.canonical') {
-    $storage = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term');
+    $storage = \Drupal::service('entity_type.manager')
+      ->getStorage('taxonomy_term');
     $tid = $route_match->getRawParameter('taxonomy_term');
     $term = $storage->load($tid);
     $suggestions[] = 'page__taxonomy__term__' . $term->getVocabularyId();
@@ -342,7 +349,7 @@ function droopler_theme_preprocess_links(&$variables) {
       $currentRouteParameters = $routeMatch->getParameters()->all();
 
       $routeName = $routeMatch->getRouteName();
-      if (stripos($routeName, 'layout_builder.') === 0 ) {
+      if (stripos($routeName, 'layout_builder.') === 0) {
         $variables['links'] = [];
       }
       if (!empty($currentRouteParameters)) {
@@ -350,12 +357,13 @@ function droopler_theme_preprocess_links(&$variables) {
           /** EntityInterface $parameter */
           if ($parameter instanceof \Drupal\Core\Entity\EntityInterface) {
             $parameterEntityRevisionTable1 = $parameter->getEntityType();
-            $parameterEntityRevisionTable = $parameter->getEntityType()->getRevisionTable();
+            $parameterEntityRevisionTable = $parameter->getEntityType()
+              ->getRevisionTable();
 
             if (empty($parameterEntityRevisionTable)) {
               $variables['links'] = [];
             }
-           }
+          }
         }
       }
     }
@@ -385,7 +393,11 @@ function droopler_theme_is_special_route() {
   $route = \Drupal::routeMatch();
   $route_name = $route->getRouteName();
   $node = $route->getParameter('node');
-  $node_check = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post', 'd_product']));
+  $node_check = (!empty($node) && in_array($node->getType(), [
+      'content_page',
+      'blog_post',
+      'd_product',
+    ]));
   $route_check = $route_name == 'd_p_subscribe_file.downloadfile.checkLink';
 
   return ($node_check || $route_check);
@@ -401,7 +413,10 @@ function droopler_theme_show_title_block() {
   $route = \Drupal::routeMatch();
   $route_name = $route->getRouteName();
   $node = $route->getParameter('node');
-  $node_check = (!empty($node) && in_array($node->getType(), ['content_page', 'blog_post']));
+  $node_check = (!empty($node) && in_array($node->getType(), [
+      'content_page',
+      'blog_post',
+    ]));
   $route_check = $route_name == 'view.blog_listing.page_1';
 
   return !($node_check || $route_check);
@@ -452,7 +467,8 @@ function droopler_theme_library_info_alter(&$libraries, $extension) {
 }
 
 /**
- * Take a list of assets and change their locations to profile directory if needed.
+ * Take a list of assets and change their locations to profile directory if
+ * needed.
  *
  * @param string $profile_libraries_dir
  *   The /libraries directory path inside the profile.
@@ -469,4 +485,43 @@ function droopler_theme_change_asset_location($profile_libraries_dir, array &$as
       }
     }
   }
+}
+
+/**
+ * Function returns user's browser based on User-Agent request header.
+ *
+ * @return string
+ *  User browser's name.
+ */
+function detect_browser() {
+  $arr_browsers = [
+    "Opera",
+    "Edge",
+    "Chrome",
+    "Safari",
+    "Firefox",
+    "MSIE",
+    "Trident",
+  ];
+  $agent = $_SERVER['HTTP_USER_AGENT'];
+  $user_browser = '';
+  foreach ($arr_browsers as $browser) {
+    if (strpos($agent, $browser) !== FALSE) {
+      $user_browser = $browser;
+      break;
+    }
+  }
+  switch ($user_browser) {
+    case 'MSIE':
+      $user_browser = 'Internet Explorer';
+      break;
+    case 'Trident':
+      $user_browser = 'Internet Explorer';
+      break;
+    case 'Edge':
+      $user_browser = 'Microsoft Edge';
+      break;
+  }
+
+  return $user_browser;
 }

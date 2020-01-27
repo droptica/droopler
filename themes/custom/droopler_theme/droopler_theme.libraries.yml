@@ -59,3 +59,11 @@ maintenance_page:
     - system/maintenance
     - droopler_theme/global-styling
 
+ie-compatibility:
+  version: VERSION
+  js:
+    /libraries/object-fit-images/dist/ofi.min.js: { }
+    js/min/ie-compatibility.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
