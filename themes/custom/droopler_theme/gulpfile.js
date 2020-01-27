@@ -25,50 +25,48 @@
   const argv = require('yargs').argv;
   const sassVars = require('gulp-sass-vars');
 
-// Patterns
+  // Patterns
   const scss_pattern = '**/*.scss';
   const js_pattern = '*.js';
 
-// Theme directory
+  // Theme directory
   const theme_dir = '.';
 
 
-// Subdirectories
+  // Subdirectories
   const scss_dir = theme_dir + '/scss';
   const css_dir = theme_dir + '/css';
   const js_dir = theme_dir + '/js';
   const jsmin_dir = theme_dir + '/js/min';
-  const vendor_dir = theme_dir + '/vendor';
+  const vendor_dir = theme_dir + '/js/vendor';
 
 
-
-// Inputs
+  // Inputs
   const scss_input = scss_dir + '/' + scss_pattern;
   const js_input = js_dir + '/' + js_pattern;
 
 
-
-// Dev SASS options
+  // Dev SASS options
   const sassOptionsDev = {
     errLogToConsole: true,
     outputStyle: 'expanded'
   };
 
-// Prod SASS options
+  // Prod SASS options
   const sassOptionsProd = {
     outputStyle: 'compressed'
   };
 
-// Autoprefixer options
+  // Autoprefixer options
   const autoprefixerOptions = {
     overrideBrowserslist: ['last 2 versions', '> 5%', 'Firefox ESR']
   };
 
 
-// MAIN TASKS
-// ----------------------------------------------------
+  // MAIN TASKS
+  // ----------------------------------------------------
 
-// Watch SASS & JS
+  // Watch SASS & JS
   function watchFiles() {
     gulp.watch(scss_input, gulp.series(sassCompile));
     gulp.watch(js_input, gulp.series(jsCompile));
@@ -113,15 +111,24 @@
     } else {
       console.log('[WARNING] .min.js directory does not exist. Please create it and don\'t tempt gulp to fail!');
     }
+
+    // Check for JS VENDOR dir
+    if (fs.existsSync(vendor_dir)) {
+      console.log('[OK] js/vendor directory exists.');
+    } else {
+      console.log('[WARNING] js/vendor directory does not exist. Please create it and don\'t tempt gulp to fail!');
+    }
+
     cb()
   }
 
 
-// Clean everything
+  // Clean everything
   function clean(cb) {
     return del([
       css_dir + '/*',
-      jsmin_dir + '/*'
+      jsmin_dir + '/*',
+      vendor_dir + '/*'
     ], {force: true});
   }
 
@@ -129,10 +136,10 @@
   const dist = gulp.parallel(sassDist, jsCopyLibs, jsCompile);
 
 
-// HELPER TASKS
-// ----------------------------------------------------
+  // HELPER TASKS
+  // ----------------------------------------------------
 
-// Compile SASS
+  // Compile SASS
   function sassCompile() {
     let profileUrl = argv.profile_url;
     let variables = {};
@@ -141,7 +148,7 @@
     }
     return gulp
       .src(scss_input)
-      .pipe(sassVars(variables, { verbose: true }))
+      .pipe(sassVars(variables, {verbose: true}))
       .pipe(sourcemaps.init())
       .pipe(sass(sassOptionsDev).on('error', sass.logError))
       .pipe(autoprefixer(autoprefixerOptions))
@@ -152,16 +159,14 @@
       .resume();
   }
 
+  // Copy JS libs
   function jsCopyLibs(cb) {
     gulp.src([
-      "node_modules/bootstrap/**/*"
-    ]).pipe(gulp.dest(vendor_dir + '/bootstrap'), cb())
-    gulp.src([
-      "node_modules/popper.js/**/*"
-    ]).pipe(gulp.dest(vendor_dir + '/popper.js'), cb())
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+    ]).pipe(gulp.dest(vendor_dir), cb())
   }
 
-// Compile JS
+  // Compile JS
   function jsCompile(cb) {
     pump([
       gulp.src(js_input),
@@ -174,7 +179,7 @@
   }
 
 
-// Generate the production styles
+  // Generate the production styles
   function sassDist() {
     let profileUrl = argv.profile_url;
     let variables = {};
@@ -183,7 +188,7 @@
     }
     return gulp
       .src(scss_input)
-      .pipe(sassVars(variables, { verbose: true }))
+      .pipe(sassVars(variables, {verbose: true}))
       .pipe(sass(sassOptionsProd))
       .pipe(autoprefixer(autoprefixerOptions))
       .pipe(gulp.dest(css_dir));
@@ -201,8 +206,8 @@
   exports.default = exports.watch;
 
 
-// For Docker - properly catch signals
-// Without this CTRL-C won't stop the app, it will send it to background
+  // For Docker - properly catch signals
+  // Without this CTRL-C won't stop the app, it will send it to background
   process.on('SIGINT', function () {
     console.log('Caught Ctrl+C...');
     process.exit();
