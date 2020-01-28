@@ -50,7 +50,7 @@ function d_geysir_page_attachments(array &$page) {
     return;
   }
 
-  $page['#attached']['library'][] = 'd_geysir/media';;
+  $page['#attached']['library'][] = 'd_geysir/media';
 }
 
 /**
@@ -59,6 +59,13 @@ function d_geysir_page_attachments(array &$page) {
 function d_geysir_field_widget_link_attributes_form_alter(&$element, &$form_state, $context) {
   // Link attributes always closed.
   $element["options"]["attributes"]["#open"] = 0;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function d_geysir_field_widget_form_alter(&$element, &$form_state, $context) {
+  $element["open_button"]["#attributes"]["data-disabled-focus"] = 'false';
 }
 
 /**
