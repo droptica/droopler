@@ -133,6 +133,14 @@
     }
   };
 
+  /**
+   * jQuery slideUp method leaves "display: none" inline styling.
+   * We need to remove it if some of menu elements was hidden and
+   * then screen resolution was resized up to minimum 992px to make
+   * them visible again.
+   *
+   * @type {{attach: Drupal.behaviors.unsetHiddenNavElements.attach}}
+   */
   Drupal.behaviors.unsetHiddenNavElements = {
     attach: function (context, settings) {
       var $menu = $('nav.navbar', context);
