@@ -14,16 +14,22 @@
       $(document).ready(function() {
         var $wrapper = $('.d-tiles, .d-side-tiles', context);
         var videoElements = $wrapper.find('.video-embed');
+        var timer;
 
-        window.onresize = function(event) {
-          if(videoElements){
+        function scaleVideo(){
+          if (videoElements) {
             var resizedImage = $('.image-style-tiles-thumbnail').first();
             var imageHeight = resizedImage.height() + 4;
 
-            videoElements.each(function(){
+            videoElements.each(function () {
               $(this).css('max-height', imageHeight + 'px');
             });
           }
+        }
+
+        window.onresize = function() {
+          clearTimeout(timer);
+          timer = setTimeout(scaleVideo, 100);
         };
         videoElements.each(function(){
           $(this).addClass('d-tiles-item');
