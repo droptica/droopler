@@ -984,19 +984,29 @@ function droopler_update_8105() {
 }
 
 /**
- * Droopler 2.0 update configuration added in Droopler 2.0 beta-1.
+ * Droopler 2.0 beta-1 update configuration modified since Droopler 2.0 alpha-2.
  */
 function droopler_update_8106() {
   $updater = \Drupal::service('d_update');
-
+  $module_handler = \Drupal::service('module_handler');
   $configs = [
     'd_media' => [
       'core.entity_view_mode.media.counter.yml' => '',
       'core.entity_view_display.media.d_video.counter.yml' => '',
       'core.entity_view_display.media.d_image.counter.yml' => '',
     ],
+    'd_content' => [
+      'node.type.content_page.yml' => 'bb51f1046ad8a56afa01acfa5ef550a3',
+    ],
   ];
+  if ($module_handler->moduleExists('d_product')) {
+    $configs['d_blog'] = [
+      'node.type.blog_post' => 'a697c1000159bc7f4a905c485ce488df',
+    ];
+  }
   $updater->importConfigs($configs);
+
+
 }
 
 /**
