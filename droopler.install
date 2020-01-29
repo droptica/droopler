@@ -39,7 +39,8 @@ function droopler_install() {
   // Try to install custom init that alters the original one.
   try {
     \Drupal::service('module_installer')->install(['d_custom_init']);
-  } catch (\Drupal\Core\Extension\MissingDependencyException $e) {
+  }
+  catch (\Drupal\Core\Extension\MissingDependencyException $e) {
     \Drupal::logger('droopler_install')
       ->notice('Custom content init not detected.');
   }
@@ -157,7 +158,8 @@ function droopler_enable_subtheme() {
 
     // Additional operations after subtheme installation.
     droopler_enable_subtheme_postprocess();
-  } catch (Exception $e) {
+  }
+  catch (Exception $e) {
     \Drupal::logger('droopler_install')->notice('No subtheme detected.');
   }
 }
@@ -232,7 +234,8 @@ function droopler_update_8102() {
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_0'] = $result;
     $values['droopler__droopler_update_8102_1'] = $result;
-  } catch (MissingDependencyException $e) {
+  }
+  catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_0'] = FALSE;
     $values['droopler__droopler_update_8102_1'] = FALSE;
   }
@@ -325,7 +328,8 @@ function droopler_update_8102() {
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_5'] = $result;
     $values['droopler__droopler_update_8102_6'] = $result;
-  } catch (MissingDependencyException $e) {
+  }
+  catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_5'] = FALSE;
     $values['droopler__droopler_update_8102_6'] = FALSE;
   }
@@ -376,7 +380,8 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_0'] = $result;
-  } catch (MissingDependencyException $e) {
+  }
+  catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
   // Import new configs for d_p.
@@ -411,7 +416,8 @@ function droopler_update_8103() {
       'd_update',
     ]);
     $values['droopler__droopler_update_8103_1'] = $module_installer->install($modules, TRUE);
-  } catch (MissingDependencyException $e) {
+  }
+  catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_1'] = FALSE;
   }
 
@@ -426,7 +432,8 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_2'] = $result;
-  } catch (MissingDependencyException $e) {
+  }
+  catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_2'] = FALSE;
   }
 
@@ -775,7 +782,8 @@ function droopler_update_8104() {
             $entity->get($entityTargetFieldName)->appendItem($media_entity);
 
           }
-        } catch (InvalidArgumentException $e) {
+        }
+        catch (InvalidArgumentException $e) {
           $errorsWhileMigrating[$entity->bundle()][$sourceField] = $sourceFieldName;
 
           \Drupal::logger('droopler_update')
