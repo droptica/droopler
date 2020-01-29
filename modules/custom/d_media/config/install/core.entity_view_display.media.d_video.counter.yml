@@ -2,14 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.counter
     - field.field.media.d_video.field_media_oembed_video
     - media.type.d_video
   module:
     - d_media
-id: media.d_video.default
+id: media.d_video.counter
 targetEntityType: media
 bundle: d_video
-mode: default
+mode: counter
 content:
   field_media_oembed_video:
     type: d_video_embed
@@ -17,10 +18,10 @@ content:
     label: hidden
     settings:
       player_settings:
+        autoplay: '1'
         controls: '1'
-        autoplay: 0
+        muted: '1'
         loop: 0
-        muted: 0
       video_settings:
         cover: '1'
         image_style: ''
