@@ -220,7 +220,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
 .top-product-info {
   margin-bottom: 1.5rem;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 
   .product-item-counter {
     font-size: 1.2rem;
@@ -360,7 +360,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
     padding-left: 2rem;
     padding-right: 2rem;
     min-width: auto;
-    align-self: end;
+    align-self: flex-end;
     @include media-breakpoint-between(sm, md) {
       min-width: 100%;
     }
