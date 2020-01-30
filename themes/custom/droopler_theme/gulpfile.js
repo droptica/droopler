@@ -162,7 +162,9 @@
   // Copy JS libs
   function jsCopyLibs(cb) {
     gulp.src([
-      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.js",      
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map"
     ]).pipe(gulp.dest(vendor_dir), cb())
   }
 
