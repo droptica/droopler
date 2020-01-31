@@ -879,7 +879,7 @@ function droopler_update_8105() {
     'd_p_counters' => [
       'core.entity_form_display.paragraph.d_p_group_of_counters.default' => '5463576b8024a2794ad29a12a893e138',
       'core.entity_form_display.paragraph.d_p_single_counter.default' => 'e857d2f5142d2b0b29fc3c49f071eae6',
-      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => 'cc73c821346cb9222ed66f554a52246b',
+      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => 'b112cb894119aa5637c5021448914b2d',
       'core.entity_view_display.paragraph.d_p_single_counter.default' => '5c2e672831135b05edfe811e5c6c85d5',
     ],
     'd_p_gallery' => [
@@ -1002,6 +1002,9 @@ function droopler_update_8106() {
       'core.entity_view_mode.media.counter.yml' => '',
       'core.entity_view_display.media.d_video.counter.yml' => '',
       'core.entity_view_display.media.d_image.counter.yml' => '',
+    ],
+    'd_p_counters' => [
+      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '1df92b0a421c733796c8388d533bd722',
     ],
   ];
   $updater->importConfigs($configs);
