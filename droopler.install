@@ -39,7 +39,8 @@ function droopler_install() {
   // Try to install custom init that alters the original one.
   try {
     \Drupal::service('module_installer')->install(['d_custom_init']);
-  } catch (\Drupal\Core\Extension\MissingDependencyException $e) {
+  }
+  catch (\Drupal\Core\Extension\MissingDependencyException $e) {
     \Drupal::logger('droopler_install')
       ->notice('Custom content init not detected.');
   }
@@ -606,7 +607,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-      ->getDefault() === 'droopler_subtheme') {
+        ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -781,7 +782,8 @@ function droopler_update_8104() {
             $entity->get($entityTargetFieldName)->appendItem($media_entity);
 
           }
-        } catch (InvalidArgumentException $e) {
+        }
+        catch (InvalidArgumentException $e) {
           $errorsWhileMigrating[$entity->bundle()][$sourceField] = $sourceFieldName;
 
           \Drupal::logger('droopler_update')
@@ -989,6 +991,34 @@ function droopler_update_8105() {
 
 }
 
+/**
+ * Droopler 2.0 beta-1 update configuration modified since Droopler 2.0 alpha-2.
+ */
+function droopler_update_8106() {
+  $updater = \Drupal::service('d_update');
+  $module_handler = \Drupal::service('module_handler');
+  $configs = [
+    'd_media' => [
+      'core.entity_view_mode.media.counter.yml' => '',
+      'core.entity_view_display.media.d_video.counter.yml' => '',
+      'core.entity_view_display.media.d_image.counter.yml' => '',
+    ],
+    'd_content' => [
+      'node.type.content_page.yml' => 'bb51f1046ad8a56afa01acfa5ef550a3',
+    ],
+    'd_p_counters' => [
+      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '1df92b0a421c733796c8388d533bd722',
+    ],
+  ];
+  if ($module_handler->moduleExists('d_product')) {
+    $configs['d_blog'] = [
+      'node.type.blog_post' => 'a697c1000159bc7f4a905c485ce488df',
+    ];
+  }
+  $updater->importConfigs($configs);
+
+
+}
 
 /**
  * Returns a list of modules to install, based on the list of required modules.
