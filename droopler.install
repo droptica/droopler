@@ -157,8 +157,7 @@ function droopler_enable_subtheme() {
 
     // Additional operations after subtheme installation.
     droopler_enable_subtheme_postprocess();
-  }
-  catch (Exception $e) {
+  } catch (Exception $e) {
     \Drupal::logger('droopler_install')->notice('No subtheme detected.');
   }
 }
@@ -233,8 +232,7 @@ function droopler_update_8102() {
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_0'] = $result;
     $values['droopler__droopler_update_8102_1'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_0'] = FALSE;
     $values['droopler__droopler_update_8102_1'] = FALSE;
   }
@@ -327,8 +325,7 @@ function droopler_update_8102() {
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8102_5'] = $result;
     $values['droopler__droopler_update_8102_6'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8102_5'] = FALSE;
     $values['droopler__droopler_update_8102_6'] = FALSE;
   }
@@ -379,8 +376,7 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_0'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_0'] = FALSE;
   }
   // Import new configs for d_p.
@@ -415,8 +411,7 @@ function droopler_update_8103() {
       'd_update',
     ]);
     $values['droopler__droopler_update_8103_1'] = $module_installer->install($modules, TRUE);
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_1'] = FALSE;
   }
 
@@ -431,8 +426,7 @@ function droopler_update_8103() {
     ];
     $result = $module_installer->install($modules, TRUE);
     $values['droopler__droopler_update_8103_2'] = $result;
-  }
-  catch (MissingDependencyException $e) {
+  } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8103_2'] = FALSE;
   }
 
@@ -606,7 +600,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-      ->getDefault() === 'droopler_subtheme') {
+        ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -987,6 +981,31 @@ function droopler_update_8105() {
 
   $updater->checklist()->saveProgress($progress);
 
+}
+
+/**
+ * Droopler 2.0 beta-1 update configuration modified since Droopler 2.0 alpha-2.
+ */
+function droopler_update_8106() {
+  $updater = \Drupal::service('d_update');
+  $module_handler = \Drupal::service('module_handler');
+  $configs = [
+    'd_media' => [
+      'core.entity_form_display.media.d_document.default.yml' => '',
+      'core.entity_form_display.media.d_document.media_library.yml' => '',
+      'core.entity_view_display.media.d_document.default.yml' => '',
+      'core.entity_view_display.media.d_document.media_library.yml' => '',
+      'field.field.media.d_document.field_media_file.yml' => '',
+      'field.storage.media.field_media_file.yml' => '',
+      'language.content_settings.media.d_document.yml' => '',
+      'media.type.d_document.yml' => '',
+    ],
+    'profile/droopler' => [
+      'filter.format.full_html.yml' => '',
+    ],
+  ];
+
+  $updater->importConfigs($configs);
 }
 
 
