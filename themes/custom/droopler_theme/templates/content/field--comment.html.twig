@@ -26,7 +26,7 @@
  * @see comment_preprocess_field()
  */
 #}
-<section{{ attributes }}>
+<section{{ attributes.addClass('container') }}>
   {% if comments and not label_hidden %}
     {{ title_prefix }}
     <h2{{ title_attributes }}>{{ label }}</h2>
