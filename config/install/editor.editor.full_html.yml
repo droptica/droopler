@@ -1,3 +1,4 @@
+langcode: en
 status: true
 dependencies:
   config:
@@ -66,10 +67,10 @@ settings:
             - Source
             - Maximize
   plugins:
-    language:
-      language_list: un
     stylescombo:
       styles: ''
+    language:
+      language_list: un
     linkit:
       linkit_profile: content_nodes
 image_upload:
@@ -78,5 +79,5 @@ image_upload:
   directory: inline-images
   max_size: ''
   max_dimensions:
-    width: null
-    height: null
+    width: 0
+    height: 0
