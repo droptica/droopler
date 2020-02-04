@@ -138,10 +138,10 @@ class Updater {
     if (!$optional) {
       $data = $this->readConfigFromFile($source, $name, 'install');
     }
-    if (!empty($data) || $optional) {
+    if (empty($data) || $optional) {
       $data = $this->readConfigFromFile($source, $name, 'optional');
     }
-    else {
+    if (empty($data)) {
       $this->getLogger('d_update')
         ->error('Cannot find file for %config', ['%config' => $name]);
 
@@ -292,7 +292,7 @@ class Updater {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function createConfig($name, FileStorage $data, $hash) {
+  public function createConfig($name, $data, $hash) {
     if (!$this->configCompare->compare($name, $hash)) {
       $this->getLogger('d_update')
         ->warning('Detected changes in %config, aborting import...', [
