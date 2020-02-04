@@ -151,6 +151,13 @@ class Updater {
     return $this->createConfig($name, $data, $hash);
   }
 
+  /**
+   * @param string $source
+   *   Module/theme name.
+   *
+   * @return array
+   *   Array containing source_type and source name.
+   */
   public function getSourceInformation($source) {
     // Parameter $source equal to "foo" means a module, "theme/foo" means a theme.
     $source_type = 'module';
@@ -242,6 +249,19 @@ class Updater {
     }
   }
 
+  /**
+   * Method for importing config from optional directory.
+   *
+   * @param string $source
+   *   Module/theme source.
+   * @param string $name
+   *   Config file name without extension.
+   * @param string $hash
+   *   Config hash.
+   *
+   * @return bool
+   *   Returns if config was imported succesfully.
+   */
   public function importOptionalConfig($source, $name, $hash) {
     $source_info = $this->getSourceInformation($source);
     $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
@@ -257,6 +277,15 @@ class Updater {
     return $this->createConfig($name, $data, $hash);
   }
 
+  /**
+   * Import many optional config files at once.
+   *
+   * @param array $configs
+   *   Array of config names.
+   *
+   * @return bool
+   *   Returns if all of the configs were imported successfully.
+   */
   public function importOptionalConfigs(array $configs) {
     $status = [];
     foreach ($configs as $source => $config) {
@@ -268,7 +297,23 @@ class Updater {
     return !in_array(FALSE, $status);
   }
 
-  public function createConfig($name, $data, $hash) {
+  /**
+   * Creates config entities from name, file and hash.
+   *
+   * @param string $name
+   *   Config name.
+   * @param \Drupal\Core\Config\FileStorage $data
+   *   Data read from file.
+   * @param string $hash
+   *   Config hash.
+   *
+   * @return bool
+   *   Status of config import.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function createConfig($name, FileStorage $data, $hash) {
     if (!$this->configCompare->compare($name, $hash)) {
       $this->getLogger('d_update')
         ->warning('Detected changes in %config, aborting import...', [
@@ -308,7 +353,8 @@ class Updater {
             '%config' => $name,
           ]);
         return TRUE;
-      } catch (EntityStorageException $e) {
+      }
+      catch (EntityStorageException $e) {
         $this->getLogger('d_update')
           ->error('Error while importing entity config %config', [
             '%config' => $name,
@@ -325,7 +371,8 @@ class Updater {
             '%config' => $name,
           ]);
         return TRUE;
-      } catch (StorageException $e) {
+      }
+      catch (StorageException $e) {
         $this->getLogger('d_update')
           ->error('Error while importing config %config', [
             '%config' => $name,
