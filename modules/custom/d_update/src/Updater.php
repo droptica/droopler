@@ -131,7 +131,6 @@ class Updater {
    * @param bool $optional
    *   Specify if config should be searched only in 'config/optional'.
    *
-   *
    * @return bool
    *   Returns if config was imported successfully.
    */
