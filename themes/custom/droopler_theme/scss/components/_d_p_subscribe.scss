@@ -20,11 +20,10 @@ $d-p-subscribe-padding-y: 8% !default;
 $d-p-subscribe-line-margin-top: 1.45rem !default;
 
 // Other settings.
-$d-p-subscribe-img-opacity: 0.4 !default;
+$d-p-subscribe-background-opacity: 0.4 !default;
 
 // Subscribe form
 .d-p-subscribe-file-form {
-
   margin: $d-p-subscribe-form-margin;
   text-align: center;
 
@@ -71,14 +70,20 @@ $d-p-subscribe-img-opacity: 0.4 !default;
 
 // Entire paragraph
 .subscribe_file {
+  position: relative;
   color: $d-p-subscribe-color;
   z-index: 0;
   padding: $d-p-subscribe-padding-y 0;
   background: $d-p-subscribe-background;
-  .backstretch-item {
-    img {
-      opacity: $d-p-subscribe-img-opacity;
+  .d-media-background-wrapper {
+    img, iframe {
+      opacity: $d-p-subscribe-background-opacity;
     }
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 2;
   }
   a {
     color: $d-p-subscribe-color;

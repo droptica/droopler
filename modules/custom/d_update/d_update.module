@@ -20,6 +20,7 @@ function d_update_checklistapi_checklist_info() {
     '#path' => '/admin/config/development/droopler-update',
     '#description' => t('Provides steps to keep your Droopler site up to date.'),
     '#callback' => 'd_update_checklistapi_checklist_items',
+    '#storage' => 'state'
   ];
 
   return $definitions;

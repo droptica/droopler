@@ -5,17 +5,43 @@ global-styling:
       css/print.css: { media: print }
       css/style.css: {}
 
-global-js:
+# Lato font.
+lato:
+  version: VERSION
+  css:
+    theme:
+      fonts/lato/lato.css: {}
+
+# Custom Fontello font.
+fontello:
+  version: VERSION
+  css:
+    theme:
+      fonts/fontello/fontello.css: {}
+
+# Social media font.
+social_media:
+  version: VERSION
+  css:
+    theme:
+      fonts/social_media/social_media.css: {}
+
+global-scripts:
   version: VERSION
   js:
     js/min/global.min.js: {}
     js/min/main-menu.min.js: {}
-    /libraries/popper.js/dist/umd/popper.min.js: { weight: -20 } # Required by Bootstrap 4
-    js/min/bootstrap.min.js: {}
   dependencies:
     - core/jquery
     - core/jquery.once
     - core/drupal
+
+bootstrap:
+  version: VERSION
+  js:
+    js/vendor/bootstrap.bundle.min.js: {}
+  dependencies:
+    - core/jquery
 
 dropbutton:
   version: VERSION
@@ -38,9 +64,11 @@ maintenance_page:
     - system/maintenance
     - droopler_theme/global-styling
 
-jquery-backstretch:
+ie-compatibility:
+  version: VERSION
   js:
-    /libraries/jquery-backstretch/src/jquery.backstretch.js: {}
+    /libraries/object-fit-images/dist/ofi.min.js: { }
+    js/min/ie-compatibility.min.js: {}
   dependencies:
     - core/jquery
-
+    - core/drupal

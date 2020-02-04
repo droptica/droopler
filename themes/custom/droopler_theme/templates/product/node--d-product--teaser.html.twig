@@ -71,15 +71,17 @@
     'clearfix',
   ]
 %}
-<div {{ attributes.addClass(classes) }}  onclick="window.location = '{{ url }}'">
-  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    {{ main_image }}
-    <div class="product-teaser-content">
-      {{ category }}
-      {{ title_prefix }}
-      <h2{{ title_attributes.addClass('node__title') }}>{{ label }}</h2>
-      {{ title_suffix }}
-      {{ content }}
+<div {{ attributes.addClass(classes) }}>
+  <a href="{{ url }}" rel="bookmark">
+    <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+      {{ main_image }}
+      <div class="product-teaser-content">
+        {{ category }}
+        {{ title_prefix }}
+        <h2{{ title_attributes.addClass('node__title') }}>{{ label }}</h2>
+        {{ title_suffix }}
+      </div>
     </div>
-  </div>
+  </a>
+  {{ content }}
 </div>

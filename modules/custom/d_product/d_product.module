@@ -119,11 +119,15 @@ function d_product_preprocess_page(&$variables) {
     $variables['#attached']['library'][] = 'd_product/d_product_searches';
   }
 
-  // Remove title block from product page.
-  if (stripos($route_name, 'entity.node.canonical') !== FALSE) {
-    $node = $variables['node'];
-    if ($node && $node->getType() == 'd_product' && isset($variables['page']['content']['pagetitle'])) {
-      $variables['page']['content']['pagetitle']['#access'] = FALSE;
+  // Remove title block from product listing and product page.
+  $no_title_routes = ['entity.node.canonical', 'view.products_list.products_list'];
+  if (in_array($route_name, $no_title_routes)) {
+    if (!isset($variables['node']) || $variables['node']->getType() == 'd_product') {
+      foreach ($variables['page']['content'] as &$element) {
+        if (isset($element['#plugin_id']) && $element['#plugin_id'] == 'page_title_block') {
+          $element['#access'] = FALSE;
+        }
+      }
     }
   }
 }
