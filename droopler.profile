@@ -14,6 +14,6 @@ function droopler_modules_installed($modules) {
         'core.entity_view_display.node.blog_post.default' => '',
       ];
     }
-    $updater->importOptionalConfigs($configs);
+    $updater->importConfigs($configs, TRUE);
   }
 }

@@ -92,7 +92,7 @@ class Updater {
    *   Config manager service.
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
-   * @param ModuleExtensionList $moduleExtensionList
+   * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
    *   Update Module Extension List service.
    */
   public function __construct(ModuleInstallerInterface $module_installer,
@@ -128,37 +128,63 @@ class Updater {
    *  Config file name without .yml extension.
    * @param string $hash
    *   Hashed array with config data.
+   * @param bool $optional
+   *   Specify if config should be searched only in 'config/optional'.
+   *
    *
    * @return bool
    *   Returns if config was imported successfully.
    */
-  public function importConfig($source, $name, $hash) {
-    $source_info = $this->getSourceInformation($source);
-    $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
-    $source = new FileStorage($config_path . '/install');
-    $optional_source = new FileStorage($config_path . '/optional');
-    $data = $source->read($name);
-    if (!$data) {
-      $data = $optional_source->read($name);
-      if (!$data) {
-        $this->getLogger('d_update')->error('Cannot find file for %config', [
-          '%config' => $name,
-        ]);
-        return FALSE;
-      }
+  public function importConfig($source, $name, $hash, $optional = FALSE) {
+    if (!$optional) {
+      $data = $this->readConfigFromFile($source, $name, 'install');
+    }
+    if (!empty($data) || $optional) {
+      $data = $this->readConfigFromFile($source, $name, 'optional');
+    }
+    else {
+      $this->getLogger('d_update')
+        ->error('Cannot find file for %config', ['%config' => $name]);
+
+      return FALSE;
     }
 
     return $this->createConfig($name, $data, $hash);
   }
 
+
   /**
+   * Reads config file data from directory based on source and type.
+   *
+   * @param string $source
+   *   Module/theme name.
+   * @param string $name
+   *   Config file name without extension.
+   * @param string $source_directory
+   *   Specify if file should be looked inside optional or install.
+   *
+   * @return array|bool
+   *   The configuration data stored for the configuration object name. If no
+   *   configuration data exists for the given name, FALSE is returned.
+   */
+  public function readConfigFromFile($source, $name, $source_directory) {
+    $source_info = $this->getSourceInformation($source);
+    $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
+    $source = new FileStorage($config_path . '/' . $source_directory);
+
+    return $source->read($name);
+  }
+
+  /**
+   * Returns array with source name and source_type.
+   *
    * @param string $source
    *   Module/theme name.
    *
    * @return array
    *   Array containing source_type and source name.
    */
-  public function getSourceInformation($source) {
+  protected function getSourceInformation($source) {
     // Parameter $source equal to "foo" means a module, "theme/foo" means a theme.
     $source_type = 'module';
     $parts = explode('/', $source);
@@ -177,16 +203,18 @@ class Updater {
    *
    * @param array $configs
    *   Two dimensional array with structure "theme_or_module_name" =>
-   *   ["config_file_name" => "config_hash"]
+   *   ["config_file_name" => "config_hash"].
+   * @param bool $optional
+   *   Specify if configs should be imported from 'config/optional' directory.
    *
    * @return bool
-   *  Returns if all of the configs were imported successfully.
+   *   Returns if all of the configs were imported successfully.
    */
-  public function importConfigs(array $configs) {
+  public function importConfigs(array $configs, $optional = FALSE) {
     $status = [];
     foreach ($configs as $source => $config) {
       foreach ($config as $config_name => $config_hash) {
-        $status[] = $this->importConfig($source, $config_name, $config_hash);
+        $status[] = $this->importConfig($source, $config_name, $config_hash, $optional);
       }
     }
 
@@ -198,7 +226,7 @@ class Updater {
    *
    * @param array $modules
    *   Numeric array with module names.
-   * @param bool $enableDependencies
+   * @param bool $enable_dependencies
    *   Should dependencies for modules be enabled.
    *
    * @return bool
@@ -223,9 +251,8 @@ class Updater {
   /**
    * Method creates new instance of existing blocks inside another theme.
    *
-   * @param $subthemeName
+   * @param string $subthemeName
    *   Name of the subtheme to place block into.
-   *
    * @param array $configs
    *   List of blocks configs to instantiate.
    */
@@ -239,7 +266,8 @@ class Updater {
         $block = Block::create($baseConfig);
         try {
           $block->save();
-        } catch (EntityStorageException $e) {
+        }
+        catch (EntityStorageException $e) {
           $this->getLogger('d_update')
             ->error('Error while instantiating block from %config', [
               '%config' => $configName,
@@ -247,54 +275,6 @@ class Updater {
         }
       }
     }
-  }
-
-  /**
-   * Method for importing config from optional directory.
-   *
-   * @param string $source
-   *   Module/theme source.
-   * @param string $name
-   *   Config file name without extension.
-   * @param string $hash
-   *   Config hash.
-   *
-   * @return bool
-   *   Returns if config was imported succesfully.
-   */
-  public function importOptionalConfig($source, $name, $hash) {
-    $source_info = $this->getSourceInformation($source);
-    $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
-    $source = new FileStorage($config_path . '/optional');
-    $data = $source->read($name);
-    if (!$data) {
-      $this->getLogger('d_update')->error('Cannot find file for %config', [
-        '%config' => $name,
-      ]);
-      return FALSE;
-    }
-
-    return $this->createConfig($name, $data, $hash);
-  }
-
-  /**
-   * Import many optional config files at once.
-   *
-   * @param array $configs
-   *   Array of config names.
-   *
-   * @return bool
-   *   Returns if all of the configs were imported successfully.
-   */
-  public function importOptionalConfigs(array $configs) {
-    $status = [];
-    foreach ($configs as $source => $config) {
-      foreach ($config as $config_name => $config_hash) {
-        $status[] = $this->importOptionalConfig($source, $config_name, $config_hash);
-      }
-    }
-
-    return !in_array(FALSE, $status);
   }
 
   /**
@@ -381,5 +361,4 @@ class Updater {
       }
     }
   }
-
 }
