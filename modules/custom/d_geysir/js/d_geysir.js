@@ -18,8 +18,6 @@
    *   The HTTP status code.
    */
   Drupal.AjaxCommands.prototype.d_geysir_reattach_behaviors = function(ajax, response, status) {
-    if (ajax.$form && ajax.$form.length > 0) {
-      Drupal.attachBehaviors(ajax.$form.get(0));
-    }
+    Drupal.attachBehaviors($('[data-geysir-field-paragraph-field-wrapper]').get(0));
   };
 })(jQuery);

@@ -39,23 +39,28 @@
  */
 #}
 {% set classes = [
-'paragraph',
-'clearfix',
-'paragraph--type--' ~ paragraph.bundle|clean_class,
-view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  'paragraph',
+  'clearfix',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
 {% set paragraph_classes = [
   'd-p-counters',
-  'background-image',
 ] %}
+
 {% block paragraph %}
 <section {{ wrapper_attributes }}>
   <div{{ attributes.addClass(classes) }}>
     <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
+      {% block background %}
+        {% include '@d_media/d-background-media.html.twig' with {
+          content: content.group_d_counters_background
+        } only %}
+      {% endblock %}
       <div class="content-wrapper">
         <div class="content container">
           {% block content %}
-            {{ content }}
+            {{ content.group_d_counters_content }}
           {% endblock %}
         </div>
       </div>

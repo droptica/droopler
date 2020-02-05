@@ -22,6 +22,8 @@
   const fs = require('fs');
   const rename = require("gulp-rename");
   const del = require('del');
+  const argv = require('yargs').argv;
+  const sassVars = require('gulp-sass-vars');
 
   // Patterns
   const scss_pattern = '**/*.scss';
@@ -36,6 +38,8 @@
   const css_dir = theme_dir + '/css';
   const js_dir = theme_dir + '/js';
   const jsmin_dir = theme_dir + '/js/min';
+  const vendor_dir = theme_dir + '/js/vendor';
+
 
   // Inputs
   const scss_input = scss_dir + '/' + scss_pattern;
@@ -71,12 +75,13 @@
   function debug(cb) {
     console.log('[OK] Working directory set: ' + theme_dir);
 
-    // Check if theme dir is mounted
+    // Check of theme dir is mounted
     if (fs.existsSync(theme_dir)) {
       console.log('[OK] Working directory exists.');
     } else {
       console.log('[ERROR] Working directory does not exist. Maybe it is not mounted by docker? Or there is a misspell?');
     }
+
 
     // Check for SCSS dir
     if (fs.existsSync(scss_dir)) {
@@ -107,6 +112,13 @@
       console.log('[WARNING] .min.js directory does not exist. Please create it and don\'t tempt gulp to fail!');
     }
 
+    // Check for JS VENDOR dir
+    if (fs.existsSync(vendor_dir)) {
+      console.log('[OK] js/vendor directory exists.');
+    } else {
+      console.log('[WARNING] js/vendor directory does not exist. Please create it and don\'t tempt gulp to fail!');
+    }
+
     cb()
   }
 
@@ -115,12 +127,13 @@
   function clean(cb) {
     return del([
       css_dir + '/*',
-      jsmin_dir + '/*'
+      jsmin_dir + '/*',
+      vendor_dir + '/*'
     ], {force: true});
   }
 
-  const compile = gulp.parallel(sassCompile, jsCompile);
-  const dist = gulp.parallel(sassDist, jsCompile);
+  const compile = gulp.parallel(sassCompile, jsCopyLibs, jsCompile);
+  const dist = gulp.parallel(sassDist, jsCopyLibs, jsCompile);
 
 
   // HELPER TASKS
@@ -128,8 +141,14 @@
 
   // Compile SASS
   function sassCompile() {
+    let profileUrl = argv.profile_url;
+    let variables = {};
+    if (typeof profileUrl !== 'undefined') {
+      variables = {profile_path: profileUrl};
+    }
     return gulp
       .src(scss_input)
+      .pipe(sassVars(variables, {verbose: true}))
       .pipe(sourcemaps.init())
       .pipe(sass(sassOptionsDev).on('error', sass.logError))
       .pipe(autoprefixer(autoprefixerOptions))
@@ -140,6 +159,14 @@
       .resume();
   }
 
+  // Copy JS libs
+  function jsCopyLibs(cb) {
+    gulp.src([
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.js",      
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+    ]).pipe(gulp.dest(vendor_dir), cb())
+  }
 
   // Compile JS
   function jsCompile(cb) {
@@ -153,10 +180,17 @@
     ], cb);
   }
 
+
   // Generate the production styles
   function sassDist() {
+    let profileUrl = argv.profile_url;
+    let variables = {};
+    if (typeof profileUrl !== 'undefined') {
+      variables = {profile_path: profileUrl};
+    }
     return gulp
       .src(scss_input)
+      .pipe(sassVars(variables, {verbose: true}))
       .pipe(sass(sassOptionsProd))
       .pipe(autoprefixer(autoprefixerOptions))
       .pipe(gulp.dest(css_dir));
@@ -165,12 +199,14 @@
   exports.compile = compile;
   exports.clean = clean;
   exports.debug = debug;
+  exports.jsCopyLibs = jsCopyLibs;
   exports.watch = watchFiles;
   exports.dist = dist;
   exports.sassCompile = sassCompile;
   exports.jsCompile = jsCompile;
   exports.sassDist = sassDist;
   exports.default = exports.watch;
+
 
   // For Docker - properly catch signals
   // Without this CTRL-C won't stop the app, it will send it to background

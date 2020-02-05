@@ -1,0 +1,6 @@
+{% if spacer_attributes %}
+  <svg {{ spacer_attributes }}></svg>
+  <iframe{{ attributes.addClass('reactive-video') }}></iframe>
+{% else %}
+  <iframe{{ attributes }}></iframe>
+{% endif %}

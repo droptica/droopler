@@ -80,6 +80,15 @@ $d-p-tiles-margin-bottom: 5% !default;
       }
     }
 
+    .video-embed {
+     max-width: 25%;
+      max-height: 314px;
+      @include media-breakpoint-down(sm) {
+        max-width: 50%;
+        max-height: 168px;
+      }
+    }
+
     .d-tiles-item {
       padding: 2px;
     }

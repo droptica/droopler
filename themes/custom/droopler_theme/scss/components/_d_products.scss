@@ -86,7 +86,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
   padding: 1rem 3.125rem 0.75rem 1.5rem;
   background-color: $color-leto;
   background-size: 1.625rem;
-  background-image: url('/profiles/contrib/droopler/themes/custom/droopler_theme/images/search.svg');
+  background-image: url('#{$assets-path}/search.svg');
   background-repeat: no-repeat;
   background-position: right 17px center;
 }
@@ -165,7 +165,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
 
       .select2-selection__arrow {
         height: 100%;
-        background-image: url('/profiles/contrib/droopler/themes/custom/droopler_theme/images/arrow.svg');
+        background-image: url('#{$assets-path}/arrow.svg');
         background-size: 1.75rem;
         background-repeat: no-repeat;
         background-position: right;
@@ -198,7 +198,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
 
 .x-mark {
   padding-right: 1.125rem;
-  background-image: url('/profiles/contrib/droopler/themes/custom/droopler_theme/images/x.svg');
+  background-image: url('#{$assets-path}/x.svg');
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: bottom;
@@ -220,7 +220,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
 .top-product-info {
   margin-bottom: 1.5rem;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 
   .product-item-counter {
     font-size: 1.2rem;
@@ -269,8 +269,8 @@ $d-product-filters-border: 2px solid $color-hector !default;
     li {
       margin-right: 0.3125rem;
       a {
-        @extend .btn;
-        @extend .btn-sm;
+        @include make-btn;
+        @include button-size($btn-padding-x-sm, $btn-padding-y-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
         min-width: auto;
         width: auto;
         color: $color-hecuba;
@@ -323,7 +323,6 @@ $d-product-filters-border: 2px solid $color-hector !default;
 
   .node--view-mode-teaser {
     border: $d-product-view-border;
-    cursor: pointer;
     height: 100%;
     box-shadow: (0 0 0.625rem -0.1875rem $color-aeneas);
     padding-bottom: 0;
@@ -361,7 +360,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
     padding-left: 2rem;
     padding-right: 2rem;
     min-width: auto;
-    align-self: end;
+    align-self: flex-end;
     @include media-breakpoint-between(sm, md) {
       min-width: 100%;
     }
@@ -371,7 +370,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
 .filters {
   .region-facets-left {
     > .block:not(.block-mobile-filters-submit) {
-      @extend .container;
+      @include  make-container-max-widths();
     }
   }
   @include media-breakpoint-up(lg) {
@@ -533,14 +532,14 @@ $d-product-filters-border: 2px solid $color-hector !default;
 
       &:hover {
         &:after {
-          background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-white.svg);
+          background-image: url(#{$assets-path}/funnel-white.svg);
         }
       }
 
       &:after {
         position: absolute;
         content: "";
-        background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel.svg);
+        background-image: url(#{$assets-path}/funnel.svg);
         background-repeat: no-repeat;
         background-position: right top 0;
         width: 1.875rem;
@@ -549,11 +548,11 @@ $d-product-filters-border: 2px solid $color-hector !default;
       }
       &.mobile-filters-active {
         &:after {
-          background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-thicked.svg);
+          background-image: url(#{$assets-path}/funnel-thicked.svg);
         }
         &:hover {
           &:after {
-            background-image: url(/profiles/contrib/droopler/themes/custom/droopler_theme/images/funnel-thicked-white.svg);
+            background-image: url(#{$assets-path}/funnel-thicked-white.svg);
           }
         }
       }

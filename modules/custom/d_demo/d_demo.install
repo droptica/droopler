@@ -54,6 +54,27 @@ function d_demo_create_secondary_menu() {
 }
 
 /**
+ * Creates a menu to be placed after footer
+ */
+
+function d_demo_create_bottom_footer_menu() {
+  $bottom_footer_menu = [
+    'data' => [
+      'id' => 'bottom_footer_menu',
+      'label' => 'Bottom footer menu',
+      'description' => 'Menu placed after footer',
+    ],
+    'links' => [
+      ['title' => 'Privacy policy', 'url' => '/privacy-policy'],
+      ['title' => 'Terms of Service', 'url' => '/terms-of-service'],
+      ['title' => 'GDPR', 'url' => '/gdpr'],
+    ],
+  ];
+
+  d_demo_create_menu_with_links($bottom_footer_menu);
+}
+
+/**
  * Implements hook_install().
  */
 function d_demo_install() {
@@ -66,6 +87,7 @@ function d_demo_install() {
     ->save();
 
   d_demo_create_secondary_menu();
+  d_demo_create_bottom_footer_menu();
 
   /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
   $themeLogoService = \Drupal::service('d_demo.theme_logo');
@@ -87,7 +109,9 @@ function d_demo_install() {
  */
 function d_demo_uninstall() {
   // Delete custom menu.
-  $menu = \Drupal::entityTypeManager()->getStorage('menu')->load('footer_example_menu');
+  $menu = \Drupal::entityTypeManager()
+    ->getStorage('menu')
+    ->load('footer_example_menu');
   if ($menu) {
     $menu->delete();
   }
