@@ -18,7 +18,7 @@ class SocialMediaBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $mediaName = ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin'];
+    $mediaName = ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin', 'dribbble'];
     $links = [];
     $config = \Drupal::config('d_social_media.settings');
     foreach ($mediaName as $name) {
