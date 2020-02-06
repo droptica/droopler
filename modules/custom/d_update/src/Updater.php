@@ -134,11 +134,9 @@ class Updater {
    * @return bool
    *   Returns if config was imported successfully.
    */
-  public function importConfig($source, $name, $hash, $optional = FALSE) {
-    if (!$optional) {
-      $data = $this->readConfigFromFile($source, $name, 'install');
-    }
-    if (empty($data) || $optional) {
+  public function importConfig($source, $name, $hash) {
+    $data = $this->readConfigFromFile($source, $name, 'install');
+    if (empty($data)) {
       $data = $this->readConfigFromFile($source, $name, 'optional');
     }
     if (empty($data)) {
@@ -203,17 +201,15 @@ class Updater {
    * @param array $configs
    *   Two dimensional array with structure "theme_or_module_name" =>
    *   ["config_file_name" => "config_hash"].
-   * @param bool $optional
-   *   Specify if configs should be imported from 'config/optional' directory.
    *
    * @return bool
    *   Returns if all of the configs were imported successfully.
    */
-  public function importConfigs(array $configs, $optional = FALSE) {
+  public function importConfigs(array $configs) {
     $status = [];
     foreach ($configs as $source => $config) {
       foreach ($config as $config_name => $config_hash) {
-        $status[] = $this->importConfig($source, $config_name, $config_hash, $optional);
+        $status[] = $this->importConfig($source, $config_name, $config_hash);
       }
     }
 
@@ -281,7 +277,7 @@ class Updater {
    *
    * @param string $name
    *   Config name.
-   * @param \Drupal\Core\Config\FileStorage $data
+   * @param array|bool $data
    *   Data read from file.
    * @param string $hash
    *   Config hash.
@@ -293,13 +289,15 @@ class Updater {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function createConfig($name, $data, $hash) {
-    if (!$this->configCompare->compare($name, $hash)) {
+
+    if (!$this->verifyHash($name, $hash)) {
       $this->getLogger('d_update')
         ->warning('Detected changes in %config, aborting import...', [
           '%config' => $name,
         ]);
       return FALSE;
     }
+
     $entity_type = $this->configManager->getEntityTypeIdByName($name);
     if (!empty($entity_type)) {
       // If this is field config, handle it properly.
@@ -360,4 +358,27 @@ class Updater {
       }
     }
   }
+
+  /**
+   * Returns whether adding config to database should proceed.
+   *
+   * @param string $name
+   *   Config name without extension.
+   * @param string $hash
+   *   Config hash or keyword, empty for new configs.
+   *
+   * @return bool
+   *   Returns TRUE for proceed, false for halt.
+   */
+  public function verifyHash($name, $hash) {
+    switch (TRUE) {
+      case $hash == 'override':
+      case empty($hash):
+        return TRUE;
+
+      default:
+        return $this->configCompare->compare($name, $hash);
+    }
+  }
+
 }
