@@ -340,7 +340,8 @@ class Updater {
             '%config' => $name,
           ]);
         return TRUE;
-      } catch (EntityStorageException $e) {
+      }
+      catch (EntityStorageException $e) {
         $this->getLogger('d_update')
           ->error('Error while importing entity config %config', [
             '%config' => $name,
@@ -357,7 +358,8 @@ class Updater {
             '%config' => $name,
           ]);
         return TRUE;
-      } catch (StorageException $e) {
+      }
+      catch (StorageException $e) {
         $this->getLogger('d_update')
           ->error('Error while importing config %config', [
             '%config' => $name,
@@ -389,8 +391,22 @@ class Updater {
     }
   }
 
+  /**
+   * Allows updating of single config, based on yml file.
+   *
+   * TODO: Implement mechanism for "change" keyword.
+   *
+   * @param string $source
+   *   Module/theme name.
+   * @param string $name
+   *   Config file name without extension.
+   *
+   * @return bool
+   *   Returns if config was modified successfully.
+   */
   public function updateConfigurations($source, $name) {
     $data = $this->readConfigFromFile($source, $name, 'update');
+    $status = [];
     if (empty($data)) {
       $this->getLogger('d_update')
         ->error('Cannot find file for %config', ['%config' => $name]);
@@ -400,23 +416,39 @@ class Updater {
     foreach ($data as $configName => $configOperations) {
       $updates = $configOperations;
       $newConfig = [];
-      if (isset($updates['change'])) {
-        $newConfig = Drupal\Component\Utility\NestedArray::mergeDeep($newConfig, $updates['change']);
-      }
       if (isset($updates['add'])) {
-        $newConfig = Drupal\Component\Utility\NestedArray::mergeDeep($newConfig, $updates['add']);
+        $newConfig = NestedArray::mergeDeep($newConfig, $updates['add']);
       }
-      $config = $this->configFactory->getEditable($configName);
-      $configData = $config->get();
-      if (empty($configData)) {
-        return FALSE;
+      if (!$this->modifyConfig($configName, $newConfig)) {
+        $this->getLogger('d_update')
+          ->error('Update failed for %config', ['%config' => $name]);
       }
-      $config->setData(NestedArray::mergeDeep($configData, $newConfig));
-      $config->save();
-
-      return TRUE;
     }
+
+    return !in_array(FALSE, $status);
   }
 
+  /**
+   * Loads and changes config.
+   *
+   * @param string $configName
+   *   Name of config to modify.
+   * @param array $newConfig
+   *   Array containing changes to apply.
+   *
+   * @return bool
+   *   Return if the config was changed sucessfuly.
+   */
+  private function modifyConfig($configName, array $newConfig) {
+    $config = $this->configFactory->getEditable($configName);
+    $configData = $config->get();
+    if (empty($configData)) {
+      return FALSE;
+    }
+    $config->setData(NestedArray::mergeDeep($configData, $newConfig));
+    $config->save();
+
+    return TRUE;
+  }
 
 }
