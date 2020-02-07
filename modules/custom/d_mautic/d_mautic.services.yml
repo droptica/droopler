@@ -1,0 +1,6 @@
+services:
+  d_mail.mailer:
+    class: Drupal\d_mail\Controller\Mailer
+  d_mautic.contact:
+    class: Drupal\d_mautic\Service\Contact
+    arguments: ['@config.factory', '@d_mail.mailer']

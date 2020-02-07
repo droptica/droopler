@@ -1,0 +1,11 @@
+<h1>Mautic authentication failed:</h1>
+
+<h2>Errors</h2>
+<ul>
+  {% for key, value in data.errors %}
+    {% for type, error in value %}
+      <li>{{ type }}: {{ error }}</li>
+    {% endfor %}
+  {% endfor %}
+</ul>
+<p>{{ data.extra }}</p>

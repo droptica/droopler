@@ -1,0 +1,7 @@
+d_mail.mail_settings:
+  path: '/admin/application/mail-settings'
+  defaults:
+    _form: '\Drupal\d_mail\Form\MailSettingsForm'
+    _title: 'Mail settings'
+  requirements:
+     _permission: 'administer application'

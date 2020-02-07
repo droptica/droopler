@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * Implements hook_mail().
+ */
+function d_mail_mail($key, &$message, $params) {
+
+  $data = \Drupal::service('d_mail.data');
+  $message['from'] = \Drupal::config('system.site')->get('mail');
+
+  $message['body'][] = $params['body'];
+
+  switch ($key) {
+    case 'contact_form_reply':
+      $message['subject'] = $data->getReplyTitle();
+      break;
+
+    case 'contact_form_return':
+      $message['subject'] = $data->getReturnTitleContact($params['values']['email']);
+      break;
+
+    case 'contact_testus_form_return':
+      $message['subject'] = $data->getReturnTitleContactTestUs();
+      break;
+
+    default:
+      $message['subject'] = $params['title'];
+  }
+}
+
+/**
+ * Implements hook_mail_alter().
+ */
+function d_mail_mail_alter(&$message) {
+
+  switch ($message['key']) {
+    case 'contact_form_reply':
+    case 'contact_form_return':
+    case 'contact_testus_form_return':
+    case 'errors_form':
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+      break;
+  }
+
+}
+
+/**
+ * Implements hook_theme.
+ */
+function d_mail_theme($existing, $type, $theme, $path) {
+  return [
+    'errors_form' => [
+      'template' => 'errors_form',
+      'variables' => [
+        'data' => NULL,
+      ],
+    ],
+  ];
+}

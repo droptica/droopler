@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Implement hook_form_alter().
+ */
+function d_mautic_form_alter(&$form, &$form_state, $form_id) {
+  $forms = [
+    'd_forms',
+    'testus_form',
+  ];
+
+  if (in_array($form_id, $forms)) {
+    $form['#submit'][] = 'd_mautic_form_submit';
+  }
+}
+
+/**
+ * Save contact data through Mautic API after form submission.
+ *
+ * @see $form
+ * @see $form_state
+ */
+function d_mautic_form_submit(&$form, &$form_state) {
+  $input = array_map('trim', $form_state->getUserInput());
+
+  try {
+    $contact_service = \Drupal::service('d_mautic.contact');
+    $contact_service->createContact($input);
+    \Drupal::logger('d_mautic')
+      ->info("Contact '" . $input['email'] . "' has been saved in Mautic Contacts.");
+  } catch (\Exception $e) {
+    \Drupal::logger('d_mautic')->warning($e->getMessage());
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function d_mautic_theme($existing, $type, $theme, $path) {
+  return [
+    'd_mautic_form_embed' => [
+      'variables' => [
+        'formUrl' => NULL,
+      ],
+    ],
+  ];
+}
