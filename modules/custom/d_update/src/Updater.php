@@ -9,6 +9,8 @@ namespace Drupal\d_update;
 
 use Drupal;
 use Drupal\block\Entity\Block;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
@@ -64,6 +66,13 @@ class Updater {
   protected $configManager;
 
   /**
+   * Config factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * Update Checklist service.
    *
    * @var \Drupal\d_update\UpdateChecklist
@@ -92,8 +101,9 @@ class Updater {
    *   Config manager service.
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
-   * @param ModuleExtensionList $moduleExtensionList
+   * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
    *   Update Module Extension List service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    */
   public function __construct(ModuleInstallerInterface $module_installer,
                               StorageInterface $config_storage,
@@ -101,7 +111,8 @@ class Updater {
                               ConfigCompare $config_compare,
                               ConfigManagerInterface $config_manager,
                               UpdateChecklist $checklist,
-                              ModuleExtensionList $moduleExtensionList) {
+                              ModuleExtensionList $moduleExtensionList,
+                              ConfigFactoryInterface $config_factory) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
     $this->entityTypeManager = $entity_type_manager;
@@ -109,6 +120,7 @@ class Updater {
     $this->configManager = $config_manager;
     $this->checklist = $checklist;
     $this->moduleExtensionList = $moduleExtensionList;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -133,6 +145,53 @@ class Updater {
    *   Returns if config was imported successfully.
    */
   public function importConfig($source, $name, $hash) {
+    $data = $this->readConfigFromFile($source, $name, 'install');
+    if (empty($data)) {
+      $data = $this->readConfigFromFile($source, $name, 'optional');
+    }
+    if (empty($data)) {
+      $this->getLogger('d_update')
+        ->error('Cannot find file for %config', ['%config' => $name]);
+
+      return FALSE;
+    }
+
+    return $this->createConfig($name, $data, $hash);
+  }
+
+
+  /**
+   * Reads config file data from directory based on source and type.
+   *
+   * @param string $source
+   *   Module/theme name.
+   * @param string $name
+   *   Config file name without extension.
+   * @param string $source_directory
+   *   Specify if file should be looked inside optional or install.
+   *
+   * @return array|bool
+   *   The configuration data stored for the configuration object name. If no
+   *   configuration data exists for the given name, FALSE is returned.
+   */
+  public function readConfigFromFile($source, $name, $source_directory) {
+    $source_info = $this->getSourceInformation($source);
+    $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
+    $source = new FileStorage($config_path . '/' . $source_directory);
+
+    return $source->read($name);
+  }
+
+  /**
+   * Returns array with source name and source_type.
+   *
+   * @param string $source
+   *   Module/theme name.
+   *
+   * @return array
+   *   Array containing source_type and source name.
+   */
+  protected function getSourceInformation($source) {
     // Parameter $source equal to "foo" means a module, "theme/foo" means a theme.
     $source_type = 'module';
     $parts = explode('/', $source);
@@ -140,82 +199,10 @@ class Updater {
       $source_type = $parts[0];
       $source = $parts[1];
     }
-    $config_path = drupal_get_path($source_type, $source) . '/config';
-
-    $source = new FileStorage($config_path . '/install');
-    $optional_source = new FileStorage($config_path . '/optional');
-    $data = $source->read($name);
-    if (!$data) {
-      $data = $optional_source->read($name);
-      if (!$data) {
-        $this->getLogger('d_update')->error('Cannot find file for %config', [
-          '%config' => $name,
-        ]);
-        return FALSE;
-      }
-    }
-    if (!$this->configCompare->compare($name, $hash)) {
-      $this->getLogger('d_update')->warning('Detected changes in %config, aborting import...', [
-        '%config' => $name,
-      ]);
-      return FALSE;
-    }
-
-    $entity_type = $this->configManager->getEntityTypeIdByName($name);
-    if (!empty($entity_type)) {
-      // If this is field config, handle it properly.
-      /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
-      $storage = $this->entityTypeManager->getStorage($entity_type);
-
-      // Try to load the existing config.
-      $id = $storage->getIDFromConfigName($name, $storage->getEntityType()->getConfigPrefix());
-      $existingEntity = $storage->load($id);
-      if (!empty($existingEntity)) {
-        // Set the proper UUID to avoid conflicts.
-        $data['uuid'] = $existingEntity->uuid();
-      }
-
-      /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity */
-      $entity = $storage->createFromStorageRecord($data);
-
-      // If we need an update, we have to inform the storage about it.
-      if (!empty($existingEntity)) {
-        $entity->original = $existingEntity;
-        $entity->enforceIsNew(FALSE);
-      }
-
-      // Do the update.
-      try {
-        $entity->save();
-        $this->getLogger('d_update')->info('Successfully imported field config %config', [
-          '%config' => $name,
-        ]);
-        return TRUE;
-      }
-      catch (EntityStorageException $e) {
-        $this->getLogger('d_update')->error('Error while importing entity config %config', [
-          '%config' => $name,
-        ]);
-        return FALSE;
-      }
-    }
-    else {
-      // Otherwise use plain config storage.
-      try {
-        $this->configStorage->write($name, $data);
-        $this->getLogger('d_update')->info('Successfully imported config %config', [
-          '%config' => $name,
-        ]);
-        return TRUE;
-      }
-      catch (StorageException $e) {
-        $this->getLogger('d_update')->error('Error while importing config %config', [
-          '%config' => $name,
-        ]);
-        return FALSE;
-      }
-    }
-
+    return [
+      'source_type' => $source_type,
+      'source' => $source,
+    ];
   }
 
   /**
@@ -223,10 +210,10 @@ class Updater {
    *
    * @param array $configs
    *   Two dimensional array with structure "theme_or_module_name" =>
-   *   ["config_file_name" => "config_hash"]
+   *   ["config_file_name" => "config_hash"].
    *
    * @return bool
-   *  Returns if all of the configs were imported successfully.
+   *   Returns if all of the configs were imported successfully.
    */
   public function importConfigs(array $configs) {
     $status = [];
@@ -244,7 +231,7 @@ class Updater {
    *
    * @param array $modules
    *   Numeric array with module names.
-   * @param bool $enableDependencies
+   * @param bool $enable_dependencies
    *   Should dependencies for modules be enabled.
    *
    * @return bool
@@ -269,14 +256,13 @@ class Updater {
   /**
    * Method creates new instance of existing blocks inside another theme.
    *
-   * @param $subthemeName
+   * @param string $subthemeName
    *   Name of the subtheme to place block into.
-   *
    * @param array $configs
    *   List of blocks configs to instantiate.
    */
   public function instantiateBlocksForSubtheme($subthemeName, array $configs) {
-    foreach($configs as $baseTheme => $baseThemeConfigs) {
+    foreach ($configs as $baseTheme => $baseThemeConfigs) {
       foreach ($baseThemeConfigs as $configName => $hash) {
         $baseConfig = \Drupal::Config($configName)->getRawData();
         unset($baseConfig['uuid']);
@@ -285,7 +271,8 @@ class Updater {
         $block = Block::create($baseConfig);
         try {
           $block->save();
-        } catch (EntityStorageException $e) {
+        }
+        catch (EntityStorageException $e) {
           $this->getLogger('d_update')
             ->error('Error while instantiating block from %config', [
               '%config' => $configName,
@@ -294,4 +281,142 @@ class Updater {
       }
     }
   }
+
+  /**
+   * Creates config entities from name, file and hash.
+   *
+   * @param string $name
+   *   Config name.
+   * @param array|bool $data
+   *   Data read from file.
+   * @param string $hash
+   *   Config hash.
+   *
+   * @return bool
+   *   Status of config import.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function createConfig($name, $data, $hash) {
+
+    if (!$this->verifyHash($name, $hash)) {
+      $this->getLogger('d_update')
+        ->warning('Detected changes in %config, aborting import...', [
+          '%config' => $name,
+        ]);
+      return FALSE;
+    }
+
+    $entity_type = $this->configManager->getEntityTypeIdByName($name);
+    if (!empty($entity_type)) {
+      // If this is field config, handle it properly.
+      /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
+      $storage = $this->entityTypeManager->getStorage($entity_type);
+
+      // Try to load the existing config.
+      $id = $storage->getIDFromConfigName($name, $storage->getEntityType()
+        ->getConfigPrefix());
+      $existingEntity = $storage->load($id);
+      if (!empty($existingEntity)) {
+        // Set the proper UUID to avoid conflicts.
+        $data['uuid'] = $existingEntity->uuid();
+      }
+
+      /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity */
+      $entity = $storage->createFromStorageRecord($data);
+
+      // If we need an update, we have to inform the storage about it.
+      if (!empty($existingEntity)) {
+        $entity->original = $existingEntity;
+        $entity->enforceIsNew(FALSE);
+      }
+
+      // Do the update.
+      try {
+        $entity->save();
+        $this->getLogger('d_update')
+          ->info('Successfully imported field config %config', [
+            '%config' => $name,
+          ]);
+        return TRUE;
+      } catch (EntityStorageException $e) {
+        $this->getLogger('d_update')
+          ->error('Error while importing entity config %config', [
+            '%config' => $name,
+          ]);
+        return FALSE;
+      }
+    }
+    else {
+      // Otherwise use plain config storage.
+      try {
+        $this->configStorage->write($name, $data);
+        $this->getLogger('d_update')
+          ->info('Successfully imported config %config', [
+            '%config' => $name,
+          ]);
+        return TRUE;
+      } catch (StorageException $e) {
+        $this->getLogger('d_update')
+          ->error('Error while importing config %config', [
+            '%config' => $name,
+          ]);
+        return FALSE;
+      }
+    }
+  }
+
+  /**
+   * Returns whether adding config to database should proceed.
+   *
+   * @param string $name
+   *   Config name without extension.
+   * @param string $hash
+   *   Config hash or keyword, empty for new configs.
+   *
+   * @return bool
+   *   Returns TRUE for proceed, false for halt.
+   */
+  public function verifyHash($name, $hash) {
+    switch (TRUE) {
+      case $hash == 'override':
+      case empty($hash):
+        return TRUE;
+
+      default:
+        return $this->configCompare->compare($name, $hash);
+    }
+  }
+
+  public function updateConfigurations($source, $name) {
+    $data = $this->readConfigFromFile($source, $name, 'update');
+    if (empty($data)) {
+      $this->getLogger('d_update')
+        ->error('Cannot find file for %config', ['%config' => $name]);
+
+      return FALSE;
+    }
+    foreach ($data as $configName => $configOperations) {
+      $updates = $configOperations;
+      $newConfig = [];
+      if (isset($updates['change'])) {
+        $newConfig = Drupal\Component\Utility\NestedArray::mergeDeep($newConfig, $updates['change']);
+      }
+      if (isset($updates['add'])) {
+        $newConfig = Drupal\Component\Utility\NestedArray::mergeDeep($newConfig, $updates['add']);
+      }
+      $config = $this->configFactory->getEditable($configName);
+      $configData = $config->get();
+      if (empty($configData)) {
+        return FALSE;
+      }
+      $config->setData(NestedArray::mergeDeep($configData, $newConfig));
+      $config->save();
+
+      return TRUE;
+    }
+  }
+
+
 }

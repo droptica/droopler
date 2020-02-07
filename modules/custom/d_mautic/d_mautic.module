@@ -43,5 +43,8 @@ function d_mautic_theme($existing, $type, $theme, $path) {
         'formUrl' => NULL,
       ],
     ],
+    'paragraph__d_mautic' => [
+      'base hook' => 'paragraph'
+    ],
   ];
 }
