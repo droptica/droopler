@@ -37,7 +37,7 @@ class Data {
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
    */
   public function getReturnTitleContact($topic) {
-    $title = $this->t('Droptica contact form: @from', ['@from' => mb_encode_mimeheader($topic, "UTF-8")]);
+    $title = $this->t('Contact form: @from', ['@from' => mb_encode_mimeheader($topic, "UTF-8")]);
 
     return $title;
   }
@@ -48,7 +48,7 @@ class Data {
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
    */
   public function getReturnTitleContactTestUs() {
-    $title = $this->t('Droptica Test Us contact form');
+    $title = $this->t('Test Us contact form');
 
     return $title;
   }

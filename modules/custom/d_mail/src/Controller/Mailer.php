@@ -101,7 +101,7 @@ class Mailer {
     // Reply to client.
     $this->sendMail($sendReplyTo, $email, $paramsReply, 'contact_form_reply');
 
-    // Return message to Droptica.
+    // Return message
     $sendReturn = $this->sendMail($email, $sendReplyTo, $paramsReturn, $key);
 
     $this->setMessages($sendReturn['result']);

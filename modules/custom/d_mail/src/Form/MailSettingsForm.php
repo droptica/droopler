@@ -37,7 +37,7 @@ class MailSettingsForm extends ConfigFormBase {
     $form['d_mail_reply_subject'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Set subject'),
-      '#default_value' => $config->get('d_mail_reply_subject') != '' ? $config->get('d_mail_reply_subject') : 'Droptica - Request received',
+      '#default_value' => $config->get('d_mail_reply_subject') != '' ? $config->get('d_mail_reply_subject') : 'Request received',
     ];
 
     $form['d_mail_reply_message'] = [
@@ -48,7 +48,7 @@ class MailSettingsForm extends ConfigFormBase {
 
     $form['d_mail_notification_email'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Set Droptica notification email address'),
+      '#title' => $this->t('Set notification email address'),
       '#default_value' => $config->get('d_mail_notification_email') ?: $site_mail,
     ];
 

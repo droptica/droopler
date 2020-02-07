@@ -15,21 +15,7 @@ use Mautic\MauticApi;
 class Contact {
 
   /**
-   * The segment id for droptica.com.
-   *
-   * @const int
-   */
-  const DROPTICA_COM_ID = 5;
-
-  /**
-   * The segment id for droptica.pl.
-   *
-   * @const int
-   */
-  const DROPTICA_PL_ID = 6;
-
-  /**
-   * The segment id for droptica.pl.
+   * Api path.
    *
    * @const string
    */
@@ -199,7 +185,7 @@ class Contact {
   private function addToSegment(int $contact_id) {
     $api = $this->initMauticApiByContext('segments');
     $uri = \Drupal::request()->getHttpHost();
-    $segment_id = stristr($uri, 'com') ? self::DROPTICA_COM_ID : self::DROPTICA_PL_ID;
+    $segment_id = stristr($uri, 'com');
 
     $api->addContact($segment_id, $contact_id);
   }
