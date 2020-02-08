@@ -23,6 +23,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    font-family: 'object-fit: cover; object-position: center;';
     @include media-breakpoint-down(sm) {
       max-width: none;
       width: 100%;
@@ -38,6 +39,24 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.field--name-field-media-oembed-video {
+  position: relative;
+  svg {
+    position: static;
+    max-width: 100%;
+    height: auto;
+  }
+  iframe {
+    max-width: 100%;
+    width: 100%;
+    &.reactive-video {
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
 }
