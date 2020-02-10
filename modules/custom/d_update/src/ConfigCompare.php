@@ -28,7 +28,6 @@ class ConfigCompare {
     if (empty($config)) {
       return FALSE;
     }
-
     unset($config['uuid']);
     unset($config['lang']);
     unset($config['langcode']);
@@ -50,12 +49,7 @@ class ConfigCompare {
    *   different hashes.
    */
   public function compare($config_name, $hash = NULL) {
-    if (empty($hash)) {
-      return TRUE;
-    }
-    else {
       return $this->generateHashFromDatabase($config_name) == $hash;
-    }
   }
 
 }

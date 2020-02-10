@@ -140,6 +140,8 @@ class Updater {
    *  Config file name without .yml extension.
    * @param string $hash
    *   Hashed array with config data.
+   * @param bool $optional
+   *   Specify if config should be searched only in 'config/optional'.
    *
    * @return bool
    *   Returns if config was imported successfully.
@@ -450,5 +452,4 @@ class Updater {
 
     return TRUE;
   }
-
 }
