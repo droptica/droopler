@@ -29,7 +29,7 @@ class ConfigurationForm extends ConfigFormBase {
    * @return array
    */
   public function getMediaNames() {
-    return ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin'];
+    return ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin', 'dribbble'];
   }
 
   /**
