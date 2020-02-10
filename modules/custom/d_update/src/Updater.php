@@ -9,6 +9,8 @@ namespace Drupal\d_update;
 
 use Drupal;
 use Drupal\block\Entity\Block;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
@@ -64,6 +66,13 @@ class Updater {
   protected $configManager;
 
   /**
+   * Config factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * Update Checklist service.
    *
    * @var \Drupal\d_update\UpdateChecklist
@@ -94,6 +103,7 @@ class Updater {
    *   Update Checklist service.
    * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
    *   Update Module Extension List service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    */
   public function __construct(ModuleInstallerInterface $module_installer,
                               StorageInterface $config_storage,
@@ -101,7 +111,8 @@ class Updater {
                               ConfigCompare $config_compare,
                               ConfigManagerInterface $config_manager,
                               UpdateChecklist $checklist,
-                              ModuleExtensionList $moduleExtensionList) {
+                              ModuleExtensionList $moduleExtensionList,
+                              ConfigFactoryInterface $config_factory) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
     $this->entityTypeManager = $entity_type_manager;
@@ -109,6 +120,7 @@ class Updater {
     $this->configManager = $config_manager;
     $this->checklist = $checklist;
     $this->moduleExtensionList = $moduleExtensionList;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -381,4 +393,63 @@ class Updater {
     }
   }
 
+  /**
+   * Allows updating of single config, based on yml file.
+   *
+   * TODO: Implement mechanism for "change" keyword.
+   *
+   * @param string $source
+   *   Module/theme name.
+   * @param string $name
+   *   Config file name without extension.
+   *
+   * @return bool
+   *   Returns if config was modified successfully.
+   */
+  public function updateConfigurations($source, $name) {
+    $data = $this->readConfigFromFile($source, $name, 'update');
+    $status = [];
+    if (empty($data)) {
+      $this->getLogger('d_update')
+        ->error('Cannot find file for %config', ['%config' => $name]);
+
+      return FALSE;
+    }
+    foreach ($data as $configName => $configOperations) {
+      $updates = $configOperations;
+      $newConfig = [];
+      if (isset($updates['add'])) {
+        $newConfig = NestedArray::mergeDeep($newConfig, $updates['add']);
+      }
+      if (!$this->modifyConfig($configName, $newConfig)) {
+        $this->getLogger('d_update')
+          ->error('Update failed for %config', ['%config' => $name]);
+      }
+    }
+
+    return !in_array(FALSE, $status);
+  }
+
+  /**
+   * Loads and changes config.
+   *
+   * @param string $configName
+   *   Name of config to modify.
+   * @param array $newConfig
+   *   Array containing changes to apply.
+   *
+   * @return bool
+   *   Return if the config was changed sucessfuly.
+   */
+  private function modifyConfig($configName, array $newConfig) {
+    $config = $this->configFactory->getEditable($configName);
+    $configData = $config->get();
+    if (empty($configData)) {
+      return FALSE;
+    }
+    $config->setData(NestedArray::mergeDeep($configData, $newConfig));
+    $config->save();
+
+    return TRUE;
+  }
 }

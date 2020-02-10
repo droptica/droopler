@@ -51,6 +51,7 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   const SCALE_AND_CROP_EFFECTS = [
     'image_scale_and_crop',
     'focal_point_scale_and_crop',
+    'image_scale',
   ];
 
   /**
@@ -196,6 +197,7 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
    */
   protected function getSpacerAttributes(array &$output) {
     $imageStyleSetting = $this->videoSettings['image_style'];
+
     $effects = \Drupal::service('entity.manager')
       ->getStorage('image_style')
       ->load($imageStyleSetting)->getEffects()->getConfiguration();
