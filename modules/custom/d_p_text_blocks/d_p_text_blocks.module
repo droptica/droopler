@@ -4,6 +4,7 @@
  * @file
  * Contains d_paragraphs_text_blocks.module..
  */
+
 use Drupal\d_p\Helper\ParagraphModifiersHelper;
 
 /**
@@ -47,12 +48,13 @@ function d_p_text_blocks_preprocess_field(&$variables) {
             /** @var \Drupal\Core\Template\Attribute $atr */
             $item_attributes = $variables['items'][$idx]['attributes'];
             $item_attributes->addClass('col-sm-6');
-            if (($idx+1) % $items_per_row == 0) {
+            if (($idx + 1) % $items_per_row == 0) {
               $item_attributes->addClass('grid-row-end-item');;
             }
             if (count($variables['items']) % $items_per_row != 0 && $idx >= count($variables['items']) - count($variables['items']) % $items_per_row) {
               $item_attributes->addClass('col-lg-6');
-            } else {
+            }
+            else {
               $item_attributes->addClass('col-lg-' . $columns);
             }
           }
@@ -84,4 +86,3 @@ function d_p_text_blocks_preprocess_paragraph(&$variables) {
       break;
   }
 }
-

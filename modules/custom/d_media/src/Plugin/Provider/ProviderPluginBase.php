@@ -104,7 +104,6 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
       ]),
     ];
 
-
     if (!empty($this->videoSettings['image_style'])) {
 
       $this->getSpacerAttributes($output);

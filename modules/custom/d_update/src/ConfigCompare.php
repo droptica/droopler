@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\d_update\ConfigCompare.
- */
-
 namespace Drupal\d_update;
 
 /**
@@ -49,7 +44,7 @@ class ConfigCompare {
    *   different hashes.
    */
   public function compare($config_name, $hash = NULL) {
-      return $this->generateHashFromDatabase($config_name) == $hash;
+    return $this->generateHashFromDatabase($config_name) == $hash;
   }
 
 }

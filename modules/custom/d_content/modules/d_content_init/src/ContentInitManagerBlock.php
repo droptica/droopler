@@ -18,7 +18,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
- * Class ContentInitManagerBlock
+ * Class ContentInitManagerBlock.
  *
  * @package Drupal\d_content_init
  */
@@ -120,7 +120,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         'type' => $block['info']['bundle'],
         'info' => $block['info']['title'],
       ]);
-      $this->processFields($block,$block_entity);
+      $this->processFields($block, $block_entity);
       if ($placed_block = $this->placeBlockContent($block, $block_entity)) {
         $this->placeBlockInWaMegaMenu($block, $placed_block);
       }
@@ -261,7 +261,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param string $parent_uuid
    *   UUID of the parent of this submenu.
    *
-   * @return \stdClass
+   * @return object
    *   Configuration object.
    */
   protected function getDefaultMegaSubmenuConfig($parent_uuid) {
@@ -298,7 +298,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    *   UUID if parent exists in the menu, FALSE otherwise.
    */
   protected function searchForParentUuidInMegaMenuByTitle($menu_name, $parent_title) {
-    foreach (WeMegaMenuBuilder::getMenuTree($menu_name) as $item)  {
+    foreach (WeMegaMenuBuilder::getMenuTree($menu_name) as $item) {
       if ($item['title'] == $parent_title) {
         return $item['derivativeId'];
       }

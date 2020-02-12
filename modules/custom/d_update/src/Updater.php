@@ -1,13 +1,7 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\d_update\Updater.
- */
-
 namespace Drupal\d_update;
 
-use Drupal;
 use Drupal\block\Entity\Block;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -135,9 +129,9 @@ class Updater {
    * Import a config file.
    *
    * @param string $source
-   *  Module/theme name.
+   *   Module/theme name.
    * @param string $name
-   *  Config file name without .yml extension.
+   *   Config file name without .yml extension.
    * @param string $hash
    *   Hashed array with config data.
    * @param bool $optional
@@ -160,7 +154,6 @@ class Updater {
 
     return $this->createConfig($name, $data, $hash);
   }
-
 
   /**
    * Reads config file data from directory based on source and type.
@@ -452,4 +445,5 @@ class Updater {
 
     return TRUE;
   }
+
 }

@@ -127,17 +127,17 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    */
   public static function defaultSettings() {
     return parent::defaultSettings() + [
-        self::PLAYER_SETTINGS_CONFIG_NAME => [
-          'autoplay' => 0,
-          'loop' => 0,
-          'controls' => 0,
-          'muted' => 0,
-        ],
-        self::VIDEO_SETTINGS_CONFIG_NAME => [
-          'cover' => 0,
-          'image_style' => '',
-        ],
-      ];
+      self::PLAYER_SETTINGS_CONFIG_NAME => [
+        'autoplay' => 0,
+        'loop' => 0,
+        'controls' => 0,
+        'muted' => 0,
+      ],
+      self::VIDEO_SETTINGS_CONFIG_NAME => [
+        'cover' => 0,
+        'image_style' => '',
+      ],
+    ];
   }
 
   /**
@@ -307,9 +307,11 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
       case '0':
         $state = $this->t('disabled');
         break;
+
       case '1':
         $state = $this->t('enabled');
         break;
+
       default:
         $state = $value;
         break;
@@ -336,4 +338,5 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
 
     return $options;
   }
+
 }
