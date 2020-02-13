@@ -308,7 +308,7 @@ class UpdateChecklist {
       $num_changed_items,
       '%title progress has been saved. 1 item changed.',
       '%title progress has been saved. @count items changed.',
-      ['%title' => $this->updateChecklist->title],
+      ['%title' => $this->updateChecklist->title]
     );
     $this->messenger()->addStatus($message);
   }
