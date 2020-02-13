@@ -35,7 +35,7 @@ class SocialMediaBlock extends BlockBase {
       '#attached' => [
         'library' => [
           'd_social_media/last-element-in-a-row',
-        ]
+        ],
       ],
       '#show' => !empty($links),
       '#links' => $links,

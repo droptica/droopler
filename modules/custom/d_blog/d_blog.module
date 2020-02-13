@@ -1,6 +1,5 @@
 <?php
 
-use \Drupal\locale\SourceString;
 use Drupal\Core\Site\Settings;
 
 /**
@@ -61,8 +60,8 @@ function d_blog_preprocess_responsive_image(&$variables) {
         $variables['#attached']['html_head_link'][] = [
           [
             'href' => $source,
-            'rel' => "droopler:$id:img$k"
-          ]
+            'rel' => "droopler:$id:img$k",
+          ],
         ];
       }
     }

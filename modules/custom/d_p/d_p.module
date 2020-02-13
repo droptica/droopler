@@ -6,10 +6,7 @@
  */
 
 use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
-use Drupal\file\Entity\File;
-use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Template\Attribute;
-use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\d_p\Helper\ParagraphModifiersHelper;
@@ -28,11 +25,8 @@ function d_p_theme($existing, $type, $theme, $path) {
   ];
 }
 
-
-//@TODO should the helpers be a class?
-
 function d_p_responsive_style_ids() {
-
+  // @TODO should the helpers be a class?
   $styles_ids = [
     'responsive_image_2000',
     'responsive_image_768',
@@ -69,7 +63,7 @@ function d_p_preprocess_paragraph(&$variables) {
   $paragraphFieldDefinitions = $paragraph->getFieldDefinitions();
 
   /**
-   * @var FieldConfig $field
+   * @var \Drupal\field\Entity\FieldConfig $field
    */
   foreach ($paragraphFieldDefinitions as $fieldName => $fieldConfig) {
     if ($fieldName == 'field_d_background_color') {
@@ -90,7 +84,7 @@ function d_p_preprocess_paragraph(&$variables) {
       }
     }
 
-   // Set background image if field is not empty.
+    // Set background image if field is not empty.
     // This overrides background color settings.
     if ($fieldName == 'field_d_media_background' && $bundle == 'd_p_single_text_block') {
       $field = $paragraph->get($fieldName);
@@ -115,7 +109,8 @@ function d_p_preprocess_paragraph(&$variables) {
 /**
  * Finds and replaces default value of class attribute in all fields of type field_d_cta_link.
  *
- * @param $form - Form array to search on.
+ * @param $form
+ *   Form array to search on.
  */
 function edit_cta_link_default_class(&$form) {
   if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
@@ -186,7 +181,7 @@ function d_p_move_heading_type(&$form) {
  * Custom validator for Heading Type.
  *
  * @param $element
- * @param FormStateInterface $form_state
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
  */
 function d_p_heading_type_validate($element, FormStateInterface $form_state) {
   $parents = [];
@@ -200,7 +195,7 @@ function d_p_heading_type_validate($element, FormStateInterface $form_state) {
 
   // Inject heading_type settings into d_settings storage.
   if (is_string($current_settings[0]['value'])) {
-    $decoded = json_decode($current_settings[0]['value'], TRUE) ;
+    $decoded = json_decode($current_settings[0]['value'], TRUE);
     $decoded['heading_type'] = $element["#value"];
     $current_settings[0]['value'] = json_encode($decoded);
   }

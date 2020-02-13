@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Drupal\d_mautic\Plugin\Field\FieldFormatter;
-
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
@@ -38,4 +36,5 @@ class MauticFormEmbedFormatter extends FormatterBase {
 
     return $element;
   }
+
 }
