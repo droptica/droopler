@@ -191,6 +191,7 @@ class SettingsWidget extends WidgetBase {
           'h3' => $this->t('H3'),
           'h4' => $this->t('H4'),
           'h5' => $this->t('H5'),
+          'div' => $this->t('Normal text'),
         ],
         'default' => 'h2',
         'bundles' => [
