@@ -1,7 +1,10 @@
 name: d_mautic
 type: module
+description: 'Allows embeding of Mautic form via URL.'
 core: 8.x
-version: 8.x-1.0
+version: 8.x-2.0
+package: Droopler
 dependencies:
   - field
   - paragraphs
+  - d_update
