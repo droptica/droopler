@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Site\Settings;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_theme().
@@ -74,5 +75,14 @@ function d_blog_preprocess_responsive_image(&$variables) {
 function d_blog_preprocess_page(&$variables) {
   if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical') {
     $variables['page']['content']['pagetitle']['#attributes']['class'] = ['blog-listing-main-header'];
+  }
+}
+
+/**
+ * Implements hook_node_links_alter().
+ */
+function d_blog_node_links_alter(array &$links, NodeInterface $node, array &$context) {
+  if($links['comment__field_comments']){
+    $links['comment__field_comments']['#links']['comment-add']['attributes']['class'][] = 'btn btn-primary';
   }
 }
