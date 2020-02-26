@@ -17,3 +17,19 @@ function d_media_theme() {
     ],
   ];
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function d_media_form_editor_image_dialog_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  $config = \Drupal::configFactory()->getEditable('d_media.settings');
+  $config->set("wysiwyg_upload_svg_disable", true);
+
+  // Allow upload svg file in ckeditor, if config wysiwyg_upload_svg_disable is null or false .
+  $config = \Drupal::config('d_media.settings');
+  $svg_upload_disabled = $config->get("wysiwyg_upload_svg_disable");
+  if (!$svg_upload_disabled) {
+    $form['fid']['#upload_validators']['file_validate_extensions'] =  ['gif png jpg jpeg svg'];
+  }
+}
