@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Allow upload svg to media image field.
+ */
+function d_media_update_8001() {
+  Drupal::service('d_update')
+    ->updateConfigurations('module/d_media', 'field.field.media.d_image.field_media_image');
+}
