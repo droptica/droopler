@@ -54,9 +54,8 @@ function d_demo_create_secondary_menu() {
 }
 
 /**
- * Creates a menu to be placed after footer
+ * Creates a menu to be placed after footer.
  */
-
 function d_demo_create_bottom_footer_menu() {
   $bottom_footer_menu = [
     'data' => [
@@ -116,4 +115,3 @@ function d_demo_uninstall() {
     $menu->delete();
   }
 }
-

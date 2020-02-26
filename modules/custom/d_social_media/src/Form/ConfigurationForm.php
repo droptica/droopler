@@ -18,18 +18,12 @@ class ConfigurationForm extends ConfigFormBase {
   const CONFIGURATION_NAME = 'd_social_media.settings';
 
   /**
-   * @var $mediaName
-   *    Media names array.
-   */
-  private $mediaName;
-
-  /**
    * Return media names.
    *
    * @return array
    */
   public function getMediaNames() {
-    return ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin'];
+    return ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin', 'dribbble'];
   }
 
   /**

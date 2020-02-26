@@ -164,6 +164,9 @@ field_page_section:
             data:
               link: internal:/documentation/text-blocks-paragraph
               text: Learn more...
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -218,6 +221,9 @@ field_page_section:
             type: text_long
             data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus
               tristique dui dignissim gravida.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: basic-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -245,7 +251,7 @@ field_page_section:
         data: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert full-width
+        custom_class: theme-invert full-width theme-invert-example
       field_d_p_tb_block_reference:
         type: paragraph_reference
         data:
@@ -328,7 +334,7 @@ field_page_section:
                 - "mt-4"
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: full-width with-grid
+        custom_class: full-width with-grid nodes-grid-example
       field_d_p_tb_block_reference:
         type: paragraph_reference
         subtype: paragraphs_wrapper
@@ -486,4 +492,4 @@ field_page_section:
                   text: For spaceship manufacturers
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: tile theme-invert
+                custom_class: tile theme-invert title-example

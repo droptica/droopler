@@ -79,6 +79,9 @@ field_page_section:
           field_d_main_title:
             type: text
             data: Adipiscing Elit
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -111,3 +114,6 @@ field_page_section:
           field_d_main_title:
             type: text
             data: Lorem Imsum
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: basic-example

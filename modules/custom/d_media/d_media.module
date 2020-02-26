@@ -13,6 +13,13 @@ function d_media_theme() {
     'd_media_video_embed' => [
       'variables' => [
         'attributes' => NULL,
+        'spacer_attributes' => NULL,
+      ],
+    ],
+    'd_media_document_embed' => [
+      'variables' => [
+        'link' => NULL,
+        'name' => NULL,
       ],
     ],
   ];

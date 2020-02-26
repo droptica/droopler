@@ -12,10 +12,10 @@
  * Implements hook_content_structure_alter()
  *
  * @param $structure
- *  The array with structure.
+ *   The array with structure.
  *
  * @param $context
- *  Which structure array is this?
+ *   Which structure array is this?
  */
 function d_blog_init_content_structure_alter(&$structure, $context) {
   $path = drupal_get_path('module', 'd_blog_init') . '/pages';
@@ -27,4 +27,3 @@ function d_blog_init_content_structure_alter(&$structure, $context) {
     $structure['blog_post_4'] = ['file' => "$path/post_4.yml"];
   }
 }
-

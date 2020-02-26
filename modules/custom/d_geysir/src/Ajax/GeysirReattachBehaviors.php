@@ -19,4 +19,5 @@ class GeysirReattachBehaviors implements CommandInterface {
       'command' => 'd_geysir_reattach_behaviors',
     ];
   }
+
 }
