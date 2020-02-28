@@ -24,4 +24,5 @@ class GeysirCustomModalParagraphForm extends GeysirModalParagraphForm {
 
     return $response;
   }
+
 }

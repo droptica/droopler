@@ -64,6 +64,9 @@ field_page_section:
         data:
           link: internal:/documentation/text-paragraph
           text: Call To Action!
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -102,3 +105,6 @@ field_page_section:
           nec mollis lectus nisl id nisl. Nam et purus hendrerit, molestie odio quis, facilisis nibh.
           Donec luctus, enim sed posuere ullamcorper, arcu ante gravida turpis, nec maximus tellus ante eu quam.
           Fusce scelerisque libero sapien, nec suscipit augue elementum ac.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: basic-example

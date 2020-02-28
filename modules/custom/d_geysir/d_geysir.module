@@ -50,7 +50,7 @@ function d_geysir_page_attachments(array &$page) {
     return;
   }
 
-  $page['#attached']['library'][] = 'd_geysir/media';;
+  $page['#attached']['library'][] = 'd_geysir/media';
 }
 
 /**
@@ -59,6 +59,14 @@ function d_geysir_page_attachments(array &$page) {
 function d_geysir_field_widget_link_attributes_form_alter(&$element, &$form_state, $context) {
   // Link attributes always closed.
   $element["options"]["attributes"]["#open"] = 0;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ * Disable premature autofocus at modal's forms.
+ */
+function d_geysir_field_widget_form_alter(&$element, &$form_state, $context) {
+  $element["open_button"]["#attributes"]["data-disabled-focus"] = 'false';
 }
 
 /**
@@ -78,7 +86,7 @@ function d_geysir_toolbar() {
   $is_admin = \Drupal::service('router.admin_context')->isAdminRoute($route);
 
   if (!\Drupal::currentUser()
-      ->hasPermission('geysir manage paragraphs from front-end') || $is_admin) {
+    ->hasPermission('geysir manage paragraphs from front-end') || $is_admin) {
     return $items;
   }
 
@@ -152,7 +160,7 @@ function d_geysir_preprocess_media_library_item__widget(array &$variables) {
  * This targets each rendered media item in the grid display of the media
  * library's modal dialog.
  *
- * @see seven_preprocess_views_view_fields__media_library().
+ * @see seven_preprocess_views_view_fields__media_library()
  */
 function d_geysir_preprocess_views_view_fields__media_library(array &$variables) {
   // Add classes to media rendered entity field so it can be targeted for
@@ -165,7 +173,7 @@ function d_geysir_preprocess_views_view_fields__media_library(array &$variables)
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
  *
- * @see seven_form_media_library_add_form_alter().
+ * @see seven_form_media_library_add_form_alter()
  */
 function d_geysir_form_media_library_add_form_alter(array &$form, FormStateInterface $form_state) {
   $form['#attributes']['class'][] = 'media-library-add-form';
@@ -187,7 +195,7 @@ function d_geysir_form_media_library_add_form_alter(array &$form, FormStateInter
 /**
  * Implements hook_form_FORM_ID_alter().
  *
- * @see seven_form_media_library_add_form_upload_alter().
+ * @see seven_form_media_library_add_form_upload_alter()
  */
 function d_geysir_form_media_library_add_form_upload_alter(array &$form, FormStateInterface $form_state) {
   $form['#attributes']['class'][] = 'media-library-add-form--upload';
@@ -200,7 +208,7 @@ function d_geysir_form_media_library_add_form_upload_alter(array &$form, FormSta
 /**
  * Implements hook_form_FORM_ID_alter().
  *
- * @see seven_form_media_library_add_form_oembed_alter().
+ * @see seven_form_media_library_add_form_oembed_alter()
  */
 function d_geysir_form_media_library_add_form_oembed_alter(array &$form, FormStateInterface $form_state) {
   $form['attributes']['class'][] = 'media-library-add-form--oembed';
@@ -220,7 +228,7 @@ function d_geysir_form_media_library_add_form_oembed_alter(array &$form, FormSta
  * This targets each new, unsaved media item added to the media library, before
  * they are saved.
  *
- * @see seven_preprocess_item_list__media_library_add_form_media_list().
+ * @see seven_preprocess_item_list__media_library_add_form_media_list()
  */
 function d_geysir_preprocess_item_list__media_library_add_form_media_list(array &$variables) {
   foreach ($variables['items'] as &$item) {
@@ -245,7 +253,7 @@ function d_geysir_preprocess_item_list__media_library_add_form_media_list(array 
  * This targets each pre-selected media item selected when adding new media in
  * the modal media library dialog.
  *
- * @see seven_preprocess_media_library_item__small().
+ * @see seven_preprocess_media_library_item__small()
  */
 function d_geysir_preprocess_media_library_item__small(array &$variables) {
   $variables['content']['select']['#attributes']['class'][] = 'media-library-item__click-to-select-checkbox';
@@ -330,7 +338,7 @@ function d_geysir_views_pre_render(ViewExecutable $view) {
  * @todo Do this in the relevant template once
  *   https://www.drupal.org/project/drupal/issues/3088856 is resolved.
  *
- * @see classy_preprocess_links__media_library_menu().
+ * @see classy_preprocess_links__media_library_menu()
  */
 function d_geysir_preprocess_links__media_library_menu(array &$variables) {
   foreach ($variables['links'] as &$link) {

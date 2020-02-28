@@ -60,7 +60,7 @@ interface ProviderPluginInterface extends PluginInspectionInterface {
   /**
    * Get the video oembed data.
    *
-   * @return \stdClass
+   * @return object
    *   Data from the oembed endpoint.
    */
   public function oEmbedData();
