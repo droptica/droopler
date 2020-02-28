@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\d_update\UpdateChecklist.
- */
-
 namespace Drupal\d_update;
 
 use Drupal\checklistapi\ChecklistapiChecklist;
@@ -254,7 +249,7 @@ class UpdateChecklist {
    *
    * @param array $values
    *   Two dimensional array with structure "version_key" => ["checkbox_id" =>
-   *   TRUE|FALSE]
+   *   TRUE|FALSE].
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
@@ -313,7 +308,7 @@ class UpdateChecklist {
       $num_changed_items,
       '%title progress has been saved. 1 item changed.',
       '%title progress has been saved. @count items changed.',
-      ['%title' => $this->updateChecklist->title],
+      ['%title' => $this->updateChecklist->title]
     );
     $this->messenger()->addStatus($message);
   }
@@ -342,13 +337,14 @@ class UpdateChecklist {
   public function migrateConfigProgressToStateProgress() {
     $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
     $config_key = defined(ChecklistapiChecklist::class . '::PROGRESS_CONFIG_KEY') ? ChecklistapiChecklist::PROGRESS_CONFIG_KEY : 'progress';
-    if ($droopler_update_config ) {
+    if ($droopler_update_config) {
       $oldSavedProgress = $droopler_update_config->get($config_key);
       if ($oldSavedProgress) {
         $newSavedProgress = $this->getChecklistSavedProgress();
         if (!empty($newSavedProgress)) {
           $newSavedProgress['#items'] = array_merge($newSavedProgress['#items'] ?? [], $oldSavedProgress['#items'] ?? []);
-        } else {
+        }
+        else {
           $newSavedProgress = $oldSavedProgress;
         }
         $this->setChecklistSavedProgress($newSavedProgress);

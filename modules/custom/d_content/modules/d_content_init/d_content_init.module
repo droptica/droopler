@@ -19,10 +19,10 @@ use Drupal\we_megamenu\WeMegaMenuBuilder;
  * This is alterable in another init modules.
  *
  * @param array $node_to_create
- *  Array node with paragraph content.
+ *   Array node with paragraph content.
  *
- * @return integer
- *  Node ID.
+ * @return int
+ *   Node ID.
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
@@ -49,11 +49,11 @@ function d_content_init_save_node($node_to_create) {
  * Save an entity.
  *
  * @param array $entity_to_create
- *  Array with entity.
+ *   Array with entity.
  * @param string $entity_type
- *  Entity type.
+ *   Entity type.
  * @param string $uuid
- *  UUID of entity.
+ *   UUID of entity.
  *
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
@@ -69,13 +69,13 @@ function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
  * Fill the field.
  *
  * @param Drupal\Core\Entity\EntityInterface $entity
- *  Entity object to set fields.
+ *   Entity object to set fields.
  *
  * @param string $name
- *  Name of the field.
+ *   Name of the field.
  *
  * @param array $value
- *  Field array (type and value).
+ *   Field array (type and value).
  */
 function d_content_init_fill_field($entity, $name, $value) {
   // Allow other init modules to add their fields types.
@@ -93,6 +93,7 @@ function d_content_init_fill_field($entity, $name, $value) {
  * @param Drupal\Core\Entity\EntityInterface $entity
  * @param string $name
  * @param array $value
+ *
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  * @throws \Drupal\Core\Entity\EntityStorageException
@@ -101,7 +102,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
   /**
    * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
    */
-  $media_manager =  Drupal::service('d_content_init.manager_media');
+  $media_manager = Drupal::service('d_content_init.manager_media');
   $type = $value['type'] ?? '';
   $data = $value['data'] ?? [];
 
@@ -113,6 +114,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       $entity->$name->format = 'full_html';
       $value['processed'] = TRUE;
       break;
+
     case 'cta':
       $entity_attributes = [
         'title' => $data['text'] ?? '',
@@ -129,6 +131,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       $entity->set($name, $entity_attributes);
       $value['processed'] = TRUE;
       break;
+
     case 'file':
     case 'image':
       // Convert short format to full (keep backward compatibility).
@@ -159,6 +162,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       }
       $value['processed'] = TRUE;
       break;
+
     case 'paragraph_reference':
       if (empty($value['subtype'])) {
         $value['subtype'] = 'd_p_single_text_block';
@@ -177,6 +181,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       }
       $value['processed'] = TRUE;
       break;
+
     case 'media_image':
       $destination_directory = $value['directory'] ?? '';
       $files = $value['files'] ?? [];
@@ -197,6 +202,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       }
       $value['processed'] = TRUE;
       break;
+
     case 'entity_reference':
       if (isset($data['target_search'])) {
         $target_entity_type = $data['target_type'] ?? 'node';
@@ -213,6 +219,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
         $value['processed'] = TRUE;
       }
       break;
+
     case 'taxonomy':
       $vid = $data['vid'] ?? NULL;
       foreach ($data['terms'] as $term_name) {
@@ -230,12 +237,13 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
         }
 
         foreach ($terms as $term) {
-          /** @var Term $term */
+          /** @var \Drupal\taxonomy\Entity\Term $term */
           $entity->$name->appendItem($term->id());
         }
       }
       $value['processed'] = TRUE;
       break;
+
     case 'field_p_configuration_storage':
       $data = [];
       if (!empty($value['custom_class'])) {
@@ -256,7 +264,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
  * Fill the paragraph.
  *
  * @param array $paragraph_data
- *  Array with paragraph content.
+ *   Array with paragraph content.
  *
  * @return \Drupal\Core\Entity\EntityInterface|\Drupal\paragraphs\Entity\Paragraph
  *
@@ -279,16 +287,16 @@ function d_content_init_fill_paragraph($paragraph_data) {
  * Add page content from YML file.
  *
  * @param array $params
- *  Array with parameters:
- *  - module: a module with ymls and assets to look for (defaults to d_content_init).
- *  - file: YML file name without path.
- *  - title: Menu link title
- *  - weight: Menu link weight
- *  - children: list of children
- *  - parent: parent menu ID
+ *   Array with parameters:
+ *   - module: a module with ymls and assets to look for (defaults to d_content_init).
+ *   - file: YML file name without path.
+ *   - title: Menu link title
+ *   - weight: Menu link weight
+ *   - children: list of children
+ *   - parent: parent menu ID.
  *
- * @return integer|null
- *  Menu item plugin ID.
+ * @return int|null
+ *   Menu item plugin ID.
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
@@ -312,7 +320,7 @@ function d_content_init_add_node($params) {
       'link' => ['uri' => 'entity:node/' . $nid],
       'menu_name' => $params['menu'] ?? 'main',
       'weight' => $params['weight'] ?? 0,
-      'expanded' => !empty($params['children'])
+      'expanded' => !empty($params['children']),
     ];
 
     // Handle submenus.
@@ -337,7 +345,7 @@ function d_content_init_add_node($params) {
     return $menu_link->getPluginId();
   }
   else {
-    return null;
+    return NULL;
   }
 }
 
@@ -345,7 +353,7 @@ function d_content_init_add_node($params) {
  * Add nodes from a given structure.
  *
  * @param $structure
- *  Array with nodes (may be nested to one level).
+ *   Array with nodes (may be nested to one level).
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
@@ -365,13 +373,13 @@ function d_content_init_add_nodes($structure) {
  * Save file in Drupal.
  *
  * @param string $path
- *  File path:
- *  - "file.jpg" for files inside d_content_init
- *  - "example_init/file.jpg" for files inside example_init module
+ *   File path:
+ *   - "file.jpg" for files inside d_content_init
+ *   - "example_init/file.jpg" for files inside example_init module.
  * @param string $dst_dir
- *  File destination directory in public files directory.
+ *   File destination directory in public files directory.
  *
- * @return \Drupal\file\FileInterface|FALSE
+ * @return \Drupal\file\FileInterface|false
  *   A file entity, or FALSE on error.
  */
 function d_content_init_get_file($path, $dst_dir = NULL) {
@@ -410,14 +418,14 @@ function d_content_init_parse_file_path($path) {
 }
 
 /**
- * Search for entity by its properties
+ * Search for entity by its properties.
  *
  * @param array $properties
  *   Array of the properties.
  * @param string $entity_type
  *   Type of the entity to find.
  *
- * @return bool|\Drupal\Core\Entity\EntityInterface|FALSE
+ * @return bool|\Drupal\Core\Entity\EntityInterface|false
  *   First found entity or FALSE.
  *
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException

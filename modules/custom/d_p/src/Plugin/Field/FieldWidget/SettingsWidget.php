@@ -44,8 +44,8 @@ class SettingsWidget extends WidgetBase {
                 'd_p_side_embed',
                 'd_p_side_image',
                 'd_p_side_tiles',
-              ]
-            ]
+              ],
+            ],
           ],
           'full-width' => [
             'title' => $this->t('Full width'),
@@ -54,8 +54,8 @@ class SettingsWidget extends WidgetBase {
               'paragraph' => [
                 'd_p_group_of_text_blocks',
                 'd_p_carousel',
-              ]
-            ]
+              ],
+            ],
           ],
           'no-padding-bottom' => [
             'title' => $this->t('Disable bottom padding'),
@@ -67,8 +67,8 @@ class SettingsWidget extends WidgetBase {
                 'd_p_carousel',
                 'd_p_text_paged',
                 'd_p_reference_content',
-              ]
-            ]
+              ],
+            ],
           ],
           'no-padding-top' => [
             'title' => $this->t('Disable top padding'),
@@ -80,8 +80,8 @@ class SettingsWidget extends WidgetBase {
                 'd_p_carousel',
                 'd_p_text_paged',
                 'd_p_reference_content',
-              ]
-            ]
+              ],
+            ],
           ],
           'half-transparent' => [
             'title' => $this->t('Half transparent'),
@@ -89,8 +89,8 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_banner',
-              ]
-            ]
+              ],
+            ],
           ],
           'with-divider' => [
             'title' => $this->t('Add dividers'),
@@ -98,8 +98,8 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_carousel',
-              ]
-            ]
+              ],
+            ],
           ],
           'background-gray-light-2' => [
             'title' => $this->t('Gray background'),
@@ -110,8 +110,8 @@ class SettingsWidget extends WidgetBase {
                 'd_p_group_of_text_blocks',
                 'd_p_reference_content',
                 'd_p_text_paged',
-              ]
-            ]
+              ],
+            ],
           ],
           'slider-desktop-off' => [
             'title' => $this->t('Turn off slider on desktop'),
@@ -119,8 +119,8 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_carousel',
-              ]
-            ]
+              ],
+            ],
           ],
           'with-grid' => [
             'title' => $this->t('Enable grid'),
@@ -129,8 +129,8 @@ class SettingsWidget extends WidgetBase {
               'paragraph' => [
                 'd_p_group_of_text_blocks',
                 'd_p_side_by_side',
-              ]
-            ]
+              ],
+            ],
           ],
           'tile' => [
             'title' => $this->t('Turn into tile'),
@@ -138,8 +138,8 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_single_text_block',
-              ]
-            ]
+              ],
+            ],
           ],
           'with-tiles' => [
             'title' => $this->t('Enable tiles'),
@@ -147,8 +147,8 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_group_of_text_blocks',
-              ]
-            ]
+              ],
+            ],
           ],
           'header-into-columns' => [
             'title' => $this->t('Paragraph header in two columns'),
@@ -156,8 +156,8 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_group_of_text_blocks',
-              ]
-            ]
+              ],
+            ],
           ],
           'with-price' => [
             'title' => $this->t('Enable price'),
@@ -165,8 +165,8 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_single_text_block',
-              ]
-            ]
+              ],
+            ],
           ],
           'stripe-sidebar' => [
             'title' => $this->t('Show the price in the sidebar'),
@@ -174,14 +174,15 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_single_text_block',
-              ]
-            ]
+              ],
+            ],
           ],
-        ]
+        ],
       ],
       self::HEADING_TYPE_SETTING_NAME => [
         'title' => $this->t('Heading type'),
-        'outside' => TRUE, // The widget is moved outside of field_d_settings form element.
+      // The widget is moved outside of field_d_settings form element.
+        'outside' => TRUE,
         'description' => $this->t('Select the type of heading to use with this paragraph.'),
         'type' => 'select',
         'options' => [
@@ -190,6 +191,7 @@ class SettingsWidget extends WidgetBase {
           'h3' => $this->t('H3'),
           'h4' => $this->t('H4'),
           'h5' => $this->t('H5'),
+          'div' => $this->t('Normal text'),
         ],
         'default' => 'h2',
         'bundles' => [
@@ -210,8 +212,8 @@ class SettingsWidget extends WidgetBase {
             'd_p_subscribe_file',
             'd_p_text_paged',
             'd_p_text_with_bckg',
-            'd_p_tiles'
-          ]
+            'd_p_tiles',
+          ],
         ],
       ],
     ];

@@ -132,7 +132,7 @@ $sidebar-animation-speed: 600ms !default;
     color: $submenu-link-color;
   }
 
-  &, a {
+  &:not(h2), a {
     &:hover, &:active, &:focus, &.active-menu-item {
       border: none;
       color: $submenu-link-hover-color;

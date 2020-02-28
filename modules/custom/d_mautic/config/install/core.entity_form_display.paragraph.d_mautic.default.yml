@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_mautic.field_d_mautic_form_url
+    - paragraphs.paragraphs_type.d_mautic
+id: paragraph.d_mautic.default
+targetEntityType: paragraph
+bundle: d_mautic
+mode: default
+content:
+  field_d_mautic_form_url:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

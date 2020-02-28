@@ -75,9 +75,12 @@ $d-p-subscribe-background-opacity: 0.4 !default;
   z-index: 0;
   padding: $d-p-subscribe-padding-y 0;
   background: $d-p-subscribe-background;
-  .d-media-background-wrapper img {
-    opacity: $d-p-subscribe-background-opacity;
+  .d-media-background-wrapper {
+    img, iframe {
+      opacity: $d-p-subscribe-background-opacity;
+    }
   }
+
   .content-wrapper {
     position: relative;
     z-index: 2;

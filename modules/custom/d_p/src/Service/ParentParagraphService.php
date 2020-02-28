@@ -3,7 +3,6 @@
 namespace Drupal\d_p\Service;
 
 use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 
 class ParentParagraphService {
 
@@ -35,7 +34,7 @@ class ParentParagraphService {
    * @param \Drupal\Core\Entity\ContentEntityInterface $mediaEntity
    *   Media Entity to get parent field info.
    *
-   * @return EntityReferenceItem|null
+   * @return \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem|null
    *   Field referencing passed media entity.
    */
   protected function getReferencingField(ContentEntityInterface $mediaEntity) {
@@ -45,4 +44,5 @@ class ParentParagraphService {
     }
     return NULL;
   }
+
 }

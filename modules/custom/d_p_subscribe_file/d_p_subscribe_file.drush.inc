@@ -18,7 +18,8 @@ function d_p_subscribe_file_drush_sql_sync_sanitize($site) {
   $wrap_table_name = (bool) drush_get_option('db-prefix');
   if ($wrap_table_name) {
     $table = '{{d_p_subscribe_file}}';
-  } else {
+  }
+  else {
     $table = 'd_p_subscribe_file';
   }
 

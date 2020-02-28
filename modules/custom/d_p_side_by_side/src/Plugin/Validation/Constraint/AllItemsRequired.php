@@ -24,7 +24,7 @@ class AllItemsRequired extends Constraint {
   /**
    * The number option.
    *
-   * @var integer
+   * @var int
    */
   public $number;
 

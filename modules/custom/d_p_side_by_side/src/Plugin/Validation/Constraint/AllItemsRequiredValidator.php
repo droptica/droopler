@@ -18,10 +18,10 @@ class AllItemsRequiredValidator extends ConstraintValidator {
       return;
     }
 
-    if ($constraint->number > 0 && $entity->count() != $constraint->number ) {
+    if ($constraint->number > 0 && $entity->count() != $constraint->number) {
       $this->context->addViolation($constraint->message, [
         '%number' => $constraint->number,
-        '%name' => $constraint->name
+        '%name' => $constraint->name,
       ]);
     }
   }

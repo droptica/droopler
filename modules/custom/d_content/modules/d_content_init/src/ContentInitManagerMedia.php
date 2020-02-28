@@ -133,7 +133,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
   /**
    * Create a new media entity or return existing one based on image fid.
    *
-   * @param integer $fid
+   * @param int $fid
    *   File ID.
    * @param string $alt
    *   Alt text.
@@ -188,7 +188,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
   /**
    * Get media entity by the file ID.
    *
-   * @param integer $fid
+   * @param int $fid
    *
    * @return \Drupal\Core\Entity\EntityInterface|void
    */
@@ -228,7 +228,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     $file_data = file_get_contents($path);
     $final_dir = dirname($uri);
     $this->fileSystem->prepareDirectory($final_dir, FileSystemInterface::CREATE_DIRECTORY);
-    return file_save_data($file_data, $uri,FileSystemInterface::EXISTS_REPLACE);
+    return file_save_data($file_data, $uri, FileSystemInterface::EXISTS_REPLACE);
   }
 
   /**
@@ -249,4 +249,5 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     }
     return $prefix . $directory . basename($path);
   }
+
 }

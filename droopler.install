@@ -1,12 +1,11 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall functions for the profilename install profile.
  */
 
 use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 
@@ -39,7 +38,8 @@ function droopler_install() {
   // Try to install custom init that alters the original one.
   try {
     \Drupal::service('module_installer')->install(['d_custom_init']);
-  } catch (\Drupal\Core\Extension\MissingDependencyException $e) {
+  }
+  catch (MissingDependencyException $e) {
     \Drupal::logger('droopler_install')
       ->notice('Custom content init not detected.');
   }
@@ -94,12 +94,11 @@ function droopler_install_tasks() {
  * Import a config file.
  *
  * @param string $module
- *  Module name.
+ *   Module name.
  * @param string $name
- *  Config file name without .yml extension.
+ *   Config file name without .yml extension.
  *
  * @todo To be moved to a new manager class.
- *
  */
 function _droopler_import_config($module, $name) {
   $config_path = drupal_get_path('module', $module) . '/config/install';
@@ -353,7 +352,6 @@ function droopler_update_8102() {
   $updater->checklist()->saveProgress($progress);
 }
 
-
 /**
  * Droopler 2.0 Updates.
  */
@@ -489,7 +487,6 @@ function droopler_update_8103() {
   ];
   $values['droopler__droopler_update_8103_3'] = $updater->importConfigs($configs);
 
-
   // Update existing fields.
   $configs = [
     'd_content' => [
@@ -526,9 +523,9 @@ function droopler_update_8103() {
     'profile/droopler' => [
       'core.entity_form_display.contact_message.feedback.default' => '',
       // @todo: These configs cause problems in logs, they must be double tested.
-      //'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
-      //'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
-      //'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
+      // 'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
+      // 'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
+      // 'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
       'taxonomy.vocabulary.tags' => '43f9e4a277457349d58cedb7bbe1dc76',
     ],
     'd_content' => [
@@ -540,9 +537,9 @@ function droopler_update_8103() {
       'views.view.subscribe_file_paragraph' => '',
     ],
     // @todo: We must check the behavior of the language switcher after update.
-    //'theme/droopler_theme' => [
+    // 'theme/droopler_theme' => [
     //  'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
-    //],
+    // ],
   ];
   $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
 
@@ -622,7 +619,7 @@ function droopler_update_8103() {
  * Droopler 2.0 Media migrate.
  */
 function droopler_update_8104() {
-  //Import all target Media Fields.
+  // Import all target Media Fields.
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
@@ -759,13 +756,13 @@ function droopler_update_8104() {
 
       $errorsWhileMigrating = [];
 
-      /** @var ContentEntityBase $entity */
+      /** @var \Drupal\Core\Entity\ContentEntityBase $entity */
       foreach ($entities as $entity) {
         if (!$entity->hasField($sourceFieldName)) {
           continue;
         }
 
-        /** @var FileFieldItemList $sourceField */
+        /** @var \Drupal\file\Plugin\Field\FieldType\FileFieldItemList $sourceField */
         $sourceField = $entity->get($sourceFieldName);
 
         if ($sourceField->isEmpty()) {
@@ -781,7 +778,8 @@ function droopler_update_8104() {
             $entity->get($entityTargetFieldName)->appendItem($media_entity);
 
           }
-        } catch (InvalidArgumentException $e) {
+        }
+        catch (InvalidArgumentException $e) {
           $errorsWhileMigrating[$entity->bundle()][$sourceField] = $sourceFieldName;
 
           \Drupal::logger('droopler_update')
@@ -989,6 +987,45 @@ function droopler_update_8105() {
 
 }
 
+/**
+ * Droopler 2.0 beta-1 - update configuration modified since Droopler 2.0 alpha-2.
+ */
+function droopler_update_8106() {
+  $updater = \Drupal::service('d_update');
+  $module_handler = \Drupal::service('module_handler');
+  $configs = [
+    'd_media' => [
+      'core.entity_view_mode.media.counter' => '',
+      'core.entity_view_display.media.d_video.counter' => '',
+      'core.entity_view_display.media.d_image.counter' => '',
+      'core.entity_form_display.media.d_document.default' => '',
+      'core.entity_form_display.media.d_document.media_library' => '',
+      'core.entity_view_display.media.d_document.default' => '',
+      'core.entity_view_display.media.d_document.media_library' => '',
+      'field.field.media.d_document.field_media_file' => '',
+      'field.storage.media.field_media_file' => '',
+      'language.content_settings.media.d_document' => '',
+      'media.type.d_document' => '',
+    ],
+    'd_content' => [
+      'node.type.content_page' => 'bb51f1046ad8a56afa01acfa5ef550a3',
+    ],
+    'd_p_counters' => [
+      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '1df92b0a421c733796c8388d533bd722',
+    ],
+    'profile/droopler' => [
+      'filter.format.full_html.yml' => '',
+      'editor.editor.full_html.yml' => '76ab97a576ba2ceb01cb3d2f960d447d',
+    ],
+  ];
+  if ($module_handler->moduleExists('d_blog')) {
+    $configs['d_blog'] = [
+      'node.type.blog_post' => 'a697c1000159bc7f4a905c485ce488df',
+    ];
+  }
+
+  $updater->importConfigs($configs);
+}
 
 /**
  * Returns a list of modules to install, based on the list of required modules.

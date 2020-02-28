@@ -43,7 +43,6 @@ class MobileFilters extends BlockBase {
     $this->configuration['button_class'] = $formState->getValue('button_class');
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -69,4 +68,5 @@ class MobileFilters extends BlockBase {
       ],
     ];
   }
+
 }

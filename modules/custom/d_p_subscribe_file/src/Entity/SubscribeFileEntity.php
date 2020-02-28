@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
- * Defines the SubscribeFile
+ * Defines the SubscribeFile.
  *
  * @ContentEntityType(
  *   id = "SubscribeFileEntity",
@@ -86,4 +86,5 @@ class SubscribeFileEntity extends ContentEntityBase implements ContentEntityInte
 
     return $fields;
   }
+
 }

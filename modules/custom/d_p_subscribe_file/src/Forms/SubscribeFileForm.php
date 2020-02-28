@@ -11,7 +11,7 @@ use Drupal\paragraphs\ParagraphInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class SubscribeFileForm
+ * Class SubscribeFileForm.
  *
  * @package Drupal\d_p_subscribe_file\Forms
  */
@@ -119,7 +119,7 @@ class SubscribeFileForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    // Save entity
+    // Save entity.
     $file_id = $form_state->getValue('file_id');
     $link_hash = md5(rand() . time());
     $file_hash = md5(rand() . time());
@@ -132,7 +132,7 @@ class SubscribeFileForm extends FormBase {
     ]);
     $contact->save();
 
-    // Send mail with link
+    // Send mail with link.
     $button_text = $this->paragraph->get('field_d_p_sf_download_button')
       ->getValue();
     $link_options = [
@@ -148,7 +148,7 @@ class SubscribeFileForm extends FormBase {
       $this->messenger()->addStatus($download_link->getUrl()->toString());
     }
 
-    $display_settings = ['label' => 'hidden',];
+    $display_settings = ['label' => 'hidden'];
     $body = $this->paragraph->get('field_d_p_sf_mail_body')
       ->view($display_settings);
     $body[0]['#text'] = str_replace("[download-button]", $rendered_download_link, $body[0]['#text']);
@@ -171,4 +171,5 @@ class SubscribeFileForm extends FormBase {
     }
 
   }
+
 }

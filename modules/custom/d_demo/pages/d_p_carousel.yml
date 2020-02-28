@@ -202,6 +202,9 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Download
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -295,6 +298,9 @@ field_page_section:
             data:
               link: internal:/documentation/carousel-paragraph
               text: Droopler
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: logos-example
 
 
   - paragraph_type: d_p_text_paged
@@ -351,6 +357,9 @@ field_page_section:
             data: <p><em>Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend.
               Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna mi.
               Nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</em></p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: opinions-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -481,6 +490,9 @@ field_page_section:
               data:
                 link: internal:/documentation/carousel-paragraph
                 text: Telephone
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: columns-example
 
 
 
@@ -519,7 +531,7 @@ field_page_section:
           Vestibulum non accumsan eros, sit amet tempus ex.</p>
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: full-width with-divider
+        custom_class: full-width with-divider full-width-example
       field_d_p_cs_item_reference:
         type: paragraph_reference
         subtype: d_p_carousel_item

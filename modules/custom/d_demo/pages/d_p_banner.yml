@@ -62,6 +62,9 @@ field_page_section:
         data:
           link: internal:/documentation/banner-paragraph
           text: Call To Action!
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -85,6 +88,9 @@ field_page_section:
       field_d_main_title:
         type: text
         data: Main Title
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: basic-example
 
   - paragraph_type: d_p_text_paged
     data:

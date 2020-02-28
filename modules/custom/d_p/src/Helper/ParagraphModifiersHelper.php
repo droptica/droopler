@@ -8,12 +8,14 @@ use Drupal\paragraphs\Entity\Paragraph;
 class ParagraphModifiersHelper {
 
   /**
-   * @var \stdClass settings object.
+   * @var \stdClass
+   * Settings object.
    */
   protected $modifiers;
 
   /**
-   * @var string Name of the field with settings.
+   * @var string
+   * Name of the field with settings.
    */
   protected $settingsFieldName;
 
@@ -126,4 +128,5 @@ class ParagraphModifiersHelper {
   public function getCustomClass() {
     return $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME);
   }
+
 }

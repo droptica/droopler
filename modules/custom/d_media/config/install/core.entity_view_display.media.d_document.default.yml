@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.d_document.field_media_file
+    - media.type.d_document
+  module:
+    - d_media
+id: media.d_document.default
+targetEntityType: media
+bundle: d_document
+mode: default
+content:
+  field_media_file:
+    label: hidden
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: d_document_embed
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

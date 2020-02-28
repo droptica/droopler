@@ -52,6 +52,9 @@ field_page_section:
       field_d_forms:
         type: entity_reference
         data: feedback
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -90,3 +93,6 @@ field_page_section:
       field_d_layout_modifier:
         type: text_select
         data: right
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: alternative-layout-example

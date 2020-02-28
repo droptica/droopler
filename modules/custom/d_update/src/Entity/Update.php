@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\d_update\Entity\Update.
- */
-
 namespace Drupal\d_update\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;

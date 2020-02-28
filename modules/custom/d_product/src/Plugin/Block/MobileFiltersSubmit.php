@@ -32,7 +32,6 @@ class MobileFiltersSubmit extends BlockBase {
       '#default_value' => $this->configuration['button_class'] ?? 'btn btn-primary',
     ];
 
-
     return $form;
   }
 
@@ -78,4 +77,5 @@ class MobileFiltersSubmit extends BlockBase {
       ],
     ];
   }
+
 }

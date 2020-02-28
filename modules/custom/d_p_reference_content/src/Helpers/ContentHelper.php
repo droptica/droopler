@@ -1,33 +1,27 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\d_p_reference_content\Helpers\ContentFinder.
- */
-
 namespace Drupal\d_p_reference_content\Helpers;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManager;
-use Drupal\paragraphs\Entity\Paragraph;
 
 class ContentHelper {
 
   /**
-   * @var Connection $dbConnection
+   * @var \Drupal\Core\Database\Connection
    */
   private $connection;
 
   /**
-   * @var EntityTypeManager $entityTypeManager
+   * @var \Drupal\Core\Entity\EntityTypeManager
    */
   private $entityTypeManager;
 
   /**
    * ContentHelper constructor.
    *
-   * @param Connection $connection
-   * @param EntityTypeManager $entityTypeManager
+   * @param \Drupal\Core\Database\Connection $connection
+   * @param \Drupal\Core\Entity\EntityTypeManager $entityTypeManager
    */
   public function __construct(Connection $connection, EntityTypeManager $entityTypeManager) {
     $this->connection = $connection;
@@ -45,6 +39,7 @@ class ContentHelper {
    *   Type of sort - DESC, ASC.
    * @param $values
    *   Array of values to exclude.
+   *
    * @return mixed
    *   Return ids.
    */
@@ -82,11 +77,12 @@ class ContentHelper {
    *   Field name.
    * @param $new_values
    *   Array with new content values
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function replaceContent(&$variables, $entity_type, $view_mode, $field, $new_values) {
-    /** @var Paragraph $paragraph */
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['elements']['#paragraph'];
     $paragraph->set($field, $new_values);
 
@@ -101,7 +97,7 @@ class ContentHelper {
     $storage = $this->entityTypeManager->getStorage($entity_type);
     foreach ($new_values as $key => $data) {
       if (!empty($data['target_id'])) {
-        if($node = $storage->load($data['target_id'])) {
+        if ($node = $storage->load($data['target_id'])) {
           $build = $view_builder->view($node, $view_mode);
           // Append element to paragraph content.
           $variables['content'][$field][$key] = $build;
@@ -117,12 +113,13 @@ class ContentHelper {
    *   Query result.
    * @param $values
    *   Values to exclude.
+   *
    * @return array
    *   New data.
    */
   private function excludeFromResults($data, $values) {
     // Remove data if target exist.
-    foreach($values as $target) {
+    foreach ($values as $target) {
       unset($data[$target['target_id']]);
     }
 
@@ -136,6 +133,7 @@ class ContentHelper {
    *
    * @param $data
    *   Nids.
+   *
    * @return array
    *   Data with target_id.
    */
@@ -143,7 +141,7 @@ class ContentHelper {
     $result = [];
     foreach ($data as $item) {
       $result[] = [
-        'target_id' => $item['nid']
+        'target_id' => $item['nid'],
       ];
     }
 
