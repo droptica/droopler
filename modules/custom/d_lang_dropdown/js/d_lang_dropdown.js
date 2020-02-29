@@ -1,11 +1,11 @@
 /*global Drupal, document, jQuery */
 
-(function ($) {
+(function ($, Drupal) {
   "use strict";
-
 
   Drupal.behaviors.d_lang_dropdown = {
     attach: function (context, settings) {
+      // @todo Replace document.ready with Drupal.behaviors.
       $(document).ready(function () {
         var $body = $('body');
         if ($body.hasClass('d-lang-added')) {
@@ -30,4 +30,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery. Drupal);

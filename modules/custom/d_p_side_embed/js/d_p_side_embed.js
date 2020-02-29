@@ -3,7 +3,7 @@
  * The script that scales facebook video iframes.
  */
 
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   Drupal.behaviors.d_p_side_embed = {
@@ -79,4 +79,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);
