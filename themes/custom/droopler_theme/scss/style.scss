@@ -6,9 +6,9 @@
 
 // Theme configuration.
 @import 'config/all';
-@import '../../../../../../../libraries/bootstrap/scss/bootstrap';
-@import '../../../../../../../libraries/bootstrap/scss/bootstrap-grid';
-@import '../../../../../../../libraries/bootstrap/scss/bootstrap-reboot';
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap-grid";
+@import "../node_modules/bootstrap/scss/bootstrap-reboot";
 @import 'mixins/fonts';
 @import 'mixins/title';
 
@@ -100,4 +100,5 @@
 
 @import 'layout/header';
 @import 'layout/footer';
+@import 'layout/bottom_footer';
 @import 'layout/download_page';

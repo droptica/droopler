@@ -15,23 +15,28 @@ function d_demo_content_structure_alter(&$structure, $context) {
   if ($context == 'all') {
     $structure['homepage'] = ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => -50];
     $structure['invest'] = ['file' => "$path/invest.yml"];
-    $structure['documentation'] = ['file' => "$path/documentation.yml", 'link' => 'Documentation', 'weight' => 30, 'children' => [
-      'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
-      'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
-      'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
-      'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
-      'd_p_sidebar_image' => ['file' => "$path/d_p_sidebar_image.yml", 'link' => 'Sidebar Image Paragraph', 'weight' => 40],
-      'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
-      'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
-      'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
-      'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
-      'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
-      'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
-      'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
-      'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
-      'd_p_reference_content' => ['file' => "$path/d_p_reference_content.yml", 'link' => 'Reference Content Paragraph', 'weight' => 120],
-      'd_p_side_by_side' => ['file' => "$path/d_p_side_by_side.yml", 'link' => 'Side By Side Paragraph', 'weight' => 130],
-    ]];
+    $structure['documentation'] = [
+      'file' => "$path/documentation.yml",
+      'link' => 'Documentation',
+      'weight' => 30,
+      'children' => [
+        'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
+        'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
+        'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
+        'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
+        'd_p_sidebar_image' => ['file' => "$path/d_p_sidebar_image.yml", 'link' => 'Sidebar Image Paragraph', 'weight' => 40],
+        'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
+        'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
+        'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
+        'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
+        'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
+        'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
+        'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
+        'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
+        'd_p_reference_content' => ['file' => "$path/d_p_reference_content.yml", 'link' => 'Reference Content Paragraph', 'weight' => 120],
+        'd_p_side_by_side' => ['file' => "$path/d_p_side_by_side.yml", 'link' => 'Side By Side Paragraph', 'weight' => 130],
+      ],
+    ];
     $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 20];
     $structure['services_engine_installation'] = ['file' => "$path/services_engine_installation.yml"];
     $structure['services_engine_overhaul'] = ['file' => "$path/services_engine_overhaul.yml"];
@@ -50,13 +55,20 @@ function d_demo_content_structure_alter(&$structure, $context) {
     $structure['contact'] = ['file' => "$path/contact.yml"];
     $structure['about_us'] = ['file' => "$path/about_us.yml"];
     $structure['careers'] = ['file' => "$path/careers.yml"];
-    $structure['engines_car'] = ['file' => "$path/engines_car.yml", 'link' => 'Car Engines', 'parent' => 'd_demo.engines', 'children' => [
+    $structure['engines_car'] = [
+      'file' => "$path/engines_car.yml",
+      'link' => 'Car Engines',
+      'parent' => 'd_demo.engines',
+      'children' => [
         'engines_car_diesel' => ['file' => "$path/engines_car_diesel.yml", 'link' => 'Diesel Engines', 'weight' => 0],
-        'engines_car_gasoline' => ['file' => "$path/engines_car_gasoline.yml", 'link' => 'Gasoline Engines', 'weight' => 1]
-      ]
+        'engines_car_gasoline' => ['file' => "$path/engines_car_gasoline.yml", 'link' => 'Gasoline Engines', 'weight' => 1],
+      ],
     ];
     $structure['engines_boat'] = ['file' => "$path/engines_boat.yml", 'link' => 'Boat Engines', 'parent' => 'd_demo.engines'];
     $structure['engines_aircraft'] = ['file' => "$path/engines_aircraft.yml", 'link' => 'Aircraft Engines', 'parent' => 'd_demo.engines'];
+    $structure['gdpr'] = ['file' => "$path/gdpr.yml"];
+    $structure['terms_of_service'] = ['file' => "$path/terms_of_service.yml"];
+    $structure['privacy_policy'] = ['file' => "$path/privacy_policy.yml"];
   }
 }
 
@@ -80,6 +92,7 @@ function d_demo_block_structure_alter(&$structure, $context) {
     $structure['d_social_media_footer'] = ['file' => "$path/d_social_media_footer.yml"];
     $structure['header_search_link'] = ['file' => "$path/header_search_link.yml"];
     $structure['secondary_menu'] = ['file' => "$path/secondary_menu.yml"];
+    $structure['bottom_footer_menu'] = ['file' => "$path/bottom_footer_menu.yml"];
   }
 }
 
@@ -99,6 +112,7 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
               $formElement['#attributes']['placeholder'] = $formElement['#title'];
               $formElement['#title_display'] = 'invisible';
               break;
+
             case 'item':
             case 'container':
               if (!empty($formElement['widget']['#title'])) {
@@ -133,6 +147,6 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
 /**
  * Implements hook_attachments().
  */
-function d_demo_page_attachments (array &$page) {
+function d_demo_page_attachments(array &$page) {
   $page['#attached']['library'][] = 'd_demo/d_demo_random_price';
 }

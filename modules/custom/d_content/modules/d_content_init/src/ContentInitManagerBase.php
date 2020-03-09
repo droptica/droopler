@@ -14,7 +14,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class ContentInitManagerBase
+ * Class ContentInitManagerBase.
  *
  * @package Drupal\d_content_init
  */
@@ -163,6 +163,7 @@ abstract class ContentInitManagerBase {
    *   entity type has bundles, the bundle key has to be specified.
    *
    * @return \Drupal\Core\Entity\EntityInterface
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\Core\Entity\EntityStorageException
@@ -223,7 +224,7 @@ abstract class ContentInitManagerBase {
       return FALSE;
     }
 
-    // Allow other modules to alter
+    // Allow other modules to alter.
     $this->moduleHandler->alter('init_field', $entity, $field_name, $field);
 
     // If the field was not processed by any alter, use a standard field "set".
