@@ -109,6 +109,9 @@
       <h5{{ title_attributes.addClass(title_classes) }}>{{ title }}</h5>
       {{ title_suffix }}
     {% endif %}
-    <p class="card-text">{{ content }}</p>
+    {{ content|without('links') }}
+  </div>
+  <div class="card-footer">
+    {{ content.links }}
   </div>
 </article>
