@@ -73,8 +73,7 @@ function d_blog_preprocess_responsive_image(&$variables) {
  * Implements theme_preprocess_page().
  */
 function d_blog_preprocess_page(&$variables) {
-  if (\Drupal::routeMatch()
-      ->getRouteName() == 'entity.taxonomy_term.canonical') {
+  if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical') {
     $variables['page']['content']['pagetitle']['#attributes']['class'] = ['blog-listing-main-header'];
   }
 }
