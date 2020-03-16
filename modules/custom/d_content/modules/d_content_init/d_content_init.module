@@ -463,7 +463,7 @@ function d_content_init_create_all() {
   Drupal::service('d_content_init.manager_media')->importFromFiles($media_structure);
 
   if($module_handler->moduleExists('d_product')) {
-    d_content_init_index_content();
+    d_content_init_index_content('product_index');
   }
 }
 
