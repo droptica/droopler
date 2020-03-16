@@ -469,7 +469,6 @@ function d_content_init_create_all() {
   Drupal::service('d_content_init.manager_media')
     ->importFromFiles($media_structure);
 
-
   if ($module_handler->moduleExists('search_api')) {
     $indices = [];
     \Drupal::moduleHandler()
