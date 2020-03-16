@@ -193,11 +193,12 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
           $entity->$name->appendItem($media_entity);
         }
         else {
-          \Drupal::logger('d_content_init')->error('Empty media reference in entity #@id of type "@type" (field "@field").', [
-            '@id' => $entity->id(),
-            '@type' => $entity->getEntityType(),
-            '@field' => $name,
-          ]);
+          \Drupal::logger('d_content_init')
+            ->error('Empty media reference in entity #@id of type "@type" (field "@field").', [
+              '@id' => $entity->id(),
+              '@type' => $entity->getEntityType(),
+              '@field' => $name,
+            ]);
         }
       }
       $value['processed'] = TRUE;
@@ -210,11 +211,12 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
           $entity->set($name, [['target_id' => $target_entity->id()]]);
         }
         else {
-          \Drupal::logger('d_content_init')->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
-            '@id' => $entity->id(),
-            '@type' => $entity->getEntityType(),
-            '@field' => $name,
-          ]);
+          \Drupal::logger('d_content_init')
+            ->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
+              '@id' => $entity->id(),
+              '@type' => $entity->getEntityType(),
+              '@field' => $name,
+            ]);
         }
         $value['processed'] = TRUE;
       }
@@ -288,7 +290,8 @@ function d_content_init_fill_paragraph($paragraph_data) {
  *
  * @param array $params
  *   Array with parameters:
- *   - module: a module with ymls and assets to look for (defaults to d_content_init).
+ *   - module: a module with ymls and assets to look for (defaults to
+ *   d_content_init).
  *   - file: YML file name without path.
  *   - title: Menu link title
  *   - weight: Menu link weight
@@ -388,8 +391,10 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
   $dst_dir = trim($dst_dir, '/');
   if (!empty($dst_dir)) {
     $directory .= $dst_dir . '/';
-    if (!Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
-      Drupal::logger('file')->warning('Directory %directory could not be created or is not accessible.', ['%directory' => $directory]);
+    if (!Drupal::service('file_system')
+      ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
+      Drupal::logger('file')
+        ->warning('Directory %directory could not be created or is not accessible.', ['%directory' => $directory]);
       return FALSE;
     }
   }
@@ -455,15 +460,21 @@ function d_content_init_create_all() {
   // Define block structure, allow other modules to modify it and create blocks.
   $block_structure = [];
   $module_handler->alter('block_structure', $block_structure, $context);
-  Drupal::service('d_content_init.manager_block')->importFromFiles($block_structure);
+  Drupal::service('d_content_init.manager_block')
+    ->importFromFiles($block_structure);
 
   // Define media structure, allow other modules to modify it and create media entities.
   $media_structure = [];
   $module_handler->alter('media_structure', $media_structure, $context);
-  Drupal::service('d_content_init.manager_media')->importFromFiles($media_structure);
+  Drupal::service('d_content_init.manager_media')
+    ->importFromFiles($media_structure);
 
-  if($module_handler->moduleExists('d_product')) {
-    d_content_init_index_content('product_index');
+
+  if ($module_handler->moduleExists('search_api')) {
+    $indices = [];
+    \Drupal::moduleHandler()
+      ->invokeAll('d_content_init_index_content', [&$indices]);
+    d_content_init_index_content($indices);
   }
 }
 
@@ -485,11 +496,13 @@ function d_content_init_recreate_content() {
 /**
  * Runs Search API indexing for specified index.
  *
- * @param $indexName
+ * @param array $indices
  *   Machine name of index to index.
  */
-function d_content_init_index_content($indexName) {
-  $index = \Drupal\search_api\Entity\Index::load($indexName);
-  $index->indexItems();
-  \Drupal::logger('d_content_init')->notice("{$indexName} indexed.");
+function d_content_init_index_content(array $indices) {
+  foreach ($indices as $indexName) {
+    $index = \Drupal\search_api\Entity\Index::load($indexName);
+    $index->indexItems();
+    \Drupal::logger('d_content_init')->notice("{$indexName} indexed.");
+  }
 }
