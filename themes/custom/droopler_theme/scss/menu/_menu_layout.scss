@@ -257,6 +257,14 @@ li.we-mega-menu-li {
       order: 1;
     }
   }
+
+  // Add offset to mobile menu when user is logged in.
+  body.user-logged-in {
+    margin-left: 0 !important;
+    header.header > nav.navbar-wrapper nav.main-navbar {
+      top: calc(#{$header-mobile-height} + #{$admin-toolbar-height});
+    }
+  }
 }
 
 // Desktop main navigation submenus styling.
@@ -331,3 +339,4 @@ li.we-mega-menu-li {
   // This includes creation of grid for megamenu col classes: "span3"
   @include views-grid();
 }
+

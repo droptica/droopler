@@ -5,7 +5,7 @@
  * Contains d_paragraphs.module..
  */
 
-use\Drupal\Core\Template\Attribute;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -33,6 +33,7 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
             $variables['image_class'] = 'col-md-6 col-lg-7';
             $variables['text_class'] = 'col-md-6 col-lg-5';
             break;
+
           case 'left':
           case 'right':
           default:

@@ -36,13 +36,13 @@ class DownloadFile extends ControllerBase {
       'attributes' => ['class' => 'btn btn-primary btn-orange'],
     ];
 
-    // Generate download link/
+    // Generate download link.
     $button_text = $paragraph->get('field_d_p_sf_download_button')->getValue();
     $download_link = Link::createFromRoute($button_text[0]['value'], 'd_p_subscribe_file.downloadfile.getFile', ['file_hash' => $file_hash['value']], $link_options);
     $rendered_download_link = $download_link->toString()->getGeneratedLink();
 
     // Generate download page with link.
-    $display_settings = ['label' => 'hidden',];
+    $display_settings = ['label' => 'hidden'];
     $body = $paragraph->get('field_d_p_sf_download_page')
       ->view($display_settings);
     $body[0]['#text'] = str_replace("[download-button]", $rendered_download_link, $body[0]['#text']);
@@ -53,7 +53,7 @@ class DownloadFile extends ControllerBase {
   }
 
   /**
-   * Get SubscribeFileEntity
+   * Get SubscribeFileEntity.
    *
    * @param $field_name
    * @param $field_value
@@ -83,7 +83,7 @@ class DownloadFile extends ControllerBase {
   }
 
   /**
-   * Redirect to home page and show drupal message
+   * Redirect to home page and show drupal message.
    *
    * @param $message
    */

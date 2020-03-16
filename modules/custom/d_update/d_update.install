@@ -2,7 +2,7 @@
 
 /**
  * @file
- * d_updater install hooks.
+ * D_updater install hooks.
  */
 
 use Drupal\Core\Extension\MissingDependencyException;
@@ -18,7 +18,7 @@ function d_update_install() {
   }
   catch (MissingDependencyException $e) {
     $logger->warning(
-      'Could not install Checklist API module. You will not see information 
+      'Could not install Checklist API module. You will not see information
       about updates in the drupal admin pages.'
     );
   }

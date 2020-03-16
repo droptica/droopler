@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function d_mautic_install() {
+  Drupal::service('d_update')
+    ->updateConfigurations('module/d_mautic', 'd_mautic.init');
+}

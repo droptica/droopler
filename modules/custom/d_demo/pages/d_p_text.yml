@@ -61,6 +61,9 @@ field_page_section:
         data:
           link: internal:/documentation/text-paragraph
           text: Call To Action!
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: full-example
 
   - paragraph_type: d_p_text_paged
     data:
@@ -91,6 +94,9 @@ field_page_section:
           Fusce egestas tincidunt nulla ut faucibus. Sed vehicula libero lectus, et volutpat quam dignissim at.
           Aliquam erat volutpat. Duis nunc massa, finibus a sapien sit amet, sagittis aliquet est.
           Etiam eget sapien massa.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: basic-example
 
 
   - paragraph_type: d_p_text_paged
@@ -133,4 +139,4 @@ field_page_section:
           text: Call To Action!
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert
+        custom_class: theme-invert theme-invert-example

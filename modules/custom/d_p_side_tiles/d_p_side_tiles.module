@@ -5,7 +5,7 @@
  * File containing d_p_side_tiles module.
  */
 
-use \Drupal\Core\Template\Attribute;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -62,7 +62,7 @@ function d_p_side_tiles_preprocess_colorbox_formatter(&$variables) {
   $paragraphFieldId = $parentEntityService->getParentParagraphFieldId($variables['entity']);
 
   if ($fd->id() == 'paragraph.d_p_side_tiles.field_d_media_image'
-    || ($paragraphFieldId && $paragraphFieldId == 'paragraph.d_p_tiles.field_d_media_image') ) {
+    || ($paragraphFieldId && $paragraphFieldId == 'paragraph.d_p_tiles.field_d_media_image')) {
     $variables['attributes']['data-cbox-title'] = $variables['attributes']['title'];
     $variables['attributes']['title'] = '';
   }
