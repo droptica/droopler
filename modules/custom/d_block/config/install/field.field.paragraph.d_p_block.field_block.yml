@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_block
+    - paragraphs.paragraphs_type.d_p_block
+  module:
+    - d_block_field
+id: paragraph.d_p_block.field_block
+field_name: field_block
+entity_type: paragraph
+bundle: d_p_block
+label: Block
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  plugin_ids: {  }
+field_type: d_block_field

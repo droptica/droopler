@@ -603,7 +603,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-      ->getDefault() === 'droopler_subtheme') {
+        ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -988,7 +988,8 @@ function droopler_update_8105() {
 }
 
 /**
- * Droopler 2.0 beta-1 - update configuration modified since Droopler 2.0 alpha-2.
+ * Droopler 2.0 beta-1 - update configuration modified since Droopler 2.0
+ * alpha-2.
  */
 function droopler_update_8106() {
   $updater = \Drupal::service('d_update');
@@ -1028,6 +1029,14 @@ function droopler_update_8106() {
 }
 
 /**
+ * Droopler 2.0 beta-3 add d_block paragraph to optional modules.
+ */
+function droopler_update_8107() {
+  $modules = ['d_blog', 'd_product'];
+  update_modules_configuration($modules, '8107');
+}
+
+/**
  * Returns a list of modules to install, based on the list of required modules.
  *
  * @param array $modules
@@ -1046,4 +1055,24 @@ function calculate_modules_for_install(array $modules) {
   }
 
   return $modulesToInstall;
+}
+
+/**
+ * Performs config update of specified modules.
+ * Configs should be placed in respective module directories e.g
+ * "module/config/update/moduleName.updateNumber.yml".
+ *
+ * @param array $modules
+ *   Array of module names to update.
+ * @param string|int $update_number
+ *   Number of the update corresponding to the droopler update number.
+ */
+function update_modules_configuration(array $modules, $update_number) {
+  $updater = \Drupal::service('d_update');
+  $module_handler = \Drupal::service('module_handler');
+  foreach ($modules as $module) {
+    if ($module_handler->moduleExists($module)) {
+      $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
+    }
+  }
 }

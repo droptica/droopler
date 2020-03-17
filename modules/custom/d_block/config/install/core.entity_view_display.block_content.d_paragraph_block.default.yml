@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.d_paragraph_block
+    - field.field.block_content.d_paragraph_block.field_paragraphs
+  module:
+    - entity_reference_revisions
+id: block_content.d_paragraph_block.default
+targetEntityType: block_content
+bundle: d_paragraph_block
+mode: default
+content:
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

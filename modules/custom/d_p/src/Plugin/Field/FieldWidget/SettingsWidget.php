@@ -54,6 +54,7 @@ class SettingsWidget extends WidgetBase {
               'paragraph' => [
                 'd_p_group_of_text_blocks',
                 'd_p_carousel',
+                'd_p_block'
               ],
             ],
           ],
