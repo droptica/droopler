@@ -1028,7 +1028,7 @@ function droopler_update_8106() {
 }
 
 /**
- * Implements hook_update_N().
+ * Droopler 2.0 Enable d_p_media module.
  */
 function droopler_update_8107() {
   \Drupal::service('module_installer')->install(['d_p_media', TRUE]);
