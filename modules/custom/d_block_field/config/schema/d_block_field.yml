@@ -1,0 +1,48 @@
+# Schema for the configuration files of the Link module.
+
+field.formatter.settings.d_block_field:
+  type: mapping
+  label: 'Link format settings'
+  mapping: {  }
+
+field.widget.settings.d_block_field_default:
+  type: mapping
+  label: 'Link format settings'
+  mapping:
+    plugin_id:
+      type: string
+      label: 'Plugin ID'
+    settings:
+      type: sequence
+      label: 'Settings'
+      sequence:
+        type: string
+    configuration_form:
+      type: string
+
+field.storage_settings.d_block_field:
+  type: mapping
+  label: 'Block field settings'
+
+field.field_settings.d_block_field:
+  type: mapping
+  label: 'Block field settings'
+  mapping:
+    plugin_ids:
+      type: sequence
+      label: 'Plugin ids'
+      sequence:
+        type: string
+
+field.value.d_block_field:
+  type: mapping
+  label: 'Default value'
+  mapping:
+    plugin_id:
+      type: string
+      label: 'Plugin ID'
+    settings:
+      type: sequence
+      label: 'Settings'
+      sequence:
+        type: string
