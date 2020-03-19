@@ -1038,6 +1038,40 @@ function droopler_update_8107() {
 }
 
 /**
+ * Droopler 2.0 beta-3 - installing SEO modules.
+ */
+function droopler_update_8108(&$sandbox) {
+  // Install SEO contrib modules.
+  $updater = \Drupal::service('d_update');
+  $module_installer = \Drupal::service('module_installer');
+  $module_handler = \Drupal::service('module_handler');
+  try {
+    $advaggModules = [
+      'advagg',
+      'advagg_mod',
+      'advagg_js_minify',
+      'advagg_css_minify',
+    ];
+    $modules = [
+      'page_cache',
+      'dynamic_page_cache',
+    ];
+    $result = $module_installer->install(array_merge($modules, $advaggModules), TRUE);
+    $values['droopler__droopler_update_8108_1'] = $result;
+  } catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8108_1'] = FALSE;
+  }
+  // Import seo configs.
+  $configs = [];
+  foreach ($advaggModules as $advaggModule) {
+    if ($module_handler->moduleExists($advaggModule)) {
+      $configs[$advaggModule] = [$advaggModule . 'settings.yml'];
+    }
+  }
+  $values['droopler__droopler_update_8108_2'] = $updater->importConfigs($configs);
+}
+
+/**
  * Returns a list of modules to install, based on the list of required modules.
  *
  * @param array $modules
