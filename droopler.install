@@ -1040,7 +1040,7 @@ function droopler_update_8107() {
  * Droopler 2.0 beta-3 - installing SEO modules.
  */
 function droopler_update_8108(&$sandbox) {
-  //Install SEO contrib modules
+  // Install SEO contrib modules.
   $updater = \Drupal::service('d_update');
   $module_installer = \Drupal::service('module_installer');
   $module_handler = \Drupal::service('module_handler');
@@ -1060,7 +1060,7 @@ function droopler_update_8108(&$sandbox) {
   } catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8108_1'] = FALSE;
   }
-  //Import seo configs
+  // Import seo configs.
   $configs = [];
   foreach ($advaggModules as $advaggModule) {
     if ($module_handler->moduleExists($advaggModule)) {
