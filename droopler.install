@@ -1034,7 +1034,7 @@ function droopler_update_8106() {
 function droopler_update_8107() {
   $modules = ['d_blog', 'd_product'];
   update_modules_configuration($modules, '8107');
-  \Drupal::service('module_installer')->install(['d_p_media', TRUE]);
+  \Drupal::service('module_installer')->install(['d_p_media'], TRUE);
 }
 
 /**
