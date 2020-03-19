@@ -1058,7 +1058,8 @@ function droopler_update_8108(&$sandbox) {
     ];
     $result = $module_installer->install(array_merge($modules, $advaggModules), TRUE);
     $values['droopler__droopler_update_8108_1'] = $result;
-  } catch (MissingDependencyException $e) {
+  }
+  catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8108_1'] = FALSE;
   }
   // Import seo configs.
@@ -1069,6 +1070,16 @@ function droopler_update_8108(&$sandbox) {
     }
   }
   $values['droopler__droopler_update_8108_2'] = $updater->importConfigs($configs);
+}
+
+/**
+ * Droopler 2.0 beta-3 turn on new modules.
+ */
+function droopler_update_8109() {
+  $modules = [
+    'd_block',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
 }
 
 /**
