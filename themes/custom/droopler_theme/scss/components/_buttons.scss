@@ -7,17 +7,14 @@ Styleguide 2.banner.celina
 // Paddings and margins.
 $button-max-width: 18rem !default; // Minimum width of the button (desktop)
 
-// Standard Bootstrap button
-.btn {
+@mixin make-btn() {
   @include font-button;
   cursor: pointer;
   max-width: $button-max-width;
   width: 100%;
 }
 
-@mixin make-btn() {
-  @include font-button;
-  cursor: pointer;
-  max-width: $button-max-width;
-  width: 100%;
+// Standard Bootstrap button
+.btn {
+  @include make-btn;
 }

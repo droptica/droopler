@@ -9,6 +9,8 @@ use Drupal\Core\Form\FormStateInterface;
  * Provide class ConfigurationForm.
  *
  * @package Drupal\d_social_media\Form
+ *
+ * @todo Please add validateForm method.
  */
 class ConfigurationForm extends ConfigFormBase {
 
@@ -18,11 +20,14 @@ class ConfigurationForm extends ConfigFormBase {
   const CONFIGURATION_NAME = 'd_social_media.settings';
 
   /**
-   * Return media names.
+   * Get defined social media machine names.
    *
    * @return array
+   *   Social media machine names.
+   *
+   * @todo Move this to other class or replace with Config API.
    */
-  public function getMediaNames() {
+  public static function getMediaNames() {
     return ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin', 'dribbble'];
   }
 
@@ -48,7 +53,7 @@ class ConfigurationForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config(self::CONFIGURATION_NAME);
 
-    foreach ($this->getMediaNames() as $name) {
+    foreach (self::getMediaNames() as $name) {
       $form["link_$name"] = [
         '#type' => 'url',
         '#title' => $this->t(ucfirst($name) . " link"),
@@ -65,7 +70,7 @@ class ConfigurationForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
-    foreach ($this->getMediaNames() as $name) {
+    foreach (self::getMediaNames() as $name) {
       $this->config(self::CONFIGURATION_NAME)
         ->set("link_$name", $form_state->getValue("link_$name"));
     }

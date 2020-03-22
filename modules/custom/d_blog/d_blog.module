@@ -82,7 +82,9 @@ function d_blog_preprocess_page(&$variables) {
  * Implements hook_node_links_alter().
  */
 function d_blog_node_links_alter(array &$links, NodeInterface $node, array &$context) {
-  if($links['comment__field_comments']){
-    $links['comment__field_comments']['#links']['comment-add']['attributes']['class'][] = 'btn btn-primary';
+  foreach ($links as $key => $link) {
+    if (strpos($key, 'comment__field') !== FALSE) {
+      unset($links[$key]);
+    }
   }
 }

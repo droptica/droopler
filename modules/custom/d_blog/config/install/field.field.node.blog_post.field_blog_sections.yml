@@ -5,6 +5,7 @@ dependencies:
     - field.storage.node.field_blog_sections
     - node.type.blog_post
     - paragraphs.paragraphs_type.d_p_banner
+    - paragraphs.paragraphs_type.d_p_block
     - paragraphs.paragraphs_type.d_p_blog_image
     - paragraphs.paragraphs_type.d_p_blog_text
     - paragraphs.paragraphs_type.d_p_carousel
@@ -47,6 +48,7 @@ settings:
       d_p_subscribe_file: d_p_subscribe_file
       d_p_text_paged: d_p_text_paged
       d_p_text_with_bckg: d_p_text_with_bckg
+      d_p_block: d_p_block
       d_p_carousel: d_p_carousel
       d_p_gallery: d_p_gallery
       d_p_group_of_counters: d_p_group_of_counters
@@ -86,6 +88,9 @@ settings:
       d_p_text_with_bckg:
         enabled: true
         weight: -13
+      d_p_block:
+        enabled: true
+        weight: 24
       d_p_carousel:
         enabled: true
         weight: 25

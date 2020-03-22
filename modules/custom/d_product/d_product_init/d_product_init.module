@@ -29,3 +29,10 @@ function d_product_init_content_structure_alter(&$structure, $context) {
     $structure = $products + $structure;
   }
 }
+
+/**
+ * Implements hook_d_content_init_index_content().
+ */
+function d_product_init_d_content_init_index_content(array &$indexes) {
+  $indexes[] = 'product_index';
+}

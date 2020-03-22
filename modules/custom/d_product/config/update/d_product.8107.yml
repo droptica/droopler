@@ -1,0 +1,13 @@
+field.field.node.d_product.field_page_section:
+  add:
+    dependencies:
+      config:
+        - paragraphs.paragraphs_type.d_p_block
+    settings:
+      handler_settings:
+        target_bundles:
+          d_p_block: d_p_block
+        target_bundles_drag_drop:
+          d_p_block:
+            enabled: true
+            weight: 24

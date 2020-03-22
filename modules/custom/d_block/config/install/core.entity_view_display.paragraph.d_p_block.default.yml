@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_block.field_block
+    - field.field.paragraph.d_p_block.field_d_settings
+    - paragraphs.paragraphs_type.d_p_block
+  module:
+    - d_block_field
+id: paragraph.d_p_block.default
+targetEntityType: paragraph
+bundle: d_p_block
+mode: default
+content:
+  field_block:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: d_block_field
+    region: content
+  field_d_settings:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  search_api_excerpt: true
