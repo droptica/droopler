@@ -603,7 +603,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-      ->getDefault() === 'droopler_subtheme') {
+        ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -619,6 +619,7 @@ function droopler_update_8103() {
  * Droopler 2.0 Media migrate.
  */
 function droopler_update_8104() {
+  $entityBundles = get_all_entity_bundles();
   // Import all target Media Fields.
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
@@ -683,7 +684,7 @@ function droopler_update_8104() {
   $values['droopler__droopler_update_8104_1'] = $updater->importConfigs($configs);
 
   $module_handler = \Drupal::service('module_handler');
-  if ($module_handler->moduleExists('d_blog')) {
+  if ($module_handler->moduleExists('d_blog') && in_array('blog_post', $entityBundles)) {
     // Update d_blog config.
     $configs = [
       'd_blog' => [
@@ -699,7 +700,7 @@ function droopler_update_8104() {
   else {
     $values['droopler__droopler_update_8104_2'] = TRUE;
   }
-  if ($module_handler->moduleExists('d_product')) {
+  if ($module_handler->moduleExists('d_product') && in_array('d_product', $entityBundles)) {
     // Update d_product config.
     $configs = [
       'd_product' => [
@@ -747,6 +748,10 @@ function droopler_update_8104() {
     /** @var \Drupal\field\Entity\FieldStorageConfig $storage */
     foreach ($res as $storage) {
       $bundles = $storage->getBundles();
+      if (empty($bundles)) {
+        \Drupal::logger('droopler_install')->notice("{$sourceFieldName} missing from active configuration. Skipping...");
+        continue;
+      }
       $entityType = $storage->getTargetEntityTypeId();
 
       $entities = \Drupal::entityTypeManager()
@@ -988,13 +993,18 @@ function droopler_update_8105() {
 }
 
 /**
- * Droopler 2.0 beta-1 - update configuration modified since Droopler 2.0 alpha-2.
+ * Droopler 2.0 beta-1 - update configuration modified since Droopler 2.0
+ * alpha-2.
  */
 function droopler_update_8106() {
   $updater = \Drupal::service('d_update');
   $module_handler = \Drupal::service('module_handler');
+
   $configs = [
     'd_media' => [
+      'media.type.d_document' => '',
+      'field.storage.media.field_media_file' => '',
+      'field.field.media.d_document.field_media_file' => '',
       'core.entity_view_mode.media.counter' => '',
       'core.entity_view_display.media.d_video.counter' => '',
       'core.entity_view_display.media.d_image.counter' => '',
@@ -1002,10 +1012,7 @@ function droopler_update_8106() {
       'core.entity_form_display.media.d_document.media_library' => '',
       'core.entity_view_display.media.d_document.default' => '',
       'core.entity_view_display.media.d_document.media_library' => '',
-      'field.field.media.d_document.field_media_file' => '',
-      'field.storage.media.field_media_file' => '',
       'language.content_settings.media.d_document' => '',
-      'media.type.d_document' => '',
     ],
     'd_content' => [
       'node.type.content_page' => 'bb51f1046ad8a56afa01acfa5ef550a3',
@@ -1028,6 +1035,60 @@ function droopler_update_8106() {
 }
 
 /**
+ * Droopler 2.0 beta3 add d_block paragraph to optional modules, enable d_p_media.
+ */
+function droopler_update_8107() {
+  $modules = ['d_blog', 'd_product'];
+  update_modules_configuration($modules, '8107');
+  \Drupal::service('module_installer')->install(['d_p_media'], TRUE);
+}
+
+/**
+ * Droopler 2.0 beta-3 - installing SEO modules.
+ */
+function droopler_update_8108(&$sandbox) {
+  // Install SEO contrib modules.
+  $updater = \Drupal::service('d_update');
+  $module_installer = \Drupal::service('module_installer');
+  $module_handler = \Drupal::service('module_handler');
+  try {
+    $advaggModules = [
+      'advagg',
+      'advagg_mod',
+      'advagg_js_minify',
+      'advagg_css_minify',
+    ];
+    $modules = [
+      'page_cache',
+      'dynamic_page_cache',
+    ];
+    $result = $module_installer->install(array_merge($modules, $advaggModules), TRUE);
+    $values['droopler__droopler_update_8108_1'] = $result;
+  }
+  catch (MissingDependencyException $e) {
+    $values['droopler__droopler_update_8108_1'] = FALSE;
+  }
+  // Import seo configs.
+  $configs = [];
+  foreach ($advaggModules as $advaggModule) {
+    if ($module_handler->moduleExists($advaggModule)) {
+      $configs[$advaggModule] = [$advaggModule . 'settings.yml'];
+    }
+  }
+  $values['droopler__droopler_update_8108_2'] = $updater->importConfigs($configs);
+}
+
+/**
+ * Droopler 2.0 beta-3 turn on new modules.
+ */
+function droopler_update_8109() {
+  $modules = [
+    'd_block',
+  ];
+  \Drupal::service('module_installer')->install($modules, TRUE);
+}
+
+/**
  * Returns a list of modules to install, based on the list of required modules.
  *
  * @param array $modules
@@ -1046,4 +1107,43 @@ function calculate_modules_for_install(array $modules) {
   }
 
   return $modulesToInstall;
+}
+
+/**
+ * Performs config update of specified modules.
+ * Configs should be placed in respective module directories e.g
+ * "module/config/update/moduleName.updateNumber.yml".
+ *
+ * @param array $modules
+ *   Array of module names to update.
+ * @param string|int $update_number
+ *   Number of the update corresponding to the droopler update number.
+ */
+function update_modules_configuration(array $modules, $update_number) {
+  $updater = \Drupal::service('d_update');
+  $module_handler = \Drupal::service('module_handler');
+  foreach ($modules as $module) {
+    if ($module_handler->moduleExists($module)) {
+      $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
+    }
+  }
+}
+
+/**
+ * Returns array of names of all existing entities bundles.
+ *
+ * @return array
+ *   Array with all entities bundles.
+ */
+function get_all_entity_bundles() {
+  $entityBundles = \Drupal::service('entity.manager')
+    ->getAllBundleInfo();
+  $bundles = [];
+  foreach ($entityBundles as $entityBundle) {
+    foreach ($entityBundle as $bundle => $information) {
+      $bundles[] = $bundle;
+    }
+  }
+
+  return $bundles;
 }

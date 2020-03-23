@@ -5,6 +5,10 @@ core: 8.x
 dependencies:
   - admin_toolbar
   - admin_toolbar_tools
+  - advagg
+  - advagg_mod
+  - advagg_js_minify
+  - advagg_css_minify
   - block
   - block_content
   - breakpoint
@@ -17,6 +21,8 @@ dependencies:
   - contact
   - content_translation
   - contextual
+  - d_block_field
+  - d_block
   - d_content
   - d_geysir
   - d_lang_dropdown
@@ -42,6 +48,7 @@ dependencies:
   - d_search
   - d_social_media
   - d_update
+  - dynamic_page_cache
   - dblog
   - editor
   - entity_reference_revisions
@@ -69,6 +76,7 @@ dependencies:
   - paragraphs
   - path
   - pathauto
+  - page_cache
   - rdf
   - redirect
   - responsive_image
