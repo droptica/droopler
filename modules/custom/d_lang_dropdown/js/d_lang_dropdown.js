@@ -30,4 +30,4 @@
       });
     }
   };
-})(jQuery. Drupal);
+})(jQuery, Drupal);
