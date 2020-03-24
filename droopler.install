@@ -1021,8 +1021,8 @@ function droopler_update_8106() {
       'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '1df92b0a421c733796c8388d533bd722',
     ],
     'profile/droopler' => [
-      'filter.format.full_html.yml' => '',
-      'editor.editor.full_html.yml' => '76ab97a576ba2ceb01cb3d2f960d447d',
+      'filter.format.full_html' => '',
+      'editor.editor.full_html' => '3ff0614c37259421cc08d145b389c56c',
     ],
   ];
   if ($module_handler->moduleExists('d_blog')) {
@@ -1072,7 +1072,7 @@ function droopler_update_8108(&$sandbox) {
   $configs = [];
   foreach ($advaggModules as $advaggModule) {
     if ($module_handler->moduleExists($advaggModule)) {
-      $configs[$advaggModule] = [$advaggModule . 'settings.yml'];
+      $configs[$advaggModule] = [$advaggModule . 'settings'];
     }
   }
   $values['droopler__droopler_update_8108_2'] = $updater->importConfigs($configs);
