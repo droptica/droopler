@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, Drupal) {
 
   /**
    * Replace selectlist to niceselect.
@@ -18,4 +18,4 @@
         });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);

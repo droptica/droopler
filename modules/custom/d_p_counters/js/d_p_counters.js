@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   Drupal.behaviors.d_p_counters = {
@@ -25,4 +25,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);

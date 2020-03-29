@@ -5,7 +5,7 @@
 
       $(context).ready(function() {
         d_p_ckeditor(true);
-      })
+      });
 
       function d_p_ckeditor_geysir() {
         if (typeof CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].element.$.parentElement.offsetParent.offsetParent.children['geysir-modal-form'] !== 'undefined') {
