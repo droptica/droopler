@@ -1,0 +1,42 @@
+core.entity_view_display.media.d_image.d_product_gallery:
+  add:
+    content:
+      field_media_image:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.media.d_image.d_product_image:
+  add:
+    content:
+      field_media_image:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.node.d_product.d_small_box:
+  add:
+    content:
+      field_d_product_media:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.node.d_product.default:
+  add:
+    content:
+      field_d_product_media:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.node.d_product.full:
+  add:
+    content:
+      field_d_product_media:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.node.d_product.teaser:
+  add:
+    content:
+      field_d_product_media:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'

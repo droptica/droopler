@@ -19,7 +19,9 @@ content:
     settings:
       responsive_image_style: product_thumbnail
       image_link: ''
-    third_party_settings: {  }
+    third_party_settings:
+      lazy:
+        lazy_image: '1'
     type: responsive_image
     region: content
 hidden:
