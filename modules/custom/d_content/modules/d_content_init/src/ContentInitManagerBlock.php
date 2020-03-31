@@ -153,7 +153,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     try {
       if (isset($block['placement'])) {
         $values = [
-          'id' => 'block_content_' . $block_entity->uuid(),
+          'id' => 'block_content_' . str_replace('-', '_', $block_entity->uuid()),
           'plugin' => 'block_content:' . $block_entity->uuid(),
         ] + $this->getBaseBlockValues($block['placement']);
 
