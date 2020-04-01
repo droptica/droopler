@@ -4,7 +4,7 @@
  * Behavior for toggling geysir overlay.
  */
 
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   Drupal.behaviors.d_geysir_toggle = {
@@ -53,4 +53,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);

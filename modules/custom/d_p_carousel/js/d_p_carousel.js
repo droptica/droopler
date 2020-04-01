@@ -3,7 +3,7 @@
  * The script that activates Slick carousels.
  */
 
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   Drupal.behaviors.d_p_carousel = {
@@ -48,4 +48,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);
