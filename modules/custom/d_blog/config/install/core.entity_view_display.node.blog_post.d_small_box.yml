@@ -25,7 +25,9 @@ content:
     settings:
       image_style: small_box_image
       image_link: content
-    third_party_settings: {  }
+    third_party_settings:
+      lazy:
+        lazy_image: '1'
 hidden:
   field_blog_category: true
   field_blog_sections: true

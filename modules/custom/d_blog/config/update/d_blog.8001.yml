@@ -1,0 +1,35 @@
+core.entity_view_display.media.d_image.d_blog_image:
+  add:
+    content:
+      field_media_image:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.node.blog_post.d_small_box:
+  add:
+    content:
+      field_blog_media_main_image:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.node.blog_post.teaser:
+  add:
+    content:
+      field_blog_media_main_image:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.node.blog_post.thumbnail:
+  add:
+    content:
+      field_blog_media_main_image:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+core.entity_view_display.node.blog_post.teaser_small:
+  add:
+    content:
+      field_blog_media_main_image:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'

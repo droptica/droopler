@@ -432,7 +432,7 @@ class Updater {
    *   Array containing changes to apply.
    *
    * @return bool
-   *   Return if the config was changed sucessfuly.
+   *   Return if the config was changed successfully.
    */
   private function modifyConfig($configName, array $newConfig) {
     $config = $this->configFactory->getEditable($configName);
