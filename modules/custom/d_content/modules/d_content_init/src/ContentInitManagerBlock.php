@@ -89,7 +89,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
   protected function createBlockPlugin(array $block) {
     try {
       $values = $this->getBaseBlockValues($block['info']);
-      $values['id'] = $values['id'] ?? 'block_plugin_' . $this->uuid->generate();
+      $values['id'] = $values['id'] ?? 'block_plugin_' . str_replace('-', '_', $this->uuid->generate());
       $this->getCurrentThemeIfNotDefined($values);
       return $this->saveEntity('block', $values);
     }
@@ -153,7 +153,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     try {
       if (isset($block['placement'])) {
         $values = [
-          'id' => 'block_content_' . $block_entity->uuid(),
+          'id' => 'block_content_' . str_replace('-', '_', $block_entity->uuid()),
           'plugin' => 'block_content:' . $block_entity->uuid(),
         ] + $this->getBaseBlockValues($block['placement']);
 
