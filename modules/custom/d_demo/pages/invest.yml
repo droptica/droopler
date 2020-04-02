@@ -195,3 +195,12 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-invert
+field_teaser_media_image:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_demo/d_demo_investors_1.jpg
+      alt: Invest with us
+field_teaser_text:
+  type: text_long
+  data: 'This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.'
