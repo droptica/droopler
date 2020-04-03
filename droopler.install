@@ -603,7 +603,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-        ->getDefault() === 'droopler_subtheme') {
+      ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -1088,11 +1088,11 @@ function droopler_update_8108(&$sandbox) {
  * Droopler 2.0 beta-3 turn on new modules.
  */
 function droopler_update_8109() {
-    $modules = ['d_block'];
-    $values['droopler__droopler_update_8109_1'] = \Drupal::service('module_installer')->install($modules, TRUE);
-    \Drupal::service('d_update')
-      ->checklist()
-      ->saveProgress(['v2.0' => $values]);
+  $modules = ['d_block'];
+  $values['droopler__droopler_update_8109_1'] = \Drupal::service('module_installer')->install($modules, TRUE);
+  \Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v2.0' => $values]);
 }
 
 /**
@@ -1168,8 +1168,8 @@ function get_all_entity_bundles() {
  * Droopler 2.0 beta3 add d_p_counters paragraph view_mode counter.
  */
 function droopler_update_8110() {
-    $values['droopler__droopler_update_8110_1'] = update_modules_configuration(['d_p_counters'], '8110');
-    \Drupal::service('d_update')
-        ->checklist()
-        ->saveProgress(['v2.0' => $values]);
+  $values['droopler__droopler_update_8110_1'] = update_modules_configuration(['d_p_counters'], '8110');
+  \Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v2.0' => $values]);
 }
