@@ -1022,7 +1022,7 @@ function droopler_update_8106() {
     ],
     'profile/droopler' => [
       'filter.format.full_html' => '',
-      'editor.editor.full_html' => '76ab97a576ba2ceb01cb3d2f960d447d',
+      'editor.editor.full_html' => 'd648633272efff8e341093268aacc083',
     ],
   ];
   if ($module_handler->moduleExists('d_blog')) {
@@ -1065,7 +1065,7 @@ function droopler_update_8108(&$sandbox) {
     $result = $module_installer->install(array_merge($modules, $advaggModules), TRUE);
     $values['droopler__droopler_update_8108_1'] = $result;
   }
-  catch (MissingDependencyException $e) {
+  catch ( MissingDependencyException $e) {
     $values['droopler__droopler_update_8108_1'] = FALSE;
   }
   // Import seo configs.
@@ -1146,4 +1146,12 @@ function get_all_entity_bundles() {
   }
 
   return $bundles;
+}
+
+/**
+ * Droopler 2.0 beta3 add d_block paragraph view_mode counter.
+ */
+function droopler_update_8110() {
+    $modules = ['d_blog'];
+    update_modules_configuration($modules, '8110');
 }
