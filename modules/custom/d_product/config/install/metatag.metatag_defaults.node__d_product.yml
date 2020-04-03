@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: node__d_product
+label: 'Content: Product'
+tags:
+  description: '[node:summary]'
+  title: '[node:title] | [site:name]'
+  image: '[node:field_d_product_media:0:entity:field_media_image:responsive_image_2000:url]'
+  og_image: '[node:field_d_product_media:0:entity:field_media_image:responsive_image_2000:url]'
+  og_description: '[node:summary]'
