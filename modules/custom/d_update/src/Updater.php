@@ -415,6 +415,7 @@ class Updater {
         $newConfig = NestedArray::mergeDeep($newConfig, $updates['add']);
       }
       if (!$this->modifyConfig($configName, $newConfig)) {
+        $status[] = FALSE;
         $this->getLogger('d_update')
           ->error('Update failed for %config', ['%config' => $name]);
       }

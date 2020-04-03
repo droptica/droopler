@@ -1022,7 +1022,7 @@ function droopler_update_8106() {
     ],
     'profile/droopler' => [
       'filter.format.full_html' => '',
-      'editor.editor.full_html' => 'd648633272efff8e341093268aacc083',
+      'editor.editor.full_html' => '76ab97a576ba2ceb01cb3d2f960d447d',
     ],
   ];
   if ($module_handler->moduleExists('d_blog')) {
@@ -1031,6 +1031,7 @@ function droopler_update_8106() {
     ];
   }
 
+  $values['droopler__droopler_update_8106_1'] = $updater->importConfigs($configs);
   $updater->importConfigs($configs);
 }
 
@@ -1039,8 +1040,11 @@ function droopler_update_8106() {
  */
 function droopler_update_8107() {
   $modules = ['d_blog', 'd_product'];
-  update_modules_configuration($modules, '8107');
-  \Drupal::service('module_installer')->install(['d_p_media'], TRUE);
+  $values['droopler__droopler_update_8107_1'] = update_modules_configuration($modules, '8107');
+  $values['droopler__droopler_update_8107_2'] = \Drupal::service('module_installer')->install(['d_p_media'], TRUE);
+  \Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v2.0' => $values]);
 }
 
 /**
@@ -1065,7 +1069,7 @@ function droopler_update_8108(&$sandbox) {
     $result = $module_installer->install(array_merge($modules, $advaggModules), TRUE);
     $values['droopler__droopler_update_8108_1'] = $result;
   }
-  catch ( MissingDependencyException $e) {
+  catch (MissingDependencyException $e) {
     $values['droopler__droopler_update_8108_1'] = FALSE;
   }
   // Import seo configs.
@@ -1075,17 +1079,20 @@ function droopler_update_8108(&$sandbox) {
       $configs[$advaggModule] = [$advaggModule . 'settings'];
     }
   }
+
   $values['droopler__droopler_update_8108_2'] = $updater->importConfigs($configs);
+  $updater->checklist()->saveProgress(['v2.0' => $values]);
 }
 
 /**
  * Droopler 2.0 beta-3 turn on new modules.
  */
 function droopler_update_8109() {
-  $modules = [
-    'd_block',
-  ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
+    $modules = ['d_block'];
+    $values['droopler__droopler_update_8109_1'] = \Drupal::service('module_installer')->install($modules, TRUE);
+    \Drupal::service('d_update')
+      ->checklist()
+      ->saveProgress(['v2.0' => $values]);
 }
 
 /**
@@ -1111,6 +1118,7 @@ function calculate_modules_for_install(array $modules) {
 
 /**
  * Performs config update of specified modules.
+ *
  * Configs should be placed in respective module directories e.g
  * "module/config/update/moduleName.updateNumber.yml".
  *
@@ -1118,15 +1126,23 @@ function calculate_modules_for_install(array $modules) {
  *   Array of module names to update.
  * @param string|int $update_number
  *   Number of the update corresponding to the droopler update number.
+ *
+ * @return bool
+ *   Status of the modules configuration update.
  */
 function update_modules_configuration(array $modules, $update_number) {
   $updater = \Drupal::service('d_update');
   $module_handler = \Drupal::service('module_handler');
   foreach ($modules as $module) {
     if ($module_handler->moduleExists($module)) {
-      $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
+      $update = $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
+      if (!$update) {
+        \Drupal::logger($module)->error('The configuration update for the module failed');
+        $status[] = $update;
+      }
     }
   }
+  return !in_array(FALSE, $status);
 }
 
 /**
@@ -1149,9 +1165,11 @@ function get_all_entity_bundles() {
 }
 
 /**
- * Droopler 2.0 beta3 add d_block paragraph view_mode counter.
+ * Droopler 2.0 beta3 add d_p_counters paragraph view_mode counter.
  */
 function droopler_update_8110() {
-    $modules = ['d_p_counters'];
-    update_modules_configuration($modules, '8110');
+    $values['droopler__droopler_update_8110_1'] = update_modules_configuration(['d_p_counters'], '8110');
+    \Drupal::service('d_update')
+        ->checklist()
+        ->saveProgress(['v2.0' => $values]);
 }
