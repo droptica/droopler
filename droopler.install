@@ -1018,7 +1018,7 @@ function droopler_update_8106() {
       'node.type.content_page' => 'bb51f1046ad8a56afa01acfa5ef550a3',
     ],
     'd_p_counters' => [
-      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '06e68db2294df8bd2cd55bdc433d6cf8',
+      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '1df92b0a421c733796c8388d533bd722',
     ],
     'profile/droopler' => [
       'filter.format.full_html' => '',
@@ -1152,6 +1152,6 @@ function get_all_entity_bundles() {
  * Droopler 2.0 beta3 add d_block paragraph view_mode counter.
  */
 function droopler_update_8110() {
-    $modules = ['d_blog'];
+    $modules = ['d_p_counters'];
     update_modules_configuration($modules, '8110');
 }
