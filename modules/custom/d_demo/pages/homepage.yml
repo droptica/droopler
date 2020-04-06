@@ -236,7 +236,7 @@ field_page_section:
                   data: For boat manufacturers
                 field_d_background_color:
                   type: text
-                  data: '#e4e4e4'
+                  data: '#949494'
                 field_d_cta_link:
                   type: cta
                   data:
@@ -258,7 +258,7 @@ field_page_section:
                   data: For airplane manufacturers
                 field_d_background_color:
                   type: text
-                  data: '#e4e4e4'
+                  data: '#949494'
                 field_d_cta_link:
                   type: cta
                   data:
@@ -280,7 +280,7 @@ field_page_section:
                   data: For car manufacturers
                 field_d_background_color:
                   type: text
-                  data: '#e4e4e4'
+                  data: '#949494'
                 field_d_cta_link:
                   type: cta
                   data:
@@ -302,7 +302,7 @@ field_page_section:
                   data: For spaceship manufacturers
                 field_d_background_color:
                   type: text
-                  data: '#e4e4e4'
+                  data: '#949494'
                 field_d_cta_link:
                   type: cta
                   data:
@@ -451,3 +451,12 @@ field_page_section:
                       alt: Workers
                 field_d_settings:
                   type: field_p_configuration_storage
+field_teaser_media_image:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_demo/demo-logo.svg
+      alt: Car Engine
+field_teaser_text:
+  type: text_long
+  data: 'We produce the most powerful and efficient engines on the planet. Check our incredible portfolio of different types of engines and choose the best option for you.'

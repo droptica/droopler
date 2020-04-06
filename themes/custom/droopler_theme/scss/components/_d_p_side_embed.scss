@@ -83,6 +83,13 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         display: none;
       }
     }
+    .field--name-field-d-long-text {
+      @for $index from 1 through 6 {
+        h#{$index}{
+          color: $d-p-side-embed-text-color;
+        }
+      }
+    }
     a:not(.btn) {
       color: $d-p-side-embed-link-color;
 
@@ -196,6 +203,13 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         .field--name-field-d-long-text,
         .field--name-field-d-main-title {
           color: $d-p-side-embed-theme-invert-text-color;
+        }
+        .field--name-field-d-long-text {
+          @for $index from 1 through 6 {
+            h#{$index}{
+              color: $d-p-side-embed-theme-invert-text-color;
+            }
+          }
         }
       }
     }
