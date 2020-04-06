@@ -1022,7 +1022,6 @@ function droopler_update_8106() {
     ],
     'profile/droopler' => [
       'filter.format.full_html' => '',
-      'editor.editor.full_html' => '76ab97a576ba2ceb01cb3d2f960d447d',
     ],
   ];
   if ($module_handler->moduleExists('d_blog')) {
@@ -1032,6 +1031,7 @@ function droopler_update_8106() {
   }
 
   $values['droopler__droopler_update_8106_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8106_2'] = $updater->updateConfigurations('profiles/droopler', 'editor.8106');
   $updater->importConfigs($configs);
 }
 
