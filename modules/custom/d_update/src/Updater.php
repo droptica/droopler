@@ -3,6 +3,7 @@
 namespace Drupal\d_update;
 
 use Drupal\block\Entity\Block;
+use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ConfigManagerInterface;
@@ -411,10 +412,13 @@ class Updater {
     foreach ($data as $configName => $configOperations) {
       $updates = $configOperations;
       $newConfig = [];
+      if (isset($updates['change'])) {
+        $newConfig = NestedArray::mergeDeep($newConfig, $updates['change']['new']);
+      }
       if (isset($updates['add'])) {
         $newConfig = NestedArray::mergeDeep($newConfig, $updates['add']);
       }
-      if (!$this->modifyConfig($configName, $newConfig)) {
+      if (!$this->modifyConfig($configName, $newConfig, $updates['change']['expected'])) {
         $this->getLogger('d_update')
           ->error('Update failed for %config', ['%config' => $name]);
       }
@@ -434,10 +438,15 @@ class Updater {
    * @return bool
    *   Return if the config was changed successfully.
    */
-  private function modifyConfig($configName, array $newConfig) {
+  private function modifyConfig($configName, array $newConfig, array $expectedConfig) {
     $config = $this->configFactory->getEditable($configName);
     $configData = $config->get();
     if (empty($configData)) {
+      return FALSE;
+    }
+    if (!empty($expected_configuration) && DiffArray::diffAssocRecursive($expected_configuration, $configData)) {
+      $this->getLogger('d_update')
+        ->error('Detected changes in configuration %config. Aborting import' . ['%config' => $configName]);
       return FALSE;
     }
     $config->setData(NestedArray::mergeDeep($configData, $newConfig));
@@ -445,5 +454,4 @@ class Updater {
 
     return TRUE;
   }
-
 }
