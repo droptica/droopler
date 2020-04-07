@@ -1038,7 +1038,12 @@ function droopler_update_8106() {
 function droopler_update_8107() {
   $modules = ['d_blog', 'd_product'];
   $values['droopler__droopler_update_8107_1'] = update_modules_configuration($modules, '8107');
-  $values['droopler__droopler_update_8107_2'] = \Drupal::service('module_installer')->install(['d_p_media'], TRUE);
+  if (\Drupal::service('module_handler')->moduleExists('d_p_media')) {
+    $values['droopler__droopler_update_8107_2'] = TRUE;
+  }
+  else {
+    $values['droopler__droopler_update_8107_2'] = \Drupal::service('module_installer')->install(['d_p_media'], TRUE);
+  }
   \Drupal::service('d_update')
     ->checklist()
     ->saveProgress(['v2.0' => $values]);
@@ -1085,8 +1090,12 @@ function droopler_update_8108(&$sandbox) {
  * Droopler 2.0 beta-3 turn on new modules.
  */
 function droopler_update_8109() {
-  $modules = ['d_block'];
-  $values['droopler__droopler_update_8109_1'] = \Drupal::service('module_installer')->install($modules, TRUE);
+  if (\Drupal::service('module_handler')->moduleExists('d_block')) {
+    $values['droopler__droopler_update_8109_1'] = TRUE;
+  }
+  else {
+    $values['droopler__droopler_update_8109_1'] = \Drupal::service('module_installer')->install(['d_block'], TRUE);
+  }
   \Drupal::service('d_update')
     ->checklist()
     ->saveProgress(['v2.0' => $values]);
