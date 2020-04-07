@@ -445,7 +445,7 @@ class Updater {
     if (empty($configData)) {
       return FALSE;
     }
-    if (!empty($expected_configuration) && DiffArray::diffAssocRecursive($expected_configuration, $configData)) {
+    if (!empty($expectedConfig) && DiffArray::diffAssocRecursive($expectedConfig, $configData)) {
       $this->getLogger('d_update')
         ->error('Detected changes in configuration %config. Aborting import' . ['%config' => $configName]);
       return FALSE;
