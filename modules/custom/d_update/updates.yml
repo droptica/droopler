@@ -168,6 +168,26 @@ v2.0:
     '#description': '<p>Perform an additional field config update for d_product module.</p>'
     '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
     extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features/diff/d_product' }
+  droopler__droopler_update_8106_1:
+    '#title': 'Update configurations for modules.'
+    '#description': '<p>Update configurations for d_media, d_content, d_p_counters module and profile/droopler.</p>'
+    '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
+    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8106_2:
+    '#title': 'Import configuration for editor.'
+    '#description': '<p>Enable Drupal media library to use in editor.</p>'
+    '#description_failed': '<p><strong>Import failed</strong>, please try to import changed features manually.</p>'
+    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8107_1:
+    '#title': 'Update configurations for modules.'
+    '#description': '<p>Update configurations for d_blog and d_product modules</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually.</p>'
+    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8107_2:
+    '#title': 'Install "d_p_media" module.'
+    '#description': '<p>Provides Media paragraph for Drupal 8.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+    extension_page: { '#text': 'Enable "d_p_media" module', '#url': 'internal:/admin/modules' }
   droopler__droopler_update_8108_1:
     '#title': 'Install SEO modules'
     '#description': '<p>Enable SEO modules: advagg,advagg_mod,advagg_js_minify,advagg_css_minify,page_cache,dynamic_page_cache </p>'
@@ -177,3 +197,13 @@ v2.0:
     '#title': 'Import configs for SEO modules'
     '#description': '<p>Imports SEO modules configuration</p>'
     '#description_failed': '<p><strong>Import failed</strong>, please try to import configuration manually.</p>'
+  droopler__droopler_update_8109_1:
+    '#title': 'Install "d_block" module.'
+    '#description': '<p>Provides Block paragraph paragraphs type and related configuration. Paragraph type with ability to add blocks as content.</p>'
+    '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
+    extension_page: { '#text': 'Enable "d_block" module', '#url': 'internal:/admin/modules' }
+  droopler__droopler_update_8110_1:
+    '#title': 'Update configuration.'
+    '#description': '<p>Update configuration for d_p_counters module</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually.</p>'
+    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
