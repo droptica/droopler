@@ -33,20 +33,11 @@
   h6 {
     font-family: $font-header;
     font-weight: $font-header-weight;
-
-    a:not(.btn) {
-      font-size: inherit;
-    }
   }
   p, ul, ol {
     @include font-body-standard;
-
-    a:not(.btn) {
-      font-size: inherit;
-    }
   }
   a:not(.btn) {
-    @include font-links;
     word-wrap: break-word;
     hyphens: auto;
   }
