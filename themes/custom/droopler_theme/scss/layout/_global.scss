@@ -25,7 +25,12 @@
   h2 {
     @include font-main-header;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: $font-header;
     font-weight: $font-header-weight;
   }
@@ -33,7 +38,6 @@
     @include font-body-standard;
   }
   a:not(.btn) {
-    @include font-links;
     word-wrap: break-word;
     hyphens: auto;
   }
