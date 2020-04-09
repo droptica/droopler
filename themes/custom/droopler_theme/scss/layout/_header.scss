@@ -77,11 +77,16 @@ header.header {
     @include media-breakpoint-only(lg) {
       max-width: 0.75 * $logo-width;
     }
+
+    .logo-svg {
+      @include font-body-standard;
+    }
   }
   @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
     .navbar-brand {
       max-width: $logo-md-width;
     }
+
   }
   @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
     min-height: $header-mobile-height;
