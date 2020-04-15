@@ -1,0 +1,16 @@
+// Main config files.
+//
+//  This section contain base variable and mixines.
+//
+// Styleguide 1.0
+
+// Theme configuration.
+@import 'config/all';
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import 'mixins/fonts';
+@import 'mixins/title';
+
+// Styles for geysir
+@import "components/d_commerce";
