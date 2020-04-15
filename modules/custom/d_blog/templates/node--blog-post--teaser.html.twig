@@ -86,13 +86,13 @@
           <div class="node__meta">
             {{ author_picture }}
 
-            <span{{ author_attributes }}>
+            <div{{ author_attributes }}>
               {% trans %}{{ date }} {% endtrans %}
 
               {% if content.field_blog_category['#object'] %}
                 / {{ content.field_blog_category }}
               {% endif %}
-            </span>
+            </div>
             {{ metadata }}
           </div>
         {% endif %}
@@ -120,13 +120,13 @@
             <div class="node__meta col-10">
               {{ author_picture }}
 
-              <span{{ author_attributes }}>
+              <div{{ author_attributes }}>
                 {% trans %}{{ date }} {% endtrans %}
 
                 {% if content.field_blog_category['#object'] %}
                   / {{ content.field_blog_category }}
                 {% endif %}
-              </span>
+              </div>
               {{ metadata }}
             </div>
           {% endif %}

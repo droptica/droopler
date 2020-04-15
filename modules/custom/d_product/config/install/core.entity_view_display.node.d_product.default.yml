@@ -45,7 +45,9 @@ content:
     settings:
       view_mode: d_product_image
       link: false
-    third_party_settings: {  }
+    third_party_settings:
+      lazy:
+        lazy_image: '1'
     region: content
   field_product_categories:
     weight: 3

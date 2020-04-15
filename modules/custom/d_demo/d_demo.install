@@ -39,7 +39,7 @@ function d_demo_create_menu_with_links(array $menu) {
 function d_demo_create_secondary_menu() {
   $secondary_menu = [
     'data' => [
-      'id' => 'secondary_menu',
+      'id' => 'secondary-menu',
       'label' => 'Secondary menu',
       'description' => 'Secondary menu',
     ],
@@ -59,7 +59,7 @@ function d_demo_create_secondary_menu() {
 function d_demo_create_bottom_footer_menu() {
   $bottom_footer_menu = [
     'data' => [
-      'id' => 'bottom_footer_menu',
+      'id' => 'bottom-footer-menu',
       'label' => 'Bottom footer menu',
       'description' => 'Menu placed after footer',
     ],

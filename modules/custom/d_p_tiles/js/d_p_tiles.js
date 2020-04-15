@@ -41,7 +41,7 @@
           percentPosition: true,
         });
 
-        $(window).on('load', function(){
+        $(window).on('lazyloaded', function(){
           $grid.masonry('layout');
         });
 

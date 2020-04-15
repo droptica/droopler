@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   /**
@@ -8,8 +8,9 @@
    */
   Drupal.behaviors.d_demo_random_price = {
     attach: function (context, settings) {
+      // @todo Replace document.ready with Drupal.behaviors.
       $(document).ready(function () {
-        var $wrapper = $('.wrapper-d_p_single_text_block');
+        var $wrapper = $('.wrapper-d_p_single_text_block', context);
         if ($wrapper.hasClass('with-price')) {
           setInterval(function () {
               var number = ((2000 + Math.floor(Math.random() * 1000)) / 100).toFixed(2);
@@ -30,4 +31,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);

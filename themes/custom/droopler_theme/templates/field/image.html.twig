@@ -15,4 +15,13 @@ set classes = [
   style_name ? 'image-style-' ~ style_name|clean_class,
 ]
 %}
+
+{% if attributes.width is empty %}
+  {% set attributes = attributes.removeAttribute('width') %}
+{% endif %}
+
+{% if attributes.height is empty %}
+  {% set attributes = attributes.removeAttribute('height') %}
+{% endif %}
+
 <img{{ attributes.addClass(classes) }} />

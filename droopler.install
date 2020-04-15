@@ -603,7 +603,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-        ->getDefault() === 'droopler_subtheme') {
+      ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -619,6 +619,7 @@ function droopler_update_8103() {
  * Droopler 2.0 Media migrate.
  */
 function droopler_update_8104() {
+  $entityBundles = get_all_entity_bundles();
   // Import all target Media Fields.
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
@@ -683,7 +684,7 @@ function droopler_update_8104() {
   $values['droopler__droopler_update_8104_1'] = $updater->importConfigs($configs);
 
   $module_handler = \Drupal::service('module_handler');
-  if ($module_handler->moduleExists('d_blog')) {
+  if ($module_handler->moduleExists('d_blog') && in_array('blog_post', $entityBundles)) {
     // Update d_blog config.
     $configs = [
       'd_blog' => [
@@ -699,7 +700,7 @@ function droopler_update_8104() {
   else {
     $values['droopler__droopler_update_8104_2'] = TRUE;
   }
-  if ($module_handler->moduleExists('d_product')) {
+  if ($module_handler->moduleExists('d_product') && in_array('d_product', $entityBundles)) {
     // Update d_product config.
     $configs = [
       'd_product' => [
@@ -747,6 +748,10 @@ function droopler_update_8104() {
     /** @var \Drupal\field\Entity\FieldStorageConfig $storage */
     foreach ($res as $storage) {
       $bundles = $storage->getBundles();
+      if (empty($bundles)) {
+        \Drupal::logger('droopler_install')->notice("{$sourceFieldName} missing from active configuration. Skipping...");
+        continue;
+      }
       $entityType = $storage->getTargetEntityTypeId();
 
       $entities = \Drupal::entityTypeManager()
@@ -875,7 +880,6 @@ function droopler_update_8105() {
     'd_p_counters' => [
       'core.entity_form_display.paragraph.d_p_group_of_counters.default' => '5463576b8024a2794ad29a12a893e138',
       'core.entity_form_display.paragraph.d_p_single_counter.default' => 'e857d2f5142d2b0b29fc3c49f071eae6',
-      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => 'b112cb894119aa5637c5021448914b2d',
       'core.entity_view_display.paragraph.d_p_single_counter.default' => '5c2e672831135b05edfe811e5c6c85d5',
     ],
     'd_p_gallery' => [
@@ -994,8 +998,12 @@ function droopler_update_8105() {
 function droopler_update_8106() {
   $updater = \Drupal::service('d_update');
   $module_handler = \Drupal::service('module_handler');
+
   $configs = [
     'd_media' => [
+      'media.type.d_document' => '',
+      'field.storage.media.field_media_file' => '',
+      'field.field.media.d_document.field_media_file' => '',
       'core.entity_view_mode.media.counter' => '',
       'core.entity_view_display.media.d_video.counter' => '',
       'core.entity_view_display.media.d_image.counter' => '',
@@ -1003,20 +1011,14 @@ function droopler_update_8106() {
       'core.entity_form_display.media.d_document.media_library' => '',
       'core.entity_view_display.media.d_document.default' => '',
       'core.entity_view_display.media.d_document.media_library' => '',
-      'field.field.media.d_document.field_media_file' => '',
-      'field.storage.media.field_media_file' => '',
       'language.content_settings.media.d_document' => '',
-      'media.type.d_document' => '',
     ],
     'd_content' => [
       'node.type.content_page' => 'bb51f1046ad8a56afa01acfa5ef550a3',
     ],
-    'd_p_counters' => [
-      'core.entity_view_display.paragraph.d_p_group_of_counters.default' => '1df92b0a421c733796c8388d533bd722',
-    ],
     'profile/droopler' => [
-      'filter.format.full_html.yml' => '',
-      'editor.editor.full_html.yml' => '76ab97a576ba2ceb01cb3d2f960d447d',
+      'filter.format.full_html' => '',
+      'node.settings' => '',
     ],
   ];
   if ($module_handler->moduleExists('d_blog')) {
@@ -1025,16 +1027,26 @@ function droopler_update_8106() {
     ];
   }
 
-  $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8106_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8106_2'] = $updater->updateConfigurations('profile/droopler', 'editor.8106');
+  $updater->checklist()->saveProgress(['v2.0' => $values]);
 }
 
 /**
- * Droopler 2.0 beta3 add d_block paragraph to optional modules, enable d_media.
+ * Droopler 2.0 beta3 add d_block paragraph to optional modules, enable d_p_media.
  */
 function droopler_update_8107() {
   $modules = ['d_blog', 'd_product'];
-  update_modules_configuration($modules, '8107');
-  \Drupal::service('module_installer')->install(['d_p_media'], TRUE);
+  $values['droopler__droopler_update_8107_1'] = update_modules_configuration($modules, '8107');
+  if (\Drupal::service('module_handler')->moduleExists('d_p_media')) {
+    $values['droopler__droopler_update_8107_2'] = TRUE;
+  }
+  else {
+    $values['droopler__droopler_update_8107_2'] = \Drupal::service('module_installer')->install(['d_p_media'], TRUE);
+  }
+  \Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v2.0' => $values]);
 }
 
 /**
@@ -1066,20 +1078,27 @@ function droopler_update_8108(&$sandbox) {
   $configs = [];
   foreach ($advaggModules as $advaggModule) {
     if ($module_handler->moduleExists($advaggModule)) {
-      $configs[$advaggModule] = [$advaggModule . 'settings.yml'];
+      $configs[$advaggModule] = [$advaggModule . 'settings'];
     }
   }
+
   $values['droopler__droopler_update_8108_2'] = $updater->importConfigs($configs);
+  $updater->checklist()->saveProgress(['v2.0' => $values]);
 }
 
 /**
  * Droopler 2.0 beta-3 turn on new modules.
  */
 function droopler_update_8109() {
-  $modules = [
-    'd_block',
-  ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
+  if (\Drupal::service('module_handler')->moduleExists('d_block')) {
+    $values['droopler__droopler_update_8109_1'] = TRUE;
+  }
+  else {
+    $values['droopler__droopler_update_8109_1'] = \Drupal::service('module_installer')->install(['d_block'], TRUE);
+  }
+  \Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v2.0' => $values]);
 }
 
 /**
@@ -1105,6 +1124,7 @@ function calculate_modules_for_install(array $modules) {
 
 /**
  * Performs config update of specified modules.
+ *
  * Configs should be placed in respective module directories e.g
  * "module/config/update/moduleName.updateNumber.yml".
  *
@@ -1112,13 +1132,51 @@ function calculate_modules_for_install(array $modules) {
  *   Array of module names to update.
  * @param string|int $update_number
  *   Number of the update corresponding to the droopler update number.
+ *
+ * @return bool
+ *   Status of the modules configuration update.
  */
 function update_modules_configuration(array $modules, $update_number) {
+  $status = [];
   $updater = \Drupal::service('d_update');
   $module_handler = \Drupal::service('module_handler');
   foreach ($modules as $module) {
     if ($module_handler->moduleExists($module)) {
-      $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
+      $update = $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
+      if (!$update) {
+        \Drupal::logger($module)->error('The configuration update for the module failed');
+        $status[] = $update;
+      }
     }
   }
+  return !in_array(FALSE, $status);
+}
+
+/**
+ * Returns array of names of all existing entities bundles.
+ *
+ * @return array
+ *   Array with all entities bundles.
+ */
+function get_all_entity_bundles() {
+  $entityBundles = \Drupal::service('entity.manager')
+    ->getAllBundleInfo();
+  $bundles = [];
+  foreach ($entityBundles as $entityBundle) {
+    foreach ($entityBundle as $bundle => $information) {
+      $bundles[] = $bundle;
+    }
+  }
+
+  return $bundles;
+}
+
+/**
+ * Droopler 2.0 beta3 add d_p_counters paragraph view_mode counter.
+ */
+function droopler_update_8110() {
+  $values['droopler__droopler_update_8110_1'] = update_modules_configuration(['d_p_counters'], '8110');
+  \Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v2.0' => $values]);
 }

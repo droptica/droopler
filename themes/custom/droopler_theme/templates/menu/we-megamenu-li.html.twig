@@ -10,6 +10,14 @@
   {% set attributes = attributes.removeClass('dropdown-menu').addClass('with-submenu') %}
 {% endif %}
 
+{% if attributes.description is empty %}
+  {% set attributes = attributes.removeAttribute('description') %}
+{% endif %}
+
+{% if attributes.hide-sub-when-collapse is empty %}
+  {% set attributes = attributes.removeAttribute('hide-sub-when-collapse') %}
+{% endif %}
+
 <li {{ attributes }}>
   {% if href is empty %}
     <span data-drupal-link-system-path="<front>" class="we-megamenu-nolink">
@@ -20,7 +28,7 @@
       {% endif %}
     </span>
   {% else %}
-    <a class="we-mega-menu-li" title="{{ attribute(attributes, 'description') }}" href="{{ href }}" target="{{ attribute(attributes, 'data-target') }}">
+    <a class="we-mega-menu-li" title="{{ attribute(attributes, 'description') }}" href="{{ href }}" {% if attribute(attributes, 'data-target') is not empty %} target="{{ attribute(attributes, 'data-target') }}" {% endif %}>
       {% if (attribute(attributes, 'data-icon') is defined and attribute(attributes, 'data-icon')|trim) %}
         <i class="{{ attribute(attributes, 'data-icon') }}"></i>
       {% endif %}

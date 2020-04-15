@@ -27,3 +27,11 @@ function d_blog_install() {
   $uuid = reset($keys);
   $linkit->set("matchers.$uuid.settings.bundles.blog_post", "blog_post")->save();
 }
+
+/**
+ * Implements hook_update_8001().
+ */
+function d_blog_update_8001(&$sandbox) {
+  \Drupal::service('d_update')
+    ->updateConfigurations('module/d_product', 'd_product.8001');
+}

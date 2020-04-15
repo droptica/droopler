@@ -4,7 +4,7 @@
  * Custom changes for geysir overlay.
  */
 
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   /**
@@ -20,4 +20,4 @@
   Drupal.AjaxCommands.prototype.d_geysir_reattach_behaviors = function(ajax, response, status) {
     Drupal.attachBehaviors($('[data-geysir-field-paragraph-field-wrapper]').get(0));
   };
-})(jQuery);
+})(jQuery, Drupal);

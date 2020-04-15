@@ -39,7 +39,7 @@
    */
   Drupal.behaviors.mainMenuMobileNavbarListener = {
     attach: function (context, settings) {
-      $ ('#navbar-main button.navbar-toggler', context).click(function() {
+      $ ('#navbar-main button.navbar-toggler', context).once('d_main_menu_open').click(function() {
         if (!$('.navbar').hasClass('collapsing')) {
           $('body').toggleClass('navbar-open');
           $('.navbar').toggleClass('open');
@@ -49,7 +49,7 @@
       });
 
       // Close sidebar when clicked overflowed content.
-      $('.main-navbar', context).click(function(e) {
+      $('.main-navbar', context).once('d_main_menu_close').click(function(e) {
         var $clickTarget = $(e.target);
         if ($clickTarget.parents('.navbar-inner').length == 0 && $clickTarget.is('.navbar-inner') == false) {
           $ ('#navbar-main button.navbar-toggler:visible', context).click();
@@ -144,7 +144,7 @@
   Drupal.behaviors.unsetHiddenNavElements = {
     attach: function (context, settings) {
       var $menu = $('nav.navbar', context);
-      $(window).resize(function() {
+      $(window).once('d_main_menu_resize').resize(function() {
         if (window.innerWidth > 992 && $clearStyling) {
           $menu.find('[style*="display: none"]').removeAttr('style');
           $clearStyling = false;

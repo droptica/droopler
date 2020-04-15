@@ -391,6 +391,11 @@ $two-columned-header-line-margin: 0.625rem !default;
       }
     }
   }
+  .d-media-background-wrapper {
+    img {
+      filter: brightness(50%);
+    }
+  }
 }
 
 .header-into-columns {

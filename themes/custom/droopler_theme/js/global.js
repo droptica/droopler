@@ -13,7 +13,7 @@
       if ($body.hasClass('d-theme-preceded')) {
         return;
       }
-      $(window).scroll(function() {
+      $(window).once('d_global_scrolled').scroll(function() {
         if ($(this).scrollTop() > 50) {
           $("body").addClass("scrolled");
         }
@@ -22,7 +22,7 @@
         }
       });
 
-      $( window ).resize(function() {
+      $( window ).once('d_global_resize').resize(function() {
         clampTitle();
       });
       clampTitle();

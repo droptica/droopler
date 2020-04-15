@@ -84,7 +84,7 @@ $sidebar-animation-speed: 600ms !default;
 
   &::after {
     font-family: "fontello";
-    content: "\e80d";
+    content: "\e80e";
     line-height: initial;
     display: flex;
     align-items: center;
@@ -96,7 +96,7 @@ $sidebar-animation-speed: 600ms !default;
 }
 @mixin mobile-toggle-open() {
   &::after {
-    content: "\e809";
+    content: "\e80a";
   }
 }
 @mixin sublist-background() {

@@ -3,13 +3,13 @@
  * The script that activates Slick carousels.
  */
 
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   Drupal.behaviors.d_p_carousel = {
     attach: function (context, settings) {
 
-      $('.field--name-field-d-p-cs-item-reference', context).each(function () {
+      $('.field--name-field-d-p-cs-item-reference', context).once('d_p_carousel').each(function () {
         var cnt = $(this).find('.d-p-carousel-item').length;
 
         // If there are no elements - do not activate Slick.
@@ -48,4 +48,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);

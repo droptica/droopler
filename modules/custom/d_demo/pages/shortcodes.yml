@@ -489,5 +489,13 @@ field_page_section:
               <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
               <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
           </p>
-
+field_teaser_media_image:
+  type: media_image
+  directory: demo
+  files:
+    - path: d_demo/demo-logo.svg
+      alt: Engine
+field_teaser_text:
+  type: text_long
+  data: 'Discover possibilities of Droopler distribution for Drupal 8.'
 

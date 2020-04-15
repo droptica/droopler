@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   Drupal.behaviors.d_p_counters = {
@@ -12,7 +12,7 @@
       };
 
       // Find all counters.
-      $('.paragraph--type--d-p-group-of-counters .field--name-field-d-number', context).each(function(){
+      $('.paragraph--type--d-p-group-of-counters .field--name-field-d-number', context).once('d_p_counters').each(function(){
         // Trigger if in viewport.
         inViewport(this, function(el) {
           var id = 'upcnt' + cnt++;
@@ -25,4 +25,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);

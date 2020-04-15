@@ -2,7 +2,7 @@
  * @file
  * Products slider.
  */
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   /**
@@ -43,8 +43,8 @@
         ]
       };
 
-      $nav.on('init', checkNavigationChildrenVisibility);
-      $nav.on('breakpoint', checkNavigationChildrenVisibility);
+      $nav.once('d_product_slider_init').on('init', checkNavigationChildrenVisibility);
+      $nav.once('d_product_slider_breakpoint').on('breakpoint', checkNavigationChildrenVisibility);
 
       createSlick($main, mainSettings);
       createSlick($nav, navSettings);
@@ -74,4 +74,4 @@
       }
     }
   };
-})(jQuery);
+})(jQuery, Drupal);
