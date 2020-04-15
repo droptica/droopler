@@ -31,6 +31,10 @@ $d-p-subscribe-background-opacity: 0.4 !default;
     border: none;
   }
 
+  a {
+    @include font-body-standard;
+  }
+
   @include make-inline-form;
   fieldset.form-item-name {
     max-width: 0.25 * $d-p-subscribe-form-max-width;

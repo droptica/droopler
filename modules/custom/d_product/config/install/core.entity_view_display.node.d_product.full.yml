@@ -59,7 +59,9 @@ content:
     settings:
       image_style: ''
       image_link: ''
-    third_party_settings: {  }
+    third_party_settings:
+      lazy:
+        lazy_image: '1'
   field_page_section:
     type: entity_reference_revisions_entity_view
     weight: 7

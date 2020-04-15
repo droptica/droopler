@@ -26,7 +26,9 @@ content:
     settings:
       image_style: gallery_thumbnail
       image_link: content
-    third_party_settings: {  }
+    third_party_settings:
+      lazy:
+        lazy_image: '1'
   field_blog_teaser:
     type: text_trimmed
     weight: 2

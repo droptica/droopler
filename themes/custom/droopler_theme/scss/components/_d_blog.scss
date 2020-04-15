@@ -114,6 +114,7 @@ article.node--type-blog-post {
         }
 
         a {
+          @include font-body-standard;
           color: $d-blog-color-taxonomy-in-header;
         }
       }
@@ -321,13 +322,14 @@ article.node--type-blog-post {
           padding-bottom: $d-blog-teaser-small-padding-y;
         }
         a {
+          @include font-body-standard;
           color: $color-odysseus;
           &:hover {
             color: $color-odysseus;
           }
           &.link {
             text-transform: uppercase;
-            color: $color-patroclus;
+            color: $color-odysseus;
           }
         }
         .node__title {

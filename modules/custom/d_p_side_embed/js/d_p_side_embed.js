@@ -3,7 +3,7 @@
  * The script that scales facebook video iframes.
  */
 
-(function ($) {
+(function ($, Drupal) {
   'use strict';
 
   Drupal.behaviors.d_p_side_embed = {
@@ -66,7 +66,7 @@
         $embed.closest('.d-p-side-embed-embed').addClass(embedType + '-wrapper');
 
         // Set proper height for full width embed element.
-        $(window).on("resize", function () {
+        $(window).once('d_p_side_embed_resize').on("resize", function () {
           if ($(window).width() > 767) {
             var $contentH = parseInt($this.find('.embed-side-full .d-p-side-embed-content').innerHeight());
             if (!isNaN($contentH)) {
@@ -79,4 +79,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery, Drupal);

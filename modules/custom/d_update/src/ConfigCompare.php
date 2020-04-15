@@ -26,6 +26,7 @@ class ConfigCompare {
     unset($config['uuid']);
     unset($config['lang']);
     unset($config['langcode']);
+    unset($config['icon_default']);
     $config_string = serialize($config);
 
     return md5($config_string);
