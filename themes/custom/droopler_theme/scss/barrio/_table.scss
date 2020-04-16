@@ -104,17 +104,6 @@ $cell_padding: .75rem;
 }
 
 /**
- * Responsive tables in views.
- */
-.view {
-  &-content {
-    display: block;
-    overflow-x: auto;
-    width: 100%;
-  }
-}
-
-/**
  * Responsive tables priorities.
  */
 @media screen and (max-width: 37.5em) { /* 600px */
