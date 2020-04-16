@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * d_commerce module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function d_commerce_theme($existing, $type, $theme, $path) {
+  return [
+    'commerce_checkout_order_summary' => [
+      'template' => 'd_commerce-checkout-order-summary',
+    ],
+    'commerce_coupon_redemption_form' => [
+      'template' => 'd_commerce-coupon-redemption-form',
+    ],
+  ];
+}
