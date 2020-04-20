@@ -27,6 +27,17 @@ input:-moz-placeholder { /* Firefox 18- */
   font-weight: normal;
 }
 
+fieldset {
+  &.error {
+    .fieldset-wrapper {
+      border-color: $danger !important;
+    }
+    .media-library-widget-empty-text {
+      color: $color-achillies;
+    }
+  }
+}
+
 @mixin make-inline-form {
   fieldset {
     display: inline-block;
