@@ -7,11 +7,9 @@ dependencies:
     - field.field.commerce_product.droopler_products.body
     - field.field.commerce_product.droopler_products.field_categories
     - field.field.commerce_product.droopler_products.field_page_section
-    - field.field.commerce_product.droopler_products.field_price
     - field.field.commerce_product.droopler_products.field_product_images
   module:
     - commerce
-    - commerce_price
     - media_library
     - paragraphs
     - path
@@ -58,12 +56,6 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
-  field_price:
-    weight: 92
-    settings: {  }
-    third_party_settings: {  }
-    type: commerce_price_default
     region: content
   field_product_images:
     type: media_library_widget

@@ -91,13 +91,21 @@
   }
 }
 
-.section-data {
+.product__content {
+  .section-data {
+    padding-top: 15px;
 
-  .field__label {
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.2rem;
-    color: #000;
-    margin: 0 0 0.6rem 0;
+    .field__label {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.2rem;
+      color: #000;
+      margin: 0 0 0.6rem 0;
+    }
+
+    .product--variation-field--variation_price__1 {
+      margin-bottom: 1rem;
+    }
   }
 }
+

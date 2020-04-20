@@ -301,7 +301,6 @@ function droopler_theme_preprocess_field(&$variables) {
     $slider = views_embed_view('product_images', 'block_1');
     $variables['slider'] = render($slider);
   }
-  $a = '123';
   if ($variables['field_name'] == 'field_product_images') {
     $variables['#attached']['library'][] = 'd_product/d_product_slider';
     $slider = views_embed_view('commerce_product_images', 'block_1');
@@ -406,6 +405,9 @@ function droopler_theme_preprocess_block(&$variables) {
 function droopler_theme_is_special_route() {
   $route = \Drupal::routeMatch();
   $route_name = $route->getRouteName();
+  if ($route_name == 'entity.commerce_product.canonical') {
+    return droopler_theme_check_is_droopler_products();
+  }
   $node = $route->getParameter('node');
   $node_check = (!empty($node) && in_array($node->getType(), [
     'content_page',
@@ -426,6 +428,9 @@ function droopler_theme_is_special_route() {
 function droopler_theme_show_title_block() {
   $route = \Drupal::routeMatch();
   $route_name = $route->getRouteName();
+  if ($route_name == 'entity.commerce_product.canonical') {
+    return !droopler_theme_check_is_droopler_products();
+  }
   $node = $route->getParameter('node');
   $node_check = (!empty($node) && in_array($node->getType(), [
     'content_page',
@@ -434,6 +439,21 @@ function droopler_theme_show_title_block() {
   $route_check = $route_name == 'view.blog_listing.page_1';
 
   return !($node_check || $route_check);
+}
+
+/**
+ * Function to check current rout is a droopler product.
+ *
+ * @return bool
+ *   True if it droopler product.
+ */
+function droopler_theme_check_is_droopler_products() {
+  $route = \Drupal::routeMatch();
+  $product = $route->getParameters();
+  $parameters = $product->get('commerce_product');
+  $product_type = $parameters->get('type')->getString();
+
+  return $product_type == 'droopler_products' ? true : false;
 }
 
 /**
