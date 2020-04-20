@@ -19,6 +19,7 @@ projects[geysir][version] = 1
 projects[google_analytics][version] = 2
 projects[google_tag][version] = 1
 projects[lazy][version] = 3
+projects[lazy][patch][] = https://www.drupal.org/files/issues/2020-04-17/lazy_droopler.patch
 projects[link_attributes][version] = 1
 projects[linkit][version] = 4
 projects[metatag][version] = 1
