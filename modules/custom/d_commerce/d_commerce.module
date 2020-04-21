@@ -18,3 +18,10 @@ function d_commerce_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for commerce-cart-block.html.twig.
+ */
+function d_commerce_preprocess_commerce_cart_block(&$variables) {
+  $variables['icon'] = NULL;
+}
