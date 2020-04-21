@@ -5,6 +5,8 @@
  * d_commerce module.
  */
 
+use Drupal\Core\Url;
+
 /**
  * Implements hook_theme().
  */
@@ -23,5 +25,18 @@ function d_commerce_theme($existing, $type, $theme, $path) {
  * Implements hook_preprocess_HOOK() for commerce-cart-block.html.twig.
  */
 function d_commerce_preprocess_commerce_cart_block(&$variables) {
+  // Remove original cart icon.
   $variables['icon'] = NULL;
+
+  // Regenerate cart link with button classes.
+  $options = [
+    'attributes' => ['class' => ['btn btn-primary']],
+  ];
+  $variables['links'] = [
+    [
+      '#type' => 'link',
+      '#title' => t('Cart'),
+      '#url' => Url::fromRoute('commerce_cart.page', [], $options),
+    ],
+  ];
 }

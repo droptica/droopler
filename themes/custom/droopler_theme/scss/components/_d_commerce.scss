@@ -12,10 +12,8 @@
   // Checkout Go Back action button.
   .form-actions {
     .link--previous {
-      display: inline-block;
-      @include button-variant($background: $white, $border: $white);
-      @include button-size($btn-padding-x, $btn-padding-y, $btn-font-size, $btn-line-height, $btn-border-radius);
-      @include make-btn;
+      @extend .btn;
+      @extend .btn-light;
     }
   }
 }
@@ -83,10 +81,7 @@
         // Go to Cart link button.
         .cart-block--contents__links {
           a {
-            display: inline-block;
-            @include button-variant($background: $primary, $border: $primary);
-            @include button-size($btn-padding-x, $btn-padding-y, $btn-font-size, $btn-line-height, $btn-border-radius);
-            @include make-btn;
+            color: $white;
           }
         }
       }
