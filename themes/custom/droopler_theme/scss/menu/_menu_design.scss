@@ -218,6 +218,10 @@ span.we-mega-menu-nolink {
   }
 
   .social-media-wrapper {
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+      text-align: center;
+    }
+
     ul {
       padding: 0;
       li {
