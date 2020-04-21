@@ -418,6 +418,9 @@ class Updater {
       if (isset($updates['add'])) {
         $newConfig = NestedArray::mergeDeep($newConfig, $updates['add']);
       }
+      if (!isset($updates['change']['expected'])) {
+        $updates['change']['expected'] = NULL;
+      }
       if (!$this->modifyConfig($configName, $newConfig, $updates['change']['expected'])) {
         $status[] = FALSE;
         $this->getLogger('d_update')
