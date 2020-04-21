@@ -5,6 +5,7 @@
  * d_commerce module.
  */
 
+use Drupal\Core\GeneratedLink;
 use Drupal\Core\Url;
 
 /**
@@ -22,7 +23,7 @@ function d_commerce_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for commerce-cart-block.html.twig.
+ * Implements hook_preprocess_HOOK().
  */
 function d_commerce_preprocess_commerce_cart_block(&$variables) {
   // Remove original cart icon.
@@ -39,4 +40,20 @@ function d_commerce_preprocess_commerce_cart_block(&$variables) {
       '#url' => Url::fromRoute('commerce_cart.page', [], $options),
     ],
   ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, &$form_state, $form_id) {
+  if (
+    isset($form['actions']['next']['#suffix']) &&
+    $form['actions']['next']['#suffix'] instanceof GeneratedLink
+  ) {
+    $form['actions']['next']['#suffix']->setGeneratedLink(str_replace(
+      'link--previous',
+      'link--previous btn btn-light',
+      $form['actions']['next']['#suffix']->getGeneratedLink()
+    ));
+  }
 }
