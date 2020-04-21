@@ -65,3 +65,11 @@ ie-compatibility:
   dependencies:
     - core/jquery
     - core/drupal
+
+documentation:
+  version: VERSION
+  js:
+    js/min/documentation.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

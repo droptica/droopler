@@ -1,0 +1,40 @@
+#documentation-preview-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background-color: rgba(0,0,0,0.5);
+  cursor: pointer;
+  & > section,
+  & > div.paragraph {
+    position: relative;
+    width: 90%;
+    top: 50px;
+    left: 5%;
+  }
+}
+
+.documentation-preview-group {
+  position: relative;
+  overflow: hidden;
+
+  // @todo: temporary, remove it
+  background: silver;
+}
+.documentation-preview-group-item {
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  transform: scale(0.3);
+  transform-origin: top left;
+  & > section,
+  & > div.paragraph {
+    position: relative;
+    left: -50%;
+  }
+}
