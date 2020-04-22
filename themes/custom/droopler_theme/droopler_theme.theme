@@ -440,7 +440,7 @@ function droopler_theme_show_title_block() {
  * Function to check current route is a droopler product.
  *
  * @return bool
- *   True if it droopler product.
+ *   True if it is a droopler product.
  */
 function droopler_theme_check_is_droopler_products() {
   $route = \Drupal::routeMatch();
