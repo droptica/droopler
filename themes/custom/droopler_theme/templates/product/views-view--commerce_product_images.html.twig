@@ -39,6 +39,8 @@
     dom_id ? 'js-view-dom-id-' ~ dom_id,
   ]
 %}
+{% set slider_class = slider_class|default("slider-main") %}
+
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
@@ -62,7 +64,8 @@
   {% endif %}
 
   {% if rows %}
-    <div class="view-content slider-main">
+    {{ main_slider_class }}
+    <div class="view-content {{ slider_class }}">
       {{ rows }}
     </div>
   {% elseif empty %}
