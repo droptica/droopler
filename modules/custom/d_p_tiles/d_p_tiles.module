@@ -94,3 +94,10 @@ function d_p_tiles_preprocess_colorbox_formatter(&$variables) {
     $variables['attributes']['data-cbox-title'] = $alt;
   }
 }
+
+/**
+ * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
+ */
+function d_p_tiles_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
+  $paragraph_types[] = 'd_p_tiles';
+}

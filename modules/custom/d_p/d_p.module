@@ -10,6 +10,7 @@ use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\d_p\Helper\ParagraphModifiersHelper;
+use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
 
 /**
  * Implements hook_theme().
@@ -232,6 +233,10 @@ function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, 
       unset($element['#options']['full']);
     }
 
+    // Make the content of the CKEditor centred by default for the specified
+    // paragraph types.
+    d_p_centered_ckeditor_widget_content($element, $form_state, $context, $bundle);
+
     // Hide options "Left (wide)" and "Right (wide)" on given paragraphs.
     if (in_array($bundle, ['d_p_side_embed', 'd_p_side_tiles'])) {
       unset($element['#options']['left-wide']);
@@ -251,5 +256,41 @@ function d_p_preprocess_field(&$variables) {
       $helper = new ParagraphModifiersHelper($entity);
       $variables['heading_tag'] = $helper->getModifier(SettingsWidget::HEADING_TYPE_SETTING_NAME);
     }
+  }
+}
+
+/**
+ * Make the content of the CKEditor centred for the specified paragraph types.
+ *
+ * @param array $element
+ *   The field widget form element.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The current state of the form.
+ * @param array $context
+ *   An associative array containing widget attributes.
+ * @param string $paragraph_type
+ *   Type of the processing paragraph.
+ *
+ * @see: d_p_preprocess_textarea();
+ */
+function d_p_centered_ckeditor_widget_content(&$element, FormStateInterface $form_state, $context, $paragraph_type) {
+  if ($context['widget'] instanceof TextareaWidget) {
+    $paragraph_types = [];
+    \Drupal::moduleHandler()->invokeAll('d_p_centered_ckeditor_widget_paragraphs', [&$paragraph_types]);
+    if (in_array($paragraph_type, $paragraph_types)) {
+      $element['#d_p_ckeditor_centered'] = TRUE;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Make the content of the CKEditor centred for the specified paragraph types.
+ * @see: d_p_centered_ckeditor_widget_content();
+ */
+function d_p_preprocess_textarea(&$variables) {
+  if ($variables['element']['#d_p_ckeditor_centered'] ?? FALSE) {
+    $variables['wrapper_attributes']->addClass('d_p_ckeditor_centered');
   }
 }
