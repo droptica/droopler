@@ -39,6 +39,9 @@
           <div class="ask-link col-sm-6 col-lg-12">
             {{ product.body }}
           </div>
+          <div class="col-sm-6 col-lg-12">
+            {{ product|without('field_page_section', 'field_categories', 'body', 'variations', 'variation_price', 'field_product_images', 'title') }}
+          </div>
           <div class="ask-link col-sm-6 col-lg-12">
             {{ product.field_categories }}
           </div>
