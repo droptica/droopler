@@ -10,3 +10,22 @@ function d_commerce_product_preprocess_field(&$variables) {
     $variables['slider'] = render($slider);
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Remove title block from commerce product page.
+ *
+ * @see hook_preprocess_HOOK()
+ */
+function d_commerce_product_preprocess_page(&$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $no_title_routes = ['entity.commerce_product.canonical'];
+  if (in_array($route_name, $no_title_routes) && !isset($variables['node'])) {
+    foreach ($variables['page']['content'] as &$element) {
+      if (isset($element['#plugin_id']) && $element['#plugin_id'] == 'page_title_block') {
+        $element['#access'] = FALSE;
+      }
+    }
+  }
+}
