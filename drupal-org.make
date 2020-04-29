@@ -15,7 +15,13 @@ projects[entity_reference_revisions][version] = 1
 projects[facets][version] = 1
 projects[features][version] = 3
 projects[field_group][version] = 3
-projects[geysir][version] = 1
+
+; Geysir module - tag to the specific commit hash on dev branch
+projects[geysir][type] = module
+projects[geysir][download][type] = git
+projects[geysir][download][revision] = 636a14e8003ccb0ef3df6370abc135acfa59eedf
+projects[geysir][download][branch] = 8.x-1.x
+
 projects[google_analytics][version] = 2
 projects[google_tag][version] = 1
 projects[lazy][version] = 3
