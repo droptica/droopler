@@ -18,4 +18,9 @@ settings:
   label_display: '0'
   button_text: Filters
   button_class: 'btn btn-outline-primary'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: /products
+    negate: false
+    context_mapping: {  }
