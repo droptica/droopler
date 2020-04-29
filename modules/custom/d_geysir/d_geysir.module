@@ -70,54 +70,23 @@ function d_geysir_field_widget_form_alter(&$element, &$form_state, $context) {
 }
 
 /**
- * Implements hook_toolbar().
+ * Implements hook_toolbar_alter().
  */
-function d_geysir_toolbar() {
-  $items = [];
-  $items['geysir_toggle'] = [
-    '#cache' => [
-      'contexts' => [
-        'user.permissions',
-      ],
-    ],
-  ];
-
+function d_geysir_toolbar_alter(&$items) {
   $route = \Drupal::routeMatch()->getRouteObject();
-  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute($route);
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute($route);
 
-  if (!\Drupal::currentUser()
-    ->hasPermission('geysir manage paragraphs from front-end') || $is_admin) {
-    return $items;
+  if (isset($items['geysir'])) {
+    if ($is_admin_route) {
+      $items['geysir'] = [
+        '#cache' => $items['geysir']['#cache'],
+      ];
+      return;
+    }
+    elseif ($items['geysir']['tab']) {
+      $items['geysir']['tab']['#value'] = t('Paragraph overlay');
+    }
   }
-
-  $items['geysir_toggle'] += [
-    '#type' => 'toolbar_item',
-    'tab' => [
-      '#type' => 'html_tag',
-      '#tag' => 'button',
-      '#value' => t('Paragraph overlay'),
-      '#attributes' => [
-        'aria-pressed' => 'true',
-        'type' => 'button',
-        'class' => [
-          'toolbar-icon',
-          'toolbar-icon-edit',
-          'toolbar-geysir-toggle',
-          'is-active',
-        ],
-      ],
-    ],
-    '#wrapper_attributes' => [
-      'class' => ['hidden', 'd-geysir-toolbar-tab'],
-    ],
-    '#attached' => [
-      'library' => [
-        'd_geysir/toggle_link',
-      ],
-    ],
-  ];
-
-  return $items;
 }
 
 /**
