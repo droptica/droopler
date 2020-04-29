@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * d_commerce_products_list module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_commerce_products_list_preprocess_commerce_product(&$variables) {
+  if (
+    isset($variables['elements']['#view_mode']) &&
+    $variables['elements']['#view_mode'] == 'teaser'
+  ) {
+    if (isset($variables['product']['field_product_images'][0])) {
+      $variables['main_image'] = $variables['product']['field_product_images'][0];
+      unset($variables['product']['field_product_images']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_commerce_products_list_preprocess_page(&$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (stripos($route_name, 'view.droopler_commerce_products_list') !== FALSE) {
+    global $pager_total_items;
+    $variables['pager_total_items'] = reset($pager_total_items);
+    $variables['#attached']['library'][] = 'd_commerce_products_list/d_commerce_products_list_select';
+    $variables['#attached']['library'][] = 'd_commerce_products_list/d_commerce_products_list_searches';
+
+    // Remove title block from product listing.
+    foreach ($variables['page']['content'] as &$element) {
+      if (isset($element['#plugin_id']) && $element['#plugin_id'] == 'page_title_block') {
+        $element['#access'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function d_commerce_products_list_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Add placeholder to contact form.
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-droopler-commerce-products-list-page-1') {
+    $form['aggregated_field']['#attributes']['placeholder'] = t('Search products...');
+    $form['sort_by']['#title'] = '';
+    $form['sort_by']['#attributes']['placeholder'] = t('Placeholder');
+    unset($form['sort_order']);
+    $query = \Drupal::request()->query->all();
+    if (isset($query['f'])) {
+      foreach ($query['f'] as $key => $value) {
+        $form['f[' . $key . ']'] = [
+          '#type' => 'hidden',
+          '#value' => $value,
+          '#weight' => -1,
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_d_content_init_index_content().
+ */
+function d_commerce_products_list_d_content_init_index_content(array &$indexes) {
+  $indexes[] = 'droopler_commerce_product_index';
+}
