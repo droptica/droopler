@@ -446,34 +446,77 @@ function d_content_init_find_entity_by_properties(array $properties, $entity_typ
 /**
  * Create all the content.
  *
+ * @param string|null $type
+ *   Filter value which allows to execute only
+ *   a specific part of content creation process.
+ *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function d_content_init_create_all() {
+function d_content_init_create_all($type = NULL) {
   $module_handler = \Drupal::moduleHandler();
   $context = 'all';
 
-  // Define content structure, allow other modules to modify it and create content.
-  $content_structure = [];
-  $module_handler->alter('content_structure', $content_structure, $context);
-  d_content_init_add_nodes($content_structure);
+  // Define content structure, allow other modules
+  // to modify it and create content.
+  if (empty($type) || $type === 'content') {
+    $content_structure = [];
+    $module_handler->alter('content_structure', $content_structure, $context);
+    d_content_init_add_nodes($content_structure);
+  }
 
   // Define block structure, allow other modules to modify it and create blocks.
-  $block_structure = [];
-  $module_handler->alter('block_structure', $block_structure, $context);
-  Drupal::service('d_content_init.manager_block')
-    ->importFromFiles($block_structure);
+  if (empty($type) || $type === 'block') {
+    $block_structure = [];
+    $module_handler->alter('block_structure', $block_structure, $context);
+    Drupal::service('d_content_init.manager_block')
+      ->importFromFiles($block_structure);
+  }
 
-  // Define media structure, allow other modules to modify it and create media entities.
-  $media_structure = [];
-  $module_handler->alter('media_structure', $media_structure, $context);
-  Drupal::service('d_content_init.manager_media')
-    ->importFromFiles($media_structure);
+  if (empty($type) || $type === 'media') {
+    // Define media structure, allow other modules
+    // to modify it and create media entities.
+    $media_structure = [];
+    $module_handler->alter('media_structure', $media_structure, $context);
+    Drupal::service('d_content_init.manager_media')
+      ->importFromFiles($media_structure);
+  }
 
-  if ($module_handler->moduleExists('search_api')) {
-    $indices = [];
-    \Drupal::moduleHandler()
-      ->invokeAll('d_content_init_index_content', [&$indices]);
-    d_content_init_index_content($indices);
+  if (empty($type) || $type === 'index_content') {
+    if ($module_handler->moduleExists('search_api')) {
+      $indices = [];
+      $module_handler
+        ->invokeAll('d_content_init_index_content', [&$indices]);
+      d_content_init_index_content($indices);
+    }
+  }
+}
+
+/**
+ * Create init content batch operation.
+ *
+ * @param string $type
+ *   Type filter of the process to execute.
+ * @param $context
+ *   Batch context.
+ */
+function d_content_init_create_all_batch(string $type, array &$context) {
+  switch ($type) {
+    case "content":
+      d_content_init_create_all($type);
+      $context['message'] = t('Creating content');
+      break;
+
+    case "block":
+      $context['message'] = t('Creating blocks');
+      break;
+
+    case "media":
+      $context['message'] = t('Creating media');
+      break;
+
+    case "index_content":
+      $context['message'] = t('Content indexing');
+      break;
   }
 }
 
