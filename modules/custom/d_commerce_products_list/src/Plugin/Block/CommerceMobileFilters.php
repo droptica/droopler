@@ -23,13 +23,13 @@ class CommerceMobileFilters extends BlockBase {
     $form['button_text'] = [
       '#type' => 'textfield',
       '#title' => t('Button text'),
-      '#default_value' => $this->configuration['button_text'] ?? 'Filters',
+      '#default_value' => $this->getConfiguration()['button_text'] ?? 'Filters',
     ];
 
     $form['button_class'] = [
       '#type' => 'textfield',
       '#title' => t('Button class'),
-      '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary',
+      '#default_value' => $this->getConfiguration()['button_class'] ?? 'btn btn-outline-primary',
     ];
 
     return $form;
@@ -39,8 +39,8 @@ class CommerceMobileFilters extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $formState) {
-    $this->configuration['button_text'] = $formState->getValue('button_text');
-    $this->configuration['button_class'] = $formState->getValue('button_class');
+    $this->setConfigurationValue('button_text', $formState->getValue('button_text'));
+    $this->setConfigurationValue('button_class', $formState->getValue('button_class'));
   }
 
   /**
@@ -51,12 +51,12 @@ class CommerceMobileFilters extends BlockBase {
       'inside' => [
         '#type' => 'html_tag',
         '#tag' => 'button',
-        '#value' => $this->t($this->configuration['button_text']),
+        '#value' => $this->t($this->getConfiguration()['button_text']),
         '#attributes' => [
           'class' => [
             'mobile-filter',
             'collapsed',
-            $this->configuration['button_class'],
+            $this->getConfiguration()['button_class'],
           ],
           'type' => ['button'],
           'data-target' => ['.region-sidebar-left'],

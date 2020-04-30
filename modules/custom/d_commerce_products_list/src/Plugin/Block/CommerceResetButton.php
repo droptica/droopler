@@ -24,25 +24,25 @@ class CommerceResetButton extends BlockBase {
     $form['button_text'] = [
       '#type' => 'textfield',
       '#title' => t('Button text'),
-      '#default_value' => $this->configuration['button_text'] ?? 'Reset Filters',
+      '#default_value' => $this->getConfiguration()['button_text'] ?? 'Reset Filters',
     ];
 
     $form['button_class'] = [
       '#type' => 'textfield',
       '#title' => t('Button class'),
-      '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary btn-sm btn-reset',
+      '#default_value' => $this->getConfiguration()['button_class'] ?? 'btn btn-outline-primary btn-sm btn-reset',
     ];
 
     $form['button_target'] = [
       '#type' => 'textfield',
       '#title' => t('Button target'),
-      '#default_value' => $this->configuration['button_target'] ?? '/shop',
+      '#default_value' => $this->getConfiguration()['button_target'] ?? '/shop',
     ];
 
     $form['button_icon_class'] = [
       '#type' => 'textfield',
       '#title' => t('Button icon class'),
-      '#default_value' => $this->configuration['button_icon_class'] ?? 'fas fa-times',
+      '#default_value' => $this->getConfiguration()['button_icon_class'] ?? 'fas fa-times',
     ];
 
     return $form;
@@ -52,15 +52,13 @@ class CommerceResetButton extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $formState) {
-    $this->configuration['button_text'] = $formState->getValue('button_text');
-    $this->configuration['button_class'] = $formState->getValue('button_class');
-    $this->configuration['button_target'] = '/' . ltrim(
-        $formState->getValue('button_target'),
-        '/'
-      );
-    $this->configuration['button_icon_class'] = $formState->getValue(
-      'button_icon_class'
-    );
+    $this->setConfigurationValue('button_text', $formState->getValue('button_text'));
+    $this->setConfigurationValue('button_class', $formState->getValue('button_class'));
+    $this->setConfigurationValue('button_target', '/' . ltrim(
+      $formState->getValue('button_target'),
+      '/'
+    ));
+    $this->setConfigurationValue('button_icon_class', $formState->getValue('button_icon_class'));
   }
 
   /**
@@ -77,18 +75,18 @@ class CommerceResetButton extends BlockBase {
     }
 
     $link_content_markups = [];
-    if (!empty($this->configuration['button_icon_class'])) {
+    if (!empty($this->getConfiguration()['button_icon_class'])) {
       $link_content_markups[] = [
         '#type' => 'html_tag',
         '#tag' => 'span',
         '#attributes' => [
-          'class' => $this->configuration['button_icon_class'],
+          'class' => $this->getConfiguration()['button_icon_class'],
         ],
       ];
     }
 
     $link_content_markups[] = [
-      '#markup' => $this->t($this->configuration['button_text']),
+      '#markup' => $this->t($this->getConfiguration()['button_text']),
     ];
 
     return [
@@ -96,10 +94,10 @@ class CommerceResetButton extends BlockBase {
         '#type' => 'link',
         '#title' => $link_content_markups,
         '#attributes' => [
-          'class' => $this->configuration['button_class'],
+          'class' => $this->getConfiguration()['button_class'],
           'target' => '_self',
         ],
-        '#url' => URL::fromUserInput($this->configuration['button_target']),
+        '#url' => URL::fromUserInput($this->getConfiguration()['button_target']),
         '#cache' => [
           'contexts' => ['url.query_args:f'],
         ],
