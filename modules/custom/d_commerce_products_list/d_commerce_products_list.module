@@ -66,6 +66,26 @@ function d_commerce_products_list_form_alter(&$form, FormStateInterface $form_st
 }
 
 /**
+ * Implements hook_theme().
+ */
+function d_commerce_products_list_theme($existing, $type, $theme, $path) {
+  return [
+    'commerce_product__droopler_products__teaser' => [
+      'template' => 'commerce-product--droopler-products--teaser',
+      'base hook' => 'commerce_product',
+    ],
+    'page__views__droopler_commerce_products_list' => [
+      'template' => 'page--views--droopler_commerce_products_list',
+      'base hook' => 'page__views',
+    ],
+    'views_view_unformatted__droopler_commerce_products_list' => [
+      'template' => 'views-view-unformatted--droopler_commerce_products_list',
+      'base hook' => 'views_view_unformatted',
+    ],
+  ];
+}
+
+/**
  * Implements hook_d_content_init_index_content().
  */
 function d_commerce_products_list_d_content_init_index_content(array &$indexes) {

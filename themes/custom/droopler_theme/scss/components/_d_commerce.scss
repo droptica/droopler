@@ -973,7 +973,7 @@ body:not(.scrolled-buttons) {
       overflow: auto;
       background-color: $color-leto;
       overflow-x: hidden;
-      padding: 10% 1.5rem 1.5rem;
+      padding: calc(2rem + 5%) 1.5rem 1.5rem;
       transition: 0.5s;
       display: flex;
       flex-direction: column;
