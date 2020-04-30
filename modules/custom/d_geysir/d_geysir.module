@@ -14,7 +14,7 @@ use Drupal\views\ViewExecutable;
  */
 function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
-    case 'geysir.modal.add_select_type_form':
+    case 'geysir_modal_add_select_type_form':
       $root_path = DRUPAL_ROOT;
       $base_url = \Drupal::service('router.request_context')->getBaseUrl();
       $module_path = drupal_get_path('module', 'd_p');
@@ -85,30 +85,9 @@ function d_geysir_toolbar_alter(&$items) {
     }
     elseif ($items['geysir']['tab']) {
       $items['geysir']['tab']['#value'] = t('Paragraph overlay');
+      $items['geysir']['tab']['#attached']['library'][] = 'd_geysir/d_geysir';
     }
   }
-}
-
-/**
- * Implements hook_module_implements_alter().
- */
-function d_geysir_module_implements_alter(&$implementations, $hook) {
-  // Move d_geysir implementation of hook_entity_type_build() to the end of list
-  // to override geysir_modal_edit form class.
-  if ($hook == 'entity_type_build') {
-    $group = $implementations['d_geysir'];
-    unset($implementations['d_geysir']);
-    $implementations['d_geysir'] = $group;
-  }
-}
-
-/**
- * Implements hook_entity_type_build().
- */
-function d_geysir_entity_type_build(array &$entity_types) {
-  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
-  // Override geysir_modal_edit form class.
-  $entity_types['paragraph']->setFormClass('geysir_modal_edit', '\Drupal\d_geysir\Form\GeysirCustomModalParagraphForm');
 }
 
 /**
