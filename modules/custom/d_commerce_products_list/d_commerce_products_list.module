@@ -28,8 +28,8 @@ function d_commerce_products_list_preprocess_commerce_product(&$variables) {
 function d_commerce_products_list_preprocess_page(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   if (stripos($route_name, 'view.droopler_commerce_products_list') !== FALSE) {
-    global $pager_total_items;
-    $variables['pager_total_items'] = reset($pager_total_items);
+    $pager_manager = \Drupal::service('pager.manager');
+    $variables['pager_total_items'] = $pager_manager->getPager(0)->getTotalItems();
     $variables['#attached']['library'][] = 'd_commerce_products_list/d_commerce_products_list_select';
     $variables['#attached']['library'][] = 'd_commerce_products_list/d_commerce_products_list_searches';
 
