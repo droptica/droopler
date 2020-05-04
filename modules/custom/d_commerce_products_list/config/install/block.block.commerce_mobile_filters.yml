@@ -6,19 +6,19 @@ dependencies:
     - system
   theme:
     - droopler_subtheme
-id: commercemobilefilterssubmit
+id: commerce_mobile_filters
 theme: droopler_subtheme
-region: facets_left
-weight: -10
+region: facets_top
+weight: -15
 provider: null
-plugin: commerce_mobile_filters_submit
+plugin: commerce_mobile_filters
 settings:
-  id: commerce_mobile_filters_submit
-  label: 'Commerce Mobile filters submit'
+  id: commerce_mobile_filters
+  label: 'Commerce Mobile filters'
   provider: d_commerce_products_list
   label_display: '0'
-  button_text: 'Close Filters'
-  button_class: 'btn btn-primary'
+  button_text: Filters
+  button_class: 'btn btn-outline-primary'
 visibility:
   request_path:
     id: request_path
