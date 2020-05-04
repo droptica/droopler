@@ -507,9 +507,10 @@ function d_content_init_create_all($type = NULL) {
  *   Batch context.
  */
 function d_content_init_create_all_batch(string $type, array &$context) {
+
+  // Here is only message added. The content is inserted by calling method bellow this switch.
   switch ($type) {
     case "content":
-      d_content_init_create_all($type);
       $context['message'] = t('Creating content');
       break;
 
@@ -525,6 +526,8 @@ function d_content_init_create_all_batch(string $type, array &$context) {
       $context['message'] = t('Content indexing');
       break;
   }
+  // This method is performing the most important action.
+  d_content_init_create_all($type);
 }
 
 /**
