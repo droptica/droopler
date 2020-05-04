@@ -8,7 +8,7 @@
   Drupal.behaviors.sm_nice_select = {
     attach: function (context, settings) {
 
-      $('.block-views-exposed-filter-blockdroopler-commerce-products-list-page-1 #edit-sort-by:not(.processed)', context)
+      $('.block-views-exposed-filter-blockdroopler-commerce-products-list-page-1 .form-item-sort-by .form-select:not(.processed)', context)
         .each(function () {
           $(this).addClass('processed');
 
