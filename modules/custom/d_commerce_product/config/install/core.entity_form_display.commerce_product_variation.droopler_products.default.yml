@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_variation_type.droopler_products
-    - field.field.commerce_product_variation.droopler_products.attribute_size
   module:
     - commerce_price
 id: commerce_product_variation.droopler_products.default
@@ -11,12 +10,6 @@ targetEntityType: commerce_product_variation
 bundle: droopler_products
 mode: default
 content:
-  attribute_size:
-    type: options_select
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   langcode:
     type: language_select
     weight: 2
