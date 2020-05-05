@@ -364,6 +364,27 @@ function get_all_entity_bundles() {
 }
 
 /**
+ * Returns a list of modules to install, based on the list of required modules.
+ *
+ * @param array $modules
+ *   Array of required modules.
+ *
+ * @return array
+ *   Array of modules that actually need installing.
+ */
+function calculate_modules_for_install(array $modules) {
+  $module_handler = \Drupal::service('module_handler');
+  $modulesToInstall = [];
+  foreach ($modules as $module) {
+    if (!$module_handler->moduleExists($module)) {
+      $modulesToInstall[] = $module;
+    }
+  }
+
+  return $modulesToInstall;
+}
+
+/**
  * Droopler 1.3 Updates.
  */
 function droopler_update_8101() {
@@ -1270,27 +1291,6 @@ function droopler_update_8109() {
   \Drupal::service('d_update')
     ->checklist()
     ->saveProgress(['v2.0' => $values]);
-}
-
-/**
- * Returns a list of modules to install, based on the list of required modules.
- *
- * @param array $modules
- *   Array of required modules.
- *
- * @return array
- *   Array of modules that actually need installing.
- */
-function calculate_modules_for_install(array $modules) {
-  $module_handler = \Drupal::service('module_handler');
-  $modulesToInstall = [];
-  foreach ($modules as $module) {
-    if (!$module_handler->moduleExists($module)) {
-      $modulesToInstall[] = $module;
-    }
-  }
-
-  return $modulesToInstall;
 }
 
 /**
