@@ -1,0 +1,13 @@
+name: d_commerce_products_list (experimental)
+description: 'Provides a droopler products list.'
+type: module
+core: 8.x
+dependencies:
+  - d_commerce_product
+  - better_exposed_filters
+  - facets
+  - search_api
+  - search_api_db
+package: Droopler
+version: 8.x-2.0
+core_incompatible: false
