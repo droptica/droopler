@@ -4,7 +4,6 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.droopler_products
     - core.entity_view_mode.commerce_product_variation.teaser
-    - field.field.commerce_product_variation.droopler_products.attribute_size
   module:
     - commerce_price
 id: commerce_product_variation.droopler_products.teaser
@@ -22,7 +21,6 @@ content:
       currency_display: symbol
     third_party_settings: {  }
 hidden:
-  attribute_size: true
   langcode: true
   list_price: true
   product_id: true
