@@ -23,6 +23,7 @@
         "bower-asset/colorbox": "^1.6",
         "bower-asset/lazysizes": "^5.2",
         "bower-asset/masonry": "^4.2",
+        "cweagans/composer-patches": "^1.6",
         "drupal/admin_toolbar": "^2.0",
         "drupal/advagg": "^4.0",
         "drupal/better_exposed_filters": "^3.0",
@@ -75,5 +76,12 @@
     "prefer-stable": true,
     "config": {
       "sort-packages": true
+    },
+    "extra": {
+        "patches": {
+            "drupal/geysir": {
+                "Geysir merged patches for Droopler https://www.drupal.org/project/droopler/issues/3133680": "https://www.drupal.org/files/issues/2020-05-05/droopler-geysir-issues-3133680-2.patch"
+            }
+        }
     }
 }
