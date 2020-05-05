@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * d_commerce_products_list install.
+ */
+
+use Drupal\search_api\Entity\Index;
+
+/**
+ * Implements hook_install().
+ */
+function d_commerce_products_list_install() {
+  $index = Index::load('droopler_commerce_product_index');
+  \Drupal::getContainer()
+    ->get('search_api.index_task_manager')
+    ->addItemsAll($index);
+  $index->indexItems();
+}
