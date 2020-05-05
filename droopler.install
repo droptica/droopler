@@ -1310,5 +1310,17 @@ function droopler_update_8111() {
   $values['droopler__droopler_update_8111_1'] = \Drupal::service('module_installer')->install(['svg_image_responsive'], TRUE);
   \Drupal::service('d_update')
     ->checklist()
-    ->saveProgress(['v2.0' => $values]);
+    ->saveProgress(['v2.1' => $values]);
+}
+
+/**
+ * Droopler 2.1 update droopler_theme configuration.
+ */
+function droopler_update_8112() {
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8112_1'] = $updater->updateConfigurations('profile/droopler', 'droopler_theme.8112');
+
+  $updater->checklist()
+    ->saveProgress(['v2.1' => $values]);
 }
