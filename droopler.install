@@ -315,6 +315,55 @@ function droopler_enable_subtheme_postprocess(array &$context) {
 }
 
 /**
+ * Performs config update of specified modules.
+ *
+ * Configs should be placed in respective module directories e.g
+ * "module/config/update/moduleName.updateNumber.yml".
+ *
+ * @param array $modules
+ *   Array of module names to update.
+ * @param string|int $update_number
+ *   Number of the update corresponding to the droopler update number.
+ *
+ * @return bool
+ *   Status of the modules configuration update.
+ */
+function update_modules_configuration(array $modules, $update_number) {
+  $status = [];
+  $updater = \Drupal::service('d_update');
+  $module_handler = \Drupal::service('module_handler');
+  foreach ($modules as $module) {
+    if ($module_handler->moduleExists($module)) {
+      $update = $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
+      if (!$update) {
+        \Drupal::logger($module)->error('The configuration update for the module failed');
+        $status[] = $update;
+      }
+    }
+  }
+  return !in_array(FALSE, $status);
+}
+
+/**
+ * Returns array of names of all existing entities bundles.
+ *
+ * @return array
+ *   Array with all entities bundles.
+ */
+function get_all_entity_bundles() {
+  $entityBundles = \Drupal::service('entity.manager')
+    ->getAllBundleInfo();
+  $bundles = [];
+  foreach ($entityBundles as $entityBundle) {
+    foreach ($entityBundle as $bundle => $information) {
+      $bundles[] = $bundle;
+    }
+  }
+
+  return $bundles;
+}
+
+/**
  * Droopler 1.3 Updates.
  */
 function droopler_update_8101() {
@@ -1245,59 +1294,20 @@ function calculate_modules_for_install(array $modules) {
 }
 
 /**
- * Performs config update of specified modules.
- *
- * Configs should be placed in respective module directories e.g
- * "module/config/update/moduleName.updateNumber.yml".
- *
- * @param array $modules
- *   Array of module names to update.
- * @param string|int $update_number
- *   Number of the update corresponding to the droopler update number.
- *
- * @return bool
- *   Status of the modules configuration update.
- */
-function update_modules_configuration(array $modules, $update_number) {
-  $status = [];
-  $updater = \Drupal::service('d_update');
-  $module_handler = \Drupal::service('module_handler');
-  foreach ($modules as $module) {
-    if ($module_handler->moduleExists($module)) {
-      $update = $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
-      if (!$update) {
-        \Drupal::logger($module)->error('The configuration update for the module failed');
-        $status[] = $update;
-      }
-    }
-  }
-  return !in_array(FALSE, $status);
-}
-
-/**
- * Returns array of names of all existing entities bundles.
- *
- * @return array
- *   Array with all entities bundles.
- */
-function get_all_entity_bundles() {
-  $entityBundles = \Drupal::service('entity.manager')
-    ->getAllBundleInfo();
-  $bundles = [];
-  foreach ($entityBundles as $entityBundle) {
-    foreach ($entityBundle as $bundle => $information) {
-      $bundles[] = $bundle;
-    }
-  }
-
-  return $bundles;
-}
-
-/**
  * Droopler 2.0 beta3 add d_p_counters paragraph view_mode counter.
  */
 function droopler_update_8110() {
   $values['droopler__droopler_update_8110_1'] = update_modules_configuration(['d_p_counters'], '8110');
+  \Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v2.0' => $values]);
+}
+
+/**
+ * Droopler 2.1 install SVG Image Responsive.
+ */
+function droopler_update_8111() {
+  $values['droopler__droopler_update_8111_1'] = \Drupal::service('module_installer')->install(['svg_image_responsive'], TRUE);
   \Drupal::service('d_update')
     ->checklist()
     ->saveProgress(['v2.0' => $values]);
