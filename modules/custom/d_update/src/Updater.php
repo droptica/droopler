@@ -447,12 +447,14 @@ class Updater {
   private function modifyConfig($configName, array $newConfig, array $expectedConfig = NULL) {
     $config = $this->configFactory->getEditable($configName);
     $configData = $config->get();
-    if (empty($configData)) {
+
+    if ($config->isNew() || empty($configData)) {
       return FALSE;
     }
+
     if (!empty($expectedConfig) && DiffArray::diffAssocRecursive($expectedConfig, $configData)) {
       $this->getLogger('d_update')
-        ->error('Detected changes in configuration %config. Aborting import' . ['%config' => $configName]);
+        ->error('Detected changes in configuration %config. Aborting import', ['%config' => $configName]);
       return FALSE;
     }
     $config->setData(NestedArray::mergeDeep($configData, $newConfig));
