@@ -1333,14 +1333,14 @@ function droopler_update_8113() {
 
   $configs = [
     'd_product' => [
-      'image.style.product_main_image' => '',
-      'image.style.product_navigation_image' => '',
-      'image.style.product_thumbnail_pc' => '',
-      'core.entity_view_display.media.d_image.d_product_image' => '',
+      'image.style.product_main_image' => 'override',
+      'image.style.product_navigation_image' => 'override',
+      'image.style.product_thumbnail_pc' => 'override',
     ],
   ];
 
   $values['droopler__droopler_update_8113_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8113_2'] = update_modules_configuration(['d_product'], '8113');
 
   $updater->checklist()
     ->saveProgress(['v2.1' => $values]);
