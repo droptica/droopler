@@ -449,6 +449,8 @@ class Updater {
     $configData = $config->get();
 
     if ($config->isNew() || empty($configData)) {
+      $this->getLogger('d_update')
+        ->error("Unable to modify newly created or empty %config configuration. Aborting import", ['%config' => $configName]);
       return FALSE;
     }
 
