@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_cart
+  theme:
+    - droopler_subtheme
+id: cart
+theme: droopler_subtheme
+region: secondary_menu
+weight: 0
+provider: null
+plugin: commerce_cart
+settings:
+  id: commerce_cart
+  label: Cart
+  provider: commerce_cart
+  label_display: '0'
+  dropdown: true
+visibility: {  }

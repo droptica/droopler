@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - d_search
+  theme:
+    - droopler_theme
+id: block_plugin_576427d8_f954_49ea_8644_abf6c1983f21
+theme: droopler_theme
+region: secondary_menu
+weight: 1
+provider: null
+plugin: search_page_link
+settings:
+  id: search_page_link
+  label: 'Search page link'
+  provider: d_search
+  label_display: '0'
+  status: true
+visibility: {  }

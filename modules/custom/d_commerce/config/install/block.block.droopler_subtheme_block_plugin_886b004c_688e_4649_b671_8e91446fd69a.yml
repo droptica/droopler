@@ -1,0 +1,20 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - d_social_media
+  theme:
+    - droopler_subtheme
+id: droopler_subtheme_block_plugin_886b004c_688e_4649_b671_8e91446fd69a
+theme: droopler_subtheme
+region: secondary_menu
+weight: -13
+provider: null
+plugin: social_media_block
+settings:
+  id: social_media_block
+  label: 'Follow us'
+  provider: d_social_media
+  label_display: '0'
+  status: true
+visibility: {  }
