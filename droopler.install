@@ -1324,3 +1324,24 @@ function droopler_update_8112() {
   $updater->checklist()
     ->saveProgress(['v2.1' => $values]);
 }
+
+/**
+ * Droopler 2.1 update d_product configuration.
+ */
+function droopler_update_8113() {
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_product' => [
+      'image.style.product_main_image' => '',
+      'image.style.product_navigation_image' => '',
+      'image.style.product_thumbnail_pc' => '',
+      'core.entity_view_display.media.d_image.d_product_image' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8113_1'] = $updater->importConfigs($configs);
+
+  $updater->checklist()
+    ->saveProgress(['v2.1' => $values]);
+}
