@@ -5,20 +5,20 @@ dependencies:
     - d_product
     - system
   theme:
-    - droopler_subtheme
-id: droopler_subtheme_mobile_filters_submit
+    - droopler_theme
+id: droopler_theme_mobile_filters
 theme: droopler_subtheme
-region: facets_left
-weight: -8
+region: facets_top
+weight: -15
 provider: null
-plugin: mobile_filters_submit
+plugin: mobile_filters
 settings:
-  id: mobile_filters_submit
-  label: 'Mobile filters submit'
+  id: mobile_filters
+  label: 'Mobile filters'
   provider: d_product
   label_display: '0'
-  button_text: 'Close Filters'
-  button_class: 'btn btn-primary'
+  button_text: Filters
+  button_class: 'btn btn-outline-primary'
 visibility:
   request_path:
     id: request_path

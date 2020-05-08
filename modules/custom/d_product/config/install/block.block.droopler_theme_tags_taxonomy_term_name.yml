@@ -7,9 +7,9 @@ dependencies:
     - facets
     - system
   theme:
-    - droopler_subtheme
-id: droopler_subtheme_tags_taxonomy_term_name
-theme: droopler_subtheme
+    - droopler_theme
+id: droopler_theme_tags_taxonomy_term_name
+theme: droopler_theme
 region: facets_left
 weight: -10
 provider: null
@@ -19,7 +19,7 @@ settings:
   label: 'Tags:'
   provider: facets
   label_display: visible
-  block_id: droopler_subtheme_tags_taxonomy_term_name
+  block_id: droopler_theme_tags_taxonomy_term_name
 visibility:
   request_path:
     id: request_path
