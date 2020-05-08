@@ -2,9 +2,10 @@
 
 /**
  * @file
- * d_commerce module.
+ * D_commerce module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\GeneratedLink;
 use Drupal\Core\Url;
 
@@ -56,4 +57,14 @@ function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, 
       $form['actions']['next']['#suffix']->getGeneratedLink()
     ));
   }
+}
+
+/**
+ * Set d_customer role for created user.
+ *
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function d_commerce_user_insert(EntityInterface $entity) {
+  $entity->addRole('d_customer');
+  $entity->save();
 }
