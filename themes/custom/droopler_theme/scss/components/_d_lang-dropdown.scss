@@ -7,7 +7,6 @@ Styleguide 2.2
 // Colour variables used in this component.
 $lang-dropdown-header-color: $menu-main-link-color !default;  // Color of language link in main menu
 $lang-dropdown-toggle-color: $menu-main-link-dropdown !default; // Color of language dropdown toggle icon
-$lang-dropdown-submenu-color: $submenu-link-color !default; // Color of link in language menu
 $lang-dropdown-submenu-hover-color: $submenu-link-hover-color !default; // Color of hover link in language submenu
 $lang-dropdown-submenu-hover-background: $submenu-link-hover-background !default; // Color of hover bg in language submenu
 $lang-dropdown-submenu-active-color: $menu-main-link-active-color !default; // Color of active link in language submenu
@@ -29,6 +28,7 @@ $lang-dropdown-dropdown-width: $menu-dropdown-width !default;  // Width of deskt
 $lang-dropdown-submenu-link-height: $submenu-link-height !default;
 $lang-dropdown-mobile-link-padding: 0.625rem !default;
 $lang-dropdown-mobile-padding: 1.25rem !default;
+$lang-dropdown-mobile-margin-top: 1.0625rem;
 
 $secondary-menu-lang-dropdown-height: 2.4rem !default;
 
@@ -107,7 +107,6 @@ $secondary-menu-lang-dropdown-height: 2.4rem !default;
         }
         a {
           font-size: $lang-dropdown-submenu-font-size;
-          color: $lang-dropdown-submenu-color;
           text-transform: uppercase;
           &:hover, &:focus {
             color: $lang-dropdown-submenu-hover-color;
@@ -124,6 +123,9 @@ $secondary-menu-lang-dropdown-height: 2.4rem !default;
 
   // Styling for mobile (<= MD)
   @include media-breakpoint-down(md) {
+    width: 100%;
+    margin-top: $lang-dropdown-mobile-margin-top;
+
     .active-lang-code {
       display: none;
     }

@@ -15,3 +15,10 @@ function d_p_text_with_bckg_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+/**
+ * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
+ */
+function d_p_text_with_bckg_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
+  $paragraph_types[] = 'd_p_text_with_bckg';
+}
