@@ -14,9 +14,9 @@ use Drupal\views\ViewExecutable;
  */
 function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
-    case 'geysir.modal.add_select_type_form':
+    case 'geysir_modal_add_select_type_form':
       $root_path = DRUPAL_ROOT;
-      $base_url = \Drupal::service('router.request_context')->getBaseUrl;
+      $base_url = \Drupal::service('router.request_context')->getBaseUrl();
       $module_path = drupal_get_path('module', 'd_p');
       foreach ($form['description'] as $paragraph_name => $attributes) {
         $file_server_path = $root_path . '/' . $module_path . '/images/' . $paragraph_name . '.png';
@@ -70,76 +70,24 @@ function d_geysir_field_widget_form_alter(&$element, &$form_state, $context) {
 }
 
 /**
- * Implements hook_toolbar().
+ * Implements hook_toolbar_alter().
  */
-function d_geysir_toolbar() {
-  $items = [];
-  $items['geysir_toggle'] = [
-    '#cache' => [
-      'contexts' => [
-        'user.permissions',
-      ],
-    ],
-  ];
-
+function d_geysir_toolbar_alter(&$items) {
   $route = \Drupal::routeMatch()->getRouteObject();
-  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute($route);
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute($route);
 
-  if (!\Drupal::currentUser()
-    ->hasPermission('geysir manage paragraphs from front-end') || $is_admin) {
-    return $items;
+  if (isset($items['geysir'])) {
+    if ($is_admin_route) {
+      $items['geysir'] = [
+        '#cache' => $items['geysir']['#cache'],
+      ];
+      return;
+    }
+    elseif ($items['geysir']['tab']) {
+      $items['geysir']['tab']['#value'] = t('Paragraph overlay');
+      $items['geysir']['tab']['#attached']['library'][] = 'd_geysir/d_geysir';
+    }
   }
-
-  $items['geysir_toggle'] += [
-    '#type' => 'toolbar_item',
-    'tab' => [
-      '#type' => 'html_tag',
-      '#tag' => 'button',
-      '#value' => t('Paragraph overlay'),
-      '#attributes' => [
-        'aria-pressed' => 'true',
-        'type' => 'button',
-        'class' => [
-          'toolbar-icon',
-          'toolbar-icon-edit',
-          'toolbar-geysir-toggle',
-          'is-active',
-        ],
-      ],
-    ],
-    '#wrapper_attributes' => [
-      'class' => ['hidden', 'd-geysir-toolbar-tab'],
-    ],
-    '#attached' => [
-      'library' => [
-        'd_geysir/toggle_link',
-      ],
-    ],
-  ];
-
-  return $items;
-}
-
-/**
- * Implements hook_module_implements_alter().
- */
-function d_geysir_module_implements_alter(&$implementations, $hook) {
-  // Move d_geysir implementation of hook_entity_type_build() to the end of list
-  // to override geysir_modal_edit form class.
-  if ($hook == 'entity_type_build') {
-    $group = $implementations['d_geysir'];
-    unset($implementations['d_geysir']);
-    $implementations['d_geysir'] = $group;
-  }
-}
-
-/**
- * Implements hook_entity_type_build().
- */
-function d_geysir_entity_type_build(array &$entity_types) {
-  /* @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
-  // Override geysir_modal_edit form class.
-  $entity_types['paragraph']->setFormClass('geysir_modal_edit', '\Drupal\d_geysir\Form\GeysirCustomModalParagraphForm');
 }
 
 /**

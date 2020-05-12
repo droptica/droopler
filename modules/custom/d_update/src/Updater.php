@@ -418,6 +418,9 @@ class Updater {
       if (isset($updates['add'])) {
         $newConfig = NestedArray::mergeDeep($newConfig, $updates['add']);
       }
+      if (!isset($updates['change']['expected'])) {
+        $updates['change']['expected'] = NULL;
+      }
       if (!$this->modifyConfig($configName, $newConfig, $updates['change']['expected'])) {
         $status[] = FALSE;
         $this->getLogger('d_update')
@@ -444,12 +447,16 @@ class Updater {
   private function modifyConfig($configName, array $newConfig, array $expectedConfig = NULL) {
     $config = $this->configFactory->getEditable($configName);
     $configData = $config->get();
-    if (empty($configData)) {
+
+    if ($config->isNew() || empty($configData)) {
+      $this->getLogger('d_update')
+        ->error("Unable to modify newly created or empty %config configuration. Aborting import", ['%config' => $configName]);
       return FALSE;
     }
+
     if (!empty($expectedConfig) && DiffArray::diffAssocRecursive($expectedConfig, $configData)) {
       $this->getLogger('d_update')
-        ->error('Detected changes in configuration %config. Aborting import' . ['%config' => $configName]);
+        ->error('Detected changes in configuration %config. Aborting import', ['%config' => $configName]);
       return FALSE;
     }
     $config->setData(NestedArray::mergeDeep($configData, $newConfig));

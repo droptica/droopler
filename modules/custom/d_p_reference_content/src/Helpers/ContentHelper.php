@@ -3,7 +3,7 @@
 namespace Drupal\d_p_reference_content\Helpers;
 
 use Drupal\Core\Database\Connection;
-use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 class ContentHelper {
 
@@ -21,9 +21,9 @@ class ContentHelper {
    * ContentHelper constructor.
    *
    * @param \Drupal\Core\Database\Connection $connection
-   * @param \Drupal\Core\Entity\EntityTypeManager $entityTypeManager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    */
-  public function __construct(Connection $connection, EntityTypeManager $entityTypeManager) {
+  public function __construct(Connection $connection, EntityTypeManagerInterface $entityTypeManager) {
     $this->connection = $connection;
     $this->entityTypeManager = $entityTypeManager;
   }
