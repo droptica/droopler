@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for d_commerce_product.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function d_commerce_product_install() {
+  $theme_name = \Drupal::config('system.theme')->get('default');
+  $config_service = \Drupal::service('config.factory');
+  $configs = d_commerce_product_get_block_configs();
+
+  foreach ($configs as $config) {
+    $config_service->getEditable($config)
+      ->set('theme', $theme_name)
+      ->set('dependencies.theme', $theme_name)
+      ->save();
+  }
+}
+
+/**
+ * Get all config names for blocks.
+ *
+ * @return array
+ *   List of configs names.
+ */
+function d_commerce_product_get_block_configs() {
+  $configs = [];
+  $dir = drupal_get_path('module', 'd_commerce_product');
+  $files = scandir($dir . '/config/optional');
+  foreach ($files as $file) {
+    if (strpos($file, 'block.block') !== FALSE) {
+      $configs[] = substr($file, 0, -4);
+    }
+  }
+  return $configs;
+}
