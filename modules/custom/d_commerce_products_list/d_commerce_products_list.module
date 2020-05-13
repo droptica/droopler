@@ -62,8 +62,9 @@ function d_commerce_products_list_preprocess_field(&$variables) {
       $view_id = 'view.droopler_commerce_products_list.page_1';
 
       $facet = Facet::load($facet_id);
+      $alias_cleaner = Drupal::service('pathauto.alias_cleaner');
+
       foreach ($variables['element']['#items'] as $key => $item) {
-        $alias_cleaner = Drupal::service('pathauto.alias_cleaner');
         $taxonomy_name = $alias_cleaner->cleanString($variables['element'][$key]['#title']);
 
         $view_url = $variables['element'][$key]['#url']->fromRoute($view_id, [
