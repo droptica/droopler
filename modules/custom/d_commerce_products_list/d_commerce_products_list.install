@@ -2,18 +2,21 @@
 
 /**
  * @file
- * d_commerce_products_list install.
+ * Install, update, and uninstall functions for d_commerce_product_list.
  */
-
-use Drupal\search_api\Entity\Index;
 
 /**
  * Implements hook_install().
  */
-function d_commerce_products_list_install() {
-  $index = Index::load('droopler_commerce_product_index');
-  \Drupal::getContainer()
-    ->get('search_api.index_task_manager')
-    ->addItemsAll($index);
-  $index->indexItems();
+function d_commerce_product_list_install() {
+  \Drupal::service('d_content_init.config_update')
+    ->updateThemeInConfigs('d_commerce_products_list', '/config/optional', '/block\.block/');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function d_commerce_product_list_uninstall() {
+  \Drupal::service('d_content_init.config_update')
+    ->deleteConfigs('d_commerce_product_list', '/config/optional', '/.yml$/');
 }

@@ -5,20 +5,22 @@ dependencies:
     - d_commerce_products_list
     - system
   theme:
-    - droopler_subtheme
-id: commerce_mobile_filters_submit
-theme: droopler_subtheme
+    - droopler_theme
+id: commerce_reset_filters_top
+theme: droopler_theme
 region: facets_left
-weight: -10
+weight: -11
 provider: null
-plugin: commerce_mobile_filters_submit
+plugin: commerce_reset_button
 settings:
-  id: commerce_mobile_filters_submit
-  label: 'Commerce Mobile filters submit'
+  id: commerce_reset_button
+  label: 'Reset Filters'
   provider: d_commerce_products_list
   label_display: '0'
-  button_text: 'Close Filters'
-  button_class: 'btn btn-primary'
+  button_text: 'Reset Filters'
+  button_class: 'btn btn-outline-primary btn-sm btn-reset'
+  button_target: /shop
+  button_icon_class: 'fas fa-times'
 visibility:
   request_path:
     id: request_path
