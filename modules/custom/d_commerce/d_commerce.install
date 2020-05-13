@@ -10,5 +10,5 @@
  */
 function d_commerce_install() {
   \Drupal::service('d_content_init.config_update')
-    ->updateThemeInConfigs('d_commerce', '/config/optional', 'block.block');
+    ->updateThemeInConfigs('d_commerce', '/config/optional', '/block\.block/');
 }
