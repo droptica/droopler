@@ -88,7 +88,6 @@ function d_demo_block_structure_alter(&$structure, $context) {
     $structure['footer_services'] = ['file' => "$path/footer_services.yml"];
     $structure['footer_others'] = ['file' => "$path/footer_others.yml"];
     $structure['footer_secondary_menu'] = ['file' => "$path/footer_secondary_menu.yml"];
-    $structure['d_social_media_header'] = ['file' => "$path/d_social_media_header.yml"];
     $structure['d_social_media_footer'] = ['file' => "$path/d_social_media_footer.yml"];
     $structure['header_search_link'] = ['file' => "$path/header_search_link.yml"];
     $structure['secondary_menu'] = ['file' => "$path/secondary_menu.yml"];

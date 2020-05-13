@@ -57,37 +57,73 @@ function droopler_install() {
 }
 
 /**
- * Implements hook_install_tasks()
+ * Implements hook_install_tasks().
  */
 function droopler_install_tasks() {
   $tasks = [
-    'droopler_enable_blog' => [
+    'droopler_enable_blog_batch' => [
       'display' => TRUE,
       'display_name' => t('Install d_blog'),
-      'type' => 'normal',
+      'type' => 'batch',
     ],
-    'droopler_enable_product' => [
+    'droopler_enable_product_batch' => [
       'display' => TRUE,
-      'display_name' => t('Install d_products'),
-      'type' => 'normal',
+      'display_name' => t('Install d_product'),
+      'type' => 'batch',
     ],
-    'droopler_enable_demo' => [
+    'droopler_enable_demo_batch' => [
       'display' => TRUE,
       'display_name' => t('Install Demo'),
-      'type' => 'normal',
+      'type' => 'batch',
     ],
-    'd_content_init_create_all' => [
+    'droopler_enable_init_content_batch' => [
       'display' => TRUE,
       'display_name' => t('Init content'),
-      'type' => 'normal',
+      'type' => 'batch',
     ],
-    'droopler_enable_subtheme' => [
+    'droopler_enable_subtheme_batch' => [
       'display' => TRUE,
       'display_name' => t('Install and enable subtheme'),
-      'type' => 'normal',
+      'type' => 'batch',
     ],
   ];
   return $tasks;
+}
+
+/**
+ * Allow to install a single module using module_installer service.
+ *
+ * @param string $module
+ *   Module machine name.
+ * @param array $context
+ *   Batch context.
+ */
+function droopler_install_module(string $module, array &$context) {
+  \Drupal::service('module_installer')->install([$module], TRUE);
+  $context['message'] = t('Installed %module module.', ['%module' => $module]);
+}
+
+/**
+ * Allows to install modules in batch.
+ *
+ * @param \Drupal\Core\StringTranslation\TranslatableMarkup|string $title
+ *   Title to display on the installation page.
+ * @param array $modules
+ *   Module machine name.
+ *
+ * @return array
+ *   Batch defintion.
+ */
+function droopler_install_modules_batch($title, array $modules) {
+  $operations = [];
+  foreach ($modules as $module) {
+    $operations[] = ['droopler_install_module', [$module]];
+  }
+
+  return [
+    'operations' => $operations,
+    'title' => $title,
+  ];
 }
 
 /**
@@ -108,44 +144,120 @@ function _droopler_import_config($module, $name) {
 }
 
 /**
- * Install d_blog.
- * This must be in a separate task because of dependency issues.
+ * Batch install of d_blog.
+ *
+ * @return array
+ *   Batch defintion.
  */
-function droopler_enable_blog() {
-  $modules = [
-    'd_blog',
+function droopler_enable_blog_batch() {
+  $title = t('Install d_blog');
+
+  return droopler_install_modules_batch($title, ['d_blog']);
+}
+
+/**
+ * Batch install of d_product.
+ *
+ * @return array
+ *   Batch defintion.
+ */
+function droopler_enable_product_batch() {
+  return [
+    'operations' => [
+      ['droopler_enable_product', [1]],
+      ['droopler_enable_product', [2]],
+    ],
+    'title' => t('Install d_product'),
   ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
 }
 
 /**
  * Install d_product.
- * This must be in a separate task because of dependency issues.
+ *
+ * @param int $step
+ *   Current installation step.
+ * @param array $context
+ *   Batch context.
  */
-function droopler_enable_product() {
-  $modules = [
-    'd_product',
-  ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
-  \Drupal::service('config.installer')->installOptionalConfig();
+function droopler_enable_product(int $step, array &$context) {
+  switch ($step) {
+    case 1:
+      droopler_install_module('d_product', $context);
+      break;
+
+    case 2:
+      \Drupal::service('config.installer')->installOptionalConfig();
+      $context['message'] = t('Optional config installed');
+      break;
+  }
 }
 
 /**
- * Install all demo modules.
+ * Batch install of all demo modules.
+ *
+ * @return array
+ *   Batch defintion.
  */
-function droopler_enable_demo() {
+function droopler_enable_demo_batch() {
+  $title = t('Install Demo');
+
   $modules = [
     'd_blog_init',
     'd_product_init',
     'd_demo',
   ];
-  \Drupal::service('module_installer')->install($modules, TRUE);
+
+  return droopler_install_modules_batch($title, $modules);
+}
+
+/**
+ * Batch content init creating.
+ *
+ * @return array
+ *   Batch defintion.
+ */
+function droopler_enable_init_content_batch() {
+  $types = [
+    'content',
+    'block',
+    'media',
+    'index_content',
+  ];
+
+  $operations = [];
+  foreach ($types as $type) {
+    $operations[] = ['d_content_init_create_all_batch', [$type]];
+  }
+
+  return [
+    'operations' => $operations,
+    'title' => t('Init content'),
+  ];
+}
+
+/**
+ * Batch enable of subtheme.
+ *
+ * @return array
+ *   Batch defintion.
+ */
+function droopler_enable_subtheme_batch() {
+  return [
+    'operations' => [
+      ['droopler_enable_subtheme', []],
+      ['droopler_enable_subtheme_postprocess', []],
+    ],
+    'title' => t('Install and enable subtheme'),
+  ];
 }
 
 /**
  * Enable subtheme.
+ *
+ * @param array $context
+ *   Batch context.
  */
-function droopler_enable_subtheme() {
+function droopler_enable_subtheme(array &$context) {
   try {
     \Drupal::service('theme_installer')->install(['droopler_subtheme']);
     \Drupal::configFactory()
@@ -153,12 +265,11 @@ function droopler_enable_subtheme() {
       ->set('default', 'droopler_subtheme')
       ->set('admin', 'seven')
       ->save();
-
-    // Additional operations after subtheme installation.
-    droopler_enable_subtheme_postprocess();
+    $context['message'] = t('Installed %theme theme', ['%theme' => 'droopler_subtheme']);
   }
   catch (Exception $e) {
     \Drupal::logger('droopler_install')->notice('No subtheme detected.');
+    $context['message'] = t('%theme theme not detected, skipping theme installation.', ['%theme' => 'droopler_subtheme']);
   }
 }
 
@@ -169,27 +280,108 @@ function droopler_enable_subtheme() {
  * We can think about to place them in the droopler_subtheme.install file when
  * this functionality will be implemented.
  *
+ * @param array $context
+ *   Batch context.
+ *
  * @see: https://www.drupal.org/project/drupal/issues/2652542
  * @see: https://www.drupal.org/node/2937955
  */
-function droopler_enable_subtheme_postprocess() {
-  // Set logo same as on base theme if custom path has been defined there.
-  $base_settings = Drupal::configFactory()
-    ->getEditable('droopler_theme.settings');
-  if (!$base_settings->get('logo.use_default')
-    && $logo_path = $base_settings->get('logo.path')) {
-    $current_settings = Drupal::configFactory()
-      ->getEditable('droopler_subtheme.settings');
-    $current_settings->set('logo.use_default', FALSE);
-    $current_settings->set('logo.path', $logo_path);
-    $current_settings->save();
+function droopler_enable_subtheme_postprocess(array &$context) {
+  if (!\Drupal::service('theme_handler')->themeExists('droopler_subtheme')) {
+    $context['message'] = t('Theme %theme not installed, skipping postinstall operations', ['%theme' => 'droopler_subtheme']);
+  }
+  else {
+
+    // Set logo same as on base theme if custom path has been defined there.
+    $base_settings = Drupal::configFactory()
+      ->getEditable('droopler_theme.settings');
+    if (!$base_settings->get('logo.use_default')
+      && $logo_path = $base_settings->get('logo.path')) {
+      $current_settings = Drupal::configFactory()
+        ->getEditable('droopler_subtheme.settings');
+      $current_settings->set('logo.use_default', FALSE);
+      $current_settings->set('logo.path', $logo_path);
+      $current_settings->save();
+    }
+
+    // Copy configuration of the WeMegaMenu from base to subtheme.
+    if ($base_menu = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme')) {
+      WeMegaMenuBuilder::saveConfig('main', 'droopler_subtheme', json_encode($base_menu));
+      we_megamenu_flush_render_cache();
+    }
+
+    $context['message'] = t('Theme %theme configured.', ['%theme' => 'droopler_subtheme']);
+  }
+}
+
+/**
+ * Performs config update of specified modules.
+ *
+ * Configs should be placed in respective module directories e.g
+ * "module/config/update/moduleName.updateNumber.yml".
+ *
+ * @param array $modules
+ *   Array of module names to update.
+ * @param string|int $update_number
+ *   Number of the update corresponding to the droopler update number.
+ *
+ * @return bool
+ *   Status of the modules configuration update.
+ */
+function update_modules_configuration(array $modules, $update_number) {
+  $status = [];
+  $updater = \Drupal::service('d_update');
+  $module_handler = \Drupal::service('module_handler');
+  foreach ($modules as $module) {
+    if ($module_handler->moduleExists($module)) {
+      $update = $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
+      if (!$update) {
+        \Drupal::logger($module)->error('The configuration update for the module failed');
+        $status[] = $update;
+      }
+    }
+  }
+  return !in_array(FALSE, $status);
+}
+
+/**
+ * Returns array of names of all existing entities bundles.
+ *
+ * @return array
+ *   Array with all entities bundles.
+ */
+function get_all_entity_bundles() {
+  $entityBundles = \Drupal::service('entity.manager')
+    ->getAllBundleInfo();
+  $bundles = [];
+  foreach ($entityBundles as $entityBundle) {
+    foreach ($entityBundle as $bundle => $information) {
+      $bundles[] = $bundle;
+    }
   }
 
-  // Copy configuration of the WeMegaMenu from base to subtheme.
-  if ($base_menu = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme')) {
-    WeMegaMenuBuilder::saveConfig('main', 'droopler_subtheme', json_encode($base_menu));
-    we_megamenu_flush_render_cache();
+  return $bundles;
+}
+
+/**
+ * Returns a list of modules to install, based on the list of required modules.
+ *
+ * @param array $modules
+ *   Array of required modules.
+ *
+ * @return array
+ *   Array of modules that actually need installing.
+ */
+function calculate_modules_for_install(array $modules) {
+  $module_handler = \Drupal::service('module_handler');
+  $modulesToInstall = [];
+  foreach ($modules as $module) {
+    if (!$module_handler->moduleExists($module)) {
+      $modulesToInstall[] = $module;
+    }
   }
+
+  return $modulesToInstall;
 }
 
 /**
@@ -603,7 +795,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-      ->getDefault() === 'droopler_subtheme') {
+        ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -1102,76 +1294,6 @@ function droopler_update_8109() {
 }
 
 /**
- * Returns a list of modules to install, based on the list of required modules.
- *
- * @param array $modules
- *   Array of required modules.
- *
- * @return array
- *   Array of modules that actually need installing.
- */
-function calculate_modules_for_install(array $modules) {
-  $module_handler = \Drupal::service('module_handler');
-  $modulesToInstall = [];
-  foreach ($modules as $module) {
-    if (!$module_handler->moduleExists($module)) {
-      $modulesToInstall[] = $module;
-    }
-  }
-
-  return $modulesToInstall;
-}
-
-/**
- * Performs config update of specified modules.
- *
- * Configs should be placed in respective module directories e.g
- * "module/config/update/moduleName.updateNumber.yml".
- *
- * @param array $modules
- *   Array of module names to update.
- * @param string|int $update_number
- *   Number of the update corresponding to the droopler update number.
- *
- * @return bool
- *   Status of the modules configuration update.
- */
-function update_modules_configuration(array $modules, $update_number) {
-  $status = [];
-  $updater = \Drupal::service('d_update');
-  $module_handler = \Drupal::service('module_handler');
-  foreach ($modules as $module) {
-    if ($module_handler->moduleExists($module)) {
-      $update = $updater->updateConfigurations("module/{$module}", "{$module}.{$update_number}");
-      if (!$update) {
-        \Drupal::logger($module)->error('The configuration update for the module failed');
-        $status[] = $update;
-      }
-    }
-  }
-  return !in_array(FALSE, $status);
-}
-
-/**
- * Returns array of names of all existing entities bundles.
- *
- * @return array
- *   Array with all entities bundles.
- */
-function get_all_entity_bundles() {
-  $entityBundles = \Drupal::service('entity.manager')
-    ->getAllBundleInfo();
-  $bundles = [];
-  foreach ($entityBundles as $entityBundle) {
-    foreach ($entityBundle as $bundle => $information) {
-      $bundles[] = $bundle;
-    }
-  }
-
-  return $bundles;
-}
-
-/**
  * Droopler 2.0 beta3 add d_p_counters paragraph view_mode counter.
  */
 function droopler_update_8110() {
@@ -1179,4 +1301,26 @@ function droopler_update_8110() {
   \Drupal::service('d_update')
     ->checklist()
     ->saveProgress(['v2.0' => $values]);
+}
+
+/**
+ * Droopler 2.1 install SVG Image Responsive.
+ */
+function droopler_update_8111() {
+  $values['droopler__droopler_update_8111_1'] = \Drupal::service('module_installer')->install(['svg_image_responsive'], TRUE);
+  \Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v2.1' => $values]);
+}
+
+/**
+ * Droopler 2.1 update droopler_theme configuration.
+ */
+function droopler_update_8112() {
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8112_1'] = $updater->updateConfigurations('profile/droopler', 'droopler_theme.8112');
+
+  $updater->checklist()
+    ->saveProgress(['v2.1' => $values]);
 }
