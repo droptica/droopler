@@ -48,18 +48,18 @@ class ConfigUpdate {
    *   Module name.
    * @param string $path
    *   Directory path with configs.
-   * @param string $configName
-   *   String to search in configuration file names.
+   * @param string $regex
+   *   Regular expresion pattern to search in configuration file names.
    *
    * @return array
    *   Array of configs.
    */
-  public function getConfigs($moduleName, $path, $configName) {
+  public function getConfigs($moduleName, $path, $regex) {
     $configs = [];
     $dir = $this->moduleHandler->getModule($moduleName)->getPath();
     $files = scandir($dir . $path);
     foreach ($files as $file) {
-      if (strpos($file, $configName) !== FALSE) {
+      if (preg_match($regex, $file) === 1) {
         $configs[] = substr($file, 0, -4);
       }
     }
@@ -89,11 +89,11 @@ class ConfigUpdate {
    *   Module name.
    * @param string $path
    *   Directory path with configs.
-   * @param string $configName
-   *   String to search in configuration file names.
+   * @param string $regex
+   *   Regular expresion pattern to search in configuration file names.
    */
-  public function updateThemeInConfigs($moduleName, $path, $configName) {
-    $this->setTheme($this->getConfigs($moduleName, $path, $configName));
+  public function updateThemeInConfigs($moduleName, $path, $regex) {
+    $this->setTheme($this->getConfigs($moduleName, $path, $regex));
   }
 
   /**
@@ -103,11 +103,11 @@ class ConfigUpdate {
    *   Module name.
    * @param string $path
    *   Directory path with configs.
-   * @param string $configName
-   *   String to search in configuration file names.
+   * @param string $regex
+   *   Regular expresion pattern to search in configuration file names.
    */
-  public function deleteConfigs($moduleName, $path, $configName) {
-    $configs = $this->getConfigs($moduleName, $path, $configName);
+  public function deleteConfigs($moduleName, $path, $regex) {
+    $configs = $this->getConfigs($moduleName, $path, $regex);
     foreach ($configs as $config) {
       $this->configFactory->getEditable($config)->delete();
     }

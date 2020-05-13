@@ -10,7 +10,7 @@
  */
 function d_commerce_product_install() {
   \Drupal::service('d_content_init.config_update')
-    ->updateThemeInConfigs('d_commerce_product', '/config/optional', 'block.block');
+    ->updateThemeInConfigs('d_commerce_product', '/config/optional', '/block\.block/');
 }
 
 /**
@@ -18,5 +18,5 @@ function d_commerce_product_install() {
  */
 function d_commerce_product_uninstall() {
   \Drupal::service('d_content_init.config_update')
-    ->deleteConfigs('d_commerce_product', '/config/optional', '.yml');
+    ->deleteConfigs('d_commerce_product', '/config/optional', '/.yml$/');
 }
