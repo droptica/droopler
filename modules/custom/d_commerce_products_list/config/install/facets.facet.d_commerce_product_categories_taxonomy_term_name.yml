@@ -5,10 +5,14 @@ dependencies:
     - search_api.index.droopler_commerce_product_index
     - views.view.droopler_commerce_products_list
   module:
+    - facets_pretty_paths
     - search_api
+third_party_settings:
+  facets_pretty_paths:
+    coder: default_coder
 id: d_commerce_product_categories_taxonomy_term_name
 name: 'Droopler Commerce Product Categories'
-url_alias: d_commerce_product_categories_taxonomy_term_name
+url_alias: categories
 weight: 0
 min_count: 1
 show_only_one_result: false
