@@ -9,32 +9,14 @@
  * Implements hook_install().
  */
 function d_commerce_product_list_install() {
-  $theme_name = \Drupal::config('system.theme')->get('default');
-  $config_service = \Drupal::service('config.factory');
-  $configs = d_commerce_product_list_get_block_configs();
-
-  foreach ($configs as $config) {
-    $config_service->getEditable($config)
-      ->set('theme', $theme_name)
-      ->set('dependencies.theme', $theme_name)
-      ->save();
-  }
+  \Drupal::service('d_content_init.config_update')
+    ->updateThemeInConfigs('d_commerce_products_list', '/config/optional', 'block.block');
 }
 
 /**
- * Get all config names for blocks.
- *
- * @return array
- *   List of configs names.
+ * Implements hook_uninstall().
  */
-function d_commerce_product_list_get_block_configs() {
-  $configs = [];
-  $dir = drupal_get_path('module', 'd_commerce_product_list');
-  $files = scandir($dir . '/config/optional');
-  foreach ($files as $file) {
-    if (strpos($file, 'block.block') !== FALSE) {
-      $configs[] = substr($file, 0, -4);
-    }
-  }
-  return $configs;
+function d_commerce_product_list_uninstall() {
+  \Drupal::service('d_content_init.config_update')
+    ->deleteConfigs('d_commerce_product_list', '/config/optional', '.yml');
 }

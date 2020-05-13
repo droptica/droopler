@@ -5,3 +5,6 @@ services:
   d_content_init.manager_media:
     class: Drupal\d_content_init\ContentInitManagerMedia
     arguments: ['@entity_type.manager', '@serialization.yaml', '@logger.factory', '@current_user', '@language_manager', '@module_handler', '@file_system']
+  d_content_init.config_update:
+    class: Drupal\d_content_init\Services\ConfigUpdate
+    arguments: ['@config.factory', '@module_handler']
