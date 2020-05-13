@@ -41,6 +41,17 @@
     }
   }
 
+  .slick-list {
+    .slick-track {
+      display: flex;
+      align-items: center;
+    }
+    .slick-slide {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .slider-nav {
     .slick-track,
     .slick-track-const {
@@ -57,10 +68,12 @@
       .slick-track-const {
         display: flex;
         justify-content: center;
+        align-items: center;
         width: 100% !important;
         transform: none !important;
       }
       .slick-slide {
+        padding: 0 0.5rem;
         &.slick-current {
           outline: 0;
         }
