@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for d_commerce.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function d_commerce_install() {
+  \Drupal::service('d_content_init.config_update')
+    ->updateThemeInConfigs('d_commerce', '/config/optional', '/block\.block/');
+}
