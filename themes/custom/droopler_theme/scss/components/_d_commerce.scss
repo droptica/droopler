@@ -12,6 +12,10 @@ $d-commerce-product-filters-group-margin: 3rem !default;
 $d-commerce-product-filters-mobile-color: $color-agamemnon !default;
 $d-commerce-product-filters-border: 2px solid $color-hector !default;
 
+// Cart
+$d-commerce-product-cart-border-color: $color-thersites !default;
+$d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color !default;;
+
 @mixin product-teaser-header {
   font-size: $d-commerce-product-teaser-header;
   color: $color-agamemnon;
@@ -1089,6 +1093,9 @@ body:not(.scrolled-buttons) {
     }
 
     .cart--cart-block {
+      position: relative;
+      z-index: 99;
+
       .cart-block--summary {
         text-align: center;
 
@@ -1121,20 +1128,36 @@ body:not(.scrolled-buttons) {
       // Cart content dropdown.
       .cart-block--contents {
         width: auto;
-        min-width: 300px;
         max-width: 500px;
+        border-top: $d-commerce-product-cart-border;
 
         @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
           position: static;
-          min-width: 0;
+          border-left: 0;
+          border-right: 0;
+        }
+        @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+          min-width: 300px;
+          margin-top: 15px;
+          top: 100%;
+          right: 0;
+          border: $d-commerce-product-cart-border;
+          border-radius: 1px;
+          box-shadow: 0 0 11px -7px darken($d-commerce-product-cart-border-color, 20%);
+        }
+        &__inner {
+          padding: 10px 20px;
+        }
 
-          .cart-block--contents__inner {
-            padding-top: 0;
-          }
+        &__items {
+          width: 100%;
+          display: table;
         }
 
         // Go to Cart link button.
         .cart-block--contents__links {
+          margin-bottom: -0.25rem;
+          padding-bottom: 10px;
           a {
             color: $white;
           }

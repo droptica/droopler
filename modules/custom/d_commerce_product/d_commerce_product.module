@@ -43,6 +43,13 @@ function d_commerce_product_preprocess_page(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_commerce_product_preprocess_commerce_cart_block(&$variables) {
+  $variables['#attached']['library'][] = 'd_commerce_product/d_product_commerce.cart';
+}
+
+/**
  * Implements hook_theme().
  *
  * Register theme's for commerce product.
