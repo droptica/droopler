@@ -66,6 +66,10 @@ function d_commerce_product_theme($existing, $type, $theme, $path) {
       'template' => 'commerce-product--droopler-products--teaser',
       'base hook' => 'commerce_product',
     ],
+    'commerce_product_variation__droopler_products__teaser' => [
+      'template' => 'commerce-product-variation--droopler-products--teaser',
+      'base hook' => 'commerce_product_variation',
+    ],
     'field__commerce_product__field_product_images__droopler_products' => [
       'template' => 'field--commerce-product--field-product-images--droopler-products',
       'base hook' => 'media',

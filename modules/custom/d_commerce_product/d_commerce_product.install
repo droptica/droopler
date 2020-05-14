@@ -5,12 +5,31 @@
  * Install, update, and uninstall functions for d_commerce_product.
  */
 
+use Drupal\Component\Plugin\Exception\PluginException;
+
 /**
  * Implements hook_install().
  */
 function d_commerce_product_install() {
   \Drupal::service('d_content_init.config_update')
     ->updateThemeInConfigs('d_commerce_product', '/config/optional', '/block\.block/');
+
+  try {
+    $order_types = \Drupal::entityTypeManager()
+      ->getStorage('commerce_order_type')
+      ->loadMultiple();
+
+    foreach ($order_types as $order_type) {
+      $order_type->setThirdPartySetting('commerce_cart', 'cart_form_view', 'd_commerce_cart_form');
+      $order_type->save();
+    }
+  }
+  catch (PluginException $exception) {
+    \Drupal::logger('d_commerce_product')
+      ->error('Could not set the @view_form as a default cart form view, please change it manually for your order types: /admin/commerce/config/order-types/', [
+        '@view_form' => 'Droopler Commerce Cart form',
+      ]);
+  }
 }
 
 /**
