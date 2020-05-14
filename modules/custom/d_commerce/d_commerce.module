@@ -20,6 +20,10 @@ function d_commerce_theme($existing, $type, $theme, $path) {
     'commerce_coupon_redemption_form' => [
       'template' => 'd_commerce-coupon-redemption-form',
     ],
+    'commerce_checkout_completion_register' => [
+      'template' => 'commerce-checkout-completion-register',
+      'base hook' => 'commerce_checkout_completion_register',
+    ],
   ];
 }
 
