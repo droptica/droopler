@@ -57,6 +57,14 @@ function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, 
       $form['actions']['next']['#suffix']->getGeneratedLink()
     ));
   }
+
+  $step = $form['#step_id'] ?? '';
+
+  if ('order_information' === $step) {
+    if (isset($form['payment_information']['billing_information'])) {
+      $form['payment_information']['billing_information']['#weight'] = -1;
+    }
+  }
 }
 
 /**
