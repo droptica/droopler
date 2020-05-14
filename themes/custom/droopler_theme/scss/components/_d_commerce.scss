@@ -1167,6 +1167,18 @@ body:not(.scrolled-buttons) {
   }
 }
 
+// Checkout (login)
+.checkout-pane-login {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  margin: 2rem -20px;
+
+  @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+    flex-wrap: nowrap;
+  }
+}
+
 // Address book.
 .address-book__container {
   .address-book__profile {
