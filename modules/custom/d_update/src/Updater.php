@@ -377,10 +377,12 @@ class Updater {
    *   Returns TRUE for proceed, false for halt.
    */
   public function verifyHash($name, $hash) {
-    switch (TRUE) {
-      case $hash == 'override':
-      case empty($hash):
+    switch ($hash) {
+      case 'override':
         return TRUE;
+
+      case '':
+        return !$this->configCompare->configExists($name);
 
       default:
         return $this->configCompare->compare($name, $hash);

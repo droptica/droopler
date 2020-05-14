@@ -1,6 +1,7 @@
 services:
   d_update.config_compare:
     class: Drupal\d_update\ConfigCompare
+    arguments: ['@config.factory']
   d_update.update_checklist:
     class: Drupal\d_update\UpdateChecklist
     arguments: ['@config.factory', '@module_handler', '@current_user', '@checklistapi_storage.state']
