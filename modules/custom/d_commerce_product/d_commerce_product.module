@@ -73,6 +73,10 @@ function d_commerce_product_theme($existing, $type, $theme, $path) {
       'template' => 'commerce-product--droopler-products--teaser',
       'base hook' => 'commerce_product',
     ],
+    'commerce_product_variation__droopler_products__teaser' => [
+      'template' => 'commerce-product-variation--droopler-products--teaser',
+      'base hook' => 'commerce_product_variation',
+    ],
     'commerce_order_total_summary__default' => [
       'template' => 'commerce-order-total-summary--default',
       'base hook' => 'commerce_order_total_summary',
