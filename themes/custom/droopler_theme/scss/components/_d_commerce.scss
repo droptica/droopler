@@ -280,6 +280,23 @@ $d-commerce-product-filters-border: 2px solid $color-hector !default;
   }
 }
 
+.view-droopler-commerce-products-list {
+  .view-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -0.625rem -0.3125rem 0 -0.3125rem;
+  }
+  .d-media-canvas-image {
+    margin: 1rem 1rem 0;
+  }
+  .field--type-image {
+    margin-right: 0;
+    img {
+      margin-bottom: 0;
+    }
+  }
+}
+
 // Full Commerce Product.
 @mixin btn-slider-navigation-next {
   z-index: 1;
@@ -326,6 +343,17 @@ $d-commerce-product-filters-border: 2px solid $color-hector !default;
     }
   }
 
+  .slick-list {
+    .slick-track {
+      display: flex;
+      align-items: center;
+    }
+    .slick-slide {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .slider-main {
     margin: 0 0 1.5rem 0;
     .img-container {
@@ -350,10 +378,12 @@ $d-commerce-product-filters-border: 2px solid $color-hector !default;
       .slick-track-const {
         display: flex;
         justify-content: center;
+        align-items: center;
         width: 100% !important;
         transform: none !important;
       }
       .slick-slide {
+        padding: 0 0.5rem;
         &.slick-current {
           outline: 0;
         }
