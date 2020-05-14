@@ -412,6 +412,11 @@ class Updater {
     foreach ($data as $configName => $configOperations) {
       $updates = $configOperations;
       $newConfig = [];
+      if (isset($updates['delete'])) {
+        foreach ($updates['delete'] as $value) {
+          NestedArray::unsetValue($newConfig, explode('.', $value));
+        }
+      }
       if (isset($updates['change'])) {
         $newConfig = NestedArray::mergeDeep($newConfig, $updates['change']['new']);
       }
