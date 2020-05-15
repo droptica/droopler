@@ -61,6 +61,15 @@ function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, 
       $form['actions']['next']['#suffix']->getGeneratedLink()
     ));
   }
+  if (isset($form['shipping_information']['recalculate_shipping'])) {
+    $form['shipping_information']['recalculate_shipping']['#attributes']['class'][] = 'btn btn-light mb-4';
+  }
+  if (isset($form['shipping_information']['shipping_profile']['edit_button'])) {
+    $form['shipping_information']['shipping_profile']['edit_button']['#attributes']['class'][] = 'btn btn-light';
+  }
+  if (isset($form['payment_information']['billing_information']['edit_button'])) {
+    $form['payment_information']['billing_information']['edit_button']['#attributes']['class'][] = 'btn btn-light';
+  }
 
   $step = $form['#step_id'] ?? '';
 
