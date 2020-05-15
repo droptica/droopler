@@ -1192,6 +1192,18 @@ body:not(.scrolled-buttons) {
   }
 }
 
+// User orders.
+.view-d-commerce-user-orders {
+  .views-field {
+    &-order-number {
+      width: 15%;
+    }
+  }
+  td.views-field {
+    text-align: center;
+  }
+}
+
 // Checkout (login)
 .checkout-pane-login {
   display: flex;
