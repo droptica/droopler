@@ -20,6 +20,10 @@ function d_commerce_theme($existing, $type, $theme, $path) {
     'commerce_coupon_redemption_form' => [
       'template' => 'd_commerce-coupon-redemption-form',
     ],
+    'commerce_checkout_completion_register' => [
+      'template' => 'commerce-checkout-completion-register',
+      'base hook' => 'commerce_checkout_completion_register',
+    ],
   ];
 }
 
@@ -57,13 +61,35 @@ function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, 
       $form['actions']['next']['#suffix']->getGeneratedLink()
     ));
   }
+  if (isset($form['shipping_information']['recalculate_shipping'])) {
+    $form['shipping_information']['recalculate_shipping']['#attributes']['class'][] = 'btn btn-light mb-4';
+  }
+  if (isset($form['shipping_information']['shipping_profile']['edit_button'])) {
+    $form['shipping_information']['shipping_profile']['edit_button']['#attributes']['class'][] = 'btn btn-light';
+  }
+  if (isset($form['payment_information']['billing_information']['edit_button'])) {
+    $form['payment_information']['billing_information']['edit_button']['#attributes']['class'][] = 'btn btn-light';
+  }
 
   $step = $form['#step_id'] ?? '';
 
-  if ('order_information' === $step) {
-    if (isset($form['payment_information']['billing_information'])) {
-      $form['payment_information']['billing_information']['#weight'] = -1;
-    }
+  switch ($step) {
+    case 'login':
+      if (isset($form['login']['returning_customer']['forgot_password'])) {
+        $form['login']['returning_customer']['forgot_password']['#attributes'] = [
+          'class' => [
+            'btn',
+            'btn-outline-primary',
+            'ml-3',
+          ],
+        ];
+      }
+      break;
+    case 'order_information':
+      if (isset($form['payment_information']['billing_information'])) {
+        $form['payment_information']['billing_information']['#weight'] = -1;
+      }
+      break;
   }
 }
 
