@@ -15,12 +15,31 @@ use Drupal\Core\Url;
 function d_commerce_theme($existing, $type, $theme, $path) {
   return [
     'commerce_checkout_order_summary' => [
-      'template' => 'd_commerce-checkout-order-summary',
+      'template' => 'commerce-checkout-order-summary--default',
+    ],
+    'commerce_order_total_summary__default' => [
+      'template' => 'commerce-order-total-summary--default',
+      'base hook' => 'commerce_order_total_summary',
     ],
     'commerce_coupon_redemption_form' => [
-      'template' => 'd_commerce-coupon-redemption-form',
+      'template' => 'commerce-coupon-redemption-form--default',
+    ],
+    'commerce_checkout_completion_message' => [
+      'template' => 'commerce-checkout-completion-message--default',
+      'base hook' => 'commerce_checkout_completion_message',
+    ],
+    'commerce_checkout_completion_register' => [
+      'template' => 'commerce-checkout-completion-register',
+      'base hook' => 'commerce_checkout_completion_register',
     ],
   ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function d_commerce_theme_suggestions_commerce_order_total_summary_alter(array &$suggestions, array $variables) {
+  $suggestions[] = $variables['theme_hook_original'] . '__' . $variables['order_entity']->bundle();
 }
 
 /**
@@ -56,6 +75,36 @@ function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, 
       'link--previous btn btn-light',
       $form['actions']['next']['#suffix']->getGeneratedLink()
     ));
+  }
+  if (isset($form['shipping_information']['recalculate_shipping'])) {
+    $form['shipping_information']['recalculate_shipping']['#attributes']['class'][] = 'btn btn-light mb-4';
+  }
+  if (isset($form['shipping_information']['shipping_profile']['edit_button'])) {
+    $form['shipping_information']['shipping_profile']['edit_button']['#attributes']['class'][] = 'btn btn-light';
+  }
+  if (isset($form['payment_information']['billing_information']['edit_button'])) {
+    $form['payment_information']['billing_information']['edit_button']['#attributes']['class'][] = 'btn btn-light';
+  }
+
+  $step = $form['#step_id'] ?? '';
+
+  switch ($step) {
+    case 'login':
+      if (isset($form['login']['returning_customer']['forgot_password'])) {
+        $form['login']['returning_customer']['forgot_password']['#attributes'] = [
+          'class' => [
+            'btn',
+            'btn-outline-primary',
+            'ml-3',
+          ],
+        ];
+      }
+      break;
+    case 'order_information':
+      if (isset($form['payment_information']['billing_information'])) {
+        $form['payment_information']['billing_information']['#weight'] = -1;
+      }
+      break;
   }
 }
 

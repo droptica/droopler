@@ -4,14 +4,22 @@
  * @file
  */
 
+use \Drupal\commerce_product\Entity\ProductInterface;
+
 /**
  * Implements hook_preprocess_field() for HTML document templates.
  */
 function d_commerce_product_preprocess_field(&$variables) {
-  if ($variables['field_name'] == 'field_product_images') {
-    $variables['#attached']['library'][] = 'd_commerce_product/d_product_commerce_slider';
-    $slider = views_embed_view('commerce_product_images', 'block_1');
-    $variables['slider'] = render($slider);
+  $object = $variables['element']['#object'] ?? NULL;
+  if ($object instanceof ProductInterface) {
+    if ($variables['field_name'] == 'field_product_images') {
+      $variables['#attached']['library'][] = 'd_commerce_product/d_product_commerce_slider';
+      $slider = views_embed_view('commerce_product_images', 'block_1');
+      $variables['slider'] = render($slider);
+    }
+    if ($variables['field_name'] === 'variations') {
+      $variables['label_hidden'] = $variables['element']['#items']->count() <= 1;
+    }
   }
 }
 
@@ -35,6 +43,13 @@ function d_commerce_product_preprocess_page(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_commerce_product_preprocess_commerce_cart_block(&$variables) {
+  $variables['#attached']['library'][] = 'd_commerce_product/d_product_commerce.cart';
+}
+
+/**
  * Implements hook_theme().
  *
  * Register theme's for commerce product.
@@ -46,16 +61,28 @@ function d_commerce_product_theme($existing, $type, $theme, $path) {
     'commerce_product__droopler_products__full' => [
       'template' => 'commerce-product--droopler-products--full',
       'base hook' => 'commerce_product',
-    ], 'commerce_product__droopler_products__teaser' => [
+    ],
+    'commerce_product__droopler_products__teaser' => [
       'template' => 'commerce-product--droopler-products--teaser',
       'base hook' => 'commerce_product',
-    ], 'field__commerce_product__field_product_images__droopler_products' => [
+    ],
+    'commerce_product_variation__droopler_products__teaser' => [
+      'template' => 'commerce-product-variation--droopler-products--teaser',
+      'base hook' => 'commerce_product_variation',
+    ],
+    'commerce_product_variation__droopler_products__summary' => [
+      'template' => 'commerce-product-variation--droopler-products--summary',
+      'base hook' => 'commerce_product_variation',
+    ],
+    'field__commerce_product__field_product_images__droopler_products' => [
       'template' => 'field--commerce-product--field-product-images--droopler-products',
       'base hook' => 'media',
-    ], 'views_view__commerce_product_images' => [
+    ],
+    'views_view__commerce_product_images' => [
       'template' => 'views-view--commerce_product_images',
       'base hook' => 'views_view__product_images',
-    ], 'views_view__commerce_product_images__attachment_1' => [
+    ],
+    'views_view__commerce_product_images__attachment_1' => [
       'template' => 'views-view--commerce_product_images--attachment_1',
       'base hook' => 'views_view__product_images_attachment_1',
     ],
