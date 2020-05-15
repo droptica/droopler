@@ -56,11 +56,15 @@ class ConfigUpdate {
    */
   public function getConfigs($moduleName, $path, $regex) {
     $configs = [];
-    $dir = $this->moduleHandler->getModule($moduleName)->getPath();
-    $files = scandir($dir . $path);
-    foreach ($files as $file) {
-      if (preg_match($regex, $file) === 1) {
-        $configs[] = substr($file, 0, -4);
+    if ($this->moduleHandler->moduleExists($moduleName)) {
+      $dir = $this->moduleHandler->getModule($moduleName)->getPath();
+      if (file_exists($dir)) {
+        $files = scandir($dir . $path);
+        foreach ($files as $file) {
+          if (preg_match($regex, $file) === 1) {
+            $configs[] = substr($file, 0, -4);
+          }
+        }
       }
     }
     return $configs;
@@ -75,10 +79,12 @@ class ConfigUpdate {
   public function setTheme(array $configs) {
     $theme = $this->configFactory->get('system.theme')->get('default');
     foreach ($configs as $config) {
-      $this->configFactory->getEditable($config)
-        ->set('theme', $theme)
-        ->set('dependencies.theme', $theme)
-        ->save();
+      $configToUpdate = $this->configFactory->getEditable($config);
+      if (!$configToUpdate->isNew()) {
+        $configToUpdate->set('theme', $theme)
+          ->set('dependencies.theme', $theme)
+          ->save();
+      }
     }
   }
 
