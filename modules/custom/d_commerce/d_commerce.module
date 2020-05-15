@@ -20,6 +20,10 @@ function d_commerce_theme($existing, $type, $theme, $path) {
     'commerce_coupon_redemption_form' => [
       'template' => 'd_commerce-coupon-redemption-form',
     ],
+    'commerce_checkout_completion_register' => [
+      'template' => 'commerce-checkout-completion-register',
+      'base hook' => 'commerce_checkout_completion_register',
+    ],
   ];
 }
 
@@ -65,6 +69,20 @@ function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, 
   }
   if (isset($form['payment_information']['billing_information']['edit_button'])) {
     $form['payment_information']['billing_information']['edit_button']['#attributes']['class'][] = 'btn btn-light';
+  }
+
+  $step = $form['#step_id'] ?? '';
+
+  if ('login' === $step) {
+    if (isset($form['login']['returning_customer']['forgot_password'])) {
+      $form['login']['returning_customer']['forgot_password']['#attributes'] = [
+        'class' => [
+          'btn',
+          'btn-outline-primary',
+          'ml-3',
+        ],
+      ];
+    }
   }
 }
 
