@@ -1167,6 +1167,31 @@ body:not(.scrolled-buttons) {
   }
 }
 
+// Shopping cart.
+.view-d-commerce-cart-form {
+  .views-field {
+    &-purchased-entity {
+      width: 50%;
+      min-width: 250px;
+    }
+    &-edit-quantity {
+      width: 10%;
+      fieldset {
+        margin: 0;
+      }
+    }
+    &-remove-button {
+      text-align: center;
+      input {
+        margin: 0;
+      }
+    }
+  }
+  td.views-field {
+    vertical-align: middle;
+  }
+}
+
 // Address book.
 .address-book__container {
   .address-book__profile {
