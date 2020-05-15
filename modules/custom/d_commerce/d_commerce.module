@@ -15,14 +15,18 @@ use Drupal\Core\Url;
 function d_commerce_theme($existing, $type, $theme, $path) {
   return [
     'commerce_checkout_order_summary' => [
-      'template' => 'd_commerce-checkout-order-summary',
+      'template' => 'commerce-checkout-order-summary--default',
     ],
     'commerce_order_total_summary__default' => [
       'template' => 'commerce-order-total-summary--default',
       'base hook' => 'commerce_order_total_summary',
     ],
     'commerce_coupon_redemption_form' => [
-      'template' => 'd_commerce-coupon-redemption-form',
+      'template' => 'commerce-coupon-redemption-form--default',
+    ],
+    'commerce_checkout_completion_message' => [
+      'template' => 'commerce-checkout-completion-message--default',
+      'base hook' => 'commerce_checkout_completion_message',
     ],
     'commerce_checkout_completion_register' => [
       'template' => 'commerce-checkout-completion-register',
