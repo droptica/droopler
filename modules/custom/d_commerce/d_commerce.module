@@ -73,16 +73,23 @@ function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, 
 
   $step = $form['#step_id'] ?? '';
 
-  if ('login' === $step) {
-    if (isset($form['login']['returning_customer']['forgot_password'])) {
-      $form['login']['returning_customer']['forgot_password']['#attributes'] = [
-        'class' => [
-          'btn',
-          'btn-outline-primary',
-          'ml-3',
-        ],
-      ];
-    }
+  switch ($step) {
+    case 'login':
+      if (isset($form['login']['returning_customer']['forgot_password'])) {
+        $form['login']['returning_customer']['forgot_password']['#attributes'] = [
+          'class' => [
+            'btn',
+            'btn-outline-primary',
+            'ml-3',
+          ],
+        ];
+      }
+      break;
+    case 'order_information':
+      if (isset($form['payment_information']['billing_information'])) {
+        $form['payment_information']['billing_information']['#weight'] = -1;
+      }
+      break;
   }
 }
 
