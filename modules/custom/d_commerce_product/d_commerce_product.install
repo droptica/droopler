@@ -21,6 +21,7 @@ function d_commerce_product_install() {
 
     foreach ($order_types as $order_type) {
       $order_type->setThirdPartySetting('commerce_cart', 'cart_form_view', 'd_commerce_cart_form');
+      $order_type->setThirdPartySetting('commerce_cart', 'cart_block_view', 'd_commerce_cart_block');
       $order_type->save();
     }
   }

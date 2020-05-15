@@ -17,6 +17,10 @@ function d_commerce_theme($existing, $type, $theme, $path) {
     'commerce_checkout_order_summary' => [
       'template' => 'd_commerce-checkout-order-summary',
     ],
+    'commerce_order_total_summary__default' => [
+      'template' => 'commerce-order-total-summary--default',
+      'base hook' => 'commerce_order_total_summary',
+    ],
     'commerce_coupon_redemption_form' => [
       'template' => 'd_commerce-coupon-redemption-form',
     ],
@@ -25,6 +29,13 @@ function d_commerce_theme($existing, $type, $theme, $path) {
       'base hook' => 'commerce_checkout_completion_register',
     ],
   ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function d_commerce_theme_suggestions_commerce_order_total_summary_alter(array &$suggestions, array $variables) {
+  $suggestions[] = $variables['theme_hook_original'] . '__' . $variables['order_entity']->bundle();
 }
 
 /**
