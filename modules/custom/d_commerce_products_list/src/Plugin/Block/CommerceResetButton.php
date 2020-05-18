@@ -4,7 +4,10 @@ namespace Drupal\d_commerce_products_list\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Provides a 'Commerce Reset button' Block.
@@ -15,7 +18,55 @@ use Drupal\Core\Url;
  *   category = @Translation("Facets"),
  * )
  */
-class CommerceResetButton extends BlockBase {
+class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * Request.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
+   * CommerceResetButton constructor.
+   *
+   * @param array $configuration
+   *   Configuration options.
+   * @param string $plugin_id
+   *   Plugin id.
+   * @param mixed $plugin_definition
+   *   Plugin definition.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+   *   Request.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RequestStack $requestStack) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->requestStack = $requestStack;
+  }
+
+  /**
+   * Create.
+   *
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   Container.
+   * @param array $configuration
+   *   Configuration options.
+   * @param string $plugin_id
+   *   Plugin id.
+   * @param mixed $plugin_definition
+   *   Plugin definition.
+   *
+   * @return CommerceResetButton|static
+   *   Static.
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('request_stack')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -65,16 +116,19 @@ class CommerceResetButton extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    if (!isset($_REQUEST['f'])) {
+
+    if ($this->requestStack->getCurrentRequest()->getRequestUri() == '/shop') {
       return [
         '#markup' => '',
         '#cache' => [
-          'contexts' => ['url.query_args:f'],
+          'contexts' => ['url'],
         ],
       ];
     }
 
-    $link_content_markups = [];
+    $link_content_markups[] = [
+      '#markup' => $this->t($this->getConfiguration()['button_text']),
+    ];
     if (!empty($this->getConfiguration()['button_icon_class'])) {
       $link_content_markups[] = [
         '#type' => 'html_tag',
@@ -84,10 +138,6 @@ class CommerceResetButton extends BlockBase {
         ],
       ];
     }
-
-    $link_content_markups[] = [
-      '#markup' => $this->t($this->getConfiguration()['button_text']),
-    ];
 
     return [
       [
@@ -99,7 +149,7 @@ class CommerceResetButton extends BlockBase {
         ],
         '#url' => URL::fromUserInput($this->getConfiguration()['button_target']),
         '#cache' => [
-          'contexts' => ['url.query_args:f'],
+          'contexts' => ['url'],
         ],
       ],
     ];
