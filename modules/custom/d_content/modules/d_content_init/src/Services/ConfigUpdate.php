@@ -5,6 +5,7 @@ namespace Drupal\d_content_init\Services;
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\ModuleHandler;
+use Drupal\Core\Logger\LoggerChannelFactory;
 
 /**
  * Class ConfigUpdate.
@@ -28,16 +29,26 @@ class ConfigUpdate {
   protected $moduleHandler;
 
   /**
+   * Logger factory.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelFactory
+   */
+  protected $loggerFactory;
+
+  /**
    * ConfigUpdate constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactory $configFactory
    *   Config factory.
    * @param \Drupal\Core\Extension\ModuleHandler $moduleHandler
    *   Module handler.
+   * @param \Drupal\Core\Logger\LoggerChannelFactory $loggerFactory
+   *   Logger factory.
    */
-  public function __construct(ConfigFactory $configFactory, ModuleHandler $moduleHandler) {
+  public function __construct(ConfigFactory $configFactory, ModuleHandler $moduleHandler, LoggerChannelFactory $loggerFactory) {
     $this->configFactory = $configFactory;
     $this->moduleHandler = $moduleHandler;
+    $this->loggerFactory = $loggerFactory;
   }
 
   /**
@@ -54,13 +65,20 @@ class ConfigUpdate {
    * @return array
    *   Array of configs names.
    */
-  public function getConfigsFilesName($moduleName, $path, $regex) {
+  public function getConfigsFilesNames($moduleName, $path, $regex) {
     $configsFileNames = [];
-    $filesNames = scandir($this->getConfigsPath($moduleName, $path));
-    foreach ($filesNames as $fileName) {
-      if (preg_match($regex, $fileName) === 1) {
-        $configsFileNames[] = substr($fileName, 0, -4);
+    try {
+      $filesNames = scandir($this->getConfigsPath($moduleName, $path));
+      foreach ($filesNames as $fileName) {
+        if (preg_match($regex, $fileName) === 1) {
+          $configsFileNames[] = substr($fileName, 0, -4);
+        }
       }
+    }
+    catch (\Exception $e) {
+      $this->loggerFactory
+        ->get('d_content_init')
+        ->error('Unable to load configuration files names: ' . $e->getMessage());
     }
     return $configsFileNames;
   }
@@ -77,15 +95,14 @@ class ConfigUpdate {
     $theme = $this->configFactory->get('system.theme')->get('default');
     $storage = new FileStorage($path);
     foreach ($configs as $themeConfigName) {
-      $subthemeConfigName = $this->getConfigName($themeConfigName, $theme);
+      $subthemeConfigName = $this->getSubthemeConfigName($themeConfigName, $theme);
       $newConfig = $this->configFactory->getEditable($subthemeConfigName);
       // Check if the configuration is new.
       if ($newConfig->isNew()) {
         $newConfig->setData($storage->read($themeConfigName));
-        // TODO: Add correct id for block config.
         $newConfig->set('theme', $theme)
           ->set('dependencies.theme', [$theme])
-          ->set('id', $this->getConfigId($subthemeConfigName))
+          ->set('id', $this->getConfigId($themeConfigName, $theme))
           ->save();
       }
     }
@@ -101,8 +118,11 @@ class ConfigUpdate {
    *   Config name parts exploded by dots.
    */
   public function getConfigNameParts($config) {
-    return explode('.', $config);
-
+    $parts = explode('.', $config);
+    if (is_array($parts) && !empty($parts)) {
+      return $parts;
+    }
+    throw new \RuntimeException('Invalid config name: ' . $config);
   }
 
   /**
@@ -116,27 +136,32 @@ class ConfigUpdate {
    * @return string
    *   Config name for theme.
    */
-  public function getConfigName($config, $theme) {
+  public function getSubthemeConfigName($config, $theme) {
     $parts = $this->getConfigNameParts($config);
     // Add active theme name to config.
-    $parts[2] = $theme . '_' . $parts[2];
+    if (isset($parts[2])) {
+      $parts[2] = $theme . '_' . $parts[2];
+    }
+    else {
+      $parts[2] = $theme;
+    }
+
     return implode('.', $parts);
   }
 
   /**
    * Get config id from config name for active theme.
    *
-   * @param string $config
+   * @param string $configName
    *   Config name.
+   * @param string $theme
+   *   Theme name.
    *
    * @return string
    *   Config id.
    */
-  public function getConfigId($config) {
-    $parts = $this->getConfigNameParts($config);
-    unset($parts[0]);
-    unset($parts[1]);
-    return implode('.', $parts);
+  public function getConfigId($configName, $theme) {
+    return $theme . '_' . $this->configFactory->getEditable($configName)->get('id');
   }
 
   /**
@@ -171,9 +196,15 @@ class ConfigUpdate {
    *   Regular expresion pattern to search in configuration file names.
    */
   public function importConfigs($moduleName, $path, $regex) {
-    $configs = $this->getConfigsFilesName($moduleName, $path, $regex);
-    $this->createBlocksConfigs($configs, $this->getConfigsPath($moduleName, $path));
-
+    $configs = $this->getConfigsFilesNames($moduleName, $path, $regex);
+    try {
+      $this->createBlocksConfigs($configs, $this->getConfigsPath($moduleName, $path));
+    }
+    catch (\Exception $e) {
+      $this->loggerFactory
+        ->get('d_content_init')
+        ->error('Create configs for active theme failed: ' . $e->getMessage());
+    }
   }
 
   /**
@@ -188,11 +219,19 @@ class ConfigUpdate {
    */
   public function deleteConfigs($moduleName, $path, $regex) {
     $theme = $this->configFactory->get('system.theme')->get('default');
-    $configs = $this->getConfigsFilesName($moduleName, $path, $regex);
+    $configs = $this->getConfigsFilesNames($moduleName, $path, $regex);
     foreach ($configs as $themeConfigName) {
-      $configToDelete = $this->configFactory->getEditable($this->getConfigName($themeConfigName, $theme));
-      if (!$configToDelete->isNew()) {
-        $configToDelete->delete();
+      try {
+        $subthemeConfigName = $this->getSubthemeConfigName($themeConfigName, $theme);
+        $configToDelete = $this->configFactory->getEditable($subthemeConfigName);
+        if (!$configToDelete->isNew()) {
+          $configToDelete->delete();
+        }
+      }
+      catch (\Exception $e) {
+        $this->loggerFactory
+          ->get('d_content_init')
+          ->error('Delete config failed: ' . $e->getMessage());
       }
     }
   }
