@@ -21,11 +21,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Request.
+   * Current Request.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var Symfony\Component\HttpFoundation\Request
    */
-  protected $requestStack;
+  protected $request;
 
   /**
    * CommerceResetButton constructor.
@@ -41,7 +41,7 @@ class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInt
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, RequestStack $requestStack) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->requestStack = $requestStack;
+    $this->request = $requestStack->getCurrentRequest();
   }
 
   /**
@@ -117,7 +117,7 @@ class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInt
    */
   public function build() {
 
-    if ($this->requestStack->getCurrentRequest()->getRequestUri() == '/shop') {
+    if ($this->request->getRequestUri() == '/shop') {
       return [
         '#markup' => '',
         '#cache' => [
