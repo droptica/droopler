@@ -1,9 +1,10 @@
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.commerce_product_variation.teaser
   enforced:
     module:
-      - commerce_cart
       - d_commerce_product
   module:
     - commerce_cart
@@ -467,4 +468,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-      tags: {  }
+      tags:
+        - 'config:core.entity_view_display.commerce_product_variation.droopler_products.teaser'
