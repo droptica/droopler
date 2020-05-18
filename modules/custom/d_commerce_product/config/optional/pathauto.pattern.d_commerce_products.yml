@@ -4,6 +4,9 @@ dependencies:
   module:
     - commerce_product
     - d_commerce_product
+  enforced:
+    module:
+      - d_commerce_product
 id: d_commerce_products
 label: 'Commerce Products'
 type: 'canonical_entities:commerce_product'

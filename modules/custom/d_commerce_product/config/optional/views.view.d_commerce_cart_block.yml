@@ -6,10 +6,12 @@ dependencies:
   enforced:
     module:
       - commerce_cart
+      - d_commerce_product
   module:
     - commerce_order
     - commerce_price
     - commerce_product
+
 id: d_commerce_cart_block
 label: 'Droopler Commerce Cart block'
 module: views

@@ -5,6 +5,9 @@ dependencies:
     - commerce_product.commerce_product_variation_type.droopler_products
     - core.entity_view_mode.commerce_product_variation.summary
     - field.field.commerce_product_variation.droopler_products.weight
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product_variation.droopler_products.summary
 targetEntityType: commerce_product_variation
 bundle: droopler_products

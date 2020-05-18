@@ -5,6 +5,9 @@ dependencies:
     - commerce_product
     - entity_reference_revisions
     - paragraphs
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product.field_page_section
 field_name: field_page_section
 entity_type: commerce_product

@@ -4,6 +4,9 @@ dependencies:
   module:
     - commerce_product
     - media
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product.field_product_images
 field_name: field_product_images
 entity_type: commerce_product

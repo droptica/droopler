@@ -1,6 +1,9 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - d_commerce_product
 id: payment_gateway_test
 label: 'Payment gateway test'
 weight: null

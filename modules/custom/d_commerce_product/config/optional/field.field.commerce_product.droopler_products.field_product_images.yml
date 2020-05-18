@@ -6,6 +6,9 @@ dependencies:
     - field.storage.commerce_product.field_product_images
     - media.type.d_image
     - media.type.d_video
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product.droopler_products.field_product_images
 field_name: field_product_images
 entity_type: commerce_product

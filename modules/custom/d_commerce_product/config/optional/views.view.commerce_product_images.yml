@@ -10,6 +10,9 @@ dependencies:
     - commerce_product
     - media
     - user
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product_images
 label: 'Commerce product images'
 module: views

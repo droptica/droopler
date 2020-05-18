@@ -1,6 +1,9 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - d_commerce_product
 id: droopler_products
 label: 'Product'
 description: ''

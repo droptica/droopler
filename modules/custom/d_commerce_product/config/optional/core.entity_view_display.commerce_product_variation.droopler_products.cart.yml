@@ -6,6 +6,9 @@ dependencies:
     - core.entity_view_mode.commerce_product_variation.cart
   module:
     - commerce_price
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product_variation.droopler_products.cart
 targetEntityType: commerce_product_variation
 bundle: droopler_products

@@ -7,6 +7,9 @@ dependencies:
     - options
     - state_machine
     - user
+  enforced:
+    module:
+      - d_commerce_product
 id: d_commerce_user_orders
 label: 'Droopler User orders'
 module: views
