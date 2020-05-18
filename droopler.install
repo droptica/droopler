@@ -8,6 +8,7 @@
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
+use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_install().
@@ -1343,5 +1344,23 @@ function droopler_update_8113() {
   $values['droopler__droopler_update_8113_2'] = update_modules_configuration(['d_product'], '8113');
 
   $updater->checklist()
+    ->saveProgress(['v2.1' => $values]);
+}
+
+/**
+ * Droopler 2.1 grant view media permission to authenticated users.
+ */
+function droopler_update_8114() {
+  $role_id = 'authenticated';
+  $perrmission = 'view media';
+
+  Role::load($role_id)
+    ->grantPermission($perrmission)
+    ->save();
+
+  $values['droopler__droopler_update_8114_1'] = Role::load($role_id)->hasPermission($perrmission);
+
+  Drupal::service('d_update')
+    ->checklist()
     ->saveProgress(['v2.1' => $values]);
 }
