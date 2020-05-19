@@ -5,7 +5,7 @@ namespace Drupal\d_content_init\Services;
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\ModuleHandler;
-use Drupal\Core\Logger\LoggerChannelFactory;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
  * Class ConfigUpdate.
@@ -29,11 +29,11 @@ class ConfigUpdate {
   protected $moduleHandler;
 
   /**
-   * Logger factory.
+   * Logger.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactory
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
    */
-  protected $loggerFactory;
+  protected $logger;
 
   /**
    * ConfigUpdate constructor.
@@ -42,13 +42,13 @@ class ConfigUpdate {
    *   Config factory.
    * @param \Drupal\Core\Extension\ModuleHandler $moduleHandler
    *   Module handler.
-   * @param \Drupal\Core\Logger\LoggerChannelFactory $loggerFactory
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
    *   Logger factory.
    */
-  public function __construct(ConfigFactory $configFactory, ModuleHandler $moduleHandler, LoggerChannelFactory $loggerFactory) {
+  public function __construct(ConfigFactory $configFactory, ModuleHandler $moduleHandler, LoggerChannelFactoryInterface $logger) {
     $this->configFactory = $configFactory;
     $this->moduleHandler = $moduleHandler;
-    $this->loggerFactory = $loggerFactory;
+    $this->logger = $logger->get('d_content_init');
   }
 
   /**
@@ -76,9 +76,7 @@ class ConfigUpdate {
       }
     }
     catch (\Exception $e) {
-      $this->loggerFactory
-        ->get('d_content_init')
-        ->error('Unable to load configuration files names: ' . $e->getMessage());
+      $this->logger->error('Unable to load configuration files names: ' . $e->getMessage());
     }
     return $configsFileNames;
   }
@@ -201,9 +199,7 @@ class ConfigUpdate {
       $this->createBlocksConfigs($configs, $this->getConfigsPath($moduleName, $path));
     }
     catch (\Exception $e) {
-      $this->loggerFactory
-        ->get('d_content_init')
-        ->error('Create configs for active theme failed: ' . $e->getMessage());
+      $this->logger->error('Create configs for active theme failed: ' . $e->getMessage());
     }
   }
 
@@ -229,9 +225,7 @@ class ConfigUpdate {
         }
       }
       catch (\Exception $e) {
-        $this->loggerFactory
-          ->get('d_content_init')
-          ->error('Delete config failed: ' . $e->getMessage());
+        $this->logger->error('Delete config failed: ' . $e->getMessage());
       }
     }
   }
