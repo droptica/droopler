@@ -17,6 +17,10 @@ function d_commerce_theme($existing, $type, $theme, $path) {
     'commerce_checkout_order_summary' => [
       'template' => 'd_commerce-checkout-order-summary',
     ],
+    'commerce_order_receipt__default' => [
+      'template' => 'commerce-order-receipt--default',
+      'base hook' => 'commerce_order_receipt__default',
+    ],
     'commerce_order_total_summary__default' => [
       'template' => 'commerce-order-total-summary--default',
       'base hook' => 'commerce_order_total_summary',
