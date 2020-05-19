@@ -49,7 +49,7 @@ class Updater {
   /**
    * D update config compare service.
    *
-   * @var \Drupal\d_update\ConfigCompare
+   * @var \Drupal\d_update\ConfigCompareInterface
    */
   protected $configCompare;
 
@@ -90,7 +90,7 @@ class Updater {
    *   Config storage service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity type manager service.
-   * @param \Drupal\d_update\ConfigCompare $config_compare
+   * @param \Drupal\d_update\ConfigCompareInterface $config_compare
    *   D Update Config compare service.
    * @param \Drupal\Core\Config\ConfigManagerInterface $config_manager
    *   Config manager service.
@@ -99,11 +99,12 @@ class Updater {
    * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
    *   Update Module Extension List service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   Config factory service.
    */
   public function __construct(ModuleInstallerInterface $module_installer,
                               StorageInterface $config_storage,
                               EntityTypeManagerInterface $entity_type_manager,
-                              ConfigCompare $config_compare,
+                              ConfigCompareInterface $config_compare,
                               ConfigManagerInterface $config_manager,
                               UpdateChecklist $checklist,
                               ModuleExtensionList $moduleExtensionList,

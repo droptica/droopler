@@ -8,3 +8,8 @@ services:
   d_update:
     class: Drupal\d_update\Updater
     arguments: ['@module_installer', '@config.storage', '@entity_type.manager',  '@d_update.config_compare', '@config.manager', '@d_update.update_checklist', '@extension.list.module', '@config.factory']
+  d_update.drush.generate_config_hash_command:
+    class: \Drupal\d_update\Commands\GenerateConfigHashCommand
+    arguments: ['@d_update.config_compare']
+    tags:
+      - { name: drush.command }
