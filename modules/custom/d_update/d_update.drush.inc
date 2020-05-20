@@ -35,7 +35,7 @@ function drush_d_update_generate_config_hash($opt = NULL) {
   }
 
   if (empty(($opt))) {
-    drush_print(dt('Config name can not be empty, please inser valid config name.'));
+    drush_print(dt('Config name can not be empty, please insert valid config name.'));
     return;
   }
 
