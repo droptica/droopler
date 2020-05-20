@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - d_commerce_products_list
+    - system
+  theme:
+    - droopler_theme
+  enforced:
+    module:
+      - d_commerce_products_list
+id: commerce_mobile_filters
+theme: droopler_theme
+region: facets_top
+weight: -15
+provider: null
+plugin: commerce_mobile_filters
+settings:
+  id: commerce_mobile_filters
+  label: 'Commerce Mobile filters'
+  provider: d_commerce_products_list
+  label_display: '0'
+  button_text: Filters
+  button_class: 'btn btn-outline-primary'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/shop\r\n/shop/*"
+    negate: false
+    context_mapping: {  }

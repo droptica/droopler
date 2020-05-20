@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.droopler_products
+  module:
+    - commerce_price
+  enforced:
+    module:
+      - d_commerce_product
+id: commerce_product_variation.droopler_products.default
+targetEntityType: commerce_product_variation
+bundle: droopler_products
+mode: default
+content:
+  price:
+    label: above
+    type: commerce_price_default
+    weight: 0
+    region: content
+    settings:
+      strip_trailing_zeroes: false
+      currency_display: symbol
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  list_price: true
+  product_id: true
+  search_api_excerpt: true
+  sku: true
+  title: true

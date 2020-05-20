@@ -5,13 +5,13 @@ dependencies:
     - facets.facet.product_categories_taxonomy_term_name
   module:
     - facets
-    - d_product
+    - system
   theme:
     - droopler_theme
-id: productcategoriestaxonomytermname
+id: droopler_theme_product_categories_taxonomy_term_name
 theme: droopler_theme
 region: facets_left
-weight: -5
+weight: -11
 provider: null
 plugin: 'facet_block:product_categories_taxonomy_term_name'
 settings:
@@ -19,5 +19,10 @@ settings:
   label: Categories
   provider: facets
   label_display: visible
-  block_id: productcategoriestaxonomytermname
-visibility: {  }
+  block_id: droopler_theme_product_categories_taxonomy_term_name
+visibility:
+  request_path:
+    id: request_path
+    pages: /products
+    negate: false
+    context_mapping: {  }
