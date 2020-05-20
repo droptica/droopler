@@ -3,6 +3,7 @@ core: 8.x
 description: 'Provides a droopler with commerce module.'
 type: module
 dependencies:
+  - block
   - colorbox
   - commerce
   - commerce_cart
@@ -12,6 +13,7 @@ dependencies:
   - commerce_product
   - commerce_promotion
   - commerce_tax
+  - user
 package: Droopler
 version: 8.x-2.0
 core_incompatible: false
