@@ -2,10 +2,10 @@
 
 namespace Drupal\d_content_init\Services;
 
-use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Extension\ModuleHandler;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
  * Class ConfigUpdate.
@@ -15,37 +15,37 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 class ConfigUpdate {
 
   /**
-   * Configuration object factory.
+   * Configuration object.
    *
-   * @var \Drupal\Core\Config\ConfigFactory
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
   /**
    * Manages modules.
    *
-   * @var \Drupal\Core\Extension\ModuleHandler
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
 
   /**
    * Logger.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
   protected $logger;
 
   /**
    * ConfigUpdate constructor.
    *
-   * @param \Drupal\Core\Config\ConfigFactory $configFactory
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory.
-   * @param \Drupal\Core\Extension\ModuleHandler $moduleHandler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   Module handler.
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
    *   Logger factory.
    */
-  public function __construct(ConfigFactory $configFactory, ModuleHandler $moduleHandler, LoggerChannelFactoryInterface $logger) {
+  public function __construct(ConfigFactoryInterface $configFactory, ModuleHandlerInterface $moduleHandler, LoggerChannelFactoryInterface $logger) {
     $this->configFactory = $configFactory;
     $this->moduleHandler = $moduleHandler;
     $this->logger = $logger->get('d_content_init');
