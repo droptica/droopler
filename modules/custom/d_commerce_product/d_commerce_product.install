@@ -12,7 +12,7 @@ use Drupal\Component\Plugin\Exception\PluginException;
  */
 function d_commerce_product_install() {
   \Drupal::service('d_content_init.config_update')
-    ->updateThemeInConfigs('d_commerce_product', '/config/optional', '/block\.block/');
+    ->importConfigs('d_commerce_product', '/config/optional', '/block\.block/');
 
   try {
     $order_types = \Drupal::entityTypeManager()
@@ -52,5 +52,5 @@ function d_commerce_product_install() {
  */
 function d_commerce_product_uninstall() {
   \Drupal::service('d_content_init.config_update')
-    ->deleteConfigs('d_commerce_product', '/config/optional', '/.yml$/');
+    ->deleteConfigs('d_commerce_product', '/config/optional', '/block\.block/');
 }

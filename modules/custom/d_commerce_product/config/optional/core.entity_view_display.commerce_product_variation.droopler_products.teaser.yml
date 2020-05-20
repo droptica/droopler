@@ -4,6 +4,9 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.droopler_products
     - core.entity_view_mode.commerce_product_variation.teaser
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product_variation.droopler_products.teaser
 targetEntityType: commerce_product_variation
 bundle: droopler_products

@@ -6,6 +6,9 @@ dependencies:
     - core.entity_view_mode.commerce_product_variation.teaser
   module:
     - commerce_price
+  enforced:
+    module:
+      - d_commerce_products_list
 id: commerce_product_variation.droopler_products.teaser
 targetEntityType: commerce_product_variation
 bundle: droopler_products

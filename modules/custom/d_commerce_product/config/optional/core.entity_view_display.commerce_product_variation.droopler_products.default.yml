@@ -5,6 +5,9 @@ dependencies:
     - commerce_product.commerce_product_variation_type.droopler_products
   module:
     - commerce_price
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product_variation.droopler_products.default
 targetEntityType: commerce_product_variation
 bundle: droopler_products

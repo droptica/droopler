@@ -8,6 +8,9 @@ dependencies:
     - field.field.commerce_product.droopler_products.field_categories
     - field.field.commerce_product.droopler_products.field_page_section
     - field.field.commerce_product.droopler_products.field_product_images
+  enforced:
+    module:
+      - d_commerce_products_list
 id: commerce_product.droopler_products.teaser
 targetEntityType: commerce_product
 bundle: droopler_products

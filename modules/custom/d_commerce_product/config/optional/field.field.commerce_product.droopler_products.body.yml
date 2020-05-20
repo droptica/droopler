@@ -6,6 +6,9 @@ dependencies:
     - field.storage.commerce_product.body
   module:
     - text
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product.droopler_products.body
 field_name: body
 entity_type: commerce_product

@@ -19,6 +19,9 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_tiles
   module:
     - entity_reference_revisions
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product.droopler_products.field_page_section
 field_name: field_page_section
 entity_type: commerce_product

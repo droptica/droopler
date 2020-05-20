@@ -5,6 +5,9 @@ dependencies:
     - commerce_product.commerce_product_type.droopler_products
     - field.storage.commerce_product.field_categories
     - taxonomy.vocabulary.droopler_commerce_categories
+  enforced:
+    module:
+      - d_commerce_product
 id: commerce_product.droopler_products.field_categories
 field_name: field_categories
 entity_type: commerce_product
