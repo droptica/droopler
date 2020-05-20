@@ -184,7 +184,6 @@ class Updater {
     $source_info = $this->getSourceInformation($source);
     $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
     $source = new FileStorage($config_path . '/' . $source_directory);
-    $name = $this->replacePlaceholders($name);
 
     return $source->read($name);
   }
@@ -462,6 +461,7 @@ class Updater {
    *   Return if the config was changed successfully.
    */
   private function modifyConfig($configName, array $newConfig, array $expectedConfig = NULL) {
+    $configName = $this->replacePlaceholders($configName);
     $config = $this->configFactory->getEditable($configName);
     $configData = $config->get();
 

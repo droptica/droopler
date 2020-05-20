@@ -1351,13 +1351,13 @@ function droopler_update_8113() {
  * Droopler 2.1 grant view media permission to authenticated users.
  */
 function droopler_update_8114() {
-  $perrmission = 'view media';
+  $permission = 'view media';
 
   $role = Role::load('authenticated');
-  $role->grantPermission($perrmission)
+  $role->grantPermission($permission)
     ->save();
 
-  $values['droopler__droopler_update_8114_1'] = $role->hasPermission($perrmission);
+  $values['droopler__droopler_update_8114_1'] = $role->hasPermission($permission);
 
   Drupal::service('d_update')
     ->checklist()
