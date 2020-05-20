@@ -3,6 +3,7 @@
 namespace Drupal\d_update;
 
 use Drupal\block\Entity\Block;
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -82,6 +83,13 @@ class Updater {
   protected $moduleExtensionList;
 
   /**
+   * Logger.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  /**
    * Constructs the Updater.
    *
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
@@ -117,6 +125,7 @@ class Updater {
     $this->checklist = $checklist;
     $this->moduleExtensionList = $moduleExtensionList;
     $this->configFactory = $config_factory;
+    $this->logger = $this->getLogger('d_update');
   }
 
   /**
@@ -148,7 +157,7 @@ class Updater {
       $data = $this->readConfigFromFile($source, $name, 'optional');
     }
     if (empty($data)) {
-      $this->getLogger('d_update')
+      $this->logger
         ->error('Cannot find file for %config', ['%config' => $name]);
 
       return FALSE;
@@ -175,6 +184,7 @@ class Updater {
     $source_info = $this->getSourceInformation($source);
     $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
     $source = new FileStorage($config_path . '/' . $source_directory);
+    $name = $this->replacePlaceholders($name);
 
     return $source->read($name);
   }
@@ -270,10 +280,9 @@ class Updater {
           $block->save();
         }
         catch (EntityStorageException $e) {
-          $this->getLogger('d_update')
-            ->error('Error while instantiating block from %config', [
-              '%config' => $configName,
-            ]);
+          $this->logger->error('Error while instantiating block from %config', [
+            '%config' => $configName,
+          ]);
         }
       }
     }
@@ -298,10 +307,9 @@ class Updater {
   public function createConfig($name, $data, $hash) {
 
     if (!$this->verifyHash($name, $hash)) {
-      $this->getLogger('d_update')
-        ->warning('Detected changes in %config, aborting import...', [
-          '%config' => $name,
-        ]);
+      $this->logger->warning('Detected changes in %config, aborting import...', [
+        '%config' => $name,
+      ]);
       return FALSE;
     }
 
@@ -332,17 +340,15 @@ class Updater {
       // Do the update.
       try {
         $entity->save();
-        $this->getLogger('d_update')
-          ->info('Successfully imported field config %config', [
-            '%config' => $name,
-          ]);
+        $this->logger->info('Successfully imported field config %config', [
+          '%config' => $name,
+        ]);
         return TRUE;
       }
       catch (EntityStorageException $e) {
-        $this->getLogger('d_update')
-          ->error('Error while importing entity config %config', [
-            '%config' => $name,
-          ]);
+        $this->logger->error('Error while importing entity config %config', [
+          '%config' => $name,
+        ]);
         return FALSE;
       }
     }
@@ -350,17 +356,15 @@ class Updater {
       // Otherwise use plain config storage.
       try {
         $this->configStorage->write($name, $data);
-        $this->getLogger('d_update')
-          ->info('Successfully imported config %config', [
-            '%config' => $name,
-          ]);
+        $this->logger->info('Successfully imported config %config', [
+          '%config' => $name,
+        ]);
         return TRUE;
       }
       catch (StorageException $e) {
-        $this->getLogger('d_update')
-          ->error('Error while importing config %config', [
-            '%config' => $name,
-          ]);
+        $this->logger->error('Error while importing config %config', [
+          '%config' => $name,
+        ]);
         return FALSE;
       }
     }
@@ -407,14 +411,15 @@ class Updater {
     $data = $this->readConfigFromFile($source, $name, 'update');
     $status = [];
     if (empty($data)) {
-      $this->getLogger('d_update')
-        ->error('Cannot find file for %config', ['%config' => $name]);
+      $this->logger->error('Cannot find file for %config', ['%config' => $name]);
 
       return FALSE;
     }
     foreach ($data as $configName => $configOperations) {
       $updates = $configOperations;
       $newConfig = [];
+      $isOptional = $updates['optional'] ?? FALSE;
+
       if (isset($updates['delete'])) {
         foreach ($updates['delete'] as $value) {
           NestedArray::unsetValue($newConfig, explode('.', $value));
@@ -430,9 +435,13 @@ class Updater {
         $updates['change']['expected'] = NULL;
       }
       if (!$this->modifyConfig($configName, $newConfig, $updates['change']['expected'])) {
-        $status[] = FALSE;
-        $this->getLogger('d_update')
-          ->error('Update failed for %config', ['%config' => $name]);
+        if ($isOptional) {
+          $this->logger->notice('Update failed for optional %config, skipping', ['%config' => $name]);
+        }
+        else {
+          $status[] = FALSE;
+          $this->logger->error('Update failed for %config', ['%config' => $name]);
+        }
       }
     }
 
@@ -457,13 +466,13 @@ class Updater {
     $configData = $config->get();
 
     if ($config->isNew() || empty($configData)) {
-      $this->getLogger('d_update')
+      $this->logger
         ->error("Unable to modify newly created or empty %config configuration. Aborting import", ['%config' => $configName]);
       return FALSE;
     }
 
     if (!empty($expectedConfig) && DiffArray::diffAssocRecursive($expectedConfig, $configData)) {
-      $this->getLogger('d_update')
+      $this->logger
         ->error('Detected changes in configuration %config. Aborting import', ['%config' => $configName]);
       return FALSE;
     }
@@ -471,6 +480,21 @@ class Updater {
     $config->save();
 
     return TRUE;
+  }
+
+  /**
+   * Replace placeholders in config file names.
+   *
+   * @param string $name
+   *   Config file name.
+   *
+   * @return string
+   *   Config file name with placeholders replaced.
+   */
+  protected function replacePlaceholders(string $name) {
+    return (new FormattableMarkup($name, [
+      '@theme' => $this->configFactory->get('system.theme')->get('default'),
+    ]))->__toString();
   }
 
 }
