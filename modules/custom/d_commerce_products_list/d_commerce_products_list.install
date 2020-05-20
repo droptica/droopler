@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for d_commerce_product_list.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function d_commerce_products_list_install() {
+  \Drupal::service('d_content_init.config_update')
+    ->importConfigs('d_commerce_products_list', '/config/optional', '/block\.block/');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function d_commerce_products_list_uninstall() {
+  \Drupal::service('d_content_init.config_update')
+    ->deleteConfigs('d_commerce_products_list', '/config/optional', '/block\.block/');
+}

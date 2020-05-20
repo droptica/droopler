@@ -31,6 +31,8 @@ function droopler_theme_preprocess_html(&$variables) {
   if (!empty($browser) && $browser === 'Internet Explorer') {
     $variables['#attached']['library'][] = 'droopler_theme/ie-compatibility';
   }
+  $variables['#attached']['library'][] = 'd_commerce/d_commerce';
+
 }
 
 /**
@@ -38,9 +40,11 @@ function droopler_theme_preprocess_html(&$variables) {
  */
 function droopler_theme_preprocess_page(&$variables) {
 
+  $variables['#attached']['library'][] = 'droopler_theme/d_commerce';
+
   // Define default classes for containers.
   $navbar_top_attributes = [
-    'class' => ['navbar'],
+    'class' => ['navbar123'],
     'id' => ['navbar-top'],
   ];
   $navbar_attributes = [
@@ -94,6 +98,7 @@ function droopler_theme_preprocess_maintenance_page(&$variables) {
 
   // Droopler has custom styling for the maintenance page.
   $variables['#attached']['library'][] = 'droopler_theme/maintenance_page';
+  $variables['#attached']['library'][] = 'droopler_theme/dcommerce';
 }
 
 /**
