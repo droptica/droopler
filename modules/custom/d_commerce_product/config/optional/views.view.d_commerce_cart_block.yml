@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.commerce_product_variation.summary
+    - core.entity_view_mode.commerce_product_variation.teaser
   enforced:
     module:
       - commerce_cart
@@ -11,7 +11,7 @@ dependencies:
     - commerce_order
     - commerce_price
     - commerce_product
-
+    - d_commerce_product
 id: d_commerce_cart_block
 label: 'Droopler Commerce Cart block'
 module: views
@@ -201,7 +201,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          view_mode: summary
+          view_mode: teaser
           entity_type: commerce_product_variation
           plugin_id: rendered_entity
         total_price__number:
@@ -398,8 +398,6 @@ display:
         - url
       tags:
         - 'config:core.entity_view_display.commerce_product_variation.default.cart'
-        - 'config:core.entity_view_display.commerce_product_variation.default.summary'
         - 'config:core.entity_view_display.commerce_product_variation.droopler_products.cart'
-        - 'config:core.entity_view_display.commerce_product_variation.droopler_products.teaser'
         - 'config:core.entity_view_display.commerce_product_variation.droopler_products.default'
-        - 'config:core.entity_view_display.commerce_product_variation.droopler_products.summary'
+        - 'config:core.entity_view_display.commerce_product_variation.droopler_products.teaser'

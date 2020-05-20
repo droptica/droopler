@@ -289,6 +289,9 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
     display: flex;
     flex-wrap: wrap;
     margin: -0.625rem -0.3125rem 0 -0.3125rem;
+    > div {
+      width: 100%;
+    }
   }
   .d-media-canvas-image {
     margin: 1rem 1rem 0;
