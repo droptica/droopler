@@ -10,7 +10,7 @@ dependencies:
     - field.field.commerce_product.droopler_products.field_product_images
   enforced:
     module:
-      - d_commerce_products_list
+      - d_commerce_product
 id: commerce_product.droopler_products.teaser
 targetEntityType: commerce_product
 bundle: droopler_products
@@ -41,6 +41,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+  variations:
+    type: commerce_add_to_cart
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      combine: true
+    third_party_settings: {  }
 hidden:
   body: true
   created: true
@@ -49,4 +57,3 @@ hidden:
   search_api_excerpt: true
   stores: true
   uid: true
-  variations: true

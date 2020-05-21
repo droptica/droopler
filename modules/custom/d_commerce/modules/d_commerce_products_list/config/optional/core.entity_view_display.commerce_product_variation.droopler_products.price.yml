@@ -3,19 +3,19 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_variation_type.droopler_products
-    - core.entity_view_mode.commerce_product_variation.teaser
-  module:
-    - commerce_price
+    - core.entity_view_mode.commerce_product_variation.price
   enforced:
     module:
       - d_commerce_products_list
-id: commerce_product_variation.droopler_products.teaser
+  module:
+    - commerce_price
+id: commerce_product_variation.droopler_products.price
 targetEntityType: commerce_product_variation
 bundle: droopler_products
-mode: teaser
+mode: price
 content:
   price:
-    label: hidden
+    label: visually_hidden
     type: commerce_price_default
     weight: 0
     region: content

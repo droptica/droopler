@@ -3,10 +3,7 @@ status: true
 dependencies:
   module:
     - commerce_product
-  enforced:
-    module:
-      - d_commerce_products_list
-id: commerce_product_variation.teaser
-label: Teaser
+id: commerce_product_variation.price
+label: Price
 targetEntityType: commerce_product_variation
 cache: true

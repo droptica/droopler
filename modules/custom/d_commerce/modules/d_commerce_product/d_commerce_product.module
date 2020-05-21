@@ -66,11 +66,11 @@ function d_commerce_product_theme($existing, $type, $theme, $path) {
     ],
     'commerce_product__droopler_products__teaser' => [
       'template' => 'commerce-product--droopler-products--teaser',
-      'base hook' => 'commerce_product',
+      'base hook' => 'commerce_product__droopler_products__teaser',
     ],
     'commerce_product_variation__droopler_products__teaser' => [
       'template' => 'commerce-product-variation--droopler-products--teaser',
-      'base hook' => 'commerce_product_variation',
+      'base hook' => 'commerce_product_variation__droopler_products__teaser',
     ],
     'field__commerce_product__field_product_images__droopler_products' => [
       'template' => 'field--commerce-product--field-product-images--droopler-products',

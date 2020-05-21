@@ -5,13 +5,12 @@ dependencies:
     - core.entity_view_mode.commerce_product_variation.teaser
   enforced:
     module:
-      - commerce_cart
       - d_commerce_product
   module:
+    - commerce_cart
     - commerce_order
     - commerce_price
     - commerce_product
-    - d_commerce_product
 id: d_commerce_cart_block
 label: 'Droopler Commerce Cart block'
 module: views
