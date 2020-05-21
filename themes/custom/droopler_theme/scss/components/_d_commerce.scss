@@ -494,14 +494,13 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
     .commerce-product__buy {
       padding:  1rem  1rem 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       flex-wrap: wrap;
 
       .field--type-commerce-price {
-        float: none;
-        width: 100%;
-        text-align: center;
         padding-bottom:  0.5rem;
+
         .field__item {
           color: $d-commerce-product-listing-price-color;
           font-weight: bold;
