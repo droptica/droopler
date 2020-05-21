@@ -1,4 +1,5 @@
 block.block.mobilefilterssubmit:
+  optional: true
   change:
     expected:
       region: facets_top
@@ -6,7 +7,8 @@ block.block.mobilefilterssubmit:
       region: facets_left
 
 # Try to update the same block for subtheme.
-block.block.droopler_subtheme_mobilefilterssubmit:
+block.block.@theme_mobilefilterssubmit:
+  optional: true
   change:
     expected:
       region: facets_top
