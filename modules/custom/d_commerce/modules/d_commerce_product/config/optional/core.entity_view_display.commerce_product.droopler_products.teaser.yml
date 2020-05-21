@@ -41,6 +41,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+  variations:
+    type: commerce_add_to_cart
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      combine: true
+    third_party_settings: {  }
 hidden:
   body: true
   created: true
@@ -49,4 +57,3 @@ hidden:
   search_api_excerpt: true
   stores: true
   uid: true
-  variations: true
