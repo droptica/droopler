@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Theme for image with svg canvas.
+ *
+ * Available variables:
+ * - canvas_attributes: HTML attributes for the svg (canvas) tag.
+ * - image: image to be displayed.
+ *
+ * @see template_preprocess_d_media_canvas_image()
+ */
+#}
+{% if canvas_attributes %}
+  <div class="d-media-canvas-image">
+    {{ image }}
+    <svg {{ canvas_attributes.addClass('canvas') }}></svg>
+  </div>
+{% else %}
+  {{ image }}
+{% endif %}

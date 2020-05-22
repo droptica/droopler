@@ -2,27 +2,44 @@
 
 namespace Drupal\d_update;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+
 /**
  * Config Compare service.
  *
  * @package Drupal\d_update
  */
-class ConfigCompare {
+class ConfigCompare implements ConfigCompareInterface {
 
   /**
-   * Generates hash for the specified config.
+   * Config factory service.
    *
-   * @param string $config_name
-   *   Full name of the config, eg node.type.content_page.
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * ConfigCompare constructor.
    *
-   * @return bool|string
-   *   Returns hash or false if there is no config with provided name.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   Config factory service.
+   */
+  public function __construct(ConfigFactoryInterface $config_factory) {
+    $this->configFactory = $config_factory;
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function generateHashFromDatabase($config_name) {
-    $config = \Drupal::config($config_name)->getRawData();
-    if (empty($config)) {
+    $config_storage = $this->getConfig($config_name);
+
+    if ($config_storage->isNew()) {
       return FALSE;
     }
+
+    $config = $config_storage->getRawData();
+
     unset($config['uuid']);
     unset($config['lang']);
     unset($config['langcode']);
@@ -33,19 +50,30 @@ class ConfigCompare {
   }
 
   /**
-   * Compares config name hash wit provided hash.
-   *
-   * @param string $config_name
-   *   Full name of the config, eg node.type.content_page.
-   * @param string $hash
-   *   Optional argument with hash.
-   *
-   * @return bool
-   *   Returns true if hashes are the same or hash was not provided, false on
-   *   different hashes.
+   * {@inheritdoc}
+   */
+  public function configExists($config_name) {
+    return !$this->getConfig($config_name)->isNew();
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function compare($config_name, $hash = NULL) {
     return $this->generateHashFromDatabase($config_name) == $hash;
+  }
+
+  /**
+   * Gets config object for the given config name.
+   *
+   * @param string $config_name
+   *   Full name of the config, eg node.type.content_page.
+   *
+   * @return \Drupal\Core\Config\ImmutableConfig
+   *   Config object.
+   */
+  protected function getConfig($config_name) {
+    return $this->configFactory->get($config_name);
   }
 
 }

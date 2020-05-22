@@ -1,0 +1,16 @@
+block.block.mobilefilterssubmit:
+  optional: true
+  change:
+    expected:
+      region: facets_top
+    new:
+      region: facets_left
+
+# Try to update the same block for subtheme.
+block.block.@theme_mobilefilterssubmit:
+  optional: true
+  change:
+    expected:
+      region: facets_top
+    new:
+      region: facets_left

@@ -27,6 +27,10 @@ header.header {
     display: flex;
     align-items: center;
 
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+      align-items: stretch;
+    }
+
     ul {
       margin-bottom: 0;
     }

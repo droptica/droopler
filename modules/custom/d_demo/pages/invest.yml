@@ -60,6 +60,7 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: |
+            <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -110,6 +111,7 @@ field_page_section:
                   </tr>
                 </tbody>
             </table>
+            </div>
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: background-gray-light-2
@@ -122,6 +124,7 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: |
+            <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -164,6 +167,7 @@ field_page_section:
                   </tr>
                 </tbody>
             </table>
+            </div>
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: background-gray-light-2 no-padding-top

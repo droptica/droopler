@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - d_commerce_products_list
+    - system
+  theme:
+    - droopler_theme
+  enforced:
+    module:
+      - d_commerce_products_list
+id: commerce_reset_filters_top
+theme: droopler_theme
+region: facets_left
+weight: -11
+provider: null
+plugin: commerce_reset_button
+settings:
+  id: commerce_reset_button
+  label: 'Reset Filters'
+  provider: d_commerce_products_list
+  label_display: '0'
+  button_text: 'Reset Filters'
+  button_class: 'btn btn-outline-primary btn-sm btn-reset'
+  button_target: /shop
+  button_icon_class: 'fas fa-times'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/shop\r\n/shop/*"
+    negate: false
+    context_mapping: {  }

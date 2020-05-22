@@ -1,0 +1,25 @@
+name: d_commerce_product (experimental)
+core: 8.x
+description: 'Provides a droopler product type.'
+type: module
+dependencies:
+  - block
+  - commerce_order
+  - commerce_product
+  - entity_reference_revisions
+  - d_commerce
+  - field
+  - image
+  - media
+  - media_library
+  - options
+  - paragraphs
+  - path
+  - pathauto
+  - state_machine
+  - taxonomy
+  - text
+  - views
+package: Droopler
+version: 8.x-2.0
+core_incompatible: false

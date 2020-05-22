@@ -122,6 +122,7 @@ $d-p-form-background-opacity: 0.4 !default;
     text-align: center;
     .btn {
       @include button-variant($background: $secondary, $border: $secondary);
+      @include make-btn-max-width;
       margin-top: $d-p-form-button-margin-top;
     }
   }
