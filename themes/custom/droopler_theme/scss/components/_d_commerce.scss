@@ -287,7 +287,7 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
 
 .view-droopler-commerce-products-list {
   .d-media-canvas-image {
-    margin: 1rem 1rem 0;
+    margin: 1.5rem 1rem 1rem;
   }
   .field--type-image {
     margin-right: 0;
@@ -444,6 +444,7 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
       height: 100%;
       display: flex;
       justify-content: center;
+      text-align: center;
     }
 
     h2 {
@@ -456,10 +457,6 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
       margin: 0;
       display: flex;
       flex-direction: column;
-
-      img {
-        width: 100%;
-      }
     }
 
     .commerce-product__buy {
