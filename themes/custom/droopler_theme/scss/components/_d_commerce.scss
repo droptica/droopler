@@ -286,14 +286,6 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
 }
 
 .view-droopler-commerce-products-list {
-  .view-content {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -0.625rem -0.3125rem 0 -0.3125rem;
-    > div {
-      width: 100%;
-    }
-  }
   .d-media-canvas-image {
     margin: 1rem 1rem 0;
   }
@@ -437,27 +429,6 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
     transition: 0.3s;
   }
 
-  margin-bottom: 1.875rem;
-  @include media-breakpoint-only(md) {
-    &:nth-child(odd) {
-      padding-right: 1rem;
-    }
-    &:nth-child(even) {
-      padding-left: 1rem;
-    }
-  }
-  @include media-breakpoint-up(lg) {
-    &:nth-child(3n+1) {
-      padding-right: 0.5rem;
-    }
-    &:nth-child(3n-1) {
-      padding-left: calc(#{$grid-gutter-width} / 4 + 0.25rem);
-      padding-right: calc(#{$grid-gutter-width} / 4 + 0.25rem);
-    }
-    &:nth-child(3n) {
-      padding-left: 0.5rem;
-    }
-  }
 
   .commerce-product--view-mode-teaser {
     border: $d-commerce-product-view-border;
