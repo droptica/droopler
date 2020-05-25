@@ -4,12 +4,12 @@ dependencies:
   config:
     - search_api.index.droopler_commerce_product_index
     - views.view.droopler_commerce_products_list
-  module:
-    - facets_pretty_paths
-    - search_api
   enforced:
     module:
       - d_commerce_products_list
+  module:
+    - facets_pretty_paths
+    - search_api
 third_party_settings:
   facets_pretty_paths:
     coder: default_coder
@@ -17,7 +17,7 @@ id: d_commerce_product_categories_taxonomy_term_name
 name: 'Droopler Commerce Product Categories'
 url_alias: categories
 weight: 0
-min_count: 1
+min_count: 0
 show_only_one_result: false
 field_identifier: name
 facet_source_id: 'search_api:views_page__droopler_commerce_products_list__page_1'
