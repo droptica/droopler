@@ -5,7 +5,6 @@
  * Functions to support theming in the Droopler theme.
  */
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Template\Attribute;
 
@@ -31,16 +30,15 @@ function droopler_theme_preprocess_html(&$variables) {
   if (!empty($browser) && $browser === 'Internet Explorer') {
     $variables['#attached']['library'][] = 'droopler_theme/ie-compatibility';
   }
-  $variables['#attached']['library'][] = 'd_commerce/d_commerce';
-
 }
 
 /**
  * Implements hook_preprocess_HOOK() for page templates.
  */
 function droopler_theme_preprocess_page(&$variables) {
-
-  $variables['#attached']['library'][] = 'droopler_theme/d_commerce';
+  if (\Drupal::moduleHandler()->moduleExists('d_commerce')) {
+    $variables['#attached']['library'][] = 'droopler_theme/d_commerce';
+  }
 
   // Define default classes for containers.
   $navbar_top_attributes = [
@@ -98,7 +96,10 @@ function droopler_theme_preprocess_maintenance_page(&$variables) {
 
   // Droopler has custom styling for the maintenance page.
   $variables['#attached']['library'][] = 'droopler_theme/maintenance_page';
-  $variables['#attached']['library'][] = 'droopler_theme/dcommerce';
+
+  if (\Drupal::moduleHandler()->moduleExists('d_commerce')) {
+    $variables['#attached']['library'][] = 'droopler_theme/d_commerce';
+  }
 }
 
 /**
