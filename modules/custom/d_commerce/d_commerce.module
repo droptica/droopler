@@ -49,7 +49,7 @@ function d_commerce_preprocess_page(&$variables) {
 /**
  * Implements hook_preprocess_maintenance_page().
  */
-function droopler_theme_preprocess_maintenance_page(&$variables) {
+function d_commerce_preprocess_maintenance_page(&$variables) {
   _d_commerce_attach_libraries($variables);
 }
 
