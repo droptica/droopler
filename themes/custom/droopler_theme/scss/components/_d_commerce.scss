@@ -1188,6 +1188,15 @@ body:not(.scrolled-buttons) {
     vertical-align: middle;
   }
 }
+.order-total-line {
+  padding: 0.25rem 0;
+  &-label {
+    margin-right: 0.5rem;
+  }
+  &-value {
+    width: auto;
+  }
+}
 
 // User orders.
 .view-d-commerce-user-orders {
