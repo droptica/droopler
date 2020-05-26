@@ -36,10 +36,6 @@ function droopler_theme_preprocess_html(&$variables) {
  * Implements hook_preprocess_HOOK() for page templates.
  */
 function droopler_theme_preprocess_page(&$variables) {
-  if (\Drupal::moduleHandler()->moduleExists('d_commerce')) {
-    $variables['#attached']['library'][] = 'droopler_theme/d_commerce';
-  }
-
   // Define default classes for containers.
   $navbar_top_attributes = [
     'class' => ['navbar123'],
@@ -96,10 +92,6 @@ function droopler_theme_preprocess_maintenance_page(&$variables) {
 
   // Droopler has custom styling for the maintenance page.
   $variables['#attached']['library'][] = 'droopler_theme/maintenance_page';
-
-  if (\Drupal::moduleHandler()->moduleExists('d_commerce')) {
-    $variables['#attached']['library'][] = 'droopler_theme/d_commerce';
-  }
 }
 
 /**
