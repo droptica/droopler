@@ -130,16 +130,6 @@ function d_commerce_form_commerce_checkout_flow_multistep_default_alter(&$form, 
 }
 
 /**
- * Set d_customer role for created user.
- *
- * Implements hook_ENTITY_TYPE_insert().
- */
-function d_commerce_user_insert(EntityInterface $entity) {
-  $entity->addRole('d_customer');
-  $entity->save();
-}
-
-/**
  * Attach related libraries from other modules and themes.
  *
  * @param array $variables
