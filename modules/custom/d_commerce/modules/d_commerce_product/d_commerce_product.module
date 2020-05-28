@@ -98,3 +98,11 @@ function d_commerce_product_entity_view_mode_alter(&$view_mode, EntityInterface 
     $view_mode = 'teaser';
   }
 }
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function d_commerce_product_entity_type_build(array &$entity_types) {
+  /** @var \Drupal\Core\Entity\EntityType[] $entity_types */
+ $entity_types['commerce_product_variation']->setClass('Drupal\d_commerce_product\Entity\ProductVariation');
+}
