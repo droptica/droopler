@@ -9,7 +9,7 @@ use Drupal\commerce_product\Entity\ProductVariation as CommerceProductVariation;
  *
  * @package Drupal\d_commerce_product\Entity
  */
-class ProductVariation extends CommerceProductVariation {
+class DrooplerProductVariation extends CommerceProductVariation {
 
   /**
    * {@inheritDoc}
