@@ -15,7 +15,7 @@ $d-commerce-product-filters-border: 2px solid $color-hector !default;
 
 // Cart
 $d-commerce-product-cart-border-color: $color-thersites !default;
-$d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color !default;;
+$d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color !default;
 
 @mixin product-teaser-header {
   font-size: $d-commerce-product-teaser-header;
@@ -457,17 +457,23 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
       margin: 0;
       display: flex;
       flex-direction: column;
+
+      > a {
+        &:focus {
+          outline: none;
+        }
+      }
     }
 
     .commerce-product__buy {
-      padding:  1rem  1rem 0;
+      padding: 1rem 1rem 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       flex-wrap: wrap;
 
       .field--type-commerce-price {
-        padding-bottom:  0.5rem;
+        padding-bottom: 0.5rem;
 
         .field__item {
           color: $d-commerce-product-listing-price-color;
@@ -533,7 +539,7 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
 
   .region-facets-left {
     > .block:not(.block-commerce-mobile-filters-submit) {
-      @include  make-container-max-widths();
+      @include make-container-max-widths();
     }
   }
   @include media-breakpoint-up(lg) {
