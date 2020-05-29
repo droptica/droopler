@@ -14,13 +14,20 @@ use Drupal\commerce_product\Entity\ProductVariationInterface;
 function d_commerce_product_preprocess_field(&$variables) {
   $object = $variables['element']['#object'] ?? NULL;
   if ($object instanceof ProductInterface) {
-    if ($variables['field_name'] == 'field_product_images') {
-      $variables['#attached']['library'][] = 'd_commerce_product/d_product_commerce_slider';
-      $slider = views_embed_view('commerce_product_images', 'block_1');
-      $variables['slider'] = render($slider);
-    }
-    if ($variables['field_name'] === 'variations') {
-      $variables['label_hidden'] = $variables['element']['#items']->count() <= 1;
+    switch ($variables['field_name']) {
+      case 'field_product_images':
+        $variables['#attached']['library'][] = 'd_commerce_product/d_product_commerce_slider';
+        $slider = views_embed_view('commerce_product_images', 'block_1');
+        $variables['slider'] = render($slider);
+        break;
+      case 'variations':
+        $variables['label_hidden'] = $variables['element']['#items']->count() <= 1;
+        break;
+      case 'title':
+        $variables['product_title'] = _d_commerce_product_get_title($object);
+        break;
+      default:
+        break;
     }
   }
 }
@@ -76,6 +83,10 @@ function d_commerce_product_theme($existing, $type, $theme, $path) {
       'template' => 'field--commerce-product--field-product-images--droopler-products',
       'base hook' => 'media',
     ],
+    'field__commerce_product__title__droopler_products' => [
+      'template' => 'field--commerce-product--title--droopler-products',
+      'base hook' => 'field',
+    ],
     'views_view__commerce_product_images' => [
       'template' => 'views-view--commerce_product_images',
       'base hook' => 'views_view__product_images',
@@ -97,4 +108,33 @@ function d_commerce_product_entity_view_mode_alter(&$view_mode, EntityInterface 
   ) {
     $view_mode = 'teaser';
   }
+}
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function d_commerce_product_entity_type_build(array &$entity_types) {
+  /** @var \Drupal\Core\Entity\EntityType[] $entity_types */
+  $entity_types['commerce_product_variation']->setClass('Drupal\d_commerce_product\Entity\DrooplerProductVariation');
+}
+
+/**
+ * Returns product page title based on number of variations.
+ *
+ * @param \Drupal\commerce_product\Entity\ProductInterface $product
+ *   Displayed product.
+ *
+ * @return string
+ *   Product page title.
+ */
+function _d_commerce_product_get_title(ProductInterface $product) {
+  $variationsIds = $product->getVariationIds();
+  if (count($variationsIds) > 1) {
+    $title = $product->getTitle();
+  }
+  else {
+    $title = $product->getDefaultVariation()->getTitle();
+  }
+
+  return $title;
 }
