@@ -38,7 +38,7 @@
         {{ title_prefix }}
         <h2{{ title_attributes.addClass('commerce-product__title') }}>
           {% set title %}
-            {{ product.title }} {{ product.variation_title }}
+            {{ product.title }}
           {% endset %}
           {{ title|render|striptags|trim }}
         </h2>
