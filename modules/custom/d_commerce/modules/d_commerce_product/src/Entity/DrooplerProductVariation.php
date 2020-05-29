@@ -38,6 +38,7 @@ class DrooplerProductVariation extends ProductVariation {
    */
   public function shouldGenerateTitle(): bool {
     $variation_type = $this->getVariationType();
+
     return $variation_type && $variation_type->shouldGenerateTitle();
   }
 
