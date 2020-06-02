@@ -1220,7 +1220,7 @@ body:not(.scrolled-buttons) {
 .checkout-pane-login {
   display: flex;
   flex-wrap: wrap;
-  align-items: start;
+  align-items: flex-start;
   margin: 2rem -20px;
 
   @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
@@ -1245,7 +1245,10 @@ body:not(.scrolled-buttons) {
 .d-commerce-checkout-register-container {
   border: $d-commerce-product-cart-border;
 
-  input {
+  input,
+  .image-widget-data,
+  .confirm-parent, .password-parent {
     width: 100%;
+    max-width: 100%;
   }
 }
