@@ -1,0 +1,11 @@
+.geysir-field-paragraph-wrapper.permanently-disabled:hover,
+.geysir-field-paragraph-wrapper.disabled:hover {
+  outline: none;
+}
+
+.geysir-field-paragraph-wrapper.disabled:after,
+.geysir-field-paragraph-wrapper.permanently-disabled:after,
+.geysir-field-paragraph-wrapper.disabled:hover .geysir-field-paragraph-links,
+.geysir-field-paragraph-wrapper.permanently-disabled:hover .geysir-field-paragraph-links {
+  display: none;
+}

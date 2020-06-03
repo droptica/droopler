@@ -234,6 +234,9 @@ $d-product-filters-border: 2px solid $color-hector !default;
     flex-wrap: wrap;
     margin: -0.625rem -0.3125rem 0 -0.3125rem;
   }
+  .d-media-canvas-image {
+    margin: 1rem 1rem 0;
+  }
   .field--type-image {
     margin-right: 0;
     img {
@@ -346,10 +349,6 @@ $d-product-filters-border: 2px solid $color-hector !default;
       display: flex;
       flex-direction: column;
       height: 100%;
-
-      img {
-        width: 100%;
-      }
     }
     .field--type-entity-reference {
       margin-bottom: 0;
@@ -371,6 +370,21 @@ $d-product-filters-border: 2px solid $color-hector !default;
   .region-facets-left {
     > .block:not(.block-mobile-filters-submit) {
       @include  make-container-max-widths();
+    }
+    @include media-breakpoint-down(md) {
+      height: 100%;
+      width: 85%;
+      position: fixed;
+      z-index: 101;
+      top: 0;
+      left: -100%;
+      overflow: auto;
+      background-color: $color-leto;
+      overflow-x: hidden;
+      padding: calc(2rem + 5%) 1.5rem 1.5rem;
+      transition: 0.5s;
+      display: flex;
+      flex-direction: column;
     }
   }
   @include media-breakpoint-up(lg) {
@@ -510,6 +524,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
       font-size: 1rem;
       letter-spacing: 0;
       padding: 0 1.25rem;
+      margin: 0;
       position: relative;
       color: $d-product-filters-mobile-color;
       border: $d-product-filters-border;
@@ -881,18 +896,9 @@ body:not(.scrolled-buttons) {
 
   .block-mobile-filters-submit {
     display: block !important;
-    position: sticky;
-    z-index: 1030;
-    margin-bottom: 0;
-    left: 0;
-    width: 100%;
     margin-top: 2rem;
-    flex-grow: 1;
-    background-color: $color-troilus;
 
     .content {
-      background-color: $color-agamemnon;
-      padding: 1.5rem 0;
       float: none;
       text-align: center;
     }

@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+  enforced:
+    module:
+      - d_commerce_product
+id: commerce_product.teaser
+label: Teaser
+targetEntityType: commerce_product
+cache: true

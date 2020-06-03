@@ -17,7 +17,7 @@ fontello:
   version: VERSION
   css:
     theme:
-      fonts/fontello-merged/fontello.css: {}
+      fonts/fontello/fontello.css: {}
 
 global-scripts:
   version: VERSION
@@ -65,3 +65,9 @@ ie-compatibility:
   dependencies:
     - core/jquery
     - core/drupal
+
+d_commerce:
+  version: VERSION
+  css:
+    theme:
+      css/d_commerce.css: {}

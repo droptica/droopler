@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.products_list
+  module:
+    - system
+    - views
+  theme:
+    - droopler_theme
+id: droopler_theme_exposed_form_products_list_products_list
+theme: droopler_theme
+region: facets_top
+weight: -14
+provider: null
+plugin: 'views_exposed_filter_block:products_list-products_list'
+settings:
+  id: 'views_exposed_filter_block:products_list-products_list'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /products
+    negate: false
+    context_mapping: {  }

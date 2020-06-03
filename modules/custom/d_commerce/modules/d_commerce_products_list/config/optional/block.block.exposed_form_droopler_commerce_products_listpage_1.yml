@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.droopler_commerce_products_list
+  module:
+    - system
+    - views
+  theme:
+    - droopler_theme
+  enforced:
+    module:
+      - d_commerce_products_list
+id: exposed_form_droopler_commerce_products_listpage_1
+theme: droopler_theme
+region: facets_top
+weight: -14
+provider: null
+plugin: 'views_exposed_filter_block:droopler_commerce_products_list-page_1'
+settings:
+  id: 'views_exposed_filter_block:droopler_commerce_products_list-page_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: "/shop\r\n/shop/*"
+    negate: false
+    context_mapping: {  }

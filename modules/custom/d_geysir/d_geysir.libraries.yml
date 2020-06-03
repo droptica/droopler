@@ -6,18 +6,10 @@ media:
   dependencies:
     - geysir/geysir
 
-toggle_link:
+d_geysir:
   version: VERSION
-  js:
-    js/d_geysir.js: {}
-    js/d_geysir.toggle.js: {}
   css:
     theme:
-      css/d_geysir.toggle.css: {}
+      css/d_geysir.css: {}
   dependencies:
     - geysir/geysir
-    - core/jquery
-    - core/jquery.once
-    - core/jquery.cookie
-    - core/drupal
-    - core/drupal.ajax

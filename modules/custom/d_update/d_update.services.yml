@@ -1,9 +1,15 @@
 services:
   d_update.config_compare:
     class: Drupal\d_update\ConfigCompare
+    arguments: ['@config.factory']
   d_update.update_checklist:
     class: Drupal\d_update\UpdateChecklist
     arguments: ['@config.factory', '@module_handler', '@current_user', '@checklistapi_storage.state']
   d_update:
     class: Drupal\d_update\Updater
     arguments: ['@module_installer', '@config.storage', '@entity_type.manager',  '@d_update.config_compare', '@config.manager', '@d_update.update_checklist', '@extension.list.module', '@config.factory']
+  d_update.drush.generate_config_hash_command:
+    class: \Drupal\d_update\Commands\GenerateConfigHashCommand
+    arguments: ['@d_update.config_compare']
+    tags:
+      - { name: drush.command }
