@@ -9,6 +9,8 @@
 
 	if(typeof module == 'object' && module.exports){
 		factory(require('lazysizes'));
+	} else if (typeof define == 'function' && define.amd) {
+		define(['lazysizes'], factory);
 	} else if(window.lazySizes) {
 		globalInstall();
 	} else {
@@ -84,6 +86,7 @@
 			blurImg.addEventListener('error', onloadBlurUp);
 
 			blurImg.className = 'ls-blur-up-img';
+			blurImg.cssText = img.cssText;
 			blurImg.src = src;
 			blurImg.alt = '';
 			blurImg.setAttribute('aria-hidden', 'true');
