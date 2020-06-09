@@ -37,6 +37,8 @@ Firstly you need to download two dependant contrib modules:
  * [Commerce](https://www.drupal.org/project/commerce)
  * [Facets Pretty Paths](https://www.drupal.org/project/facets_pretty_paths)
 
+Using composer run `composer require drupal/commerce drupal/facets_pretty_paths` command.
+
 In the next step, you need to enable `d_commerce` module that comes with Droopler.
 
 Droopler comes with two optional submodules extending Commerce integration:
