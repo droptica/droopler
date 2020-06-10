@@ -75,8 +75,8 @@
     {{ content.field_blog_media_main_image }}
 
     <div class="blog-post-header-wrapper container">
-      {% if display_submitted %}
-        <div class="node__meta">
+      <div class="node__meta">
+        {% if display_submitted %}
           {{ author_picture }}
 
           {% block submitted %}
@@ -84,12 +84,12 @@
               {% trans %}{{ author_name }} /  {{ date }}{% endtrans %}
             </span>
           {% endblock %}
+        {% endif %}
 
-          {{ metadata }}
+        {{ metadata }}
 
-          <h1{{ title_attributes.addClass('node__title') }}>{{ label }}</h1>
-        </div>
-      {% endif %}
+        <h1{{ title_attributes.addClass('node__title') }}>{{ label }}</h1>
+      </div>
 
       {{ content.field_blog_category }}
     </div>
