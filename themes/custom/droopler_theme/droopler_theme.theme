@@ -166,7 +166,7 @@ function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array 
       ->getStorage('taxonomy_term');
     $tid = $route_match->getRawParameter('taxonomy_term');
     $term = $storage->load($tid);
-    $suggestions[] = 'page__taxonomy__term__' . $term->getVocabularyId();
+    $suggestions[] = 'page__taxonomy__term__' . $term->bundle();
   }
 
   // Theme suggestions for pages derived from the views.
