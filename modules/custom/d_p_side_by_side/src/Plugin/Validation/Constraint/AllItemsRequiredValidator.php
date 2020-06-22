@@ -2,6 +2,7 @@
 
 namespace Drupal\d_p_side_by_side\Plugin\Validation\Constraint;
 
+use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -15,6 +16,12 @@ class AllItemsRequiredValidator extends ConstraintValidator {
    */
   public function validate($entity, Constraint $constraint) {
     if (!isset($entity)) {
+      return;
+    }
+
+    /** @var Paragraph $parentParagraph */
+    $parentParagraph = $entity->getParent()->getEntity();
+    if (!$parentParagraph->isValidationRequired()) {
       return;
     }
 

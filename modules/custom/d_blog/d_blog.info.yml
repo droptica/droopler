@@ -2,6 +2,7 @@ name: d_blog
 description: 'Adds a blog to Droopler.'
 type: module
 core: 8.x
+core_version_requirement: ^8 || ^9
 dependencies:
   - block
   - content_translation
@@ -48,7 +49,7 @@ dependencies:
   - tvi
   - user
   - views
-version: 8.x-2.0
+version: DROOPLER_VERSION
 package: Droopler
 'interface translation project': d_blog
 'interface translation server pattern': profiles/contrib/droopler/modules/custom/d_blog/translations/%project-%version.%language.po

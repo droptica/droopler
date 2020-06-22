@@ -2,6 +2,7 @@ name: d_p_media
 description: 'Provides Media paragraph for Drupal 8'
 type: module
 core: 8.x
+core_version_requirement: ^8 || ^9
 dependencies:
   - colorbox
   - content_translation
@@ -22,4 +23,4 @@ dependencies:
   - user
 package: Paragraphs
 core_incompatible: false
-version: 8.x-2.0
+version: DROOPLER_VERSION

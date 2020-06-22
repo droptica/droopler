@@ -33,6 +33,7 @@ $d-blog-author-attributes-font-size-desktop: 1.0625rem !default;
 $d-blog-author-attributes-font-size-mobile: 0.75rem !default;
 $d-blog-block-category-font-size-desktop: 1rem !default;
 $d-blog-block-category-font-size-mobile: 0.625rem !default;
+$d-blog-block-category-margin: 1rem 0 !default;
 
 $d-blog-image-margin: 2.1875rem auto !default;
 $d-blog-paragraph-text-margin: 1.5625rem auto !default;
@@ -107,6 +108,7 @@ article.node--type-blog-post {
         text-align: center;
         font-size: $d-blog-block-category-font-size-desktop;
         color: $d-blog-color-taxonomy-in-header;
+        margin: $d-blog-block-category-margin;
 
         .field__item {
           display: inline;

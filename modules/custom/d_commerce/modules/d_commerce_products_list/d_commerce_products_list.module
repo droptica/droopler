@@ -160,7 +160,7 @@ function d_commerce_products_list_form_views_exposed_form_alter(array &$form, Fo
     if (!$facet_source) {
       return;
     }
-    if ('facets_pretty_paths' == $facet_source->getUrlProcessorName()) {
+    if ('d_commerce_product_list_url_processor' == $facet_source->getUrlProcessorName()) {
       $form['#action'] = NULL;
     }
   }

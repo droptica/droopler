@@ -1,8 +1,9 @@
 name: Droopler Theme
 type: theme
 description: 'A flexible Booststrap based theme, with many regions and a responsive, mobile-first layout.'
-version: 8.x-2.0
+version: DROOPLER_VERSION
 core: '8.x'
+core_version_requirement: ^8 || ^9
 base theme: false
 
 libraries:
@@ -12,7 +13,6 @@ libraries:
   - droopler_theme/fontello
   - droopler_theme/social_media
   - droopler_theme/bootstrap
-  - droopler_theme/d_commerce
 
 libraries-extend:
   core/drupal.dropbutton:
