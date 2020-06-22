@@ -2,7 +2,7 @@ core = 8.x
 api = 2
 defaults[projects][subdir] = contrib
 
-projects[admin_toolbar][version] = 2
+projects[admin_toolbar][version] = 2.2
 projects[advagg][version] = 4
 projects[better_exposed_filters][version] = 4
 projects[checklistapi][version] = 1
