@@ -2,13 +2,13 @@ core = 8.x
 api = 2
 defaults[projects][subdir] = contrib
 
-projects[admin_toolbar][version] = 2.2
+projects[admin_toolbar][version] = 2.3
 projects[advagg][version] = 4
 projects[better_exposed_filters][version] = 4
 projects[checklistapi][version] = 1
 projects[colorbox][version] = 1
 projects[config_update][version] = 1
-projects[contact_formatter][version] = ~
+projects[contact_formatter][version] = 2.0.x
 projects[ctools][version] = 3
 projects[entity_reference_display][version] = 1
 projects[entity_reference_revisions][version] = 1
