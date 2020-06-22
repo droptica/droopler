@@ -3,5 +3,3 @@ core: 8.x
 projects:
   drupal:
     type: core
-
-`
