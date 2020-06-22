@@ -1,5 +1,6 @@
 name: d_p_node
 core: 8.x
+core_version_requirement: ^8 || ^9
 description: 'Provides a paragraph with node reference.'
 type: module
 dependencies:
@@ -20,5 +21,5 @@ dependencies:
   - user
   - views
 package: Paragraphs
-version: 8.x-2.0
+version: DROOPLER_VERSION
 core_incompatible: false

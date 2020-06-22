@@ -1,9 +1,10 @@
 name: d_demo
 core: 8.x
+core_version_requirement: ^8 || ^9
 description: 'Module with demo content.'
 type: module
 package: Droopler
-version: 8.x-2.0
+version: DROOPLER_VERSION
 dependencies:
   - block
   - d_content_init
