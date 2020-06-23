@@ -2,7 +2,7 @@ name: d_p_gallery
 description: 'Provides a paragraph with a simple gallery.'
 type: module
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 package: Paragraphs
 dependencies:
   - colorbox
@@ -12,6 +12,8 @@ dependencies:
   - field
   - file
   - image
+  - link
+  - link_attributes
   - media
   - media_library
   - paragraphs
