@@ -2,7 +2,7 @@ name: d_p_carousel
 description: 'Provides a Paragraph with a Slick carousel.'
 type: module
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 dependencies:
   - content_translation
   - d_media
@@ -12,11 +12,12 @@ dependencies:
   - field_group
   - image
   - link
+  - link_attributes
   - media
   - media_library
   - paragraphs
   - svg_image
   - text
 version: DROOPLER_VERSION
-package: Droopler
+package: d
 core_incompatible: false

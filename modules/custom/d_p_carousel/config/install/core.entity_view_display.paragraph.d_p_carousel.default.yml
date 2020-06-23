@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.d_p_carousel.field_d_cta_link
     - field.field.paragraph.d_p_carousel.field_d_long_text
     - field.field.paragraph.d_p_carousel.field_d_main_title
     - field.field.paragraph.d_p_carousel.field_d_media_icon
@@ -12,12 +13,25 @@ dependencies:
   module:
     - d_p
     - entity_reference_revisions
+    - link
     - text
 id: paragraph.d_p_carousel.default
 targetEntityType: paragraph
 bundle: d_p_carousel
 mode: default
 content:
+  field_d_cta_link:
+    weight: 6
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
   field_d_long_text:
     weight: 3
     label: hidden
