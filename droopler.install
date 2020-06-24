@@ -1363,3 +1363,22 @@ function droopler_update_8114() {
     ->checklist()
     ->saveProgress(['v2.1' => $values]);
 }
+
+/**
+ * Droopler 2.2 update configs for modules.
+ */
+function droopler_update_8115() {
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_p_carousel' => [
+      'field.field.paragraph.d_p_carousel.field_d_cta_link' => '737461f87cacdf24c8ec7a876bca868b',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8115_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8115_2'] = update_modules_configuration(['d_p_carousel'], '8115');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
