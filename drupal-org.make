@@ -4,7 +4,7 @@ defaults[projects][subdir] = contrib
 
 projects[admin_toolbar][version] = 2
 projects[advagg][version] = 4
-projects[better_exposed_filters][version] = 3
+projects[better_exposed_filters][version] = 4
 projects[checklistapi][version] = 1
 projects[colorbox][version] = 1
 projects[config_update][version] = 1
