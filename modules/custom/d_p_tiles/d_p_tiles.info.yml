@@ -2,7 +2,7 @@ name: d_p_tiles
 description: 'Provides a paragraph with Masonry tile gallery.'
 type: module
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 package: Paragraphs
 dependencies:
   - colorbox
@@ -11,6 +11,8 @@ dependencies:
   - d_p
   - field
   - file
+  - link
+  - link_attributes
   - media
   - media_library
   - paragraphs
