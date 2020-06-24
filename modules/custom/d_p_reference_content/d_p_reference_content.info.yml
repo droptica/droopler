@@ -1,14 +1,17 @@
 name: d_p_reference_content
 type: module
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 dependencies:
+  - d_media
   - d_p
   - field
   - link
   - link_attributes
+  - media_library
   - node
   - paragraphs
+  - text
 version: DROOPLER_VERSION
 package: Paragraphs
 core_incompatible: false
