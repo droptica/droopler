@@ -9,6 +9,7 @@ $d-p-counters-line-color-inverted: $line-background !default;
 $d-p-counters-header-color: $color-odysseus !default;
 $d-p-counters-number-color: $color-odysseus !default;
 $d-p-counters-text-color: $color-nestor !default;
+$d-p-counters-long-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-counters-title-margin-top: 0 !default;
@@ -69,6 +70,11 @@ $d-p-counters-background-opacity: 0.2 !default;
         font-size: 1rem;
         font-weight: normal;
       }
+    }
+
+    .field--name-field-d-long-text {
+      color: $d-p-counters-long-text-color;
+      padding-top: 10px;
     }
   }
 }
