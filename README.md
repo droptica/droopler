@@ -26,9 +26,7 @@ The Droopler profile should be installed via Composer. We recommend using [Droop
 
 And run **composer update**.
 
-In case of unexpected problems please update your main composer.json to comply 
-with the [Droopler skeleton repository](https://github.com/droptica/droopler_project). 
-You may run into some issues with libraries and their directories.
+In case of unexpected problems please update your main composer.json to comply with the [Droopler skeleton repository](https://github.com/droptica/droopler_project). You may run into some issues with libraries and their directories.
 
 ## Commerce ##
 Droopler, starting from version 2.1 comes with Drupal Commerce integration modules.
