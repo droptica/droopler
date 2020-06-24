@@ -2,6 +2,7 @@ name: 'Droopler Profile'
 type: profile
 description: 'Ready to use site builder with paragraphs.'
 core: 8.x
+core_version_requirement: ^8 || ^9
 dependencies:
   - admin_toolbar
   - admin_toolbar_tools
@@ -85,6 +86,7 @@ dependencies:
   - shortcut
   - simple_sitemap
   - svg_image
+  - svg_image_responsive
   - system
   - taxonomy
   - text
@@ -98,6 +100,5 @@ themes:
   - seven
 distribution:
   name: 'Droopler Profile'
-version: 8.x-2.0
+version: 8.x-2.1
 project: 'droopler'
-core_incompatible: false
