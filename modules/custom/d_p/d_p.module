@@ -114,16 +114,29 @@ function d_p_preprocess_paragraph(&$variables) {
  *   Form array to search on.
  */
 function edit_cta_link_default_class(&$form) {
-  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
-    foreach ($form as &$subform) {
-      if (!is_object($subform) && isset($subform['field_d_cta_link'])) {
-        $subform['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
-      }
-      if (is_array($subform)) {
-        edit_cta_link_default_class($subform);
-      }
+  foreach ($form as &$subform) {
+    if (!is_object($subform) && isset($subform['field_d_cta_link'])) {
+      $subform['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = add_cta_link_default_class($subform['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value']);
+    }
+    if (is_array($subform)) {
+      edit_cta_link_default_class($subform);
     }
   }
+}
+
+/**
+ * Adds CTA classes to the class list.
+ *
+ * @param string $class_list
+ *   List of classes to add a CTA classes.
+ *
+ * @return string
+ *   List of classes with CTA classes.
+ */
+function add_cta_link_default_class($class_list) {
+  $class_list .= preg_match('/(^| )btn($| )/', $class_list) ? '' : ' btn';
+  $class_list .= preg_match('/(^| )btn-primary($| )/', $class_list) ? '' : ' btn-primary';
+  return trim(preg_replace('/\s+/', ' ', $class_list));
 }
 
 /**
@@ -145,9 +158,14 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   // Add bootstrap classes to CTA by default.
   $trigger_name = $form_state->getUserInput()['_triggering_element_name'] ?? NULL;
-  if (strpos($form_id, 'add') !== FALSE || strpos($trigger_name, 'add') !== FALSE) {
+  if (
+    strpos($form_id, 'add') !== FALSE ||
+    strpos($trigger_name, 'add') !== FALSE ||
+    strpos($form_id, 'edit') !== FALSE ||
+    strpos($trigger_name, 'edit') !== FALSE
+  ) {
     if (isset($form['field_d_cta_link'])) {
-      $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+      $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = add_cta_link_default_class($form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value']);
     }
     edit_cta_link_default_class($form);
   }
