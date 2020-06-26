@@ -24,6 +24,23 @@ core.entity_form_display.paragraph.d_p_reference_content.default:
         type: media_library_widget
         region: content
 core.entity_view_display.paragraph.d_p_reference_content.default:
+  change:
+    expected:
+      content:
+        field_d_cta_link:
+          weight: 2
+        field_d_main_title:
+          weight: 0
+        field_d_p_reference_content:
+          weight: 1
+    new:
+      content:
+        field_d_cta_link:
+          weight: 4
+        field_d_main_title:
+          weight: 1
+        field_d_p_reference_content:
+          weight: 3
   add:
     dependencies:
       config:
