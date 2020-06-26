@@ -34,40 +34,40 @@ core.entity_form_display.paragraph.d_p_group_of_counters.default:
         type: text_textarea
         region: content
 core.entity_view_display.paragraph.d_p_group_of_counters.default:
-add:
-  dependencies:
-    config:
-      - field.field.paragraph.d_p_group_of_counters.field_d_cta_link
-      - field.field.paragraph.d_p_group_of_counters.field_d_long_text
-    module:
-      - link
-      - text
-  third_party_settings:
-    field_group:
-      group_d_counters_content:
-        children:
-          - field_d_long_text
-          - field_d_cta_link
-  content:
-    field_d_cta_link:
-      weight: 9
-      label: hidden
-      settings:
-        trim_length: 80
-        url_only: false
-        url_plain: false
-        rel: ''
-        target: ''
-      third_party_settings: {  }
-      type: link
-      region: content
-    field_d_long_text:
-      weight: 7
-      label: hidden
-      settings: {  }
-      third_party_settings: {  }
-      type: text_default
-      region: content
+  add:
+    dependencies:
+      config:
+        - field.field.paragraph.d_p_group_of_counters.field_d_cta_link
+        - field.field.paragraph.d_p_group_of_counters.field_d_long_text
+      module:
+        - link
+        - text
+    third_party_settings:
+      field_group:
+        group_d_counters_content:
+          children:
+            - field_d_long_text
+            - field_d_cta_link
+    content:
+      field_d_cta_link:
+        weight: 9
+        label: hidden
+        settings:
+          trim_length: 80
+          url_only: false
+          url_plain: false
+          rel: ''
+          target: ''
+        third_party_settings: {  }
+        type: link
+        region: content
+      field_d_long_text:
+        weight: 7
+        label: hidden
+        settings: {  }
+        third_party_settings: {  }
+        type: text_default
+        region: content
 core.entity_form_display.paragraph.d_p_single_counter.default:
   add:
     dependencies:
