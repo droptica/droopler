@@ -71,10 +71,10 @@ function droopler_install_tasks() {
       'display_name' => t('Install additional components'),
       'type' => 'batch',
     ],
-    'droopler_enable_subtheme' => [
+    'droopler_enable_subtheme_batch' => [
       'display' => TRUE,
       'display_name' => t('Install and enable subtheme'),
-      'type' => 'normal',
+      'type' => 'batch',
     ],
   ];
   return $tasks;
@@ -90,7 +90,7 @@ function droopler_install_tasks() {
  */
 function droopler_additional_components_install(array &$install_state) {
   $modules = $install_state['droopler_additional_modules'];
-  $functions = $install_state['droopler_additional_components'];
+  $functions = $install_state['droopler_additional_functions'];
 
   $batch = $operations = [];
   if ($modules) {

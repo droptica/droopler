@@ -65,7 +65,7 @@ class AdditionalComponentsForm extends FormBase {
     ];
 
     foreach ($this->modules as $name => $description) {
-      if ($name == 'd_commerce' && !$this->moduleExist('d_commerce')) {
+      if ($name == 'd_commerce' && !$this->modulesExists(['d_commerce', 'commerce'])) {
         $description = $this->t('Out-of-the-box support for Commerce module for Drupal. You have to install additional modules to enable this checkbox. <a href="@readme" target="_blank">Read more</a>.',
         ['@readme' => 'https://github.com/droptica/droopler/blob/master/README.md']);
       }
@@ -111,7 +111,7 @@ class AdditionalComponentsForm extends FormBase {
     $build_info = $form_state->getBuildInfo();
     $install_state = $build_info['args'];
 
-    $install_modules = $additional_modules = $documentation_module = $methods = [];
+    $install_modules = $additional_modules = $documentation_module = $functions = [];
     foreach($this->modules as $name => $desc)  {
       if ($values['module_' . $name]) {
         $install_modules[] = $name;
@@ -127,7 +127,7 @@ class AdditionalComponentsForm extends FormBase {
         'd_demo',
         'd_product',
       ];
-      $methods = [
+      $functions = [
         'd_content_init_create_all'
       ];
     }
@@ -138,12 +138,12 @@ class AdditionalComponentsForm extends FormBase {
         'd_content_init',
         'd_documentation',
       ]);
-      $methods = array_merge($methods, [
+      $functions = array_merge($functions, [
         'd_content_init_create_all',
       ]);
     }
 
-    $install_state[0]['droopler_additional_components'] = array_unique($methods);
+    $install_state[0]['droopler_additional_functions'] = array_unique($functions);
     $install_state[0]['droopler_additional_modules'] = array_unique(array_merge($install_modules, $additional_modules), SORT_REGULAR);
     $build_info['args'] = $install_state;
     $form_state->setBuildInfo($build_info);
@@ -160,5 +160,22 @@ class AdditionalComponentsForm extends FormBase {
   private function moduleExist($module_name) {
     $modules_data = $this->moduleExtensionList->reset()->getList();
     return !empty($modules_data[$module_name]);
+  }
+
+  /**
+   * Check if all modules exists.
+   *
+   * @param array $modules
+   *   List of modules.
+   * @return bool
+   *   Return TRUE if all modules exist.
+   */
+  private function modulesExists(array $modules) {
+    foreach ($modules as $module) {
+      if (!$this->moduleExist($module)) {
+        return FALSE;
+      }
+    }
+    return TRUE;
   }
 }
