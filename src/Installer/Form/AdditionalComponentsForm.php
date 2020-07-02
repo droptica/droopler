@@ -64,17 +64,19 @@ class AdditionalComponentsForm extends FormBase {
       '#type' => 'container',
     ];
 
+    $disabled = FALSE;
     foreach ($this->modules as $name => $description) {
       if ($name == 'd_commerce' && !$this->modulesExists(['d_commerce', 'commerce'])) {
         $description = $this->t('Out-of-the-box support for Commerce module for Drupal. You have to install additional modules to enable this checkbox. <a href="@readme" target="_blank">Read more</a>.',
         ['@readme' => 'https://github.com/droptica/droopler/blob/master/README.md']);
+        $disabled = TRUE;
       }
 
       $form['install']['module_' . $name] = [
         '#type' => 'checkbox',
         '#title' => $name,
         '#description' => $this->t('@description', ['@description' => $description]),
-        '#disabled' => !$this->moduleExist($name),
+        '#disabled' => $disabled,
       ];
     }
 
@@ -128,7 +130,7 @@ class AdditionalComponentsForm extends FormBase {
         'd_product',
       ];
       $functions = [
-        'd_content_init_create_all'
+        'd_content_init_create_all',
       ];
     }
 
@@ -155,7 +157,7 @@ class AdditionalComponentsForm extends FormBase {
    * @param string $module_name
    *   Module name.
    * @return \Drupal\Core\Extension\Extension|mixed
-   *   Return true if module exist.
+   *   Return TRUE if module exist.
    */
   private function moduleExist($module_name) {
     $modules_data = $this->moduleExtensionList->reset()->getList();

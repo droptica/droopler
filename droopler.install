@@ -112,7 +112,7 @@ function droopler_additional_components_install(array &$install_state) {
   if ($operations) {
     $batch = [
       'operations' => $operations,
-      'title' => t('Installing selected component'),
+      'title' => t('Installing selected components'),
       'error_message' => t('Installation error.'),
     ];
   }
