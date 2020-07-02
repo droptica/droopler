@@ -64,8 +64,8 @@ class AdditionalComponentsForm extends FormBase {
       '#type' => 'container',
     ];
 
-    $disabled = FALSE;
     foreach ($this->modules as $name => $description) {
+      $disabled = !$this->moduleExist($name);
       if ($name == 'd_commerce' && !$this->modulesExists(['d_commerce', 'commerce'])) {
         $description = $this->t('Out-of-the-box support for Commerce module for Drupal. You have to install additional modules to enable this checkbox. <a href="@readme" target="_blank">Read more</a>.',
         ['@readme' => 'https://github.com/droptica/droopler/blob/master/README.md']);
