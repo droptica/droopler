@@ -58,37 +58,82 @@ function droopler_install() {
 }
 
 /**
- * Implements hook_install_tasks().
+ * Implements hook_install_tasks()
  */
 function droopler_install_tasks() {
   $tasks = [
-    'droopler_enable_blog_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install d_blog'),
+    'droopler_additional_components_form' => [
+      'display_name' => t('Enable additional components'),
+      'type' => 'form',
+      'function' => 'Drupal\droopler\Installer\Form\AdditionalComponentsForm',
+    ],
+    'droopler_additional_components_install' => [
+      'display_name' => t('Install additional components'),
       'type' => 'batch',
     ],
-    'droopler_enable_product_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install d_product'),
-      'type' => 'batch',
-    ],
-    'droopler_enable_demo_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install Demo'),
-      'type' => 'batch',
-    ],
-    'droopler_enable_init_content_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Init content'),
-      'type' => 'batch',
-    ],
-    'droopler_enable_subtheme_batch' => [
+    'droopler_enable_subtheme' => [
       'display' => TRUE,
       'display_name' => t('Install and enable subtheme'),
-      'type' => 'batch',
+      'type' => 'normal',
     ],
   ];
   return $tasks;
+}
+
+/**
+ * Install additional components in a batch.
+ *
+ * @param array $install_state
+ *   The install state.
+ * @return array
+ *   Batch array.
+ */
+function droopler_additional_components_install(array &$install_state) {
+  $modules = $install_state['droopler_additional_modules'];
+  $functions = $install_state['droopler_additional_components'];
+
+  $batch = $operations = [];
+  if ($modules) {
+    foreach ($modules as $module) {
+      $operations[] = [
+        'droopler_install_module',
+        [$module],
+      ];
+    }
+  }
+  if ($functions) {
+    foreach ($functions as $function) {
+      $operations[] = [
+        'droopler_execute_function',
+        [$function],
+      ];
+    }
+  }
+  if ($operations) {
+    $batch = [
+      'operations' => $operations,
+      'title' => t('Installing selected component'),
+      'error_message' => t('Installation error.'),
+    ];
+  }
+  return $batch;
+}
+
+/**
+ * Execute function in batch.
+ *
+ * @param string $function_name
+ *   Name of method.
+ * @param array $context
+ *   Batch context.
+ */
+function droopler_execute_function($function_name, &$context) {
+  if (function_exists($function_name)) {
+    $function_name();
+  }
+  $context['message'] = t('%function_name executed.', [
+    '%function_name' => $function_name,
+  ]);
 }
 
 /**
@@ -102,29 +147,6 @@ function droopler_install_tasks() {
 function droopler_install_module(string $module, array &$context) {
   \Drupal::service('module_installer')->install([$module], TRUE);
   $context['message'] = t('Installed %module module.', ['%module' => $module]);
-}
-
-/**
- * Allows to install modules in batch.
- *
- * @param \Drupal\Core\StringTranslation\TranslatableMarkup|string $title
- *   Title to display on the installation page.
- * @param array $modules
- *   Module machine name.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_install_modules_batch($title, array $modules) {
-  $operations = [];
-  foreach ($modules as $module) {
-    $operations[] = ['droopler_install_module', [$module]];
-  }
-
-  return [
-    'operations' => $operations,
-    'title' => $title,
-  ];
 }
 
 /**
