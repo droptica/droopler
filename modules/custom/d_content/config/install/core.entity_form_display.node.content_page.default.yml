@@ -2,16 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.content_page.field_header_cta
+    - field.field.node.content_page.field_header_layout
     - field.field.node.content_page.field_page_section
     - field.field.node.content_page.field_teaser_media_image
     - field.field.node.content_page.field_teaser_text
-    - image.style.thumbnail
     - node.type.content_page
   module:
     - field_group
+    - link_attributes
+    - media_library
     - paragraphs
     - path
-    - svg_image
 third_party_settings:
   field_group:
     group_seo:
@@ -39,6 +41,29 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_header_cta:
+    weight: 27
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        id: true
+        name: true
+        target: true
+        rel: true
+        class: true
+        accesskey: true
+        aria-label: false
+        title: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_header_layout:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_page_section:
     weight: 11
     settings:

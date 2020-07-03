@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Theme override to display a contente page .
+ *
+ * @see template_preprocess_page()
+ */
+#}
+{% set classes = [
+  'navbar-wrapper',
+  header_layout == 'header_with_cta' ? 'mb-lg-2',
+] %}
+{% extends "page.html.twig" %}
+{% block head %}
+  {% if header_layout != 'header_disabled' %}
+    <nav{{ navbar_attributes.addClass(classes) }}>
+      <div class="container no-padding-md">
+        <div class="navbar-brand d-flex align-items-center">
+          {{ page.header }}
+        </div>
+        {% if (header_layout == 'header_with_cta') %}
+          {% if node.field_header_cta and (node.field_header_cta.0.uri is not empty) %}
+            <div class="d-content-cta-wrapper">
+              {% if node.field_header_cta.0.url.external %}
+                <a href="{{ node.field_header_cta.0.uri }}"
+                   target="{{ node.field_header_cta.0.options.attributes.target }}"
+                   class="{{ node.field_header_cta.0.options.attributes.class|join(' ') }}">
+                  <span class="d-md-none icon-hand-pointer-o"></span>
+                  <span class="d-none d-md-block">{{ node.field_header_cta.0.title }}</span>
+                </a>
+              {% else %}
+                <a href="{{ path(node.field_header_cta.0.url.routeName, node.field_header_cta.0.url.routeParameters) }}"
+                   target="{{ node.field_header_cta.0.options.attributes.target }}"
+                   class="{{ node.field_header_cta.0.options.attributes.class|join(' ') }}">
+                  <span class="d-md-none icon-hand-pointer-o"></span>
+                  <span class="d-none d-md-block">{{ node.field_header_cta.0.title }}</span>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% else %}
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="navbar navbar-expand-lg main-navbar px-0 collapse ml-auto flex-column d-lg-flex" id="navbar-nav">
+              <div class="navbar-inner d-flex">
+                {% if page.secondary_menu %}
+                  <div class="secondary-menu-region">{{ page.secondary_menu }}</div>
+                {% endif %}
+                {% if page.primary_menu %}
+                  <div class="menu-region">{{ page.primary_menu }}</div>
+                {% endif %}
+                {% if  page.lang_menu %}
+                  <div class="lang-region">{{ page.lang_menu }}</div>
+                {% endif %}
+              </div>
+          </nav>
+        {% endif %}
+      </div>
+    </nav>
+  {% endif %}
+{% endblock %}
+
