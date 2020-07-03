@@ -73,14 +73,12 @@ function d_update_preprocess_menu__toolbar(&$variables) {
     return;
   }
   if (d_update_update_link_is_active()) {
-    if (d_update_system_has_pending_updates()) {
-      // In this stage title is already a string, so we need to call __toString.
-      $variables['items']['d_update.admin_update']['title'] = t('Droopler Update')->__toString();
-      // We need to rewrite current url options to hold classes etc.
-      $options = $variables['items']['d_update.admin_update']['url']->getOptions();
-      $variables['items']['d_update.admin_update']['url'] = Url::fromRoute('system.db_update')
-        ->setOptions($options);
-    }
+    // In this stage title is already a string, so we need to call __toString.
+    $variables['items']['d_update.admin_update']['title'] = t('Droopler Update')->__toString();
+    // We need to rewrite current url options to hold classes etc.
+    $options = $variables['items']['d_update.admin_update']['url']->getOptions();
+    $variables['items']['d_update.admin_update']['url'] = Url::fromRoute('system.db_update')
+      ->setOptions($options);
   }
   else {
     unset($variables['items']['d_update.admin_update']);
@@ -95,13 +93,9 @@ function d_update_preprocess_menu__toolbar(&$variables) {
  *
  * @return bool
  *   return true if checklist has any pending updates
- *   or update.php execution is required, return false otherwise
  */
 function d_update_update_link_is_active() {
-  $system_has_pending_updates = d_update_system_has_pending_updates();
-  $checklist_has_pending_updates = d_update_checklist_has_pending_updates();
-
-  return $system_has_pending_updates || $checklist_has_pending_updates;
+  return  d_update_checklist_has_pending_updates();
 }
 
 /**
