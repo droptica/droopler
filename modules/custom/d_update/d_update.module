@@ -72,7 +72,7 @@ function d_update_preprocess_menu__toolbar(&$variables) {
   if (empty($variables['items']['d_update.admin_update'])) {
     return;
   }
-  if (d_update_update_link_is_active()) {
+  if (d_update_checklist_has_pending_updates()) {
     // In this stage title is already a string, so we need to call __toString.
     $variables['items']['d_update.admin_update']['title'] = t('Droopler Update')->__toString();
     // We need to rewrite current url options to hold classes etc.
@@ -86,16 +86,6 @@ function d_update_preprocess_menu__toolbar(&$variables) {
 
   $variables['#cache']['max-age'] = 0;
   $variables['#attached']['library'][] = 'd_update/droopler';
-}
-
-/**
- * Control visibility of the update button.
- *
- * @return bool
- *   return true if checklist has any pending updates
- */
-function d_update_update_link_is_active() {
-  return  d_update_checklist_has_pending_updates();
 }
 
 /**
