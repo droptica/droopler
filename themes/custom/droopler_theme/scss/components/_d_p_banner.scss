@@ -30,8 +30,10 @@ $d-p-banner-background-opacity: 0.5 !default;
 $d-p-banner-subheader-opacity: 0.7 !default;
 
 .theme-default .paragraph--type--d-p-banner {
-  position: relative;
   background: $d-p-banner-background-overlay;
+}
+.paragraph--type--d-p-banner {
+  position: relative;
   color: $d-p-banner-text-color;
   z-index: 0;
   text-align: center;

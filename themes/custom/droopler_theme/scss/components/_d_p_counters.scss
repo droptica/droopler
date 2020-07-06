@@ -20,9 +20,12 @@ $d-p-counters-mobile-padding-bottom: 3rem !default;
 // Other settings
 $d-p-counters-background-opacity: 0.2 !default;
 
-.theme-default .paragraph--type--d-p-group-of-counters {
-  position: relative;
+.theme-default .paragraph--type--d-p-group-of-counters  {
   background: $d-p-counters-background-overlay;
+}
+
+.paragraph--type--d-p-group-of-counters {
+  position: relative;
   z-index: 0;
 
   .d-media-background-wrapper {

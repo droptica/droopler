@@ -27,7 +27,9 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
 
 .theme-default .d-p-side-tiles-wrapper {
   background-color: $d-p-side-tiles-text-background-color;
+}
 
+.d-p-side-tiles-wrapper {
   &.image-side-left {
     background-color: $d-p-side-tiles-text-background-color-secondary;
   }

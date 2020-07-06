@@ -23,11 +23,14 @@ $d-p-form-small-labels-spacing: 7px !default;
 $d-p-form-background-opacity: 0.4 !default;
 
 .theme-default .paragraph-d-form {
+  background: $d-p-form-background;
+}
+
+.paragraph-d-form {
   position: relative;
   padding-top: $d-p-form-padding-top;
   padding-bottom: $d-p-form-padding-bottom;
   color: $d-p-form-text-color;
-  background: $d-p-form-background;
 
   .d-media-background-wrapper {
     opacity: $d-p-form-background-opacity;

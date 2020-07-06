@@ -21,8 +21,11 @@ $d-p-text-with-bckg-mobile-padding-bottom: 6.25rem !default;
 $d-p-text-with-bckg-img-opacity: 0.1 !default;
 
 .theme-default .d-p-text-with-bckg {
-  position: relative;
   background: $d-p-text-with-bckg-background-overlay;
+}
+
+.d-p-text-with-bckg {
+  position: relative;
   z-index: 0;
   text-align: center;
 

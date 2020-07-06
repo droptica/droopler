@@ -428,14 +428,14 @@ $two-columned-header-line-margin: 0.625rem !default;
   padding-top: 0;
 }
 
-.theme-primary {
+.theme-primary > .paragraph {
   background: $color-agamemnon;
 }
 
-.theme-gray {
+.theme-gray > .paragraph {
   background: $color-paris;
 }
 
-.theme-secondary {
+.theme-secondary > .paragraph {
   background: $color-odysseus;
 }

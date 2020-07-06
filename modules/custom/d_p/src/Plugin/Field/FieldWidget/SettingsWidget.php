@@ -187,7 +187,7 @@ class SettingsWidget extends WidgetBase {
               'theme-primary' => $this->t('Primary'),
               'theme-secondary' => $this->t('Secondary'),
               'theme-gray' => $this->t('Gray'),
-              ],
+            ],
             'bundles' => [
               'paragraph' => ['all'],
             ],
