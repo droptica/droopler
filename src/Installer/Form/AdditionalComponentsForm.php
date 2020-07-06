@@ -47,6 +47,21 @@ class AdditionalComponentsForm extends FormBase {
   ];
 
   /**
+   * @var string[]
+   *   List of all d_commerce dependencies.
+   */
+  private $commerce_modules = [
+    'commerce',
+    'commerce_cart',
+    'commerce_checkout',
+    'commerce_payment',
+    'commerce_price',
+    'commerce_product',
+    'commerce_promotion',
+    'commerce_tax',
+  ];
+
+  /**
    * {@inheritdoc}
    */
   public function getFormId() {
@@ -59,14 +74,9 @@ class AdditionalComponentsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $this->messenger()->deleteAll();
 
-    $form['#title'] = $this->t('Install components');
-    $form['install'] = [
-      '#type' => 'container',
-    ];
-
     foreach ($this->modules as $name => $description) {
       $disabled = !$this->moduleExist($name);
-      if ($name == 'd_commerce' && !$this->modulesExists(['d_commerce', 'commerce'])) {
+      if ($name == 'd_commerce' && !$this->modulesExists($this->commerce_modules)) {
         $description = $this->t('Out-of-the-box support for Commerce module for Drupal. You have to install additional modules to enable this checkbox. <a href="@readme" target="_blank">Read more</a>.',
         ['@readme' => 'https://github.com/droptica/droopler/blob/master/README.md']);
         $disabled = TRUE;
@@ -113,39 +123,34 @@ class AdditionalComponentsForm extends FormBase {
     $build_info = $form_state->getBuildInfo();
     $install_state = $build_info['args'];
 
-    $install_modules = $additional_modules = $documentation_module = $functions = [];
+    $install_modules = $additional_modules = $documentation_module = [];
     foreach($this->modules as $name => $desc)  {
       if ($values['module_' . $name]) {
         $install_modules[] = $name;
       }
     }
 
+    $install_state[0]['droopler_init_content'] = 0;
     if ($values['init_content']) {
+      //$am = $this->initContent($values);
+      $install_state[0]['droopler_init_content'] = 1;
       $additional_modules = [
-        'd_content',
-        'd_content_init',
-        'd_blog_init',
-        'd_product_init',
         'd_demo',
-        'd_product',
       ];
-      $functions = [
-        'd_content_init_create_all',
-      ];
+      if ($values['module_d_blog']) {
+        $additional_modules[] = 'd_blog_init';
+      }
+      if ($values['module_d_product']) {
+        $additional_modules[] = 'd_product_init';
+      }
     }
 
     if ($values['documentation']) {
       $additional_modules = array_merge($additional_modules, [
-        'd_content',
-        'd_content_init',
         'd_documentation',
-      ]);
-      $functions = array_merge($functions, [
-        'd_content_init_create_all',
       ]);
     }
 
-    $install_state[0]['droopler_additional_functions'] = array_unique($functions);
     $install_state[0]['droopler_additional_modules'] = array_unique(array_merge($install_modules, $additional_modules), SORT_REGULAR);
     $build_info['args'] = $install_state;
     $form_state->setBuildInfo($build_info);

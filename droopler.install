@@ -90,7 +90,7 @@ function droopler_install_tasks() {
  */
 function droopler_additional_components_install(array &$install_state) {
   $modules = $install_state['droopler_additional_modules'];
-  $functions = $install_state['droopler_additional_functions'];
+  $init_content = $install_state['droopler_init_content'];
 
   $batch = $operations = [];
   if ($modules) {
@@ -101,14 +101,14 @@ function droopler_additional_components_install(array &$install_state) {
       ];
     }
   }
-  if ($functions) {
-    foreach ($functions as $function) {
-      $operations[] = [
-        'droopler_execute_function',
-        [$function],
-      ];
+
+  if ($init_content) {
+    $init_content_batch = droopler_enable_init_content_batch();
+    foreach ($init_content_batch['operations'] as $operation) {
+      $operations[] = $operation;
     }
   }
+
   if (!empty($operations)) {
     $batch = [
       'operations' => $operations,
@@ -131,10 +131,15 @@ function droopler_additional_components_install(array &$install_state) {
 function droopler_execute_function($function_name, &$context) {
   if (function_exists($function_name)) {
     $function_name();
+    $context['message'] = t('%function_name executed.', [
+      '%function_name' => $function_name,
+    ]);
   }
-  $context['message'] = t('%function_name executed.', [
-    '%function_name' => $function_name,
-  ]);
+  else {
+    $context['message'] = t('%function_name not exist.', [
+      '%function_name' => $function_name,
+    ]);
+  }
 }
 
 /**
@@ -214,24 +219,6 @@ function droopler_enable_product(int $step, array &$context) {
       $context['message'] = t('Optional config installed');
       break;
   }
-}
-
-/**
- * Batch install of all demo modules.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_demo_batch() {
-  $title = t('Install Demo');
-
-  $modules = [
-    'd_blog_init',
-    'd_product_init',
-    'd_demo',
-  ];
-
-  return droopler_install_modules_batch($title, $modules);
 }
 
 /**
