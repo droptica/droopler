@@ -132,7 +132,6 @@ class AdditionalComponentsForm extends FormBase {
 
     $install_state[0]['droopler_init_content'] = 0;
     if ($values['init_content']) {
-      //$am = $this->initContent($values);
       $install_state[0]['droopler_init_content'] = 1;
       $additional_modules = [
         'd_demo',
