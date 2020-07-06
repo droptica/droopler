@@ -178,6 +178,20 @@ class SettingsWidget extends WidgetBase {
               ],
             ],
           ],
+          'paragraph-theme' => [
+            'title' => $this->t('Paragraph Theme'),
+            'description' => $this->t('Choose a color theme for this paragraph.'),
+            'type' => 'select',
+            'options' => [
+              'theme-default' => $this->t('Default'),
+              'theme-primary' => $this->t('Primary'),
+              'theme-secondary' => $this->t('Secondary'),
+              'theme-gray' => $this->t('Gray'),
+              ],
+            'bundles' => [
+              'paragraph' => ['all'],
+            ],
+          ],
         ],
       ],
       self::HEADING_TYPE_SETTING_NAME => [
@@ -250,6 +264,7 @@ class SettingsWidget extends WidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
     $config = !empty($value) ? json_decode($value) : [];
+    $inputs = $form_state->getUserInput();
 
     // Set up the form element for this widget.
     $element += [
@@ -274,6 +289,7 @@ class SettingsWidget extends WidgetBase {
             if (!$this->inBundle($modifier['bundles'])) {
               continue;
             }
+
             $class_key = array_search($class, $classes);
             if ($class_key === FALSE) {
               $default_value = 0;
@@ -282,13 +298,28 @@ class SettingsWidget extends WidgetBase {
               unset($classes[$class_key]);
               $default_value = 1;
             }
+
+            $element_type = !empty($modifier['type']) ? $modifier['type'] : 'checkbox';
             $element[$class] = [
-              '#type' => 'checkbox',
+              '#type' => $element_type,
               '#description' => $modifier['description'] ?? '',
               '#title' => $modifier['title'],
               '#default_value' => $default_value,
               '#attributes' => ['data-modifier' => $class],
             ];
+            if ($modifier['type'] == 'select') {
+              // First element as default.
+              $default_select_value = key($modifier['options']);
+              foreach ($modifier['options'] as $theme_class => $data) {
+                $class_key = array_search($theme_class, $classes);
+                if ($class_key) {
+                  $default_select_value = $theme_class;
+                  unset($classes[$class_key]);
+                }
+              }
+              $element[$class]['#options'] = $modifier['options'];
+              $element[$class]['#default_value'] = $default_select_value;
+            }
           }
 
           $element[$key] = [
@@ -350,7 +381,14 @@ class SettingsWidget extends WidgetBase {
         foreach ($options['modifiers'] as $class => $modifier) {
           $modifier_value = $element[$class]['#value'] ?? NULL;
           if ($modifier_value && $this->inBundle($modifier['bundles'])) {
-            $classes[] = $class;
+            switch ($modifier['type']) {
+              case 'select':
+                $classes[] = $modifier_value;
+                break;
+              default:
+                $classes[] = $class;
+                break;
+            }
           }
         }
         $classes = array_unique($classes);
