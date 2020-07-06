@@ -85,8 +85,7 @@ function d_update_preprocess_menu__toolbar(&$variables) {
   else {
     unset($variables['items']['d_update.admin_update']);
   }
-
-  $variables['#cache']['max-age'] = 0;
+  
   $variables['#attached']['library'][] = 'd_update/droopler';
 }
 
