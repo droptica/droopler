@@ -427,3 +427,15 @@ $two-columned-header-line-margin: 0.625rem !default;
 .no-padding-top > .paragraph {
   padding-top: 0;
 }
+
+.theme-primary > .paragraph {
+  background: $color-agamemnon;
+}
+
+.theme-gray > .paragraph {
+  background: $color-paris;
+}
+
+.theme-secondary > .paragraph {
+  background: $color-odysseus;
+}
