@@ -1363,3 +1363,25 @@ function droopler_update_8114() {
     ->checklist()
     ->saveProgress(['v2.1' => $values]);
 }
+
+/**
+ * Droopler 2.2 update configs for module d_content.
+ */
+function droopler_update_8115() {
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_content' => [
+      'field.field.node.content_page.field_header_cta.yml' => '',
+      'field.field.node.content_page.field_header_layout.yml' => '',
+      'field.storage.node.field_header_cta.yml' => '',
+      'field.storage.node.field_header_layout.yml' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8115_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8115_2'] = update_modules_configuration(['d_content'], '8115');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
