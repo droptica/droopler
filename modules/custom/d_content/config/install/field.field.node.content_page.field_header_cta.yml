@@ -14,7 +14,10 @@ label: CTA
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  - options:
+      attributes:
+        class: btn btn-primary
 default_value_callback: ''
 settings:
   link_type: 17
