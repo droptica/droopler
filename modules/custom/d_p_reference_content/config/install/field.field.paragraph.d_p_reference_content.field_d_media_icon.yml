@@ -21,7 +21,8 @@ settings:
     target_bundles:
       d_image: d_image
     sort:
-      field: _none
+      field: revision_created
+      direction: DESC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
