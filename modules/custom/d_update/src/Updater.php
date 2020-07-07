@@ -11,6 +11,7 @@ use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Extension\ModuleExtensionList;
+use Drupal\Core\Extension\ModuleHandler;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
@@ -90,6 +91,13 @@ class Updater {
   protected $logger;
 
   /**
+   * Module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandler
+   */
+  protected $moduleHandler;
+
+  /**
    * Constructs the Updater.
    *
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
@@ -108,6 +116,8 @@ class Updater {
    *   Update Module Extension List service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   Config factory service.
+   * @param \Drupal\Core\Extension\ModuleHandler $module_handler
+   *   Module handler service.
    */
   public function __construct(ModuleInstallerInterface $module_installer,
                               StorageInterface $config_storage,
@@ -116,7 +126,8 @@ class Updater {
                               ConfigManagerInterface $config_manager,
                               UpdateChecklist $checklist,
                               ModuleExtensionList $moduleExtensionList,
-                              ConfigFactoryInterface $config_factory) {
+                              ConfigFactoryInterface $config_factory,
+                              ModuleHandler $module_handler) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
     $this->entityTypeManager = $entity_type_manager;
@@ -126,6 +137,7 @@ class Updater {
     $this->moduleExtensionList = $moduleExtensionList;
     $this->configFactory = $config_factory;
     $this->logger = $this->getLogger('d_update');
+    $this->moduleHandler = $module_handler;
   }
 
   /**
@@ -137,7 +149,10 @@ class Updater {
   }
 
   /**
-   * Import a config file.
+   * Import a config file if the module exists.
+   *
+   * The method tries to read config files from the modules' 'install' or 'optional' directories,
+   * if the config has been found and the module exists - the config is imported.
    *
    * @param string $source
    *   Module/theme name.
@@ -145,22 +160,31 @@ class Updater {
    *   Config file name without .yml extension.
    * @param string $hash
    *   Hashed array with config data.
-   * @param bool $optional
-   *   Specify if config should be searched only in 'config/optional'.
    *
    * @return bool
-   *   Returns if config was imported successfully.
+   *   TRUE if the config was imported successfully or the module does not exist,
+   *   FALSE otherwise.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function importConfig($source, $name, $hash) {
     $data = $this->readConfigFromFile($source, $name, 'install');
+
     if (empty($data)) {
       $data = $this->readConfigFromFile($source, $name, 'optional');
     }
+
     if (empty($data)) {
       $this->logger
         ->error('Cannot find file for %config', ['%config' => $name]);
 
       return FALSE;
+    }
+
+    // No need to import anything if the module does not exist.
+    if ($this->moduleHandler->moduleExists($source) === FALSE) {
+      return TRUE;
     }
 
     return $this->createConfig($name, $data, $hash);
