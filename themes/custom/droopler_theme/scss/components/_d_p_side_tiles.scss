@@ -25,15 +25,16 @@ $d-p-side-tiles-text-mobile-padding: 7% !default;
 $d-p-side-tiles-text-width: 35.625rem !default;
 $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half of the screen
 
-.theme-default .d-p-side-tiles-wrapper {
-  background-color: $d-p-side-tiles-text-background-color;
+.theme-default {
+  .d-p-side-tiles-wrapper {
+    background-color: $d-p-side-tiles-text-background-color;
+    &.image-side-left {
+      background-color: $d-p-side-tiles-text-background-color-secondary;
+    }
+  }
 }
 
 .d-p-side-tiles-wrapper {
-  &.image-side-left {
-    background-color: $d-p-side-tiles-text-background-color-secondary;
-  }
-
   .d-p-side-tiles-content {
     color: $d-p-side-tiles-text-color;
 
