@@ -37,14 +37,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
 
 // Group of carousel items.
 .paragraph--type--d-p-carousel {
-  padding-top: $d-p-carousel-padding-y;
-  padding-bottom: $d-p-carousel-padding-y;
   text-align: center;
-
-  @include media-breakpoint-down(md) {
-    padding-top: $d-p-carousel-mobile-padding-y;
-    padding-bottom: $d-p-carousel-mobile-padding-y;
-  }
 
   .field--name-field-d-media-icon {
     text-align: center;

@@ -220,29 +220,29 @@ class SettingsWidget extends WidgetBase {
               'paragraph' => ['all'],
             ],
           ],
-          'margin-left' => [
-            'title' => $this->t('Margin Left'),
-            'description' => $this->t('Choose the size of left margin.'),
+          'padding-top' => [
+            'title' => $this->t('Padding Top'),
+            'description' => $this->t('Choose the size of top padding.'),
             'type' => 'select',
             'options' => [
-              'margin-left-default' => $this->t('Default'),
-              'margin-left-small' => $this->t('Small'),
-              'margin-left-big' => $this->t('Big'),
-              'margin-left-none' => $this->t('None'),
+              'padding-top-default' => $this->t('Default'),
+              'padding-top-small' => $this->t('Small'),
+              'padding-top-big' => $this->t('Big'),
+              'padding-top-none' => $this->t('None'),
             ],
             'bundles' => [
               'paragraph' => ['all'],
             ],
           ],
-          'margin-right' => [
-            'title' => $this->t('Margin Right'),
-            'description' => $this->t('Choose the size of right margin.'),
+          'padding-bottom' => [
+            'title' => $this->t('Padding Bottom'),
+            'description' => $this->t('Choose the size of bottom padding.'),
             'type' => 'select',
             'options' => [
-              'margin-right-default' => $this->t('Default'),
-              'margin-right-small' => $this->t('Small'),
-              'margin-right-big' => $this->t('Big'),
-              'margin-right-none' => $this->t('None'),
+              'padding-bottom-default' => $this->t('Default'),
+              'padding-bottom-small' => $this->t('Small'),
+              'padding-bottom-big' => $this->t('Big'),
+              'padding-bottom-none' => $this->t('None'),
             ],
             'bundles' => [
               'paragraph' => ['all'],
@@ -320,7 +320,6 @@ class SettingsWidget extends WidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
     $config = !empty($value) ? json_decode($value) : [];
-    $inputs = $form_state->getUserInput();
 
     // Set up the form element for this widget.
     $element += [
