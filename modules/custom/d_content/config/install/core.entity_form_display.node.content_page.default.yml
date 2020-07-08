@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.content_page.field_meta_tags
     - field.field.node.content_page.field_page_section
     - field.field.node.content_page.field_teaser_media_image
     - field.field.node.content_page.field_teaser_text
@@ -9,6 +10,8 @@ dependencies:
     - node.type.content_page
   module:
     - field_group
+    - media_library
+    - metatag
     - paragraphs
     - path
     - svg_image
@@ -39,6 +42,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_meta_tags:
+    weight: 26
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_page_section:
     weight: 11
     settings:

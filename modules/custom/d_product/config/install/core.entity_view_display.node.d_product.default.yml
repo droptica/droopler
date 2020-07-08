@@ -6,12 +6,15 @@ dependencies:
     - field.field.node.d_product.field_d_ask_for_product
     - field.field.node.d_product.field_d_product_link
     - field.field.node.d_product.field_d_product_media
+    - field.field.node.d_product.field_meta_tags
     - field.field.node.d_product.field_page_section
     - field.field.node.d_product.field_product_categories
     - field.field.node.d_product.field_tags
     - node.type.d_product
   module:
+    - lazy
     - link
+    - metatag
     - text
     - user
 id: node.d_product.default
@@ -48,6 +51,13 @@ content:
     third_party_settings:
       lazy:
         lazy_image: '1'
+    region: content
+  field_meta_tags:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
     region: content
   field_product_categories:
     weight: 3

@@ -1371,14 +1371,10 @@ function droopler_update_8115() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
-  // Import storage first.
-  $updater->importConfigs([
+  $configs = [
     'd_p' => [
       'field.storage.node.field_meta_tags' => '',
     ],
-  ]);
-
-  $configs = [
     'd_blog' => [
       'field.field.node.blog_post.field_meta_tags' => '',
     ],
