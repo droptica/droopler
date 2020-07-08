@@ -192,6 +192,62 @@ class SettingsWidget extends WidgetBase {
               'paragraph' => ['all'],
             ],
           ],
+          'margin-top' => [
+            'title' => $this->t('Margin Top'),
+            'description' => $this->t('Choose the size of top margin.'),
+            'type' => 'select',
+            'options' => [
+              'margin-top-default' => $this->t('Default'),
+              'margin-top-small' => $this->t('Small'),
+              'margin-top-big' => $this->t('Big'),
+              'margin-top-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => ['all'],
+            ],
+          ],
+          'margin-bottom' => [
+            'title' => $this->t('Margin Bottom'),
+            'description' => $this->t('Choose the size of bottom margin.'),
+            'type' => 'select',
+            'options' => [
+              'margin-bottom-default' => $this->t('Default'),
+              'margin-bottom-small' => $this->t('Small'),
+              'margin-bottom-big' => $this->t('Big'),
+              'margin-bottom-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => ['all'],
+            ],
+          ],
+          'margin-left' => [
+            'title' => $this->t('Margin Left'),
+            'description' => $this->t('Choose the size of left margin.'),
+            'type' => 'select',
+            'options' => [
+              'margin-left-default' => $this->t('Default'),
+              'margin-left-small' => $this->t('Small'),
+              'margin-left-big' => $this->t('Big'),
+              'margin-left-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => ['all'],
+            ],
+          ],
+          'margin-right' => [
+            'title' => $this->t('Margin Right'),
+            'description' => $this->t('Choose the size of right margin.'),
+            'type' => 'select',
+            'options' => [
+              'margin-right-default' => $this->t('Default'),
+              'margin-right-small' => $this->t('Small'),
+              'margin-right-big' => $this->t('Big'),
+              'margin-right-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => ['all'],
+            ],
+          ],
         ],
       ],
       self::HEADING_TYPE_SETTING_NAME => [
@@ -311,10 +367,10 @@ class SettingsWidget extends WidgetBase {
               // First element as default.
               $default_select_value = key($modifier['options']);
               foreach ($modifier['options'] as $theme_class => $data) {
-                $class_key = array_search($theme_class, $classes);
-                if ($class_key) {
+                $theme_class_key = array_search($theme_class, $classes);
+                if ($theme_class_key !== FALSE) {
                   $default_select_value = $theme_class;
-                  unset($classes[$class_key]);
+                  unset($classes[$theme_class_key]);
                 }
               }
               $element[$class]['#options'] = $modifier['options'];
