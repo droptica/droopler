@@ -311,10 +311,10 @@ class SettingsWidget extends WidgetBase {
               // First element as default.
               $default_select_value = key($modifier['options']);
               foreach ($modifier['options'] as $theme_class => $data) {
-                $class_key = array_search($theme_class, $classes);
-                if ($class_key) {
+                $theme_class_key = array_search($theme_class, $classes);
+                if ($theme_class_key !== FALSE) {
                   $default_select_value = $theme_class;
-                  unset($classes[$class_key]);
+                  unset($classes[$theme_class_key]);
                 }
               }
               $element[$class]['#options'] = $modifier['options'];
