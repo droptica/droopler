@@ -58,28 +58,17 @@ function droopler_install() {
 }
 
 /**
- * Implements hook_install_tasks().
+ * Implements hook_install_tasks()
  */
 function droopler_install_tasks() {
   $tasks = [
-    'droopler_enable_blog_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install d_blog'),
-      'type' => 'batch',
+    'droopler_additional_components_form' => [
+      'display_name' => t('Enable additional components'),
+      'type' => 'form',
+      'function' => 'Drupal\droopler\Installer\Form\AdditionalComponentsForm',
     ],
-    'droopler_enable_product_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install d_product'),
-      'type' => 'batch',
-    ],
-    'droopler_enable_demo_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install Demo'),
-      'type' => 'batch',
-    ],
-    'droopler_enable_init_content_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Init content'),
+    'droopler_additional_components_install' => [
+      'display_name' => t('Install additional components'),
       'type' => 'batch',
     ],
     'droopler_enable_subtheme_batch' => [
@@ -89,6 +78,46 @@ function droopler_install_tasks() {
     ],
   ];
   return $tasks;
+}
+
+/**
+ * Install additional components in a batch.
+ *
+ * @param array $install_state
+ *   The install state.
+ * @return array
+ *   Batch array.
+ */
+function droopler_additional_components_install(array &$install_state) {
+  $modules = $install_state['droopler_additional_modules'];
+  $init_content = $install_state['droopler_init_content'];
+
+  $batch = $operations = [];
+  if ($modules) {
+    foreach ($modules as $module) {
+      $operations[] = [
+        'droopler_install_module',
+        [$module],
+      ];
+    }
+  }
+
+  if ($init_content) {
+    $init_content_batch = droopler_enable_init_content_batch();
+    foreach ($init_content_batch['operations'] as $operation) {
+      $operations[] = $operation;
+    }
+  }
+
+  if (!empty($operations)) {
+    $batch = [
+      'operations' => $operations,
+      'title' => t('Installing selected components'),
+      'error_message' => t('Installation error.'),
+    ];
+  }
+
+  return $batch;
 }
 
 /**
@@ -102,29 +131,6 @@ function droopler_install_tasks() {
 function droopler_install_module(string $module, array &$context) {
   \Drupal::service('module_installer')->install([$module], TRUE);
   $context['message'] = t('Installed %module module.', ['%module' => $module]);
-}
-
-/**
- * Allows to install modules in batch.
- *
- * @param \Drupal\Core\StringTranslation\TranslatableMarkup|string $title
- *   Title to display on the installation page.
- * @param array $modules
- *   Module machine name.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_install_modules_batch($title, array $modules) {
-  $operations = [];
-  foreach ($modules as $module) {
-    $operations[] = ['droopler_install_module', [$module]];
-  }
-
-  return [
-    'operations' => $operations,
-    'title' => $title,
-  ];
 }
 
 /**
@@ -142,34 +148,6 @@ function _droopler_import_config($module, $name) {
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
   $config_storage->write($name, $source->read($name));
-}
-
-/**
- * Batch install of d_blog.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_blog_batch() {
-  $title = t('Install d_blog');
-
-  return droopler_install_modules_batch($title, ['d_blog']);
-}
-
-/**
- * Batch install of d_product.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_product_batch() {
-  return [
-    'operations' => [
-      ['droopler_enable_product', [1]],
-      ['droopler_enable_product', [2]],
-    ],
-    'title' => t('Install d_product'),
-  ];
 }
 
 /**
@@ -191,24 +169,6 @@ function droopler_enable_product(int $step, array &$context) {
       $context['message'] = t('Optional config installed');
       break;
   }
-}
-
-/**
- * Batch install of all demo modules.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_demo_batch() {
-  $title = t('Install Demo');
-
-  $modules = [
-    'd_blog_init',
-    'd_product_init',
-    'd_demo',
-  ];
-
-  return droopler_install_modules_batch($title, $modules);
 }
 
 /**
