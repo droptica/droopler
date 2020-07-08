@@ -1363,3 +1363,32 @@ function droopler_update_8114() {
     ->checklist()
     ->saveProgress(['v2.1' => $values]);
 }
+
+/**
+ * Droopler 2.2 update configs for modules.
+ */
+function droopler_update_8115() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_p' => [
+      'field.storage.node.field_meta_tags' => '',
+    ],
+    'd_blog' => [
+      'field.field.node.blog_post.field_meta_tags' => '',
+    ],
+    'd_content' => [
+      'field.field.node.content_page.field_meta_tags' => '',
+    ],
+    'd_product' => [
+      'field.field.node.d_product.field_meta_tags' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8115_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8115_2'] = update_modules_configuration(array_keys($configs), '8115');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
