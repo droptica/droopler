@@ -164,7 +164,7 @@ class AdditionalComponentsForm extends FormBase {
    *   Return TRUE if module exist.
    */
   private function moduleExist($module_name) {
-    $modules_data = $this->moduleExtensionList->reset()->getList();
+    $modules_data = $this->moduleExtensionList->getList();
     return !empty($modules_data[$module_name]);
   }
 

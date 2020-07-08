@@ -121,28 +121,6 @@ function droopler_additional_components_install(array &$install_state) {
 }
 
 /**
- * Execute function in batch.
- *
- * @param string $function_name
- *   Name of method.
- * @param array $context
- *   Batch context.
- */
-function droopler_execute_function($function_name, &$context) {
-  if (function_exists($function_name)) {
-    $function_name();
-    $context['message'] = t('%function_name executed.', [
-      '%function_name' => $function_name,
-    ]);
-  }
-  else {
-    $context['message'] = t('%function_name not exist.', [
-      '%function_name' => $function_name,
-    ]);
-  }
-}
-
-/**
  * Allow to install a single module using module_installer service.
  *
  * @param string $module
@@ -170,34 +148,6 @@ function _droopler_import_config($module, $name) {
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
   $config_storage->write($name, $source->read($name));
-}
-
-/**
- * Batch install of d_blog.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_blog_batch() {
-  $title = t('Install d_blog');
-
-  return droopler_install_modules_batch($title, ['d_blog']);
-}
-
-/**
- * Batch install of d_product.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_product_batch() {
-  return [
-    'operations' => [
-      ['droopler_enable_product', [1]],
-      ['droopler_enable_product', [2]],
-    ],
-    'title' => t('Install d_product'),
-  ];
 }
 
 /**
