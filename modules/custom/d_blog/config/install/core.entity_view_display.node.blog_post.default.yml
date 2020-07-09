@@ -6,9 +6,11 @@ dependencies:
     - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
+    - field.field.node.blog_post.field_meta_tags
     - node.type.blog_post
   module:
     - entity_reference_revisions
+    - metatag
     - user
 id: node.blog_post.default
 targetEntityType: node
@@ -40,6 +42,13 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
+  field_meta_tags:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
     region: content
   links:
     weight: 0
