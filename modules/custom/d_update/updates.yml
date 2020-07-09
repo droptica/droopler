@@ -239,12 +239,12 @@ v2.2:
   '#title': 'Update to Droopler 2.2'
   '#description': '<h3>Checkout new features for the minor Droopler release:</h3>'
   droopler__droopler_update_8115_1:
-    '#title': 'Import configs for content page.'
-    '#description': '<p>Import fields for content page.</p>'
-    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually.</p>'
-    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
+    '#title': 'Import configs for content types'
+    '#description': '<p>Import configs for existing default content types</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import configs manually</p>'
+    extension_page: { '#text': 'Import configs', '#url': 'internal:/admin/config/development/features' }
   droopler__droopler_update_8115_2:
-    '#title': 'Update configs for content page'
-    '#description': '<p>Update configs for content page</p>'
-    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
-    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+    '#title': 'Update configs for content types'
+    '#description': '<p>Update configs for existing default content types</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to update changed configs manually</p>'
+    extension_page: { '#text': 'Update changed configs', '#url': 'internal:/admin/config/development/features' }

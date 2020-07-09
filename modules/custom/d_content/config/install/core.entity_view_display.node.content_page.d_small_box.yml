@@ -5,6 +5,7 @@ dependencies:
     - field.field.node.content_page.field_header_cta
     - field.field.node.content_page.field_header_layout
     - core.entity_view_mode.node.d_small_box
+    - field.field.node.content_page.field_meta_tags
     - field.field.node.content_page.field_page_section
     - field.field.node.content_page.field_teaser_media_image
     - field.field.node.content_page.field_teaser_text
@@ -32,6 +33,7 @@ content:
 hidden:
   field_header_cta: true
   field_header_layout: true
+  field_meta_tags: true
   field_page_section: true
   field_teaser_text: true
   langcode: true

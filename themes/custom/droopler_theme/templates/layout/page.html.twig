@@ -164,5 +164,7 @@
     </div>
   {% endif %}
 
-  {% include '@droopler_theme/includes/footer.html.twig' %}
+  {% block footer %}
+    {% include '@droopler_theme/includes/footer.html.twig' %}
+  {% endblock %}
 </div>

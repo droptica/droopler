@@ -7,9 +7,11 @@ dependencies:
     - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
+    - field.field.node.blog_post.field_meta_tags
     - image.style.responsive_image_768
     - node.type.blog_post
   module:
+    - lazy
     - media
     - text
     - user
@@ -51,5 +53,6 @@ content:
     third_party_settings: {  }
 hidden:
   field_blog_sections: true
+  field_meta_tags: true
   langcode: true
   search_api_excerpt: true
