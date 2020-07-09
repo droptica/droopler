@@ -19,21 +19,13 @@ function d_p_reference_content_theme($existing, $type, $theme, $path) {
     'field__paragraph__field_d_cta_link__d_p_reference_content' => [
       'base hook' => 'field',
     ],
+    'field__paragraph__field_d_media_icon__d_p_reference_content' => [
+      'base hook' => 'field',
+    ],
+    'field__paragraph__field_d_long_text__d_p_reference_content' => [
+      'base hook' => 'field',
+    ],
   ];
-}
-
-/**
- * Implements hook_preprocess_field().
- */
-function d_p_reference_content_preprocess_field(&$variables) {
-  if ($variables['element']['#entity_type'] == 'paragraph' && $variables['element']['#bundle'] == 'd_p_reference_content') {
-    if ($variables['field_name'] == 'field_d_long_text') {
-        $variables['attributes']['class'][] = 'container';
-    }
-    if ($variables['field_name'] == 'field_d_media_icon') {
-        $variables['attributes']['class'][] = 'container mx-auto text-center';
-    }
-  }
 }
 
 /**
