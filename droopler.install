@@ -1363,3 +1363,42 @@ function droopler_update_8114() {
     ->checklist()
     ->saveProgress(['v2.1' => $values]);
 }
+
+/**
+ * Droopler 2.2 update configs for modules.
+ */
+function droopler_update_8115() {
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_p_carousel' => [
+      'field.field.paragraph.d_p_carousel.field_d_cta_link' => '',
+    ],
+    'd_p_gallery' => [
+      'field.field.paragraph.d_p_gallery.field_d_cta_link' => '',
+    ],
+    'd_p_counters' => [
+      'field.field.paragraph.d_p_group_of_counters.field_d_cta_link' => '',
+      'field.field.paragraph.d_p_group_of_counters.field_d_long_text' => '',
+      'field.field.paragraph.d_p_single_counter.field_d_media_icon' => '',
+    ],
+    'd_p_side_by_side' => [
+      'field.field.paragraph.d_p_side_by_side.field_d_cta_link' => '',
+      'field.field.paragraph.d_p_side_by_side.field_d_media_icon' => '',
+    ],
+    'd_p_tiles' => [
+      'field.field.paragraph.d_p_tiles.field_d_cta_link' => '',
+    ]
+    ,
+    'd_p_reference_content' => [
+      'field.field.paragraph.d_p_reference_content.field_d_long_text' => '',
+      'field.field.paragraph.d_p_reference_content.field_d_media_icon' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8115_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8115_2'] = update_modules_configuration(array_keys($configs), '8115');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
