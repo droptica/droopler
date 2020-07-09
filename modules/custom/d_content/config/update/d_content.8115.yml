@@ -1,3 +1,12 @@
+core.entity_form_display.node.content_page.d_small_box:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_header_cta
+        - field.field.node.content_page.field_header_layout
+      module:
+        - link_attributes
+        - media_library
 core.entity_form_display.node.content_page.default:
   change:
     expected:

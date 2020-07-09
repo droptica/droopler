@@ -2,6 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.content_page.field_header_cta
+    - field.field.node.content_page.field_header_layout
     - core.entity_view_mode.node.d_small_box
     - field.field.node.content_page.field_page_section
     - field.field.node.content_page.field_teaser_media_image
@@ -11,6 +13,8 @@ dependencies:
   module:
     - media
     - user
+    - link_attributes
+    - media_library
 id: node.content_page.d_small_box
 targetEntityType: node
 bundle: content_page
@@ -26,6 +30,8 @@ content:
       image_link: content
     third_party_settings: {  }
 hidden:
+  field_header_cta: true
+  field_header_layout: true
   field_page_section: true
   field_teaser_text: true
   langcode: true
