@@ -5,10 +5,11 @@
  * D_content module.
  */
 
+use Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_alter().
  */
 function d_content_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if ($form_id == 'node_content_page_edit_form' || $form_id == 'node_content_page_form') {
@@ -19,5 +20,19 @@ function d_content_form_alter(&$form, FormStateInterface $form_state, $form_id) 
         ],
       ];
     }
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function d_content_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  $field_definition = $context['items']->getFieldDefinition();
+  if ($field_definition instanceof FieldConfig &&
+    $field_definition->getName() == 'field_header_cta' &&
+    empty($element['url']['#default_value']) &&
+    empty($element['options']['attributes']['class']['#default_value'])
+  ) {
+    $element['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
   }
 }
