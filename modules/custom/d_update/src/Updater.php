@@ -137,7 +137,10 @@ class Updater {
   }
 
   /**
-   * Import a config file.
+   * Import a config file if the module exists.
+   *
+   * The method tries to read config files from the modules' 'install' or 'optional' directories,
+   * if the config has been found and the module exists - the config is imported.
    *
    * @param string $source
    *   Module/theme name.
@@ -145,22 +148,31 @@ class Updater {
    *   Config file name without .yml extension.
    * @param string $hash
    *   Hashed array with config data.
-   * @param bool $optional
-   *   Specify if config should be searched only in 'config/optional'.
    *
    * @return bool
-   *   Returns if config was imported successfully.
+   *   TRUE if the config was imported successfully or the module does not exist,
+   *   FALSE otherwise.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function importConfig($source, $name, $hash) {
     $data = $this->readConfigFromFile($source, $name, 'install');
+
     if (empty($data)) {
       $data = $this->readConfigFromFile($source, $name, 'optional');
     }
+
     if (empty($data)) {
       $this->logger
         ->error('Cannot find file for %config', ['%config' => $name]);
 
       return FALSE;
+    }
+
+    // Check if the module exists.
+    if ($this->moduleExtensionList->exists($source) === FALSE) {
+      return TRUE;
     }
 
     return $this->createConfig($name, $data, $hash);
