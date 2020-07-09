@@ -25,6 +25,18 @@ $d-p-side-tiles-text-mobile-padding: 7% !default;
 $d-p-side-tiles-text-width: 35.625rem !default;
 $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half of the screen
 
+// Override default values.
+.padding-top-default {
+  .d-p-side-tiles-banner {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .d-p-side-tiles-banner {
+    padding-bottom: 0;
+  }
+}
+
 .theme-default {
   .d-p-side-tiles-wrapper {
     background-color: $d-p-side-tiles-text-background-color;

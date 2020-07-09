@@ -20,6 +20,18 @@ $d-p-side-by-side-text-box-padding-y: $grid-gutter-width !default;
 $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
 $d-p-side-by-side-image-background-padding-y: 130px !default;
 
+// Override default values.
+.padding-top-default {
+  .paragraph--type--d-p-side-by-side {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph--type--d-p-side-by-side {
+    padding-bottom: 0;
+  }
+}
+
 .d-p-side-by-side {
   text-align: center;
 

@@ -22,6 +22,18 @@ $d-p-subscribe-line-margin-top: 1.45rem !default;
 // Other settings.
 $d-p-subscribe-background-opacity: 0.4 !default;
 
+// Override default values.
+.padding-top-default {
+  .paragraph--type--d-p-subscribe-file {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph--type--d-p-subscribe-file {
+    padding-bottom: 0;
+  }
+}
+
 // Subscribe form
 .d-p-subscribe-file-form {
   margin: $d-p-subscribe-form-margin;

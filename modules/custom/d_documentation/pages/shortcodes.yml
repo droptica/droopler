@@ -14,6 +14,7 @@ field_page_section:
         data: Droopler Typography
       field_d_settings:
         type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         heading_type: h1
       field_d_long_text:
         type: text_long
@@ -149,6 +150,9 @@ field_page_section:
 
   - paragraph_type: d_p_text_paged
     data:
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
       field_d_media_icon:
         type: media_image
         directory: demo

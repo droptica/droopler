@@ -17,7 +17,7 @@ field_page_section:
         data: Droopler Documentation
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert
+        custom_class: theme-invert theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         heading_type: h1
 
   - paragraph_type: d_p_text_paged
@@ -30,6 +30,9 @@ field_page_section:
         data: <p>This type of paragraph is popular on the company's websites. It contains some significant
           numbers on the background of your choice. The mask is put on an image to improve readability.
           You may use the icon above the title to enhance the visual effect.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_group_of_counters
     data:
@@ -81,7 +84,7 @@ field_page_section:
             data: Adipiscing Elit
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: full-example theme-default
+        custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_text_paged
     data:
@@ -92,6 +95,9 @@ field_page_section:
         type: text_long
         data: <p>The title and the icon are not necessary at all. What's more, you don't need a lot of counters.
           Even one will work fine. Just see the most basic version below.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_group_of_counters
     data:
@@ -116,7 +122,7 @@ field_page_section:
             data: Lorem Imsum
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: basic-example theme-default
+        custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

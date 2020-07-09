@@ -20,6 +20,18 @@ $d-p-counters-mobile-padding-bottom: 3rem !default;
 // Other settings
 $d-p-counters-background-opacity: 0.2 !default;
 
+// Override default values.
+.padding-top-default {
+  .paragraph--type--d-p-group-of-counters {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph--type--d-p-group-of-counters {
+    padding-bottom: 0;
+  }
+}
+
 .theme-default .paragraph--type--d-p-group-of-counters  {
   background: $d-p-counters-background-overlay;
 }

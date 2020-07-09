@@ -17,7 +17,7 @@ field_page_section:
         data: Droopler Documentation
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert
+        custom_class: theme-invert theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         heading_type: h1
 
   - paragraph_type: d_p_text_paged
@@ -34,7 +34,7 @@ field_page_section:
           two Tile Galleries and two Side Tiles.</p>
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: background-gray-light-2
+        custom_class: background-gray-light-2 theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_tiles
     data:
@@ -70,7 +70,7 @@ field_page_section:
             alt: Title / Subtitle
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: full-example
+        custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_side_tiles
     data:
@@ -113,7 +113,7 @@ field_page_section:
             alt: Title / Subtitle
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: second-example theme-default
+        custom_class: second-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_side_tiles
     data:
@@ -156,7 +156,7 @@ field_page_section:
             alt: Title / Subtitle
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: third-example theme-default
+        custom_class: third-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_tiles
     data:
@@ -174,6 +174,9 @@ field_page_section:
             alt: Title / Subtitle
           - path: d_demo/d_demo_tiles_2_5.jpg
             alt: Title / Subtitle
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: third-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_side_tiles
     data:
@@ -216,7 +219,7 @@ field_page_section:
             alt: Title / Subtitle
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert invert-example theme-default
+        custom_class: theme-invert invert-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

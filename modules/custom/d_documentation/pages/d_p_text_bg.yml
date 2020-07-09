@@ -17,7 +17,7 @@ field_page_section:
         data: Droopler Documentation
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert
+        custom_class: theme-invert theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         heading_type: h1
 
   - paragraph_type: d_p_text_paged
@@ -31,6 +31,9 @@ field_page_section:
           noticeable difference - the background. When you upload an image, Droopler puts
           a white mask on it to make text easier to read. All font colors are dark to increase
           the contrast. Look at this full-featured example.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_text_with_bckg
     data:
@@ -66,7 +69,7 @@ field_page_section:
           text: Call To Action!
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: full-example theme-default
+        custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_text_paged
     data:
@@ -78,6 +81,9 @@ field_page_section:
         data: <p>A bare text looks excellent when we display it on an image background.
           If you choose a right photo with noticeable contrast, the result is very professional.
           The white mask has high opacity and ensures readability.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_text_with_bckg
     data:
@@ -107,7 +113,7 @@ field_page_section:
           Fusce scelerisque libero sapien, nec suscipit augue elementum ac.</p>
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: basic-example theme-default
+        custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

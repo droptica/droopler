@@ -17,7 +17,7 @@ field_page_section:
         data: Droopler Documentation
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert
+        custom_class: theme-invert theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         heading_type: h1
 
   - paragraph_type: d_p_text_paged
@@ -31,6 +31,9 @@ field_page_section:
           in exchange for user's email. It contains three separate elements -
           the Paragraph itself (visible below), the email (sent to the user after submitting the form)
           and the download page. See how the full-featured version looks like.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_subscribe_file
     data:
@@ -77,7 +80,7 @@ field_page_section:
           tristique dui dignissim gravida.</p>'
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: full-example
+        custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_text_paged
     data:
@@ -88,6 +91,9 @@ field_page_section:
         type: text_long
         data: <p>There are lots of ways of configuring Subscribe File Paragraph.
           See how it looks in the simplest version, with just some form controls.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_subscribe_file
     data:
@@ -114,7 +120,7 @@ field_page_section:
           tristique dui dignissim gravida.</p><p>[download-button]</p>'
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: basic-example
+        custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

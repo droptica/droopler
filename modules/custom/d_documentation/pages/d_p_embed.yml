@@ -17,7 +17,7 @@ field_page_section:
         data: Droopler Documentation
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert
+        custom_class: theme-invert theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         heading_type: h1
 
   - paragraph_type: d_p_text_paged
@@ -30,6 +30,9 @@ field_page_section:
         data: <p>If you need to insert some external iframe to your website, use Side Embed Paragraph.
           It is perfect for maps and videos. Below you can a fully responsive Google Maps widget. It stretches
           when you resize the browser window.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_side_embed
     data:
@@ -65,6 +68,9 @@ field_page_section:
               class:
                 - "btn"
                 - "btn-secondary"
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
   - paragraph_type: d_p_side_embed
     data:
       field_d_media_icon:
@@ -101,7 +107,7 @@ field_page_section:
                 - "btn-primary"
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert full-example theme-default
+        custom_class: theme-invert full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_text_paged
     data:
@@ -112,6 +118,9 @@ field_page_section:
         type: text
         data: <p>There is a "Full width" layout available. It spans the embed 100% width and pulls the
           description to the left. If you select the "Invert colors" option, the text background becomes white.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_side_embed
     data:
@@ -149,7 +158,7 @@ field_page_section:
                 - "btn-primary"
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: theme-invert full-width-example theme-default
+        custom_class: theme-invert full-width-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_text_paged
     data:
@@ -161,6 +170,9 @@ field_page_section:
         data: <p>Side Embed can contain a video from YouTube, Dailymotion, and other providers.
           Just copy the iframe code to Droopler. The responsiveness of the video depends on its source,
           as you can see below, Youtube embeds do not stretch in the container. Instead, they get black borders.</p>
+      field_d_settings:
+        type: field_p_configuration_storage
+        custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 
   - paragraph_type: d_p_side_embed
     data:
@@ -182,7 +194,7 @@ field_page_section:
           Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>
       field_d_settings:
         type: field_p_configuration_storage
-        custom_class: youtube-example theme-default
+        custom_class: youtube-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

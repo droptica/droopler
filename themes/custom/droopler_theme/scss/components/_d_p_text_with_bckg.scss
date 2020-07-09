@@ -20,6 +20,18 @@ $d-p-text-with-bckg-mobile-padding-bottom: 6.25rem !default;
 // Other settings
 $d-p-text-with-bckg-img-opacity: 0.1 !default;
 
+// Override default values.
+.padding-top-default {
+  .paragraph--type--d-p-text-with-bckg {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph--type--d-p-text-with-bckg {
+    padding-bottom: 0;
+  }
+}
+
 .theme-default .d-p-text-with-bckg {
   background: $d-p-text-with-bckg-background-overlay;
 }
