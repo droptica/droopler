@@ -3,6 +3,8 @@ field.field.node.blog_post.field_blog_sections:
     dependencies:
       config:
         - paragraphs.paragraphs_type.d_p_block
+      module:
+        - link_attributes
     settings:
       handler_settings:
         target_bundles:
