@@ -60,8 +60,11 @@
       <div class="content-wrapper">
         <div class="content container">
           {% block content %}
-            {{ content.group_d_counters_content }}
+            {{ content.group_d_counters_content|without('field_d_cta_link') }}
           {% endblock %}
+        </div>
+        <div class="text-center pt-4">
+            {{ content.group_d_counters_content.field_d_cta_link }}
         </div>
       </div>
     </div>

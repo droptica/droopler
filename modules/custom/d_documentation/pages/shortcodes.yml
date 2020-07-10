@@ -4,7 +4,6 @@ info:
   path:
     alias: /documentation/shortcodes
     pathauto: 0
-
 field_page_section:
   paragraphs:
   - paragraph_type: d_p_text_paged
@@ -501,7 +500,8 @@ field_teaser_media_image:
   type: media_image
   directory: demo
   files:
-    - path: d_demo/demo-logo.svg
+    -
+      path: d_demo/demo-logo.svg
       alt: Engine
 field_teaser_text:
   type: text_long

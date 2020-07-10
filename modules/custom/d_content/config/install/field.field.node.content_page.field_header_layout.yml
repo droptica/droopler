@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_layout
+    - node.type.content_page
+  module:
+    - options
+id: node.content_page.field_header_layout
+field_name: field_header_layout
+entity_type: node
+bundle: content_page
+label: 'Header layout'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: header_with_menu
+default_value_callback: ''
+settings: {  }
+field_type: list_string
