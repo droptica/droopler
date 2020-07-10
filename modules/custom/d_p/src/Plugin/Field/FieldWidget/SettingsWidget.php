@@ -23,6 +23,31 @@ class SettingsWidget extends WidgetBase {
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
 
+  /**
+   * @var array
+   *   Stores bundles where spacing settings should be enabled.
+   */
+  private $spacingBundles = [
+    'd_p_banner',
+    'd_p_block',
+    'd_p_blog_image',
+    'd_p_blog_text',
+    'd_p_carousel',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_group_of_counters',
+    'd_p_group_of_text_blocks',
+    'd_p_reference_content',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_side_by_side',
+    'd_p_subscribe_file',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+  ];
+
   private function getConfigOptions() {
     return [
       self::CSS_CLASS_SETTING_NAME => [
@@ -203,7 +228,7 @@ class SettingsWidget extends WidgetBase {
               'margin-top-none' => $this->t('None'),
             ],
             'bundles' => [
-              'paragraph' => ['all'],
+              'paragraph' => $this->spacingBundles,
             ],
           ],
           'margin-bottom' => [
@@ -217,7 +242,7 @@ class SettingsWidget extends WidgetBase {
               'margin-bottom-none' => $this->t('None'),
             ],
             'bundles' => [
-              'paragraph' => ['all'],
+              'paragraph' => $this->spacingBundles,
             ],
           ],
           'padding-top' => [
@@ -231,7 +256,7 @@ class SettingsWidget extends WidgetBase {
               'padding-top-none' => $this->t('None'),
             ],
             'bundles' => [
-              'paragraph' => ['all'],
+              'paragraph' => $this->spacingBundles,
             ],
           ],
           'padding-bottom' => [
@@ -245,7 +270,7 @@ class SettingsWidget extends WidgetBase {
               'padding-bottom-none' => $this->t('None'),
             ],
             'bundles' => [
-              'paragraph' => ['all'],
+              'paragraph' => $this->spacingBundles,
             ],
           ],
         ],
