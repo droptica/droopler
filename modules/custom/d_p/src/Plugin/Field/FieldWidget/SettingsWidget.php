@@ -22,6 +22,7 @@ class SettingsWidget extends WidgetBase {
 
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
+  const COLUMN_COUNT_SETTING_NAME = 'column_count';
 
   private function getConfigOptions() {
     return [
@@ -228,6 +229,28 @@ class SettingsWidget extends WidgetBase {
             'd_p_text_paged',
             'd_p_text_with_bckg',
             'd_p_tiles',
+          ],
+        ],
+      ],
+      self::COLUMN_COUNT_SETTING_NAME => [
+        'title' => $this->t('Column count'),
+        'outside' => TRUE,
+        'description' => $this->t('Select the number of items in one row.'),
+        'type' => 'select',
+        'options' => [
+          '1' => $this->t('1'),
+          '2' => $this->t('2'),
+          '3' => $this->t('3'),
+          '4' => $this->t('4'),
+          '6' => $this->t('6'),
+          '12' => $this->t('12'),
+        ],
+        'default' => 'h2',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
           ],
         ],
       ],
