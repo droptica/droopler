@@ -430,12 +430,18 @@ $two-columned-header-line-margin: 0.625rem !default;
 
 .theme-primary > .paragraph {
   background: $color-agamemnon;
+
+  &, .field {
+    color: $color-odysseus;
+  }
 }
 
 .theme-gray > .paragraph {
   background: $color-paris;
+  color: $color-acamas;
 }
 
 .theme-secondary > .paragraph {
   background: $color-odysseus;
+  color: $color-hecuba;
 }
