@@ -29,6 +29,7 @@ field_page_section:
                 target: _self
         field_d_settings:
           type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -39,6 +40,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>We offer regular servicing for our products to our customers who bought our motor engines for boats and yachts. We provide engine reviews and a basic range of services (for example oil replacement).</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_form
       data:
@@ -55,6 +59,9 @@ field_page_section:
         field_d_forms:
           type: entity_reference
           data: feedback
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

@@ -35,7 +35,7 @@ field_page_section:
           data: '<p>We offer a wide range of services to our customers who have bought our aircraft engines. Our experienced team of mechanics and specialists will provide high quality of service. Contact our company to arrange a service date and time.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'background-gray-light-2 theme-invert'
+          custom_class: background-gray-light-2 theme-invert theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_carousel
       data:
@@ -45,6 +45,9 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Our happy customers'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_p_cs_item_reference:
           type: paragraph_reference
           subtype: d_p_carousel_item
@@ -86,7 +89,7 @@ field_page_section:
           data: 3
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'full-width with-tiles'
+          custom_class: full-width with-tiles theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_main_title:
           type: text
           data: 'Our services for aircraft engines'
@@ -182,6 +185,9 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Our company in numbers'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_counter_reference:
           type: paragraph_reference
           subtype: d_p_single_counter
@@ -223,6 +229,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p1>Our company has many certificates confirming the high quality of our services: ISO 14001:2015, ISO 9001:2015 and BS OHSAS 18001:2007.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo
