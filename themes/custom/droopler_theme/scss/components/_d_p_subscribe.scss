@@ -25,12 +25,25 @@ $d-p-subscribe-background-opacity: 0.4 !default;
 // Override default values.
 .padding-top-default {
   .paragraph--type--d-p-subscribe-file {
-    padding-top: 0;
+    &.paragraph:not(.content-moved-inside) {
+      padding-top: 0;
+    }
+
+    .subscribe_file {
+      padding-top: $d-p-subscribe-padding-y;
+    }
   }
 }
+
 .padding-bottom-default {
   .paragraph--type--d-p-subscribe-file {
-    padding-bottom: 0;
+    &.paragraph:not(.content-moved-inside) {
+      padding-bottom: 0;
+    }
+
+    .subscribe_file {
+      padding-bottom: $d-p-subscribe-padding-y;
+    }
   }
 }
 
@@ -89,7 +102,6 @@ $d-p-subscribe-background-opacity: 0.4 !default;
   position: relative;
   color: $d-p-subscribe-color;
   z-index: 0;
-  padding: $d-p-subscribe-padding-y 0;
   background: $d-p-subscribe-background;
   .d-media-background-wrapper {
     img, iframe {
