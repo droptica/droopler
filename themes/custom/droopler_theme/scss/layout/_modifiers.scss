@@ -433,23 +433,27 @@ $two-columned-header-line-margin: 0.625rem !default;
 /*
   Themes styling.
  */
-$d-p-themes: (
-  primary: (
-    background: $color-agamemnon,
-    text: $color-odysseus,
-    setFieldsColor: true,
-  ),
-  gray: (
-    background: $color-paris,
-    text: $color-acamas,
-    setFieldsColor: false,
-  ),
-  secondary: (
-    background: $color-odysseus,
-    text: $color-hecuba,
-    setFieldsColor: false,
-  )
-) !default;
+$d-p-themes: () !default;
+$d-p-themes: map-merge(
+    (
+      primary: (
+        background: $color-agamemnon,
+        text: $color-odysseus,
+        setFieldsColor: true,
+      ),
+      gray: (
+        background: $color-paris,
+        text: $color-acamas,
+        setFieldsColor: false,
+      ),
+      secondary: (
+        background: $color-odysseus,
+        text: $color-hecuba,
+        setFieldsColor: false,
+      ),
+    ),
+    $d-p-themes
+);
 
 @each $name, $themeSettings in $d-p-themes {
   .theme-#{$name} {
