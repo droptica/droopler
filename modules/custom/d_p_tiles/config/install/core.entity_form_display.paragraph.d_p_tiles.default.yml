@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.d_p_tiles.field_d_cta_link
     - field.field.paragraph.d_p_tiles.field_d_long_text
     - field.field.paragraph.d_p_tiles.field_d_main_title
     - field.field.paragraph.d_p_tiles.field_d_media_icon
@@ -10,6 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_tiles
   module:
     - d_p
+    - link_attributes
     - media_library
     - text
 id: paragraph.d_p_tiles.default
@@ -17,6 +19,23 @@ targetEntityType: paragraph
 bundle: d_p_tiles
 mode: default
 content:
+  field_d_cta_link:
+    weight: 7
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        id: true
+        name: true
+        target: true
+        rel: true
+        class: true
+        accesskey: true
+        aria-label: false
+        title: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
   field_d_long_text:
     weight: 3
     settings:

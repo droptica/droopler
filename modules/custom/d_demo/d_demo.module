@@ -15,28 +15,6 @@ function d_demo_content_structure_alter(&$structure, $context) {
   if ($context == 'all') {
     $structure['homepage'] = ['file' => "$path/homepage.yml", 'link' => 'Home', 'weight' => -50];
     $structure['invest'] = ['file' => "$path/invest.yml"];
-    $structure['documentation'] = [
-      'file' => "$path/documentation.yml",
-      'link' => 'Documentation',
-      'weight' => 30,
-      'children' => [
-        'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
-        'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
-        'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
-        'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
-        'd_p_sidebar_image' => ['file' => "$path/d_p_sidebar_image.yml", 'link' => 'Sidebar Image Paragraph', 'weight' => 40],
-        'd_p_subscribe' => ['file' => "$path/d_p_subscribe.yml", 'link' => 'Subscribe File Paragraph', 'weight' => 50],
-        'd_p_text' => ['file' => "$path/d_p_text.yml", 'link' => 'Text Paragraph', 'weight' => 60],
-        'd_p_text_bg' => ['file' => "$path/d_p_text_bg.yml", 'link' => 'Text With Background Paragraph', 'weight' => 70],
-        'd_p_counters' => ['file' => "$path/d_p_counters.yml", 'link' => 'Counters Paragraph', 'weight' => 80],
-        'd_p_gallery' => ['file' => "$path/d_p_gallery.yml", 'link' => 'Gallery Paragraph', 'weight' => 90],
-        'd_p_carousel' => ['file' => "$path/d_p_carousel.yml", 'link' => 'Carousel Paragraph', 'weight' => 90],
-        'd_p_embed' => ['file' => "$path/d_p_embed.yml", 'link' => 'Side Embed Paragraph', 'weight' => 100],
-        'd_p_tiles' => ['file' => "$path/d_p_tiles.yml", 'link' => 'Tiles Paragraphs', 'weight' => 110],
-        'd_p_reference_content' => ['file' => "$path/d_p_reference_content.yml", 'link' => 'Reference Content Paragraph', 'weight' => 120],
-        'd_p_side_by_side' => ['file' => "$path/d_p_side_by_side.yml", 'link' => 'Side By Side Paragraph', 'weight' => 130],
-      ],
-    ];
     $structure['services'] = ['file' => "$path/services.yml", 'link' => 'Services', 'weight' => 20];
     $structure['services_engine_installation'] = ['file' => "$path/services_engine_installation.yml"];
     $structure['services_engine_overhaul'] = ['file' => "$path/services_engine_overhaul.yml"];

@@ -25,6 +25,7 @@ $theme-invert-text-color: $color-cassandra !default;
 $line-background-alter: $color-nestor !default;
 $two-columned-header-line-margin: 0.625rem !default;
 
+// TODO: migrate to new themes.
 .background {
   &-gray-light {
     background: $light-gray-background;
@@ -420,6 +421,7 @@ $two-columned-header-line-margin: 0.625rem !default;
   }
 }
 
+// TODO: migrate to new spacings
 .no-padding-bottom > .paragraph {
   padding-bottom: 0;
 }
@@ -428,20 +430,74 @@ $two-columned-header-line-margin: 0.625rem !default;
   padding-top: 0;
 }
 
-.theme-primary > .paragraph {
-  background: $color-agamemnon;
+/*
+  Themes styling.
+ */
+$themes: (
+  primary: (
+    background: $color-agamemnon,
+    text: $color-odysseus,
+    setFieldsColor: true,
+  ),
+  gray: (
+    background: $color-paris,
+    text: $color-acamas,
+    setFieldsColor: false,
+  ),
+  secondary: (
+    background: $color-odysseus,
+    text: $color-hecuba,
+    setFieldsColor: false,
+  )
+) !default;
 
-  &, .field {
-    color: $color-odysseus;
+@each $name, $themeSettings in $themes {
+  .theme-#{$name} {
+    > .paragraph:not(.content-moved-inside),
+    > .content-moved-inside .content-inside-wrapper {
+      background: map-get($themeSettings, "background");
+      color: map-get($themeSettings, "text");
+
+      @if map-get($themeSettings, "setFieldsColor") {
+        .field {
+          color: map-get($themeSettings, "text");
+        }
+      }
+    }
   }
 }
 
-.theme-gray > .paragraph {
-  background: $color-paris;
-  color: $color-acamas;
+/*
+  Spacings styling.
+ */
+$paddings: (
+  default: 5%,
+  small: 2%,
+  big: 10%,
+  none: 0
+) !default;
+
+@each $size, $value in $paddings {
+  @each $placement in (top, bottom) {
+    .padding-#{$placement}-#{$size} {
+      > .paragraph:not(.content-moved-inside),
+      > .content-moved-inside .content-inside-wrapper {
+        padding-#{$placement}: $value;
+      }
+    }
+  }
 }
 
-.theme-secondary > .paragraph {
-  background: $color-odysseus;
-  color: $color-hecuba;
+$margins: (
+  small: 2%,
+  big: 10%,
+  none: 0
+) !default;
+
+@each $size, $value in $margins {
+  @each $placement in (top, bottom) {
+    .margin-#{$placement}-#{$size} .paragraph {
+      margin-#{$placement}: $value;
+    }
+  }
 }

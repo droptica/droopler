@@ -42,6 +42,7 @@
   'paragraph',
   'container-fluid',
   'd-p-side-tiles-banner',
+  'content-moved-inside',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
@@ -58,6 +59,7 @@
 {% set content_side_classes = [
   'd-p-side-tiles-content',
   'col-md-6 p-md-0',
+  'content-inside-wrapper',
 ] %}
 {% set content_fields_classes = [
   'd-p-side-tiles-content-fields',

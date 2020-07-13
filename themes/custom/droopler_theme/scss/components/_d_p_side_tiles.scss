@@ -31,16 +31,20 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
     &.image-side-left {
       background-color: $d-p-side-tiles-text-background-color-secondary;
     }
+    .d-p-side-tiles-content {
+      color: $d-p-side-tiles-text-color;
+      .field--name-field-d-main-title {
+        color: $d-p-side-tiles-header-color;
+      }
+    }
   }
 }
 
 .d-p-side-tiles-wrapper {
   .d-p-side-tiles-content {
-    color: $d-p-side-tiles-text-color;
 
     .field--name-field-d-main-title {
       @include font-main-header;
-      color: $d-p-side-tiles-header-color;
       text-align: left;
       &:after {
         @include decoration-header-line($d-p-side-tiles-line-color, $d-p-side-tiles-line-color-inverted)
