@@ -317,15 +317,9 @@ class SettingsWidget extends WidgetBase {
         'title' => $this->t('Column count'),
         'outside' => TRUE,
         'description' => $this->t('Select the number of items in one row.'),
-        'type' => 'select',
-        'options' => [
-          '1' => $this->t('1'),
-          '2' => $this->t('2'),
-          '3' => $this->t('3'),
-          '4' => $this->t('4'),
-          '6' => $this->t('6'),
-          '12' => $this->t('12'),
-        ],
+        'type' => 'number',
+        'min' => '1',
+        'max' => '12',
         'default' => '4',
         'bundles' => [
           'paragraph' => [
@@ -444,6 +438,20 @@ class SettingsWidget extends WidgetBase {
             '#description' => $options['description'] ?? '',
             '#options' => $options['options'],
             '#default_value' => empty($value) ? $options['default'] : $value,
+          ];
+          if ($element['#required']) {
+            $element[$key]['#required'] = TRUE;
+          }
+          break;
+
+        case 'number':
+          $element[$key] = [
+            '#type' => 'number',
+            '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
+            '#default_value' => !empty($value) && $value !== '' ? $value : $options['default'],
+            '#min' => $options['min'] ?? NULL,
+            '#max' => $options['max'] ?? NULL,
           ];
           if ($element['#required']) {
             $element[$key]['#required'] = TRUE;
