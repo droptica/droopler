@@ -1429,7 +1429,7 @@ function droopler_update_8117(&$sandbox) {
     FieldStorageConfig::loadByName('paragraph', 'field_d_number')->delete();
 
     foreach ($bundles as $bundle) {
-      $field = FieldConfig::loadByName('paragraph', 'd_p_carousel', 'field_d_number');
+      $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_number');
 
       if ($field !== NULL) {
         $field->delete();

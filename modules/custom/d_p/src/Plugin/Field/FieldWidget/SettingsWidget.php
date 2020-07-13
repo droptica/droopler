@@ -245,7 +245,7 @@ class SettingsWidget extends WidgetBase {
           '6' => $this->t('6'),
           '12' => $this->t('12'),
         ],
-        'default' => 'h2',
+        'default' => '4',
         'bundles' => [
           'paragraph' => [
             'd_p_carousel',
