@@ -1384,7 +1384,7 @@ function droopler_update_8115() {
 /**
  * Droopler 2.2 Migrate column count field.
  */
-function droopler_update_8117(&$sandbox) {
+function droopler_update_8116(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $query = \Drupal::entityQuery('paragraph')
       ->exists('field_d_number')
