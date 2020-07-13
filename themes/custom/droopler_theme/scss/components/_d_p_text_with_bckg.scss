@@ -22,13 +22,30 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
 
 // Override default values.
 .padding-top-default {
-  .paragraph--type--d-p-text-with-bckg {
+  .d-p-text-with-bckg {
     padding-top: 0;
+
+    .content-wrapper {
+      padding-top: $d-p-text-with-bckg-padding-top;
+
+      @include media-breakpoint-down(sm) {
+        padding-top: $d-p-text-with-bckg-mobile-padding-top;
+      }
+    }
   }
 }
+
 .padding-bottom-default {
-  .paragraph--type--d-p-text-with-bckg {
+  .d-p-text-with-bckg {
     padding-bottom: 0;
+
+    .content-wrapper {
+      padding-bottom: $d-p-text-with-bckg-padding-bottom;
+
+      @include media-breakpoint-down(sm) {
+        padding-bottom: $d-p-text-with-bckg-mobile-padding-bottom;
+      }
+    }
   }
 }
 
@@ -82,11 +99,5 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
     position: relative;
     z-index: 2;
     width: 100%;
-    padding-top: $d-p-text-with-bckg-padding-top;
-    padding-bottom: $d-p-text-with-bckg-padding-bottom;
-    @include media-breakpoint-down(sm) {
-      padding-top: $d-p-text-with-bckg-mobile-padding-top;
-      padding-bottom: $d-p-text-with-bckg-mobile-padding-bottom;
-    }
   }
 }
