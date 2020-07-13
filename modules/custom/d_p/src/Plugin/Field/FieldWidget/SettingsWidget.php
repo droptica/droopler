@@ -224,6 +224,7 @@ class SettingsWidget extends WidgetBase {
             'options' => [
               'margin-top-default' => $this->t('Default'),
               'margin-top-small' => $this->t('Small'),
+              'margin-top-medium' => $this->t('Medium'),
               'margin-top-big' => $this->t('Big'),
               'margin-top-none' => $this->t('None'),
             ],
@@ -238,6 +239,7 @@ class SettingsWidget extends WidgetBase {
             'options' => [
               'margin-bottom-default' => $this->t('Default'),
               'margin-bottom-small' => $this->t('Small'),
+              'margin-bottom-medium' => $this->t('Medium'),
               'margin-bottom-big' => $this->t('Big'),
               'margin-bottom-none' => $this->t('None'),
             ],
