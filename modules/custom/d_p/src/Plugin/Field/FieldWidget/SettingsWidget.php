@@ -23,6 +23,31 @@ class SettingsWidget extends WidgetBase {
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
 
+  /**
+   * @var array
+   *   Stores bundles where spacing settings should be enabled.
+   */
+  private $spacingBundles = [
+    'd_p_banner',
+    'd_p_block',
+    'd_p_blog_image',
+    'd_p_blog_text',
+    'd_p_carousel',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_group_of_counters',
+    'd_p_group_of_text_blocks',
+    'd_p_reference_content',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_side_by_side',
+    'd_p_subscribe_file',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+  ];
+
   private function getConfigOptions() {
     return [
       self::CSS_CLASS_SETTING_NAME => [
@@ -192,6 +217,62 @@ class SettingsWidget extends WidgetBase {
               'paragraph' => ['all'],
             ],
           ],
+          'margin-top' => [
+            'title' => $this->t('Margin Top'),
+            'description' => $this->t('Choose the size of top margin.'),
+            'type' => 'select',
+            'options' => [
+              'margin-top-default' => $this->t('Default'),
+              'margin-top-small' => $this->t('Small'),
+              'margin-top-big' => $this->t('Big'),
+              'margin-top-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => $this->spacingBundles,
+            ],
+          ],
+          'margin-bottom' => [
+            'title' => $this->t('Margin Bottom'),
+            'description' => $this->t('Choose the size of bottom margin.'),
+            'type' => 'select',
+            'options' => [
+              'margin-bottom-default' => $this->t('Default'),
+              'margin-bottom-small' => $this->t('Small'),
+              'margin-bottom-big' => $this->t('Big'),
+              'margin-bottom-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => $this->spacingBundles,
+            ],
+          ],
+          'padding-top' => [
+            'title' => $this->t('Padding Top'),
+            'description' => $this->t('Choose the size of top padding.'),
+            'type' => 'select',
+            'options' => [
+              'padding-top-default' => $this->t('Default'),
+              'padding-top-small' => $this->t('Small'),
+              'padding-top-big' => $this->t('Big'),
+              'padding-top-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => $this->spacingBundles,
+            ],
+          ],
+          'padding-bottom' => [
+            'title' => $this->t('Padding Bottom'),
+            'description' => $this->t('Choose the size of bottom padding.'),
+            'type' => 'select',
+            'options' => [
+              'padding-bottom-default' => $this->t('Default'),
+              'padding-bottom-small' => $this->t('Small'),
+              'padding-bottom-big' => $this->t('Big'),
+              'padding-bottom-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => $this->spacingBundles,
+            ],
+          ],
         ],
       ],
       self::HEADING_TYPE_SETTING_NAME => [
@@ -264,7 +345,6 @@ class SettingsWidget extends WidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
     $config = !empty($value) ? json_decode($value) : [];
-    $inputs = $form_state->getUserInput();
 
     // Set up the form element for this widget.
     $element += [

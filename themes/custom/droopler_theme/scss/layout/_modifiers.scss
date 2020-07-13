@@ -505,3 +505,88 @@ $margins: (
     }
   }
 }
+
+$paddings: (
+  default: 5%,
+  small: 2%,
+  big: 10%,
+  none: 0
+) !default;
+
+@each $size, $value in $paddings {
+  @each $placement in (top, bottom) {
+    .padding-#{$placement}-#{$size} .paragraph {
+      padding-#{$placement}: $value;
+    }
+  }
+}
+
+$margins: (
+  small: 2%,
+  big: 10%,
+  none: 0
+) !default;
+
+@each $size, $value in $margins {
+  @each $placement in (top, bottom) {
+    .margin-#{$placement}-#{$size} .paragraph {
+      margin-#{$placement}: $value;
+    }
+  }
+}
+
+//.margin-top-small > .paragraph {
+//  margin-top: 2%;
+//}
+//
+//.margin-top-big > .paragraph {
+//  margin-top: 10%;
+//}
+//
+//.margin-top-none > .paragraph {
+//  margin-top: 0;
+//}
+//
+//.margin-bottom-small > .paragraph {
+//  margin-bottom: 2%;
+//}
+//
+//.margin-bottom-big > .paragraph {
+//  margin-bottom: 10%;
+//}
+//
+//.margin-bottom-none > .paragraph {
+//  margin-bottom: 0;
+//}
+//
+//.padding-top-default > .paragraph {
+//  padding-top: 5%;
+//}
+//
+//.padding-top-small > .paragraph {
+//  padding-top: 2%;
+//}
+//
+//.padding-top-big > .paragraph {
+//  padding-top: 10%;
+//}
+//
+//.padding-top-none > .paragraph {
+//  padding-top: 0;
+//}
+//
+//.padding-bottom-default > .paragraph {
+//  padding-bottom: 5%;
+//}
+//
+//.padding-bottom-small > .paragraph {
+//  padding-bottom: 2%;
+//}
+//
+//.padding-bottom-big > .paragraph {
+//  padding-bottom: 10%;
+//}
+//
+//.padding-bottom-none > .paragraph {
+//  padding-bottom: 0;
+//}

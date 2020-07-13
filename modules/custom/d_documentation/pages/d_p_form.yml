@@ -17,7 +17,7 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert
+          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -28,6 +28,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>With Droopler you can put almost every form into a Paragraph. Such form has a modern, Bootstrap 4 layout and an image background. You can also add some title and an optional icon. See the example below.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_form
       data:
@@ -53,7 +56,7 @@ field_page_section:
           data: feedback
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'full-example theme-default'
+          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_text_paged
       data:
@@ -63,6 +66,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>You can choose an alternative layout for the form. Try changing the layout from "Bottom" to "Right". The title and description will go to the left column and the form itself will go to the right..</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_form
       data:
@@ -94,7 +100,7 @@ field_page_section:
           data: right
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'alternative-layout-example theme-default'
+          custom_class: alternative-layout-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

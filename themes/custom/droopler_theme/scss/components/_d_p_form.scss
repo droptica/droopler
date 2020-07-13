@@ -13,14 +13,33 @@ $d-p-form-line-color-inverted: $color-agamemnon !default;
 
 // Margins, paddings and sizes.
 $d-p-form-header-margin-bottom: 10% !default;
-$d-p-form-padding-top: 5% !default;
-$d-p-form-padding-bottom: 5% !default;
 $d-p-form-button-margin-top: 1rem !default;
 $d-p-form-copy-margin-left: 1.25rem !default;
 $d-p-form-small-labels-spacing: 7px !default;
 
+$d-p-form-padding-top: 5% !default;
+$d-p-form-padding-bottom: 5% !default;
+
 // Other settings
 $d-p-form-background-opacity: 0.4 !default;
+
+// Override default values.
+.padding-top-default {
+  .paragraph--type--d-p-form {
+    padding-top: 0;
+    .paragraph-d-form {
+      padding-top: $d-p-form-padding-top;
+    }
+  }
+}
+.padding-bottom-default {
+  .paragraph--type--d-p-form {
+    padding-bottom: 0;
+    .paragraph-d-form {
+      padding-bottom: $d-p-form-padding-bottom;
+    }
+  }
+}
 
 .theme-default .paragraph-d-form {
   background: $d-p-form-background;
@@ -28,8 +47,6 @@ $d-p-form-background-opacity: 0.4 !default;
 
 .paragraph-d-form {
   position: relative;
-  padding-top: $d-p-form-padding-top;
-  padding-bottom: $d-p-form-padding-bottom;
   color: $d-p-form-text-color;
 
   .d-media-background-wrapper {
