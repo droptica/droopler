@@ -31,7 +31,7 @@ field_page_section:
             class: 'btn btn-primary'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'half-transparent theme-invert theme-default'
+          custom_class: half-transparent theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_carousel
@@ -41,7 +41,7 @@ field_page_section:
           data: 'Top Actions'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'full-width with-divider background-gray-light-2 slider-desktop-off'
+          custom_class: full-width with-divider background-gray-light-2 slider-desktop-off padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 6
         field_d_p_cs_item_reference:
           type: paragraph_reference
@@ -167,7 +167,7 @@ field_page_section:
                   - mt-4
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'full-width with-grid'
+          custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 3
         field_d_p_tb_block_reference:
           type: paragraph_reference
@@ -214,7 +214,7 @@ field_page_section:
       data:
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'full-width with-tiles background-gray-light-2 header-into-columns'
+          custom_class: full-width with-tiles background-gray-light-2 header-into-columns padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 4
         field_d_main_title:
           type: text
@@ -330,7 +330,7 @@ field_page_section:
           data: 'Who uses our engines'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'full-width with-grid'
+          custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 3
         field_d_p_tb_block_reference:
           type: paragraph_reference
@@ -403,7 +403,7 @@ field_page_section:
                   - mt-5
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'no-padding-top no-padding-bottom'
+          custom_class: no-padding-top no-padding-bottom theme-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_side_by_side
       data:
@@ -468,8 +468,9 @@ field_page_section:
                     -
                       path: d_demo/d_demo_career.jpg
                       alt: Workers
-                field_d_settings:
-                  type: field_p_configuration_storage
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

@@ -20,6 +20,7 @@ field_page_section:
           data: '<p>At Drooplengines, we employ over 2,000 experienced experts and engineers. We provide fantastic opportunities for professional development. Join our great Team today!</p>'
         field_d_settings:
           type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -32,7 +33,7 @@ field_page_section:
           data: |
             <p class="text-align-center">We constantly seek <strong>new talents.</strong></p>
             <p class="text-align-center">Open aplications:</p>
-            
+
             <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -77,7 +78,7 @@ field_page_section:
                 </tbody>
             </table>
             </div>
-            
+
     -
       paragraph_type: d_p_group_of_counters
       data:
@@ -125,6 +126,7 @@ field_page_section:
                 data: 'Products and parts'
         field_d_settings:
           type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 4
     -
       paragraph_type: d_p_text_paged
@@ -141,6 +143,9 @@ field_page_section:
             link: 'internal:/contact'
             text: 'CONTACT US'
             class: 'btn btn-primary'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_subscribe_file
       data:
@@ -173,6 +178,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>Find out more about our HR Department and recruitment process.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

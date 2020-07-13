@@ -17,7 +17,7 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert
+          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -28,6 +28,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>This paragraph is almost the same as Text Paragraph. There is one, noticeable difference - the background. When you upload an image, Droopler puts a white mask on it to make text easier to read. All font colors are dark to increase the contrast. Look at this full-featured example.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_text_with_bckg
       data:
@@ -61,7 +64,7 @@ field_page_section:
             text: 'Call To Action!'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'full-example theme-default'
+          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_text_paged
       data:
@@ -71,6 +74,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>A bare text looks excellent when we display it on an image background. If you choose a right photo with noticeable contrast, the result is very professional. The white mask has high opacity and ensures readability.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_text_with_bckg
       data:
@@ -86,7 +92,7 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. <strong>Nulla porttitor lorem in erat maximus</strong>, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p> <p>Aenean et purus eget sapien laoreet consectetur eu eget leo. Mauris enim felis, pharetra et odio quis, ultricies maximus nunc. <em><strong>Ut ac justo bibendum</strong></em>, commodo elit in, imperdiet lectus. Quisque justo felis, placerat a lacinia sit amet, posuere quis metus. Fusce egestas tincidunt nulla ut faucibus. Sed vehicula libero lectus, et volutpat quam dignissim at. Aliquam erat volutpat. Duis nunc massa, finibus a sapien sit amet, sagittis aliquet est. Etiam eget sapien massa.</p><p>Aliquam pharetra diam sed nulla tempus interdum. Cras eu elit blandit, ultricies ante at, tincidunt augue. Maecenas vitae condimentum enim, eu venenatis lectus. Aliquam erat volutpat. Nullam consectetur, eros in tristique commodo, massa dolor egestas purus, nec mollis lectus nisl id nisl. Nam et purus hendrerit, molestie odio quis, facilisis nibh. Donec luctus, enim sed posuere ullamcorper, arcu ante gravida turpis, nec maximus tellus ante eu quam. Fusce scelerisque libero sapien, nec suscipit augue elementum ac.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'basic-example theme-default'
+          custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

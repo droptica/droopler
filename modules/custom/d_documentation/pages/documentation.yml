@@ -24,6 +24,7 @@ field_page_section:
           data: '<p class="text-align-center">Droopler utilizes Paragraphs to build content in a comfortable, Lego-like way. Take a while to see the examples of each Paragraph. You will be surprised how much you can achieve.</p>'
         field_d_settings:
           type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_group_of_text_blocks
@@ -31,6 +32,9 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Available Paragraphs'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_p_tb_block_reference:
           type: paragraph_reference
           data:
