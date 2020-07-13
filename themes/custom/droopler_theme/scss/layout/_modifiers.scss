@@ -452,17 +452,17 @@ $d-p-themes: map-merge(
     primary: (
       background: $color-agamemnon,
       text: $color-odysseus,
-      setFieldsColor: true,
+      set-fields-color: true,
     ),
     gray: (
       background: $color-paris,
       text: $color-acamas,
-      setFieldsColor: false,
+      set-fields-color: false,
     ),
     secondary: (
       background: $color-odysseus,
       text: $color-hecuba,
-      setFieldsColor: false,
+      set-fields-color: false,
     ),
   ),
   $d-p-themes
@@ -475,7 +475,7 @@ $d-p-themes: map-merge(
       background: map-get($themeSettings, "background");
       color: map-get($themeSettings, "text");
 
-      @if map-get($themeSettings, "setFieldsColor") {
+      @if map-get($themeSettings, "set-fields-color") {
         .field {
           color: map-get($themeSettings, "text");
         }
