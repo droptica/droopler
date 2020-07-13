@@ -433,7 +433,7 @@ $two-columned-header-line-margin: 0.625rem !default;
 /*
   Themes styling.
  */
-$themes: (
+$d-p-themes: (
   primary: (
     background: $color-agamemnon,
     text: $color-odysseus,
@@ -451,7 +451,7 @@ $themes: (
   )
 ) !default;
 
-@each $name, $themeSettings in $themes {
+@each $name, $themeSettings in $d-p-themes {
   .theme-#{$name} {
     > .paragraph:not(.content-moved-inside),
     > .content-moved-inside .content-inside-wrapper {
