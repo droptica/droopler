@@ -32,12 +32,22 @@ $d-p-banner-subheader-opacity: 0.7 !default;
 // Override default values.
 .padding-top-default {
   .paragraph--type--d-p-banner {
-    padding-top: 0;
+    .content-wrapper {
+      padding-top: $d-p-banner-padding-top;
+      @include media-breakpoint-down(sm) {
+        padding-top: $d-p-banner-mobile-padding-top;
+      }
+    }
   }
 }
 .padding-bottom-default {
   .paragraph--type--d-p-banner {
-    padding-bottom: 0;
+    .content-wrapper {
+      padding-bottom: $d-p-banner-padding-bottom;
+      @include media-breakpoint-down(sm) {
+        padding-bottom: $d-p-banner-mobile-padding-bottom;
+      }
+    }
   }
 }
 
@@ -95,12 +105,6 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     position: relative;
     z-index: 2;
     width: 100%;
-    padding-top: $d-p-banner-padding-top;
-    padding-bottom: $d-p-banner-padding-bottom;
-    @include media-breakpoint-down(sm) {
-      padding-top: $d-p-banner-mobile-padding-top;
-      padding-bottom: $d-p-banner-mobile-padding-bottom;
-    }
   }
 }
 

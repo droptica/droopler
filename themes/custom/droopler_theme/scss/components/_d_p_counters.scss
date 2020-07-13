@@ -24,12 +24,18 @@ $d-p-counters-background-opacity: 0.2 !default;
 // Override default values.
 .padding-top-default {
   .paragraph--type--d-p-group-of-counters {
-    padding-top: 0;
+    padding-top: $d-p-counters-padding-top;
+    @include media-breakpoint-down(sm) {
+      padding-top: $d-p-counters-mobile-padding-top;
+    }
   }
 }
 .padding-bottom-default {
   .paragraph--type--d-p-group-of-counters {
-    padding-bottom: 0;
+    padding-bottom: $d-p-counters-padding-bottom;
+    @include media-breakpoint-down(sm) {
+      padding-bottom: $d-p-counters-mobile-padding-bottom;
+    }
   }
 }
 
@@ -49,12 +55,6 @@ $d-p-counters-background-opacity: 0.2 !default;
     position: relative;
     z-index: 2;
     width: 100%;
-    padding-top: $d-p-counters-padding-top;
-    padding-bottom: $d-p-counters-padding-bottom;
-    @include media-breakpoint-down(sm) {
-      padding-top: $d-p-counters-mobile-padding-top;
-      padding-bottom: $d-p-counters-mobile-padding-bottom;
-    }
 
     .field--name-field-d-media-icon {
       text-align: center;
