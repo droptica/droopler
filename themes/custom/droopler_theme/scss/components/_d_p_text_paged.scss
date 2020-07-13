@@ -18,6 +18,22 @@ $d-p-text-paged-theme-invert-text-color: $color-odysseus !default;
 $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
 $d-p-text-paged-first-margin-top: 2% !default;
 
+.theme-default {
+  .text-page {
+    > div > h3.field--name-field-d-subtitle {
+      color: $d-p-text-paged-subtitle-color;
+    }
+    .field--name-field-d-long-text {
+      color: $d-p-text-paged-color;
+      p {
+        b, strong {
+          color: $d-p-text-paged-bold-color;
+        }
+      }
+    }
+  }
+}
+
 .text-page {
   text-align: center;
 
@@ -34,19 +50,14 @@ $d-p-text-paged-first-margin-top: 2% !default;
     margin: $d-p-text-paged-subtitle-margin-y 0;
     @include font-subtitle;
     text-align: center;
-    color: $d-p-text-paged-subtitle-color;
   }
   .field--type-link {
     text-align: center;
   }
   .field--name-field-d-long-text {
-    color: $d-p-text-paged-color;
     p {
       word-wrap: break-word;
       hyphens: auto;
-      b, strong {
-        color: $d-p-text-paged-bold-color;
-      }
     }
 
     &:before {
