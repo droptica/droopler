@@ -1,3 +1,4 @@
+uuid: c25de6db-a2fa-4576-8d3c-c81c9de04e5a
 langcode: en
 status: true
 dependencies:
@@ -6,7 +7,6 @@ dependencies:
     - field.field.paragraph.d_p_carousel.field_d_long_text
     - field.field.paragraph.d_p_carousel.field_d_main_title
     - field.field.paragraph.d_p_carousel.field_d_media_icon
-    - field.field.paragraph.d_p_carousel.field_d_number
     - field.field.paragraph.d_p_carousel.field_d_p_cs_item_reference
     - field.field.paragraph.d_p_carousel.field_d_settings
     - paragraphs.paragraphs_type.d_p_carousel
@@ -37,7 +37,6 @@ third_party_settings:
         - field_d_main_title
         - field_d_media_icon
         - field_d_long_text
-        - field_d_number
         - field_d_settings
         - field_d_cta_link
       parent_name: group_tabs
@@ -109,13 +108,6 @@ content:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
-    region: content
-  field_d_number:
-    weight: 5
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: number
     region: content
   field_d_p_cs_item_reference:
     type: entity_reference_paragraphs

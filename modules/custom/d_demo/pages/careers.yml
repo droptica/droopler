@@ -88,9 +88,6 @@ field_page_section:
             -
               path: d_demo/demo_bg_2.jpg
               alt: 'Abstract Background'
-        field_d_number:
-          type: number
-          data: 4
         field_d_main_title:
           type: text
           data: 'Our company in numbers'
@@ -126,6 +123,9 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Products and parts'
+        field_d_settings:
+          type: field_p_configuration_storage
+          column_count: 4
     -
       paragraph_type: d_p_text_paged
       data:
