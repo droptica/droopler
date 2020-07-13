@@ -42,9 +42,6 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Our happy customers'
-        field_d_settings:
-          type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_p_cs_item_reference:
           type: paragraph_reference
           subtype: d_p_carousel_item
@@ -79,6 +76,7 @@ field_page_section:
                 data: '<p><em>The Drooplengines company is an excellent business partner who has carried out services at the highest level. Thanks to cooperation with Drooplengines, we have reduced the company''s operating costs associated with servicing our engines.</em></p>'
         field_d_settings:
           type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 1
     -
       paragraph_type: d_p_group_of_counters
@@ -93,9 +91,6 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Our company in numbers'
-        field_d_settings:
-          type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_counter_reference:
           type: paragraph_reference
           subtype: d_p_single_counter
@@ -130,6 +125,7 @@ field_page_section:
                 data: 'Products and parts'
         field_d_settings:
           type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 4
     -
       paragraph_type: d_p_text_paged
