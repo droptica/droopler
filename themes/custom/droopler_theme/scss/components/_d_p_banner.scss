@@ -32,6 +32,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
 // Override default values.
 .padding-top-default {
   .paragraph--type--d-p-banner {
+    padding-top: 0;
     .content-wrapper {
       padding-top: $d-p-banner-padding-top;
       @include media-breakpoint-down(sm) {
@@ -42,6 +43,7 @@ $d-p-banner-subheader-opacity: 0.7 !default;
 }
 .padding-bottom-default {
   .paragraph--type--d-p-banner {
+    padding-bottom: 0;
     .content-wrapper {
       padding-bottom: $d-p-banner-padding-bottom;
       @include media-breakpoint-down(sm) {
