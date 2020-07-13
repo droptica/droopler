@@ -14,7 +14,7 @@ $arrow-margin-top: 6% !default;
 $arrow-border-width: 9px !default;
 $arrow-border: $arrow-border-width solid transparent !default;
 $arrow-down-color: lighten($color-achillies, 10%) !default;
-$stripe-background-color: rgba(0,0,0, 0.57) !default;
+$stripe-background-color: rgba(0, 0, 0, 0.57) !default;
 $tile-padding-top: 70px !default;
 $tile-padding-bottom: 70px !default;
 $tiles-spacing: 10px !default;
@@ -25,10 +25,12 @@ $theme-invert-text-color: $color-cassandra !default;
 $line-background-alter: $color-nestor !default;
 $two-columned-header-line-margin: 0.625rem !default;
 
+// TODO: migrate to new themes.
 .background {
   &-gray-light {
     background: $light-gray-background;
   }
+
   &-gray-light-2 {
     background-color: $light-gray-background-2;
   }
@@ -100,6 +102,7 @@ $two-columned-header-line-margin: 0.625rem !default;
       z-index: 1;
       left: 0;
     }
+
     &:after {
       margin-top: -2px;
     }
@@ -172,6 +175,7 @@ $two-columned-header-line-margin: 0.625rem !default;
           padding-right: $grid-gutter-width / 2;
         }
       }
+
       .item-2 & {
         left: 0;
         @include media-breakpoint-down(md) {
@@ -235,10 +239,12 @@ $two-columned-header-line-margin: 0.625rem !default;
             padding-bottom: unset;
           }
         }
+
         .with-price-currency,
         .with-price-timestamp {
           display: none;
         }
+
         .with-price-percentage {
           color: $white;
         }
@@ -296,14 +302,17 @@ $two-columned-header-line-margin: 0.625rem !default;
         .change {
           color: $color-serpedon;
         }
+
         .with-price-arrow {
           border-bottom: 16px solid $color-serpedon;
         }
       }
+
       &.down {
         .change {
           color: $arrow-down-color;
         }
+
         .with-price-arrow {
           border-top: 16px solid $arrow-down-color;
         }
@@ -349,11 +358,13 @@ $two-columned-header-line-margin: 0.625rem !default;
     right: 0;
     display: block;
     z-index: -1;
+
     &.background-properties {
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
     }
+
     &.background-image {
       z-index: -1 !important;
     }
@@ -370,6 +381,7 @@ $two-columned-header-line-margin: 0.625rem !default;
       @include media-breakpoint-down(lg) {
         font-size: $tile-title-font-size-mobile;
       }
+
       &:after {
         margin: 7px auto;
       }
@@ -391,6 +403,7 @@ $two-columned-header-line-margin: 0.625rem !default;
       }
     }
   }
+
   .d-media-background-wrapper {
     img {
       filter: brightness(50%);
@@ -412,6 +425,7 @@ $two-columned-header-line-margin: 0.625rem !default;
           text-align: left;
           margin-bottom: 0;
         }
+
         .field--name-field-d-main-title::after {
           margin: $two-columned-header-line-margin auto $two-columned-header-line-margin 0 !important;
         }
@@ -420,6 +434,7 @@ $two-columned-header-line-margin: 0.625rem !default;
   }
 }
 
+// TODO: migrate to new spacings
 .no-padding-bottom > .paragraph {
   padding-bottom: 0;
 }
@@ -428,18 +443,50 @@ $two-columned-header-line-margin: 0.625rem !default;
   padding-top: 0;
 }
 
-.theme-primary > .paragraph {
-  background: $color-agamemnon;
+/*
+  Themes styling.
+ */
+$d-p-themes: () !default;
+$d-p-themes: map-merge(
+  (
+    primary: (
+      background: $color-agamemnon,
+      text: $color-odysseus,
+      set-fields-color: true,
+    ),
+    gray: (
+      background: $color-paris,
+      text: $color-acamas,
+      set-fields-color: false,
+    ),
+    secondary: (
+      background: $color-odysseus,
+      text: $color-hecuba,
+      set-fields-color: false,
+    ),
+  ),
+  $d-p-themes
+);
+
+@each $name, $themeSettings in $d-p-themes {
+  .theme-#{$name} {
+    > .paragraph:not(.content-moved-inside),
+    > .content-moved-inside .content-inside-wrapper {
+      background: map-get($themeSettings, "background");
+      color: map-get($themeSettings, "text");
+
+      @if map-get($themeSettings, "set-fields-color") {
+        .field {
+          color: map-get($themeSettings, "text");
+        }
+      }
+    }
+  }
 }
 
-.theme-gray > .paragraph {
-  background: $color-paris;
-}
-
-.theme-secondary > .paragraph {
-  background: $color-odysseus;
-}
-
+/*
+  Spacings styling.
+ */
 $paddings: (
   default: 5%,
   small: 2%,
@@ -449,8 +496,11 @@ $paddings: (
 
 @each $size, $value in $paddings {
   @each $placement in (top, bottom) {
-    .padding-#{$placement}-#{$size} .paragraph {
-      padding-#{$placement}: $value;
+    .padding-#{$placement}-#{$size} {
+      > .paragraph:not(.content-moved-inside),
+      > .content-moved-inside .content-inside-wrapper {
+        padding-#{$placement}: $value;
+      }
     }
   }
 }
@@ -468,59 +518,3 @@ $margins: (
     }
   }
 }
-
-//.margin-top-small > .paragraph {
-//  margin-top: 2%;
-//}
-//
-//.margin-top-big > .paragraph {
-//  margin-top: 10%;
-//}
-//
-//.margin-top-none > .paragraph {
-//  margin-top: 0;
-//}
-//
-//.margin-bottom-small > .paragraph {
-//  margin-bottom: 2%;
-//}
-//
-//.margin-bottom-big > .paragraph {
-//  margin-bottom: 10%;
-//}
-//
-//.margin-bottom-none > .paragraph {
-//  margin-bottom: 0;
-//}
-//
-//.padding-top-default > .paragraph {
-//  padding-top: 5%;
-//}
-//
-//.padding-top-small > .paragraph {
-//  padding-top: 2%;
-//}
-//
-//.padding-top-big > .paragraph {
-//  padding-top: 10%;
-//}
-//
-//.padding-top-none > .paragraph {
-//  padding-top: 0;
-//}
-//
-//.padding-bottom-default > .paragraph {
-//  padding-bottom: 5%;
-//}
-//
-//.padding-bottom-small > .paragraph {
-//  padding-bottom: 2%;
-//}
-//
-//.padding-bottom-big > .paragraph {
-//  padding-bottom: 10%;
-//}
-//
-//.padding-bottom-none > .paragraph {
-//  padding-bottom: 0;
-//}
