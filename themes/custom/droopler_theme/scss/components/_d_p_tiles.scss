@@ -15,6 +15,18 @@ $d-p-tiles-overlay-opacity: 0.6 !default;
 $d-p-tiles-margin-top: 5% !default;
 $d-p-tiles-margin-bottom: 5% !default;
 
+// Override default values.
+.padding-top-default {
+  .paragraph--type--d-p-tiles {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph--type--d-p-tiles {
+    padding-bottom: 0;
+  }
+}
+
 .paragraph--type--d-p-tiles {
   @include clearfix;
   text-align: center;

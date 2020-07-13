@@ -56,9 +56,11 @@
           <div class="container items">
             {{ content.field_d_p_sbs_items }}
           </div>
-          <div class="container my-5">
-            {{ content.field_d_cta_link }}
-          </div>
+          {% if content.field_d_cta_link|render %}
+            <div class="container my-5">
+              {{ content.field_d_cta_link }}
+            </div>
+          {% endif %}
         </div>
       {% endblock %}
     </div>

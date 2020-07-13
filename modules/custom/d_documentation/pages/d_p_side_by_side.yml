@@ -17,7 +17,7 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert
+          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -28,12 +28,15 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>This paragraph allows you put two pieces of content next to each other. See below examples to explore its features.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_side_by_side
       data:
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'no-padding-top no-padding-bottom full-example'
+          custom_class: no-padding-top no-padding-bottom full-example theme-default margin-top-default margin-bottom-default
         field_d_p_sbs_items:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -85,7 +88,7 @@ field_page_section:
       data:
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: with-grid
+          custom_class: with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_p_sbs_items:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -130,7 +133,7 @@ field_page_section:
       data:
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'no-padding-top no-padding-bottom'
+          custom_class: no-padding-top no-padding-bottom theme-default margin-top-default margin-bottom-default
         field_d_p_sbs_items:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -223,6 +226,9 @@ field_page_section:
                     -
                       path: d_demo/d_demo_career.jpg
                       alt: Workers
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

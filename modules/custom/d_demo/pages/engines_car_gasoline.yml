@@ -27,7 +27,7 @@ field_page_section:
           data: '#fff'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert
+          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -38,6 +38,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>We have over 20 years of experience in the production of engines for automotive industry.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_side_image
       data:
@@ -59,7 +62,7 @@ field_page_section:
           data: '#dddddd'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert
+          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -88,7 +91,7 @@ field_page_section:
                 custom_class: theme-invert
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'with-tiles theme-invert header-margin-none'
+          custom_class: with-tiles theme-invert header-margin-none padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -111,7 +114,7 @@ field_page_section:
                   - mt-4
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: 'full-width with-grid'
+          custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -171,7 +174,7 @@ field_page_section:
                   - mt-5
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: no-padding-top
+          custom_class: no-padding-top theme-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_banner
       data:
@@ -193,6 +196,9 @@ field_page_section:
           data:
             link: 'internal:/contact'
             text: 'CONTACT US'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

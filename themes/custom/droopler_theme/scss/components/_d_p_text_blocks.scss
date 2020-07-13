@@ -44,13 +44,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Group of text blocks with header and CTA
 .d-p-group-of-text-blocks {
-  padding-top: $d-p-text-blocks-group-padding-y;
-  padding-bottom: $d-p-text-blocks-group-padding-y;
-
-  @include media-breakpoint-down(md) {
-    padding-top: $d-p-text-blocks-group-mobile-padding-y;
-    padding-bottom: $d-p-text-blocks-group-mobile-padding-y;
-  }
   > .container {
     > .field--name-field-d-media-icon {
       text-align: center;

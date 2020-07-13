@@ -21,6 +21,18 @@ $d-p-side-image-banner-text-padding: 7% !default;
 $d-p-side-image-banner-text-width: 35.625rem !default;
 $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and half of the screen
 
+// Override default values.
+.padding-top-default {
+  .paragraph--type--d-p-side-image {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph--type--d-p-side-image {
+    padding-bottom: 0;
+  }
+}
+
 .d-p-side-image-banner {
   color: $d-p-side-image-banner-text-color;
   .field--name-field-d-main-title {
