@@ -44,15 +44,11 @@ $d-p-form-background-opacity: 0.4 !default;
   form {
     margin: 0;
 
-    a {
-      color: inherit;
-    }
-
     .field--type-file.form-group {
       margin-top: $d-p-form-button-margin-top;
     }
     small, label {
-       //color: $d-p-form-text-color;
+       color: $d-p-form-text-color;
     }
     small.description {
       margin-top: $d-p-form-small-labels-spacing;
@@ -80,7 +76,7 @@ $d-p-form-background-opacity: 0.4 !default;
         a {
           @include make-btn;
           text-transform: none;
-          //background-color: $d-p-form-text-color;
+          background-color: $d-p-form-text-color;
           color: $d-p-form-background;
           text-align: left;
           width: 100%;
