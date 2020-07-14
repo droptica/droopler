@@ -22,15 +22,31 @@ $d-p-subscribe-line-margin-top: 1.45rem !default;
 // Other settings.
 $d-p-subscribe-background-opacity: 0.4 !default;
 
+.theme-default {
+  .paragraph--type--d-p-subscribe-file {
+    background: $d-p-subscribe-background;
+    color: $d-p-subscribe-color;
+
+    a {
+      color: $d-p-subscribe-color;
+    }
+
+    .field--name-field-d-main-title {
+      color: $d-p-subscribe-header-color;
+    }
+  }
+}
+
 // Override default values.
 .padding-top-default {
   .paragraph--type--d-p-subscribe-file {
-    padding-top: 0;
+    padding-top: $d-p-subscribe-padding-y;
   }
 }
+
 .padding-bottom-default {
   .paragraph--type--d-p-subscribe-file {
-    padding-bottom: 0;
+    padding-bottom: $d-p-subscribe-padding-y;
   }
 }
 
@@ -85,12 +101,10 @@ $d-p-subscribe-background-opacity: 0.4 !default;
 }
 
 // Entire paragraph
-.subscribe_file {
+.paragraph--type--d-p-subscribe-file {
   position: relative;
-  color: $d-p-subscribe-color;
   z-index: 0;
-  padding: $d-p-subscribe-padding-y 0;
-  background: $d-p-subscribe-background;
+
   .d-media-background-wrapper {
     img, iframe {
       opacity: $d-p-subscribe-background-opacity;
@@ -101,15 +115,12 @@ $d-p-subscribe-background-opacity: 0.4 !default;
     position: relative;
     z-index: 2;
   }
-  a {
-    color: $d-p-subscribe-color;
-  }
+
   .field--name-field-d-media-icon {
     text-align: center;
   }
   .field--name-field-d-main-title {
     @include font-main-header;
-    color: $d-p-subscribe-header-color;
     text-align: center;
 
     // Horizontal line
