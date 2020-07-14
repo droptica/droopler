@@ -1,6 +1,6 @@
 core.entity_view_display.media.d_image.d_product_image:
   delete:
-    - content.field_media_image.settings.responsive_image_style
+    - content:field_media_image:settings:responsive_image_style
   change:
     expected:
       dependencies:
