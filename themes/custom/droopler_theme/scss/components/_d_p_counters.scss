@@ -23,30 +23,46 @@ $d-p-counters-background-opacity: 0.2 !default;
 
 // Override default values.
 .padding-top-default {
-  .paragraph--type--d-p-group-of-counters {
-    padding-top: 0;
-    .content-wrapper {
-      padding-top: $d-p-counters-padding-top;
-      @include media-breakpoint-down(sm) {
-        padding-top: $d-p-counters-mobile-padding-top;
-      }
+  .paragraph.paragraph--type--d-p-group-of-counters {
+    padding-top: $d-p-counters-padding-top;
+
+    @include media-breakpoint-down(sm) {
+      padding-top: $d-p-counters-mobile-padding-top;
     }
   }
 }
 .padding-bottom-default {
-  .paragraph--type--d-p-group-of-counters {
-    padding-bottom: 0;
-    .content-wrapper {
-      padding-bottom: $d-p-counters-padding-bottom;
-      @include media-breakpoint-down(sm) {
-        padding-bottom: $d-p-counters-mobile-padding-bottom;
-      }
+  .paragraph.paragraph--type--d-p-group-of-counters {
+
+    padding-bottom: $d-p-counters-padding-bottom;
+    @include media-breakpoint-down(sm) {
+      padding-bottom: $d-p-counters-mobile-padding-bottom;
     }
   }
 }
 
-.theme-default .paragraph--type--d-p-group-of-counters  {
-  background: $d-p-counters-background-overlay;
+.theme-default {
+  .paragraph--type--d-p-group-of-counters  {
+    background: $d-p-counters-background-overlay;
+
+    .content > .field--name-field-d-main-title {
+      color: $d-p-counters-header-color;
+    }
+
+    .paragraph--type--d-p-single-counter {
+      .field--name-field-d-number {
+        color: $d-p-counters-number-color;
+      }
+
+      .field--name-field-d-main-title {
+        color: $d-p-counters-text-color;
+      }
+    }
+
+    .field--name-field-d-long-text {
+      color: $d-p-counters-long-text-color;
+    }
+  }
 }
 
 .paragraph--type--d-p-group-of-counters {
@@ -69,7 +85,6 @@ $d-p-counters-background-opacity: 0.2 !default;
     // The header.
     .content > .field--name-field-d-main-title {
       @include font-main-header;
-      color: $d-p-counters-header-color;
       text-align: center;
       margin-top: $d-p-counters-title-margin-top;
 
@@ -83,18 +98,15 @@ $d-p-counters-background-opacity: 0.2 !default;
       text-align: center;
       .field--name-field-d-number {
         @include font-main-header;
-        color: $d-p-counters-number-color;
         font-family: $font-header;
       }
       .field--name-field-d-main-title {
-        color: $d-p-counters-text-color;
         font-size: 1rem;
         font-weight: normal;
       }
     }
 
     .field--name-field-d-long-text {
-      color: $d-p-counters-long-text-color;
       padding-top: 1.51rem;
     }
   }

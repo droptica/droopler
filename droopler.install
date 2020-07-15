@@ -1333,6 +1333,19 @@ function droopler_update_8115() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
+  $updater->importConfigs([
+    'd_p' => [
+      'field.storage.node.field_meta_tags' => '',
+    ],
+    'd_content' => [
+      'field.storage.node.field_header_cta' => '',
+      'field.storage.node.field_header_layout' => '',
+      'field.field.node.content_page.field_header_cta' => '',
+      'field.field.node.content_page.field_header_layout' => '',
+      'field.field.node.content_page.field_meta_tags' => '',
+    ],
+  ]);
+
   $configs = [
     'd_p_carousel' => [
       'field.field.paragraph.d_p_carousel.field_d_cta_link' => '',
@@ -1356,18 +1369,8 @@ function droopler_update_8115() {
       'field.field.paragraph.d_p_reference_content.field_d_long_text' => '',
       'field.field.paragraph.d_p_reference_content.field_d_media_icon' => '',
     ],
-    'd_p' => [
-      'field.storage.node.field_meta_tags' => '',
-    ],
     'd_blog' => [
       'field.field.node.blog_post.field_meta_tags' => '',
-    ],
-    'd_content' => [
-      'field.storage.node.field_header_cta' => '',
-      'field.storage.node.field_header_layout' => '',
-      'field.field.node.content_page.field_header_cta' => '',
-      'field.field.node.content_page.field_header_layout' => '',
-      'field.field.node.content_page.field_meta_tags' => '',
     ],
     'd_product' => [
       'field.field.node.d_product.field_meta_tags' => '',
