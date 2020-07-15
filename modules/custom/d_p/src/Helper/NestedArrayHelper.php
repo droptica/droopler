@@ -32,7 +32,7 @@ class NestedArrayHelper extends NestedArray {
     $unset_key = array_pop($parents);
     $ref = &self::getValue($array, $parents, $key_existed);
 
-    if ($key_existed === FALSE || !is_array($ref) || (!isset($ref[$unset_key]) && !array_key_exists($unset_key, $ref))) {
+    if ($key_existed === FALSE || !is_array($ref) || !array_key_exists($unset_key, $ref)) {
       $key_existed = FALSE;
       return;
     }
