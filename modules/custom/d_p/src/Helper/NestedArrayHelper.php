@@ -38,14 +38,14 @@ class NestedArrayHelper extends NestedArray {
     }
 
     $key_existed = FALSE;
-    $is_ref_associative = [] !== $ref[$unset_key] && array_keys($ref[$unset_key]) !== range(0, count($ref[$unset_key]) - 1);
+    $is_ref_sequential = [] !== $ref[$unset_key] && array_keys($ref[$unset_key]) !== range(0, count($ref[$unset_key]) - 1);
     $key = array_search($value, $ref[$unset_key]);
 
     if ($key !== FALSE) {
       $key_existed = TRUE;
       unset($ref[$unset_key][$key]);
 
-      if ($is_ref_associative === TRUE) {
+      if ($is_ref_sequential === TRUE) {
         $ref[$unset_key] = array_values($ref[$unset_key]);
       }
     }
