@@ -1429,7 +1429,9 @@ function droopler_update_8116(&$sandbox) {
       'd_p_group_of_counters',
       'd_p_group_of_text_blocks',
     ];
-    FieldStorageConfig::loadByName('paragraph', 'field_d_number')->delete();
+    $values['droopler__droopler_update_8116_1'] = update_modules_configuration($bundles, '8116');
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v2.2' => $values]);
 
     foreach ($bundles as $bundle) {
       $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_number');

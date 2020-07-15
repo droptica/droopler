@@ -38,7 +38,7 @@ class NestedArrayHelper extends NestedArray {
     }
 
     $key_existed = FALSE;
-    $is_ref_sequential = [] !== $ref[$unset_key] && array_keys($ref[$unset_key]) !== range(0, count($ref[$unset_key]) - 1);
+    $is_ref_sequential = [] !== $ref[$unset_key] && array_keys($ref[$unset_key]) === range(0, count($ref[$unset_key]) - 1);
     $key = array_search($value, $ref[$unset_key]);
 
     if ($key !== FALSE) {
