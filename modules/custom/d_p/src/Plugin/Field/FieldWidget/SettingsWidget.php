@@ -22,6 +22,7 @@ class SettingsWidget extends WidgetBase {
 
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
+  const COLUMN_COUNT_SETTING_NAME = 'column_count';
 
   /**
    * @var array
@@ -312,6 +313,22 @@ class SettingsWidget extends WidgetBase {
           ],
         ],
       ],
+      self::COLUMN_COUNT_SETTING_NAME => [
+        'title' => $this->t('Column count'),
+        'outside' => TRUE,
+        'description' => $this->t('Select the number of items in one row.'),
+        'type' => 'number',
+        'min' => '1',
+        'max' => '12',
+        'default' => '4',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
+          ],
+        ],
+      ],
     ];
   }
 
@@ -421,6 +438,20 @@ class SettingsWidget extends WidgetBase {
             '#description' => $options['description'] ?? '',
             '#options' => $options['options'],
             '#default_value' => empty($value) ? $options['default'] : $value,
+          ];
+          if ($element['#required']) {
+            $element[$key]['#required'] = TRUE;
+          }
+          break;
+
+        case 'number':
+          $element[$key] = [
+            '#type' => 'number',
+            '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
+            '#default_value' => !empty($value) && $value !== '' ? $value : $options['default'],
+            '#min' => $options['min'] ?? NULL,
+            '#max' => $options['max'] ?? NULL,
           ];
           if ($element['#required']) {
             $element[$key]['#required'] = TRUE;

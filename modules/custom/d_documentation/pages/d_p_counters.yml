@@ -48,9 +48,6 @@ field_page_section:
             -
               path: d_demo/demo_droopler_white.svg
               alt: 'Droopler Logo'
-        field_d_number:
-          type: number
-          data: 4
         field_d_main_title:
           type: text
           data: 'Main Title'
@@ -89,6 +86,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 4
     -
       paragraph_type: d_p_text_paged
       data:
@@ -111,9 +109,6 @@ field_page_section:
             -
               path: d_demo/demo_bg_2.jpg
               alt: 'Abstract Background'
-        field_d_number:
-          type: number
-          data: 1
         field_d_counter_reference:
           type: paragraph_reference
           subtype: d_p_single_counter
@@ -128,6 +123,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 1
 field_teaser_media_image:
   type: media_image
   directory: demo
