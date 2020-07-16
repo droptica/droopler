@@ -6,6 +6,7 @@
  */
 
 use Drupal\d_p\Helper\ParagraphModifiersHelper;
+use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 
 /**
  * Implements hook_theme().
@@ -34,10 +35,11 @@ function d_p_text_blocks_preprocess_field(&$variables) {
 
         $paragraph_modifiers_helper = new ParagraphModifiersHelper($variables['element']['#object']);
 
-        /** @var \Drupal\Core\Field\FieldItemList $num_field */
-        $num_field = $variables['element']['#object']->get('field_d_number');
+        $num_field = $paragraph_modifiers_helper->getModifier(
+          SettingsWidget::COLUMN_COUNT_SETTING_NAME
+        );
 
-        $items_per_row = $num_field->isEmpty() ? 3 : $num_field->first()->get('value')->getValue();
+        $items_per_row = $num_field ?? 3;
         $columns = floor(12 / $items_per_row);
         $variables['column_class'] = 'col-sm-' . $columns;
 
