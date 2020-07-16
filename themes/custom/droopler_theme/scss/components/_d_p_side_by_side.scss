@@ -7,8 +7,6 @@ Styleguide 2.d_p_side_by_side
 // Colour variables used in this paragraph
 $d-p-side-by-side-line-color: $color-agamemnon !default;
 $d-p-side-by-side-line-color-inverted: $color-nestor !default;
-$d-p-side-by-side-color: $color-hecuba !default;
-$d-p-side-by-side-bold-color: $color-troilus !default;
 
 // Margins, paddings and sizing.
 $d-p-side-by-side-padding-y: 5% !default;
@@ -20,7 +18,19 @@ $d-p-side-by-side-text-box-padding-y: $grid-gutter-width !default;
 $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
 $d-p-side-by-side-image-background-padding-y: 130px !default;
 
-.paragraph--type--d-p-side-by-side {
+// Override default values.
+.padding-top-default {
+  .paragraph.paragraph--type--d-p-side-by-side {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph.paragraph--type--d-p-side-by-side {
+    padding-bottom: 0;
+  }
+}
+
+.d-p-side-by-side {
   text-align: center;
 
   > div > .field--name-field-d-media-icon {
@@ -28,6 +38,8 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   }
 
   .text-content {
+    padding-bottom: $d-p-side-by-side-padding-y;
+
     .field--name-field-d-main-title {
       @include font-main-header;
 
@@ -159,12 +171,8 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 
   .field--name-field-d-long-text {
     p {
-      color: $d-p-side-by-side-color;
       word-wrap: break-word;
       hyphens: auto;
-      b, strong {
-        color: $d-p-side-by-side-bold-color;
-      }
     }
   }
 }
