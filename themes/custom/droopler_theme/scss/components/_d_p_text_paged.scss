@@ -9,7 +9,6 @@ $d-p-text-paged-subtitle-color: $color-agamemnon !default;
 $d-p-text-paged-line-color: $color-agamemnon !default;
 $d-p-text-paged-line-color-inverted: $color-nestor !default;
 $d-p-text-paged-color: $color-hecuba !default;
-$d-p-text-paged-bold-color: $color-troilus !default;
 $d-p-text-paged-background-invert-color: $color-agamemnon !default;
 $d-p-text-paged-theme-invert-background-color: $color-agamemnon !default;
 $d-p-text-paged-theme-invert-text-color: $color-odysseus !default;
@@ -25,11 +24,6 @@ $d-p-text-paged-first-margin-top: 2% !default;
     }
     .field--name-field-d-long-text {
       color: $d-p-text-paged-color;
-      p {
-        b, strong {
-          color: $d-p-text-paged-bold-color;
-        }
-      }
     }
   }
 }
