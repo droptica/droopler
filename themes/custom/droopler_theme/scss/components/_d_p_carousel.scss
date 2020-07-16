@@ -3,8 +3,6 @@ Components Carousel
 */
 
 // Colour variables used in this paragraph.
-$d-p-carousel-item-text-color: $color-hecuba !default;
-$d-p_carousel-item-text-bold-color: $color-troilus !default;
 $d-p-carousel-item-line-color: $color-agamemnon !default;
 $d-p-carousel-item-line-color-inverted: $color-nestor !default;
 $d-p-carousel-line-color: $color-agamemnon !default;
@@ -52,13 +50,8 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
 
   .content > .field--name-field-d-long-text {
     p {
-      color: $d-p-carousel-item-text-color;
       word-wrap: break-word;
       hyphens: auto;
-
-      b, strong {
-        color: $d-p-carousel-item-text-bold-color;
-      }
     }
   }
 
@@ -135,11 +128,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
         .field--name-field-d-long-text {
           p {
             @include font-body-standard;
-            color: $d-p-carousel-item-text-color;
             text-align: center;
-            b, strong {
-              color: $d-p_carousel-item-text-bold-color;
-            }
           }
           &:before {
             @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);

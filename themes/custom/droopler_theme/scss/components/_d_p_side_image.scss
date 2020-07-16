@@ -14,6 +14,7 @@ $d-p-side-image-banner-link-hover-color: darken($d-p-side-image-banner-link-colo
 $d-p-side-image-line-color: $color-nestor !default;
 $d-p-side-image-line-color-inverted: $color-agamemnon !default;
 $d-p-side-image-header-color: $color-odysseus !default;
+$d-p-side-image-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-side-image-mobile-height: 18.75rem !default;
@@ -23,12 +24,12 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
 
 // Override default values.
 .padding-top-default {
-  .paragraph--type--d-p-side-image {
+  .paragraph.paragraph--type--d-p-side-image {
     padding-top: 0;
   }
 }
 .padding-bottom-default {
-  .paragraph--type--d-p-side-image {
+  .paragraph.paragraph--type--d-p-side-image {
     padding-bottom: 0;
   }
 }
@@ -44,6 +45,12 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     }
     &:last-child:after {
       display: none;
+    }
+  }
+
+  .field--name-field-d-long-text {
+    p {
+      color: $d-p-side-image-color;
     }
   }
   a:not(.btn) {
