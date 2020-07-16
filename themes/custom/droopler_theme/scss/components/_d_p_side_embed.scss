@@ -31,12 +31,48 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 // Override default values.
 .padding-top-default {
   .paragraph--type--d-p-side-embed {
-    padding-top: 0;
+
+    @include media-breakpoint-down(md) {
+      .content-inside-wrapper {
+        padding: $d-p-side-embed-text-mobile-padding;
+      }
+    }
+
+    .embed-side {
+      &-left,
+      &-right, {
+        .content-inside-wrapper {
+          padding-top: $d-p-side-embed-fields-padding-y;
+        }
+      }
+      &-full {
+        .content-inside-wrapper {
+          padding-top: $d-p-side-embed-fields-full-padding-y;
+        }
+      }
+    }
   }
 }
 .padding-bottom-default {
   .paragraph--type--d-p-side-embed {
-    padding-bottom: 0;
+    .embed-side {
+      &-left,
+      &-right, {
+        .content-inside-wrapper {
+
+          @include media-breakpoint-up(md) {
+            padding: $d-p-side-embed-text-mobile-padding;
+          }
+
+          padding-bottom: $d-p-side-embed-fields-padding-y;
+        }
+      }
+      &-full {
+        .content-inside-wrapper {
+          padding-bottom: $d-p-side-embed-fields-full-padding-y;
+        }
+      }
+    }
   }
 }
 
@@ -47,13 +83,44 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
   .embed-side-left {
     background: $d-p-side-embed-background-color-secondary;
   }
+
+            padding: $d-p-side-embed-text-mobile-padding;
+          }
+  .d-p-side-embed-content {
+    background: $d-p-side-embed-background-color;
+    color: $d-p-side-embed-text-color;
+  }
+
+  .field--name-field-d-main-title {
+    color: $d-p-side-embed-header-color;
+  }
+  .field--name-field-d-long-text {
+    @for $index from 1 through 6 {
+      h#{$index}{
+        color: $d-p-side-embed-text-color;
+      }
+    }
+  }
+
+  a:not(.btn) {
+    color: $d-p-side-embed-link-color;
+
+    @at-root .theme-invert & {
+      color: $d-p-side-embed-link-color-inverted;
+    }
+
+    &:hover {
+      color: $d-p-side-embed-link-hover-color;
+    }
+  }
 }
 
-.d-p-side-embed .d-p-side-embed-wrapper {
+.paragraph--type--d-p-side-embed {
   $root: &;
 
-  &.embed-side-full {
+  .embed-side-full {
     position: relative;
+
     .d-p-side-embed-embed {
       width: 100%;
       height: 320px;
@@ -67,9 +134,9 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         }
       }
     }
+
     .d-p-side-embed-content {
       position: relative;
-      background: $d-p-side-embed-background-color;
 
       @include media-breakpoint-up(md) {
         position: absolute;
@@ -85,35 +152,16 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
   }
 
   .d-p-side-embed-content {
-    color: $d-p-side-embed-text-color;
 
     .field--name-field-d-main-title {
       @include font-main-header;
-      color: $d-p-side-embed-header-color;
       text-align: left;
+
       &:after {
         @include decoration-header-line($d-p-side-embed-line-color, $d-p-side-embed-line-color-inverted)
       }
       &:last-child:after {
         display: none;
-      }
-    }
-    .field--name-field-d-long-text {
-      @for $index from 1 through 6 {
-        h#{$index}{
-          color: $d-p-side-embed-text-color;
-        }
-      }
-    }
-    a:not(.btn) {
-      color: $d-p-side-embed-link-color;
-
-      @at-root .theme-invert & {
-        color: $d-p-side-embed-link-color-inverted;
-      }
-
-      &:hover {
-        color: $d-p-side-embed-link-hover-color;
       }
     }
   }
@@ -127,6 +175,10 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     position: relative;
     height: $d-p-side-embed-desktop-height;
     background: $d-p-side-embed-embed-background-color;
+
+    @include media-breakpoint-down(sm) {
+      min-height: $d-p-side-embed-mobile-height;
+    }
 
     > * {
       position: absolute;
@@ -151,29 +203,20 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     }
   }
 
-  @include media-breakpoint-down(sm) {
-    .d-p-side-embed-content {
-      padding: $d-p-side-embed-text-mobile-padding;
-    }
-    .d-p-side-embed-embed {
-      min-height: $d-p-side-embed-mobile-height;
-    }
-  }
 
   @include media-breakpoint-up(md) {
 
     .d-p-side-embed-content {
-      padding: $d-p-side-embed-text-desktop-padding-y ($grid-gutter-width / 2);
+      //padding: $d-p-side-embed-text-desktop-padding-y ($grid-gutter-width / 2);
       display: flex;
       align-items: center;
 
       .d-p-side-embed-content-fields {
         width: $d-p-side-embed-text-width;
-        padding-top: $d-p-side-embed-fields-padding-y;
-        padding-bottom: $d-p-side-embed-fields-padding-y;
       }
     }
-    &.embed-side {
+
+    .embed-side {
       &-right {
         .d-p-side-embed-content {
           justify-content: flex-end;
@@ -194,12 +237,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         .d-p-side-embed-content-fields {
           padding-left: $d-p-side-embed-half-padding;
           padding-right: ($grid-gutter-width / 2);
-        }
-      }
-      &-full {
-        .d-p-side-embed-content-fields {
-          padding-top: $d-p-side-embed-fields-full-padding-y;
-          padding-bottom: $d-p-side-embed-fields-full-padding-y;
         }
       }
     }
