@@ -136,8 +136,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 
       .d-p-side-embed-content-fields {
         width: 600px; // Half of container.
-        padding-left: $d-p-side-embed-fields-padding-x;
-        padding-right: $d-p-side-embed-fields-padding-x;
       }
     }
 
@@ -145,6 +143,11 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 
       .d-p-side-embed-content {
         margin: 2*$d-p-side-embed-fields-padding-y 0;
+
+        .d-p-side-embed-content-fields {
+          padding-left: $d-p-side-embed-fields-padding-x;
+          padding-right: $d-p-side-embed-fields-padding-x;
+        }
       }
 
       .d-p-side-embed-embed {
