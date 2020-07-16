@@ -15,6 +15,7 @@ $d-p-side-embed-line-color-inverted: $color-agamemnon !default;
 $d-p-side-embed-header-color: $color-odysseus !default;
 $d-p-side-embed-full-text-color: $color-cassandra !default;
 $d-p-side-embed-theme-invert-text-color: $color-cassandra !default;
+$d-p-side-embed-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-side-embed-fields-padding-y: 7% !default;
@@ -30,12 +31,12 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 
 // Override default values.
 .padding-top-default {
-  .paragraph--type--d-p-side-embed {
+  .paragraph.paragraph--type--d-p-side-embed {
     padding-top: 0;
   }
 }
 .padding-bottom-default {
-  .paragraph--type--d-p-side-embed {
+  .paragraph.paragraph--type--d-p-side-embed {
     padding-bottom: 0;
   }
 }
@@ -103,6 +104,10 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         h#{$index}{
           color: $d-p-side-embed-text-color;
         }
+      }
+
+      p {
+        color: $d-p-side-embed-color;
       }
     }
     a:not(.btn) {
