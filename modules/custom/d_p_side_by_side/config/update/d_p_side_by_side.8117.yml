@@ -17,6 +17,19 @@ core.entity_form_display.paragraph.d_p_side_by_side.default:
           size: 60
           placeholder: ''
         third_party_settings: {  }
+  change:
+    expected:
+      content:
+        field_d_settings:
+          weight: 15
+        field_d_cta_link:
+          weight: 16
+    new:
+      content:
+        field_d_settings:
+          weight: 16
+        field_d_cta_link:
+          weight: 15
   delete_value:
     - parents: hidden:config
       values:
@@ -37,10 +50,10 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
         type: string_textfield
         weight: 0
         region: content
-          settings:
-            size: 60
-            placeholder: ''
-          third_party_settings: {  }
+        settings:
+          size: 60
+          placeholder: ''
+        third_party_settings: {  }
   delete_value:
     - parents: hidden:config
       values:
