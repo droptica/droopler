@@ -75,66 +75,41 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
   }
 }
 
-.margin-top-default {
-  .paragraph--type--d-p-side-embed {
-    @include media-breakpoint-up(md) {
-      .embed-side {
-        &-full {
-          .content-inside-wrapper {
-            margin-top: 2 * $d-p-side-embed-fields-padding-y;
-          }
-        }
-      }
-    }
-  }
-}
-.margin-bottom-default {
-  .paragraph--type--d-p-side-embed {
-    @include media-breakpoint-up(md) {
-      .embed-side {
-        &-full {
-          .content-inside-wrapper {
-            margin-bottom: 2 * $d-p-side-embed-fields-padding-y;
-          }
-        }
-      }
-    }
-  }
-}
-
 .theme-default {
-  .embed-side-right {
-    background: $d-p-side-embed-background-color;
-  }
-  .embed-side-left {
-    background: $d-p-side-embed-background-color-secondary;
-  }
+  .paragraph--type--d-p-side-embed {
+    .embed-side-right {
+      background: $d-p-side-embed-background-color;
+    }
+    .embed-side-left {
+      background: $d-p-side-embed-background-color-secondary;
+    }
 
-  .d-p-side-embed-content {
-    background: $d-p-side-embed-background-color;
-    color: $d-p-side-embed-text-color;
-  }
+    .d-p-side-embed-content {
+      background: $d-p-side-embed-background-color;
+      color: $d-p-side-embed-text-color;
+    }
 
-  .field--name-field-d-main-title {
-    color: $d-p-side-embed-header-color;
-  }
-  .field--name-field-d-long-text {
-    @for $index from 1 through 6 {
-      h#{$index}{
-        color: $d-p-side-embed-text-color;
+    .field--name-field-d-main-title {
+      color: $d-p-side-embed-header-color;
+    }
+    .field--name-field-d-long-text {
+      @for $index from 1 through 6 {
+        h#{$index}{
+          color: $d-p-side-embed-text-color;
+        }
       }
     }
-  }
 
-  a:not(.btn) {
-    color: $d-p-side-embed-link-color;
+    a:not(.btn) {
+      color: $d-p-side-embed-link-color;
 
-    @at-root .theme-invert & {
-      color: $d-p-side-embed-link-color-inverted;
-    }
+      @at-root .theme-invert & {
+        color: $d-p-side-embed-link-color-inverted;
+      }
 
-    &:hover {
-      color: $d-p-side-embed-link-hover-color;
+      &:hover {
+        color: $d-p-side-embed-link-hover-color;
+      }
     }
   }
 }
@@ -149,9 +124,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
       width: 100%;
       height: 100%;
 
-      //@include media-breakpoint-up(md) {
-      //  height: 640px; // Default value. Dynamically defined in d_p_side_embed.js
-      //}
       &.google-maps-wrapper {
         .google-maps-embed {
           height: 100%;
@@ -161,12 +133,7 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     }
 
     .d-p-side-embed-content {
-      //position: relative;
 
-      @include media-breakpoint-up(md) {
-        //bottom: 50%;
-        //transform: translateY(50%);
-      }
       .d-p-side-embed-content-fields {
         width: 600px; // Half of container.
         padding-left: $d-p-side-embed-fields-padding-x;
@@ -174,8 +141,12 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
       }
     }
 
-
     @include media-breakpoint-up(md) {
+
+      .d-p-side-embed-content {
+        margin: 2*$d-p-side-embed-fields-padding-y 0;
+      }
+
       .d-p-side-embed-embed {
         position: absolute;
       }
