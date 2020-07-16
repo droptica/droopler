@@ -1450,14 +1450,14 @@ function droopler_update_8117() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
-//  $configs = [
-//    'd_p_side_by_side' => [
-//      'core.entity_form_display.paragraph.d_p_side_by_side.default' => '',
-//      'core.entity_view_display.paragraph.d_p_side_by_side.default' => '',
-//    ],
-//  ];
+  $configs = [
+    'd_p_side_by_side' => [
+      'core.entity_form_display.paragraph.d_p_side_by_side.default' => '',
+      'core.entity_view_display.paragraph.d_p_side_by_side.default' => '',
+    ],
+  ];
 
-  //$values['droopler__droopler_update_8117_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8117_1'] = $updater->importConfigs($configs);
   $values['droopler__droopler_update_8117_2'] = update_modules_configuration(['d_p_side_by_side'], '8117');
 
   $updater->checklist()

@@ -17,11 +17,11 @@ core.entity_form_display.paragraph.d_p_side_by_side.default:
           size: 60
           placeholder: ''
         third_party_settings: {  }
-#  delete_value:
-#    - parents: hidden:config
-#      values:
-#        - field_d_long_text
-#        - field_d_main_title
+  delete_value:
+    - parents: hidden:config
+      values:
+        - field_d_long_text
+        - field_d_main_title
 core.entity_view_display.paragraph.d_p_side_by_side.default:
   add:
     content:
@@ -37,12 +37,12 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
         type: string_textfield
         weight: 0
         region: content
-        settings:
-          size: 60
-          placeholder: ''
-        third_party_settings: {  }
-#  delete_value:
-#    - parents: hidden:config
-#      values:
-#        - field_d_long_text
-#        - field_d_main_title
+          settings:
+            size: 60
+            placeholder: ''
+          third_party_settings: {  }
+  delete_value:
+    - parents: hidden:config
+      values:
+        - field_d_long_text
+        - field_d_main_title
