@@ -1,0 +1,134 @@
+core.entity_form_display.node.content_page.d_small_box:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_header_cta
+        - field.field.node.content_page.field_header_layout
+        - field.field.node.content_page.field_meta_tags
+      module:
+        - link_attributes
+        - media_library
+    hidden:
+      field_meta_tags: true
+      field_header_cta: true
+      field_header_layout: true
+core.entity_form_display.node.content_page.default:
+  change:
+    expected:
+      third_party_settings:
+        field_group:
+          group_seo:
+            parent_name: ''
+            weight: 8
+            format_type: fieldset
+    new:
+      third_party_settings:
+        field_group:
+          group_seo:
+            parent_name: group_tabs
+            weight: 17
+            format_type: tab
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_header_cta
+        - field.field.node.content_page.field_header_layout
+        - field.field.node.content_page.field_meta_tags
+      module:
+        - link_attributes
+        - media_library
+        - metatag
+    third_party_settings:
+      field_group:
+        group_seo:
+          format_settings:
+            formatter: closed
+        group_tabs:
+          children:
+            - group_basic
+            - group_page_sections
+            - group_seo
+          parent_name: ''
+          weight: 0
+          format_type: tabs
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            direction: horizontal
+          label: Tabs
+          group_basic:
+            children:
+              - title
+              - langcode
+              - field_header_layout
+              - field_header_cta
+              - status
+            parent_name: group_tabs
+            weight: 15
+            format_type: tab
+            region: content
+            format_settings:
+              id: ''
+              classes: ''
+              description: ''
+              formatter: open
+              required_fields: true
+            label: Basic
+          group_page_sections:
+            children:
+              - field_page_section
+            parent_name: group_tabs
+            weight: 16
+            format_type: tab
+            region: content
+            format_settings:
+              id: ''
+              classes: ''
+              description: ''
+              formatter: closed
+              required_fields: true
+            label: 'Page Sections'
+    content:
+      field_header_cta:
+        weight: 4
+        settings:
+          placeholder_url: ''
+          placeholder_title: ''
+          enabled_attributes:
+            id: true
+            name: true
+            target: true
+            rel: true
+            class: true
+            accesskey: true
+            aria-label: false
+            title: false
+        third_party_settings: {  }
+        type: link_attributes
+        region: content
+      field_header_layout:
+        weight: 3
+        settings: {  }
+        third_party_settings: {  }
+        type: options_select
+        region: content
+      field_meta_tags:
+        weight: 26
+        settings:
+          sidebar: true
+        third_party_settings: {  }
+        type: metatag_firehose
+        region: content
+core.entity_view_display.node.content_page.default:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_header_cta
+        - field.field.node.content_page.field_header_layout
+        - field.field.node.content_page.field_meta_tags
+    hidden:
+      field_header_cta: true
+      field_header_layout: true
+      search_api_excerpt: true
+      field_meta_tags: true

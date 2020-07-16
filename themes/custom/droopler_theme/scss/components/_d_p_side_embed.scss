@@ -28,15 +28,30 @@ $d-p-side-embed-half-padding: 10% !default; // Spacing between content and half 
 $d-p-side-embed-mobile-height: 300px !default; // This value must be set, otherwise embed won't be visible.
 $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of embed here.
 
+// Override default values.
+.padding-top-default {
+  .paragraph--type--d-p-side-embed {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph--type--d-p-side-embed {
+    padding-bottom: 0;
+  }
+}
+
+.theme-default {
+  .embed-side-right {
+    background: $d-p-side-embed-background-color;
+  }
+  .embed-side-left {
+    background: $d-p-side-embed-background-color-secondary;
+  }
+}
+
 .d-p-side-embed .d-p-side-embed-wrapper {
   $root: &;
 
-  &.embed-side-right {
-    background: $d-p-side-embed-background-color;
-  }
-  &.embed-side-left {
-    background: $d-p-side-embed-background-color-secondary;
-  }
   &.embed-side-full {
     position: relative;
     .d-p-side-embed-embed {

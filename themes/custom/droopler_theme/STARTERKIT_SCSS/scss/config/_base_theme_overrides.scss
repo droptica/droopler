@@ -312,10 +312,9 @@
 // $d-p-form-line-color: $color-nestor;
 // $d-p-form-line-color-inverted: $color-agamemnon;
 // $d-p-form-header-margin-bottom: 10%;
-// $d-p-form-padding-top: 5%;
-// $d-p-form-padding-bottom: 5%;
 // $d-p-form-button-margin-top: 1rem;
 // $d-p-form-copy-margin-left: 1.25rem;
+// $d-p-form-copy-margin-right: 1.25rem;
 // $d-p-form-small-labels-spacing: 7px;
 // $d-p-form-background-opacity: 0.4;
 
@@ -369,7 +368,6 @@
 // $d-p-text-paged-theme-invert-background-color: $color-agamemnon;
 // $d-p-text-paged-theme-invert-text-color: $color-odysseus;
 // $d-p-text-paged-subtitle-margin-y: 1.125rem;
-// $d-p-text-paged-padding-y: 5%;
 // $d-p-text-paged-first-margin-top: 2%;
 
 // Paragraph d_p_text_with_bckg
@@ -393,6 +391,7 @@
 // $d-p-counters-header-color: $color-odysseus;
 // $d-p-counters-number-color: $color-odysseus;
 // $d-p-counters-text-color: $color-nestor;
+// $d-p-counters-long-text-color: $color-odysseus;
 // $d-p-counters-title-margin-top: 0;
 // $d-p-counters-padding-top: 4.5rem;
 // $d-p-counters-padding-bottom: 3.5rem;
@@ -406,7 +405,6 @@
 // $d-p-gallery-line-color-inverted: $color-nestor;
 // $d-p-gallery-color: $color-hecuba;
 // $d-p-gallery-bold-color: $color-troilus;
-// $d-p-gallery-margin-y: 5%;
 
 // Paragraph d_p_carousel
 // -------------------------
@@ -419,8 +417,6 @@
 // $d-p-carousel-arrow-color: $color-cassandra;
 // $d-p-carousel-background-theme-invert: $color-agamemnon;
 // $d-p-carousel-theme-invert-text-color: $color-odysseus;
-// $d-p-carousel-padding-y: 5%;
-// $d-p-carousel-mobile-padding-y: 5%;
 // $d-p-carousel-items-margin-top: 2%;
 // $d-p-carousel-mobile-items-margin-top: 3rem;
 // $d-p-carousel-item-image-margin-bottom: 1rem;
@@ -498,7 +494,6 @@
 // -------------------------
 // $d-p-reference-content-line-color: $color-agamemnon;
 // $d-p-reference-content-line-color-inverted: $color-nestor;
-// $d-p-reference-content-wrapper-padding-y: 3.875rem;
 // $d-p-reference-content-padding-top: 3.875rem;
 // $d-p-reference-content-padding-bottom: 0;
 // $d-p-reference-content-items-padding-x: 5px;
@@ -614,3 +609,40 @@
 // $d-blog-margin-between-header-and-article-teasers: 1rem;
 // $d-blog-field-type-image-margin: 0;
 // $d-blog-article-row-min-height: 420px;
+
+
+// Paragraph themes definitions.
+// if "set-fields-color" is set to "true" it will add CSS rules to style color of all .fields tags.
+// -------------------------
+// $d-p-themes: (
+//   // A new Theme
+//   pigy: (
+//     background: pink,
+//     text: yellow,
+//     set-fields-color: true,
+//   ),
+//
+//   // Override Droopler Theme.
+//   secondary: (
+//     background: purple,
+//     text: green,
+//     set-fields-color: false,
+//   ),
+// );
+
+
+// Paragraph spacings definitions.
+// -------------------------
+// $d-p-paddings: (
+//   // New spacing class definiton.
+//   tiny: 1%,
+//   // Override Droopler spacing.
+//   default: 7%,
+// );
+//
+// $d-p-margins: (
+//   // New spacing class definiton.
+//   tiny: 1%,
+//   // Override Droopler spacing.
+//   small: 3%,
+// );

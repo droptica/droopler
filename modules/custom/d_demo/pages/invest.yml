@@ -1,62 +1,63 @@
 info:
   type: content_page
-  title: Investor relations
+  title: 'Investor relations'
 field_page_section:
   paragraphs:
-    - paragraph_type: d_p_side_image
+    -
+      paragraph_type: d_p_side_image
       data:
         field_d_main_title:
           type: text
-          data: For Investors
+          data: 'For Investors'
         field_d_media_background:
           type: media_image
           directory: demo
           files:
-            - path: d_demo/d_demo_investors_1.jpg
+            -
+              path: d_demo/d_demo_investors_1.jpg
               alt: Investors
         field_d_p_si_image_side:
           type: text_select
           data: right-wide
         field_d_long_text:
           type: text_long
-          data: <p>This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.</p>
+          data: '<p>This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.</p>'
         field_d_background_color:
           type: text
           data: '#ffffff'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert
+          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
-
-    - paragraph_type: d_p_group_of_text_blocks
+    -
+      paragraph_type: d_p_group_of_text_blocks
       data:
-        field_d_number:
-          type: number
-          data: 1
         field_d_main_title:
           type: text
-          data: Stock market
+          data: 'Stock market'
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
           data:
-            - type: d_p_single_text_block
+            -
+              type: d_p_single_text_block
               data:
                 field_d_long_text:
                   type: text_long
-                  data: <p><h3>Drooplengines</h3></p>
+                  data: '<p><h3>Drooplengines</h3></p>'
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: with-price testing
+                  custom_class: 'with-price testing'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid no-padding-bottom
-
-    - paragraph_type: d_p_text_paged
+          custom_class: full-width with-grid no-padding-bottom theme-default padding-top-default margin-top-default margin-bottom-default
+          column_count: 1
+    -
+      paragraph_type: d_p_text_paged
       data:
         field_d_main_title:
           type: text
-          data: Investor Calendar
+          data: 'Investor Calendar'
         field_d_long_text:
           type: text_long
           data: |
@@ -112,11 +113,12 @@ field_page_section:
                 </tbody>
             </table>
             </div>
+
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: background-gray-light-2
-
-    - paragraph_type: d_p_text_paged
+          custom_class: background-gray-light-2 padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_text_paged
       data:
         field_d_main_title:
           type: text
@@ -168,43 +170,42 @@ field_page_section:
                 </tbody>
             </table>
             </div>
+
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: background-gray-light-2 no-padding-top
-
-
-    - paragraph_type: d_p_side_image
+          custom_class: background-gray-light-2 no-padding-top padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_side_image
       data:
         field_d_main_title:
           type: text
-          data: Contact for Investors
+          data: 'Contact for Investors'
         field_d_media_background:
           type: media_image
           directory: demo
           files:
-            - path: d_demo/d_demo_investors_2.jpg
+            -
+              path: d_demo/d_demo_investors_2.jpg
               alt: Investors
         field_d_p_si_image_side:
           type: text_select
           data: left-wide
         field_d_long_text:
           type: text_long
-          data:
-            '<p>John Smith</p>
-            <p>ul. Duńska 9<br>54-427 Wrocław</p>
-            <p>Mobile: +48 333 444 222</p>'
+          data: '<p>John Smith</p> <p>ul. Duńska 9<br>54-427 Wrocław</p> <p>Mobile: +48 333 444 222</p>'
         field_d_background_color:
           type: text
           data: '#fff'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert
+          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo
   files:
-    - path: d_demo/d_demo_investors_1.jpg
-      alt: Invest with us
+    -
+      path: d_demo/d_demo_investors_1.jpg
+      alt: 'Invest with us'
 field_teaser_text:
   type: text_long
   data: 'This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.'

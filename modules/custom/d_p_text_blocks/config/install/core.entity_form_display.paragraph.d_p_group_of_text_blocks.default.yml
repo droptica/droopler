@@ -6,7 +6,6 @@ dependencies:
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_long_text
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_main_title
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_media_icon
-    - field.field.paragraph.d_p_group_of_text_blocks.field_d_number
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_p_tb_block_reference
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_settings
     - paragraphs.paragraphs_type.d_p_group_of_text_blocks
@@ -37,7 +36,6 @@ third_party_settings:
         - field_d_main_title
         - field_d_media_icon
         - field_d_long_text
-        - field_d_number
         - field_d_cta_link
         - field_d_settings
         - translation
@@ -108,13 +106,6 @@ content:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
-    region: content
-  field_d_number:
-    weight: 5
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: number
     region: content
   field_d_p_tb_block_reference:
     type: entity_reference_paragraphs

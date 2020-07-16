@@ -50,9 +50,17 @@
     <div{{ attributes.addClass(classes) }}>
       {% block tiles_content %}
         <div class="d-p-tiles-wrapper expandable-content">
+          <div class="container">
+            {{ content.field_d_media_icon }}
+          </div>
           <div class="container items">
             {{ content.field_d_p_sbs_items }}
           </div>
+          {% if content.field_d_cta_link|render %}
+            <div class="container my-5">
+              {{ content.field_d_cta_link }}
+            </div>
+          {% endif %}
         </div>
       {% endblock %}
     </div>

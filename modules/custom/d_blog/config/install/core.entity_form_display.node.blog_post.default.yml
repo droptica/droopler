@@ -6,9 +6,11 @@ dependencies:
     - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
+    - field.field.node.blog_post.field_meta_tags
     - node.type.blog_post
   module:
     - media_library
+    - metatag
     - paragraphs
     - path
     - text
@@ -55,6 +57,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_meta_tags:
+    weight: 26
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   langcode:
     type: language_select
