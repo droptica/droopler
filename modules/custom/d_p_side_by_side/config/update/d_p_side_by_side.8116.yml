@@ -1,24 +1,12 @@
 core.entity_form_display.paragraph.d_p_side_by_side.default:
-  change:
-    expected:
-      hidden:
-        created: true
-        field_d_long_text: true
-        field_d_main_title: true
-        status: true
-    new:
-      hidden:
-        created: true
-        status: true
+  delete_value:
+    - parents: hidden:config
+      values:
+        - field_d_long_text
+        - field_d_main_title
 core.entity_view_display.paragraph.d_p_side_by_side.default:
-  change:
-    expected:
-      hidden:
-        created: true
-        field_d_long_text: true
-        field_d_main_title: true
-        status: true
-    new:
-      hidden:
-        created: true
-        status: true
+  delete_value:
+    - parents: hidden:config
+      values:
+        - field_d_long_text
+        - field_d_main_title
