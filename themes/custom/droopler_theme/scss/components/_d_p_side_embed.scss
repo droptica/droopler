@@ -17,7 +17,7 @@ $d-p-side-embed-full-text-color: $color-cassandra !default;
 $d-p-side-embed-theme-invert-text-color: $color-cassandra !default;
 
 // Margins, paddings and sizing.
-$d-p-side-embed-fields-padding-y: 7% !default;
+$d-p-side-embed-fields-padding-y: 3.5% !default;
 $d-p-side-embed-fields-full-padding-y: 30px !default;
 $d-p-side-embed-fields-padding-x: 30px !default;
 $d-p-side-embed-mobile-height: 18.75rem !default;
@@ -31,23 +31,21 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 // Override default values.
 .padding-top-default {
   .paragraph--type--d-p-side-embed {
-
-    @include media-breakpoint-down(md) {
-      .content-inside-wrapper {
-        padding: $d-p-side-embed-text-mobile-padding;
-      }
+    .content-inside-wrapper {
+      padding-top: $d-p-side-embed-text-mobile-padding;
     }
-
-    .embed-side {
-      &-left,
-      &-right, {
-        .content-inside-wrapper {
-          padding-top: $d-p-side-embed-fields-padding-y;
+    @include media-breakpoint-up(md) {
+      .embed-side {
+        &-left,
+        &-right, {
+          .content-inside-wrapper {
+            padding-top: $d-p-side-embed-fields-padding-y;
+          }
         }
-      }
-      &-full {
-        .content-inside-wrapper {
-          padding-top: $d-p-side-embed-fields-full-padding-y;
+        &-full {
+          .content-inside-wrapper {
+            padding-top: $d-p-side-embed-fields-full-padding-y;
+          }
         }
       }
     }
@@ -55,21 +53,49 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 }
 .padding-bottom-default {
   .paragraph--type--d-p-side-embed {
-    .embed-side {
-      &-left,
-      &-right, {
-        .content-inside-wrapper {
+    .content-inside-wrapper {
+      padding-bottom: $d-p-side-embed-text-mobile-padding;
+    }
 
-          @include media-breakpoint-up(md) {
-            padding: $d-p-side-embed-text-mobile-padding;
+    @include media-breakpoint-up(md) {
+      .embed-side {
+        &-left,
+        &-right, {
+          .content-inside-wrapper {
+            padding-bottom: $d-p-side-embed-fields-padding-y;
           }
-
-          padding-bottom: $d-p-side-embed-fields-padding-y;
+        }
+        &-full {
+          .content-inside-wrapper {
+            padding-bottom: $d-p-side-embed-fields-full-padding-y;
+          }
         }
       }
-      &-full {
-        .content-inside-wrapper {
-          padding-bottom: $d-p-side-embed-fields-full-padding-y;
+    }
+  }
+}
+
+.margin-top-default {
+  .paragraph--type--d-p-side-embed {
+    @include media-breakpoint-up(md) {
+      .embed-side {
+        &-full {
+          .content-inside-wrapper {
+            margin-top: 2 * $d-p-side-embed-fields-padding-y;
+          }
+        }
+      }
+    }
+  }
+}
+.margin-bottom-default {
+  .paragraph--type--d-p-side-embed {
+    @include media-breakpoint-up(md) {
+      .embed-side {
+        &-full {
+          .content-inside-wrapper {
+            margin-bottom: 2 * $d-p-side-embed-fields-padding-y;
+          }
         }
       }
     }
@@ -84,8 +110,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     background: $d-p-side-embed-background-color-secondary;
   }
 
-            padding: $d-p-side-embed-text-mobile-padding;
-          }
   .d-p-side-embed-content {
     background: $d-p-side-embed-background-color;
     color: $d-p-side-embed-text-color;
@@ -123,10 +147,11 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 
     .d-p-side-embed-embed {
       width: 100%;
-      height: 320px;
-      @include media-breakpoint-up(md) {
-        height: 640px; // Default value. Dynamically defined in d_p_side_embed.js
-      }
+      height: 100%;
+
+      //@include media-breakpoint-up(md) {
+      //  height: 640px; // Default value. Dynamically defined in d_p_side_embed.js
+      //}
       &.google-maps-wrapper {
         .google-maps-embed {
           height: 100%;
@@ -136,12 +161,11 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     }
 
     .d-p-side-embed-content {
-      position: relative;
+      //position: relative;
 
       @include media-breakpoint-up(md) {
-        position: absolute;
-        bottom: 50%;
-        transform: translateY(50%);
+        //bottom: 50%;
+        //transform: translateY(50%);
       }
       .d-p-side-embed-content-fields {
         width: 600px; // Half of container.
@@ -149,20 +173,24 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         padding-right: $d-p-side-embed-fields-padding-x;
       }
     }
+
+
+    @include media-breakpoint-up(md) {
+      .d-p-side-embed-embed {
+        position: absolute;
+      }
+    }
   }
 
-  .d-p-side-embed-content {
+  .field--name-field-d-main-title {
+    @include font-main-header;
+    text-align: left;
 
-    .field--name-field-d-main-title {
-      @include font-main-header;
-      text-align: left;
-
-      &:after {
-        @include decoration-header-line($d-p-side-embed-line-color, $d-p-side-embed-line-color-inverted)
-      }
-      &:last-child:after {
-        display: none;
-      }
+    &:after {
+      @include decoration-header-line($d-p-side-embed-line-color, $d-p-side-embed-line-color-inverted)
+    }
+    &:last-child:after {
+      display: none;
     }
   }
 
@@ -203,13 +231,13 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     }
   }
 
-
   @include media-breakpoint-up(md) {
 
     .d-p-side-embed-content {
-      //padding: $d-p-side-embed-text-desktop-padding-y ($grid-gutter-width / 2);
       display: flex;
       align-items: center;
+      padding-left: 0;
+      padding-right: 0;
 
       .d-p-side-embed-content-fields {
         width: $d-p-side-embed-text-width;
