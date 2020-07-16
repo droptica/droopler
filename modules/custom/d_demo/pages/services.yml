@@ -32,12 +32,10 @@ field_page_section:
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
-        field_d_number:
-          type: number
-          data: 4
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-width with-tiles background-gray-light-2 header-into-columns padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 4
         field_d_main_title:
           type: text
           data: Services
@@ -154,15 +152,9 @@ field_page_section:
             -
               path: d_demo/demo_bg_2.jpg
               alt: 'Abstract Background'
-        field_d_number:
-          type: number
-          data: 4
         field_d_main_title:
           type: text
           data: 'Our company in numbers'
-        field_d_settings:
-          type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_counter_reference:
           type: paragraph_reference
           subtype: d_p_single_counter
@@ -195,6 +187,10 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Products and parts'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 4
     -
       paragraph_type: d_p_text_paged
       data:

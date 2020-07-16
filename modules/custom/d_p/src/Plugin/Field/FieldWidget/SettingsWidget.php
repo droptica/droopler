@@ -22,6 +22,7 @@ class SettingsWidget extends WidgetBase {
 
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
+  const COLUMN_COUNT_SETTING_NAME = 'column_count';
 
   /**
    * @var array
@@ -224,6 +225,7 @@ class SettingsWidget extends WidgetBase {
             'options' => [
               'margin-top-default' => $this->t('Default'),
               'margin-top-small' => $this->t('Small'),
+              'margin-top-medium' => $this->t('Medium'),
               'margin-top-big' => $this->t('Big'),
               'margin-top-none' => $this->t('None'),
             ],
@@ -238,6 +240,7 @@ class SettingsWidget extends WidgetBase {
             'options' => [
               'margin-bottom-default' => $this->t('Default'),
               'margin-bottom-small' => $this->t('Small'),
+              'margin-bottom-medium' => $this->t('Medium'),
               'margin-bottom-big' => $this->t('Big'),
               'margin-bottom-none' => $this->t('None'),
             ],
@@ -309,6 +312,22 @@ class SettingsWidget extends WidgetBase {
             'd_p_text_paged',
             'd_p_text_with_bckg',
             'd_p_tiles',
+          ],
+        ],
+      ],
+      self::COLUMN_COUNT_SETTING_NAME => [
+        'title' => $this->t('Column count'),
+        'outside' => TRUE,
+        'description' => $this->t('Select the number of items in one row.'),
+        'type' => 'number',
+        'min' => '1',
+        'max' => '12',
+        'default' => '4',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
           ],
         ],
       ],
@@ -421,6 +440,20 @@ class SettingsWidget extends WidgetBase {
             '#description' => $options['description'] ?? '',
             '#options' => $options['options'],
             '#default_value' => empty($value) ? $options['default'] : $value,
+          ];
+          if ($element['#required']) {
+            $element[$key]['#required'] = TRUE;
+          }
+          break;
+
+        case 'number':
+          $element[$key] = [
+            '#type' => 'number',
+            '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
+            '#default_value' => !empty($value) && $value !== '' ? $value : $options['default'],
+            '#min' => $options['min'] ?? NULL,
+            '#max' => $options['max'] ?? NULL,
           ];
           if ($element['#required']) {
             $element[$key]['#required'] = TRUE;

@@ -41,9 +41,6 @@ field_page_section:
             -
               path: d_demo/demo_droopler.svg
               alt: 'Droopler icon'
-        field_d_number:
-          type: number
-          data: 4
         field_d_main_title:
           type: text
           data: 'Main Title'
@@ -209,6 +206,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 4
     -
       paragraph_type: d_p_text_paged
       data:
@@ -224,9 +222,6 @@ field_page_section:
     -
       paragraph_type: d_p_carousel
       data:
-        field_d_number:
-          type: number
-          data: 4
         field_d_main_title:
           type: text
           data: 'Main Title'
@@ -315,6 +310,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: logos-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 4
     -
       paragraph_type: d_p_text_paged
       data:
@@ -330,9 +326,6 @@ field_page_section:
     -
       paragraph_type: d_p_carousel
       data:
-        field_d_number:
-          type: number
-          data: 1
         field_d_main_title:
           type: text
           data: 'Main Title'
@@ -371,6 +364,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: opinions-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 1
     -
       paragraph_type: d_p_text_paged
       data:
@@ -393,9 +387,6 @@ field_page_section:
             -
               path: d_demo/demo_droopler.svg
               alt: 'Droopler icon'
-        field_d_number:
-          type: number
-          data: 4
         field_d_main_title:
           type: text
           data: 'Main Title'
@@ -504,6 +495,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: columns-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 4
     -
       paragraph_type: d_p_text_paged
       data:
@@ -526,9 +518,6 @@ field_page_section:
             -
               path: d_demo/demo_droopler.svg
               alt: 'Droopler icon'
-        field_d_number:
-          type: number
-          data: 3
         field_d_main_title:
           type: text
           data: 'Main Title'
@@ -538,6 +527,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-width with-divider full-width-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 3
         field_d_p_cs_item_reference:
           type: paragraph_reference
           subtype: d_p_carousel_item

@@ -66,9 +66,6 @@ field_page_section:
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
-        field_d_number:
-          type: number
-          data: 2
         field_d_main_title:
           type: text
           data: 'Our services for diesel engines'
@@ -86,16 +83,13 @@ field_page_section:
               field_d_long_text:
                 type: text_long
                 data: '<p><ul> <li>Inspect and replace the timing belt</li> <li>Check for any Error codes in the ECU</li> <li>Use scan tool read trouble code</li> </ul></p>'
-
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: with-tiles theme-invert header-margin-none padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 2
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
-        field_d_number:
-          type: number
-          data: 3
         field_d_main_title:
           type: text
           data: 'Other products'
@@ -113,6 +107,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 3
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper

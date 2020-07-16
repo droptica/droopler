@@ -32,9 +32,6 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Available Paragraphs'
-        field_d_settings:
-          type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
         field_d_p_tb_block_reference:
           type: paragraph_reference
           data:
@@ -304,6 +301,10 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/side-by-side-paragraph'
                   text: 'Learn more...'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 3
 field_teaser_media_image:
   type: media_image
   directory: demo
