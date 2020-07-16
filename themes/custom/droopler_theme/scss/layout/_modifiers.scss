@@ -487,14 +487,18 @@ $d-p-themes: map-merge(
 /*
   Spacings styling.
  */
-$paddings: (
-  default: 5%,
-  small: 2%,
-  big: 10%,
-  none: 0
-) !default;
+$d-p-paddings: () !default;
+$d-p-paddings: map-merge(
+    (
+      default: 5%,
+      small: 2%,
+      big: 10%,
+      none: 0
+    ),
+    $d-p-paddings
+);
 
-@each $size, $value in $paddings {
+@each $size, $value in $d-p-paddings {
   @each $placement in (top, bottom) {
     .padding-#{$placement}-#{$size} {
       > .paragraph:not(.content-moved-inside),
@@ -505,13 +509,17 @@ $paddings: (
   }
 }
 
-$margins: (
-  small: 2%,
-  big: 10%,
-  none: 0
-) !default;
-
-@each $size, $value in $margins {
+$d-p-margins: () !default;
+$d-p-margins: map-merge(
+    (
+      small: 2%,
+      medium: 5%,
+      big: 10%,
+      none: 0
+    ),
+    $d-p-margins
+);
+@each $size, $value in $d-p-margins {
   @each $placement in (top, bottom) {
     .margin-#{$placement}-#{$size} .paragraph {
       margin-#{$placement}: $value;
