@@ -15,6 +15,7 @@ dependencies:
     - link_attributes
     - media_library
     - paragraphs
+    - text
 third_party_settings:
   field_group:
     group_tabs:
@@ -32,11 +33,11 @@ third_party_settings:
       region: content
     group_settings:
       children:
+        - field_d_main_title
+        - field_d_long_text
         - field_d_media_icon
         - field_d_settings
         - field_d_cta_link
-        - field_d_long_text
-        - field_d_main_title
       parent_name: group_tabs
       weight: 6
       format_type: tab
@@ -68,7 +69,7 @@ bundle: d_p_side_by_side
 mode: default
 content:
   field_d_cta_link:
-    weight: 16
+    weight: 4
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -84,8 +85,24 @@ content:
     third_party_settings: {  }
     type: link_attributes
     region: content
+  field_d_long_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_d_main_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_d_media_icon:
-    weight: 14
+    weight: 2
     settings:
       media_types: {  }
     third_party_settings: {  }
@@ -104,7 +121,7 @@ content:
     third_party_settings: {  }
     region: content
   field_d_settings:
-    weight: 15
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: field_d_p_set_settings
