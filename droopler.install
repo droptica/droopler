@@ -1455,3 +1455,16 @@ function droopler_update_8117() {
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
 }
+
+/**
+ * Droopler 2.2 update configs for modules.
+ */
+function droopler_update_8118() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8118_1'] = update_modules_configuration(['d_content'], '8118');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
