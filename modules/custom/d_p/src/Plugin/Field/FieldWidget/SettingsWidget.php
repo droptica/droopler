@@ -213,6 +213,7 @@ class SettingsWidget extends WidgetBase {
               'theme-primary' => $this->t('Primary'),
               'theme-secondary' => $this->t('Secondary'),
               'theme-gray' => $this->t('Gray'),
+              'theme-custom' => $this->t('Custom'),
             ],
             'bundles' => [
               'paragraph' => ['all'],
@@ -362,6 +363,7 @@ class SettingsWidget extends WidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
     $config = !empty($value) ? json_decode($value) : [];
+    $field_name = $items->getFieldDefinition()->getName();
 
     // Set up the form element for this widget.
     $element += [
@@ -471,6 +473,33 @@ class SettingsWidget extends WidgetBase {
           }
       }
     }
+
+    $element['background-theme-custom'] = [
+      '#type' => 'd_color',
+      '#title' => 'Background color',
+      '#default_value' => $value ?: '#ffffff',
+      '#states' => [
+        'visible' => [
+          'select[name="' . $field_name . '[0][value][paragraph-theme]"]' => [
+            'value' => 'theme-custom',
+          ],
+        ],
+      ],
+    ];
+
+    $element['text-theme-custom'] = [
+      '#type' => 'd_color',
+      '#title' => 'Text color',
+      '#default_value' => $value ?: '#ffffff',
+      '#states' => [
+        'visible' => [
+          'select[name="' . $field_name . '[0][value][paragraph-theme]"]' => [
+            'value' => 'theme-custom',
+          ],
+        ],
+      ],
+    ];
+
     return ['value' => $element];
   }
 
