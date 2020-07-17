@@ -241,6 +241,9 @@ function d_product_preprocess_pager(&$variables) {
   }
 }
 
+/**
+ * Implements hook_views_plugins_argument_alter().
+ */
 function d_product_views_plugins_argument_alter(array &$plugins) {
   $plugins['node_vid']['class'] = 'Drupal\d_product\Plugin\views\argument\NodeVid';
 }
