@@ -44,7 +44,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
       @include decoration-header-line($d-p-side-image-line-color, $d-p-side-image-line-color-inverted);
     }
     &:last-child::after {
-      content: none;
+      display: none;
     }
   }
 

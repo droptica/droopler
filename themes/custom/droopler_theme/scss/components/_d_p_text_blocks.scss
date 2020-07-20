@@ -201,7 +201,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
         @include font-small-box-title();
 
         &::after {
-          content: none;
+          display: none;
         }
       }
 
