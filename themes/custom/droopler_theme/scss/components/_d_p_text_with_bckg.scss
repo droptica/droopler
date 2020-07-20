@@ -74,7 +74,7 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
       word-wrap: break-word;
       hyphens: auto;
     }
-    &:before {
+    &::before {
       @include decoration-header-line-main-center ($d-p-text-with-bckg-line-color, $d-p-text-with-bckg-line-color-inverted)
     }
   }

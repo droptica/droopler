@@ -98,10 +98,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
           color: $d-p-side-embed-text-color;
         }
       }
-
-      p {
-        color: $d-p-side-embed-text-color;
-      }
     }
     a:not(.btn) {
       color: $d-p-side-embed-link-color;
@@ -166,6 +162,7 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 
       .d-p-side-embed-embed {
         position: absolute;
+        background: none;
       }
     }
   }
@@ -174,11 +171,11 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     @include font-main-header;
     text-align: left;
 
-    &:after {
-      @include decoration-header-line($d-p-side-embed-line-color, $d-p-side-embed-line-color-inverted)
+    &::after {
+      @include decoration-header-line($d-p-side-embed-line-color, $d-p-side-embed-line-color-inverted);
     }
-    &:last-child:after {
-      display: none;
+    &:last-child::after {
+      content: none;
     }
   }
 

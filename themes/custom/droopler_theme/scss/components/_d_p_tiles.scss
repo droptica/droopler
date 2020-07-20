@@ -42,7 +42,7 @@ $d-p-tiles-margin-bottom: 5% !default;
 
   .field--name-field-d-long-text {
 
-    &:before {
+    &::before {
       @include decoration-header-line-main-center($d-p-tiles-line-color, $d-p-tiles-line-color-inverted)
     }
   }

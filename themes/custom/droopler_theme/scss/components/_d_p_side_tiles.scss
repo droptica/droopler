@@ -46,14 +46,14 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
 .theme-default {
   .d-p-side-tiles-wrapper {
     background-color: $d-p-side-tiles-text-background-color;
+    color: $d-p-side-tiles-text-color;
+
     &.image-side-left {
       background-color: $d-p-side-tiles-text-background-color-secondary;
     }
-    .d-p-side-tiles-content {
-      color: $d-p-side-tiles-text-color;
-      .field--name-field-d-main-title {
-        color: $d-p-side-tiles-header-color;
-      }
+
+    .field--name-field-d-main-title {
+      color: $d-p-side-tiles-header-color;
     }
   }
 }
@@ -64,11 +64,11 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
     .field--name-field-d-main-title {
       @include font-main-header;
       text-align: left;
-      &:after {
+      &::after {
         @include decoration-header-line($d-p-side-tiles-line-color, $d-p-side-tiles-line-color-inverted)
       }
-      &:last-child:after {
-        display: none;
+      &:last-child::after {
+        content: none;
       }
     }
     a:not(.btn) {

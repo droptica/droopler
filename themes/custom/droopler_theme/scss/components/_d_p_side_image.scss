@@ -40,11 +40,11 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     @include font-main-header;
     color: $d_p_side-image-header-color;
     text-align: left;
-    &:after {
+    &::after {
       @include decoration-header-line($d-p-side-image-line-color, $d-p-side-image-line-color-inverted);
     }
-    &:last-child:after {
-      display: none;
+    &:last-child::after {
+      content: none;
     }
   }
 
