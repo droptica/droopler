@@ -68,7 +68,7 @@ $two-columned-header-line-margin: 0.625rem !default;
   }
 
   .list-item-wrapper {
-    &:before {
+    &::before {
       position: absolute;
       background-color: $divider-background;
       width: 1px;
@@ -79,9 +79,9 @@ $two-columned-header-line-margin: 0.625rem !default;
     }
 
     &:first-child::before,
-    &[aria-hidden="true"] + [aria-hidden="false"]:before,
-    &[aria-hidden="false"] + [aria-hidden="true"]:before {
-      display: none;
+    &[aria-hidden="true"] + [aria-hidden="false"]::before,
+    &[aria-hidden="false"] + [aria-hidden="true"]::before {
+      content: none;
     }
   }
 }
@@ -92,7 +92,7 @@ $two-columned-header-line-margin: 0.625rem !default;
     max-width: 100%;
     position: relative;
 
-    &:before,
+    &::before,
     &:after {
       height: $grid-border-width;
       background-color: $grid-border-color;
@@ -335,7 +335,7 @@ $two-columned-header-line-margin: 0.625rem !default;
     margin-bottom: $tiles-spacing;
   }
 
-  &:before {
+  &::before {
     content: none;
   }
 

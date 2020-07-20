@@ -9,8 +9,8 @@
     outline: none !important;
 
     .geysir-field-paragraph-links,
-    &:after {
-      display: none !important;
+    &::after {
+      content: none !important;
     }
   }
 }

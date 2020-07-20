@@ -54,7 +54,7 @@ $d-p-text-paged-first-margin-top: 2% !default;
       hyphens: auto;
     }
 
-    &:before {
+    &::before {
       @include decoration-header-line-main-center($d-p-text-paged-line-color, $d-p-text-paged-line-color-inverted)
     }
   }

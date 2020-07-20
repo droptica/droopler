@@ -130,12 +130,12 @@ header.header {
     padding: 0;
     // Reset content added by we_megamenu.
     &:after,
-    &:before {
+    &::before {
       content: none;
     }
     .container {
       &:after,
-      &:before {
+      &::before {
         content: none;
       }
     }
