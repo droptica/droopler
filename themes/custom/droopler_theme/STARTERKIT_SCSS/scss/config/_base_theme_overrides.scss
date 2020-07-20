@@ -602,13 +602,15 @@
 
 
 // Paragraph themes definitions.
-// if "set-fields-color" is set to "true" it will add CSS rules to style color of all .fields tags.
+// if "set-fields-color" is set to "true" it will add CSS rules to style color of all .fields tags,
+// "text-bold" is used for setting the color for <b> and <strong> tags.
 // -------------------------
 // $d-p-themes: (
 //   // A new Theme
 //   pigy: (
 //     background: pink,
 //     text: yellow,
+//     text-bold: orange,
 //     set-fields-color: true,
 //   ),
 //
@@ -616,6 +618,7 @@
 //   secondary: (
 //     background: purple,
 //     text: green,
+//     text-bold: red,
 //     set-fields-color: false,
 //   ),
 // );

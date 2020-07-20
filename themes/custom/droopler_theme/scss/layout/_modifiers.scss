@@ -452,16 +452,19 @@ $d-p-themes: map-merge(
     primary: (
       background: $color-agamemnon,
       text: $color-odysseus,
+      text-bold: inherit,
       set-fields-color: true,
     ),
     gray: (
       background: $color-paris,
       text: $color-acamas,
+      text-bold: $color-cassandra,
       set-fields-color: false,
     ),
     secondary: (
       background: $color-odysseus,
       text: $color-hecuba,
+      text-bold: $color-troilus,
       set-fields-color: false,
     ),
   ),
@@ -474,6 +477,14 @@ $d-p-themes: map-merge(
     > .content-moved-inside .content-inside-wrapper {
       background: map-get($themeSettings, "background");
       color: map-get($themeSettings, "text");
+
+
+      @if map-get($themeSettings, "text-bold") {
+        b,
+        strong {
+          color: map-get($themeSettings, "text-bold");
+        }
+      }
 
       @if map-get($themeSettings, "set-fields-color") {
         .field {
