@@ -98,8 +98,22 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
           color: $d-p-side-embed-text-color;
         }
       }
-    }
 
+      p {
+        color: $d-p-side-embed-text-color;
+      }
+    }
+    a:not(.btn) {
+      color: $d-p-side-embed-link-color;
+
+      @at-root .theme-invert & {
+        color: $d-p-side-embed-link-color-inverted;
+      }
+
+      &:hover {
+        color: $d-p-side-embed-link-hover-color;
+      }
+    }
     a:not(.btn) {
       color: $d-p-side-embed-link-color;
 

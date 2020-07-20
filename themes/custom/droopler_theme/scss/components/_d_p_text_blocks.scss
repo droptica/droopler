@@ -169,10 +169,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   }
   p {
     @include font-body-standard;
-    color: $d-p-single-box-text-color;
-    b, strong {
-      color: $d-p-single-box-text-bold-color;
-    }
   }
   a {
     @include text-transform($d-p-single-text-box-cta-text-transform)
