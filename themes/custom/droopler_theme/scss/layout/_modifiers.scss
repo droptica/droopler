@@ -500,10 +500,10 @@ $d-p-paddings: map-merge(
 );
 $d-p-paddings-extended: map-merge(
     (
-      default: 8%,
-      small: 6%,
-      big: 12%,
-      none: 5%
+      default: 10%,
+      small: 12%,
+      big: 14%,
+      none: 8%
     ),
     $d-p-paddings-extended
 );
@@ -519,15 +519,17 @@ $d-p-paddings-extended: map-merge(
   }
 }
 
-.page-wrapper {
-  &.landing-page-header {
-    .paragraph-sections div:first-of-type {
-      @each $size, $value in $d-p-paddings-extended {
-        @each $placement in (top, bottom) {
-          .padding-#{$placement}-#{$size} {
-            > .paragraph:not(.content-moved-inside),
-            > .content-moved-inside .content-inside-wrapper {
-              padding-#{$placement}: $value;
+@include media-breakpoint-up(lg) {
+  .landing-page-header {
+    .paragraph-sections {
+      section:nth-child(1) {
+        @each $size, $value in $d-p-paddings-extended {
+          @each $placement in (top) {
+            &.padding-#{$placement}-#{$size} {
+              > .paragraph:not(.content-moved-inside),
+              > .content-moved-inside .content-inside-wrapper {
+                padding-#{$placement}: $value;
+              }
             }
           }
         }

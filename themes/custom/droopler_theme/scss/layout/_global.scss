@@ -81,27 +81,29 @@ body {
   }
 }
 
-.layout-main-wrapper {
+.landing-page-header {
   position: relative;
   .hanging-header {
     position: relative;
     width: 100%;
     top: 0;
-    z-index: 1;
+    z-index: 9;
     left: 0;
     right: 0;
 
     @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
       position: absolute;
-      top: 10px
+      top: 20px
     }
   }
 }
 
 .toolbar-tray-open {
-  &.hanging-header {
-    @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-      top: 90px;
+  .landing-page-header {
+    .hanging-header {
+      @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+        top: 90px;
+      }
     }
   }
 }

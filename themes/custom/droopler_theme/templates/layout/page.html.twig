@@ -69,6 +69,7 @@
   'navbar-wrapper',
   node.field_header_layout.value == 'header_with_cta' ? 'mb-lg-2',
 ] %}
+{% set hanging_header = (header_layout == 'header_with_cta') ? 'hanging-header' %}
 {% set lp_header_class = (header_layout == 'header_with_cta') ? 'landing-page-header' %}
 <div id="page-wrapper" class="page-wrapper {{ lp_header_class }}">
   <header id="header" class="header" role="banner"
@@ -76,17 +77,28 @@
     {% block head %}
       {% if header_layout != 'header_disabled' %}
         <nav{{ navbar_attributes.addClass(classes) }}>
-          <div class="container no-padding-md">
-            {% if (header_layout != 'header_with_cta') %}
-              <div class="navbar-brand d-flex align-items-center">
-                {{ page.header }}
-              </div>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav"
-                      aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <div class="container no-padding-md {{ hanging_header }}">
+            <div class="navbar-brand d-flex align-items-center">
+              {{ page.header }}
+            </div>
+            {% if (header_layout == 'header_with_cta') %}
+              {% if node.field_header_cta.0.uri is not empty %}
+                <div class="d-content-cta-wrapper">
+                  <a href="{{ node.field_header_cta.0.url.external ?
+                  node.field_header_cta.0.uri :
+                  path(node.field_header_cta.0.url.routeName, node.field_header_cta.0.url.routeParameters)}}"
+                     target="{{ node.field_header_cta.0.options.attributes.target }}"
+                     class="{{ node.field_header_cta.0.options.attributes.class|join(' ') }}">
+                    <span class="d-md-none icon-hand-pointer-o"></span>
+                    <span class="d-none d-md-block">{{ node.field_header_cta.0.title }}</span>
+                  </a>
+                </div>
+              {% endif %}
+            {% else %}
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <nav class="navbar navbar-expand-lg main-navbar px-0 collapse ml-auto flex-column d-lg-flex"
-                   id="navbar-nav">
+              <nav class="navbar navbar-expand-lg main-navbar px-0 collapse ml-auto flex-column d-lg-flex" id="navbar-nav">
                 <div class="navbar-inner d-flex">
                   {% if page.secondary_menu %}
                     <div class="secondary-menu-region">{{ page.secondary_menu }}</div>
@@ -128,25 +140,6 @@
     {{ page.admin_tabs }}
   {% endif %}
   <div id="main-wrapper" class="layout-main-wrapper clearfix">
-    {% if (header_layout == 'header_with_cta') %}
-      <div class="container no-padding-md d-flex justify-content-between hanging-header">
-        <div class="navbar-brand d-flex align-items-center">
-          {{ page.header }}
-        </div>
-        {% if node.field_header_cta.0.uri is not empty %}
-          <div class="d-content-cta-wrapper">
-            <a href="{{ node.field_header_cta.0.url.external ?
-            node.field_header_cta.0.uri :
-            path(node.field_header_cta.0.url.routeName, node.field_header_cta.0.url.routeParameters) }}"
-               target="{{ node.field_header_cta.0.options.attributes.target }}"
-               class="{{ node.field_header_cta.0.options.attributes.class|join(' ') }}">
-              <span class="d-md-none icon-hand-pointer-o"></span>
-              <span class="d-none d-md-block">{{ node.field_header_cta.0.title }}</span>
-            </a>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
     {% block content %}
       {{ page.page_top_content }}
       <div{{ main_attributes }}>
