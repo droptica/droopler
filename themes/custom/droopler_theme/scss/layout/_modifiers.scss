@@ -488,6 +488,7 @@ $d-p-themes: map-merge(
   Spacings styling.
  */
 $d-p-paddings: () !default;
+$d-p-paddings-extended: () !default;
 $d-p-paddings: map-merge(
     (
       default: 5%,
@@ -497,6 +498,15 @@ $d-p-paddings: map-merge(
     ),
     $d-p-paddings
 );
+$d-p-paddings-extended: map-merge(
+    (
+      default: 8%,
+      small: 6%,
+      big: 12%,
+      none: 5%
+    ),
+    $d-p-paddings-extended
+);
 
 @each $size, $value in $d-p-paddings {
   @each $placement in (top, bottom) {
@@ -504,6 +514,23 @@ $d-p-paddings: map-merge(
       > .paragraph:not(.content-moved-inside),
       > .content-moved-inside .content-inside-wrapper {
         padding-#{$placement}: $value;
+      }
+    }
+  }
+}
+
+.page-wrapper {
+  &.landing-page-header {
+    .paragraph-sections div:first-of-type {
+      @each $size, $value in $d-p-paddings-extended {
+        @each $placement in (top, bottom) {
+          .padding-#{$placement}-#{$size} {
+            > .paragraph:not(.content-moved-inside),
+            > .content-moved-inside .content-inside-wrapper {
+              padding-#{$placement}: $value;
+            }
+          }
+        }
       }
     }
   }

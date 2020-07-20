@@ -72,4 +72,34 @@
     }
   };
 
+  Drupal.behaviors.droopler_extra_paragraph_padding = {
+    attach: function (context, settings) {
+
+      // var $firstParagraph = $('.paragraph').first();
+      // var $toolbar = $('#toolbar-bar');
+      // var $header = $('header .hanging-header');
+      //
+      // var topPos = $firstParagraph.offset().top;
+      // var toolbarHeight = 0;
+      // if ($toolbar.length) {
+      //   toolbarHeight = $toolbar.outerHeight();
+      // }
+      //
+      // var paragraphPaddingTop = $firstParagraph.css('padding-top');
+      // var hangingTopPos = 15 + topPos - toolbarHeight;
+      //
+      // $header.css('top', hangingTopPos);
+      //
+      // if (1.5 * $header.outerHeight() > parseInt(paragraphPaddingTop, 10)) {
+      //   $firstParagraph.css('padding-top', 1.5 * $header.outerHeight() + parseInt(paragraphPaddingTop, 10));
+      // }
+      //
+      // $(window).resize(function() {
+      //   if ($(window).width() < 992 ) {
+      //     $header.css('top', 0);
+      //   }
+      // });
+    }
+  };
+
 })(jQuery, Drupal);
