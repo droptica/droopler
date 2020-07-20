@@ -129,12 +129,12 @@ header.header {
     border: none;
     padding: 0;
     // Reset content added by we_megamenu.
-    &:after,
+    &::after,
     &::before {
       content: none;
     }
     .container {
-      &:after,
+      &::after,
       &::before {
         content: none;
       }

@@ -81,7 +81,7 @@ $two-columned-header-line-margin: 0.625rem !default;
     &:first-child::before,
     &[aria-hidden="true"] + [aria-hidden="false"]::before,
     &[aria-hidden="false"] + [aria-hidden="true"]::before {
-      content: none;
+      display: none;
     }
   }
 }
@@ -93,7 +93,7 @@ $two-columned-header-line-margin: 0.625rem !default;
     position: relative;
 
     &::before,
-    &:after {
+    &::after {
       height: $grid-border-width;
       background-color: $grid-border-color;
       position: absolute;
@@ -103,7 +103,7 @@ $two-columned-header-line-margin: 0.625rem !default;
       left: 0;
     }
 
-    &:after {
+    &::after {
       margin-top: -2px;
     }
 
@@ -382,7 +382,7 @@ $two-columned-header-line-margin: 0.625rem !default;
         font-size: $tile-title-font-size-mobile;
       }
 
-      &:after {
+      &::after {
         margin: 7px auto;
       }
     }
