@@ -41,6 +41,7 @@
 {% set classes = [
   'paragraph',
   'd-p-side-image-banner',
+  'content-moved-inside',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
@@ -52,6 +53,9 @@
   'd-p-side-image-banner-wrapper',
   'clearfix',
   'position-relative',
+] %}
+{% set content_side_classes = [
+  'content-inside-wrapper',
 ] %}
 
 {% block paragraph %}
@@ -67,7 +71,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="container-half {{ text_class }}">
+          <div class="{{ text_class }} {{ content_side_classes|join(' ') }}">
             {{ content.group_d_side_image_content }}
           </div>
         </div>
