@@ -1426,8 +1426,8 @@ function droopler_update_8116(&$sandbox) {
   if ($sandbox['#finished'] === 1) {
     $bundles = [
       'd_p_carousel',
-      'd_p_group_of_counters',
-      'd_p_group_of_text_blocks',
+      'd_p_counters',
+      'd_p_text_blocks',
     ];
     $values['droopler__droopler_update_8116_1'] = update_modules_configuration($bundles, '8116');
     \Drupal::service('d_update')->checklist()
