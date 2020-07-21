@@ -1384,6 +1384,8 @@ function droopler_update_8116() {
   $values['droopler__droopler_update_8116_1'] = $updater->importConfigs($configs);
   $values['droopler__droopler_update_8116_2'] = update_modules_configuration(array_keys($configs), '8116');
 
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
 }
 
 /**
