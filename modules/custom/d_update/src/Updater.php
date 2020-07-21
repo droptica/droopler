@@ -523,6 +523,10 @@ class Updater {
       }
     }
     if (!$goDeeper) {
+      if (array_keys($configArray) === range(0, count($configArray) - 1)) {
+        $configArray = array_unique($configArray);
+      }
+
       sort($configArray);
     } else {
       array_walk($configArray, [$this, 'configKeySort']);

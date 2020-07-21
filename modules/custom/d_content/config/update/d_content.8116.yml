@@ -49,9 +49,8 @@ core.entity_form_display.node.content_page.default:
       module:
         - link_attributes
         - media_library
+
     third_party_settings:
-      group_seo:
-        formatter: open
       field_group:
         group_tabs:
           children:
@@ -98,39 +97,54 @@ core.entity_form_display.node.content_page.default:
               formatter: closed
               required_fields: true
             label: 'Page Sections'
-          group_basic:
-            children:
-              - title
-              - group_seo
-              - field_header_layout
-              - field_header_cta
-              - langcode
-              - status
-            parent_name: group_tabs
-            weight: 20
-            format_type: tab
-            region: content
-            format_settings:
-              id: ''
-              classes: ''
-              description: ''
-              formatter: closed
-              required_fields: true
-            label: Basic
-          group_page_sections:
-            children:
-              - field_page_section
-            parent_name: group_tabs
-            weight: 21
-            format_type: tab
-            region: content
-            format_settings:
-              id: ''
-              classes: ''
-              description: ''
-              formatter: closed
-              required_fields: true
-            label: 'Page Sections'
+        group_basic:
+          children:
+            - title
+            - group_seo
+            - field_header_layout
+            - field_header_cta
+            - langcode
+            - status
+          parent_name: group_tabs
+          weight: 20
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Basic
+        group_page_sections:
+          children:
+            - field_page_section
+          parent_name: group_tabs
+          weight: 21
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: 'Page Sections'
+        group_seo:
+          children:
+            - field_teaser_media_image
+            - field_teaser_text
+          parent_name: group_basic
+          weight: 1
+          format_type: fieldset
+          region: content
+          format_settings:
+            description: ''
+            formatter: open
+            required_fields: true
+            id: ''
+            classes: ''
+          label: SEO
     content:
       field_header_cta:
         weight: 3
