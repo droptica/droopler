@@ -1378,8 +1378,9 @@ function droopler_update_8116() {
       'field.storage.node.field_header_layout' => '',
       'field.field.node.content_page.field_header_cta' => '',
       'field.field.node.content_page.field_header_layout' => '',
+      'core.entity_form_display.node.content_page.d_small_box' => '',
     ],
-  ]);
+  ];
 
   $values['droopler__droopler_update_8116_1'] = $updater->importConfigs($configs);
   $values['droopler__droopler_update_8116_2'] = update_modules_configuration(array_keys($configs), '8116');

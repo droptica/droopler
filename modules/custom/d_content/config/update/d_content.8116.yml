@@ -1,14 +1,3 @@
-core.entity_form_display.node.content_page.d_small_box:
-  add:
-    dependencies:
-      config:
-        - field.field.node.content_page.field_header_cta
-        - field.field.node.content_page.field_header_layout
-      module:
-        - link_attributes
-    hidden:
-      field_header_cta: true
-      field_header_layout: true
 core.entity_form_display.node.content_page.default:
   change:
     expected:
@@ -118,3 +107,14 @@ core.entity_view_display.node.content_page.default:
       field_header_cta: true
       field_header_layout: true
       search_api_excerpt: true
+core.entity_view_display.node.content_page.d_small_box:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_header_cta
+        - field.field.node.content_page.field_header_layout
+      module:
+        - link_attributes
+    hidden:
+      field_header_cta: true
+      field_header_layout: true

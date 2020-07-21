@@ -1,13 +1,3 @@
-core.entity_form_display.node.content_page.d_small_box:
-  add:
-    dependencies:
-      config:
-        - field.field.node.content_page.field_meta_tags
-      module:
-        - link_attributes
-        - media_library
-    hidden:
-      field_meta_tags: true
 core.entity_form_display.node.content_page.default:
   add:
     dependencies:
@@ -31,4 +21,14 @@ core.entity_view_display.node.content_page.default:
         - field.field.node.content_page.field_meta_tags
     hidden:
       search_api_excerpt: true
+      field_meta_tags: true
+core.entity_view_display.node.content_page.d_small_box:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_meta_tags
+      module:
+        - link_attributes
+        - media_library
+    hidden:
       field_meta_tags: true
