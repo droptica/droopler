@@ -142,7 +142,7 @@ $d-blog-article-row-min-height: 420px !default;
     padding-left: $d-blog-teaser-text-padding-left;
     word-wrap: break-word;
 
-    &:after {
+    &::after {
       @include decoration-header-line;
     }
   }
@@ -181,7 +181,7 @@ $d-blog-article-row-min-height: 420px !default;
       //because German language and long words
       font-size: $d-blog-teaser-blog-post-title-mobile;
 
-      &:after {
+      &::after {
         margin-top: $d-blog-teaser-title-margin-between-text-decoration-mobile;
       }
     }

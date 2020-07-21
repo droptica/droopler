@@ -1,7 +1,6 @@
 $d-blog-text-container-width: 35em !default;
 
 $d-blog-font-color: $color-odysseus !default;
-$d-blog-font-bold-color: $color-troilus !default;
 $d-blog-headers-color: $color-cassandra !default;
 $d-blog-under-background-color: $color-cassandra !default; // color when there's not image
 $d-blog-color-taxonomy-in-header: $color-aeneas !default;
@@ -175,9 +174,6 @@ article.node--type-blog-post {
 
     p {
       margin-bottom: $d-blog-margin-between-html-paragraphs;
-      b, strong {
-        color: $d-blog-font-bold-color;
-      }
     }
   }
 
@@ -263,11 +259,7 @@ article.node--type-blog-post {
     .field--name-field-blog-sections {
       p {
         font-size: $d-blog-text-font-size-mobile;
-        b, strong {
-          color: $d-blog-font-bold-color;
-        }
       }
-
     }
   }
 
@@ -277,9 +269,6 @@ article.node--type-blog-post {
         font-size: $d-blog-text-font-size-desktop;
         p, a, ul, li {
           font-size: $d-blog-text-font-size-desktop;
-          b, strong {
-            color: $d-blog-font-bold-color;
-          }
         }
       }
     }

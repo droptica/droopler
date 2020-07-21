@@ -121,11 +121,11 @@ $d-p-form-background-opacity: 0.4 !default;
         background: none;
         &:hover {
           background: none;
-          &:after {
+          &::after {
             color: inherit;
           }
         }
-        &:after {
+        &::after {
           font-family: "fontello";
           content: "\f047";
           color: $d-p-form-text-color;
@@ -136,7 +136,8 @@ $d-p-form-background-opacity: 0.4 !default;
   .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
-    &:after {
+    color: $d-p-form-header-color;
+    &::after {
       @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
     }
   }

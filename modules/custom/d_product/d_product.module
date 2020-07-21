@@ -9,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 
@@ -120,9 +121,13 @@ function d_product_preprocess_page(&$variables) {
   }
 
   // Remove title block from product listing and product page.
-  $no_title_routes = ['entity.node.canonical', 'view.products_list.products_list'];
+  $no_title_routes = ['entity.node.canonical', 'entity.node.revision', 'view.products_list.products_list'];
   if (in_array($route_name, $no_title_routes)) {
-    if (!isset($variables['node']) || $variables['node']->getType() == 'd_product') {
+    $node = isset($variables['node']) ? $variables['node'] : NULL;
+    if ($node && !($node instanceof NodeInterface)) {
+      $node = Node::load($node);
+    }
+    if (!$node || $node->getType() == 'd_product') {
       foreach ($variables['page']['content'] as &$element) {
         if (isset($element['#plugin_id']) && $element['#plugin_id'] == 'page_title_block') {
           $element['#access'] = FALSE;
@@ -234,4 +239,11 @@ function d_product_preprocess_pager(&$variables) {
       $variables['items']['last']['text'] = $pages_count;
     }
   }
+}
+
+/**
+ * Implements hook_views_plugins_argument_alter().
+ */
+function d_product_views_plugins_argument_alter(array &$plugins) {
+  $plugins['node_vid']['class'] = 'Drupal\d_product\Plugin\views\argument\NodeVid';
 }

@@ -74,6 +74,8 @@ class AdditionalComponentsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $this->messenger()->deleteAll();
 
+    $form['#title'] = $this->t('Install & configure Droopler components');
+
     foreach ($this->modules as $name => $description) {
       $disabled = !$this->moduleExist($name);
       if ($name == 'd_commerce' && !$this->modulesExists($this->commerce_modules)) {
@@ -145,6 +147,7 @@ class AdditionalComponentsForm extends FormBase {
     }
 
     if ($values['documentation']) {
+      $install_state[0]['droopler_init_content'] = 1;
       $additional_modules = array_merge($additional_modules, [
         'd_documentation',
       ]);

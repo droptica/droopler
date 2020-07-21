@@ -11,6 +11,16 @@ Styleguide 2.9
   margin-top: $form-text-margin-top;
 }
 
+// Fix Bootstrap messing up Admin Toolbar's search.
+#admin-toolbar-search-tab > fieldset {
+  margin-bottom: 0;
+  margin-top: 0.3rem;
+
+  > input {
+    height: unset;
+  }
+}
+
 input {
   font-weight: bold;
 }

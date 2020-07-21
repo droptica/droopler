@@ -6,6 +6,7 @@
  */
 
 use Drupal\d_p\Helper\ParagraphModifiersHelper;
+use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 
 /**
  * Implements hook_theme().
@@ -47,12 +48,15 @@ function d_p_counters_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_group_of_counters') {
       if ($variables['field_name'] == 'field_d_counter_reference') {
+        $paragraph = $variables['element']['#object'];
+        $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
         // Set column layout.
-        $num_array = $variables['element']['#object']->get('field_d_number')
-          ->getValue();
+        $num_array = $paragraph_modifiers_helper->getModifier(
+          SettingsWidget::COLUMN_COUNT_SETTING_NAME
+        );
         $variables['column_class'] = 'col-sm-4';
-        if (!empty($num_array[0]['value'])) {
-          $columns = floor(12 / $num_array[0]['value']);
+        if (!empty($num_array)) {
+          $columns = floor(12 / $num_array);
           $variables['column_class'] = 'col-sm-' . $columns;
         }
 

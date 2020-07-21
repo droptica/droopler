@@ -5,8 +5,6 @@
 // Colour variables used in this paragraph
 $d-p-tiles-line-color: $color-agamemnon !default;
 $d-p-tiles-line-color-inverted: $color-nestor !default;
-$d-p-tiles-color: $color-hecuba !default;
-$d-p-tiles-bold-color: $color-troilus !default;
 $d-p-tiles-overlay-background: $color-cassandra !default;
 $d-p-tiles-overlay-color: $color-odysseus !default;
 $d-p-tiles-overlay-opacity: 0.6 !default;
@@ -17,25 +15,24 @@ $d-p-tiles-margin-bottom: 5% !default;
 
 // Override default values.
 .padding-top-default {
-  .paragraph--type--d-p-tiles {
+  .paragraph.paragraph--type--d-p-tiles {
     padding-top: 0;
   }
 }
 .padding-bottom-default {
-  .paragraph--type--d-p-tiles {
+  .paragraph.paragraph--type--d-p-tiles {
     padding-bottom: 0;
+  }
+}
+.margin-top-default {
+  .paragraph--type--d-p-tiles {
+    margin-top: $d-p-tiles-margin-top;
   }
 }
 
 .paragraph--type--d-p-tiles {
   @include clearfix;
   text-align: center;
-  .paragraph-top-light & {
-    margin-top: $d-p-tiles-margin-top;
-  }
-  .paragraph-bottom-light & {
-    margin-bottom: $d-p-tiles-margin-bottom;
-  }
 
   .field--name-field-d-main-title {
     @include font-main-header;
@@ -43,14 +40,8 @@ $d-p-tiles-margin-bottom: 5% !default;
   }
 
   .field--name-field-d-long-text {
-    p {
-      color: $d-p-tiles-color;
-      b, strong {
-        color: $d-p-tiles-bold-color;
-      }
-    }
 
-    &:before {
+    &::before {
       @include decoration-header-line-main-center($d-p-tiles-line-color, $d-p-tiles-line-color-inverted)
     }
   }
