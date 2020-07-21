@@ -513,8 +513,11 @@ class Updater {
   }
 
   protected function configKeySort(&$configArray) {
+    if (!is_array($configArray)) {
+      return;
+    }
     ksort($configArray);
-    array_walk($configArray, $this->configKeySort);
+    array_walk($configArray, [$this, 'configKeySort']);
   }
 
   /**
