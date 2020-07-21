@@ -504,9 +504,17 @@ class Updater {
         ->error('Detected changes in configuration %config. Aborting import', ['%config' => $configName]);
       return FALSE;
     }
+
+    $this->configKeySort($newConfig);
+
     $config->setData($newConfig)->save();
 
     return TRUE;
+  }
+
+  protected function configKeySort(&$configArray) {
+    ksort($configArray);
+    array_walk($configArray, $this->configKeySort);
   }
 
   /**
