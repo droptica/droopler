@@ -15,39 +15,19 @@ $d-p-form-line-color-inverted: $color-agamemnon !default;
 $d-p-form-header-margin-bottom: 10% !default;
 $d-p-form-button-margin-top: 1rem !default;
 $d-p-form-copy-margin-left: 1.25rem !default;
+$d-p-form-copy-margin-right: 1.25rem !default;
 $d-p-form-small-labels-spacing: 7px !default;
-
-$d-p-form-padding-top: 5% !default;
-$d-p-form-padding-bottom: 5% !default;
 
 // Other settings
 $d-p-form-background-opacity: 0.4 !default;
 
-// Override default values.
-.padding-top-default {
-  .paragraph--type--d-p-form {
-    padding-top: 0;
-    .paragraph-d-form {
-      padding-top: $d-p-form-padding-top;
-    }
-  }
-}
-.padding-bottom-default {
-  .paragraph--type--d-p-form {
-    padding-bottom: 0;
-    .paragraph-d-form {
-      padding-bottom: $d-p-form-padding-bottom;
-    }
-  }
-}
-
-.theme-default .paragraph-d-form {
+.theme-default .paragraph--type--d-p-form {
   background: $d-p-form-background;
+  color: $d-p-form-text-color;
 }
 
-.paragraph-d-form {
+.paragraph--type--d-p-form {
   position: relative;
-  color: $d-p-form-text-color;
 
   .d-media-background-wrapper {
     opacity: $d-p-form-background-opacity;
@@ -64,9 +44,7 @@ $d-p-form-background-opacity: 0.4 !default;
     .field--type-file.form-group {
       margin-top: $d-p-form-button-margin-top;
     }
-    small, label {
-       color: $d-p-form-text-color;
-    }
+
     small.description {
       margin-top: $d-p-form-small-labels-spacing;
       display: inline-block;
@@ -87,14 +65,14 @@ $d-p-form-background-opacity: 0.4 !default;
         display: inline;
         max-width: $button-max-width;
         width: 100%;
-        padding-left: $d-p-form-copy-margin-left;
+        margin-right: $d-p-form-copy-margin-right;
         height: fit-content;
 
         a {
           @include make-btn;
           text-transform: none;
-          background-color: $d-p-form-text-color;
-          color: $d-p-form-background;
+          color: $d-p-form-text-color;
+          background-color: $d-p-form-background;
           text-align: left;
           width: 100%;
         }
@@ -114,11 +92,11 @@ $d-p-form-background-opacity: 0.4 !default;
         background: none;
         &:hover {
           background: none;
-          &:after {
+          &::after {
             color: inherit;
           }
         }
-        &:after {
+        &::after {
           font-family: "fontello";
           content: "\f047";
           color: $d-p-form-text-color;
@@ -130,7 +108,7 @@ $d-p-form-background-opacity: 0.4 !default;
     @include font-main-header;
     text-align: center;
     color: $d-p-form-header-color;
-    &:after {
+    &::after {
       @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
     }
   }

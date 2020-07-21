@@ -88,7 +88,7 @@ $d-p-counters-background-opacity: 0.2 !default;
       text-align: center;
       margin-top: $d-p-counters-title-margin-top;
 
-      &:after {
+      &::after {
         @include decoration-header-line-main-center($d-p-counters-line-color, $d-p-counters-line-color-inverted);
       }
     }

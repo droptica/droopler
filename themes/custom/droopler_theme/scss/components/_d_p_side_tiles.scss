@@ -20,34 +20,40 @@ $d-p-side-tiles-overlay-opacity: 0.6 !default;
 
 // Margins, paddings and sizing.
 $d-p-side-tiles-mobile-height: 18.75rem !default;
-$d-p-side-tiles-text-desktop-padding-y: 7% !default;
+$d-p-side-tiles-text-desktop-padding-y: 5% !default;
 $d-p-side-tiles-text-mobile-padding: 7% !default;
 $d-p-side-tiles-text-width: 35.625rem !default;
 $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half of the screen
 
 // Override default values.
 .padding-top-default {
-  .d-p-side-tiles-banner {
-    padding-top: 0;
+  .d-p-side-tiles-content {
+    padding-top: $d-p-side-tiles-text-mobile-padding;
+    @include media-breakpoint-up(md) {
+      padding-top: $d-p-side-tiles-text-desktop-padding-y;
+    }
   }
 }
 .padding-bottom-default {
-  .d-p-side-tiles-banner {
-    padding-bottom: 0;
+  .d-p-side-tiles-content {
+    padding-bottom: $d-p-side-tiles-text-mobile-padding;
+    @include media-breakpoint-up(md) {
+      padding-bottom: $d-p-side-tiles-text-desktop-padding-y;
+    }
   }
 }
 
 .theme-default {
   .d-p-side-tiles-wrapper {
     background-color: $d-p-side-tiles-text-background-color;
+    color: $d-p-side-tiles-text-color;
+
     &.image-side-left {
       background-color: $d-p-side-tiles-text-background-color-secondary;
     }
-    .d-p-side-tiles-content {
-      color: $d-p-side-tiles-text-color;
-      .field--name-field-d-main-title {
-        color: $d-p-side-tiles-header-color;
-      }
+
+    .field--name-field-d-main-title {
+      color: $d-p-side-tiles-header-color;
     }
   }
 }
@@ -58,10 +64,10 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
     .field--name-field-d-main-title {
       @include font-main-header;
       text-align: left;
-      &:after {
+      &::after {
         @include decoration-header-line($d-p-side-tiles-line-color, $d-p-side-tiles-line-color-inverted)
       }
-      &:last-child:after {
+      &:last-child::after {
         display: none;
       }
     }
@@ -145,9 +151,6 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
   }
 
   @include media-breakpoint-down(sm) {
-    .d-p-side-tiles-content {
-      padding: $d-p-side-tiles-text-mobile-padding;
-    }
     .d-p-side-tiles-images {
       border: 2px solid $d-p-side-tiles-image-background-color;
     }
@@ -176,7 +179,8 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
           border-right: 2px solid $d-p-side-tiles-image-background-color;
         }
         .d-p-side-tiles-content-fields {
-          padding: $d-p-side-tiles-text-desktop-padding-y $d-p-side-tiles-half-padding $d-p-side-tiles-text-desktop-padding-y ($grid-gutter-width / 2);
+          padding-left: $grid-gutter-width / 2;
+          padding-right: $d-p-side-tiles-half-padding;
         }
       }
       &-left {
@@ -188,7 +192,8 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
           border-left: 2px solid $d-p-side-tiles-image-background-color;
         }
         .d-p-side-tiles-content-fields {
-          padding: $d-p-side-tiles-text-desktop-padding-y ($grid-gutter-width / 2) $d-p-side-tiles-text-desktop-padding-y $d-p-side-tiles-half-padding;
+          padding-left: $d-p-side-tiles-half-padding;
+          padding-right: $grid-gutter-width / 2;
         }
       }
     }

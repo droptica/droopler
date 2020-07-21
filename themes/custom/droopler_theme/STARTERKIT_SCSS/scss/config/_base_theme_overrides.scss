@@ -314,10 +314,9 @@
 // $d-p-form-header-margin-bottom: 10%;
 // $d-p-form-button-margin-top: 1rem;
 // $d-p-form-copy-margin-left: 1.25rem;
+// $d-p-form-copy-margin-right: 1.25rem;
 // $d-p-form-small-labels-spacing: 7px;
 // $d-p-form-background-opacity: 0.4;
-// $d-p-form-padding-top: 5%;
-// $d-p-form-padding-bottom: 5%;
 
 // Paragraph d_p_side_image
 // -------------------------
@@ -333,11 +332,10 @@
 // $d-p-side-image-banner-text-padding: 7%;
 // $d-p-side-image-banner-text-width: 35.625rem;
 // $d-p-side-image-banner-half-padding: 5%; // Spacing between content and half of the screen
+// $d-p-side-image-color: $color-odysseus;
 
 // Paragraph d_p_text_blocks
 // -------------------------
-// $d-p-single-box-text-color: $color-hecuba;
-// $d-p-single-box-text-bold-color: $color-troilus;
 // $d-p-single-box-line-color: $color-agamemnon;
 // $d-p-single-box-line-color-inverted: $color-nestor;
 // $d-p-text-blocks-line-color: $color-agamemnon;
@@ -364,7 +362,6 @@
 // $d-p-text-paged-line-color: $color-agamemnon;
 // $d-p-text-paged-line-color-inverted: $color-nestor;
 // $d-p-text-paged-color: $color-hecuba;
-// $d-p-text-paged-bold-color: $color-troilus;
 // $d-p-text-paged-background-invert-color: $color-agamemnon;
 // $d-p-text-paged-theme-invert-background-color: $color-agamemnon;
 // $d-p-text-paged-theme-invert-text-color: $color-odysseus;
@@ -404,13 +401,9 @@
 // -------------------------
 // $d-p-gallery-line-color: $color-agamemnon;
 // $d-p-gallery-line-color-inverted: $color-nestor;
-// $d-p-gallery-color: $color-hecuba;
-// $d-p-gallery-bold-color: $color-troilus;
 
 // Paragraph d_p_carousel
 // -------------------------
-// $d-p-carousel-item-text-color: $color-hecuba;
-// $d-p-carousel-item-text-bold-color: $color-troilus;
 // $d-p-carousel-item-line-color: $color-agamemnon;
 // $d-p-carousel-item-line-color-inverted: $color-nestor;
 // $d-p-carousel-line-color: $color-agamemnon;
@@ -449,6 +442,7 @@
 // $d-p-side-embed-half-padding: 5%; // Spacing between content and half of the screen
 // $d-p-side-embed-mobile-height: 300px; // This value must be set, otherwise embed won't be visible.
 // $d-p-side-embed-desktop-height: auto; // You can set fixed height of embed here.
+// $d-p-side-embed-color: $color-odysseus;
 
 // Paragraph d_p_side_tiles
 // -------------------------
@@ -475,8 +469,6 @@
 // -------------------------
 // $d-p-tiles-line-color: $color-agamemnon;
 // $d-p-tiles-line-color-inverted: $color-nestor;
-// $d-p-tiles-color: $color-hecuba;
-// $d-p-tiles-bold-color: $color-troilus;
 // $d-p-tiles-overlay-background: $color-cassandra;
 // $d-p-tiles-overlay-color: $color-odysseus;
 // $d-p-tiles-overlay-opacity: 0.6;
@@ -507,8 +499,6 @@
 // -------------------------
 // $d-p-side-by-side-line-color: $color-agamemnon;
 // $d-p-side-by-side-line-color-inverted: $color-nestor;
-// $d-p-side-by-side-color: $color-hecuba;
-// $d-p-side-by-side-bold-color: $color-troilus;
 // $d-p-side-by-side-padding-y: 5%;
 // $d-p-side-by-side-subtitle-margin-y: 2.125rem;
 // $d-p-side-by-side-content-padding-x: 7vw;
@@ -528,7 +518,6 @@
 // -------------------------
 // $d-blog-text-container-width: 35em;
 // $d-blog-font-color: $color-odysseus;
-// $d-blog-font-bold-color: $color-troilus;
 // $d-blog-headers-color: $color-cassandra;
 // $d-blog-under-background-color: $color-cassandra; // color when image is not
 // $d-blog-color-taxonomy-in-header: $color-aeneas;
@@ -613,20 +602,40 @@
 
 
 // Paragraph themes definitions.
-// if "set-fields-color" is set to "true" it will add CSS rules to style color of all .fields tags.
+// if "set-fields-color" is set to "true" it will add CSS rules to style color of all .fields tags,
+// "text-bold" is used for setting the color for <b> and <strong> tags.
 // -------------------------
-//$d-p-themes: (
-//  // A new Theme
-//  pigy: (
-//    background: pink,
-//    text: yellow,
-//    set-fields-color: true,
-//  ),
+// $d-p-themes: (
+//   // A new Theme
+//   pigy: (
+//     background: pink,
+//     text: yellow,
+//     text-bold: orange,
+//     set-fields-color: true,
+//   ),
 //
-//  // Override Droopler Theme.
-//  secondary: (
-//    background: purple,
-//    text: green,
-//    set-fields-color: false,
-//  ),
-//);
+//   // Override Droopler Theme.
+//   secondary: (
+//     background: purple,
+//     text: green,
+//     text-bold: red,
+//     set-fields-color: false,
+//   ),
+// );
+
+
+// Paragraph spacings definitions.
+// -------------------------
+// $d-p-paddings: (
+//   // New spacing class definiton.
+//   tiny: 1%,
+//   // Override Droopler spacing.
+//   default: 7%,
+// );
+//
+// $d-p-margins: (
+//   // New spacing class definiton.
+//   tiny: 1%,
+//   // Override Droopler spacing.
+//   small: 3%,
+// );

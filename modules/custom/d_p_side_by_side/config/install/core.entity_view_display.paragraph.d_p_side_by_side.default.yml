@@ -12,11 +12,27 @@ dependencies:
   module:
     - entity_reference_revisions
     - link
+    - text
 id: paragraph.d_p_side_by_side.default
 targetEntityType: paragraph
 bundle: d_p_side_by_side
 mode: default
 content:
+  field_d_long_text:
+    type: text_default
+    weight: 1
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_d_main_title:
+    type: string
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
   field_d_cta_link:
     weight: 6
     label: hidden
@@ -48,7 +64,5 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  field_d_long_text: true
-  field_d_main_title: true
   field_d_settings: true
   search_api_excerpt: true

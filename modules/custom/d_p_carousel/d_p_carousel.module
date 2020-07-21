@@ -6,6 +6,7 @@
  */
 
 use Drupal\d_p\Helper\ParagraphModifiersHelper;
+use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 
 /**
  * Implements hook_theme().
@@ -37,15 +38,17 @@ function d_p_carousel_preprocess_field(&$variables) {
         /**
          * @var \Drupal\paragraphs\Entity\Paragraph $paragraph
          */
-
         $paragraph = $variables['element']['#object'];
 
-        $paragraphModifiersHelper = new ParagraphModifiersHelper($paragraph);
+        $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
 
-        $num_array = $paragraph->get('field_d_number')->getValue();
+        $num_array = $paragraph_modifiers_helper->getModifier(
+          SettingsWidget::COLUMN_COUNT_SETTING_NAME
+        );
         $variables['column_classes'] = 'col-sm-4';
-        if (!empty($num_array[0]['value'])) {
-          $columns = $num_array[0]['value'];
+
+        if (!empty($num_array)) {
+          $columns = $num_array;
           $columns_sm = min($columns, 2);
           $num_items = count($variables['items']);
 
@@ -54,7 +57,7 @@ function d_p_carousel_preprocess_field(&$variables) {
           if ($num_items === 1) {
             $columns = 1;
           }
-          elseif ($num_items <= $columns && !$paragraphModifiersHelper->hasClass('slider-desktop-off')) {
+          elseif ($num_items <= $columns && !$paragraph_modifiers_helper->hasClass('slider-desktop-off')) {
             $columns = $num_items - 1;
           }
 
