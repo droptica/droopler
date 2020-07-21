@@ -516,8 +516,17 @@ class Updater {
     if (!is_array($configArray)) {
       return;
     }
-    ksort($configArray);
-    array_walk($configArray, [$this, 'configKeySort']);
+    $goDeeper = false;
+    foreach ($configArray as $configItem) {
+      if (is_array($configArray)) {
+        $goDeeper = true;
+      }
+    }
+    if (!$goDeeper) {
+      sort($configArray);
+    } else {
+      array_walk($configArray, [$this, 'configKeySort']);
+    }
   }
 
   /**
