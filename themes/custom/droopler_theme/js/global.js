@@ -72,17 +72,13 @@
     }
   };
 
-  Drupal.behaviors.droopler_extra_paragraph_padding = {
+  /**
+   * Add extra class to first paragraph in section.
+   * @type {{attach: Drupal.behaviors.droopler_first_paragraph.attach}}
+   */
+  Drupal.behaviors.droopler_first_paragraph = {
     attach: function (context, settings) {
-
-      var alertHeight = 0;
-      var $alertSection = $('.section .alert');
-      var $header = $('.layout-main-wrapper .hanging-header');
-      if ($alertSection.length) {
-        alertHeight = $alertSection.outerHeight();
-      }
-
-      $header.css('top', $header.position().top + alertHeight);
+      $('.paragraph-sections').find('section').first().addClass('first-paragraph');
     }
   };
 

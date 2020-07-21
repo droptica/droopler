@@ -522,7 +522,7 @@ $d-p-paddings-extended: map-merge(
 @include media-breakpoint-up(lg) {
   .landing-page-header {
     .paragraph-sections {
-      section:nth-child(1) {
+      .first-paragraph {
         @each $size, $value in $d-p-paddings-extended {
           @each $placement in (top) {
             &.padding-#{$placement}-#{$size} {
