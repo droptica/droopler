@@ -112,11 +112,25 @@ header.header {
     }
   }
   > nav.navbar-wrapper {
+    padding-bottom: 0;
 
     @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-      padding-top: $navbar-padding-y;
+      .menu-region {
+        padding-top: 1rem;
+
+        nav.main > .we-mega-menu-ul > .we-mega-menu-li {
+          padding-bottom: calc(1rem + 10px);
+        }
+      }
+
+      .secondary-menu-region + .menu-region {
+        padding-top: 0;
+
+        nav.main > .we-mega-menu-ul > .we-mega-menu-li {
+          padding-bottom: 0;
+        }
+      }
     }
-    padding-bottom: 0;
   }
 
   .navbar {
@@ -129,13 +143,13 @@ header.header {
     border: none;
     padding: 0;
     // Reset content added by we_megamenu.
-    &:after,
-    &:before {
+    &::after,
+    &::before {
       content: none;
     }
     .container {
-      &:after,
-      &:before {
+      &::after,
+      &::before {
         content: none;
       }
     }

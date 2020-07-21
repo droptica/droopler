@@ -68,7 +68,7 @@ $two-columned-header-line-margin: 0.625rem !default;
   }
 
   .list-item-wrapper {
-    &:before {
+    &::before {
       position: absolute;
       background-color: $divider-background;
       width: 1px;
@@ -79,8 +79,8 @@ $two-columned-header-line-margin: 0.625rem !default;
     }
 
     &:first-child::before,
-    &[aria-hidden="true"] + [aria-hidden="false"]:before,
-    &[aria-hidden="false"] + [aria-hidden="true"]:before {
+    &[aria-hidden="true"] + [aria-hidden="false"]::before,
+    &[aria-hidden="false"] + [aria-hidden="true"]::before {
       display: none;
     }
   }
@@ -92,8 +92,8 @@ $two-columned-header-line-margin: 0.625rem !default;
     max-width: 100%;
     position: relative;
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       height: $grid-border-width;
       background-color: $grid-border-color;
       position: absolute;
@@ -103,7 +103,7 @@ $two-columned-header-line-margin: 0.625rem !default;
       left: 0;
     }
 
-    &:after {
+    &::after {
       margin-top: -2px;
     }
 
@@ -335,7 +335,7 @@ $two-columned-header-line-margin: 0.625rem !default;
     margin-bottom: $tiles-spacing;
   }
 
-  &:before {
+  &::before {
     content: none;
   }
 
@@ -382,7 +382,7 @@ $two-columned-header-line-margin: 0.625rem !default;
         font-size: $tile-title-font-size-mobile;
       }
 
-      &:after {
+      &::after {
         margin: 7px auto;
       }
     }

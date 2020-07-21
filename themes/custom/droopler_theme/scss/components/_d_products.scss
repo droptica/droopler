@@ -458,7 +458,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
         @include media-breakpoint-down(md) {
           display: none;
         }
-        &:after {
+        &::after {
           content: " ";
           display: block;
           width: 100%;
@@ -546,12 +546,12 @@ $d-product-filters-border: 2px solid $color-hector !default;
       }
 
       &:hover {
-        &:after {
+        &::after {
           background-image: url(#{$assets-path}/funnel-white.svg);
         }
       }
 
-      &:after {
+      &::after {
         position: absolute;
         content: "";
         background-image: url(#{$assets-path}/funnel.svg);
@@ -562,18 +562,18 @@ $d-product-filters-border: 2px solid $color-hector !default;
         right: 0.9375rem;
       }
       &.mobile-filters-active {
-        &:after {
+        &::after {
           background-image: url(#{$assets-path}/funnel-thicked.svg);
         }
         &:hover {
-          &:after {
+          &::after {
             background-image: url(#{$assets-path}/funnel-thicked-white.svg);
           }
         }
       }
       @include media-breakpoint-down(sm) {
         font-size: 0;
-        &:after {
+        &::after {
           right: 0.625rem;
           top: 0.8125rem;
         }
@@ -599,7 +599,7 @@ $d-product-filters-border: 2px solid $color-hector !default;
 
 .navigation-bar-visible {
   .mobile-filter {
-    &:after {
+    &::after {
       background: none;
     }
   }
@@ -645,7 +645,7 @@ body:not(.scrolled-buttons) {
           min-width: 4rem;
           transition: none;
 
-          &:after {
+          &::after {
             background-position: center top;
           }
           .mobile-filters-counter {
@@ -709,7 +709,7 @@ body:not(.scrolled-buttons) {
     }
     .select2-dropdown--below {
       border-top-left-radius: 0.3125rem !important;
-      &:before {
+      &::before {
         width: calc(100% - 4rem);
         background: black;
         margin: 0 0 0 0.125rem;

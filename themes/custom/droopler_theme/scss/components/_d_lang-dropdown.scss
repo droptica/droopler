@@ -50,7 +50,7 @@ $secondary-menu-lang-dropdown-height: 2.4rem !default;
       color: $lang-dropdown-header-color;
       position: relative;
       padding-right: $lang-dropdown-dropdown-width;
-      &:after {
+      &::after {
         text-align: center;
         color: $lang-dropdown-toggle-color;
         font-family: "fontello";
@@ -67,7 +67,7 @@ $secondary-menu-lang-dropdown-height: 2.4rem !default;
         border: none;
       }
       &-down {
-        &:after {
+        &::after {
           content: "\e806";
         }
       }
@@ -94,7 +94,7 @@ $secondary-menu-lang-dropdown-height: 2.4rem !default;
           line-height: $lang-dropdown-submenu-link-height;
           display: block;
         }
-        &:nth-child(1):after {
+        &:nth-child(1)::after {
           content: "\e806";
           color: $lang-dropdown-toggle-color;
           font-family: "fontello";

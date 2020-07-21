@@ -43,7 +43,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     @include font-main-header;
     text-align: center;
 
-    &:after {
+    &::after {
       @include decoration-header-line-main-center($d-p-carousel-line-color, $d-p-carousel-line-color-inverted);
     }
   }
@@ -89,14 +89,14 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
       width: $d-p-carousel-arrow-size;
       height: $d-p-carousel-arrow-size;
 
-      &:before {
+      &::before {
         color: $d-p-carousel-arrow-color;
         font-size: $d-p-carousel-arrow-size;
         opacity: $d-p-carousel-arrow-opacity;
       }
 
       &:hover {
-        &:before {
+        &::before {
           opacity: $d-p-carousel-arrow-hover-opacity;
         }
       }
@@ -130,7 +130,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
             @include font-body-standard;
             text-align: center;
           }
-          &:before {
+          &::before {
             @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);
           }
         }

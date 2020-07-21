@@ -43,7 +43,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
     .field--name-field-d-main-title {
       @include font-main-header;
 
-      &:after {
+      &::after {
         @include decoration-header-line-main-center($d-p-side-by-side-line-color, $d-p-side-by-side-line-color-inverted);
       }
     }
@@ -91,7 +91,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   .item-2 {
     .user-image-background {
       padding: $d-p-side-by-side-image-background-padding-y 0;
-      &:before {
+      &::before {
         content: none;
       }
       .image-background-container {
