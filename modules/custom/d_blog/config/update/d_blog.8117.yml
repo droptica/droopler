@@ -3,9 +3,9 @@ core.entity_view_display.node.blog_post.teaser_small:
     dependencies:
       config:
         - image.style.large_gallery_thumbnail
-  delete:
-    dependencies:
-      config:
+  delete_value:
+    - parents: dependencies:config
+      values:
         - image.style.gallery_thumbnail
   change:
     expected:
