@@ -72,14 +72,4 @@
     }
   };
 
-  /**
-   * Add extra class to first paragraph in section.
-   * @type {{attach: Drupal.behaviors.droopler_first_paragraph.attach}}
-   */
-  Drupal.behaviors.droopler_first_paragraph = {
-    attach: function (context, settings) {
-      $('.paragraph-sections').find('section').first().addClass('first-paragraph');
-    }
-  };
-
 })(jQuery, Drupal);
