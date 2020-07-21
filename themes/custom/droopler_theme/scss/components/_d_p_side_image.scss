@@ -55,9 +55,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
 .padding-top-default {
   .paragraph {
     &.paragraph--type--d-p-side-image {
-      padding-top: 0;
-
-      .container-half {
+      .content-inside-wrapper {
         padding-top: $d-p-side-image-banner-text-padding;
       }
 
@@ -65,7 +63,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
         .image-side {
           &-left-wide,
           &-right-wide {
-            .container-half {
+            .content-inside-wrapper {
               padding-top: 2 * $d-p-side-image-banner-text-padding;
             }
           }
@@ -77,8 +75,6 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
 .padding-bottom-default {
   .paragraph {
     &.paragraph--type--d-p-side-image {
-      padding-bottom: 0;
-
       .container-half {
         padding-bottom: $d-p-side-image-banner-text-padding;
       }
