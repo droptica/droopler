@@ -1451,6 +1451,7 @@ function droopler_update_8117() {
   $updater = \Drupal::service('d_update');
 
   $values['droopler__droopler_update_8117_1'] = update_modules_configuration(['d_p_side_by_side'], '8117');
+  $values['droopler__droopler_update_8117_2'] = update_modules_configuration(['d_product'], '8117');
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
