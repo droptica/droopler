@@ -1333,12 +1333,6 @@ function droopler_update_8115() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
-  $values['droopler__droopler_update_8115_1'] = $updater->importConfigs([
-    'd_p' => [
-      'field.storage.node.field_meta_tags' => '',
-    ],
-  ]);
-
   $configs = [
     'd_p_carousel' => [
       'field.field.paragraph.d_p_carousel.field_d_cta_link' => '',
@@ -1362,16 +1356,63 @@ function droopler_update_8115() {
       'field.field.paragraph.d_p_reference_content.field_d_long_text' => '',
       'field.field.paragraph.d_p_reference_content.field_d_media_icon' => '',
     ],
+  ];
+
+  $values['droopler__droopler_update_8115_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8115_2'] = update_modules_configuration(array_keys($configs), '8115');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 - add Header Layout settings for Content Page node types.
+ */
+function droopler_update_8116() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_content' => [
+      'field.storage.node.field_header_cta' => '',
+      'field.storage.node.field_header_layout' => '',
+      'field.field.node.content_page.field_header_cta' => '',
+      'field.field.node.content_page.field_header_layout' => '',
+    ],
+  ]);
+
+  $values['droopler__droopler_update_8116_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8116_2'] = update_modules_configuration(array_keys($configs), '8116');
+
+}
+
+/**
+ * Droopler 2.2 - add new field for content types allowing overwriting meta tags during node add/edit.
+ */
+function droopler_update_8117() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8117_1'] = $updater->importConfigs([
+    'd_p' => [
+      'field.storage.node.field_meta_tags' => '',
+    ],
+  ]);
+
+  $configs = [
     'd_blog' => [
       'field.field.node.blog_post.field_meta_tags' => '',
     ],
     'd_product' => [
       'field.field.node.d_product.field_meta_tags' => '',
     ],
+    'd_content' => [
+      'field.field.node.content_page.field_meta_tags' => '',
+    ],
   ];
 
-  $values['droopler__droopler_update_8115_2'] = $updater->importConfigs($configs);
-  $values['droopler__droopler_update_8115_3'] = update_modules_configuration(array_keys($configs), '8115');
+  $values['droopler__droopler_update_8117_2'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8117_3'] = update_modules_configuration(array_keys($configs), '8117');
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
@@ -1380,7 +1421,7 @@ function droopler_update_8115() {
 /**
  * Droopler 2.2 Migrate column count field.
  */
-function droopler_update_8116(&$sandbox) {
+function droopler_update_8118(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $query = \Drupal::entityQuery('paragraph')
       ->exists('field_d_number')
@@ -1422,7 +1463,7 @@ function droopler_update_8116(&$sandbox) {
       'd_p_counters',
       'd_p_text_blocks',
     ];
-    $values['droopler__droopler_update_8116_1'] = update_modules_configuration($bundles, '8116');
+    $values['droopler__droopler_update_8118_1'] = update_modules_configuration($bundles, '8118');
     \Drupal::service('d_update')->checklist()
       ->saveProgress(['v2.2' => $values]);
 
@@ -1437,45 +1478,13 @@ function droopler_update_8116(&$sandbox) {
 }
 
 /**
- * Droopler 2.2 - add Header Layout settings for Content Page node types.
- */
-function droopler_update_8117() {
-  /** @var Drupal\d_update\Updater $updater */
-  $updater = \Drupal::service('d_update');
-
-  $values['droopler__droopler_update_8117_1'] = $updater->importConfigs([
-    'd_content' => [
-      'field.storage.node.field_header_cta' => '',
-      'field.storage.node.field_header_layout' => '',
-      'field.field.node.content_page.field_header_cta' => '',
-      'field.field.node.content_page.field_header_layout' => '',
-      'field.field.node.content_page.field_meta_tags' => '',
-    ],
-  ]);
-
-}
-
-/**
  * Droopler 2.2 update Product configs fixing issues related to revisions.
- */
-function droopler_update_8118() {
-  /** @var Drupal\d_update\Updater $updater */
-  $updater = \Drupal::service('d_update');
-
-  $values['droopler__droopler_update_8118_2'] = update_modules_configuration(['d_product'], '8118');
-
-  $updater->checklist()
-    ->saveProgress(['v2.2' => $values]);
-}
-
-/**
- * Droopler 2.2 update Droopler paragraphs configs.
  */
 function droopler_update_8119() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
-  $values['droopler__droopler_update_8119_1'] = update_modules_configuration(['d_p_side_by_side'], '8119');
+  $values['droopler__droopler_update_8119_2'] = update_modules_configuration(['d_product'], '8119');
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);

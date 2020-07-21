@@ -4,12 +4,9 @@ core.entity_form_display.node.content_page.d_small_box:
       config:
         - field.field.node.content_page.field_header_cta
         - field.field.node.content_page.field_header_layout
-        - field.field.node.content_page.field_meta_tags
       module:
         - link_attributes
-        - media_library
     hidden:
-      field_meta_tags: true
       field_header_cta: true
       field_header_layout: true
 core.entity_form_display.node.content_page.default:
@@ -33,11 +30,9 @@ core.entity_form_display.node.content_page.default:
       config:
         - field.field.node.content_page.field_header_cta
         - field.field.node.content_page.field_header_layout
-        - field.field.node.content_page.field_meta_tags
       module:
         - link_attributes
         - media_library
-        - metatag
     third_party_settings:
       field_group:
         group_seo:
@@ -113,22 +108,13 @@ core.entity_form_display.node.content_page.default:
         third_party_settings: {  }
         type: options_select
         region: content
-      field_meta_tags:
-        weight: 26
-        settings:
-          sidebar: true
-        third_party_settings: {  }
-        type: metatag_firehose
-        region: content
 core.entity_view_display.node.content_page.default:
   add:
     dependencies:
       config:
         - field.field.node.content_page.field_header_cta
         - field.field.node.content_page.field_header_layout
-        - field.field.node.content_page.field_meta_tags
     hidden:
       field_header_cta: true
       field_header_layout: true
       search_api_excerpt: true
-      field_meta_tags: true
