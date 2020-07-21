@@ -114,7 +114,27 @@ $d-p-banner-subheader-opacity: 0.7 !default;
 
 // Styles for half-transparent modifier.
 .half-transparent {
-  .d-p-banner {
+
+  &.padding-top-default {
+    .paragraph.paragraph--type--d-p-banner {
+      padding-top: 0;
+    }
+  }
+
+  &.padding-bottom-default {
+    .paragraph.paragraph--type--d-p-banner {
+      padding-bottom: 0;
+    }
+  }
+
+  .paragraph--type--d-p-banner {
+
+    &,
+    .field--name-field-d-main-title,
+    .field--name-field-d-subtitle {
+      color: $color-cassandra;
+    }
+
     .content-wrapper {
       width: 100%;
       background: $d-p-banner-half-transparent-background-color;
@@ -128,53 +148,44 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       @include media-breakpoint-up(lg) {
         width: 50%;
       }
+
       .content {
         padding-left: $d-p-banner-half-transparent-content-spacing;
         padding-right: $d-p-banner-half-transparent-content-spacing;
+      }
+    }
 
-        .field--type-string,
-        .field--type-text-long {
-          &,
-          p {
-            color: $color-cassandra;
-          }
-        }
+    .field--name-field-d-main-title,
+    .field--name-field-d-subtitle,
+    .field--name-field-d-long-text p {
+      text-transform: none;
+      opacity: 1;
 
-        .field--name-field-d-main-title,
-        .field--name-field-d-subtitle {
-          text-transform: none;
-          opacity: 1;
-          @include media-breakpoint-up(lg) {
-            text-align: left;
-          }
-        }
-        .field--name-field-d-subtitle {
-          font-weight: normal;
-        }
-        .field--name-field-d-cta-link {
-          @include media-breakpoint-up(lg) {
-            text-align: left;
-          }
-          a {
-            margin: $d-p-banner-half-transparent-btn-spacing 0 0 0;
-          }
-        }
-        .field--name-field-d-main-title,
-        .field--name-field-d-subtitle,
-        .field--name-field-d-long-text,
-        .field--name-field-d-cta-link {
-          &::before {
-            @include media-breakpoint-up(lg) {
-              margin-left: 0;
-            }
-          }
-        }
-        .field--name-field-d-long-text {
-          p {
-            @include media-breakpoint-up(lg) {
-              text-align: left;
-            }
-          }
+      @include media-breakpoint-up(lg) {
+        text-align: left;
+      }
+    }
+
+    .field--name-field-d-subtitle {
+      font-weight: normal;
+    }
+
+    .field--name-field-d-cta-link {
+      @include media-breakpoint-up(lg) {
+        text-align: left;
+      }
+      a {
+        margin: $d-p-banner-half-transparent-btn-spacing 0 0 0;
+      }
+    }
+
+    .field--name-field-d-main-title,
+    .field--name-field-d-subtitle,
+    .field--name-field-d-long-text,
+    .field--name-field-d-cta-link {
+      &::before {
+        @include media-breakpoint-up(lg) {
+          margin-left: 0;
         }
       }
     }
