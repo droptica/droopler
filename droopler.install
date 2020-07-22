@@ -1460,15 +1460,20 @@ function droopler_update_8118(&$sandbox) {
   $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
 
   if ($sandbox['#finished'] === 1) {
-    $bundles = [
+    $modules = [
       'd_p_carousel',
       'd_p_counters',
       'd_p_text_blocks',
     ];
-    $values['droopler__droopler_update_8118_1'] = update_modules_configuration($bundles, '8118');
+    $values['droopler__droopler_update_8118_1'] = update_modules_configuration($modules, '8118');
     \Drupal::service('d_update')->checklist()
       ->saveProgress(['v2.2' => $values]);
 
+    $bundles = [
+      'd_p_carousel',
+      'd_p_group_of_counters',
+      'd_p_group_of_text_blocks',
+    ];
     foreach ($bundles as $bundle) {
       $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_number');
 
