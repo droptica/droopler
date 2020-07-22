@@ -61,6 +61,11 @@ $d-p-form-background-opacity: 0.4 !default;
     table {
       .draggable {
         .tabledrag-handle {
+          display: flex;
+          height: 60px;
+          align-items: center;
+          padding-top: 10px;
+
           .handle:after {
             color: $d-p-form-table-color;
           }
@@ -117,8 +122,11 @@ $d-p-form-background-opacity: 0.4 !default;
         flex-wrap: wrap;
       }
       .tabledrag-handle .handle {
-        display: inline;
+        display: flex;
         background: none;
+        width: unset;
+        height: unset;
+
         &:hover {
           background: none;
           &::after {
@@ -136,7 +144,6 @@ $d-p-form-background-opacity: 0.4 !default;
   .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
-    color: $d-p-form-header-color;
     &::after {
       @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
     }
