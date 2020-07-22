@@ -14,6 +14,11 @@ core.entity_form_display.node.content_page.default:
         third_party_settings: {  }
         type: metatag_firehose
         region: content
+  delete:
+    - hidden:field_header_cta
+    - hidden:field_header_layout
+    - hidden:field_meta_tags
+
 core.entity_view_display.node.content_page.default:
   add:
     dependencies:
