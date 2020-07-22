@@ -27,8 +27,5 @@ core.entity_view_display.node.content_page.d_small_box:
     dependencies:
       config:
         - field.field.node.content_page.field_meta_tags
-      module:
-        - link_attributes
-        - media_library
     hidden:
       field_meta_tags: true

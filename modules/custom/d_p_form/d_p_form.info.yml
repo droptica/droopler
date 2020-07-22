@@ -1,23 +1,28 @@
 name: d_p_form
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 description: 'Provides a paragraph with a form.'
 type: module
 dependencies:
+  - block
   - contact
   - contact_formatter
   - content_translation
   - d_media
   - d_p
+  - d_product
   - entity_reference_revisions
   - field
+  - field_group
   - file
   - language
   - link
   - media_library
   - options
   - paragraphs
+  - system
   - text
+  - views
 package: Paragraphs
 version: DROOPLER_VERSION
 core_incompatible: false

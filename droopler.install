@@ -1491,3 +1491,41 @@ function droopler_update_8119() {
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
 }
+
+/**
+ * Droopler 2.2 update paragraphs config fixing missing dependency and features changes.
+ */
+function droopler_update_8120() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $bundles = [
+    'd_block',
+    'd_blog',
+    'd_media',
+    'd_p_banner',
+    'd_p_carousel',
+    'd_p_counters',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_media',
+    'd_p_node',
+    'd_p_reference_content',
+    'd_p_side_by_side',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_subscribe_file',
+    'd_p_text_blocks',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+    'd_product',
+  ];
+
+  $values['droopler__droopler_update_8119_2'] = update_modules_configuration($bundles, '8120');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
