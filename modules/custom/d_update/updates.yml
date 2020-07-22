@@ -278,3 +278,13 @@ v2.2:
     '#description': '<p>Migration of Column Count field (in d_p_carousel, d_p_counters, d_p_text_blocks paragraphs) to Paragraphs Settings field.</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please try to migrate values and delete old fields manually</p>'
     extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8119_1:
+    '#title': 'Update Product configs.'
+    '#description': '<p>Update Product configs fixing issues related to revisions.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to migrate values and delete old fields manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8120_1:
+    '#title': 'Update paragraphs configs clearing small changes in features.'
+    '#description': '<p>Update paragraphs configs clearing small changes in features.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to migrate values and delete old fields manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }

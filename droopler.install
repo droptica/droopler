@@ -1491,7 +1491,7 @@ function droopler_update_8119() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
-  $values['droopler__droopler_update_8119_2'] = update_modules_configuration(['d_product'], '8119');
+  $values['droopler__droopler_update_8119_1'] = update_modules_configuration(['d_product'], '8119');
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
@@ -1527,7 +1527,7 @@ function droopler_update_8120() {
     'd_product',
   ];
 
-  $values['droopler__droopler_update_8119_2'] = update_modules_configuration($bundles, '8120');
+  $values['droopler__droopler_update_8120_1'] = update_modules_configuration($bundles, '8120');
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
