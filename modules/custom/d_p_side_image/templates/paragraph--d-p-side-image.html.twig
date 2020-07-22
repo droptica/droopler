@@ -69,10 +69,12 @@
           } only %}
         {% endblock %}
       </div>
-      <div class="container">
-        <div class="row">
-          <div class="{{ text_class }} {{ content_side_classes|join(' ') }}">
-            {{ content.group_d_side_image_content }}
+      <div class="{{ content_side_classes|join(' ') }}">
+        <div class="container">
+          <div class="row">
+            <div class="{{ text_class }} container-half">
+              {{ content.group_d_side_image_content }}
+            </div>
           </div>
         </div>
       </div>

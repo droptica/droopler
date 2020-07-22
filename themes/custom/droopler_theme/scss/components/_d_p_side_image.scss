@@ -30,6 +30,12 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
       color: $d_p_side-image-header-color;
     }
 
+    .field--name-field-d-long-text {
+      p {
+        color: $d-p-side-image-color;
+      }
+    }
+
     .image-side {
       &-right,
       &-right-wide {
@@ -64,7 +70,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
           &-left-wide,
           &-right-wide {
             .content-inside-wrapper {
-              padding-top: 2 * $d-p-side-image-banner-text-padding;
+              //padding-top: 2 * $d-p-side-image-banner-text-padding;
             }
           }
         }
@@ -84,7 +90,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
           &-left-wide,
           &-right-wide {
             .content-inside-wrapper {
-              padding-bottom: 2 * $d-p-side-image-banner-text-padding;
+              //padding-bottom: 2 * $d-p-side-image-banner-text-padding;
             }
           }
         }
@@ -105,11 +111,6 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     }
   }
 
-  .field--name-field-d-long-text {
-    p {
-      color: $d-p-side-image-color;
-    }
-  }
 
   .d-image {
     padding: 0;
@@ -129,7 +130,7 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
         .d-image {
           right: 0;
         }
-        .content-inside-wrapper {
+        .container-half {
           padding-right: $d-p-side-image-banner-half-padding;
         }
       }
@@ -138,8 +139,12 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
         .d-image {
           left: 0;
         }
-        .content-inside-wrapper {
+        .container-half {
           padding-left: $d-p-side-image-banner-half-padding;
+          margin-left: auto;
+        }
+
+        .content-inside-wrapper {
           margin-left: auto;
         }
       }
@@ -151,12 +156,12 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
         }
       }
       &-left-wide {
-        .content-inside-wrapper{
+        .container-half {
           padding-left: 1.5 * $d-p-side-image-banner-text-padding;
         }
       }
       &-right-wide {
-        .content-inside-wrapper {
+        .container-half {
           padding-right: 1.5 * $d-p-side-image-banner-text-padding;
         }
       }
