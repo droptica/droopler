@@ -11,9 +11,9 @@ dependencies:
     - node.type.content_page
   module:
     - field_group
-    - metatag
     - link_attributes
     - media_library
+    - metatag
     - paragraphs
     - path
 third_party_settings:
@@ -143,12 +143,14 @@ content:
     weight: 2
     settings: {  }
     third_party_settings: {  }
+    region: content
+    type: options_select
   field_meta_tags:
     weight: 26
     settings:
       sidebar: true
     third_party_settings: {  }
-    type: options_select
+    type: metatag_firehose
     region: content
   field_page_section:
     weight: 11

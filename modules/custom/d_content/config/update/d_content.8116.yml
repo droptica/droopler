@@ -167,8 +167,8 @@ core.entity_form_display.node.content_page.default:
         weight: 2
         settings: {  }
         third_party_settings: {  }
-        type: options_select
         region: content
+        type: options_select
 core.entity_view_display.node.content_page.default:
   add:
     dependencies:
@@ -185,11 +185,13 @@ core.entity_view_display.node.content_page.d_small_box:
       config:
         - field.field.node.content_page.field_header_cta
         - field.field.node.content_page.field_header_layout
-      module:
-        - link_attributes
     hidden:
       field_header_cta: true
       field_header_layout: true
+  delete_value:
+    - parents: dependencies:module
+      values:
+        - media_library
 field.field.node.content_page.field_page_section:
   add:
     settings:
