@@ -64,17 +64,6 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
       .content-inside-wrapper {
         padding-top: $d-p-side-image-banner-text-padding;
       }
-
-      @include media-breakpoint-up(md) {
-        .image-side {
-          &-left-wide,
-          &-right-wide {
-            .content-inside-wrapper {
-              //padding-top: 2 * $d-p-side-image-banner-text-padding;
-            }
-          }
-        }
-      }
     }
   }
 }
@@ -83,17 +72,6 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     &.paragraph--type--d-p-side-image {
       .content-inside-wrapper {
         padding-bottom: $d-p-side-image-banner-text-padding;
-      }
-
-      @include media-breakpoint-up(md) {
-        .image-side {
-          &-left-wide,
-          &-right-wide {
-            .content-inside-wrapper {
-              //padding-bottom: 2 * $d-p-side-image-banner-text-padding;
-            }
-          }
-        }
       }
     }
   }
