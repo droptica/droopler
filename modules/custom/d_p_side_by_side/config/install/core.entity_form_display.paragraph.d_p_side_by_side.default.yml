@@ -85,6 +85,22 @@ content:
     third_party_settings: {  }
     type: link_attributes
     region: content
+  field_d_long_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_d_main_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_d_media_icon:
     weight: 14
     settings:
@@ -110,22 +126,6 @@ content:
     third_party_settings: {  }
     type: field_d_p_set_settings
     region: content
-  field_d_long_text:
-    type: text_textarea
-    weight: 1
-    region: content
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-  field_d_main_title:
-    type: string_textfield
-    weight: 0
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
 hidden:
   created: true
   status: true

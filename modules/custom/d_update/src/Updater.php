@@ -504,6 +504,7 @@ class Updater {
         ->error('Detected changes in configuration %config. Aborting import', ['%config' => $configName]);
       return FALSE;
     }
+
     $config->setData($newConfig)->save();
 
     return TRUE;

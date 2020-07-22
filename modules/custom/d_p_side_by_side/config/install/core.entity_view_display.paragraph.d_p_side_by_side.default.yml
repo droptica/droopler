@@ -18,6 +18,18 @@ targetEntityType: paragraph
 bundle: d_p_side_by_side
 mode: default
 content:
+  field_d_cta_link:
+    weight: 6
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
   field_d_long_text:
     type: text_default
     weight: 1
@@ -33,18 +45,6 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  field_d_cta_link:
-    weight: 6
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-    region: content
   field_d_media_icon:
     weight: 7
     label: hidden
