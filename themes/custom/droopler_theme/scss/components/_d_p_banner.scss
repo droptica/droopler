@@ -127,10 +127,10 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     }
   }
 
-  .paragraph--type--d-p-banner {
-
+  .paragraph.paragraph--type--d-p-banner {
     &,
     .field--name-field-d-main-title,
+    .field--name-field-d-long-text,
     .field--name-field-d-subtitle {
       color: $color-cassandra;
     }
