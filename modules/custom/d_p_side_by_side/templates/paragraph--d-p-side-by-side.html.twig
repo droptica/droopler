@@ -49,16 +49,18 @@
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       {% block tiles_content %}
-        {% if (content.field_d_main_title|render or content.field_d_long_text|render)  %}
-          <div class="text-content">
-            {{ content.field_d_main_title }}
-            {{ content.field_d_long_text }}
-          </div>
+        {% if (content.field_d_media_icon|render) or (content.field_d_main_title|render) or (content.field_d_long_text|render)  %}
+        <div class="container side-header">
+          {{ content.field_d_media_icon }}
+          {% if (content.field_d_main_title|render) or (content.field_d_long_text|render)  %}
+            <div class="text-content">
+              {{ content.field_d_main_title }}
+              {{ content.field_d_long_text }}
+            </div>
+          {% endif %}
+        </div>
         {% endif %}
         <div class="d-p-tiles-wrapper expandable-content">
-          <div class="container">
-            {{ content.field_d_media_icon }}
-          </div>
           <div class="container items">
             {{ content.field_d_p_sbs_items }}
           </div>

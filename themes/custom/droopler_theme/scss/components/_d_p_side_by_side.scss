@@ -9,7 +9,6 @@ $d-p-side-by-side-line-color: $color-agamemnon !default;
 $d-p-side-by-side-line-color-inverted: $color-nestor !default;
 
 // Margins, paddings and sizing.
-$d-p-side-by-side-padding-x: 5% !default;
 $d-p-side-by-side-padding-y: 5% !default;
 
 $d-p-side-by-side-subtitle-margin-y: 2.125rem !default;
@@ -31,31 +30,32 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   }
 }
 
-.paragraph--type--d-p-side-by-side {
+.d-p-side-by-side {
   text-align: center;
 
   > div > .field--name-field-d-media-icon {
     text-align: center;
   }
 
-  .text-content {
-    padding-bottom: $d-p-side-by-side-padding-y;
-    padding-top: $d-p-side-by-side-padding-x;
+  .side-header {
+    padding: $d-p-side-by-side-padding-y 0;
 
-    .field--name-field-d-main-title {
-      @include font-main-header;
+    .text-content {
 
-      &::after {
-        @include decoration-header-line-main-center($d-p-side-by-side-line-color, $d-p-side-by-side-line-color-inverted);
+      .field--name-field-d-main-title {
+        @include font-main-header;
+
+        &::after {
+          @include decoration-header-line-main-center($d-p-side-by-side-line-color, $d-p-side-by-side-line-color-inverted);
+        }
+      }
+
+      .field--name-field-d-long-text {
+        margin: $d-p-side-by-side-subtitle-margin-y 0;
+        @include font-subtitle;
       }
     }
-
-    .field--name-field-d-long-text {
-      margin: $d-p-side-by-side-subtitle-margin-y 0;
-      @include font-subtitle;
-    }
   }
-
   .wrapper-d_p_single_text_block {
     padding: $d-p-side-by-side-text-box-padding-y 0;
     text-align: left;
