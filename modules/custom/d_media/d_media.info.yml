@@ -2,15 +2,17 @@ name: d_media
 description: 'Provides Media configuration for Drupal 8'
 type: module
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 dependencies:
   - colorbox
   - content_translation
+  - d_media
   - d_p
   - field
   - file
   - image
   - language
+  - lazy
   - media
   - node
   - paragraphs

@@ -1327,24 +1327,11 @@ function droopler_update_8114() {
 }
 
 /**
- * Droopler 2.2 update configs for modules.
+ * Droopler 2.2 - extend paragraphs missing common fields (CTA, Icon, Long text).
  */
 function droopler_update_8115() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
-
-  $updater->importConfigs([
-    'd_p' => [
-      'field.storage.node.field_meta_tags' => '',
-    ],
-    'd_content' => [
-      'field.storage.node.field_header_cta' => '',
-      'field.storage.node.field_header_layout' => '',
-      'field.field.node.content_page.field_header_cta' => '',
-      'field.field.node.content_page.field_header_layout' => '',
-      'field.field.node.content_page.field_meta_tags' => '',
-    ],
-  ]);
 
   $configs = [
     'd_p_carousel' => [
@@ -1369,12 +1356,6 @@ function droopler_update_8115() {
       'field.field.paragraph.d_p_reference_content.field_d_long_text' => '',
       'field.field.paragraph.d_p_reference_content.field_d_media_icon' => '',
     ],
-    'd_blog' => [
-      'field.field.node.blog_post.field_meta_tags' => '',
-    ],
-    'd_product' => [
-      'field.field.node.d_product.field_meta_tags' => '',
-    ],
   ];
 
   $values['droopler__droopler_update_8115_1'] = $updater->importConfigs($configs);
@@ -1385,9 +1366,64 @@ function droopler_update_8115() {
 }
 
 /**
+ * Droopler 2.2 - add Header Layout settings for Content Page node types.
+ */
+function droopler_update_8116() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_content' => [
+      'field.storage.node.field_header_cta' => '',
+      'field.storage.node.field_header_layout' => '',
+      'field.field.node.content_page.field_header_cta' => '',
+      'field.field.node.content_page.field_header_layout' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8116_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8116_2'] = update_modules_configuration(array_keys($configs), '8116');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 - add new field for content types allowing overwriting meta tags during node add/edit.
+ */
+function droopler_update_8117() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8117_1'] = $updater->importConfigs([
+    'd_p' => [
+      'field.storage.node.field_meta_tags' => '',
+    ],
+  ]);
+
+  $configs = [
+    'd_blog' => [
+      'field.field.node.blog_post.field_meta_tags' => '',
+    ],
+    'd_product' => [
+      'field.field.node.d_product.field_meta_tags' => '',
+    ],
+    'd_content' => [
+      'field.field.node.content_page.field_meta_tags' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8117_2'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8117_3'] = update_modules_configuration(array_keys($configs), '8117');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
  * Droopler 2.2 Migrate column count field.
  */
-function droopler_update_8116(&$sandbox) {
+function droopler_update_8118(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $query = \Drupal::entityQuery('paragraph')
       ->exists('field_d_number')
@@ -1424,15 +1460,20 @@ function droopler_update_8116(&$sandbox) {
   $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
 
   if ($sandbox['#finished'] === 1) {
-    $bundles = [
+    $modules = [
       'd_p_carousel',
       'd_p_counters',
       'd_p_text_blocks',
     ];
-    $values['droopler__droopler_update_8116_1'] = update_modules_configuration($bundles, '8116');
+    $values['droopler__droopler_update_8118_1'] = update_modules_configuration($modules, '8118');
     \Drupal::service('d_update')->checklist()
       ->saveProgress(['v2.2' => $values]);
 
+    $bundles = [
+      'd_p_carousel',
+      'd_p_group_of_counters',
+      'd_p_group_of_text_blocks',
+    ];
     foreach ($bundles as $bundle) {
       $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_number');
 
@@ -1444,14 +1485,62 @@ function droopler_update_8116(&$sandbox) {
 }
 
 /**
- * Droopler 2.2 update Side by side paragraph.
+ * Droopler 2.2 update Product configs fixing issues related to revisions.
  */
-function droopler_update_8117() {
+function droopler_update_8119() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
-  $values['droopler__droopler_update_8117_1'] = update_modules_configuration(['d_p_side_by_side'], '8117');
-  $values['droopler__droopler_update_8117_2'] = update_modules_configuration(['d_product'], '8117');
+  $values['droopler__droopler_update_8119_1'] = update_modules_configuration(['d_product'], '8119');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 update paragraphs config fixing missing dependency and features changes.
+ */
+function droopler_update_8120() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $bundles = [
+    'd_blog',
+    'd_media',
+    'd_p_banner',
+    'd_p_carousel',
+    'd_p_counters',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_media',
+    'd_p_node',
+    'd_p_reference_content',
+    'd_p_side_by_side',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_subscribe_file',
+    'd_p_text_blocks',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+    'd_product',
+  ];
+
+  $values['droopler__droopler_update_8120_1'] = update_modules_configuration($bundles, '8120');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 update Side by side paragraph.
+ */
+function droopler_update_8121() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8121_1'] = update_modules_configuration(['d_p_side_by_side'], '8121');
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);

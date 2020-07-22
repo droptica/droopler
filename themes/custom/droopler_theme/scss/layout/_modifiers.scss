@@ -513,7 +513,7 @@ $d-p-paddings: map-merge(
   @each $placement in (top, bottom) {
     .padding-#{$placement}-#{$size} {
       > .paragraph:not(.content-moved-inside),
-      > .content-moved-inside .content-inside-wrapper {
+      > .paragraph.content-moved-inside .content-inside-wrapper {
         padding-#{$placement}: $value;
       }
     }
