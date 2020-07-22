@@ -505,32 +505,9 @@ class Updater {
       return FALSE;
     }
 
-    $this->configKeySort($newConfig);
-
     $config->setData($newConfig)->save();
 
     return TRUE;
-  }
-
-  protected function configKeySort(&$configArray) {
-    if (!is_array($configArray)) {
-      return;
-    }
-    $goDeeper = false;
-    foreach ($configArray as $configItem) {
-      if (is_array($configArray)) {
-        $goDeeper = true;
-      }
-    }
-    if (!$goDeeper) {
-      if (array_keys($configArray) === range(0, count($configArray) - 1)) {
-        $configArray = array_unique($configArray);
-      }
-
-      sort($configArray);
-    } else {
-      array_walk($configArray, [$this, 'configKeySort']);
-    }
   }
 
   /**
