@@ -29,6 +29,11 @@ $d-p-tiles-margin-bottom: 5% !default;
     margin-top: $d-p-tiles-margin-top;
   }
 }
+.margin-bottom-default {
+  .paragraph--type--d-p-tiles {
+    margin-bottom: $d-p-tiles-margin-top;
+  }
+}
 
 .paragraph--type--d-p-tiles {
   @include clearfix;
