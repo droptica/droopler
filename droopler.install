@@ -1533,3 +1533,22 @@ function droopler_update_8120() {
     ->saveProgress(['v2.2' => $values]);
 }
 
+/**
+ * Droopler 2.2 improve Blog Post "teaser small" image style.
+ */
+function droopler_update_8121() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_media' => [
+      'image.style.large_gallery_thumbnail' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8121_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8121_2'] = update_modules_configuration(['d_blog'], '8121');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
