@@ -20,6 +20,7 @@ function d_documentation_content_structure_alter(&$structure, $context) {
       'children' => [
         'shortcodes' => ['file' => "$path/shortcodes.yml", 'link' => 'Shortcodes', 'weight' => 0],
         'd_p_banner' => ['file' => "$path/d_p_banner.yml", 'link' => 'Banner Paragraph', 'weight' => 10],
+        'd_p_block' => ['file' => "$path/d_p_block.yml", 'link' => 'Block Paragraph', 'weight' => 10],
         'd_p_form' => ['file' => "$path/d_p_form.yml", 'link' => 'Form Paragraph', 'weight' => 20],
         'd_p_text_blocks' => ['file' => "$path/d_p_text_blocks.yml", 'link' => 'Text Blocks Paragraph', 'weight' => 30],
         'd_p_sidebar_image' => ['file' => "$path/d_p_sidebar_image.yml", 'link' => 'Sidebar Image Paragraph', 'weight' => 40],
