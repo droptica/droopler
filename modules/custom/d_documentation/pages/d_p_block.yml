@@ -1,0 +1,64 @@
+info:
+  type: content_page
+  title: 'Block Paragraph'
+  path:
+    alias: /documentation/banner-paragraph
+    pathauto: 0
+field_page_section:
+  paragraphs:
+    -
+      paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Block Paragraph'
+        field_d_subtitle:
+          type: text
+          data: 'Droopler Documentation'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          heading_type: h1
+    -
+      paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Example #1'
+        field_d_long_text:
+          type: text_long
+          data: '<p>TODO socials.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_block
+      data:
+        field_d_subtitle:
+          type: text
+          data: Subtitle
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Example #2'
+        field_d_long_text:
+          type: text_long
+          data: '<p>TODO breadcrumbs</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+field_teaser_media_image:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_demo/demo-logo.svg
+      alt: Droopler
+field_teaser_text:
+  type: text_long
+  data: 'Discover possibilities of Droopler distribution for Drupal 8.'
