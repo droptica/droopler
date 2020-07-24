@@ -60,6 +60,25 @@ field_page_section:
                 directory: demo
                 files:
                   -
+                    path: d_demo/demo_paragraph_banner.png
+                    alt: 'Paragraph Block Icon'
+              field_d_main_title:
+                type: text
+                data: Banner
+              field_d_long_text:
+                type: text_long
+                data: '<p>A typical Block with text and CTA button, located on top of a large background image.</p>'
+              field_d_cta_link:
+                type: cta
+                data:
+                  link: 'internal:/documentation/block-paragraph'
+                  text: 'Learn more...'
+            -
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  -
                     path: d_demo/demo_paragraph_form.png
                     alt: 'Paragraph Form Icon'
               field_d_main_title:
