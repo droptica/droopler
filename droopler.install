@@ -1612,7 +1612,7 @@ function droopler_update_8122(&$sandbox) {
         default:
           $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-default');
       }
-    } elseif ($paragraphModifiersHelper->hasModifier('background-gray-light-')) {
+    } elseif ($paragraphModifiersHelper->hasModifier('background-gray-light-2')) {
       // Migrate background-gray-light-2
       $paragraphModifiersHelper->replaceModifier('background-gray-light-2', 'theme-gray');
     } else {

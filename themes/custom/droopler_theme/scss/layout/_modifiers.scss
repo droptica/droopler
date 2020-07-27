@@ -327,7 +327,6 @@ $two-columned-header-line-margin: 0.625rem !default;
 }
 
 .tile {
-  padding: $tile-padding-top 0 $tile-padding-bottom 0;
   transform: scale(1);
   transition: 0.3s;
 
@@ -375,6 +374,9 @@ $two-columned-header-line-margin: 0.625rem !default;
   }
 
   .paragraph {
+    padding-top: $tile-padding-top;
+    padding-bottom: $tile-padding-bottom;
+
     .field--name-field-d-main-title {
       text-align: center;
       font-size: $tile-title-font-size-desktop;
@@ -390,7 +392,7 @@ $two-columned-header-line-margin: 0.625rem !default;
 
   .field--type-link {
     a {
-      &, &:active, &:hover {
+      &, &:not(.disabled):active, &:active, &:hover {
         position: absolute;
         left: 0;
         top: 0;
@@ -400,6 +402,8 @@ $two-columned-header-line-margin: 0.625rem !default;
         border: none;
         text-indent: -9999px;
         max-width: none;
+        background: none;
+        border: none;
       }
     }
   }

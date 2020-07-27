@@ -102,6 +102,13 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   }
 }
 
+.theme-default.user-image-background {
+  .d-p-text-block {
+    &, .field {
+      color: white;
+    }
+  }
+}
 
 .with-tiles {
   @include media-breakpoint-down(md) {
@@ -112,7 +119,8 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
   .list-item-wrapper {
     padding: 0 $d-p-text-blocks-tiles-spacing $d-p-text-blocks-tiles-spacing 0;
-
+    display: flex;
+    align-items: center;
 
     .d-p-text-block {
       padding: $d-p-text-blocks-tiles-padding 2* $d-p-text-blocks-tiles-padding;
