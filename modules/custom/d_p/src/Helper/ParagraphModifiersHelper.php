@@ -117,8 +117,10 @@ class ParagraphModifiersHelper {
   }
 
   public function replaceModifier($name, $newName, $newValue = NULL) {
-    $this->removeModifier($name);
-    $this->setModifier($newName, $newValue);
+    if ($this->hasModifier($name)) {
+      $this->removeModifier($name);
+      $this->setModifier($newName, $newValue);
+    }
   }
 
   /**
