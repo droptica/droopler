@@ -228,15 +228,8 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
         if ($target_entity = d_content_init_find_entity_by_properties($data['target_search'], $target_entity_type)) {
           $entity->set($name, [[
             'plugin_id' => $target_entity_type . ':' . $target_entity->uuid(),
-            'settings' => ['label_display' => $data['label_display']]
+            'settings' => $data['settings'],
           ]]);
-
-//          plugin_id = "block_content:2bc7b7a8-e484-4709-adbf-b5e91f698172"
-//          settings = {array} [4]
-//           provider = "block_content"
-//           label = "Block With Paragraphs Example"
-//           label_display = false
-//           view_mode = "full"
         }
         else {
           \Drupal::logger('d_content_init')

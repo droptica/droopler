@@ -124,8 +124,6 @@ abstract class ContentInitManagerBase {
         ]));
       }
     }
-    $this->entityTypeManager->clearCachedDefinitions();
-    drupal_flush_all_caches();
   }
 
   /**

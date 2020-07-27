@@ -54,25 +54,7 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/banner-paragraph'
                   text: 'Learn more...'
-            -
-              field_d_media_icon:
-                type: media_image
-                directory: demo
-                files:
-                  -
-                    path: d_demo/demo_paragraph_banner.png
-                    alt: 'Paragraph Block Icon'
-              field_d_main_title:
-                type: text
-                data: Banner
-              field_d_long_text:
-                type: text_long
-                data: '<p>A typical Block with text and CTA button, located on top of a large background image.</p>'
-              field_d_cta_link:
-                type: cta
-                data:
-                  link: 'internal:/documentation/block-paragraph'
-                  text: 'Learn more...'
+
             -
               field_d_media_icon:
                 type: media_image
@@ -320,6 +302,20 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/side-by-side-paragraph'
                   text: 'Learn more...'
+
+            -
+              field_d_main_title:
+                type: text
+                data: Block
+              field_d_long_text:
+                type: text_long
+                data: '<p>Paragraph allowing embedding Drupal blocks.</p>'
+              field_d_cta_link:
+                type: cta
+                data:
+                  link: 'internal:/documentation/block-paragraph'
+                  text: 'Learn more...'
+
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default

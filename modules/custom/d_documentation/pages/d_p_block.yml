@@ -76,10 +76,11 @@ field_page_section:
           type: block_reference
           data:
             target_type: 'block_content'
-            label_display: FALSE
             target_search:
               info: 'Block With Paragraphs Example'
               type: d_paragraph_block
+            settings:
+              label_display: FALSE
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: padding-top-none padding-bottom-none margin-top-default margin-bottom-default
