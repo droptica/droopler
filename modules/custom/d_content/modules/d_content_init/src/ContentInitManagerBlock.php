@@ -124,6 +124,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
       if ($placed_block = $this->placeBlockContent($block, $block_entity)) {
         $this->placeBlockInWaMegaMenu($block, $placed_block);
       }
+
       return $block_entity;
     }
     catch (PluginNotFoundException $e) {

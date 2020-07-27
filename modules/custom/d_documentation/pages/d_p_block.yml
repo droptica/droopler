@@ -2,7 +2,7 @@ info:
   type: content_page
   title: 'Block Paragraph'
   path:
-    alias: /documentation/banner-paragraph
+    alias: /documentation/block-paragraph
     pathauto: 0
 field_page_section:
   paragraphs:
@@ -25,33 +25,65 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Example #1'
-        field_d_long_text:
-          type: text_long
-          data: '<p>TODO socials.</p>'
-        field_d_settings:
-          type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-    -
-      paragraph_type: d_p_block
-      data:
         field_d_subtitle:
           type: text
-          data: Subtitle
+          data: 'Plugin Block'
+        field_d_long_text:
+          type: text_long
+          data: '<p>There are times, creating pages using paragraphs, we need to embed a block with views result,
+          or some custom block. In that kind of situation with help comes Block Paragraph. You can use it to embed
+          any block that can be placed in the <a href="/admin/structure/block">Block Layout</a>, so it gives us quite a lot of possibilities. </p>
+          <p>Below we have an example of embedding a block with Social Icons - the same block is also placed in our footer,
+          just the title of the block is overwritten here.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+
+    - paragraph_type: d_p_block
+      data:
+        field_block:
+          type: block_reference
+          data:
+            plugin_id: 'social_media_block'
+            settings:
+              label_display: TRUE
+              label: 'Social Media Block'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default text-center
     -
       paragraph_type: d_p_text_paged
       data:
         field_d_main_title:
           type: text
           data: 'Example #2'
+        field_d_subtitle:
+          type: text
+          data: 'Content Block with Paragraphs'
         field_d_long_text:
           type: text_long
-          data: '<p>TODO breadcrumbs</p>'
+          data: '<p>Quite often you probably noticed, that there is a common content shared between multiple subpages.
+          Let''s think for example of "Our Partners" section or "Contact us" banner. Instead of adding identical
+          paragraphs over again, you could create Content Block with that paragraph and embed it in all pages using
+          Block Paragraph like we did bellow.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_block
+      data:
+        field_block:
+          type: block_reference
+          data:
+            target_type: 'block_content'
+            label_display: FALSE
+            target_search:
+              info: 'Block With Paragraphs Example'
+              type: d_paragraph_block
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: padding-top-none padding-bottom-none margin-top-default margin-bottom-default
+
 field_teaser_media_image:
   type: media_image
   directory: demo
