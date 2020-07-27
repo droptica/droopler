@@ -1585,11 +1585,6 @@ function droopler_update_8122(&$sandbox) {
     $sandbox['current']++;
     $paragraphModifiersHelper->analyzeParagraph($paragraph);
 
-    if (!$paragraphModifiersHelper->hasModifier('theme-invert')
-      && !$paragraphModifiersHelper->hasModifier('background-gray-light-2')) {
-      continue;
-    }
-
     if (
       $paragraphModifiersHelper->hasModifier('theme-default') ||
       $paragraphModifiersHelper->hasModifier('theme-primary') ||
@@ -1598,24 +1593,31 @@ function droopler_update_8122(&$sandbox) {
     ) {
       $paragraphModifiersHelper->removeModifier('theme-invert');
       $paragraphModifiersHelper->removeModifier('background-gray-light-2');
+      continue;
     }
 
-    // Migrate theme-invert
-    switch ($paragraph->bundle()) {
-      case 'd_p_side_embed':
-      case 'd_p_side_image':
-      case 'd_p_side_tiles':
-        $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-secondary');
-        break;
-      case 'd_p_text_paged':
-      case 'd_p_group_of_text_blocks':
-      case 'd_p_single_text_block':
-        $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-primary');
-        break;
+    if ($paragraphModifiersHelper->hasModifier('theme-invert')) {
+      // Migrate theme-invert
+      switch ($paragraph->bundle()) {
+        case 'd_p_side_embed':
+        case 'd_p_side_image':
+        case 'd_p_side_tiles':
+          $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-secondary');
+          break;
+        case 'd_p_text_paged':
+        case 'd_p_group_of_text_blocks':
+        case 'd_p_single_text_block':
+          $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-primary');
+          break;
+        default:
+          $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-default');
+      }
+    } elseif ($paragraphModifiersHelper->hasModifier('background-gray-light-')) {
+      // Migrate background-gray-light-2
+      $paragraphModifiersHelper->replaceModifier('background-gray-light-2', 'theme-gray');
+    } else {
+      $paragraphModifiersHelper->setModifier('theme-default');
     }
-
-    // Migrate background-gray-light-2
-    $paragraphModifiersHelper->replaceModifier('background-gray-light-2', 'theme-gray');
 
     $paragraph->set($paragraphModifiersHelper->getSettingsFieldName(), $paragraphModifiersHelper->getModifiersEncoded());
     $paragraph->save();
