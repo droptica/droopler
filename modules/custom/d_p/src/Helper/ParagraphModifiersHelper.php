@@ -108,10 +108,10 @@ class ParagraphModifiersHelper {
       $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME) ?? '';
       $classesSet = explode(' ', $classes);
 
-      unset($classesSet[array_search($name)]);
+      unset($classesSet[array_search($name, $classesSet)]);
 
-      $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', $classesSet);
-    } else {
+      $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', array_unique($classesSet));
+    } elseif(property_exists($this->modifiers, $name)) {
       unset($this->modifiers->$name);
     }
   }
@@ -129,7 +129,10 @@ class ParagraphModifiersHelper {
    * @return bool
    */
   public function hasClass($class) {
-    if (!$this->hasModifier(SettingsWidget::CSS_CLASS_SETTING_NAME)) {
+
+    if (!$this->hasModifiers() ||
+      !property_exists($this->modifiers, SettingsWidget::CSS_CLASS_SETTING_NAME) ||
+      empty($this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME}) ) {
       return FALSE;
     }
 
@@ -156,7 +159,7 @@ class ParagraphModifiersHelper {
    *   Modifier or NULL if not found or empty.
    */
   public function getModifier($name) {
-    return $this->hasModifier($name) ? $this->modifiers->$name : NULL;
+    return $this->modifiers->$name ?? NULL;
   }
 
   public function getModifiersEncoded() {

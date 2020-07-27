@@ -1567,7 +1567,7 @@ function droopler_update_8122(&$sandbox) {
   $paragraphs_per_batch = 10;
 
   $paragraphs_ids = \Drupal::entityQuery('paragraph')
-    ->exists('field_d_number')
+    ->exists('field_d_settings')
     ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
     ->execute();
 
@@ -1610,7 +1610,7 @@ function droopler_update_8122(&$sandbox) {
       case 'd_p_text_paged':
       case 'd_p_group_of_text_blocks':
       case 'd_p_single_text_block':
-        $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-gray');
+        $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-primary');
         break;
     }
 
