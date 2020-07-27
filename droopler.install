@@ -8,9 +8,9 @@
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 use Drupal\user\Entity\Role;
+use Drupal\d_p\Helper\ParagraphModifiersHelper;
 
 /**
  * Implements hook_install().
@@ -1425,11 +1425,10 @@ function droopler_update_8117() {
  */
 function droopler_update_8118(&$sandbox) {
   if (!isset($sandbox['total'])) {
-    $query = \Drupal::entityQuery('paragraph')
+    $sandbox['total'] = \Drupal::entityQuery('paragraph')
       ->exists('field_d_number')
-      ->execute();
+      ->count()->execute();
 
-    $sandbox['total'] = count($query);
     $sandbox['current'] = 0;
   }
 
@@ -1452,7 +1451,6 @@ function droopler_update_8118(&$sandbox) {
       $paragraph->set('field_d_settings', json_encode($json));
       $paragraph->save();
     }
-    $paragraph->save();
     $sandbox['current']++;
   }
 
@@ -1552,3 +1550,85 @@ function droopler_update_8121() {
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
 }
+
+/**
+ * Droopler 2.2 Migrate Paragraphs Settings values to the new format.
+ */
+function droopler_update_8122(&$sandbox) {
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['total'] = \Drupal::entityQuery('paragraph')
+      ->exists('field_d_settings')
+      ->count()->execute();
+
+    $sandbox['current'] = 0;
+  }
+
+  $paragraphs_per_batch = 10;
+
+  $paragraphs_ids = \Drupal::entityQuery('paragraph')
+    ->exists('field_d_number')
+    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->execute();
+
+  $paragraphs = [];
+  if (!empty($paragraphs_ids)) {
+    $paragraphs = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->loadMultiple($paragraphs_ids);
+  }
+
+  $paragraphModifiersHelper = new ParagraphModifiersHelper();
+
+  foreach ($paragraphs as $paragraph) {
+
+    $sandbox['current']++;
+    $paragraphModifiersHelper->analyzeParagraph($paragraph);
+
+    if (!$paragraphModifiersHelper->hasModifier('theme-invert')
+      && !$paragraphModifiersHelper->hasModifier('background-gray-light-2')) {
+      continue;
+    }
+
+    if (
+      $paragraphModifiersHelper->hasModifier('theme-default') ||
+      $paragraphModifiersHelper->hasModifier('theme-primary') ||
+      $paragraphModifiersHelper->hasModifier('theme-secondary') ||
+      $paragraphModifiersHelper->hasModifier('theme-gray')
+    ) {
+      $paragraphModifiersHelper->removeModifier('theme-invert');
+      $paragraphModifiersHelper->removeModifier('background-gray-light-2');
+    }
+
+    // Migrate theme-invert
+    switch ($paragraph->bundle()) {
+      case 'd_p_side_embed':
+      case 'd_p_side_image':
+      case 'd_p_side_tiles':
+        $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-secondary');
+        break;
+      case 'd_p_text_paged':
+      case 'd_p_group_of_text_blocks':
+      case 'd_p_single_text_block':
+        $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-gray');
+        break;
+    }
+
+    // Migrate background-gray-light-2
+    $paragraphModifiersHelper->replaceModifier('background-gray-light-2', 'theme-gray');
+
+    $paragraph->set($paragraphModifiersHelper->getSettingsFieldName(), $paragraphModifiersHelper->getModifiersEncoded());
+    $paragraph->save();
+  }
+
+  \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed (total ' . $sandbox['total'] . ').');
+  $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
+
+  if ($sandbox['#finished'] === 1) {
+
+    $values['droopler__droopler_update_8122_1'] = TRUE;
+    \Drupal::service('d_update')->checklist()->saveProgress(['v2.2' => $values]);
+  }
+
+}
+

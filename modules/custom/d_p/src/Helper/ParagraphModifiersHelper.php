@@ -25,8 +25,10 @@ class ParagraphModifiersHelper {
    * @param \Drupal\paragraphs\Entity\Paragraph $paragraph
    *   Paragraph to be analyzed.
    */
-  public function __construct(Paragraph $paragraph) {
-    $this->analyzeParagraph($paragraph);
+  public function __construct(Paragraph $paragraph = NULL) {
+    if ($paragraph) {
+      $this->analyzeParagraph($paragraph);
+    }
   }
 
   /**
@@ -79,7 +81,44 @@ class ParagraphModifiersHelper {
    * @return bool
    */
   public function hasModifier($name) {
+    /*
+     * TODO: In the future we'll probably have simplified structure of d_settings field - in that case only one method would be sufficient for checking if the modifier is set.
+     */
+    if ($this->hasClass($name)) {
+      return TRUE;
+    }
+
     return $this->hasModifiers() && property_exists($this->modifiers, $name) && !empty($this->modifiers->$name);
+  }
+
+  public function setModifier($name, $value = NULL) {
+    if (empty($value)) {
+      $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME) ?? '';
+      $classesSet = explode(' ', $classes);
+      $classesSet[] = $name;
+
+      $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', $classesSet);
+    } else {
+      $this->modifiers->$name = $value;
+    }
+  }
+
+  public function removeModifier($name) {
+    if ($this->hasClass($name)) {
+      $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME) ?? '';
+      $classesSet = explode(' ', $classes);
+
+      unset($classesSet[array_search($name)]);
+
+      $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', $classesSet);
+    } else {
+      unset($this->modifiers->$name);
+    }
+  }
+
+  public function replaceModifier($name, $newName, $newValue = NULL) {
+    $this->removeModifier($name);
+    $this->setModifier($newName, $newValue);
   }
 
   /**
@@ -118,6 +157,10 @@ class ParagraphModifiersHelper {
    */
   public function getModifier($name) {
     return $this->hasModifier($name) ? $this->modifiers->$name : NULL;
+  }
+
+  public function getModifiersEncoded() {
+    return json_encode($this->modifiers);
   }
 
   /**
