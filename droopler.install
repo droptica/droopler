@@ -1534,13 +1534,33 @@ function droopler_update_8120() {
 }
 
 /**
- * Droopler 2.2 Change icon weight in Side by side paragraph.
+ * Droopler 2.2 improve Blog Post "teaser small" image style.
  */
 function droopler_update_8121() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
-  $values['droopler__droopler_update_8121_1'] = update_modules_configuration(['d_p_side_by_side'], '8121');
+  $configs = [
+    'd_media' => [
+      'image.style.large_gallery_thumbnail' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8121_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8121_2'] = update_modules_configuration(['d_blog'], '8121');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 Change icon weight in Side by Side paragraph.
+ */
+function droopler_update_8122() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8122_1'] = update_modules_configuration(['d_p_side_by_side'], '8122');
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);

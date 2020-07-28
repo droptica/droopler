@@ -490,6 +490,11 @@ $d-p-themes: map-merge(
         .field {
           color: map-get($themeSettings, "text");
         }
+        @for $i from 1 through 6 {
+          h#{$i} {
+            color: map-get($themeSettings, "text");
+          }
+        }
       }
     }
   }
