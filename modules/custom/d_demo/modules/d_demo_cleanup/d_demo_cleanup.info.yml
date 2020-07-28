@@ -1,0 +1,9 @@
+name: d_demo_cleanup
+core: 8.x
+core_version_requirement: ^8 || ^9
+description: 'Cleans up stale users.'
+type: module
+package: Droopler
+version: DROOPLER_VERSION
+dependencies:
+  - automated_cron

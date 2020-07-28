@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * d_demo_cleanup module.
+ */
+
+function d_demo_cleanup_cron() {
+  $storage = \Drupal::entityTypeManager()->getStorage('user');
+
+  $delay = time() - 24 * 60 * 60;
+
+  $ids = $storage->getQuery()
+    ->condition('created', $delay, '<')
+    ->condition('uid', 1, '>')
+    ->execute();
+
+  $users = $storage->loadMultiple($ids);
+  $storage->delete($users);
+}
