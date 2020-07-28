@@ -1,0 +1,36 @@
+core.entity_form_display.node.content_page.default:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_meta_tags
+      module:
+        - media_library
+        - metatag
+    content:
+      field_meta_tags:
+        weight: 26
+        settings:
+          sidebar: true
+        third_party_settings: {  }
+        type: metatag_firehose
+        region: content
+  delete:
+    - hidden:field_header_cta
+    - hidden:field_header_layout
+    - hidden:field_meta_tags
+
+core.entity_view_display.node.content_page.default:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_meta_tags
+    hidden:
+      search_api_excerpt: true
+      field_meta_tags: true
+core.entity_view_display.node.content_page.d_small_box:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_meta_tags
+    hidden:
+      field_meta_tags: true

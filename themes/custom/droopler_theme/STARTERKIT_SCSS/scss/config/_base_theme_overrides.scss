@@ -317,6 +317,7 @@
 // $d-p-form-copy-margin-right: 1.25rem;
 // $d-p-form-small-labels-spacing: 7px;
 // $d-p-form-background-opacity: 0.4;
+// $d-p-form-table-color: $color-cassandra;
 
 // Paragraph d_p_side_image
 // -------------------------
@@ -602,13 +603,15 @@
 
 
 // Paragraph themes definitions.
-// if "set-fields-color" is set to "true" it will add CSS rules to style color of all .fields tags.
+// if "set-fields-color" is set to "true" it will add CSS rules to style color of all .fields tags,
+// "text-bold" is used for setting the color for <b> and <strong> tags.
 // -------------------------
 // $d-p-themes: (
 //   // A new Theme
 //   pigy: (
 //     background: pink,
 //     text: yellow,
+//     text-bold: orange,
 //     set-fields-color: true,
 //   ),
 //
@@ -616,6 +619,7 @@
 //   secondary: (
 //     background: purple,
 //     text: green,
+//     text-bold: red,
 //     set-fields-color: false,
 //   ),
 // );

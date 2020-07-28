@@ -1,0 +1,20 @@
+core.entity_view_display.node.blog_post.teaser_small:
+  add:
+    dependencies:
+      config:
+        - image.style.large_gallery_thumbnail
+  delete_value:
+    - parents: dependencies:config
+      values:
+        - image.style.gallery_thumbnail
+  change:
+    expected:
+      content:
+        field_blog_media_main_image:
+          settings:
+            image_style: gallery_thumbnail
+    new:
+      content:
+        field_blog_media_main_image:
+          settings:
+            image_style: large_gallery_thumbnail

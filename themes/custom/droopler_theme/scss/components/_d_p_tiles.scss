@@ -24,16 +24,20 @@ $d-p-tiles-margin-bottom: 5% !default;
     padding-bottom: 0;
   }
 }
+.margin-top-default {
+  .paragraph--type--d-p-tiles {
+    margin-top: $d-p-tiles-margin-top;
+  }
+}
+.margin-bottom-default {
+  .paragraph--type--d-p-tiles {
+    margin-bottom: $d-p-tiles-margin-bottom;
+  }
+}
 
 .paragraph--type--d-p-tiles {
   @include clearfix;
   text-align: center;
-  .paragraph-top-light & {
-    margin-top: $d-p-tiles-margin-top;
-  }
-  .paragraph-bottom-light & {
-    margin-bottom: $d-p-tiles-margin-bottom;
-  }
 
   .field--name-field-d-main-title {
     @include font-main-header;
