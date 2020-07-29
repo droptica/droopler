@@ -98,12 +98,18 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   }
 
   .d-media-background-wrapper {
-    z-index: -1;
+    opacity: 0.5;
+  }
+  .content-wrapper {
+    position: relative;
+    z-index: 2;
   }
 }
 
 .theme-default.user-image-background {
-  .d-p-text-block {
+  .paragraph.d-p-text-block {
+    background-color: black;
+
     &, .field {
       color: white;
     }
@@ -119,33 +125,32 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
   .list-item-wrapper {
     padding: 0 $d-p-text-blocks-tiles-spacing $d-p-text-blocks-tiles-spacing 0;
-    display: flex;
-    align-items: center;
 
     .d-p-text-block {
-      padding: $d-p-text-blocks-tiles-padding 2* $d-p-text-blocks-tiles-padding;
+      padding-left: 2* $d-p-text-blocks-tiles-padding;
+      padding-right: 2* $d-p-text-blocks-tiles-padding;
       margin-bottom: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .content-wrapper {
+        padding: $d-p-text-blocks-tiles-padding 0;
+      }
+    }
+
+    > div {
+      display: block;
+      height: 100%;
       width: 100%;
     }
 
     @include media-breakpoint-down(lg) {
       .d-p-text-block {
-        padding: $d-p-text-blocks-tiles-padding;
-      }
-    }
-
-    @include media-breakpoint-up(sm) {
-      > .geysir-field-paragraph-wrapper {
-          display: block;
-          height: 100%;
-      }
-
-      > .geysir-field-paragraph-wrapper > .wrapper-d_p_single_text_block,
-      > .wrapper-d_p_single_text_block {
-        display: flex;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
+        padding-left: $d-p-text-blocks-tiles-padding;
+        padding-right: $d-p-text-blocks-tiles-padding;
       }
     }
 

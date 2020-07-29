@@ -344,29 +344,7 @@ $two-columned-header-line-margin: 0.625rem !default;
   }
 
   &.wrapper-d_p_single_text_block {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 100%;
-  }
-
-  .image-background-container {
-    position: absolute;
-    height: 100%;
-    top: 0;
-    right: 0;
-    display: block;
-    z-index: -1;
-
-    &.background-properties {
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-    }
-
-    &.background-image {
-      z-index: -1 !important;
-    }
   }
 
   .d-p-text-block {
@@ -392,7 +370,10 @@ $two-columned-header-line-margin: 0.625rem !default;
 
   .field--type-link {
     a {
-      &, &:not(.disabled):active, &:active, &:hover {
+      &,
+      &:not(.disabled):active,
+      &:active,
+      &:hover {
         position: absolute;
         left: 0;
         top: 0;
@@ -405,12 +386,6 @@ $two-columned-header-line-margin: 0.625rem !default;
         background: none;
         border: none;
       }
-    }
-  }
-
-  .d-media-background-wrapper {
-    img {
-      filter: brightness(50%);
     }
   }
 }
@@ -481,7 +456,6 @@ $d-p-themes: map-merge(
     > .content-moved-inside .content-inside-wrapper {
       background: map-get($themeSettings, "background");
       color: map-get($themeSettings, "text");
-
 
       @if map-get($themeSettings, "text-bold") {
         b,

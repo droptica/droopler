@@ -1606,8 +1606,10 @@ function droopler_update_8122(&$sandbox) {
           break;
         case 'd_p_text_paged':
         case 'd_p_group_of_text_blocks':
-        case 'd_p_single_text_block':
           $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-primary');
+          break;
+        case 'd_p_single_text_block':
+          $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-default');
           break;
         default:
           $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-default');
