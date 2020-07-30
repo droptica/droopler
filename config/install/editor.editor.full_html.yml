@@ -37,7 +37,7 @@ settings:
         -
           name: Linking
           items:
-            - Linkit
+            - DrupalLink
             - DrupalUnlink
         -
           name: Lists
@@ -67,12 +67,13 @@ settings:
             - Source
             - Maximize
   plugins:
+    drupallink:
+      linkit_enabled: true
+      linkit_profile: content_nodes
     stylescombo:
       styles: ''
     language:
       language_list: un
-    linkit:
-      linkit_profile: content_nodes
 image_upload:
   status: true
   scheme: public
