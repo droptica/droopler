@@ -1,0 +1,22 @@
+core.entity_view_display.paragraph.d_p_side_by_side.default:
+  change:
+    expected:
+      content:
+        field_d_media_icon:
+          weight: 7
+        field_d_main_title:
+          weight: 0
+          label: above
+        field_d_long_text:
+          weight: 1
+          label: above
+    new:
+      content:
+        field_d_media_icon:
+          weight: 0
+        field_d_main_title:
+          weight: 1
+          label: hidden
+        field_d_long_text:
+          weight: 2
+          label: hidden
