@@ -10,3 +10,14 @@ function d_block_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function d_block_preprocess_paragraph__d_p_block(&$variables) {
+  $variables['container_class'] = 'container';
+  $block_content = $variables['elements']['field_block'][0]['content']['#block_content'] ?? false;
+  if ($block_content) {
+    $variables['container_class'] = $block_content->field_paragraphs ? '' : 'container';
+  }
+}

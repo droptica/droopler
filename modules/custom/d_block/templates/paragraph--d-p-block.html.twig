@@ -48,7 +48,8 @@
     <div{{ attributes.addClass(classes) }}>
       <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
         <div class="content-wrapper">
-          <div class="content container">
+          <div class="content {{ container_class }}">
+            {{ asd }}
             {% block content %}
               {{ content.field_block }}
             {% endblock %}
