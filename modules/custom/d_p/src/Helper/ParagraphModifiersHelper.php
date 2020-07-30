@@ -84,13 +84,17 @@ class ParagraphModifiersHelper {
     /*
      * TODO: In the future we'll probably have simplified structure of d_settings field - in that case only one method would be sufficient for checking if the modifier is set.
      */
-    if ($this->hasClass($name)) {
-      return TRUE;
-    }
-
-    return $this->hasModifiers() && property_exists($this->modifiers, $name) && !empty($this->modifiers->$name);
+    return $this->hasClass($name) || $this->checkPropertyExists($name);
   }
 
+  /**
+   * Sets a new modifier.
+   *
+   * @param $name
+   *   Name of the new modifier to be set.
+   * @param null $value
+   *   Optional value for the new modifier.
+   */
   public function setModifier($name, $value = NULL) {
     if (empty($value)) {
       $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME) ?? '';
@@ -103,6 +107,12 @@ class ParagraphModifiersHelper {
     }
   }
 
+  /**
+   * Removes specified modifier.
+   *
+   * @param $name
+   *   Name of the modifier to be removed.
+   */
   public function removeModifier($name) {
     if ($this->hasClass($name)) {
       $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME) ?? '';
@@ -111,11 +121,21 @@ class ParagraphModifiersHelper {
       unset($classesSet[array_search($name, $classesSet)]);
 
       $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', array_unique($classesSet));
-    } elseif(property_exists($this->modifiers, $name)) {
+    } elseif ($this->checkPropertyExists($name)) {
       unset($this->modifiers->$name);
     }
   }
 
+  /**
+   * Replaces specified modifier with new one.
+   *
+   * @param $name
+   *   Name of modifier to be replaced.
+   * @param $newName
+   *   Name of the new modifier to be set.
+   * @param null $newValue
+   *   Optional value set for the new modifier.
+   */
   public function replaceModifier($name, $newName, $newValue = NULL) {
     if ($this->hasModifier($name)) {
       $this->removeModifier($name);
@@ -131,10 +151,7 @@ class ParagraphModifiersHelper {
    * @return bool
    */
   public function hasClass($class) {
-
-    if (!$this->hasModifiers() ||
-      !property_exists($this->modifiers, SettingsWidget::CSS_CLASS_SETTING_NAME) ||
-      empty($this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME}) ) {
+    if (!$this->checkPropertyExists(SettingsWidget::CSS_CLASS_SETTING_NAME)) {
       return FALSE;
     }
 
@@ -161,9 +178,14 @@ class ParagraphModifiersHelper {
    *   Modifier or NULL if not found or empty.
    */
   public function getModifier($name) {
-    return $this->modifiers->$name ?? NULL;
+    return $this->hasModifier($name) ? $this->modifiers->$name : NULL;
   }
 
+  /**
+   * Returns paragraph modifiers encoded in d_settings field format.
+   *
+   * @return false|string
+   */
   public function getModifiersEncoded() {
     return json_encode($this->modifiers);
   }
@@ -177,4 +199,22 @@ class ParagraphModifiersHelper {
     return $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME);
   }
 
+  /**
+   * Method checks if currently analyzed paragraph has specified property in d_settings field.
+   *
+   * @param $name
+   *   Name of property to be checked.
+   *
+   * @return bool
+   *   TRUE if is set, FALSE if not.
+   */
+  protected function checkPropertyExists($name) {
+    if (!$this->hasModifiers() ||
+      !property_exists($this->modifiers, SettingsWidget::CSS_CLASS_SETTING_NAME) ||
+      empty($this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME}) ) {
+      return FALSE;
+    }
+
+    return TRUE;
+  }
 }
