@@ -178,7 +178,7 @@ class ParagraphModifiersHelper {
    *   Modifier or NULL if not found or empty.
    */
   public function getModifier($name) {
-    return $this->hasModifier($name) ? $this->modifiers->$name : NULL;
+    return $this->modifiers->$name ?? NULL;
   }
 
   /**
