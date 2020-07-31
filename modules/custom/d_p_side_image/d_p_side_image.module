@@ -15,11 +15,11 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
   $bundle = $paragraph->bundle();
 
   switch ($bundle) {
-
     case 'd_p_side_image':
-      $field_image_side = $paragraph->get('field_d_p_si_image_side')->get(0);
-      if ($field_image_side) {
-        $image_side = $field_image_side->get('value')->getValue();
+      $settings = $paragraph->get('field_d_settings');
+      if (!empty($settings->first()->getValue())) {
+        $value = json_decode($settings->first()->getValue()['value'], TRUE);
+        $image_side = $value['layout_class'];
         $wrapper_attributes = [
           'class' => [
             'image-side-' . $image_side,

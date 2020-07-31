@@ -200,20 +200,9 @@ function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, 
     $config = $field_definition->id();
     list ($entity_type, $bundle, $field_name) = explode('.', $config);
 
-    // Hide option "full" paragraphs other than "d_p_side_embed".
-    if ($bundle != 'd_p_side_embed' && $field_name == 'field_d_p_si_image_side') {
-      unset($element['#options']['full']);
-    }
-
     // Make the content of the CKEditor centred by default for the specified
     // paragraph types.
     d_p_centered_ckeditor_widget_content($element, $form_state, $context, $bundle);
-
-    // Hide options "Left (wide)" and "Right (wide)" on given paragraphs.
-    if (in_array($bundle, ['d_p_side_embed', 'd_p_side_tiles'])) {
-      unset($element['#options']['left-wide']);
-      unset($element['#options']['right-wide']);
-    }
 
     // Add default value to the link class attribute.
     if ($field_name === 'field_d_cta_link' &&

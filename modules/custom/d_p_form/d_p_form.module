@@ -26,11 +26,10 @@ function d_p_form_preprocess_paragraph(&$variables) {
 
   switch ($bundle) {
     case 'd_p_form':
-      $field_form_layout_field = $paragraph->get('field_d_layout_modifier');
       $settings = $paragraph->get('field_d_settings');
-      if (!$field_form_layout_field->isEmpty()) {
-        $form_side_value = $field_form_layout_field->first()->getValue();
-        $variables['d_p_form_placement'] = $form_side_value['value'];
+      if (!empty($settings->first()->getValue())) {
+        $value = json_decode($settings->first()->getValue()['value'], TRUE);
+        $variables['d_p_form_placement'] = $value['layout_class'];
       }
       break;
   }

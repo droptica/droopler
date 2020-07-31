@@ -16,11 +16,12 @@ function d_p_side_tiles_preprocess_paragraph(&$variables) {
 
   switch ($bundle) {
     case 'd_p_side_tiles':
-      $field_tiles_side = $paragraph->get('field_d_p_si_image_side')->get(0);
-      if ($field_tiles_side) {
-        $tiles_side = $field_tiles_side->getValue();
-        $variables['tiles_side'] = $tiles_side['value'];
+      $settings = $paragraph->get('field_d_settings');
+      if (!empty($settings->first()->getValue())) {
+        $value = json_decode($settings->first()->getValue()['value'], TRUE);
+        $variables['tiles_side'] = $value['layout_class'];
       }
+
       $variables['#attached']['library'][] = 'd_p_tiles/masonry';
       $variables['#attached']['library'][] = 'd_p_tiles/d_p_tiles';
 
