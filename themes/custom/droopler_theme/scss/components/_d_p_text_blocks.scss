@@ -104,17 +104,18 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     position: relative;
     z-index: 2;
   }
-}
 
-.theme-default.user-image-background {
-  .paragraph.d-p-text-block {
-    background-color: black;
+  .theme-default.user-image-background {
+    .paragraph.d-p-text-block {
+      background-color: black;
 
-    &, .field {
-      color: white;
+      &, .field {
+        color: white;
+      }
     }
   }
 }
+
 
 .with-tiles {
   @include media-breakpoint-down(md) {

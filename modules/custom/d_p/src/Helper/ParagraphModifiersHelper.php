@@ -210,8 +210,8 @@ class ParagraphModifiersHelper {
    */
   protected function checkPropertyExists($name) {
     if (!$this->hasModifiers() ||
-      !property_exists($this->modifiers, SettingsWidget::CSS_CLASS_SETTING_NAME) ||
-      empty($this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME}) ) {
+      !property_exists($this->modifiers, $name) ||
+      empty($this->modifiers->$name) ) {
       return FALSE;
     }
 
