@@ -23,6 +23,7 @@ class SettingsWidget extends WidgetBase {
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
   const COLUMN_COUNT_SETTING_NAME = 'column_count';
+  const PARAGRAPH_LAYOUT_SETTING = 'layout_class';
 
   /**
    * @var array
@@ -331,6 +332,77 @@ class SettingsWidget extends WidgetBase {
           ],
         ],
       ],
+      self::PARAGRAPH_LAYOUT_SETTING => [
+        'title' => $this->t('Paragraph layout settings'),
+        'type' => 'layout_css',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_form',
+            'd_p_side_embed',
+            'd_p_side_image',
+            'd_p_side_tiles',
+          ],
+        ],
+        'modifiers' => [
+          'form-layout' => [
+            'title' => $this->t('Form layout'),
+            'description' => $this->t('Choose form layout'),
+            'type' => 'select',
+            'options' => [
+              'left' => $this->t('Left'),
+              'right' => $this->t('Right'),
+              'bottom' => $this->t('Bottom'),
+            ],
+            'bundles' => [
+              'paragraph' => [
+                'd_p_form',
+              ],
+            ],
+          ],
+          'embed-layout' => [
+            'title' => $this->t('Embed side'),
+            'type' => 'select',
+            'options' => [
+              'left' => $this->t('Left'),
+              'right' => $this->t('Right'),
+              'full' => $this->t('Full width'),
+            ],
+            'bundles' => [
+              'paragraph' => [
+                'd_p_side_embed',
+              ],
+            ],
+          ],
+          'side-image-layout' => [
+            'title' => $this->t('Image side'),
+            'type' => 'select',
+            'options' => [
+              'left' => $this->t('Left'),
+              'right' => $this->t('Right'),
+              'left-wide' => $this->t('Left (wide)'),
+              'right-wide' => $this->t('Right (wide)'),
+            ],
+            'bundles' => [
+              'paragraph' => [
+                'd_p_side_image',
+              ],
+            ],
+          ],
+          'side-tiles-layout' => [
+            'title' => $this->t('Tiles gallery side'),
+            'type' => 'select',
+            'options' => [
+              'left' => $this->t('Left'),
+              'right' => $this->t('Right'),
+            ],
+            'bundles' => [
+              'paragraph' => [
+                'd_p_side_tiles',
+              ],
+            ],
+          ],
+        ],
+      ],
     ];
   }
 
@@ -374,7 +446,9 @@ class SettingsWidget extends WidgetBase {
     ];
 
     $config_options = $this->getConfigOptions();
+
     foreach ($config_options as $key => $options) {
+
       // If the widget is not available in the current bundle, just skip it.
       if (!$this->inBundle($options['bundles'])) {
         continue;
@@ -392,8 +466,7 @@ class SettingsWidget extends WidgetBase {
             $class_key = array_search($class, $classes);
             if ($class_key === FALSE) {
               $default_value = 0;
-            }
-            else {
+            } else {
               unset($classes[$class_key]);
               $default_value = 1;
             }
@@ -433,46 +506,64 @@ class SettingsWidget extends WidgetBase {
           }
           break;
 
-        case 'select':
-          $element[$key] = [
-            '#type' => 'select',
-            '#title' => $options['title'],
-            '#description' => $options['description'] ?? '',
-            '#options' => $options['options'],
-            '#default_value' => empty($value) ? $options['default'] : $value,
-          ];
-          if ($element['#required']) {
-            $element[$key]['#required'] = TRUE;
-          }
-          break;
+          case 'select':
+            $element[$key] = [
+              '#type' => 'select',
+              '#title' => $options['title'],
+              '#description' => $options['description'] ?? '',
+              '#options' => $options['options'],
+              '#default_value' => empty($value) ? $options['default'] : $value,
+            ];
+            if ($element['#required']) {
+              $element[$key]['#required'] = TRUE;
+            }
+            break;
 
-        case 'number':
-          $element[$key] = [
-            '#type' => 'number',
-            '#title' => $options['title'],
-            '#description' => $options['description'] ?? '',
-            '#default_value' => !empty($value) && $value !== '' ? $value : $options['default'],
-            '#min' => $options['min'] ?? NULL,
-            '#max' => $options['max'] ?? NULL,
-          ];
-          if ($element['#required']) {
-            $element[$key]['#required'] = TRUE;
-          }
-          break;
+          case 'number':
+            $element[$key] = [
+              '#type' => 'number',
+              '#title' => $options['title'],
+              '#description' => $options['description'] ?? '',
+              '#default_value' => !empty($value) && $value !== '' ? $value : $options['default'],
+              '#min' => $options['min'] ?? NULL,
+              '#max' => $options['max'] ?? NULL,
+            ];
+            if ($element['#required']) {
+              $element[$key]['#required'] = TRUE;
+            }
+            break;
 
-        default:
-          $element[$key] = [
-            '#type' => 'textfield',
-            '#title' => $options['title'],
-            '#description' => $options['description'] ?? '',
-            '#size' => 32,
-            '#default_value' => $value,
-          ];
-          if ($element['#required']) {
-            $element[$key]['#required'] = TRUE;
-          }
-      }
+          case 'layout_css':
+            foreach ($options['modifiers'] as $layout => $modifier) {
+              if (!$this->inBundle($modifier['bundles'])) {
+                continue;
+              }
+              $element[$layout] = [
+                '#type' => $modifier['type'],
+                '#description' => $modifier['description'] ?? '',
+                '#title' => $modifier['title'],
+                '#options' => $modifier['options'],
+                '#default_value' => $value,
+                '#attributes' => ['data-layout' => $layout],
+                '#required' => TRUE,
+              ];
+            }
+            break;
+
+          default:
+            $element[$key] = [
+              '#type' => 'textfield',
+              '#title' => $options['title'],
+              '#description' => $options['description'] ?? '',
+              '#size' => 32,
+              '#default_value' => $value,
+            ];
+            if ($element['#required']) {
+              $element[$key]['#required'] = TRUE;
+            }
+        }
     }
+
     return ['value' => $element];
   }
 
@@ -489,26 +580,30 @@ class SettingsWidget extends WidgetBase {
       if (!$this->inBundle($options['bundles'])) {
         continue;
       }
-      if ($options['type'] === 'css') {
-        $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
-        foreach ($options['modifiers'] as $class => $modifier) {
-          $modifier_value = $element[$class]['#value'] ?? NULL;
-          if ($modifier_value && $this->inBundle($modifier['bundles'])) {
-            switch ($modifier['type']) {
-              case 'select':
-                $classes[] = $modifier_value;
-                break;
-              default:
-                $classes[] = $class;
-                break;
+
+      switch ($options['type']) {
+        case 'css':
+        case 'layout_css':
+          $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
+          foreach ($options['modifiers'] as $class => $modifier) {
+            $modifier_value = $element[$class]['#value'] ?? NULL;
+            if ($modifier_value && $this->inBundle($modifier['bundles'])) {
+              switch ($modifier['type']) {
+                case 'select':
+                  $classes[] = $modifier_value;
+                  break;
+                  default:
+                    $classes[] = $class;
+                    break;
+              }
             }
           }
-        }
-        $classes = array_unique($classes);
-        $values[$key] = join(' ', $classes);
-      }
-      else {
-        $values[$key] = $value;
+          $classes = array_unique($classes);
+          $values[$key] = join(' ', $classes);
+          break;
+
+        default:
+          $values[$key] = $value;
       }
     }
     $form_state->setValueForElement($element, json_encode($values));
