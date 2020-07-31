@@ -10,6 +10,7 @@ $d-p-side-by-side-line-color-inverted: $color-nestor !default;
 
 // Margins, paddings and sizing.
 $d-p-side-by-side-padding-y: 5% !default;
+$d-p-side-by-side-header-padding: 5% !default;
 
 $d-p-side-by-side-subtitle-margin-y: 2.125rem !default;
 
@@ -37,8 +38,10 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
     text-align: center;
   }
 
-  .text-content {
-    padding-bottom: $d-p-side-by-side-padding-y;
+  .side-header {
+    .field:first-child {
+      padding-top: $d-p-side-by-side-header-padding;
+    }
 
     .field--name-field-d-main-title {
       @include font-main-header;
@@ -52,8 +55,8 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
       margin: $d-p-side-by-side-subtitle-margin-y 0;
       @include font-subtitle;
     }
-  }
 
+  }
   .wrapper-d_p_single_text_block {
     padding: $d-p-side-by-side-text-box-padding-y 0;
     text-align: left;

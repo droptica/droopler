@@ -1552,3 +1552,32 @@ function droopler_update_8121() {
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
 }
+
+/**
+ * Droopler 2.2 configure meta tags for Commerce products.
+ */
+function droopler_update_8122() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  if (\Drupal::service('module_handler')->moduleExists('d_commerce_product')) {
+    try {
+      \Drupal::service('module_installer')->install(['metatag_open_graph_products']);
+      $configs = [
+        'd_commerce_product' => [
+          'metatag.metatag_defaults.commerce_product.yml' => '',
+        ],
+      ];
+      $values['droopler__droopler_update_8122_1'] = $updater->importConfigs($configs);
+    }
+    catch (MissingDependencyException $e) {
+      $values['droopler__droopler_update_8122_1'] = FALSE;
+    }
+  }
+  else {
+    $values['droopler__droopler_update_8122_1'] = TRUE;
+  }
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
