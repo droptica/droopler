@@ -19,7 +19,7 @@ bundle: d_p_side_by_side
 mode: default
 content:
   field_d_cta_link:
-    weight: 6
+    weight: 4
     label: hidden
     settings:
       trim_length: 80
@@ -32,21 +32,21 @@ content:
     region: content
   field_d_long_text:
     type: text_default
-    weight: 1
+    weight: 2
     region: content
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
   field_d_main_title:
     type: string
-    weight: 0
+    weight: 1
     region: content
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
   field_d_media_icon:
-    weight: 7
+    weight: 0
     label: hidden
     settings:
       view_mode: d_icon
@@ -56,7 +56,7 @@ content:
     region: content
   field_d_p_sbs_items:
     type: entity_reference_revisions_entity_view
-    weight: 5
+    weight: 3
     label: hidden
     settings:
       view_mode: default
