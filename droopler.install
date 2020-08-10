@@ -1543,6 +1543,8 @@ function droopler_update_8121() {
   $configs = [
     'd_media' => [
       'image.style.large_gallery_thumbnail' => '',
+      'core.entity_view_display.media.d_image.tiles_gallery_fullscreen_featured' => '',
+      'core.entity_view_mode.media.tiles_gallery_fullscreen_featured' => '',
     ],
   ];
 

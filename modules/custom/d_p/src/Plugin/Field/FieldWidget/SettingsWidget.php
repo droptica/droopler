@@ -24,6 +24,7 @@ class SettingsWidget extends WidgetBase {
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
   const COLUMN_COUNT_SETTING_NAME = 'column_count';
   const PARAGRAPH_LAYOUT_SETTING = 'layout_class';
+  const PARAGRAPH_FEATURED_IMAGES = 'featured_images';
 
   /**
    * @var array
@@ -400,6 +401,18 @@ class SettingsWidget extends WidgetBase {
                 'd_p_side_tiles',
               ],
             ],
+          ],
+        ],
+      ],
+      self::PARAGRAPH_FEATURED_IMAGES => [
+        'title' => $this->t('Featured images'),
+        'outside' => TRUE,
+        'description' => $this->t('Comma separated image numbers. Example: 1,4,7'),
+        'type' => 'textfield',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_side_tiles',
+            'd_p_tiles',
           ],
         ],
       ],
