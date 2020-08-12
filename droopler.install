@@ -1755,7 +1755,7 @@ function droopler_update_8124(&$sandbox) {
 /**
  * Droopler 2.2 update configs for featured view mode in media.
  */
-function droopler_update_8130() {
+function droopler_update_8125() {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
 
@@ -1766,7 +1766,7 @@ function droopler_update_8130() {
     ],
   ];
 
-  $values['droopler__droopler_update_8130_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8125_1'] = $updater->importConfigs($configs);
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
