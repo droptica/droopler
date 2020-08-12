@@ -1534,7 +1534,7 @@ function droopler_update_8120() {
 }
 
 /**
- * Droopler 2.2 Add fearured templates for media.
+ * Droopler 2.2 improve Blog Post "teaser small" image style.
  */
 function droopler_update_8121() {
   /** @var Drupal\d_update\Updater $updater */
@@ -1543,13 +1543,11 @@ function droopler_update_8121() {
   $configs = [
     'd_media' => [
       'image.style.large_gallery_thumbnail' => '',
-      'core.entity_view_display.media.d_image.tiles_gallery_fullscreen_featured' => '',
-      'core.entity_view_mode.media.tiles_gallery_fullscreen_featured' => '',
     ],
   ];
 
   $values['droopler__droopler_update_8121_1'] = $updater->importConfigs($configs);
-  $values['droopler__droopler_update_8121_2'] = update_modules_configuration(['d_media'], '8121');
+  $values['droopler__droopler_update_8121_2'] = update_modules_configuration(['d_blog'], '8121');
 
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
@@ -1746,10 +1744,30 @@ function droopler_update_8124(&$sandbox) {
 
   $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
 
-  if ($sandbox['##finished'] === 1) {
+  if ($sandbox['#finished'] === 1) {
     $values['droopler__droopler_update_8124_1'] = TRUE;
     \Drupal::service('d_update')->checklist()
       ->saveProgress(['v2.2' => $values]);
     \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed, ' . $sandbox['changed'] . ' changed.');
   }
+}
+
+/**
+ * Droopler 2.2 update configs for featured view mode in media.
+ */
+function droopler_update_8130() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_media' => [
+      'core.entity_view_display.media.d_image.tiles_gallery_fullscreen_featured' => 'override',
+      'core.entity_view_mode.media.tiles_gallery_fullscreen_featured' => 'override',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8130_1'] = $updater->importConfigs($configs);
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
 }
