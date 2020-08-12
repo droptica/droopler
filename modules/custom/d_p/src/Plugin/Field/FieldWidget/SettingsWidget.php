@@ -492,62 +492,62 @@ class SettingsWidget extends WidgetBase {
           }
           break;
 
-          case 'select':
-            $element[$key] = [
-              '#type' => 'select',
-              '#title' => $options['title'],
-              '#description' => $options['description'] ?? '',
-              '#options' => $options['options'],
-              '#default_value' => empty($value) ? $options['default'] : $value,
-            ];
-            if ($element['#required']) {
-              $element[$key]['#required'] = TRUE;
-            }
-            break;
+        case 'select':
+          $element[$key] = [
+            '#type' => 'select',
+            '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
+            '#options' => $options['options'],
+            '#default_value' => empty($value) ? $options['default'] : $value,
+          ];
+          if ($element['#required']) {
+            $element[$key]['#required'] = TRUE;
+          }
+          break;
 
-          case 'number':
-            $element[$key] = [
-              '#type' => 'number',
-              '#title' => $options['title'],
-              '#description' => $options['description'] ?? '',
-              '#default_value' => !empty($value) && $value !== '' ? $value : $options['default'],
-              '#min' => $options['min'] ?? NULL,
-              '#max' => $options['max'] ?? NULL,
-            ];
-            if ($element['#required']) {
-              $element[$key]['#required'] = TRUE;
-            }
-            break;
+        case 'number':
+          $element[$key] = [
+            '#type' => 'number',
+            '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
+            '#default_value' => !empty($value) && $value !== '' ? $value : $options['default'],
+            '#min' => $options['min'] ?? NULL,
+            '#max' => $options['max'] ?? NULL,
+          ];
+          if ($element['#required']) {
+            $element[$key]['#required'] = TRUE;
+          }
+          break;
 
-          case 'layout_css':
-            foreach ($options['modifiers'] as $layout => $modifier) {
-              if (!$this->inBundle($modifier['bundles'])) {
-                continue;
-              }
-              $element[$layout] = [
-                '#type' => $modifier['type'],
-                '#description' => $modifier['description'] ?? '',
-                '#title' => $modifier['title'],
-                '#options' => $modifier['options'],
-                '#default_value' => $value,
-                '#attributes' => ['data-layout' => $layout],
-                '#required' => TRUE,
-              ];
+        case 'layout_css':
+          foreach ($options['modifiers'] as $layout => $modifier) {
+            if (!$this->inBundle($modifier['bundles'])) {
+              continue;
             }
-            break;
-
-          default:
-            $element[$key] = [
-              '#type' => 'textfield',
-              '#title' => $options['title'],
-              '#description' => $options['description'] ?? '',
-              '#size' => 32,
+            $element[$layout] = [
+              '#type' => $modifier['type'],
+              '#description' => $modifier['description'] ?? '',
+              '#title' => $modifier['title'],
+              '#options' => $modifier['options'],
               '#default_value' => $value,
+              '#attributes' => ['data-layout' => $layout],
+              '#required' => TRUE,
             ];
-            if ($element['#required']) {
-              $element[$key]['#required'] = TRUE;
-            }
-        }
+          }
+          break;
+
+        default:
+          $element[$key] = [
+            '#type' => 'textfield',
+            '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
+            '#size' => 32,
+            '#default_value' => $value,
+          ];
+          if ($element['#required']) {
+            $element[$key]['#required'] = TRUE;
+          }
+      }
     }
 
     return ['value' => $element];

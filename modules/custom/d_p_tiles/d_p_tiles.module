@@ -1,11 +1,11 @@
 <?php
 
-  /**
-   * @file
-   * File containing d_p_tiles module.
-   */
+/**
+ * @file
+ * File containing d_p_tiles module.
+ */
 
-  use Drupal\Core\Template\Attribute;
+use Drupal\Core\Template\Attribute;
 
   /**
    * Implements hook_theme().
@@ -83,9 +83,9 @@
     }
   }
 
-  /**
-   * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
-   */
-  function d_p_tiles_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
-    $paragraph_types[] = 'd_p_tiles';
-  }
+/**
+ * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
+ */
+function d_p_tiles_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
+  $paragraph_types[] = 'd_p_tiles';
+}
