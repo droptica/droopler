@@ -385,7 +385,6 @@ class SettingsWidget extends WidgetBase {
         'type' => 'textfield',
         'bundles' => [
           'paragraph' => [
-            'd_p_side_tiles',
             'd_p_tiles',
           ],
         ],

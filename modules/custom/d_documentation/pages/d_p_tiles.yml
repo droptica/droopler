@@ -69,6 +69,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          featured_images: 1
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -117,6 +118,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: second-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          layout_class: right
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -165,6 +167,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: third-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          layout_class: left
     -
       paragraph_type: d_p_tiles
       data:
@@ -187,6 +190,9 @@ field_page_section:
             -
               path: d_demo/d_demo_tiles_2_5.jpg
               alt: 'Title / Subtitle'
+        field_d_settings:
+          type: field_p_configuration_storage
+          featured_images: 1
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -235,6 +241,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-invert invert-example padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          layout_class: left
 field_teaser_media_image:
   type: media_image
   directory: demo
