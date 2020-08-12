@@ -10,6 +10,7 @@ $d-p-form-text-color: $color-odysseus !default;
 $d-p-form-background: $color-agamemnon !default;
 $d-p-form-line-color: $color-nestor !default;
 $d-p-form-line-color-inverted: $color-agamemnon !default;
+$d-p-form-table-color: $color-cassandra !default;
 
 // Margins, paddings and sizes.
 $d-p-form-header-margin-bottom: 10% !default;
@@ -21,9 +22,15 @@ $d-p-form-small-labels-spacing: 7px !default;
 // Other settings
 $d-p-form-background-opacity: 0.4 !default;
 
-.theme-default .paragraph--type--d-p-form {
-  background: $d-p-form-background;
-  color: $d-p-form-text-color;
+.theme-default {
+  .paragraph--type--d-p-form {
+    background: $d-p-form-background;
+    color: $d-p-form-text-color;
+
+    .field--name-field-d-main-title {
+      color: $d-p-form-header-color;
+    }
+  }
 }
 
 .paragraph--type--d-p-form {
@@ -48,6 +55,32 @@ $d-p-form-background-opacity: 0.4 !default;
     small.description {
       margin-top: $d-p-form-small-labels-spacing;
       display: inline-block;
+    }
+
+    // Multiple files attached.
+    table {
+      .draggable {
+        .tabledrag-handle {
+          display: flex;
+          height: 60px;
+          align-items: center;
+          padding-top: 10px;
+
+          .handle:after {
+            color: $d-p-form-table-color;
+          }
+        }
+      }
+      .js-form-managed-file {
+        span.file {
+          padding-left: 20px;
+          a {
+            display: block;
+            background-color: transparent;
+            color: $d-p-form-table-color;
+          }
+        }
+      }
     }
 
     .js-form-managed-file {
@@ -75,6 +108,7 @@ $d-p-form-background-opacity: 0.4 !default;
           background-color: $d-p-form-background;
           text-align: left;
           width: 100%;
+          padding: 20px;
         }
       }
       .form-type-textfield {
@@ -88,8 +122,11 @@ $d-p-form-background-opacity: 0.4 !default;
         flex-wrap: wrap;
       }
       .tabledrag-handle .handle {
-        display: inline;
+        display: flex;
         background: none;
+        width: unset;
+        height: unset;
+
         &:hover {
           background: none;
           &::after {
@@ -107,7 +144,6 @@ $d-p-form-background-opacity: 0.4 !default;
   .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
-    color: $d-p-form-header-color;
     &::after {
       @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
     }

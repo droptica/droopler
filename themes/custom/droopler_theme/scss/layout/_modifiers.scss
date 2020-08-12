@@ -490,6 +490,11 @@ $d-p-themes: map-merge(
         .field {
           color: map-get($themeSettings, "text");
         }
+        @for $i from 1 through 6 {
+          h#{$i} {
+            color: map-get($themeSettings, "text");
+          }
+        }
       }
     }
   }
@@ -499,6 +504,7 @@ $d-p-themes: map-merge(
   Spacings styling.
  */
 $d-p-paddings: () !default;
+$d-p-paddings-extended: () !default;
 $d-p-paddings: map-merge(
     (
       default: 5%,
@@ -508,13 +514,40 @@ $d-p-paddings: map-merge(
     ),
     $d-p-paddings
 );
+$d-p-paddings-extended: map-merge(
+    (
+      default: 10%,
+      small: 12%,
+      big: 14%,
+      none: 8%
+    ),
+    $d-p-paddings-extended
+);
 
 @each $size, $value in $d-p-paddings {
   @each $placement in (top, bottom) {
     .padding-#{$placement}-#{$size} {
       > .paragraph:not(.content-moved-inside),
-      > .content-moved-inside .content-inside-wrapper {
+      > .paragraph.content-moved-inside .content-inside-wrapper {
         padding-#{$placement}: $value;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .landing-page-header {
+    .paragraph-sections {
+      > div:first-of-type section, // geysir
+      > section:first-of-type {
+        @each $size, $value in $d-p-paddings-extended {
+          &.padding-top-#{$size} {
+            > .paragraph:not(.content-moved-inside),
+            > .content-moved-inside .content-inside-wrapper {
+              padding-top: $value;
+            }
+          }
+        }
       }
     }
   }
