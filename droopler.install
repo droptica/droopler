@@ -1554,3 +1554,194 @@ function droopler_update_8121() {
   $updater->checklist()
     ->saveProgress(['v2.2' => $values]);
 }
+
+/**
+ * Droopler 2.2 configure meta tags for Commerce products.
+ */
+function droopler_update_8122() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  if (\Drupal::service('module_handler')->moduleExists('d_commerce_product')) {
+    try {
+      \Drupal::service('module_installer')->install(['metatag_open_graph_products']);
+      $configs = [
+        'd_commerce_product' => [
+          'metatag.metatag_defaults.commerce_product.yml' => '',
+        ],
+      ];
+      $values['droopler__droopler_update_8122_1'] = $updater->importConfigs($configs);
+    }
+    catch (MissingDependencyException $e) {
+      $values['droopler__droopler_update_8122_1'] = FALSE;
+    }
+  }
+  else {
+    $values['droopler__droopler_update_8122_1'] = TRUE;
+  }
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 Migrate paddings modifiers.
+ */
+function droopler_update_8123(&$sandbox) {
+  $entity_ids = [
+    'd_p_side_by_side',
+    'd_p_group_of_text_blocks',
+    'd_p_carousel',
+    'd_p_text_paged',
+    'd_p_reference_content',
+  ];
+
+  if (!isset($sandbox['total'])) {
+    $query = \Drupal::entityQuery('paragraph');
+    $group = $query->orConditionGroup();
+
+    foreach ($entity_ids as $entity_id) {
+      $group->condition('type', $entity_id);
+    }
+
+    $query = $query->condition($group)->execute();
+
+    $sandbox['total'] = count($query);
+    $sandbox['current'] = 0;
+    $sandbox['changed'] = 0;
+  }
+
+  $paragraphs_per_batch = 25;
+
+  $query = \Drupal::entityQuery('paragraph');
+  $group = $query->orConditionGroup();
+
+  foreach ($entity_ids as $entity_id) {
+    $group->condition('type', $entity_id);
+  }
+
+  $query = $query
+    ->condition($group)
+    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->execute();
+
+  foreach ($query as $pid) {
+    $paragraph = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->load($pid);
+    $settings = $paragraph->hasField('field_d_settings') && $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
+
+    $replaces = [
+      'no-padding-bottom' => 'padding-bottom-none',
+      'no-padding-top' => 'padding-top-none',
+    ];
+
+    $json = json_decode($settings);
+
+    $save = FALSE;
+    if (isset($json->custom_class)) {
+      foreach ($replaces as $old => $new) {
+        if (strpos($json->custom_class, $old) === FALSE) {
+          continue;
+        }
+
+        $json->custom_class = str_replace($old, $new, $json->custom_class);
+        $paragraph->set('field_d_settings', json_encode($json));
+        $save = TRUE;
+      }
+    }
+
+    if ($save) {
+      $paragraph->save();
+      $sandbox['changed']++;
+    }
+
+    $sandbox['current']++;
+  }
+
+  $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
+
+  if ($sandbox['##finished'] === 1) {
+    $values['droopler__droopler_update_8123_1'] = TRUE;
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v2.2' => $values]);
+    \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed, ' . $sandbox['changed'] . ' changed.');
+  }
+}
+
+/**
+ * Droopler 2.2 Migrate layout settings.
+ */
+function droopler_update_8124(&$sandbox) {
+
+  $entity_ids = [
+    'd_p_side_tiles',
+    'd_p_side_image',
+    'd_p_side_embed',
+    'd_p_side_form',
+  ];
+
+  $query = \Drupal::entityQuery('paragraph');
+  $group = $query->orConditionGroup();
+
+  foreach ($entity_ids as $entity_id) {
+    $group->condition('type', $entity_id);
+  }
+
+  $query = $query->condition($group)->execute();
+  $sandbox['total'] = count($query);
+  $sandbox['current'] = 0;
+  $sandbox['changed'] = 0;
+
+  $paragraphs_per_batch = 25;
+
+  $query = \Drupal::entityQuery('paragraph');
+  $group = $query->orConditionGroup();
+
+  foreach ($entity_ids as $entity_id) {
+    $group->condition('type', $entity_id);
+  }
+
+  $query = $query
+    ->condition($group)
+    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->execute();
+
+  foreach ($query as $pid) {
+    $paragraph = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->load($pid);
+    $settings = $paragraph->hasField('field_d_settings') && $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
+
+    switch ($paragraph->bundle()) {
+      case 'd_p_side_tiles':
+      case 'd_p_side_image':
+      case 'd_p_side_embed':
+        $old_settings = $paragraph->hasField('field_d_p_si_image_side') && $paragraph->get('field_d_p_si_image_side') ? $paragraph->get('field_d_p_si_image_side')->value : [];
+        break;
+      case 'd_p_side_form':
+        $old_settings = $paragraph->hasField('field_d_layout_modifier') && $paragraph->get('field_d_layout_modifier') ? $paragraph->get('field_d_layout_modifier')->value : [];
+        break;
+      default:
+        $old_settings = $paragraph->hasField('field_d_layout_modifier') && $paragraph->get('field_d_layout_modifier') ? $paragraph->get('field_d_layout_modifier')->value : [];
+    }
+
+    $json = json_decode($settings);
+    $json->layout_class = $old_settings;
+    $new_settings = json_encode($json, TRUE);
+
+    $paragraph->set('field_d_settings', $new_settings);
+    $paragraph->save();
+    $sandbox['changed']++;
+    $sandbox['current']++;
+  }
+
+  $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
+
+  if ($sandbox['##finished'] === 1) {
+    $values['droopler__droopler_update_8124_1'] = TRUE;
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v2.2' => $values]);
+    \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed, ' . $sandbox['changed'] . ' changed.');
+  }
+}

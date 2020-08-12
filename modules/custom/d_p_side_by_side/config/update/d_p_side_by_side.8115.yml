@@ -79,7 +79,8 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
     content:
       field_d_long_text:
         type: text_textarea
-        weight: 1
+        weight: 2
+        label: hidden
         region: content
         settings:
           rows: 5
@@ -87,7 +88,8 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
         third_party_settings: {  }
       field_d_main_title:
         type: string_textfield
-        weight: 0
+        weight: 1
+        label: hidden
         region: content
         settings:
           size: 60
@@ -106,7 +108,7 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
         type: link
         region: content
       field_d_media_icon:
-        weight: 7
+        weight: 0
         label: hidden
         settings:
           view_mode: d_icon
