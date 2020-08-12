@@ -1,88 +1,88 @@
 <?php
 
-/**
- * @file
- * File containing d_p_tiles module.
- */
+  /**
+   * @file
+   * File containing d_p_tiles module.
+   */
 
-use Drupal\Core\Template\Attribute;
+  use Drupal\Core\Template\Attribute;
 
-/**
- * Implements hook_theme().
- */
-function d_p_tiles_theme($existing, $type, $theme, $path) {
-  return [
-    'paragraph__d_p_tiles' => [
-      'base hook' => 'paragraph',
-    ],
-    'field__paragraph__field_d_media_image__d_p_tiles' => [
-      'base hook' => 'field',
-    ],
-    'media__d_image__tiles_gallery_fullscreen_featured' => [
-      'base hook' => 'media',
-    ],
-  ];
-}
-
-/**
- * Implements hook_preprocess_paragraph().
- */
-function d_p_tiles_preprocess_paragraph(&$variables) {
-  $paragraph = $variables['paragraph'];
-  $bundle = $paragraph->bundle();
-
-  switch ($bundle) {
-    case 'd_p_tiles':
-      // Attach libraries.
-      $variables['#attached']['library'][] = 'd_p_tiles/masonry';
-      $variables['#attached']['library'][] = 'd_p_tiles/d_p_tiles';
-      break;
+  /**
+   * Implements hook_theme().
+   */
+  function d_p_tiles_theme($existing, $type, $theme, $path) {
+    return [
+      'paragraph__d_p_tiles' => [
+        'base hook' => 'paragraph',
+      ],
+      'field__paragraph__field_d_media_image__d_p_tiles' => [
+        'base hook' => 'field',
+      ],
+      'media__d_image__tiles_gallery_fullscreen_featured' => [
+        'base hook' => 'media',
+      ],
+    ];
   }
 
-}
+  /**
+   * Implements hook_preprocess_paragraph().
+   */
+  function d_p_tiles_preprocess_paragraph(&$variables) {
+    $paragraph = $variables['paragraph'];
+    $bundle = $paragraph->bundle();
 
-/**
- * Implements hook_preprocess_field().
- */
-function d_p_tiles_preprocess_field(&$variables) {
-  if ($variables['element']['#entity_type'] == 'paragraph') {
-    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
-    $paragraph = $variables['element']['#object'];
+    switch ($bundle) {
+      case 'd_p_tiles':
+        // Attach libraries.
+        $variables['#attached']['library'][] = 'd_p_tiles/masonry';
+        $variables['#attached']['library'][] = 'd_p_tiles/d_p_tiles';
+        break;
+    }
 
-    if ($variables['element']['#bundle'] == 'd_p_tiles') {
-      switch ($variables['field_name']) {
+  }
 
-        case 'field_d_main_title':
-        case 'field_d_long_text':
-          // Add container class to title and description.
-          $variables['attributes']['class'][] = 'container';
-          break;
+  /**
+   * Implements hook_preprocess_field().
+   */
+  function d_p_tiles_preprocess_field(&$variables) {
+    if ($variables['element']['#entity_type'] == 'paragraph') {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = $variables['element']['#object'];
 
-        case 'field_d_media_image':
-          $variables['wrapper_attributes'] = new Attribute();
+      if ($variables['element']['#bundle'] == 'd_p_tiles') {
+        switch ($variables['field_name']) {
 
-          $settings = $paragraph->get('field_d_settings');
-          $featured_images = [];
-          if (!empty($settings->first()->getValue())) {
-            $value = json_decode($settings->first()->getValue()['value'], TRUE);
-            $featured_images = explode(',', $value['featured_images']);
-          }
+          case 'field_d_main_title':
+          case 'field_d_long_text':
+            // Add container class to title and description.
+            $variables['attributes']['class'][] = 'container';
+            break;
 
-          $featured_images = array_map('intval', $featured_images);
-          foreach ($featured_images as $index => $image_number) {
-            if ($image_number > 0 && !empty($variables['items'][$image_number - 1])) {
-              $variables['items'][$image_number - 1]['content']['#view_mode'] = 'tiles_gallery_fullscreen_featured';
+          case 'field_d_media_image':
+            $variables['wrapper_attributes'] = new Attribute();
+
+            $settings = $paragraph->get('field_d_settings');
+            $featured_images = [];
+            if (!empty($settings->first()->getValue())) {
+              $value = json_decode($settings->first()->getValue()['value'], TRUE);
+              $featured_images = explode(',', $value['featured_images']);
             }
-          }
-          break;
+
+            $featured_images = array_map('intval', $featured_images);
+            foreach ($featured_images as $index => $image_number) {
+              if ($image_number > 0 && !empty($variables['items'][$image_number - 1])) {
+                $variables['items'][$image_number - 1]['content']['#view_mode'] = 'tiles_gallery_fullscreen_featured';
+              }
+            }
+            break;
+        }
       }
     }
   }
-}
 
-/**
- * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
- */
-function d_p_tiles_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
-  $paragraph_types[] = 'd_p_tiles';
-}
+  /**
+   * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
+   */
+  function d_p_tiles_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
+    $paragraph_types[] = 'd_p_tiles';
+  }
