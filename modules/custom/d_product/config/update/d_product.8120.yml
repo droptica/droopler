@@ -3,3 +3,27 @@ core.entity_view_display.media.d_image.d_product_gallery:
     dependencies:
       module:
         - lazy
+
+core.entity_view_display.node.d_product.default:
+  expected:
+    content:
+      field_d_product_media:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+  new:
+    content:
+      field_d_product_media:
+        third_party_settings: {  }
+
+core.entity_view_display.node.d_product.teaser:
+  expected:
+    content:
+      field_d_product_media:
+        third_party_settings:
+          lazy:
+            lazy_image: '1'
+  new:
+    content:
+      field_d_product_media:
+        third_party_settings: {  }
