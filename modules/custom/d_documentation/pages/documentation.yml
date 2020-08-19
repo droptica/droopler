@@ -302,7 +302,12 @@ field_page_section:
                   link: 'internal:/documentation/side-by-side-paragraph'
                   text: 'Learn more...'
 
-            -
+            - field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/demo_paragraph_block.png
+                    alt: 'Paragraph BLock Icon'
               field_d_main_title:
                 type: text
                 data: Block
