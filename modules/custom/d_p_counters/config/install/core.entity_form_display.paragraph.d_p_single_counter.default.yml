@@ -9,6 +9,7 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_single_counter
   module:
     - d_p
+    - media_library
 id: paragraph.d_p_single_counter.default
 targetEntityType: paragraph
 bundle: d_p_single_counter
@@ -25,12 +26,9 @@ content:
   field_d_media_icon:
     weight: 3
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      media_types: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: media_library_widget
     region: content
   field_d_number:
     weight: 0

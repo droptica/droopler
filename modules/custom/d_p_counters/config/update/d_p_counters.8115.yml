@@ -77,12 +77,9 @@ core.entity_form_display.paragraph.d_p_single_counter.default:
       field_d_media_icon:
         weight: 3
         settings:
-          match_operator: CONTAINS
-          match_limit: 10
-          size: 60
-          placeholder: ''
+          media_types: {  }
         third_party_settings: {  }
-        type: entity_reference_autocomplete
+        type: media_library_widget
         region: content
 core.entity_view_display.paragraph.d_p_single_counter.default:
   add:
