@@ -181,9 +181,9 @@ function droopler_enable_product(int $step, array &$context) {
  */
 function droopler_enable_init_content_batch() {
   $types = [
-    'content',
     'block',
     'media',
+    'content',
     'index_content',
   ];
 
