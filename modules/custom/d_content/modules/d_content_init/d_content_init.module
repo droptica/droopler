@@ -170,7 +170,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       foreach ($data as $child) {
         if ($value['subtype'] == 'paragraphs_wrapper') {
           $new_child['data'] = $child['data'] ?? [];
-          $new_child['paragraph_type'] = $child['type'] ?? '';
+          $new_child['paragraph_type'] = $child['paragraph_type'] ?? '';
         }
         else {
           $new_child['data'] = $child;
@@ -220,6 +220,30 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
         }
         $value['processed'] = TRUE;
       }
+      break;
+
+    case 'block_reference':
+      if (!empty($data['target_type'])) {
+        $target_entity_type = $data['target_type'] ?? 'node';
+        if ($target_entity = d_content_init_find_entity_by_properties($data['target_search'], $target_entity_type)) {
+          $entity->set($name, [[
+            'plugin_id' => $target_entity_type . ':' . $target_entity->uuid(),
+            'settings' => $data['settings'],
+          ]]);
+        }
+        else {
+          \Drupal::logger('d_content_init')
+            ->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
+              '@id' => $entity->id(),
+              '@type' => $entity->getEntityType(),
+              '@field' => $name,
+            ]);
+        }
+      } elseif (!empty($data['plugin_id'])) {
+        $entity->set($name, [$data]);
+      }
+
+      $value['processed'] = TRUE;
       break;
 
     case 'taxonomy':
@@ -459,20 +483,20 @@ function d_content_init_create_all($type = NULL) {
   $module_handler = \Drupal::moduleHandler();
   $context = 'all';
 
+    // Define block structure, allow other modules to modify it and create blocks.
+  if (empty($type) || $type === 'block') {
+    $block_structure = [];
+    $module_handler->alter('block_structure', $block_structure, $context);
+    Drupal::service('d_content_init.manager_block')
+      ->importFromFiles($block_structure);
+  }
+
   // Define content structure, allow other modules
   // to modify it and create content.
   if (empty($type) || $type === 'content') {
     $content_structure = [];
     $module_handler->alter('content_structure', $content_structure, $context);
     d_content_init_add_nodes($content_structure);
-  }
-
-  // Define block structure, allow other modules to modify it and create blocks.
-  if (empty($type) || $type === 'block') {
-    $block_structure = [];
-    $module_handler->alter('block_structure', $block_structure, $context);
-    Drupal::service('d_content_init.manager_block')
-      ->importFromFiles($block_structure);
   }
 
   if (empty($type) || $type === 'media') {
