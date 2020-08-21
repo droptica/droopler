@@ -174,7 +174,7 @@ field_page_section:
           subtype: paragraphs_wrapper
           data:
             -
-              type: d_p_node
+              paragraph_type: d_p_node
               data:
                 field_d_display_mode:
                   type: text_select
@@ -186,7 +186,7 @@ field_page_section:
                       title: 'Super Charged Engine v12'
                       type: d_product
             -
-              type: d_p_node
+              paragraph_type: d_p_node
               data:
                 field_d_display_mode:
                   type: text_select
@@ -198,7 +198,7 @@ field_page_section:
                       title: 'Centurion 3000'
                       type: d_product
             -
-              type: d_p_node
+              paragraph_type: d_p_node
               data:
                 field_d_display_mode:
                   type: text_select
@@ -227,7 +227,7 @@ field_page_section:
           subtype: paragraphs_wrapper
           data:
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_background:
                   type: media_image
@@ -251,7 +251,7 @@ field_page_section:
                   type: field_p_configuration_storage
                   custom_class: 'tile theme-invert'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_background:
                   type: media_image
@@ -275,7 +275,7 @@ field_page_section:
                   type: field_p_configuration_storage
                   custom_class: 'tile theme-invert'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_background:
                   type: media_image
@@ -299,7 +299,7 @@ field_page_section:
                   type: field_p_configuration_storage
                   custom_class: 'tile theme-invert'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_background:
                   type: media_image
@@ -337,7 +337,7 @@ field_page_section:
           subtype: paragraphs_wrapper
           data:
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_icon:
                   type: media_image
@@ -353,7 +353,7 @@ field_page_section:
                   type: text
                   data: '#ffffff'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_icon:
                   type: media_image
@@ -369,7 +369,7 @@ field_page_section:
                   type: text
                   data: '#ffffff'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_icon:
                   type: media_image
@@ -403,7 +403,7 @@ field_page_section:
                   - mt-5
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: no-padding-top no-padding-bottom theme-default margin-top-default margin-bottom-default
+          custom_class: padding-top-none padding-bottom-none theme-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_side_by_side
       data:
@@ -412,7 +412,7 @@ field_page_section:
           subtype: paragraphs_wrapper
           data:
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_main_title:
                   type: text
@@ -442,7 +442,7 @@ field_page_section:
                   type: field_p_configuration_storage
                   custom_class: 'with-price testing stripe-sidebar'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_main_title:
                   type: text

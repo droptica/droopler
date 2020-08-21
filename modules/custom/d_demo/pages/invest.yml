@@ -40,7 +40,7 @@ field_page_section:
           subtype: paragraphs_wrapper
           data:
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_long_text:
                   type: text_long
@@ -50,7 +50,7 @@ field_page_section:
                   custom_class: 'with-price testing'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid no-padding-bottom theme-default padding-top-default margin-top-default margin-bottom-default
+          custom_class: full-width with-grid padding-bottom-none theme-default padding-top-default margin-top-default margin-bottom-default
           column_count: 1
     -
       paragraph_type: d_p_text_paged
@@ -173,7 +173,7 @@ field_page_section:
 
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: background-gray-light-2 no-padding-top padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: background-gray-light-2 padding-top-none padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_side_image
       data:
