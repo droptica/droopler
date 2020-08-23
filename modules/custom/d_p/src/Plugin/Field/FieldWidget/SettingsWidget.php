@@ -57,22 +57,6 @@ class SettingsWidget extends WidgetBase {
         'type' => 'css',
         'bundles' => ['paragraph' => ['all']],
         'modifiers' => [
-          'theme-invert' => [
-            'title' => $this->t('Inverted colors'),
-            'description' => $this->t('Toggle dark and light theme of the paragraph.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_banner',
-                'd_p_text_paged',
-                'd_p_single_text_block',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_side_embed',
-                'd_p_side_image',
-                'd_p_side_tiles',
-              ],
-            ],
-          ],
           'full-width' => [
             'title' => $this->t('Full width'),
             'description' => $this->t('Stretch this paragraph to 100% browser width.'),
@@ -125,18 +109,6 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_carousel',
-              ],
-            ],
-          ],
-          'background-gray-light-2' => [
-            'title' => $this->t('Gray background'),
-            'description' => $this->t('Change paragraph background to light gray.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_carousel',
-                'd_p_group_of_text_blocks',
-                'd_p_reference_content',
-                'd_p_text_paged',
               ],
             ],
           ],

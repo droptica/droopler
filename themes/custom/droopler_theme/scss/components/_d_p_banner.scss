@@ -199,14 +199,3 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     }
   }
 }
-
-.theme-invert {
-  > .d-p-banner {
-    .field--type-string,
-    .field--type-text-long {
-      &, p {
-        color: $color-cassandra;
-      }
-    }
-  }
-}

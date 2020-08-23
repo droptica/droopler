@@ -25,26 +25,6 @@ $theme-invert-text-color: $color-cassandra !default;
 $line-background-alter: $color-nestor !default;
 $two-columned-header-line-margin: 0.625rem !default;
 
-// TODO: migrate to new themes.
-.background {
-  &-gray-light {
-    background: $light-gray-background;
-  }
-
-  &-gray-light-2 {
-    background-color: $light-gray-background-2;
-  }
-}
-
-.theme-invert {
-  > .paragraph {
-    .field--type-string,
-    .field--type-text-long {
-      color: $color-cassandra;
-    }
-  }
-}
-
 .full-width {
   .expandable-content {
     width: 100%;
