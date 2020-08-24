@@ -67,17 +67,17 @@
 {% set header_layout = node.field_header_layout.value %}
 {% set classes = [
   'navbar-wrapper',
-  node.field_header_layout.value == 'header_with_cta' ? 'mb-lg-2',
 ] %}
 {% set hanging_header = (header_layout == 'header_with_cta') ? 'hanging-header' %}
 {% set lp_header_class = (header_layout == 'header_with_cta') ? 'landing-page-header' %}
+{% set lp_alert_header_class = page.admin_tabs ? 'alert-ladning-header' %}
 <div id="page-wrapper" class="page-wrapper {{ lp_header_class }}">
   <header id="header" class="header" role="banner"
           aria-label="{{ 'Site header'|t }}">
     {% block head %}
       {% if header_layout != 'header_disabled' %}
         <nav{{ navbar_attributes.addClass(classes) }}>
-          <div class="container no-padding-md {{ hanging_header }}">
+          <div class="container no-padding-md {{ hanging_header }} {{ lp_alert_header_class }}">
             <div class="navbar-brand d-flex align-items-center">
               {{ page.header }}
             </div>
