@@ -60,7 +60,7 @@
       } });
       $body.addClass("d-theme-preceded");
 
-      // Check if alert box is visible on on hanging-header and adjust position.
+      // Check if alert box is visible on hanging-header and adjust position.
       $(window).on('load', function () {
         var alert = $('div.alert-dismissible');
 
