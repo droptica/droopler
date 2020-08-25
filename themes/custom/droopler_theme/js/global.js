@@ -58,7 +58,22 @@
         $(this).parent().removeClass('force-show');
         $(this).parent().find(".dropdown-menu").removeClass('force-show');
       } });
-      $body.addClass("d-theme-preceded")
+      $body.addClass("d-theme-preceded");
+
+      // Check if alert box is visible on on hanging-header and adjust position.
+      $(window).on('load', function () {
+        var alert = $('div.alert-dismissible');
+
+        if (alert.length) {
+          var header = $('div.hanging-header');
+          var height = parseInt(header.css('top'), 10);
+          header.css('top', height + parseInt(alert.css('height'), 10) + 20);
+
+          $('div.alert-dismissible button.close').click(function () {
+            header.css('top', height);
+          });
+        }
+      });
     }
   };
 
