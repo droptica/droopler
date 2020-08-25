@@ -48,8 +48,9 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% set wrapper_classes = [
   paragraph.field_d_media_icon.value is empty and
     paragraph.field_d_main_title.value is empty and
-    paragraph.field_d_long_text.value is empty ? 'paragraph-top-dark' : 'paragraph-top-light',
+    paragraph.field_d_long_text.value is empty ? 'paragraph-top-dark' : 'paragraph-top-light required-spacing-top',
   'paragraph-bottom-dark',
+  paragraph.field_d_cta_link.value is not empty ? 'required-spacing-bottom',
 ] %}
 {% set paragraph_classes = [
   'd-p-tiles',
