@@ -80,8 +80,37 @@ body {
   }
 }
 
+.header-section {
+  article {
+    .paragraph-sections {
+      section {
+        .paragraph {
+          @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+            padding-top: calc(70px + 5%);
+
+            &--type--d-p-side-image,
+            &--type--d-p-side-embed {
+              padding-top: 0;
+            }
+          }
+
+          @include media-breakpoint-between(md, $navbar-mobile-breakpoint-down) {
+            &--type--d-p-side-image,
+            &--type--d-p-side-embed {
+              .content-inside-wrapper {
+                padding-top: 15%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .landing-page-header {
   position: relative;
+
   .hanging-header {
     position: relative;
     width: 100%;
@@ -93,6 +122,10 @@ body {
     @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
       position: absolute;
       top: 20px
+    }
+
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+      position: absolute;
     }
   }
 }
