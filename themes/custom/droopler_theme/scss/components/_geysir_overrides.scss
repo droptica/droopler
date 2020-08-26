@@ -13,10 +13,18 @@
       display: none !important;
     }
   }
+
+  /* Fix overlay on margins */
+  &:hover {
+    outline: none;
+
+    .geysir-field-paragraph-links {
+      display: block;
+    }
+  }
 }
 
 /* Fix modal styles. */
-
 #media-library-wrapper,
 #geysir-modal,
 #geysir-modal-form {
