@@ -538,7 +538,7 @@ $d-p-paddings-extended: map-merge(
 @include media-breakpoint-up(lg) {
   .landing-page-header {
     .paragraph-sections {
-      > div:first-of-type section, // geysir
+      > .geysir-field-paragraph-wrapper:first-of-type section, // geysir
       > section:first-of-type {
         @each $size, $value in $d-p-paddings-extended {
           &.padding-top-#{$size} {
