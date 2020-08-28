@@ -15,7 +15,6 @@ $d-p-text-paged-theme-invert-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
-$d-p-text-paged-first-margin-top: 2% !default;
 
 .theme-default {
   .paragraph--type--d-p-text-paged {
@@ -59,12 +58,6 @@ $d-p-text-paged-first-margin-top: 2% !default;
     }
   }
 }
-
-// If this is the first paragraph - decrease top margin.
-.paragraph-sections > section:first-child > .paragraph--type--d-p-text-paged {
-  margin-top: $d-p-text-paged-first-margin-top;
-}
-
 
 .theme-invert {
   &:not(.user-background-defined):not(.user-image-background) > .paragraph--type--d-p-text-paged {
