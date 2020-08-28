@@ -63,14 +63,33 @@
       // Check if alert box and header with cta is visible for position adjustments.
       var alert = $('div.alert-dismissible');
       var header = $('div.hanging-header');
+      var perms = $('div.admin_tabs');
 
-      if (alert.length && header.length) {
+      if (header.length) {
         var height = parseInt(header.css('top'), 10);
-        header.css('top', height + parseInt(alert.css('height'), 10) + 20);
 
-        $('div.alert-dismissible button.close').click(function () {
-          header.css('top', height);
+        if (alert.length) {
+          header.css('top', height + parseInt(alert.css('height'), 10) + 20);
+
+          $('div.alert-dismissible button.close').click(function () {
+            header.css('top', height);
+          });
+        }
+
+        $(window).on('resize', function () {
+          calcHeader();
         });
+
+        calcHeader();
+      }
+
+      // Function which will calculate height of header based on admin page.
+      function calcHeader() {
+        if (!perms.length) {
+          return;
+        }
+
+        header.css('top', $(window).width() + 15 > 991 ? (height === 0 ? 90 : height) : 65);
       }
     }
   };
