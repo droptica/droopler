@@ -126,7 +126,20 @@ class ParagraphModifiersHelper {
    * @return |null
    */
   public function getCustomClass() {
-    return $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME);
+    $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME);
+
+    // Add default classes if not present.
+    $defaults = SettingsWidget::getModifierDefaults();
+    foreach ($defaults as $modifier) {
+      foreach ($modifier['options'] as $option) {
+        if (strpos($classes, $option) !== FALSE) {
+          continue 2;
+        }
+      }
+      $classes .= ' ' . $modifier['default'];
+    }
+
+    return $classes;
   }
 
 }
