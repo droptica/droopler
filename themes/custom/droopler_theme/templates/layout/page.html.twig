@@ -81,7 +81,7 @@
               {{ page.header }}
             </div>
             {% if (header_layout == 'header_with_cta') %}
-              {% if node.field_header_cta.0.title is not empty %}
+              {% if cta_button is not empty %}
                 <div class="d-content-cta-wrapper">
                   {{ cta_button | render }}
                 </div>

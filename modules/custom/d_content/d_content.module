@@ -45,13 +45,17 @@ function d_content_field_widget_form_alter(&$element, FormStateInterface $form_s
 function d_content_preprocess_page(&$variables) {
   if (isset($variables['node']) && ($node = $variables['node']) instanceof NodeInterface) {
     if ($node->getType() == 'content_page') {
-      $title = $node->field_header_cta[0]->get('title')->getValue();
-
-      $new_title = '<span class="d-md-none icon-hand-pointer-o"></span>';
-      $new_title .= '<span class="d-none d-md-block">' . $title . '</span>';
-
       $variables['cta_button'] = $node->field_header_cta->view('d_header');
-      $variables['cta_button'][0]['#title'] = Markup::create($new_title);
+
+      if (empty($variables['cta_button'][0]['#title'])) {
+        $variables['cta_button'] = false;
+      } else {
+        // Prepare new title in HTML format
+        $new_title = '<span class="d-md-none icon-hand-pointer-o"></span>';
+        $new_title .= '<span class="d-none d-md-block">' . $variables['cta_button'][0]['#title'] . '</span>';
+
+        $variables['cta_button'][0]['#title'] = Markup::create($new_title);
+      }
     }
   }
 }
