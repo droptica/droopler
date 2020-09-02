@@ -47,11 +47,15 @@ $d-p-text-paged-first-margin-top: 2% !default;
   }
   .field--type-link {
     text-align: center;
+    margin-top: 1rem;
   }
   .field--name-field-d-long-text {
     p {
       word-wrap: break-word;
       hyphens: auto;
+    }
+    p:last-of-type {
+      margin-bottom: 0;
     }
 
     &::before {
