@@ -54,7 +54,7 @@ $d-p-text-paged-first-margin-top: 2% !default;
       word-wrap: break-word;
       hyphens: auto;
     }
-    p:last-of-type {
+    > :last-child {
       margin-bottom: 0;
     }
 
