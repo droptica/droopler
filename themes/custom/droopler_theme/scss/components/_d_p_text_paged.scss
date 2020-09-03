@@ -54,10 +54,12 @@ $d-p-text-paged-first-margin-top: 2% !default;
       word-wrap: break-word;
       hyphens: auto;
     }
+    blockquote > :last-child {
+      margin-bottom: 0;
+    }
     > :last-child {
       margin-bottom: 0;
     }
-
     &::before {
       @include decoration-header-line-main-center($d-p-text-paged-line-color, $d-p-text-paged-line-color-inverted)
     }
