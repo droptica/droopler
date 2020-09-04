@@ -8,7 +8,6 @@
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 use Drupal\user\Entity\Role;
 
@@ -87,6 +86,7 @@ function droopler_install_tasks() {
  *
  * @param array $install_state
  *   The install state.
+ *
  * @return array
  *   Batch array.
  */
@@ -758,7 +758,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-        ->getDefault() === 'droopler_subtheme') {
+      ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -1665,4 +1665,45 @@ function droopler_update_8123(&$sandbox) {
       ->saveProgress(['v2.2' => $values]);
     \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed, ' . $sandbox['changed'] . ' changed.');
   }
+}
+
+/**
+ * Droopler 2.2 - remove "mt-5" spacing from CTA field in Reference Content Paragraph.
+ */
+function droopler_update_8124() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8124_1'] = update_modules_configuration(['d_p_reference_content'], '8124');
+  $updater->checklist()->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 - remove "mt-5" spacing from CTA field saved in database.
+ */
+function droopler_update_8125(&$sandbox) {
+  $limit = 25;
+  $entities = \Drupal::entityQuery('paragraph')->condition('type', 'd_p_reference_content')->execute();
+  if (!isset($sandbox['current'])) {
+    $sandbox['current'] = 0;
+    $sandbox['max'] = count($entities);
+  }
+  $batch = array_slice($entities, $sandbox['current'], $limit);
+  foreach ($batch as $entity_id) {
+    $entity = \Drupal::entityTypeManager()->getStorage('paragraph')->load($entity_id);
+    if ($entity->hasField('field_d_cta_link')) {
+      $fields = $entity->get('field_d_cta_link');
+      foreach ($fields as $field) {
+        $value = $field->getValue();
+        // Check if field has a class 'mt-5'. If so, we remove it.
+        if ($key = array_search('mt-5', $value['options']['attributes']['class'])) {
+          unset($value['options']['attributes']['class'][$key]);
+          $field->setValue($value);
+        }
+      }
+      $entity->save();
+      $sandbox['current']++;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['current'] / $sandbox['max']);
 }
