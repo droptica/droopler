@@ -33,6 +33,15 @@ core.entity_form_display.paragraph.d_p_group_of_counters.default:
         third_party_settings: {  }
         type: text_textarea
         region: content
+  change:
+    expected:
+      content:
+        field_d_media_background:
+          weight: 4
+    new:
+      content:
+        field_d_media_background:
+          weight: 3
 core.entity_view_display.paragraph.d_p_group_of_counters.default:
   add:
     dependencies:
