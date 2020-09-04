@@ -26,7 +26,7 @@ core.entity_form_display.paragraph.d_p_group_of_counters.default:
         type: link_attributes
         region: content
       field_d_long_text:
-        weight: 2
+        weight: 4
         settings:
           rows: 5
           placeholder: ''
@@ -68,6 +68,15 @@ core.entity_view_display.paragraph.d_p_group_of_counters.default:
         third_party_settings: {  }
         type: text_default
         region: content
+  change:
+    expected:
+      content:
+        field_d_counter_reference:
+          weight: 7
+    new:
+      content:
+        field_d_counter_reference:
+          weight: 8
 core.entity_form_display.paragraph.d_p_single_counter.default:
   add:
     dependencies:
@@ -88,7 +97,7 @@ core.entity_view_display.paragraph.d_p_single_counter.default:
         - field.field.paragraph.d_p_single_counter.field_d_media_icon
     content:
       field_d_media_icon:
-        weight: 1
+        weight: 0
         label: hidden
         settings:
           view_mode: d_icon
@@ -101,7 +110,11 @@ core.entity_view_display.paragraph.d_p_single_counter.default:
       content:
         field_d_main_title:
           weight: 1
+        field_d_number:
+          weight: 0
     new:
       content:
         field_d_main_title:
           weight: 2
+        field_d_number:
+          weight: 1
