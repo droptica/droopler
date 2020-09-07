@@ -220,7 +220,13 @@ function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, 
       empty($element['url']['#default_value']) &&
       empty($element['options']['attributes']['class']['#default_value'])
     ) {
-      $element['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+      if (in_array($bundle, ['d_p_group_of_counters'])) {
+        $default_value = 'btn btn-secondary';
+      }
+      else {
+        $default_value = 'btn btn-primary';
+      }
+      $element['options']['attributes']['class']['#default_value'] = $default_value;
     }
   }
 }
