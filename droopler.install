@@ -1666,3 +1666,16 @@ function droopler_update_8123(&$sandbox) {
     \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed, ' . $sandbox['changed'] . ' changed.');
   }
 }
+
+/**
+ * Droopler 2.2 update Linkit.
+ */
+function droopler_update_8124() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8124_1'] = $updater->updateConfigurations('profile/droopler', 'editor.8124');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
