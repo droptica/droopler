@@ -53,11 +53,11 @@ $line-thickness: 0.125rem !default;
 }
 
 @mixin add-commas-to-elements {
-    &:after {
+    &::after {
         content: ', ';
     }
 
-    &:last-child:after {
+    &:last-child::after {
         content: '';
     }
 }

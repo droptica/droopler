@@ -71,3 +71,38 @@ body {
 .background-gray-light-2 {
   color: $color-acamas;
 }
+
+.paragraph {
+  color: $color-hecuba;
+
+  b, strong {
+    color: $color-troilus;
+  }
+}
+
+.landing-page-header {
+  position: relative;
+  .hanging-header {
+    position: relative;
+    width: 100%;
+    top: 0;
+    z-index: 9;
+    left: 0;
+    right: 0;
+
+    @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+      position: absolute;
+      top: 20px
+    }
+  }
+}
+
+.toolbar-tray-open {
+  .landing-page-header {
+    .hanging-header {
+      @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+        top: 90px;
+      }
+    }
+  }
+}

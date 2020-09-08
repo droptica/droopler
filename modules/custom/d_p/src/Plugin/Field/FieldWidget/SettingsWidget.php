@@ -84,32 +84,6 @@ class SettingsWidget extends WidgetBase {
               ],
             ],
           ],
-          'no-padding-bottom' => [
-            'title' => $this->t('Disable bottom padding'),
-            'description' => $this->t('Set the bottom padding of the paragraph to zero.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_by_side',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_text_paged',
-                'd_p_reference_content',
-              ],
-            ],
-          ],
-          'no-padding-top' => [
-            'title' => $this->t('Disable top padding'),
-            'description' => $this->t('Set the top padding of the paragraph to zero.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_by_side',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_text_paged',
-                'd_p_reference_content',
-              ],
-            ],
-          ],
           'half-transparent' => [
             'title' => $this->t('Half transparent'),
             'description' => $this->t('Moves the text to the left and adds a transparent overlay.'),
@@ -226,6 +200,7 @@ class SettingsWidget extends WidgetBase {
             'options' => [
               'margin-top-default' => $this->t('Default'),
               'margin-top-small' => $this->t('Small'),
+              'margin-top-medium' => $this->t('Medium'),
               'margin-top-big' => $this->t('Big'),
               'margin-top-none' => $this->t('None'),
             ],
@@ -240,6 +215,7 @@ class SettingsWidget extends WidgetBase {
             'options' => [
               'margin-bottom-default' => $this->t('Default'),
               'margin-bottom-small' => $this->t('Small'),
+              'margin-bottom-medium' => $this->t('Medium'),
               'margin-bottom-big' => $this->t('Big'),
               'margin-bottom-none' => $this->t('None'),
             ],

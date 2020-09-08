@@ -239,17 +239,77 @@ v2.2:
   '#title': 'Update to Droopler 2.2'
   '#description': '<h3>Checkout new features for the minor Droopler release:</h3>'
   droopler__droopler_update_8115_1:
-    '#title': 'Imports configs for paragraphs and content types.'
-    '#description': '<p>Import configs for existing default content types and paragraphs: d_p_carousel, d_p_gallery, d_p_group_of_counters, d_p_side_by_side, d_p_tiles, d_p_reference_content.</p>'
+    '#title': 'Imports configs for paragraphs - add fields: CTA, Icon, Long text.'
+    '#description': '<p>Import configs for existing paragraphs (d_p_carousel, d_p_gallery, d_p_group_of_counters, d_p_side_by_side, d_p_tiles, d_p_reference_content) adding missing common fields.</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually.</p>'
     extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features' }
   droopler__droopler_update_8115_2:
-    '#title': 'Update configs for paragraphs and content types'
-    '#description': '<p>Update configs for existing default content types and paragraphs: d_p_carousel, d_p_gallery, d_p_group_of_counters, d_p_side_by_side, d_p_tiles, d_p_reference_content.</p>'
+    '#title': 'Update configs for paragraphs - edition and displaying fields: CTA, Icon, Long text'
+    '#description': '<p>Update configs for existing paragraphs: d_p_carousel, d_p_gallery, d_p_group_of_counters, d_p_side_by_side, d_p_tiles, d_p_reference_content.</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
     extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
   droopler__droopler_update_8116_1:
-    '#title': 'Update configs for paragraphs'
-    '#description': '<p>Update configs for paragraphs: d_p_carousel, d_p_group_of_counters, d_p_group_of_text_blocks.</p>'
+    '#title': 'Import configs with new fields for Content Page content type'
+    '#description': '<p>.Import configs for new fields allowing changing header layout for Content Pages</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features/diff/d_content' }
+  droopler__droopler_update_8116_2:
+    '#title': 'Update configs for Content Page content type'
+    '#description': '<p>Update configs for Content Page content type - enabling Header Layout option during adding/edition Content Pages.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features/diff/d_content' }
+  droopler__droopler_update_8117_1:
+    '#title': 'Imports config for Meta Tags field storage.'
+    '#description': '<p>Import configs for new field added to Content Page, Product and Blog Post node types.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import field.storage.node.field_meta_tags config in d_p feature manually.</p>'
+    extension_page: { '#text': 'Import changed features', '#url': 'internal:/admin/config/development/features/diff/d_p' }
+  droopler__droopler_update_8117_2:
+    '#title': 'Import configs with new Meta Tags field for default node types.'
+    '#description': '<p>Update configs for d_p_side_by_side paragraph</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8117_3:
+    '#title': 'Update Meta Tags configs for default node types.'
+    '#description': '<p>Update config for default node types - enable Meta Tags field during adding/edition of Content Pages, Products and Blog Posts</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8118_1:
+    '#title': 'Migrate column count field.'
+    '#description': '<p>Migration of Column Count field (in d_p_carousel, d_p_counters, d_p_text_blocks paragraphs) to Paragraphs Settings field.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to migrate values and delete old fields manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8119_1:
+    '#title': 'Update Product configs.'
+    '#description': '<p>Update Product configs fixing issues related to revisions and lazyload.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to migrate values and delete old fields manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8120_1:
+    '#title': 'Update paragraphs configs clearing small changes in features.'
+    '#description': '<p>Update paragraphs configs clearing small changes in features.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to migrate values and delete old fields manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8121_1:
+    '#title': 'Add new image style'
+    '#description': '<p>Install new configs for d_media</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Add new image style', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8121_2:
+    '#title': 'Update Blog Post configs'
+    '#description': '<p>Update config for d_blog improving image style used in "Teaser small" view mode.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8122_1:
+    '#title': 'Import metatag config to d_commerce_product'
+    '#description': '<p>Add metatags for Commerce products.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8123_1:
+    '#title': 'Migrate padding modifiers'
+    '#description': '<p>Migrate the paddings modifiers to our new global spacing select list.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please update paragraphs manually</p>'
+    extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/content' }
+  droopler__droopler_update_8124_1:
+    '#title': 'Update Linkit'
+    '#description': '<p>Fix missing link button in editor, improve dropdown styling.</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
     extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }

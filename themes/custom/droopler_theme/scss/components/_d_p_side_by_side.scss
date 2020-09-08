@@ -7,11 +7,10 @@ Styleguide 2.d_p_side_by_side
 // Colour variables used in this paragraph
 $d-p-side-by-side-line-color: $color-agamemnon !default;
 $d-p-side-by-side-line-color-inverted: $color-nestor !default;
-$d-p-side-by-side-color: $color-hecuba !default;
-$d-p-side-by-side-bold-color: $color-troilus !default;
 
 // Margins, paddings and sizing.
 $d-p-side-by-side-padding-y: 5% !default;
+$d-p-side-by-side-header-padding: 5% !default;
 
 $d-p-side-by-side-subtitle-margin-y: 2.125rem !default;
 
@@ -22,12 +21,12 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 
 // Override default values.
 .padding-top-default {
-  .paragraph--type--d-p-side-by-side {
+  .paragraph.paragraph--type--d-p-side-by-side {
     padding-top: 0;
   }
 }
 .padding-bottom-default {
-  .paragraph--type--d-p-side-by-side {
+  .paragraph.paragraph--type--d-p-side-by-side {
     padding-bottom: 0;
   }
 }
@@ -39,13 +38,15 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
     text-align: center;
   }
 
-  .text-content {
-    padding-bottom: $d-p-side-by-side-padding-y;
+  .side-header {
+    .field:first-child {
+      padding-top: $d-p-side-by-side-header-padding;
+    }
 
     .field--name-field-d-main-title {
       @include font-main-header;
 
-      &:after {
+      &::after {
         @include decoration-header-line-main-center($d-p-side-by-side-line-color, $d-p-side-by-side-line-color-inverted);
       }
     }
@@ -54,8 +55,8 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
       margin: $d-p-side-by-side-subtitle-margin-y 0;
       @include font-subtitle;
     }
-  }
 
+  }
   .wrapper-d_p_single_text_block {
     padding: $d-p-side-by-side-text-box-padding-y 0;
     text-align: left;
@@ -93,7 +94,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   .item-2 {
     .user-image-background {
       padding: $d-p-side-by-side-image-background-padding-y 0;
-      &:before {
+      &::before {
         content: none;
       }
       .image-background-container {
@@ -173,12 +174,8 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 
   .field--name-field-d-long-text {
     p {
-      color: $d-p-side-by-side-color;
       word-wrap: break-word;
       hyphens: auto;
-      b, strong {
-        color: $d-p-side-by-side-bold-color;
-      }
     }
   }
 }

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: large_gallery_thumbnail
+label: 'Large gallery thumbnail'
+effects:
+  51541ff2-3fcd-45e6-b8d3-459f73f5445a:
+    uuid: 51541ff2-3fcd-45e6-b8d3-459f73f5445a
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 640
+      height: 480
+      anchor: center-center

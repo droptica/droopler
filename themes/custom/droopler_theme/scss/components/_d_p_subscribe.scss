@@ -124,7 +124,7 @@ $d-p-subscribe-background-opacity: 0.4 !default;
     text-align: center;
 
     // Horizontal line
-    &:after {
+    &::after {
       @include decoration-header-line-main-center($d-p-subscribe-line-color, $d-p-subscribe-line-color-inverted);
     }
   }

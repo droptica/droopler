@@ -14,6 +14,7 @@ $d-p-side-image-banner-link-hover-color: darken($d-p-side-image-banner-link-colo
 $d-p-side-image-line-color: $color-nestor !default;
 $d-p-side-image-line-color-inverted: $color-agamemnon !default;
 $d-p-side-image-header-color: $color-odysseus !default;
+$d-p-side-image-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-side-image-mobile-height: 18.75rem !default;
@@ -21,56 +22,79 @@ $d-p-side-image-banner-text-padding: 7% !default;
 $d-p-side-image-banner-text-width: 35.625rem !default;
 $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and half of the screen
 
-// Override default values.
-.padding-top-default {
+.theme-default {
   .paragraph--type--d-p-side-image {
-    padding-top: 0;
-  }
-}
-.padding-bottom-default {
-  .paragraph--type--d-p-side-image {
-    padding-bottom: 0;
+    color: $d-p-side-image-banner-text-color;
+
+    .field--name-field-d-main-title {
+      color: $d_p_side-image-header-color;
+    }
+
+    .field--name-field-d-long-text {
+      p {
+        color: $d-p-side-image-color;
+      }
+    }
+
+    .image-side {
+      &-right,
+      &-right-wide {
+        background: $d-p-side-image-banner-background-color;
+      }
+
+      &-left,
+      &-left-wide {
+        background: $d-p-side-image-banner-background-color-secondary;
+      }
+    }
+
+    a:not(.btn) {
+      color: $d-p-side-image-banner-link-color;
+      &:hover {
+        color: $d-p-side-image-banner-link-hover-color;
+      }
+    }
   }
 }
 
-.d-p-side-image-banner {
-  color: $d-p-side-image-banner-text-color;
+// Override default values.
+.padding-top-default {
+  .paragraph {
+    &.paragraph--type--d-p-side-image {
+      .content-inside-wrapper {
+        padding-top: $d-p-side-image-banner-text-padding;
+      }
+    }
+  }
+}
+.padding-bottom-default {
+  .paragraph {
+    &.paragraph--type--d-p-side-image {
+      .content-inside-wrapper {
+        padding-bottom: $d-p-side-image-banner-text-padding;
+      }
+    }
+  }
+}
+
+.paragraph--type--d-p-side-image {
   .field--name-field-d-main-title {
     @include font-main-header;
-    color: $d_p_side-image-header-color;
     text-align: left;
-    &:after {
+    &::after {
       @include decoration-header-line($d-p-side-image-line-color, $d-p-side-image-line-color-inverted);
     }
-    &:last-child:after {
+    &:last-child::after {
       display: none;
     }
   }
-  a:not(.btn) {
-    color: $d-p-side-image-banner-link-color;
-    &:hover {
-      color: $d-p-side-image-banner-link-hover-color;
-    }
-  }
+
+
   .d-image {
     padding: 0;
     @include media-breakpoint-down(sm) {
       height: $d-p-side-image-mobile-height !important;
       position: relative !important;
-    }
-  }
-  .container-half {
-    padding-top: $d-p-side-image-banner-text-padding;
-    padding-bottom: $d-p-side-image-banner-text-padding;
-  }
-  .image-side {
-    &-right,
-    &-right-wide {
-      background: $d-p-side-image-banner-background-color;
-    }
-    &-left,
-    &-left-wide {
-      background: $d-p-side-image-banner-background-color-secondary;
     }
   }
 
@@ -97,10 +121,14 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
           padding-left: $d-p-side-image-banner-half-padding;
           margin-left: auto;
         }
+
+        .content-inside-wrapper {
+          margin-left: auto;
+        }
       }
       &-left-wide,
       &-right-wide {
-        .container-half {
+        .content-inside-wrapper {
           padding-top: 2 * $d-p-side-image-banner-text-padding;
           padding-bottom: 2 * $d-p-side-image-banner-text-padding;
         }

@@ -14,8 +14,24 @@ core.entity_form_display.paragraph.d_p_side_by_side.default:
             - field_d_media_icon
             - field_d_cta_link
     content:
+      field_d_long_text:
+        type: text_textarea
+        weight: 1
+        region: content
+        settings:
+          rows: 5
+          placeholder: ''
+        third_party_settings: {  }
+      field_d_main_title:
+        type: string_textfield
+        weight: 0
+        region: content
+        settings:
+          size: 60
+          placeholder: ''
+        third_party_settings: {  }
       field_d_cta_link:
-        weight: 16
+        weight: 15
         settings:
           placeholder_url: ''
           placeholder_title: ''
@@ -38,6 +54,20 @@ core.entity_form_display.paragraph.d_p_side_by_side.default:
         third_party_settings: {  }
         type: media_library_widget
         region: content
+  change:
+    expected:
+      content:
+        field_d_settings:
+          weight: 2
+    new:
+      content:
+        field_d_settings:
+          weight: 16
+  delete_value:
+    - parents: hidden:config
+      values:
+        - field_d_long_text
+        - field_d_main_title
 core.entity_view_display.paragraph.d_p_side_by_side.default:
   add:
     dependencies:
@@ -47,6 +77,24 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
       module:
         - link
     content:
+      field_d_long_text:
+        type: text_textarea
+        weight: 2
+        label: hidden
+        region: content
+        settings:
+          rows: 5
+          placeholder: ''
+        third_party_settings: {  }
+      field_d_main_title:
+        type: string_textfield
+        weight: 1
+        label: hidden
+        region: content
+        settings:
+          size: 60
+          placeholder: ''
+        third_party_settings: {  }
       field_d_cta_link:
         weight: 6
         label: hidden
@@ -60,7 +108,7 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
         type: link
         region: content
       field_d_media_icon:
-        weight: 7
+        weight: 0
         label: hidden
         settings:
           view_mode: d_icon
@@ -68,6 +116,11 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
         third_party_settings: {  }
         type: entity_reference_entity_view
         region: content
+  delete_value:
+    - parents: hidden:config
+      values:
+        - field_d_long_text
+        - field_d_main_title
 field.field.paragraph.d_p_side_by_side.field_d_p_sbs_items:
   add:
     settings:

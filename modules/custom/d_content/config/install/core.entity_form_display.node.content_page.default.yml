@@ -11,34 +11,17 @@ dependencies:
     - node.type.content_page
   module:
     - field_group
-    - metatag
     - link_attributes
     - media_library
+    - metatag
     - paragraphs
     - path
-    - svg_image
 third_party_settings:
   field_group:
-    group_seo:
-      children:
-        - field_teaser_media_image
-        - field_teaser_text
-      parent_name: group_tabs
-      weight: 17
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        description: ''
-        required_fields: true
-        formatter: closed
-      label: SEO
-      region: content
     group_tabs:
       children:
         - group_basic
         - group_page_sections
-        - group_seo
       parent_name: ''
       weight: 0
       format_type: tabs
@@ -48,29 +31,62 @@ third_party_settings:
         classes: ''
         direction: horizontal
       label: Tabs
+      group_basic:
+        children:
+          - title
+          - langcode
+          - field_header_layout
+          - field_header_cta
+          - status
+        parent_name: group_tabs
+        weight: 15
+        format_type: tab
+        region: content
+        format_settings:
+          id: ''
+          classes: ''
+          description: ''
+          formatter: open
+          required_fields: true
+        label: Basic
+      group_page_sections:
+        children:
+          - field_page_section
+        parent_name: group_tabs
+        weight: 16
+        format_type: tab
+        region: content
+        format_settings:
+          id: ''
+          classes: ''
+          description: ''
+          formatter: closed
+          required_fields: true
+        label: 'Page Sections'
     group_basic:
       children:
         - title
-        - langcode
+        - group_seo
         - field_header_layout
         - field_header_cta
+        - langcode
         - status
       parent_name: group_tabs
-      weight: 15
+      weight: 20
       format_type: tab
       region: content
       format_settings:
         id: ''
         classes: ''
         description: ''
-        formatter: open
+        formatter: closed
         required_fields: true
       label: Basic
     group_page_sections:
       children:
         - field_page_section
       parent_name: group_tabs
-      weight: 16
+      weight: 21
       format_type: tab
       region: content
       format_settings:
@@ -80,6 +96,21 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: 'Page Sections'
+    group_seo:
+      children:
+        - field_teaser_media_image
+        - field_teaser_text
+      parent_name: group_basic
+      weight: 1
+      format_type: fieldset
+      region: content
+      format_settings:
+        description: ''
+        formatter: open
+        required_fields: true
+        id: ''
+        classes: ''
+      label: SEO
 id: node.content_page.default
 targetEntityType: node
 bundle: content_page
@@ -87,12 +118,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_header_cta:
-    weight: 4
+    weight: 3
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -109,18 +140,20 @@ content:
     type: link_attributes
     region: content
   field_header_layout:
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings: {  }
+    region: content
+    type: options_select
   field_meta_tags:
     weight: 26
     settings:
       sidebar: true
     third_party_settings: {  }
-    type: options_select
+    type: metatag_firehose
     region: content
   field_page_section:
-    weight: 10
+    weight: 11
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -148,14 +181,14 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 1
+    weight: 4
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -170,14 +203,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 13
+    weight: 5
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 6
+    weight: 1
     region: content
     third_party_settings: {  }
   title:
@@ -204,7 +237,7 @@ content:
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 12
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -75,7 +75,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     text-align: center;
 
     .field--name-field-d-main-title {
-      &:after {
+      &::after {
         @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
     }
@@ -163,16 +163,12 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   margin-bottom: $d-p-single-box-margin-bottom;
   .field--name-field-d-main-title {
     @include font-title-single-box;
-    &:after {
+    &::after {
       @include decoration-header-line($d-p-single-box-line-color, $d-p-single-box-line-color-inverted);
     }
   }
   p {
     @include font-body-standard;
-    color: $d-p-single-box-text-color;
-    b, strong {
-      color: $d-p-single-box-text-bold-color;
-    }
   }
   a {
     @include text-transform($d-p-single-text-box-cta-text-transform)

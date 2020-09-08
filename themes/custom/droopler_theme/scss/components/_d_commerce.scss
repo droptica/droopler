@@ -674,12 +674,12 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
       }
 
       &:hover {
-        &:after {
+        &::after {
           background-image: url(#{$assets-path}/funnel-white.svg);
         }
       }
 
-      &:after {
+      &::after {
         position: absolute;
         content: "";
         background-image: url(#{$assets-path}/funnel.svg);
@@ -690,18 +690,18 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
         right: 0.9375rem;
       }
       &.mobile-filters-active {
-        &:after {
+        &::after {
           background-image: url(#{$assets-path}/funnel-thicked.svg);
         }
         &:hover {
-          &:after {
+          &::after {
             background-image: url(#{$assets-path}/funnel-thicked-white.svg);
           }
         }
       }
       @include media-breakpoint-down(sm) {
         font-size: 0;
-        &:after {
+        &::after {
           right: 0.625rem;
           top: 0.8125rem;
         }
@@ -727,7 +727,7 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
 
 .commerce-navigation-bar-visible {
   .mobile-filter {
-    &:after {
+    &::after {
       background: none;
     }
   }
@@ -776,7 +776,7 @@ body:not(.scrolled-buttons) {
           min-width: 4rem;
           transition: none;
 
-          &:after {
+          &::after {
             background-position: center top;
           }
           .mobile-filters-counter {
@@ -840,7 +840,7 @@ body:not(.scrolled-buttons) {
     }
     .select2-dropdown--below {
       border-top-left-radius: 0.3125rem !important;
-      &:before {
+      &::before {
         width: calc(100% - 4rem);
         background: black;
         margin: 0 0 0 0.125rem;
@@ -1111,7 +1111,7 @@ body:not(.scrolled-buttons) {
             padding: $mobile-submenu-padding;
           }
 
-          .cart-block--summary__icon:before {
+          .cart-block--summary__icon::before {
             content: '';
             @include commerce-cart-ico-bg($secondary-menu-link-colors);
             display: inline-block;
@@ -1121,7 +1121,7 @@ body:not(.scrolled-buttons) {
           }
 
           &:hover {
-            .cart-block--summary__icon:before {
+            .cart-block--summary__icon::before {
               @include commerce-cart-ico-bg($secondary-menu-link-hover-colors);
             }
           }
