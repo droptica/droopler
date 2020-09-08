@@ -493,12 +493,15 @@ class SettingsWidget extends WidgetBase {
     $form_state->setValueForElement($element, json_encode($values));
   }
 
+  /**
+   * Returns default options for select fields.
+   */
   public static function getModifierDefaults() {
     $modifiers = self::getConfigOptions()[self::CSS_CLASS_SETTING_NAME]['modifiers'];
     $defaults = [];
     foreach ($modifiers as $key => $modifier) {
       if ($modifier['type'] === 'select') {
-        if ($modifier['default']) {
+        if (isset($modifier['default']) && $modifier['default']) {
           $default = $modifier['default'];
         }
         else {
