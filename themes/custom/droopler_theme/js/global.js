@@ -58,7 +58,20 @@
         $(this).parent().removeClass('force-show');
         $(this).parent().find(".dropdown-menu").removeClass('force-show');
       } });
-      $body.addClass("d-theme-preceded")
+      $body.addClass("d-theme-preceded");
+
+      // Check if alert box and header with cta is visible for position adjustments.
+      var alert = $('div.alert-dismissible');
+      var header = $('div.hanging-header');
+
+      if (alert.length && header.length) {
+        var height = parseInt(header.css('top'), 10);
+        header.css('top', height + parseInt(alert.css('height'), 10) + 20);
+
+        $('div.alert-dismissible button.close').click(function () {
+          header.css('top', height);
+        });
+      }
     }
   };
 
