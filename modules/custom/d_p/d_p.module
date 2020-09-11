@@ -108,25 +108,6 @@ function d_p_preprocess_paragraph(&$variables) {
 }
 
 /**
- * Finds and replaces default value of class attribute in all fields of type field_d_cta_link.
- *
- * @param $form
- *   Form array to search on.
- */
-function edit_cta_link_default_class(&$form) {
-  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
-    foreach ($form as &$subform) {
-      if (!is_object($subform) && isset($subform['field_d_cta_link'])) {
-        $subform['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
-      }
-      if (is_array($subform)) {
-        edit_cta_link_default_class($subform);
-      }
-    }
-  }
-}
-
-/**
  * Implements hook_form_alter().
  */
 function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -141,15 +122,6 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   }
   else {
     d_p_move_heading_type($form);
-  }
-
-  // Add bootstrap classes to CTA by default.
-  $trigger_name = $form_state->getUserInput()['_triggering_element_name'] ?? NULL;
-  if (strpos($form_id, 'add') !== FALSE || strpos($trigger_name, 'add') !== FALSE) {
-    if (isset($form['field_d_cta_link'])) {
-      $form['field_d_cta_link']['widget'][0]['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
-    }
-    edit_cta_link_default_class($form);
   }
 }
 
@@ -241,6 +213,20 @@ function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, 
     if (in_array($bundle, ['d_p_side_embed', 'd_p_side_tiles'])) {
       unset($element['#options']['left-wide']);
       unset($element['#options']['right-wide']);
+    }
+
+    // Add default value to the link class attribute.
+    if ($field_name === 'field_d_cta_link' &&
+      empty($element['url']['#default_value']) &&
+      empty($element['options']['attributes']['class']['#default_value'])
+    ) {
+      if (in_array($bundle, ['d_p_group_of_counters'])) {
+        $default_value = 'btn btn-secondary';
+      }
+      else {
+        $default_value = 'btn btn-primary';
+      }
+      $element['options']['attributes']['class']['#default_value'] = $default_value;
     }
   }
 }

@@ -17,6 +17,7 @@ use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\d_p\Helper\NestedArrayHelper;
 
 /**
  * Helper class to update configuration.
@@ -137,7 +138,10 @@ class Updater {
   }
 
   /**
-   * Import a config file.
+   * Import a config file if the module exists.
+   *
+   * The method tries to read config files from the modules' 'install' or 'optional' directories,
+   * if the config has been found and the module exists - the config is imported.
    *
    * @param string $source
    *   Module/theme name.
@@ -145,22 +149,31 @@ class Updater {
    *   Config file name without .yml extension.
    * @param string $hash
    *   Hashed array with config data.
-   * @param bool $optional
-   *   Specify if config should be searched only in 'config/optional'.
    *
    * @return bool
-   *   Returns if config was imported successfully.
+   *   TRUE if the config was imported successfully or the module does not exist,
+   *   FALSE otherwise.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function importConfig($source, $name, $hash) {
     $data = $this->readConfigFromFile($source, $name, 'install');
+
     if (empty($data)) {
       $data = $this->readConfigFromFile($source, $name, 'optional');
     }
+
     if (empty($data)) {
       $this->logger
         ->error('Cannot find file for %config', ['%config' => $name]);
 
       return FALSE;
+    }
+
+    // Check if the module exists.
+    if ($this->moduleExtensionList->exists($source) === FALSE) {
+      return TRUE;
     }
 
     return $this->createConfig($name, $data, $hash);
@@ -416,23 +429,38 @@ class Updater {
     }
     foreach ($data as $configName => $configOperations) {
       $updates = $configOperations;
-      $newConfig = [];
+      $config = $this->configFactory->getEditable($configName);
+      $newConfig = $config->get();
       $isOptional = $updates['optional'] ?? FALSE;
 
       if (isset($updates['delete'])) {
-        foreach ($updates['delete'] as $value) {
-          NestedArray::unsetValue($newConfig, explode('.', $value));
+        foreach ($updates['delete'] as $update) {
+          NestedArray::unsetValue($newConfig, explode(':', $update));
         }
       }
+
+      if (isset($updates['delete_value'])) {
+        foreach ($updates['delete_value'] as $update) {
+          $exp = explode(':', $update['parents']);
+
+          foreach ($update['values'] as $value) {
+            NestedArrayHelper::unsetValueIfEqualTo($newConfig, $exp, $value);
+          }
+        }
+      }
+
       if (isset($updates['change'])) {
         $newConfig = NestedArray::mergeDeep($newConfig, $updates['change']['new']);
       }
+
       if (isset($updates['add'])) {
         $newConfig = NestedArray::mergeDeep($newConfig, $updates['add']);
       }
+
       if (!isset($updates['change']['expected'])) {
         $updates['change']['expected'] = NULL;
       }
+
       if (!$this->modifyConfig($configName, $newConfig, $updates['change']['expected'])) {
         if ($isOptional) {
           $this->logger->notice('Update failed for optional %config, skipping', ['%config' => $name]);
@@ -476,8 +504,8 @@ class Updater {
         ->error('Detected changes in configuration %config. Aborting import', ['%config' => $configName]);
       return FALSE;
     }
-    $config->setData(NestedArray::mergeDeep($configData, $newConfig));
-    $config->save();
+
+    $config->setData($newConfig)->save();
 
     return TRUE;
   }

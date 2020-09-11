@@ -7,6 +7,8 @@
 
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\MissingDependencyException;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 use Drupal\user\Entity\Role;
 
@@ -58,28 +60,17 @@ function droopler_install() {
 }
 
 /**
- * Implements hook_install_tasks().
+ * Implements hook_install_tasks()
  */
 function droopler_install_tasks() {
   $tasks = [
-    'droopler_enable_blog_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install d_blog'),
-      'type' => 'batch',
+    'droopler_additional_components_form' => [
+      'display_name' => t('Enable additional components'),
+      'type' => 'form',
+      'function' => 'Drupal\droopler\Installer\Form\AdditionalComponentsForm',
     ],
-    'droopler_enable_product_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install d_product'),
-      'type' => 'batch',
-    ],
-    'droopler_enable_demo_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Install Demo'),
-      'type' => 'batch',
-    ],
-    'droopler_enable_init_content_batch' => [
-      'display' => TRUE,
-      'display_name' => t('Init content'),
+    'droopler_additional_components_install' => [
+      'display_name' => t('Install additional components'),
       'type' => 'batch',
     ],
     'droopler_enable_subtheme_batch' => [
@@ -89,6 +80,46 @@ function droopler_install_tasks() {
     ],
   ];
   return $tasks;
+}
+
+/**
+ * Install additional components in a batch.
+ *
+ * @param array $install_state
+ *   The install state.
+ * @return array
+ *   Batch array.
+ */
+function droopler_additional_components_install(array &$install_state) {
+  $modules = $install_state['droopler_additional_modules'];
+  $init_content = $install_state['droopler_init_content'];
+
+  $batch = $operations = [];
+  if ($modules) {
+    foreach ($modules as $module) {
+      $operations[] = [
+        'droopler_install_module',
+        [$module],
+      ];
+    }
+  }
+
+  if ($init_content) {
+    $init_content_batch = droopler_enable_init_content_batch();
+    foreach ($init_content_batch['operations'] as $operation) {
+      $operations[] = $operation;
+    }
+  }
+
+  if (!empty($operations)) {
+    $batch = [
+      'operations' => $operations,
+      'title' => t('Installing selected components'),
+      'error_message' => t('Installation error.'),
+    ];
+  }
+
+  return $batch;
 }
 
 /**
@@ -102,29 +133,6 @@ function droopler_install_tasks() {
 function droopler_install_module(string $module, array &$context) {
   \Drupal::service('module_installer')->install([$module], TRUE);
   $context['message'] = t('Installed %module module.', ['%module' => $module]);
-}
-
-/**
- * Allows to install modules in batch.
- *
- * @param \Drupal\Core\StringTranslation\TranslatableMarkup|string $title
- *   Title to display on the installation page.
- * @param array $modules
- *   Module machine name.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_install_modules_batch($title, array $modules) {
-  $operations = [];
-  foreach ($modules as $module) {
-    $operations[] = ['droopler_install_module', [$module]];
-  }
-
-  return [
-    'operations' => $operations,
-    'title' => $title,
-  ];
 }
 
 /**
@@ -142,34 +150,6 @@ function _droopler_import_config($module, $name) {
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
   $config_storage->write($name, $source->read($name));
-}
-
-/**
- * Batch install of d_blog.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_blog_batch() {
-  $title = t('Install d_blog');
-
-  return droopler_install_modules_batch($title, ['d_blog']);
-}
-
-/**
- * Batch install of d_product.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_product_batch() {
-  return [
-    'operations' => [
-      ['droopler_enable_product', [1]],
-      ['droopler_enable_product', [2]],
-    ],
-    'title' => t('Install d_product'),
-  ];
 }
 
 /**
@@ -194,24 +174,6 @@ function droopler_enable_product(int $step, array &$context) {
 }
 
 /**
- * Batch install of all demo modules.
- *
- * @return array
- *   Batch defintion.
- */
-function droopler_enable_demo_batch() {
-  $title = t('Install Demo');
-
-  $modules = [
-    'd_blog_init',
-    'd_product_init',
-    'd_demo',
-  ];
-
-  return droopler_install_modules_batch($title, $modules);
-}
-
-/**
  * Batch content init creating.
  *
  * @return array
@@ -219,9 +181,9 @@ function droopler_enable_demo_batch() {
  */
 function droopler_enable_init_content_batch() {
   $types = [
-    'content',
     'block',
     'media',
+    'content',
     'index_content',
   ];
 
@@ -1362,4 +1324,360 @@ function droopler_update_8114() {
   Drupal::service('d_update')
     ->checklist()
     ->saveProgress(['v2.1' => $values]);
+}
+
+/**
+ * Droopler 2.2 - extend paragraphs missing common fields (CTA, Icon, Long text).
+ */
+function droopler_update_8115() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_p_carousel' => [
+      'field.field.paragraph.d_p_carousel.field_d_cta_link' => '',
+    ],
+    'd_p_gallery' => [
+      'field.field.paragraph.d_p_gallery.field_d_cta_link' => '',
+    ],
+    'd_p_counters' => [
+      'field.field.paragraph.d_p_group_of_counters.field_d_cta_link' => '',
+      'field.field.paragraph.d_p_group_of_counters.field_d_long_text' => '',
+      'field.field.paragraph.d_p_single_counter.field_d_media_icon' => '',
+    ],
+    'd_p_side_by_side' => [
+      'field.field.paragraph.d_p_side_by_side.field_d_cta_link' => '',
+      'field.field.paragraph.d_p_side_by_side.field_d_media_icon' => '',
+    ],
+    'd_p_tiles' => [
+      'field.field.paragraph.d_p_tiles.field_d_cta_link' => '',
+    ],
+    'd_p_reference_content' => [
+      'field.field.paragraph.d_p_reference_content.field_d_long_text' => '',
+      'field.field.paragraph.d_p_reference_content.field_d_media_icon' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8115_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8115_2'] = update_modules_configuration(array_keys($configs), '8115');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 - add Header Layout settings for Content Page node types.
+ */
+function droopler_update_8116() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_content' => [
+      'field.storage.node.field_header_cta' => '',
+      'field.storage.node.field_header_layout' => '',
+      'field.field.node.content_page.field_header_cta' => '',
+      'field.field.node.content_page.field_header_layout' => '',
+      'core.entity_view_display.node.content_page.d_header' => '',
+      'core.entity_view_mode.node.d_header' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8116_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8116_2'] = update_modules_configuration(array_keys($configs), '8116');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 - add new field for content types allowing overwriting meta tags during node add/edit.
+ */
+function droopler_update_8117() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8117_1'] = $updater->importConfigs([
+    'd_p' => [
+      'field.storage.node.field_meta_tags' => '',
+    ],
+  ]);
+
+  $configs = [
+    'd_blog' => [
+      'field.field.node.blog_post.field_meta_tags' => '',
+    ],
+    'd_product' => [
+      'field.field.node.d_product.field_meta_tags' => '',
+    ],
+    'd_content' => [
+      'field.field.node.content_page.field_meta_tags' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8117_2'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8117_3'] = update_modules_configuration(array_keys($configs), '8117');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 Migrate column count field.
+ */
+function droopler_update_8118(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $query = \Drupal::entityQuery('paragraph')
+      ->exists('field_d_number')
+      ->execute();
+
+    $sandbox['total'] = count($query);
+    $sandbox['current'] = 0;
+  }
+
+  $paragraphs_per_batch = 25;
+
+  $query = \Drupal::entityQuery('paragraph')
+    ->exists('field_d_number')
+    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->execute();
+
+  foreach ($query as $pid) {
+    $paragraph = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->load($pid);
+    $settings = $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
+
+    $json = json_decode($settings);
+    if (empty($json->column_count)) {
+      $json->column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '4') : '4';
+      $paragraph->set('field_d_settings', json_encode($json));
+      $paragraph->save();
+    }
+    $paragraph->save();
+    $sandbox['current']++;
+  }
+
+  \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed.');
+  $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
+
+  if ($sandbox['#finished'] === 1) {
+    $modules = [
+      'd_p_carousel',
+      'd_p_counters',
+      'd_p_text_blocks',
+    ];
+    $values['droopler__droopler_update_8118_1'] = update_modules_configuration($modules, '8118');
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v2.2' => $values]);
+
+    $bundles = [
+      'd_p_carousel',
+      'd_p_group_of_counters',
+      'd_p_group_of_text_blocks',
+    ];
+    foreach ($bundles as $bundle) {
+      $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_number');
+
+      if ($field !== NULL) {
+        $field->delete();
+      }
+    }
+  }
+}
+
+/**
+ * Droopler 2.2 update Product configs fixing issues related to revisions.
+ */
+function droopler_update_8119() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8119_1'] = update_modules_configuration(['d_product'], '8119');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 update paragraphs config fixing missing dependency and features changes.
+ */
+function droopler_update_8120() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $bundles = [
+    'd_blog',
+    'd_media',
+    'd_p_banner',
+    'd_p_carousel',
+    'd_p_counters',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_media',
+    'd_p_node',
+    'd_p_reference_content',
+    'd_p_side_by_side',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_subscribe_file',
+    'd_p_text_blocks',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+    'd_product',
+  ];
+
+  $values['droopler__droopler_update_8120_1'] = update_modules_configuration($bundles, '8120');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 improve Blog Post "teaser small" image style.
+ */
+function droopler_update_8121() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $configs = [
+    'd_media' => [
+      'image.style.large_gallery_thumbnail' => '',
+    ],
+  ];
+
+  $values['droopler__droopler_update_8121_1'] = $updater->importConfigs($configs);
+  $values['droopler__droopler_update_8121_2'] = update_modules_configuration(['d_blog'], '8121');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 configure meta tags for Commerce products.
+ */
+function droopler_update_8122() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  if (\Drupal::service('module_handler')->moduleExists('d_commerce_product')) {
+    try {
+      \Drupal::service('module_installer')->install(['metatag_open_graph_products']);
+      $configs = [
+        'd_commerce_product' => [
+          'metatag.metatag_defaults.commerce_product.yml' => '',
+        ],
+      ];
+      $values['droopler__droopler_update_8122_1'] = $updater->importConfigs($configs);
+    }
+    catch (MissingDependencyException $e) {
+      $values['droopler__droopler_update_8122_1'] = FALSE;
+    }
+  }
+  else {
+    $values['droopler__droopler_update_8122_1'] = TRUE;
+  }
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 Migrate paddings modifiers.
+ */
+function droopler_update_8123(&$sandbox) {
+  $entity_ids = [
+    'd_p_side_by_side',
+    'd_p_group_of_text_blocks',
+    'd_p_carousel',
+    'd_p_text_paged',
+    'd_p_reference_content',
+  ];
+
+  if (!isset($sandbox['total'])) {
+    $query = \Drupal::entityQuery('paragraph');
+    $group = $query->orConditionGroup();
+
+    foreach ($entity_ids as $entity_id) {
+      $group->condition('type', $entity_id);
+    }
+
+    $query = $query->condition($group)->execute();
+
+    $sandbox['total'] = count($query);
+    $sandbox['current'] = 0;
+    $sandbox['changed'] = 0;
+  }
+
+  $paragraphs_per_batch = 25;
+
+  $query = \Drupal::entityQuery('paragraph');
+  $group = $query->orConditionGroup();
+
+  foreach ($entity_ids as $entity_id) {
+    $group->condition('type', $entity_id);
+  }
+
+  $query = $query
+    ->condition($group)
+    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->execute();
+
+  foreach ($query as $pid) {
+    $paragraph = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->load($pid);
+    $settings = $paragraph->hasField('field_d_settings') && $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
+
+    $replaces = [
+      'no-padding-bottom' => 'padding-bottom-none',
+      'no-padding-top' => 'padding-top-none',
+    ];
+
+    $json = json_decode($settings);
+
+    $save = FALSE;
+    if (isset($json->custom_class)) {
+      foreach ($replaces as $old => $new) {
+        if (strpos($json->custom_class, $old) === FALSE) {
+          continue;
+        }
+
+        $json->custom_class = str_replace($old, $new, $json->custom_class);
+        $paragraph->set('field_d_settings', json_encode($json));
+        $save = TRUE;
+      }
+    }
+
+    if ($save) {
+      $paragraph->save();
+      $sandbox['changed']++;
+    }
+
+    $sandbox['current']++;
+  }
+
+  $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
+
+  if ($sandbox['##finished'] === 1) {
+    $values['droopler__droopler_update_8123_1'] = TRUE;
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v2.2' => $values]);
+    \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed, ' . $sandbox['changed'] . ' changed.');
+  }
+}
+
+/**
+ * Droopler 2.2 update Linkit.
+ */
+function droopler_update_8124() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8124_1'] = $updater->updateConfigurations('profile/droopler', 'editor.8124');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
 }

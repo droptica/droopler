@@ -3,8 +3,6 @@ Components Carousel
 */
 
 // Colour variables used in this paragraph.
-$d-p-carousel-item-text-color: $color-hecuba !default;
-$d-p_carousel-item-text-bold-color: $color-troilus !default;
 $d-p-carousel-item-line-color: $color-agamemnon !default;
 $d-p-carousel-item-line-color-inverted: $color-nestor !default;
 $d-p-carousel-line-color: $color-agamemnon !default;
@@ -14,8 +12,6 @@ $d-p-carousel-background-theme-invert: $color-agamemnon !default;
 $d-p-carousel-theme-invert-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
-$d-p-carousel-padding-y: 5% !default;
-$d-p-carousel-mobile-padding-y: 5% !default;
 $d-p-carousel-items-margin-top: 2% !default;
 $d-p-carousel-mobile-items-margin-top: 3rem !default;
 $d-p-carousel-item-image-margin-bottom: 1rem !default;
@@ -37,14 +33,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
 
 // Group of carousel items.
 .paragraph--type--d-p-carousel {
-  padding-top: $d-p-carousel-padding-y;
-  padding-bottom: $d-p-carousel-padding-y;
   text-align: center;
-
-  @include media-breakpoint-down(md) {
-    padding-top: $d-p-carousel-mobile-padding-y;
-    padding-bottom: $d-p-carousel-mobile-padding-y;
-  }
 
   .field--name-field-d-media-icon {
     text-align: center;
@@ -54,20 +43,15 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     @include font-main-header;
     text-align: center;
 
-    &:after {
+    &::after {
       @include decoration-header-line-main-center($d-p-carousel-line-color, $d-p-carousel-line-color-inverted);
     }
   }
 
   .content > .field--name-field-d-long-text {
     p {
-      color: $d-p-carousel-item-text-color;
       word-wrap: break-word;
       hyphens: auto;
-
-      b, strong {
-        color: $d-p-carousel-item-text-bold-color;
-      }
     }
   }
 
@@ -105,14 +89,14 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
       width: $d-p-carousel-arrow-size;
       height: $d-p-carousel-arrow-size;
 
-      &:before {
+      &::before {
         color: $d-p-carousel-arrow-color;
         font-size: $d-p-carousel-arrow-size;
         opacity: $d-p-carousel-arrow-opacity;
       }
 
       &:hover {
-        &:before {
+        &::before {
           opacity: $d-p-carousel-arrow-hover-opacity;
         }
       }
@@ -144,13 +128,9 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
         .field--name-field-d-long-text {
           p {
             @include font-body-standard;
-            color: $d-p-carousel-item-text-color;
             text-align: center;
-            b, strong {
-              color: $d-p_carousel-item-text-bold-color;
-            }
           }
-          &:before {
+          &::before {
             @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);
           }
         }

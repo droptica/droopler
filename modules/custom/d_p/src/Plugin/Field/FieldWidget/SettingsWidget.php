@@ -22,6 +22,32 @@ class SettingsWidget extends WidgetBase {
 
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
+  const COLUMN_COUNT_SETTING_NAME = 'column_count';
+
+  /**
+   * @var array
+   *   Stores bundles where spacing settings should be enabled.
+   */
+  private $spacingBundles = [
+    'd_p_banner',
+    'd_p_block',
+    'd_p_blog_image',
+    'd_p_blog_text',
+    'd_p_carousel',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_group_of_counters',
+    'd_p_group_of_text_blocks',
+    'd_p_reference_content',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_side_by_side',
+    'd_p_subscribe_file',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+  ];
 
   private function getConfigOptions() {
     return [
@@ -55,32 +81,6 @@ class SettingsWidget extends WidgetBase {
                 'd_p_group_of_text_blocks',
                 'd_p_carousel',
                 'd_p_block'
-              ],
-            ],
-          ],
-          'no-padding-bottom' => [
-            'title' => $this->t('Disable bottom padding'),
-            'description' => $this->t('Set the bottom padding of the paragraph to zero.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_by_side',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_text_paged',
-                'd_p_reference_content',
-              ],
-            ],
-          ],
-          'no-padding-top' => [
-            'title' => $this->t('Disable top padding'),
-            'description' => $this->t('Set the top padding of the paragraph to zero.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_by_side',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_text_paged',
-                'd_p_reference_content',
               ],
             ],
           ],
@@ -178,6 +178,78 @@ class SettingsWidget extends WidgetBase {
               ],
             ],
           ],
+          'paragraph-theme' => [
+            'title' => $this->t('Paragraph Theme'),
+            'description' => $this->t('Choose a color theme for this paragraph.'),
+            'type' => 'select',
+            'options' => [
+              'theme-default' => $this->t('Default'),
+              'theme-primary' => $this->t('Primary'),
+              'theme-secondary' => $this->t('Secondary'),
+              'theme-gray' => $this->t('Gray'),
+            ],
+            'bundles' => [
+              'paragraph' => ['all'],
+            ],
+          ],
+          'margin-top' => [
+            'title' => $this->t('Margin Top'),
+            'description' => $this->t('Choose the size of top margin.'),
+            'type' => 'select',
+            'options' => [
+              'margin-top-default' => $this->t('Default'),
+              'margin-top-small' => $this->t('Small'),
+              'margin-top-medium' => $this->t('Medium'),
+              'margin-top-big' => $this->t('Big'),
+              'margin-top-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => $this->spacingBundles,
+            ],
+          ],
+          'margin-bottom' => [
+            'title' => $this->t('Margin Bottom'),
+            'description' => $this->t('Choose the size of bottom margin.'),
+            'type' => 'select',
+            'options' => [
+              'margin-bottom-default' => $this->t('Default'),
+              'margin-bottom-small' => $this->t('Small'),
+              'margin-bottom-medium' => $this->t('Medium'),
+              'margin-bottom-big' => $this->t('Big'),
+              'margin-bottom-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => $this->spacingBundles,
+            ],
+          ],
+          'padding-top' => [
+            'title' => $this->t('Padding Top'),
+            'description' => $this->t('Choose the size of top padding.'),
+            'type' => 'select',
+            'options' => [
+              'padding-top-default' => $this->t('Default'),
+              'padding-top-small' => $this->t('Small'),
+              'padding-top-big' => $this->t('Big'),
+              'padding-top-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => $this->spacingBundles,
+            ],
+          ],
+          'padding-bottom' => [
+            'title' => $this->t('Padding Bottom'),
+            'description' => $this->t('Choose the size of bottom padding.'),
+            'type' => 'select',
+            'options' => [
+              'padding-bottom-default' => $this->t('Default'),
+              'padding-bottom-small' => $this->t('Small'),
+              'padding-bottom-big' => $this->t('Big'),
+              'padding-bottom-none' => $this->t('None'),
+            ],
+            'bundles' => [
+              'paragraph' => $this->spacingBundles,
+            ],
+          ],
         ],
       ],
       self::HEADING_TYPE_SETTING_NAME => [
@@ -214,6 +286,22 @@ class SettingsWidget extends WidgetBase {
             'd_p_text_paged',
             'd_p_text_with_bckg',
             'd_p_tiles',
+          ],
+        ],
+      ],
+      self::COLUMN_COUNT_SETTING_NAME => [
+        'title' => $this->t('Column count'),
+        'outside' => TRUE,
+        'description' => $this->t('Select the number of items in one row.'),
+        'type' => 'number',
+        'min' => '1',
+        'max' => '12',
+        'default' => '4',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
           ],
         ],
       ],
@@ -274,6 +362,7 @@ class SettingsWidget extends WidgetBase {
             if (!$this->inBundle($modifier['bundles'])) {
               continue;
             }
+
             $class_key = array_search($class, $classes);
             if ($class_key === FALSE) {
               $default_value = 0;
@@ -282,13 +371,28 @@ class SettingsWidget extends WidgetBase {
               unset($classes[$class_key]);
               $default_value = 1;
             }
+
+            $element_type = !empty($modifier['type']) ? $modifier['type'] : 'checkbox';
             $element[$class] = [
-              '#type' => 'checkbox',
+              '#type' => $element_type,
               '#description' => $modifier['description'] ?? '',
               '#title' => $modifier['title'],
               '#default_value' => $default_value,
               '#attributes' => ['data-modifier' => $class],
             ];
+            if ($modifier['type'] == 'select') {
+              // First element as default.
+              $default_select_value = key($modifier['options']);
+              foreach ($modifier['options'] as $theme_class => $data) {
+                $theme_class_key = array_search($theme_class, $classes);
+                if ($theme_class_key !== FALSE) {
+                  $default_select_value = $theme_class;
+                  unset($classes[$theme_class_key]);
+                }
+              }
+              $element[$class]['#options'] = $modifier['options'];
+              $element[$class]['#default_value'] = $default_select_value;
+            }
           }
 
           $element[$key] = [
@@ -310,6 +414,20 @@ class SettingsWidget extends WidgetBase {
             '#description' => $options['description'] ?? '',
             '#options' => $options['options'],
             '#default_value' => empty($value) ? $options['default'] : $value,
+          ];
+          if ($element['#required']) {
+            $element[$key]['#required'] = TRUE;
+          }
+          break;
+
+        case 'number':
+          $element[$key] = [
+            '#type' => 'number',
+            '#title' => $options['title'],
+            '#description' => $options['description'] ?? '',
+            '#default_value' => !empty($value) && $value !== '' ? $value : $options['default'],
+            '#min' => $options['min'] ?? NULL,
+            '#max' => $options['max'] ?? NULL,
           ];
           if ($element['#required']) {
             $element[$key]['#required'] = TRUE;
@@ -350,7 +468,14 @@ class SettingsWidget extends WidgetBase {
         foreach ($options['modifiers'] as $class => $modifier) {
           $modifier_value = $element[$class]['#value'] ?? NULL;
           if ($modifier_value && $this->inBundle($modifier['bundles'])) {
-            $classes[] = $class;
+            switch ($modifier['type']) {
+              case 'select':
+                $classes[] = $modifier_value;
+                break;
+              default:
+                $classes[] = $class;
+                break;
+            }
           }
         }
         $classes = array_unique($classes);

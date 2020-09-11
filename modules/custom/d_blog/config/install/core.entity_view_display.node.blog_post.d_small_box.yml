@@ -7,9 +7,11 @@ dependencies:
     - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
+    - field.field.node.blog_post.field_meta_tags
     - image.style.small_box_image
     - node.type.blog_post
   module:
+    - lazy
     - media
     - user
 id: node.blog_post.d_small_box
@@ -32,6 +34,7 @@ hidden:
   field_blog_category: true
   field_blog_sections: true
   field_blog_teaser: true
+  field_meta_tags: true
   langcode: true
   links: true
   search_api_excerpt: true

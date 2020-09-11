@@ -3,11 +3,13 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_single_counter.field_d_main_title
+    - field.field.paragraph.d_p_single_counter.field_d_media_icon
     - field.field.paragraph.d_p_single_counter.field_d_number
     - field.field.paragraph.d_p_single_counter.field_d_settings
     - paragraphs.paragraphs_type.d_p_single_counter
   module:
     - d_p
+    - media_library
 id: paragraph.d_p_single_counter.default
 targetEntityType: paragraph
 bundle: d_p_single_counter
@@ -20,6 +22,13 @@ content:
       placeholder: 'ie. Clients this year'
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_d_media_icon:
+    weight: 3
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
     region: content
   field_d_number:
     weight: 0

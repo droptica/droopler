@@ -23,6 +23,11 @@ function droopler_theme_preprocess_html(&$variables) {
   $path_args = explode('/', $path);
   if (isset($path_args[0]) && isset($path_args[1]) && ($path_args[0] == 'node') && (is_numeric($path_args[1]))) {
     $variables['attributes']['class'][] = 'page-node-' . $path_args[1];
+
+    // Add node type when viewing a node revision.
+    if (isset($path_args[2]) && $path_args[2] == 'revisions') {
+      $variables['node_type'] = Node::load($path_args[1])->getType();
+    }
   }
   if (isset($path_args[0]) && isset($path_args[1]) && ($path_args[0] == 'user')) {
     $variables['attributes']['class'][] = 'page-user-' . $path_args[1];
@@ -293,7 +298,8 @@ function droopler_theme_preprocess_views_mini_pager(&$variables) {
 function droopler_theme_preprocess_field(&$variables) {
   if ($variables['field_name'] == 'field_d_product_media') {
     $variables['#attached']['library'][] = 'd_product/d_product_slider';
-    $slider = views_embed_view('product_images', 'block_1');
+    $vid = $variables['element']['#object']->vid->value;
+    $slider = views_embed_view('product_images', 'block_1', $vid);
     $variables['slider'] = render($slider);
   }
 }

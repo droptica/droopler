@@ -9,14 +9,22 @@
     outline: none !important;
 
     .geysir-field-paragraph-links,
-    &:after {
+    &::after {
       display: none !important;
+    }
+  }
+
+  /* Fix overlay on margins */
+  &:hover {
+    outline: none;
+
+    .geysir-field-paragraph-links {
+      display: block;
     }
   }
 }
 
 /* Fix modal styles. */
-
 #media-library-wrapper,
 #geysir-modal,
 #geysir-modal-form {
@@ -125,3 +133,6 @@
   }
 }
 
+.editor-link-dialog .ui-dialog-content {
+  overflow: unset;
+}

@@ -1,0 +1,15 @@
+core.entity_view_display.media.d_image.d_blog_image:
+  add:
+    dependencies:
+      module:
+        - lazy
+core.entity_form_display.node.blog_post.default:
+  add:
+    hidden:
+      field_meta_tags: true
+paragraphs.paragraphs_type.d_p_blog_image:
+  add:
+    icon_default: null
+paragraphs.paragraphs_type.d_p_blog_text:
+  add:
+    icon_default: null

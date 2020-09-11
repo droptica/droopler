@@ -54,6 +54,7 @@
     <section {{ wrapper_attributes }}>
         <div{{ attributes.addClass(classes) }}>
             <div {{ d_p_reference_content_wrapper_attributes.addClass(d_p_reference_content_wrapper_classes) }}>
+{#                {{ content|without('field_d_media_icon', 'field_d_main_title', 'field_d_long_text') }}#}
                 {{ content }}
             </div>
         </div>
