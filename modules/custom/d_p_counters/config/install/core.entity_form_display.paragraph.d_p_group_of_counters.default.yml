@@ -23,7 +23,7 @@ mode: default
 content:
   field_d_counter_reference:
     type: entity_reference_paragraphs
-    weight: 5
+    weight: 6
     settings:
       title: Counter
       title_plural: Counters
@@ -51,7 +51,7 @@ content:
     type: link_attributes
     region: content
   field_d_long_text:
-    weight: 2
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
