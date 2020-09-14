@@ -1707,41 +1707,69 @@ function droopler_update_8125(&$sandbox) {
     $settings = $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
 
     $json = json_decode($settings);
-    if (isset($json->custom_theme_colors)) {
-      if ($paragraph->field_d_background_color) {
-        switch ($paragraph->field_d_background_color->value) {
-          case '#ac0000':
-            $class = 'theme-primary'; break;
+    if ($paragraph->field_d_background_color) {
+      $val = $paragraph->field_d_background_color->value;
+      switch ($paragraph->field_d_background_color->value) {
+        case '#ac0000':
+          $class = 'theme-primary'; break;
 
-          case '#e4e4e4':
-          case '#dddddd':
-            $class = 'theme-gray'; break;
+        case '#e4e4e4':
+        case '#dddddd':
+          $class = 'theme-gray'; break;
 
-          case '#ffffff':
-          case '#fff':
-            $class = 'theme-white'; break;
+        case '#ffffff':
+        case '#fff':
+          $class = 'theme-white'; break;
 
-          default:
-            $class = 'theme-custom';
-            $json->custom_theme_colors->background = $paragraph->field_d_background_color->value;
-            $json->custom_theme_colors->text = '#000000';
-        }
+        default:
+          $class = 'theme-custom';
+          $json->custom_theme_colors['background'] = $paragraph->field_d_background_color->value;
+          if (strpos($json->custom_class, 'theme-invert') === FALSE) {
+            $json->custom_theme_colors['text'] = '#000000';
+          }
+          else {
+            $json->custom_theme_colors['text'] = '#ffffff';
+          }
       }
-      else {
-        $class = 'theme-default';
-      }
-
-      if (strpos($settings->custom_class, $class) === FALSE) {
-        $json->custom_class .= ' ' . $class;
-      }
-
-      $paragraph->set('field_d_settings', json_encode($json));
-      $paragraph->save();
     }
+    else {
+      $class = 'theme-default';
+    }
+
+    $json->custom_class = preg_replace('/theme-(?!invert)([a-z]*)/', $class, $json->custom_class);
+    if (strpos($json->custom_class, $class) === FALSE) {
+      $json->custom_class .= ' ' . $class;
+    }
+
+    $paragraph->set('field_d_settings', json_encode($json));
     $paragraph->save();
     $sandbox['current']++;
   }
 
   \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed.');
   $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
+
+  if ($sandbox['#finished'] === 1) {
+    $modules = [
+      'd_p_side_image',
+      'd_p_text_blocks',
+    ];
+    $values['droopler__droopler_update_8125_1'] = update_modules_configuration($modules, '8125');
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v2.2' => $values]);
+
+    $bundles = [
+      'd_p_side_image',
+      'd_p_single_text_block',
+    ];
+    foreach ($bundles as $bundle) {
+      $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_number');
+
+      if ($field !== NULL) {
+        $field->delete();
+      }
+    }
+
+    $values['droopler__droopler_update_8125_2'] = \Drupal::service('module_installer')->install(['d_color'], TRUE);
+  }
 }
