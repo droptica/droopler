@@ -450,13 +450,22 @@ class SettingsWidget extends WidgetBase {
       }
     }
 
+    $tree = $element['#field_parents'];
+    $tree[] = $field_name;
+    $selector_string = array_shift($tree);
+    if (!empty($tree)) {
+      foreach ($tree as $item) {
+        $selector_string .= "[$item]";
+      }
+    }
+
     $element['background-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Background color',
       '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->background : '#ffffff',
       '#states' => [
         'visible' => [
-          ':input[name="' . $field_name . '[0][value][paragraph-theme]"]' => [
+          ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [
             'value' => 'theme-custom',
           ],
         ],
@@ -469,7 +478,7 @@ class SettingsWidget extends WidgetBase {
       '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->text : '#ffffff',
       '#states' => [
         'visible' => [
-          ':input[name="' . $field_name . '[0][value][paragraph-theme]"]' => [
+          ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [
             'value' => 'theme-custom',
           ],
         ],
