@@ -76,20 +76,16 @@ function d_p_preprocess_paragraph(&$variables) {
 
       $settings = json_decode($field->first()->get('value')->getValue());
 
-      if (array_key_exists('custom_class', $settings) === FALSE ||
-        array_key_exists('text_theme_custom', $settings) === FALSE
+      if (!isset($settings->custom_class) || !isset($settings->custom_theme_colors)
+        || strpos($settings->custom_class, 'theme-custom') === FALSE
       ) {
         continue;
       }
 
-      if (strpos($settings['custom_class'], 'theme-custom') === FALSE) {
-        continue;
-      }
-
-      $main_selector = "#{$paragraph->getEntityType()->id()}-{$paragraph->bundle()}-{$paragraph->id()}";
-      $styles = "$main_selector .custom-text-color .field { color: {$settings['text_theme_custom']} !important; }";
-
-      $variables['styles'] = $styles;
+      $wrapper_attributes['style'] = [
+        'background-color: ' . $settings->custom_theme_colors->background . ';',
+        'color: ' . $settings->custom_theme_colors->text . ';',
+      ];
     }
     if ($fieldName == 'field_d_background_color') {
       $field = $paragraph->get($fieldName);

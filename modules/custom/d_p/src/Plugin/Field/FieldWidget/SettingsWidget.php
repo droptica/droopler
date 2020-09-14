@@ -453,10 +453,10 @@ class SettingsWidget extends WidgetBase {
     $element['background-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Background color',
-      '#default_value' => $value ?: '#ffffff',
+      '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->background : '#ffffff',
       '#states' => [
         'visible' => [
-          'select[name="' . $field_name . '[0][value][paragraph-theme]"]' => [
+          ':input[name="' . $field_name . '[0][value][paragraph-theme]"]' => [
             'value' => 'theme-custom',
           ],
         ],
@@ -466,10 +466,10 @@ class SettingsWidget extends WidgetBase {
     $element['text-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Text color',
-      '#default_value' => $value ?: '#ffffff',
+      '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->text : '#ffffff',
       '#states' => [
         'visible' => [
-          'select[name="' . $field_name . '[0][value][paragraph-theme]"]' => [
+          ':input[name="' . $field_name . '[0][value][paragraph-theme]"]' => [
             'value' => 'theme-custom',
           ],
         ],
@@ -513,6 +513,12 @@ class SettingsWidget extends WidgetBase {
       else {
         $values[$key] = $value;
       }
+    }
+    if ($element['paragraph-theme']['#value'] === 'theme-custom') {
+      $values['custom_theme_colors'] = [
+        'background' => $element['background-theme-custom']['#value'],
+        'text' => $element['text-theme-custom']['#value'],
+      ];
     }
     $form_state->setValueForElement($element, json_encode($values));
   }
