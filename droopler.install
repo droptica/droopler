@@ -1699,7 +1699,7 @@ function droopler_update_8125() {
 function droopler_update_8126(&$sandbox) {
   /** @var Drupal\d_update\Updater $updater */
   $updater = \Drupal::service('d_update');
-  $limit = 2;
+  $limit = 25;
   if (!isset($sandbox['current'])) {
     $sandbox['current'] = 0;
   }
