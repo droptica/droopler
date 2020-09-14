@@ -64,20 +64,3 @@ $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
     }
   }
 }
-
-.theme-invert {
-  &:not(.user-background-defined):not(.user-image-background) > .paragraph--type--d-p-text-paged {
-    background: $d-p-text-paged-theme-invert-background-color;
-  }
-  > .paragraph--type--d-p-text-paged {
-    color: $d-p-text-paged-theme-invert-text-color;
-
-    .field--name-field-d-long-text,
-    .field--name-field-d-subtitle,
-    .field--name-field-d-main-title {
-      &, p {
-        color: $d-p-text-paged-theme-invert-text-color;
-      }
-    }
-  }
-}

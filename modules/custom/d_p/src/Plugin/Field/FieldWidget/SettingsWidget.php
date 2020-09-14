@@ -57,22 +57,6 @@ class SettingsWidget extends WidgetBase {
         'type' => 'css',
         'bundles' => ['paragraph' => ['all']],
         'modifiers' => [
-          'theme-invert' => [
-            'title' => t('Inverted colors'),
-            'description' => t('Toggle dark and light theme of the paragraph.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_banner',
-                'd_p_text_paged',
-                'd_p_single_text_block',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_side_embed',
-                'd_p_side_image',
-                'd_p_side_tiles',
-              ],
-            ],
-          ],
           'full-width' => [
             'title' => t('Full width'),
             'description' => t('Stretch this paragraph to 100% browser width.'),
@@ -99,18 +83,6 @@ class SettingsWidget extends WidgetBase {
             'bundles' => [
               'paragraph' => [
                 'd_p_carousel',
-              ],
-            ],
-          ],
-          'background-gray-light-2' => [
-            'title' => t('Gray background'),
-            'description' => t('Change paragraph background to light gray.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_carousel',
-                'd_p_group_of_text_blocks',
-                'd_p_reference_content',
-                'd_p_text_paged',
               ],
             ],
           ],
@@ -500,7 +472,7 @@ class SettingsWidget extends WidgetBase {
     $modifiers = self::getConfigOptions()[self::CSS_CLASS_SETTING_NAME]['modifiers'];
     $defaults = [];
     foreach ($modifiers as $key => $modifier) {
-      if ($modifier['type'] === 'select') {
+      if (!empty($modifier['type']) && $modifier['type'] === 'select') {
         if (isset($modifier['default']) && $modifier['default']) {
           $default = $modifier['default'];
         }

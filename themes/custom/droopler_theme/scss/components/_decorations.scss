@@ -29,7 +29,7 @@ $line-thickness: 0.125rem !default;
   margin-top: $line-left-margin-top !important;
   margin-bottom: $line-left-margin-bottom !important;
 
-  @at-root .theme-invert & {
+  @at-root .theme-primary & {
     background: $line-color-inverted;
   }
 }
@@ -47,7 +47,7 @@ $line-thickness: 0.125rem !default;
   margin-left: auto;
   margin-right: auto;
 
-  @at-root .theme-invert & {
+  @at-root .theme-primary & {
     background: $line-color-inverted;
   }
 }
