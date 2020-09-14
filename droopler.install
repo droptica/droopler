@@ -1685,17 +1685,19 @@ function droopler_update_8124() {
  * Droopler 2.2 Migrate Paragraphs Settings values to the new format.
  */
 function droopler_update_8125(&$sandbox) {
-  $query = \Drupal::entityQuery('paragraph')
-    ->exists('field_d_settings');
   if (!isset($sandbox['total'])) {
-    $sandbox['total'] = $query->count()->execute();
+    $sandbox['total'] = \Drupal::entityQuery('paragraph')
+      ->exists('field_d_settings')
+      ->count()->execute();
 
     $sandbox['current'] = 0;
   }
 
   $paragraphs_per_batch = 10;
 
-  $paragraphs_ids = $query->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+  $paragraphs_ids = \Drupal::entityQuery('paragraph')
+    ->exists('field_d_settings')
+    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
     ->execute();
 
   $paragraphs = [];

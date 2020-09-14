@@ -331,9 +331,21 @@ $two-columned-header-line-margin: 0.625rem !default;
     margin-bottom: 0;
   }
 
+  // Override default values.
+  &.padding-top-default {
+    > .paragraph:not(.content-moved-inside),
+    > .content-moved-inside .content-inside-wrapper {
+      padding-top: $tile-padding-top;
+    }
+  }
+  &.padding-bottom-default {
+    > .paragraph:not(.content-moved-inside),
+    > .content-moved-inside .content-inside-wrapper {
+      padding-bottom: $tile-padding-bottom;
+    }
+  }
+
   .paragraph {
-    padding-top: $tile-padding-top;
-    padding-bottom: $tile-padding-bottom;
 
     .field--name-field-d-main-title {
       text-align: center;

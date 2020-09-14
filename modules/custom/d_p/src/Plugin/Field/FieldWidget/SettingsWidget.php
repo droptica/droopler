@@ -472,7 +472,7 @@ class SettingsWidget extends WidgetBase {
     $modifiers = self::getConfigOptions()[self::CSS_CLASS_SETTING_NAME]['modifiers'];
     $defaults = [];
     foreach ($modifiers as $key => $modifier) {
-      if ($modifier['type'] === 'select') {
+      if (!empty($modifier['type']) && $modifier['type'] === 'select') {
         if (isset($modifier['default']) && $modifier['default']) {
           $default = $modifier['default'];
         }
