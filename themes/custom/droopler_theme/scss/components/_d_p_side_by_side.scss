@@ -10,7 +10,7 @@ $d-p-side-by-side-line-color-inverted: $color-nestor !default;
 
 // Margins, paddings and sizing.
 $d-p-side-by-side-padding-y: 5% !default;
-$d-p-side-by-side-header-padding: 5% !default;
+$d-p-side-by-side-header-padding: 2.5% !default;
 
 $d-p-side-by-side-subtitle-margin-y: 2.125rem !default;
 
@@ -41,6 +41,10 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   .side-header {
     .field:first-child {
       padding-top: $d-p-side-by-side-header-padding;
+
+      @include media-breakpoint-up(xl) {
+        padding-top: 0;
+      }
     }
 
     .field--name-field-d-main-title {
