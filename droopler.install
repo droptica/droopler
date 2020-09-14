@@ -1793,7 +1793,6 @@ function droopler_update_8126(&$sandbox) {
 
     $json = json_decode($settings);
     if ($paragraph->field_d_background_color) {
-      $val = $paragraph->field_d_background_color->value;
       switch ($paragraph->field_d_background_color->value) {
         case '#ac0000':
           $class = 'theme-primary'; break;
@@ -1809,12 +1808,7 @@ function droopler_update_8126(&$sandbox) {
         default:
           $class = 'theme-custom';
           $json->custom_theme_colors['background'] = $paragraph->field_d_background_color->value;
-          if (strpos($json->custom_class, 'theme-invert') === FALSE) {
-            $json->custom_theme_colors['text'] = '#000000';
-          }
-          else {
-            $json->custom_theme_colors['text'] = '#ffffff';
-          }
+          $json->custom_theme_colors['text'] = '#000000';
       }
     }
     else {
