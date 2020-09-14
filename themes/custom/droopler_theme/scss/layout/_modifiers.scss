@@ -474,6 +474,7 @@ $d-p-themes: map-merge(
   Spacings styling.
  */
 $d-p-paddings: () !default;
+$d-p-paddings-mobile: () !default;
 $d-p-paddings-extended: () !default;
 $d-p-paddings: map-merge(
     (
@@ -494,12 +495,35 @@ $d-p-paddings-extended: map-merge(
     $d-p-paddings-extended
 );
 
+$d-p-paddings-mobile: map-merge(
+    (
+      default: 10%,
+      small: 5%,
+      big: 15%,
+      none: 0
+    ),
+    $d-p-paddings-mobile
+);
+
 @each $size, $value in $d-p-paddings {
   @each $placement in (top, bottom) {
     .padding-#{$placement}-#{$size} {
       > .paragraph:not(.content-moved-inside),
       > .paragraph.content-moved-inside .content-inside-wrapper {
         padding-#{$placement}: $value;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  @each $size, $value in $d-p-paddings-mobile {
+    @each $placement in (top, bottom) {
+      .padding-#{$placement}-#{$size} {
+        > .paragraph:not(.content-moved-inside),
+        > .paragraph.content-moved-inside .content-inside-wrapper {
+          padding-#{$placement}: $value;
+        }
       }
     }
   }
