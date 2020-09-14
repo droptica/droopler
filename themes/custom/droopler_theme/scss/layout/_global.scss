@@ -78,6 +78,7 @@ body {
 
 .landing-page-header {
   position: relative;
+
   .hanging-header {
     position: relative;
     width: 100%;
@@ -88,7 +89,7 @@ body {
 
     @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
       position: absolute;
-      top: 20px
+      top: 20px;
     }
   }
 }

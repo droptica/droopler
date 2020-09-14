@@ -1,0 +1,9 @@
+editor.editor.full_html:
+  delete:
+    - settings:plugins:linkit
+  add:
+    settings:
+      plugins:
+        drupallink:
+          linkit_enabled: true
+          linkit_profile: content_nodes

@@ -69,3 +69,10 @@ function d_p_counters_preprocess_field(&$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
+ */
+function d_p_counters_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
+  $paragraph_types[] = 'd_p_group_of_counters';
+}

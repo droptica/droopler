@@ -1379,6 +1379,8 @@ function droopler_update_8116() {
       'field.storage.node.field_header_layout' => '',
       'field.field.node.content_page.field_header_cta' => '',
       'field.field.node.content_page.field_header_layout' => '',
+      'core.entity_view_display.node.content_page.d_header' => '',
+      'core.entity_view_mode.node.d_header' => '',
     ],
   ];
 
@@ -1667,23 +1669,33 @@ function droopler_update_8123(&$sandbox) {
 }
 
 /**
+ * Droopler 2.2 update Linkit.
+ */
+function droopler_update_8124() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8124_1'] = $updater->updateConfigurations('profile/droopler', 'editor.8124');
+
+  $updater->checklist()
+    ->saveProgress(['v2.2' => $values]);
+}
+
+/**
  * Droopler 2.2 Migrate Paragraphs Settings values to the new format.
  */
-function droopler_update_8124(&$sandbox) {
-
+function droopler_update_8125(&$sandbox) {
+  $query = \Drupal::entityQuery('paragraph')
+    ->exists('field_d_settings');
   if (!isset($sandbox['total'])) {
-    $sandbox['total'] = \Drupal::entityQuery('paragraph')
-      ->exists('field_d_settings')
-      ->count()->execute();
+    $sandbox['total'] = $query->count()->execute();
 
     $sandbox['current'] = 0;
   }
 
   $paragraphs_per_batch = 10;
 
-  $paragraphs_ids = \Drupal::entityQuery('paragraph')
-    ->exists('field_d_settings')
-    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+  $paragraphs_ids = $query->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
     ->execute();
 
   $paragraphs = [];
@@ -1745,7 +1757,7 @@ function droopler_update_8124(&$sandbox) {
 
   if ($sandbox['#finished'] === 1) {
 
-    $values['droopler__droopler_update_8124_1'] = TRUE;
+    $values['droopler__droopler_update_8125_1'] = TRUE;
     \Drupal::service('d_update')->checklist()->saveProgress(['v2.2' => $values]);
   }
 
