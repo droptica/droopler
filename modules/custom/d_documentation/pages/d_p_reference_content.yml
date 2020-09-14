@@ -34,9 +34,18 @@ field_page_section:
     -
       paragraph_type: d_p_reference_content
       data:
+        field_d_media_icon:
+          type: media_image
+          directory: demo
+          files:
+            - path: d_demo/demo_droopler.svg
+              alt: 'Droopler Logo'
         field_d_main_title:
           type: text
           data: 'Example Blog Posts'
+        field_d_long_text:
+          type: text_long
+          data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_cta_link:
           type: cta
           data:

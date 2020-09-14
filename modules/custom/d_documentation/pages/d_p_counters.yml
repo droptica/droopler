@@ -51,6 +51,9 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Main Title'
+        field_d_long_text:
+          type: text_long
+          data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_counter_reference:
           type: paragraph_reference
           subtype: d_p_single_counter
@@ -62,6 +65,12 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Lorem Imsum'
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_future_car.jpg
+                    alt: 'Future car'
             -
               field_d_number:
                 type: number
@@ -69,6 +78,12 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Dolor Sit'
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_tile_car.jpg
+                    alt: 'Tile car'
             -
               field_d_number:
                 type: number
@@ -76,6 +91,12 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Amet Consectetur'
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_new_cars.jpg
+                    alt: 'New cars'
             -
               field_d_number:
                 type: number
@@ -83,6 +104,17 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Adipiscing Elit'
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_engine_car_4.jpg
+                    alt: 'Engine car'
+        field_d_cta_link:
+          type: cta
+          data:
+            link: 'internal:/documentation/counters-paragraph'
+            text: 'See more'
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
