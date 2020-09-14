@@ -43,7 +43,7 @@ function d_p_text_blocks_preprocess_field(&$variables) {
         $columns = floor(12 / $items_per_row);
         $variables['column_class'] = 'col-sm-' . $columns;
 
-        if ($paragraph_modifiers_helper->hasClass('with-grid')) {
+        if ($paragraph_modifiers_helper->hasModifier('with-grid')) {
           $variables['column_class'] = '';
 
           foreach ($variables['items'] as $idx => $list_item) {
@@ -76,7 +76,7 @@ function d_p_text_blocks_preprocess_paragraph(&$variables) {
   switch ($bundle) {
     case 'd_p_single_text_block':
       $paragraphModifiersHelper = new ParagraphModifiersHelper($paragraph);
-      if ($paragraphModifiersHelper->hasClass('with-price')) {
+      if ($paragraphModifiersHelper->hasModifier('with-price')) {
         $variables['with_price'] = TRUE;
       }
       // Set background image if field is not empty.
