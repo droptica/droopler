@@ -1441,7 +1441,7 @@ function droopler_update_8118(&$sandbox) {
 
   $query = \Drupal::entityQuery('paragraph')
     ->exists('field_d_number')
-    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
   foreach ($query as $pid) {
@@ -1624,7 +1624,7 @@ function droopler_update_8123(&$sandbox) {
 
   $query = $query
     ->condition($group)
-    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
   foreach ($query as $pid) {
@@ -1750,7 +1750,7 @@ function droopler_update_8127(&$sandbox) {
 
   $paragraphs_ids = \Drupal::entityQuery('paragraph')
     ->exists('field_d_settings')
-    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
   $paragraphs = [];
