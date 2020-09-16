@@ -87,16 +87,6 @@ function d_p_preprocess_paragraph(&$variables) {
         'color: ' . $settings->custom_theme_colors->text . ';',
       ];
     }
-    if ($fieldName == 'field_d_background_color') {
-      $field = $paragraph->get($fieldName);
-      if (!$field->isEmpty()) {
-        $wrapper_attributes['style'] = [
-          'background-color: ' . $field->first()->get('value')->getValue(),
-        ];
-        $wrapper_attributes['class'][] = 'user-background-defined';
-      }
-      unset($variables['content'][$fieldName]);
-    }
 
     if ($fieldName == 'field_d_long_text') {
       $field = $paragraph->get($fieldName);

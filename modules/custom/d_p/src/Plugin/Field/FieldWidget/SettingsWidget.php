@@ -452,7 +452,7 @@ class SettingsWidget extends WidgetBase {
     $element['text-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Text color',
-      '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->text : '#ffffff',
+      '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->text : '#000000',
       '#states' => [
         'visible' => [
           ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [

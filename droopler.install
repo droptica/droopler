@@ -1782,7 +1782,7 @@ function droopler_update_8126(&$sandbox) {
 
   $query = \Drupal::entityQuery('paragraph')
     ->exists('field_d_background_color')
-    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
   foreach ($query as $pid) {
@@ -1842,7 +1842,7 @@ function droopler_update_8126(&$sandbox) {
       'd_p_single_text_block',
     ];
     foreach ($bundles as $bundle) {
-      $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_number');
+      $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_background_color');
 
       if ($field !== NULL) {
         $field->delete();

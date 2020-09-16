@@ -2,17 +2,12 @@
 
   'use strict';
 
+  // Colorpicker + reset button.
   Drupal.behaviors.dpColorpicker = {
     attach: function (context, settings) {
       $(context).ready(function() {
-        $('.form-type-d-color', context).once().each(function () {
+        $('.form-type-d-color', context).once('d_color_picker').each(function () {
           var $element = $(this);
-
-          if ($element.hasClass('binded')) {
-            return;
-          }
-
-          $element.addClass('binded');
 
           var $color = $element.children('.form-d-color').first();
           $color.change(function () {
