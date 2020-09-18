@@ -313,7 +313,7 @@ class SettingsWidget extends WidgetBase {
 
     // Set up the form element for this widget.
     $element += [
-      '#type' => 'details',
+      '#type' => 'fieldset',
       '#element_validate' => [
         [$this, 'validate'],
       ],
