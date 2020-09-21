@@ -16,16 +16,84 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_subscribe_file
   module:
     - d_p
+    - field_group
     - file
     - media_library
     - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_form_messages
+        - group_settings
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_basic:
+      children:
+        - field_d_main_title
+        - field_d_media_background
+        - field_d_media_icon
+        - field_d_long_text
+        - field_d_p_sf_additional_info
+        - translation
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Basic
+    group_form_messages:
+      children:
+        - field_file_download
+        - field_d_p_sf_consent
+        - field_d_p_sf_download_button
+        - field_d_p_sf_download_page
+        - field_d_p_sf_mail_body
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: 'Form & Messages'
+    group_settings:
+      children:
+        - field_d_settings
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Settings
 id: paragraph.d_p_subscribe_file.default
 targetEntityType: paragraph
 bundle: d_p_subscribe_file
 mode: default
 content:
   field_d_long_text:
-    weight: 3
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
@@ -33,7 +101,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -49,7 +117,7 @@ content:
     third_party_settings: {  }
   field_d_media_icon:
     type: media_library_widget
-    weight: 1
+    weight: 3
     region: content
     settings:
       media_types: {  }
@@ -63,7 +131,7 @@ content:
     type: text_textarea
     region: content
   field_d_p_sf_consent:
-    weight: 10
+    weight: 6
     settings:
       size: 60
       placeholder: 'Enter consent label (HTML is allowed).'
@@ -71,7 +139,7 @@ content:
     type: text_textfield
     region: content
   field_d_p_sf_download_button:
-    weight: 9
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -79,14 +147,6 @@ content:
     type: string_textfield
     region: content
   field_d_p_sf_download_page:
-    weight: 7
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: text_textarea
-    region: content
-  field_d_p_sf_mail_body:
     weight: 8
     settings:
       rows: 5
@@ -94,14 +154,22 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
+  field_d_p_sf_mail_body:
+    weight: 9
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
   field_d_settings:
+    type: field_d_p_set_settings
     weight: 11
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: field_d_p_set_settings
-    region: content
   field_file_download:
-    weight: 4
+    weight: 5
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
