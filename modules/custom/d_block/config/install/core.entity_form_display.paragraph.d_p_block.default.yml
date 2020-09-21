@@ -8,13 +8,57 @@ dependencies:
   module:
     - d_block_field
     - d_p
+    - field_group
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_settings
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_basic:
+      children:
+        - field_block
+      parent_name: group_tabs
+      weight: 5
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Basic
+    group_settings:
+      children:
+        - field_d_settings
+      parent_name: group_tabs
+      weight: 6
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Settings
 id: paragraph.d_p_block.default
 targetEntityType: paragraph
 bundle: d_p_block
 mode: default
 content:
   field_block:
-    weight: 0
+    weight: 1
     settings:
       plugin_id: ''
       settings: {  }
@@ -23,7 +67,7 @@ content:
     type: d_block_field_default
     region: content
   field_d_settings:
-    weight: 1
+    weight: 7
     settings: {  }
     third_party_settings: {  }
     type: field_d_p_set_settings
