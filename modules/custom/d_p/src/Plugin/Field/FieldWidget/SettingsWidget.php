@@ -23,8 +23,19 @@ class SettingsWidget extends WidgetBase {
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
   const COLUMN_COUNT_SETTING_NAME = 'column_count';
+  const COLUMN_COUNT_MOBILE_SETTING_NAME = 'column_count_mobile';
+  const COLUMN_COUNT_TABLET_SETTING_NAME = 'column_count_tablet';
 
   /**
+   * List of bundles for which we validate column count field.
+   *
+   * @var array
+   */
+  private static $columnCountValidateBundles = ['d_p_group_of_text_blocks', 'd_p_group_of_counters', 'd_p_carousel'];
+
+  /**
+   * List of bundles.
+   *
    * @var array
    *   Stores bundles where spacing settings should be enabled.
    */
@@ -49,6 +60,9 @@ class SettingsWidget extends WidgetBase {
     'd_p_tiles',
   ];
 
+  /**
+   * Get configuration options for fields in paragraph settings.
+   */
   private static function getConfigOptions() {
     return [
       self::CSS_CLASS_SETTING_NAME => [
@@ -262,7 +276,7 @@ class SettingsWidget extends WidgetBase {
         ],
       ],
       self::COLUMN_COUNT_SETTING_NAME => [
-        'title' => t('Column count'),
+        'title' => t('Column count (desktop)'),
         'outside' => TRUE,
         'description' => t('Select the number of items in one row.'),
         'type' => 'number',
@@ -274,6 +288,59 @@ class SettingsWidget extends WidgetBase {
             'd_p_carousel',
             'd_p_group_of_counters',
             'd_p_group_of_text_blocks',
+          ],
+        ],
+        'validation' => [
+          'default' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+          'paragraphs' => [
+            'd_p_group_of_counters' => [1, 2, 3, 4, 6, 12],
+            'd_p_group_of_text_blocks' => [1, 2, 3, 4, 6, 12],
+          ],
+        ],
+      ],
+      self::COLUMN_COUNT_TABLET_SETTING_NAME => [
+        'title' => t('Column count (tablet)'),
+        'outside' => TRUE,
+        'description' => t('Select the number of items in one row.'),
+        'type' => 'number',
+        'min' => '1',
+        'max' => '12',
+        'default' => '3',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
+          ],
+        ],
+        'validation' => [
+          'default' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+          'paragraphs' => [
+            'd_p_group_of_counters' => [1, 2, 3, 4, 6, 12],
+            'd_p_group_of_text_blocks' => [1, 2, 3, 4, 6, 12],
+          ],
+        ],
+      ],
+      self::COLUMN_COUNT_MOBILE_SETTING_NAME => [
+        'title' => t('Column count (mobile)'),
+        'outside' => TRUE,
+        'description' => t('Select the number of items in one row.'),
+        'type' => 'number',
+        'min' => '1',
+        'max' => '12',
+        'default' => '1',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
+          ],
+        ],
+        'validation' => [
+          'default' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+          'paragraphs' => [
+            'd_p_group_of_counters' => [1, 2, 3, 4, 6, 12],
+            'd_p_group_of_text_blocks' => [1, 2, 3, 4, 6, 12],
           ],
         ],
       ],
@@ -289,7 +356,7 @@ class SettingsWidget extends WidgetBase {
    *
    * @return bool
    */
-  protected function inBundle($list) {
+  protected function inBundle(array $list) {
     $entity_type = $this->fieldDefinition->getTargetEntityTypeId();
     $bundle = $this->fieldDefinition->getTargetBundle();
     if (isset($list[$entity_type])) {
@@ -318,6 +385,10 @@ class SettingsWidget extends WidgetBase {
         [$this, 'validate'],
       ],
     ];
+
+    if (in_array($this->fieldDefinition->getTargetBundle(), self::$columnCountValidateBundles)) {
+      array_unshift($element['#element_validate'], [$this, 'validateColumnCount']);
+    }
 
     $config_options = self::getConfigOptions();
     foreach ($config_options as $key => $options) {
@@ -377,7 +448,7 @@ class SettingsWidget extends WidgetBase {
             '#title' => $options['title'],
             '#description' => $options['description'] ?? '',
             '#size' => 32,
-            '#default_value' => join(' ', $classes),
+            '#default_value' => implode(' ', $classes),
           ];
           if ($element['#required']) {
             $element[$key]['#required'] = TRUE;
@@ -449,6 +520,7 @@ class SettingsWidget extends WidgetBase {
               case 'select':
                 $classes[] = $modifier_value;
                 break;
+
               default:
                 $classes[] = $class;
                 break;
@@ -456,13 +528,44 @@ class SettingsWidget extends WidgetBase {
           }
         }
         $classes = array_unique($classes);
-        $values[$key] = join(' ', $classes);
+        $values[$key] = implode(' ', $classes);
       }
       else {
         $values[$key] = $value;
       }
     }
     $form_state->setValueForElement($element, json_encode($values));
+  }
+
+  /**
+   * Validate field column count.
+   *
+   * @param array $element
+   *   The form element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state.
+   */
+  public function validateColumnCount(array $element, FormStateInterface $form_state) {
+    $fields = [
+      self::COLUMN_COUNT_SETTING_NAME,
+      self::COLUMN_COUNT_TABLET_SETTING_NAME,
+      self::COLUMN_COUNT_MOBILE_SETTING_NAME,
+    ];
+    $config_options = self::getConfigOptions();
+    $bundle = $this->fieldDefinition->getTargetBundle();
+    foreach ($fields as $field) {
+      $column_count = $form_state->getValue(array_merge($element['#parents'], [$field]));
+      $valid_number_of_columns = isset($config_options[$field]['validation']['paragraphs'][$bundle])
+        ? $config_options[$field]['validation']['paragraphs'][$bundle]
+        : $config_options[$field]['validation']['default'];
+
+      if (!in_array($column_count, $valid_number_of_columns)) {
+        $form_state->setError(
+          $element[$field],
+          $this->t('The allowed number of columns for @field is @column_number',
+            ['@column_number' => implode(', ', $valid_number_of_columns), '@field' => $config_options[$field]['title']]));
+      }
+    }
   }
 
   /**

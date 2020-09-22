@@ -8,7 +8,6 @@
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 use Drupal\user\Entity\Role;
 use Drupal\d_p\Helper\ParagraphModifiersHelper;
@@ -1448,9 +1447,28 @@ function droopler_update_8118(&$sandbox) {
     $paragraph = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
       ->load($pid);
-    $settings = $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
-
+    try {
+      $settings = $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
+    }
+    catch (\Exception $e) {
+      continue;
+    }
+    // Migrate column size.
     $json = json_decode($settings);
+    switch ($paragraph->bundle()) {
+      case 'd_p_carousel':
+        $number_of_columns = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '2') : '2';
+        $json->column_count_tablet = $number_of_columns == '1' ? '1' : '2';
+        break;
+
+      case 'd_p_group_of_counters':
+        $json->column_count_tablet = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '3') : '3';
+        break;
+
+      case 'd_p_group_of_text_blocks':
+        $json->column_count_tablet = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '3') : '3';
+    }
+
     if (empty($json->column_count)) {
       $json->column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '4') : '4';
       $paragraph->set('field_d_settings', json_encode($json));
@@ -1779,27 +1797,32 @@ function droopler_update_8127(&$sandbox) {
     }
 
     if ($paragraphModifiersHelper->hasModifier('theme-invert')) {
-      // Migrate theme-invert
+      // Migrate theme-invert.
       switch ($paragraph->bundle()) {
         case 'd_p_side_embed':
         case 'd_p_side_image':
         case 'd_p_side_tiles':
           $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-secondary');
           break;
+
         case 'd_p_text_paged':
         case 'd_p_group_of_text_blocks':
           $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-primary');
           break;
+
         case 'd_p_single_text_block':
           $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-default');
           break;
+
         default:
           $paragraphModifiersHelper->replaceModifier('theme-invert', 'theme-default');
       }
-    } elseif ($paragraphModifiersHelper->hasModifier('background-gray-light-2')) {
-      // Migrate background-gray-light-2
+    }
+    elseif ($paragraphModifiersHelper->hasModifier('background-gray-light-2')) {
+      // Migrate background-gray-light-2.
       $paragraphModifiersHelper->replaceModifier('background-gray-light-2', 'theme-gray');
-    } else {
+    }
+    else {
       $paragraphModifiersHelper->setModifier('theme-default');
     }
 
@@ -1817,4 +1840,3 @@ function droopler_update_8127(&$sandbox) {
   }
 
 }
-
