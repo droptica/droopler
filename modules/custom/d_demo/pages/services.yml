@@ -27,14 +27,14 @@ field_page_section:
           data: '#fff'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-tiles background-gray-light-2 header-into-columns padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: full-width with-tiles theme-gray header-into-columns padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 4
         field_d_main_title:
           type: text
@@ -47,7 +47,7 @@ field_page_section:
           subtype: paragraphs_wrapper
           data:
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_background:
                   type: media_image
@@ -59,9 +59,6 @@ field_page_section:
                 field_d_main_title:
                   type: text
                   data: 'For boat manufacturers'
-                field_d_background_color:
-                  type: text
-                  data: '#e4e4e4'
                 field_d_cta_link:
                   type: cta
                   data:
@@ -69,9 +66,9 @@ field_page_section:
                     text: 'For boat manufacturers'
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-invert'
+                  custom_class: 'tile theme-default'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_background:
                   type: media_image
@@ -83,9 +80,6 @@ field_page_section:
                 field_d_main_title:
                   type: text
                   data: 'For airplane manufacturers'
-                field_d_background_color:
-                  type: text
-                  data: '#e4e4e4'
                 field_d_cta_link:
                   type: cta
                   data:
@@ -93,9 +87,9 @@ field_page_section:
                     text: 'For airplane manufacturers'
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-invert'
+                  custom_class: 'tile theme-default'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_background:
                   type: media_image
@@ -107,9 +101,6 @@ field_page_section:
                 field_d_main_title:
                   type: text
                   data: 'For car manufacturers'
-                field_d_background_color:
-                  type: text
-                  data: '#e4e4e4'
                 field_d_cta_link:
                   type: cta
                   data:
@@ -117,9 +108,9 @@ field_page_section:
                     text: 'For car manufacturers'
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-invert'
+                  custom_class: 'tile theme-default'
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_media_background:
                   type: media_image
@@ -131,9 +122,6 @@ field_page_section:
                 field_d_main_title:
                   type: text
                   data: 'For spaceship manufacturers'
-                field_d_background_color:
-                  type: text
-                  data: '#e4e4e4'
                 field_d_cta_link:
                   type: cta
                   data:
@@ -141,7 +129,7 @@ field_page_section:
                     text: 'For spaceship manufacturers'
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-invert'
+                  custom_class: 'tile theme-default'
     -
       paragraph_type: d_p_group_of_counters
       data:

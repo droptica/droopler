@@ -58,7 +58,20 @@
         $(this).parent().removeClass('force-show');
         $(this).parent().find(".dropdown-menu").removeClass('force-show');
       } });
-      $body.addClass("d-theme-preceded")
+      $body.addClass("d-theme-preceded");
+
+      // Check if alert box and header with cta is visible for position adjustments.
+      var alert = $('div.alert-dismissible');
+      var header = $('div.hanging-header');
+
+      if (alert.length && header.length) {
+        var height = parseInt(header.css('top'), 10);
+        header.css('top', height + parseInt(alert.css('height'), 10) + 20);
+
+        $('div.alert-dismissible button.close').click(function () {
+          header.css('top', height);
+        });
+      }
     }
   };
 
@@ -69,6 +82,26 @@
   Drupal.behaviors.droopler_unpublished = {
     attach: function (context, settings) {
       $('<div>').addClass('unpublished-message').text(Drupal.t('Unpublished')).insertBefore($('.node--unpublished', context));
+    }
+  };
+
+  /**
+   * Initialize tooltip.
+   * @type {{attach: Drupal.behaviors.droopler_tooltip.attach}}
+   */
+  Drupal.behaviors.droopler_tooltip = {
+    attach: function (context, settings) {
+      $('[data-toggle="tooltip"]').tooltip();
+    }
+  };
+
+  /**
+   * Initialize popovers.
+   * @type {{attach: Drupal.behaviors.droopler_popover.attach}}
+   */
+  Drupal.behaviors.droopler_popover = {
+    attach: function (context, settings) {
+      $('[data-toggle="popover"]').popover();
     }
   };
 

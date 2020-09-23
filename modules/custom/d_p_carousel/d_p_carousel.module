@@ -57,7 +57,7 @@ function d_p_carousel_preprocess_field(&$variables) {
           if ($num_items === 1) {
             $columns = 1;
           }
-          elseif ($num_items <= $columns && !$paragraph_modifiers_helper->hasClass('slider-desktop-off')) {
+          elseif ($num_items <= $columns && !$paragraph_modifiers_helper->hasModifier('slider-desktop-off')) {
             $columns = $num_items - 1;
           }
 

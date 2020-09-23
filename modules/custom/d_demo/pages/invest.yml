@@ -27,7 +27,7 @@ field_page_section:
           data: '#ffffff'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_group_of_text_blocks
@@ -40,7 +40,7 @@ field_page_section:
           subtype: paragraphs_wrapper
           data:
             -
-              type: d_p_single_text_block
+              paragraph_type: d_p_single_text_block
               data:
                 field_d_long_text:
                   type: text_long
@@ -116,7 +116,7 @@ field_page_section:
 
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: background-gray-light-2 padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_text_paged
       data:
@@ -173,7 +173,7 @@ field_page_section:
 
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: background-gray-light-2 padding-top-none padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-gray padding-top-none padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_side_image
       data:
@@ -198,7 +198,7 @@ field_page_section:
           data: '#fff'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
 field_teaser_media_image:
   type: media_image
   directory: demo

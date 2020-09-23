@@ -280,7 +280,7 @@ v2.2:
     extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
   droopler__droopler_update_8119_1:
     '#title': 'Update Product configs.'
-    '#description': '<p>Update Product configs fixing issues related to revisions.</p>'
+    '#description': '<p>Update Product configs fixing issues related to revisions and lazyload.</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please try to migrate values and delete old fields manually</p>'
     extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
   droopler__droopler_update_8120_1:
@@ -309,11 +309,31 @@ v2.2:
     '#description_failed': '<p><strong>Update failed</strong>, please update paragraphs manually</p>'
     extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/content' }
   droopler__droopler_update_8124_1:
+    '#title': 'Update Linkit'
+    '#description': '<p>Fix missing link button in editor, improve dropdown styling.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8125_1:
+    '#title': 'Update Reference Content paragraph field configs'
+    '#description': '<p>Update config for CTA field</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8126_1:
+    '#title': 'Remove spacing from Content paragraph CTA field'
+    '#description': '<p>Remove mt-5 class from CTA field</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please update paragraphs manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/content' }
+  droopler__droopler_update_8127_1:
+    '#title': 'Migrate theme-invert and background-gray-light-2 modifiers'
+    '#description': '<p>Migrate the "theme-invert" and "background-gray-light-2" modifiers to the new theme setting.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please update paragraphs manually</p>'
+    extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/content' }
+  droopler__droopler_update_8128_1:
     '#title': 'Migrate layout settings'
     '#description': '<p>Migrate layout settings from separate field to Paragraph Settings</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please update paragraphs manually</p>'
     extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/content' }
-  droopler__droopler_update_8125_1:
+  droopler__droopler_update_8129_1:
     '#title': 'Update Media configs'
     '#description': '<p>Update configs for featured view mode in media.</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
