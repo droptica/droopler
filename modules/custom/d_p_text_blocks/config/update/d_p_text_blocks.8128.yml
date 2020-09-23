@@ -1,0 +1,176 @@
+core.entity_form_display.paragraph.d_p_group_of_text_blocks.default:
+  delete:
+    - third_party_settings:field_group:group_boxes
+
+  add:
+    third_party_settings:
+      field_group:
+        group_basic:
+          children:
+            - field_d_main_title
+            - field_d_media_icon
+            - field_d_long_text
+            - field_d_cta_link
+            - translation
+          parent_name: group_tabs
+          weight: 20
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: open
+            required_fields: true
+          label: Basic
+        group_items:
+          children:
+            - field_d_p_tb_block_reference
+          parent_name: group_tabs
+          weight: 21
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Items
+
+  change:
+    expected:
+      third_party_settings:
+        field_group:
+          group_tabs:
+            children:
+              - group_settings
+              - group_boxes
+          group_settings:
+            weight: 10
+            format_settings:
+              formatter: open
+      content:
+        field_d_cta_link:
+          weight: 6
+        field_d_p_tb_block_reference:
+          settings:
+            edit_mode: open
+            default_paragraph_type: ''
+        translation:
+          weight: 8
+
+    new:
+      third_party_settings:
+        field_group:
+          group_tabs:
+            children:
+              - group_basic
+              - group_items
+              - group_settings
+          group_settings:
+            weight: 22
+            format_settings:
+              formatter: closed
+      content:
+        field_d_cta_link:
+          weight: 5
+        field_d_p_tb_block_reference:
+          settings:
+            edit_mode: closed
+            default_paragraph_type: _none
+        translation:
+          weight: 6
+
+core.entity_form_display.paragraph.d_p_single_text_block.default:
+  add:
+    dependencies:
+      module:
+        - field_group
+    third_party_settings:
+      field_group:
+        group_tabs:
+          children:
+            - group_basic
+            - group_settings
+          parent_name: ''
+          weight: 0
+          format_type: tabs
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            direction: horizontal
+          label: Tabs
+        group_basic:
+          children:
+            - field_d_main_title
+            - field_d_media_background
+            - field_d_media_icon
+            - field_d_long_text
+            - field_d_cta_link
+            - translation
+          parent_name: group_tabs
+          weight: 11
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: open
+            required_fields: true
+          label: Basic
+        group_settings:
+          children:
+            - field_d_settings
+          parent_name: group_tabs
+          weight: 13
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Settings
+
+  change:
+    expected:
+      content:
+        field_d_background_color:
+          weight: 6
+        field_d_cta_link:
+          weight: 3
+        field_d_long_text:
+          weight: 2
+        field_d_main_title:
+          weight: 0
+        field_d_media_background:
+          weight: 5
+        field_d_media_icon:
+          weight: 1
+        field_d_settings:
+          weight: 7
+        translation:
+          weight: 4
+
+    new:
+      content:
+        field_d_background_color:
+          weight: 7
+        field_d_cta_link:
+          weight: 5
+        field_d_long_text:
+          weight: 4
+        field_d_main_title:
+          weight: 1
+        field_d_media_background:
+          weight: 2
+        field_d_media_icon:
+          weight: 3
+        field_d_settings:
+          weight: 8
+        translation:
+          weight: 6
