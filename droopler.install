@@ -88,6 +88,7 @@ function droopler_install_tasks() {
  *
  * @param array $install_state
  *   The install state.
+ *
  * @return array
  *   Batch array.
  */
@@ -759,7 +760,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-        ->getDefault() === 'droopler_subtheme') {
+      ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -1379,8 +1380,8 @@ function droopler_update_8116() {
       'field.storage.node.field_header_layout' => '',
       'field.field.node.content_page.field_header_cta' => '',
       'field.field.node.content_page.field_header_layout' => '',
-      'core.entity_view_display.node.content_page.d_header' => '',
       'core.entity_view_mode.node.d_header' => '',
+      'core.entity_view_display.node.content_page.d_header' => '',
     ],
   ];
 
@@ -1428,10 +1429,11 @@ function droopler_update_8117() {
  */
 function droopler_update_8118(&$sandbox) {
   if (!isset($sandbox['total'])) {
-    $sandbox['total'] = \Drupal::entityQuery('paragraph')
+    $query = \Drupal::entityQuery('paragraph')
       ->exists('field_d_number')
-      ->count()->execute();
+      ->execute();
 
+    $sandbox['total'] = count($query);
     $sandbox['current'] = 0;
   }
 
@@ -1439,7 +1441,7 @@ function droopler_update_8118(&$sandbox) {
 
   $query = \Drupal::entityQuery('paragraph')
     ->exists('field_d_number')
-    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
   foreach ($query as $pid) {
@@ -1454,6 +1456,7 @@ function droopler_update_8118(&$sandbox) {
       $paragraph->set('field_d_settings', json_encode($json));
       $paragraph->save();
     }
+    $paragraph->save();
     $sandbox['current']++;
   }
 
@@ -1621,7 +1624,7 @@ function droopler_update_8123(&$sandbox) {
 
   $query = $query
     ->condition($group)
-    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
   foreach ($query as $pid) {
@@ -1682,9 +1685,59 @@ function droopler_update_8124() {
 }
 
 /**
+ * Droopler 2.2 - remove "mt-5" spacing from CTA field in Reference Content Paragraph.
+ */
+function droopler_update_8125() {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $values['droopler__droopler_update_8125_1'] = update_modules_configuration(['d_p_reference_content'], '8125');
+  $updater->checklist()->saveProgress(['v2.2' => $values]);
+}
+
+/**
+ * Droopler 2.2 - remove "mt-5" spacing from CTA field saved in database.
+ */
+function droopler_update_8126(&$sandbox) {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+  $limit = 25;
+  if (!isset($sandbox['current'])) {
+    $sandbox['current'] = 0;
+  }
+  $entities = \Drupal::entityQuery('paragraph')
+    ->condition('type', 'd_p_reference_content')
+    ->range($sandbox['current'], $limit)
+    ->execute();
+  $sandbox['total'] = count($entities);
+  foreach ($entities as $entity_id) {
+    $entity = \Drupal::entityTypeManager()->getStorage('paragraph')->load($entity_id);
+    if ($entity->hasField('field_d_cta_link')) {
+      $fields = $entity->get('field_d_cta_link');
+      foreach ($fields as $field) {
+        $value = $field->getValue();
+        // Check if field has a class 'mt-5'. If so, we remove it.
+        $key = array_search('mt-5', $value['options']['attributes']['class']);
+        if ($key !== FALSE) {
+          unset($value['options']['attributes']['class'][$key]);
+          $field->setValue($value);
+          $entity->save();
+        }
+      }
+    }
+    $sandbox['current']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['total']) ? 1 : ($sandbox['current'] / ($sandbox['total'] + $sandbox['current']));
+  if ($sandbox['#finished'] === 1) {
+    $updater->checklist()->saveProgress(['v2.2' => ['droopler__droopler_update_8126_1' => TRUE]]);
+  }
+
+}
+
+/**
  * Droopler 2.2 Migrate Paragraphs Settings values to the new format.
  */
-function droopler_update_8125(&$sandbox) {
+function droopler_update_8127(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = \Drupal::entityQuery('paragraph')
       ->exists('field_d_settings')
@@ -1697,7 +1750,7 @@ function droopler_update_8125(&$sandbox) {
 
   $paragraphs_ids = \Drupal::entityQuery('paragraph')
     ->exists('field_d_settings')
-    ->range($sandbox['current'], $sandbox['current'] + $paragraphs_per_batch)
+    ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
   $paragraphs = [];
@@ -1759,17 +1812,46 @@ function droopler_update_8125(&$sandbox) {
 
   if ($sandbox['#finished'] === 1) {
 
-    $values['droopler__droopler_update_8125_1'] = TRUE;
+    $values['droopler__droopler_update_8127_1'] = TRUE;
     \Drupal::service('d_update')->checklist()->saveProgress(['v2.2' => $values]);
   }
 
 }
 
+/**
+ * Droopler 2.2 Paragraph UI improvements and unification.
+ */
+function droopler_update_8128(&$sandbox) {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $bundles = [
+    'd_block',
+    'd_p_reference_content',
+    'd_p_banner',
+    'd_p_carousel',
+    'd_p_counters',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_side_by_side',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_subscribe_file',
+    'd_p_text_blocks',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+  ];
+
+  $values['droopler__droopler_update_8128_1'] = update_modules_configuration($bundles, '8128');
+  $updater->checklist()->saveProgress(['v2.2' => $values]);
+}
 
 /**
  * Droopler 2.2 Migrate background color
  */
-function droopler_update_8126(&$sandbox) {
+function droopler_update_8129(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = \Drupal::entityQuery('paragraph')
       ->exists('field_d_background_color')
@@ -1795,15 +1877,18 @@ function droopler_update_8126(&$sandbox) {
     if ($paragraph->field_d_background_color) {
       switch ($paragraph->field_d_background_color->value) {
         case '#ac0000':
-          $class = 'theme-primary'; break;
+          $class = 'theme-primary';
+          break;
 
         case '#e4e4e4':
         case '#dddddd':
-          $class = 'theme-gray'; break;
+          $class = 'theme-gray';
+          break;
 
         case '#ffffff':
         case '#fff':
-          $class = 'theme-white'; break;
+          $class = 'theme-white';
+          break;
 
         default:
           $class = 'theme-custom';
@@ -1815,7 +1900,8 @@ function droopler_update_8126(&$sandbox) {
       $class = 'theme-default';
     }
 
-    $json->custom_class = preg_replace('/theme-([a-z]*)/', $class, $json->custom_class);
+    $json->custom_class = preg_replace('/theme-([a-z]*)/', $class,
+      $json->custom_class);
     if (strpos($json->custom_class, $class) === FALSE) {
       $json->custom_class .= ' ' . $class;
     }
@@ -1825,7 +1911,8 @@ function droopler_update_8126(&$sandbox) {
     $sandbox['current']++;
   }
 
-  \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed.');
+  \Drupal::messenger()
+    ->addMessage($sandbox['current'] . ' paragraphs processed.');
   $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
 
   if ($sandbox['#finished'] === 1) {
@@ -1833,7 +1920,7 @@ function droopler_update_8126(&$sandbox) {
       'd_p_side_image',
       'd_p_text_blocks',
     ];
-    $values['droopler__droopler_update_8126_1'] = update_modules_configuration($modules, '8126');
+    $values['droopler__droopler_update_8129_1'] = update_modules_configuration($modules, '8129');
     \Drupal::service('d_update')->checklist()
       ->saveProgress(['v2.2' => $values]);
 
@@ -1849,6 +1936,7 @@ function droopler_update_8126(&$sandbox) {
       }
     }
 
-    $values['droopler__droopler_update_8126_2'] = \Drupal::service('module_installer')->install(['d_color'], TRUE);
+    $values['droopler__droopler_update_8129_2'] = \Drupal::service('module_installer')
+      ->install(['d_color'], TRUE);
   }
 }
