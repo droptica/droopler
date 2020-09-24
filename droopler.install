@@ -1380,8 +1380,8 @@ function droopler_update_8116() {
       'field.storage.node.field_header_layout' => '',
       'field.field.node.content_page.field_header_cta' => '',
       'field.field.node.content_page.field_header_layout' => '',
-      'core.entity_view_display.node.content_page.d_header' => '',
       'core.entity_view_mode.node.d_header' => '',
+      'core.entity_view_display.node.content_page.d_header' => '',
     ],
   ];
 
@@ -1818,3 +1818,32 @@ function droopler_update_8127(&$sandbox) {
 
 }
 
+/**
+ * Droopler 2.2 Paragraph UI improvements and unification.
+ */
+function droopler_update_8128(&$sandbox) {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+
+  $bundles = [
+    'd_block',
+    'd_p_reference_content',
+    'd_p_banner',
+    'd_p_carousel',
+    'd_p_counters',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_side_by_side',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_subscribe_file',
+    'd_p_text_blocks',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+  ];
+
+  $values['droopler__droopler_update_8128_1'] = update_modules_configuration($bundles, '8128');
+  $updater->checklist()->saveProgress(['v2.2' => $values]);
+}
