@@ -438,6 +438,12 @@ $d-p-themes: map-merge(
       text-bold: $color-troilus,
       set-fields-color: false,
     ),
+    custom: (
+      background: inherit,
+      text: inherit,
+      text-bold: inherit,
+      set-fields-color: true,
+    ),
   ),
   $d-p-themes
 );
@@ -445,6 +451,7 @@ $d-p-themes: map-merge(
 @each $name, $themeSettings in $d-p-themes {
   .theme-#{$name} {
     > .paragraph:not(.content-moved-inside),
+    > div[data-geysir-paragraph-id] > .paragraph:not(.content-moved-inside),
     > .content-moved-inside .content-inside-wrapper {
       background: map-get($themeSettings, "background");
       color: map-get($themeSettings, "text");
