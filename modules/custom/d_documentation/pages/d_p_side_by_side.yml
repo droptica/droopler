@@ -61,9 +61,6 @@ field_page_section:
                           - btn
                           - btn-secondary
                           - mt-4
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
                 field_d_media_background:
                   type: media_image
                   directory: demo
@@ -128,9 +125,9 @@ field_page_section:
                           - btn
                           - btn-primary
                           - mt-4
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                field_d_settings:
+                  type: field_p_configuration_storage
+                  custom_class: theme-secondary
     -
       paragraph_type: d_p_side_by_side
       data:
@@ -189,9 +186,6 @@ field_page_section:
                           - btn
                           - btn-primary
                           - mt-4
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
                 field_d_media_background:
                   type: media_image
                   directory: demo
@@ -201,7 +195,7 @@ field_page_section:
                       alt: Buildings
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'with-price testing stripe-sidebar'
+                  custom_class: 'with-price testing stripe-sidebar theme-default'
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -219,9 +213,6 @@ field_page_section:
                           - btn
                           - btn-primary
                           - mt-4
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
                 field_d_media_background:
                   type: media_image
                   directory: demo

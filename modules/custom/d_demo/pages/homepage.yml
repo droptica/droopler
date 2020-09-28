@@ -337,9 +337,9 @@ field_page_section:
                 field_d_main_title:
                   type: text
                   data: Marine
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                field_d_settings:
+                  type: field_p_configuration_storage
+                  custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -353,9 +353,9 @@ field_page_section:
                 field_d_main_title:
                   type: text
                   data: Aviation
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                field_d_settings:
+                  type: field_p_configuration_storage
+                  custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -369,9 +369,9 @@ field_page_section:
                 field_d_main_title:
                   type: text
                   data: Automotive
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                field_d_settings:
+                  type: field_p_configuration_storage
+                  custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_reference_content
       data:
@@ -416,9 +416,6 @@ field_page_section:
                           - btn
                           - btn-primary
                           - mt-4
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
                 field_d_media_background:
                   type: media_image
                   directory: demo
@@ -428,7 +425,7 @@ field_page_section:
                       alt: Buildings
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'with-price testing stripe-sidebar'
+                  custom_class: 'theme-default with-price testing stripe-sidebar'
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -446,9 +443,9 @@ field_page_section:
                           - btn
                           - btn-primary
                           - mt-4
-                field_d_background_color:
-                  type: text
-                  data: '#ffffff'
+                field_d_settings:
+                  type: field_p_configuration_storage
+                  custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
                 field_d_media_background:
                   type: media_image
                   directory: demo
