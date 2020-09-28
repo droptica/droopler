@@ -22,9 +22,6 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>We have over 20 years of experience in the production of high-class engines. We not only deliver products but also provide full technical support.</p>'
-        field_d_background_color:
-          type: text
-          data: '#ac0000'
         field_d_cta_link:
           type: cta
           data:
@@ -38,7 +35,7 @@ field_page_section:
                 target: _self
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -71,9 +68,6 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>We are constantly expanding our team with new employees. We are looking for experienced product designers and engineers. Check our current job offers.</p>'
-        field_d_background_color:
-          type: text
-          data: '#e4e4e4'
         field_d_cta_link:
           type: cta
           data:
@@ -87,7 +81,7 @@ field_page_section:
                 target: _self
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_banner
       data:

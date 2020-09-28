@@ -328,12 +328,17 @@ v2.2:
     '#description': '<p>Migrate the "theme-invert" and "background-gray-light-2" modifiers to the new theme setting.</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please update paragraphs manually</p>'
     extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/content' }
-  droopler__droopler_update_8126_1:
+  droopler__droopler_update_8128_1:
+    '#title': 'Update Paragraphs fields configs'
+    '#description': '<p>Update config for paragraphs to improve and unify UI.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8129_1:
     '#title': 'Migrate custom background colors'
     '#description': '<p>Migrate custom background colors to the new custom theme setting.</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please update paragraphs manually</p>'
     extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/content' }
-  droopler__droopler_update_8126_2:
+  droopler__droopler_update_8129_2:
     '#title': 'Enable "d_color" module'
     '#description': '<p>Install the d_color module to enable colorpicker form elements</p>'
     '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
