@@ -25,6 +25,10 @@ class SettingsWidget extends WidgetBase {
   const COLUMN_COUNT_SETTING_NAME = 'column_count';
   const PARAGRAPH_LAYOUT_SETTING = 'layout_class';
   const PARAGRAPH_FEATURED_IMAGES = 'featured_images';
+  const PARAGRAPH_SETTING_FORM_LAYOUT = 'form_layout';
+  const PARAGRAPH_SETTING_EMBED_LAYOUT = 'embed_layout';
+  const PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT = 'side_image_layout';
+  const PARAGRAPH_SETTING_SIDE_TILES_LAYOUT = 'side_tiles_layout';
 
   /**
    * @var array
@@ -51,6 +55,9 @@ class SettingsWidget extends WidgetBase {
     'd_p_tiles',
   ];
 
+  /**
+   *
+   */
   private static function getConfigOptions() {
     return [
       self::CSS_CLASS_SETTING_NAME => [
@@ -279,74 +286,60 @@ class SettingsWidget extends WidgetBase {
           ],
         ],
       ],
-      self::PARAGRAPH_LAYOUT_SETTING => [
-        'title' => t('Paragraph layout settings'),
-        'type' => 'layout_css',
+      self::PARAGRAPH_SETTING_FORM_LAYOUT => [
+        'title' => t('Form layout'),
+        'description' => t('Choose form layout'),
+        'type' => 'select',
+        'options' => [
+          'left' => t('Left'),
+          'right' => t('Right'),
+          'bottom' => t('Bottom'),
+        ],
         'bundles' => [
           'paragraph' => [
             'd_p_form',
-            'd_p_side_embed',
-            'd_p_side_image',
-            'd_p_side_tiles',
           ],
         ],
-        'modifiers' => [
-          'form-layout' => [
-            'title' => t('Form layout'),
-            'description' => t('Choose form layout'),
-            'type' => 'select',
-            'options' => [
-              'left' => t('Left'),
-              'right' => t('Right'),
-              'bottom' => t('Bottom'),
-            ],
-            'bundles' => [
-              'paragraph' => [
-                'd_p_form',
-              ],
-            ],
+      ],
+      self::PARAGRAPH_SETTING_EMBED_LAYOUT => [
+        'title' => t('Embed side'),
+        'type' => 'select',
+        'options' => [
+          'left' => t('Left'),
+          'right' => t('Right'),
+          'full' => t('Full width'),
+        ],
+        'bundles' => [
+          'paragraph' => [
+            'd_p_side_embed',
           ],
-          'embed-layout' => [
-            'title' => t('Embed side'),
-            'type' => 'select',
-            'options' => [
-              'left' => t('Left'),
-              'right' => t('Right'),
-              'full' => t('Full width'),
-            ],
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_embed',
-              ],
-            ],
+        ],
+      ],
+      self::PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT => [
+        'title' => t('Image side'),
+        'type' => 'select',
+        'options' => [
+          'left' => t('Left'),
+          'right' => t('Right'),
+          'left-wide' => t('Left (wide)'),
+          'right-wide' => t('Right (wide)'),
+        ],
+        'bundles' => [
+          'paragraph' => [
+            'd_p_side_image',
           ],
-          'side-image-layout' => [
-            'title' => t('Image side'),
-            'type' => 'select',
-            'options' => [
-              'left' => t('Left'),
-              'right' => t('Right'),
-              'left-wide' => t('Left (wide)'),
-              'right-wide' => t('Right (wide)'),
-            ],
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_image',
-              ],
-            ],
-          ],
-          'side-tiles-layout' => [
-            'title' => t('Tiles gallery side'),
-            'type' => 'select',
-            'options' => [
-              'left' => t('Left'),
-              'right' => t('Right'),
-            ],
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_tiles',
-              ],
-            ],
+        ],
+      ],
+      self::PARAGRAPH_SETTING_SIDE_TILES_LAYOUT => [
+        'title' => t('Tiles gallery side'),
+        'type' => 'select',
+        'options' => [
+          'left' => t('Left'),
+          'right' => t('Right'),
+        ],
+        'bundles' => [
+          'paragraph' => [
+            'd_p_side_tiles',
           ],
         ],
       ],
@@ -495,23 +488,6 @@ class SettingsWidget extends WidgetBase {
           }
           break;
 
-        case 'layout_css':
-          foreach ($options['modifiers'] as $layout => $modifier) {
-            if (!$this->inBundle($modifier['bundles'])) {
-              continue;
-            }
-            $element[$layout] = [
-              '#type' => $modifier['type'],
-              '#description' => $modifier['description'] ?? '',
-              '#title' => $modifier['title'],
-              '#options' => $modifier['options'],
-              '#default_value' => $value,
-              '#attributes' => ['data-layout' => $layout],
-              '#required' => TRUE,
-            ];
-          }
-          break;
-
         default:
           $element[$key] = [
             '#type' => 'textfield',
@@ -545,7 +521,6 @@ class SettingsWidget extends WidgetBase {
 
       switch ($options['type']) {
         case 'css':
-        case 'layout_css':
           $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
           foreach ($options['modifiers'] as $class => $modifier) {
             $modifier_value = $element[$class]['#value'] ?? NULL;
@@ -554,9 +529,10 @@ class SettingsWidget extends WidgetBase {
                 case 'select':
                   $classes[] = $modifier_value;
                   break;
-                  default:
-                    $classes[] = $class;
-                    break;
+
+                default:
+                  $classes[] = $class;
+                  break;
               }
             }
           }
