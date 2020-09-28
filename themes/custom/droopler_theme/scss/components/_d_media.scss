@@ -11,7 +11,7 @@
     float: none;
     margin: 0;
   }
-  div {
+  div:not([data-contextual-id]) {
     height: 100%;
   }
   picture {
