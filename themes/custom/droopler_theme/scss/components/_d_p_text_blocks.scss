@@ -17,7 +17,10 @@ $d-p-text-blocks-group-margin: 0 0 5.5rem 0 !default;
 $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0 !default;
 $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
 $d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto !default;
-$d-p-single-box-margin-bottom: 15% !default;
+$d-p-single-box-padding-left: 5% !default;
+$d-p-single-box-padding-right: 5% !default;
+$d-p-single-box-mobile-padding-left: 10% !default;
+$d-p-single-box-mobile-padding-right: 10% !default;
 
 $d-p-text-blocks-tiles-padding: 20px !default;
 $d-p-text-blocks-tiles-spacing: 5px !default;
@@ -88,6 +91,17 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
       &:last-child {
         margin-bottom: inherit;
+      }
+
+      .d-p-text-block {
+        position: relative;
+        padding-left: $d-p-single-box-padding-left;
+        padding-right: $d-p-single-box-padding-right;
+
+        @include media-breakpoint-down(sm) {
+          padding-left: $d-p-single-box-mobile-padding-left;
+          padding-right: $d-p-single-box-mobile-padding-right;
+        }
       }
     }
   }
@@ -175,7 +189,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Single box
 .d-p-text-block {
-  margin-bottom: $d-p-single-box-margin-bottom;
   .field--name-field-d-main-title {
     @include font-title-single-box;
     &::after {
