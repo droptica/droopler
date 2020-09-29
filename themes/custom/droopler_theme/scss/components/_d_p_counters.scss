@@ -17,6 +17,10 @@ $d-p-counters-padding-top: 7.5rem !default;
 $d-p-counters-padding-bottom: 7.5rem !default;
 $d-p-counters-mobile-padding-top: 3rem !default;
 $d-p-counters-mobile-padding-bottom: 3rem !default;
+$d-p-single-counter-padding-left: 5% !default;
+$d-p-single-counter-padding-right: 5% !default;
+$d-p-single-counter-mobile-padding-left: 10% !default;
+$d-p-single-counter-mobile-padding-right: 10% !default;
 
 // Other settings
 $d-p-counters-background-opacity: 0.2 !default;
@@ -96,6 +100,14 @@ $d-p-counters-background-opacity: 0.2 !default;
     // List of counters.
     .paragraph--type--d-p-single-counter {
       text-align: center;
+      padding-left: $d-p-single-counter-padding-left;
+      padding-right: $d-p-single-counter-padding-right;
+
+      @include media-breakpoint-down(sm) {
+        padding-left: $d-p-single-counter-mobile-padding-left;
+        padding-right: $d-p-single-counter-mobile-padding-right;
+      }
+
       .field--name-field-d-number {
         @include font-main-header;
         font-family: $font-header;
