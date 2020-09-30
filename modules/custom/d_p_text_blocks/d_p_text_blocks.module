@@ -34,32 +34,44 @@ function d_p_text_blocks_preprocess_field(&$variables) {
       if ($variables['field_name'] == 'field_d_p_tb_block_reference') {
 
         $paragraph_modifiers_helper = new ParagraphModifiersHelper($variables['element']['#object']);
-
-        $num_field = $paragraph_modifiers_helper->getModifier(
-          SettingsWidget::COLUMN_COUNT_SETTING_NAME
-        );
-
-        $items_per_row = $num_field ?? 3;
-        $columns = floor(12 / $items_per_row);
-        $variables['column_class'] = 'col-sm-' . $columns;
-
+        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME);
+        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME);
+        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME);
+        // Enable grid setting.
         if ($paragraph_modifiers_helper->hasModifier('with-grid')) {
-          $variables['column_class'] = '';
+          set_columns_sizes($variables['items'], ['md' => $columns_md, 'sm' => $columns_sm, 'xs' => $columns_xs]);
+        }
+        else {
+          $variables['column_class'] = 'col-md-' . 12 / $columns_md . ' col-sm-' . 12 / $columns_sm . ' col-' . 12 / $columns_xs;
+        }
+      }
+    }
+  }
+}
 
-          foreach ($variables['items'] as $idx => $list_item) {
-            /** @var \Drupal\Core\Template\Attribute $atr */
-            $item_attributes = $variables['items'][$idx]['attributes'];
-            $item_attributes->addClass('col-sm-6');
-            if (($idx + 1) % $items_per_row == 0) {
-              $item_attributes->addClass('grid-row-end-item');;
-            }
-            if (count($variables['items']) % $items_per_row != 0 && $idx >= count($variables['items']) - count($variables['items']) % $items_per_row) {
-              $item_attributes->addClass('col-lg-6');
-            }
-            else {
-              $item_attributes->addClass('col-lg-' . $columns);
-            }
-          }
+/**
+ * Set columns sizes for defined breakpoints.
+ *
+ * @param array $items
+ *   Single block text items array.
+ * @param array $column_count
+ *   Array with the number of columns for the selected breakpoints.
+ */
+function set_columns_sizes(array $items, array $column_count) {
+  foreach ($column_count as $breakpoint => $items_per_row) {
+    if (!empty($items_per_row)) {
+      foreach ($items as $idx => $list_item) {
+        /** @var \Drupal\Core\Template\Attribute $atr */
+        $item_attributes = $items[$idx]['attributes'];
+        $class_prefix = 'col-' . ($breakpoint == 'xs' ? '' : $breakpoint . '-');
+        if (($idx + 1) % $items_per_row == 0) {
+          $item_attributes->addClass($breakpoint . '-grid-row-end-item');
+        }
+        if (count($items) % $items_per_row != 0 && $idx >= count($items) - count($items) % $items_per_row) {
+          $item_attributes->addClass($class_prefix . '6');
+        }
+        else {
+          $item_attributes->addClass($class_prefix . 12 / $items_per_row);
         }
       }
     }

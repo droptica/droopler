@@ -221,7 +221,7 @@ $d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
 
   .item-1,
   .item-2 {
-    .geysir-field-paragraph-wrapper {
+    div[data-geysir-paragraph-id] {
       position: unset;
       height: 100%;
     }

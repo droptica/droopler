@@ -17,7 +17,8 @@ $d-p-text-blocks-group-margin: 0 0 5.5rem 0 !default;
 $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0 !default;
 $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
 $d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto !default;
-$d-p-single-box-margin-bottom: 15% !default;
+$d-p-single-box-padding-x: 5% !default;
+$d-p-single-box-mobile-padding-x: 10% !default;
 
 $d-p-text-blocks-tiles-padding: 20px !default;
 $d-p-text-blocks-tiles-spacing: 5px !default;
@@ -77,7 +78,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   }
 
   &.with-long-text {
-
     .d-p-group-of-text-blocks-header-wrapper {
       .field--name-field-d-main-title {
         margin-bottom: 0;
@@ -100,6 +100,17 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     z-index: 2;
   }
 
+  .d-p-text-block {
+    position: relative;
+    padding-left: $d-p-single-box-padding-x;
+    padding-right: $d-p-single-box-padding-x;
+
+    @include media-breakpoint-down(sm) {
+      padding-left: $d-p-single-box-mobile-padding-x;
+      padding-right: $d-p-single-box-mobile-padding-x;
+    }
+  }
+
   .theme-default.user-image-background {
     .paragraph.d-p-text-block {
       background-color: black;
@@ -116,7 +127,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     }
   }
 }
-
 
 .with-tiles {
   @include media-breakpoint-down(md) {
@@ -175,7 +185,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Single box
 .d-p-text-block {
-  margin-bottom: $d-p-single-box-margin-bottom;
   .field--name-field-d-main-title {
     @include font-title-single-box;
     &::after {

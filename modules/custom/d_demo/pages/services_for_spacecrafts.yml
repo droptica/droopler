@@ -16,9 +16,6 @@ field_page_section:
             -
               path: d_demo/d_demo_services_spacecrafts.jpg
               alt: 'For spacecrafts'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left-wide
         field_d_cta_link:
           type: cta
           data:
@@ -36,6 +33,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_image_layout: left-wide
     -
       paragraph_type: d_p_carousel
       data:

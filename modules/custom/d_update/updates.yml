@@ -343,3 +343,13 @@ v2.2:
     '#description': '<p>Install the d_color module to enable colorpicker form elements</p>'
     '#description_failed': '<p><strong>Installation failed</strong>, visit the extension page and try to enable the module manually.</p>'
     extension_page: { '#text': 'Enable "d_color" module', '#url': 'internal:/admin/modules' }
+  droopler__droopler_update_8130_1:
+    '#title': 'Update Media configs'
+    '#description': '<p>Update configs for featured view mode in media.</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8131_1:
+    '#title': 'Migrate layout settings'
+    '#description': '<p>Migrate layout settings from separate field to Paragraph Settings</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please update paragraphs manually</p>'
+    extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/content' }

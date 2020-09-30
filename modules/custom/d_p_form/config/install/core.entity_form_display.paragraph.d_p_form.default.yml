@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_form.field_d_forms
-    - field.field.paragraph.d_p_form.field_d_layout_modifier
     - field.field.paragraph.d_p_form.field_d_long_text
     - field.field.paragraph.d_p_form.field_d_main_title
     - field.field.paragraph.d_p_form.field_d_media_background
@@ -69,12 +68,6 @@ mode: default
 content:
   field_d_forms:
     weight: 5
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_d_layout_modifier:
-    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: options_select

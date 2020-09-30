@@ -93,30 +93,31 @@ $two-columned-header-line-margin: 0.625rem !default;
 
     .list-item-wrapper {
       border-bottom: $grid-border-width $grid-border-type;
-
+      border-right: $grid-border-width $grid-border-type;
       &:last-child {
         border: none;
-      }
-
-      @include media-breakpoint-between(sm, md) {
-        &:nth-child(2n+1) {
-          border-right: $grid-border-width $grid-border-type;
-        }
-        &:last-child {
-          border: none;
-        }
-      }
-      @include media-breakpoint-up(lg) {
-        border-right: $grid-border-width $grid-border-type;
-
-        &.grid-row-end-item {
-          border-right: none;
-        }
       }
     }
 
     .field--type-entity-reference {
       margin: 0;
+    }
+    .xs-grid-row-end-item {
+      @include media-breakpoint-down(xs) {
+        border-right: none;
+      }
+    }
+
+    .sm-grid-row-end-item {
+      @include media-breakpoint-only(sm) {
+        border-right: none;
+      }
+    }
+
+    .md-grid-row-end-item {
+      @include media-breakpoint-up(md) {
+        border-right: none;
+      }
     }
   }
 }
@@ -450,9 +451,10 @@ $d-p-themes: map-merge(
 
 @each $name, $themeSettings in $d-p-themes {
   .theme-#{$name} {
-    > .paragraph:not(.content-moved-inside),
-    > div[data-geysir-paragraph-id] > .paragraph:not(.content-moved-inside),
-    > .content-moved-inside .content-inside-wrapper {
+    > .paragraph,
+    > div[data-geysir-paragraph-id] > .paragraph,
+    > .paragraph .theme-default > .paragraph,
+    > .paragraph .theme-default > div[data-geysir-paragraph-id] > .paragraph {
       background: map-get($themeSettings, "background");
       color: map-get($themeSettings, "text");
 

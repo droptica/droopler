@@ -17,9 +17,6 @@ field_page_section:
             -
               path: d_demo/d_demo_engine_testing_services_1.jpg
               alt: 'Car engine'
-        field_d_p_si_image_side:
-          type: text_select
-          data: right-wide
         field_d_long_text:
           type: text_long
           data: '<p>We produce a wide range of car engines for both: diesel and gasoline. We provide engines with low, medium power for cars and high power for sports vehicles.</p>'
@@ -27,6 +24,7 @@ field_page_section:
           type: field_p_configuration_storage
           custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          side_image_layout: right-wide
     -
       paragraph_type: d_p_text_paged
       data:
@@ -49,15 +47,13 @@ field_page_section:
             -
               path: d_demo/d_demo_car_engine_centurion.jpg
               alt: 'Car Engine Centurion'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_long_text:
           type: text_long
           data: '<h3> Centurion V750 </h3> <p>Excellent and powerful diesel engine for cars. A wide range of power. Designed and created by a team of experienced mechanics and engineers. Perfect for small city cars and large SUVs.</p> <ul> <li>1.4 L (1,360 cc) Euro 5 70-72 kW</li> <li>1.6 L (1,598 cc) Euro 5 72-88 kW</li> <li>1.6 L (1,598 cc) Euro 4 103-120 kW</li> <li>1.6 L (1,598 cc) Euro 5 103-120 kW</li> <li>1.6 L (1,598 cc) Euro 4 128-152 kW</li> </ul>'
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_image_layout: left
     -
       paragraph_type: d_p_group_of_text_blocks
       data:

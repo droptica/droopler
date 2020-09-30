@@ -16,6 +16,9 @@ function d_p_counters_theme($existing, $type, $theme, $path) {
     'paragraph__d_p_group_of_counters' => [
       'base hook' => 'paragraph',
     ],
+    'paragraph__d_p_single_counter' => [
+      'base hook' => 'paragraph',
+    ],
     'field__paragraph__field_d_counter_reference__d_p_group_of_counters' => [
       'base hook' => 'field',
     ],
@@ -50,15 +53,10 @@ function d_p_counters_preprocess_field(&$variables) {
       if ($variables['field_name'] == 'field_d_counter_reference') {
         $paragraph = $variables['element']['#object'];
         $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
-        // Set column layout.
-        $num_array = $paragraph_modifiers_helper->getModifier(
-          SettingsWidget::COLUMN_COUNT_SETTING_NAME
-        );
-        $variables['column_class'] = 'col-sm-4';
-        if (!empty($num_array)) {
-          $columns = floor(12 / $num_array);
-          $variables['column_class'] = 'col-sm-' . $columns;
-        }
+        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME);
+        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME);
+        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME);
+        $variables['column_class'] = 'col-md-' . 12 / $columns_md . ' col-sm-' . 12 / $columns_sm . ' col-' . 12 / $columns_xs;
 
         // Add custom classes.
         foreach ($variables["items"] as &$item) {

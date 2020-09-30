@@ -84,6 +84,24 @@ $d-p-tiles-padding-bottom: 5% !default;
     display: block !important;
     width: 100%;
 
+    .featured {
+      a {
+        width: 50%;
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+        }
+      }
+    }
+
+    .standard {
+      a {
+        width: 25%;
+        @include media-breakpoint-down(sm) {
+          width: 50%;
+        }
+      }
+    }
+
     .d-tiles-sizer,
     .d-tiles-item {
       width: 25%;

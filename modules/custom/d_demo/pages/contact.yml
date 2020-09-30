@@ -16,9 +16,6 @@ field_page_section:
             -
               path: d_demo/d_demo_jet.jpg
               alt: Jet
-        field_d_p_si_image_side:
-          type: text_select
-          data: right-wide
         field_d_long_text:
           type: text_long
           data: '<p>Our dedicated support and sales teams will answer any questions related to our products and services. Please check our office addresses or send us an email.</p>'
@@ -26,6 +23,7 @@ field_page_section:
           type: field_p_configuration_storage
           custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          side_image_layout: right-wide
     -
       paragraph_type: d_p_form
       data:
@@ -45,12 +43,10 @@ field_page_section:
         field_d_forms:
           type: entity_reference
           data: feedback
-        field_d_layout_modifier:
-          type: text_select
-          data: right
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          form_layout: right
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -113,15 +109,13 @@ field_page_section:
         field_d_embed:
           type: text_long
           data: '<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10019.591321160302!2d16.973667!3d51.1103452!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2sie!4v1564423228931!5m2!1spl!2sie" frameborder="0" style="border:0" allowfullscreen></iframe>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: full
         field_d_long_text:
           type: text_long
           data: '<p>Check our office locations on the map.<br /> Check how to get to our offices.</p>'
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          embed_layout: full
 field_teaser_media_image:
   type: media_image
   directory: demo
