@@ -89,16 +89,9 @@
               {{ page.header }}
             </div>
             {% if (is_cta_header) %}
-              {% if node.field_header_cta.0.uri is not empty %}
+              {% if cta_button is not empty %}
                 <div class="d-content-cta-wrapper">
-                  <a href="{{ node.field_header_cta.0.url.external ?
-                  node.field_header_cta.0.uri :
-                  path(node.field_header_cta.0.url.routeName, node.field_header_cta.0.url.routeParameters)}}"
-                     target="{{ node.field_header_cta.0.options.attributes.target }}"
-                     class="{{ node.field_header_cta.0.options.attributes.class|join(' ') }}">
-                    <span class="d-md-none icon-hand-pointer-o"></span>
-                    <span class="d-none d-md-block">{{ node.field_header_cta.0.title }}</span>
-                  </a>
+                  {{ cta_button | render }}
                 </div>
               {% endif %}
             {% else %}

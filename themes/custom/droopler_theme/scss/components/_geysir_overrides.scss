@@ -13,10 +13,18 @@
       display: none !important;
     }
   }
+
+  /* Fix overlay on margins */
+  &:hover {
+    outline: none;
+
+    .geysir-field-paragraph-links {
+      display: block;
+    }
+  }
 }
 
 /* Fix modal styles. */
-
 #media-library-wrapper,
 #geysir-modal,
 #geysir-modal-form {
@@ -83,9 +91,10 @@
     display: flex;
     flex-wrap: wrap;
   }
-  .field--name-field-d-background-color .js-form-type-color input {
+  .field--name-field-d-background-color .js-form-type-color input,
+  .js-form-type-d-color input.form-d-color {
     height: 35px;
-    max-width: 65px;
+    width: 65px;
     padding: 5px;
   }
   .field--widget-media-library-widget,
@@ -125,3 +134,6 @@
   }
 }
 
+.editor-link-dialog .ui-dialog-content {
+  overflow: unset;
+}

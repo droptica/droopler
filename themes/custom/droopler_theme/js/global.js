@@ -88,4 +88,24 @@
     }
   };
 
+  /**
+   * Initialize tooltip.
+   * @type {{attach: Drupal.behaviors.droopler_tooltip.attach}}
+   */
+  Drupal.behaviors.droopler_tooltip = {
+    attach: function (context, settings) {
+      $('[data-toggle="tooltip"]').tooltip();
+    }
+  };
+
+  /**
+   * Initialize popovers.
+   * @type {{attach: Drupal.behaviors.droopler_popover.attach}}
+   */
+  Drupal.behaviors.droopler_popover = {
+    attach: function (context, settings) {
+      $('[data-toggle="popover"]').popover();
+    }
+  };
+
 })(jQuery, Drupal);

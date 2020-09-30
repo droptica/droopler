@@ -17,7 +17,7 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -51,6 +51,9 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Main Title'
+        field_d_long_text:
+          type: text_long
+          data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_counter_reference:
           type: paragraph_reference
           subtype: d_p_single_counter
@@ -62,6 +65,12 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Lorem Imsum'
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_bag_white.svg
+                    alt: 'Bag icon'
             -
               field_d_number:
                 type: number
@@ -69,6 +78,12 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Dolor Sit'
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_boat_white.svg
+                    alt: 'Boat icon'
             -
               field_d_number:
                 type: number
@@ -76,6 +91,12 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Amet Consectetur'
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_car_white.svg
+                    alt: 'Car icon'
             -
               field_d_number:
                 type: number
@@ -83,6 +104,22 @@ field_page_section:
               field_d_main_title:
                 type: text
                 data: 'Adipiscing Elit'
+              field_d_media_icon:
+                type: media_image
+                directory: demo
+                files:
+                  - path: d_demo/d_demo_icon_cog_white.svg
+                    alt: 'Settings icon'
+        field_d_cta_link:
+          type: cta
+          data:
+            link: 'internal:/documentation/counters-paragraph'
+            text: 'See more'
+            options:
+              attributes:
+                class:
+                  - btn
+                  - btn-secondary
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
