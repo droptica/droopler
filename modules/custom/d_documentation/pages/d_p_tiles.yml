@@ -27,7 +27,7 @@ field_page_section:
           data: 'Full Gallery & Side Tiles Example'
         field_d_long_text:
           type: text_long
-          data: '<p>The Tiles Paragraphs utilize Masonry to deliver an excellent gallery experience. All images get arranged to fit the screen width. You can manipulate the display by changing the ALT attribute of each image. Appending "2x2" makes the picture two times larger than the others. The "/" character separates the title and subtitle. Below there are four paragraphs - two Tile Galleries and two Side Tiles.</p>'
+          data: '<p>The Tiles Paragraphs utilize Masonry to deliver an excellent gallery experience. All images get arranged to fit the screen width. You can manipulate the display by paragraph settings field. You can choose number of pictures which should be two times larger than the others. The "/" character separates the title and subtitle. Below there are four paragraphs - two Tile Galleries and two Side Tiles.</p>'
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
@@ -53,7 +53,7 @@ field_page_section:
           files:
             -
               path: d_demo/d_demo_aircraft_tiles_1_1.jpg
-              alt: '2x2 Title / Subtitle'
+              alt: 'Title / Subtitle'
             -
               path: d_demo/d_demo_aircraft_tiles_1_2.jpg
               alt: 'Title / Subtitle'
@@ -74,6 +74,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          featured_images: 1
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -90,9 +91,6 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>Lorem ipsum dolor sit amet.</p>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: right
         field_d_cta_link:
           type: cta
           data:
@@ -122,6 +120,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: second-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_tiles_layout: right
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -138,9 +137,6 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>Curabitur consectetur nec ante ac ornare.</p>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_cta_link:
           type: cta
           data:
@@ -170,6 +166,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: third-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_tiles_layout: left
     -
       paragraph_type: d_p_tiles
       data:
@@ -185,13 +182,16 @@ field_page_section:
               alt: 'Title / Subtitle'
             -
               path: d_demo/d_demo_tiles_2_3.jpg
-              alt: '2x2 Title / Subtitle'
+              alt: 'Title / Subtitle'
             -
               path: d_demo/d_demo_tiles_2_4.jpg
               alt: 'Title / Subtitle'
             -
               path: d_demo/d_demo_tiles_2_5.jpg
               alt: 'Title / Subtitle'
+        field_d_settings:
+          type: field_p_configuration_storage
+          featured_images: 3
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -208,9 +208,6 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>Lorem ipsum dolor sit amet.</p>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_cta_link:
           type: cta
           data:
@@ -240,6 +237,8 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_tiles_layout: left
+
 field_teaser_media_image:
   type: media_image
   directory: demo

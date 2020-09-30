@@ -23,6 +23,11 @@ class SettingsWidget extends WidgetBase {
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
   const COLUMN_COUNT_SETTING_NAME = 'column_count';
+  const PARAGRAPH_FEATURED_IMAGES = 'featured_images';
+  const PARAGRAPH_SETTING_FORM_LAYOUT = 'form_layout';
+  const PARAGRAPH_SETTING_EMBED_LAYOUT = 'embed_layout';
+  const PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT = 'side_image_layout';
+  const PARAGRAPH_SETTING_SIDE_TILES_LAYOUT = 'side_tiles_layout';
 
   /**
    * @var array
@@ -290,6 +295,74 @@ class SettingsWidget extends WidgetBase {
             'd_p_carousel',
             'd_p_group_of_counters',
             'd_p_group_of_text_blocks',
+          ],
+        ],
+      ],
+      self::PARAGRAPH_SETTING_FORM_LAYOUT => [
+        'title' => t('Form layout'),
+        'description' => t('Choose form layout'),
+        'type' => 'select',
+        'options' => [
+          'left' => t('Left'),
+          'right' => t('Right'),
+          'bottom' => t('Bottom'),
+        ],
+        'bundles' => [
+          'paragraph' => [
+            'd_p_form',
+          ],
+        ],
+      ],
+      self::PARAGRAPH_SETTING_EMBED_LAYOUT => [
+        'title' => t('Embed side'),
+        'type' => 'select',
+        'options' => [
+          'left' => t('Left'),
+          'right' => t('Right'),
+          'full' => t('Full width'),
+        ],
+        'bundles' => [
+          'paragraph' => [
+            'd_p_side_embed',
+          ],
+        ],
+      ],
+      self::PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT => [
+        'title' => t('Image side'),
+        'type' => 'select',
+        'options' => [
+          'left' => t('Left'),
+          'right' => t('Right'),
+          'left-wide' => t('Left (wide)'),
+          'right-wide' => t('Right (wide)'),
+        ],
+        'bundles' => [
+          'paragraph' => [
+            'd_p_side_image',
+          ],
+        ],
+      ],
+      self::PARAGRAPH_SETTING_SIDE_TILES_LAYOUT => [
+        'title' => t('Tiles gallery side'),
+        'type' => 'select',
+        'options' => [
+          'left' => t('Left'),
+          'right' => t('Right'),
+        ],
+        'bundles' => [
+          'paragraph' => [
+            'd_p_side_tiles',
+          ],
+        ],
+      ],
+      self::PARAGRAPH_FEATURED_IMAGES => [
+        'title' => t('Featured images'),
+        'outside' => TRUE,
+        'description' => t('Comma separated image numbers. Example: 1,4,7'),
+        'type' => 'textfield',
+        'bundles' => [
+          'paragraph' => [
+            'd_p_tiles',
           ],
         ],
       ],

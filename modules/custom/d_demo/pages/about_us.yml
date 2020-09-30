@@ -16,9 +16,6 @@ field_page_section:
             -
               path: d_demo/d_demo_flying_jetplane.jpg
               alt: Jetplane
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_long_text:
           type: text_long
           data: '<p>We have over 20 years of experience in the production of high-class engines. We not only deliver products but also provide full technical support.</p>'
@@ -37,6 +34,7 @@ field_page_section:
           type: field_p_configuration_storage
           custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          side_image_layout: left
     -
       paragraph_type: d_p_text_paged
       data:
@@ -62,9 +60,6 @@ field_page_section:
             -
               path: d_demo/d_demo_laptop_typing.jpg
               alt: 'Laptop typing'
-        field_d_p_si_image_side:
-          type: text_select
-          data: right
         field_d_long_text:
           type: text_long
           data: '<p>We are constantly expanding our team with new employees. We are looking for experienced product designers and engineers. Check our current job offers.</p>'
@@ -81,7 +76,8 @@ field_page_section:
                 target: _self
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class:  theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_image_layout: right
     -
       paragraph_type: d_p_banner
       data:
