@@ -31,7 +31,7 @@ function d_p_carousel_theme($existing, $type, $theme, $path) {
  * @param array $variables
  *   Template variables.
  */
-function d_p_carousel_preprocess_field(&$variables) {
+function d_p_carousel_preprocess_field(array &$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_carousel') {
       if ($variables['field_name'] == 'field_d_p_cs_item_reference') {
@@ -39,46 +39,24 @@ function d_p_carousel_preprocess_field(&$variables) {
          * @var \Drupal\paragraphs\Entity\Paragraph $paragraph
          */
         $paragraph = $variables['element']['#object'];
-
         $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
+        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME);
+        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME);
+        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME);
 
-        $num_array = $paragraph_modifiers_helper->getModifier(
-          SettingsWidget::COLUMN_COUNT_SETTING_NAME
-        );
-        $variables['column_classes'] = 'col-sm-4';
-
-        if (!empty($num_array)) {
-          $columns = $num_array;
-          $columns_sm = min($columns, 2);
-          $num_items = count($variables['items']);
-
-          // MD/LG - special cases when there is one element or
-          // number of elements is smaller than number of columns.
-          if ($num_items === 1) {
-            $columns = 1;
-          }
-          elseif ($num_items <= $columns && !$paragraph_modifiers_helper->hasModifier('slider-desktop-off')) {
-            $columns = $num_items - 1;
-          }
-
-          // SM - one or two columns.
-          if ($num_items <= $columns_sm) {
-            $columns_sm = 1;
-          }
-
-          $variables['column_classes'] = [
-            'col-md-' . floor(12 / $columns),
-            'col-sm-' . floor(12 / $columns_sm),
-            'col-xs-12',
-          ];
-
-          $id = $paragraph->id();
-          $variables['#attached']['drupalSettings']['d_p_carousel'][$id] = [
-            'columns' => $columns,
-            'columns_sm' => $columns_sm,
-            'columns_xs' => 1,
-          ];
+        $variables['column_classes'] = [
+          'col-md-' . floor(12 / $columns_md),
+          'col-sm-' . floor(12 / $columns_sm),
+          'col-' . floor(12 / $columns_xs),
+        ];
+        if ($paragraph_modifiers_helper->hasModifier('slider-desktop-off')) {
+          $variables['attributes']['class'][] = 'd-md-none';
         }
+        $variables['#attached']['drupalSettings']['d_p_carousel'][$paragraph->id()] = [
+          'columns_md' => $columns_md,
+          'columns_sm' => $columns_sm,
+          'columns_xs' => $columns_xs,
+        ];
       }
     }
   }
