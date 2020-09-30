@@ -1458,19 +1458,13 @@ function droopler_update_8118(&$sandbox) {
     $paragraph = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
       ->load($pid);
-    try {
-      $helper->analyzeParagraph($paragraph);
-      $items_count = $paragraph->field_d_p_cs_item_reference->count();
-    }
-    catch (\Exception $e) {
-      continue;
-    }
-    // Migrate column size.
-    $tablet_column_count = NULL;
-    $desktop_column_count = NULL;
 
+    $helper->analyzeParagraph($paragraph);
+
+    // Migrate column size.
     switch ($paragraph->bundle()) {
       case 'd_p_carousel':
+        $items_count = $paragraph->field_d_p_cs_item_reference->count();
         $old_column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '2') : '2';
         $tablet_column_count = $old_column_count == '1' ? '1' : '2';
 
@@ -1482,16 +1476,11 @@ function droopler_update_8118(&$sandbox) {
         }
         break;
 
-      case 'd_p_group_of_counters':
+      default:
         $old_column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '3') : '3';
         $tablet_column_count = $old_column_count;
         $desktop_column_count = $old_column_count;
         break;
-
-      case 'd_p_group_of_text_blocks':
-        $old_column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '3') : '3';
-        $tablet_column_count = $old_column_count;
-        $desktop_column_count = $old_column_count;
     }
 
     $helper->setModifier(
