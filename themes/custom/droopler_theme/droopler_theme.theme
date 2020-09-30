@@ -380,6 +380,7 @@ function droopler_theme_show_title_block() {
  *   Theme variables.
  *
  * @return string|null
+ *   Layout name, defaults to null.
  */
 function droopler_theme_get_page_layout(array $variables) {
   /** @var NodeInterface|null $node */
