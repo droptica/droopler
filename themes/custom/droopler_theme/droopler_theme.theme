@@ -43,6 +43,8 @@ function droopler_theme_preprocess_html(&$variables) {
  * Implements hook_preprocess_HOOK() for page templates.
  */
 function droopler_theme_preprocess_page(&$variables) {
+  $layout = droopler_theme_get_page_layout($variables);
+
   // Define default classes for containers.
   $navbar_top_attributes = [
     'class' => ['navbar123'],
@@ -58,6 +60,9 @@ function droopler_theme_preprocess_page(&$variables) {
   ];
   $main_content_attributes = [
     'class' => ['col-12', 'main-content'],
+  ];
+  $section_attributes = [
+    'class' => ['section',],
   ];
   $content_attributes = [
     'class' => ['main-content', 'col-md-12'],
@@ -75,7 +80,13 @@ function droopler_theme_preprocess_page(&$variables) {
   $variables['navbar_attributes'] = new Attribute($navbar_attributes);
   $variables['main_attributes'] = new Attribute($main_attributes);
   $variables['main_content_attributes'] = new Attribute($main_content_attributes);
+  $variables['section_attributes'] = new Attribute($section_attributes);
   $variables['content_attributes'] = new Attribute($content_attributes);
+
+  // Add attributes that depends of the page layout.
+  if ($layout === 'header_with_cta') {
+    $variables['section_attributes']->addClass(['header-section',]);
+  }
 
   $footer_regions = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
   $filled_regions = [];
@@ -360,6 +371,29 @@ function droopler_theme_show_title_block() {
   $route_check = $route_name == 'view.blog_listing.page_1';
 
   return !($node_check || $route_check);
+}
+
+/**
+ * Getter for the page layout on node pages.
+ *
+ * @param array $variables
+ *   Theme variables.
+ *
+ * @return string|null
+ */
+function droopler_theme_get_page_layout(array $variables) {
+  /** @var NodeInterface|null $node */
+  $node = $variables['node'] ?? NULL;
+  $layout = NULL;
+
+  if ($node instanceof NodeInterface) {
+    $layout_field = 'field_header_layout';
+    if ($node->hasField($layout_field)) {
+      $layout = $node->{$layout_field}->value;
+    }
+  }
+
+  return $layout;
 }
 
 /**

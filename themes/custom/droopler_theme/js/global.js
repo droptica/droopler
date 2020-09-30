@@ -60,37 +60,21 @@
       } });
       $body.addClass("d-theme-preceded");
 
-      // Check if alert box and header with cta is visible for position adjustments.
-      var alert = $('div.alert-dismissible');
-      var header = $('div.hanging-header');
-      var perms = $('div.admin_tabs');
+      // Calculate value for elemenets with dynamic offset top value.
+      $(window).bind('syncDynamicOffsetElements', function () {
+        $('.has-offset-sync').each(function () {
+          var selector = $(this).data('offset-sync-source');
+          var $sourceElement = $(selector);
+          var offset = $sourceElement.offset().top - parseInt($body.css('padding-top'));
 
-      if (header.length) {
-        var height = parseInt(header.css('top'), 10);
-
-        if (alert.length) {
-          header.css('top', height + parseInt(alert.css('height'), 10) + 20);
-
-          $('div.alert-dismissible button.close').click(function () {
-            header.css('top', height);
-          });
-        }
-
-        $(window).on('resize', function () {
-          calcHeader();
+          $(this).css({ 'top': offset + 'px'});
         });
+      }).trigger('syncDynamicOffsetElements');
 
-        calcHeader();
-      }
+      $(window).on('resize', Drupal.debounce(function () {
+        $(window).trigger('syncDynamicOffsetElements');
+      }, 100));
 
-      // Function which will calculate height of header based on admin page.
-      function calcHeader() {
-        if (!perms.length) {
-          return;
-        }
-
-        header.css('top', $(window).width() + 15 > 991 ? (height === 0 ? 90 : height) : 65);
-      }
     }
   };
 

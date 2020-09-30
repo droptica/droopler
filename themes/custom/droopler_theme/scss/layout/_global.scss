@@ -86,8 +86,6 @@ body {
       section {
         .paragraph {
           @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
-            padding-top: calc(70px + 5%);
-
             &--type--d-p-side-image,
             &--type--d-p-side-embed {
               padding-top: 0;
@@ -112,30 +110,14 @@ body {
   position: relative;
 
   .hanging-header {
-    position: relative;
+    position: absolute;
     width: 100%;
     top: 0;
     z-index: 9;
     left: 0;
     right: 0;
-
     @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-      position: absolute;
-      top: 20px;
-    }
-
-    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
-      position: absolute;
-    }
-  }
-}
-
-.toolbar-tray-open {
-  .landing-page-header {
-    .hanging-header {
-      @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-        top: 90px;
-      }
+      margin-top: 20px;
     }
   }
 }
