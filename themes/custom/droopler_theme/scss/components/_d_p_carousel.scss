@@ -12,11 +12,14 @@ $d-p-carousel-background-theme-invert: $color-agamemnon !default;
 $d-p-carousel-theme-invert-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
+$d-p-carousel-long-text-margin-bottom: 1.52rem !default;
 $d-p-carousel-items-margin-top: 2% !default;
 $d-p-carousel-mobile-items-margin-top: 3rem !default;
 $d-p-carousel-item-image-margin-bottom: 1rem !default;
 $d-p-carousel-item-image-height: 200px !default;
 $d-p-carousel-item-mobile-image-height: 150px !default;
+$d-p-carousel-item-padding-x: 5% !default;
+$d-p-carousel-item-mobile-padding-x: 10% !default;
 $d-p-carousel-arrow-size: 40px !default;
 $d-p-carousel-arrow-opacity: 0.2 !default;
 $d-p-carousel-arrow-hover-opacity: 0.3 !default;
@@ -49,6 +52,8 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
   }
 
   .content > .field--name-field-d-long-text {
+    margin-bottom: $d-p-carousel-long-text-margin-bottom;
+
     p {
       word-wrap: break-word;
       hyphens: auto;
@@ -111,6 +116,13 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
       }
 
       .d-p-carousel-item {
+        padding-left: $d-p-carousel-item-padding-x;
+        padding-right: $d-p-carousel-item-padding-x;
+
+        @include media-breakpoint-down(sm) {
+          padding-left:  $d-p-carousel-item-mobile-padding-x;
+          padding-right: $d-p-carousel-item-mobile-padding-x;
+        }
 
         &:focus,
         &:focus * {
@@ -141,6 +153,12 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
           display: flex;
           align-items: center;
           justify-content: center;
+
+          @include media-breakpoint-up(sm) {
+            @at-root .slider-desktop-off & {
+              height: auto;
+            }
+          }
 
           @include media-breakpoint-down(sm) {
             max-height: $d-p-carousel-item-mobile-image-height;
