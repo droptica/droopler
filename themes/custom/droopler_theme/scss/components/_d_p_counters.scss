@@ -13,14 +13,14 @@ $d-p-counters-long-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-counters-title-margin-top: 0 !default;
+$d-p-counters-title-margin-bottom: 1.52rem !default;
+$d-p-counters-long-text-margin-bottom: 1.52rem !default;
 $d-p-counters-padding-top: 7.5rem !default;
 $d-p-counters-padding-bottom: 7.5rem !default;
 $d-p-counters-mobile-padding-top: 3rem !default;
 $d-p-counters-mobile-padding-bottom: 3rem !default;
-$d-p-single-counter-padding-left: 5% !default;
-$d-p-single-counter-padding-right: 5% !default;
-$d-p-single-counter-mobile-padding-left: 10% !default;
-$d-p-single-counter-mobile-padding-right: 10% !default;
+$d-p-single-counter-padding-x: 5% !default;
+$d-p-single-counter-mobile-padding-x: 10% !default;
 
 // Other settings
 $d-p-counters-background-opacity: 0.2 !default;
@@ -91,6 +91,7 @@ $d-p-counters-background-opacity: 0.2 !default;
       @include font-main-header;
       text-align: center;
       margin-top: $d-p-counters-title-margin-top;
+      margin-bottom: $d-p-counters-title-margin-bottom;
 
       &::after {
         @include decoration-header-line-main-center($d-p-counters-line-color, $d-p-counters-line-color-inverted);
@@ -100,12 +101,12 @@ $d-p-counters-background-opacity: 0.2 !default;
     // List of counters.
     .paragraph--type--d-p-single-counter {
       text-align: center;
-      padding-left: $d-p-single-counter-padding-left;
-      padding-right: $d-p-single-counter-padding-right;
+      padding-left: $d-p-single-counter-padding-x;
+      padding-right: $d-p-single-counter-padding-x;
 
       @include media-breakpoint-down(sm) {
-        padding-left: $d-p-single-counter-mobile-padding-left;
-        padding-right: $d-p-single-counter-mobile-padding-right;
+        padding-left: $d-p-single-counter-mobile-padding-x;
+        padding-right: $d-p-single-counter-mobile-padding-x;
       }
 
       .field--name-field-d-number {
@@ -119,8 +120,7 @@ $d-p-counters-background-opacity: 0.2 !default;
     }
 
     .field--name-field-d-long-text {
-      padding-top: 1.51rem;
-      padding-bottom: 1.51rem;
+      margin-bottom: $d-p-counters-long-text-margin-bottom;
       text-align: center;
     }
   }

@@ -453,7 +453,7 @@ $d-p-themes: map-merge(
     > .paragraph,
     > div[data-geysir-paragraph-id] > .paragraph,
     > .paragraph .theme-default > .paragraph,
-    > .paragraph .theme-default  > div[data-geysir-paragraph-id] > .paragraph {
+    > .paragraph .theme-default > div[data-geysir-paragraph-id] > .paragraph {
       background: map-get($themeSettings, "background");
       color: map-get($themeSettings, "text");
 
