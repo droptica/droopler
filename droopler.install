@@ -1428,8 +1428,15 @@ function droopler_update_8117() {
  * Droopler 2.2 Migrate column count field.
  */
 function droopler_update_8118(&$sandbox) {
+  $bundles = [
+    'd_p_carousel',
+    'd_p_group_of_counters',
+    'd_p_group_of_text_blocks',
+  ];
+
   if (!isset($sandbox['total'])) {
     $query = \Drupal::entityQuery('paragraph')
+      ->condition('type', $bundles, 'IN')
       ->exists('field_d_number')
       ->execute();
 
@@ -1440,41 +1447,65 @@ function droopler_update_8118(&$sandbox) {
   $paragraphs_per_batch = 25;
 
   $query = \Drupal::entityQuery('paragraph')
+    ->condition('type', $bundles, 'IN')
     ->exists('field_d_number')
     ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
+
+  $helper = new ParagraphModifiersHelper();
 
   foreach ($query as $pid) {
     $paragraph = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
       ->load($pid);
     try {
-      $settings = $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
+      $helper->analyzeParagraph($paragraph);
+      $items_count = $paragraph->field_d_p_cs_item_reference->count();
     }
     catch (\Exception $e) {
       continue;
     }
     // Migrate column size.
-    $json = json_decode($settings);
+    $tablet_column_count = NULL;
+    $desktop_column_count = NULL;
+
     switch ($paragraph->bundle()) {
       case 'd_p_carousel':
-        $number_of_columns = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '2') : '2';
-        $json->column_count_tablet = $number_of_columns == '1' ? '1' : '2';
+        $old_column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '2') : '2';
+        $tablet_column_count = $old_column_count == '1' ? '1' : '2';
+
+        if ($items_count <= $old_column_count) {
+          $desktop_column_count = $items_count - 1;
+        }
+        else {
+          $desktop_column_count = $old_column_count;
+        }
         break;
 
       case 'd_p_group_of_counters':
-        $json->column_count_tablet = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '3') : '3';
+        $old_column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '3') : '3';
+        $tablet_column_count = $old_column_count;
+        $desktop_column_count = $old_column_count;
         break;
 
       case 'd_p_group_of_text_blocks':
-        $json->column_count_tablet = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '3') : '3';
+        $old_column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '3') : '3';
+        $tablet_column_count = $old_column_count;
+        $desktop_column_count = $old_column_count;
     }
 
-    if (empty($json->column_count)) {
-      $json->column_count = $paragraph->field_d_number ? ($paragraph->field_d_number->value ?? '4') : '4';
-      $paragraph->set('field_d_settings', json_encode($json));
-      $paragraph->save();
-    }
+    $helper->setModifier(
+      SettingsWidget::COLUMN_COUNT_SETTING_NAME,
+      $desktop_column_count
+    );
+
+    $helper->setModifier(
+      SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME,
+      $tablet_column_count
+    );
+    $helper->setModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME,1);
+
+    $paragraph->set($helper->getSettingsFieldName(), $helper->getModifiersEncoded());
     $paragraph->save();
     $sandbox['current']++;
   }
@@ -1492,11 +1523,6 @@ function droopler_update_8118(&$sandbox) {
     \Drupal::service('d_update')->checklist()
       ->saveProgress(['v2.2' => $values]);
 
-    $bundles = [
-      'd_p_carousel',
-      'd_p_group_of_counters',
-      'd_p_group_of_text_blocks',
-    ];
     foreach ($bundles as $bundle) {
       $field = FieldConfig::loadByName('paragraph', $bundle, 'field_d_number');
 
@@ -1646,33 +1672,32 @@ function droopler_update_8123(&$sandbox) {
     ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
+  $helper = new ParagraphModifiersHelper();
+
   foreach ($query as $pid) {
     $paragraph = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
       ->load($pid);
-    $settings = $paragraph->hasField('field_d_settings') && $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
+    $helper->analyzeParagraph($paragraph);
 
     $replaces = [
       'no-padding-bottom' => 'padding-bottom-none',
       'no-padding-top' => 'padding-top-none',
     ];
 
-    $json = json_decode($settings);
-
     $save = FALSE;
-    if (isset($json->custom_class)) {
-      foreach ($replaces as $old => $new) {
-        if (strpos($json->custom_class, $old) === FALSE) {
-          continue;
-        }
 
-        $json->custom_class = str_replace($old, $new, $json->custom_class);
-        $paragraph->set('field_d_settings', json_encode($json));
-        $save = TRUE;
+    foreach ($replaces as $old => $new) {
+      if (!$helper->hasModifier($old)) {
+        continue;
       }
+
+      $helper->replaceModifier($old, $new);
+      $save = TRUE;
     }
 
     if ($save) {
+      $paragraph->set($helper->getSettingsFieldName(), $helper->getModifiersEncoded());
       $paragraph->save();
       $sandbox['changed']++;
     }
@@ -1891,13 +1916,14 @@ function droopler_update_8129(&$sandbox) {
     ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
+  $helper = new ParagraphModifiersHelper();
+
   foreach ($query as $pid) {
     $paragraph = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
       ->load($pid);
-    $settings = $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
 
-    $json = json_decode($settings);
+    $helper->analyzeParagraph($paragraph);
     if ($paragraph->field_d_background_color) {
       switch ($paragraph->field_d_background_color->value) {
         case '#ac0000':
@@ -1916,21 +1942,23 @@ function droopler_update_8129(&$sandbox) {
 
         default:
           $class = 'theme-custom';
-          $json->custom_theme_colors['background'] = $paragraph->field_d_background_color->value;
-          $json->custom_theme_colors['text'] = '#000000';
+          $helper->setModifier('custom_theme_colors', [
+            'background' => $paragraph->field_d_background_color->value,
+            'text' => '#000000',
+          ]);
       }
     }
     else {
       $class = 'theme-default';
     }
 
-    $json->custom_class = preg_replace('/theme-([a-z]*)/', $class,
-      $json->custom_class);
-    if (strpos($json->custom_class, $class) === FALSE) {
-      $json->custom_class .= ' ' . $class;
+    $classes = $helper->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME);
+    $classes = preg_replace('/theme-([a-z]*)/', $class, $classes);
+    if (strpos($classes, $class) === FALSE) {
+      $classes .= ' ' . $class;
     }
-
-    $paragraph->set('field_d_settings', json_encode($json));
+    $helper->setModifier(SettingsWidget::CSS_CLASS_SETTING_NAME, $classes);
+    $paragraph->set($helper->getSettingsFieldName(), $helper->getModifiersEncoded());
     $paragraph->save();
     $sandbox['current']++;
   }
@@ -2005,40 +2033,41 @@ function droopler_update_8131(&$sandbox) {
     ->range($sandbox['current'], $paragraphs_per_batch)
     ->execute();
 
+  $helper = new ParagraphModifiersHelper();
+
   foreach ($paragraphs_ids as $id) {
     $paragraph = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
       ->load($id);
 
-    $settings = $paragraph->hasField('field_d_settings') && $paragraph->get('field_d_settings') ? $paragraph->get('field_d_settings')->value : "{}";
-    $json = json_decode($settings);
+    $helper->analyzeParagraph($paragraph);
 
     switch ($paragraph->bundle()) {
       case 'd_p_side_image':
         if ($paragraph->hasField('field_d_p_si_image_side')) {
           $side_image_layout = $paragraph->get('field_d_p_si_image_side') ? $paragraph->get('field_d_p_si_image_side')->value : 'left';
-          $json->{SettingsWidget::PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT} = $side_image_layout;
+          $helper->setModifier(SettingsWidget::PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT, $side_image_layout);
         }
         break;
 
       case 'd_p_side_embed':
         if ($paragraph->hasField('field_d_p_si_image_side')) {
           $embed_layout = $paragraph->get('field_d_p_si_image_side') ? $paragraph->get('field_d_p_si_image_side')->value : 'left';
-          $json->{SettingsWidget::PARAGRAPH_SETTING_EMBED_LAYOUT} = $embed_layout;
+          $helper->setModifier(SettingsWidget::PARAGRAPH_SETTING_EMBED_LAYOUT, $embed_layout);
         }
         break;
 
       case 'd_p_side_form':
         if ($paragraph->hasField('field_d_layout_modifier')) {
           $form_layout = $paragraph->get('field_d_layout_modifier') ? $paragraph->get('field_d_layout_modifier')->value : 'left';
-          $json->{SettingsWidget::PARAGRAPH_SETTING_FORM_LAYOUT} = $form_layout;
+          $helper->setModifier(SettingsWidget::PARAGRAPH_SETTING_FORM_LAYOUT, $form_layout);
         }
         break;
 
       case 'd_p_side_tiles':
         if ($paragraph->hasField('field_d_p_si_image_side')) {
           $side_tiles_layout = $paragraph->get('field_d_p_si_image_side') ? $paragraph->get('field_d_p_si_image_side')->value : 'left';
-          $json->{SettingsWidget::PARAGRAPH_SETTING_SIDE_TILES_LAYOUT} = $side_tiles_layout;
+          $helper->setModifier(SettingsWidget::PARAGRAPH_SETTING_SIDE_TILES_LAYOUT, $side_tiles_layout);
         }
         break;
 
@@ -2059,12 +2088,12 @@ function droopler_update_8131(&$sandbox) {
           }
         }
         if (!empty($featured_images)) {
-          $json->{SettingsWidget::PARAGRAPH_FEATURED_IMAGES} = implode(",", $featured_images);
+          $helper->setModifier(SettingsWidget::PARAGRAPH_FEATURED_IMAGES, implode(",", $featured_images));
         }
         break;
     }
 
-    $paragraph->set('field_d_settings', json_encode($json, TRUE));
+    $paragraph->set($helper->getSettingsFieldName(), $helper->getModifiersEncoded());
     $paragraph->save();
     $sandbox['current']++;
   }
