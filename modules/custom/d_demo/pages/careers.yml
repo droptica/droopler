@@ -12,9 +12,6 @@ field_page_section:
         field_d_embed:
           type: text_long
           data: '<iframe allow="autoplay" width="560" height="315" src="https://www.youtube.com/embed/6yO16tVGC1w?showinfo=0&amp;rel=0&amp;modestbranding=1&amp;title=&amp;fs=0&amp;controls=0" frameborder="0" allowfullscreen=""></iframe>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_long_text:
           type: text_long
           data: '<p>At Drooplengines, we employ over 2,000 experienced experts and engineers. We provide fantastic opportunities for professional development. Join our great Team today!</p>'
@@ -22,6 +19,7 @@ field_page_section:
           type: field_p_configuration_storage
           custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          embed_layout: left
     -
       paragraph_type: d_p_text_paged
       data:

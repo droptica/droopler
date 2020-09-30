@@ -91,9 +91,6 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>Lorem ipsum dolor sit amet.</p>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: right
         field_d_cta_link:
           type: cta
           data:
@@ -123,7 +120,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: second-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          layout_class: right
+          side_tiles_layout: right
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -140,9 +137,6 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>Curabitur consectetur nec ante ac ornare.</p>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_cta_link:
           type: cta
           data:
@@ -172,7 +166,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: third-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          layout_class: left
+          side_tiles_layout: left
     -
       paragraph_type: d_p_tiles
       data:
@@ -197,7 +191,7 @@ field_page_section:
               alt: 'Title / Subtitle'
         field_d_settings:
           type: field_p_configuration_storage
-          featured_images: 1
+          featured_images: 3
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -214,9 +208,6 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>Lorem ipsum dolor sit amet.</p>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_cta_link:
           type: cta
           data:
@@ -246,7 +237,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          layout_class: left
+          side_tiles_layout: left
 
 field_teaser_media_image:
   type: media_image

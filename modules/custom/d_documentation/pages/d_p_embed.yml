@@ -44,9 +44,6 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Main Title'
-        field_d_p_si_image_side:
-          type: text_select
-          data: right
         field_d_embed:
           type: text_long
           data: '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10019.548437096011!2d16.9733284!3d51.110543!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x15d28d9cdc4aa64f!2sDroptica+Sp.+z+o.o.!5e0!3m2!1spl!2spl!4v1534140503730" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
@@ -66,6 +63,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          embed_layout: right
     -
       paragraph_type: d_p_side_embed
       data:
@@ -79,9 +77,6 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Main Title'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_embed:
           type: text_long
           data: '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10019.548437096011!2d16.9733284!3d51.110543!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x15d28d9cdc4aa64f!2sDroptica+Sp.+z+o.o.!5e0!3m2!1spl!2spl!4v1534140503730" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
@@ -101,6 +96,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-secondary full-example padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          embed_layout: left
     -
       paragraph_type: d_p_text_paged
       data:
@@ -126,9 +122,6 @@ field_page_section:
         field_d_main_title:
           type: text
           data: 'Main Title'
-        field_d_p_si_image_side:
-          type: text_select
-          data: full
         field_d_embed:
           type: text_long
           data: '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10019.548437096011!2d16.9733284!3d51.110543!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x15d28d9cdc4aa64f!2sDroptica+Sp.+z+o.o.!5e0!3m2!1spl!2spl!4v1534140503730" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>'
@@ -148,6 +141,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-secondary full-width-example padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          embed_layout: full
     -
       paragraph_type: d_p_text_paged
       data:
@@ -169,15 +163,13 @@ field_page_section:
         field_d_embed:
           type: text_long
           data: '<iframe allow="autoplay" width="560" height="315" src="https://www.youtube.com/embed/6yO16tVGC1w?showinfo=0&amp;rel=0&amp;modestbranding=1&amp;title=&amp;fs=0&amp;controls=0" frameborder="0" allowfullscreen=""></iframe>'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_long_text:
           type: text_long
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: youtube-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          embed_layout: left
 field_teaser_media_image:
   type: media_image
   directory: demo

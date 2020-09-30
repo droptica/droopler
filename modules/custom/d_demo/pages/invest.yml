@@ -16,9 +16,6 @@ field_page_section:
             -
               path: d_demo/d_demo_investors_1.jpg
               alt: Investors
-        field_d_p_si_image_side:
-          type: text_select
-          data: right-wide
         field_d_long_text:
           type: text_long
           data: '<p>This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.</p>'
@@ -29,6 +26,7 @@ field_page_section:
           type: field_p_configuration_storage
           custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          side_image_layout: right-wide
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -187,9 +185,6 @@ field_page_section:
             -
               path: d_demo/d_demo_investors_2.jpg
               alt: Investors
-        field_d_p_si_image_side:
-          type: text_select
-          data: left-wide
         field_d_long_text:
           type: text_long
           data: '<p>John Smith</p> <p>ul. Duńska 9<br>54-427 Wrocław</p> <p>Mobile: +48 333 444 222</p>'
@@ -199,6 +194,7 @@ field_page_section:
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_image_layout: left-wide
 field_teaser_media_image:
   type: media_image
   directory: demo

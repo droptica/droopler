@@ -7,7 +7,6 @@ dependencies:
     - field.field.paragraph.d_p_side_tiles.field_d_main_title
     - field.field.paragraph.d_p_side_tiles.field_d_media_icon
     - field.field.paragraph.d_p_side_tiles.field_d_media_image
-    - field.field.paragraph.d_p_side_tiles.field_d_p_si_image_side
     - field.field.paragraph.d_p_side_tiles.field_d_settings
     - paragraphs.paragraphs_type.d_p_side_tiles
   module:
@@ -127,12 +126,6 @@ content:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
-    region: content
-  field_d_p_si_image_side:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
     region: content
   field_d_settings:
     weight: 14

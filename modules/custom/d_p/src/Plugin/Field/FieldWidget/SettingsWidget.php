@@ -23,7 +23,6 @@ class SettingsWidget extends WidgetBase {
   const CSS_CLASS_SETTING_NAME = 'custom_class';
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
   const COLUMN_COUNT_SETTING_NAME = 'column_count';
-  const PARAGRAPH_LAYOUT_SETTING = 'layout_class';
   const PARAGRAPH_FEATURED_IMAGES = 'featured_images';
   const PARAGRAPH_SETTING_FORM_LAYOUT = 'form_layout';
   const PARAGRAPH_SETTING_EMBED_LAYOUT = 'embed_layout';
