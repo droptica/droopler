@@ -16,19 +16,14 @@ field_page_section:
             -
               path: d_demo/d_demo_engine_airplane_3.jpg
               alt: Airplane
-        field_d_p_si_image_side:
-          type: text_select
-          data: right-wide
         field_d_long_text:
           type: text_long
           data: '<p>Reliability and perfect quality. These are the engine features for aircraft manufactured by our company. We also provide a full range of support services.</p>'
-        field_d_background_color:
-          type: text
-          data: '#fff'
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          side_image_layout: right-wide
     -
       paragraph_type: d_p_text_paged
       data:
@@ -51,18 +46,13 @@ field_page_section:
             -
               path: d_demo/d_demo_engine_airplane_2.jpg
               alt: 'Engine airplane'
-        field_d_p_si_image_side:
-          type: text_select
-          data: left
         field_d_long_text:
           type: text_long
           data: '<h3> JetSpeed 5000 </h3> <p>Excellent and powerful engine for medium-sized jets. Designed and created by a team of experienced mechanics, engineers and aviation experts.</p> <ul> <li>Compact design</li> <li>Excellent thrust-to-weight ratio, low power consumption</li> <li>Max. thrust: 1,300 N*</li> <li>Outer diameter: 272 mm</li> <li>Length: 625 mm</li> <li>Weight: 90.5 kg</li> </ul>'
-        field_d_background_color:
-          type: text
-          data: '#dddddd'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_image_layout: left
     -
       paragraph_type: d_p_group_of_text_blocks
       data:

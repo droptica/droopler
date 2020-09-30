@@ -60,18 +60,21 @@
       } });
       $body.addClass("d-theme-preceded");
 
-      // Check if alert box and header with cta is visible for position adjustments.
-      var alert = $('div.alert-dismissible');
-      var header = $('div.hanging-header');
+      // Calculate value for elemenets with dynamic offset top value.
+      $(window).bind('syncDynamicOffsetElements', function () {
+        $('.has-offset-sync').each(function () {
+          var selector = $(this).data('offset-sync-source');
+          var $sourceElement = $(selector);
+          var offset = $sourceElement.offset().top - parseInt($body.css('padding-top'));
 
-      if (alert.length && header.length) {
-        var height = parseInt(header.css('top'), 10);
-        header.css('top', height + parseInt(alert.css('height'), 10) + 20);
-
-        $('div.alert-dismissible button.close').click(function () {
-          header.css('top', height);
+          $(this).css({ 'top': offset + 'px'});
         });
-      }
+      }).trigger('syncDynamicOffsetElements');
+
+      $(window).on('resize', Drupal.debounce(function () {
+        $(window).trigger('syncDynamicOffsetElements');
+      }, 100));
+
     }
   };
 
@@ -82,6 +85,26 @@
   Drupal.behaviors.droopler_unpublished = {
     attach: function (context, settings) {
       $('<div>').addClass('unpublished-message').text(Drupal.t('Unpublished')).insertBefore($('.node--unpublished', context));
+    }
+  };
+
+  /**
+   * Initialize tooltip.
+   * @type {{attach: Drupal.behaviors.droopler_tooltip.attach}}
+   */
+  Drupal.behaviors.droopler_tooltip = {
+    attach: function (context, settings) {
+      $('[data-toggle="tooltip"]').tooltip();
+    }
+  };
+
+  /**
+   * Initialize popovers.
+   * @type {{attach: Drupal.behaviors.droopler_popover.attach}}
+   */
+  Drupal.behaviors.droopler_popover = {
+    attach: function (context, settings) {
+      $('[data-toggle="popover"]').popover();
     }
   };
 

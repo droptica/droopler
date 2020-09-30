@@ -12,10 +12,73 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_group_of_counters
   module:
     - d_p
+    - field_group
     - link_attributes
     - media_library
     - paragraphs
     - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_i
+        - group_set
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_basic:
+      children:
+        - field_d_main_title
+        - field_d_media_background
+        - field_d_media_icon
+        - field_d_long_text
+        - field_d_cta_link
+      parent_name: group_tabs
+      weight: 10
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Basic
+    group_i:
+      children:
+        - field_d_counter_reference
+      parent_name: group_tabs
+      weight: 11
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Items
+    group_set:
+      children:
+        - field_d_settings
+      parent_name: group_tabs
+      weight: 12
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Settings
 id: paragraph.d_p_group_of_counters.default
 targetEntityType: paragraph
 bundle: d_p_group_of_counters
@@ -23,18 +86,18 @@ mode: default
 content:
   field_d_counter_reference:
     type: entity_reference_paragraphs
-    weight: 6
+    weight: 5
     settings:
       title: Counter
       title_plural: Counters
-      edit_mode: open
+      edit_mode: closed
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: d_p_single_counter
     third_party_settings: {  }
     region: content
   field_d_cta_link:
-    weight: 7
+    weight: 6
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -51,7 +114,7 @@ content:
     type: link_attributes
     region: content
   field_d_long_text:
-    weight: 4
+    weight: 5
     settings:
       rows: 5
       placeholder: ''
@@ -59,7 +122,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: ''
@@ -74,7 +137,7 @@ content:
     type: media_library_widget
     region: content
   field_d_media_icon:
-    weight: 0
+    weight: 4
     settings:
       media_types: {  }
     third_party_settings: {  }

@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_form.field_d_forms
-    - field.field.paragraph.d_p_form.field_d_layout_modifier
     - field.field.paragraph.d_p_form.field_d_long_text
     - field.field.paragraph.d_p_form.field_d_main_title
     - field.field.paragraph.d_p_form.field_d_media_background
@@ -12,20 +11,62 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_form
   module:
     - d_p
+    - field_group
     - media_library
     - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_settings
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_basic:
+      children:
+        - field_d_main_title
+        - field_d_media_background
+        - field_d_media_icon
+        - field_d_long_text
+        - field_d_forms
+      parent_name: group_tabs
+      weight: 10
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Basic
+    group_settings:
+      children:
+        - field_d_settings
+      parent_name: group_tabs
+      weight: 11
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Settings
 id: paragraph.d_p_form.default
 targetEntityType: paragraph
 bundle: d_p_form
 mode: default
 content:
   field_d_forms:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_d_layout_modifier:
     weight: 5
     settings: {  }
     third_party_settings: {  }
@@ -40,7 +81,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -49,20 +90,20 @@ content:
     region: content
   field_d_media_background:
     type: media_library_widget
-    weight: 3
+    weight: 2
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_d_media_icon:
     type: media_library_widget
-    weight: 2
+    weight: 3
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_d_settings:
-    weight: 6
+    weight: 12
     settings: {  }
     third_party_settings: {  }
     type: field_d_p_set_settings

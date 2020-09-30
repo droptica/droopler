@@ -16,19 +16,14 @@ field_page_section:
             -
               path: d_demo/d_demo_engine_car_5.jpg
               alt: Engine
-        field_d_p_si_image_side:
-          type: text_select
-          data: right-wide
         field_d_long_text:
           type: text_long
           data: '<p>We offer a wide range of services for our products. Our experienced team of mechanics can help you repair, overhaul and maintain engines for cars, boats, aircrafts and spaceships.</p>'
-        field_d_background_color:
-          type: text
-          data: '#fff'
         field_d_settings:
           type: field_p_configuration_storage
           custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          side_image_layout: right-wide
     -
       paragraph_type: d_p_group_of_text_blocks
       data:

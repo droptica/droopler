@@ -11,16 +11,78 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_reference_content
   module:
     - d_p
+    - field_group
     - link_attributes
     - media_library
     - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_items
+        - group_settings
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        direction: horizontal
+        id: ''
+        classes: ''
+      label: Tabs
+    group_basic:
+      children:
+        - field_d_main_title
+        - field_d_media_icon
+        - field_d_long_text
+        - field_d_cta_link
+      parent_name: group_tabs
+      weight: 9
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Basic
+    group_items:
+      children:
+        - field_d_p_reference_content
+      parent_name: group_tabs
+      weight: 10
+      format_type: tab
+      region: content
+      format_settings:
+        description: 'Please specify nodes which will be always displayed. Otherwise, the paragraph will show latest nodes.'
+        formatter: closed
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Items
+    group_settings:
+      children:
+        - field_d_settings
+      parent_name: group_tabs
+      weight: 11
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Settings
 id: paragraph.d_p_reference_content.default
 targetEntityType: paragraph
 bundle: d_p_reference_content
 mode: default
 content:
   field_d_cta_link:
-    weight: 4
+    weight: 5
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -37,7 +99,7 @@ content:
     type: link_attributes
     region: content
   field_d_long_text:
-    weight: 2
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
@@ -45,7 +107,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: ''
@@ -53,14 +115,14 @@ content:
     type: string_textfield
     region: content
   field_d_media_icon:
-    weight: 0
+    weight: 3
     settings:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
     region: content
   field_d_p_reference_content:
-    weight: 3
+    weight: 4
     settings:
       match_operator: CONTAINS
       size: 60
@@ -70,7 +132,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_d_settings:
-    weight: 5
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: field_d_p_set_settings
