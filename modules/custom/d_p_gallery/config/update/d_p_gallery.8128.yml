@@ -1,0 +1,97 @@
+core.entity_form_display.paragraph.d_p_gallery.default:
+  add:
+    dependencies:
+      module:
+        - field_group
+    third_party_settings:
+      field_group:
+        group_tabs:
+          children:
+            - group_basic
+            - group_items
+            - group_settings
+          parent_name: ''
+          weight: 0
+          format_type: tabs
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            direction: horizontal
+          label: Tabs
+        group_basic:
+          children:
+            - field_d_main_title
+            - field_d_media_icon
+            - field_d_long_text
+            - field_d_cta_link
+          parent_name: group_tabs
+          weight: 9
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: open
+            required_fields: true
+          label: Basic
+        group_items:
+          children:
+            - field_d_media_image
+          parent_name: group_tabs
+          weight: 10
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Items
+        group_settings:
+          children:
+            - field_d_settings
+          parent_name: group_tabs
+          weight: 11
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Settings
+
+  change:
+    expected:
+      content:
+        field_d_cta_link:
+          weight: 6
+        field_d_long_text:
+          weight: 2
+        field_d_main_title:
+          weight: 1
+        field_d_media_icon:
+          weight: 0
+        field_d_media_image:
+          weight: 4
+        field_d_settings:
+          weight: 5
+
+    new:
+      content:
+        field_d_cta_link:
+          weight: 5
+        field_d_long_text:
+          weight: 4
+        field_d_main_title:
+          weight: 2
+        field_d_media_icon:
+          weight: 3
+        field_d_media_image:
+          weight: 1
+        field_d_settings:
+          weight: 2

@@ -194,19 +194,3 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     }
   }
 }
-
-.theme-invert {
-  &:not(.user-background-defined):not(.user-image-background) > .paragraph--type--d-p-carousel {
-    background-color: $d-p-carousel-background-theme-invert;
-  }
-
-  > .paragraph--type--d-p-carousel {
-    .field--name-field-d-main-title,
-    .field--name-field-d-long-text {
-      &, p {
-        color: $d-p-carousel-theme-invert-text-color;
-      }
-    }
-  }
-
-}

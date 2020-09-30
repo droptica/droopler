@@ -22,12 +22,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<p>We manufacture modern engines for boats and ships. Our experts from the maritime industry are constantly developing our range of products.</p>'
-        field_d_background_color:
-          type: text
-          data: '#fff'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
     -
       paragraph_type: d_p_text_paged
@@ -57,12 +54,9 @@ field_page_section:
         field_d_long_text:
           type: text_long
           data: '<h3> Future B400 </h3> <p>Excellent and powerful engine for speed boats. A wide range of power. Designed and created by a team of experienced mechanics, engineers and marine experts.</p> <ul> <li>Engine performance: 1 x 4 HP / 2.9 kW</li> <li>Fuel type: gasoline</li> <li>Boat type: outboard</li> <li>Max speed: 250 km/h</li> <li>Fuel consumption: 5l / 100 miles</li> </ul>'
-        field_d_background_color:
-          type: text
-          data: '#dddddd'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -78,17 +72,17 @@ field_page_section:
                 data: '<p><ul> <li>Basic servicing</li> <li>Full annual servicing</li> <li>Oil and filter changes</li> </ul></p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+                custom_class: theme-default
             -
               field_d_long_text:
                 type: text_long
                 data: '<p><ul> <li>Transmission fluid inspection</li> <li>Water pump replacement</li> <li>And more ...</li> </ul></p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-invert
+                custom_class: theme-default
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: with-tiles theme-invert header-margin-none padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: with-tiles theme-primary header-margin-none padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           column_count: 2
     -
       paragraph_type: d_p_group_of_text_blocks

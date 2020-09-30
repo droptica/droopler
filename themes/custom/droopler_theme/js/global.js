@@ -58,7 +58,23 @@
         $(this).parent().removeClass('force-show');
         $(this).parent().find(".dropdown-menu").removeClass('force-show');
       } });
-      $body.addClass("d-theme-preceded")
+      $body.addClass("d-theme-preceded");
+
+      // Calculate value for elemenets with dynamic offset top value.
+      $(window).bind('syncDynamicOffsetElements', function () {
+        $('.has-offset-sync').each(function () {
+          var selector = $(this).data('offset-sync-source');
+          var $sourceElement = $(selector);
+          var offset = $sourceElement.offset().top - parseInt($body.css('padding-top'));
+
+          $(this).css({ 'top': offset + 'px'});
+        });
+      }).trigger('syncDynamicOffsetElements');
+
+      $(window).on('resize', Drupal.debounce(function () {
+        $(window).trigger('syncDynamicOffsetElements');
+      }, 100));
+
     }
   };
 
@@ -69,6 +85,26 @@
   Drupal.behaviors.droopler_unpublished = {
     attach: function (context, settings) {
       $('<div>').addClass('unpublished-message').text(Drupal.t('Unpublished')).insertBefore($('.node--unpublished', context));
+    }
+  };
+
+  /**
+   * Initialize tooltip.
+   * @type {{attach: Drupal.behaviors.droopler_tooltip.attach}}
+   */
+  Drupal.behaviors.droopler_tooltip = {
+    attach: function (context, settings) {
+      $('[data-toggle="tooltip"]').tooltip();
+    }
+  };
+
+  /**
+   * Initialize popovers.
+   * @type {{attach: Drupal.behaviors.droopler_popover.attach}}
+   */
+  Drupal.behaviors.droopler_popover = {
+    attach: function (context, settings) {
+      $('[data-toggle="popover"]').popover();
     }
   };
 

@@ -25,26 +25,6 @@ $theme-invert-text-color: $color-cassandra !default;
 $line-background-alter: $color-nestor !default;
 $two-columned-header-line-margin: 0.625rem !default;
 
-// TODO: migrate to new themes.
-.background {
-  &-gray-light {
-    background: $light-gray-background;
-  }
-
-  &-gray-light-2 {
-    background-color: $light-gray-background-2;
-  }
-}
-
-.theme-invert {
-  > .paragraph {
-    .field--type-string,
-    .field--type-text-long {
-      color: $color-cassandra;
-    }
-  }
-}
-
 .full-width {
   .expandable-content {
     width: 100%;
@@ -327,7 +307,6 @@ $two-columned-header-line-margin: 0.625rem !default;
 }
 
 .tile {
-  padding: $tile-padding-top 0 $tile-padding-bottom 0;
   transform: scale(1);
   transition: 0.3s;
 
@@ -345,36 +324,29 @@ $two-columned-header-line-margin: 0.625rem !default;
   }
 
   &.wrapper-d_p_single_text_block {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 100%;
-  }
-
-  .image-background-container {
-    position: absolute;
-    height: 100%;
-    top: 0;
-    right: 0;
-    display: block;
-    z-index: -1;
-
-    &.background-properties {
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-    }
-
-    &.background-image {
-      z-index: -1 !important;
-    }
   }
 
   .d-p-text-block {
     margin-bottom: 0;
   }
 
+  // Override default values.
+  &.padding-top-default {
+    > .paragraph:not(.content-moved-inside),
+    > .content-moved-inside .content-inside-wrapper {
+      padding-top: $tile-padding-top;
+    }
+  }
+  &.padding-bottom-default {
+    > .paragraph:not(.content-moved-inside),
+    > .content-moved-inside .content-inside-wrapper {
+      padding-bottom: $tile-padding-bottom;
+    }
+  }
+
   .paragraph {
+
     .field--name-field-d-main-title {
       text-align: center;
       font-size: $tile-title-font-size-desktop;
@@ -390,7 +362,10 @@ $two-columned-header-line-margin: 0.625rem !default;
 
   .field--type-link {
     a {
-      &, &:active, &:hover {
+      &,
+      &:not(.disabled):active,
+      &:active,
+      &:hover {
         position: absolute;
         left: 0;
         top: 0;
@@ -400,13 +375,9 @@ $two-columned-header-line-margin: 0.625rem !default;
         border: none;
         text-indent: -9999px;
         max-width: none;
+        background: none;
+        border: none;
       }
-    }
-  }
-
-  .d-media-background-wrapper {
-    img {
-      filter: brightness(50%);
     }
   }
 }
@@ -467,6 +438,12 @@ $d-p-themes: map-merge(
       text-bold: $color-troilus,
       set-fields-color: false,
     ),
+    custom: (
+      background: inherit,
+      text: inherit,
+      text-bold: inherit,
+      set-fields-color: true,
+    ),
   ),
   $d-p-themes
 );
@@ -474,10 +451,10 @@ $d-p-themes: map-merge(
 @each $name, $themeSettings in $d-p-themes {
   .theme-#{$name} {
     > .paragraph:not(.content-moved-inside),
+    > div[data-geysir-paragraph-id] > .paragraph:not(.content-moved-inside),
     > .content-moved-inside .content-inside-wrapper {
       background: map-get($themeSettings, "background");
       color: map-get($themeSettings, "text");
-
 
       @if map-get($themeSettings, "text-bold") {
         b,
@@ -504,6 +481,7 @@ $d-p-themes: map-merge(
   Spacings styling.
  */
 $d-p-paddings: () !default;
+$d-p-paddings-mobile: () !default;
 $d-p-paddings-extended: () !default;
 $d-p-paddings: map-merge(
     (
@@ -524,6 +502,16 @@ $d-p-paddings-extended: map-merge(
     $d-p-paddings-extended
 );
 
+$d-p-paddings-mobile: map-merge(
+    (
+      default: 10%,
+      small: 5%,
+      big: 15%,
+      none: 0
+    ),
+    $d-p-paddings-mobile
+);
+
 @each $size, $value in $d-p-paddings {
   @each $placement in (top, bottom) {
     .padding-#{$placement}-#{$size} {
@@ -535,10 +523,23 @@ $d-p-paddings-extended: map-merge(
   }
 }
 
+@include media-breakpoint-down(sm) {
+  @each $size, $value in $d-p-paddings-mobile {
+    @each $placement in (top, bottom) {
+      .padding-#{$placement}-#{$size} {
+        > .paragraph:not(.content-moved-inside),
+        > .paragraph.content-moved-inside .content-inside-wrapper {
+          padding-#{$placement}: $value;
+        }
+      }
+    }
+  }
+}
+
 @include media-breakpoint-up(lg) {
   .landing-page-header {
     .paragraph-sections {
-      > div:first-of-type section, // geysir
+      > .geysir-field-paragraph-wrapper:first-of-type section, // geysir
       > section:first-of-type {
         @each $size, $value in $d-p-paddings-extended {
           &.padding-top-#{$size} {

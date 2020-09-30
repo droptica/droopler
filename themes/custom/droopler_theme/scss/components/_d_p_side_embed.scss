@@ -77,15 +77,19 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
 
 .theme-default {
   .paragraph--type--d-p-side-embed {
+    .embed-side-full,
     .embed-side-right {
-      background: $d-p-side-embed-background-color;
+      .d-p-side-embed-content {
+        background: $d-p-side-embed-background-color;
+      }
     }
     .embed-side-left {
-      background: $d-p-side-embed-background-color-secondary;
+      .d-p-side-embed-content {
+        background: $d-p-side-embed-background-color-secondary;
+      }
     }
 
     .d-p-side-embed-content {
-      background: $d-p-side-embed-background-color;
       color: $d-p-side-embed-text-color;
     }
 
@@ -102,7 +106,7 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     a:not(.btn) {
       color: $d-p-side-embed-link-color;
 
-      @at-root .theme-invert & {
+      @at-root .theme-secondary & {
         color: $d-p-side-embed-link-color-inverted;
       }
 
@@ -113,7 +117,7 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     a:not(.btn) {
       color: $d-p-side-embed-link-color;
 
-      @at-root .theme-invert & {
+      @at-root .theme-secondary & {
         color: $d-p-side-embed-link-color-inverted;
       }
 
@@ -250,31 +254,6 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
         .d-p-side-embed-content-fields {
           padding-left: $d-p-side-embed-half-padding;
           padding-right: ($grid-gutter-width / 2);
-        }
-      }
-    }
-  }
-}
-
-.theme-invert {
-  &:not(.user-background-defined):not(.user-image-background) .d-p-side-embed-content {
-    background: $color-odysseus;
-  }
-  .d-p-side-embed-wrapper {
-    .d-p-side-embed-content {
-      color: $d-p-side-embed-theme-invert-text-color;
-
-      .d-p-side-embed-content-fields {
-        .field--name-field-d-long-text,
-        .field--name-field-d-main-title {
-          color: $d-p-side-embed-theme-invert-text-color;
-        }
-        .field--name-field-d-long-text {
-          @for $index from 1 through 6 {
-            h#{$index}{
-              color: $d-p-side-embed-theme-invert-text-color;
-            }
-          }
         }
       }
     }

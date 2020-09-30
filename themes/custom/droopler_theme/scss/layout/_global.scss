@@ -67,10 +67,6 @@ body {
   width: 0px;
   height: 0px;
 }
-// Higher contrast font color for paragraphs with gray background.
-.background-gray-light-2 {
-  color: $color-acamas;
-}
 
 .paragraph {
   color: $color-hecuba;
@@ -80,29 +76,44 @@ body {
   }
 }
 
+.header-section {
+  article {
+    .paragraph-sections {
+      section {
+        .paragraph {
+          @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+            &--type--d-p-side-image,
+            &--type--d-p-side-embed {
+              padding-top: 0;
+            }
+          }
+
+          @include media-breakpoint-between(md, $navbar-mobile-breakpoint-down) {
+            &--type--d-p-side-image,
+            &--type--d-p-side-embed {
+              .content-inside-wrapper {
+                padding-top: 15%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .landing-page-header {
   position: relative;
+
   .hanging-header {
-    position: relative;
+    position: absolute;
     width: 100%;
     top: 0;
     z-index: 9;
     left: 0;
     right: 0;
-
     @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-      position: absolute;
-      top: 20px
-    }
-  }
-}
-
-.toolbar-tray-open {
-  .landing-page-header {
-    .hanging-header {
-      @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-        top: 90px;
-      }
+      margin-top: 20px;
     }
   }
 }

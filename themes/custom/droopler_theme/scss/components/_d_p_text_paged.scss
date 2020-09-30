@@ -15,7 +15,6 @@ $d-p-text-paged-theme-invert-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
-$d-p-text-paged-first-margin-top: 2% !default;
 
 .theme-default {
   .paragraph--type--d-p-text-paged {
@@ -47,38 +46,21 @@ $d-p-text-paged-first-margin-top: 2% !default;
   }
   .field--type-link {
     text-align: center;
+    margin-top: 1rem;
   }
   .field--name-field-d-long-text {
     p {
       word-wrap: break-word;
       hyphens: auto;
     }
-
+    blockquote > :last-child {
+      margin-bottom: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
     &::before {
       @include decoration-header-line-main-center($d-p-text-paged-line-color, $d-p-text-paged-line-color-inverted)
-    }
-  }
-}
-
-// If this is the first paragraph - decrease top margin.
-.paragraph-sections > section:first-child > .paragraph--type--d-p-text-paged {
-  margin-top: $d-p-text-paged-first-margin-top;
-}
-
-
-.theme-invert {
-  &:not(.user-background-defined):not(.user-image-background) > .paragraph--type--d-p-text-paged {
-    background: $d-p-text-paged-theme-invert-background-color;
-  }
-  > .paragraph--type--d-p-text-paged {
-    color: $d-p-text-paged-theme-invert-text-color;
-
-    .field--name-field-d-long-text,
-    .field--name-field-d-subtitle,
-    .field--name-field-d-main-title {
-      &, p {
-        color: $d-p-text-paged-theme-invert-text-color;
-      }
     }
   }
 }

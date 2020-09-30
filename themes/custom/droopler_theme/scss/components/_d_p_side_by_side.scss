@@ -10,7 +10,7 @@ $d-p-side-by-side-line-color-inverted: $color-nestor !default;
 
 // Margins, paddings and sizing.
 $d-p-side-by-side-padding-y: 5% !default;
-$d-p-side-by-side-header-padding: 5% !default;
+$d-p-side-by-side-header-padding: 2.5% !default;
 
 $d-p-side-by-side-subtitle-margin-y: 2.125rem !default;
 
@@ -18,6 +18,10 @@ $d-p-side-by-side-content-padding-x: 7vw !default;
 $d-p-side-by-side-text-box-padding-y: $grid-gutter-width !default;
 $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
 $d-p-side-by-side-image-background-padding-y: 130px !default;
+
+// Other settings
+$d-p-side-by-side-image-single_text_block-themed-background-opacity: 0.2 !default;
+$d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
 
 // Override default values.
 .padding-top-default {
@@ -41,6 +45,10 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   .side-header {
     .field:first-child {
       padding-top: $d-p-side-by-side-header-padding;
+
+      @include media-breakpoint-up(xl) {
+        padding-top: 0;
+      }
     }
 
     .field--name-field-d-main-title {
@@ -82,6 +90,33 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
       }
     }
 
+    @each $name, $themeSettings in $d-p-side-by-side-image-single_text_block-themes {
+      &.theme-#{$name} {
+        &::before {
+          content: "";
+          top: 0;
+          right: 0;
+          height: 100%;
+          width: 100vw;
+          position: absolute;
+          background-color: map-get($themeSettings, "background");
+
+          @include media-breakpoint-up(sm) {
+            width: 50vw;
+          }
+        }
+
+        .d-media-background-wrapper {
+          opacity:$d-p-side-by-side-image-single_text_block-themed-background-opacity;
+        }
+
+        .d-p-text-block {
+          background-color: transparent;
+          z-index: 0;
+        }
+      }
+    }
+
     .d-p-text-block {
       margin-bottom: 0;
       width: 100%;
@@ -96,6 +131,13 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
       padding: $d-p-side-by-side-image-background-padding-y 0;
       &::before {
         content: none;
+      }
+      @each $name, $themeSettings in $d-p-side-by-side-image-single_text_block-themes {
+        &.theme-#{$name} {
+          &::before {
+            content: "";
+          }
+        }
       }
       .image-background-container {
         position: absolute;
@@ -125,6 +167,15 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
         right: 0;
       }
     }
+    @each $name, $themeSettings in $d-p-side-by-side-image-single_text_block-themes {
+      .wrapper-d_p_single_text_block.theme-#{$name} {
+        &::before {
+          @include media-breakpoint-up(sm) {
+            margin-left: calc(100% - 50vw);
+          }
+        }
+      }
+    }
     .d-media-background-wrapper {
       @include media-breakpoint-up(sm) {
         margin-left: calc(100% - 50vw);
@@ -135,6 +186,20 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
     .user-image-background {
       .image-background-container {
         left: 0;
+      }
+    }
+    @each $name, $themeSettings in $d-p-side-by-side-image-single_text_block-themes {
+      .wrapper-d_p_single_text_block.theme-#{$name} {
+        &::before {
+          @include media-breakpoint-up(sm) {
+            margin-right: calc(100% - 50vw);
+          }
+        }
+      }
+    }
+    .d-media-background-wrapper {
+      @include media-breakpoint-up(sm) {
+        margin-right: calc(100% - 50vw);
       }
     }
   }
@@ -151,6 +216,7 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
   .expandable-content {
     overflow: hidden;
     position: relative;
+    z-index: 0;
   }
 
   .item-1,

@@ -29,6 +29,10 @@ $d-p-form-background-opacity: 0.4 !default;
 
     .field--name-field-d-main-title {
       color: $d-p-form-header-color;
+
+      &::after {
+        @include decoration-header-line-main-center($d-p-form-line-color-inverted, $d-p-form-line-color);
+      }
     }
   }
 }
@@ -144,9 +148,6 @@ $d-p-form-background-opacity: 0.4 !default;
   .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
-    &::after {
-      @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
-    }
   }
 
   .field--name-field-d-media-icon {
@@ -217,4 +218,10 @@ $d-p-form-background-opacity: 0.4 !default;
       }
     }
   }
+}
+
+#geysir-modal .form-color {
+  width: 60px;
+  height: 30px;
+  padding: 0;
 }
