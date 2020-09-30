@@ -27,9 +27,9 @@ third_party_settings:
       format_type: tabs
       region: content
       format_settings:
+        direction: horizontal
         id: ''
         classes: ''
-        direction: vertical
       label: Tabs
     group_basic:
       children:
@@ -56,11 +56,11 @@ third_party_settings:
       format_type: tab
       region: content
       format_settings:
-        id: ''
-        classes: ''
-        description: ''
+        description: 'Please specify nodes which will be always displayed. Otherwise, the paragraph will show latest nodes.'
         formatter: closed
         required_fields: true
+        id: ''
+        classes: ''
       label: Items
     group_settings:
       children:

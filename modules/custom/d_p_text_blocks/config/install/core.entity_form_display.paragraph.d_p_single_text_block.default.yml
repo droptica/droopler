@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.d_p_single_text_block.field_d_background_color
     - field.field.paragraph.d_p_single_text_block.field_d_cta_link
     - field.field.paragraph.d_p_single_text_block.field_d_long_text
     - field.field.paragraph.d_p_single_text_block.field_d_main_title
@@ -69,14 +68,6 @@ targetEntityType: paragraph
 bundle: d_p_single_text_block
 mode: default
 content:
-  field_d_background_color:
-    weight: 7
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_d_cta_link:
     weight: 5
     settings:

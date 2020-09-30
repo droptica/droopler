@@ -64,27 +64,31 @@
  * @see html.html.twig
  */
 #}
-{% set header_layout = node.field_header_layout.value %}
 {% set classes = [
   'navbar-wrapper',
 ] %}
-{% set lp_header_class = (header_layout == 'header_with_cta') ? 'landing-page-header' %}
-<div id="page-wrapper" class="page-wrapper {{ lp_header_class }}">
-  <header id="header" class="header" role="banner" aria-label="{{ 'Site header'|t }}">
+
+{% set header_layout = node.field_header_layout.value %}
+{% set is_cta_header = header_layout == 'header_with_cta' %}
+
+<div id="page-wrapper" class="page-wrapper {% if is_cta_header %}landing-page-header{% endif %}">
+  <header id="header" class="header" role="banner"
+          aria-label="{{ 'Site header'|t }}">
     {% block head %}
       {% if header_layout != 'header_disabled' %}
         <nav{{ navbar_attributes.addClass(classes) }}>
           {% set header_classes = [
             'container',
             'no-padding-md',
-            (header_layout == 'header_with_cta') ? 'hanging-header',
+            is_cta_header ? 'hanging-header',
+            is_cta_header ? 'has-offset-sync',
             page.admin_tabs ? 'alert-ladning-header',
           ] %}
-          <div class="{{ header_classes | join(' ') }}">
+          <div class="{{ header_classes | join(' ') }}" {% if is_cta_header %}data-offset-sync-source="#main-wrapper"{% endif %}>
             <div class="navbar-brand d-flex align-items-center">
               {{ page.header }}
             </div>
-            {% if (header_layout == 'header_with_cta') %}
+            {% if (is_cta_header) %}
               {% if cta_button is not empty %}
                 <div class="d-content-cta-wrapper">
                   {{ cta_button | render }}
@@ -142,7 +146,7 @@
         <div class="row clearfix">
           {{ page.breadcrumb }}
           <main{{ main_content_attributes }}>
-            <section class="section">
+            <section{{ section_attributes }}>
               <a id="main-content" tabindex="-1"></a>
               {{ page.content }}
             </section>

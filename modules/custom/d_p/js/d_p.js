@@ -11,7 +11,7 @@
       var container = $('.d-p-side-by-side .items', context);
       container.find('.items-wrapper .list-item-wrapper').each(function (key, value) {
         var $this = $(this);
-        if (typeof($this.find('.image-background-container'))) {
+        if ($this.find('.image-background-container').length) {
           $this.find('.user-image-background').css('background-color', 'unset');
         }
       });

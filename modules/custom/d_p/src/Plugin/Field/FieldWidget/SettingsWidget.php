@@ -54,9 +54,6 @@ class SettingsWidget extends WidgetBase {
     'd_p_tiles',
   ];
 
-  /**
-   *
-   */
   private static function getConfigOptions() {
     return [
       self::CSS_CLASS_SETTING_NAME => [
@@ -68,6 +65,7 @@ class SettingsWidget extends WidgetBase {
           'full-width' => [
             'title' => t('Full width'),
             'description' => t('Stretch this paragraph to 100% browser width.'),
+            'weight' => 0,
             'bundles' => [
               'paragraph' => [
                 'd_p_group_of_text_blocks',
@@ -79,6 +77,7 @@ class SettingsWidget extends WidgetBase {
           'half-transparent' => [
             'title' => t('Half transparent'),
             'description' => t('Moves the text to the left and adds a transparent overlay.'),
+            'weight' => 10,
             'bundles' => [
               'paragraph' => [
                 'd_p_banner',
@@ -88,6 +87,7 @@ class SettingsWidget extends WidgetBase {
           'with-divider' => [
             'title' => t('Add dividers'),
             'description' => t('Add vertical lines between all elements.'),
+            'weight' => 20,
             'bundles' => [
               'paragraph' => [
                 'd_p_carousel',
@@ -97,6 +97,7 @@ class SettingsWidget extends WidgetBase {
           'slider-desktop-off' => [
             'title' => t('Turn off slider on desktop'),
             'description' => t('The slider will be visible only on tablet and mobile devices.'),
+            'weight' => 30,
             'bundles' => [
               'paragraph' => [
                 'd_p_carousel',
@@ -106,6 +107,7 @@ class SettingsWidget extends WidgetBase {
           'with-grid' => [
             'title' => t('Enable grid'),
             'description' => t('Adds a thin grid around all boxes.'),
+            'weight' => 40,
             'bundles' => [
               'paragraph' => [
                 'd_p_group_of_text_blocks',
@@ -116,6 +118,7 @@ class SettingsWidget extends WidgetBase {
           'tile' => [
             'title' => t('Turn into tile'),
             'description' => t('Stretch the background and turn the box into tile.'),
+            'weight' => 50,
             'bundles' => [
               'paragraph' => [
                 'd_p_single_text_block',
@@ -125,6 +128,7 @@ class SettingsWidget extends WidgetBase {
           'with-tiles' => [
             'title' => t('Enable tiles'),
             'description' => t('Enables tile view. You have to set all child boxes to tiles by adjusting their settings.'),
+            'weight' => 60,
             'bundles' => [
               'paragraph' => [
                 'd_p_group_of_text_blocks',
@@ -134,6 +138,7 @@ class SettingsWidget extends WidgetBase {
           'header-into-columns' => [
             'title' => t('Paragraph header in two columns'),
             'description' => t('Enable column mode: header on the left and description on the right.'),
+            'weight' => 70,
             'bundles' => [
               'paragraph' => [
                 'd_p_group_of_text_blocks',
@@ -143,6 +148,7 @@ class SettingsWidget extends WidgetBase {
           'with-price' => [
             'title' => t('Enable price'),
             'description' => t('Show a dynamic price on the right, it requires a JS script to connect to a data source.'),
+            'weight' => 80,
             'bundles' => [
               'paragraph' => [
                 'd_p_single_text_block',
@@ -152,6 +158,7 @@ class SettingsWidget extends WidgetBase {
           'stripe-sidebar' => [
             'title' => t('Show the price in the sidebar'),
             'description' => t('Works only if "Enable price" is turned on. Enables a black sidebar on the right.'),
+            'weight' => 90,
             'bundles' => [
               'paragraph' => [
                 'd_p_single_text_block',
@@ -167,7 +174,9 @@ class SettingsWidget extends WidgetBase {
               'theme-primary' => t('Primary'),
               'theme-secondary' => t('Secondary'),
               'theme-gray' => t('Gray'),
+              'theme-custom' => t('Custom'),
             ],
+            'weight' => 100,
             'bundles' => [
               'paragraph' => ['all'],
             ],
@@ -183,6 +192,7 @@ class SettingsWidget extends WidgetBase {
               'margin-top-big' => t('Big'),
               'margin-top-none' => t('None'),
             ],
+            'weight' => 110,
             'bundles' => [
               'paragraph' => self::$spacingBundles,
             ],
@@ -198,6 +208,7 @@ class SettingsWidget extends WidgetBase {
               'margin-bottom-big' => t('Big'),
               'margin-bottom-none' => t('None'),
             ],
+            'weight' => 120,
             'bundles' => [
               'paragraph' => self::$spacingBundles,
             ],
@@ -212,6 +223,7 @@ class SettingsWidget extends WidgetBase {
               'padding-top-big' => t('Big'),
               'padding-top-none' => t('None'),
             ],
+            'weight' => 130,
             'bundles' => [
               'paragraph' => self::$spacingBundles,
             ],
@@ -226,6 +238,7 @@ class SettingsWidget extends WidgetBase {
               'padding-bottom-big' => t('Big'),
               'padding-bottom-none' => t('None'),
             ],
+            'weight' => 140,
             'bundles' => [
               'paragraph' => self::$spacingBundles,
             ],
@@ -386,6 +399,7 @@ class SettingsWidget extends WidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
     $config = !empty($value) ? json_decode($value) : [];
+    $field_name = $items->getFieldDefinition()->getName();
 
     // Set up the form element for this widget.
     $element += [
@@ -445,6 +459,7 @@ class SettingsWidget extends WidgetBase {
               }
               $element[$class]['#options'] = $modifier['options'];
               $element[$class]['#default_value'] = $default_select_value;
+              $element[$class]['#weight'] = $modifier['weight'] ?? 0;
             }
           }
 
@@ -501,6 +516,43 @@ class SettingsWidget extends WidgetBase {
       }
     }
 
+    $tree = $element['#field_parents'];
+    $tree[] = $field_name;
+    $selector_string = array_shift($tree);
+    if (!empty($tree)) {
+      foreach ($tree as $item) {
+        $selector_string .= "[$item]";
+      }
+    }
+
+    $element['background-theme-custom'] = [
+      '#type' => 'd_color',
+      '#title' => 'Background color',
+      '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->background : '#ffffff',
+      '#weight' => 101,
+      '#states' => [
+        'visible' => [
+          ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [
+            'value' => 'theme-custom',
+          ],
+        ],
+      ],
+    ];
+
+    $element['text-theme-custom'] = [
+      '#type' => 'd_color',
+      '#title' => 'Text color',
+      '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->text : '#000000',
+      '#weight' => 102,
+      '#states' => [
+        'visible' => [
+          ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [
+            'value' => 'theme-custom',
+          ],
+        ],
+      ],
+    ];
+
     return ['value' => $element];
   }
 
@@ -517,31 +569,33 @@ class SettingsWidget extends WidgetBase {
       if (!$this->inBundle($options['bundles'])) {
         continue;
       }
-
-      switch ($options['type']) {
-        case 'css':
-          $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
-          foreach ($options['modifiers'] as $class => $modifier) {
-            $modifier_value = $element[$class]['#value'] ?? NULL;
-            if ($modifier_value && $this->inBundle($modifier['bundles'])) {
-              switch ($modifier['type']) {
-                case 'select':
-                  $classes[] = $modifier_value;
-                  break;
-
-                default:
-                  $classes[] = $class;
-                  break;
-              }
+      if ($options['type'] === 'css') {
+        $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
+        foreach ($options['modifiers'] as $class => $modifier) {
+          $modifier_value = $element[$class]['#value'] ?? NULL;
+          if ($modifier_value && $this->inBundle($modifier['bundles'])) {
+            switch ($modifier['type']) {
+              case 'select':
+                $classes[] = $modifier_value;
+                break;
+              default:
+                $classes[] = $class;
+                break;
             }
           }
-          $classes = array_unique($classes);
-          $values[$key] = join(' ', $classes);
-          break;
-
-        default:
-          $values[$key] = $value;
+        }
+        $classes = array_unique($classes);
+        $values[$key] = join(' ', $classes);
       }
+      else {
+        $values[$key] = $value;
+      }
+    }
+    if ($element['paragraph-theme']['#value'] === 'theme-custom') {
+      $values['custom_theme_colors'] = [
+        'background' => $element['background-theme-custom']['#value'],
+        'text' => $element['text-theme-custom']['#value'],
+      ];
     }
     $form_state->setValueForElement($element, json_encode($values));
   }
