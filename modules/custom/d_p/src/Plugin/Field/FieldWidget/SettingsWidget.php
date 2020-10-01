@@ -69,7 +69,7 @@ class SettingsWidget extends WidgetBase {
    * Get configuration options for fields in paragraph settings.
    */
   private static function getConfigOptions() {
-    return [
+    $form = [
       self::CSS_CLASS_SETTING_NAME => [
         'title' => t('Additional classes for the paragraph'),
         'description' => t('Please separate multiple classes by spaces.'),
@@ -434,6 +434,8 @@ class SettingsWidget extends WidgetBase {
         ],
       ],
     ];
+    
+    return \Drupal::moduleHandler()->alter('d_settings', $form);
   }
 
   /**
