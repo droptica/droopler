@@ -434,8 +434,9 @@ class SettingsWidget extends WidgetBase {
         ],
       ],
     ];
-    
-    return \Drupal::moduleHandler()->alter('d_settings', $form);
+
+    \Drupal::moduleHandler()->alter('d_settings', $form);
+    return $form;
   }
 
   /**
