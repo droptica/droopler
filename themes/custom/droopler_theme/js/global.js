@@ -59,22 +59,6 @@
         $(this).parent().find(".dropdown-menu").removeClass('force-show');
       } });
       $body.addClass("d-theme-preceded");
-
-      // Calculate value for elemenets with dynamic offset top value.
-      $(window).bind('syncDynamicOffsetElements', function () {
-        $('.has-offset-sync').each(function () {
-          var selector = $(this).data('offset-sync-source');
-          var $sourceElement = $(selector);
-          var offset = $sourceElement.offset().top - parseInt($body.css('padding-top'));
-
-          $(this).css({ 'top': offset + 'px'});
-        });
-      }).trigger('syncDynamicOffsetElements');
-
-      $(window).on('resize', Drupal.debounce(function () {
-        $(window).trigger('syncDynamicOffsetElements');
-      }, 100));
-
     }
   };
 

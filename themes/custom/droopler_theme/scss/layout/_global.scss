@@ -108,12 +108,16 @@ body {
   .hanging-header {
     position: absolute;
     width: 100%;
-    top: 0;
+    top: 20px;
     z-index: 9;
     left: 0;
     right: 0;
-    @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
-      margin-top: 20px;
+  }
+
+  .d-content-cta-wrapper {
+    &, .btn {
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
 }

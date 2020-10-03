@@ -536,17 +536,15 @@ $d-p-paddings-mobile: map-merge(
   }
 }
 
-@include media-breakpoint-up(lg) {
-  .landing-page-header {
-    .paragraph-sections {
-      > .geysir-field-paragraph-wrapper:first-of-type section, // geysir
-      > section:first-of-type {
-        @each $size, $value in $d-p-paddings-extended {
-          &.padding-top-#{$size} {
-            > .paragraph:not(.content-moved-inside),
-            > .content-moved-inside .content-inside-wrapper {
-              padding-top: $value;
-            }
+.landing-page-header {
+  .paragraph-sections {
+    > .geysir-field-paragraph-wrapper:first-of-type section, // geysir
+    > section:first-of-type {
+      @each $size, $value in $d-p-paddings-extended {
+        &.padding-top-#{$size} {
+          > .paragraph:not(.content-moved-inside),
+          > .content-moved-inside .content-inside-wrapper {
+            padding-top: $value;
           }
         }
       }
