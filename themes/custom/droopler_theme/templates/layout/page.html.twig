@@ -58,6 +58,8 @@
  * - navbar_top_attributes: Items for the header region.
  * - navbar_attributes: Items for the header region.
  * - content_attributes: Items for the header region.
+ * - page_attributes: Attributes applied to the page main wrapping tag.
+ * - section_attributes: Attributes applied to the page section tag.
  *
  * @see template_preprocess_page()
  * @see droopler_theme_preprocess_page()
@@ -68,60 +70,10 @@
   'navbar-wrapper',
 ] %}
 
-{% set header_layout = node.field_header_layout.value %}
-{% set is_cta_header = header_layout == 'header_with_cta' %}
+<div{{ page_attributes }}>
 
-{% set header_classes = [
-  'container',
-  'no-padding-md',
-  is_cta_header ? 'hanging-header',
-  page.admin_tabs ? 'alert-ladning-header',
-] %}
-
-{# Header section #}
-{% set header %}
-  {% block head %}
-    <header id="header" class="header" role="banner"
-            aria-label="{{ 'Site header'|t }}">
-      <nav{{ navbar_attributes.addClass(classes) }}>
-        <div class="{{ header_classes | join(' ') }}">
-          <div class="navbar-brand d-flex align-items-center">
-            {{ page.header }}
-          </div>
-          {% if is_cta_header %}
-            {% if cta_button is not empty %}
-              <div class="d-content-cta-wrapper">
-                {{ cta_button | render }}
-              </div>
-            {% endif %}
-          {% else %}
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <nav class="navbar navbar-expand-lg main-navbar px-0 collapse ml-auto flex-column d-lg-flex" id="navbar-nav">
-              <div class="navbar-inner d-flex">
-                {% if page.secondary_menu %}
-                  <div class="secondary-menu-region">{{ page.secondary_menu }}</div>
-                {% endif %}
-                {% if page.primary_menu %}
-                  <div class="menu-region">{{ page.primary_menu }}</div>
-                {% endif %}
-                {% if  page.lang_menu %}
-                  <div class="lang-region">{{ page.lang_menu }}</div>
-                {% endif %}
-              </div>
-            </nav>
-          {% endif %}
-        </div>
-      </nav>
-    </header>
-  {% endblock %}
-{% endset %}
-
-<div id="page-wrapper" class="page-wrapper {% if is_cta_header %}landing-page-header{% endif %}">
-
-  {% if header_layout != 'header_disabled' and not is_cta_header  %}
-    {{ header }}
+  {% if not is_disabled_header and not is_cta_header %}
+    {% include '@droopler_theme/includes/header.html.twig' %}
   {% endif %}
 
   {% if page.highlighted %}
@@ -157,7 +109,7 @@
               {% if is_cta_header %}
                 {{ page.content.messages }}
                 <div class="position-relative">
-                  {{ header }}
+                  {% include '@droopler_theme/includes/header.html.twig' %}
                   {{ page.content|without('messages') }}
                 </div>
               {% else %}
