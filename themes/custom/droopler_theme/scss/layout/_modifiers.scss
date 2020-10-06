@@ -492,15 +492,6 @@ $d-p-paddings: map-merge(
     ),
     $d-p-paddings
 );
-$d-p-paddings-extended: map-merge(
-    (
-      default: 10%,
-      small: 12%,
-      big: 14%,
-      none: 8%
-    ),
-    $d-p-paddings-extended
-);
 
 $d-p-paddings-mobile: map-merge(
     (
@@ -530,22 +521,6 @@ $d-p-paddings-mobile: map-merge(
         > .paragraph:not(.content-moved-inside),
         > .paragraph.content-moved-inside .content-inside-wrapper {
           padding-#{$placement}: $value;
-        }
-      }
-    }
-  }
-}
-
-.landing-page-header {
-  .paragraph-sections {
-    > .geysir-field-paragraph-wrapper:first-of-type section, // geysir
-    > section:first-of-type {
-      @each $size, $value in $d-p-paddings-extended {
-        &.padding-top-#{$size} {
-          > .paragraph:not(.content-moved-inside),
-          > .content-moved-inside .content-inside-wrapper {
-            padding-top: $value;
-          }
         }
       }
     }
