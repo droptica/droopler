@@ -172,13 +172,16 @@ class ParagraphModifiersHelper {
   /**
    * Returns modifier if available.
    *
-   * @param $name
+   * @param mixed $name
+   *   Modifier name.
+   * @param mixed|null $default
+   *   Default value to use.
    *
-   * @return |null
-   *   Modifier or NULL if not found or empty.
+   * @return mixed|null
+   *   Modifier value or default if not found or empty.
    */
-  public function getModifier($name) {
-    return $this->modifiers->$name ?? NULL;
+  public function getModifier($name, $default = NULL) {
+    return $this->modifiers->$name ?? $default;
   }
 
   /**

@@ -40,23 +40,30 @@ function d_p_carousel_preprocess_field(array &$variables) {
          */
         $paragraph = $variables['element']['#object'];
         $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
-        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME);
-        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME);
-        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME);
 
-        $variables['column_classes'] = [
-          'col-md-' . floor(12 / $columns_md),
-          'col-sm-' . floor(12 / $columns_sm),
-          'col-' . floor(12 / $columns_xs),
+        $columns = [
+          'md' => SettingsWidget::COLUMN_COUNT_SETTING_NAME,
+          'sm' => SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME,
+          'xs' => SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME,
         ];
+
+        $columns_values = [];
+        $variables['column_classes'] = [];
+        $grid = 12;
+
+        foreach ($columns as $breakpoint => $config_name) {
+          $default_value = SettingsWidget::getConfigOptionDefaultValue($config_name);
+          $value = $paragraph_modifiers_helper->getModifier($config_name, $default_value);
+          $columns_values['columns_' . $breakpoint] = $value;
+
+          $breakpoint_suffix = $breakpoint === 'xs' ? '' : $breakpoint . '-';
+          $variables['column_classes'][] = 'col-' . $breakpoint_suffix . floor($grid / $value);
+        }
+
         if ($paragraph_modifiers_helper->hasModifier('slider-desktop-off')) {
           $variables['attributes']['class'][] = 'd-md-none';
         }
-        $variables['#attached']['drupalSettings']['d_p_carousel'][$paragraph->id()] = [
-          'columns_md' => $columns_md,
-          'columns_sm' => $columns_sm,
-          'columns_xs' => $columns_xs,
-        ];
+        $variables['#attached']['drupalSettings']['d_p_carousel'][$paragraph->id()] = $columns_values;
       }
     }
   }
