@@ -28,6 +28,9 @@
 #media-library-wrapper,
 #geysir-modal,
 #geysir-modal-form {
+  .horizontal-tabs {
+    background: $white;
+  }
   .button-override {
     @include make-btn;
     @include button-variant($background: $primary, $border: $primary);
@@ -60,6 +63,10 @@
   }
   .paragraph-form .form-actions {
     margin-bottom: 1rem;
+  }
+  .paragraphs-collapsed-description:after {
+    background: $color-paris;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, $color-paris 100%);
   }
   .tabledrag-handle .form-actions {
     margin-bottom: 15px;
