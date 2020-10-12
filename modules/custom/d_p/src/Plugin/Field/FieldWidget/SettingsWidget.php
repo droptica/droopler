@@ -729,4 +729,19 @@ class SettingsWidget extends WidgetBase {
     return $defaults;
   }
 
+  /**
+   * Get the default value for config option.
+   *
+   * @param string $option_name
+   *   Config option name.
+   *
+   * @return mixed|null
+   *   Option default value, null if not found.
+   */
+  public static function getConfigOptionDefaultValue(string $option_name) {
+    $config = self::getConfigOptions();
+
+    return $config[$option_name]['default'] ?? NULL;
+  }
+
 }
