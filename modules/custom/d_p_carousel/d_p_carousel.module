@@ -60,9 +60,6 @@ function d_p_carousel_preprocess_field(array &$variables) {
           $variables['column_classes'][] = 'col-' . $breakpoint_suffix . floor($grid / $value);
         }
 
-        if ($paragraph_modifiers_helper->hasModifier('slider-desktop-off')) {
-          $variables['attributes']['class'][] = 'd-md-none';
-        }
         $variables['#attached']['drupalSettings']['d_p_carousel'][$paragraph->id()] = $columns_values;
       }
     }
