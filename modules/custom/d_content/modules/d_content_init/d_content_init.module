@@ -271,16 +271,9 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       break;
 
     case 'field_p_configuration_storage':
-      $data = [];
-      if (!empty($value['custom_class'])) {
-        $data += ['custom_class' => $value['custom_class']];
-      }
-      if (!empty($value['heading_type'])) {
-        $data += ['heading_type' => $value['heading_type']];
-      }
-      if (!empty($value['column_count'])) {
-        $data += ['column_count' => $value['column_count']];
-      }
+      $data = $value;
+      unset($data['type']);
+
       if (!empty($data)) {
         $entity->set($name, json_encode($data));
       }

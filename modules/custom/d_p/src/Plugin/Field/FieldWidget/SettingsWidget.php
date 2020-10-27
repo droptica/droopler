@@ -108,16 +108,6 @@ class SettingsWidget extends WidgetBase {
               ],
             ],
           ],
-          'slider-desktop-off' => [
-            'title' => t('Turn off slider on desktop'),
-            'description' => t('The slider will be visible only on tablet and mobile devices.'),
-            'weight' => 30,
-            'bundles' => [
-              'paragraph' => [
-                'd_p_carousel',
-              ],
-            ],
-          ],
           'with-grid' => [
             'title' => t('Enable grid'),
             'description' => t('Adds a thin grid around all boxes.'),

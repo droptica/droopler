@@ -154,12 +154,6 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
           align-items: center;
           justify-content: center;
 
-          @include media-breakpoint-up(sm) {
-            @at-root .slider-desktop-off & {
-              height: auto;
-            }
-          }
-
           @include media-breakpoint-down(sm) {
             max-height: $d-p-carousel-item-mobile-image-height;
           }
