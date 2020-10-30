@@ -34,9 +34,9 @@ function d_p_text_blocks_preprocess_field(&$variables) {
       if ($variables['field_name'] == 'field_d_p_tb_block_reference') {
 
         $paragraph_modifiers_helper = new ParagraphModifiersHelper($variables['element']['#object']);
-        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME);
-        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME);
-        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME);
+        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME, 3);
+        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME, 1);
+        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME, 1);
         // Enable grid setting.
         if ($paragraph_modifiers_helper->hasModifier('with-grid')) {
           set_columns_sizes($variables['items'], ['md' => $columns_md, 'sm' => $columns_sm, 'xs' => $columns_xs]);
