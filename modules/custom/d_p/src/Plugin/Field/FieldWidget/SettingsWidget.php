@@ -78,6 +78,7 @@ class SettingsWidget extends WidgetBase {
         'modifiers' => [
           'full-width' => [
             'title' => t('Full width'),
+            'type' => 'checkbox',
             'description' => t('Stretch this paragraph to 100% browser width.'),
             'weight' => 0,
             'bundles' => [
@@ -90,6 +91,7 @@ class SettingsWidget extends WidgetBase {
           ],
           'half-transparent' => [
             'title' => t('Half transparent'),
+            'type' => 'checkbox',
             'description' => t('Moves the text to the left and adds a transparent overlay.'),
             'weight' => 10,
             'bundles' => [
@@ -100,6 +102,7 @@ class SettingsWidget extends WidgetBase {
           ],
           'with-divider' => [
             'title' => t('Add dividers'),
+            'type' => 'checkbox',
             'description' => t('Add vertical lines between all elements.'),
             'weight' => 20,
             'bundles' => [
@@ -110,6 +113,7 @@ class SettingsWidget extends WidgetBase {
           ],
           'with-grid' => [
             'title' => t('Enable grid'),
+            'type' => 'checkbox',
             'description' => t('Adds a thin grid around all boxes.'),
             'weight' => 40,
             'bundles' => [
@@ -121,6 +125,7 @@ class SettingsWidget extends WidgetBase {
           ],
           'tile' => [
             'title' => t('Turn into tile'),
+            'type' => 'checkbox',
             'description' => t('Stretch the background and turn the box into tile.'),
             'weight' => 50,
             'bundles' => [
@@ -131,6 +136,7 @@ class SettingsWidget extends WidgetBase {
           ],
           'with-tiles' => [
             'title' => t('Enable tiles'),
+            'type' => 'checkbox',
             'description' => t('Enables tile view. You have to set all child boxes to tiles by adjusting their settings.'),
             'weight' => 60,
             'bundles' => [
@@ -141,6 +147,7 @@ class SettingsWidget extends WidgetBase {
           ],
           'header-into-columns' => [
             'title' => t('Paragraph header in two columns'),
+            'type' => 'checkbox',
             'description' => t('Enable column mode: header on the left and description on the right.'),
             'weight' => 70,
             'bundles' => [
@@ -151,6 +158,7 @@ class SettingsWidget extends WidgetBase {
           ],
           'with-price' => [
             'title' => t('Enable price'),
+            'type' => 'checkbox',
             'description' => t('Show a dynamic price on the right, it requires a JS script to connect to a data source.'),
             'weight' => 80,
             'bundles' => [
@@ -161,6 +169,7 @@ class SettingsWidget extends WidgetBase {
           ],
           'stripe-sidebar' => [
             'title' => t('Show the price in the sidebar'),
+            'type' => 'checkbox',
             'description' => t('Works only if "Enable price" is turned on. Enables a black sidebar on the right.'),
             'weight' => 90,
             'bundles' => [
@@ -498,7 +507,7 @@ class SettingsWidget extends WidgetBase {
               $default_value = 1;
             }
 
-            $element_type = !empty($modifier['type']) ? $modifier['type'] : 'checkbox';
+            $element_type = $modifier['type'] ?? 'checkbox';
             $element[$class] = [
               '#type' => $element_type,
               '#description' => $modifier['description'] ?? '',
@@ -507,13 +516,8 @@ class SettingsWidget extends WidgetBase {
               '#attributes' => ['data-modifier' => $class],
             ];
             if ($modifier['type'] == 'select') {
-              if ($modifier['default']) {
-                $default_select_value = $modifier['default'];
-              }
-              else {
-                // First element as default.
-                $default_select_value = key($modifier['options']);
-              }
+              $default_select_value = $modifier['default'] ?? key($modifier['options']);
+
               foreach ($modifier['options'] as $theme_class => $data) {
                 $theme_class_key = array_search($theme_class, $classes);
                 if ($theme_class_key !== FALSE) {
