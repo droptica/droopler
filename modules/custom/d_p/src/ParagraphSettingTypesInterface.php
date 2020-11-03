@@ -9,8 +9,6 @@ namespace Drupal\d_p;
  */
 interface ParagraphSettingTypesInterface {
 
-  const SETTINGS_FIELD_NAME = 'field_d_settings';
-
   const CSS_CLASS_SETTING_NAME = 'custom_class';
 
   const HEADING_TYPE_SETTING_NAME = 'heading_type';

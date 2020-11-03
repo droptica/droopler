@@ -57,10 +57,10 @@ class ParagraphSettingsValidation {
    *   Paragraph bundle id, defaults to null.
    */
   protected static function getParentParagraphBundleId(array $element, FormStateInterface $form_state): ?string {
-    $settings_field_name = ParagraphSettingTypesInterface::SETTINGS_FIELD_NAME;
-    $parent_paragraph_position = array_search($settings_field_name, $element['#array_parents']);
-    $form_parents = array_slice($element['#array_parents'], 0, $parent_paragraph_position - 1);
+    $parents_reversed = array_reverse($element['#array_parents'], TRUE);
+    $paragraph_subform_position = array_search('subform', $parents_reversed);
 
+    $form_parents = array_slice($element['#array_parents'], 0, count($element['#array_parents']) - $paragraph_subform_position);
     $parent_paragraph_form_element = NestedArrayHelper::getParentElement($form_state->getCompleteForm(), $form_parents);
 
     return $parent_paragraph_form_element['#paragraph_type'] ?? NULL;
