@@ -38,9 +38,19 @@ class ConfigurationStorage extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
+  public function getValue() {
+    $values = parent::getValue();
+
+    return json_decode($values['value'] ?? []);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function isEmpty() {
     $value = $this->get('value')->getValue();
-    return $value === NULL || $value === '';
+
+    return $value === NULL || $value === '' || $value === [];
   }
 
   /**

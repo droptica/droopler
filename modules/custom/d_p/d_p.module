@@ -74,7 +74,7 @@ function d_p_preprocess_paragraph(&$variables) {
         continue;
       }
 
-      $settings = json_decode($field->first()->get('value')->getValue());
+      $settings = $field->first()->getValue();
 
       if (!isset($settings->custom_class) || !isset($settings->custom_theme_colors)
         || strpos($settings->custom_class, 'theme-custom') === FALSE
