@@ -5,7 +5,6 @@ namespace Drupal\d_p\Validation;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\d_p\Helper\NestedArrayHelper;
-use Drupal\d_p\ParagraphSettingTypesInterface;
 
 /**
  * Provides paragraph settings validator.

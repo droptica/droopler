@@ -9,6 +9,8 @@ namespace Drupal\d_p\Service;
  */
 interface ParagraphSettingsConfigurationInterface {
 
+  const ALL_ALLOWED_BUNDLES = 'all';
+
   /**
    * Loads setting element for the given id.
    *

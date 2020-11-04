@@ -2,7 +2,9 @@
 
 namespace Drupal\d_p\Plugin\Field\FieldType;
 
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldItemBase;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
 
@@ -61,6 +63,28 @@ class ConfigurationStorage extends FieldItemBase {
       ->setLabel(t('Config Settings'));
 
     return $properties;
+  }
+
+  /**
+   * Gets the settings field from a given entity.
+   *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
+   *   Fieldable entity.
+   *
+   * @return \Drupal\Core\Field\FieldItemListInterface|null
+   *   Field, defaults to null.
+   */
+  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity):? FieldItemListInterface {
+    /** @var \Drupal\field\FieldConfigInterface[] $fiels_definitions */
+    $fiels_definitions = $entity->getFieldDefinitions();
+
+    foreach ($fiels_definitions as $field_name => $field) {
+      if ($field->getType() == 'field_p_configuration_storage') {
+        return $entity->$field_name;
+      }
+    }
+
+    return NULL;
   }
 
 }

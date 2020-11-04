@@ -2,6 +2,7 @@
 
 namespace Drupal\d_p\Service;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\d_p\ParagraphSettingTypesInterface;
 use Drupal\d_p\Validation\ParagraphSettingsValidation;
 
@@ -13,17 +14,38 @@ use Drupal\d_p\Validation\ParagraphSettingsValidation;
 class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigurationInterface {
 
   /**
+   * Module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * Constructs paragraph settings configuration manager.
+   *
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   Module handler service.
+   */
+  public function __construct(ModuleHandlerInterface $module_handler) {
+    $this->moduleHandler = $module_handler;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function load(string $id): array {
-    return $this->getStorage()[$id] ?? [];
+    return $this->loadMultiple()[$id] ?? [];
   }
 
   /**
    * {@inheritdoc}
    */
   public function loadMultiple(): array {
-    return $this->getStorage();
+    $storage = $this->getStorage();
+
+    $this->moduleHandler->alter('d_settings', $storage);
+
+    return $storage;
   }
 
   /**
@@ -44,10 +66,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
         '#size' => 32,
         '#d_settings' => [
           'subtype' => 'css',
-          'bundles' => [
-            'paragraph' => [
-              'all',
-            ],
+          'allowed_bundles' => [
+            self::ALL_ALLOWED_BUNDLES,
           ],
         ],
         'modifiers' => [
@@ -57,12 +77,10 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Stretch this paragraph to 100% browser width.'),
             '#weight' => 0,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_group_of_text_blocks',
-                  'd_p_carousel',
-                  'd_p_block',
-                ],
+              'allowed_bundles' => [
+                'd_p_group_of_text_blocks',
+                'd_p_carousel',
+                'd_p_block',
               ],
             ],
           ],
@@ -72,10 +90,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Moves the text to the left and adds a transparent overlay.'),
             '#weight' => 10,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_banner',
-                ],
+              'allowed_bundles' => [
+                'd_p_banner',
               ],
             ],
           ],
@@ -85,10 +101,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Add vertical lines between all elements.'),
             '#weight' => 20,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_carousel',
-                ],
+              'allowed_bundles' => [
+                'd_p_carousel',
               ],
             ],
           ],
@@ -98,11 +112,9 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Adds a thin grid around all boxes.'),
             '#weight' => 40,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_group_of_text_blocks',
-                  'd_p_side_by_side',
-                ],
+              'allowed_bundles' => [
+                'd_p_group_of_text_blocks',
+                'd_p_side_by_side',
               ],
             ],
           ],
@@ -112,10 +124,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Stretch the background and turn the box into tile.'),
             '#weight' => 50,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_single_text_block',
-                ],
+              'allowed_bundles' => [
+                'd_p_single_text_block',
               ],
             ],
           ],
@@ -125,10 +135,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Enables tile view. You have to set all child boxes to tiles by adjusting their settings.'),
             '#weight' => 60,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_group_of_text_blocks',
-                ],
+              'allowed_bundles' => [
+                'd_p_group_of_text_blocks',
               ],
             ],
           ],
@@ -138,10 +146,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Enable column mode: header on the left and description on the right.'),
             '#weight' => 70,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_group_of_text_blocks',
-                ],
+              'allowed_bundles' => [
+                'd_p_group_of_text_blocks',
               ],
             ],
           ],
@@ -151,10 +157,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Show a dynamic price on the right, it requires a JS script to connect to a data source.'),
             '#weight' => 80,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_single_text_block',
-                ],
+              'allowed_bundles' => [
+                'd_p_single_text_block',
               ],
             ],
           ],
@@ -164,10 +168,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             '#description' => t('Works only if "Enable price" is turned on. Enables a black sidebar on the right.'),
             '#weight' => 90,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => [
-                  'd_p_single_text_block',
-                ],
+              'allowed_bundles' => [
+                'd_p_single_text_block',
               ],
             ],
           ],
@@ -184,8 +186,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             ],
             '#weight' => 100,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => ['all'],
+              'allowed_bundles' => [
+                self::ALL_ALLOWED_BUNDLES,
               ],
             ],
           ],
@@ -202,9 +204,7 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             ],
             '#weight' => 110,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => static::getSpacingBundles(),
-              ],
+              'allowed_bundles' => self::getSpacingBundles(),
             ],
           ],
           'margin-bottom' => [
@@ -220,9 +220,7 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             ],
             '#weight' => 120,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => static::getSpacingBundles(),
-              ],
+              'allowed_bundles' => self::getSpacingBundles(),
             ],
           ],
           'padding-top' => [
@@ -237,9 +235,7 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             ],
             '#weight' => 130,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => static::getSpacingBundles(),
-              ],
+              'allowed_bundles' => self::getSpacingBundles(),
             ],
           ],
           'padding-bottom' => [
@@ -254,9 +250,7 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
             ],
             '#weight' => 140,
             '#d_settings' => [
-              'bundles' => [
-                'paragraph' => static::getSpacingBundles(),
-              ],
+              'allowed_bundles' => self::getSpacingBundles(),
             ],
           ],
         ],
@@ -276,26 +270,24 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
         '#default_value' => 'h2',
         '#d_settings' => [
           'outside' => TRUE,
-          'bundles' => [
-            'paragraph' => [
-              'd_p_banner',
-              'd_p_carousel',
-              'd_p_carousel_item',
-              'd_p_form',
-              'd_p_gallery',
-              'd_p_group_of_counters',
-              'd_p_group_of_text_blocks',
-              'd_p_node',
-              'd_p_reference_content',
-              'd_p_side_embed',
-              'd_p_side_image',
-              'd_p_side_tiles',
-              'd_p_single_text_block',
-              'd_p_subscribe_file',
-              'd_p_text_paged',
-              'd_p_text_with_bckg',
-              'd_p_tiles',
-            ],
+          'allowed_bundles' => [
+            'd_p_banner',
+            'd_p_carousel',
+            'd_p_carousel_item',
+            'd_p_form',
+            'd_p_gallery',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
+            'd_p_node',
+            'd_p_reference_content',
+            'd_p_side_embed',
+            'd_p_side_image',
+            'd_p_side_tiles',
+            'd_p_single_text_block',
+            'd_p_subscribe_file',
+            'd_p_text_paged',
+            'd_p_text_with_bckg',
+            'd_p_tiles',
           ],
         ],
       ],
@@ -311,12 +303,10 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
         ],
         '#d_settings' => [
           'outside' => TRUE,
-          'bundles' => [
-            'paragraph' => [
-              'd_p_carousel',
-              'd_p_group_of_counters',
-              'd_p_group_of_text_blocks',
-            ],
+          'allowed_bundles' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
           ],
           'validation' => [
             'column_count' => [
@@ -340,13 +330,11 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
           [ParagraphSettingsValidation::class, 'validateColumnCount'],
         ],
         '#d_settings' => [
-          'bundles' => [
-            'outside' => TRUE,
-            'paragraph' => [
-              'd_p_carousel',
-              'd_p_group_of_counters',
-              'd_p_group_of_text_blocks',
-            ],
+          'outside' => TRUE,
+          'allowed_bundles' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
           ],
           'validation' => [
             'column_count' => [
@@ -371,12 +359,10 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
         ],
         '#d_settings' => [
           'outside' => TRUE,
-          'bundles' => [
-            'paragraph' => [
-              'd_p_carousel',
-              'd_p_group_of_counters',
-              'd_p_group_of_text_blocks',
-            ],
+          'allowed_bundles' => [
+            'd_p_carousel',
+            'd_p_group_of_counters',
+            'd_p_group_of_text_blocks',
           ],
           'validation' => [
             'column_count' => [
@@ -399,10 +385,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
           'bottom' => t('Bottom'),
         ],
         '#d_settings' => [
-          'bundles' => [
-            'paragraph' => [
-              'd_p_form',
-            ],
+          'allowed_bundles' => [
+            'd_p_form',
           ],
         ],
       ],
@@ -415,10 +399,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
           'full' => t('Full width'),
         ],
         '#d_settings' => [
-          'bundles' => [
-            'paragraph' => [
-              'd_p_side_embed',
-            ],
+          'allowed_bundles' => [
+            'd_p_side_embed',
           ],
         ],
       ],
@@ -432,10 +414,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
           'right-wide' => t('Right (wide)'),
         ],
         '#d_settings' => [
-          'bundles' => [
-            'paragraph' => [
-              'd_p_side_image',
-            ],
+          'allowed_bundles' => [
+            'd_p_side_image',
           ],
         ],
       ],
@@ -447,10 +427,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
           'right' => t('Right'),
         ],
         '#d_settings' => [
-          'bundles' => [
-            'paragraph' => [
-              'd_p_side_tiles',
-            ],
+          'allowed_bundles' => [
+            'd_p_side_tiles',
           ],
         ],
       ],
@@ -460,10 +438,8 @@ class ParagraphSettingsConfigurationManager implements ParagraphSettingsConfigur
         '#type' => 'textfield',
         '#d_settings' => [
           'outside' => TRUE,
-          'bundles' => [
-            'paragraph' => [
-              'd_p_tiles',
-            ],
+          'allowed_bundles' => [
+            'd_p_tiles',
           ],
         ],
       ],

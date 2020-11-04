@@ -5,4 +5,4 @@ services:
 
   d_p.paragraph_settings_configuration.manager:
     class: Drupal\d_p\Service\ParagraphSettingsConfigurationManager
-    arguments: []
+    arguments: ['@module_handler']
