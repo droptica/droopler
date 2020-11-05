@@ -761,7 +761,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-      ->getDefault() === 'droopler_subtheme') {
+        ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -1784,7 +1784,7 @@ function droopler_update_8127(&$sandbox) {
   }
 
   foreach ($paragraphs as $paragraph) {
-
+    $sandbox['current']++;
     /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
     $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
     $theme_classes = [
@@ -1831,7 +1831,6 @@ function droopler_update_8127(&$sandbox) {
       $setting_field->addClass('theme-default');
     }
 
-    $sandbox['current']++;
     $paragraph->save();
   }
 
@@ -1839,7 +1838,6 @@ function droopler_update_8127(&$sandbox) {
   $sandbox['#finished'] = $sandbox['total'] == 0 ? 1 : $sandbox['current'] / $sandbox['total'];
 
   if ($sandbox['#finished'] === 1) {
-
     $values['droopler__droopler_update_8127_1'] = TRUE;
     \Drupal::service('d_update')->checklist()->saveProgress(['v2.2' => $values]);
   }

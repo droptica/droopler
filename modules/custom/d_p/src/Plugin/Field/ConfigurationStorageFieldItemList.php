@@ -49,10 +49,21 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function getClasses() {
-    $classes = explode(self::CSS_CLASS_DELIMITER, $this->getClassesValue()) ?: [];
+    $classes = $classes_value = $this->getClassesValue();
+
+    if (is_object($classes_value)) {
+      $classes = get_object_vars($classes_value);
+    }
+    elseif (is_string($classes_value)) {
+      $classes = explode(self::CSS_CLASS_DELIMITER, $classes_value);
+    }
+    elseif (!is_array($classes)) {
+      $classes = [];
+    }
+
     $this->appendDefaultClasses($classes);
 
-    return $classes;
+    return array_filter($classes);
   }
 
   /**
