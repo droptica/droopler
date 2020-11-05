@@ -29,4 +29,6 @@ interface ParagraphSettingTypesInterface {
 
   const PARAGRAPH_SETTING_SIDE_TILES_LAYOUT = 'side_tiles_layout';
 
+  const THEME_COLORS_SETTING_NAME = 'custom_theme_colors';
+
 }

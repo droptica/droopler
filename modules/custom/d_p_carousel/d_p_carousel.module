@@ -5,7 +5,8 @@
  * Contains d_p_carousel module with Carousel Paragraph.
  */
 
-use Drupal\d_p\Helper\ParagraphModifiersHelper;
+use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
 use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 
 /**
@@ -39,12 +40,13 @@ function d_p_carousel_preprocess_field(array &$variables) {
          * @var \Drupal\paragraphs\Entity\Paragraph $paragraph
          */
         $paragraph = $variables['element']['#object'];
-        $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
+        /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+        $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
 
         $columns = [
-          'md' => SettingsWidget::COLUMN_COUNT_SETTING_NAME,
-          'sm' => SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME,
-          'xs' => SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME,
+          'md' => ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME,
+          'sm' => ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME,
+          'xs' => ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME,
         ];
 
         $columns_values = [];
@@ -53,7 +55,7 @@ function d_p_carousel_preprocess_field(array &$variables) {
 
         foreach ($columns as $breakpoint => $config_name) {
           $default_value = SettingsWidget::getConfigOptionDefaultValue($config_name);
-          $value = $paragraph_modifiers_helper->getModifier($config_name, $default_value);
+          $value = $setting_field->getSettingValue($config_name, $default_value);
           $columns_values['columns_' . $breakpoint] = $value;
 
           $breakpoint_suffix = $breakpoint === 'xs' ? '' : $breakpoint . '-';

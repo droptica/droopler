@@ -79,33 +79,7 @@ class SettingsWidget extends WidgetBase {
     /** @var \Drupal\d_p\Service\ParagraphSettingsConfigurationManager $settingsManager */
     $settingsManager = \Drupal::service('d_p.paragraph_settings_configuration.manager');
 
-    $form = $settingsManager->loadMultiple();
-
-    return $form;
-  }
-
-  /**
-   * Is the element available in the bundle of widget's target?
-   *
-   * @param array $list
-   *   The form element bundle list, keyed by entity type and bundle, like $list['paragraph']['sample_paragraph'].
-   *   There is a magic "all" item, that means "available for all bundles of this entity type".
-   *
-   * @return bool
-   */
-  protected function inBundle(array $list) {
-    $entity_type = $this->fieldDefinition->getTargetEntityTypeId();
-    $bundle = $this->fieldDefinition->getTargetBundle();
-    if (isset($list[$entity_type])) {
-      if (array_search('all', $list[$entity_type]) !== FALSE) {
-        // Introduce "all" keyword to avoid listing all bundles.
-        return TRUE;
-      }
-      else {
-        return array_search($bundle, $list[$entity_type]) !== FALSE;
-      }
-    }
-    return FALSE;
+    return $settingsManager->loadMultiple();
   }
 
   /**
@@ -122,7 +96,7 @@ class SettingsWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $config = isset($items[$delta]->value) ? $items[$delta]->getValue() : '';
+    $config = $items[$delta]->getValue();
     // Set up the form element for this widget.
     $element += [
       '#type' => 'fieldset',
@@ -152,7 +126,7 @@ class SettingsWidget extends WidgetBase {
 
         case 'select':
           $element[$key] = [
-            '#default_value' => empty($value) ? $options['#default_value'] : $value,
+            '#default_value' => empty($value) ? ($options['#default_value'] ?? array_keys($options['#options'])[0]) : $value,
           ] + $options;
           break;
 
@@ -228,7 +202,7 @@ class SettingsWidget extends WidgetBase {
       }
     }
     if ($element['paragraph-theme']['#value'] === 'theme-custom') {
-      $values['custom_theme_colors'] = [
+      $values[ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME] = [
         'background' => $element['background-theme-custom']['#value'],
         'text' => $element['text-theme-custom']['#value'],
       ];
@@ -350,11 +324,11 @@ class SettingsWidget extends WidgetBase {
    */
   protected function processCustomThemeElements(array &$element, object $config): void {
     $selector_string = $this->getSelectorStringFromElement($element);
-
+    $config_name = ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME;
     $element['background-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Background color',
-      '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->background : '#ffffff',
+      '#default_value' => isset($config->$config_name) ? $config->$config_name->background : '#ffffff',
       '#weight' => 101,
       '#states' => [
         'visible' => [
@@ -368,7 +342,7 @@ class SettingsWidget extends WidgetBase {
     $element['text-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Text color',
-      '#default_value' => isset($config->custom_theme_colors) ? $config->custom_theme_colors->text : '#000000',
+      '#default_value' => isset($config->$config_name) ? $config->$config_name->text : '#000000',
       '#weight' => 102,
       '#states' => [
         'visible' => [
@@ -390,19 +364,19 @@ class SettingsWidget extends WidgetBase {
    *   True if the element is allowed, false otherwise.
    */
   protected function isElementAccessAllowed(array $element): bool {
-    return (bool) $element['#access'] ?? TRUE;
+    return isset($element['#access']) ? (bool) $element['#access'] : TRUE;
   }
 
   /**
    * Get CSS class from a given string.
    *
-   * @param string $value
+   * @param null|string $value
    *   String to be parsed.
    *
    * @return array
    *   CSS classes.
    */
-  protected function getCssClassListFromString(string $value): array {
+  protected function getCssClassListFromString(?string $value): array {
     $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
 
     return $classes ?: [];

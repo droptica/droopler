@@ -4,9 +4,10 @@ namespace Drupal\d_p\Plugin\Field\FieldType;
 
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldItemBase;
-use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
+use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
+use Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface;
 
 /**
  * Plugin implementation of the 'field_p_settings' field type.
@@ -17,10 +18,11 @@ use Drupal\Core\TypedData\DataDefinition;
  *   module = "d_p",
  *   description = @Translation("Configuration storage"),
  *   default_widget = "field_d_p_set_settings",
- *   default_formatter = "string"
+ *   default_formatter = "string",
+ *   list_class = "\Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemList"
  * )
  */
-class ConfigurationStorage extends FieldItemBase {
+class ConfigurationStorage extends FieldItemBase implements ConfigurationStorageInterface {
 
   /**
    * {@inheritdoc}
@@ -66,15 +68,9 @@ class ConfigurationStorage extends FieldItemBase {
   }
 
   /**
-   * Gets the settings field from a given entity.
-   *
-   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
-   *   Fieldable entity.
-   *
-   * @return \Drupal\Core\Field\FieldItemListInterface|null
-   *   Field, defaults to null.
+   * {@inheritdoc}
    */
-  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity):? FieldItemListInterface {
+  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity):? ConfigurationStorageFieldItemListInterface {
     /** @var \Drupal\field\FieldConfigInterface[] $fiels_definitions */
     $fiels_definitions = $entity->getFieldDefinitions();
 
@@ -84,7 +80,10 @@ class ConfigurationStorage extends FieldItemBase {
       }
     }
 
-    return NULL;
+    throw new MissingConfigurationStorageFieldException(t("No instance of configuration storage found on entity @entity of bundle @bundle", [
+      '@entity' => $entity->getEntityType()->id(),
+      '@bundle' => $entity->bundle(),
+    ]));
   }
 
 }
