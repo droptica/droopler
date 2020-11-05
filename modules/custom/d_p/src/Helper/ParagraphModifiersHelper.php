@@ -12,9 +12,10 @@ use Drupal\paragraphs\Entity\Paragraph;
  *
  * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
  * As this is working on the particular field instance,
- * we have unified and moved all the methods to the field list class directly.
+ * we have unified and moved all the methods directly to the field list class:
+ * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
  *
- * @see Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorageInterface.
+ * @see https://www.drupal.org/project/droopler/issues/3180465
  */
 class ParagraphModifiersHelper {
 
