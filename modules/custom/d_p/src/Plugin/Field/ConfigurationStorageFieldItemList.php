@@ -154,7 +154,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function hasSettingValue(string $setting_name): bool {
-    return in_array($setting_name, $this->getValue()->$setting_name);
+    return in_array($setting_name, $this->getSettingValue($setting_name));
   }
 
   /**

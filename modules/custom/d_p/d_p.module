@@ -247,14 +247,13 @@ function d_p_preprocess_field(&$variables) {
   // Alter field_d_main_title.
   if ($variables['element']['#field_name'] == 'field_d_main_title') {
     $entity = $variables["element"]["#object"];
-    if ($entity->getEntityTypeId() == 'paragraph') {
+    if ($entity->getEntityTypeId() === 'paragraph') {
       try {
         /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
         $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($entity);
         $variables['heading_tag'] = $setting_field->getSettingValue(ParagraphSettingTypesInterface::HEADING_TYPE_SETTING_NAME);
       }
       catch (MissingConfigurationStorageFieldException $exception) {
-        \Drupal::logger('d_p')->error($exception->getMessage());
       }
     }
   }

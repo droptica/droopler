@@ -18,6 +18,36 @@ interface ParagraphSettingPluginManagerInterface {
   public function getAll(): array;
 
   /**
+   * Gets plugin instance by id.
+   *
+   * This is a simple wrapper for createInstance method.
+   * It is possible that we will load plugin configuration
+   * automatically by bundle in some future version.
+   * In that case we don't want to use the createInstance method
+   * directly.
+   *
+   * @param string $plugin_id
+   *   Plugin id.
+   *
+   * @return object|\Drupal\d_p\ParagraphSettingInterface
+   *   Instance of paragraph setting plugin.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
+   */
+  public function getPluginById(string $plugin_id);
+
+  /**
+   * Load all children plugins by given plugin id.
+   *
+   * @param string $parent_plugin_id
+   *   Parent plugin id.
+   *
+   * @return array
+   *   Plugin instances.
+   */
+  public function getAllChildrenPlugins(string $parent_plugin_id): array;
+
+  /**
    * Getter for settings form built from all plugin instances.
    *
    * @return array

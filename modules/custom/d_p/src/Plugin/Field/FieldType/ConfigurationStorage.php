@@ -51,6 +51,17 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
   /**
    * {@inheritdoc}
    */
+  public function setValue($values, $notify = TRUE) {
+    if (is_object($values)) {
+      $values = json_encode($values);
+    }
+
+    parent::setValue($values, $notify);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function isEmpty() {
     $value = $this->get('value')->getValue();
 

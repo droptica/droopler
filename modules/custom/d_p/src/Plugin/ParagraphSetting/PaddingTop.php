@@ -7,10 +7,10 @@ use Drupal\d_p\ParagraphSettingSelectInterface;
 use Drupal\d_p\ParagraphSettingSpacingBundlesTrait;
 
 /**
- * Plugin implementation of the 'padding-bottom' modifier setting.
+ * Plugin implementation of the 'padding-top' modifier setting.
  *
  * @ParagraphSetting(
- *   id = "padding-bottom",
+ *   id = "padding-top",
  *   label = @Translation("Padding Top"),
  *   settings = {
  *      "parent" = "custom_class",

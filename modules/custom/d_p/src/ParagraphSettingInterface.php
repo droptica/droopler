@@ -73,12 +73,31 @@ interface ParagraphSettingInterface {
   public function hasParentPlugin(): bool;
 
   /**
+   * Check if the given plugin is the plugin parent.
+   *
+   * @param string $parent_id
+   *   Id of plugin parent to be checked.
+   *
+   * @return bool
+   *   True if this is the plugin parent, false otherwise.
+   */
+  public function isPluginParent(string $parent_id): bool;
+
+  /**
    * This is an alias of hasParentPlugin.
    *
    * @return bool
    *   True if has parent, false if this is a root element.
    */
   public function isSubtype(): bool;
+
+  /**
+   * Load all children plugins.
+   *
+   * @return array
+   *   Child plugin instances.
+   */
+  public function getChildrenPlugins(): array;
 
   /**
    * Getter for plugin weight, used as #weight in form element.

@@ -54,18 +54,29 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
    * @todo: Rework or add method to load all plugins by pragraph bundle.
    */
   public function getAll(): array {
-    $plugins = [];
+    return $this->loadPluginsFromDefinitions($this->getDefinitions());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPluginById(string $plugin_id) {
+    return $this->createInstance($plugin_id);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getAllChildrenPlugins(string $parent_plugin_id): array {
+    $definitions = [];
+
     foreach ($this->getDefinitions() as $definition) {
-      try {
-        // @todo: We can think of keeping the configuration in yml files.
-        $plugins[$definition['id']] = $this->createInstance($definition['id'], []);
-      }
-      catch (PluginException $exception) {
-        $this->logger->error($exception->getMessage());
+      if (isset($definition['settings']['parent']) && $definition['settings']['parent'] === $parent_plugin_id) {
+        $definitions[] = $definition;
       }
     }
 
-    return $plugins;
+    return $this->loadPluginsFromDefinitions($definitions);
   }
 
   /**
@@ -89,6 +100,31 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
     }
 
     return $form;
+  }
+
+  /**
+   * Load all plugins by given definitions.
+   *
+   * @param array $definitions
+   *   Plugin definitions.
+   *
+   * @return array
+   *   Loaded plugin instances.
+   */
+  protected function loadPluginsFromDefinitions(array $definitions): array {
+    $plugins = [];
+
+    foreach ($definitions as $definition) {
+      try {
+        // @todo: We can think of keeping the configuration in yml files.
+        $plugins[$definition['id']] = $this->getPluginById($definition['id']);
+      }
+      catch (PluginException $exception) {
+        $this->logger->error($exception->getMessage());
+      }
+    }
+
+    return $plugins;
   }
 
 }

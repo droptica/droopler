@@ -11,6 +11,9 @@ use Drupal\d_p\Validation\ParagraphSettingsValidation;
  * @ParagraphSetting(
  *   id = "column_count",
  *   label = @Translation("Column count (desktop)"),
+ *   settings = {
+ *      "weight" = 0,
+ *   }
  * )
  */
 class ColumnCount extends ParagraphSettingPluginBase {

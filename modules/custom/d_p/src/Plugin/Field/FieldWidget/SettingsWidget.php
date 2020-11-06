@@ -2,9 +2,11 @@
 
 namespace Drupal\d_p\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\d_p\ParagraphSettingSelectInterface;
 use Drupal\d_p\ParagraphSettingTypesInterface;
 use Drupal\d_p\Service\ParagraphSettingsConfigurationInterface;
 
@@ -76,10 +78,10 @@ class SettingsWidget extends WidgetBase {
    * Get configuration options for fields in paragraph settings.
    */
   private static function getConfigOptions() {
-    /** @var \Drupal\d_p\Service\ParagraphSettingsConfigurationManager $settingsManager */
-    $settingsManager = \Drupal::service('d_p.paragraph_settings_configuration.manager');
+    /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
+    $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
 
-    return $settingsManager->loadMultiple();
+    return $pluginManager->getSettingsForm();
   }
 
   /**
@@ -107,10 +109,8 @@ class SettingsWidget extends WidgetBase {
 
     $config_options = self::getConfigOptions();
     foreach ($config_options as $key => $options) {
-      $d_settings = $options['#d_settings'];
-      // Add widgets of different types.
       $value = $config->$key ?? '';
-      $type = $d_settings['subtype'] ?? $options['#type'];
+      $type = $options['#subtype'] ?? $options['#type'];
 
       switch ($type) {
         case 'css':
@@ -118,14 +118,17 @@ class SettingsWidget extends WidgetBase {
 
           $this->processModifiers($element, $options['modifiers'], $classes);
 
+          // Preserve only root keys, without children/modifiers.
+          unset($options['modifiers']);
+
           $element[$key] = [
             '#default_value' => implode(' ', $classes),
-          ];
+          ] + $options;
           break;
 
         case 'select':
           $element[$key] = [
-            '#default_value' => empty($value) ? ($options['#default_value'] ?? array_keys($options['#options'])[0]) : $value,
+            '#default_value' => empty($value) ? $options['#default_value'] : $value,
           ] + $options;
           break;
 
@@ -138,8 +141,10 @@ class SettingsWidget extends WidgetBase {
           break;
 
         default:
+          $value = $config->$key ?? $options['#default_value'];
+
           $element[$key] = [
-            '#size' => $element[$key]['#size'] ?? 32,
+            '#size' => $options['#size'] ?? 32,
             '#default_value' => $value,
           ] + $options;
       }
@@ -165,9 +170,8 @@ class SettingsWidget extends WidgetBase {
     $config_options = self::getConfigOptions();
     foreach ($config_options as $key => $options) {
       $value = $form_state->getValue(array_merge($element['#parents'], [$key]));
-      $d_settings = $options['#d_settings'];
 
-      $type = $d_settings['subtype'] ?? $options['#type'];
+      $type = $options['#subtype'] ?? $options['#type'];
       if ($type === 'css') {
         $classes = $this->getCssClassListFromString($value);
 
@@ -212,24 +216,35 @@ class SettingsWidget extends WidgetBase {
 
   /**
    * Returns default options for select fields.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * As this is working on the particular field instance,
+   * we have unified and moved all the methods directly to the field list class:
+   * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
    */
   public static function getModifierDefaults() {
-    $modifiers = self::getConfigOptions()[ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME]['modifiers'];
+    /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
+    $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
+    $custom_class_plugin_id = ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME;
+
+    /** @var \Drupal\d_p\ParagraphSettingInterface $custom_class_plugin */
+    $custom_class_plugin = $pluginManager->getPluginById($custom_class_plugin_id);
+    /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
+    $plugins = $custom_class_plugin->getChildrenPlugins();
+
     $defaults = [];
-    foreach ($modifiers as $key => $modifier) {
-      if (!empty($modifier['#type']) && $modifier['#type'] === 'select') {
-        if (isset($modifier['#default_value']) && $modifier['#default_value']) {
-          $default = $modifier['#default_value'];
-        }
-        else {
-          $default = key($modifier['#options']);
-        }
+
+    foreach ($plugins as $plugin) {
+      if ($plugin instanceof ParagraphSettingSelectInterface) {
         $defaults[] = [
-          'options' => array_keys($modifier['#options']),
-          'default' => $default,
+          'options' => $plugin->getOptions(),
+          'default' => $plugin->getDefaultValue(),
         ];
       }
     }
+
     return $defaults;
   }
 
@@ -243,11 +258,17 @@ class SettingsWidget extends WidgetBase {
    *   Option default value, null if not found.
    */
   public static function getConfigOptionDefaultValue(string $option_name) {
-    /** @var \Drupal\d_p\Service\ParagraphSettingsConfigurationManager $settingsManager */
-    $settingsManager = \Drupal::service('d_p.paragraph_settings_configuration.manager');
-    $option = $settingsManager->load($option_name);
+    try {
+      /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
+      $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
+      /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
+      $plugin = $pluginManager->getPluginById($option_name);
 
-    return $option['#default_value'] ?? NULL;
+      return $plugin->getDefaultValue();
+    }
+    catch (PluginException $exception) {
+      return NULL;
+    }
   }
 
   /**
@@ -262,13 +283,13 @@ class SettingsWidget extends WidgetBase {
         continue;
       }
 
-      if (empty($item['#d_settings']['allowed_bundles'])) {
+      if (empty($item['#plugin'])) {
         $this->processBundleAccess($item);
       }
       else {
-        $allowed_bundles_list = $item['#d_settings']['allowed_bundles'];
-        $allow_all_bundles = in_array(ParagraphSettingsConfigurationInterface::ALL_ALLOWED_BUNDLES, $allowed_bundles_list);
-        $item['#access'] = $allow_all_bundles || in_array($this->getTargetBundle(), $allowed_bundles_list);
+        /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
+        $plugin = $item['#plugin'];
+        $item['#access'] = $plugin->isAllBundlesAllowed() ?: $plugin->isBundleAllowed($this->getTargetBundle());
       }
     }
   }
@@ -298,16 +319,20 @@ class SettingsWidget extends WidgetBase {
         'data-modifier' => $class,
       ];
 
-      if ($modifier['#type'] == 'select') {
-        $default_select_value = $modifier['#default'] ?? key($modifier['#options']);
+      /** @var \Drupal\d_p\ParagraphSettingInterface $setting_plugin */
+      $setting_plugin = $modifier['#plugin'];
 
-        foreach ($modifier['#options'] as $theme_class => $data) {
+      if ($setting_plugin instanceof ParagraphSettingSelectInterface) {
+        $default_select_value = $setting_plugin->getDefaultValue();
+
+        foreach ($setting_plugin->getOptions() as $theme_class => $data) {
           $theme_class_key = array_search($theme_class, $classes);
           if ($theme_class_key !== FALSE) {
             $default_select_value = $theme_class;
             unset($classes[$theme_class_key]);
           }
         }
+
         $element[$class]['#default_value'] = $default_select_value;
       }
     }

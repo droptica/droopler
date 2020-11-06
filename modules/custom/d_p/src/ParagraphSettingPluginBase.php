@@ -2,15 +2,54 @@
 
 namespace Drupal\d_p;
 
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides base plugin implementation for paragraph setting plugins.
  *
  * @package Drupal\d_p
  */
-abstract class ParagraphSettingPluginBase extends PluginBase implements ParagraphSettingInterface {
+abstract class ParagraphSettingPluginBase extends PluginBase implements ParagraphSettingInterface, ContainerFactoryPluginInterface {
+
+  /**
+   * Paragraph setting plugin manager.
+   *
+   * @var \Drupal\d_p\ParagraphSettingPluginManagerInterface
+   */
+  protected $settingManager;
+
+  /**
+   * Constructs paragraph plugin instance.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\d_p\ParagraphSettingPluginManagerInterface $setting_manager
+   *   Paragraph setting plugin manager.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ParagraphSettingPluginManagerInterface $setting_manager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->settingManager = $setting_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('d_p.paragraph_settings.plugin.manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -42,7 +81,7 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
    * {@inheritdoc}
    */
   public function label(): ?TranslatableMarkup {
-    return $this->getSettings()['label'] ?? NULL;
+    return $this->pluginDefinition['label'] ?? NULL;
   }
 
   /**
@@ -69,8 +108,22 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
   /**
    * {@inheritdoc}
    */
+  public function isPluginParent(string $parent_id): bool {
+    return $this->getParentPluginId() === $parent_id;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function isSubtype(): bool {
     return $this->hasParentPlugin();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getChildrenPlugins(): array {
+    return $this->settingManager->getAllChildrenPlugins($this->id());
   }
 
   /**

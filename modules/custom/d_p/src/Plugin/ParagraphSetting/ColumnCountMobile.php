@@ -8,6 +8,9 @@ namespace Drupal\d_p\Plugin\ParagraphSetting;
  * @ParagraphSetting(
  *   id = "column_count_mobile",
  *   label = @Translation("Column count (mobile)"),
+ *   settings = {
+ *      "weight" = 2,
+ *   }
  * )
  */
 class ColumnCountMobile extends ColumnCount {

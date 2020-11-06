@@ -8,6 +8,9 @@ namespace Drupal\d_p\Plugin\ParagraphSetting;
  * @ParagraphSetting(
  *   id = "column_count_tablet",
  *   label = @Translation("Column count (tablet)"),
+ *   settings = {
+ *      "weight" = 1,
+ *   }
  * )
  */
 class ColumnCountTablet extends ColumnCount {

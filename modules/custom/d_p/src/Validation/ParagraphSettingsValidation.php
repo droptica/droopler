@@ -29,7 +29,11 @@ class ParagraphSettingsValidation {
       return;
     }
 
-    $validation_rules = $element['#d_settings']['validation']['column_count'] ?? [];
+    $validation_rules = $element['#plugin']->getValidationRulesDefinition()['column_count'] ?? NULL;
+
+    if (empty($validation_rules)) {
+      return;
+    }
 
     $valid_number_of_columns = $validation_rules['bundle_allowed_values'][$paragraph_bundle] ?: $validation_rules['allowed_values'];
     if (!in_array($column_count_value, $valid_number_of_columns)) {
