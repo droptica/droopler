@@ -107,7 +107,6 @@ class SettingsWidget extends WidgetBase {
 
     $config_options = self::getConfigOptions();
     foreach ($config_options as $key => $options) {
-      // If the widget is not available in the current bundle, just skip it.
       $d_settings = $options['#d_settings'];
       // Add widgets of different types.
       $value = $config->$key ?? '';
