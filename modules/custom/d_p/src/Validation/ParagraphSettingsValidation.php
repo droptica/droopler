@@ -5,6 +5,7 @@ namespace Drupal\d_p\Validation;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\d_p\Helper\NestedArrayHelper;
+use Drupal\geysir\Form\GeysirModalParagraphForm;
 
 /**
  * Provides paragraph settings validator.
@@ -23,9 +24,15 @@ class ParagraphSettingsValidation {
    */
   public static function validateColumnCount(array $element, FormStateInterface $form_state) {
     $column_count_value = $form_state->getValue(array_merge($element['#parents']));
-    $paragraph_bundle = self::getParentParagraphBundleId($element, $form_state);
+    $form_object = $form_state->getFormObject();
+    if ($form_object instanceof GeysirModalParagraphForm) {
+      $paragraph_bundle = $form_object->getEntity()->bundle();
+    }
+    else {
+      $paragraph_bundle = self::getParentParagraphBundleId($element, $form_state);
+    }
 
-    if (is_null($paragraph_bundle)) {
+    if (!is_string($paragraph_bundle)) {
       return;
     }
 
@@ -35,7 +42,7 @@ class ParagraphSettingsValidation {
       return;
     }
 
-    $valid_number_of_columns = $validation_rules['bundle_allowed_values'][$paragraph_bundle] ?: $validation_rules['allowed_values'];
+    $valid_number_of_columns = $validation_rules['bundle_allowed_values'][$paragraph_bundle] ?? $validation_rules['allowed_values'];
     if (!in_array($column_count_value, $valid_number_of_columns)) {
       $form_state->setError(
         $element,

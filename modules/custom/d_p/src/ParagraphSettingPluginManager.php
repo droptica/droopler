@@ -3,6 +3,7 @@
 namespace Drupal\d_p;
 
 use Drupal\Component\Plugin\Exception\PluginException;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
@@ -44,7 +45,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
     );
 
     $this->alterInfo('paragraph_setting_info');
-    $this->setCacheBackend($cache_backend, 'paragraph_setting_info_plugins');
+    $this->setCacheBackend($cache_backend, 'paragraph_setting_plugins');
     $this->logger = $this->getLogger('d_p');
   }
 
@@ -83,20 +84,31 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
    * {@inheritdoc}
    */
   public function getSettingsForm(): array {
-    /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
-    $plugins = $this->getAll();
-    $form = [];
+    $cache = $this->cacheGet(self::SETTINGS_FORM_STORAGE_CID);
 
-    foreach ($plugins as $plugin) {
-      if (!$plugin->isSubtype()) {
-        $form[$plugin->id()] = $plugin->formElement();
-      }
+    if ($cache) {
+      $form = $cache->data;
     }
+    else {
+      /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
+      $plugins = $this->getAll();
+      $form = [];
 
-    foreach ($plugins as $plugin) {
-      if ($plugin->isSubtype()) {
-        $form[$plugin->getParentPluginId()]['modifiers'][$plugin->id()] = $plugin->formElement();
+      foreach ($plugins as $plugin) {
+        if (!$plugin->isSubtype()) {
+          $form[$plugin->id()] = $plugin->formElement();
+        }
       }
+
+      foreach ($plugins as $plugin) {
+        if ($plugin->isSubtype()) {
+          $form[$plugin->getParentPluginId()]['modifiers'][$plugin->id()] = $plugin->formElement();
+        }
+      }
+
+      $this->moduleHandler->alter('d_settings', $form);
+
+      $this->cacheSet(self::SETTINGS_FORM_STORAGE_CID, $form, Cache::PERMANENT, [self::SETTINGS_FORM_STORAGE_CID]);
     }
 
     return $form;

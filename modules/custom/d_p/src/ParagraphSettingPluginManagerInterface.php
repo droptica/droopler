@@ -9,6 +9,8 @@ namespace Drupal\d_p;
  */
 interface ParagraphSettingPluginManagerInterface {
 
+  const SETTINGS_FORM_STORAGE_CID = 'paragraph_setting_plugins:settings_form';
+
   /**
    * Getter for all plugin instances.
    *

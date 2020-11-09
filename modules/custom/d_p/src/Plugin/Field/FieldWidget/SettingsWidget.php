@@ -8,7 +8,6 @@ use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\d_p\ParagraphSettingSelectInterface;
 use Drupal\d_p\ParagraphSettingTypesInterface;
-use Drupal\d_p\Service\ParagraphSettingsConfigurationInterface;
 
 /**
  * Plugin implementation of the 'Settings widget' widget.
@@ -25,54 +24,24 @@ use Drupal\d_p\Service\ParagraphSettingsConfigurationInterface;
 class SettingsWidget extends WidgetBase {
 
   /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
+   * Custom class setting name.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
    */
   const CSS_CLASS_SETTING_NAME = 'custom_class';
 
   /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
+   * Heading setting name.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
    */
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
-
-  /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   */
-  const COLUMN_COUNT_SETTING_NAME = 'column_count';
-
-  /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   */
-  const COLUMN_COUNT_MOBILE_SETTING_NAME = 'column_count_mobile';
-
-  /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   */
-  const COLUMN_COUNT_TABLET_SETTING_NAME = 'column_count_tablet';
-
-  /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   */
-  const PARAGRAPH_FEATURED_IMAGES = 'featured_images';
-
-  /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   */
-  const PARAGRAPH_SETTING_FORM_LAYOUT = 'form_layout';
-
-  /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   */
-  const PARAGRAPH_SETTING_EMBED_LAYOUT = 'embed_layout';
-
-  /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   */
-  const PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT = 'side_image_layout';
-
-  /**
-   * @deprecated Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   */
-  const PARAGRAPH_SETTING_SIDE_TILES_LAYOUT = 'side_tiles_layout';
 
   /**
    * Get configuration options for fields in paragraph settings.
@@ -82,16 +51,6 @@ class SettingsWidget extends WidgetBase {
     $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
 
     return $pluginManager->getSettingsForm();
-  }
-
-  /**
-   * Getter for target bundle of the entity.
-   *
-   * @return string|null
-   *   Bundle name, or null if it's not bundle specific.
-   */
-  protected function getTargetBundle(): ?string {
-    return $this->fieldDefinition->getTargetBundle();
   }
 
   /**
@@ -215,63 +174,6 @@ class SettingsWidget extends WidgetBase {
   }
 
   /**
-   * Returns default options for select fields.
-   *
-   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
-   * As this is working on the particular field instance,
-   * we have unified and moved all the methods directly to the field list class:
-   * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
-   *
-   * @see https://www.drupal.org/project/droopler/issues/3180465
-   */
-  public static function getModifierDefaults() {
-    /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
-    $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
-    $custom_class_plugin_id = ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME;
-
-    /** @var \Drupal\d_p\ParagraphSettingInterface $custom_class_plugin */
-    $custom_class_plugin = $pluginManager->getPluginById($custom_class_plugin_id);
-    /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
-    $plugins = $custom_class_plugin->getChildrenPlugins();
-
-    $defaults = [];
-
-    foreach ($plugins as $plugin) {
-      if ($plugin instanceof ParagraphSettingSelectInterface) {
-        $defaults[] = [
-          'options' => $plugin->getOptions(),
-          'default' => $plugin->getDefaultValue(),
-        ];
-      }
-    }
-
-    return $defaults;
-  }
-
-  /**
-   * Get the default value for config option.
-   *
-   * @param string $option_name
-   *   Config option name.
-   *
-   * @return mixed|null
-   *   Option default value, null if not found.
-   */
-  public static function getConfigOptionDefaultValue(string $option_name) {
-    try {
-      /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
-      $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
-      /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
-      $plugin = $pluginManager->getPluginById($option_name);
-
-      return $plugin->getDefaultValue();
-    }
-    catch (PluginException $exception) {
-      return NULL;
-    }
-  }
-
-  /**
    * Process render array in order to apply access value.
    *
    * @param array $element
@@ -379,6 +281,16 @@ class SettingsWidget extends WidgetBase {
   }
 
   /**
+   * Getter for target bundle of the entity.
+   *
+   * @return string|null
+   *   Bundle name, or null if it's not bundle specific.
+   */
+  protected function getTargetBundle(): ?string {
+    return $this->fieldDefinition->getTargetBundle();
+  }
+
+  /**
    * Check if access to the element is allowed.
    *
    * @param array $element
@@ -427,6 +339,70 @@ class SettingsWidget extends WidgetBase {
     }
 
     return $selector_string;
+  }
+
+  /**
+   * Returns default options for select fields.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * As this is working on the particular field instance,
+   * we have unified and moved all the methods directly to the field list class:
+   * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
+   */
+  public static function getModifierDefaults() {
+    /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
+    $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
+    $custom_class_plugin_id = ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME;
+
+    /** @var \Drupal\d_p\ParagraphSettingInterface $custom_class_plugin */
+    $custom_class_plugin = $pluginManager->getPluginById($custom_class_plugin_id);
+    /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
+    $plugins = $custom_class_plugin->getChildrenPlugins();
+
+    $defaults = [];
+
+    foreach ($plugins as $plugin) {
+      if ($plugin instanceof ParagraphSettingSelectInterface) {
+        $defaults[] = [
+          'options' => $plugin->getOptions(),
+          'default' => $plugin->getDefaultValue(),
+        ];
+      }
+    }
+
+    return $defaults;
+  }
+
+  /**
+   * Get the default value for config option.
+   *
+   * @param string $option_name
+   *   Config option name.
+   *
+   * @return mixed|null
+   *   Option default value, null if not found.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * As this is working on the particular field instance,
+   * we have unified and moved all the methods directly to the field list class:
+   * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
+   */
+  public static function getConfigOptionDefaultValue(string $option_name) {
+    try {
+      /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
+      $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
+      /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
+      $plugin = $pluginManager->getPluginById($option_name);
+
+      return $plugin->getDefaultValue();
+    }
+    catch (PluginException $exception) {
+      return NULL;
+    }
   }
 
 }

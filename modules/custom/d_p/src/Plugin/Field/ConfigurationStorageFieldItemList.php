@@ -2,9 +2,13 @@
 
 namespace Drupal\d_p\Plugin\Field;
 
+use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Field\FieldItemList;
+use Drupal\Core\Logger\LoggerChannelTrait;
+use Drupal\Core\TypedData\DataDefinitionInterface;
+use Drupal\Core\TypedData\TypedDataInterface;
+use Drupal\d_p\ParagraphSettingSelectInterface;
 use Drupal\d_p\ParagraphSettingTypesInterface;
-use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 
 /**
  * Provides field item list class for configuration storage field type.
@@ -12,6 +16,31 @@ use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
  * @package Drupal\d_p\Plugin\Field
  */
 class ConfigurationStorageFieldItemList extends FieldItemList implements ConfigurationStorageFieldItemListInterface {
+  use LoggerChannelTrait;
+
+  /**
+   * Logger.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  /**
+   * Paragraph setting plugin manager.
+   *
+   * @var \Drupal\d_p\ParagraphSettingPluginManagerInterface
+   */
+  protected $pluginManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(DataDefinitionInterface $definition, $name = NULL, TypedDataInterface $parent = NULL) {
+    parent::__construct($definition, $name, $parent);
+
+    $this->pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
+    $this->logger = $this->getLogger('d_p');
+  }
 
   /**
    * {@inheritdoc}
@@ -137,16 +166,13 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    *   Default classes to be populated.
    */
   protected function appendDefaultClasses(array &$classes) {
-    // Add default classes if not present.
-    // @todo: We should have a better way to populate the default values.
-    $defaults = SettingsWidget::getModifierDefaults();
+
+    $defaults = $this->getStorageItemDefaultClasses(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME);
     foreach ($defaults as $modifier) {
-      foreach ($modifier['options'] as $option) {
-        if (in_array($option, $classes)) {
-          continue 2;
-        }
+      // Add default classes if any value from options is not present.
+      if (empty(array_intersect($modifier['options'], $classes))) {
+        $classes[] = $modifier['default'];
       }
-      $classes[] = $modifier['default'];
     }
   }
 
@@ -161,7 +187,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function getSettingValue(string $setting_name, $default = NULL) {
-    return $this->getValue()->$setting_name ?? $default;
+    return $this->getValue()->$setting_name ?? $this->getStorageItemDefaultValue($setting_name) ?? $default;
   }
 
   /**
@@ -184,6 +210,74 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    */
   protected function setEncodedValue($values) {
     $this->setValue(json_encode($values), TRUE);
+  }
+
+  /**
+   * Getter for storage item default value.
+   *
+   * @param string $storage_id
+   *   The storage id.
+   *
+   * @return mixed|null
+   *   The default value.
+   */
+  protected function getStorageItemDefaultValue(string $storage_id) {
+    try {
+      return $this->loadStorageItemById($storage_id)->getDefaultValue();
+    }
+    catch (PluginException $exception) {
+      $this->logger->error($exception->getMessage());
+
+      return NULL;
+    }
+  }
+
+  /**
+   * Getter for storage item default classes.
+   *
+   * @param string $storage_id
+   *   The storage id.
+   *
+   * @return array
+   *   The default classes.
+   */
+  protected function getStorageItemDefaultClasses(string $storage_id): array {
+    $defaults = [];
+
+    try {
+      $plugin = $this->loadStorageItemById($storage_id);
+      /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
+      $class_plugins = $plugin->getChildrenPlugins();
+
+      foreach ($class_plugins as $plugin) {
+        if ($plugin instanceof ParagraphSettingSelectInterface) {
+          $defaults[] = [
+            'options' => $plugin->getOptions(),
+            'default' => $plugin->getDefaultValue(),
+          ];
+        }
+      }
+    }
+    catch (PluginException $exception) {
+      $this->logger->error($exception->getMessage());
+    }
+
+    return $defaults;
+  }
+
+  /**
+   * Loads storage item.
+   *
+   * @param string $storage_id
+   *   The storage id (plugin id).
+   *
+   * @return \Drupal\d_p\ParagraphSettingInterface|object
+   *   The plugin instance.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
+   */
+  protected function loadStorageItemById(string $storage_id) {
+    return $this->pluginManager->getPluginById($storage_id);
   }
 
 }
