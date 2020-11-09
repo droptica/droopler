@@ -209,6 +209,10 @@ function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array 
 function droopler_theme_preprocess_input(&$variables) {
   // For submit elements.
   if ($variables['element']['#type'] == 'submit') {
+    // Omit class manipulation if is geysir modal.
+    if (\Drupal::service('d_geysir.utility.modal_detector')->isGeysirModalRequest()) {
+      return;
+    }
 
     // If button has some class.
     if (is_object($variables['attributes'])) {
