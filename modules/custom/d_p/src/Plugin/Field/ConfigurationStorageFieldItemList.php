@@ -55,7 +55,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function hasClasses(): bool {
-    return (bool) count($this->getClasses());
+    return (bool) count($this->getClassesValueAsArray());
   }
 
   /**
@@ -78,17 +78,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function getClasses() {
-    $classes = $classes_value = $this->getClassesValue();
-
-    if (is_object($classes_value)) {
-      $classes = get_object_vars($classes_value);
-    }
-    elseif (is_string($classes_value)) {
-      $classes = explode(self::CSS_CLASS_DELIMITER, $classes_value);
-    }
-    elseif (!is_array($classes)) {
-      $classes = [];
-    }
+    $classes = $this->getClassesValueAsArray();
 
     $this->appendDefaultClasses($classes);
 
@@ -103,6 +93,28 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    */
   protected function getClassesValue() {
     return $this->getValue()->{ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME} ?? '';
+  }
+
+  /**
+   * Get classes value as array.
+   *
+   * @return array
+   *   Array of CSS classes.
+   */
+  protected function getClassesValueAsArray(): array {
+    $classes = $classes_value = $this->getClassesValue();
+
+    if (is_object($classes_value)) {
+      $classes = get_object_vars($classes_value);
+    }
+    elseif (is_string($classes_value)) {
+      $classes = explode(self::CSS_CLASS_DELIMITER, $classes_value);
+    }
+    elseif (!is_array($classes)) {
+      $classes = [];
+    }
+
+    return $classes;
   }
 
   /**
@@ -180,7 +192,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function hasSettingValue(string $setting_name): bool {
-    return in_array($setting_name, $this->getSettingValue($setting_name));
+    return !is_null($this->getSettingValue($setting_name));
   }
 
   /**
@@ -226,8 +238,6 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
       return $this->loadStorageItemById($storage_id)->getDefaultValue();
     }
     catch (PluginException $exception) {
-      $this->logger->error($exception->getMessage());
-
       return NULL;
     }
   }
