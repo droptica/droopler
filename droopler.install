@@ -1929,11 +1929,13 @@ function droopler_update_8129(&$sandbox) {
     }
 
     $classes = $settings_field->getClasses();
-    $classes = preg_replace('/theme-([a-z]*)/', $class, $classes);
-
-    if (strpos($classes, $class) === FALSE) {
-      $settings_field->addClass($class);
+    foreach ($classes as $modifier) {
+      if (strpos($modifier, 'theme-') === 0) {
+        $settings_field->removeClass($modifier);
+      }
     }
+
+    $settings_field->addClass($class);
 
     $paragraph->save();
 
