@@ -1828,6 +1828,13 @@ function droopler_update_8127(&$sandbox) {
       $setting_field->replaceClass('background-gray-light-2', 'theme-gray');
     }
     else {
+      $classes = $setting_field->getClasses();
+      foreach ($classes as $modifier) {
+        if (strpos($modifier, 'theme-') === 0) {
+          $setting_field->removeClass($modifier);
+        }
+      }
+
       $setting_field->addClass('theme-default');
     }
 

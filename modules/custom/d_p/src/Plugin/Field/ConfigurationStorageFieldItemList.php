@@ -55,7 +55,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function hasClasses(): bool {
-    return (bool) count($this->getClassesValueAsArray());
+    return (bool) count($this->getClassesArrayValue());
   }
 
   /**
@@ -78,9 +78,9 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function getClasses() {
-    $classes = $this->getClassesValueAsArray();
+    $classes = $this->getClassesArrayValue();
 
-    $this->appendDefaultClasses($classes);
+    $this->processDefaultClasses($classes);
 
     return array_unique(array_filter($classes));
   }
@@ -101,7 +101,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * @return array
    *   Array of CSS classes.
    */
-  protected function getClassesValueAsArray(): array {
+  protected function getClassesArrayValue(): array {
     $classes = $classes_value = $this->getClassesValue();
 
     if (is_object($classes_value)) {
@@ -121,7 +121,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * {@inheritdoc}
    */
   public function addClass(string $value): ConfigurationStorageFieldItemListInterface {
-    $classes = $this->getClasses();
+    $classes = $this->getClassesArrayValue();
     $classes[] = $value;
 
     $this->setClasses($classes);
@@ -134,7 +134,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    */
   public function removeClass(string $value): ConfigurationStorageFieldItemListInterface {
     if ($this->hasClass($value)) {
-      $classes = $this->getClasses();
+      $classes = $this->getClassesArrayValue();
 
       unset($classes[array_search($value, $classes)]);
 
@@ -149,7 +149,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    */
   public function replaceClass(string $old_value, string $new_value): ConfigurationStorageFieldItemListInterface {
     if ($this->hasClass($old_value)) {
-      $classes = $this->getClasses();
+      $classes = $this->getClassesArrayValue();
       $classes[array_search($old_value, $classes)] = $new_value;
 
       $this->setClasses($classes);
@@ -172,18 +172,24 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
   }
 
   /**
-   * Adds default classes to classes set.
+   * Process default classes on classes set.
    *
    * @param array $classes
-   *   Default classes to be populated.
+   *   Classes stored in the field value.
    */
-  protected function appendDefaultClasses(array &$classes) {
-
+  protected function processDefaultClasses(array &$classes) {
     $defaults = $this->getStorageItemDefaultClasses(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME);
     foreach ($defaults as $modifier) {
+      $existing_classes = array_intersect($modifier['options'], $classes);
       // Add default classes if any value from options is not present.
-      if (empty(array_intersect($modifier['options'], $classes))) {
+      if (empty($existing_classes)) {
         $classes[] = $modifier['default'];
+      }
+      elseif (count($existing_classes) > 1) {
+        // Filter out the default value in case it was added accidentally.
+        if (in_array($modifier['default'], $existing_classes)) {
+          unset($classes[array_search($modifier['default'], $classes)]);
+        }
       }
     }
   }
