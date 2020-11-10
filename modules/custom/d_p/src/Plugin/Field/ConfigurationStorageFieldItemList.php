@@ -82,7 +82,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
 
     $this->appendDefaultClasses($classes);
 
-    return array_filter($classes);
+    return array_unique(array_filter($classes));
   }
 
   /**
@@ -262,7 +262,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
       foreach ($class_plugins as $plugin) {
         if ($plugin instanceof ParagraphSettingSelectInterface) {
           $defaults[] = [
-            'options' => $plugin->getOptions(),
+            'options' => array_keys($plugin->getOptions()),
             'default' => $plugin->getDefaultValue(),
           ];
         }
