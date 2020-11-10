@@ -6,8 +6,8 @@
  */
 
 use Drupal\Core\Template\Attribute;
-use Drupal\d_p\Helper\ParagraphModifiersHelper;
-use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+use Drupal\d_p\ParagraphSettingTypesInterface;
 
 /**
  * Implements hook_theme().
@@ -65,8 +65,10 @@ function d_p_tiles_preprocess_field(&$variables) {
 
         case 'field_d_media_image':
           $variables['wrapper_attributes'] = new Attribute();
-          $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
-          $featured_images = $paragraph_modifiers_helper->getModifier(SettingsWidget::PARAGRAPH_FEATURED_IMAGES);
+
+          /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+          $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+          $featured_images = $setting_field->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_FEATURED_IMAGES);
           $featured_images = empty($featured_images) ? [] : explode(',', $featured_images);
 
           $featured_images = array_map('intval', $featured_images);

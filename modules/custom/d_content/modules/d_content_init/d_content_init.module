@@ -271,16 +271,9 @@ function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$val
       break;
 
     case 'field_p_configuration_storage':
-      $data = [];
-      if (!empty($value['custom_class'])) {
-        $data += ['custom_class' => $value['custom_class']];
-      }
-      if (!empty($value['heading_type'])) {
-        $data += ['heading_type' => $value['heading_type']];
-      }
-      if (!empty($value['column_count'])) {
-        $data += ['column_count' => $value['column_count']];
-      }
+      $data = $value;
+      unset($data['type']);
+
       if (!empty($data)) {
         $entity->set($name, json_encode($data));
       }
@@ -484,8 +477,11 @@ function d_content_init_create_all($type = NULL) {
   $context = 'all';
 
     // Define block structure, allow other modules to modify it and create blocks.
-  if (empty($type) || $type === 'block') {
+  if (empty($type) || $type === 'block' || $type === 'block_second_run') {
     $block_structure = [];
+    if ($type != 'block') {
+      $context = $type;
+    }
     $module_handler->alter('block_structure', $block_structure, $context);
     Drupal::service('d_content_init.manager_block')
       ->importFromFiles($block_structure);

@@ -5,12 +5,13 @@
  * Contains d_paragraphs.module.
  */
 
-use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\d_p\Helper\ParagraphModifiersHelper;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
 use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
+use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
+use Drupal\d_p\ParagraphSettingTypesInterface;
 
 /**
  * Implements hook_theme().
@@ -47,11 +48,6 @@ function d_p_preprocess_paragraph(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  $paragraphModifiersHelper = new ParagraphModifiersHelper($paragraph);
-
-  if ($paragraphModifiersHelper->hasModifiers()) {
-    unset($variables['content'][$paragraphModifiersHelper->getSettingsFieldName()]);
-  }
   $bundle = $paragraph->bundle();
   $paragraph_id = 'paragraph-' . $bundle . '-' . $paragraph->id();
   $wrapper_attributes = [
@@ -68,23 +64,26 @@ function d_p_preprocess_paragraph(&$variables) {
    */
   foreach ($paragraphFieldDefinitions as $fieldName => $fieldConfig) {
     if ($fieldName == 'field_d_settings') {
+      /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $field */
       $field = $paragraph->get($fieldName);
 
       if ($field->isEmpty()) {
         continue;
       }
 
-      $settings = json_decode($field->first()->get('value')->getValue());
-
-      if (!isset($settings->custom_class) || !isset($settings->custom_theme_colors)
-        || strpos($settings->custom_class, 'theme-custom') === FALSE
+      if (
+        !$field->hasClasses()
+        || !$field->hasSettingValue(ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME)
+        || !$field->hasClass('theme-custom')
       ) {
         continue;
       }
 
+      $custom_theme = $field->getSettingValue(ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME);
+
       $wrapper_attributes['style'] = [
-        'background-color: ' . $settings->custom_theme_colors->background . ';',
-        'color: ' . $settings->custom_theme_colors->text . ';',
+        'background-color: ' . $custom_theme->background . ';',
+        'color: ' . $custom_theme->text . ';',
       ];
     }
 
@@ -106,12 +105,25 @@ function d_p_preprocess_paragraph(&$variables) {
 
   }
 
-  if ($paragraphModifiersHelper->hasCustomClasses()) {
-    $wrapper_attributes['class'][] = $paragraphModifiersHelper->getCustomClass();
+  try {
+    /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+    $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+
+    if (!$setting_field->isEmpty()) {
+      unset($variables['content'][$setting_field->getName()]);
+    }
+
+    if ($setting_field->hasClasses()) {
+      $wrapper_attributes['class'] = array_merge($wrapper_attributes['class'], $setting_field->getClasses());
+    }
   }
+  catch (\Throwable $exception) {
+  }
+
   $paragraph_attributes = [
     'data-id' => $paragraph_id,
   ];
+
   $variables['wrapper_attributes'] = new Attribute($wrapper_attributes);
   $variables['paragraph_attributes'] = new Attribute($paragraph_attributes);
   $variables['#attached']['library'][] = 'd_p/d_p';
@@ -208,7 +220,7 @@ function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, 
 
   if ($field_definition instanceof FieldConfig) {
     $config = $field_definition->id();
-    list ($entity_type, $bundle, $field_name) = explode('.', $config);
+    [$entity_type, $bundle, $field_name] = explode('.', $config);
 
     // Make the content of the CKEditor centred by default for the specified
     // paragraph types.
@@ -237,9 +249,14 @@ function d_p_preprocess_field(&$variables) {
   // Alter field_d_main_title.
   if ($variables['element']['#field_name'] == 'field_d_main_title') {
     $entity = $variables["element"]["#object"];
-    if ($entity->getEntityTypeId() == 'paragraph') {
-      $helper = new ParagraphModifiersHelper($entity);
-      $variables['heading_tag'] = $helper->getModifier(SettingsWidget::HEADING_TYPE_SETTING_NAME);
+    if ($entity->getEntityTypeId() === 'paragraph') {
+      try {
+        /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+        $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($entity);
+        $variables['heading_tag'] = $setting_field->getSettingValue(ParagraphSettingTypesInterface::HEADING_TYPE_SETTING_NAME);
+      }
+      catch (MissingConfigurationStorageFieldException $exception) {
+      }
     }
   }
 }

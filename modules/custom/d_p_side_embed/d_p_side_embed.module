@@ -6,8 +6,9 @@
  */
 
 use Drupal\Core\Template\Attribute;
-use Drupal\d_p\Helper\ParagraphModifiersHelper;
-use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -15,12 +16,18 @@ use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 function d_p_side_embed_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
-  $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
+
   switch ($bundle) {
     case 'd_p_side_embed':
-      $embed_side = $paragraph_modifiers_helper->getModifier(SettingsWidget::PARAGRAPH_SETTING_EMBED_LAYOUT);
-      // Process embed side.
-      $variables['embed_side'] = $embed_side ? $embed_side : 'left';
+      try {
+        /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+        $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+        $variables['embed_side'] = $setting_field
+          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_EMBED_LAYOUT, 'left');
+      }
+      catch (MissingConfigurationStorageFieldException $exception) {
+        \Drupal::logger('d_p_side_embed')->error($exception->getMessage());
+      }
 
       // Process embed code.
       $field_embed = $paragraph->get('field_d_embed')->get(0);
