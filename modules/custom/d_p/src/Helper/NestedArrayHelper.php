@@ -51,4 +51,25 @@ class NestedArrayHelper extends NestedArray {
     }
   }
 
+  /**
+   * Get ancestors on the given array element based on the parents.
+   *
+   * @param array $array
+   *   Array to be searched.
+   * @param array $parents
+   *   List of array keys.
+   *
+   * @return mixed
+   *   Array element.
+   */
+  public static function getParentElement(array $array, array $parents) {
+    $element = $array;
+
+    foreach ($parents as $parent) {
+      $element = $element[$parent];
+    }
+
+    return $element;
+  }
+
 }

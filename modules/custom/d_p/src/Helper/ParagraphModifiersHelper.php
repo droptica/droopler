@@ -5,6 +5,18 @@ namespace Drupal\d_p\Helper;
 use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 use Drupal\paragraphs\Entity\Paragraph;
 
+/**
+ * Class ParagraphModifiersHelper.
+ *
+ * @package Drupal\d_p\Helper
+ *
+ * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+ * As this is working on the particular field instance,
+ * we have unified and moved all the methods directly to the field list class:
+ * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
+ *
+ * @see https://www.drupal.org/project/droopler/issues/3180465
+ */
 class ParagraphModifiersHelper {
 
   /**
@@ -45,9 +57,8 @@ class ParagraphModifiersHelper {
      */
     foreach ($fieldsDefs as $fieldName => $field) {
       if ($field->getType() == 'field_p_configuration_storage') {
-        $settings = $paragraph->get($fieldName)->getValue();
+        $settings = $paragraph->get($fieldName)->first()->getValue();
         if (!empty($settings)) {
-          $settings = json_decode($settings[0]['value']);
           $this->settingsFieldName = $fieldName;
           $this->modifiers = $settings;
         }
