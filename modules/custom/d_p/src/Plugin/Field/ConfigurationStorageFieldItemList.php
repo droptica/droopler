@@ -71,7 +71,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
       return FALSE;
     }
 
-    return in_array((string) $classes, $this->getClasses());
+    return in_array((string) $classes, $this->getClassesArrayValue());
   }
 
   /**
@@ -159,12 +159,9 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
   }
 
   /**
-   * Setter for CSS classes.
-   *
-   * @param array $classes
-   *   Classes to be set.
+   * {@inheritdoc}
    */
-  protected function setClasses(array $classes): void {
+  public function setClasses(array $classes): void {
     $values = $this->getValue();
     $values->{ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME} = array_unique($classes);
 

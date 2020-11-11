@@ -71,6 +71,14 @@ interface ConfigurationStorageFieldItemListInterface {
   public function replaceClass(string $old_value, string $new_value): self;
 
   /**
+   * Setter for CSS classes.
+   *
+   * @param array $classes
+   *   Classes to be set.
+   */
+  public function setClasses(array $classes): void;
+
+  /**
    * Check if the given setting exists.
    *
    * @param string $setting_name

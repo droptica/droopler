@@ -1787,6 +1787,10 @@ function droopler_update_8127(&$sandbox) {
     $sandbox['current']++;
     /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
     $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+
+    // Always replace background gray light 2 class.
+    $setting_field->replaceClass('background-gray-light-2', 'theme-gray');
+
     $theme_classes = [
       'theme-default',
       'theme-primary',
@@ -1798,6 +1802,8 @@ function droopler_update_8127(&$sandbox) {
       $setting_field
         ->removeClass('theme-invert')
         ->removeClass('background-gray-light-2');
+
+      $paragraph->save();
       continue;
     }
 
@@ -1807,7 +1813,15 @@ function droopler_update_8127(&$sandbox) {
         case 'd_p_side_embed':
         case 'd_p_side_image':
         case 'd_p_side_tiles':
+          if ($paragraph->hasField('field_d_background_color')) {
+            $background = $paragraph->field_d_background_color->value;
+            if (in_array($background, ['#e4e4e4', '#dddddd'])) {
+              $setting_field->replaceClass('theme-invert', 'theme-gray');
+              break;
+            }
+          }
           $setting_field->replaceClass('theme-invert', 'theme-secondary');
+
           break;
 
         case 'd_p_text_paged':
@@ -1815,26 +1829,12 @@ function droopler_update_8127(&$sandbox) {
           $setting_field->replaceClass('theme-invert', 'theme-primary');
           break;
 
-        case 'd_p_single_text_block':
-          $setting_field->replaceClass('theme-invert', 'theme-default');
-          break;
-
         default:
           $setting_field->replaceClass('theme-invert', 'theme-default');
+          break;
       }
-    }
-    elseif ($setting_field->hasClass('background-gray-light-2')) {
-      // Migrate background-gray-light-2.
-      $setting_field->replaceClass('background-gray-light-2', 'theme-gray');
     }
     else {
-      $classes = $setting_field->getClasses();
-      foreach ($classes as $modifier) {
-        if (strpos($modifier, 'theme-') === 0) {
-          $setting_field->removeClass($modifier);
-        }
-      }
-
       $setting_field->addClass('theme-default');
     }
 
@@ -1907,8 +1907,10 @@ function droopler_update_8129(&$sandbox) {
 
     /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $settings_field */
     $settings_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
-    if ($paragraph->field_d_background_color) {
-      switch ($paragraph->field_d_background_color->value) {
+    $classes = $settings_field->getClasses();
+    $background_color = $paragraph->field_d_background_color->value;
+    if (!empty($background_color)) {
+      switch ($background_color) {
         case '#ac0000':
           $class = 'theme-primary';
           break;
@@ -1925,9 +1927,11 @@ function droopler_update_8129(&$sandbox) {
 
         default:
           $class = 'theme-custom';
+          $black = '#000000';
+          $white = '#ffffff';
           $settings_field->setSettingValue(ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME, [
-            'background' => $paragraph->field_d_background_color->value,
-            'text' => '#000000',
+            'background' => $background_color,
+            'text' => $background_color === $black ? $white : $black,
           ]);
       }
     }
@@ -1935,14 +1939,11 @@ function droopler_update_8129(&$sandbox) {
       $class = 'theme-default';
     }
 
-    $classes = $settings_field->getClasses();
-    foreach ($classes as $modifier) {
-      if (strpos($modifier, 'theme-') === 0) {
-        $settings_field->removeClass($modifier);
-      }
+    $classes = preg_replace('/theme-([a-z]*)/', $class, $classes);
+    if (array_search($class, $classes) === FALSE) {
+      $classes[] = $class;
     }
-
-    $settings_field->addClass($class);
+    $settings_field->setClasses($classes);
 
     $paragraph->save();
 
@@ -2008,7 +2009,7 @@ function droopler_update_8131(&$sandbox) {
     'd_p_side_tiles',
     'd_p_side_image',
     'd_p_side_embed',
-    'd_p_side_form',
+    'd_p_form',
   ];
   $paragraphs_per_batch = 25;
   if (!isset($sandbox['current'])) {
@@ -2043,7 +2044,7 @@ function droopler_update_8131(&$sandbox) {
         }
         break;
 
-      case 'd_p_side_form':
+      case 'd_p_form':
         if ($paragraph->hasField('field_d_layout_modifier')) {
           $form_layout = $paragraph->get('field_d_layout_modifier') ? $paragraph->get('field_d_layout_modifier')->value : 'left';
           $setting_field->setSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_FORM_LAYOUT, $form_layout);
@@ -2092,7 +2093,7 @@ function droopler_update_8131(&$sandbox) {
   if ($sandbox['#finished'] === 1) {
     // Remove fields from database.
     foreach ($bundles as $bundle) {
-      $field = $bundle == 'd_p_side_form' ? 'field_d_layout_modifier' : 'field_d_p_si_image_side';
+      $field = $bundle == 'd_p_form' ? 'field_d_layout_modifier' : 'field_d_p_si_image_side';
       $field = FieldConfig::loadByName('paragraph', $bundle, $field);
       if ($field !== NULL) {
         $field->delete();
@@ -2103,7 +2104,7 @@ function droopler_update_8131(&$sandbox) {
       'd_p_side_tiles',
       'd_p_side_image',
       'd_p_side_embed',
-      'd_p_side_form',
+      'd_p_form',
     ], '8131');
     \Drupal::service('d_update')->checklist()
       ->saveProgress(['v2.2' => $values]);

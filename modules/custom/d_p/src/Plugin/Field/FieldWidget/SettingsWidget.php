@@ -73,7 +73,7 @@ class SettingsWidget extends WidgetBase {
 
       switch ($type) {
         case 'css':
-          $classes = $this->getCssClassListFromString($value);
+          $classes = $this->getCssClassList($value);
 
           $this->processModifiers($element, $options['modifiers'], $classes);
 
@@ -132,7 +132,7 @@ class SettingsWidget extends WidgetBase {
 
       $type = $options['#subtype'] ?? $options['#type'];
       if ($type === 'css') {
-        $classes = $this->getCssClassListFromString($value);
+        $classes = $this->getCssClassList($value);
 
         foreach ($options['modifiers'] as $class => $modifier) {
           if (!$this->isElementAccessAllowed($element[$class])) {
@@ -316,6 +316,26 @@ class SettingsWidget extends WidgetBase {
     $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
 
     return $classes ?: [];
+  }
+
+  /**
+   * Getter for css class list.
+   *
+   * @param mixed $value
+   *   Stored value.
+   *
+   * @return array
+   *   Array of classes.
+   */
+  protected function getCssClassList($value): array {
+    if (is_array($value)) {
+      return $value;
+    }
+    elseif (is_string($value) || is_null($value)) {
+      return $this->getCssClassListFromString($value);
+    }
+
+    return [];
   }
 
   /**

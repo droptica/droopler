@@ -113,9 +113,7 @@ function d_p_preprocess_paragraph(&$variables) {
       unset($variables['content'][$setting_field->getName()]);
     }
 
-    if ($setting_field->hasClasses()) {
-      $wrapper_attributes['class'] = array_merge($wrapper_attributes['class'], $setting_field->getClasses());
-    }
+    $wrapper_attributes['class'] = array_merge($wrapper_attributes['class'], $setting_field->getClasses());
   }
   catch (\Throwable $exception) {
   }
