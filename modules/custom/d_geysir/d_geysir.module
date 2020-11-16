@@ -21,7 +21,7 @@ function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       foreach ($form['description'] as $paragraph_name => $attributes) {
         $file_server_path = $root_path . '/' . $module_path . '/images/' . $paragraph_name . '.png';
         if (file_exists($file_server_path)) {
-          $file_url = $base_url . $module_path . '/images/' . $paragraph_name . '.png';
+          $file_url = $base_url . '/' . $module_path . '/images/' . $paragraph_name . '.png';
           $form['description'][$paragraph_name]['#src'] = $file_url;
         }
       }
