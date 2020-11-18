@@ -10,6 +10,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Extension\Exception\UnknownExtensionException;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Config\StorageInterface;
@@ -172,7 +173,12 @@ class Updater {
     }
 
     // Check if the module exists.
-    if ($this->moduleExtensionList->exists($source) === FALSE) {
+    try {
+      $this->moduleExtensionList->getExtensionInfo($source);
+    }
+    catch (UnknownExtensionException $exception) {
+      $this->logger->warning('The specified extensions %extension could not be found or is not installed. Configuration import skipped.', ['%extension' => $source]);
+
       return TRUE;
     }
 
