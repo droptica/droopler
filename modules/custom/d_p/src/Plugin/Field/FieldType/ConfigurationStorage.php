@@ -45,7 +45,7 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
   public function getValue() {
     $values = parent::getValue();
 
-    return json_decode($values['value'] ?? []);
+    return json_decode($values['value'] ?? '');
   }
 
   /**
