@@ -186,17 +186,6 @@ article.node--type-blog-post {
     }
   }
 
-  .paragraph--full-screen-width {
-    img {
-      width: 100%;
-    }
-    .field--name-field-d-media-image {
-      img {
-        width: 100vw;
-      }
-    }
-  }
-
   .paragraph--type--d-p-blog-image {
     .field--name-field-d-media-image {
       margin: $d-blog-image-margin;
@@ -207,6 +196,17 @@ article.node--type-blog-post {
         margin-right: auto;
         display: block;
         height: auto;
+      }
+    }
+
+    &.paragraph--full-screen-width {
+      img {
+        width: 100%;
+      }
+      .field--name-field-d-media-image {
+        img {
+          width: 100vw;
+        }
       }
     }
   }
