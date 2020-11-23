@@ -1,5 +1,9 @@
 <?php
 
+use Drupal\Component\Utility\NestedArray;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+use Drupal\Core\Template\Attribute;
+
 /**
  * Implements hook_theme().
  */
@@ -15,9 +19,36 @@ function d_block_theme($existing, $type, $theme, $path) {
  * Implements hook_preprocess_paragraph().
  */
 function d_block_preprocess_paragraph__d_p_block(&$variables) {
-  $variables['container_class'] = 'container';
-  $block_content = $variables['elements']['field_block'][0]['content']['#block_content'] ?? FALSE;
-  if ($block_content) {
-    $variables['container_class'] = $block_content->field_paragraphs ? '' : 'container';
+  $variables['content_attributes'] = new Attribute([
+    'class' => ['content']
+  ]);
+
+  /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+  $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($variables['paragraph']);
+  if (!$setting_field->hasClass('full-width')) {
+    $variables['content_attributes']->addClass('container');
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_block_preprocess_field__paragraph__field_block__d_p_block(array &$variables) {
+  foreach ($variables['items'] as &$item) {
+    $item['content']['#title_attributes'] = [
+      'class' => [
+        'container',
+        'text-center',
+      ],
+    ];
+  }
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function d_block_preprocess_block(array &$variables) {
+  if (isset($variables['elements']['#title_attributes'])) {
+    $variables['title_attributes'] = NestedArray::mergeDeep( $variables['title_attributes'], $variables['elements']['#title_attributes']);
   }
 }
