@@ -541,7 +541,7 @@ $d-p-margins: map-merge(
 );
 @each $size, $value in $d-p-margins {
   @each $placement in (top, bottom) {
-    .margin-#{$placement}-#{$size} .paragraph {
+    .margin-#{$placement}-#{$size} > .paragraph {
       margin-#{$placement}: $value;
     }
   }
