@@ -1,0 +1,4 @@
+services:
+  d_geysir.utility.modal_detector:
+    class: Drupal\d_geysir\Utility\ModalDetector
+    arguments: ['@request_stack', '@controller_resolver']

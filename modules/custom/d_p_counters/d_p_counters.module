@@ -5,8 +5,9 @@
  * File containing Counter Paragraph module.
  */
 
-use Drupal\d_p\Helper\ParagraphModifiersHelper;
-use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
+use Drupal\d_p\ParagraphSettingTypesInterface;
 
 /**
  * Implements hook_theme().
@@ -52,16 +53,40 @@ function d_p_counters_preprocess_field(&$variables) {
     if ($variables['element']['#bundle'] == 'd_p_group_of_counters') {
       if ($variables['field_name'] == 'field_d_counter_reference') {
         $paragraph = $variables['element']['#object'];
-        $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
-        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME);
-        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME);
-        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME);
-        $variables['column_class'] = 'col-md-' . 12 / $columns_md . ' col-sm-' . 12 / $columns_sm . ' col-' . 12 / $columns_xs;
+        $logger = \Drupal::logger('d_p_counters');
+        try {
+          /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $settings_field */
+          $settings_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+
+          $columns = [
+            'col-md-' => $settings_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME),
+            'col-sm-' => $settings_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME),
+            'col-' => $settings_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME),
+          ];
+
+          $grid_size = 12;
+          $classes = [];
+          foreach ($columns as $key => $value) {
+            $classes[] = $key . ($grid_size / $value);
+          }
+
+          $variables['column_class'] = implode(' ', $classes);
+        }
+        catch (MissingConfigurationStorageFieldException $exception) {
+          $logger->error($exception->getMessage());
+        }
 
         // Add custom classes.
         foreach ($variables["items"] as &$item) {
-          $helper = new ParagraphModifiersHelper($item["content"]["#paragraph"]);
-          $item['attributes']->addClass($helper->getCustomClass());
+          try {
+            /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $item_setting_field */
+            $item_setting_field = ConfigurationStorage::getSettingsFieldFromEntity($item["content"]["#paragraph"]);
+
+            $item['attributes']->addClass($item_setting_field->getClasses());
+          }
+          catch (MissingConfigurationStorageFieldException $exception) {
+            $logger->error($exception->getMessage());
+          }
         }
       }
     }

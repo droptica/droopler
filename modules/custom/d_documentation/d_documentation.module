@@ -46,6 +46,6 @@ function d_documentation_block_structure_alter(&$structure, $context) {
   $path = drupal_get_path('module', 'd_documentation') . '/blocks';
 
   if ($context == 'all') {
-    $structure['block'] = ['file' => "$path/block_documentation_example.yml"];
+    $structure['d_documentation_block_example'] = ['file' => "$path/block_documentation_example.yml"];
   }
 }

@@ -5,8 +5,9 @@
  * Contains d_paragraphs_text_blocks.module..
  */
 
-use Drupal\d_p\Helper\ParagraphModifiersHelper;
-use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
 
 /**
  * Implements hook_theme().
@@ -32,17 +33,33 @@ function d_p_text_blocks_preprocess_field(&$variables) {
   if ($variables['element']['#entity_type'] == 'paragraph') {
     if ($variables['element']['#bundle'] == 'd_p_group_of_text_blocks') {
       if ($variables['field_name'] == 'field_d_p_tb_block_reference') {
+        try {
+          /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+          $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($variables['element']['#object']);
 
-        $paragraph_modifiers_helper = new ParagraphModifiersHelper($variables['element']['#object']);
-        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME);
-        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME);
-        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME);
-        // Enable grid setting.
-        if ($paragraph_modifiers_helper->hasModifier('with-grid')) {
-          set_columns_sizes($variables['items'], ['md' => $columns_md, 'sm' => $columns_sm, 'xs' => $columns_xs]);
+          $columns = [
+            'md' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME, 3),
+            'sm' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME, 1),
+            'xs' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME, 1),
+          ];
+
+          // Enable grid setting.
+          if ($setting_field->hasClass('with-grid')) {
+            set_columns_sizes($variables['items'], $columns);
+          }
+          else {
+            $grid_size = 12;
+            $classes = [];
+            foreach ($columns as $breakpoint => $value) {
+              $breakpoint_string = $breakpoint === 'xs' ? '' : $breakpoint . '-';
+              $classes[] = 'col-' . $breakpoint_string . ($grid_size / $value);
+            }
+
+            $variables['column_class'] = implode(' ', $classes);
+          }
         }
-        else {
-          $variables['column_class'] = 'col-md-' . 12 / $columns_md . ' col-sm-' . 12 / $columns_sm . ' col-' . 12 / $columns_xs;
+        catch (MissingConfigurationStorageFieldException $exception) {
+          \Drupal::logger('d_p_text_blocks')->error($exception->getMessage());
         }
       }
     }
@@ -87,10 +104,16 @@ function d_p_text_blocks_preprocess_paragraph(&$variables) {
 
   switch ($bundle) {
     case 'd_p_single_text_block':
-      $paragraphModifiersHelper = new ParagraphModifiersHelper($paragraph);
-      if ($paragraphModifiersHelper->hasModifier('with-price')) {
-        $variables['with_price'] = TRUE;
+      try {
+        /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+        $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+
+        $variables['with_price'] = $setting_field->hasClass('with-price');
       }
+      catch (MissingConfigurationStorageFieldException $exception) {
+        \Drupal::logger('d_p_text_blocks')->error($exception->getMessage());
+      }
+
       // Set background image if field is not empty.
       // This overrides background color settings.
       $field_image = $paragraph->get('field_d_media_background')->first();

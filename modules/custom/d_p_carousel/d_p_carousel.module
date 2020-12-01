@@ -5,8 +5,8 @@
  * Contains d_p_carousel module with Carousel Paragraph.
  */
 
-use Drupal\d_p\Helper\ParagraphModifiersHelper;
-use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
+use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
 
 /**
  * Implements hook_theme().
@@ -39,24 +39,28 @@ function d_p_carousel_preprocess_field(array &$variables) {
          * @var \Drupal\paragraphs\Entity\Paragraph $paragraph
          */
         $paragraph = $variables['element']['#object'];
-        $paragraph_modifiers_helper = new ParagraphModifiersHelper($paragraph);
-        $columns_md = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_SETTING_NAME);
-        $columns_sm = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_TABLET_SETTING_NAME);
-        $columns_xs = $paragraph_modifiers_helper->getModifier(SettingsWidget::COLUMN_COUNT_MOBILE_SETTING_NAME);
+        /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+        $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
 
-        $variables['column_classes'] = [
-          'col-md-' . floor(12 / $columns_md),
-          'col-sm-' . floor(12 / $columns_sm),
-          'col-' . floor(12 / $columns_xs),
+        $columns = [
+          'md' => ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME,
+          'sm' => ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME,
+          'xs' => ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME,
         ];
-        if ($paragraph_modifiers_helper->hasModifier('slider-desktop-off')) {
-          $variables['attributes']['class'][] = 'd-md-none';
+
+        $columns_values = [];
+        $variables['column_classes'] = [];
+        $grid = 12;
+
+        foreach ($columns as $breakpoint => $config_name) {
+          $value = $setting_field->getSettingValue($config_name);
+          $columns_values['columns_' . $breakpoint] = $value;
+
+          $breakpoint_suffix = $breakpoint === 'xs' ? '' : $breakpoint . '-';
+          $variables['column_classes'][] = 'col-' . $breakpoint_suffix . floor($grid / $value);
         }
-        $variables['#attached']['drupalSettings']['d_p_carousel'][$paragraph->id()] = [
-          'columns_md' => $columns_md,
-          'columns_sm' => $columns_sm,
-          'columns_xs' => $columns_xs,
-        ];
+
+        $variables['#attached']['drupalSettings']['d_p_carousel'][$paragraph->id()] = $columns_values;
       }
     }
   }

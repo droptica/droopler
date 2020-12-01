@@ -3,6 +3,10 @@
  * Style overrides for Geysir.
  */
 
+// Colour variables used in this component.
+$geysir-description-background: $color-paris !default;
+$geysir-add-more-button: $color-hecuba !default;
+
 .geysir-field-paragraph-wrapper {
   .geysir-field-paragraph-wrapper {
     /* Disable nested paragraphs. */
@@ -28,6 +32,9 @@
 #media-library-wrapper,
 #geysir-modal,
 #geysir-modal-form {
+  .horizontal-tabs {
+    background: $white;
+  }
   .button-override {
     @include make-btn;
     @include button-variant($background: $primary, $border: $primary);
@@ -61,11 +68,20 @@
   .paragraph-form .form-actions {
     margin-bottom: 1rem;
   }
+  .paragraphs-collapsed-description:after {
+    background: $geysir-description-background;
+    background: linear-gradient(to right, rgba($white,0) 0%, $geysir-description-background 100%);
+  }
   .tabledrag-handle .form-actions {
     margin-bottom: 15px;
   }
   .btn {
     min-width: 0;
+  }
+  .field-add-more-submit.btn-primary {
+    background-color: transparent;
+    border-color: transparent;
+    color: $geysir-add-more-button;
   }
   .field-multiple-table {
     th h4 {

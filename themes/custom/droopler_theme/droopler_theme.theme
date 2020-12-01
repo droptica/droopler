@@ -45,7 +45,16 @@ function droopler_theme_preprocess_html(&$variables) {
 function droopler_theme_preprocess_page(&$variables) {
   $layout = droopler_theme_get_page_layout($variables);
 
+  // Define header type variables.
+  $variables['header_layout'] = $layout;
+  $variables['is_disabled_header'] =  $layout === 'header_disabled';
+  $variables['is_cta_header'] = $layout === 'header_with_cta';
+
   // Define default classes for containers.
+  $page_attributes = [
+    'class' => ['page-wrapper'],
+    'id' => ['page-wrapper'],
+  ];
   $navbar_top_attributes = [
     'class' => ['navbar123'],
     'id' => ['navbar-top'],
@@ -76,6 +85,7 @@ function droopler_theme_preprocess_page(&$variables) {
   }
 
   // Declare attributes.
+  $variables['page_attributes'] = new Attribute($page_attributes);
   $variables['navbar_top_attributes'] = new Attribute($navbar_top_attributes);
   $variables['navbar_attributes'] = new Attribute($navbar_attributes);
   $variables['main_attributes'] = new Attribute($main_attributes);
@@ -84,7 +94,8 @@ function droopler_theme_preprocess_page(&$variables) {
   $variables['content_attributes'] = new Attribute($content_attributes);
 
   // Add attributes that depends of the page layout.
-  if ($layout === 'header_with_cta') {
+  if ($variables['is_cta_header']) {
+    $variables['page_attributes']->addClass(['landing-page-header',]);
     $variables['section_attributes']->addClass(['header-section',]);
   }
 
@@ -198,6 +209,10 @@ function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array 
 function droopler_theme_preprocess_input(&$variables) {
   // For submit elements.
   if ($variables['element']['#type'] == 'submit') {
+    // Omit class manipulation if is geysir modal.
+    if (\Drupal::service('d_geysir.utility.modal_detector')->isGeysirModalRequest()) {
+      return;
+    }
 
     // If button has some class.
     if (is_object($variables['attributes'])) {

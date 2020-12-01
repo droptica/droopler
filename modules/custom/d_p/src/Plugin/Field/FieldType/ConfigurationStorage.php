@@ -2,9 +2,12 @@
 
 namespace Drupal\d_p\Plugin\Field\FieldType;
 
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
+use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
+use Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface;
 
 /**
  * Plugin implementation of the 'field_p_settings' field type.
@@ -15,10 +18,11 @@ use Drupal\Core\TypedData\DataDefinition;
  *   module = "d_p",
  *   description = @Translation("Configuration storage"),
  *   default_widget = "field_d_p_set_settings",
- *   default_formatter = "string"
+ *   default_formatter = "string",
+ *   list_class = "\Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemList"
  * )
  */
-class ConfigurationStorage extends FieldItemBase {
+class ConfigurationStorage extends FieldItemBase implements ConfigurationStorageInterface {
 
   /**
    * {@inheritdoc}
@@ -38,9 +42,30 @@ class ConfigurationStorage extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
+  public function getValue() {
+    $values = parent::getValue();
+
+    return json_decode($values['value'] ?? '');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setValue($values, $notify = TRUE) {
+    if (is_object($values)) {
+      $values = json_encode($values);
+    }
+
+    parent::setValue($values, $notify);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function isEmpty() {
     $value = $this->get('value')->getValue();
-    return $value === NULL || $value === '';
+
+    return $value === NULL || $value === '' || $value === [];
   }
 
   /**
@@ -51,6 +76,25 @@ class ConfigurationStorage extends FieldItemBase {
       ->setLabel(t('Config Settings'));
 
     return $properties;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity):? ConfigurationStorageFieldItemListInterface {
+    /** @var \Drupal\field\FieldConfigInterface[] $fiels_definitions */
+    $fiels_definitions = $entity->getFieldDefinitions();
+
+    foreach ($fiels_definitions as $field_name => $field) {
+      if ($field->getType() == 'field_p_configuration_storage') {
+        return $entity->$field_name;
+      }
+    }
+
+    throw new MissingConfigurationStorageFieldException(t("No instance of configuration storage found on entity @entity of bundle @bundle", [
+      '@entity' => $entity->getEntityType()->id(),
+      '@bundle' => $entity->bundle(),
+    ]));
   }
 
 }

@@ -28,7 +28,14 @@ class ConfigurationForm extends ConfigFormBase {
    * @todo Move this to other class or replace with Config API.
    */
   public static function getMediaNames() {
-    return ['facebook', 'twitter', 'youtube', 'instagram', 'linkedin', 'dribbble'];
+    return [
+      'facebook',
+      'twitter',
+      'youtube',
+      'instagram',
+      'linkedin',
+      'dribbble',
+    ];
   }
 
   /**
