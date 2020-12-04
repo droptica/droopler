@@ -46,6 +46,39 @@ $d-p-gallery-bold-color: $color-troilus !default;
   }
 
   .field--name-field-d-media-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .field__item {
+      display: flex;
+      justify-content: center;
+
+      div {
+        width: 100%;
+      }
+    }
+
+    a[href*=".svg"] {
+      position: relative;
+      width: 100%;
+
+      &::before {
+        content: '';
+        display: block;
+        padding-bottom: calc(100% / (320 / 240) + 1em);
+      }
+
+      .no-image-style {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        object-fit: contain;
+        padding-bottom: 1em;
+      }
+    }
+
     img {
       width: 100%;
       height: auto;

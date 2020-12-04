@@ -92,14 +92,42 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
     .field--name-field-d-media-image {
       background-color: $d-p-side-tiles-image-background-color;
 
-      a {
-        display: block;
-      }
       img {
         width: 100%;
         height: auto;
         margin: 0 !important;
         display: block;
+      }
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &[href*=".svg"] {
+          position: relative;
+
+          &::before {
+            content: '';
+            display: block;
+            padding-bottom: calc(100% / (466 / 307));
+          }
+
+          .no-image-style {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        .no-image-style {
+          max-width: 466px;
+          max-height: 307px;
+          width: 100%;
+          height: auto;
+        }
       }
     }
   }

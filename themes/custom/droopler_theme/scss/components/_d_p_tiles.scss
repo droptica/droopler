@@ -12,6 +12,7 @@ $d-p-tiles-overlay-opacity: 0.6 !default;
 // Margins, paddings and sizing.
 $d-p-tiles-padding-top: 5% !default;
 $d-p-tiles-padding-bottom: 5% !default;
+$d-p-tiles-item-padding: 2px !default;
 
 // Override default values.
 .padding-top-default {
@@ -84,6 +85,37 @@ $d-p-tiles-padding-bottom: 5% !default;
     display: block !important;
     width: 100%;
 
+    a.d-tiles-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &[href*=".svg"] {
+        position: relative;
+
+        &::before {
+          content: '';
+          display: block;
+          padding-bottom: calc(100% / (428 / 282));
+        }
+
+        .no-image-style {
+          position: absolute;
+          top: $d-p-tiles-item-padding;
+          left: 0;
+          height: calc(100% - #{$d-p-tiles-item-padding} * 2);
+          object-fit: contain;
+        }
+      }
+
+      .no-image-style {
+        max-width: 466px;
+        max-height: 307px;
+        width: 100%;
+        height: auto;
+      }
+    }
+
     .featured {
       a {
         width: 50%;
@@ -111,7 +143,7 @@ $d-p-tiles-padding-bottom: 5% !default;
     }
 
     .video-embed {
-     max-width: 25%;
+      max-width: 25%;
       max-height: 314px;
       @include media-breakpoint-down(sm) {
         max-width: 50%;
@@ -120,7 +152,7 @@ $d-p-tiles-padding-bottom: 5% !default;
     }
 
     .d-tiles-item {
-      padding: 2px;
+      padding: $d-p-tiles-item-padding;
     }
 
     .d-tiles-item-2x2 {
