@@ -44,7 +44,7 @@ function d_content_field_widget_form_alter(&$element, FormStateInterface $form_s
  */
 function d_content_preprocess_page(&$variables) {
   if (isset($variables['node']) && ($node = $variables['node']) instanceof NodeInterface) {
-    if ($node->getType() == 'content_page') {
+    if ($node->getType() == 'content_page' && $node->hasField('field_header_cta')) {
       $variables['cta_button'] = $node->field_header_cta->view('d_header');
 
       if (empty($variables['cta_button'][0]['#title'])) {
