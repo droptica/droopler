@@ -224,7 +224,13 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    *   Values to be set.
    */
   protected function setEncodedValue($values) {
-    $this->setValue(json_encode($values), TRUE);
+    $values_to_set = [
+      [
+        'value' => json_encode($values),
+      ],
+    ];
+
+    $this->setValue($values_to_set, TRUE);
   }
 
   /**
