@@ -163,7 +163,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    */
   public function setClasses(array $classes): void {
     $values = $this->getValue();
-    $values->{ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME} = array_unique($classes);
+    $values->{ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME} = implode(self::CSS_CLASS_DELIMITER, array_unique($classes));
 
     $this->setEncodedValue($values);
   }
