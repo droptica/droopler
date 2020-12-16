@@ -1965,8 +1965,6 @@ function droopler_update_8129(&$sandbox) {
       'd_p_text_blocks',
     ];
     $values['droopler__droopler_update_8129_1'] = update_modules_configuration($modules, '8129');
-    \Drupal::service('d_update')->checklist()
-      ->saveProgress(['v2.2' => $values]);
 
     $bundles = [
       'd_p_side_image',
@@ -1982,6 +1980,9 @@ function droopler_update_8129(&$sandbox) {
 
     $values['droopler__droopler_update_8129_2'] = \Drupal::service('module_installer')
       ->install(['d_color'], TRUE);
+
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v2.2' => $values]);
   }
 }
 
