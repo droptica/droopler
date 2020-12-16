@@ -484,7 +484,6 @@ $d-p-themes: map-merge(
  */
 $d-p-paddings: () !default;
 $d-p-paddings-mobile: () !default;
-$d-p-paddings-extended: () !default;
 $d-p-paddings: map-merge(
     (
       default: 5%,
@@ -511,18 +510,54 @@ $d-p-paddings-mobile: map-merge(
       > .paragraph:not(.content-moved-inside),
       > .paragraph.content-moved-inside .content-inside-wrapper {
         padding-#{$placement}: $value;
+
+        @include media-breakpoint-down(sm) {
+          padding-#{$placement}: map-get($d-p-paddings-mobile, $size);
+        }
       }
     }
   }
 }
 
-@include media-breakpoint-down(sm) {
-  @each $size, $value in $d-p-paddings-mobile {
-    @each $placement in (top, bottom) {
-      .padding-#{$placement}-#{$size} {
-        > .paragraph:not(.content-moved-inside),
-        > .paragraph.content-moved-inside .content-inside-wrapper {
-          padding-#{$placement}: $value;
+$d-p-paddings-extended: () !default;
+$d-p-paddings-extended: map-merge(
+    (
+      default: 180px,
+      small: 140px,
+      big: 220px,
+      none: 100px
+    ),
+    $d-p-paddings-extended
+);
+
+$d-p-paddings-extended-mobile: () !default;
+$d-p-paddings-extended-mobile: map-merge(
+    (
+      default: 140px,
+      small: 110px,
+      big: 170px,
+      none: 90px
+    ),
+    $d-p-paddings-extended-mobile
+);
+
+.landing-page-header {
+  .paragraph-sections {
+    > .geysir-field-paragraph-wrapper:first-of-type section, // geysir
+    > div[data-geysir-paragraph-id]:first-child > section,
+    > section:first-of-type {
+      @each $size, $value in $d-p-paddings-extended {
+        &.padding-top-#{$size} {
+          > .paragraph:not(.content-moved-inside),
+          > .content-moved-inside:not(.d-p-banner) .content-inside-wrapper {
+            &:not(.d-p-banner) {
+              padding-top: $value;
+            }
+
+            @include media-breakpoint-down(md) {
+              padding-top: map-get($d-p-paddings-extended-mobile, $size);
+            }
+          }
         }
       }
     }
