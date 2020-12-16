@@ -451,8 +451,11 @@ $d-p-themes: map-merge(
 
 @each $name, $themeSettings in $d-p-themes {
   .theme-#{$name} {
-    > .paragraph,
-    > div[data-geysir-paragraph-id] > .paragraph,
+    > .paragraph:not(.content-moved-inside),
+    > div[data-geysir-paragraph-id] > .paragraph:not(.content-moved-inside),
+    &.theme-custom > .content-moved-inside,
+    &.theme-custom > .content-moved-inside > *:not(.content-inside-wrapper),
+    > .content-moved-inside .content-inside-wrapper,
     > .paragraph .theme-default > .paragraph,
     > .paragraph .theme-default > div[data-geysir-paragraph-id] > .paragraph {
       background: map-get($themeSettings, "background");
