@@ -79,13 +79,13 @@
           getExtendedPaddingElementOffset: function () {
             var element = this.getExtendedPaddingElement();
 
-            return element.offset().top + element.outerHeight();
+            return element.offset().top + this.getExtendedPaddingElementHeight();
           },
           getExtendedPaddingElementHeight: function () {
-            var extendedElement = this.getExtendedPaddingElement();
-            var extendedElementSizing = Math.ceil(extendedElement.outerHeight() + extendedElement.position().top);
+            var $extendedElement = this.getExtendedPaddingElement();
+            var extendedElementSizing = Math.ceil($extendedElement.outerHeight() + $extendedElement.position().top);
 
-            var sizingCompare = extendedElementSizing - Math.ceil(this.getElementPadding());
+            var sizingCompare = extendedElementSizing - parseInt($extendedElement.css('padding-bottom'));
 
             return sizingCompare > 0 ? sizingCompare : 0;
           },
@@ -108,7 +108,7 @@
             return parseFloat(clonedElementPadding);
           },
           isExtendedPaddingApplicable: function () {
-            return $element.offset().top < this.getExtendedPaddingElementOffset();
+            return $element.offset().top < 2 * this.getExtendedPaddingElementOffset();
           },
           getCombinedPaddingCssValue: function () {
             return this.getElementPadding() + this.getExtendedPaddingElementHeight() + 'px';
@@ -139,20 +139,17 @@
           var firstParagraph = $('.paragraph-sections section:first > .paragraph:first');
           var elementToObserve = firstParagraph;
 
-          if (firstParagraph.find('.content-inside-wrapper').length) {
+          if (firstParagraph.parent().find('.content-moved-inside .content-inside-wrapper').length) {
             elementToObserve = firstParagraph.find('.content-inside-wrapper');
           }
           else if (firstParagraph.find('.expandable-content .list-item-wrapper').length) {
             if (!firstParagraph.hasClass('d-p-group-of-text-blocks') && !firstParagraph.hasClass('d-p-carousel')) {
-              firstParagraph.find('.expandable-content .list-item-wrapper section').each(function () {
+              firstParagraph.find('.expandable-content .list-item-wrapper .paragraph').each(function () {
                 paragraphPaddingObserver($(this));
               });
 
               return;
             }
-          }
-          else if (firstParagraph.find('> .content-wrapper').length) {
-            elementToObserve = firstParagraph.find('> .content-wrapper');
           }
 
           paragraphPaddingObserver(elementToObserve);
