@@ -63,6 +63,105 @@
   };
 
   /**
+   * Calculates first paragraph padding for header with cta page layout.
+   *
+   * @type {{ attach: Drupal.behaviors.droopler_cta_header.attach }}
+   */
+  Drupal.behaviors.droopler_cta_header = {
+    attach: function (context, settings) {
+
+      var paragraphPaddingObserver = function ($element) {
+
+        var paragraphPaddingApp = {
+          getExtendedPaddingElement: function () {
+            return $('.hanging-header');
+          },
+          getExtendedPaddingElementOffset: function () {
+            var element = this.getExtendedPaddingElement();
+
+            return element.offset().top + this.getExtendedPaddingElementHeight();
+          },
+          getExtendedPaddingElementHeight: function () {
+            var $extendedElement = this.getExtendedPaddingElement();
+            var extendedElementSizing = Math.ceil($extendedElement.outerHeight() + $extendedElement.position().top);
+
+            var sizingCompare = extendedElementSizing - parseInt($extendedElement.css('padding-bottom'));
+
+            return sizingCompare > 0 ? sizingCompare : 0;
+          },
+          getElementPadding: function () {
+            var $clonedElement = $element.clone();
+
+            $clonedElement
+              .prop('style', '')
+              .css({
+                'position': 'absolute',
+                'z-index': -9999,
+                'top': -9999,
+                'left': -9999,
+              })
+              .appendTo($element.parent());
+
+            var clonedElementPadding = $clonedElement.css('padding-top');
+            $clonedElement.remove();
+
+            return parseFloat(clonedElementPadding);
+          },
+          isExtendedPaddingApplicable: function () {
+            return $element.offset().top < 2 * this.getExtendedPaddingElementOffset();
+          },
+          getCombinedPaddingCssValue: function () {
+            return this.getElementPadding() + this.getExtendedPaddingElementHeight() + 'px';
+          },
+          run: function () {
+            var header = this.getExtendedPaddingElement();
+
+            if (header.length  && $element.length) {
+              if (this.isExtendedPaddingApplicable()) {
+                $element.css('padding-top', this.getCombinedPaddingCssValue());
+                return this;
+              }
+              $element.removeAttr('style');
+            }
+
+            return this;
+          }
+        }
+
+        return paragraphPaddingApp.run();
+      };
+
+      var eventName = 'calculateDynamicHeaderOffset';
+
+      $(window)
+        .once(eventName)
+        .bind(eventName, Drupal.debounce(function () {
+          var firstParagraph = $('.paragraph-sections section:first > .paragraph:first');
+          var elementToObserve = firstParagraph;
+
+          if (firstParagraph.parent().find('.content-moved-inside .content-inside-wrapper').length) {
+            elementToObserve = firstParagraph.find('.content-inside-wrapper');
+          }
+          else if (firstParagraph.find('.expandable-content .list-item-wrapper').length) {
+            if (!firstParagraph.hasClass('d-p-group-of-text-blocks') && !firstParagraph.hasClass('d-p-carousel')) {
+              firstParagraph.find('.expandable-content .list-item-wrapper .paragraph').each(function () {
+                paragraphPaddingObserver($(this));
+              });
+
+              return;
+            }
+          }
+
+          paragraphPaddingObserver(elementToObserve);
+        }, 300));
+
+      $(window).on('resize',function () {
+        $(this).trigger(eventName);
+      }).trigger(eventName);
+    }
+  }
+
+  /**
    * Adds additional div above the unpublished content.
    * @type {{attach: Drupal.behaviors.droopler_unpublished.attach}}
    */
