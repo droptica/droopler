@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_blog_text.field_d_long_text
+    - paragraphs.paragraphs_type.d_p_blog_text
+  module:
+    - text
+id: paragraph.d_p_blog_text.default
+targetEntityType: paragraph
+bundle: d_p_blog_text
+mode: default
+content:
+  field_d_long_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

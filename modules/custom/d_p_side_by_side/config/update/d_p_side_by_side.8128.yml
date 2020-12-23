@@ -1,0 +1,77 @@
+core.entity_form_display.paragraph.d_p_side_by_side.default:
+  add:
+    dependencies:
+      module:
+        - field_group
+    third_party_settings:
+      field_group:
+        group_basic:
+          children:
+            - field_d_main_title
+            - field_d_media_icon
+            - field_d_long_text
+            - field_d_cta_link
+          parent_name: group_tabs
+          weight: 20
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: open
+            required_fields: true
+          label: Basic
+
+  change:
+    expected:
+      third_party_settings:
+        field_group:
+          group_tabs:
+            children:
+              - group_settings
+              - group_items
+          group_settings:
+            weight: 6
+            format_settings:
+              formatter: open
+          group_items:
+            weight: 7
+      content:
+        field_d_cta_link:
+          weight: 15
+        field_d_long_text:
+          weight: 1
+        field_d_media_icon:
+          weight: 14
+        field_d_p_sbs_items:
+          settings:
+            edit_mode: open
+            default_paragraph_type: ''
+
+    new:
+      third_party_settings:
+        field_group:
+          group_tabs:
+            children:
+              - group_basic
+              - group_items
+              - group_settings
+          group_settings:
+            weight: 22
+            format_settings:
+              formatter: closed
+          group_items:
+            weight: 21
+      content:
+        field_d_cta_link:
+          weight: 3
+        field_d_long_text:
+          weight: 2
+        field_d_media_icon:
+          weight: 1
+        field_d_p_sbs_items:
+          settings:
+            edit_mode: closed
+            default_paragraph_type: _none
+

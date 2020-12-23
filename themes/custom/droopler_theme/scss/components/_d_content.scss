@@ -1,0 +1,21 @@
+/**
+ * Content page cta.
+ */
+.d-content-cta-wrapper {
+  @include media-breakpoint-up(md) {
+    width: 100%;
+    max-width: 18rem;
+
+    a {
+      width: 100%;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    margin: 1rem;
+
+    a {
+      width: 100%;
+    }
+  }
+}

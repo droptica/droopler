@@ -1,0 +1,39 @@
+info:
+  type: d_product
+  title: 'Marine-XT 550'
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_product_init/d_product_init_machine-xt-550-1.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_machine-xt-550-2.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_machine-xt-550-3.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_machine-xt-550-4.jpg
+      alt: 'Title / Subtitle'
+body:
+  type: text
+  data: 'Engine for small motor boats. Mounted outside the boat. 40 horsepower ensures excellent performance and low fuel consumption.'
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: d_product_categories
+    terms:
+      - 'Boat engines'
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Boats
+field_d_product_link:
+  type: cta
+  data:
+    link: null
+    text: 'Buy now'

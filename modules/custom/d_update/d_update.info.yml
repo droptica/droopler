@@ -1,0 +1,10 @@
+name: 'Droopler Update'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+description: 'Provide support for updating Droopler versions.'
+dependencies:
+  - config_update:config_update
+  - checklistapi
+package: Droopler
+version: DROOPLER_VERSION

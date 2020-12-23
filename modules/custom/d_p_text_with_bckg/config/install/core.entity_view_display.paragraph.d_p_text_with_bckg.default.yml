@@ -1,0 +1,119 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_text_with_bckg.field_d_cta_link
+    - field.field.paragraph.d_p_text_with_bckg.field_d_long_text
+    - field.field.paragraph.d_p_text_with_bckg.field_d_main_title
+    - field.field.paragraph.d_p_text_with_bckg.field_d_media_background
+    - field.field.paragraph.d_p_text_with_bckg.field_d_media_icon
+    - field.field.paragraph.d_p_text_with_bckg.field_d_settings
+    - field.field.paragraph.d_p_text_with_bckg.field_d_subtitle
+    - paragraphs.paragraphs_type.d_p_text_with_bckg
+  module:
+    - field_group
+    - link
+    - text
+third_party_settings:
+  field_group:
+    group_d_block_background:
+      children:
+        - field_d_media_background
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Block background'
+    group_d_block_content:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+        - field_d_subtitle
+        - field_d_long_text
+        - field_d_cta_link
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Block content'
+id: paragraph.d_p_text_with_bckg.default
+targetEntityType: paragraph
+bundle: d_p_text_with_bckg
+mode: default
+content:
+  field_d_cta_link:
+    weight: 6
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_d_long_text:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_d_main_title:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_d_media_background:
+    type: entity_reference_entity_view
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      view_mode: d_responsive_background
+      link: false
+    third_party_settings: {  }
+  field_d_media_icon:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: d_icon
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_d_subtitle:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_d_settings: true
+  search_api_excerpt: true

@@ -1,0 +1,45 @@
+core.entity_form_display.paragraph.d_p_tiles.default:
+  add:
+    dependencies:
+      config:
+        - field.field.paragraph.d_p_tiles.field_d_cta_link
+      module:
+        - link_attributes
+    content:
+      field_d_cta_link:
+        weight: 7
+        settings:
+          placeholder_url: ''
+          placeholder_title: ''
+          enabled_attributes:
+            id: true
+            name: true
+            target: true
+            rel: true
+            class: true
+            accesskey: true
+            aria-label: false
+            title: false
+        third_party_settings: {  }
+        type: link_attributes
+        region: content
+core.entity_view_display.paragraph.d_p_tiles.default:
+  add:
+    dependencies:
+      config:
+        - field.field.paragraph.d_p_tiles.field_d_cta_link
+      module:
+        - link
+    content:
+      field_d_cta_link:
+        type: link
+        weight: 4
+        region: content
+        label: hidden
+        settings:
+          trim_length: 80
+          url_only: false
+          url_plain: false
+          rel: ''
+          target: ''
+        third_party_settings: {  }

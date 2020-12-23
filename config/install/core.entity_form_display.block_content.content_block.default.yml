@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_block
+    - field.field.block_content.content_block.field_d_long_text
+    - field.field.block_content.content_block.field_d_main_title
+  module:
+    - text
+id: block_content.content_block.default
+targetEntityType: block_content
+bundle: content_block
+mode: default
+content:
+  field_d_long_text:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_d_main_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+hidden: {  }

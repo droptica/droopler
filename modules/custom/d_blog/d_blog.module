@@ -1,0 +1,90 @@
+<?php
+
+use Drupal\Core\Site\Settings;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function d_blog_theme($existing, $type, $theme, $path) {
+  return [
+    'node__blog_post' => [
+      'base hook' => 'node',
+    ],
+    'node__blog_post__thumbnail' => [
+      'base hook' => 'node',
+    ],
+    'node__blog_post__teaser' => [
+      'base hook' => 'node',
+    ],
+    'node__blog_post__teaser_small' => [
+      'base hook' => 'node',
+    ],
+    'paragraph__d_p_blog_image' => [
+      'base hook' => 'paragraph',
+    ],
+    'field__node__field_blog_media_main_image__blog_post' => [
+      'base hook' => 'field',
+    ],
+    'page__blog' => [
+      'base hook' => 'page',
+    ],
+    'page__taxonomy__term__blog_posts_category' => [
+      'base hook' => 'page',
+    ],
+    'pager__blog_listing__page' => [
+      'base hook' => 'pager',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_links().
+ */
+function d_blog_preprocess_links(&$variables) {
+  if (isset($variables['links']['node-readmore'])) {
+    $variables['links']['node-readmore']['link']['#title'] = t('Read article...');
+  }
+}
+
+/**
+ * Implements hook_preprocess_responsive_image().
+ */
+function d_blog_preprocess_responsive_image(&$variables) {
+  // Generate a list of image links for httrack.
+  if (Settings::get('httrack_enabled', FALSE)) {
+    if (!empty($variables['sources'])) {
+      $id = substr(md5($variables['uri']), 0, 6);
+      foreach ($variables['sources'] as $k => $attribute) {
+        /** @var \Drupal\Core\Template\Attribute $attribute */
+        $source = preg_replace('/\s\d[xX]$/', '', $attribute->offsetGet('srcset'));
+        $variables['#attached']['html_head_link'][] = [
+          [
+            'href' => $source,
+            'rel' => "droopler:$id:img$k",
+          ],
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements theme_preprocess_page().
+ */
+function d_blog_preprocess_page(&$variables) {
+  if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical') {
+    $variables['page']['content']['pagetitle']['#attributes']['class'] = ['blog-listing-main-header'];
+  }
+}
+
+/**
+ * Implements hook_node_links_alter().
+ */
+function d_blog_node_links_alter(array &$links, NodeInterface $node, array &$context) {
+  foreach ($links as $key => $link) {
+    if (strpos($key, 'comment__field') !== FALSE) {
+      unset($links[$key]);
+    }
+  }
+}

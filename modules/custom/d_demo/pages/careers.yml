@@ -1,0 +1,191 @@
+info:
+  type: content_page
+  title: Careers
+field_page_section:
+  paragraphs:
+    -
+      paragraph_type: d_p_side_embed
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Work with Us'
+        field_d_embed:
+          type: text_long
+          data: '<iframe allow="autoplay" width="560" height="315" src="https://www.youtube.com/embed/6yO16tVGC1w?showinfo=0&amp;rel=0&amp;modestbranding=1&amp;title=&amp;fs=0&amp;controls=0" frameborder="0" allowfullscreen=""></iframe>'
+        field_d_long_text:
+          type: text_long
+          data: '<p>At Drooplengines, we employ over 2,000 experienced experts and engineers. We provide fantastic opportunities for professional development. Join our great Team today!</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          heading_type: h1
+          embed_layout: left
+    -
+      paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Job offers'
+        field_d_long_text:
+          type: text_long
+          data: |
+            <p class="text-align-center">We constantly seek <strong>new talents.</strong></p>
+            <p class="text-align-center">Open aplications:</p>
+
+            <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Job title</th>
+                        <th>Location</th>
+                        <th>Ref. number</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">Engineer</td>
+                        <td>London</td>
+                        <td>138991</td>
+                        <td><a href="#"> Apply </a></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">Engineer</td>
+                        <td>Berlin</td>
+                        <td>498403</td>
+                        <td><a href="#"> Apply </a></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">Engine designer</td>
+                        <td>Berlin</td>
+                        <td>434324</td>
+                        <td><a href="#"> Apply </a></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">Marketing Manager</td>
+                        <td>London</td>
+                        <td>234667</td>
+                        <td><a href="#"> Apply </a></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">Sales Manager</td>
+                        <td>Paris</td>
+                        <td>453422</td>
+                        <td><a href="#"> Apply </a></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+    -
+      paragraph_type: d_p_group_of_counters
+      data:
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/demo_bg_2.jpg
+              alt: 'Abstract Background'
+        field_d_main_title:
+          type: text
+          data: 'Our company in numbers'
+        field_d_counter_reference:
+          type: paragraph_reference
+          subtype: d_p_single_counter
+          data:
+            -
+              field_d_number:
+                type: number
+                data: 8
+              field_d_main_title:
+                type: text
+                data: Plants
+            -
+              field_d_number:
+                type: number
+                data: 21
+              field_d_main_title:
+                type: text
+                data: 'Offices worldwide'
+            -
+              field_d_number:
+                type: number
+                data: 2000
+              field_d_main_title:
+                type: text
+                data: Employees
+            -
+              field_d_number:
+                type: number
+                data: 15000
+              field_d_main_title:
+                type: text
+                data: 'Products and parts'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 4
+    -
+      paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Stay up to date'
+        field_d_long_text:
+          type: text_long
+          data: '<p>Get in touch for career or job-related questions, find company insights and updates or meet our employees.</p>'
+        field_d_cta_link:
+          type: cta
+          data:
+            link: 'internal:/contact'
+            text: 'CONTACT US'
+            class: 'btn btn-primary'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_subscribe_file
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Download our HR brochure'
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/demo_educational_4.jpg
+              alt: Educational
+        field_file_download:
+          type: file
+          data: d_demo/demo_file.zip
+          dst_dir: demo
+        field_d_p_sf_consent:
+          type: text
+          data: 'I accept the <a href="#">Terms and Conditions</a>'
+        field_d_p_sf_download_button:
+          type: text
+          data: 'GET DOWNLOAD LINK'
+        field_d_p_sf_download_page:
+          type: text_long
+          data: '<p>Text on the download page like: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p><p>[download-button]</p>'
+        field_d_p_sf_mail_body:
+          type: text_long
+          data: '<p>Mail body like: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p><p>[download-button]</p>'
+        field_d_long_text:
+          type: text_long
+          data: '<p>Find out more about our HR Department and recruitment process.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+field_teaser_media_image:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_demo/demo_educational_4.jpg
+      alt: Educational
+field_teaser_text:
+  type: text_long
+  data: 'Join our great Team today! At Drooplengines, we employ over 2,000 experienced experts and engineers. We provide fantastic opportunities for professional development.'

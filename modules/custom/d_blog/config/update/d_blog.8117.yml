@@ -1,0 +1,60 @@
+core.entity_form_display.node.blog_post.default:
+  add:
+    dependencies:
+      config:
+        - field.field.node.blog_post.field_meta_tags
+      module:
+        - metatag
+    content:
+      field_meta_tags:
+        weight: 26
+        settings:
+          sidebar: true
+        third_party_settings: {  }
+        type: metatag_firehose
+        region: content
+core.entity_view_display.node.blog_post.d_small_box:
+  add:
+    dependencies:
+      config:
+        - field.field.node.blog_post.field_meta_tags
+    module:
+      - lazy
+    hidden:
+      field_meta_tags: true
+core.entity_view_display.node.blog_post.default:
+  add:
+    dependencies:
+      config:
+        - field.field.node.blog_post.field_meta_tags
+      module:
+        - metatag
+    hidden:
+      field_meta_tags: true
+core.entity_view_display.node.blog_post.teaser:
+  add:
+    dependencies:
+      config:
+        - field.field.node.blog_post.field_meta_tags
+      module:
+        - lazy
+    hidden:
+      field_meta_tags: true
+core.entity_view_display.node.blog_post.teaser_small:
+  add:
+    dependencies:
+      config:
+        - field.field.node.blog_post.field_meta_tags
+      module:
+        - lazy
+    hidden:
+      field_meta_tags: true
+core.entity_view_display.node.blog_post.thumbnail:
+  add:
+    dependencies:
+      config:
+        - field.field.node.blog_post.field_meta_tags
+      module:
+        - lazy
+    hidden:
+      field_meta_tags: true

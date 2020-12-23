@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function d_social_media_theme($existing, $type, $theme, $path) {
+  // @todo Replace this theme with RenderElement class.
+  return [
+    'd_social_media' => [
+      'variables' => [
+        'links' => [],
+      ],
+    ],
+  ];
+}

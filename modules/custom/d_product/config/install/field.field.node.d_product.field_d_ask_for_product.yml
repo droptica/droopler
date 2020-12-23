@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_d_ask_for_product
+    - node.type.d_product
+id: node.d_product.field_d_ask_for_product
+field_name: field_d_ask_for_product
+entity_type: node
+bundle: d_product
+label: 'Ask for product'
+description: 'Show Ask Button on product page with redirect to contact page.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

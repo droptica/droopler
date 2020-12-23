@@ -1,0 +1,40 @@
+info:
+  type: d_product
+  title: 'JetSpeed 600'
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_product_init/d_product_init_jetspeed-600-1.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_jetspeed-600-2.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_jetspeed-600-3.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_jetspeed-600-4.jpg
+      alt: 'Title / Subtitle'
+body:
+  type: text
+  data: 'Jet engine for medium aircrafts. For many years appreciated by dozens of airlines from around the world. The engine is made of the most modern parts.'
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: d_product_categories
+    terms:
+      - 'Jet engines'
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Airplanes
+      - 'Jet engine'
+field_d_product_link:
+  type: cta
+  data:
+    link: null
+    text: 'Buy now'

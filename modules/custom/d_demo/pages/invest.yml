@@ -1,0 +1,201 @@
+info:
+  type: content_page
+  title: 'Investor relations'
+field_page_section:
+  paragraphs:
+    -
+      paragraph_type: d_p_side_image
+      data:
+        field_d_main_title:
+          type: text
+          data: 'For Investors'
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/d_demo_investors_1.jpg
+              alt: Investors
+        field_d_long_text:
+          type: text_long
+          data: '<p>This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          heading_type: h1
+          side_image_layout: right-wide
+    -
+      paragraph_type: d_p_group_of_text_blocks
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Stock market'
+        field_d_p_tb_block_reference:
+          type: paragraph_reference
+          subtype: paragraphs_wrapper
+          data:
+            -
+              paragraph_type: d_p_single_text_block
+              data:
+                field_d_long_text:
+                  type: text_long
+                  data: '<p><h3>Drooplengines</h3></p>'
+                field_d_settings:
+                  type: field_p_configuration_storage
+                  custom_class: 'with-price testing'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: full-width with-grid padding-bottom-none theme-default padding-top-default margin-top-default margin-bottom-default
+          column_count: 1
+    -
+      paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Investor Calendar'
+        field_d_long_text:
+          type: text_long
+          data: |
+            <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td scope="row">05.12.2019</td>
+                      <td>8th annual Global Market Conference</td>
+                  </tr>
+                  <tr>
+                     <td scope="row">17.12.2019</td>
+                     <td>The Investor Conference in London</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">02.01.2020</td>
+                      <td>Consolidated report for the 2010</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">13.02.2020</td>
+                      <td>Meeting with Investors in Paris</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">15.03.2020</td>
+                      <td>Engine Producers Market Conference in Berlin</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">06.04.2020</td>
+                      <td>First Quarter 2019 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">23.05.2020</td>
+                      <td>The Investor Conference in Warsaw</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">04.07.2020</td>
+                      <td>Second Quarter 2019 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">19.09.2020</td>
+                      <td>The Investor Conference in London</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">05.10.2020</td>
+                      <td>Third Quarter 2019 Financial Results</td>
+                  </tr>
+                </tbody>
+            </table>
+            </div>
+
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: Reports
+        field_d_long_text:
+          type: text_long
+          data: |
+            <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td scope="row">Report Q4 2019</td>
+                      <td>Drooplengines Reports Fourth Quarter 2019 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">Report Q3 2019</td>
+                      <td>Drooplengines Reports Third Quarter 2019 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">Report Q2 2019</td>
+                      <td>Drooplengines Reports Second Quarter 2019 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">Report Q1 2019</td>
+                      <td>Drooplengines Reports First Quarter 2019 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">Report Q4 2018</td>
+                      <td>Drooplengines Reports Fourth Quarter 2018 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">Report Q3 2018</td>
+                      <td>Drooplengines Reports Third Quarter 2018 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">Report Q2 2018</td>
+                      <td>Drooplengines Reports Second Quarter 2018 Financial Results</td>
+                  </tr>
+                  <tr>
+                      <td scope="row">Report Q1 2018</td>
+                      <td>Drooplengines Reports First Quarter 2018 Financial Results</td>
+                  </tr>
+                </tbody>
+            </table>
+            </div>
+
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-gray padding-top-none padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_side_image
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Contact for Investors'
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/d_demo_investors_2.jpg
+              alt: Investors
+        field_d_long_text:
+          type: text_long
+          data: '<p>John Smith</p> <p>ul. Stacyjna 1<br>53-613 Wrocław</p> <p>Mobile: +48 333 444 222</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_image_layout: left-wide
+field_teaser_media_image:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_demo/d_demo_investors_1.jpg
+      alt: 'Invest with us'
+field_teaser_text:
+  type: text_long
+  data: 'This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.'

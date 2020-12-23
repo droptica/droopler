@@ -1,0 +1,15 @@
+{% extends "field--text.html.twig" %}
+
+{#
+/**
+ * @file
+ * Custom theme implementation for body field in custom block.
+ * Adding wrapping div around default content.
+ */
+#}
+
+{% block content %}
+  <div class="field-content-wrapper">
+    {{ parent() }}
+  </div>
+{% endblock %}

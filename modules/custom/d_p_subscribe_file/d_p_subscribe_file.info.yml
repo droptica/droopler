@@ -1,0 +1,22 @@
+name: d_p_subscribe_file
+core: 8.x
+core_version_requirement: '^8 || ^9'
+description: 'Provides a paragraph with subscribe file.'
+type: module
+dependencies:
+  - content_translation
+  - d_media
+  - d_p
+  - d_p_subscribe_file
+  - field
+  - field_group
+  - file
+  - language
+  - media_library
+  - paragraphs
+  - text
+  - user
+  - views
+package: Paragraphs
+version: DROOPLER_VERSION
+core_incompatible: false

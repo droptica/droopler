@@ -1,0 +1,119 @@
+info:
+  type: block_content
+  bundle: d_paragraph_block
+  title: 'Block With Paragraphs Example'
+
+# Placement of the block in region.
+placement:
+  langcode: en
+  settings:
+    status: false
+    provider: block_content
+
+# Content block fields.
+fields:
+  field_paragraphs:
+    type: paragraph_reference
+    subtype: paragraphs_wrapper
+    data:
+      - paragraph_type: d_p_text_with_bckg
+        data:
+          field_d_media_background:
+            type: media_image
+            directory: demo
+            files:
+              - path: d_demo/d_demo_architecture.jpg
+                alt: 'Abstract background'
+          field_d_main_title:
+            type: text
+            data: 'Contact us'
+          field_d_long_text:
+            type: text_long
+            data: '<p>Lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. <strong>Nulla porttitor lorem in erat maximus</strong>, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+          field_d_cta_link:
+            type: cta
+            data:
+              link: 'internal:/documentation/text-paragraph'
+              text: 'Call To Action!'
+          field_d_settings:
+            type: field_p_configuration_storage
+            custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+      - paragraph_type: d_p_carousel
+        data:
+          field_d_main_title:
+            type: text
+            data: 'Our Partners'
+          field_d_p_cs_item_reference:
+            type: paragraph_reference
+            subtype: d_p_carousel_item
+            data:
+              - field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/demo_logo1.svg
+                      alt: BTU
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: 'internal:/documentation/carousel-paragraph'
+                    text: BTU
+              - field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/demo_logo2.svg
+                      alt: 'Cube Inc.'
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: 'internal:/documentation/carousel-paragraph'
+                    text: 'Cube Inc.'
+              - field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/demo_logo3.svg
+                      alt: 'Atlantic Jetlines'
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: 'internal:/documentation/carousel-paragraph'
+                    text: 'Atlantic Jetlines'
+              - field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/demo_logo4.svg
+                      alt: 'Rock World Cafe'
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: 'internal:/documentation/carousel-paragraph'
+                    text: 'Rock World Cafe'
+              - field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/demo_logo5.svg
+                      alt: YETI
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: 'internal:/documentation/carousel-paragraph'
+                    text: YETI
+              - field_d_media_icon:
+                  type: media_image
+                  directory: demo
+                  files:
+                    - path: d_demo/demo_droopler.svg
+                      alt: Droopler
+                field_d_cta_link:
+                  type: cta
+                  data:
+                    link: 'internal:/documentation/carousel-paragraph'
+                    text: Droopler
+          field_d_settings:
+            type: field_p_configuration_storage
+            custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+            column_count: 4

@@ -1,0 +1,14 @@
+core.entity_form_display.paragraph.d_p_single_text_block.default:
+  delete:
+    - content:field_d_background_color
+  delete_value:
+    - parents: dependencies:config
+      values:
+        - field.field.paragraph.d_p_single_text_block.field_d_background_color
+core.entity_view_display.paragraph.d_p_single_text_block.default:
+  delete:
+    - hidden:field_d_number
+  delete_value:
+    - parents: dependencies:config
+      values:
+        - field.field.paragraph.d_p_single_text_block.field_d_background_color

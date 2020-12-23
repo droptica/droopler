@@ -1,0 +1,59 @@
+editor.editor.full_html:
+  delete:
+    - settings:plugins:linkit
+    - settings:toolbar:rows
+  add:
+    settings:
+      toolbar:
+        rows:
+          - - name: Formatting
+              items:
+                - Bold
+                - Italic
+                - Underline
+                - Strike
+                - Superscript
+                - Subscript
+                - RemoveFormat
+                - '-'
+            - name: Undo
+              items:
+                - Undo
+                - Redo
+            - name: Alignment
+              items:
+                - JustifyLeft
+                - JustifyCenter
+                - JustifyRight
+                - JustifyBlock
+            - name: Linking
+              items:
+                - DrupalLink
+                - DrupalUnlink
+            - name: Lists
+              items:
+                - BulletedList
+                - NumberedList
+                - Outdent
+                - Indent
+            - name: Media
+              items:
+                - Blockquote
+                - DrupalImage
+                - Table
+                - HorizontalRule
+                - DrupalMediaLibrary
+            - name: 'Block Formatting'
+              items:
+                - Format
+            - name: Tools
+              items:
+                - SpecialChar
+                - Language
+                - ShowBlocks
+                - Source
+                - Maximize
+      plugins:
+        drupallink:
+          linkit_enabled: true
+          linkit_profile: content_nodes

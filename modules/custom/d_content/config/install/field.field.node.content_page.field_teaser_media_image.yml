@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser_media_image
+    - media.type.d_image
+    - media.type.d_video
+    - node.type.content_page
+id: node.content_page.field_teaser_media_image
+field_name: field_teaser_media_image
+entity_type: node
+bundle: content_page
+label: 'Teaser image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      d_image: d_image
+      d_video: d_video
+    sort:
+      field: revision_created
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: d_image
+field_type: entity_reference

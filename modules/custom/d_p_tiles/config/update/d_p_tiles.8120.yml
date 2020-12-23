@@ -1,0 +1,25 @@
+paragraphs.paragraphs_type.d_p_tiles:
+  add:
+    icon_default: null
+core.entity_view_display.paragraph.d_p_tiles.default:
+  change:
+    expected:
+      content:
+        field_d_long_text:
+          weight: 3
+        field_d_main_title:
+          weight: 2
+        field_d_media_icon:
+          weight: 1
+        field_d_media_image:
+          weight: 5
+    new:
+      content:
+        field_d_long_text:
+          weight: 2
+        field_d_main_title:
+          weight: 1
+        field_d_media_icon:
+          weight: 0
+        field_d_media_image:
+          weight: 3

@@ -1,0 +1,121 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_page_section
+    - node.type.d_product
+    - paragraphs.paragraphs_type.d_p_banner
+    - paragraphs.paragraphs_type.d_p_block
+    - paragraphs.paragraphs_type.d_p_carousel
+    - paragraphs.paragraphs_type.d_p_gallery
+    - paragraphs.paragraphs_type.d_p_group_of_counters
+    - paragraphs.paragraphs_type.d_p_group_of_text_blocks
+    - paragraphs.paragraphs_type.d_p_reference_content
+    - paragraphs.paragraphs_type.d_p_side_by_side
+    - paragraphs.paragraphs_type.d_p_side_embed
+    - paragraphs.paragraphs_type.d_p_side_image
+    - paragraphs.paragraphs_type.d_p_side_tiles
+    - paragraphs.paragraphs_type.d_p_subscribe_file
+    - paragraphs.paragraphs_type.d_p_text_paged
+    - paragraphs.paragraphs_type.d_p_text_with_bckg
+    - paragraphs.paragraphs_type.d_p_tiles
+  module:
+    - entity_reference_revisions
+id: node.d_product.field_page_section
+field_name: field_page_section
+entity_type: node
+bundle: d_product
+label: 'Page section'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      d_p_banner: d_p_banner
+      d_p_block: d_p_block
+      d_p_carousel: d_p_carousel
+      d_p_gallery: d_p_gallery
+      d_p_group_of_counters: d_p_group_of_counters
+      d_p_group_of_text_blocks: d_p_group_of_text_blocks
+      d_p_reference_content: d_p_reference_content
+      d_p_side_by_side: d_p_side_by_side
+      d_p_side_embed: d_p_side_embed
+      d_p_side_image: d_p_side_image
+      d_p_side_tiles: d_p_side_tiles
+      d_p_subscribe_file: d_p_subscribe_file
+      d_p_text_paged: d_p_text_paged
+      d_p_text_with_bckg: d_p_text_with_bckg
+      d_p_tiles: d_p_tiles
+    target_bundles_drag_drop:
+      d_p_banner:
+        enabled: true
+        weight: 22
+      d_p_blog_image:
+        weight: 23
+        enabled: false
+      d_p_block:
+        enabled: true
+        weight: 24
+      d_p_blog_text:
+        weight: 24
+        enabled: false
+      d_p_carousel:
+        enabled: true
+        weight: 25
+      d_p_carousel_item:
+        weight: 26
+        enabled: false
+      d_p_form:
+        weight: 27
+        enabled: false
+      d_p_gallery:
+        enabled: true
+        weight: 28
+      d_p_group_of_counters:
+        enabled: true
+        weight: 29
+      d_p_group_of_text_blocks:
+        enabled: true
+        weight: 30
+      d_p_node:
+        weight: 31
+        enabled: false
+      d_p_reference_content:
+        enabled: true
+        weight: 32
+      d_p_side_by_side:
+        enabled: true
+        weight: 33
+      d_p_side_embed:
+        enabled: true
+        weight: 34
+      d_p_side_image:
+        enabled: true
+        weight: 35
+      d_p_side_tiles:
+        enabled: true
+        weight: 36
+      d_p_single_counter:
+        weight: 37
+        enabled: false
+      d_p_single_text_block:
+        weight: 38
+        enabled: false
+      d_p_subscribe_file:
+        enabled: true
+        weight: 39
+      d_p_text_paged:
+        enabled: true
+        weight: 40
+      d_p_text_with_bckg:
+        enabled: true
+        weight: 41
+      d_p_tiles:
+        enabled: true
+        weight: 42
+field_type: entity_reference_revisions

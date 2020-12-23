@@ -1,0 +1,299 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - field.storage.node.field_product_categories
+    - field.storage.node.field_tags
+    - search_api.server.db_server
+    - core.entity_view_mode.node.full
+  module:
+    - taxonomy
+    - search_api
+    - node
+id: product_index
+name: 'Product Index'
+description: ''
+read_only: false
+field_settings:
+  aggregated_field:
+    label: 'Aggregated field'
+    property_path: aggregated_field
+    type: text
+    boost: !!float 3
+    configuration:
+      type: concat
+      fields:
+        - 'entity:node/body'
+        - 'entity:node/title'
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.body
+  description:
+    label: 'Product categories » Taxonomy term » Description'
+    datasource_id: 'entity:node'
+    property_path: 'field_product_categories:entity:description'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_product_categories
+      module:
+        - taxonomy
+  description_1:
+    label: 'Tags » Taxonomy term » Description'
+    datasource_id: 'entity:node'
+    property_path: 'field_tags:entity:description'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+      module:
+        - taxonomy
+  name:
+    label: 'Product categories » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_product_categories:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_product_categories
+      module:
+        - taxonomy
+  name_1:
+    label: 'Tags » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_tags:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          d_product: full
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - d_product
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  html_filter:
+    all_fields: true
+    fields:
+      - aggregated_field
+      - body
+      - description
+      - description_1
+      - name
+      - name_1
+      - rendered_item
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  ignore_character:
+    all_fields: true
+    fields:
+      - aggregated_field
+      - body
+      - description
+      - description_1
+      - name
+      - name_1
+      - rendered_item
+      - title
+    ignorable: '[''¿¡!?,.:;]'
+    strip:
+      character_sets:
+        Cc: 0
+        Cf: 0
+        Co: 0
+        Mc: 0
+        Me: 0
+        Mn: 0
+        Pc: Pc
+        Pd: Pd
+        Pe: Pe
+        Pf: Pf
+        Pi: Pi
+        Po: Po
+        Ps: Ps
+        Sc: 0
+        Sk: 0
+        Sm: 0
+        So: 0
+        Zl: 0
+        Zp: 0
+        Zs: 0
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
+  ignorecase:
+    all_fields: true
+    fields:
+      - aggregated_field
+      - body
+      - description
+      - description_1
+      - name
+      - name_1
+      - rendered_item
+      - title
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+  rendered_item: {  }
+  stemmer:
+    all_fields: true
+    fields:
+      - aggregated_field
+      - body
+      - description
+      - description_1
+      - rendered_item
+    exceptions:
+      mexican: mexic
+      texan: texa
+    weights:
+      preprocess_index: 0
+      preprocess_query: 0
+  stopwords:
+    all_fields: true
+    fields:
+      - aggregated_field
+      - body
+      - description
+      - description_1
+      - rendered_item
+    stopwords:
+      - a
+      - an
+      - and
+      - are
+      - as
+      - at
+      - be
+      - but
+      - by
+      - for
+      - if
+      - in
+      - into
+      - is
+      - it
+      - 'no'
+      - not
+      - of
+      - 'on'
+      - or
+      - s
+      - such
+      - t
+      - that
+      - the
+      - their
+      - then
+      - there
+      - these
+      - they
+      - this
+      - to
+      - was
+      - will
+      - with
+    weights:
+      preprocess_index: -5
+      preprocess_query: -2
+  tokenizer:
+    all_fields: true
+    fields:
+      - aggregated_field
+      - body
+      - description
+      - description_1
+      - rendered_item
+    spaces: ''
+    overlap_cjk: 1
+    minimum_word_size: '2'
+    weights:
+      preprocess_index: -6
+      preprocess_query: -6
+  transliteration:
+    all_fields: true
+    fields:
+      - aggregated_field
+      - body
+      - description
+      - description_1
+      - name
+      - name_1
+      - rendered_item
+      - title
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: db_server

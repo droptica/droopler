@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ *
+ * Default product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ *
+ * @ingroup themeable
+ */
+#}
+<article{{ attributes }}>
+  <div{{ attributes.addClass('container', 'commerce-product__content', 'mb-4') }}>
+    <div class="row">
+      <div class="section-images col-lg-8 col-md-12">
+        <div class="header">
+          <div class="title">
+            <h1>{{ product.title }}</h1>
+          </div>
+        </div>
+        {{ product.field_product_images }}
+      </div>
+      <div class="section-data col-lg-4 col-md-12">
+        <div class="products-links row">
+          <div class="buy-link col-sm-6 col-lg-12">
+            {{ product.variation_price }}
+            {{ product.variations }}
+          </div>
+          <div class="ask-link col-sm-6 col-lg-12">
+            {{ product.body }}
+          </div>
+          <div class="col-sm-6 col-lg-12">
+            {{ product|without('field_page_section', 'field_categories', 'body', 'variations', 'variation_price', 'field_product_images', 'title') }}
+          </div>
+          <div class="ask-link col-sm-6 col-lg-12">
+            {{ product.field_categories }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        {{ product|without('field_categories', 'body', 'variations', 'variation_price', 'field_product_images', 'title') }}
+      </div>
+    </div>
+  </div>
+</article>

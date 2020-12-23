@@ -1,0 +1,583 @@
+<?php
+
+/**
+ * @file
+ * d_content_init module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\we_megamenu\WeMegaMenuBuilder;
+
+/**
+ * Save node with paragraphs.
+ * This is alterable in another init modules.
+ *
+ * @param array $node_to_create
+ *   Array node with paragraph content.
+ *
+ * @return int
+ *   Node ID.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_save_node($node_to_create) {
+  $node = Node::create($node_to_create['info']);
+
+  foreach ($node_to_create as $field_name => $field_value) {
+    if (!empty($field_value['paragraphs'])) {
+      foreach ($field_value['paragraphs'] as $paragraph_data) {
+        $paragraph = d_content_init_fill_paragraph($paragraph_data);
+        $node->$field_name->appendItem($paragraph);
+      }
+    }
+    elseif ($field_name != 'info') {
+      d_content_init_fill_field($node, $field_name, $field_value);
+    }
+  }
+
+  $node->save();
+  return $node->id();
+}
+
+/**
+ * Save an entity.
+ *
+ * @param array $entity_to_create
+ *   Array with entity.
+ * @param string $entity_type
+ *   Entity type.
+ * @param string $uuid
+ *   UUID of entity.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_save_entity($entity_to_create, $entity_type, $uuid) {
+  $storage = \Drupal::entityTypeManager()->getStorage($entity_type);
+  $entity = $storage->create($entity_to_create + ['uuid' => $uuid]);
+  $entity->save();
+}
+
+/**
+ * Fill the field.
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ *   Entity object to set fields.
+ *
+ * @param string $name
+ *   Name of the field.
+ *
+ * @param array $value
+ *   Field array (type and value).
+ */
+function d_content_init_fill_field($entity, $name, $value) {
+  // Allow other init modules to add their fields types.
+  \Drupal::moduleHandler()->alter('init_field', $entity, $name, $value);
+
+  // If the field was not processed by any alter, use a standard field "set".
+  if (empty($value['processed'])) {
+    $entity->set($name, $value['data']);
+  }
+}
+
+/**
+ * Implements hook_init_field_alter().
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ * @param string $name
+ * @param array $value
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_init_field_alter(EntityInterface &$entity, &$name, &$value) {
+  /**
+   * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
+   */
+  $media_manager = Drupal::service('d_content_init.manager_media');
+  $type = $value['type'] ?? '';
+  $data = $value['data'] ?? [];
+
+  // Alter fields by their type.
+  switch ($type) {
+    case 'text':
+    case 'text_long':
+      $entity->set($name, $data);
+      $entity->$name->format = 'full_html';
+      $value['processed'] = TRUE;
+      break;
+
+    case 'cta':
+      $entity_attributes = [
+        'title' => $data['text'] ?? '',
+        'uri' => $data['link'] ?? '',
+        'options' => [
+          'attributes' => [
+            'class' => 'btn btn-primary',
+          ],
+        ],
+      ];
+      if (isset($data['options'])) {
+        $entity_attributes['options'] = $data['options'];
+      }
+      $entity->set($name, $entity_attributes);
+      $value['processed'] = TRUE;
+      break;
+
+    case 'file':
+    case 'image':
+      // Convert short format to full (keep backward compatibility).
+      if (!is_array($data)) {
+        $files = [
+          ['file' => $data],
+        ];
+      }
+      else {
+        $files = $data;
+      }
+      $destination_dir = $value['dst_dir'] ?? '';
+      // Add all files.
+      foreach ($files as $file) {
+        /**
+         * @var \Drupal\file\FileInterface $file_object
+         */
+        $file_object = d_content_init_get_file($file['file'], $destination_dir);
+        if (!empty($file_object)) {
+          $params = ["target_id" => $file_object->id()];
+          if ($type == 'image') {
+            if (!empty($file['alt'])) {
+              $params["alt"] = $file['alt'];
+            }
+          }
+          $entity->$name->appendItem($params);
+        }
+      }
+      $value['processed'] = TRUE;
+      break;
+
+    case 'paragraph_reference':
+      if (empty($value['subtype'])) {
+        $value['subtype'] = 'd_p_single_text_block';
+      }
+      foreach ($data as $child) {
+        if ($value['subtype'] == 'paragraphs_wrapper') {
+          $new_child['data'] = $child['data'] ?? [];
+          $new_child['paragraph_type'] = $child['paragraph_type'] ?? '';
+        }
+        else {
+          $new_child['data'] = $child;
+          $new_child['paragraph_type'] = $value['subtype'] ?? '';
+        }
+        $child_paragraph = d_content_init_fill_paragraph($new_child);
+        $entity->$name->appendItem($child_paragraph);
+      }
+      $value['processed'] = TRUE;
+      break;
+
+    case 'media_image':
+      $destination_directory = $value['directory'] ?? '';
+      $files = $value['files'] ?? [];
+      foreach ($files as $file) {
+        $path = d_content_init_parse_file_path($file['path'] ?? '');
+        $alt = $file['alt'] ?? '';
+        $media_entity = $media_manager->createMediaImageFromFile($path, $destination_directory, $alt);
+        if ($entity) {
+          $entity->$name->appendItem($media_entity);
+        }
+        else {
+          \Drupal::logger('d_content_init')
+            ->error('Empty media reference in entity #@id of type "@type" (field "@field").', [
+              '@id' => $entity->id(),
+              '@type' => $entity->getEntityType(),
+              '@field' => $name,
+            ]);
+        }
+      }
+      $value['processed'] = TRUE;
+      break;
+
+    case 'entity_reference':
+      if (isset($data['target_search'])) {
+        $target_entity_type = $data['target_type'] ?? 'node';
+        if ($target_entity = d_content_init_find_entity_by_properties($data['target_search'], $target_entity_type)) {
+          $entity->set($name, [['target_id' => $target_entity->id()]]);
+        }
+        else {
+          \Drupal::logger('d_content_init')
+            ->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
+              '@id' => $entity->id(),
+              '@type' => $entity->getEntityType(),
+              '@field' => $name,
+            ]);
+        }
+        $value['processed'] = TRUE;
+      }
+      break;
+
+    case 'block_reference':
+      if (!empty($data['target_type'])) {
+        $target_entity_type = $data['target_type'] ?? 'node';
+        if ($target_entity = d_content_init_find_entity_by_properties($data['target_search'], $target_entity_type)) {
+          $entity->set($name, [[
+            'plugin_id' => $target_entity_type . ':' . $target_entity->uuid(),
+            'settings' => $data['settings'],
+          ]]);
+        }
+        else {
+          \Drupal::logger('d_content_init')
+            ->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
+              '@id' => $entity->id(),
+              '@type' => $entity->getEntityType(),
+              '@field' => $name,
+            ]);
+        }
+      } elseif (!empty($data['plugin_id'])) {
+        $entity->set($name, [$data]);
+      }
+
+      $value['processed'] = TRUE;
+      break;
+
+    case 'taxonomy':
+      $vid = $data['vid'] ?? NULL;
+      foreach ($data['terms'] as $term_name) {
+        $terms = taxonomy_term_load_multiple_by_name($term_name, $vid);
+
+        if (empty($terms)) {
+          // Create term and use it.
+          $new_term = Term::create([
+            'name' => $term_name,
+            'vid' => $vid,
+          ]);
+
+          $new_term->save();
+          $terms = taxonomy_term_load_multiple_by_name($term_name, $vid);
+        }
+
+        foreach ($terms as $term) {
+          /** @var \Drupal\taxonomy\Entity\Term $term */
+          $entity->$name->appendItem($term->id());
+        }
+      }
+      $value['processed'] = TRUE;
+      break;
+
+    case 'field_p_configuration_storage':
+      $data = $value;
+      unset($data['type']);
+
+      if (!empty($data)) {
+        $entity->set($name, json_encode($data));
+      }
+      $value['processed'] = TRUE;
+      break;
+  }
+}
+
+/**
+ * Fill the paragraph.
+ *
+ * @param array $paragraph_data
+ *   Array with paragraph content.
+ *
+ * @return \Drupal\Core\Entity\EntityInterface|\Drupal\paragraphs\Entity\Paragraph
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_fill_paragraph($paragraph_data) {
+  $paragraph = Paragraph::create([
+    'type' => $paragraph_data['paragraph_type'],
+  ]);
+
+  foreach ($paragraph_data['data'] as $field_name => $field_value) {
+    d_content_init_fill_field($paragraph, $field_name, $field_value);
+  }
+
+  $paragraph->save();
+  return $paragraph;
+}
+
+/**
+ * Add page content from YML file.
+ *
+ * @param array $params
+ *   Array with parameters:
+ *   - module: a module with ymls and assets to look for (defaults to
+ *   d_content_init).
+ *   - file: YML file name without path.
+ *   - title: Menu link title
+ *   - weight: Menu link weight
+ *   - children: list of children
+ *   - parent: parent menu ID.
+ *
+ * @return int|null
+ *   Menu item plugin ID.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_add_node($params) {
+  $page_array = Yaml::decode(file_get_contents($params['file']));
+  $nid = d_content_init_save_node($page_array);
+
+  // Set homepage.
+  if ($homepage = isset($page_array['info']['homepage'])) {
+    if ($homepage) {
+      $config = \Drupal::configFactory()->getEditable('system.site');
+      $config->set('page.front', '/node/' . $nid)->save();
+      $params['parent'] = 'standard.front_page';
+    }
+  }
+
+  // If title is not empty add menu link.
+  if (!empty($params['link'])) {
+    $config = [
+      'title' => $params['link'],
+      'link' => ['uri' => 'entity:node/' . $nid],
+      'menu_name' => $params['menu'] ?? 'main',
+      'weight' => $params['weight'] ?? 0,
+      'expanded' => !empty($params['children']),
+    ];
+
+    // Handle submenus.
+    if (!empty($params['parent'])) {
+      $config['parent'] = $params['parent'];
+    }
+    else {
+      $config['parent'] = 'menu_link_content:';
+    }
+
+    // Make sure that there is anything in we_megamenu's table config field.
+    if (\Drupal::service('module_handler')->moduleExists('we_megamenu')) {
+      $menu_config = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme');
+      if (empty($menu_config)) {
+        WeMegaMenuBuilder::saveConfig('main', 'droopler_theme', '{"menu_config":{}}');
+      }
+    }
+
+    // Save link.
+    $menu_link = MenuLinkContent::create($config);
+    $menu_link->save();
+    return $menu_link->getPluginId();
+  }
+  else {
+    return NULL;
+  }
+}
+
+/**
+ * Add nodes from a given structure.
+ *
+ * @param $structure
+ *   Array with nodes (may be nested to one level).
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_add_nodes($structure) {
+  foreach ($structure as $key => $page) {
+    $mid = d_content_init_add_node($page);
+    if (!empty($page['children'])) {
+      foreach ($page['children'] as $child) {
+        $child['parent'] = $mid;
+        d_content_init_add_node($child);
+      }
+    }
+  }
+}
+
+/**
+ * Save file in Drupal.
+ *
+ * @param string $path
+ *   File path:
+ *   - "file.jpg" for files inside d_content_init
+ *   - "example_init/file.jpg" for files inside example_init module.
+ * @param string $dst_dir
+ *   File destination directory in public files directory.
+ *
+ * @return \Drupal\file\FileInterface|false
+ *   A file entity, or FALSE on error.
+ */
+function d_content_init_get_file($path, $dst_dir = NULL) {
+  // Prepare destination directory.
+  $directory = 'public://';
+  $dst_dir = trim($dst_dir, '/');
+  if (!empty($dst_dir)) {
+    $directory .= $dst_dir . '/';
+    if (!Drupal::service('file_system')
+      ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
+      Drupal::logger('file')
+        ->warning('Directory %directory could not be created or is not accessible.', ['%directory' => $directory]);
+      return FALSE;
+    }
+  }
+
+  // Save the file.
+  $data = file_get_contents(d_content_init_parse_file_path($path));
+  $filename = basename($path);
+  $image = file_save_data($data, $directory . $filename, FileSystemInterface::EXISTS_REPLACE);
+  return $image;
+}
+
+function d_content_init_parse_file_path($path) {
+  // Check if image name contains module.
+  $parts = explode('/', $path);
+  if (count($parts) == 2) {
+    $dir = drupal_get_path('module', $parts[0]);
+    $filename = $parts[1];
+  }
+  else {
+    // In case there is no module name specified in path, use placeholder file.
+    $dir = drupal_get_path('module', 'd_content_init');
+    $filename = 'placeholder.png';
+  }
+
+  return "$dir/assets/$filename";
+}
+
+/**
+ * Search for entity by its properties.
+ *
+ * @param array $properties
+ *   Array of the properties.
+ * @param string $entity_type
+ *   Type of the entity to find.
+ *
+ * @return bool|\Drupal\Core\Entity\EntityInterface|false
+ *   First found entity or FALSE.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function d_content_init_find_entity_by_properties(array $properties, $entity_type = 'node') {
+  $entities = \Drupal::entityTypeManager()
+    ->getStorage($entity_type)
+    ->loadByProperties($properties);
+  return $entities ? reset($entities) : FALSE;
+}
+
+/**
+ * Create all the content.
+ *
+ * @param string|null $type
+ *   Filter value which allows to execute only
+ *   a specific part of content creation process.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_create_all($type = NULL) {
+  $module_handler = \Drupal::moduleHandler();
+  $context = 'all';
+
+    // Define block structure, allow other modules to modify it and create blocks.
+  if (empty($type) || $type === 'block' || $type === 'block_second_run') {
+    $block_structure = [];
+    if ($type != 'block') {
+      $context = $type;
+    }
+    $module_handler->alter('block_structure', $block_structure, $context);
+    Drupal::service('d_content_init.manager_block')
+      ->importFromFiles($block_structure);
+  }
+
+  // Define content structure, allow other modules
+  // to modify it and create content.
+  if (empty($type) || $type === 'content') {
+    $content_structure = [];
+    $module_handler->alter('content_structure', $content_structure, $context);
+    d_content_init_add_nodes($content_structure);
+  }
+
+  if (empty($type) || $type === 'media') {
+    // Define media structure, allow other modules
+    // to modify it and create media entities.
+    $media_structure = [];
+    $module_handler->alter('media_structure', $media_structure, $context);
+    Drupal::service('d_content_init.manager_media')
+      ->importFromFiles($media_structure);
+  }
+
+  if (empty($type) || $type === 'index_content') {
+    if ($module_handler->moduleExists('search_api')) {
+      $indices = [];
+      $module_handler
+        ->invokeAll('d_content_init_index_content', [&$indices]);
+      d_content_init_index_content($indices);
+    }
+
+    if ($module_handler->moduleExists('search')) {
+      $search_page_repository = \Drupal::service('search.search_page_repository');
+      foreach ($search_page_repository->getIndexableSearchPages() as $entity) {
+        $entity->getPlugin()->updateIndex();
+      }
+    }
+  }
+}
+
+/**
+ * Create init content batch operation.
+ *
+ * @param string $type
+ *   Type filter of the process to execute.
+ * @param $context
+ *   Batch context.
+ */
+function d_content_init_create_all_batch(string $type, array &$context) {
+
+  // Here is only message added. The content is inserted by calling method bellow this switch.
+  switch ($type) {
+    case "content":
+      $context['message'] = t('Creating content');
+      break;
+
+    case "block":
+      $context['message'] = t('Creating blocks');
+      break;
+
+    case "media":
+      $context['message'] = t('Creating media');
+      break;
+
+    case "index_content":
+      $context['message'] = t('Content indexing');
+      break;
+  }
+  // This method is performing the most important action.
+  d_content_init_create_all($type);
+}
+
+/**
+ * Removes all the content and recreates it again.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_content_init_recreate_content() {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $entities = $storage->loadMultiple();
+  $storage->delete($entities);
+
+  d_content_init_create_all();
+}
+
+/**
+ * Runs Search API indexing for specified index.
+ *
+ * @param array $indices
+ *   Machine name of index to index.
+ */
+function d_content_init_index_content(array $indices) {
+  foreach ($indices as $indexName) {
+    $index = \Drupal\search_api\Entity\Index::load($indexName);
+    $index->indexItems();
+    \Drupal::logger('d_content_init')->notice("{$indexName} indexed.");
+  }
+}

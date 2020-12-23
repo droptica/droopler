@@ -1,0 +1,122 @@
+/**
+ * @file
+ * Styles for Droopler's tables.
+ */
+
+$cell_padding: .75rem;
+
+.table, table {
+  border: 0;
+  border-spacing: 0;
+  font-size: 0.857em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+
+  table {
+    font-size: 1em;
+  }
+
+  th {
+    padding: $cell_padding;
+    border-style:none;
+    border-top: 2px solid $white;
+    background: $color-agamemnon;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    vertical-align: middle;
+    line-height: 1.2;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  thead {
+
+    tr {
+
+      th {
+
+        a, a:hover, a:focus {
+          line-height: 1.2;
+          color: $white;
+          font-size: 1rem;
+        }
+
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .tablesort {
+          filter: brightness(0) invert(1);
+          margin-left: 7px;
+        }
+
+      }
+
+    }
+
+  }
+
+  tbody {
+
+    tr {
+      padding: 0.1em 0.6em;
+      background: lighten($color-paris, 4%);
+      border-bottom: none;
+
+      &:nth-of-type(odd) {
+        background: $color-paris;
+      }
+
+      td {
+        padding: $cell_padding;
+        vertical-align: top;
+        border: 2px solid $white;
+        text-align: left; /* [dir="ltr"] */
+
+        &:first-child {
+          border-left: none;
+        }
+
+        &:last-child {
+          border-right: none;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+[dir="rtl"] {
+  .table, table {
+    tbody {
+      td {
+        text-align: right;
+      }
+    }
+  }
+}
+
+/**
+ * Responsive tables priorities.
+ */
+@media screen and (max-width: 37.5em) { /* 600px */
+  th.priority-low,
+  td.priority-low,
+  th.priority-medium,
+  td.priority-medium {
+    display: none;
+  }
+}
+@media screen and (max-width: 60em) { /* 920px */
+  th.priority-low,
+  td.priority-low {
+    display: none;
+  }
+}

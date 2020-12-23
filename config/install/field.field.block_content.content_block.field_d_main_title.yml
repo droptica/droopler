@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_block
+    - field.storage.block_content.field_d_main_title
+id: block_content.content_block.field_d_main_title
+field_name: field_d_main_title
+entity_type: block_content
+bundle: content_block
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

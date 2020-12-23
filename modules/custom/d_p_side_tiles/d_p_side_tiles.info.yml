@@ -1,0 +1,25 @@
+name: d_p_side_tiles
+core: 8.x
+core_version_requirement: '^8 || ^9'
+description: 'Provides a paragraph with side Masonry tiles.'
+type: module
+dependencies:
+  - colorbox
+  - content_translation
+  - d_media
+  - d_p
+  - d_p_side_image
+  - d_p_tiles
+  - field
+  - field_group
+  - file
+  - language
+  - link
+  - link_attributes
+  - media_library
+  - options
+  - paragraphs
+  - text
+package: Paragraphs
+version: DROOPLER_VERSION
+core_incompatible: false

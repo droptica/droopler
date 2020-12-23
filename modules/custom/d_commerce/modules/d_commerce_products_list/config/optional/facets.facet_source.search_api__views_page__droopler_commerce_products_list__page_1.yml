@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - d_commerce_products_list
+id: search_api__views_page__droopler_commerce_products_list__page_1
+name: 'search_api:views_page__droopler_commerce_products_list__page_1'
+filter_key: ''
+url_processor: d_commerce_product_list_url_processor
+breadcrumb:
+  active: false
+  before: true
+  group: false

@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_d_product_media
+    - media.type.d_image
+    - media.type.d_video
+    - node.type.d_product
+id: node.d_product.field_d_product_media
+field_name: field_d_product_media
+entity_type: node
+bundle: d_product
+label: 'Product images'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      d_image: d_image
+      d_video: d_video
+    sort:
+      field: revision_created
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: d_image
+field_type: entity_reference

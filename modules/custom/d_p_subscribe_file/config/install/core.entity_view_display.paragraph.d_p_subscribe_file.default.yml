@@ -1,0 +1,130 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_subscribe_file.field_d_long_text
+    - field.field.paragraph.d_p_subscribe_file.field_d_main_title
+    - field.field.paragraph.d_p_subscribe_file.field_d_media_background
+    - field.field.paragraph.d_p_subscribe_file.field_d_media_icon
+    - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_additional_info
+    - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_consent
+    - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_download_button
+    - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_download_page
+    - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_mail_body
+    - field.field.paragraph.d_p_subscribe_file.field_d_settings
+    - field.field.paragraph.d_p_subscribe_file.field_file_download
+    - paragraphs.paragraphs_type.d_p_subscribe_file
+  module:
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_d_subscribe_background:
+      children:
+        - field_d_media_background
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Subscribe background'
+    group_d_subscribe_content:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+        - field_d_long_text
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Subscribe content'
+    group_d_subscribe_info:
+      children:
+        - field_d_p_sf_additional_info
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Subscribe info'
+id: paragraph.d_p_subscribe_file.default
+targetEntityType: paragraph
+bundle: d_p_subscribe_file
+mode: default
+content:
+  field_d_long_text:
+    weight: 4
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_d_main_title:
+    weight: 3
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_d_media_background:
+    type: entity_reference_entity_view
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      view_mode: d_banner
+      link: false
+    third_party_settings: {  }
+  field_d_media_icon:
+    type: entity_reference_entity_view
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      view_mode: d_icon
+      link: false
+    third_party_settings: {  }
+  field_d_p_sf_additional_info:
+    weight: 5
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  field_d_p_sf_consent: true
+  field_d_p_sf_download_button: true
+  field_d_p_sf_download_page: true
+  field_d_p_sf_mail_body: true
+  field_d_settings: true
+  field_file_download: true
+  search_api_excerpt: true

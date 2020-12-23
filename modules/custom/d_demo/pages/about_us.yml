@@ -1,0 +1,117 @@
+info:
+  type: content_page
+  title: 'About us'
+field_page_section:
+  paragraphs:
+    -
+      paragraph_type: d_p_side_image
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Efficiency & innovation'
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/d_demo_flying_jetplane.jpg
+              alt: Jetplane
+        field_d_long_text:
+          type: text_long
+          data: '<p>We have over 20 years of experience in the production of high-class engines. We not only deliver products but also provide full technical support.</p>'
+        field_d_cta_link:
+          type: cta
+          data:
+            link: 'internal:/contact'
+            text: 'Contact us'
+            options:
+              attributes:
+                class:
+                  - btn
+                  - btn-secondary
+                target: _self
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          heading_type: h1
+          side_image_layout: left
+    -
+      paragraph_type: d_p_text_paged
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Our Strategy'
+        field_d_long_text:
+          type: text_long
+          data: '<p>Our company''s mission is to provide excellent and reliable products<br />with high-quality customer service.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_side_image
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Work with Us'
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/d_demo_laptop_typing.jpg
+              alt: 'Laptop typing'
+        field_d_long_text:
+          type: text_long
+          data: '<p>We are constantly expanding our team with new employees. We are looking for experienced product designers and engineers. Check our current job offers.</p>'
+        field_d_cta_link:
+          type: cta
+          data:
+            link: 'internal:/careers'
+            text: Careers
+            options:
+              attributes:
+                class:
+                  - btn
+                  - btn-primary
+                target: _self
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class:  theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          side_image_layout: right
+    -
+      paragraph_type: d_p_banner
+      data:
+        field_d_main_title:
+          type: text
+          data: 'For investors'
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/d_demo_architecture2.jpg
+              alt: Architecture
+        field_d_cta_link:
+          type: cta
+          data:
+            link: 'internal:/investor-relations'
+            text: 'Read more'
+            options:
+              attributes:
+                class:
+                  - btn
+                  - btn-primary
+                target: _self
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+field_teaser_media_image:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_demo/d_demo_flying_jetplane.jpg
+      alt: Jetplane
+field_teaser_text:
+  type: text_long
+  data: 'At DrooplEngines we have over 20 years of experience in the production of high-class engines. We not only deliver products but also provide full technical support.'

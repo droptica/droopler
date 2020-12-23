@@ -1,0 +1,53 @@
+// Colour variables used in this file.
+$d-search-page-link-color: $color-iphis !default;
+$d-search-page-link-color-hover: $color-achillies !default;
+
+// Margins, paddings and sizing.
+$d-search-page-link-margin: 10px !default;
+$d-search-page-link-size: 24px !default;
+$d-search-page-link-indent: -999px !default;
+$d-search-button-top-margin-desktop: 30px !default;
+$d-search-button-top-margin-mobile: 10px !default;
+$d-search-button-max-width-mobile: 11rem !default;
+
+
+.block-search-page-link {
+  .search-page-link {
+    display: block;
+    margin: $d-search-page-link-margin;
+    width: $d-search-page-link-size;
+    height: $d-search-page-link-size;
+    text-indent: $d-search-page-link-indent;
+    mask: url('#{$assets-path}/search-icon.svg');
+    background-color: $d-search-page-link-color;
+
+    &:hover {
+      background-color: $d-search-page-link-color-hover;
+    }
+
+    @include media-breakpoint-only(lg) {
+      width: 0.75 * $d-search-page-link-size;
+      height: 0.75 * $d-search-page-link-size;
+    }
+  }
+}
+
+.path-search {
+  .form-group {
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+    }
+
+    input[type=submit] {
+      margin-top: $d-search-button-top-margin-mobile;
+
+      @include media-breakpoint-up(md) {
+        margin-top: $d-search-button-top-margin-desktop;
+      }
+
+      @include media-breakpoint-down(md) {
+        max-width: $d-search-button-max-width-mobile;
+      }
+    }
+  }
+}

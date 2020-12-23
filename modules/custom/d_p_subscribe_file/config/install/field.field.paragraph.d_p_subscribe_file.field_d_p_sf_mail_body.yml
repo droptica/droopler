@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_sf_mail_body
+    - paragraphs.paragraphs_type.d_p_subscribe_file
+  module:
+    - text
+id: paragraph.d_p_subscribe_file.field_d_p_sf_mail_body
+field_name: field_d_p_sf_mail_body
+entity_type: paragraph
+bundle: d_p_subscribe_file
+label: 'E-mail body'
+description: "Use [download-button] to render download button.\r\n\r\n"
+required: true
+translatable: true
+default_value:
+  -
+    value: "<p>Hi, this is your download link</p>\r\n\r\n<p>The link will be active 24h from now</p>\r\n\r\n<p>[download-button]</p>\r\n\r\n<p>Droopler Team</p>\r\n"
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

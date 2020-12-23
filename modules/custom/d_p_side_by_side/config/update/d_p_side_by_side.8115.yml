@@ -1,0 +1,130 @@
+core.entity_form_display.paragraph.d_p_side_by_side.default:
+  add:
+    dependencies:
+      config:
+        - field.field.paragraph.d_p_side_by_side.field_d_cta_link
+        - field.field.paragraph.d_p_side_by_side.field_d_media_icon
+      module:
+        - link_attributes
+        - media_library
+    third_party_settings:
+      field_group:
+        group_settings:
+          children:
+            - field_d_media_icon
+            - field_d_cta_link
+    content:
+      field_d_long_text:
+        type: text_textarea
+        weight: 1
+        region: content
+        settings:
+          rows: 5
+          placeholder: ''
+        third_party_settings: {  }
+      field_d_main_title:
+        type: string_textfield
+        weight: 0
+        region: content
+        settings:
+          size: 60
+          placeholder: ''
+        third_party_settings: {  }
+      field_d_cta_link:
+        weight: 15
+        settings:
+          placeholder_url: ''
+          placeholder_title: ''
+          enabled_attributes:
+            id: true
+            name: true
+            target: true
+            rel: true
+            class: true
+            accesskey: true
+            aria-label: false
+            title: false
+        third_party_settings: {  }
+        type: link_attributes
+        region: content
+      field_d_media_icon:
+        weight: 14
+        settings:
+          media_types: {  }
+        third_party_settings: {  }
+        type: media_library_widget
+        region: content
+  change:
+    expected:
+      content:
+        field_d_settings:
+          weight: 2
+    new:
+      content:
+        field_d_settings:
+          weight: 16
+  delete_value:
+    - parents: hidden:config
+      values:
+        - field_d_long_text
+        - field_d_main_title
+core.entity_view_display.paragraph.d_p_side_by_side.default:
+  add:
+    dependencies:
+      config:
+        - field.field.paragraph.d_p_side_by_side.field_d_cta_link
+        - field.field.paragraph.d_p_side_by_side.field_d_media_icon
+      module:
+        - link
+    content:
+      field_d_long_text:
+        type: text_default
+        weight: 2
+        region: content
+        label: hidden
+        settings: {  }
+        third_party_settings: {  }
+      field_d_main_title:
+        type: string
+        weight: 1
+        region: content
+        label: hidden
+        settings:
+          link_to_entity: false
+        third_party_settings: {  }
+      field_d_cta_link:
+        weight: 6
+        label: hidden
+        settings:
+          trim_length: 80
+          url_only: false
+          url_plain: false
+          rel: ''
+          target: ''
+        third_party_settings: {  }
+        type: link
+        region: content
+      field_d_media_icon:
+        weight: 0
+        label: hidden
+        settings:
+          view_mode: d_icon
+          link: false
+        third_party_settings: {  }
+        type: entity_reference_entity_view
+        region: content
+  delete_value:
+    - parents: hidden:config
+      values:
+        - field_d_long_text
+        - field_d_main_title
+field.field.paragraph.d_p_side_by_side.field_d_p_sbs_items:
+  add:
+    settings:
+      handler_settings:
+        target_bundles:
+          d_p_media: d_p_media
+        target_bundles_drag_drop:
+          d_p_media:
+            enabled: true
+            weight: 50

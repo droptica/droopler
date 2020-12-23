@@ -1,0 +1,25 @@
+name: d_p_node
+core: 8.x
+core_version_requirement: '^8 || ^9'
+description: 'Provides a paragraph with node reference.'
+type: module
+dependencies:
+  - content_translation
+  - d_p
+  - entity_reference_display
+  - entity_reference_revisions
+  - field
+  - field_group
+  - image
+  - language
+  - link
+  - link_attributes
+  - node
+  - paragraphs
+  - svg_image
+  - text
+  - user
+  - views
+package: Paragraphs
+version: DROOPLER_VERSION
+core_incompatible: false

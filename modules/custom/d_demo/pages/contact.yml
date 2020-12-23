@@ -1,0 +1,128 @@
+info:
+  type: content_page
+  title: Contact
+field_page_section:
+  paragraphs:
+    -
+      paragraph_type: d_p_side_image
+      data:
+        field_d_main_title:
+          type: text
+          data: Contact
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/d_demo_jet.jpg
+              alt: Jet
+        field_d_long_text:
+          type: text_long
+          data: '<p>Our dedicated support and sales teams will answer any questions related to our products and services. Please check our office addresses or send us an email.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          heading_type: h1
+          side_image_layout: right-wide
+    -
+      paragraph_type: d_p_form
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Contact Form'
+        field_d_long_text:
+          type: text_long
+          data: '<p>Please use our contact form to send us a message. We will contact you within 24 hours.</p>'
+        field_d_media_background:
+          type: media_image
+          directory: demo
+          files:
+            -
+              path: d_demo/d_demo_architecture.jpg
+              alt: Architecture
+        field_d_forms:
+          type: entity_reference
+          data: feedback
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          form_layout: right
+    -
+      paragraph_type: d_p_group_of_text_blocks
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Our offices'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: full-width with-tiles theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count: 4
+        field_d_p_tb_block_reference:
+          type: paragraph_reference
+          data:
+            -
+              field_d_long_text:
+                type: text_long
+                data: '<p>Wrocław<br />Stacyjna 1<br />53-613 Wrocław<br />Polska</p> <p>71 32 23 233</p> <p>wroclaw@droptica.com</p>'
+              field_d_main_title:
+                type: text
+                data: Wrocław
+              field_d_settings:
+                type: field_p_configuration_storage
+                custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+            -
+              field_d_long_text:
+                type: text_long
+                data: '<p>Gdańsk<br />Azymutalna 9<br />80-298 Gdańsk<br />Polska</p> <p>71 32 23 233</p> <p>gdansk@droptica.com</p>'
+              field_d_main_title:
+                type: text
+                data: Gdańsk
+              field_d_settings:
+                type: field_p_configuration_storage
+                custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+            -
+              field_d_long_text:
+                type: text_long
+                data: '<p>Rzeszów<br />Warszawska 18<br />35-202 Rzeszów<br />Polska</p> <p>71 32 23 233</p> <p>rzeszow@droptica.com</p>'
+              field_d_main_title:
+                type: text
+                data: Rzeszów
+              field_d_settings:
+                type: field_p_configuration_storage
+                custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+            -
+              field_d_long_text:
+                type: text_long
+                data: '<p>Toruń<br />Grudziądzka 46-48<br />87-100 Toruń<br />Polska</p> <p>71 32 23 233</p> <p>torun@droptica.com</p>'
+              field_d_main_title:
+                type: text
+                data: Toruń
+              field_d_settings:
+                type: field_p_configuration_storage
+                custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+    -
+      paragraph_type: d_p_side_embed
+      data:
+        field_d_main_title:
+          type: text
+          data: 'Find us'
+        field_d_embed:
+          type: text_long
+          data: '<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10019.591321160302!2d16.973667!3d51.1103452!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2sie!4v1564423228931!5m2!1spl!2sie" frameborder="0" style="border:0" allowfullscreen></iframe>'
+        field_d_long_text:
+          type: text_long
+          data: '<p>Check our office locations on the map.<br /> Check how to get to our offices.</p>'
+        field_d_settings:
+          type: field_p_configuration_storage
+          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          embed_layout: full
+field_teaser_media_image:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_demo/d_demo_architecture.jpg
+      alt: Architecture
+field_teaser_text:
+  type: text_long
+  data: 'Our dedicated support and sales teams will answer any questions related to our products and services. Please check our office addresses or send us an email.'

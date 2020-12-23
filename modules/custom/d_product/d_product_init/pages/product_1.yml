@@ -1,0 +1,40 @@
+info:
+  type: d_product
+  title: 'Super Charged Engine v12'
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_product_init/d_product_init_super-charged-engine-1.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_super-charged-engine-2.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_super-charged-engine-3.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_super-charged-engine-4.jpg
+      alt: 'Title / Subtitle'
+body:
+  type: text
+  data: 'Modern automotive engine for sports vehicles. Excellent performance with moderate fuel consumption.'
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: d_product_categories
+    terms:
+      - 'Car Engines'
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Cars
+      - 'Sport Cars'
+field_d_product_link:
+  type: cta
+  data:
+    link: null
+    text: 'Buy now'

@@ -1,0 +1,95 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_single_counter.field_d_main_title
+    - field.field.paragraph.d_p_single_counter.field_d_media_icon
+    - field.field.paragraph.d_p_single_counter.field_d_number
+    - field.field.paragraph.d_p_single_counter.field_d_settings
+    - paragraphs.paragraphs_type.d_p_single_counter
+  module:
+    - d_p
+    - field_group
+    - media_library
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_settings
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_basic:
+      children:
+        - field_d_number
+        - field_d_main_title
+        - field_d_media_icon
+      parent_name: group_tabs
+      weight: 7
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Basic
+    group_settings:
+      children:
+        - field_d_settings
+      parent_name: group_tabs
+      weight: 8
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Settings
+id: paragraph.d_p_single_counter.default
+targetEntityType: paragraph
+bundle: d_p_single_counter
+mode: default
+content:
+  field_d_main_title:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: 'ie. Clients this year'
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_d_media_icon:
+    weight: 3
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
+    region: content
+  field_d_number:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_d_settings:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: field_d_p_set_settings
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

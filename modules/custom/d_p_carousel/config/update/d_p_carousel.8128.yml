@@ -1,0 +1,152 @@
+core.entity_form_display.paragraph.d_p_carousel.default:
+  add:
+    third_party_settings:
+      field_group:
+        group_basic:
+          children:
+            - field_d_main_title
+            - field_d_media_icon
+            - field_d_long_text
+            - field_d_cta_link
+          parent_name: group_tabs
+          weight: 20
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: open
+            required_fields: true
+          label: Basic
+    content:
+      field_d_cta_link:
+        weight: 7
+      field_d_p_cs_item_reference:
+        settings:
+          edit_mode: open
+          default_paragraph_type: ''
+
+  change:
+    expected:
+      third_party_settings:
+        field_group:
+          group_tabs:
+            children:
+              - group_settings
+              - group_items
+          group_settings:
+            children:
+              - field_d_main_title
+              - field_d_media_icon
+              - field_d_long_text
+              - field_d_settings
+              - field_d_cta_link
+            weight: 7
+            format_settings:
+              formatter: open
+          group_items:
+            weight: 8
+
+    new:
+      third_party_settings:
+        field_group:
+          group_tabs:
+            children:
+              - group_basic
+              - group_items
+              - group_settings
+          group_settings:
+            children:
+              - field_d_settings
+            weight: 22
+            format_settings:
+              formatter: closed
+          group_items:
+            weight: 21
+      content:
+        field_d_cta_link:
+          weight: 5
+        field_d_p_cs_item_reference:
+          settings:
+            edit_mode: closed
+            default_paragraph_type: d_p_carousel_item
+
+core.entity_form_display.paragraph.d_p_carousel_item.default:
+  add:
+    dependencies:
+      module:
+        - field_group
+    third_party_settings:
+      field_group:
+        group_tabs:
+          children:
+            - group_basic
+            - group_settings
+          parent_name: ''
+          weight: 0
+          format_type: tabs
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            direction: horizontal
+          label: Tabs
+        group_basic:
+          children:
+            - field_d_main_title
+            - field_d_media_icon
+            - field_d_long_text
+            - field_d_cta_link
+          parent_name: group_tabs
+          weight: 8
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: open
+            required_fields: true
+          label: Basic
+        group_settings:
+          children:
+            - field_d_settings
+          parent_name: group_tabs
+          weight: 9
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Settings
+
+  change:
+    expected:
+      content:
+        field_d_cta_link:
+          weight: 3
+        field_d_long_text:
+          weight: 2
+        field_d_main_title:
+          weight: 0
+        field_d_media_icon:
+          weight: 1
+        field_d_settings:
+          weight: 4
+
+    new:
+      content:
+        field_d_cta_link:
+          weight: 4
+        field_d_long_text:
+          weight: 3
+        field_d_main_title:
+          weight: 1
+        field_d_media_icon:
+          weight: 2
+        field_d_settings:
+          weight: 10

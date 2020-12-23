@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.droopler_products
+    - core.entity_view_mode.commerce_product.teaser
+    - field.field.commerce_product.droopler_products.body
+    - field.field.commerce_product.droopler_products.field_categories
+    - field.field.commerce_product.droopler_products.field_page_section
+    - field.field.commerce_product.droopler_products.field_product_images
+  enforced:
+    module:
+      - d_commerce_product
+id: commerce_product.droopler_products.teaser
+targetEntityType: commerce_product
+bundle: droopler_products
+mode: teaser
+content:
+  field_categories:
+    weight: 2
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_product_images:
+    type: entity_reference_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: d_product_image
+      link: false
+    third_party_settings: {  }
+    region: content
+  title:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  variations:
+    type: commerce_add_to_cart
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      combine: true
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  field_page_section: true
+  langcode: true
+  search_api_excerpt: true
+  stores: true
+  uid: true

@@ -1,0 +1,8 @@
+services:
+  d_p.entity_parent_paragraph:
+    class: Drupal\d_p\Service\ParentParagraphService
+    arguments: []
+
+  d_p.paragraph_settings.plugin.manager:
+    class: Drupal\d_p\ParagraphSettingPluginManager
+    parent: default_plugin_manager

@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * D_content module.
+ */
+
+use Drupal\Core\Render\Markup;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function d_content_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'node_content_page_edit_form' || $form_id == 'node_content_page_form') {
+    if (isset($form['field_header_cta'])) {
+      $form['field_header_cta']['#states'] = [
+        'visible' => [
+          ':input[name="field_header_layout"]' => ['value' => 'header_with_cta'],
+        ],
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function d_content_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  $field_definition = $context['items']->getFieldDefinition();
+  if ($field_definition instanceof FieldConfig &&
+    $field_definition->getName() == 'field_header_cta' &&
+    empty($element['url']['#default_value']) &&
+    empty($element['options']['attributes']['class']['#default_value'])
+  ) {
+    $element['options']['attributes']['class']['#default_value'] = 'btn btn-primary';
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function d_content_preprocess_page(&$variables) {
+  if (isset($variables['node']) && ($node = $variables['node']) instanceof NodeInterface) {
+    if ($node->getType() == 'content_page') {
+      $variables['cta_button'] = $node->field_header_cta->view('d_header');
+
+      if (empty($variables['cta_button'][0]['#title'])) {
+        $variables['cta_button'] = false;
+      } else {
+        // Prepare new title in HTML format
+        $new_title = '<span class="d-md-none icon-hand-pointer-o"></span>';
+        $new_title .= '<span class="d-none d-md-block">' . $variables['cta_button'][0]['#title'] . '</span>';
+
+        $variables['cta_button'][0]['#title'] = Markup::create($new_title);
+      }
+    }
+  }
+}

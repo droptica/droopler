@@ -1,0 +1,36 @@
+core.entity_view_display.media.d_image.d_product_image:
+  delete:
+    - content:field_media_image:settings:responsive_image_style
+  change:
+    expected:
+      dependencies:
+        config:
+          - core.entity_view_mode.media.d_product_image
+          - field.field.media.d_image.field_media_image
+          - media.type.d_image
+          - responsive_image.styles.product_thumbnail
+      content:
+        field_media_image:
+          type: responsive_image
+    new:
+      dependencies:
+        config:
+          - core.entity_view_mode.media.d_product_image
+          - field.field.media.d_image.field_media_image
+          - image.style.product_thumbnail_pc
+          - media.type.d_image
+        module:
+          - lazy
+          - svg_image
+      content:
+        field_media_image:
+          type: image
+  add:
+    content:
+      field_media_image:
+        settings:
+          image_style: product_thumbnail_pc
+          svg_attributes:
+            width: null
+            height: null
+          svg_render_as_image: true

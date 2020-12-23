@@ -1,0 +1,117 @@
+<?php
+
+use Drupal\block\Entity\Block;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+
+/**
+ * Creates menu with links, based on specified parameters.
+ *
+ * @param array $menu
+ *   Menu definition array.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_demo_create_menu_with_links(array $menu) {
+  \Drupal::entityTypeManager()->getStorage('menu')->create(
+    $menu['data']
+  )->save();
+
+  foreach ($menu['links'] as $key => $link) {
+    MenuLinkContent::create([
+      'title' => $link['title'],
+      'link' => ['uri' => 'internal:' . $link['url']],
+      'menu_name' => $menu['data']['id'],
+      'expanded' => $link['expanded'] ?? TRUE,
+      'weight' => $link['weight'] ?? $key,
+    ])->save();
+  }
+}
+
+/**
+ * Creates a secondary menu to be placed in the header.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function d_demo_create_secondary_menu() {
+  $secondary_menu = [
+    'data' => [
+      'id' => 'secondary-menu',
+      'label' => 'Secondary menu',
+      'description' => 'Secondary menu',
+    ],
+    'links' => [
+      ['title' => 'About Us', 'url' => '/about-us'],
+      ['title' => 'For investors', 'url' => '/investor-relations'],
+      ['title' => 'Careers', 'url' => '/careers'],
+      ['title' => 'Contact', 'url' => '/contact'],
+    ],
+  ];
+  d_demo_create_menu_with_links($secondary_menu);
+}
+
+/**
+ * Creates a menu to be placed after footer.
+ */
+function d_demo_create_bottom_footer_menu() {
+  $bottom_footer_menu = [
+    'data' => [
+      'id' => 'bottom-footer-menu',
+      'label' => 'Bottom footer menu',
+      'description' => 'Menu placed after footer',
+    ],
+    'links' => [
+      ['title' => 'Privacy policy', 'url' => '/privacy-policy'],
+      ['title' => 'Terms of Service', 'url' => '/terms-of-service'],
+      ['title' => 'GDPR', 'url' => '/gdpr'],
+    ],
+  ];
+
+  d_demo_create_menu_with_links($bottom_footer_menu);
+}
+
+/**
+ * Implements hook_install().
+ */
+function d_demo_install() {
+  $config = \Drupal::configFactory()->getEditable('d_social_media.settings')
+    ->set('link_facebook', 'https://www.facebook.com/dropticacom/')
+    ->set('link_twitter', 'https://twitter.com/droptica')
+    ->set('link_youtube', 'https://www.youtube.com/channel/UCL_XD86NqAJppzw3w7QJqGw')
+    ->set('link_instagram', 'https://www.instagram.com/droptica/')
+    ->set('link_linkedin', 'https://www.linkedin.com/company/2947414')
+    ->save();
+
+  d_demo_create_secondary_menu();
+  d_demo_create_bottom_footer_menu();
+
+  /** @var \Drupal\d_demo\Service\ThemeLogoService $themeLogoService */
+  $themeLogoService = \Drupal::service('d_demo.theme_logo');
+  $themeLogoService->setThemeDemoLogo();
+
+  /** @var \Drupal\block\Entity\Block $languageSwitcherBlock */
+  $languageSwitcherBlock = Block::load('languageswitcher');
+
+  if ($languageSwitcherBlock) {
+    $languageSwitcherBlock
+      ->setRegion('secondary_menu')
+      ->setWeight(4)
+      ->save();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function d_demo_uninstall() {
+  // Delete custom menu.
+  $menu = \Drupal::entityTypeManager()
+    ->getStorage('menu')
+    ->load('footer_example_menu');
+  if ($menu) {
+    $menu->delete();
+  }
+}

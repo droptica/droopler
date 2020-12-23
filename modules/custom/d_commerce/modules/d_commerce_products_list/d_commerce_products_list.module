@@ -1,0 +1,190 @@
+<?php
+
+/**
+ * @file
+ * d_commerce_products_list module.
+ */
+
+use Drupal\commerce_product\Entity\ProductInterface;
+use Drupal\Component\Plugin\Exception\PluginException;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\facets\Entity\Facet;
+use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_commerce_products_list_preprocess_commerce_product(&$variables) {
+  if (
+    isset($variables['elements']['#view_mode']) &&
+    $variables['elements']['#view_mode'] == 'teaser'
+  ) {
+    if (isset($variables['product']['field_product_images'][0])) {
+      $variables['main_image'] = $variables['product']['field_product_images'][0];
+      unset($variables['product']['field_product_images']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_THEME().
+ */
+function d_commerce_product_preprocess_commerce_product__droopler_products__teaser(&$variables) {
+  if (isset($variables['product']['variation_title'])) {
+    $variation = $variables['product']['variation_title']['#object'];
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder($variation->getEntityTypeId());
+    $variables['product']['variation_price'] = $view_builder->view($variation, 'price');
+    $variables['product']['variation_price']['#attributes']['class'][] = 'd-commerce-price';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function d_commerce_products_list_preprocess_page(&$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (stripos($route_name, 'view.droopler_commerce_products_list') !== FALSE) {
+    $pager_manager = \Drupal::service('pager.manager');
+    $variables['pager_total_items'] = $pager_manager->getPager(0)->getTotalItems();
+    $variables['#attached']['library'][] = 'd_commerce_products_list/d_commerce_products_list_select';
+    $variables['#attached']['library'][] = 'd_commerce_products_list/d_commerce_products_list_searches';
+
+    // Remove title block from product listing.
+    foreach ($variables['page']['content'] as &$element) {
+      if (isset($element['#plugin_id']) && $element['#plugin_id'] == 'page_title_block') {
+        $element['#access'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function d_commerce_products_list_preprocess_field(&$variables) {
+  $object = $variables['element']['#object'] ?? NULL;
+  if ($object instanceof ProductInterface) {
+    $formatter = $variables['element']['#formatter'] ?? '';
+    if (
+      $variables['field_name'] === 'field_categories'
+      && $formatter === 'entity_reference_label'
+    ) {
+      $facet_id = 'd_commerce_product_categories_taxonomy_term_name';
+      $view_id = 'view.droopler_commerce_products_list.page_1';
+
+      $facet = Facet::load($facet_id);
+      $alias_cleaner = Drupal::service('pathauto.alias_cleaner');
+
+      foreach ($variables['element']['#items'] as $key => $item) {
+        $taxonomy_name = $alias_cleaner->cleanString($variables['element'][$key]['#title']);
+
+        $view_url = $variables['element'][$key]['#url']->fromRoute($view_id, [
+          'arg_0' => $facet->getUrlAlias(),
+          'arg_1' => $taxonomy_name,
+        ]);
+        $variables['items'][$key]['content']['#url'] = $view_url;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function d_commerce_products_list_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Add placeholder to contact form.
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-droopler-commerce-products-list-page-1') {
+    $form['aggregated_field']['#attributes']['placeholder'] = t('Search products...');
+    $form['sort_by']['#title'] = '';
+    $form['sort_by']['#attributes']['placeholder'] = t('Placeholder');
+    unset($form['sort_order']);
+    $query = \Drupal::request()->query->all();
+    if (isset($query['f'])) {
+      foreach ($query['f'] as $key => $value) {
+        $form['f[' . $key . ']'] = [
+          '#type' => 'hidden',
+          '#value' => $value,
+          '#weight' => -1,
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for views_exposed_form().
+ *
+ * Custom integration for facets. When a Views exposed filter is modified on a
+ * search results page it will lose any facets which have been already selected.
+ * This adds hidden fields for each facet so their values are retained.
+ *
+ * @todo
+ * It may be removed when the functionality
+ * will be provided by the facets itself.
+ *
+ * @see https://www.drupal.org/project/facets_pretty_paths/issues/3041314
+ */
+function d_commerce_products_list_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state) {
+  // Retrieve the view object and the query plugin.
+  $storage = $form_state->getStorage();
+  if (!isset($storage['view'])) {
+    return;
+  }
+
+  $view = $storage['view'];
+  if (!($view instanceof ViewExecutable)) {
+    return;
+  }
+
+  $query_plugin = $view->getQuery();
+  // Make sure the view is based on Search API and has the "Preserve facets"
+  // option enabled, and that the Facets module is installed.
+  $preserve_facets = !empty($query_plugin->options['preserve_facet_query_args'])
+    && $query_plugin instanceof SearchApiQuery
+    && \Drupal::moduleHandler()->moduleExists('facets');
+
+  if ($preserve_facets) {
+    // Retrieve the facet source.
+    $query = $query_plugin->getSearchApiQuery();
+    $display_id = $query->getSearchId(FALSE);
+    $facet_source_id = str_replace(':', '__', 'search_api:' . $display_id);
+    try {
+      $facet_source = \Drupal::entityTypeManager()
+        ->getStorage('facets_facet_source')
+        ->load($facet_source_id);
+    }
+    catch (PluginException $exception) {
+      return;
+    }
+    if (!$facet_source) {
+      return;
+    }
+    if ('d_commerce_product_list_url_processor' == $facet_source->getUrlProcessorName()) {
+      $form['#action'] = NULL;
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function d_commerce_products_list_theme($existing, $type, $theme, $path) {
+  return [
+    'page__views__droopler_commerce_products_list' => [
+      'template' => 'page--views--droopler_commerce_products_list',
+      'base hook' => 'page__views',
+    ],
+    'views_view_unformatted__droopler_commerce_products_list' => [
+      'template' => 'views-view-unformatted--droopler_commerce_products_list',
+      'base hook' => 'views_view_unformatted',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_d_content_init_index_content().
+ */
+function d_commerce_products_list_d_content_init_index_content(array &$indexes) {
+  $indexes[] = 'droopler_commerce_product_index';
+}

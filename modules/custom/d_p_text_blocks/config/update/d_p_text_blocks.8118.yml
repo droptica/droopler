@@ -1,0 +1,17 @@
+core.entity_form_display.paragraph.d_p_group_of_text_blocks.default:
+  delete:
+    - content:field_d_number
+  delete_value:
+    - parents: dependencies:config
+      values:
+        - field.field.paragraph.d_p_carousel.field_d_number
+    - parents: third_party_settings:field_group:group_settings:children
+      values:
+        - field_d_number
+core.entity_view_display.paragraph.d_p_group_of_text_blocks.default:
+  delete:
+    - hidden:field_d_number
+  delete_value:
+    - parents: dependencies:config
+      values:
+        - field.field.paragraph.d_p_carousel.field_d_number

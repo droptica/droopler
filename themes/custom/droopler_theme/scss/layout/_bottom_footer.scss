@@ -1,0 +1,38 @@
+//Styles for the menu placed after the main footer.
+
+//Color variables used in this component.
+$bottom-footer-background-color: $color-hecuba !default;
+$bottom-footer-text-color: $color-odysseus !default;
+
+// Margins, paddings and sizes.
+$bottom-footer-link-padding-y: 0.5rem !default;
+$bottom-footer-link-padding-x: 2.2rem !default;
+
+.bottom-footer {
+  background-color: $bottom-footer-background-color;
+  //Menu block from d_demo
+  .region-footer-main {
+    .block-menu {
+      margin-bottom: 0;
+      .nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+
+        @include media-breakpoint-down(sm) {
+          flex-direction: column;
+        }
+
+        .nav-item {
+          .nav-link {
+            font-size: $font-subtitle-font-size;
+            font-weight: $font-subtitle-font-weight;
+            color: $bottom-footer-text-color;
+            padding: $bottom-footer-link-padding-y $bottom-footer-link-padding-x;
+          }
+        }
+      }
+    }
+  }
+}

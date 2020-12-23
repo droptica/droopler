@@ -1,0 +1,52 @@
+core.entity_form_display.node.d_product.default:
+  add:
+    dependencies:
+      config:
+        - field.field.node.d_product.field_meta_tags
+    module:
+      - metatag
+    content:
+      field_meta_tags:
+        weight: 27
+        settings:
+          sidebar: true
+        third_party_settings: {  }
+        type: metatag_firehose
+        region: content
+core.entity_view_display.node.d_product.d_small_box:
+  add:
+    dependencies:
+      config:
+        - field.field.node.d_product.field_meta_tags
+      module:
+        - lazy
+    hidden:
+      field_meta_tags: true
+core.entity_view_display.node.d_product.default:
+  add:
+    dependencies:
+      config:
+        - field.field.node.d_product.field_meta_tags
+      module:
+        - lazy
+        - metatag
+    hidden:
+      field_meta_tags: true
+core.entity_view_display.node.d_product.full:
+  add:
+    dependencies:
+      config:
+        - field.field.node.d_product.field_meta_tags
+      module:
+        - lazy
+    hidden:
+      field_meta_tags: true
+core.entity_view_display.node.d_product.teaser:
+  add:
+    dependencies:
+      config:
+        - field.field.node.d_product.field_meta_tags
+      module:
+        - lazy
+    hidden:
+      field_meta_tags: true

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies: {  }
+id: commerce_product
+label: Product
+tags:
+  title: '[commerce_product:title]'
+  description: '[commerce_product:body]'
+  og_image: '[commerce_product:field_product_images:0:entity:field_media_image:entity:url]'
+  og_title: '[commerce_product:title]'
+  og_image_alt: '[commerce_product:field_product_images:0:entity:field_media_image:alt]'
+  og_site_name: '[site:name]'
+  og_description: '[commerce_product:body]'
+  og_type: product
+  product_price_currency: '[commerce_product:variations:0:entity:price:currency_code]'
+  product_price_amount: '[commerce_product:variations:0:entity:price:number]'

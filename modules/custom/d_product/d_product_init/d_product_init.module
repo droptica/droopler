@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Initialization of content for d_product module.
+ *
+ * d_product_init module.
+ */
+
+/**
+ * Alter content structure.
+ * Implements hook_content_structure_alter()
+ *
+ * @param $structure
+ *   The array with structure.
+ *
+ * @param $context
+ *   Which structure array is this?
+ */
+function d_product_init_content_structure_alter(&$structure, $context) {
+  $path = drupal_get_path('module', 'd_product_init') . '/pages';
+
+  if ($context == 'all') {
+    $products = [];
+    // Make product_1 as first on product list by decrement loop.
+    for ($i = 5; $i >= 1; $i--) {
+      $products['product_' . $i] = ['file' => "$path/product_{$i}.yml", 'weight' => 0];
+    }
+    $structure = $products + $structure;
+  }
+}
+
+/**
+ * Implements hook_d_content_init_index_content().
+ */
+function d_product_init_d_content_init_index_content(array &$indexes) {
+  $indexes[] = 'product_index';
+}

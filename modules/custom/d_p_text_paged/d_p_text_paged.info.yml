@@ -1,0 +1,20 @@
+name: d_p_text_paged
+core: 8.x
+core_version_requirement: '^8 || ^9'
+description: 'Provides a paragraphs with just text.'
+type: module
+dependencies:
+  - content_translation
+  - d_media
+  - d_p
+  - field
+  - field_group
+  - language
+  - link
+  - link_attributes
+  - media_library
+  - paragraphs
+  - text
+package: Paragraphs
+version: DROOPLER_VERSION
+core_incompatible: false

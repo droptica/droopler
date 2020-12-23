@@ -1,0 +1,23 @@
+name: d_p_gallery
+description: 'Provides a paragraph with a simple gallery.'
+type: module
+core: 8.x
+core_version_requirement: '^8 || ^9'
+package: Paragraphs
+dependencies:
+  - colorbox
+  - content_translation
+  - d_media
+  - d_p
+  - field
+  - field_group
+  - file
+  - image
+  - link
+  - link_attributes
+  - media
+  - media_library
+  - paragraphs
+  - text
+version: DROOPLER_VERSION
+core_incompatible: false

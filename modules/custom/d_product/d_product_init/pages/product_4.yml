@@ -1,0 +1,40 @@
+info:
+  type: d_product
+  title: 'Auto Engine ST 40'
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_product_init/d_product_init_auto-engine-st-40-1.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_auto-engine-st-40-2.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_auto-engine-st-40-3.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_auto-engine-st-40-4.jpg
+      alt: 'Title / Subtitle'
+body:
+  type: text
+  data: 'Car engine for small cars. Manufactured for the first time in 2010. Since then, several versions with different powers have been created.'
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: d_product_categories
+    terms:
+      - 'Car engines'
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Cars
+      - Gasoline
+field_d_product_link:
+  type: cta
+  data:
+    link: null
+    text: 'Buy now'

@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_header_layout
+field_name: field_header_layout
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: header_with_menu
+      label: 'Header with menu'
+    -
+      value: header_with_cta
+      label: 'Header with CTA'
+    -
+      value: header_disabled
+      label: 'Header disabled'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

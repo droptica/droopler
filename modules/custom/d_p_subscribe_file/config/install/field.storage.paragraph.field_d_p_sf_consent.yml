@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_d_p_sf_consent
+field_name: field_d_p_sf_consent
+entity_type: paragraph
+type: text
+settings:
+  max_length: 512
+module: text
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

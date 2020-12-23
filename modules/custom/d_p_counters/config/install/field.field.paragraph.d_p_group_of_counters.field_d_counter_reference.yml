@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_counter_reference
+    - paragraphs.paragraphs_type.d_p_group_of_counters
+    - paragraphs.paragraphs_type.d_p_single_counter
+  module:
+    - entity_reference_revisions
+id: paragraph.d_p_group_of_counters.field_d_counter_reference
+field_name: field_d_counter_reference
+entity_type: paragraph
+bundle: d_p_group_of_counters
+label: Counters
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      d_p_single_counter: d_p_single_counter
+    target_bundles_drag_drop:
+      d_p_group_of_counters:
+        weight: 12
+        enabled: false
+      d_p_banner:
+        weight: 13
+        enabled: false
+      d_p_form:
+        weight: 14
+        enabled: false
+      d_p_group_of_text_blocks:
+        weight: 15
+        enabled: false
+      d_p_side_image:
+        weight: 16
+        enabled: false
+      d_p_single_text_block:
+        weight: 17
+        enabled: false
+      d_p_subscribe_file:
+        weight: 18
+        enabled: false
+      d_p_text_paged:
+        weight: 19
+        enabled: false
+      d_p_text_with_bckg:
+        weight: 20
+        enabled: false
+      d_p_single_counter:
+        enabled: true
+        weight: 22
+field_type: entity_reference_revisions

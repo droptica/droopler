@@ -1,0 +1,57 @@
+name: d_product
+description: 'Provides Product content type and related configuration.'
+type: module
+core: 8.x
+core_version_requirement: '^8 || ^9'
+dependencies:
+  - better_exposed_filters
+  - block
+  - colorbox
+  - d_block
+  - d_content
+  - d_media
+  - d_p_banner
+  - d_p_carousel
+  - d_p_counters
+  - d_p_gallery
+  - d_p_node
+  - d_p_reference_content
+  - d_p_side_by_side
+  - d_p_side_embed
+  - d_p_side_image
+  - d_p_side_tiles
+  - d_p_subscribe_file
+  - d_p_text_blocks
+  - d_p_text_paged
+  - d_p_text_with_bckg
+  - d_p_tiles
+  - entity_reference_revisions
+  - facets
+  - field
+  - file
+  - image
+  - language
+  - lazy
+  - link
+  - media
+  - media_library
+  - menu_ui
+  - metatag
+  - node
+  - paragraphs
+  - path
+  - pathauto
+  - responsive_image
+  - search_api
+  - search_api_db
+  - simple_sitemap
+  - svg_image
+  - svg_image_responsive
+  - system
+  - taxonomy
+  - text
+  - user
+  - views
+package: Droopler
+version: DROOPLER_VERSION
+core_incompatible: false

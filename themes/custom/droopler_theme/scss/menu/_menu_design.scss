@@ -1,0 +1,184 @@
+/*
+Components Main menu
+
+ul with main menu.
+
+Markup:
+<ul class="nav navbar-nav main-menu">
+  <li class="nav-item active"><a href="/en/node/1" class="nav-link active is-active" data-drupal-link-system-path="node/1">Home</a> </li>
+  <li class="nav-item"><a href="/node/2" class="nav-link">About</a></li>
+  <li class="nav-item"><a href="/node/3" class="nav-link">Services</a></li>
+  <li class="nav-item"><a href="/node/4" class="nav-link">Gallery</a></li>
+  <li class="nav-item"><a href="/node/5" class="nav-link">Contact</a></li>
+</ul>
+
+Styleguide 2.1
+*/
+
+.navbar-inner {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+button.navbar-toggler {
+  display: none;
+}
+
+header.header > nav.navbar-wrapper {
+  nav.main-navbar {
+    position: static;
+  }
+}
+
+a.we-mega-menu-li,
+span.we-mega-menu-nolink {
+  &, &:hover {
+    text-decoration: none;
+  }
+}
+
+// Styling first level main menu items
+.we-mega-menu-ul > li.we-mega-menu-li{
+  > a, > span {
+    @include mobile-menu-first-level-items;
+
+    @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+      padding: $menu-main-link-padding-desktop;
+      line-height: $submenu-link-height;
+      color: $menu-main-link-color;
+      text-transform: capitalize;
+      font-weight: 700;
+      font-size: $menu-font-size-desktop;
+    }
+  }
+
+  @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+    &:hover {
+      &, > a, > span {
+        color: $menu-main-link-hover-color;
+      }
+    }
+  }
+}
+
+// Secondary menu
+.secondary-menu-region {
+  li.nav-item {
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+      width: 100%;
+      > a {
+        @include mobile-menu-first-level-items;
+      }
+    }
+  }
+
+  a {
+    color: $secondary-menu-link-colors;
+
+    &:hover {
+      color: $secondary-menu-link-hover-colors;
+    }
+  }
+
+  .social-media-wrapper {
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+      text-align: center;
+    }
+
+    ul {
+      padding: 0;
+      li {
+        &::after {
+          display: none;
+        }
+        a::before {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Mega menu content
+.type-of-block {
+  .block-inner {
+
+    @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+      h2 + .field-content-wrapper {
+        padding-top: 0;
+      }
+
+      .field-content-wrapper {
+        padding-top: $mobile-sidebar-submenu-spacing;
+
+        .field--name-field-d-long-text {
+          ul {
+            padding-left: 0;
+          }
+        }
+      }
+      ul {
+        &.subul {
+          padding-left: $mobile-sidebar-submenu-spacing;
+          padding-right: $mobile-sidebar-submenu-spacing;
+          overflow: hidden;
+        }
+
+        li {
+          width: 100%;
+        }
+      }
+    }
+    h2 + .field-content-wrapper {
+      ul li a {
+        @include sublist-list-item();
+      }
+    }
+
+    h2 {
+      @include sublist-list-item;
+
+      @include media-breakpoint-up($navbar-mobile-breakpoint-up) {
+        font-size: $mega-menu-submenu-header-font-size;
+        color: $submenu-link-color;
+        text-transform: uppercase;
+        margin-bottom: $mega-menu-submenu-header-margin-bottom;
+        padding-top: 0;
+      }
+    }
+
+    p {
+      padding: $mega-menu-submenu-link-padding-y 0;
+      margin-bottom: 0;
+    }
+
+    ul, ul.nav {
+      list-style-type: none;
+      padding-left: 0;
+      display: block;
+    }
+  }
+}
+
+
+@include media-breakpoint-only(lg) {
+  .secondary-menu-region,
+  .region-primary-menu {
+    a.nav-link {
+      padding-left: $menu-secondary-link-padding-x-tablet;
+      padding-right: $menu-secondary-link-padding-x-tablet;
+    }
+    .we-mega-menu-li {
+      > a.we-mega-menu-li,
+      > span.we-megamenu-nolink {
+        padding: $menu-main-link-padding-tablet;
+      }
+    }
+    .social-media-wrapper .icons-wrapper {
+      a.icon {
+        font-size: 115%;
+        padding: $menu-secondary-social-icon-padding-tablet;
+      }
+    }
+  }
+}

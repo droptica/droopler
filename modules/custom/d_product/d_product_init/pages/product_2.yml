@@ -1,0 +1,40 @@
+info:
+  type: d_product
+  title: 'Centurion 3000'
+field_d_product_media:
+  type: media_image
+  directory: demo
+  files:
+    -
+      path: d_product_init/d_product_init_centurion-3000-1.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_centurion-3000-2.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_centurion-3000-3.jpg
+      alt: 'Title / Subtitle'
+    -
+      path: d_product_init/d_product_init_centurion-3000-4.jpg
+      alt: 'Title / Subtitle'
+body:
+  type: text
+  data: 'New engine for cars developed by top engineers and industry specialists. Ideal for city and off-road cars.'
+field_product_categories:
+  type: taxonomy
+  data:
+    vid: d_product_categories
+    terms:
+      - 'Car engines'
+field_tags:
+  type: taxonomy
+  data:
+    vid: tags
+    terms:
+      - Cars
+      - Diesel
+field_d_product_link:
+  type: cta
+  data:
+    link: null
+    text: 'Buy now'

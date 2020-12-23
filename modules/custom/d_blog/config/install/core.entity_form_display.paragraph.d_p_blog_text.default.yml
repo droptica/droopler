@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_blog_text.field_d_long_text
+    - paragraphs.paragraphs_type.d_p_blog_text
+  module:
+    - text
+id: paragraph.d_p_blog_text.default
+targetEntityType: paragraph
+bundle: d_p_blog_text
+mode: default
+content:
+  field_d_long_text:
+    weight: 11
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

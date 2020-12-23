@@ -1,0 +1,33 @@
+paragraphs.paragraphs_type.d_p_reference_content:
+  add:
+    icon_default: null
+core.entity_form_display.paragraph.d_p_reference_content.default:
+  change:
+    expected:
+      content:
+        field_d_cta_link:
+          weight: 2
+          settings:
+            enabled_attributes:
+              id: false
+              name: false
+        field_d_main_title:
+          weight: 0
+        field_d_p_reference_content:
+          weight: 1
+        field_d_settings:
+          weight: 3
+    new:
+      content:
+        field_d_cta_link:
+          weight: 4
+          settings:
+            enabled_attributes:
+              id: true
+              name: true
+        field_d_main_title:
+          weight: 1
+        field_d_p_reference_content:
+          weight: 3
+        field_d_settings:
+          weight: 5

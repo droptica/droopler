@@ -1,0 +1,101 @@
+/**
+ * @file
+ * Visual styles for Droopler's node component.
+ */
+
+$node-thumbnail-title-link-color: $black !default;
+$node-thumbnail-margin-bottom: 15px !default;
+
+/* View mode teaser styles. */
+.node--view-mode-teaser {
+  border-bottom: 1px solid #d3d7d9;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+}
+.node--view-mode-teaser h2 {
+  margin-top: 0;
+  padding-top: 0.5em;
+}
+.node--view-mode-teaser h2 a {
+  color: #181818;
+}
+.node--view-mode-teaser.node--sticky {
+  background: #f9f9f9;
+  background: rgba(0, 0, 0, 0.024);
+  border: 1px solid #d3d7d9;
+  padding: 0 15px 15px;
+}
+.node--view-mode-teaser .node__content {
+  clear: none;
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+// View mode thumbnail styles.
+.node--view-mode-thumbnail {
+  h2 {
+    margin-top: 0;
+    padding-top: 0.5em;
+    a {
+      color: $node-thumbnail-title-link-color;
+    }
+  }
+  .node__meta {
+    padding-left: 0;
+  }
+  .node__content {
+    clear: none;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: $node-thumbnail-margin-bottom;
+    .field--type-image {
+      float: none;
+    }
+  }
+  .nav-link {
+    padding-left: 0;
+    &.node-readmore {
+      text-transform: uppercase;
+    }
+  }
+}
+
+/* Node metadata styles. */
+.node__meta {
+  font-size: 0.857em;
+  color: #68696b;
+  margin-bottom: -5px;
+}
+.node__meta .field--name-field-user-picture img {
+  float: left; /* LTR */
+  margin: 1px 20px 0 0; /* LTR */
+}
+[dir="rtl"] .node__meta .field--name-field-user-picture img {
+  float: right;
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+/* Node links styles. */
+.node__links {
+  text-align: right; /* LTR */
+  font-size: 0.93em;
+}
+[dir="rtl"] .node__links {
+  text-align: left;
+}
+
+/* Unpublished node styles. */
+.node--unpublished .comment-text .comment-arrow {
+  border-left: 1px solid #fff4f4;
+  border-right: 1px solid #fff4f4;
+}
+.unpublished-message {
+  text-align: center;
+  background: $danger;
+  display: block;
+  color: $white;
+  font-weight: bold;
+  font-size: 3em;
+  opacity: 0.1;
+}

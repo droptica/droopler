@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies: {  }
+id: d_video
+label: Video
+description: 'A video added from YouTube or Vimeo.'
+source: 'oembed:video'
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  thumbnails_directory: 'public://media/video/thumbnails'
+  providers:
+    - YouTube
+    - Vimeo
+  source_field: field_media_oembed_video
+field_map:
+  title: name

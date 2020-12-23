@@ -1,0 +1,24 @@
+d_p:
+  version: VERSION
+  js:
+    js/d_p.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - d_p/d_p_ckeditor
+d_p_ckeditor:
+  version: VERSION
+  js:
+    js/d_p_ckeditor.js: {}
+    js/d_p_colorpicker.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+d_p_with_price:
+  version: VERSION
+  js:
+    js/d_p_with_price.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

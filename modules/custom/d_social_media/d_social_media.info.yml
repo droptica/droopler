@@ -1,0 +1,10 @@
+name: d_social_media
+description: Provide blocks including links to social media.
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Droopler
+version: DROOPLER_VERSION
+configure: d_social_media.settings
+dependecies:
+  - block

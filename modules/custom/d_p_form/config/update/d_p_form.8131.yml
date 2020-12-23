@@ -1,0 +1,14 @@
+core.entity_view_display.paragraph.d_p_form.default:
+  delete:
+    - hidden:field_d_layout_modifier
+  delete_value:
+    - parents: dependencies:config
+      values:
+        - field.field.paragraph.d_p_form.field_d_layout_modifier
+core.entity_form_display.paragraph.d_p_form.default:
+  delete:
+    - content:field_d_layout_modifier
+  delete_value:
+    - parents: dependencies:config
+      values:
+        - field.field.paragraph.d_p_form.field_d_layout_modifier

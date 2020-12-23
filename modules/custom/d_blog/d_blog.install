@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function d_blog_install() {
+  // Add configuration to TVI module
+  // Taxonomy Views Integrator
+  // Page of taxonomy blog_post is the same as view blog_listing.
+  $entity_type = 'taxonomy_vocabulary';
+  $entity_id = 'blog_posts_category';
+
+  // Enable TVI support.
+  Drupal::configFactory()
+    ->getEditable('tvi.' . $entity_type . '.' . $entity_id)
+    ->set('enable_override', 1)
+    ->set('view', 'blog_listing')
+    ->set('view_display', "page_1")
+    ->set('inherit_settings', 1)
+    ->set('pass_arguments', 1)
+    ->save();
+
+  // Setup Linkit to work with blog.
+  $linkit = \Drupal::configFactory()->getEditable('linkit.linkit_profile.content_nodes');
+  $matchers = $linkit->get("matchers");
+  $keys = array_keys($matchers);
+  $uuid = reset($keys);
+  $linkit->set("matchers.$uuid.settings.bundles.blog_post", "blog_post")->save();
+}
+
+/**
+ * Implements hook_update_8001().
+ */
+function d_blog_update_8001(&$sandbox) {
+  \Drupal::service('d_update')
+    ->updateConfigurations('module/d_product', 'd_product.8001');
+}

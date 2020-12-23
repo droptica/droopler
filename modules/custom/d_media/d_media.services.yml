@@ -1,0 +1,4 @@
+services:
+  d_media.video_provider_manager:
+    class: Drupal\d_media\Service\ProviderManager
+    parent: default_plugin_manager

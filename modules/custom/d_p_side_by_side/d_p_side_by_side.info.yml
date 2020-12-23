@@ -1,0 +1,21 @@
+name: d_p_side_by_side
+core: 8.x
+core_version_requirement: '^8 || ^9'
+description: 'Provides a paragraph with paragraphs side by side layout.'
+type: module
+package: Paragraphs
+version: DROOPLER_VERSION
+dependencies:
+  - d_media
+  - d_p
+  - d_p_node
+  - d_p_text_blocks
+  - entity_reference_revisions
+  - field
+  - field_group
+  - link
+  - link_attributes
+  - media_library
+  - paragraphs
+  - text
+core_incompatible: false

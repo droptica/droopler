@@ -1,0 +1,22 @@
+// Main config files.
+//
+//  This section contain base variable and mixines.
+//
+// Styleguide 1.0
+
+// Theme configuration.
+@import 'config/all';
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/utilities/display";
+@import 'mixins/fonts';
+@import 'mixins/title';
+
+// Elements used in d_commerce.
+@import 'components/buttons';
+@import 'menu/menu_variables';
+@import 'components/decorations';
+
+// Styles for d_commerce.
+@import "components/d_commerce";

@@ -1,0 +1,84 @@
+core.entity_form_display.paragraph.d_p_form.default:
+  add:
+    dependencies:
+      module:
+        - field_group
+    third_party_settings:
+      field_group:
+        group_tabs:
+          children:
+            - group_basic
+            - group_settings
+          parent_name: ''
+          weight: 0
+          format_type: tabs
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            direction: horizontal
+          label: Tabs
+        group_basic:
+          children:
+            - field_d_main_title
+            - field_d_media_background
+            - field_d_media_icon
+            - field_d_long_text
+            - field_d_forms
+          parent_name: group_tabs
+          weight: 10
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Basic
+        group_settings:
+          children:
+            - field_d_settings
+          parent_name: group_tabs
+          weight: 11
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Settings
+
+  change:
+    expected:
+      content:
+        field_d_forms:
+          weight: 1
+        field_d_layout_modifier:
+          weight: 5
+        field_d_main_title:
+          weight: 0
+        field_d_media_background:
+          weight: 3
+        field_d_media_icon:
+          weight: 2
+        field_d_settings:
+          weight: 6
+
+    new:
+      content:
+        field_d_forms:
+          weight: 5
+        field_d_layout_modifier:
+          weight: 6
+        field_d_main_title:
+          weight: 1
+        field_d_media_background:
+          weight: 2
+        field_d_media_icon:
+          weight: 3
+        field_d_settings:
+          weight: 12
+
