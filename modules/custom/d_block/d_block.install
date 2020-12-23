@@ -1,9 +1,0 @@
-<?php
-
-/**
- * Implements hook_install().
- */
-function d_block_install() {
-  Drupal::service('d_update')
-    ->updateConfigurations('module/d_block', 'd_block.init');
-}

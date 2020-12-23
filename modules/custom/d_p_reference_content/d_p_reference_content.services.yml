@@ -1,4 +1,0 @@
-services:
-  d_p_reference_content.content_helper:
-    class: Drupal\d_p_reference_content\Helpers\ContentHelper
-    arguments: ['@database', '@entity_type.manager']

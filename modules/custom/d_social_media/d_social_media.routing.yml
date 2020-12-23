@@ -1,9 +1,0 @@
-d_social_media.settings:
-  path: '/admin/config/system/social-media'
-  defaults:
-    _form: '\Drupal\d_social_media\Form\ConfigurationForm'
-    _title: 'Social Media Configuration'
-  requirements:
-    _permission: 'access administration pages'
-  options:
-    _admin_route: TRUE
