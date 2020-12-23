@@ -52,11 +52,23 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
    * {@inheritdoc}
    */
   public function setValue($values, $notify = TRUE) {
+    $config_value = [
+      'value' => '',
+    ];
+
     if (is_object($values)) {
-      $values = json_encode($values);
+      $config_value['value'] = json_encode($values);
     }
 
-    parent::setValue($values, $notify);
+    if (is_string($values)) {
+      $config_value['value'] = $values;
+    }
+
+    if (is_array($values) && isset($values['value'])) {
+      $config_value = $values;
+    }
+
+    parent::setValue($config_value, $notify);
   }
 
   /**
@@ -65,7 +77,7 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
   public function isEmpty() {
     $value = $this->get('value')->getValue();
 
-    return $value === NULL || $value === '' || $value === [];
+    return $value === NULL;
   }
 
   /**

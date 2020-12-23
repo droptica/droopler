@@ -451,8 +451,11 @@ $d-p-themes: map-merge(
 
 @each $name, $themeSettings in $d-p-themes {
   .theme-#{$name} {
-    > .paragraph,
-    > div[data-geysir-paragraph-id] > .paragraph,
+    > .paragraph:not(.content-moved-inside),
+    > div[data-geysir-paragraph-id] > .paragraph:not(.content-moved-inside),
+    &.theme-custom > .content-moved-inside,
+    &.theme-custom > .content-moved-inside > *:not(.content-inside-wrapper),
+    > .content-moved-inside .content-inside-wrapper,
     > .paragraph .theme-default > .paragraph,
     > .paragraph .theme-default > div[data-geysir-paragraph-id] > .paragraph {
       background: map-get($themeSettings, "background");
@@ -511,23 +514,15 @@ $d-p-paddings-mobile: map-merge(
       > .paragraph:not(.content-moved-inside),
       > .paragraph.content-moved-inside .content-inside-wrapper {
         padding-#{$placement}: $value;
-      }
-    }
-  }
-}
 
-@include media-breakpoint-down(sm) {
-  @each $size, $value in $d-p-paddings-mobile {
-    @each $placement in (top, bottom) {
-      .padding-#{$placement}-#{$size} {
-        > .paragraph:not(.content-moved-inside),
-        > .paragraph.content-moved-inside .content-inside-wrapper {
-          padding-#{$placement}: $value;
+        @include media-breakpoint-down(sm) {
+          padding-#{$placement}: map-get($d-p-paddings-mobile, $size);
         }
       }
     }
   }
 }
+
 
 $d-p-margins: () !default;
 $d-p-margins: map-merge(

@@ -21,10 +21,11 @@ class CustomClass extends ParagraphSettingPluginBase {
     $element = parent::formElement();
 
     return [
-      '#type' => 'hidden',
+      '#type' => 'textfield',
       '#subtype' => 'css',
       '#description' => $this->t('Please separate multiple classes by spaces.'),
       '#size' => 32,
+      '#weight' => 150,
     ] + $element;
   }
 
