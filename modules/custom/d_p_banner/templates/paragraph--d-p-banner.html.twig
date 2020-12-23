@@ -45,6 +45,10 @@
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
 
+{% if wrapper_attributes.hasClass('half-transparent') %}
+  {% set classes = classes|merge(['content-moved-inside']) %}
+{% endif %}
+
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
@@ -54,7 +58,7 @@
         } only %}
       {% endblock %}
       <div class="content-wrapper">
-        <div class="content container">
+        <div class="content content-inside-wrapper container">
           {% block content %}
             {{ content.group_d_banner_content }}
           {% endblock %}

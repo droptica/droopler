@@ -1458,6 +1458,9 @@ function droopler_update_8118(&$sandbox) {
       ->getStorage('paragraph')
       ->load($pid);
 
+    /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+    $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+
     // Migrate column size.
     switch ($paragraph->bundle()) {
       case 'd_p_carousel':
@@ -1466,7 +1469,12 @@ function droopler_update_8118(&$sandbox) {
         $tablet_column_count = $old_column_count == '1' ? '1' : '2';
 
         if ($items_count <= $old_column_count) {
-          $desktop_column_count = $items_count - 1;
+          if ($setting_field->hasClass('slider-desktop-off')) {
+            $desktop_column_count = $items_count;
+          }
+          else {
+            $desktop_column_count = $items_count - 1;
+          }
         }
         else {
           $desktop_column_count = $old_column_count;
@@ -1479,9 +1487,6 @@ function droopler_update_8118(&$sandbox) {
         $desktop_column_count = $old_column_count;
         break;
     }
-
-    /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
-    $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
 
     $setting_field->setSettingValue(
       ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME,
@@ -1960,8 +1965,6 @@ function droopler_update_8129(&$sandbox) {
       'd_p_text_blocks',
     ];
     $values['droopler__droopler_update_8129_1'] = update_modules_configuration($modules, '8129');
-    \Drupal::service('d_update')->checklist()
-      ->saveProgress(['v2.2' => $values]);
 
     $bundles = [
       'd_p_side_image',
@@ -1977,6 +1980,9 @@ function droopler_update_8129(&$sandbox) {
 
     $values['droopler__droopler_update_8129_2'] = \Drupal::service('module_installer')
       ->install(['d_color'], TRUE);
+
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v2.2' => $values]);
   }
 }
 
@@ -1990,6 +1996,7 @@ function droopler_update_8130() {
   $configs = [
     'd_media' => [
       'core.entity_view_mode.media.tiles_gallery_fullscreen_featured' => '',
+      'core.entity_view_display.media.d_image.tiles_gallery_fullscreen_featured' => '',
     ],
   ];
 

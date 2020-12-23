@@ -78,22 +78,19 @@ core.entity_view_display.paragraph.d_p_side_by_side.default:
         - link
     content:
       field_d_long_text:
-        type: text_textarea
+        type: text_default
         weight: 2
-        label: hidden
         region: content
-        settings:
-          rows: 5
-          placeholder: ''
+        label: hidden
+        settings: {  }
         third_party_settings: {  }
       field_d_main_title:
-        type: string_textfield
+        type: string
         weight: 1
-        label: hidden
         region: content
+        label: hidden
         settings:
-          size: 60
-          placeholder: ''
+          link_to_entity: false
         third_party_settings: {  }
       field_d_cta_link:
         weight: 6
