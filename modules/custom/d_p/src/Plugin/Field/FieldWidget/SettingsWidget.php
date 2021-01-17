@@ -126,7 +126,10 @@ class SettingsWidget extends WidgetBase {
    */
   public function validate($element, FormStateInterface $form_state) {
     $values = [];
+
     $config_options = self::getConfigOptions();
+    $this->processBundleAccess($config_options);
+
     foreach ($config_options as $key => $options) {
       $value = $form_state->getValue(array_merge($element['#parents'], [$key]));
 
@@ -135,10 +138,6 @@ class SettingsWidget extends WidgetBase {
         $classes = $this->getCssClassList($value);
 
         foreach ($options['modifiers'] as $class => $modifier) {
-          if (!$this->isElementAccessAllowed($element[$class])) {
-            continue;
-          }
-
           $modifier_value = $element[$class]['#value'] ?? NULL;
 
           if ($modifier_value) {
@@ -157,9 +156,6 @@ class SettingsWidget extends WidgetBase {
         $values[$key] = implode(' ', $classes);
       }
       else {
-        if (!$this->isElementAccessAllowed($element)) {
-          continue;
-        }
         $values[$key] = $value;
       }
     }
@@ -181,7 +177,7 @@ class SettingsWidget extends WidgetBase {
    */
   protected function processBundleAccess(array &$element): void {
     foreach ($element as $key => &$item) {
-      if (!is_array($item)) {
+      if (!is_array($item) || strpos($key, '#') === 0) {
         continue;
       }
 
@@ -191,7 +187,10 @@ class SettingsWidget extends WidgetBase {
       else {
         /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
         $plugin = $item['#plugin'];
-        $item['#access'] = $plugin->isAllBundlesAllowed() ?: $plugin->isBundleAllowed($this->getTargetBundle());
+        $access = $plugin->isAllBundlesAllowed() ?: $plugin->isBundleAllowed($this->getTargetBundle());
+        if (!$access) {
+          unset($element[$key]);
+        }
       }
     }
   }
@@ -288,19 +287,6 @@ class SettingsWidget extends WidgetBase {
    */
   protected function getTargetBundle(): ?string {
     return $this->fieldDefinition->getTargetBundle();
-  }
-
-  /**
-   * Check if access to the element is allowed.
-   *
-   * @param array $element
-   *   Form element.
-   *
-   * @return bool
-   *   True if the element is allowed, false otherwise.
-   */
-  protected function isElementAccessAllowed(array $element): bool {
-    return isset($element['#access']) ? (bool) $element['#access'] : TRUE;
   }
 
   /**
