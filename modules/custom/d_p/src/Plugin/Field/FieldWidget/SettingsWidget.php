@@ -51,6 +51,9 @@ class SettingsWidget extends WidgetBase {
    */
   protected $paragraphSettingsManager;
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $instance->paragraphSettingsManager = $container->get('d_p.paragraph_settings.plugin.manager');
