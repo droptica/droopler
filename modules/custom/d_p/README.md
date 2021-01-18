@@ -15,7 +15,7 @@ in the cache. You need to clear the cache each time you changed something in you
 
 ### Adding the custom plugin ###
 In order to create a custom paragraph setting plugin, you need to put your
-plugin file in the `your_module/src/Plugin?ParagraphSettings` directory
+plugin file in the `your_module/src/Plugin/ParagraphSettings` directory
 of your custom module.
 The easiest way is to extend the `Drupal\d_p\ParagraphSettingPluginBase`
 and give your own implementation of some methods ex.`formElement`.
