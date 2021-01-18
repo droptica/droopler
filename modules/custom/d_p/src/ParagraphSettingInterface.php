@@ -105,7 +105,7 @@ interface ParagraphSettingInterface {
    * @return int
    *   Plugin weight.
    */
-  public function getWeight();
+  public function getWeight(): int;
 
   /**
    * List of paragraph bundles supported by that plugin.

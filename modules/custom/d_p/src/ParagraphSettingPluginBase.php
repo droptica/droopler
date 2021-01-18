@@ -129,7 +129,7 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
   /**
    * {@inheritdoc}
    */
-  public function getWeight() {
+  public function getWeight(): int {
     return $this->getSettings()['weight'] ?? 0;
   }
 
