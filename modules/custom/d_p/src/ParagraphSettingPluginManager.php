@@ -102,7 +102,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
       foreach ($plugins as $plugin) {
         if ($plugin->isSubtype()) {
-          $form[$plugin->getParentPluginId()]['modifiers'][$plugin->id()] = $plugin->formElement();
+          $form[$plugin->getParentPluginId()][self::SETTINGS_SUBTYPE_ID][$plugin->id()] = $plugin->formElement();
         }
       }
 
@@ -112,6 +112,27 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
     }
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSettingsFormOptions(): array {
+    $options = [];
+
+    foreach ($this->getSettingsForm() as $id => $element) {
+      $options[$id] = [
+        'label' => $element['#title']
+      ];
+      $modifiers = self::SETTINGS_SUBTYPE_ID;
+      if (isset($element[$modifiers])) {
+        foreach ($element[$modifiers] as $mid => $modifier) {
+          $options[$id][$modifiers][$mid]['label'] = $modifier['#title'];
+        }
+      }
+    }
+
+    return $options;
   }
 
   /**
