@@ -8,6 +8,7 @@ use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\d_p\ParagraphSettingSelectInterface;
 use Drupal\d_p\ParagraphSettingTypesInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'Settings widget' widget.
@@ -44,13 +45,33 @@ class SettingsWidget extends WidgetBase {
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
 
   /**
-   * Get configuration options for fields in paragraph settings.
+   * The paragraph setting plugin manager.
+   *
+   * @var \Drupal\d_p\ParagraphSettingPluginManagerInterface
    */
-  private static function getConfigOptions() {
-    /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
-    $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
+  protected $paragraphSettingsManager;
 
-    return $pluginManager->getSettingsForm();
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->paragraphSettingsManager = $container->get('d_p.paragraph_settings.plugin.manager');
+
+    return $instance;
+  }
+
+  /**
+   * Get configuration options form for fields in paragraph settings.
+   *
+   * @return array
+   *   The available configuration for this parapraph bundle.
+   */
+  private function getConfigOptions(): array {
+    $form = $this->paragraphSettingsManager->getSettingsForm();
+    $this->processBundleAccess($form);
+
+    return $form;
   }
 
   /**
@@ -66,7 +87,7 @@ class SettingsWidget extends WidgetBase {
       ],
     ];
 
-    $config_options = self::getConfigOptions();
+    $config_options = $this->getConfigOptions();
     foreach ($config_options as $key => $options) {
       $value = $config->$key ?? '';
       $type = $options['#subtype'] ?? $options['#type'];
@@ -114,7 +135,6 @@ class SettingsWidget extends WidgetBase {
     }
 
     $this->processCustomThemeElements($element, $config);
-    $this->processBundleAccess($element);
 
     return ['value' => $element];
   }
@@ -126,7 +146,9 @@ class SettingsWidget extends WidgetBase {
    */
   public function validate($element, FormStateInterface $form_state) {
     $values = [];
-    $config_options = self::getConfigOptions();
+
+    $config_options = $this->getConfigOptions();
+
     foreach ($config_options as $key => $options) {
       $value = $form_state->getValue(array_merge($element['#parents'], [$key]));
 
@@ -135,10 +157,6 @@ class SettingsWidget extends WidgetBase {
         $classes = $this->getCssClassList($value);
 
         foreach ($options['modifiers'] as $class => $modifier) {
-          if (!$this->isElementAccessAllowed($element[$class])) {
-            continue;
-          }
-
           $modifier_value = $element[$class]['#value'] ?? NULL;
 
           if ($modifier_value) {
@@ -157,9 +175,6 @@ class SettingsWidget extends WidgetBase {
         $values[$key] = implode(' ', $classes);
       }
       else {
-        if (!$this->isElementAccessAllowed($element)) {
-          continue;
-        }
         $values[$key] = $value;
       }
     }
@@ -181,18 +196,21 @@ class SettingsWidget extends WidgetBase {
    */
   protected function processBundleAccess(array &$element): void {
     foreach ($element as $key => &$item) {
-      if (!is_array($item)) {
+      if (!is_array($item) || strpos($key, '#') === 0) {
         continue;
       }
 
-      if (empty($item['#plugin'])) {
-        $this->processBundleAccess($item);
-      }
-      else {
+      if (!empty($item['#plugin'])) {
         /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
         $plugin = $item['#plugin'];
-        $item['#access'] = $plugin->isAllBundlesAllowed() ?: $plugin->isBundleAllowed($this->getTargetBundle());
+        $access = $plugin->isAllBundlesAllowed() ?: $plugin->isBundleAllowed($this->getTargetBundle());
+        if (!$access) {
+          unset($element[$key]);
+          continue;
+        }
       }
+
+      $this->processBundleAccess($item);
     }
   }
 
@@ -288,19 +306,6 @@ class SettingsWidget extends WidgetBase {
    */
   protected function getTargetBundle(): ?string {
     return $this->fieldDefinition->getTargetBundle();
-  }
-
-  /**
-   * Check if access to the element is allowed.
-   *
-   * @param array $element
-   *   Form element.
-   *
-   * @return bool
-   *   True if the element is allowed, false otherwise.
-   */
-  protected function isElementAccessAllowed(array $element): bool {
-    return isset($element['#access']) ? (bool) $element['#access'] : TRUE;
   }
 
   /**
