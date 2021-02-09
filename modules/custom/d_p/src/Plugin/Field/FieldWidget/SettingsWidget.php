@@ -99,7 +99,7 @@ class SettingsWidget extends WidgetBase {
       $form['allowed_settings'][$id]['status'] = [
         '#title' => $option['label'],
         '#type' => 'checkbox',
-        '#default_value' => $allowed_settings[$id]['status'] ?: FALSE,
+        '#default_value' => $allowed_settings[$id]['status'] ?? FALSE,
         '#states' => [
           'checked' => [
             '[data-setting-id="' . $id . '"]' => ['value' => 1],
@@ -113,7 +113,7 @@ class SettingsWidget extends WidgetBase {
           $form['allowed_settings'][$id][$subtype][$mid]['status'] = [
             '#title' => '<em>' . $option['label'] . '</em> » ' . $modifier['label'],
             '#type' => 'checkbox',
-            '#default_value' => $allowed_settings[$id][$subtype][$mid]['status'] ?: FALSE,
+            '#default_value' => $allowed_settings[$id][$subtype][$mid]['status'] ?? FALSE,
             '#attributes' => [
               'data-setting-id' => $id,
             ],

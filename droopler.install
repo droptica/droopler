@@ -7,11 +7,11 @@
 
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\MissingDependencyException;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\we_megamenu\WeMegaMenuBuilder;
-use Drupal\user\Entity\Role;
-use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
 use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\user\Entity\Role;
+use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
  * Implements hook_install().
@@ -2117,4 +2117,30 @@ function droopler_update_8131(&$sandbox) {
       ->saveProgress(['v2.2' => $values]);
     \Drupal::messenger()->addMessage($sandbox['current'] . ' paragraphs processed.');
   }
+}
+
+/**
+ * Droopler 2.2 Add settings widget configuration.
+ */
+function droopler_update_8132(&$sandbox) {
+  $values['droopler__droopler_update_8132_1'] = update_modules_configuration([
+    'd_p_banner',
+    'd_p_carousel',
+    'd_p_counters',
+    'd_p_form',
+    'd_p_gallery',
+    'd_p_reference_content',
+    'd_p_side_by_side',
+    'd_p_side_embed',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_subscribe_file',
+    'd_p_text_blocks',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+    'd_p_tiles',
+  ], '8132');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v2.2' => $values]);
 }
