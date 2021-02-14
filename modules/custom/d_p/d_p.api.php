@@ -22,7 +22,7 @@ function hook_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
  * The settings form is built from ParagraphSettings plugins,
  * so it might be work to check first for creating new plugin
  * class or override the existing one instead of using hook.
- * Each elements must be the valid form render elements.
+ * Each elements must be the valid form element.
  *
  * @param array $settings_form
  *   The settings form.
