@@ -93,6 +93,7 @@ class SettingsWidget extends WidgetBase {
     ];
 
     $options = $this->paragraphSettingsManager->getSettingsFormOptions();
+
     $allowed_settings = $this->getAllowedSettings();
 
     foreach ($options as $id => $option) {
