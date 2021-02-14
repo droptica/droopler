@@ -37,14 +37,4 @@ class WithGrid extends ParagraphSettingPluginBase {
     return 0;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return [
-      'd_p_group_of_text_blocks',
-      'd_p_side_by_side',
-    ];
-  }
-
 }

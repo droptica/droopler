@@ -46,13 +46,4 @@ class FormLayout extends ParagraphSettingPluginBase implements ParagraphSettingS
     return 'left';
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return [
-      'd_p_form',
-    ];
-  }
-
 }

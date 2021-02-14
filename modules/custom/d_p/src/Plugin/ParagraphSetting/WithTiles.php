@@ -37,13 +37,4 @@ class WithTiles extends ParagraphSettingPluginBase {
     return 0;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return [
-      'd_p_group_of_text_blocks',
-    ];
-  }
-
 }

@@ -11,8 +11,6 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  */
 interface ParagraphSettingInterface {
 
-  const ALL_ALLOWED_BUNDLES = 'all';
-
   /**
    * Plugin settings.
    *
@@ -106,14 +104,6 @@ interface ParagraphSettingInterface {
    *   Plugin weight.
    */
   public function getWeight(): int;
-
-  /**
-   * List of paragraph bundles supported by that plugin.
-   *
-   * @return array
-   *   Paragraph bundle ids.
-   */
-  public function getAllowedBundles(): array;
 
   /**
    * Getter for validation rules definition.

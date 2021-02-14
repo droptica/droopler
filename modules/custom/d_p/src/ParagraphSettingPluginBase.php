@@ -136,13 +136,6 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
   /**
    * {@inheritdoc}
    */
-  public function getAllowedBundles(): array {
-    return $this->getSettings()['allowed_bundles'] ?? [self::ALL_ALLOWED_BUNDLES];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getValidationRulesDefinition(): array {
     return [];
   }
