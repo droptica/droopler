@@ -63,7 +63,7 @@ interface ParagraphSettingPluginManagerInterface {
    * Getter for settings form available options built from all plugin instances.
    *
    * @return array
-   *   An array containing all plugin names and its sub plugins,  keyed by id.
+   *   An array containing all plugin names and its subplugins, keyed by id.
    */
   public function getSettingsFormOptions(): array;
 
