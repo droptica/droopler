@@ -6,6 +6,7 @@ use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\d_p\ParagraphSettingPluginManagerInterface;
 use Drupal\d_p\ParagraphSettingSelectInterface;
 use Drupal\d_p\ParagraphSettingTypesInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -62,6 +63,82 @@ class SettingsWidget extends WidgetBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function defaultSettings(): array {
+    return [
+        'filter_mode' => 1,
+        'allowed_settings' => [],
+      ] + parent::defaultSettings();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
+    $form = parent::settingsForm($form, $form_state);
+
+    $form['filter_mode'] = [
+      '#type' => 'radios',
+      '#options' => [
+        0 => $this->t('Exclude selected'),
+        1 => $this->t('Include selected'),
+      ],
+      '#default_value' => $this->getSetting('filter_mode'),
+    ];
+
+    $form['allowed_settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Allowed settings'),
+    ];
+
+    $options = $this->paragraphSettingsManager->getSettingsFormOptions();
+
+    $allowed_settings = $this->getAllowedSettings();
+
+    foreach ($options as $id => $option) {
+      $form['allowed_settings'][$id]['status'] = [
+        '#title' => $option['label'],
+        '#type' => 'checkbox',
+        '#default_value' => $allowed_settings[$id]['status'] ?? FALSE,
+        '#states' => [
+          'checked' => [
+            '[data-setting-id="' . $id . '"]' => ['value' => 1],
+          ],
+        ],
+      ];
+
+      $subtype = ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID;
+      if (isset($option[$subtype])) {
+        foreach ($option[$subtype] as $mid => $modifier) {
+          $form['allowed_settings'][$id][$subtype][$mid]['status'] = [
+            '#title' => '<em>' . $option['label'] . '</em> » ' . $modifier['label'],
+            '#type' => 'checkbox',
+            '#default_value' => $allowed_settings[$id][$subtype][$mid]['status'] ?? FALSE,
+            '#attributes' => [
+              'data-setting-id' => $id,
+            ],
+          ];
+        }
+      }
+    }
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary() {
+    $summary = [];
+
+    $include_selected = (bool) $this->getSetting('filter_mode');
+    $summary[] = $include_selected ? $this->t('Filter mode: Include selected') : $this->t('Filter mode: Exclude selected');
+
+    return $summary;
+  }
+
+  /**
    * Get configuration options form for fields in paragraph settings.
    *
    * @return array
@@ -69,7 +146,7 @@ class SettingsWidget extends WidgetBase {
    */
   private function getConfigOptions(): array {
     $form = $this->paragraphSettingsManager->getSettingsForm();
-    $this->processBundleAccess($form);
+    $this->processSettingAccess($form);
 
     return $form;
   }
@@ -95,11 +172,11 @@ class SettingsWidget extends WidgetBase {
       switch ($type) {
         case 'css':
           $classes = $this->getCssClassList($value);
-
-          $this->processModifiers($element, $options['modifiers'], $classes);
+          $subtype = ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID;
+          $this->processModifiers($element, $options[$subtype], $classes);
 
           // Preserve only root keys, without children/modifiers.
-          unset($options['modifiers']);
+          unset($options[$subtype]);
 
           $element[$key] = [
             '#default_value' => implode(' ', $classes),
@@ -156,7 +233,7 @@ class SettingsWidget extends WidgetBase {
       if ($type === 'css') {
         $classes = $this->getCssClassList($value);
 
-        foreach ($options['modifiers'] as $class => $modifier) {
+        foreach ($options[ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID] as $class => $modifier) {
           $modifier_value = $element[$class]['#value'] ?? NULL;
 
           if ($modifier_value) {
@@ -189,28 +266,28 @@ class SettingsWidget extends WidgetBase {
   }
 
   /**
-   * Process render array in order to apply access value.
+   * Process render array in order to exclude not allowed settings.
    *
    * @param array $element
    *   Form element.
    */
-  protected function processBundleAccess(array &$element): void {
-    foreach ($element as $key => &$item) {
-      if (!is_array($item) || strpos($key, '#') === 0) {
+  protected function processSettingAccess(array &$element, ?string $parent_id = NULL): void {
+    $include_selected = (bool) $this->getSetting('filter_mode');
+
+    foreach ($element as $id => &$item) {
+      $is_setting_allowed = $this->isSettingAllowed($id, $parent_id);
+      $include_allowed = $include_selected && !$is_setting_allowed;
+      $exclude_allowed = !$include_selected && $is_setting_allowed;
+
+      if ( $include_allowed || $exclude_allowed) {
+        unset($element[$id]);
         continue;
       }
 
-      if (!empty($item['#plugin'])) {
-        /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
-        $plugin = $item['#plugin'];
-        $access = $plugin->isAllBundlesAllowed() ?: $plugin->isBundleAllowed($this->getTargetBundle());
-        if (!$access) {
-          unset($element[$key]);
-          continue;
-        }
+      $subtype = ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID;
+      if (isset($item[$subtype])) {
+        $this->processSettingAccess($item[$subtype], $id);
       }
-
-      $this->processBundleAccess($item);
     }
   }
 
@@ -364,6 +441,35 @@ class SettingsWidget extends WidgetBase {
     }
 
     return $selector_string;
+  }
+
+  /**
+   * Getter for allowed settings.
+   *
+   * @return array
+   */
+  protected function getAllowedSettings(): array {
+    return $this->getSetting('allowed_settings');
+  }
+
+  /**
+   * Check whether given setting was allowed in the setting configuration.
+   *
+   * @param string $id
+   *   The setting id.
+   * @param string|null $parent_id
+   *   The parent setting id, null if there is not parent.
+   *
+   * @return bool
+   *   True if this settings is allowed, false otherwise.
+   */
+  protected function isSettingAllowed(string $id, ?string $parent_id): bool {
+    $settings = $this->getAllowedSettings();
+
+    $is_setting_allowed = is_string($parent_id) ?
+      ($settings[$parent_id][ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID][$id]['status'] ?: 0) : ($settings[$id]['status'] ?: 0);
+
+    return (bool) $is_setting_allowed;
   }
 
   /**

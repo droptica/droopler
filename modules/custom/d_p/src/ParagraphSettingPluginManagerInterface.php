@@ -11,6 +11,8 @@ interface ParagraphSettingPluginManagerInterface {
 
   const SETTINGS_FORM_STORAGE_CID = 'paragraph_setting_plugins:settings_form';
 
+  const SETTINGS_SUBTYPE_ID = 'modifiers';
+
   /**
    * Getter for all plugin instances.
    *
@@ -56,5 +58,13 @@ interface ParagraphSettingPluginManagerInterface {
    *   Form elements.
    */
   public function getSettingsForm(): array;
+
+  /**
+   * Getter for settings form available options built from all plugin instances.
+   *
+   * @return array
+   *   An array containing all plugin names and its subplugins, keyed by id.
+   */
+  public function getSettingsFormOptions(): array;
 
 }
