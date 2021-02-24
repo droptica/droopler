@@ -4,7 +4,6 @@ namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
 use Drupal\d_p\ParagraphSettingSelectInterface;
-use Drupal\d_p\ParagraphSettingSpacingBundlesTrait;
 
 /**
  * Plugin implementation of the 'padding-top' modifier setting.
@@ -19,7 +18,6 @@ use Drupal\d_p\ParagraphSettingSpacingBundlesTrait;
  * )
  */
 class PaddingTop extends ParagraphSettingPluginBase implements ParagraphSettingSelectInterface {
-  use ParagraphSettingSpacingBundlesTrait;
 
   /**
    * {@inheritdoc}
@@ -51,13 +49,6 @@ class PaddingTop extends ParagraphSettingPluginBase implements ParagraphSettingS
    */
   public function getDefaultValue() {
     return 'padding-top-default';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return $this->getSpacingBundles();
   }
 
 }

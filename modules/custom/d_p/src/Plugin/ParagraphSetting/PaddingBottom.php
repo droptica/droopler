@@ -4,7 +4,6 @@ namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
 use Drupal\d_p\ParagraphSettingSelectInterface;
-use Drupal\d_p\ParagraphSettingSpacingBundlesTrait;
 
 /**
  * Plugin implementation of the 'padding-bottom' modifier setting.
@@ -19,7 +18,6 @@ use Drupal\d_p\ParagraphSettingSpacingBundlesTrait;
  * )
  */
 class PaddingBottom extends ParagraphSettingPluginBase implements ParagraphSettingSelectInterface {
-  use ParagraphSettingSpacingBundlesTrait;
 
   /**
    * {@inheritdoc}
@@ -51,13 +49,6 @@ class PaddingBottom extends ParagraphSettingPluginBase implements ParagraphSetti
    */
   public function getDefaultValue() {
     return 'padding-bottom-default';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return $this->getSpacingBundles();
   }
 
 }
