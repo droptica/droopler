@@ -136,7 +136,7 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Create heading type selector under the title.
   if (isset($form["field_page_section"])) {
     // Locate all paragraph subforms.
-    for ($i = 0; $i < $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
+    for ($i = 0; $i <= $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
       d_p_move_heading_type($form["field_page_section"]["widget"][$i]["subform"]);
     }
   }
