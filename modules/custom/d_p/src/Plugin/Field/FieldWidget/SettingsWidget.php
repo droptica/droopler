@@ -210,8 +210,10 @@ class SettingsWidget extends WidgetBase {
         $element[$key]['#required'] = TRUE;
       }
     }
-
-    $this->processCustomThemeElements($element, $config);
+    // Paragraph theme field.
+    if (isset($element['paragraph-theme'])) {
+      $this->processCustomThemeElements($element, $config);
+    }
 
     return ['value' => $element];
   }
