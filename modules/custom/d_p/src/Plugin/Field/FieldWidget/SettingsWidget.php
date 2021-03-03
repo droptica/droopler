@@ -469,7 +469,7 @@ class SettingsWidget extends WidgetBase {
     $settings = $this->getAllowedSettings();
 
     $is_setting_allowed = is_string($parent_id) ?
-      ($settings[$parent_id][ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID][$id]['status'] ?: 0) : ($settings[$id]['status'] ?: 0);
+      ($settings[$parent_id][ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID][$id]['status'] ?: 0) : ($settings[$id]['status'] ?? 0);
 
     return (bool) $is_setting_allowed;
   }
