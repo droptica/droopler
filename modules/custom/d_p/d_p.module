@@ -179,7 +179,8 @@ function d_p_move_heading_type(&$form) {
 function d_p_heading_type_validate($element, FormStateInterface $form_state) {
   $parents = [];
   foreach ($element["#parents"] as $index) {
-    if (!in_array($index, ['widget', 'heading_type', 'group_settings'], TRUE)) {
+    if (!in_array($index, ['widget', 'heading_type'], TRUE)
+        && strpos($index, 'group_') === FALSE) {
       $parents[] = $index;
     }
   }
