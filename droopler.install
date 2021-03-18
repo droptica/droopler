@@ -1934,9 +1934,23 @@ function droopler_update_8129(&$sandbox) {
           $class = 'theme-custom';
           $black = '#000000';
           $white = '#ffffff';
+          $background_color_hex = str_replace('#', '', $background_color);
+
+          /**
+           * HSL algorithm.
+           * @see https://stackoverflow.com/a/12228730
+           */
+          $lightness = function ($hex) {
+            $r = hexdec($hex[0].$hex[1]);
+            $g = hexdec($hex[2].$hex[3]);
+            $b = hexdec($hex[4].$hex[5]);
+
+            return (max($r, $g, $b) + min($r, $g, $b)) / 510.0;
+          };
+
           $settings_field->setSettingValue(ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME, [
             'background' => $background_color,
-            'text' => $background_color === $black ? $white : $black,
+            'text' => $lightness($background_color_hex) <= 0.6 ? $white : $black,
           ]);
       }
     }
