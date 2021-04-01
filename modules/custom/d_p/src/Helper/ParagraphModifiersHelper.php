@@ -57,7 +57,7 @@ class ParagraphModifiersHelper {
      */
     foreach ($fieldsDefs as $fieldName => $field) {
       if ($field->getType() == 'field_p_configuration_storage') {
-        $settings = $paragraph->get($fieldName)->first()->getValue();
+        $settings = $paragraph->get($fieldName)->getValue();
         if (!empty($settings)) {
           $this->settingsFieldName = $fieldName;
           $this->modifiers = $settings;

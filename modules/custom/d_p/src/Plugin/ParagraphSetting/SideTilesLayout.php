@@ -44,13 +44,4 @@ class SideTilesLayout extends ParagraphSettingPluginBase implements ParagraphSet
     return 'left';
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return [
-      'd_p_side_tiles',
-    ];
-  }
-
 }

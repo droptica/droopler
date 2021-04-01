@@ -45,13 +45,4 @@ class EmbedLayout extends ParagraphSettingPluginBase implements ParagraphSetting
     return 'left';
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return [
-      'd_p_side_embed',
-    ];
-  }
-
 }

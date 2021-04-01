@@ -37,13 +37,4 @@ class WithDivider extends ParagraphSettingPluginBase {
     return 0;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return [
-      'd_p_carousel',
-    ];
-  }
-
 }

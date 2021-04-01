@@ -1,5 +1,18 @@
 # Changelog
 
+### 5.3.1
+- Added basic Typescript support
+
+### 5.3.0
+
+- BGSet: Support adding multiple images/backgrounds through `event.detail.fullSrc` ([#827](https://github.com/aFarkas/lazysizes/issues/827))
+- RiaS plugin: Use `source` based config in case of `picture` element usage ([#764](https://github.com/aFarkas/lazysizes/issues/831))
+- BlurUp plugin: Added possibility to change classNames ([#814](https://github.com/aFarkas/lazysizes/pull/814))
+- Core: Added `iframeLoadMode` option (see [#810](https://github.com/aFarkas/lazysizes/pull/810))
+
+## 5.2.2
+- Add correct AMD module pattern for plugins.
+
 ## 5.2.1
 
 - BlurUp-Plugin: Copy style attribute ([#764](https://github.com/aFarkas/lazysizes/pull/764))
@@ -33,7 +46,7 @@
 * Do not leak global `lazySizesConfig` anymore fixes [#647](https://github.com/aFarkas/lazysizes/issues/647)
 * Improve handling of cloned object-fit images fixes [#648](https://github.com/aFarkas/lazysizes/issues/648)
 * Improve blur-up/effect plugin.
-* Add support fot native `loading="lazy"` feature as a [native loading plugin](https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/native-loading).
+* Add support for native `loading="lazy"` feature as a [native loading plugin](https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/native-loading).
 
 ## 4.1.8
 

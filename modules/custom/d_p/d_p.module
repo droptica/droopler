@@ -136,7 +136,7 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Create heading type selector under the title.
   if (isset($form["field_page_section"])) {
     // Locate all paragraph subforms.
-    for ($i = 0; $i < $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
+    for ($i = 0; $i <= $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
       d_p_move_heading_type($form["field_page_section"]["widget"][$i]["subform"]);
     }
   }
@@ -179,7 +179,8 @@ function d_p_move_heading_type(&$form) {
 function d_p_heading_type_validate($element, FormStateInterface $form_state) {
   $parents = [];
   foreach ($element["#parents"] as $index) {
-    if (!in_array($index, ['widget', 'heading_type', 'group_settings'], TRUE)) {
+    if (!in_array($index, ['widget', 'heading_type'], TRUE)
+        && !preg_match('/^group_/', $index)) {
       $parents[] = $index;
     }
   }

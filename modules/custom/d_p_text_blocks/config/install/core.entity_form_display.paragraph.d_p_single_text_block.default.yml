@@ -117,7 +117,58 @@ content:
     type: field_d_p_set_settings
     weight: 8
     region: content
-    settings: {  }
+    settings:
+      filter_mode: '1'
+      allowed_settings:
+        heading_type:
+          status: '1'
+        custom_class:
+          status: '1'
+          modifiers:
+            stripe-sidebar:
+              status: '1'
+            paragraph-theme:
+              status: '1'
+            tile:
+              status: '1'
+            with-price:
+              status: '1'
+            padding-bottom:
+              status: 0
+            with-divider:
+              status: 0
+            with-tiles:
+              status: 0
+            half-transparent:
+              status: 0
+            margin-bottom:
+              status: 0
+            margin-top:
+              status: 0
+            with-grid:
+              status: 0
+            padding-top:
+              status: 0
+            header-into-columns:
+              status: 0
+            full-width:
+              status: 0
+        side_image_layout:
+          status: 0
+        column_count_tablet:
+          status: 0
+        form_layout:
+          status: 0
+        side_tiles_layout:
+          status: 0
+        featured_images:
+          status: 0
+        column_count_mobile:
+          status: 0
+        embed_layout:
+          status: 0
+        column_count:
+          status: 0
     third_party_settings: {  }
   translation:
     weight: 6

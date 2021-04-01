@@ -45,17 +45,6 @@ class ColumnCount extends ParagraphSettingPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function getAllowedBundles(): array {
-    return [
-      'd_p_carousel',
-      'd_p_group_of_counters',
-      'd_p_group_of_text_blocks',
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getValidationRulesDefinition(): array {
     return [
       'column_count' => [

@@ -4,7 +4,6 @@ namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
 use Drupal\d_p\ParagraphSettingSelectInterface;
-use Drupal\d_p\ParagraphSettingSpacingBundlesTrait;
 
 /**
  * Plugin implementation of the 'margin-bottom' modifier setting.
@@ -19,7 +18,6 @@ use Drupal\d_p\ParagraphSettingSpacingBundlesTrait;
  * )
  */
 class MarginBottom extends ParagraphSettingPluginBase implements ParagraphSettingSelectInterface {
-  use ParagraphSettingSpacingBundlesTrait;
 
   /**
    * {@inheritdoc}
@@ -52,13 +50,6 @@ class MarginBottom extends ParagraphSettingPluginBase implements ParagraphSettin
    */
   public function getDefaultValue() {
     return 'margin-bottom-default';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return $this->getSpacingBundles();
   }
 
 }

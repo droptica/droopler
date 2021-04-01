@@ -51,8 +51,6 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
   /**
    * {@inheritdoc}
-   *
-   * @todo: Rework or add method to load all plugins by pragraph bundle.
    */
   public function getAll(): array {
     return $this->loadPluginsFromDefinitions($this->getDefinitions());
@@ -102,7 +100,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
       foreach ($plugins as $plugin) {
         if ($plugin->isSubtype()) {
-          $form[$plugin->getParentPluginId()]['modifiers'][$plugin->id()] = $plugin->formElement();
+          $form[$plugin->getParentPluginId()][self::SETTINGS_SUBTYPE_ID][$plugin->id()] = $plugin->formElement();
         }
       }
 
@@ -112,6 +110,29 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
     }
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSettingsFormOptions(): array {
+    $options = [];
+
+    foreach ($this->getSettingsForm() as $id => $element) {
+      $options[$id] = [
+        'label' => $element['#title']
+      ];
+      $modifiers = self::SETTINGS_SUBTYPE_ID;
+      if (isset($element[$modifiers])) {
+        foreach ($element[$modifiers] as $mid => $modifier) {
+          $options[$id][$modifiers][$mid]['label'] = $modifier['#title'];
+        }
+      }
+    }
+
+    $this->sortSettingsOptions($options);
+
+    return $options;
   }
 
   /**
@@ -137,6 +158,24 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
     }
 
     return $plugins;
+  }
+
+  /**
+   * Provides alphabetic sorting for settings options.
+   *
+   * @param array $options
+   *   Settings options.
+   */
+  protected function sortSettingsOptions(array &$options): void {
+    uasort($options, function ($a, $b) {
+      return $a['label'] <=> $b['label'];
+    });
+
+    foreach ($options as &$option) {
+      if (isset($option[self::SETTINGS_SUBTYPE_ID])) {
+        $this->sortSettingsOptions($option[self::SETTINGS_SUBTYPE_ID]);
+      }
+    }
   }
 
 }
