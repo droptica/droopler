@@ -195,6 +195,17 @@ $geysir-add-more-button: $color-hecuba !default;
     background: transparent;
   }
 
+  // Submit button.
+  .ui-dialog-buttonpane {
+    .button {
+      &--primary {
+        @include make-btn;
+        @include button-variant($background: $primary, $border: $primary);
+        @include button-size($btn-padding-x-sm, $btn-padding-y, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+      }
+    }
+  }
+
   // Dropbutton throbber.
   .dropbutton {
     .ajax-progress-throbber {
