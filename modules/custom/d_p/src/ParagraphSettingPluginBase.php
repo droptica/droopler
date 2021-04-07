@@ -129,29 +129,8 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
   /**
    * {@inheritdoc}
    */
-  public function getWeight() {
+  public function getWeight(): int {
     return $this->getSettings()['weight'] ?? 0;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return $this->getSettings()['allowed_bundles'] ?? [self::ALL_ALLOWED_BUNDLES];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function isBundleAllowed(string $bundle_name): bool {
-    return in_array($bundle_name, $this->getAllowedBundles());
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function isAllBundlesAllowed(): bool {
-    return $this->isBundleAllowed(self::ALL_ALLOWED_BUNDLES);
   }
 
   /**

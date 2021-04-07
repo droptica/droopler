@@ -33,13 +33,4 @@ class FeaturedImages extends ParagraphSettingPluginBase {
     return '';
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getAllowedBundles(): array {
-    return [
-      'd_p_tiles',
-    ];
-  }
-
 }
