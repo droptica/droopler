@@ -55,7 +55,12 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
       <div class="content-wrapper">
         <div class="container">
           {% block content %}
-            {{ content }}
+            {{ content | without('field_d_cta_link') }}
+            {% if content.field_d_cta_link|render %}
+              <div class="container mt-4">
+                {{ content.field_d_cta_link }}
+              </div>
+            {% endif %}
           {% endblock %}
         </div>
       </div>

@@ -15,8 +15,6 @@ $d-p-text-blocks-group-padding-y: 3.875rem !default;
 $d-p-text-blocks-group-mobile-padding-y: 2rem !default;
 $d-p-text-blocks-group-margin: 0 0 5.5rem 0 !default;
 $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0 !default;
-$d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
-$d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto !default;
 $d-p-single-box-padding-x: 5% !default;
 $d-p-single-box-mobile-padding-x: 10% !default;
 
@@ -58,12 +56,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     }
     > .field--type-link {
       text-align: center;
-      a {
-        margin: $d-p-text-blocks-group-button-margin;
-        @include media-breakpoint-down(md) {
-          margin: $d-p-text-blocks-mobile-group-button-margin;
-        }
-      }
     }
   }
 

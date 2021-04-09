@@ -49,7 +49,12 @@
     <div{{ attributes.addClass(classes) }}>
       <div class="container">
         {% block content %}
-          {{ content }}
+          {{ content | without('field_d_cta_link') }}
+          {% if content.field_d_cta_link|render %}
+            <div class="mt-4">
+              {{ content.field_d_cta_link }}
+            </div>
+          {% endif %}
         {% endblock %}
       </div>
     </div>

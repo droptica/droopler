@@ -74,7 +74,12 @@
       </div>
       <div {{ content_side_attributes.addClass(content_side_classes) }}>
         <div {{ content_fields_attributes.addClass(content_fields_classes) }}>
-          {{ content | without('field_d_media_image') }}
+          {{ content | without('field_d_media_image', 'field_d_cta_link') }}
+          {% if content.field_d_cta_link|render %}
+            <div class="mt-4">
+              {{ content.field_d_cta_link }}
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
