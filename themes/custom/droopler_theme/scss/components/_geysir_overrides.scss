@@ -191,8 +191,10 @@ $geysir-add-more-button: $color-hecuba !default;
 
   // Button.
   .button {
-    border: none;
-    background: transparent;
+    &:not(.media-library-item__remove) {
+      border: none;
+      background: transparent;
+    }
   }
 
   // Submit button.

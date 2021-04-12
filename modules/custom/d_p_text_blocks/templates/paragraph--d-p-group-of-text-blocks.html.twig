@@ -65,9 +65,11 @@
         {% endif %}
       {% endblock %}
       {% block paragraph_cta_content %}
-        <div class="container">
-          {{ content.field_d_cta_link }}
-        </div>
+        {% if content.field_d_cta_link.0 %}
+          <div class="container mt-4">
+            {{ content.field_d_cta_link }}
+          </div>
+        {% endif %}
       {% endblock %}
     </div>
   </section>
