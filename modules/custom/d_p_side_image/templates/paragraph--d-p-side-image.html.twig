@@ -73,8 +73,8 @@
         <div class="container">
           <div class="row">
             <div class="{{ text_class }} container-half">
-              {{ content.group_d_side_image_content | without('field_d_cta_link') }}
-              {% if content.group_d_side_image_content.field_d_cta_link|render %}
+              {{ content.group_d_side_image_content|without('field_d_cta_link') }}
+              {% if content.group_d_side_image_content.field_d_cta_link.0 %}
                 <div class="mt-4">
                   {{ content.group_d_side_image_content.field_d_cta_link }}
                 </div>

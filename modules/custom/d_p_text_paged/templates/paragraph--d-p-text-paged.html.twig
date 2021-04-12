@@ -49,8 +49,8 @@
     <div{{ attributes.addClass(classes) }}>
       <div class="container">
         {% block content %}
-          {{ content | without('field_d_cta_link') }}
-          {% if content.field_d_cta_link|render %}
+          {{ content|without('field_d_cta_link') }}
+          {% if content.field_d_cta_link.0 %}
             <div class="mt-4">
               {{ content.field_d_cta_link }}
             </div>
