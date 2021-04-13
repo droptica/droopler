@@ -195,6 +195,12 @@ $geysir-add-more-button: $color-hecuba !default;
       border: none;
       background: transparent;
     }
+
+    &.form-submit {
+      @include make-btn;
+      @include button-variant($background: $primary, $border: $primary);
+      @include button-size($btn-padding-x-sm, $btn-padding-y, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+    }
   }
 
   // Submit button.
