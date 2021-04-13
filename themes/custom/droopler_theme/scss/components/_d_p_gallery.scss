@@ -7,13 +7,9 @@ $d-p-gallery-line-color: $color-agamemnon !default;
 $d-p-gallery-line-color-inverted: $color-nestor !default;
 $d-p-gallery-color: $color-hecuba !default;
 $d-p-gallery-bold-color: $color-troilus !default;
-
-// Margins, paddings and sizing.
-$d-p-gallery-margin-y: 5% !default;
+$d-p-gallery-image-margin-bottom: 0 !default;
 
 .paragraph--type--d-p-gallery {
-  margin-top: $d-p-gallery-margin-y;
-  margin-bottom: $d-p-gallery-margin-y;
   text-align: center;
 
   .field--name-field-d-main-title {
@@ -27,16 +23,6 @@ $d-p-gallery-margin-y: 5% !default;
 
   .field--name-field-d-media-icon {
     text-align: center;
-  }
-
-  .field--name-field-d-long-text {
-    p {
-      color: $d-p-gallery-color;
-      b, strong {
-        color: $d-p-gallery-bold-color;
-      }
-    }
-
   }
 
   .with-long-text & {
@@ -64,6 +50,7 @@ $d-p-gallery-margin-y: 5% !default;
     img {
       width: 100%;
       height: auto;
+      margin-bottom: $d-p-gallery-image-margin-bottom;
     }
   }
 }

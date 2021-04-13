@@ -1,13 +1,14 @@
 name: d_content
 type: module
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 description: 'Provides "content page" node type.'
 dependencies:
   - block
   - block_content
-  - content_translation
   - ckeditor
+  - content_translation
+  - d_color
   - d_media
   - d_p
   - d_p_banner
@@ -33,12 +34,16 @@ dependencies:
   - file
   - image
   - language
+  - link
+  - link_attributes
   - media
+  - media_library
   - menu_link_content
   - menu_ui
   - metatag
   - metatag_open_graph
   - node
+  - options
   - paragraphs
   - path
   - simple_sitemap

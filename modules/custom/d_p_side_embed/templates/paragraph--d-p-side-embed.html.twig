@@ -42,6 +42,7 @@
 'paragraph',
 'container-fluid',
 'd-p-side-embed',
+'content-moved-inside',
 'paragraph--type--' ~ paragraph.bundle|clean_class,
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
@@ -58,8 +59,8 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
 {% set content_side_classes = [
   'd-p-side-embed-content',
-  embed_side == 'full' ? 'col-md-6 col-12 p-md-0 d-flex justify-content-end' : 'col-md-6',
-  'p-md-0',
+  'content-inside-wrapper',
+  embed_side == 'full' ? 'col-md-6 col-12 d-flex justify-content-end' : 'col-md-6',
 ] %}
 {% set content_fields_classes = [
   'd-p-side-embed-content-fields',
@@ -75,7 +76,12 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
       </div>
       <div {{ content_side_attributes.addClass(content_side_classes) }}>
         <div {{ content_fields_attributes.addClass(content_fields_classes) }}>
-          {{ content | without('field_d_embed') }}
+          {{ content|without('field_d_embed', 'field_d_cta_link') }}
+          {% if content.field_d_cta_link.0 %}
+            <div class="mt-4">
+              {{ content.field_d_cta_link }}
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

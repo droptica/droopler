@@ -67,7 +67,58 @@ body {
   width: 0px;
   height: 0px;
 }
-// Higher contrast font color for paragraphs with gray background.
-.background-gray-light-2 {
-  color: $color-acamas;
+
+.paragraph {
+  color: $color-hecuba;
+
+  b, strong {
+    color: $color-troilus;
+  }
+}
+
+.header-section {
+  article {
+    .paragraph-sections {
+      section {
+        .paragraph {
+          @include media-breakpoint-down($navbar-mobile-breakpoint-down) {
+            &--type--d-p-side-image,
+            &--type--d-p-side-embed {
+              padding-top: 0;
+            }
+          }
+
+          @include media-breakpoint-between(md, $navbar-mobile-breakpoint-down) {
+            &--type--d-p-side-image,
+            &--type--d-p-side-embed {
+              .content-inside-wrapper {
+                padding-top: 15%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.landing-page-header {
+  position: relative;
+
+  .hanging-header {
+    position: absolute;
+    width: 100%;
+    z-index: 9;
+    top: 20px;
+    left: 0;
+    right: 0;
+    padding-bottom: 20px;
+  }
+
+  .d-content-cta-wrapper {
+    &, .btn {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
 }

@@ -21,7 +21,7 @@
 
         $(this).slick({
           infinite: true,
-          slidesToShow: settings.d_p_carousel[id].columns,
+          slidesToShow: settings.d_p_carousel[id].columns_md,
           slidesToScroll: 1,
           swipeToSlide: true,
           touchMove: true,

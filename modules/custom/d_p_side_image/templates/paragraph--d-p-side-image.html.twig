@@ -41,6 +41,7 @@
 {% set classes = [
   'paragraph',
   'd-p-side-image-banner',
+  'content-moved-inside',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
@@ -52,6 +53,9 @@
   'd-p-side-image-banner-wrapper',
   'clearfix',
   'position-relative',
+] %}
+{% set content_side_classes = [
+  'content-inside-wrapper',
 ] %}
 
 {% block paragraph %}
@@ -65,10 +69,17 @@
           } only %}
         {% endblock %}
       </div>
-      <div class="container">
-        <div class="row">
-          <div class="container-half {{ text_class }}">
-            {{ content.group_d_side_image_content }}
+      <div class="{{ content_side_classes|join(' ') }}">
+        <div class="container">
+          <div class="row">
+            <div class="{{ text_class }} container-half">
+              {{ content.group_d_side_image_content|without('field_d_cta_link') }}
+              {% if content.group_d_side_image_content.field_d_cta_link.0 %}
+                <div class="mt-4">
+                  {{ content.group_d_side_image_content.field_d_cta_link }}
+                </div>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>

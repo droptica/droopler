@@ -36,10 +36,17 @@
     'block-' ~ plugin_id|clean_class,
   ]
 %}
+
+{%
+  set title_classes = [
+    'block__title',
+  ]
+%}
+
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
+    <h2{{ title_attributes.addClass(title_classes) }}>{{ label }}</h2>
   {% endif %}
   {{ title_suffix }}
   {% block content %}

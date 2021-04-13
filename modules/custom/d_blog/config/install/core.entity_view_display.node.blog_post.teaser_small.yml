@@ -7,9 +7,11 @@ dependencies:
     - field.field.node.blog_post.field_blog_media_main_image
     - field.field.node.blog_post.field_blog_sections
     - field.field.node.blog_post.field_blog_teaser
-    - image.style.gallery_thumbnail
+    - field.field.node.blog_post.field_meta_tags
+    - image.style.large_gallery_thumbnail
     - node.type.blog_post
   module:
+    - lazy
     - media
     - text
     - user
@@ -24,7 +26,7 @@ content:
     region: content
     label: hidden
     settings:
-      image_style: gallery_thumbnail
+      image_style: large_gallery_thumbnail
       image_link: content
     third_party_settings:
       lazy:
@@ -40,6 +42,7 @@ content:
 hidden:
   field_blog_category: true
   field_blog_sections: true
+  field_meta_tags: true
   langcode: true
   links: true
   search_api_excerpt: true

@@ -11,16 +11,65 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_text_paged
   module:
     - d_p
+    - field_group
     - link_attributes
     - media_library
     - text
+third_party_settings:
+  field_group:
+    group_tabsd:
+      children:
+        - group_basic
+        - group_settings
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_basic:
+      children:
+        - field_d_main_title
+        - field_d_subtitle
+        - field_d_media_icon
+        - field_d_long_text
+        - field_d_cta_link
+        - translation
+      parent_name: group_tabsd
+      weight: 10
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Basic
+    group_settings:
+      children:
+        - field_d_settings
+      parent_name: group_tabsd
+      weight: 11
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Settings
 id: paragraph.d_p_text_paged.default
 targetEntityType: paragraph
 bundle: d_p_text_paged
 mode: default
 content:
   field_d_cta_link:
-    weight: 3
+    weight: 5
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -43,7 +92,7 @@ content:
     type: text_textarea
     region: content
   field_d_main_title:
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -51,15 +100,66 @@ content:
     type: string_textfield
     region: content
   field_d_media_icon:
-    weight: 1
+    weight: 3
     settings:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
     region: content
   field_d_settings:
-    weight: 6
-    settings: {  }
+    weight: 7
+    settings:
+      filter_mode: '1'
+      allowed_settings:
+        heading_type:
+          status: '1'
+        custom_class:
+          status: '1'
+          modifiers:
+            padding-bottom:
+              status: '1'
+            paragraph-theme:
+              status: '1'
+            margin-bottom:
+              status: '1'
+            margin-top:
+              status: '1'
+            padding-top:
+              status: '1'
+            stripe-sidebar:
+              status: 0
+            tile:
+              status: 0
+            with-divider:
+              status: 0
+            with-tiles:
+              status: 0
+            half-transparent:
+              status: 0
+            with-grid:
+              status: 0
+            with-price:
+              status: 0
+            header-into-columns:
+              status: 0
+            full-width:
+              status: 0
+        side_image_layout:
+          status: 0
+        column_count_tablet:
+          status: 0
+        form_layout:
+          status: 0
+        side_tiles_layout:
+          status: 0
+        featured_images:
+          status: 0
+        column_count_mobile:
+          status: 0
+        embed_layout:
+          status: 0
+        column_count:
+          status: 0
     third_party_settings: {  }
     type: field_d_p_set_settings
     region: content
@@ -72,7 +172,7 @@ content:
     type: string_textfield
     region: content
   translation:
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }

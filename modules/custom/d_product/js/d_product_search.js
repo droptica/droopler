@@ -43,6 +43,12 @@
         $(".region-facets-left", context).css("left", "-100%");
         $("body").removeClass("navigation-bar-visible");
       });
+
+      $(window).once('d_product_resize_filters').resize(function () {
+        if (window.innerWidth >= 992) {
+          $buttonClose.click();
+        }
+      });
     }
   };
 

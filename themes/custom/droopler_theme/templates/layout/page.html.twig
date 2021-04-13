@@ -58,41 +58,23 @@
  * - navbar_top_attributes: Items for the header region.
  * - navbar_attributes: Items for the header region.
  * - content_attributes: Items for the header region.
+ * - page_attributes: Attributes applied to the page main wrapping tag.
+ * - section_attributes: Attributes applied to the page section tag.
  *
  * @see template_preprocess_page()
  * @see droopler_theme_preprocess_page()
  * @see html.html.twig
  */
 #}
-<div id="page-wrapper" class="page-wrapper">
-  <header id="header" class="header" role="banner"
-          aria-label="{{ 'Site header'|t }}">
-    {% block head %}
-      <nav{{ navbar_attributes.addClass('navbar-wrapper') }}>
-        <div class="container no-padding-md">
-          <div class="navbar-brand d-flex align-items-center">
-            {{ page.header }}
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <nav class="navbar navbar-expand-lg main-navbar px-0 collapse ml-auto flex-column d-lg-flex" id="navbar-nav">
-            <div class="navbar-inner d-flex">
-              {% if page.secondary_menu %}
-                <div class="secondary-menu-region">{{ page.secondary_menu }}</div>
-              {% endif %}
-              {% if page.primary_menu %}
-                <div class="menu-region">{{ page.primary_menu }}</div>
-              {% endif %}
-              {% if  page.lang_menu %}
-                <div class="lang-region">{{ page.lang_menu }}</div>
-              {% endif %}
-            </div>
-          </nav>
-        </div>
-      </nav>
-    {% endblock %}
-  </header>
+{% set classes = [
+  'navbar-wrapper',
+] %}
+
+<div{{ page_attributes }}>
+
+  {% if not is_disabled_header and not is_cta_header %}
+    {% include '@droopler_theme/includes/header.html.twig' %}
+  {% endif %}
 
   {% if page.highlighted %}
     <div class="highlighted">
@@ -122,9 +104,17 @@
         <div class="row clearfix">
           {{ page.breadcrumb }}
           <main{{ main_content_attributes }}>
-            <section class="section">
+            <section{{ section_attributes }}>
               <a id="main-content" tabindex="-1"></a>
-              {{ page.content }}
+              {% if is_cta_header %}
+                {{ page.content.messages }}
+                <div class="position-relative">
+                  {% include '@droopler_theme/includes/header.html.twig' %}
+                  {{ page.content|without('messages') }}
+                </div>
+              {% else %}
+                {{ page.content }}
+              {% endif %}
             </section>
           </main>
         </div>
@@ -142,5 +132,7 @@
     </div>
   {% endif %}
 
-  {% include '@droopler_theme/includes/footer.html.twig' %}
+  {% block footer %}
+    {% include '@droopler_theme/includes/footer.html.twig' %}
+  {% endblock %}
 </div>

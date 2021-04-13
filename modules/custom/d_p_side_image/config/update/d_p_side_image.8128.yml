@@ -1,0 +1,96 @@
+core.entity_form_display.paragraph.d_p_side_image.default:
+  add:
+    dependencies:
+      module:
+        - field_group
+    third_party_settings:
+      field_group:
+        group_tabs:
+          children:
+            - group_basic
+            - group_settings
+          parent_name: ''
+          weight: 0
+          format_type: tabs
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            direction: horizontal
+          label: Tabs
+        group_basic:
+          children:
+            - field_d_main_title
+            - field_d_media_background
+            - field_d_media_icon
+            - field_d_long_text
+            - field_d_cta_link
+            - translation
+          parent_name: group_tabs
+          weight: 12
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: open
+            required_fields: true
+          label: Basic
+        group_settings:
+          children:
+            - field_d_settings
+          parent_name: group_tabs
+          weight: 13
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Settings
+
+  change:
+    expected:
+      content:
+        field_d_background_color:
+          weight: 7
+        field_d_cta_link:
+          weight: 5
+        field_d_long_text:
+          weight: 3
+        field_d_main_title:
+          weight: 0
+        field_d_media_background:
+          weight: 2
+        field_d_media_icon:
+          weight: 1
+        field_d_p_si_image_side:
+          weight: 4
+        field_d_settings:
+          weight: 8
+        translation:
+          weight: 6
+
+    new:
+      content:
+        field_d_background_color:
+          weight: 2
+        field_d_cta_link:
+          weight: 17
+        field_d_long_text:
+          weight: 16
+        field_d_main_title:
+          weight: 13
+        field_d_media_background:
+          weight: 14
+        field_d_media_icon:
+          weight: 15
+        field_d_p_si_image_side:
+          weight: 1
+        field_d_settings:
+          weight: 9
+        translation:
+          weight: 18

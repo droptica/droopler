@@ -3,34 +3,140 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.d_p_single_counter.field_d_main_title
+    - field.field.paragraph.d_p_single_counter.field_d_media_icon
     - field.field.paragraph.d_p_single_counter.field_d_number
     - field.field.paragraph.d_p_single_counter.field_d_settings
     - paragraphs.paragraphs_type.d_p_single_counter
   module:
     - d_p
+    - field_group
+    - media_library
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_settings
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_basic:
+      children:
+        - field_d_number
+        - field_d_main_title
+        - field_d_media_icon
+      parent_name: group_tabs
+      weight: 7
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Basic
+    group_settings:
+      children:
+        - field_d_settings
+      parent_name: group_tabs
+      weight: 8
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Settings
 id: paragraph.d_p_single_counter.default
 targetEntityType: paragraph
 bundle: d_p_single_counter
 mode: default
 content:
   field_d_main_title:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: 'ie. Clients this year'
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_d_media_icon:
+    weight: 3
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
+    region: content
   field_d_number:
-    weight: 0
+    weight: 1
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_d_settings:
-    weight: 2
-    settings: {  }
+    weight: 3
+    settings:
+      filter_mode: '1'
+      allowed_settings:
+        custom_class:
+          status: '1'
+          modifiers:
+            paragraph-theme:
+              status: '1'
+            padding-bottom:
+              status: 0
+            stripe-sidebar:
+              status: 0
+            tile:
+              status: 0
+            with-divider:
+              status: 0
+            with-tiles:
+              status: 0
+            half-transparent:
+              status: 0
+            margin-bottom:
+              status: 0
+            margin-top:
+              status: 0
+            with-grid:
+              status: 0
+            padding-top:
+              status: 0
+            with-price:
+              status: 0
+            header-into-columns:
+              status: 0
+            full-width:
+              status: 0
+        heading_type:
+          status: 0
+        side_image_layout:
+          status: 0
+        column_count_tablet:
+          status: 0
+        form_layout:
+          status: 0
+        side_tiles_layout:
+          status: 0
+        featured_images:
+          status: 0
+        column_count_mobile:
+          status: 0
+        embed_layout:
+          status: 0
+        column_count:
+          status: 0
     third_party_settings: {  }
     type: field_d_p_set_settings
     region: content

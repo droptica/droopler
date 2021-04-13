@@ -10,24 +10,35 @@ $d-p-form-text-color: $color-odysseus !default;
 $d-p-form-background: $color-agamemnon !default;
 $d-p-form-line-color: $color-nestor !default;
 $d-p-form-line-color-inverted: $color-agamemnon !default;
+$d-p-form-table-color: $color-cassandra !default;
 
 // Margins, paddings and sizes.
 $d-p-form-header-margin-bottom: 10% !default;
-$d-p-form-padding-top: 5% !default;
-$d-p-form-padding-bottom: 5% !default;
 $d-p-form-button-margin-top: 1rem !default;
 $d-p-form-copy-margin-left: 1.25rem !default;
+$d-p-form-copy-margin-right: 1.25rem !default;
 $d-p-form-small-labels-spacing: 7px !default;
 
 // Other settings
 $d-p-form-background-opacity: 0.4 !default;
 
-.paragraph-d-form {
+.theme-default {
+  .paragraph--type--d-p-form {
+    background: $d-p-form-background;
+    color: $d-p-form-text-color;
+
+    .field--name-field-d-main-title {
+      color: $d-p-form-header-color;
+
+      &::after {
+        @include decoration-header-line-main-center($d-p-form-line-color-inverted, $d-p-form-line-color);
+      }
+    }
+  }
+}
+
+.paragraph--type--d-p-form {
   position: relative;
-  padding-top: $d-p-form-padding-top;
-  padding-bottom: $d-p-form-padding-bottom;
-  color: $d-p-form-text-color;
-  background: $d-p-form-background;
 
   .d-media-background-wrapper {
     opacity: $d-p-form-background-opacity;
@@ -44,12 +55,36 @@ $d-p-form-background-opacity: 0.4 !default;
     .field--type-file.form-group {
       margin-top: $d-p-form-button-margin-top;
     }
-    small, label {
-       color: $d-p-form-text-color;
-    }
+
     small.description {
       margin-top: $d-p-form-small-labels-spacing;
       display: inline-block;
+    }
+
+    // Multiple files attached.
+    table {
+      .draggable {
+        .tabledrag-handle {
+          display: flex;
+          height: 60px;
+          align-items: center;
+          padding-top: 10px;
+
+          .handle:after {
+            color: $d-p-form-table-color;
+          }
+        }
+      }
+      .js-form-managed-file {
+        span.file {
+          padding-left: 20px;
+          a {
+            display: block;
+            background-color: transparent;
+            color: $d-p-form-table-color;
+          }
+        }
+      }
     }
 
     .js-form-managed-file {
@@ -67,16 +102,17 @@ $d-p-form-background-opacity: 0.4 !default;
         display: inline;
         max-width: $button-max-width;
         width: 100%;
-        padding-left: $d-p-form-copy-margin-left;
+        margin-right: $d-p-form-copy-margin-right;
         height: fit-content;
 
         a {
           @include make-btn;
           text-transform: none;
-          background-color: $d-p-form-text-color;
-          color: $d-p-form-background;
+          color: $d-p-form-text-color;
+          background-color: $d-p-form-background;
           text-align: left;
           width: 100%;
+          padding: 20px;
         }
       }
       .form-type-textfield {
@@ -90,15 +126,18 @@ $d-p-form-background-opacity: 0.4 !default;
         flex-wrap: wrap;
       }
       .tabledrag-handle .handle {
-        display: inline;
+        display: flex;
         background: none;
+        width: unset;
+        height: unset;
+
         &:hover {
           background: none;
-          &:after {
+          &::after {
             color: inherit;
           }
         }
-        &:after {
+        &::after {
           font-family: "fontello";
           content: "\f047";
           color: $d-p-form-text-color;
@@ -109,10 +148,6 @@ $d-p-form-background-opacity: 0.4 !default;
   .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
-    color: $d-p-form-header-color;
-    &:after {
-      @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
-    }
   }
 
   .field--name-field-d-media-icon {
@@ -183,4 +218,10 @@ $d-p-form-background-opacity: 0.4 !default;
       }
     }
   }
+}
+
+#geysir-modal .form-color {
+  width: 60px;
+  height: 30px;
+  padding: 0;
 }

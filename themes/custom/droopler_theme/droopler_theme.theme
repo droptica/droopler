@@ -23,6 +23,11 @@ function droopler_theme_preprocess_html(&$variables) {
   $path_args = explode('/', $path);
   if (isset($path_args[0]) && isset($path_args[1]) && ($path_args[0] == 'node') && (is_numeric($path_args[1]))) {
     $variables['attributes']['class'][] = 'page-node-' . $path_args[1];
+
+    // Add node type when viewing a node revision.
+    if (isset($path_args[2]) && $path_args[2] == 'revisions') {
+      $variables['node_type'] = Node::load($path_args[1])->getType();
+    }
   }
   if (isset($path_args[0]) && isset($path_args[1]) && ($path_args[0] == 'user')) {
     $variables['attributes']['class'][] = 'page-user-' . $path_args[1];
@@ -38,7 +43,18 @@ function droopler_theme_preprocess_html(&$variables) {
  * Implements hook_preprocess_HOOK() for page templates.
  */
 function droopler_theme_preprocess_page(&$variables) {
+  $layout = droopler_theme_get_page_layout($variables);
+
+  // Define header type variables.
+  $variables['header_layout'] = $layout;
+  $variables['is_disabled_header'] =  $layout === 'header_disabled';
+  $variables['is_cta_header'] = $layout === 'header_with_cta';
+
   // Define default classes for containers.
+  $page_attributes = [
+    'class' => ['page-wrapper'],
+    'id' => ['page-wrapper'],
+  ];
   $navbar_top_attributes = [
     'class' => ['navbar123'],
     'id' => ['navbar-top'],
@@ -54,6 +70,9 @@ function droopler_theme_preprocess_page(&$variables) {
   $main_content_attributes = [
     'class' => ['col-12', 'main-content'],
   ];
+  $section_attributes = [
+    'class' => ['section',],
+  ];
   $content_attributes = [
     'class' => ['main-content', 'col-md-12'],
     'id' => ['content'],
@@ -66,11 +85,19 @@ function droopler_theme_preprocess_page(&$variables) {
   }
 
   // Declare attributes.
+  $variables['page_attributes'] = new Attribute($page_attributes);
   $variables['navbar_top_attributes'] = new Attribute($navbar_top_attributes);
   $variables['navbar_attributes'] = new Attribute($navbar_attributes);
   $variables['main_attributes'] = new Attribute($main_attributes);
   $variables['main_content_attributes'] = new Attribute($main_content_attributes);
+  $variables['section_attributes'] = new Attribute($section_attributes);
   $variables['content_attributes'] = new Attribute($content_attributes);
+
+  // Add attributes that depends of the page layout.
+  if ($variables['is_cta_header']) {
+    $variables['page_attributes']->addClass(['landing-page-header',]);
+    $variables['section_attributes']->addClass(['header-section',]);
+  }
 
   $footer_regions = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
   $filled_regions = [];
@@ -182,6 +209,10 @@ function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array 
 function droopler_theme_preprocess_input(&$variables) {
   // For submit elements.
   if ($variables['element']['#type'] == 'submit') {
+    // Omit class manipulation if is geysir modal.
+    if (\Drupal::service('d_geysir.utility.modal_detector')->isGeysirModalRequest()) {
+      return;
+    }
 
     // If button has some class.
     if (is_object($variables['attributes'])) {
@@ -293,7 +324,8 @@ function droopler_theme_preprocess_views_mini_pager(&$variables) {
 function droopler_theme_preprocess_field(&$variables) {
   if ($variables['field_name'] == 'field_d_product_media') {
     $variables['#attached']['library'][] = 'd_product/d_product_slider';
-    $slider = views_embed_view('product_images', 'block_1');
+    $vid = $variables['element']['#object']->vid->value;
+    $slider = views_embed_view('product_images', 'block_1', $vid);
     $variables['slider'] = render($slider);
   }
 }
@@ -354,6 +386,30 @@ function droopler_theme_show_title_block() {
   $route_check = $route_name == 'view.blog_listing.page_1';
 
   return !($node_check || $route_check);
+}
+
+/**
+ * Getter for the page layout on node pages.
+ *
+ * @param array $variables
+ *   Theme variables.
+ *
+ * @return string|null
+ *   Layout name, defaults to null.
+ */
+function droopler_theme_get_page_layout(array $variables) {
+  /** @var NodeInterface|null $node */
+  $node = $variables['node'] ?? NULL;
+  $layout = NULL;
+
+  if ($node instanceof NodeInterface) {
+    $layout_field = 'field_header_layout';
+    if ($node->hasField($layout_field)) {
+      $layout = $node->{$layout_field}->value;
+    }
+  }
+
+  return $layout;
 }
 
 /**

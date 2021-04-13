@@ -29,27 +29,56 @@ $d-p-banner-half-transparent-btn-spacing: 25px !default;
 $d-p-banner-background-opacity: 0.5 !default;
 $d-p-banner-subheader-opacity: 0.7 !default;
 
-.paragraph--type--d-p-banner {
-  position: relative;
+// Override default values.
+.padding-top-default {
+  .paragraph.paragraph--type--d-p-banner {
+    padding-top: $d-p-banner-mobile-padding-top;
+
+    @include media-breakpoint-up(md) {
+      padding-top: $d-p-banner-padding-top;
+    }
+  }
+}
+.padding-bottom-default {
+  .paragraph.paragraph--type--d-p-banner {
+    padding-bottom: $d-p-banner-mobile-padding-bottom;
+
+    @include media-breakpoint-up(md) {
+      padding-bottom: $d-p-banner-padding-bottom;
+    }
+  }
+}
+
+.theme-default .paragraph--type--d-p-banner {
   background: $d-p-banner-background-overlay;
   color: $d-p-banner-text-color;
+
+  .field--name-field-d-main-title {
+    color: $d-p-banner-header-color;
+  }
+
+  .field--name-field-d-subtitle {
+    color: $d-p-banner-subheader-color;
+  }
+}
+
+.paragraph--type--d-p-banner {
+  position: relative;
   z-index: 0;
   text-align: center;
   $root: &;
 
   .content > .field--name-field-d-main-title {
     @include font-main-header-big;
-    color: $d-p-banner-header-color;
     text-align: center;
     text-transform: uppercase;
   }
   .field--name-field-d-media-icon {
     text-align: center;
   }
-  h3.field--name-field-d-subtitle {
+  .field--name-field-d-subtitle {
     @include font-subtitle;
     text-align: center;
-    color: $d-p-banner-subheader-color;
     opacity: $d-p-banner-subheader-opacity;
   }
   p {
@@ -63,10 +92,9 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     }
   }
   .field--name-field-d-main-title + .field--type-link,
-  h3 + .field--type-link,
+  .field--name-field-d-subtitle + .field--type-link,
   .field--name-field-d-long-text {
     p {
-      color: $d-p-banner-text-color;
       word-wrap: break-word;
       hyphens: auto;
     }
@@ -81,23 +109,46 @@ $d-p-banner-subheader-opacity: 0.7 !default;
     position: relative;
     z-index: 2;
     width: 100%;
-    padding-top: $d-p-banner-padding-top;
-    padding-bottom: $d-p-banner-padding-bottom;
-    @include media-breakpoint-down(sm) {
-      padding-top: $d-p-banner-mobile-padding-top;
-      padding-bottom: $d-p-banner-mobile-padding-bottom;
-    }
   }
 }
 
 // Styles for half-transparent modifier.
 .half-transparent {
-  .d-p-banner {
+
+  &.padding-top-default {
+    .paragraph.paragraph--type--d-p-banner {
+      padding-top: 0;
+    }
+  }
+
+  &.padding-bottom-default {
+    .paragraph.paragraph--type--d-p-banner {
+      padding-bottom: 0;
+    }
+  }
+
+  .paragraph.paragraph--type--d-p-banner {
+    &,
+    .field--name-field-d-main-title,
+    .field--name-field-d-long-text,
+    .field--name-field-d-subtitle {
+      color: $color-cassandra;
+    }
+
+    .field--name-field-d-main-title + .field--type-link,
+    .field--name-field-d-subtitle + .field--type-link,
+    .field--name-field-d-long-text {
+      &::before {
+        @include decoration-header-line-main-center($d-p-banner-line-color-inverted, $d-p-banner-line-color);
+      }
+    }
+
     .content-wrapper {
       width: 100%;
       background: $d-p-banner-half-transparent-background-color;
       padding-top: $d-p-banner-half-transparent-padding-top;
       padding-bottom: $d-p-banner-half-transparent-padding-bottom;
+
       @include media-breakpoint-down(sm) {
         padding-top: $d-p-banner-mobile-padding-top;
         padding-bottom: $d-p-banner-mobile-padding-bottom;
@@ -105,56 +156,49 @@ $d-p-banner-subheader-opacity: 0.7 !default;
       @include media-breakpoint-up(lg) {
         width: 50%;
       }
+
+      .content-inside-wrapper {
+        background: none;
+      }
+
       .content {
         padding-left: $d-p-banner-half-transparent-content-spacing;
         padding-right: $d-p-banner-half-transparent-content-spacing;
-        .field--name-field-d-main-title,
-        .field--name-field-d-subtitle {
-          text-transform: none;
-          opacity: 1;
-          @include media-breakpoint-up(lg) {
-            text-align: left;
-          }
-        }
-        .field--name-field-d-subtitle {
-          font-weight: normal;
-        }
-        .field--name-field-d-cta-link {
-          @include media-breakpoint-up(lg) {
-            text-align: left;
-          }
-          a {
-            margin: $d-p-banner-half-transparent-btn-spacing 0 0 0;
-          }
-        }
-        .field--name-field-d-main-title,
-        .field--name-field-d-subtitle,
-        .field--name-field-d-long-text,
-        .field--name-field-d-cta-link {
-          &::before {
-            @include media-breakpoint-up(lg) {
-              margin-left: 0;
-            }
-          }
-        }
-        .field--name-field-d-long-text {
-          p {
-            @include media-breakpoint-up(lg) {
-              text-align: left;
-            }
-          }
-        }
       }
     }
-  }
-}
 
-.theme-invert {
-  > .d-p-banner {
-    .field--type-string,
-    .field--type-text-long {
-      &, p {
-        color: $color-cassandra;
+    .field--name-field-d-main-title,
+    .field--name-field-d-subtitle,
+    .field--name-field-d-long-text p {
+      text-transform: none;
+      opacity: 1;
+
+      @include media-breakpoint-up(lg) {
+        text-align: left;
+      }
+    }
+
+    .field--name-field-d-subtitle {
+      font-weight: normal;
+    }
+
+    .field--name-field-d-cta-link {
+      @include media-breakpoint-up(lg) {
+        text-align: left;
+      }
+      a {
+        margin: $d-p-banner-half-transparent-btn-spacing 0 0 0;
+      }
+    }
+
+    .field--name-field-d-main-title,
+    .field--name-field-d-subtitle,
+    .field--name-field-d-long-text,
+    .field--name-field-d-cta-link {
+      &::before {
+        @include media-breakpoint-up(lg) {
+          margin-left: 0;
+        }
       }
     }
   }

@@ -9,20 +9,68 @@ $d-p-counters-line-color-inverted: $line-background !default;
 $d-p-counters-header-color: $color-odysseus !default;
 $d-p-counters-number-color: $color-odysseus !default;
 $d-p-counters-text-color: $color-nestor !default;
+$d-p-counters-long-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-counters-title-margin-top: 0 !default;
+$d-p-counters-title-margin-bottom: 1.52rem !default;
+$d-p-counters-long-text-margin-bottom: 1.52rem !default;
 $d-p-counters-padding-top: 7.5rem !default;
 $d-p-counters-padding-bottom: 7.5rem !default;
 $d-p-counters-mobile-padding-top: 3rem !default;
 $d-p-counters-mobile-padding-bottom: 3rem !default;
+$d-p-single-counter-padding-x: 5% !default;
+$d-p-single-counter-mobile-padding-x: 10% !default;
 
 // Other settings
 $d-p-counters-background-opacity: 0.2 !default;
 
+// Override default values.
+.padding-top-default {
+  .paragraph.paragraph--type--d-p-group-of-counters {
+    padding-top: $d-p-counters-padding-top;
+
+    @include media-breakpoint-down(sm) {
+      padding-top: $d-p-counters-mobile-padding-top;
+    }
+  }
+}
+.padding-bottom-default {
+  .paragraph.paragraph--type--d-p-group-of-counters {
+
+    padding-bottom: $d-p-counters-padding-bottom;
+    @include media-breakpoint-down(sm) {
+      padding-bottom: $d-p-counters-mobile-padding-bottom;
+    }
+  }
+}
+
+.theme-default {
+  .paragraph--type--d-p-group-of-counters  {
+    background: $d-p-counters-background-overlay;
+
+    .content > .field--name-field-d-main-title {
+      color: $d-p-counters-header-color;
+    }
+
+    .paragraph--type--d-p-single-counter {
+      .field--name-field-d-number {
+        color: $d-p-counters-number-color;
+      }
+
+      .field--name-field-d-main-title {
+        color: $d-p-counters-text-color;
+      }
+    }
+
+    .field--name-field-d-long-text {
+      color: $d-p-counters-long-text-color;
+    }
+  }
+}
+
 .paragraph--type--d-p-group-of-counters {
   position: relative;
-  background: $d-p-counters-background-overlay;
   z-index: 0;
 
   .d-media-background-wrapper {
@@ -33,12 +81,6 @@ $d-p-counters-background-opacity: 0.2 !default;
     position: relative;
     z-index: 2;
     width: 100%;
-    padding-top: $d-p-counters-padding-top;
-    padding-bottom: $d-p-counters-padding-bottom;
-    @include media-breakpoint-down(sm) {
-      padding-top: $d-p-counters-mobile-padding-top;
-      padding-bottom: $d-p-counters-mobile-padding-bottom;
-    }
 
     .field--name-field-d-media-icon {
       text-align: center;
@@ -47,11 +89,11 @@ $d-p-counters-background-opacity: 0.2 !default;
     // The header.
     .content > .field--name-field-d-main-title {
       @include font-main-header;
-      color: $d-p-counters-header-color;
       text-align: center;
       margin-top: $d-p-counters-title-margin-top;
+      margin-bottom: $d-p-counters-title-margin-bottom;
 
-      &:after {
+      &::after {
         @include decoration-header-line-main-center($d-p-counters-line-color, $d-p-counters-line-color-inverted);
       }
     }
@@ -59,16 +101,27 @@ $d-p-counters-background-opacity: 0.2 !default;
     // List of counters.
     .paragraph--type--d-p-single-counter {
       text-align: center;
+      padding-left: $d-p-single-counter-padding-x;
+      padding-right: $d-p-single-counter-padding-x;
+
+      @include media-breakpoint-down(sm) {
+        padding-left: $d-p-single-counter-mobile-padding-x;
+        padding-right: $d-p-single-counter-mobile-padding-x;
+      }
+
       .field--name-field-d-number {
         @include font-main-header;
-        color: $d-p-counters-number-color;
         font-family: $font-header;
       }
       .field--name-field-d-main-title {
-        color: $d-p-counters-text-color;
         font-size: 1rem;
         font-weight: normal;
       }
+    }
+
+    .field--name-field-d-long-text {
+      margin-bottom: $d-p-counters-long-text-margin-bottom;
+      text-align: center;
     }
   }
 }

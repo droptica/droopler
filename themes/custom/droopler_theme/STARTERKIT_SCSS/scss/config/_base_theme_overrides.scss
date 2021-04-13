@@ -263,7 +263,7 @@
 
 // Paragraph d_p_subscribe_file
 // -------------------------
-// $download-background: $color-agamemnon;
+// $download-background: darken($color-agamemnon, 15%);
 // $download-color: $color-odysseus;
 // $download-header-background: $color-odysseus;
 // $download-additional-color: $color-nestor;
@@ -304,6 +304,13 @@
 // $d-p-banner-background-opacity: 0.5;
 // $d-p-banner-subheader-opacity: 0.7;
 
+// Paragraph d_p_block
+// -------------------------
+// $d-p-block-line-color: $color-nestor;
+// $d-p-block-line-color-inverted: $color-agamemnon;
+// $d-p-block-line-margin-top: $line-center-with-long-text-margin-top;
+// $d-p-block-line-margin-bottom: 2 * $line-center-with-long-text-margin-bottom;
+
 // Paragraph d_p_form
 // -------------------------
 // $d-p-form-header-color: $color-odysseus;
@@ -311,11 +318,11 @@
 // $d-p-form-background: $color-agamemnon;
 // $d-p-form-line-color: $color-nestor;
 // $d-p-form-line-color-inverted: $color-agamemnon;
+// $d-p-form-table-color: $color-cassandra;
 // $d-p-form-header-margin-bottom: 10%;
-// $d-p-form-padding-top: 5%;
-// $d-p-form-padding-bottom: 5%;
 // $d-p-form-button-margin-top: 1rem;
 // $d-p-form-copy-margin-left: 1.25rem;
+// $d-p-form-copy-margin-right: 1.25rem;
 // $d-p-form-small-labels-spacing: 7px;
 // $d-p-form-background-opacity: 0.4;
 
@@ -329,31 +336,26 @@
 // $d-p-side-image-line-color: $color-nestor;
 // $d-p-side-image-line-color-inverted: $color-agamemnon;
 // $d-p-side-image-header-color: $color-odysseus;
+// $d-p-side-image-color: $color-odysseus;
 // $d-p-side-image-mobile-height: 18.75rem;
 // $d-p-side-image-banner-text-padding: 7%;
 // $d-p-side-image-banner-text-width: 35.625rem;
-// $d-p-side-image-banner-half-padding: 5%; // Spacing between content and half of the screen
+// $d-p-side-image-banner-half-padding: 5%; // Spacing between content and half of the screen.
 
 // Paragraph d_p_text_blocks
 // -------------------------
-// $d-p-single-box-text-color: $color-hecuba;
-// $d-p-single-box-text-bold-color: $color-troilus;
 // $d-p-single-box-line-color: $color-agamemnon;
 // $d-p-single-box-line-color-inverted: $color-nestor;
 // $d-p-text-blocks-line-color: $color-agamemnon;
 // $d-p-text-blocks-line-color-inverted: $color-nestor;
-// $d-p-text-blocks-background: $color-agamemnon;
-// $d-p-text-blocks-theme-invert-text-color: $color-odysseus;
 // $d-p-text-blocks-group-padding-y: 3.875rem;
 // $d-p-text-blocks-group-mobile-padding-y: 2rem;
 // $d-p-text-blocks-group-margin: 0 0 5.5rem 0;
 // $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0;
-// $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto;
-// $d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto;
-// $d-p-single-box-margin-bottom: 15%;
+// $d-p-single-box-padding-x: 5%;
+// $d-p-single-box-mobile-padding-x: 10%;
 // $d-p-text-blocks-tiles-padding: 20px;
 // $d-p-text-blocks-tiles-spacing: 5px;
-// $d-p-text-blocks-grid-link-color: $color-agamemnon;
 // $d-p-single-text-box-cta-text-transform: uppercase;
 // $d-p-single-text-box-grid-image-padding-bottom: $grid-gutter-width / 2;
 // $d-p-single-text-box-grid-large-padding: $grid-gutter-width;
@@ -364,13 +366,10 @@
 // $d-p-text-paged-line-color: $color-agamemnon;
 // $d-p-text-paged-line-color-inverted: $color-nestor;
 // $d-p-text-paged-color: $color-hecuba;
-// $d-p-text-paged-bold-color: $color-troilus;
 // $d-p-text-paged-background-invert-color: $color-agamemnon;
 // $d-p-text-paged-theme-invert-background-color: $color-agamemnon;
 // $d-p-text-paged-theme-invert-text-color: $color-odysseus;
 // $d-p-text-paged-subtitle-margin-y: 1.125rem;
-// $d-p-text-paged-padding-y: 5%;
-// $d-p-text-paged-first-margin-top: 2%;
 
 // Paragraph d_p_text_with_bckg
 // -------------------------
@@ -393,11 +392,16 @@
 // $d-p-counters-header-color: $color-odysseus;
 // $d-p-counters-number-color: $color-odysseus;
 // $d-p-counters-text-color: $color-nestor;
+// $d-p-counters-long-text-color: $color-odysseus;
 // $d-p-counters-title-margin-top: 0;
-// $d-p-counters-padding-top: 4.5rem;
-// $d-p-counters-padding-bottom: 3.5rem;
+// $d-p-counters-title-margin-bottom: 1.52rem;
+// $d-p-counters-long-text-margin-bottom: 1.52rem;
+// $d-p-counters-padding-top: 7.5rem;
+// $d-p-counters-padding-bottom: 7.5rem;
 // $d-p-counters-mobile-padding-top: 3rem;
 // $d-p-counters-mobile-padding-bottom: 3rem;
+// $d-p-single-counter-padding-x: 5%;
+// $d-p-single-counter-mobile-padding-x: 10%;
 // $d-p-counters-background-opacity: 0.2;
 
 // Paragraph d_p_gallery
@@ -406,12 +410,9 @@
 // $d-p-gallery-line-color-inverted: $color-nestor;
 // $d-p-gallery-color: $color-hecuba;
 // $d-p-gallery-bold-color: $color-troilus;
-// $d-p-gallery-margin-y: 5%;
 
 // Paragraph d_p_carousel
 // -------------------------
-// $d-p-carousel-item-text-color: $color-hecuba;
-// $d-p-carousel-item-text-bold-color: $color-troilus;
 // $d-p-carousel-item-line-color: $color-agamemnon;
 // $d-p-carousel-item-line-color-inverted: $color-nestor;
 // $d-p-carousel-line-color: $color-agamemnon;
@@ -419,13 +420,14 @@
 // $d-p-carousel-arrow-color: $color-cassandra;
 // $d-p-carousel-background-theme-invert: $color-agamemnon;
 // $d-p-carousel-theme-invert-text-color: $color-odysseus;
-// $d-p-carousel-padding-y: 5%;
-// $d-p-carousel-mobile-padding-y: 5%;
+// $d-p-carousel-long-text-margin-bottom: 1.52rem;
 // $d-p-carousel-items-margin-top: 2%;
 // $d-p-carousel-mobile-items-margin-top: 3rem;
 // $d-p-carousel-item-image-margin-bottom: 1rem;
 // $d-p-carousel-item-image-height: 200px;
 // $d-p-carousel-item-mobile-image-height: 150px;
+// $d-p-carousel-item-padding-x: 5%;
+// $d-p-carousel-item-mobile-padding-x: 10%;
 // $d-p-carousel-arrow-size: 40px;
 // $d-p-carousel-arrow-opacity: 0.2;
 // $d-p-carousel-arrow-hover-opacity: 0.3;
@@ -434,22 +436,24 @@
 // -------------------------
 // $d-p-side-embed-background-color: $color-agamemnon;
 // $d-p-side-embed-background-color-secondary: darken($d-p-side-embed-background-color, 15%);
+// $d-p-side-embed-embed-background-color: $color-cassandra;
 // $d-p-side-embed-text-color: $color-odysseus;
 // $d-p-side-embed-link-color: $color-nestor;
 // $d-p-side-embed-link-hover-color: darken($d-p-side-embed-link-color, 5%);
 // $d-p-side-embed-line-color: $color-nestor;
 // $d-p-side-embed-link-color-inverted: $color-agamemnon;
+// $d-p-side-embed-line-color-inverted: $color-agamemnon;
 // $d-p-side-embed-header-color: $color-odysseus;
 // $d-p-side-embed-full-text-color: $color-cassandra;
 // $d-p-side-embed-theme-invert-text-color: $color-cassandra;
-// $d-p-side-embed-fields-padding-y: 7%;
+// $d-p-side-embed-fields-padding-y: 3.5%;
 // $d-p-side-embed-fields-full-padding-y: 30px;
 // $d-p-side-embed-fields-padding-x: 30px;
 // $d-p-side-embed-mobile-height: 18.75rem;
 // $d-p-side-embed-text-desktop-padding-y: 2rem;
-// $d-p-side-embed-text-mobile-padding-y: 7%;
-// $d-p-side-embed-text-width: 430px;
-// $d-p-side-embed-half-padding: 5%; // Spacing between content and half of the screen
+// $d-p-side-embed-text-mobile-padding: 7%;
+// $d-p-side-embed-text-width: 35.625rem;
+// $d-p-side-embed-half-padding: 10%; // Spacing between content and half of the screen.
 // $d-p-side-embed-mobile-height: 300px; // This value must be set, otherwise embed won't be visible.
 // $d-p-side-embed-desktop-height: auto; // You can set fixed height of embed here.
 
@@ -464,27 +468,26 @@
 // $d-p-side-tiles-link-hover-color: darken($d-p-side-tiles-link-color, 5%);
 // $d-p-side-tiles-line-color: $color-nestor;
 // $d-p-side-tiles-link-color-inverted: $color-agamemnon;
+// $d-p-side-tiles-line-color-inverted: $color-agamemnon;
 // $d-p-side-tiles-header-color: $color-odysseus;
 // $d-p-side-tiles-overlay-background: $color-cassandra;
 // $d-p-side-tiles-overlay-color: $color-odysseus;
 // $d-p-side-tiles-overlay-opacity: 0.6;
 // $d-p-side-tiles-mobile-height: 18.75rem;
-// $d-p-side-tiles-text-desktop-padding-y: 7%;
+// $d-p-side-tiles-text-desktop-padding-y: 5%;
 // $d-p-side-tiles-text-mobile-padding: 7%;
 // $d-p-side-tiles-text-width: 35.625rem;
-// $d-p-side-tiles-half-padding: 10%; // Spacing between content and half of the screen
+// $d-p-side-tiles-half-padding: 10%; // Spacing between content and half of the screen.
 
 // Paragraph d_p_tiles
 // -------------------------
 // $d-p-tiles-line-color: $color-agamemnon;
 // $d-p-tiles-line-color-inverted: $color-nestor;
-// $d-p-tiles-color: $color-hecuba;
-// $d-p-tiles-bold-color: $color-troilus;
 // $d-p-tiles-overlay-background: $color-cassandra;
 // $d-p-tiles-overlay-color: $color-odysseus;
 // $d-p-tiles-overlay-opacity: 0.6;
-// $d-p-tiles-margin-top: 5%;
-// $d-p-tiles-margin-bottom: 5%;
+// $d-p-tiles-padding-top: 5%;
+// $d-p-tiles-padding-bottom: 5%;
 
 // Paragraph d_p_node
 // -------------------------
@@ -498,8 +501,7 @@
 // -------------------------
 // $d-p-reference-content-line-color: $color-agamemnon;
 // $d-p-reference-content-line-color-inverted: $color-nestor;
-// $d-p-reference-content-wrapper-padding-y: 3.875rem;
-// $d-p-reference-content-padding-top: 3.875rem;
+// $d-p-reference-content-padding-top: 1.51rem;
 // $d-p-reference-content-padding-bottom: 0;
 // $d-p-reference-content-items-padding-x: 5px;
 // $d-p-reference-content-item-padding: 5px;
@@ -511,14 +513,15 @@
 // -------------------------
 // $d-p-side-by-side-line-color: $color-agamemnon;
 // $d-p-side-by-side-line-color-inverted: $color-nestor;
-// $d-p-side-by-side-color: $color-hecuba;
-// $d-p-side-by-side-bold-color: $color-troilus;
 // $d-p-side-by-side-padding-y: 5%;
+// $d-p-side-by-side-header-padding: 2.5%;
 // $d-p-side-by-side-subtitle-margin-y: 2.125rem;
 // $d-p-side-by-side-content-padding-x: 7vw;
 // $d-p-side-by-side-text-box-padding-y: $grid-gutter-width;
 // $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2;
 // $d-p-side-by-side-image-background-padding-y: 130px;
+// $d-p-side-by-side-image-single_text_block-themed-background-opacity: 0.2;
+// $d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
 
 // Paragraph d_search_blocks
 // -------------------------
@@ -527,14 +530,16 @@
 // $d-search-page-link-margin: 10px;
 // $d-search-page-link-size: 24px;
 // $d-search-page-link-indent: -999px;
+// $d-search-button-top-margin-desktop: 30px;
+// $d-search-button-top-margin-mobile: 10px;
+// $d-search-button-max-width-mobile: 11rem;
 
 // BLOG & BLOG LISTING
 // -------------------------
 // $d-blog-text-container-width: 35em;
 // $d-blog-font-color: $color-odysseus;
-// $d-blog-font-bold-color: $color-troilus;
 // $d-blog-headers-color: $color-cassandra;
-// $d-blog-under-background-color: $color-cassandra; // color when image is not
+// $d-blog-under-background-color: $color-cassandra; // color when there's not image.
 // $d-blog-color-taxonomy-in-header: $color-aeneas;
 // $d-blog-image-opacity-for-blog: 50%;
 // $d-blog-margin-between-html-paragraphs: 1.5rem;
@@ -561,9 +566,11 @@
 // $d-blog-author-attributes-font-size-mobile: 0.75rem;
 // $d-blog-block-category-font-size-desktop: 1rem;
 // $d-blog-block-category-font-size-mobile: 0.625rem;
+// $d-blog-block-category-margin: 1rem 0;
 // $d-blog-image-margin: 2.1875rem auto;
 // $d-blog-paragraph-text-margin: 1.5625rem auto;
 // $d-blog-text-font-size-desktop: 1.25rem;
+// $d-blog-text-font-size-mobile: 1.07083125rem;
 // $d-blog-text-width-mobile: 85%;
 // $d-blog-header-text-distance-from-bottom: -0.25rem;
 // $d-blog-header-text-distance-from-top-mobile: 40%;
@@ -614,3 +621,43 @@
 // $d-blog-margin-between-header-and-article-teasers: 1rem;
 // $d-blog-field-type-image-margin: 0;
 // $d-blog-article-row-min-height: 420px;
+
+
+// Paragraph themes definitions.
+// if "set-fields-color" is set to "true" it will add CSS rules to style color of all .fields tags,
+// "text-bold" is used for setting the color for <b> and <strong> tags.
+// -------------------------
+// $d-p-themes: (
+//   // A new Theme
+//   pigy: (
+//     background: pink,
+//     text: yellow,
+//     text-bold: orange,
+//     set-fields-color: true,
+//   ),
+//
+//   // Override Droopler Theme.
+//   secondary: (
+//     background: purple,
+//     text: green,
+//     text-bold: red,
+//     set-fields-color: false,
+//   ),
+// );
+
+
+// Paragraph spacings definitions.
+// -------------------------
+// $d-p-paddings: (
+//   // New spacing class definiton.
+//   tiny: 1%,
+//   // Override Droopler spacing.
+//   default: 7%,
+// );
+//
+// $d-p-margins: (
+//   // New spacing class definiton.
+//   tiny: 1%,
+//   // Override Droopler spacing.
+//   small: 3%,
+// );

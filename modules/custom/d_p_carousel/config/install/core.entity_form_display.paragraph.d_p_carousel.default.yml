@@ -2,16 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.d_p_carousel.field_d_cta_link
     - field.field.paragraph.d_p_carousel.field_d_long_text
     - field.field.paragraph.d_p_carousel.field_d_main_title
     - field.field.paragraph.d_p_carousel.field_d_media_icon
-    - field.field.paragraph.d_p_carousel.field_d_number
     - field.field.paragraph.d_p_carousel.field_d_p_cs_item_reference
     - field.field.paragraph.d_p_carousel.field_d_settings
     - paragraphs.paragraphs_type.d_p_carousel
   module:
     - d_p
     - field_group
+    - link_attributes
     - media_library
     - paragraphs
     - text
@@ -19,8 +20,9 @@ third_party_settings:
   field_group:
     group_tabs:
       children:
-        - group_settings
+        - group_basic
         - group_items
+        - group_settings
       parent_name: ''
       weight: 6
       format_type: tabs
@@ -32,27 +34,23 @@ third_party_settings:
       region: content
     group_settings:
       children:
-        - field_d_main_title
-        - field_d_media_icon
-        - field_d_long_text
-        - field_d_number
         - field_d_settings
       parent_name: group_tabs
-      weight: 7
+      weight: 22
       format_type: tab
       format_settings:
+        description: ''
+        formatter: closed
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
-        formatter: open
-        required_fields: true
       label: Settings
       region: content
     group_items:
       children:
         - field_d_p_cs_item_reference
       parent_name: group_tabs
-      weight: 8
+      weight: 21
       format_type: tab
       format_settings:
         id: ''
@@ -62,11 +60,45 @@ third_party_settings:
         required_fields: true
       label: Items
       region: content
+    group_basic:
+      children:
+        - field_d_main_title
+        - field_d_media_icon
+        - field_d_long_text
+        - field_d_cta_link
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Basic
 id: paragraph.d_p_carousel.default
 targetEntityType: paragraph
 bundle: d_p_carousel
 mode: default
 content:
+  field_d_cta_link:
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        id: true
+        name: true
+        target: true
+        rel: true
+        class: true
+        accesskey: true
+        aria-label: false
+        title: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
   field_d_long_text:
     weight: 4
     settings:
@@ -90,28 +122,72 @@ content:
     third_party_settings: {  }
     type: media_library_widget
     region: content
-  field_d_number:
-    weight: 5
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: number
-    region: content
   field_d_p_cs_item_reference:
     type: entity_reference_paragraphs
     weight: 4
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: open
+      edit_mode: closed
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: ''
+      default_paragraph_type: d_p_carousel_item
     third_party_settings: {  }
     region: content
   field_d_settings:
     weight: 6
-    settings: {  }
+    settings:
+      filter_mode: '1'
+      allowed_settings:
+        heading_type:
+          status: '1'
+        column_count_tablet:
+          status: '1'
+        column_count_mobile:
+          status: '1'
+        custom_class:
+          status: '1'
+          modifiers:
+            padding-bottom:
+              status: '1'
+            paragraph-theme:
+              status: '1'
+            with-divider:
+              status: '1'
+            margin-bottom:
+              status: '1'
+            margin-top:
+              status: '1'
+            padding-top:
+              status: '1'
+            full-width:
+              status: '1'
+            stripe-sidebar:
+              status: 0
+            tile:
+              status: 0
+            with-tiles:
+              status: 0
+            half-transparent:
+              status: 0
+            with-grid:
+              status: 0
+            with-price:
+              status: 0
+            header-into-columns:
+              status: 0
+        column_count:
+          status: '1'
+        side_image_layout:
+          status: 0
+        form_layout:
+          status: 0
+        side_tiles_layout:
+          status: 0
+        featured_images:
+          status: 0
+        embed_layout:
+          status: 0
     third_party_settings: {  }
     type: field_d_p_set_settings
     region: content

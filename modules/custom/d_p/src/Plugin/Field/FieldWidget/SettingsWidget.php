@@ -2,9 +2,14 @@
 
 namespace Drupal\d_p\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\d_p\ParagraphSettingPluginManagerInterface;
+use Drupal\d_p\ParagraphSettingSelectInterface;
+use Drupal\d_p\ParagraphSettingTypesInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'Settings widget' widget.
@@ -20,240 +25,140 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class SettingsWidget extends WidgetBase {
 
+  /**
+   * Custom class setting name.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
+   */
   const CSS_CLASS_SETTING_NAME = 'custom_class';
+
+  /**
+   * Heading setting name.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
+   */
   const HEADING_TYPE_SETTING_NAME = 'heading_type';
 
-  private function getConfigOptions() {
-    return [
-      self::CSS_CLASS_SETTING_NAME => [
-        'title' => $this->t('Additional classes for the paragraph'),
-        'description' => $this->t('Please separate multiple classes by spaces.'),
-        'type' => 'css',
-        'bundles' => ['paragraph' => ['all']],
-        'modifiers' => [
-          'theme-invert' => [
-            'title' => $this->t('Inverted colors'),
-            'description' => $this->t('Toggle dark and light theme of the paragraph.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_banner',
-                'd_p_text_paged',
-                'd_p_single_text_block',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_side_embed',
-                'd_p_side_image',
-                'd_p_side_tiles',
-              ],
-            ],
-          ],
-          'full-width' => [
-            'title' => $this->t('Full width'),
-            'description' => $this->t('Stretch this paragraph to 100% browser width.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_block'
-              ],
-            ],
-          ],
-          'no-padding-bottom' => [
-            'title' => $this->t('Disable bottom padding'),
-            'description' => $this->t('Set the bottom padding of the paragraph to zero.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_by_side',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_text_paged',
-                'd_p_reference_content',
-              ],
-            ],
-          ],
-          'no-padding-top' => [
-            'title' => $this->t('Disable top padding'),
-            'description' => $this->t('Set the top padding of the paragraph to zero.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_side_by_side',
-                'd_p_group_of_text_blocks',
-                'd_p_carousel',
-                'd_p_text_paged',
-                'd_p_reference_content',
-              ],
-            ],
-          ],
-          'half-transparent' => [
-            'title' => $this->t('Half transparent'),
-            'description' => $this->t('Moves the text to the left and adds a transparent overlay.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_banner',
-              ],
-            ],
-          ],
-          'with-divider' => [
-            'title' => $this->t('Add dividers'),
-            'description' => $this->t('Add vertical lines between all elements.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_carousel',
-              ],
-            ],
-          ],
-          'background-gray-light-2' => [
-            'title' => $this->t('Gray background'),
-            'description' => $this->t('Change paragraph background to light gray.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_carousel',
-                'd_p_group_of_text_blocks',
-                'd_p_reference_content',
-                'd_p_text_paged',
-              ],
-            ],
-          ],
-          'slider-desktop-off' => [
-            'title' => $this->t('Turn off slider on desktop'),
-            'description' => $this->t('The slider will be visible only on tablet and mobile devices.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_carousel',
-              ],
-            ],
-          ],
-          'with-grid' => [
-            'title' => $this->t('Enable grid'),
-            'description' => $this->t('Adds a thin grid around all boxes.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_group_of_text_blocks',
-                'd_p_side_by_side',
-              ],
-            ],
-          ],
-          'tile' => [
-            'title' => $this->t('Turn into tile'),
-            'description' => $this->t('Stretch the background and turn the box into tile.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_single_text_block',
-              ],
-            ],
-          ],
-          'with-tiles' => [
-            'title' => $this->t('Enable tiles'),
-            'description' => $this->t('Enables tile view. You have to set all child boxes to tiles by adjusting their settings.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_group_of_text_blocks',
-              ],
-            ],
-          ],
-          'header-into-columns' => [
-            'title' => $this->t('Paragraph header in two columns'),
-            'description' => $this->t('Enable column mode: header on the left and description on the right.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_group_of_text_blocks',
-              ],
-            ],
-          ],
-          'with-price' => [
-            'title' => $this->t('Enable price'),
-            'description' => $this->t('Show a dynamic price on the right, it requires a JS script to connect to a data source.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_single_text_block',
-              ],
-            ],
-          ],
-          'stripe-sidebar' => [
-            'title' => $this->t('Show the price in the sidebar'),
-            'description' => $this->t('Works only if "Enable price" is turned on. Enables a black sidebar on the right.'),
-            'bundles' => [
-              'paragraph' => [
-                'd_p_single_text_block',
-              ],
-            ],
-          ],
-        ],
-      ],
-      self::HEADING_TYPE_SETTING_NAME => [
-        'title' => $this->t('Heading type'),
-      // The widget is moved outside of field_d_settings form element.
-        'outside' => TRUE,
-        'description' => $this->t('Select the type of heading to use with this paragraph.'),
-        'type' => 'select',
-        'options' => [
-          'h1' => $this->t('H1'),
-          'h2' => $this->t('H2'),
-          'h3' => $this->t('H3'),
-          'h4' => $this->t('H4'),
-          'h5' => $this->t('H5'),
-          'div' => $this->t('Normal text'),
-        ],
-        'default' => 'h2',
-        'bundles' => [
-          'paragraph' => [
-            'd_p_banner',
-            'd_p_carousel',
-            'd_p_carousel_item',
-            'd_p_form',
-            'd_p_gallery',
-            'd_p_group_of_counters',
-            'd_p_group_of_text_blocks',
-            'd_p_node',
-            'd_p_reference_content',
-            'd_p_side_embed',
-            'd_p_side_image',
-            'd_p_side_tiles',
-            'd_p_single_text_block',
-            'd_p_subscribe_file',
-            'd_p_text_paged',
-            'd_p_text_with_bckg',
-            'd_p_tiles',
-          ],
-        ],
-      ],
-    ];
+  /**
+   * The paragraph setting plugin manager.
+   *
+   * @var \Drupal\d_p\ParagraphSettingPluginManagerInterface
+   */
+  protected $paragraphSettingsManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->paragraphSettingsManager = $container->get('d_p.paragraph_settings.plugin.manager');
+
+    return $instance;
   }
 
   /**
-   * Is the element available in the bundle of widget's target?
-   *
-   * @param array $list
-   *   The form element bundle list, keyed by entity type and bundle, like $list['paragraph']['sample_paragraph'].
-   *   There is a magic "all" item, that means "available for all bundles of this entity type".
-   *
-   * @return bool
+   * {@inheritdoc}
    */
-  protected function inBundle($list) {
-    $entity_type = $this->fieldDefinition->getTargetEntityTypeId();
-    $bundle = $this->fieldDefinition->getTargetBundle();
-    if (isset($list[$entity_type])) {
-      if (array_search('all', $list[$entity_type]) !== FALSE) {
-        // Introduce "all" keyword to avoid listing all bundles.
-        return TRUE;
-      }
-      else {
-        return array_search($bundle, $list[$entity_type]) !== FALSE;
+  public static function defaultSettings(): array {
+    return [
+        'filter_mode' => 1,
+        'allowed_settings' => [],
+      ] + parent::defaultSettings();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
+    $form = parent::settingsForm($form, $form_state);
+
+    $form['filter_mode'] = [
+      '#type' => 'radios',
+      '#options' => [
+        0 => $this->t('Exclude selected'),
+        1 => $this->t('Include selected'),
+      ],
+      '#default_value' => $this->getSetting('filter_mode'),
+    ];
+
+    $form['allowed_settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Allowed settings'),
+    ];
+
+    $options = $this->paragraphSettingsManager->getSettingsFormOptions();
+
+    $allowed_settings = $this->getAllowedSettings();
+
+    foreach ($options as $id => $option) {
+      $form['allowed_settings'][$id]['status'] = [
+        '#title' => $option['label'],
+        '#type' => 'checkbox',
+        '#default_value' => $allowed_settings[$id]['status'] ?? FALSE,
+        '#states' => [
+          'checked' => [
+            '[data-setting-id="' . $id . '"]' => ['value' => 1],
+          ],
+        ],
+      ];
+
+      $subtype = ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID;
+      if (isset($option[$subtype])) {
+        foreach ($option[$subtype] as $mid => $modifier) {
+          $form['allowed_settings'][$id][$subtype][$mid]['status'] = [
+            '#title' => '<em>' . $option['label'] . '</em> » ' . $modifier['label'],
+            '#type' => 'checkbox',
+            '#default_value' => $allowed_settings[$id][$subtype][$mid]['status'] ?? FALSE,
+            '#attributes' => [
+              'data-setting-id' => $id,
+            ],
+          ];
+        }
       }
     }
-    return FALSE;
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary() {
+    $summary = [];
+
+    $include_selected = (bool) $this->getSetting('filter_mode');
+    $summary[] = $include_selected ? $this->t('Filter mode: Include selected') : $this->t('Filter mode: Exclude selected');
+
+    return $summary;
+  }
+
+  /**
+   * Get configuration options form for fields in paragraph settings.
+   *
+   * @return array
+   *   The available configuration for this parapraph bundle.
+   */
+  private function getConfigOptions(): array {
+    $form = $this->paragraphSettingsManager->getSettingsForm();
+    $this->processSettingAccess($form);
+
+    return $form;
   }
 
   /**
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
-    $config = !empty($value) ? json_decode($value) : [];
-
+    $config = $items->getValue();
     // Set up the form element for this widget.
     $element += [
-      '#type' => 'details',
+      '#type' => 'fieldset',
       '#element_validate' => [
         [$this, 'validate'],
       ],
@@ -261,74 +166,55 @@ class SettingsWidget extends WidgetBase {
 
     $config_options = $this->getConfigOptions();
     foreach ($config_options as $key => $options) {
-      // If the widget is not available in the current bundle, just skip it.
-      if (!$this->inBundle($options['bundles'])) {
-        continue;
-      }
-      // Add widgets of different types.
       $value = $config->$key ?? '';
-      switch ($options['type']) {
+      $type = $options['#subtype'] ?? $options['#type'];
+
+      switch ($type) {
         case 'css':
-          $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
-          foreach ($options['modifiers'] as $class => $modifier) {
-            if (!$this->inBundle($modifier['bundles'])) {
-              continue;
-            }
-            $class_key = array_search($class, $classes);
-            if ($class_key === FALSE) {
-              $default_value = 0;
-            }
-            else {
-              unset($classes[$class_key]);
-              $default_value = 1;
-            }
-            $element[$class] = [
-              '#type' => 'checkbox',
-              '#description' => $modifier['description'] ?? '',
-              '#title' => $modifier['title'],
-              '#default_value' => $default_value,
-              '#attributes' => ['data-modifier' => $class],
-            ];
-          }
+          $classes = $this->getCssClassList($value);
+          $subtype = ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID;
+          $this->processModifiers($element, $options[$subtype], $classes);
+
+          // Preserve only root keys, without children/modifiers.
+          unset($options[$subtype]);
 
           $element[$key] = [
-            '#type' => 'textfield',
-            '#title' => $options['title'],
-            '#description' => $options['description'] ?? '',
-            '#size' => 32,
-            '#default_value' => join(' ', $classes),
-          ];
-          if ($element['#required']) {
-            $element[$key]['#required'] = TRUE;
-          }
+            '#default_value' => implode(' ', $classes),
+          ] + $options;
           break;
 
         case 'select':
           $element[$key] = [
-            '#type' => 'select',
-            '#title' => $options['title'],
-            '#description' => $options['description'] ?? '',
-            '#options' => $options['options'],
-            '#default_value' => empty($value) ? $options['default'] : $value,
-          ];
-          if ($element['#required']) {
-            $element[$key]['#required'] = TRUE;
-          }
+            '#default_value' => empty($value) ? $options['#default_value'] : $value,
+          ] + $options;
+          break;
+
+        case 'number':
+          $element[$key] = [
+            '#default_value' => !empty($value) && $value !== '' ? $value : $options['#default_value'],
+            '#min' => $element[$key]['#min'] ?? NULL,
+            '#max' => $element[$key]['#max'] ?? NULL,
+          ] + $options;
           break;
 
         default:
+          $value = $config->$key ?? $options['#default_value'];
+
           $element[$key] = [
-            '#type' => 'textfield',
-            '#title' => $options['title'],
-            '#description' => $options['description'] ?? '',
-            '#size' => 32,
+            '#size' => $options['#size'] ?? 32,
             '#default_value' => $value,
-          ];
-          if ($element['#required']) {
-            $element[$key]['#required'] = TRUE;
-          }
+          ] + $options;
+      }
+
+      if ($element['#required']) {
+        $element[$key]['#required'] = TRUE;
       }
     }
+    // Paragraph theme field.
+    if (isset($element['paragraph-theme'])) {
+      $this->processCustomThemeElements($element, $config);
+    }
+
     return ['value' => $element];
   }
 
@@ -339,28 +225,317 @@ class SettingsWidget extends WidgetBase {
    */
   public function validate($element, FormStateInterface $form_state) {
     $values = [];
+
     $config_options = $this->getConfigOptions();
+
     foreach ($config_options as $key => $options) {
       $value = $form_state->getValue(array_merge($element['#parents'], [$key]));
-      if (!$this->inBundle($options['bundles'])) {
-        continue;
-      }
-      if ($options['type'] === 'css') {
-        $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
-        foreach ($options['modifiers'] as $class => $modifier) {
+
+      $type = $options['#subtype'] ?? $options['#type'];
+      if ($type === 'css') {
+        $classes = $this->getCssClassList($value);
+
+        foreach ($options[ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID] as $class => $modifier) {
           $modifier_value = $element[$class]['#value'] ?? NULL;
-          if ($modifier_value && $this->inBundle($modifier['bundles'])) {
-            $classes[] = $class;
+
+          if ($modifier_value) {
+            switch ($modifier['#type']) {
+              case 'select':
+                $classes[] = $modifier_value;
+                break;
+
+              default:
+                $classes[] = $class;
+                break;
+            }
           }
         }
         $classes = array_unique($classes);
-        $values[$key] = join(' ', $classes);
+        $values[$key] = implode(' ', $classes);
       }
       else {
         $values[$key] = $value;
       }
     }
+    if ($element['paragraph-theme']['#value'] === 'theme-custom') {
+      $values[ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME] = [
+        'background' => $element['background-theme-custom']['#value'],
+        'text' => $element['text-theme-custom']['#value'],
+      ];
+    }
+
     $form_state->setValueForElement($element, json_encode($values));
+  }
+
+  /**
+   * Process render array in order to exclude not allowed settings.
+   *
+   * @param array $element
+   *   Form element.
+   */
+  protected function processSettingAccess(array &$element, ?string $parent_id = NULL): void {
+    $include_selected = (bool) $this->getSetting('filter_mode');
+
+    foreach ($element as $id => &$item) {
+      $is_setting_allowed = $this->isSettingAllowed($id, $parent_id);
+      $include_allowed = $include_selected && !$is_setting_allowed;
+      $exclude_allowed = !$include_selected && $is_setting_allowed;
+
+      if ( $include_allowed || $exclude_allowed) {
+        unset($element[$id]);
+        continue;
+      }
+
+      $subtype = ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID;
+      if (isset($item[$subtype])) {
+        $this->processSettingAccess($item[$subtype], $id);
+      }
+    }
+  }
+
+  /**
+   * Process render array in order to populate modifiers elements.
+   *
+   * @param array $element
+   *   Form element.
+   * @param array $modifiers
+   *   Modifiers list.
+   * @param array $classes
+   *   List of CSS classes.
+   */
+  protected function processModifiers(array &$element, array $modifiers, array &$classes): void {
+    foreach ($modifiers as $class => $modifier) {
+      $class_key = array_search($class, $classes);
+      $default_value = (int) ($class_key !== FALSE);
+
+      if ($default_value) {
+        unset($classes[$class_key]);
+      }
+
+      $element[$class] = ['#default_value' => $default_value] + $modifier;
+
+      $element[$class]['#attributes'] = [
+        'data-modifier' => $class,
+      ];
+
+      /** @var \Drupal\d_p\ParagraphSettingInterface $setting_plugin */
+      $setting_plugin = $modifier['#plugin'];
+
+      if ($setting_plugin instanceof ParagraphSettingSelectInterface) {
+        $default_select_value = $setting_plugin->getDefaultValue();
+
+        foreach ($setting_plugin->getOptions() as $theme_class => $data) {
+          $theme_class_key = array_search($theme_class, $classes);
+          if ($theme_class_key !== FALSE) {
+            $default_select_value = $theme_class;
+            unset($classes[$theme_class_key]);
+          }
+        }
+
+        $element[$class]['#default_value'] = $default_select_value;
+      }
+    }
+  }
+
+  /**
+   * Process render array in otder to populate custom theme elements.
+   *
+   * @param array $element
+   *   Form element.
+   * @param object $config
+   *   Existing configuration.
+   */
+  protected function processCustomThemeElements(array &$element, object $config): void {
+    $selector_string = $this->getSelectorStringFromElement($element);
+    $config_name = ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME;
+    $element['background-theme-custom'] = [
+      '#type' => 'd_color',
+      '#title' => 'Background color',
+      '#default_value' => isset($config->$config_name) ? $config->$config_name->background : '#ffffff',
+      '#weight' => 101,
+      '#states' => [
+        'visible' => [
+          ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [
+            'value' => 'theme-custom',
+          ],
+        ],
+      ],
+    ];
+
+    $element['text-theme-custom'] = [
+      '#type' => 'd_color',
+      '#title' => 'Text color',
+      '#default_value' => isset($config->$config_name) ? $config->$config_name->text : '#000000',
+      '#weight' => 102,
+      '#states' => [
+        'visible' => [
+          ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [
+            'value' => 'theme-custom',
+          ],
+        ],
+      ],
+    ];
+  }
+
+  /**
+   * Getter for target bundle of the entity.
+   *
+   * @return string|null
+   *   Bundle name, or null if it's not bundle specific.
+   */
+  protected function getTargetBundle(): ?string {
+    return $this->fieldDefinition->getTargetBundle();
+  }
+
+  /**
+   * Get CSS class from a given string.
+   *
+   * @param null|string $value
+   *   String to be parsed.
+   *
+   * @return array
+   *   CSS classes.
+   */
+  protected function getCssClassListFromString(?string $value): array {
+    $classes = preg_split("/[\s,]+/", $value, -1, PREG_SPLIT_NO_EMPTY);
+
+    return $classes ?: [];
+  }
+
+  /**
+   * Getter for css class list.
+   *
+   * @param mixed $value
+   *   Stored value.
+   *
+   * @return array
+   *   Array of classes.
+   */
+  protected function getCssClassList($value): array {
+    if (is_array($value)) {
+      return $value;
+    }
+    elseif (is_string($value) || is_null($value)) {
+      return $this->getCssClassListFromString($value);
+    }
+
+    return [];
+  }
+
+  /**
+   * Get element unique selector.
+   *
+   * @param array $element
+   *   Form element.
+   *
+   * @return string
+   *   Selector string.
+   */
+  protected function getSelectorStringFromElement(array $element): string {
+    $tree = $element['#field_parents'];
+    $tree[] = $this->fieldDefinition->getName();
+
+    $selector_string = array_shift($tree);
+    if (!empty($tree)) {
+      foreach ($tree as $item) {
+        $selector_string .= "[$item]";
+      }
+    }
+
+    return $selector_string;
+  }
+
+  /**
+   * Getter for allowed settings.
+   *
+   * @return array
+   */
+  protected function getAllowedSettings(): array {
+    return $this->getSetting('allowed_settings');
+  }
+
+  /**
+   * Check whether given setting was allowed in the setting configuration.
+   *
+   * @param string $id
+   *   The setting id.
+   * @param string|null $parent_id
+   *   The parent setting id, null if there is not parent.
+   *
+   * @return bool
+   *   True if this settings is allowed, false otherwise.
+   */
+  protected function isSettingAllowed(string $id, ?string $parent_id): bool {
+    $settings = $this->getAllowedSettings();
+
+    $is_setting_allowed = is_string($parent_id) ?
+      ($settings[$parent_id][ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID][$id]['status'] ?: 0) : ($settings[$id]['status'] ?? 0);
+
+    return (bool) $is_setting_allowed;
+  }
+
+  /**
+   * Returns default options for select fields.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * As this is working on the particular field instance,
+   * we have unified and moved all the methods directly to the field list class:
+   * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
+   */
+  public static function getModifierDefaults() {
+    /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
+    $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
+    $custom_class_plugin_id = ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME;
+
+    /** @var \Drupal\d_p\ParagraphSettingInterface $custom_class_plugin */
+    $custom_class_plugin = $pluginManager->getPluginById($custom_class_plugin_id);
+    /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
+    $plugins = $custom_class_plugin->getChildrenPlugins();
+
+    $defaults = [];
+
+    foreach ($plugins as $plugin) {
+      if ($plugin instanceof ParagraphSettingSelectInterface) {
+        $defaults[] = [
+          'options' => $plugin->getOptions(),
+          'default' => $plugin->getDefaultValue(),
+        ];
+      }
+    }
+
+    return $defaults;
+  }
+
+  /**
+   * Get the default value for config option.
+   *
+   * @param string $option_name
+   *   Config option name.
+   *
+   * @return mixed|null
+   *   Option default value, null if not found.
+   *
+   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+   * As this is working on the particular field instance,
+   * we have unified and moved all the methods directly to the field list class:
+   * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
+   *
+   * @see https://www.drupal.org/project/droopler/issues/3180465
+   */
+  public static function getConfigOptionDefaultValue(string $option_name) {
+    try {
+      /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
+      $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
+      /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
+      $plugin = $pluginManager->getPluginById($option_name);
+
+      return $plugin->getDefaultValue();
+    }
+    catch (PluginException $exception) {
+      return NULL;
+    }
   }
 
 }

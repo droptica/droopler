@@ -1,6 +1,6 @@
 name: d_p_side_image
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 description: 'Provides a paragraph with a side image.'
 type: module
 dependencies:
@@ -8,6 +8,7 @@ dependencies:
   - d_media
   - d_p
   - field
+  - field_group
   - image
   - language
   - link

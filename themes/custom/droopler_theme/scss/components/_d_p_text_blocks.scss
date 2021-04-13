@@ -5,27 +5,21 @@ Styleguide 2.8
 */
 
 // Color variables used in this paragraph.
-$d-p-single-box-text-color: $color-hecuba !default;
-$d-p-single-box-text-bold-color: $color-troilus !default;
 $d-p-single-box-line-color: $color-agamemnon !default;
 $d-p-single-box-line-color-inverted: $color-nestor !default;
 $d-p-text-blocks-line-color: $color-agamemnon !default;
 $d-p-text-blocks-line-color-inverted: $color-nestor !default;
-$d-p-text-blocks-background: $color-agamemnon !default;
-$d-p-text-blocks-theme-invert-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
 $d-p-text-blocks-group-padding-y: 3.875rem !default;
 $d-p-text-blocks-group-mobile-padding-y: 2rem !default;
 $d-p-text-blocks-group-margin: 0 0 5.5rem 0 !default;
 $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0 !default;
-$d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto !default;
-$d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto !default;
-$d-p-single-box-margin-bottom: 15% !default;
+$d-p-single-box-padding-x: 5% !default;
+$d-p-single-box-mobile-padding-x: 10% !default;
 
 $d-p-text-blocks-tiles-padding: 20px !default;
 $d-p-text-blocks-tiles-spacing: 5px !default;
-$d-p-text-blocks-grid-link-color: $color-agamemnon !default;
 
 // Other settings.
 $d-p-single-text-box-cta-text-transform: uppercase !default;
@@ -44,13 +38,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Group of text blocks with header and CTA
 .d-p-group-of-text-blocks {
-  padding-top: $d-p-text-blocks-group-padding-y;
-  padding-bottom: $d-p-text-blocks-group-padding-y;
-
-  @include media-breakpoint-down(md) {
-    padding-top: $d-p-text-blocks-group-mobile-padding-y;
-    padding-bottom: $d-p-text-blocks-group-mobile-padding-y;
-  }
   > .container {
     > .field--name-field-d-media-icon {
       text-align: center;
@@ -69,12 +56,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     }
     > .field--type-link {
       text-align: center;
-      a {
-        margin: $d-p-text-blocks-group-button-margin;
-        @include media-breakpoint-down(md) {
-          margin: $d-p-text-blocks-mobile-group-button-margin;
-        }
-      }
     }
   }
 
@@ -82,14 +63,13 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     text-align: center;
 
     .field--name-field-d-main-title {
-      &:after {
+      &::after {
         @include decoration-header-line-main-center($d-p-text-blocks-line-color, $d-p-text-blocks-line-color-inverted);
       }
     }
   }
 
   &.with-long-text {
-
     .d-p-group-of-text-blocks-header-wrapper {
       .field--name-field-d-main-title {
         margin-bottom: 0;
@@ -105,10 +85,40 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   }
 
   .d-media-background-wrapper {
-    z-index: -1;
+    opacity: 0.5;
+  }
+  .content-wrapper {
+    position: relative;
+    z-index: 2;
+  }
+
+  .d-p-text-block {
+    position: relative;
+    padding-left: $d-p-single-box-padding-x;
+    padding-right: $d-p-single-box-padding-x;
+
+    @include media-breakpoint-down(sm) {
+      padding-left: $d-p-single-box-mobile-padding-x;
+      padding-right: $d-p-single-box-mobile-padding-x;
+    }
+  }
+
+  .theme-default.user-image-background {
+    .paragraph.d-p-text-block {
+      background-color: black;
+
+      &, .field {
+        color: white;
+      }
+
+      .field--name-field-d-main-title {
+        &::after {
+          @include decoration-header-line-main-center($d-p-text-blocks-line-color-inverted, $d-p-text-blocks-line-color);
+        }
+      }
+    }
   }
 }
-
 
 .with-tiles {
   @include media-breakpoint-down(md) {
@@ -120,31 +130,31 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   .list-item-wrapper {
     padding: 0 $d-p-text-blocks-tiles-spacing $d-p-text-blocks-tiles-spacing 0;
 
-
     .d-p-text-block {
-      padding: $d-p-text-blocks-tiles-padding 2* $d-p-text-blocks-tiles-padding;
+      padding-left: 2* $d-p-text-blocks-tiles-padding;
+      padding-right: 2* $d-p-text-blocks-tiles-padding;
       margin-bottom: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .content-wrapper {
+        padding: $d-p-text-blocks-tiles-padding 0;
+      }
+    }
+
+    > div {
+      display: block;
+      height: 100%;
       width: 100%;
     }
 
     @include media-breakpoint-down(lg) {
       .d-p-text-block {
-        padding: $d-p-text-blocks-tiles-padding;
-      }
-    }
-
-    @include media-breakpoint-up(sm) {
-      > .geysir-field-paragraph-wrapper {
-          display: block;
-          height: 100%;
-      }
-
-      > .geysir-field-paragraph-wrapper > .wrapper-d_p_single_text_block,
-      > .wrapper-d_p_single_text_block {
-        display: flex;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
+        padding-left: $d-p-text-blocks-tiles-padding;
+        padding-right: $d-p-text-blocks-tiles-padding;
       }
     }
 
@@ -167,19 +177,14 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Single box
 .d-p-text-block {
-  margin-bottom: $d-p-single-box-margin-bottom;
   .field--name-field-d-main-title {
     @include font-title-single-box;
-    &:after {
+    &::after {
       @include decoration-header-line($d-p-single-box-line-color, $d-p-single-box-line-color-inverted);
     }
   }
   p {
     @include font-body-standard;
-    color: $d-p-single-box-text-color;
-    b, strong {
-      color: $d-p-single-box-text-bold-color;
-    }
   }
   a {
     @include text-transform($d-p-single-text-box-cta-text-transform)
@@ -222,22 +227,3 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     }
   }
 }
-
-.theme-invert {
-  > .d-p-group-of-text-blocks,
-  &:not(.user-background-defined):not(.user-image-background) > .d-p-text-block {
-    background-color: $d-p-text-blocks-background;
-  }
-
-  > .d-p-group-of-text-blocks .d-p-group-of-text-blocks-header-wrapper,
-  > .d-p-text-block {
-    .field--name-field-d-main-title,
-    .field--name-field-d-long-text {
-      &, p {
-        color: $d-p-text-blocks-theme-invert-text-color;
-      }
-    }
-  }
-
-}
-
