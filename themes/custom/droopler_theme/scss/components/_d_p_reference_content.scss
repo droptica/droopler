@@ -5,6 +5,7 @@ $d-p-reference-content-line-color-inverted: $color-nestor !default;
 // Margins, paddings and sizing.
 $d-p-reference-content-padding-top: 1.51rem !default;
 $d-p-reference-content-padding-bottom: 0 !default;
+$d-p-reference-content-margin-bottom: 0 !default;
 $d-p-reference-content-items-padding-x: 5px !default;
 $d-p-reference-content-item-padding: 5px !default;
 $d-p-reference-content-item-margin-left: -5px !default;
@@ -24,8 +25,7 @@ $d-p-reference-content-content-padding: 5px !default;
   > .field--name-field-d-p-reference-content {
     padding-top: $d-p-reference-content-padding-top;
     padding-bottom: $d-p-reference-content-padding-bottom;
-    margin-bottom: 1.51rem;
-
+    margin-bottom: $d-p-reference-content-margin-bottom;
 
     @include media-breakpoint-up(xl) {
       margin-right: -$d-p-reference-content-item-padding;
@@ -33,6 +33,7 @@ $d-p-reference-content-content-padding: 5px !default;
 
     .field--wrapper {
       overflow: hidden;
+      margin-bottom: 0;
       @include media-breakpoint-down(lg) {
         padding: 0 0 0 $d-p-reference-content-content-padding;
       }

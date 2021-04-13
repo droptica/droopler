@@ -1,11 +1,25 @@
-# Droopler 2.0 #
+# Updating Droopler
+
+## Droopler 2.2
+
+No significant actions to be done in this update.
+
+You may want to verify your paragraph themes, as we introduced new d_settings for each paragraph. The migration script should cover most edge cases.
+
+Starting from this version, we are oficially becoming Drupal 9 compatible. You may start considering the upgrade.
+
+## Droopler 2.1
+
+No significant actions to be done in this update.
+
+## Droopler 2.0
 
 **WARNING!**
 
 * If you have a composer-based installation, please apply all the below steps.
 * If you have a drupal.org installation, update your `profiles/droopler` directory and make sure the modules in `modules/contrib` and `profiles/droopler/modules/contrib` are not duplicated (they should stay in the profile). Also, change your theme to `droopler_theme` if you did not make any custom overrides to `droopler_subtheme`. This way you won't have to maintain your subtheme anymore. If you have a custom subtheme, please apply all the below steps.
 
-## 1. Update your subtheme regions ##
+### 1. Update your subtheme regions ##
 
 Please update your `themes/custom/droopler_subtheme.info.yml` file and make sure it has the following regions defined:
 
@@ -41,7 +55,7 @@ regions:
   footer_main: 'Footer Main'
   ```
 
-## 2. Update your subtheme files ##
+### 2. Update your subtheme files 
 
 In the new version, we refactored the process of building assets. To make it work in your subtheme, you have to update the following files in your `themes/custom/droopler_subtheme` directory to the ones [from here](https://github.com/droptica/droopler_project/tree/master/web/themes/custom/droopler_subtheme):
 
@@ -58,11 +72,11 @@ To compile the assets, run the following commands:
 
 Please note that Droopler 2.0 works with the latest version of node.js.
 
-## 3. Update your composer files (optional) ##
+### 3. Update your composer files (optional) 
 
 In 2.0 we changed the composer template to the one provided by Drupal 8.8. You don't have to update your `composer.json`, however, it will simplify your project's maintenance.
 
-## 4. Restore the blue color scheme (optional) ##
+### 4. Restore the blue color scheme (optional) 
 Since version 1.4, the color scheme has changed from blue to red. In case you've grown accustomed to the old Droopler's color scheme, we provide you with a file containing SCSS variables from the older Droopler builds. This file is located in `themes/custom/droopler_theme/scss/config/_old_color_scheme.scss`
 
 In order to restore old color scheme either copy it's contents into the  `themes/custom/droopler_theme/scss/config/_color.scss`,
