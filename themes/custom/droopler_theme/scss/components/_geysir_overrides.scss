@@ -169,18 +169,22 @@ $geysir-add-more-button: $color-hecuba !default;
   .js-form-item {
     margin-bottom: 10px;
   }
+
   .js-form-type-checkbox {
     padding-left: 0;
+
     .form-check-label {
       display: flex;
       align-items: center;
       margin: 0;
     }
+
     .form-check-input {
       position: static;
       margin: 0 5px 0 0;
     }
   }
+
   .form-autocomplete {
     background-position-x: 95%;
   }
@@ -195,12 +199,6 @@ $geysir-add-more-button: $color-hecuba !default;
       border: none;
       background: transparent;
     }
-
-    &.form-submit {
-      @include make-btn;
-      @include button-variant($background: $primary, $border: $primary);
-      @include button-size($btn-padding-x-sm, $btn-padding-y, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
-    }
   }
 
   // Submit button.
@@ -214,19 +212,77 @@ $geysir-add-more-button: $color-hecuba !default;
     }
   }
 
-  // Dropbutton throbber.
-  .dropbutton {
+  %geysir-throbber {
+    vertical-align: middle;
+    background-size: contain;
+  }
+
+  // Paragraphs Dropbutton
+  .paragraphs-dropbutton-wrapper {
+    // Throbber.
     .ajax-progress-throbber {
-      display: block;
       .throbber {
-        background-size: cover;
-        display: inline-block;
-        vertical-align: middle;
-        width: 10px;
-        height: 8px;
+        @extend %geysir-throbber;
       }
-      .message {
-        font-size: 10px;
+    }
+
+    // Action.
+    .button {
+      &.form-submit {
+        @include make-btn;
+        @include button-variant($background: $primary, $border: $primary);
+        @include button-size($btn-padding-x-sm, $btn-padding-y, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+      }
+    }
+  }
+
+  // Dropbutton widget.
+  .dropbutton-widget {
+    border: none;
+    border-radius: 0;
+
+    .dropbutton {
+      border-right: 0;
+
+      // Throbber.
+      .ajax-progress-throbber {
+        display: block;
+        background-color: $primary;
+        color: $white;
+        margin: 0;
+        .throbber {
+          @extend %geysir-throbber;
+        }
+      }
+
+      // Actions.
+      .dropbutton-action {
+        .button {
+          &.form-submit {
+            @include make-btn;
+            @include button-variant($background: $primary, $border: $primary);
+            @include button-size($btn-padding-x-sm, $btn-padding-y, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+            margin: 0;
+            width: 100%;
+          }
+        }
+      }
+
+      // Toggle.
+      .dropbutton-toggle {
+        button {
+          @include make-btn;
+          @include button-variant($background: $primary, $border: $primary);
+          @include button-size($btn-padding-x-sm, $btn-padding-y, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+          margin: 0;
+          background-image: none;
+
+          .dropbutton-arrow {
+            &:hover {
+              background-color: transparent;
+            }
+          }
+        }
       }
     }
   }
