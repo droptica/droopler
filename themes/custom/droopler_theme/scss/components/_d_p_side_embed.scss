@@ -27,6 +27,7 @@ $d-p-side-embed-text-width: 35.625rem !default;
 $d-p-side-embed-half-padding: 10% !default; // Spacing between content and half of the screen
 $d-p-side-embed-mobile-height: 300px !default; // This value must be set, otherwise embed won't be visible.
 $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of embed here.
+$d-p-side-embed-long-text-margin-bottom: 0 !default;
 
 // Override default values.
 .padding-top-default {
@@ -181,6 +182,10 @@ $d-p-side-embed-desktop-height: auto !default; // You can set fixed height of em
     &:last-child::after {
       display: none;
     }
+  }
+
+  .field--name-field-d-long-text {
+    margin-bottom: $d-p-side-embed-long-text-margin-bottom;
   }
 
   .d-p-side-embed-embed {

@@ -31,7 +31,18 @@ $d-p-form-background-opacity: 0.4 !default;
       color: $d-p-form-header-color;
 
       &::after {
-        @include decoration-header-line-main-center($d-p-form-line-color-inverted, $d-p-form-line-color);
+        @include decoration-header-line-main-center($d-p-form-line-color, $d-p-form-line-color-inverted);
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      .left,
+      .right {
+        .field--name-field-d-main-title {
+          &:last-child::after {
+            display: none;
+          }
+        }
       }
     }
   }
@@ -201,6 +212,7 @@ $d-p-form-background-opacity: 0.4 !default;
         align-items: flex-start;
       }
       .field--name-field-d-main-title {
+        text-align: left;
         &::after {
           margin-left: 0;
         }
@@ -212,6 +224,7 @@ $d-p-form-background-opacity: 0.4 !default;
         text-align: right;
       }
       .field--name-field-d-main-title {
+        text-align: right;
         &::after {
           margin-right: 0;
         }

@@ -47,16 +47,17 @@ $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
   .field--type-link {
     text-align: center;
   }
+  .field--name-field-d-main-title + div > .field--type-link,
+  .field--name-field-d-subtitle + div > .field--type-link {
+    &::before {
+      @include decoration-header-line-main-center($d-p-text-paged-line-color, $d-p-text-paged-line-color-inverted)
+    }
+  }
+
   .field--name-field-d-long-text {
     p {
       word-wrap: break-word;
       hyphens: auto;
-    }
-    blockquote > :last-child {
-      margin-bottom: 0;
-    }
-    > :last-child {
-      margin-bottom: 0;
     }
     &::before {
       @include decoration-header-line-main-center($d-p-text-paged-line-color, $d-p-text-paged-line-color-inverted)

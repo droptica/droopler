@@ -24,6 +24,7 @@ $d-p-side-tiles-text-desktop-padding-y: 5% !default;
 $d-p-side-tiles-text-mobile-padding: 7% !default;
 $d-p-side-tiles-text-width: 35.625rem !default;
 $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half of the screen
+$d-p-side-tiles-long-text-margin-bottom: 0 !default;
 
 // Override default values.
 .padding-top-default {
@@ -71,6 +72,11 @@ $d-p-side-tiles-half-padding: 10% !default; // Spacing between content and half 
         display: none;
       }
     }
+
+    .field--name-field-d-long-text {
+      margin-bottom: $d-p-side-tiles-long-text-margin-bottom;
+    }
+
     a:not(.btn) {
       color: $d-p-side-tiles-link-color;
 

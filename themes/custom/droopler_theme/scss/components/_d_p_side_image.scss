@@ -21,6 +21,7 @@ $d-p-side-image-mobile-height: 18.75rem !default;
 $d-p-side-image-banner-text-padding: 7% !default;
 $d-p-side-image-banner-text-width: 35.625rem !default;
 $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and half of the screen
+$d-p-side-image-long-text-margin-bottom: 0 !default;
 
 .theme-default {
   .paragraph--type--d-p-side-image {
@@ -89,6 +90,9 @@ $d-p-side-image-banner-half-padding: 5% !default; // Spacing between content and
     }
   }
 
+  .field--name-field-d-long-text {
+    margin-bottom: $d-p-side-image-long-text-margin-bottom;
+  }
 
   .d-image {
     padding: 0;
