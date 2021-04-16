@@ -139,6 +139,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
           &::after {
             @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);
           }
+
           &:last-child::after {
             display: none;
           }

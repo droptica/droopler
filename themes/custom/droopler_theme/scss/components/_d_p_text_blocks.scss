@@ -180,9 +180,11 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 .d-p-text-block {
   .field--name-field-d-main-title {
     @include font-title-single-box;
+
     &::after {
       @include decoration-header-line($d-p-single-box-line-color, $d-p-single-box-line-color-inverted);
     }
+
     &:last-child::after {
       display: none;
     }

@@ -179,6 +179,7 @@ $d-p-side-embed-long-text-margin-bottom: 0 !default;
     &::after {
       @include decoration-header-line($d-p-side-embed-line-color, $d-p-side-embed-line-color-inverted);
     }
+
     &:last-child::after {
       display: none;
     }
