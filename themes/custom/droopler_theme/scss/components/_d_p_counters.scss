@@ -12,9 +12,6 @@ $d-p-counters-text-color: $color-nestor !default;
 $d-p-counters-long-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
-$d-p-counters-title-margin-top: 0 !default;
-$d-p-counters-title-margin-bottom: 1.52rem !default;
-$d-p-counters-long-text-margin-bottom: 1.52rem !default;
 $d-p-counters-padding-top: 7.5rem !default;
 $d-p-counters-padding-bottom: 7.5rem !default;
 $d-p-counters-mobile-padding-top: 3rem !default;
@@ -90,8 +87,6 @@ $d-p-counters-background-opacity: 0.2 !default;
     .content > .field--name-field-d-main-title {
       @include font-main-header;
       text-align: center;
-      margin-top: $d-p-counters-title-margin-top;
-      margin-bottom: $d-p-counters-title-margin-bottom;
 
       &::after {
         @include decoration-header-line-main-center($d-p-counters-line-color, $d-p-counters-line-color-inverted);
@@ -120,7 +115,6 @@ $d-p-counters-background-opacity: 0.2 !default;
     }
 
     .field--name-field-d-long-text {
-      margin-bottom: $d-p-counters-long-text-margin-bottom;
       text-align: center;
     }
   }

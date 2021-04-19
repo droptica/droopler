@@ -25,20 +25,6 @@ $d-p-gallery-image-margin-bottom: 0 !default;
     text-align: center;
   }
 
-  .with-long-text & {
-
-    .field--name-field-d-main-title {
-      &::after {
-        display: none;
-      }
-    }
-    .field--name-field-d-long-text {
-      &::before {
-        @include decoration-header-line-main-center($d-p-gallery-line-color, $d-p-gallery-line-color-inverted);
-      }
-    }
-  }
-
   .field--name-field-media-image, .field--name-field-media-oembed-video {
     margin: 0;
     a {

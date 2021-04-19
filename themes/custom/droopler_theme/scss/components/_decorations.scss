@@ -11,10 +11,8 @@ $line-background-inverted: $color-nestor !default;
 // Margins, paddings and sizings.
 $line-left-margin-top: 1.25rem !default;
 $line-left-margin-bottom: 1.52rem !default;
-$line-center-margin-top: 0.625rem !default;
-$line-center-margin-bottom: 0.625rem !default;
-$line-center-with-long-text-margin-top: 1.375rem !default;
-$line-center-with-long-text-margin-bottom: 1.51rem !default;
+$line-center-margin-top: 1.375rem !default;
+$line-center-margin-bottom: 1.51rem !default;
 $line-width: 3.125rem !default;
 $line-thickness: 0.125rem !default;
 
@@ -69,21 +67,4 @@ $line-thickness: 0.125rem !default;
     display: block;
     margin: 0;
     float: none;
-}
-
-section .paragraph {
-  .field--name-field-d-main-title:last-child {
-    &::after {
-      margin-top: $line-center-margin-top !important;
-      margin-bottom: $line-center-margin-top !important;
-    }
-  }
-}
-section .paragraph.with-long-text,
-section.with-long-text .paragraph {
-  .field--name-field-d-main-title::after,
-  .field--name-field-d-long-text::before {
-    margin-top: $line-center-with-long-text-margin-top;
-    margin-bottom: $line-center-with-long-text-margin-bottom;
-  }
 }

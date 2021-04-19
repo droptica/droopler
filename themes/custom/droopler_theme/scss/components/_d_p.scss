@@ -1,0 +1,20 @@
+/*
+Default Paragraph.
+*/
+
+// Margins, paddings and sizing.
+$d-p-long-text-margin-bottom: 1.5rem !default;
+
+.paragraph {
+  .field--name-field-d-long-text {
+    margin-bottom: $d-p-long-text-margin-bottom;
+
+    blockquote > :last-child {
+      margin-bottom: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -17,6 +17,7 @@ $d-p-text-blocks-group-margin: 0 0 5.5rem 0 !default;
 $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0 !default;
 $d-p-single-box-padding-x: 5% !default;
 $d-p-single-box-mobile-padding-x: 10% !default;
+$d-p-single-box-long-text-margin-bottom: 0 !default;
 
 $d-p-text-blocks-tiles-padding: 20px !default;
 $d-p-text-blocks-tiles-spacing: 5px !default;
@@ -179,10 +180,20 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 .d-p-text-block {
   .field--name-field-d-main-title {
     @include font-title-single-box;
+
     &::after {
       @include decoration-header-line($d-p-single-box-line-color, $d-p-single-box-line-color-inverted);
     }
+
+    &:last-child::after {
+      display: none;
+    }
   }
+
+  .field--name-field-d-long-text {
+    margin-bottom: $d-p-single-box-long-text-margin-bottom;
+  }
+
   p {
     @include font-body-standard;
   }
