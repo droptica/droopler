@@ -38,9 +38,9 @@ function d_p_text_blocks_preprocess_field(&$variables) {
           $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($variables['element']['#object']);
 
           $columns = [
-            'md' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME, 3),
-            'sm' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME, 1),
-            'xs' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME, 1),
+            'md' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME),
+            'sm' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME),
+            'xs' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME),
           ];
 
           // Enable grid setting.

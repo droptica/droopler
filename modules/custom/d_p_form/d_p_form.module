@@ -34,7 +34,7 @@ function d_p_form_preprocess_paragraph(&$variables) {
         $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
 
         $variables['d_p_form_placement'] = $setting_field
-          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_FORM_LAYOUT, 'left');
+          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_FORM_LAYOUT);
       }
       catch (MissingConfigurationStorageFieldException $exception) {
         \Drupal::logger('d_p_form')->error($exception->getMessage());

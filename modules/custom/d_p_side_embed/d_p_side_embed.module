@@ -23,7 +23,7 @@ function d_p_side_embed_preprocess_paragraph(&$variables) {
         /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
         $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
         $variables['embed_side'] = $setting_field
-          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_EMBED_LAYOUT, 'left');
+          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_EMBED_LAYOUT);
       }
       catch (MissingConfigurationStorageFieldException $exception) {
         \Drupal::logger('d_p_side_embed')->error($exception->getMessage());

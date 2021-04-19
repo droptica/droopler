@@ -23,7 +23,7 @@ class ParagraphSettingsValidation {
    *   The form state.
    */
   public static function validateColumnCount(array $element, FormStateInterface $form_state) {
-    $column_count_value = $form_state->getValue(array_merge($element['#parents']));
+    $column_count_value = $form_state->getValue($element['#parents']);
     $form_object = $form_state->getFormObject();
     if ($form_object instanceof GeysirModalParagraphForm) {
       $paragraph_bundle = $form_object->getEntity()->bundle();

@@ -18,17 +18,16 @@ function d_p_side_image_preprocess_paragraph(&$variables) {
   $bundle = $paragraph->bundle();
   switch ($bundle) {
     case 'd_p_side_image':
-      $image_side = 'left';
-
       try {
         /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
         $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
 
         $image_side = $setting_field
-          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT, $image_side);
+          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_SIDE_IMAGE_LAYOUT);
       }
       catch (MissingConfigurationStorageFieldException $exception) {
         \Drupal::logger('d_p_side_image')->error($exception->getMessage());
+        break;
       }
 
       $wrapper_attributes = [
