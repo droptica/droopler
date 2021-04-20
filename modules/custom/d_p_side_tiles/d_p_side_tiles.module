@@ -24,7 +24,7 @@ function d_p_side_tiles_preprocess_paragraph(&$variables) {
         $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
 
         $variables['tiles_side'] = $setting_field
-          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_SIDE_TILES_LAYOUT, 'left');
+          ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_SIDE_TILES_LAYOUT);
       }
       catch (MissingConfigurationStorageFieldException $exception) {
         \Drupal::logger('d_p')->error($exception->getMessage());
