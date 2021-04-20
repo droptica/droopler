@@ -18,7 +18,6 @@ $d-p-carousel-item-image-margin-bottom: 1rem !default;
 $d-p-carousel-item-image-height: 200px !default;
 $d-p-carousel-item-mobile-image-height: 150px !default;
 $d-p-carousel-item-padding-x: 5% !default;
-$d-p-carousel-item-padding-y: 0 !default;
 $d-p-carousel-item-mobile-padding-x: 10% !default;
 $d-p-carousel-item-long-text-margin-bottom: 0 !default;
 $d-p-carousel-arrow-size: 40px !default;
@@ -116,7 +115,8 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
 
       .d-p-carousel-item {
         display: block;
-        padding: $d-p-carousel-item-padding-y $d-p-carousel-item-padding-x;
+        padding-left:  $d-p-carousel-item-padding-x;
+        padding-right: $d-p-carousel-item-padding-x;
 
         @include media-breakpoint-down(sm) {
           padding-left:  $d-p-carousel-item-mobile-padding-x;
