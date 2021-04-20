@@ -21,6 +21,7 @@ $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
     > div > h3.field--name-field-d-subtitle {
       color: $d-p-text-paged-subtitle-color;
     }
+
     .field--name-field-d-long-text {
       color: $d-p-text-paged-color;
     }
@@ -51,7 +52,8 @@ $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
 
   .field--name-field-d-main-title,
   .field--name-field-d-subtitle {
-    + div > .field--type-link {
+    + div > .field--type-link,
+    + .field--name-field-d-long-text {
       &::before {
         @include decoration-header-line-main-center($d-p-text-paged-line-color, $d-p-text-paged-line-color-inverted)
       }
@@ -62,9 +64,6 @@ $d-p-text-paged-subtitle-margin-y: 1.125rem !default;
     p {
       word-wrap: break-word;
       hyphens: auto;
-    }
-    &::before {
-      @include decoration-header-line-main-center($d-p-text-paged-line-color, $d-p-text-paged-line-color-inverted)
     }
   }
 }
