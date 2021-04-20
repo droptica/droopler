@@ -368,9 +368,6 @@ $d-product-filters-border: 2px solid $color-hector !default;
 
 .filters {
   .region-facets-left {
-    > .block:not(.block-mobile-filters-submit) {
-      @include  make-container-max-widths();
-    }
     @include media-breakpoint-down(md) {
       height: 100%;
       width: 85%;
