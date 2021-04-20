@@ -63,9 +63,11 @@
             {{ content.group_d_counters_content|without('field_d_cta_link') }}
           {% endblock %}
         </div>
-        <div class="text-center pt-4">
+        {% if content.group_d_counters_content.field_d_cta_link.0 %}
+          <div class="text-center mt-4">
             {{ content.group_d_counters_content.field_d_cta_link }}
-        </div>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
