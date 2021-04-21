@@ -376,8 +376,6 @@ $two-columned-header-line-margin: 0.625rem !default;
         border: none;
         text-indent: -9999px;
         max-width: none;
-        background: none;
-        border: none;
       }
     }
   }
@@ -421,29 +419,33 @@ $two-columned-header-line-margin: 0.625rem !default;
 $d-p-themes: () !default;
 $d-p-themes: map-merge(
   (
+    custom: (
+      background: inherit,
+      text: inherit,
+      text-bold: inherit,
+      set-fields-color: true,
+      link-color: inherit,
+    ),
     primary: (
       background: $color-agamemnon,
       text: $color-odysseus,
       text-bold: inherit,
       set-fields-color: true,
+      link-color: $color-nestor,
     ),
     gray: (
       background: $color-paris,
       text: $color-acamas,
       text-bold: $color-cassandra,
       set-fields-color: false,
+      link-color: $color-agamemnon,
     ),
     secondary: (
       background: $color-odysseus,
       text: $color-hecuba,
       text-bold: $color-troilus,
       set-fields-color: false,
-    ),
-    custom: (
-      background: inherit,
-      text: inherit,
-      text-bold: inherit,
-      set-fields-color: true,
+      link-color: $color-agamemnon,
     ),
   ),
   $d-p-themes
@@ -471,6 +473,15 @@ $d-p-themes: map-merge(
       @if map-get($themeSettings, "set-fields-color") {
         .field {
           color: map-get($themeSettings, "text");
+
+          &.field--name-field-d-long-text a,
+          a.link {
+            color: map-get($themeSettings, "link-color");
+
+            span {
+              color: map-get($themeSettings, "link-color");
+            }
+          }
         }
         @for $i from 1 through 6 {
           h#{$i} {

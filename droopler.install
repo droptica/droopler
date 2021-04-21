@@ -2159,3 +2159,15 @@ function droopler_update_8132(&$sandbox) {
   \Drupal::service('d_update')->checklist()
     ->saveProgress(['v2.2' => $values]);
 }
+
+/**
+ * Droopler 2.3 Add settings widget to d_p_node.
+ */
+function droopler_update_8133(&$sandbox) {
+  $values['droopler__droopler_update_8133_1'] = update_modules_configuration([
+    'd_p_node',
+  ], '8133');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v2.3' => $values]);
+}

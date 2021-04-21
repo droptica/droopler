@@ -62,6 +62,7 @@ $d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
     }
 
   }
+  .wrapper-d_p_node,
   .wrapper-d_p_single_text_block {
     padding: $d-p-side-by-side-text-box-padding-y 0;
     text-align: left;
@@ -165,6 +166,7 @@ $d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
       }
     }
     @each $name, $themeSettings in $d-p-side-by-side-image-single_text_block-themes {
+      .wrapper-d_p_node.theme-#{$name},
       .wrapper-d_p_single_text_block.theme-#{$name} {
         &::before {
           @include media-breakpoint-up(sm) {
@@ -186,6 +188,7 @@ $d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
       }
     }
     @each $name, $themeSettings in $d-p-side-by-side-image-single_text_block-themes {
+      .wrapper-d_p_node.theme-#{$name},
       .wrapper-d_p_single_text_block.theme-#{$name} {
         &::before {
           @include media-breakpoint-up(sm) {
