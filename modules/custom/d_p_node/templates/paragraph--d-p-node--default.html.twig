@@ -47,14 +47,7 @@
   ]
 %}
 
-{#{%#}
-{#  set default_theme_classes = [#}
-{#    'theme-default',#}
-{#  ]#}
-{#%}#}
-
 {% block paragraph %}
-{#  <section {{ wrapper_attributes.addClass(default_theme_classes) }}>#}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
       {% block content %}
