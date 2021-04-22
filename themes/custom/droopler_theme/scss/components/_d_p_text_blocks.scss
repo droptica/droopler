@@ -23,7 +23,6 @@ $d-p-text-blocks-tiles-padding: 20px !default;
 $d-p-text-blocks-tiles-spacing: 5px !default;
 
 // Other settings.
-$d-p-single-text-box-cta-text-transform: uppercase !default;
 $d-p-single-text-box-grid-image-padding-bottom: $grid-gutter-width / 2 !default;
 $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
@@ -196,9 +195,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
   p {
     @include font-body-standard;
-  }
-  a {
-    @include text-transform($d-p-single-text-box-cta-text-transform)
   }
 }
 

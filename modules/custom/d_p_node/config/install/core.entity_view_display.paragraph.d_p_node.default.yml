@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.paragraph.d_p_node.field_d_display_mode
     - field.field.paragraph.d_p_node.field_d_node_reference
+    - field.field.paragraph.d_p_node.field_d_settings
     - paragraphs.paragraphs_type.d_p_node
   module:
     - entity_reference_display
@@ -21,6 +22,14 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_display_default
+    region: content
+  field_d_settings:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
 hidden:
   field_d_display_mode: true
