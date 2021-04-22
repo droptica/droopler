@@ -2161,7 +2161,7 @@ function droopler_update_8132(&$sandbox) {
 }
 
 /**
- * Droopler 2.3 Add settings widget to d_p_node.
+ * Droopler 3.0 Add settings widget to d_p_node.
  */
 function droopler_update_8133(&$sandbox) {
   /** @var Drupal\d_update\Updater $updater */
@@ -2179,5 +2179,5 @@ function droopler_update_8133(&$sandbox) {
   ], '8133');
 
   $updater->checklist()
-    ->saveProgress(['v2.3' => $values]);
+    ->saveProgress(['v3.0' => $values]);
 }
