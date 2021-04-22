@@ -4,6 +4,7 @@ namespace Drupal\d_p\Plugin\Field;
 
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Field\FieldItemList;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
@@ -49,6 +50,15 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
     $value = parent::getValue();
 
     return $value[0] ?? new \StdClass();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultValuesFormSubmit(array $element, array &$form, FormStateInterface $form_state) {
+    $value = parent::defaultValuesFormSubmit($element, $form, $form_state);
+
+    return $this->toEncodedValue($value);
   }
 
   /**
@@ -221,16 +231,29 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * Set value as JSON encoded string.
    *
    * @param mixed $values
-   *   Values to be set.
+   *   The values to be set.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\ReadOnlyException
    */
   protected function setEncodedValue($values) {
-    $values_to_set = [
+    $this->setValue($this->toEncodedValue($values), TRUE);
+  }
+
+  /**
+   * Convert given values to a field value with encoded data.
+   *
+   * @param mixed $value
+   *   The values to be set.
+   *
+   * @return array[]
+   *   The field value.
+   */
+  protected function toEncodedValue($value): array {
+    return [
       [
-        'value' => json_encode($values),
+        'value' => json_encode($value),
       ],
     ];
-
-    $this->setValue($values_to_set, TRUE);
   }
 
   /**
