@@ -108,6 +108,7 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     // Single carousel item
     .carousel-item-wrapper {
       overflow: hidden;
+      position: relative;
 
       &:focus {
         outline: 0;

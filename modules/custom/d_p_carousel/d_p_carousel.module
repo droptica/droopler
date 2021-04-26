@@ -49,15 +49,10 @@ function d_p_carousel_preprocess_field(array &$variables) {
         ];
 
         $columns_values = [];
-        $variables['column_classes'] = [];
-        $grid = 12;
 
         foreach ($columns as $breakpoint => $config_name) {
           $value = $setting_field->getSettingValue($config_name);
           $columns_values['columns_' . $breakpoint] = $value;
-
-          $breakpoint_suffix = $breakpoint === 'xs' ? '' : $breakpoint . '-';
-          $variables['column_classes'][] = 'col-' . $breakpoint_suffix . floor($grid / $value);
         }
 
         $variables['#attached']['drupalSettings']['d_p_carousel'][$paragraph->id()] = $columns_values;
