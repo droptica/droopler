@@ -30,20 +30,11 @@ function d_p_tiles_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Implements hook_preprocess_paragraph().
+ * Implements hook_preprocess_HOOK().
  */
-function d_p_tiles_preprocess_paragraph(&$variables) {
-  $paragraph = $variables['paragraph'];
-  $bundle = $paragraph->bundle();
-
-  switch ($bundle) {
-    case 'd_p_tiles':
-      // Attach libraries.
-      $variables['#attached']['library'][] = 'd_p_tiles/masonry';
-      $variables['#attached']['library'][] = 'd_p_tiles/d_p_tiles';
-      break;
-  }
-
+function d_p_tiles_preprocess_paragraph__d_p_tiles(array &$variables) {
+  $variables['#attached']['library'][] = 'd_p_tiles/masonry';
+  $variables['#attached']['library'][] = 'd_p_tiles/d_p_tiles';
 }
 
 /**
