@@ -13,7 +13,7 @@ interface ModalDetectorInterface {
    * Check if the current request is handled by the geysir modal controller.
    *
    * @return bool
-   *   True if the request is for geysir modal, false othewise.
+   *   True if the request is for geysir modal, false otherwise.
    */
   public function isGeysirModalRequest(): bool;
 

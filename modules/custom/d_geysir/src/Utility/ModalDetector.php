@@ -28,6 +28,20 @@ class ModalDetector implements ModalDetectorInterface {
   protected $resolver;
 
   /**
+   * Wrapper format.
+   *
+   * @var string
+   */
+  protected $wrapperFormat;
+
+  /**
+   * Triggering element.
+   *
+   * @var string
+   */
+  protected $triggeringElement;
+
+  /**
    * Modal detector contructor.
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
@@ -38,6 +52,8 @@ class ModalDetector implements ModalDetectorInterface {
   public function __construct(RequestStack $request_stack, ControllerResolverInterface $controller_resolver) {
     $this->request = $request_stack->getCurrentRequest();
     $this->resolver = $controller_resolver;
+    $this->wrapperFormat = $this->request->query->get('_wrapper_format');
+    $this->triggeringElement = $this->request->request->get('_triggering_element_name');
   }
 
   /**
@@ -46,25 +62,57 @@ class ModalDetector implements ModalDetectorInterface {
   public function isGeysirModalRequest(): bool {
     try {
       $controller = $this->resolver->getController($this->request);
-      $is_modal = (
-        // Modal window.
-        $this->request->query->get('_wrapper_format') === 'drupal_modal' ||
-        (
-          // Ajax inside modal window.
-          $this->request->query->get('_wrapper_format') === 'drupal_ajax' &&
-          $this->request->request->get('_triggering_element_name') !== 'op'
-        )
-      );
 
       if (isset($controller[0])) {
-        return $controller[0] instanceof GeysirModalController && $is_modal;
+        return $controller[0] instanceof GeysirModalController && $this->isGeysirModal();
       }
 
-      return $controller instanceof GeysirModalController && $is_modal;
+      return $controller instanceof GeysirModalController && $this->isGeysirModal();
     }
     catch (\LogicException $exception) {
       return FALSE;
     }
+  }
+
+  /**
+   * Check if the wrapper format is drupal modal.
+   *
+   * @return bool
+   *   True if the wrapper format is drupal modal, false otherwise.
+   */
+  private function isModal(): bool {
+    return $this->wrapperFormat === 'drupal_modal';
+  }
+
+  /**
+   * Check if the wrapper format is drupal ajax.
+   *
+   * @return bool
+   *   True if the wrapper format is drupal ajax, false otherwise.
+   */
+  private function isAjax(): bool {
+    return $this->wrapperFormat === 'drupal_ajax';
+  }
+
+  /**
+   * Check if the triggering element name is not op.
+   *
+   * @return bool
+   *   True if the triggering element name is not op, false otherwise.
+   */
+  private function isNotOpElement(): bool {
+    return $this->triggeringElement !== 'op';
+  }
+
+  /**
+   * Check if we have geysir modal or some ajax inside geysir modal.
+   *
+   * @return bool
+   *   True if we have geysir modal or some ajax inside geysir modal,
+   *   false otherwise.
+   */
+  private function isGeysirModal(): bool {
+    return $this->isModal() || ($this->isAjax() && $this->isNotOpElement());
   }
 
 }
