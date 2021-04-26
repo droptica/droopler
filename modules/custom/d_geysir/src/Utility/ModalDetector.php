@@ -46,12 +46,21 @@ class ModalDetector implements ModalDetectorInterface {
   public function isGeysirModalRequest(): bool {
     try {
       $controller = $this->resolver->getController($this->request);
+      $is_modal = (
+        // Modal window.
+        $this->request->query->get('_wrapper_format') === 'drupal_modal' ||
+        (
+          // Ajax inside modal window.
+          $this->request->query->get('_wrapper_format') === 'drupal_ajax' &&
+          $this->request->request->get('_triggering_element_name') !== 'op'
+        )
+      );
 
       if (isset($controller[0])) {
-        return $controller[0] instanceof GeysirModalController;
+        return $controller[0] instanceof GeysirModalController && $is_modal;
       }
 
-      return $controller instanceof GeysirModalController;
+      return $controller instanceof GeysirModalController && $is_modal;
     }
     catch (\LogicException $exception) {
       return FALSE;
