@@ -17,11 +17,12 @@ function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     case 'geysir_modal_add_select_type_form':
       $root_path = DRUPAL_ROOT;
       $base_url = \Drupal::service('router.request_context')->getBaseUrl();
+      $base_url = empty($base_url) ? '' : '/' . trim($base_url, '/') . '/';
       $module_path = drupal_get_path('module', 'd_p');
       foreach ($form['description'] as $paragraph_name => $attributes) {
         $file_server_path = $root_path . '/' . $module_path . '/images/' . $paragraph_name . '.png';
         if (file_exists($file_server_path)) {
-          $file_url = $base_url . '/' . $module_path . '/images/' . $paragraph_name . '.png';
+          $file_url = $base_url . $module_path . '/images/' . $paragraph_name . '.png';
           $form['description'][$paragraph_name]['#src'] = $file_url;
         }
       }
