@@ -12,21 +12,14 @@ use Drupal\d_p_subscribe_file\Forms\SubscribeFileForm;
 /**
  * Implements hook_preprocess_HOOK().
  */
-function d_p_subscribe_file_preprocess_paragraph(&$variables) {
+function d_p_subscribe_file_preprocess_paragraph__d_p_subscribe_file(array &$variables) {
   $paragraph = $variables['paragraph'];
-  $bundle = $paragraph->bundle();
 
-  switch ($bundle) {
-    case 'd_p_subscribe_file':
-      $form_class = \Drupal::service('class_resolver')
-        ->getInstanceFromDefinition(SubscribeFileForm::class);
-      $form_class->setParagraph($paragraph);
-      $form = \Drupal::formBuilder()->getForm($form_class);
+  $form_class = \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(SubscribeFileForm::class);
+  $form_class->setParagraph($paragraph);
 
-      $variables['subscribe_file_form'] = $form;
-      $variables['#attached']['library'][] = 'd_p_subscribe_file/d_p_subscribe_file';
-      break;
-  }
+  $variables['subscribe_file_form'] = \Drupal::formBuilder()->getForm($form_class);
 }
 
 /**
