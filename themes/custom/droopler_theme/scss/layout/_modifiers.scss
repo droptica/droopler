@@ -419,28 +419,28 @@ $two-columned-header-line-margin: 0.625rem !default;
 $d-p-themes: () !default;
 $d-p-themes: map-merge(
   (
-    custom: (
+    "custom": (
       background: inherit,
       text: inherit,
       text-bold: inherit,
       set-fields-color: true,
       link-color: inherit,
     ),
-    primary: (
+    "primary": (
       background: $color-agamemnon,
       text: $color-odysseus,
       text-bold: inherit,
       set-fields-color: true,
       link-color: $color-nestor,
     ),
-    gray: (
+    "gray": (
       background: $color-paris,
       text: $color-acamas,
       text-bold: $color-cassandra,
       set-fields-color: false,
       link-color: $color-agamemnon,
     ),
-    secondary: (
+    "secondary": (
       background: $color-odysseus,
       text: $color-hecuba,
       text-bold: $color-troilus,
