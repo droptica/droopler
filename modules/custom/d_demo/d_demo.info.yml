@@ -1,18 +1,24 @@
-name: d_demo
+name: 'Droopler Demo'
 core: 8.x
 core_version_requirement: ^8 || ^9
 description: 'Module with demo content.'
 type: module
+dependencies:
+  # Core.
+  - drupal:block
+  - drupal:system
+
+  # Contrib.
+  - we_megamenu:we_megamenu
+
+  # Droopler
+  - droopler:d_content_init
+  - droopler:d_media
+  - droopler:d_p_media
+  - droopler:d_p_reference_content
+  - droopler:d_social_media
+
 package: Droopler
 version: DROOPLER_VERSION
-dependencies:
-  - block
-  - d_content_init
-  - d_media
-  - d_p_media
-  - d_p_reference_content
-  - d_social_media
-  - system
-  - we_megamenu
 libraries:
   - droopler_theme/global-styling
