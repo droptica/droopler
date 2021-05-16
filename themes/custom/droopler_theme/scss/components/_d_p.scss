@@ -9,12 +9,28 @@ $d-p-long-text-margin-bottom: 1.5rem !default;
   .field--name-field-d-long-text {
     margin-bottom: $d-p-long-text-margin-bottom;
 
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     blockquote > :last-child {
       margin-bottom: 0;
     }
 
     > :last-child {
       margin-bottom: 0;
+    }
+  }
+
+  // Typically, we don't want any margin on the last d_long_text field.
+  // However, there are few exceptions that need separate handling.
+  // Add "paragraph--with-long-text-margin" class to your paragraph
+  // to always apply bottom margin to d_long_text.
+  &.with-forced-long-text-margin {
+    .field--name-field-d-long-text {
+      &:last-child {
+        margin-bottom: $d-p-long-text-margin-bottom;
+      }
     }
   }
 }
