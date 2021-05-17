@@ -147,7 +147,6 @@
     }
     return gulp
       .src(scss_input)
-      .pipe(sassVars(variables, {verbose: true}))
       .pipe(sourcemaps.init())
       .pipe(sass(sassOptionsDev).on('error', sass.logError))
       .pipe(autoprefixer(autoprefixerOptions))
@@ -189,7 +188,6 @@
     }
     return gulp
       .src(scss_input)
-      .pipe(sassVars(variables, {verbose: true}))
       .pipe(sass(sassOptionsProd))
       .pipe(autoprefixer(autoprefixerOptions))
       .pipe(gulp.dest(css_dir));
