@@ -1,10 +1,14 @@
-name: d_geysir
+name: 'Droopler Geysir Integration'
 core: 8.x
 core_version_requirement: ^8 || ^9
-description: 'Provides extensions and overrides to geysir module.'
+description: 'Provides extensions and overrides to Geysir module.'
 type: module
 dependencies:
-  - geysir
-  - d_p
+  # Contrib.
+  - geysir:geysir
+
+  # Droopler.
+  - droopler:d_p
+
 package: Droopler
 version: DROOPLER_VERSION

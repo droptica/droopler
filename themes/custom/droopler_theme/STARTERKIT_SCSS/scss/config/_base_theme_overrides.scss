@@ -134,8 +134,8 @@
 // $line-background-inverted: $color-nestor;
 // $line-left-margin-top: 1.25rem;
 // $line-left-margin-bottom: 1.52rem;
-// $line-center-margin-top: 1.375rem !default;
-// $line-center-margin-bottom: 1.51rem !default;
+// $line-center-margin-top: 1.375rem;
+// $line-center-margin-bottom: 1.51rem;
 // $line-width: 3.125rem;
 // $line-thickness: 0.125rem;
 
@@ -256,6 +256,8 @@
 
 // PARAGRAPHS
 // -------------------------
+// $d-p-long-text-margin-bottom: 1.5rem;
+
 // All core paragraph variables have different naming convention.
 // Their names begin with $d-p- prefix.
 
@@ -339,6 +341,7 @@
 // $d-p-side-image-banner-text-padding: 7%;
 // $d-p-side-image-banner-text-width: 35.625rem;
 // $d-p-side-image-banner-half-padding: 5%; // Spacing between content and half of the screen.
+// $d-p-side-image-long-text-margin-bottom: 0;
 
 // Paragraph d_p_text_blocks
 // -------------------------
@@ -350,11 +353,13 @@
 // $d-p-text-blocks-group-mobile-padding-y: 2rem;
 // $d-p-text-blocks-group-margin: 0 0 5.5rem 0;
 // $d-p-text-blocks-mobile-group-margin: 0 0 2.8rem 0;
+// $d-p-text-blocks-group-button-margin: 3.125rem auto 0 auto;
+// $d-p-text-blocks-mobile-group-button-margin: 1.875rem auto 4.375rem auto;
 // $d-p-single-box-padding-x: 5%;
 // $d-p-single-box-mobile-padding-x: 10%;
+// $d-p-single-box-long-text-margin-bottom: 0;
 // $d-p-text-blocks-tiles-padding: 20px;
 // $d-p-text-blocks-tiles-spacing: 5px;
-// $d-p-single-text-box-cta-text-transform: uppercase;
 // $d-p-single-text-box-grid-image-padding-bottom: $grid-gutter-width / 2;
 // $d-p-single-text-box-grid-large-padding: $grid-gutter-width;
 
@@ -391,9 +396,6 @@
 // $d-p-counters-number-color: $color-odysseus;
 // $d-p-counters-text-color: $color-nestor;
 // $d-p-counters-long-text-color: $color-odysseus;
-// $d-p-counters-title-margin-top: 0;
-// $d-p-counters-title-margin-bottom: 1.52rem;
-// $d-p-counters-long-text-margin-bottom: 1.52rem;
 // $d-p-counters-padding-top: 7.5rem;
 // $d-p-counters-padding-bottom: 7.5rem;
 // $d-p-counters-mobile-padding-top: 3rem;
@@ -418,12 +420,12 @@
 // $d-p-carousel-arrow-color: $color-cassandra;
 // $d-p-carousel-background-theme-invert: $color-agamemnon;
 // $d-p-carousel-theme-invert-text-color: $color-odysseus;
-// $d-p-carousel-long-text-margin-bottom: 1.52rem;
 // $d-p-carousel-items-margin-top: 2%;
 // $d-p-carousel-mobile-items-margin-top: 3rem;
 // $d-p-carousel-item-image-margin-bottom: 1rem;
 // $d-p-carousel-item-image-height: 200px;
 // $d-p-carousel-item-mobile-image-height: 150px;
+// $d-p-carousel-item-long-text-margin-bottom: 0;
 // $d-p-carousel-item-padding-x: 5%;
 // $d-p-carousel-item-mobile-padding-x: 10%;
 // $d-p-carousel-arrow-size: 40px;
@@ -454,6 +456,7 @@
 // $d-p-side-embed-half-padding: 10%; // Spacing between content and half of the screen.
 // $d-p-side-embed-mobile-height: 300px; // This value must be set, otherwise embed won't be visible.
 // $d-p-side-embed-desktop-height: auto; // You can set fixed height of embed here.
+// $d-p-side-embed-long-text-margin-bottom: 0;
 
 // Paragraph d_p_side_tiles
 // -------------------------
@@ -476,6 +479,7 @@
 // $d-p-side-tiles-text-mobile-padding: 7%;
 // $d-p-side-tiles-text-width: 35.625rem;
 // $d-p-side-tiles-half-padding: 10%; // Spacing between content and half of the screen.
+// $d-p-side-tiles-long-text-margin-bottom: 0;
 
 // Paragraph d_p_tiles
 // -------------------------
@@ -499,8 +503,6 @@
 // -------------------------
 // $d-p-reference-content-line-color: $color-agamemnon;
 // $d-p-reference-content-line-color-inverted: $color-nestor;
-// $d-p-reference-content-padding-top: 1.51rem;
-// $d-p-reference-content-padding-bottom: 0;
 // $d-p-reference-content-items-padding-x: 5px;
 // $d-p-reference-content-item-padding: 5px;
 // $d-p-reference-content-item-margin-left: -5px;
@@ -513,7 +515,6 @@
 // $d-p-side-by-side-line-color-inverted: $color-nestor;
 // $d-p-side-by-side-padding-y: 5%;
 // $d-p-side-by-side-header-padding: 2.5%;
-// $d-p-side-by-side-subtitle-margin-y: 2.125rem;
 // $d-p-side-by-side-content-padding-x: 7vw;
 // $d-p-side-by-side-text-box-padding-y: $grid-gutter-width;
 // $d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2;
@@ -647,14 +648,14 @@
 // Paragraph spacings definitions.
 // -------------------------
 // $d-p-paddings: (
-//   // New spacing class definiton.
+//   // New spacing class definition.
 //   tiny: 1%,
 //   // Override Droopler spacing.
 //   default: 7%,
 // );
 //
 // $d-p-margins: (
-//   // New spacing class definiton.
+//   // New spacing class definition.
 //   tiny: 1%,
 //   // Override Droopler spacing.
 //   small: 3%,

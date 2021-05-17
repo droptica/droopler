@@ -1,23 +1,29 @@
-name: d_p_carousel
-description: 'Provides a Paragraph with a Slick carousel.'
-type: module
+name: 'Droopler Carousel Paragraph'
 core: 8.x
 core_version_requirement: '^8 || ^9'
+description: 'Provides a Paragraph with a Slick carousel.'
+type: module
 dependencies:
-  - content_translation
-  - d_media
-  - d_p
-  - entity_reference_revisions
-  - field
-  - field_group
-  - image
-  - link
-  - link_attributes
-  - media
-  - media_library
-  - paragraphs
-  - svg_image
-  - text
+  # Core.
+  - drupal:content_translation
+  - drupal:field
+  - drupal:image
+  - drupal:link
+  - drupal:media
+  - drupal:media_library
+  - drupal:text
+
+  # Contrib.
+  - entity_reference_revisions:entity_reference_revisions
+  - field_group:field_group
+  - link_attributes:link_attributes
+  - paragraphs:paragraphs
+  - svg_image:svg_image
+
+  # Droopler.
+  - droopler:d_media
+  - droopler:d_p
+
 version: DROOPLER_VERSION
-package: Paragraphs
+package: Droopler
 core_incompatible: false

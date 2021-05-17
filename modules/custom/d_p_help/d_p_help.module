@@ -16,7 +16,7 @@ function d_p_help_help($route_name, RouteMatchInterface $route_match) {
 
   switch ($route_name) {
     case 'help.page.d_p_help':
-      $output = '<h3>' . t('Droopler is a Drupal 8 profile designed to kickstart a new webpage in a few minutes') . '</h3>';
+      $output = '<h3>' . t('Droopler is a Drupal 8/9 profile designed to kickstart a new webpage in a few minutes') . '</h3>';
       $output .= '<p>' . t('More info about Droopler - <a href=":link">See official Droopler website</a>.', [':link' => 'https://droopler.com/']) . '</p>';
       $output .= '<h3>' . t('Support') . '</h3>';
       $output .= '<p>' . t('Do You need support with Droopler? -  <a href=":link">Droptica.com</a>.', [':link' => 'https://droptica.com']) . '</p>';
