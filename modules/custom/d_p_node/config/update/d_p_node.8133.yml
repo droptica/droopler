@@ -1,0 +1,140 @@
+core.entity_view_display.paragraph.d_p_node.default:
+  add:
+    dependencies:
+      config:
+        - field.field.paragraph.d_p_node.field_d_settings
+    content:
+      field_d_settings:
+        weight: 1
+        label: above
+        settings:
+          link_to_entity: false
+        third_party_settings: { }
+        type: string
+        region: content
+
+core.entity_form_display.paragraph.d_p_node.default:
+  add:
+    dependencies:
+      config:
+        - field.field.paragraph.d_p_node.field_d_settings
+      module:
+        - d_p
+        - field_group
+    third_party_settings:
+      field_group:
+        group_tabs:
+          children:
+            - group_basic
+            - group_settings
+          parent_name: ''
+          weight: 0
+          format_type: tabs
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            direction: horizontal
+          label: Tabs
+        group_basic:
+          children:
+            - field_d_display_mode
+            - field_d_node_reference
+          parent_name: group_tabs
+          weight: 20
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: open
+            required_fields: true
+          label: Basic
+        group_settings:
+          children:
+            - field_d_settings
+          parent_name: group_tabs
+          weight: 21
+          format_type: tab
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            description: ''
+            formatter: closed
+            required_fields: true
+          label: Settings
+    content:
+      field_d_settings:
+        weight: 3
+        settings:
+          filter_mode: '1'
+          allowed_settings:
+            custom_class:
+              status: '1'
+              modifiers:
+                paragraph-theme:
+                  status: '1'
+                with-divider:
+                  status: 0
+                with-grid:
+                  status: 0
+                with-price:
+                  status: 0
+                with-tiles:
+                  status: 0
+                full-width:
+                  status: 0
+                half-transparent:
+                  status: 0
+                margin-bottom:
+                  status: 0
+                margin-top:
+                  status: 0
+                padding-bottom:
+                  status: 0
+                padding-top:
+                  status: 0
+                header-into-columns:
+                  status: 0
+                stripe-sidebar:
+                  status: 0
+                tile:
+                  status: 0
+            column_count:
+              status: 0
+            column_count_mobile:
+              status: 0
+            column_count_tablet:
+              status: 0
+            embed_layout:
+              status: 0
+            featured_images:
+              status: 0
+            form_layout:
+              status: 0
+            heading_type:
+              status: 0
+            side_image_layout:
+              status: 0
+            side_tiles_layout:
+              status: 0
+        third_party_settings: { }
+        type: field_d_p_set_settings
+        region: content
+
+  change:
+    expected:
+      content:
+        field_d_display_mode:
+          weight: 0
+        field_d_node_reference:
+          weight: 1
+
+    new:
+      content:
+        field_d_display_mode:
+          weight: 1
+        field_d_node_reference:
+          weight: 2

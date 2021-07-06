@@ -537,11 +537,6 @@ $d-commerce-product-cart-border: 1px solid $d-commerce-product-cart-border-color
     background-position: bottom;
   }
 
-  .region-facets-left {
-    > .block:not(.block-commerce-mobile-filters-submit) {
-      @include make-container-max-widths();
-    }
-  }
   @include media-breakpoint-up(lg) {
     .region-facets-left {
       .container {

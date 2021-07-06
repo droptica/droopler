@@ -1,11 +1,17 @@
-name: d_mautic
-type: module
-description: 'Allows embeding of Mautic form via URL.'
+name: 'Droopler Mautic Integration'
 core: 8.x
 core_version_requirement: ^8 || ^9
+description: 'Allows embedding of Mautic form via URL.'
+type: module
+dependencies:
+  # Core.
+  - drupal:field
+
+  # Contrib.
+  - paragraphs:paragraphs
+
+  # Droopler.
+  - droopler:d_update
+
 version: DROOPLER_VERSION
 package: Droopler
-dependencies:
-  - field
-  - paragraphs
-  - d_update

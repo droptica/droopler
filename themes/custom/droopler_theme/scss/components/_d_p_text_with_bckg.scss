@@ -55,38 +55,46 @@ $d-p-text-with-bckg-img-opacity: 0.1 !default;
     color: $d-p-text-with-bckg-header-color;
     text-align: center;
   }
+
   .field--name-field-d-media-icon {
     text-align: center;
   }
+
   h3.field--name-field-d-subtitle {
     @include font-subtitle;
     text-align: center;
   }
+
   p {
     @include font-body-standard;
     line-height: 1.7;
   }
 
-  .field--name-field-d-main-title + .field--type-link,
-  h3 + .field--type-link,
+  .field--name-field-d-main-title,
+  .field--name-field-d-subtitle {
+    + div > .field--type-link,
+    + .field--name-field-d-long-text {
+      &::before {
+        @include decoration-header-line-main-center($d-p-text-with-bckg-line-color, $d-p-text-with-bckg-line-color-inverted)
+      }
+    }
+  }
+
   .field--name-field-d-long-text {
     p {
       word-wrap: break-word;
       hyphens: auto;
     }
-    &::before {
-      @include decoration-header-line-main-center ($d-p-text-with-bckg-line-color, $d-p-text-with-bckg-line-color-inverted)
-    }
   }
+
   .field--type-link {
     text-align: center;
-    a {
-      margin-top: $d-p-text-with-bckg-button-margin-top;
-    }
   }
+
   .d-media-background-wrapper {
     opacity: $d-p-text-with-bckg-img-opacity;
   }
+
   .content-wrapper {
     position: relative;
     z-index: 2;

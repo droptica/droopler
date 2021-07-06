@@ -10,7 +10,7 @@ use Drupal\paragraphs\Entity\Paragraph;
  *
  * @package Drupal\d_p\Helper
  *
- * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
+ * @deprecated in droopler:8.x-2.2 and is removed starting from droopler:3.1.0
  * As this is working on the particular field instance,
  * we have unified and moved all the methods directly to the field list class:
  * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface

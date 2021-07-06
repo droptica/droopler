@@ -12,7 +12,6 @@ $d-p-carousel-background-theme-invert: $color-agamemnon !default;
 $d-p-carousel-theme-invert-text-color: $color-odysseus !default;
 
 // Margins, paddings and sizing.
-$d-p-carousel-long-text-margin-bottom: 1.52rem !default;
 $d-p-carousel-items-margin-top: 2% !default;
 $d-p-carousel-mobile-items-margin-top: 3rem !default;
 $d-p-carousel-item-image-margin-bottom: 1rem !default;
@@ -20,6 +19,7 @@ $d-p-carousel-item-image-height: 200px !default;
 $d-p-carousel-item-mobile-image-height: 150px !default;
 $d-p-carousel-item-padding-x: 5% !default;
 $d-p-carousel-item-mobile-padding-x: 10% !default;
+$d-p-carousel-item-long-text-margin-bottom: 0 !default;
 $d-p-carousel-arrow-size: 40px !default;
 $d-p-carousel-arrow-opacity: 0.2 !default;
 $d-p-carousel-arrow-hover-opacity: 0.3 !default;
@@ -52,8 +52,6 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
   }
 
   .content > .field--name-field-d-long-text {
-    margin-bottom: $d-p-carousel-long-text-margin-bottom;
-
     p {
       word-wrap: break-word;
       hyphens: auto;
@@ -110,13 +108,15 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
     // Single carousel item
     .carousel-item-wrapper {
       overflow: hidden;
+      position: relative;
 
       &:focus {
         outline: 0;
       }
 
       .d-p-carousel-item {
-        padding-left: $d-p-carousel-item-padding-x;
+        display: block;
+        padding-left:  $d-p-carousel-item-padding-x;
         padding-right: $d-p-carousel-item-padding-x;
 
         @include media-breakpoint-down(sm) {
@@ -136,14 +136,21 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
         .field--name-field-d-main-title {
           @include font-title-carousel-item;
           text-align: center;
+
+          &::after {
+            @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);
+          }
+
+          &:last-child::after {
+            display: none;
+          }
         }
         .field--name-field-d-long-text {
+          margin-bottom: $d-p-carousel-item-long-text-margin-bottom;
+
           p {
             @include font-body-standard;
             text-align: center;
-          }
-          &::before {
-            @include decoration-header-line-main-center($d-p-carousel-item-line-color, $d-p-carousel-item-line-color-inverted);
           }
         }
         .field--type-image {

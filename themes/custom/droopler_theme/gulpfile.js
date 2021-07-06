@@ -14,7 +14,7 @@
   'use strict';
 
   const gulp = require('gulp');
-  const sass = require('gulp-sass');
+  const sass = require('gulp-dart-sass');
   const sourcemaps = require('gulp-sourcemaps');
   const autoprefixer = require('gulp-autoprefixer');
   const uglify = require('gulp-uglify');
@@ -23,7 +23,6 @@
   const rename = require("gulp-rename");
   const del = require('del');
   const argv = require('yargs').argv;
-  const sassVars = require('gulp-sass-vars');
 
   // Patterns
   const scss_pattern = '**/*.scss';
@@ -148,7 +147,6 @@
     }
     return gulp
       .src(scss_input)
-      .pipe(sassVars(variables, {verbose: true}))
       .pipe(sourcemaps.init())
       .pipe(sass(sassOptionsDev).on('error', sass.logError))
       .pipe(autoprefixer(autoprefixerOptions))
@@ -162,7 +160,7 @@
   // Copy JS libs
   function jsCopyLibs(cb) {
     gulp.src([
-      "node_modules/bootstrap/dist/js/bootstrap.bundle.js",      
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
       "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
       "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map"
     ]).pipe(gulp.dest(vendor_dir), cb())
@@ -190,7 +188,6 @@
     }
     return gulp
       .src(scss_input)
-      .pipe(sassVars(variables, {verbose: true}))
       .pipe(sass(sassOptionsProd))
       .pipe(autoprefixer(autoprefixerOptions))
       .pipe(gulp.dest(css_dir));

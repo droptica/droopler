@@ -1,10 +1,12 @@
-name: 'd_block_field'
-description: 'Provides a field that allows a content entity to create and configure custom block instances.'
-type: module
-package: Droopler
+name: 'Droopler Block Field'
 core: 8.x
 core_version_requirement: ^8 || ^9
+description: 'Provides a field that allows a content entity to create and configure custom block instances.'
+type: module
 dependencies:
-  - block
-  - block_content
+  # Core.
+  - drupal:block
+  - drupal:block_content
+
+package: Droopler
 version: DROOPLER_VERSION

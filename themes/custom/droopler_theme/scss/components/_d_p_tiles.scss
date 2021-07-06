@@ -46,11 +46,8 @@ $d-p-tiles-padding-bottom: 5% !default;
   .field--name-field-d-main-title {
     @include font-main-header;
     text-align: center;
-  }
 
-  .field--name-field-d-long-text {
-
-    &::before {
+    &::after {
       @include decoration-header-line-main-center($d-p-tiles-line-color, $d-p-tiles-line-color-inverted)
     }
   }

@@ -38,9 +38,9 @@ function d_p_text_blocks_preprocess_field(&$variables) {
           $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($variables['element']['#object']);
 
           $columns = [
-            'md' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME, 3),
-            'sm' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME, 1),
-            'xs' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME, 1),
+            'md' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME),
+            'sm' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME),
+            'xs' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME),
           ];
 
           // Enable grid setting.
@@ -98,29 +98,24 @@ function set_columns_sizes(array $items, array $column_count) {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function d_p_text_blocks_preprocess_paragraph(&$variables) {
+function d_p_text_blocks_preprocess_paragraph__d_p_single_text_block(array &$variables) {
   $paragraph = $variables['paragraph'];
-  $bundle = $paragraph->bundle();
 
-  switch ($bundle) {
-    case 'd_p_single_text_block':
-      try {
-        /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
-        $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+  try {
+    /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+    $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
 
-        $variables['with_price'] = $setting_field->hasClass('with-price');
-      }
-      catch (MissingConfigurationStorageFieldException $exception) {
-        \Drupal::logger('d_p_text_blocks')->error($exception->getMessage());
-      }
+    $variables['with_price'] = $setting_field->hasClass('with-price');
+  }
+  catch (MissingConfigurationStorageFieldException $exception) {
+    \Drupal::logger('d_p_text_blocks')->error($exception->getMessage());
+  }
 
-      // Set background image if field is not empty.
-      // This overrides background color settings.
-      $field_image = $paragraph->get('field_d_media_background')->first();
-      if (!empty($field_image)) {
-        $variables['image_class'] = $variables['text_class'] = 'col-md-12';
-      }
-      break;
+  // Set background image if field is not empty.
+  // This overrides background color settings.
+  $field_image = $paragraph->get('field_d_media_background')->first();
+  if (!empty($field_image)) {
+    $variables['image_class'] = $variables['text_class'] = 'col-md-12';
   }
 }
 

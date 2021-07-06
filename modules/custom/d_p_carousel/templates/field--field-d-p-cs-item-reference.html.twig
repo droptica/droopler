@@ -51,17 +51,24 @@
     label_display == 'visually_hidden' ? 'visually-hidden',
   ]
 %}
+{%
+  set carousel_item_classes = [
+  'carousel-item-wrapper',
+  'list-item-wrapper',
+  'px-3',
+]
+%}
 
 {% if label_hidden %}
   {% if multiple %}
     <div{{ attributes.addClass(classes, 'carousel-items-wrapper row') }}>
       {% for item in items %}
-        <div{{ item.attributes.addClass('carousel-item-wrapper list-item-wrapper', column_classes) }}>{{ item.content }}</div>
+        <div{{ item.attributes.addClass(carousel_item_classes) }}>{{ item.content }}</div>
       {% endfor %}
     </div>
   {% else %}
     {% for item in items %}
-      <div{{ attributes.addClass(classes, 'carousel-item-wrapper list-item-wrapper', column_classes) }}>{{ item.content }}</div>
+      <div{{ attributes.addClass(classes, carousel_item_classes) }}>{{ item.content }}</div>
     {% endfor %}
   {% endif %}
 {% else %}
@@ -71,7 +78,7 @@
       <div class='carousel-items-wrapper row'>
     {% endif %}
     {% for item in items %}
-      <div{{ item.attributes.addClass('carousel-item-wrapper list-item-wrapper', column_class, 'col-xs-12') }}>{{ item.content }}</div>
+      <div{{ item.attributes.addClass(carousel_item_classes) }}>{{ item.content }}</div>
     {% endfor %}
     {% if multiple %}
       </div>

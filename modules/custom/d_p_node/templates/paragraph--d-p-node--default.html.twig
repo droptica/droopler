@@ -38,60 +38,21 @@
  * @ingroup themeable
  */
 #}
-{% set classes = [
-  'paragraph',
-  'paragraph--type--' ~ paragraph.bundle|clean_class,
-  'with-forced-long-text-margin',
-  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-] %}
-{% set paragraph_classes = [
-  'paragraph-d-form',
-] %}
-
-{% set d_p_form_placement = d_p_form_placement|default('bottom') %}
-
-{% if d_p_form_placement == 'bottom' %}
-  {% set row_classes = '' %}
-  {% set content_classes = 'col-md-8' %}
-  {% set form_classes = 'col-md-8' %}
-{% endif %}
-{% if d_p_form_placement == 'right' %}
-  {% set row_classes = '' %}
-  {% set content_classes = 'col-md-5 col-12' %}
-  {% set form_classes = 'col-md-7 col-12' %}
-{% endif %}
-{% if d_p_form_placement == 'left' %}
-  {% set row_classes = '' %}
-  {% set content_classes = 'col-md-5 col-12 order-1 order-md-2' %}
-  {% set form_classes = 'col-md-7 col-12 order-md-1 order-2' %}
-{% endif %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
 
 {% block paragraph %}
   <section {{ wrapper_attributes }}>
     <div{{ attributes.addClass(classes) }}>
-      <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
-        {% block background %}
-          {% include '@d_media/d-background-media.html.twig' with {
-            content: content.group_d_form_background
-          } only %}
-        {% endblock %}
-        <div class="content-wrapper">
-          <div class="container">
-            <div class="row justify-content-center {{ d_p_form_placement }} {{ row_classes }}">
-              <div class="content {{ content_classes }}">
-                {% block content %}
-                  {{ content.group_d_form_content }}
-                {% endblock %}
-              </div>
-              <div class="form {{ form_classes }}">
-                {% block form %}
-                  {{ content.group_d_form_fields }}
-                {% endblock %}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% block content %}
+        {{ content }}
+      {% endblock %}
     </div>
   </section>
 {% endblock paragraph %}

@@ -358,3 +358,16 @@ v2.2:
     '#description': '<p>Store paragraph settings in the field widget configuration</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
     extension_page: { '#text': 'Update paragraphs', '#url': 'internal:/admin/config/development/features' }
+v3.0:
+  '#title': 'Update to Droopler 3.0'
+  '#description': '<h3>Checkout new features for the major Droopler release:</h3>'
+  droopler__droopler_update_8133_1:
+    '#title': 'Add settings widget to the "d_p_node" module'
+    '#description': '<p>Add paragraph settings to the "d_p_node" module</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+  droopler__droopler_update_8133_2:
+    '#title': 'Update form display in the "d_p_node" module'
+    '#description': '<p>Added tabs to from display</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
+    extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
