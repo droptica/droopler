@@ -371,3 +371,9 @@ v3.0:
     '#description': '<p>Added tabs to from display</p>'
     '#description_failed': '<p><strong>Update failed</strong>, please try to import changed features manually</p>'
     extension_page: { '#text': 'Update configs', '#url': 'internal:/admin/config/development/features' }
+v3.0.1:
+  droopler__droopler_update_8134_1:
+    '#title': 'Add permission to Contextual links for editor'
+    '#description': '<p>Added access to contextual links</p>'
+    '#description_failed': '<p><strong>Update failed</strong>, please try to add permission manually</p>'
+    extension_page: { '#text': 'Change permissions', '#url': 'internal:/admin/people/permissions/d_editor' }

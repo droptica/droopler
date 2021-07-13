@@ -2181,3 +2181,20 @@ function droopler_update_8133(&$sandbox) {
   $updater->checklist()
     ->saveProgress(['v3.0' => $values]);
 }
+
+/**
+ * Droopler 3.0.1 grant access contextual links permission to editor users.
+ */
+function droopler_update_8134() {
+  $permission = 'access contextual links';
+
+  $role = Role::load('d_editor');
+  $role->grantPermission($permission)
+    ->save();
+
+  $values['droopler__droopler_update_8134_1'] = $role->hasPermission($permission);
+
+  Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v3.0.1' => $values]);
+}
