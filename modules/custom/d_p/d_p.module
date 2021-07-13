@@ -152,7 +152,7 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
  *   The form that contains the d_settings field.
  */
 function d_p_move_heading_type(&$form) {
-  if (isset($form["field_d_settings"]["widget"][0]["value"]) && isset($form["field_d_main_title"])) {
+  if (isset($form["field_d_settings"]["widget"][0]["value"]["heading_type"]) && isset($form["field_d_main_title"])) {
     $widget = &$form["field_d_settings"]["widget"][0]["value"];
     $widget['heading_type']['#weight'] = $form["field_d_main_title"]["#weight"] + 0.5;
     $widget['heading_type']['#element_validate'] = ['d_p_heading_type_validate'];
