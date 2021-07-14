@@ -541,7 +541,7 @@
 .geysir-dialog .fieldset-wrapper{
   margin-top: 1em;
 }
-.media-library-widget__toggle-weight {
+.geysir-dialog .media-library-widget__toggle-weight {
   position: absolute;
   top: -35px;
   right: 0; /* LTR */
@@ -553,7 +553,7 @@
   background-color: #ac0000;
   border-color: #ac0000;
   padding: 0.65rem 0.9rem;
-  font-size: 0.75rem !important;
+  font-size: 0.75rem;
   line-height: 1em;
   border: none;
   margin: .5rem 0;
@@ -564,8 +564,8 @@
   background-color: #860000;
   border-color: #790000;
 }
-#geysir-modal-form .js-media-library-item-weight {
-  width: 100% !important;
+#geysir-modal-form .js-form-item .form-control {
+  width: 100%;
 }
 
 [dir="rtl"] .media-library-widget__toggle-weight {
