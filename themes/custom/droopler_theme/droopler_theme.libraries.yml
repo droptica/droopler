@@ -33,7 +33,7 @@ global-scripts:
 bootstrap:
   version: VERSION
   js:
-    js/vendor/bootstrap.bundle.min.js: {}
+    js/vendor/bootstrap.bundle.min.js: { weight: -12 }
   dependencies:
     - core/jquery
 
