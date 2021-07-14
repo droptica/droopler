@@ -82,6 +82,7 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
   switch ($form_id) {
     case 'contact_message_feedback_form':
       unset($form['actions']['preview']);
+      unset($form['copy']);
       foreach ($form as &$formElement) {
         if (isset($formElement['#type'])) {
           switch ($formElement['#type']) {
@@ -115,6 +116,21 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
 
       $wrapper['name'] = $form['name'];
       $wrapper['mail'] = $form['mail'];
+      if ($wrapper['name']['#type'] == 'item') {
+        $wrapper['name']['#type'] = 'textfield';
+        $wrapper['name']['#disabled'] = TRUE;
+        $wrapper['name']['#required'] = TRUE;
+        $wrapper['name']['#attributes']['placeholder'] = $wrapper['name']['#title'];
+        $wrapper['name']['#title_display'] = 'invisible';
+      }
+      if ($wrapper['mail']['#type'] == 'item') {
+        $wrapper['mail']['#type'] = 'textfield';
+        $wrapper['mail']['#disabled'] = TRUE;
+        $wrapper['mail']['#required'] = TRUE;
+        $wrapper['mail']['#attributes']['placeholder'] = $wrapper['mail']['#title'];
+        $wrapper['mail']['#title_display'] = 'invisible';
+      }
+
       $form['name_and_mail'] = $wrapper;
       unset($form['name']);
       unset($form['mail']);
