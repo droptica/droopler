@@ -538,12 +538,36 @@
   margin-right: 0;
   margin-left: 1em;
 }
-
+.geysir-dialog .fieldset-wrapper{
+  margin-top: 1em;
+}
 .media-library-widget__toggle-weight {
   position: absolute;
-  top: -5px;
+  top: -35px;
   right: 0; /* LTR */
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  color: #fff;
+  background-color: #ac0000;
+  border-color: #ac0000;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.75rem !important;
+  line-height: 1em;
+  border: none;
+  margin: .5rem 0;
 }
+
+.media-library-widget__toggle-weight:hover {
+  color: #fff;
+  background-color: #860000;
+  border-color: #790000;
+}
+#geysir-modal-form .js-media-library-item-weight {
+  width: 100% !important;
+}
+
 [dir="rtl"] .media-library-widget__toggle-weight {
   right: auto;
   left: 0;
@@ -551,7 +575,7 @@
 
 /* Add negative margin for flex grid. */
 .media-library-selection {
-  margin: 1em -8px;
+  margin: .5em -8px;
 }
 
 /**
