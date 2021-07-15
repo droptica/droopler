@@ -2210,3 +2210,15 @@ function droopler_update_8135(&$sandbox) {
   \Drupal::service('d_update')->checklist()
     ->saveProgress(['v3.0.1' => $values]);
 }
+
+/**
+ * Droopler 3.0.1 Update CTA widget to the "d_p_carousel" module.
+ */
+function droopler_update_8136(&$sandbox) {
+  $values['droopler__droopler_update_8136_1'] = update_modules_configuration([
+    'd_p_carousel',
+  ], '8136');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v3.0.1' => $values]);
+}
