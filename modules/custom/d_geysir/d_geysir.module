@@ -40,6 +40,7 @@ function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Add after build to add a CSS class to the form actions.
   if ($form_id === 'views_exposed_form' && strpos($form['#id'], 'views-exposed-form-media-library-widget') === 0) {
     $form['actions']['#attributes']['class'][] = 'media-library-view--form-actions';
+    $form['actions']['submit']['#attributes']['class'][] = 'button-override';
   }
 }
 
