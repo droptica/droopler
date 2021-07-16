@@ -21,18 +21,6 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 $d-p-side-by-side-image-single_text_block-themed-background-opacity: 0.2 !default;
 $d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
 
-// Override default values.
-.padding-top-default {
-  .paragraph.paragraph--type--d-p-side-by-side {
-    padding-top: 0;
-  }
-}
-.padding-bottom-default {
-  .paragraph.paragraph--type--d-p-side-by-side {
-    padding-bottom: 0;
-  }
-}
-
 .d-p-side-by-side {
   text-align: center;
 
@@ -41,14 +29,6 @@ $d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
   }
 
   .side-header {
-    .field:first-child {
-      padding-top: $d-p-side-by-side-header-padding;
-
-      @include media-breakpoint-up(xl) {
-        padding-top: 0;
-      }
-    }
-
     .field--name-field-d-main-title {
       @include font-main-header;
 
