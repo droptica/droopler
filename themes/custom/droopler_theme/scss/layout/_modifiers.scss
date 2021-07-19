@@ -365,6 +365,7 @@ $two-columned-header-line-margin: 0.625rem !default;
     a {
       &,
       &:not(.disabled):active,
+      &:not(:disabled):active:focus,
       &:active,
       &:hover {
         position: absolute;
@@ -376,6 +377,7 @@ $two-columned-header-line-margin: 0.625rem !default;
         border: none;
         text-indent: -9999px;
         max-width: none;
+        box-shadow: none;
       }
     }
   }
