@@ -159,13 +159,23 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
     }
 
     @include media-breakpoint-up(lg) {
+      padding-top: $d-p-text-blocks-tiles-spacing;
       padding-bottom: 0;
 
       &:first-child {
         padding-left: 0;
       }
-      &:last-child {
-        padding-right: 0;
+
+      $cols: 1, 2, 3, 4, 6, 12;
+      @each $col in $cols {
+        &.col-md-#{$col} {
+          &:nth-child(#{12/$col}n) {
+            padding-right: 0;
+          }
+          &:nth-child(-n+#{12/$col}) {
+            padding-top: 0;
+          }
+        }
       }
     }
 
