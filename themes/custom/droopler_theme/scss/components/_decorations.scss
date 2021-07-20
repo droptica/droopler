@@ -48,6 +48,15 @@ $line-thickness: 0.125rem !default;
   @at-root .theme-primary & {
     background: $line-color-inverted;
   }
+  // Fix for primary theme in subparagraphs
+  @if str-index(#{&}, '.carousel-item-wrapper') {
+    @at-root {
+      #{str-replace(#{&}, '.carousel-item-wrapper', '.carousel-item-wrapper .theme-primary')} {
+        background: $line-color-inverted;
+      }
+    }
+  }
+
 }
 
 @mixin add-commas-to-elements {
