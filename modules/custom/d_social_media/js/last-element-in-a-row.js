@@ -1,21 +1,35 @@
 /**
  * Style all far right elements in horizontal list.
  */
-(function (Drupal) {
+(function ($, Drupal) {
   Drupal.behaviors.dSocialMedia = {
     attach: function (context) {
-      var lastElement = false;
-      var els = context.querySelectorAll('.social-media-wrapper ul li');
-      if (els.length > 0) {
-        for (var i = 0; i < els.length; i++) {
-          var el = els[i]; // current element
-          if (lastElement && lastElement.offsetTop !== el.offsetTop) {
-            lastElement.className += " last-element";
+      setBorders();
+      var timeout;
+
+      $(window).once('d_social_media_resize').resize(function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(setBorders, 100);
+      });
+
+      /**
+       * Add last-element class for particular social media icons in horizontal list.
+       */
+      function setBorders() {
+        var $liElements = $('.social-media-wrapper ul li', context);
+        var lastItemOffset = -1;
+
+        $liElements.removeClass('last-element');
+
+        $liElements.each(function (index, item) {
+          if (lastItemOffset !== $(item).offset().top) {
+            $($liElements[index - 1]).addClass('last-element');
           }
-          lastElement = el;
-        }
-        els[els.length - 1].className += " last-element";
+          lastItemOffset = $(item).offset().top;
+        }).promise().done(function () {
+          $liElements.last().addClass('last-element');
+        });
       }
     }
   };
-})(Drupal);
+})(jQuery, Drupal);
