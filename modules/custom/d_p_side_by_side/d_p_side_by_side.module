@@ -26,3 +26,15 @@ function d_p_side_by_side_entity_bundle_field_info_alter(&$fields, EntityTypeInt
     ]);
   }
 }
+
+/**
+ * Implements hook_preprocess().
+ *
+ * Check if side by side contains non-empty header.
+ */
+function d_p_side_by_side_preprocess_paragraph__d_p_side_by_side(&$variables, $hook) {
+  $variables['has_header'] = FALSE;
+  if (isset($variables['content']['field_d_long_text'][0]) || isset($variables['content']['field_d_main_title'][0])) {
+    $variables['has_header'] = TRUE;
+  }
+}
