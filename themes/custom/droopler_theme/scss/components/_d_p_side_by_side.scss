@@ -21,6 +21,18 @@ $d-p-side-by-side-image-background-padding-y: 130px !default;
 $d-p-side-by-side-image-single_text_block-themed-background-opacity: 0.2 !default;
 $d-p-side-by-side-image-single_text_block-themes: $d-p-themes;
 
+// Override default paddings values for paragraphs without title and description.
+.padding-top-default {
+  .paragraph.paragraph--type--d-p-side-by-side.without-header {
+    padding-top: 0;
+  }
+}
+.padding-bottom-default {
+  .paragraph.paragraph--type--d-p-side-by-side {
+    padding-bottom: 0;
+  }
+}
+
 .d-p-side-by-side {
   text-align: center;
 
