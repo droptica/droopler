@@ -23,7 +23,6 @@ third_party_settings:
         - field_d_main_title
         - field_d_long_text
         - field_d_counter_reference
-        - field_d_cta_link
       parent_name: ''
       weight: 1
       format_type: html_element
@@ -57,6 +56,24 @@ third_party_settings:
         effect: none
         speed: fast
       label: 'Counters background'
+    group_d_counters_cta:
+      children:
+        - field_d_cta_link
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Call To Action'
 id: paragraph.d_p_group_of_counters.default
 targetEntityType: paragraph
 bundle: d_p_group_of_counters

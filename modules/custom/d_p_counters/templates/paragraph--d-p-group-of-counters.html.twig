@@ -49,27 +49,27 @@
 ] %}
 
 {% block paragraph %}
-<section {{ wrapper_attributes }}>
-  <div{{ attributes.addClass(classes) }}>
-    <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
-      {% block background %}
-        {% include '@d_media/d-background-media.html.twig' with {
-          content: content.group_d_counters_background
-        } only %}
-      {% endblock %}
-      <div class="content-wrapper">
-        <div class="content container">
-          {% block content %}
-            {{ content.group_d_counters_content|without('field_d_cta_link') }}
-          {% endblock %}
-        </div>
-        {% if content.group_d_counters_content.field_d_cta_link.0 %}
-          <div class="text-center mt-4">
-            {{ content.group_d_counters_content.field_d_cta_link }}
+  <section {{ wrapper_attributes }}>
+    <div{{ attributes.addClass(classes) }}>
+      <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
+        {% block background %}
+          {% include '@d_media/d-background-media.html.twig' with {
+            content: content.group_d_counters_background
+          } only %}
+        {% endblock %}
+        <div class="content-wrapper">
+          <div class="content container">
+            {% block content %}
+              {{ content.group_d_counters_content }}
+            {% endblock %}
           </div>
-        {% endif %}
+          {% if content.group_d_counters_cta %}
+            <div class="text-center mt-4">
+              {{ content.group_d_counters_cta }}
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {% endblock paragraph %}

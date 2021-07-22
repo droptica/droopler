@@ -60,12 +60,12 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   <div{{ attributes.addClass(classes) }}>
     <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
       {% block content %}
-        {{ content|without('field_d_cta_link') }}
+        {{ content.group_d_tiles_content }}
       {% endblock %}
     </div>
-    {% if content.field_d_cta_link.0 %}
+    {% if content.group_d_tiles_cta %}
       <div class="container mt-4">
-        {{ content.field_d_cta_link }}
+        {{ content.group_d_tiles_cta }}
       </div>
     {% endif %}
   </div>

@@ -49,10 +49,10 @@
     <div{{ attributes.addClass(classes) }}>
       <div class="container">
         {% block content %}
-          {{ content|without('field_d_cta_link') }}
-          {% if content.field_d_cta_link.0 %}
+          {{ content.group_d_text_paged_content}}
+          {% if content.group_d_text_paged_cta %}
             <div class="mt-4">
-              {{ content.field_d_cta_link }}
+              {{ content.group_d_text_paged_cta }}
             </div>
           {% endif %}
         {% endblock %}

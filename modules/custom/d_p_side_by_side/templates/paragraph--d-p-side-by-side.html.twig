@@ -52,16 +52,16 @@
     <div{{ attributes.addClass(classes) }}>
       {% block tiles_content %}
         <div class="side-header container">
-          {{ content|without('field_d_p_sbs_items', 'field_d_cta_link') }}
+          {{ content.group_d_side_content }}
         </div>
         <div class="d-p-tiles-wrapper expandable-content">
           <div class="container items">
             {{ content.field_d_p_sbs_items }}
           </div>
         </div>
-        {% if content.field_d_cta_link.0 %}
+      {% if content.group_d_side_cta %}
           <div class="container mt-4">
-            {{ content.field_d_cta_link }}
+            {{ content.group_d_side_cta }}
           </div>
         {% endif %}
       {% endblock %}

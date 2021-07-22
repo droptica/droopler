@@ -2222,3 +2222,22 @@ function droopler_update_8136(&$sandbox) {
   \Drupal::service('d_update')->checklist()
     ->saveProgress(['v3.0.1' => $values]);
 }
+
+/**
+ * Droopler 3.0.1 Changing CTA widget settings configuration.
+ */
+function droopler_update_8137(&$sandbox) {
+  $values['droopler__droopler_update_8137_1'] = update_modules_configuration([
+    'd_p_counters',
+    'd_p_gallery',
+    'd_p_side_by_side',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_text_blocks',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+  ], '8137');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v3.0.1' => $values]);
+}
