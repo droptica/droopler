@@ -3,21 +3,19 @@
 /**
  * @file
  * Initialization of content for d_blog module.
- *
- * d_blog_init module.
  */
 
 /**
  * Alter content structure.
+ *
  * Implements hook_content_structure_alter()
  *
- * @param $structure
+ * @param array $structure
  *   The array with structure.
- *
- * @param $context
+ * @param string $context
  *   Which structure array is this?
  */
-function d_blog_init_content_structure_alter(&$structure, $context) {
+function d_blog_init_content_structure_alter(array &$structure, string $context) {
   $path = drupal_get_path('module', 'd_blog_init') . '/pages';
 
   if ($context == 'all') {

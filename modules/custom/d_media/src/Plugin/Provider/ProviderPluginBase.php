@@ -193,6 +193,7 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
    * Adds spacer attributes to the output based on selected image style.
    *
    * @param array $output
+   *   Contains theme and attributes data.
    */
   protected function getSpacerAttributes(array &$output) {
     $imageStyleSetting = $this->videoSettings['image_style'];

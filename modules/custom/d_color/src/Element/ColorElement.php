@@ -61,7 +61,7 @@ class ColorElement extends Color {
     Element::setAttributes($element, [
       'id',
       'name',
-      'value'
+      'value',
     ]);
     static::setAttributes($element, ['form-d-color']);
 

@@ -48,9 +48,10 @@ function d_content_preprocess_page(&$variables) {
       $variables['cta_button'] = $node->field_header_cta->view('d_header');
 
       if (empty($variables['cta_button'][0]['#title'])) {
-        $variables['cta_button'] = false;
-      } else {
-        // Prepare new title in HTML format
+        $variables['cta_button'] = FALSE;
+      }
+      else {
+        // Prepare new title in HTML format.
         $new_title = '<span class="d-md-none icon-hand-pointer-o"></span>';
         $new_title .= '<span class="d-none d-md-block">' . $variables['cta_button'][0]['#title'] . '</span>';
 

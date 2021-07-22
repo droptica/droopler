@@ -25,16 +25,22 @@ use Drupal\we_megamenu\WeMegaMenuBuilder;
 class ContentInitManagerBlock extends ContentInitManagerBase {
 
   /**
+   * Universally Unique IDentifier.
+   *
    * @var \Drupal\Component\Uuid\UuidInterface
    */
   protected $uuid;
 
   /**
+   * Discovery and instantiation of block plugins.
+   *
    * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
   /**
+   * Manages the list of available themes.
+   *
    * @var \Drupal\Core\Extension\ThemeHandlerInterface
    */
   protected $themeHandler;
@@ -92,14 +98,11 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
       $values['id'] = $values['id'] ?? 'block_plugin_' . str_replace('-', '_', $this->uuid->generate());
       $this->getCurrentThemeIfNotDefined($values);
       return $this->saveEntity('block', $values);
-    }
-    catch (PluginNotFoundException $e) {
+    } catch (PluginNotFoundException $e) {
       $this->logger->error('Entity type "media" doesn\'t exist.');
-    }
-    catch (InvalidPluginDefinitionException $e) {
+    } catch (InvalidPluginDefinitionException $e) {
       $this->logger->error('Entity type "media" storage handler couldn\'t be loaded.');
-    }
-    catch (EntityStorageException $e) {
+    } catch (EntityStorageException $e) {
       $this->logger->error('Media entity couldn\'t be handled.');
     }
     return NULL;
@@ -125,14 +128,11 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         $this->placeBlockInWaMegaMenu($block, $placed_block);
       }
       return $block_entity;
-    }
-    catch (PluginNotFoundException $e) {
+    } catch (PluginNotFoundException $e) {
       $this->logger->error('Create block: Entity type "block_content" doesn\'t exist.');
-    }
-    catch (InvalidPluginDefinitionException $e) {
+    } catch (InvalidPluginDefinitionException $e) {
       $this->logger->error('Create block: Entity type "block_content" storage handler couldn\'t be loaded.');
-    }
-    catch (EntityStorageException $e) {
+    } catch (EntityStorageException $e) {
       $this->logger->error('Create block: Entity of type "block_content" couldn\'t be handled.');
     }
     return NULL;
@@ -153,22 +153,19 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     try {
       if (isset($block['placement'])) {
         $values = [
-          'id' => 'block_content_' . str_replace('-', '_', $block_entity->uuid()),
-          'plugin' => 'block_content:' . $block_entity->uuid(),
-        ] + $this->getBaseBlockValues($block['placement']);
+            'id' => 'block_content_' . str_replace('-', '_', $block_entity->uuid()),
+            'plugin' => 'block_content:' . $block_entity->uuid(),
+          ] + $this->getBaseBlockValues($block['placement']);
 
         $this->getCurrentThemeIfNotDefined($values);
         return $this->saveEntity('block', $values);
       }
       return FALSE;
-    }
-    catch (PluginNotFoundException $e) {
+    } catch (PluginNotFoundException $e) {
       $this->logger->error('Place block: Entity type "block_content" doesn\'t exist.');
-    }
-    catch (InvalidPluginDefinitionException $e) {
+    } catch (InvalidPluginDefinitionException $e) {
       $this->logger->error('Place block: Entity type "block_content" storage handler couldn\'t be loaded.');
-    }
-    catch (EntityStorageException $e) {
+    } catch (EntityStorageException $e) {
       $this->logger->error('Place block: Entity of type "block_content" couldn\'t be handled.');
     }
     return NULL;
@@ -312,7 +309,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block_values
    *   Block values.
    */
-  protected function getCurrentThemeIfNotDefined(&$block_values) {
+  protected function getCurrentThemeIfNotDefined(array &$block_values) {
     if (!isset($block_values['theme']) || empty($block_values['theme'])) {
       $block_values['theme'] = $this->themeHandler->getDefault();
     }

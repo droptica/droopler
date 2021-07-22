@@ -8,26 +8,28 @@ use Drupal\paragraphs\Entity\Paragraph;
 /**
  * Class ParagraphModifiersHelper.
  *
- * @package Drupal\d_p\Helper
- *
  * @deprecated in droopler:8.x-2.2 and is removed starting from droopler:3.1.0
  * As this is working on the particular field instance,
  * we have unified and moved all the methods directly to the field list class:
  * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
  *
  * @see https://www.drupal.org/project/droopler/issues/3180465
+ * @package Drupal\d_p\Helper
+ *
  */
 class ParagraphModifiersHelper {
 
   /**
-   * @var \stdClass
    * Settings object.
+   *
+   * @var \stdClass
    */
   protected $modifiers;
 
   /**
-   * @var string
    * Name of the field with settings.
+   *
+   * @var string
    */
   protected $settingsFieldName;
 
@@ -70,6 +72,7 @@ class ParagraphModifiersHelper {
    * Checks if any modifiers were found during paragraph analyze.
    *
    * @return bool
+   *   Return  state of modifiers variable if it is empty or not.
    */
   public function hasModifiers() {
     return !empty($this->modifiers);
@@ -79,6 +82,7 @@ class ParagraphModifiersHelper {
    * Checks if custom classes are set.
    *
    * @return bool
+   *   Return true if has modifier.
    */
   public function hasCustomClasses() {
     return $this->hasModifier(SettingsWidget::CSS_CLASS_SETTING_NAME);
@@ -87,13 +91,17 @@ class ParagraphModifiersHelper {
   /**
    * Checks if specified modifier were set.
    *
-   * @param $name
+   * @param string $name
+   *   Name of modifier.
    *
    * @return bool
+   *   Return state.
    */
   public function hasModifier($name) {
     /*
-     * TODO: In the future we'll probably have simplified structure of d_settings field - in that case only one method would be sufficient for checking if the modifier is set.
+     * '@TODO: In the future we'll probably have simplified structure of
+     *  d_settings field - in that case only one method would be
+     *  sufficient for checking if the modifier is set.'
      */
     return $this->hasClass($name) || $this->checkPropertyExists($name);
   }
@@ -101,7 +109,7 @@ class ParagraphModifiersHelper {
   /**
    * Sets a new modifier.
    *
-   * @param $name
+   * @param string $name
    *   Name of the new modifier to be set.
    * @param null $value
    *   Optional value for the new modifier.
@@ -113,7 +121,8 @@ class ParagraphModifiersHelper {
       $classesSet[] = $name;
 
       $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', $classesSet);
-    } else {
+    }
+    else {
       $this->modifiers->$name = $value;
     }
   }
@@ -132,7 +141,8 @@ class ParagraphModifiersHelper {
       unset($classesSet[array_search($name, $classesSet)]);
 
       $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', array_unique($classesSet));
-    } elseif ($this->checkPropertyExists($name)) {
+    }
+    elseif ($this->checkPropertyExists($name)) {
       unset($this->modifiers->$name);
     }
   }
@@ -227,9 +237,10 @@ class ParagraphModifiersHelper {
   }
 
   /**
-   * Method checks if currently analyzed paragraph has specified property in d_settings field.
+   * Method checks if currently analyzed paragraph has specified property in
+   * d_settings field.
    *
-   * @param $name
+   * @param string $name
    *   Name of property to be checked.
    *
    * @return bool
@@ -238,10 +249,11 @@ class ParagraphModifiersHelper {
   protected function checkPropertyExists($name) {
     if (!$this->hasModifiers() ||
       !property_exists($this->modifiers, $name) ||
-      empty($this->modifiers->$name) ) {
+      empty($this->modifiers->$name)) {
       return FALSE;
     }
 
     return TRUE;
   }
+
 }
