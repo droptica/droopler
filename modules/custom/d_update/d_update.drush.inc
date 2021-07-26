@@ -5,6 +5,8 @@
  * File declaring drush commands.
  */
 
+use Drush\Drush;
+
 /**
  * Implements hook_drush_command().
  */
@@ -30,12 +32,12 @@ function drush_d_update_generate_config_hash($opt = NULL) {
   $service_name = 'd_update.drush.generate_config_hash_command';
 
   if (!\Drupal::hasService($service_name)) {
-    drush_print(dt('Service to generate hash is missing.'));
+    Drush::output()->writeln(dt('Service to generate hash is missing.'));
     return;
   }
 
   if (empty(($opt))) {
-    drush_print(dt('Config name can not be empty, please insert valid config name.'));
+    Drush::output()->writeln(dt('Config name can not be empty, please insert valid config name.'));
     return;
   }
 

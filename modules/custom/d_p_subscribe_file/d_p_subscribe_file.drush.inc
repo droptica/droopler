@@ -5,6 +5,8 @@
  * Drush hooks.
  */
 
+use Drush\Drush;
+
 /**
  * Implements hook_drush_sql_sync_sanitize().
  *
@@ -15,7 +17,7 @@ function d_p_subscribe_file_drush_sql_sync_sanitize($site) {
   $databases = sitealias_get_databases_from_record($site_settings);
 
   // Check if table name has to be wrapped.
-  $wrap_table_name = (bool) drush_get_option('db-prefix');
+  $wrap_table_name = (bool) Drush::input('db-prefix');
   if ($wrap_table_name) {
     $table = '{{d_p_subscribe_file}}';
   }
