@@ -1,0 +1,6 @@
+services:
+  d_p_subscribe_file.sanitize.command:
+    class: \Drupal\d_p_subscribe_file\Commands\SubscribeSanitizeCommand
+    arguments: ['@database']
+    tags:
+      - { name: drush.command }
