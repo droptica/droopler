@@ -25,16 +25,22 @@ use Drupal\we_megamenu\WeMegaMenuBuilder;
 class ContentInitManagerBlock extends ContentInitManagerBase {
 
   /**
+   * Universally Unique IDentifier.
+   *
    * @var \Drupal\Component\Uuid\UuidInterface
    */
   protected $uuid;
 
   /**
+   * Discovery and instantiation of block plugins.
+   *
    * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
   /**
+   * Manages the list of available themes.
+   *
    * @var \Drupal\Core\Extension\ThemeHandlerInterface
    */
   protected $themeHandler;
@@ -153,9 +159,9 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     try {
       if (isset($block['placement'])) {
         $values = [
-          'id' => 'block_content_' . str_replace('-', '_', $block_entity->uuid()),
-          'plugin' => 'block_content:' . $block_entity->uuid(),
-        ] + $this->getBaseBlockValues($block['placement']);
+            'id' => 'block_content_' . str_replace('-', '_', $block_entity->uuid()),
+            'plugin' => 'block_content:' . $block_entity->uuid(),
+          ] + $this->getBaseBlockValues($block['placement']);
 
         $this->getCurrentThemeIfNotDefined($values);
         return $this->saveEntity('block', $values);
@@ -312,7 +318,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block_values
    *   Block values.
    */
-  protected function getCurrentThemeIfNotDefined(&$block_values) {
+  protected function getCurrentThemeIfNotDefined(array &$block_values) {
     if (!isset($block_values['theme']) || empty($block_values['theme'])) {
       $block_values['theme'] = $this->themeHandler->getDefault();
     }

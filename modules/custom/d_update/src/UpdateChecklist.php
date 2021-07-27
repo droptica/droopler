@@ -188,7 +188,7 @@ class UpdateChecklist {
    */
   protected function checkListPoints(array $names) {
 
-    /* @var \Drupal\Core\Config\Config $droopler_update_config */
+    /** @var \Drupal\Core\Config\Config $droopler_update_config */
     $currentProgress = $this->getChecklistSavedProgress();
     $user = $this->account->id();
     $time = time();
@@ -288,7 +288,7 @@ class UpdateChecklist {
           $progress['#items'][$item_key] = [
             '#completed' => $time,
             '#uid' => $user->id(),
-          ];;
+          ];
         }
         else {
           // Item is unchecked.
@@ -317,6 +317,7 @@ class UpdateChecklist {
    * Getter for saved progress in checklist storage.
    *
    * @return mixed
+   *   The stored value or NULL if no value exists.
    */
   protected function getChecklistSavedProgress() {
     return $this->checkListStateStorage->getSavedProgress();
@@ -325,14 +326,18 @@ class UpdateChecklist {
   /**
    * Setter for saving progress to checklist storage.
    *
-   * @param $progress
+   * @param array $progress
+   *   An array of checklist progress data.
    */
-  protected function setChecklistSavedProgress($progress) {
+  protected function setChecklistSavedProgress(array $progress) {
     $this->checkListStateStorage->setSavedProgress($progress);
   }
 
   /**
-   * Function copies checklist values stored old method to new checklist storage.
+   * Function copies checklist.
+   *
+   * Function copies checklist values stored by old method to a
+   * new checklist storage.
    */
   public function migrateConfigProgressToStateProgress() {
     $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');

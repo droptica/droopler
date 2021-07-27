@@ -10,11 +10,12 @@ use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\Plugin\DefaultPluginManager;
 
 /**
- * The plugin manager for paragraph settiings plugins.
+ * The plugin manager for paragraph settings plugins.
  *
  * @package Drupal\d_p
  */
 class ParagraphSettingPluginManager extends DefaultPluginManager implements ParagraphSettingPluginManagerInterface {
+
   use LoggerChannelTrait;
 
   /**
@@ -120,7 +121,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
     foreach ($this->getSettingsForm() as $id => $element) {
       $options[$id] = [
-        'label' => $element['#title']
+        'label' => $element['#title'],
       ];
       $modifiers = self::SETTINGS_SUBTYPE_ID;
       if (isset($element[$modifiers])) {
@@ -149,7 +150,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
     foreach ($definitions as $definition) {
       try {
-        // @todo: We can think of keeping the configuration in yml files.
+        // @todo We can think of keeping the configuration in yml files.
         $plugins[$definition['id']] = $this->getPluginById($definition['id']);
       }
       catch (PluginException $exception) {

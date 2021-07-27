@@ -110,8 +110,6 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
       [$field_name, $delta, 'settings']
     ));
 
-   // $plugin_ids = $this->fieldDefinition->getSetting('plugin_ids');
-
     $values = $form_state->getValues();
     $item->plugin_id = (isset($values[$field_name][$delta]['plugin_id'])) ? $values[$field_name][$delta]['plugin_id'] : $item->plugin_id;
     if (!empty($values[$field_name][$delta]['settings'])) {

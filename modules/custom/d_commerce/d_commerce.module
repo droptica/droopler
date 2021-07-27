@@ -5,7 +5,6 @@
  * D_commerce module.
  */
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\GeneratedLink;
 use Drupal\Core\Url;
 
@@ -143,7 +142,10 @@ function _d_commerce_attach_libraries(array &$variables) {
       ->getLibraryByName($theme_name, $module_name);
 
     if ($d_commerce_library) {
-      $variables['#attached']['library'][] = implode('/', [$theme_name, $module_name]);
+      $variables['#attached']['library'][] = implode('/', [
+        $theme_name,
+        $module_name,
+      ]);
     }
   }
 }

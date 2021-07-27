@@ -22,6 +22,8 @@ use Drupal\media\Entity\Media;
 class ContentInitManagerMedia extends ContentInitManagerBase {
 
   /**
+   * Helper that operate on files.
+   *
    * @var \Drupal\Core\File\FileSystemInterface
    */
   protected $fileSystem;
@@ -99,6 +101,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *   Alt text.
    *
    * @return \Drupal\Core\Entity\EntityInterface|void
+   *   Returns Entity object or void.
    */
   public function createMediaImageFromFile($path, $destination_directory, $alt) {
     // Build file URI.
@@ -139,6 +142,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *   Alt text.
    *
    * @return \Drupal\Core\Entity\EntityInterface|void
+   *   Returns Entity object or void.
    */
   public function createMediaImageFromFid($fid, $alt) {
     // Check if the media entity exists.
@@ -164,8 +168,10 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * Get media entity by the file URI.
    *
    * @param string $uri
+   *   String containing uri data.
    *
    * @return \Drupal\Core\Entity\EntityInterface|void
+   *   Returns Entity object or void.
    */
   protected function getMediaImageByUri($uri) {
     try {
@@ -189,8 +195,10 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * Get media entity by the file ID.
    *
    * @param int $fid
+   *   File id.
    *
    * @return \Drupal\Core\Entity\EntityInterface|void
+   *   Returns Entity object or void.
    */
   protected function getMediaImageByFid($fid) {
     try {
@@ -215,11 +223,11 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *
    * @param string $path
    *   The original file path.
-   *
    * @param string $uri
    *   The destination URI.
    *
    * @return \Drupal\file\FileInterface|false
+   *   Returns file entity or false.
    */
   protected function saveFile($path, $uri) {
     if (!file_exists($path)) {
@@ -240,6 +248,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *   Optional subdirectory.
    *
    * @return string
+   *   Returns file uri.
    */
   public function getFileUri($path, $directory) {
     $prefix = 'public://';

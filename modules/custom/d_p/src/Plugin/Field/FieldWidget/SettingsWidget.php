@@ -66,10 +66,7 @@ class SettingsWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public static function defaultSettings(): array {
-    return [
-        'filter_mode' => 1,
-        'allowed_settings' => [],
-      ] + parent::defaultSettings();
+    return ['filter_mode' => 1, 'allowed_settings' => []] + parent::defaultSettings();
   }
 
   /**
@@ -179,31 +176,31 @@ class SettingsWidget extends WidgetBase {
           unset($options[$subtype]);
 
           $element[$key] = [
-            '#default_value' => implode(' ', $classes),
-          ] + $options;
+              '#default_value' => implode(' ', $classes),
+            ] + $options;
           break;
 
         case 'select':
           $element[$key] = [
-            '#default_value' => empty($value) ? $options['#default_value'] : $value,
-          ] + $options;
+              '#default_value' => empty($value) ? $options['#default_value'] : $value,
+            ] + $options;
           break;
 
         case 'number':
           $element[$key] = [
-            '#default_value' => !empty($value) && $value !== '' ? $value : $options['#default_value'],
-            '#min' => $element[$key]['#min'] ?? NULL,
-            '#max' => $element[$key]['#max'] ?? NULL,
-          ] + $options;
+              '#default_value' => !empty($value) && $value !== '' ? $value : $options['#default_value'],
+              '#min' => $element[$key]['#min'] ?? NULL,
+              '#max' => $element[$key]['#max'] ?? NULL,
+            ] + $options;
           break;
 
         default:
           $value = $config->$key ?? $options['#default_value'];
 
           $element[$key] = [
-            '#size' => $options['#size'] ?? 32,
-            '#default_value' => $value,
-          ] + $options;
+              '#size' => $options['#size'] ?? 32,
+              '#default_value' => $value,
+            ] + $options;
       }
 
       if ($element['#required']) {
@@ -272,6 +269,8 @@ class SettingsWidget extends WidgetBase {
    *
    * @param array $element
    *   Form element.
+   * @param string|null $parent_id
+   *   Id of a parent.
    */
   protected function processSettingAccess(array &$element, ?string $parent_id = NULL): void {
     $include_selected = (bool) $this->getSetting('filter_mode');
@@ -281,7 +280,7 @@ class SettingsWidget extends WidgetBase {
       $include_allowed = $include_selected && !$is_setting_allowed;
       $exclude_allowed = !$include_selected && $is_setting_allowed;
 
-      if ( $include_allowed || $exclude_allowed) {
+      if ($include_allowed || $exclude_allowed) {
         unset($element[$id]);
         continue;
       }
@@ -449,6 +448,7 @@ class SettingsWidget extends WidgetBase {
    * Getter for allowed settings.
    *
    * @return array
+   *   Allowed settings.
    */
   protected function getAllowedSettings(): array {
     return $this->getSetting('allowed_settings');

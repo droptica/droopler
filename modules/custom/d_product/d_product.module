@@ -14,7 +14,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 
 /**
- * Implements hook_preprocess_HOOK.
+ * Implements hook_preprocess_HOOK().
  */
 function d_product_preprocess_node(&$variables) {
   $node = $variables['node'];
@@ -115,15 +115,20 @@ function d_product_preprocess_page(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   if (stripos($route_name, 'view.products_list') !== FALSE) {
     $pager_manager = \Drupal::service('pager.manager');
-    $variables['pager_total_items'] = $pager_manager->getPager(0)->getTotalItems();
+    $variables['pager_total_items'] = $pager_manager->getPager(0)
+      ->getTotalItems();
     $variables['#attached']['library'][] = 'd_product/d_product_select';
     $variables['#attached']['library'][] = 'd_product/d_product_searches';
   }
 
   // Remove title block from product listing and product page.
-  $no_title_routes = ['entity.node.canonical', 'entity.node.revision', 'view.products_list.products_list'];
+  $no_title_routes = [
+    'entity.node.canonical',
+    'entity.node.revision',
+    'view.products_list.products_list',
+  ];
   if (in_array($route_name, $no_title_routes)) {
-    $node = isset($variables['node']) ? $variables['node'] : NULL;
+    $node = $variables['node'] ?? NULL;
     if ($node && !($node instanceof NodeInterface)) {
       $node = Node::load($node);
     }

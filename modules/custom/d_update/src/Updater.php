@@ -131,6 +131,8 @@ class Updater {
   }
 
   /**
+   * Returns the update checklist.
+   *
    * @return \Drupal\d_update\UpdateChecklist
    *   Returns the update checklist.
    */
@@ -141,8 +143,9 @@ class Updater {
   /**
    * Import a config file if the module exists.
    *
-   * The method tries to read config files from the modules' 'install' or 'optional' directories,
-   * if the config has been found and the module exists - the config is imported.
+   * The method tries to read config files from the modules' 'install' or
+   * 'optional' directories, if the config has been found and the module
+   * exists - the config is imported.
    *
    * @param string $source
    *   Module/theme name.
@@ -152,8 +155,8 @@ class Updater {
    *   Hashed array with config data.
    *
    * @return bool
-   *   TRUE if the config was imported successfully or the module does not exist,
-   *   FALSE otherwise.
+   *   TRUE if the config was imported successfully or the module does not
+   *   exist, FALSE otherwise.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
@@ -217,7 +220,8 @@ class Updater {
    *   Array containing source_type and source name.
    */
   protected function getSourceInformation($source) {
-    // Parameter $source equal to "foo" means a module, "theme/foo" means a theme.
+    // Parameter $source equal to "foo" means a module, "theme/foo"
+    // means a theme.
     $source_type = 'module';
     $parts = explode('/', $source);
     if (count($parts) == 2) {
@@ -239,6 +243,9 @@ class Updater {
    *
    * @return bool
    *   Returns if all of the configs were imported successfully.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function importConfigs(array $configs) {
     $status = [];
@@ -415,7 +422,7 @@ class Updater {
   /**
    * Allows updating of single config, based on yml file.
    *
-   * TODO: Implement mechanism for "change" keyword.
+   * @todo Implement mechanism for "change" keyword.
    *
    * @param string $source
    *   Module/theme name.

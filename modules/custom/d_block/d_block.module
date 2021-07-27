@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * File containing d_block module.
+ */
+
 use Drupal\Component\Utility\NestedArray;
 use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
 use Drupal\Core\Template\Attribute;
@@ -20,7 +25,7 @@ function d_block_theme($existing, $type, $theme, $path) {
  */
 function d_block_preprocess_paragraph__d_p_block(&$variables) {
   $variables['content_attributes'] = new Attribute([
-    'class' => ['content']
+    'class' => ['content'],
   ]);
 
   /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
@@ -49,6 +54,6 @@ function d_block_preprocess_field__paragraph__field_block__d_p_block(array &$var
  */
 function d_block_preprocess_block(array &$variables) {
   if (isset($variables['elements']['#title_attributes'])) {
-    $variables['title_attributes'] = NestedArray::mergeDeep( $variables['title_attributes'], $variables['elements']['#title_attributes']);
+    $variables['title_attributes'] = NestedArray::mergeDeep($variables['title_attributes'], $variables['elements']['#title_attributes']);
   }
 }

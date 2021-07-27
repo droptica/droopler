@@ -52,8 +52,10 @@ class ConfigUpdate {
   }
 
   /**
-   * Searches for all files in the given path that contain in the name the
-   * value specified in the variable $configName.
+   * Searches for all files containing specified value.
+   *
+   * Searches for all files in the given path that contain in the name the value
+   * specified in the variable $configName.
    *
    * @param string $moduleName
    *   Module name.

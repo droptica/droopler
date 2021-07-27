@@ -19,7 +19,7 @@ use Drupal\Core\Field\FormatterBase;
 class MauticFormEmbedFormatter extends FormatterBase {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $element = [];

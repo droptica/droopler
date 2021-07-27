@@ -31,6 +31,9 @@ use Drupal\Core\Field\BaseFieldDefinition;
  */
 class SubscribeFileEntity extends ContentEntityBase implements ContentEntityInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
 
     $fields['id'] = BaseFieldDefinition::create('integer')

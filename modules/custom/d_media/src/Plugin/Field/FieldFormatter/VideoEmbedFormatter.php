@@ -63,6 +63,8 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    *   Any third party settings.
    * @param \Drupal\d_media\Service\ProviderManagerInterface $provider_manager
    *   The video embed provider manager.
+   * @param \Drupal\Core\Entity\EntityStorageInterface $image_style_storage
+   *   The entity storage class.
    */
   public function __construct(
     $plugin_id,
@@ -324,6 +326,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    * Gets image styles option available for the field.
    *
    * @return array
+   *   Array of image style options.
    */
   private function imageStyleOptions() {
     $styles = ImageStyle::loadMultiple();

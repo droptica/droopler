@@ -19,7 +19,7 @@ class AllItemsRequiredValidator extends ConstraintValidator {
       return;
     }
 
-    /** @var Paragraph $parentParagraph */
+    /** @var \Drupal\paragraphs\Entity\Paragraph $parentParagraph */
     $parentParagraph = $entity->getParent()->getEntity();
     if (!$parentParagraph->isValidationRequired()) {
       return;
