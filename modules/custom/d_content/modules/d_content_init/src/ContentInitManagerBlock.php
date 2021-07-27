@@ -98,11 +98,14 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
       $values['id'] = $values['id'] ?? 'block_plugin_' . str_replace('-', '_', $this->uuid->generate());
       $this->getCurrentThemeIfNotDefined($values);
       return $this->saveEntity('block', $values);
-    } catch (PluginNotFoundException $e) {
+    }
+    catch (PluginNotFoundException $e) {
       $this->logger->error('Entity type "media" doesn\'t exist.');
-    } catch (InvalidPluginDefinitionException $e) {
+    }
+    catch (InvalidPluginDefinitionException $e) {
       $this->logger->error('Entity type "media" storage handler couldn\'t be loaded.');
-    } catch (EntityStorageException $e) {
+    }
+    catch (EntityStorageException $e) {
       $this->logger->error('Media entity couldn\'t be handled.');
     }
     return NULL;
@@ -128,11 +131,14 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         $this->placeBlockInWaMegaMenu($block, $placed_block);
       }
       return $block_entity;
-    } catch (PluginNotFoundException $e) {
+    }
+    catch (PluginNotFoundException $e) {
       $this->logger->error('Create block: Entity type "block_content" doesn\'t exist.');
-    } catch (InvalidPluginDefinitionException $e) {
+    }
+    catch (InvalidPluginDefinitionException $e) {
       $this->logger->error('Create block: Entity type "block_content" storage handler couldn\'t be loaded.');
-    } catch (EntityStorageException $e) {
+    }
+    catch (EntityStorageException $e) {
       $this->logger->error('Create block: Entity of type "block_content" couldn\'t be handled.');
     }
     return NULL;
@@ -161,11 +167,14 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         return $this->saveEntity('block', $values);
       }
       return FALSE;
-    } catch (PluginNotFoundException $e) {
+    }
+    catch (PluginNotFoundException $e) {
       $this->logger->error('Place block: Entity type "block_content" doesn\'t exist.');
-    } catch (InvalidPluginDefinitionException $e) {
+    }
+    catch (InvalidPluginDefinitionException $e) {
       $this->logger->error('Place block: Entity type "block_content" storage handler couldn\'t be loaded.');
-    } catch (EntityStorageException $e) {
+    }
+    catch (EntityStorageException $e) {
       $this->logger->error('Place block: Entity of type "block_content" couldn\'t be handled.');
     }
     return NULL;

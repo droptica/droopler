@@ -99,9 +99,9 @@ class ParagraphModifiersHelper {
    */
   public function hasModifier($name) {
     /*
-     * '@TODO: In the future we'll probably have simplified structure of
+     * @todo In the future we'll probably have simplified structure of
      *  d_settings field - in that case only one method would be
-     *  sufficient for checking if the modifier is set.'
+     *  sufficient for checking if the modifier is set.
      */
     return $this->hasClass($name) || $this->checkPropertyExists($name);
   }

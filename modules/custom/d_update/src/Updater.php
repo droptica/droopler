@@ -422,7 +422,7 @@ class Updater {
   /**
    * Allows updating of single config, based on yml file.
    *
-   * '@TODO: Implement mechanism for "change" keyword.'
+   * @todo Implement mechanism for "change" keyword.
    *
    * @param string $source
    *   Module/theme name.

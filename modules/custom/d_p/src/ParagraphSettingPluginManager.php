@@ -150,9 +150,10 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
     foreach ($definitions as $definition) {
       try {
-        // '@todo: We can think of keeping the configuration in yml files.'
+        // @todo We can think of keeping the configuration in yml files.
         $plugins[$definition['id']] = $this->getPluginById($definition['id']);
-      } catch (PluginException $exception) {
+      }
+      catch (PluginException $exception) {
         $this->logger->error($exception->getMessage());
       }
     }

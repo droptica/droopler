@@ -2,7 +2,7 @@
 
 /**
  * @file
- * D_commerce_products_list module.
+ * Contains d_commerce_products_list module.
  */
 
 use Drupal\commerce_product\Entity\ProductInterface;
@@ -119,7 +119,7 @@ function d_commerce_products_list_form_alter(&$form, FormStateInterface $form_st
  * search results page it will lose any facets which have been already selected.
  * This adds hidden fields for each facet so their values are retained.
  *
- * '@todo It may be removed when the functionality
+ * @todo It may be removed when the functionality.
  *  will be provided by the facets itself.'
  *
  * @see https://www.drupal.org/project/facets_pretty_paths/issues/3041314
