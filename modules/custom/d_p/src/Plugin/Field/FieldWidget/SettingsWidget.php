@@ -194,6 +194,14 @@ class SettingsWidget extends WidgetBase {
             ] + $options;
           break;
 
+        case 'checkboxes':
+          // Convert stdClass to array after deserialization.
+          $value = is_object($value) ? (array) $value : $value;
+          $element[$key] = [
+              '#default_value' => empty($value) ? $options['#default_value'] : $value,
+            ] + $options;
+          break;
+
         default:
           $value = $config->$key ?? $options['#default_value'];
 
