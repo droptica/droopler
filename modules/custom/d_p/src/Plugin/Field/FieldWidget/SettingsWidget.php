@@ -254,7 +254,7 @@ class SettingsWidget extends WidgetBase {
         $values[$key] = $value;
       }
     }
-    if ($element['paragraph-theme']['#value'] === 'theme-custom') {
+    if (($element['paragraph-theme']['#value'] ?? NULL) === 'theme-custom') {
       $values[ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME] = [
         'background' => $element['background-theme-custom']['#value'],
         'text' => $element['text-theme-custom']['#value'],
