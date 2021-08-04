@@ -178,10 +178,6 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
         }
       }
     }
-
-    @include media-breakpoint-between(sm, md) {
-      @include make-col(6);
-    }
   }
 }
 
