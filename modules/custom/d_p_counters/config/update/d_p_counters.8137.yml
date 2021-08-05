@@ -1,0 +1,26 @@
+core.entity_view_display.paragraph.d_p_group_of_counters.default:
+  delete_value:
+    - parents: third_party_settings:field_group:group_d_counters_content:children
+      values:
+        - field_d_cta_link
+  add:
+    third_party_settings:
+      field_group:
+        group_d_counters_cta:
+          children:
+            - field_d_cta_link
+          parent_name: ''
+          weight: 3
+          format_type: html_element
+          region: content
+          format_settings:
+            id: ''
+            classes: ''
+            element: '<none>'
+            show_label: false
+            label_element: h3
+            label_element_classes: ''
+            attributes: ''
+            effect: none
+            speed: fast
+          label: 'Call To Action'

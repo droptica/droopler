@@ -59,10 +59,10 @@
         <div class="content-wrapper">
           <div class="content container">
             {% block content %}
-              {{ content.group_d_block_content|without('field_d_cta_link') }}
-              {% if content.group_d_block_content.field_d_cta_link.0 %}
+              {{ content.group_d_block_content }}
+              {% if content.group_d_block_cta %}
                 <div class="mt-4">
-                  {{ content.group_d_block_content.field_d_cta_link }}
+                  {{ content.group_d_block_cta }}
                 </div>
               {% endif %}
             {% endblock %}
