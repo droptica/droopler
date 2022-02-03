@@ -4,6 +4,8 @@
 ## What is Droopler?
 Droopler is a Drupal 8/9 profile designed to build corporate websites. It's based on the latest frontend technologies, including Bootstrap 4. The maintainer of Droopler is [Droptica](https://www.droptica.com).
 
+[![Build Status](https://github.com/droptica/droopler/workflows/Drupal%20coding%20standards/badge.svg?branch=master)](https://github.com/droptica/droopler/actions)
+
 * **Official website**: [droptica.com/droopler](https://www.droptica.com/droopler)
 * **Tutorials**: [droptica.com/droopler/tutorials](https://www.droptica.com/droopler/tutorials/)
 * **Demo**: [droopler-demo.droptica.com](https://droopler-demo.droptica.com)
