@@ -36,11 +36,11 @@ jobs:
           tools: composer, phpcs
 
       - name: Download Drupal coding standards
-        run: composer global require --no-progress --no-suggest --no-scripts --no-plugins --optimize-autoloader slevomat/coding-standard drupal/coder
+        run: composer global require --no-progress --no-suggest --no-scripts --no-plugins --optimize-autoloader slevomat/coding-standard:^7.0 drupal/coder
 
       - name: Add Drupal coding standards to phpcs
-        run: phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer,~/.composer/vendor/slevomat/coding-standard
+        run: phpcs --config-set installed_paths $HOME/.composer/vendor/drupal/coder/coder_sniffer,$HOME/.composer/vendor/slevomat/coding-standard
 
       - name: Verify coding standards
-        run: phpcs ${{ env.CODE_SNIFFER_PATH }} --ignore=${{ env.CODE_SNIFFER_IGNORE }} --extensions=${{ env.CODE_SNIFFER_EXTENSIONS}} --standard=drupal --report=full,gitblame
+        run: phpcs ${{ env.CODE_SNIFFER_PATH }} --ignore=${{ env.CODE_SNIFFER_IGNORE }} --extensions=${{ env.CODE_SNIFFER_EXTENSIONS}} --standard=Drupal --report=full,gitblame
 
