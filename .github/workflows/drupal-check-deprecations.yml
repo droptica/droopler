@@ -37,7 +37,7 @@ jobs:
           tools: composer
 
       - name: Install drupal/core
-        run: mkdir $HOME/${{ env.DRUPAL_DIR }} && cd $HOME/${{ env.DRUPAL_DIR }} && composer init --name="droopler/drupal-core-drupal-check" -n && composer require drupal/core:${{ env.DRUPAL_VERSION }}
+        run: cd $HOME && composer create-project drupal/recommended-project:${{ env.DRUPAL_VERSION }} ${{ env.DRUPAL_DIR }}
 
       - name: Install drupal-check
         run: composer global require --no-progress --no-suggest --no-scripts --no-plugins --optimize-autoloader mglaman/drupal-check
@@ -46,5 +46,5 @@ jobs:
         run: ls -al $HOME/${{ env.DRUPAL_DIR }}/vendor/drupal/core
 
       - name: Verify drupal-check deprecations
-        run: $HOME/.composer/vendor/bin/drupal-check -d -e=${{ env.DRUPAL_CHECK_IGNORE }} --drupal-root=$HOME/${{ env.DRUPAL_DIR }}/vendor/drupal/core ${{ env.DRUPAL_CHECK_PATH }}
+        run: $HOME/.composer/vendor/bin/drupal-check -d -e=${{ env.DRUPAL_CHECK_IGNORE }} --drupal-root=$HOME/${{ env.DRUPAL_DIR }} ${{ env.DRUPAL_CHECK_PATH }}
 
