@@ -37,7 +37,7 @@ jobs:
           tools: composer
 
       - name: Install drupal/core
-        run: mkdir $HOME/${{ env.DRUPAL_DIR }} && cd ${{ env.DRUPAL_DIR }} && composer init --name="droopler/drupal-core-drupal-check" -n && composer require drupal/core:${{ env.DRUPAL_VERSION }}
+        run: mkdir $HOME/${{ env.DRUPAL_DIR }} && cd $HOME/${{ env.DRUPAL_DIR }} && composer init --name="droopler/drupal-core-drupal-check" -n && composer require drupal/core:${{ env.DRUPAL_VERSION }}
 
       - name: Install drupal-check
         run: composer global require --no-progress --no-suggest --no-scripts --no-plugins --optimize-autoloader mglaman/drupal-check
