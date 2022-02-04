@@ -1,0 +1,47 @@
+name: drupal-check analysis
+
+on:
+  # Run on all pushes and on all pull requests.
+  # Prevent the build from running when there are only irrelevant changes.
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+ 
+jobs:
+  Verify:
+    name: "Analysis by drupal-check tool"
+
+    runs-on: "ubuntu-latest"
+
+    env:
+      PHP_VERSION: "8.1"
+      DRUPAL_CHECK_PATH: "modules/custom/ themes/custom/"
+      DRUPAL_CHECK_IGNORE: "*md,*.css,*.txt,*.info,*interactive_ui/react_slider/js*,*pl-sk/*,*pattern-lab/*,*_twig-components/*"
+      DRUPAL_DIR: "drupal-core-drupal-check"
+      DRUPAL_VERSION: "^9.3"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+          tools: composer
+
+      - name: Install drupal/core
+        run: cd $HOME && composer create-project drupal/recommended-project:${{ env.DRUPAL_VERSION }} ${{ env.DRUPAL_DIR }}
+
+      - name: Install drupal-check
+        run: composer global require --no-progress --no-suggest --no-scripts --no-plugins --optimize-autoloader mglaman/drupal-check
+
+      - name: Verify drupal-check deprecations
+        run: $HOME/.composer/vendor/bin/drupal-check -a -e=${{ env.DRUPAL_CHECK_IGNORE }} --drupal-root=$HOME/${{ env.DRUPAL_DIR }} ${{ env.DRUPAL_CHECK_PATH }}
+
