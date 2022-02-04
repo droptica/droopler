@@ -22,6 +22,8 @@ jobs:
       PHP_VERSION: "7.4"
       DRUPAL_CHECK_PATH: "modules/custom/ themes/custom/"
       DRUPAL_CHECK_IGNORE: "*md,*.css,*.txt,*.info,*interactive_ui/react_slider/js*,*pl-sk/*,*pattern-lab/*,*_twig-components/*"
+      DRUPAL_DIR: "drupal-core-drupal-check"
+      DRUPAL_VERSION: "9.3"
 
     steps:
       - name: Checkout code
@@ -34,9 +36,12 @@ jobs:
           coverage: none
           tools: composer
 
+      - name: Install drupal/core
+        run: mkdir $HOME/${{ env.DRUPAL_DIR }} && cd ${{ env.DRUPAL_DIR }} && composer init --name="droopler/drupal-core-drupal-check" -n && composer require drupal/core:${{ env.DRUPAL_VERSION }}
+
       - name: Install drupal-check
         run: composer global require --no-progress --no-suggest --no-scripts --no-plugins --optimize-autoloader mglaman/drupal-check
 
       - name: Verify drupal-check deprecations
-        run: $HOME/.composer/vendor/bin/drupal-check -d -e=${{ env.DRUPAL_CHECK_IGNORE }} ${{ env.DRUPAL_CHECK_PATH }}
+        run: $HOME/.composer/vendor/bin/drupal-check -d -e=${{ env.DRUPAL_CHECK_IGNORE }} --drupal-root=$HOME/${{ env.DRUPAL_DIR }}/vendor/drupal/core ${{ env.DRUPAL_CHECK_PATH }}
 
