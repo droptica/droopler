@@ -19,7 +19,7 @@ jobs:
     runs-on: "ubuntu-latest"
 
     env:
-      PHP_VERSION: "7.4"
+      PHP_VERSION: "8.1"
       DRUPAL_CHECK_PATH: "modules/custom/ themes/custom/"
       DRUPAL_CHECK_IGNORE: "*md,*.css,*.txt,*.info,*interactive_ui/react_slider/js*,*pl-sk/*,*pattern-lab/*,*_twig-components/*"
       DRUPAL_DIR: "drupal-core-drupal-check"
