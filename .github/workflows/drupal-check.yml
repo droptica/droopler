@@ -38,5 +38,5 @@ jobs:
         run: composer global require --no-progress --no-suggest --no-scripts --no-plugins --optimize-autoloader mglaman/drupal-check
 
       - name: Verify drupal-check deprecations
-        run: $HOME/.composer/vendor/bin/drupal-check -d -e=${{ env.IGNORE }} ${{ env.PATH }}
+        run: $HOME/.composer/vendor/bin/drupal-check -d -e=${{ env.DRUPAL_CHECK_IGNORE }} ${{ env.DRUPAL_CHECK_PATH }}
 
