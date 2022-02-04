@@ -23,7 +23,7 @@ jobs:
       DRUPAL_CHECK_PATH: "modules/custom/ themes/custom/"
       DRUPAL_CHECK_IGNORE: "*md,*.css,*.txt,*.info,*interactive_ui/react_slider/js*,*pl-sk/*,*pattern-lab/*,*_twig-components/*"
       DRUPAL_DIR: "drupal-core-drupal-check"
-      DRUPAL_VERSION: "9.3"
+      DRUPAL_VERSION: "^9.3"
 
     steps:
       - name: Checkout code
