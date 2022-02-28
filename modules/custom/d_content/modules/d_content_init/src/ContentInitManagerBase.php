@@ -14,7 +14,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class ContentInitManagerBase.
+ * Content init manager base.
  *
  * @package Drupal\d_content_init
  */
@@ -25,7 +25,7 @@ abstract class ContentInitManagerBase {
   /**
    * Manages entity type plugin definitions.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManager
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 

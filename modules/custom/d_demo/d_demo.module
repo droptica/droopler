@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
  * Implements hook_content_structure_alter().
  */
 function d_demo_content_structure_alter(&$structure, $context) {
-  $path = drupal_get_path('module', 'd_demo') . '/pages';
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_demo') . '/pages';
   if ($context == 'all') {
     $structure['homepage'] = [
       'file' => "$path/homepage.yml",
@@ -78,7 +78,7 @@ function d_demo_content_structure_alter(&$structure, $context) {
  * Implements hook_block_structure_alter().
  */
 function d_demo_block_structure_alter(&$structure, $context) {
-  $path = drupal_get_path('module', 'd_demo') . '/blocks';
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_demo') . '/blocks';
   if ($context == 'block_second_run') {
     $structure['cars'] = ['file' => "$path/mega_submenu_services_for_cars.yml"];
     $structure['boats'] = ['file' => "$path/mega_submenu_services_for_boats.yml"];

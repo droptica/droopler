@@ -22,7 +22,7 @@ class CkeditorResponsiveTables extends CKEditorPluginBase implements CKEditorPlu
    * Get path to plugin folder.
    */
   public function getPluginPath() {
-    return drupal_get_path('module', 'd_content') . '/js/plugins/d_responsive_tables';
+    return \Drupal::service('extension.path.resolver')->getPath('module', 'd_content') . '/js/plugins/d_responsive_tables';
   }
 
   /**

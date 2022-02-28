@@ -12,7 +12,7 @@
           .html(Drupal.t('Reset color'))
           .attr('id', 'reset-button')
           .addClass('button js-form-submit form-submit m-1')
-          .click(function(e) {
+          .click(function (e) {
           e.preventDefault();
           $(this).siblings('input[type=hidden]').val('');
           $(this).siblings('input[type=color]').val('#ffffff').css('opacity', 0.3);
@@ -22,7 +22,7 @@
         var $colorpicker = $('<input/>')
           .addClass('m-1')
           .attr('type', 'color')
-          .on('input', function(e) {
+          .on('input', function (e) {
             $(this).siblings('input[type=hidden]').val($(this).val());
             $(this).css('opacity', 1);
             $(this).siblings('button').show();
@@ -47,7 +47,7 @@
         }
       }
 
-      $(context).ready(function() {
+      $(context).ready(function () {
         $('.field--name-field-d-background-color', context).once().each(d_p_colorpicker);
       });
     }

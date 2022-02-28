@@ -148,7 +148,7 @@ function droopler_install_module(string $module, array &$context) {
  * @todo To be moved to a new manager class.
  */
 function _droopler_import_config($module, $name) {
-  $config_path = drupal_get_path('module', $module) . '/config/install';
+  $config_path = \Drupal::service('extension.path.resolver')->getPath('module', $module) . '/config/install';
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
   $config_storage->write($name, $source->read($name));
@@ -317,7 +317,7 @@ function update_modules_configuration(array $modules, $update_number) {
  *   Array with all entities bundles.
  */
 function get_all_entity_bundles() {
-  $entityBundles = \Drupal::service('entity.manager')
+  $entityBundles = \Drupal::service('entity_type.manager')
     ->getAllBundleInfo();
   $bundles = [];
   foreach ($entityBundles as $entityBundle) {

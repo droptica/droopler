@@ -204,7 +204,7 @@ class Updater {
    */
   public function readConfigFromFile($source, $name, $source_directory) {
     $source_info = $this->getSourceInformation($source);
-    $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
+    $config_path = \Drupal::service('extension.path.resolver')->getPath($source_info['source_type'], $source_info['source']) . '/config';
     $source = new FileStorage($config_path . '/' . $source_directory);
 
     return $source->read($name);
@@ -353,7 +353,6 @@ class Updater {
         $data['uuid'] = $existingEntity->uuid();
       }
 
-      /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity */
       $entity = $storage->createFromStorageRecord($data);
 
       // If we need an update, we have to inform the storage about it.

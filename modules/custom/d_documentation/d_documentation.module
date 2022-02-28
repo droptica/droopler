@@ -9,7 +9,7 @@
  * Implements hook_content_structure_alter().
  */
 function d_documentation_content_structure_alter(&$structure, $context) {
-  $path = drupal_get_path('module', 'd_documentation') . '/pages';
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_documentation') . '/pages';
   if ($context == 'all') {
     $structure['documentation'] = [
       'file' => "$path/documentation.yml",
@@ -105,7 +105,7 @@ function d_documentation_content_structure_alter(&$structure, $context) {
  * Implements hook_block_structure_alter().
  */
 function d_documentation_block_structure_alter(&$structure, $context) {
-  $path = drupal_get_path('module', 'd_documentation') . '/blocks';
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_documentation') . '/blocks';
 
   if ($context == 'all') {
     $structure['d_documentation_block_example'] = ['file' => "$path/block_documentation_example.yml"];

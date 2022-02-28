@@ -16,7 +16,7 @@
  *   Which structure array is this?
  */
 function d_blog_init_content_structure_alter(array &$structure, string $context) {
-  $path = drupal_get_path('module', 'd_blog_init') . '/pages';
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_blog_init') . '/pages';
 
   if ($context == 'all') {
     $structure['blog_post_1'] = ['file' => "$path/post_1.yml"];

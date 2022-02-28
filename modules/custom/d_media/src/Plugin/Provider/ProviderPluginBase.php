@@ -198,7 +198,7 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   protected function getSpacerAttributes(array &$output) {
     $imageStyleSetting = $this->videoSettings['image_style'];
 
-    $effects = \Drupal::service('entity.manager')
+    $effects = \Drupal::service('entity_type.manager')
       ->getStorage('image_style')
       ->load($imageStyleSetting)->getEffects()->getConfiguration();
     foreach ($effects as $effect) {

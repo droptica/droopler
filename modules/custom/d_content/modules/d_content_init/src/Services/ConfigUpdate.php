@@ -8,7 +8,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
- * Class ConfigUpdate.
+ * Config update service.
  *
  * @package Drupal\d_commerce\Services
  */
