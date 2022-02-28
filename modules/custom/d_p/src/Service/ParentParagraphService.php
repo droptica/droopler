@@ -5,7 +5,7 @@ namespace Drupal\d_p\Service;
 use Drupal\Core\Entity\ContentEntityInterface;
 
 /**
- * Class ParentParagraphService
+ * Class ParentParagraphService.
  *
  * @package Drupal\d_p\Service
  */
@@ -20,7 +20,7 @@ class ParentParagraphService {
    * @return int|string|null
    *   Id of field referencing passed entity.
    */
-  public function getParentParagraphFieldId($mediaEntity) {
+  public function getParentParagraphFieldId(ContentEntityInterface $mediaEntity) {
     $parentField = $this->getReferencingField($mediaEntity);
 
     if ($parentField) {

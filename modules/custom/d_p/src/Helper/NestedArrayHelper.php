@@ -28,7 +28,7 @@ class NestedArrayHelper extends NestedArray {
    *   Array with parents of value.
    * @param string $value
    *   Value to search for.
-   * @param null $key_existed
+   * @param bool|null $key_existed
    *   (optional) Referenced flag, TRUE if provided key exists and the value is
    *   equal to the provided one, FALSE otherwise.
    */
