@@ -353,7 +353,6 @@ class Updater {
         $data['uuid'] = $existingEntity->uuid();
       }
 
-      /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity */
       $entity = $storage->createFromStorageRecord($data);
 
       // If we need an update, we have to inform the storage about it.

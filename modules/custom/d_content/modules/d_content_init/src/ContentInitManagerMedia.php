@@ -32,7 +32,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
   /**
    * Provides a file entity repository.
    *
-   * @var \Drupal\Core\File\FileSystemInterface
+   * @var \Drupal\File\FileRepositoryInterface
    */
   protected $fileRepository;
 
@@ -76,7 +76,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @param array $media_array
    *   Array with definition of media to create.
    *
-   * @return \Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface|null
    *   Created media entity.
    */
   protected function createMediaImage(array $media_array) {
@@ -153,7 +153,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @param string $alt
    *   Alt text.
    *
-   * @return \Drupal\Core\Entity\EntityInterface|void
+   * @return \Drupal\Core\Entity\EntityInterface|void|null
    *   Returns Entity object or void.
    */
   public function createMediaImageFromFid($fid, $alt) {
@@ -182,7 +182,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @param string $uri
    *   String containing uri data.
    *
-   * @return \Drupal\Core\Entity\EntityInterface|void
+   * @return \Drupal\Core\Entity\EntityInterface|void|null
    *   Returns Entity object or void.
    */
   protected function getMediaImageByUri($uri) {
@@ -209,7 +209,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @param int $fid
    *   File id.
    *
-   * @return \Drupal\Core\Entity\EntityInterface|void
+   * @return \Drupal\Core\Entity\EntityInterface|void|null
    *   Returns Entity object or void.
    */
   protected function getMediaImageByFid($fid) {
@@ -238,7 +238,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @param string $uri
    *   The destination URI.
    *
-   * @return \Drupal\file\FileInterface|false
+   * @return \Drupal\file\FileInterface|false|null
    *   Returns file entity or false.
    */
   protected function saveFile($path, $uri) {

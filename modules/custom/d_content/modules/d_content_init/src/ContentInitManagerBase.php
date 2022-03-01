@@ -25,7 +25,7 @@ abstract class ContentInitManagerBase {
   /**
    * Manages entity type plugin definitions.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManager
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 

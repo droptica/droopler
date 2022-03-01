@@ -89,7 +89,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block
    *   Array with definition of block to create.
    *
-   * @return array|\Drupal\Core\Entity\EntityInterface
+   * @return array|\Drupal\Core\Entity\EntityInterface|null
    *   Created block entity.
    */
   protected function createBlockPlugin(array $block) {
@@ -117,7 +117,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block
    *   Array with definition of block to create.
    *
-   * @return \Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface|null
    *   Created block entity.
    */
   protected function createBlockContent(array $block) {
