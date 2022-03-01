@@ -204,7 +204,7 @@ function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array 
 }
 
 /**
- * Implements hook_preprocess_input() to add classes to inputs.
+ * Implements hook_preprocess_input().
  */
 function droopler_theme_preprocess_input(&$variables) {
   // For submit elements.

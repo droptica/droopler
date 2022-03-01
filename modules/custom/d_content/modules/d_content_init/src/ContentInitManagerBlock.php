@@ -18,7 +18,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
- * Class ContentInitManagerBlock.
+ * Content init manager block.
  *
  * @package Drupal\d_content_init
  */

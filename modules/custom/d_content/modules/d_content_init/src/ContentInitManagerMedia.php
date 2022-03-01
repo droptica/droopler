@@ -16,7 +16,7 @@ use Drupal\file\FileRepositoryInterface;
 use Drupal\media\Entity\Media;
 
 /**
- * Class ContentInitManagerMedia.
+ * Content init media manager.
  *
  * @package Drupal\d_content_init
  */
