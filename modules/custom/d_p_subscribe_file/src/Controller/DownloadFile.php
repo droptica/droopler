@@ -80,9 +80,10 @@ class DownloadFile extends ControllerBase {
   /**
    * Checking link was created before 24h.
    *
-   * @param $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   Entity.
    */
-  private function checkLinkActive($entity) {
+  private function checkLinkActive(EntityInterface $entity) {
     $created = $entity->get('created')->get(0)->getValue();
     if (time() > $created['value'] + 86400) {
       $this->goHomeWithMessage(t('Link is not active, please add your email again'));
