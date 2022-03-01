@@ -12,9 +12,9 @@
       };
 
       // Find all counters.
-      $('.paragraph--type--d-p-group-of-counters .field--name-field-d-number', context).once('d_p_counters').each(function(){
+      $('.paragraph--type--d-p-group-of-counters .field--name-field-d-number', context).once('d_p_counters').each(function () {
         // Trigger if in viewport.
-        inViewport(this, function(el) {
+        inViewport(this, function (el) {
           var id = 'upcnt' + cnt++;
           $(el).attr('id', id);
 

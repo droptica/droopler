@@ -22,7 +22,7 @@ class Vimeo extends ProviderPluginBase {
    */
   public static function getIdFromInput($input) {
     preg_match('/^https?:\/\/(www\.)?vimeo.com\/(channels\/[a-zA-Z0-9]*\/)?(?<id>[0-9]*)(\/[a-zA-Z0-9]+)?(\#t=(\d+)s)?$/', $input, $matches);
-    return isset($matches['id']) ? $matches['id'] : FALSE;
+    return $matches['id'] ?? FALSE;
   }
 
   /**
@@ -51,7 +51,7 @@ class Vimeo extends ProviderPluginBase {
    */
   protected function getTimeIndex() {
     preg_match('/\#t=(?<time_index>(\d+)s)$/', $this->getInput(), $matches);
-    return isset($matches['time_index']) ? $matches['time_index'] : FALSE;
+    return $matches['time_index'] ?? FALSE;
   }
 
   /**

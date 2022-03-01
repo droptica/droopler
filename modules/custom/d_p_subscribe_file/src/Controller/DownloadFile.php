@@ -3,6 +3,7 @@
 namespace Drupal\d_p_subscribe_file\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
@@ -12,6 +13,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class DownloadFile controller.
+ */
 class DownloadFile extends ControllerBase {
 
   /**
@@ -55,10 +59,13 @@ class DownloadFile extends ControllerBase {
   /**
    * Get SubscribeFileEntity.
    *
-   * @param $field_name
-   * @param $field_value
+   * @param string $field_name
+   *   Field name.
+   * @param string $field_value
+   *   Field value.
    *
    * @return \Drupal\Core\Entity\EntityInterface|mixed
+   *   Return file entity.
    */
   private function getSubscribeFileEntity($field_name, $field_value) {
     $subscribe_file_entity = \Drupal::entityTypeManager()
@@ -85,9 +92,10 @@ class DownloadFile extends ControllerBase {
   /**
    * Redirect to home page and show drupal message.
    *
-   * @param $message
+   * @param string $message
+   *   Message.
    */
-  private function goHomeWithMessage($message) {
+  private function goHomeWithMessage(string $message) {
     $this->messenger()->addStatus($message);
     $url = Url::fromRoute('<front>');
     $response = new RedirectResponse($url->toString());
@@ -97,13 +105,13 @@ class DownloadFile extends ControllerBase {
   /**
    * Send file to browsers.
    *
-   * @param $file_hash
+   * @param string $file_hash
    *   File link hash.
    *
    * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
    *   Return file.
    */
-  public function getFile($file_hash) {
+  public function getFile(string $file_hash) {
     $entity = $this->getSubscribeFileEntity('file_hash', $file_hash);
     $this->checkLinkActive($entity);
     $file = File::load($entity->get('fid')->getValue()[0]['value']);

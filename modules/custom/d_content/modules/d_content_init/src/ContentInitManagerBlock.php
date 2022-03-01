@@ -159,9 +159,9 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     try {
       if (isset($block['placement'])) {
         $values = [
-            'id' => 'block_content_' . str_replace('-', '_', $block_entity->uuid()),
-            'plugin' => 'block_content:' . $block_entity->uuid(),
-          ] + $this->getBaseBlockValues($block['placement']);
+          'id' => 'block_content_' . str_replace('-', '_', $block_entity->uuid()),
+          'plugin' => 'block_content:' . $block_entity->uuid(),
+        ] + $this->getBaseBlockValues($block['placement']);
 
         $this->getCurrentThemeIfNotDefined($values);
         return $this->saveEntity('block', $values);

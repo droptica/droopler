@@ -18,7 +18,7 @@ class NodeVid extends Vid {
     return $this->database->query('SELECT nr.vid, nr.nid, nfr.title
       FROM {node_revision} nr
       INNER JOIN {node_field_revision} nfr ON nr.vid = nfr.vid
-      WHERE nr.vid IN ( :vids[] )', array(':vids[]' => $this->value))->fetchAllKeyed(1, 2);
+      WHERE nr.vid IN ( :vids[] )', [':vids[]' => $this->value])->fetchAllKeyed(1, 2);
   }
 
 }
