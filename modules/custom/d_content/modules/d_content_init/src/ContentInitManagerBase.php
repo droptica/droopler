@@ -14,7 +14,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class ContentInitManagerBase.
+ * Content init manager base.
  *
  * @package Drupal\d_content_init
  */
