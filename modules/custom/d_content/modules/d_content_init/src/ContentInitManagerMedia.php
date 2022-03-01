@@ -12,6 +12,7 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\file\FileRepositoryInterface;
 use Drupal\media\Entity\Media;
 
 /**
@@ -27,6 +28,13 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @var \Drupal\Core\File\FileSystemInterface
    */
   protected $fileSystem;
+
+  /**
+   * Provides a file entity repository.
+   *
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
+  protected $fileRepository;
 
   /**
    * ContentInitManagerMedia constructor.
@@ -45,6 +53,8 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *   Module handler interface.
    * @param \Drupal\Core\File\FileSystemInterface $file_system
    *   File system.
+   * @param \Drupal\File\FileRepositoryInterface $file_repository
+   *   Provides a file entity repository.
    */
   public function __construct(
     EntityTypeManagerInterface $entity_type_manager,
@@ -53,9 +63,11 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     AccountProxyInterface $current_user,
     LanguageManagerInterface $language_manager,
     ModuleHandlerInterface $module_handler,
-    FileSystemInterface $file_system) {
+    FileSystemInterface $file_system,
+    FileRepositoryInterface $file_repository) {
     parent::__construct($entity_type_manager, $serialization, $logger_factory, $current_user, $language_manager, $module_handler);
     $this->fileSystem = $file_system;
+    $this->fileRepository = $file_repository;
   }
 
   /**
@@ -236,7 +248,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     $file_data = file_get_contents($path);
     $final_dir = dirname($uri);
     $this->fileSystem->prepareDirectory($final_dir, FileSystemInterface::CREATE_DIRECTORY);
-    return file_save_data($file_data, $uri, FileSystemInterface::EXISTS_REPLACE);
+    return $this->fileRepository->writeData($file_data, $uri, FileSystemInterface::EXISTS_REPLACE);
   }
 
   /**

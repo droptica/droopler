@@ -184,7 +184,7 @@ function d_product_preprocess_image_style(&$variables) {
 /**
  * Create custom term links.
  *
- * @param array $items
+ * @param object $items
  *   Store term ids.
  * @param string $element
  *   Facet path element.
@@ -192,7 +192,7 @@ function d_product_preprocess_image_style(&$variables) {
  * @return array
  *   Generated links.
  */
-function d_product_generate_term_links(array $items, $element) {
+function d_product_generate_term_links(object $items, $element) {
   $links = [];
   foreach ($items as $term_obj) {
     $tid = $term_obj->getValue();
