@@ -11,6 +11,7 @@ use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Extension\Exception\UnknownExtensionException;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Config\StorageInterface;
@@ -92,6 +93,13 @@ class Updater {
   protected $logger;
 
   /**
+   * ExtensionPathResolver service.
+   *
+   * @var \Drupal\Core\Extension\ExtensionPathResolver
+   */
+  protected ExtensionPathResolver $extensionPathResolver;
+
+  /**
    * Constructs the Updater.
    *
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
@@ -110,15 +118,20 @@ class Updater {
    *   Update Module Extension List service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   Config factory service.
+   * @param \Drupal\Core\Extension\ExtensionPathResolver $extension_path_resolver
+   *   The extension path resolver.
    */
-  public function __construct(ModuleInstallerInterface $module_installer,
-                              StorageInterface $config_storage,
-                              EntityTypeManagerInterface $entity_type_manager,
-                              ConfigCompareInterface $config_compare,
-                              ConfigManagerInterface $config_manager,
-                              UpdateChecklist $checklist,
-                              ModuleExtensionList $moduleExtensionList,
-                              ConfigFactoryInterface $config_factory) {
+  public function __construct(
+    ModuleInstallerInterface $module_installer,
+    StorageInterface $config_storage,
+    EntityTypeManagerInterface $entity_type_manager,
+    ConfigCompareInterface $config_compare,
+    ConfigManagerInterface $config_manager,
+    UpdateChecklist $checklist,
+    ModuleExtensionList $moduleExtensionList,
+    ConfigFactoryInterface $config_factory,
+    ExtensionPathResolver $extension_path_resolver
+  ) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
     $this->entityTypeManager = $entity_type_manager;
@@ -128,6 +141,7 @@ class Updater {
     $this->moduleExtensionList = $moduleExtensionList;
     $this->configFactory = $config_factory;
     $this->logger = $this->getLogger('d_update');
+    $this->extensionPathResolver = $extension_path_resolver;
   }
 
   /**
@@ -204,7 +218,7 @@ class Updater {
    */
   public function readConfigFromFile($source, $name, $source_directory) {
     $source_info = $this->getSourceInformation($source);
-    $config_path = \Drupal::service('extension.path.resolver')->getPath($source_info['source_type'], $source_info['source']) . '/config';
+    $config_path = $this->extensionPathResolver->getPath($source_info['source_type'], $source_info['source']) . '/config';
     $source = new FileStorage($config_path . '/' . $source_directory);
 
     return $source->read($name);

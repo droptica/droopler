@@ -51,7 +51,7 @@ class ContentHelper {
    * @return mixed
    *   Return ids.
    */
-  public function getSortedContentByType($type, $sortBy, $sort, array $values) {
+  public function getSortedContentByType(string $type, string $sortBy, string $sort, array $values) {
     $query = $this->connection->select('node_field_data', 'nfd')
       ->fields('nfd', ['nid', 'created'])
       ->orderBy($sortBy, $sort)
@@ -89,7 +89,7 @@ class ContentHelper {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function replaceContent(array &$variables, $entity_type, $view_mode, $field, array $new_values) {
+  public function replaceContent(array &$variables, string $entity_type, string $view_mode, string $field, array $new_values) {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['elements']['#paragraph'];
     $paragraph->set($field, $new_values);

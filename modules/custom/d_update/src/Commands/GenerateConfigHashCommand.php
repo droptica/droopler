@@ -34,6 +34,8 @@ class GenerateConfigHashCommand extends DrushCommands {
 
   /**
    * Drush print.
+   *
+   * @todo Refactor this function.
    */
   public function drush_print($arg = NULL) {
     return $arg;
