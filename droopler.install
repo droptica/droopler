@@ -36,19 +36,25 @@ function droopler_install() {
     ->set('page.front', '/node/1')
     ->save();
 
+  /** @var \Drupal\Core\Extension\ModuleInstaller $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+
+  /** @var \Drupal\Core\Extension\ModuleHandler $module_handler */
+  $module_handler = \Drupal::service('module_handler');
+
   // Install init content. It will add an install task to be performed later.
-  \Drupal::service('module_installer')->install(['d_content_init']);
+  $module_installer->install(['d_content_init']);
 
   // Try to install custom init that alters the original one.
-  try {
-    \Drupal::service('module_installer')->install(['d_custom_init']);
+  if ($module_handler->moduleExists('d_custom_init')) {
+    $module_installer->install(['d_custom_init']);
   }
-  catch (MissingDependencyException $e) {
+  else {
     \Drupal::logger('droopler_install')
       ->notice('Custom content init not detected.');
   }
 
-  // Remove footer menu menu to avoid fatal error while trying to edit it
+  // Remove footer menu to avoid fatal error while trying to edit it
   // because of missing route.
   \Drupal::configFactory()->getEditable('system.menu.footer')->delete();
 
