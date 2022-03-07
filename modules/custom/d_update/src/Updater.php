@@ -128,7 +128,7 @@ class Updater {
     ConfigCompareInterface $config_compare,
     ConfigManagerInterface $config_manager,
     UpdateChecklist $checklist,
-    ModuleExtensionList $moduleExtensionList,
+    ModuleExtensionList $module_extension_list,
     ConfigFactoryInterface $config_factory,
     ExtensionPathResolver $extension_path_resolver
   ) {
@@ -138,7 +138,7 @@ class Updater {
     $this->configCompare = $config_compare;
     $this->configManager = $config_manager;
     $this->checklist = $checklist;
-    $this->moduleExtensionList = $moduleExtensionList;
+    $this->moduleExtensionList = $module_extension_list;
     $this->configFactory = $config_factory;
     $this->logger = $this->getLogger('d_update');
     $this->extensionPathResolver = $extension_path_resolver;
