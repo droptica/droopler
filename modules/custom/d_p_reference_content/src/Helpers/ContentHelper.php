@@ -5,15 +5,21 @@ namespace Drupal\d_p_reference_content\Helpers;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
+/**
+ * Content helper.
+ */
 class ContentHelper {
-
   /**
+   * The database connection.
+   *
    * @var \Drupal\Core\Database\Connection
    */
   private $connection;
 
   /**
-   * @var \Drupal\Core\Entity\EntityTypeManager
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   private $entityTypeManager;
 
@@ -21,7 +27,9 @@ class ContentHelper {
    * ContentHelper constructor.
    *
    * @param \Drupal\Core\Database\Connection $connection
+   *   The database connection.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
    */
   public function __construct(Connection $connection, EntityTypeManagerInterface $entityTypeManager) {
     $this->connection = $connection;
@@ -31,19 +39,19 @@ class ContentHelper {
   /**
    * Get nids from selected content type.
    *
-   * @param $type
+   * @param string $type
    *   Content type.
-   * @param $sortBy
+   * @param string $sortBy
    *   Table name used for sorting.
-   * @param $sort
+   * @param string $sort
    *   Type of sort - DESC, ASC.
-   * @param $values
+   * @param array $values
    *   Array of values to exclude.
    *
    * @return mixed
    *   Return ids.
    */
-  public function getSortedContentByType($type, $sortBy, $sort, array $values) {
+  public function getSortedContentByType(string $type, string $sortBy, string $sort, array $values) {
     $query = $this->connection->select('node_field_data', 'nfd')
       ->fields('nfd', ['nid', 'created'])
       ->orderBy($sortBy, $sort)
@@ -67,21 +75,21 @@ class ContentHelper {
   /**
    * Replace content.
    *
-   * @param $variables
+   * @param array $variables
    *   Variables array from preprocess.
-   * @param $entity_type
+   * @param string $entity_type
    *   Entity type.
-   * @param $view_mode
+   * @param string $view_mode
    *   Entity view mode.
-   * @param $field
+   * @param string $field
    *   Field name.
-   * @param $new_values
-   *   Array with new content values
+   * @param array $new_values
+   *   Array with new content values.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function replaceContent(&$variables, $entity_type, $view_mode, $field, $new_values) {
+  public function replaceContent(array &$variables, string $entity_type, string $view_mode, string $field, array $new_values) {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['elements']['#paragraph'];
     $paragraph->set($field, $new_values);
@@ -109,15 +117,15 @@ class ContentHelper {
   /**
    * Exclude values from result.
    *
-   * @param $data
+   * @param array $data
    *   Query result.
-   * @param $values
+   * @param array $values
    *   Values to exclude.
    *
    * @return array
    *   New data.
    */
-  private function excludeFromResults($data, $values) {
+  private function excludeFromResults(array $data, array $values) {
     // Remove data if target exist.
     foreach ($values as $target) {
       unset($data[$target['target_id']]);
@@ -131,13 +139,13 @@ class ContentHelper {
   /**
    * Prepare data for field values.
    *
-   * @param $data
+   * @param array $data
    *   Nids.
    *
    * @return array
    *   Data with target_id.
    */
-  private function prepareFieldValues($data) {
+  private function prepareFieldValues(array $data) {
     $result = [];
     foreach ($data as $item) {
       $result[] = [

@@ -3,8 +3,6 @@
 /**
  * @file
  * Initialization of content for d_product module.
- *
- * d_product_init module.
  */
 
 /**
@@ -18,7 +16,7 @@
  *   Which structure array is this?
  */
 function d_product_init_content_structure_alter(array &$structure, $context) {
-  $path = drupal_get_path('module', 'd_product_init') . '/pages';
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_product_init') . '/pages';
 
   if ($context == 'all') {
     $products = [];

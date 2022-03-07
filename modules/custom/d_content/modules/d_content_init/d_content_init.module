@@ -2,7 +2,7 @@
 
 /**
  * @file
- * d_content_init module.
+ * File containing d_content_init module.
  */
 
 use Drupal\Core\Entity\EntityInterface;
@@ -246,7 +246,10 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
     case 'taxonomy':
       $vid = $data['vid'] ?? NULL;
       foreach ($data['terms'] as $term_name) {
-        $terms = taxonomy_term_load_multiple_by_name($term_name, $vid);
+        $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
+          'name' => $term_name,
+          'vid' => $vid,
+        ]);
 
         if (empty($terms)) {
           // Create term and use it.
@@ -256,7 +259,10 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
           ]);
 
           $new_term->save();
-          $terms = taxonomy_term_load_multiple_by_name($term_name, $vid);
+          $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
+            'name' => $term_name,
+            'vid' => $vid,
+          ]);
         }
 
         foreach ($terms as $term) {
@@ -316,7 +322,7 @@ function d_content_init_fill_paragraph(array $paragraph_data) {
  *   - children: list of children
  *   - parent: parent menu ID.
  *
- * @return int|null
+ * @return string|null
  *   Menu item plugin ID.
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
@@ -420,7 +426,7 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
   // Save the file.
   $data = file_get_contents(d_content_init_parse_file_path($path));
   $filename = basename($path);
-  $image = file_save_data($data, $directory . $filename, FileSystemInterface::EXISTS_REPLACE);
+  $image = \Drupal::service('file.repository')->writeData($data, $directory . $filename, FileSystemInterface::EXISTS_REPLACE);
   return $image;
 }
 
@@ -437,12 +443,12 @@ function d_content_init_parse_file_path($path) {
   // Check if image name contains module.
   $parts = explode('/', $path);
   if (count($parts) == 2) {
-    $dir = drupal_get_path('module', $parts[0]);
+    $dir = \Drupal::service('extension.path.resolver')->getPath('module', $parts[0]);
     $filename = $parts[1];
   }
   else {
     // In case there is no module name specified in path, use placeholder file.
-    $dir = drupal_get_path('module', 'd_content_init');
+    $dir = \Drupal::service('extension.path.resolver')->getPath('module', 'd_content_init');
     $filename = 'placeholder.png';
   }
 

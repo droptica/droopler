@@ -11,7 +11,7 @@ use Drupal\paragraphs\ParagraphInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class SubscribeFileForm.
+ * File subscribe form.
  *
  * @package Drupal\d_p_subscribe_file\Forms
  */

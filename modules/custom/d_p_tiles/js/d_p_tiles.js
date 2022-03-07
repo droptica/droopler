@@ -11,7 +11,7 @@
     attach: function (context, settings) {
 
       // Enable Masonry.
-      $(document).ready(function() {
+      $(document).ready(function () {
         var $wrapper = $('.d-tiles, .d-side-tiles', context);
         var videoElements = $wrapper.find('.video-embed');
         var timer;
@@ -27,11 +27,11 @@
           }
         }
 
-        window.onresize = function() {
+        window.onresize = function () {
           clearTimeout(timer);
           timer = setTimeout(scaleVideo, 100);
         };
-        videoElements.each(function(){
+        videoElements.each(function () {
           $(this).addClass('d-tiles-item');
         });
 
@@ -41,12 +41,12 @@
           percentPosition: true,
         });
 
-        $(window).on('lazyloaded', function(){
+        $(window).on('lazyloaded', function () {
           $grid.masonry('layout');
         });
 
         // Add titles to items.
-        $wrapper.find('.d-tiles-item').each(function(){
+        $wrapper.find('.d-tiles-item').each(function () {
           var alt = $(this).find('img').attr('alt');
           var subalt = '';
           if (alt) {

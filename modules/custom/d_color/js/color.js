@@ -5,7 +5,7 @@
   // Colorpicker + reset button.
   Drupal.behaviors.dpColorpicker = {
     attach: function (context, settings) {
-      $(context).ready(function() {
+      $(context).ready(function () {
         $('.form-type-d-color', context).once('d_color_picker').each(function () {
           var $element = $(this);
 

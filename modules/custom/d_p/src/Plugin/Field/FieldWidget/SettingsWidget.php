@@ -176,39 +176,39 @@ class SettingsWidget extends WidgetBase {
           unset($options[$subtype]);
 
           $element[$key] = [
-              '#default_value' => implode(' ', $classes),
-            ] + $options;
+            '#default_value' => implode(' ', $classes),
+          ] + $options;
           break;
 
         case 'select':
           $element[$key] = [
-              '#default_value' => empty($value) ? $options['#default_value'] : $value,
-            ] + $options;
+            '#default_value' => empty($value) ? $options['#default_value'] : $value,
+          ] + $options;
           break;
 
         case 'number':
           $element[$key] = [
-              '#default_value' => !empty($value) && $value !== '' ? $value : $options['#default_value'],
-              '#min' => $element[$key]['#min'] ?? NULL,
-              '#max' => $element[$key]['#max'] ?? NULL,
-            ] + $options;
+            '#default_value' => !empty($value) && $value !== '' ? $value : $options['#default_value'],
+            '#min' => $element[$key]['#min'] ?? NULL,
+            '#max' => $element[$key]['#max'] ?? NULL,
+          ] + $options;
           break;
 
         case 'checkboxes':
           // Convert stdClass to array after deserialization.
           $value = is_object($value) ? (array) $value : $value;
           $element[$key] = [
-              '#default_value' => empty($value) ? $options['#default_value'] : $value,
-            ] + $options;
+            '#default_value' => empty($value) ? $options['#default_value'] : $value,
+          ] + $options;
           break;
 
         default:
           $value = $config->$key ?? $options['#default_value'];
 
           $element[$key] = [
-              '#size' => $options['#size'] ?? 32,
-              '#default_value' => $value,
-            ] + $options;
+            '#size' => $options['#size'] ?? 32,
+            '#default_value' => $value,
+          ] + $options;
       }
 
       if ($element['#required']) {

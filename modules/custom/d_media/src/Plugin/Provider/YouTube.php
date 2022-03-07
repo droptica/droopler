@@ -22,7 +22,7 @@ class YouTube extends ProviderPluginBase {
    */
   public static function getIdFromInput($input) {
     preg_match('/^https?:\/\/(www\.)?((?!.*list=)youtube\.com\/watch\?.*v=|youtu\.be\/)(?<id>[0-9A-Za-z_-]*)/', $input, $matches);
-    return isset($matches['id']) ? $matches['id'] : FALSE;
+    return $matches['id'] ?? FALSE;
   }
 
   /**
@@ -56,7 +56,7 @@ class YouTube extends ProviderPluginBase {
    */
   protected function getLanguagePreference() {
     preg_match('/[&\?]hl=(?<language>[a-z\-]*)/', $this->getInput(), $matches);
-    return isset($matches['language']) ? $matches['language'] : FALSE;
+    return $matches['language'] ?? FALSE;
   }
 
   /**
