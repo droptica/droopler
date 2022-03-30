@@ -4,6 +4,8 @@ Components Lang switcher
 Styleguide 2.2
 */
 
+@use "sass:math";
+
 // Colour variables used in this component.
 $lang-dropdown-header-color: $menu-main-link-color !default;  // Color of language link in main menu
 $lang-dropdown-toggle-color: $menu-main-link-dropdown !default; // Color of language dropdown toggle icon
@@ -77,7 +79,7 @@ $secondary-menu-lang-dropdown-height: 2.4rem !default;
       padding: 0;
       left: auto;
       right: -0.063rem;
-      top: ($lang-dropdown-link-height / 2) - 1.6rem;
+      top: (math.div($lang-dropdown-link-height, 2)) - 1.6rem;
       border-radius: 0;
 
       // Submenu forced to show on hover

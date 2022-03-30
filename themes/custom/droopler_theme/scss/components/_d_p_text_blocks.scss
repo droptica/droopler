@@ -4,6 +4,8 @@ Components Boxes
 Styleguide 2.8
 */
 
+@use "sass:math";
+
 // Color variables used in this paragraph.
 $d-p-single-box-line-color: $color-agamemnon !default;
 $d-p-single-box-line-color-inverted: $color-nestor !default;
@@ -23,7 +25,7 @@ $d-p-text-blocks-tiles-padding: 20px !default;
 $d-p-text-blocks-tiles-spacing: 5px !default;
 
 // Other settings.
-$d-p-single-text-box-grid-image-padding-bottom: $grid-gutter-width / 2 !default;
+$d-p-single-text-box-grid-image-padding-bottom: math.div($grid-gutter-width, 2) !default;
 $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
 // Font mixins
@@ -169,10 +171,10 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
       $cols: 1, 2, 3, 4, 6, 12;
       @each $col in $cols {
         &.col-md-#{$col} {
-          &:nth-child(#{12/$col}n) {
+          &:nth-child(#{math.div(12, $col)}n) {
             padding-right: 0;
           }
-          &:nth-child(-n+#{12/$col}) {
+          &:nth-child(-n+#{math.div(12, $col)}) {
             padding-top: 0;
           }
         }

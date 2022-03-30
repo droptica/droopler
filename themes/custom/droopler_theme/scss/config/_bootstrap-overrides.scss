@@ -1,7 +1,7 @@
 // Bootsrap variable override.
 //
 // Styleguide 1.1
-
+@use "sass:math";
 // Layout
 $grid-gutter-width: 60px !default;
 
@@ -38,10 +38,10 @@ $btn-border-radius-lg: 0 !default;
 $btn-border-radius-sm: 0 !default;
 $input-btn-padding-y: 0.90rem !default;
 $input-btn-padding-x: 1rem !default;
-$input-btn-padding-y-sm: $input-btn-padding-y * 2/3 !default;
-$input-btn-padding-x-sm: $input-btn-padding-x * 2/3 !default;
-$input-btn-padding-y-lg: $input-btn-padding-y * 4/3 !default;
-$input-btn-padding-x-lg: $input-btn-padding-x * 4/3 !default;
+$input-btn-padding-y-sm: $input-btn-padding-y * math.div(2, 3) !default;
+$input-btn-padding-x-sm: $input-btn-padding-x * math.div(2, 3) !default;
+$input-btn-padding-y-lg: $input-btn-padding-y * math.div(4, 3) !default;
+$input-btn-padding-x-lg: $input-btn-padding-x * math.div(4, 3) !default;
 $input-btn-border-width: 0.125rem !default;
 $primary: $color-achillies !default;
 $secondary: $color-nestor !default;
@@ -53,4 +53,3 @@ $input-padding-x: 1.5rem !default;
 $input-border-color: $color-hecuba !default;
 $input-border-radius: 0 !default;
 $input-border-width: 1px !default;
-

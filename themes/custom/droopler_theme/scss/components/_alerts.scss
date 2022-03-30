@@ -1,8 +1,10 @@
+@use "sass:math";
+
 #main-wrapper {
   & > .container {
     .alert {
-      margin-left: -($grid-gutter-width/2);
-      margin-right: -($grid-gutter-width/2);
+      margin-left: -(math.div($grid-gutter-width, 2));
+      margin-right: -(math.div($grid-gutter-width, 2));
     }
   }
 }
