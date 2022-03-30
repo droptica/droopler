@@ -2,6 +2,8 @@
 Menu general variables and mixins.
  */
 
+@use "sass:math";
+
 // Colour variables used in this component
 $menu-main-link-color: $color-cassandra !default;
 $menu-main-link-active-color: $color-achillies !default;
@@ -49,7 +51,7 @@ $submenu-link-height: 2.9rem !default; // Height of links in submenu (desktop)
 $mobile-sidebar-items-spacing: 10px !default;
 $mobile-sidebar-submenu-spacing: 15px !default;
 $mobile-submenu-padding: $mobile-sidebar-items-spacing $mobile-sidebar-submenu-spacing !default;
-$mobile-submenu-item-padding: $mobile-sidebar-items-spacing/2 0 !default;
+$mobile-submenu-item-padding: math.div($mobile-sidebar-items-spacing, 2) 0 !default;
 $submenu-dropdown-min-width: 12rem !default;
 
 $secondary-menu-link-colors: $color-iphis !default;
@@ -132,7 +134,7 @@ $sidebar-animation-speed: 600ms !default;
   font-size: $menu-font-size-mobile;
   line-height: $mega-menu-link-line-height;
   font-family: $mega-menu-submenu-font-family;
-  padding: $mobile-sidebar-items-spacing/2 $mobile-sidebar-submenu-spacing;
+  padding: math.div($mobile-sidebar-items-spacing, 2) $mobile-sidebar-submenu-spacing;
   font-weight: $mega-menu-submenu-font-weight;
   color: $menu-main-link-active-color;
   width: 100%;
