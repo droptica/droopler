@@ -25,3 +25,7 @@ To do that go to `/store/add/online` URL and set up your store details.
 Having configured Commerce store, you can start adding products - if enabled `d_commerce_product` module
 you'll have an additional type of product simply called "Product". Those product types will be displayed on the page `/shop`
 provided by the `d_commerce_products_list` module.
+
+## 3.1.0
+The way titles are displayed has been changed with the removal of the DrooplerProductVariation class,
+information on how to restore it can be found in web/UPDATE.md

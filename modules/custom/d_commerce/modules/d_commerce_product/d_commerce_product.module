@@ -115,14 +115,6 @@ function d_commerce_product_entity_view_mode_alter(&$view_mode, EntityInterface 
 }
 
 /**
- * Implements hook_entity_type_build().
- */
-function d_commerce_product_entity_type_build(array &$entity_types) {
-  /** @var \Drupal\Core\Entity\EntityType[] $entity_types */
-  $entity_types['commerce_product_variation']->setClass('Drupal\d_commerce_product\Entity\DrooplerProductVariation');
-}
-
-/**
  * Returns product page title based on number of variations.
  *
  * @param \Drupal\commerce_product\Entity\ProductInterface $product
