@@ -2247,3 +2247,15 @@ function droopler_update_8137(&$sandbox) {
   \Drupal::service('d_update')->checklist()
     ->saveProgress(['v3.0.1' => $values]);
 }
+
+/**
+ * Droopler 3.0.1 Updating d_p_tiles paragraph field grouping.
+ */
+function droopler_update_8138(&$sandbox) {
+  $values['droopler__droopler_update_8138_1'] = update_modules_configuration([
+    'd_p_tiles',
+  ], '8138');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v3.0.1' => $values]);
+}

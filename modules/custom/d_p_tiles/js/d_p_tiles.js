@@ -12,14 +12,14 @@
 
       // Enable Masonry.
       $(document).ready(function () {
-        var $wrapper = $('.d-tiles, .d-side-tiles', context);
-        var videoElements = $wrapper.find('.video-embed');
-        var timer;
+        let $wrapper = $('.d-tiles, .d-side-tiles', context);
+        let videoElements = $wrapper.find('.video-embed');
+        let timer;
 
         function scaleVideo(){
           if (videoElements) {
-            var resizedImage = $('.image-style-tiles-thumbnail').first();
-            var imageHeight = resizedImage.height() + 4;
+            let resizedImage = $('.image-style-tiles-thumbnail').first();
+            let imageHeight = resizedImage.height() + 4;
 
             videoElements.each(function () {
               $(this).css('max-height', imageHeight + 'px');
@@ -35,7 +35,7 @@
           $(this).addClass('d-tiles-item');
         });
 
-        var $grid = $wrapper.masonry({
+        let $grid = $wrapper.masonry({
           itemSelector: '.d-tiles-item',
           columnWidth: '.d-tiles-sizer',
           percentPosition: true,
@@ -47,16 +47,16 @@
 
         // Add titles to items.
         $wrapper.find('.d-tiles-item').each(function () {
-          var alt = $(this).find('img').attr('alt');
-          var subalt = '';
+          let alt = $(this).find('img').attr('alt');
+          let subalt = '';
           if (alt) {
-            var parts = alt.split('/', 2);
+            let parts = alt.split('/', 2);
             if (parts.length > 1) {
               alt = parts[0];
               subalt = parts[1];
             }
-            var $caption_wrapper = $('<div class="d-tiles-caption"></div>').appendTo($(this));
-            var $caption = $('<div></div>').appendTo($caption_wrapper).text(alt);
+            let $caption_wrapper = $('<div class="d-tiles-caption"></div>').appendTo($(this));
+            let $caption = $('<div></div>').appendTo($caption_wrapper).text(alt);
             if (subalt !== '') {
               $('<small></small>').appendTo($caption).text(subalt);
             }
