@@ -28,4 +28,4 @@ provided by the `d_commerce_products_list` module.
 
 ## 3.1.0
 The way titles are displayed has been changed with the removal of the DrooplerProductVariation class,
-information on how to restore it can be found in [UPDATE.md](../../../../../../UPDATE.md)
+information on how to restore it can be found in [UPDATE.md](../../../../../UPDATE.md)

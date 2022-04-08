@@ -1,7 +1,6 @@
 # Updating Droopler
 
-## Droopler 3.0.1
-
+## Droopler 3.1.0
 Class DrooplerProductVariation has been removed, if you want to restore it for your project you can find it here:
 https://github.com/droptica/droopler/tree/master/modules/custom/d_commerce/modules/d_commerce_product/src/Entity
 And attach it in:
