@@ -26,6 +26,5 @@ Having configured Commerce store, you can start adding products - if enabled `d_
 you'll have an additional type of product simply called "Product". Those product types will be displayed on the page `/shop`
 provided by the `d_commerce_products_list` module.
 
-## 3.1.0
-The way titles are displayed has been changed with the removal of the DrooplerProductVariation class,
-information on how to restore it can be found in [UPDATE.md](../../../../../UPDATE.md)
+## Product and variation titles
+The way titles are displayed has been changed with the removal of the `DrooplerProductVariation` class. Product and variation titles are not glued together anymore. Information on how to restore it can be found in [UPDATE.md](../../../../../UPDATE.md).
