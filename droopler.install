@@ -2189,7 +2189,7 @@ function droopler_update_8133(&$sandbox) {
 }
 
 /**
- * Droopler 3.0.1 grant access contextual links permission to editor users.
+ * Droopler 3.1 grant access contextual links permission to editor users.
  */
 function droopler_update_8134() {
   $permission = 'access contextual links';
@@ -2202,11 +2202,11 @@ function droopler_update_8134() {
 
   Drupal::service('d_update')
     ->checklist()
-    ->saveProgress(['v3.0.1' => $values]);
+    ->saveProgress(['v3.1' => $values]);
 }
 
 /**
- * Droopler 3.0.1 Add settings widget to the "d_p_side_by_side" module.
+ * Droopler 3.1 Add settings widget to the "d_p_side_by_side" module.
  */
 function droopler_update_8135(&$sandbox) {
   $values['droopler__droopler_update_8135_1'] = update_modules_configuration([
@@ -2214,11 +2214,11 @@ function droopler_update_8135(&$sandbox) {
   ], '8135');
 
   \Drupal::service('d_update')->checklist()
-    ->saveProgress(['v3.0.1' => $values]);
+    ->saveProgress(['v3.1' => $values]);
 }
 
 /**
- * Droopler 3.0.1 Update CTA widget to the "d_p_carousel" module.
+ * Droopler 3.1 Update CTA widget to the "d_p_carousel" module.
  */
 function droopler_update_8136(&$sandbox) {
   $values['droopler__droopler_update_8136_1'] = update_modules_configuration([
@@ -2226,11 +2226,11 @@ function droopler_update_8136(&$sandbox) {
   ], '8136');
 
   \Drupal::service('d_update')->checklist()
-    ->saveProgress(['v3.0.1' => $values]);
+    ->saveProgress(['v3.1' => $values]);
 }
 
 /**
- * Droopler 3.0.1 Changing CTA widget settings configuration.
+ * Droopler 3.1 Changing CTA widget settings configuration.
  */
 function droopler_update_8137(&$sandbox) {
   $values['droopler__droopler_update_8137_1'] = update_modules_configuration([
@@ -2245,17 +2245,18 @@ function droopler_update_8137(&$sandbox) {
   ], '8137');
 
   \Drupal::service('d_update')->checklist()
-    ->saveProgress(['v3.0.1' => $values]);
+    ->saveProgress(['v3.1' => $values]);
 }
 
 /**
- * Droopler 3.0.1 Updating d_p_tiles paragraph field grouping.
+ * Droopler 3.1 Updating d_p_tiles and d_p_side_tiles paragraph field grouping.
  */
 function droopler_update_8138(&$sandbox) {
   $values['droopler__droopler_update_8138_1'] = update_modules_configuration([
     'd_p_tiles',
+    'd_p_side_tiles',
   ], '8138');
 
   \Drupal::service('d_update')->checklist()
-    ->saveProgress(['v3.0.1' => $values]);
+    ->saveProgress(['v3.1' => $values]);
 }

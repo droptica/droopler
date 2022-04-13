@@ -59,10 +59,10 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 <section {{ wrapper_attributes.addClass(wrapper_classes) }}>
   <div{{ attributes.addClass(classes) }}>
     <div {{ paragraph_attributes.addClass(paragraph_classes) }}>
-      {{ content.group_d_tiles_gallery }}
       {% block content %}
         {{ content.group_d_tiles_content }}
       {% endblock %}
+      {{ content.group_d_tiles_gallery }}
     </div>
     {% if content.group_d_tiles_cta %}
       <div class="container mt-4">

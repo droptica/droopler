@@ -65,23 +65,23 @@
   'd-p-side-tiles-content-fields',
 ] %}
 {% block paragraph %}
-<section {{ wrapper_attributes }}>
-  <div {{ attributes.addClass(classes) }}>
-    <div {{ tiles_wrapper_attributes.addClass(tiles_wrapper_classes) }}>
-      <div {{ images_side_attributes.addClass(images_side_classes) }}>
-        {{ content.group_tiles_content.field_d_media_image }}
-      </div>
-      <div {{ content_side_attributes.addClass(content_side_classes) }}>
-        <div {{ content_fields_attributes.addClass(content_fields_classes) }}>
-          {{ content.group_tiles_content|without('field_d_media_image', 'field_d_cta_link') }}
-          {% if content.field_d_cta_link.0 %}
-            <div class="mt-4">
-              {{ content.field_d_cta_link }}
-            </div>
-          {% endif %}
+  <section {{ wrapper_attributes }}>
+    <div {{ attributes.addClass(classes) }}>
+      <div {{ tiles_wrapper_attributes.addClass(tiles_wrapper_classes) }}>
+        <div {{ images_side_attributes.addClass(images_side_classes) }}>
+          {{ content.group_d_side_tiles_gallery }}
+        </div>
+        <div {{ content_side_attributes.addClass(content_side_classes) }}>
+          <div {{ content_fields_attributes.addClass(content_fields_classes) }}>
+            {{ content.group_d_side_tiles_content }}
+            {% if content.group_d_side_tiles_cta %}
+              <div class="mt-4">
+                {{ content.group_d_side_tiles_cta }}
+              </div>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {% endblock paragraph %}
