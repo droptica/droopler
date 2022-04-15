@@ -6,7 +6,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
- * Class ThemeLogoService.
+ * ThemeLogo service.
  *
  * @package Drupal\d_demo\Service
  */

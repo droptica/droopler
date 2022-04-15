@@ -23,7 +23,7 @@ class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInt
   /**
    * Current Request.
    *
-   * @var Symfony\Component\HttpFoundation\Request
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $request;
 

@@ -4,6 +4,8 @@ Mixins file taken from we_megamenu module.
 Only few basic mixins taken to keep the primary functionality allowing user setting columns width for blocks in submenu.
  */
 
+@use "sass:math";
+
 @mixin flex-width-col-xs($val) {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 $val;
@@ -58,11 +60,11 @@ $percent: 12;
     .#{$class-grid} {
       .#{$flex-item}#{$i} {
         @if $type==flex {
-          @include flex-width-col-xs(percentage($i / $percent) - 2.12766%);
+          @include flex-width-col-xs(percentage(math.div($i, $percent)) - 2.12766%);
         }
 
         @else if $type==width {
-          width: (percentage($i / $percent) - 2.12766%);
+          width: (percentage(math.div($i, $percent)) - 2.12766%);
         }
       }
     }

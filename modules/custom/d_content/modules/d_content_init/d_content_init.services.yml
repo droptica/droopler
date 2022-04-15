@@ -4,7 +4,7 @@ services:
     arguments: ['@entity_type.manager', '@serialization.yaml', '@logger.factory', '@current_user', '@language_manager', '@module_handler', '@uuid', '@plugin.manager.block', '@theme_handler']
   d_content_init.manager_media:
     class: Drupal\d_content_init\ContentInitManagerMedia
-    arguments: ['@entity_type.manager', '@serialization.yaml', '@logger.factory', '@current_user', '@language_manager', '@module_handler', '@file_system']
+    arguments: ['@entity_type.manager', '@serialization.yaml', '@logger.factory', '@current_user', '@language_manager', '@module_handler', '@file_system', '@file.repository']
   d_content_init.config_update:
     class: Drupal\d_content_init\Services\ConfigUpdate
     arguments: ['@config.factory', '@module_handler', '@logger.factory']

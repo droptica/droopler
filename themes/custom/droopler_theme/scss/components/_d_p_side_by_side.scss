@@ -4,6 +4,8 @@ Side by Side
 Styleguide 2.d_p_side_by_side
 */
 
+@use "sass:math";
+
 // Colour variables used in this paragraph
 $d-p-side-by-side-line-color: $color-agamemnon !default;
 $d-p-side-by-side-line-color-inverted: $color-nestor !default;
@@ -14,7 +16,7 @@ $d-p-side-by-side-header-padding: 2.5% !default;
 
 $d-p-side-by-side-content-padding-x: 7vw !default;
 $d-p-side-by-side-text-box-padding-y: $grid-gutter-width !default;
-$d-p-side-by-side-node-box-margin-x: 0 - $grid-gutter-width / 2 !default;
+$d-p-side-by-side-node-box-margin-x: 0 - math.div($grid-gutter-width, 2) !default;
 $d-p-side-by-side-image-background-padding-y: 130px !default;
 
 // Other settings

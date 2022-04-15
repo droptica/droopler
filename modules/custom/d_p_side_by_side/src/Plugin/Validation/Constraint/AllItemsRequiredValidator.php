@@ -2,7 +2,6 @@
 
 namespace Drupal\d_p_side_by_side\Plugin\Validation\Constraint;
 
-use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

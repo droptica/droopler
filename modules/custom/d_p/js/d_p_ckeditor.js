@@ -3,7 +3,7 @@
   Drupal.behaviors.customCKEditorConfig = {
     attach: function (context, settings) {
 
-      $(context).ready(function() {
+      $(context).ready(function () {
         d_p_ckeditor();
       });
 

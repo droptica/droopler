@@ -2,27 +2,27 @@
 
 namespace Drupal\d_p\Helper;
 
+use Drupal\d_p\ParagraphSettingTypesInterface;
 use Drupal\d_p\Plugin\Field\FieldWidget\SettingsWidget;
 use Drupal\paragraphs\Entity\Paragraph;
 
 /**
- * Class ParagraphModifiersHelper.
+ * Paragraph helper.
  *
- * @deprecated in droopler:8.x-2.2 and is removed starting from droopler:3.1.0
+ * @deprecated in droopler:8.x-2.2 and is removed from droopler:3.1.0
  * As this is working on the particular field instance,
  * we have unified and moved all the methods directly to the field list class:
  * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
  *
  * @see https://www.drupal.org/project/droopler/issues/3180465
  * @package Drupal\d_p\Helper
- *
  */
 class ParagraphModifiersHelper {
 
   /**
    * Settings object.
    *
-   * @var \stdClass
+   * @var object
    */
   protected $modifiers;
 
@@ -111,16 +111,16 @@ class ParagraphModifiersHelper {
    *
    * @param string $name
    *   Name of the new modifier to be set.
-   * @param null $value
+   * @param null|string $value
    *   Optional value for the new modifier.
    */
   public function setModifier($name, $value = NULL) {
     if (empty($value)) {
-      $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME) ?? '';
+      $classes = $this->getModifier(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME) ?? '';
       $classesSet = explode(' ', $classes);
       $classesSet[] = $name;
 
-      $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', $classesSet);
+      $this->modifiers->{ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME} = implode(' ', $classesSet);
     }
     else {
       $this->modifiers->$name = $value;
@@ -130,17 +130,17 @@ class ParagraphModifiersHelper {
   /**
    * Removes specified modifier.
    *
-   * @param $name
+   * @param string $name
    *   Name of the modifier to be removed.
    */
   public function removeModifier($name) {
     if ($this->hasClass($name)) {
-      $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME) ?? '';
+      $classes = $this->getModifier(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME) ?? '';
       $classesSet = explode(' ', $classes);
 
       unset($classesSet[array_search($name, $classesSet)]);
 
-      $this->modifiers->{SettingsWidget::CSS_CLASS_SETTING_NAME} = implode(' ', array_unique($classesSet));
+      $this->modifiers->{ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME} = implode(' ', array_unique($classesSet));
     }
     elseif ($this->checkPropertyExists($name)) {
       unset($this->modifiers->$name);
@@ -150,11 +150,11 @@ class ParagraphModifiersHelper {
   /**
    * Replaces specified modifier with new one.
    *
-   * @param $name
+   * @param string $name
    *   Name of modifier to be replaced.
-   * @param $newName
+   * @param string $newName
    *   Name of the new modifier to be set.
-   * @param null $newValue
+   * @param null|string $newValue
    *   Optional value set for the new modifier.
    */
   public function replaceModifier($name, $newName, $newValue = NULL) {
@@ -167,16 +167,18 @@ class ParagraphModifiersHelper {
   /**
    * Checks if specified class were added to custom classes setting.
    *
-   * @param $class
+   * @param string $class
+   *   Class name.
    *
    * @return bool
+   *   Return false if class doesn't exist.
    */
   public function hasClass($class) {
-    if (!$this->checkPropertyExists(SettingsWidget::CSS_CLASS_SETTING_NAME)) {
+    if (!$this->checkPropertyExists(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME)) {
       return FALSE;
     }
 
-    $classesSet = explode(' ', $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME));
+    $classesSet = explode(' ', $this->getModifier(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME));
 
     return in_array($class, $classesSet);
   }
@@ -185,6 +187,7 @@ class ParagraphModifiersHelper {
    * Returns name of field containing settings.
    *
    * @return string
+   *   Return field name.
    */
   public function getSettingsFieldName() {
     return $this->settingsFieldName;
@@ -209,6 +212,7 @@ class ParagraphModifiersHelper {
    * Returns paragraph modifiers encoded in d_settings field format.
    *
    * @return false|string
+   *   Return encoded paragraph modifiers.
    */
   public function getModifiersEncoded() {
     return json_encode($this->modifiers);
@@ -217,10 +221,11 @@ class ParagraphModifiersHelper {
   /**
    * Get custom class modifier.
    *
-   * @return |null
+   * @return string|null
+   *   Return classes.
    */
   public function getCustomClass() {
-    $classes = $this->getModifier(SettingsWidget::CSS_CLASS_SETTING_NAME);
+    $classes = $this->getModifier(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME);
 
     // Add default classes if not present.
     $defaults = SettingsWidget::getModifierDefaults();
@@ -237,8 +242,10 @@ class ParagraphModifiersHelper {
   }
 
   /**
-   * Method checks if currently analyzed paragraph has specified property in
-   * d_settings field.
+   * Method checks property.
+   *
+   * Method checks if currently analyzed paragraph
+   * has specified property in d_settings field.
    *
    * @param string $name
    *   Name of property to be checked.

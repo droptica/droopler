@@ -181,7 +181,9 @@ function d_p_move_heading_type(array &$form) {
  * Custom validator for Heading Type.
  *
  * @param array $element
+ *   Array of element.
  * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   State of form.
  */
 function d_p_heading_type_validate(array $element, FormStateInterface $form_state) {
   $parents = [];

@@ -32,7 +32,12 @@ class GenerateConfigHashCommand extends DrushCommands {
     $this->configCompare = $config_compare;
   }
 
-  function drush_print($arg = NULL) {
+  /**
+   * Drush print.
+   *
+   * @todo Refactor this function.
+   */
+  public function drush_print($arg = NULL) {
     return $arg;
   }
 
@@ -51,9 +56,9 @@ class GenerateConfigHashCommand extends DrushCommands {
     $hash = $this->configCompare->generateHashFromDatabase($config_name);
     Drush::output()->writeln(
       dt('Generated hash for config @config_name: @hash', [
-      '@config_name' => $config_name,
-      '@hash' => $hash,
-    ]));
+        '@config_name' => $config_name,
+        '@hash' => $hash,
+      ]));
   }
 
 }

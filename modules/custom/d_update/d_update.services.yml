@@ -21,6 +21,7 @@ services:
       - '@d_update.update_checklist'
       - '@extension.list.module'
       - '@config.factory'
+      - '@extension.path.resolver'
   d_update.drush.generate_config_hash_command:
     class: \Drupal\d_update\Commands\GenerateConfigHashCommand
     arguments:

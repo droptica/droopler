@@ -79,7 +79,7 @@ function set_columns_sizes(array $items, array $column_count) {
     if (!empty($items_per_row)) {
       foreach ($items as $idx => $list_item) {
         /** @var \Drupal\Core\Template\Attribute $atr */
-        $item_attributes = $items[$idx]['attributes'];
+        $item_attributes = $list_item['attributes'];
         $class_prefix = 'col-' . ($breakpoint == 'xs' ? '' : $breakpoint . '-');
         if (($idx + 1) % $items_per_row == 0) {
           $item_attributes->addClass($breakpoint . '-grid-row-end-item');
