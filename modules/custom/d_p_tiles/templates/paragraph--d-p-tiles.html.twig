@@ -62,6 +62,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
       {% block content %}
         {{ content.group_d_tiles_content }}
       {% endblock %}
+      {{ content.group_d_tiles_gallery }}
     </div>
     {% if content.group_d_tiles_cta %}
       <div class="container mt-4">
