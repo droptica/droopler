@@ -186,7 +186,7 @@ class ContentHelper {
       }
     }
 
-    return $values;
+    return array_values($values);
   }
 
 }
