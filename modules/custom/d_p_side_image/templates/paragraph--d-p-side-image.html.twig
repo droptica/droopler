@@ -54,7 +54,9 @@
   'clearfix',
   'position-relative',
 ] %}
-{% set content_side_classes = ['content-inside-wrapper',] %}
+{% set content_side_classes = [
+  'content-inside-wrapper',
+] %}
 {% set content_side_classes = content_side_classes|merge([text_class]) %}
 
 {% block paragraph %}
