@@ -92,6 +92,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   .content-wrapper {
     position: relative;
     z-index: 2;
+    word-break: break-all;
   }
 
   .d-p-text-block {
@@ -144,6 +145,9 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
       .content-wrapper {
         padding: $d-p-text-blocks-tiles-padding 0;
+        .field--name-field-d-main-title {
+          text-align: center;
+        }
       }
     }
 
