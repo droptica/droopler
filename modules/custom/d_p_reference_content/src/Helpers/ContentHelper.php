@@ -51,7 +51,7 @@ class ContentHelper {
    * @return mixed
    *   Return ids.
    */
-  public function getSortedContentByType($type, $sortBy, $sort, array $values) {
+  public function getSortedContentByType(string $type, string $sortBy, string $sort, array $values) {
     $query = $this->connection->select('node_field_data', 'nfd')
       ->fields('nfd', ['nid', 'created'])
       ->orderBy($sortBy, $sort)
@@ -89,7 +89,7 @@ class ContentHelper {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function replaceContent(array &$variables, $entity_type, $view_mode, $field, array $new_values) {
+  public function replaceContent(array &$variables, string $entity_type, string $view_mode, string $field, array $new_values) {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['elements']['#paragraph'];
     $paragraph->set($field, $new_values);
@@ -154,6 +154,39 @@ class ContentHelper {
     }
 
     return $result;
+  }
+
+  /**
+   * Delete unpublished content.
+   *
+   * @param array $values
+   *   Array with content values.
+   *
+   * @return array
+   *   Content without unpublished nodes.
+   */
+  public function getPublishedContent(array $values) {
+    $nids = [];
+    foreach ($values as $value) {
+      $nids[] = $value['target_id'];
+    }
+
+    $results = $this->connection->select('node_field_data', 'nfd')
+      ->fields('nfd', ['nid'])
+      ->condition('nfd.status', 1)
+      ->condition('nfd.nid', $nids, 'IN')
+      ->execute()->fetchCol();
+
+    $diff = array_values(array_diff($nids, $results));
+
+    // Remove data if target exist.
+    foreach ($values as $key => $value) {
+      if (in_array($value['target_id'], $diff)) {
+        unset($values[$key]);
+      }
+    }
+
+    return array_values($values);
   }
 
 }

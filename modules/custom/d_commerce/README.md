@@ -1,6 +1,6 @@
 # Droopler Commerce Modules
-Droopler, starting from version 2.1 comes with Drupal Commerce integration modules. 
-Their goal is to provide an out-of-the-box Commerce experience. 
+Droopler, starting from version 2.1 comes with Drupal Commerce integration modules.
+Their goal is to provide an out-of-the-box Commerce experience.
 All the views like Cart, Categories, Products, and Orders are supported by `droopler_theme` by default.
 
 ## Setup
@@ -25,3 +25,6 @@ To do that go to `/store/add/online` URL and set up your store details.
 Having configured Commerce store, you can start adding products - if enabled `d_commerce_product` module
 you'll have an additional type of product simply called "Product". Those product types will be displayed on the page `/shop`
 provided by the `d_commerce_products_list` module.
+
+## Product and variation titles
+The way titles are displayed has been changed with the removal of the `DrooplerProductVariation` class. Product and variation titles are not glued together anymore. Information on how to restore it can be found in [UPDATE.md](../../../../../UPDATE.md).

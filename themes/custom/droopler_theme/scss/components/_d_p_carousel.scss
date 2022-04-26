@@ -2,6 +2,8 @@
 Components Carousel
 */
 
+@use "sass:math";
+
 // Colour variables used in this paragraph.
 $d-p-carousel-item-line-color: $color-agamemnon !default;
 $d-p-carousel-item-line-color-inverted: $color-nestor !default;
@@ -67,8 +69,8 @@ $d-p-carousel-arrow-hover-opacity: 0.3 !default;
   }
 
   .field--name-field-d-p-cs-item-reference {
-    margin-left: $d-p-carousel-arrow-size / 2;
-    margin-right: $d-p-carousel-arrow-size / 2;
+    margin-left: math.div($d-p-carousel-arrow-size, 2);
+    margin-right: math.div($d-p-carousel-arrow-size, 2);
     @include media-breakpoint-up(sm) {
       margin-left: 0;
       margin-right: 0;

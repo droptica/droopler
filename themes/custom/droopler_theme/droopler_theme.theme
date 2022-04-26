@@ -157,7 +157,7 @@ function droopler_theme_preprocess_menu_local_task(&$variables) {
   $link = $variables['element']['#link'];
   $url = $link['url'];
   $options = $url->getOptions();
-  $url->setOptions($options + $link['localized_options']);
+  $url->setOptions($options + ($link['localized_options'] ?? []));
   $variables['item'] = Link::fromTextAndUrl($link['title'], $url);
 }
 

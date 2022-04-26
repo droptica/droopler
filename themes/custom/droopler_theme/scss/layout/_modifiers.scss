@@ -2,6 +2,8 @@
 //
 // Styleguide 3.1
 
+@use "sass:math";
+
 // Colour variables used in this file.
 $light-gray-background: $color-hector !default;
 $light-gray-background-2: $color-paris !default;
@@ -153,7 +155,7 @@ $two-columned-header-line-margin: 0.625rem !default;
           }
         }
         @include media-breakpoint-down(sm) {
-          padding-right: $grid-gutter-width / 2;
+          padding-right: math.div($grid-gutter-width, 2);
         }
       }
 
@@ -167,7 +169,7 @@ $two-columned-header-line-margin: 0.625rem !default;
           }
         }
         @include media-breakpoint-down(sm) {
-          padding-left: $grid-gutter-width / 2;
+          padding-left: math.div($grid-gutter-width, 2);
         }
       }
 
@@ -207,8 +209,8 @@ $two-columned-header-line-margin: 0.625rem !default;
         @include media-breakpoint-down(xs) {
           .item-1 &, .item-2 & {
             justify-content: flex-start;
-            padding-right: $grid-gutter-width / 2;
-            padding-left: $grid-gutter-width / 2;
+            padding-right: math.div($grid-gutter-width, 2);
+            padding-left: math.div($grid-gutter-width, 2);
           }
         }
 

@@ -2,6 +2,8 @@
  * Side embed paragraph.
  */
 
+@use "sass:math";
+
 // Colour variables used in this paragraph.
 $d-p-side-embed-background-color: $color-agamemnon !default;
 $d-p-side-embed-background-color-secondary: darken($d-p-side-embed-background-color, 15%) !default;
@@ -255,7 +257,7 @@ $d-p-side-embed-long-text-margin-bottom: 0 !default;
         }
         .d-p-side-embed-content-fields {
           padding-right: $d-p-side-embed-half-padding;
-          padding-left: ($grid-gutter-width / 2);
+          padding-left: (math.div($grid-gutter-width, 2));
         }
       }
       &-left {
@@ -264,7 +266,7 @@ $d-p-side-embed-long-text-margin-bottom: 0 !default;
         }
         .d-p-side-embed-content-fields {
           padding-left: $d-p-side-embed-half-padding;
-          padding-right: ($grid-gutter-width / 2);
+          padding-right: (math.div($grid-gutter-width, 2));
         }
       }
     }

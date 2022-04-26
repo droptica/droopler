@@ -17,14 +17,14 @@ function d_p_subscribe_file_requirements($phase) {
     $private_path = PrivateStream::basePath();
     if ($private_path) {
       $requirements['droopler'] = [
-        'title' => t('droopler paragraphs'),
+        'title' => t('Droopler Paragraphs'),
         'value' => t('Private file system path is set'),
         'severity' => REQUIREMENT_INFO,
       ];
     }
     else {
       $requirements['droopler'] = [
-        'title' => t('droopler paragraphs'),
+        'title' => t('Droopler Paragraphs'),
         'value' => t('Private file system path is not set'),
         'severity' => REQUIREMENT_ERROR,
         'description' => t('You need set Private file system path. <a href=":prv-file">How to set the private files directory</a>.', [':prv-file' => 'https://www.drupal.org/node/2392959']),
