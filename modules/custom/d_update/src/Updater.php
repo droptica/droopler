@@ -114,7 +114,7 @@ class Updater {
    *   Config manager service.
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
-   * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
+   * @param \Drupal\Core\Extension\ModuleExtensionList $module_extension_list
    *   Update Module Extension List service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   Config factory service.

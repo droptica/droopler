@@ -96,10 +96,10 @@ function d_product_form_alter(&$form, FormStateInterface $form_state, $form_id) 
           $subject = $subject->render();
           $subject = strlen($subject) > 100 ? substr($subject, 0, 97) . "..." : $subject;
 
-          $message = t(
-            'I would like to ask about @title, link - @link ',
-            ['@title' => $node->getTitle(), '@link' => $alias]
-          );
+          $message = t('I would like to ask about @title, link - @link', [
+            '@title' => $node->getTitle(),
+            '@link' => $alias,
+          ]);
           $form['subject']['widget'][0]['value']['#default_value'] = $subject;
           $form['message']['widget'][0]['value']['#default_value'] = $message;
         }
