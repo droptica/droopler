@@ -1,0 +1,5 @@
+services:
+  d_content_init.commands:
+    class: \Drupal\d_content_init\Commands\DContentInitCommands
+    tags:
+      - { name: drush.command }

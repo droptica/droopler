@@ -493,9 +493,9 @@ function d_content_init_create_all($type = NULL) {
   if (empty($type) || $type === 'block' || $type === 'block_second_run') {
     $block_structure = [];
     if ($type != 'block') {
-      $context = $type;
+      $block_context = $type;
     }
-    $module_handler->alter('block_structure', $block_structure, $context);
+    $module_handler->alter('block_structure', $block_structure, $block_context);
     Drupal::service('d_content_init.manager_block')
       ->importFromFiles($block_structure);
   }
@@ -505,6 +505,7 @@ function d_content_init_create_all($type = NULL) {
   if (empty($type) || $type === 'content') {
     $content_structure = [];
     $module_handler->alter('content_structure', $content_structure, $context);
+    var_dump($content_structure);
     d_content_init_add_nodes($content_structure);
   }
 
@@ -532,6 +533,8 @@ function d_content_init_create_all($type = NULL) {
       }
     }
   }
+
+
 }
 
 /**
