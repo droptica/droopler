@@ -96,10 +96,10 @@ function d_product_form_alter(&$form, FormStateInterface $form_state, $form_id) 
           $subject = $subject->render();
           $subject = strlen($subject) > 100 ? substr($subject, 0, 97) . "..." : $subject;
 
-          $message = t(
-            'I would like to ask about @title, link - @link ',
-            ['@title' => $node->getTitle(), '@link' => $alias]
-          );
+          $message = t('I would like to ask about @title, link - @link', [
+            '@title' => $node->getTitle(),
+            '@link' => $alias,
+          ]);
           $form['subject']['widget'][0]['value']['#default_value'] = $subject;
           $form['message']['widget'][0]['value']['#default_value'] = $message;
         }
@@ -202,7 +202,7 @@ function d_product_generate_term_links(object $items, $element) {
       'query' => ['f[0]' => $element . ':' . strtolower($name)],
     ];
     $link = Link::fromTextAndUrl(
-      t($name),
+      t($name), // phpcs:ignore
       Url::fromUri('internal:/products', $options)
     )->toString();
     $links[] = $link;
@@ -224,7 +224,7 @@ function d_product_generate_ask_product_link(NodeInterface $node) {
   $name = 'Ask for product';
   $options = ['query' => ['product' => $node->id()]];
   $link = Link::fromTextAndUrl(
-    t($name),
+    t($name), // phpcs:ignore
     Url::fromUri('internal:/contact#contact-message-feedback-form', $options)
   )->toRenderable();
   $link['#attributes'] = ['class' => ['btn btn-outline-primary']];
