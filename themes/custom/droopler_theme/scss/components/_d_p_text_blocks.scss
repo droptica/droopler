@@ -47,7 +47,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
 
     > .field--name-field-d-main-title {
       @include font-main-header;
-      margin: $d-p-text-blocks-group-margin;
+
       @include media-breakpoint-down(md) {
         margin: $d-p-text-blocks-mobile-group-margin;
       }
