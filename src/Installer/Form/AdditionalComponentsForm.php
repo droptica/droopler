@@ -8,11 +8,16 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Extension\ModuleExtensionList;
 
+/**
+ * A form class to customize Droopler installation process.
+ */
 class AdditionalComponentsForm extends FormBase {
 
   use StringTranslationTrait;
 
   /**
+   * Module extension list.
+   *
    * @var \Drupal\Core\Extension\ModuleExtensionList
    */
   private $moduleExtensionList;
@@ -37,8 +42,9 @@ class AdditionalComponentsForm extends FormBase {
   }
 
   /**
+   * Modules to enable directly from Droopler installator.
+   *
    * @var string[]
-   *   Modules to enable directly from Droopler installator.
    */
   private $modules = [
     'd_blog' => 'This module allows you to create professional blog posts, with all Droopler paragraphs',
@@ -47,10 +53,11 @@ class AdditionalComponentsForm extends FormBase {
   ];
 
   /**
+   * List of all d_commerce dependencies.
+   *
    * @var string[]
-   *   List of all d_commerce dependencies.
    */
-  private $commerce_modules = [
+  private $commerceModules = [
     'commerce',
     'commerce_cart',
     'commerce_checkout',
@@ -78,7 +85,7 @@ class AdditionalComponentsForm extends FormBase {
 
     foreach ($this->modules as $name => $description) {
       $disabled = !$this->moduleExist($name);
-      if ($name == 'd_commerce' && !$this->modulesExists($this->commerce_modules)) {
+      if ($name == 'd_commerce' && !$this->modulesExists($this->commerceModules)) {
         $description = $this->t('Out-of-the-box support for Commerce module for Drupal. You have to install additional modules to enable this checkbox. <a href="@readme" target="_blank">Read more</a>.',
         ['@readme' => 'https://github.com/droptica/droopler/blob/master/README.md']);
         $disabled = TRUE;
@@ -105,7 +112,7 @@ class AdditionalComponentsForm extends FormBase {
     ];
 
     $form['actions'] = [
-      '#type' => 'actions'
+      '#type' => 'actions',
     ];
 
     $form['actions']['save'] = [
@@ -126,7 +133,7 @@ class AdditionalComponentsForm extends FormBase {
     $install_state = $build_info['args'];
 
     $install_modules = $additional_modules = $documentation_module = [];
-    foreach($this->modules as $name => $desc)  {
+    foreach ($this->modules as $name => $desc) {
       if ($values['module_' . $name]) {
         $install_modules[] = $name;
       }
@@ -163,6 +170,7 @@ class AdditionalComponentsForm extends FormBase {
    *
    * @param string $module_name
    *   Module name.
+   *
    * @return \Drupal\Core\Extension\Extension|mixed
    *   Return TRUE if module exist.
    */
@@ -176,6 +184,7 @@ class AdditionalComponentsForm extends FormBase {
    *
    * @param array $modules
    *   List of modules.
+   *
    * @return bool
    *   Return TRUE if all modules exist.
    */
@@ -187,4 +196,5 @@ class AdditionalComponentsForm extends FormBase {
     }
     return TRUE;
   }
+
 }
