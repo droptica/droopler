@@ -14,15 +14,15 @@ on:
 
 jobs:
   Verify:
-    name: "Verify Drupal conding standards"
+    name: "Verify Drupal coding standards"
 
     runs-on: "ubuntu-latest"
 
     env:
       PHP_VERSION: "7.4"
-      CODE_SNIFFER_PATH: "modules/custom/ themes/custom/"
+      CODE_SNIFFER_PATH: "droopler.* src/ modules/custom/ themes/custom/"
       CODE_SNIFFER_IGNORE: "*md,*.css,*.txt,*.info,*interactive_ui/react_slider/js*,*pl-sk/*,*pattern-lab/*,*_twig-components/*"
-      CODE_SNIFFER_EXTENSIONS: "php,inc,install,module,yaml,yml,twig,theme,profile"
+      CODE_SNIFFER_EXTENSIONS: "php,inc,install,module,yaml,yml,theme,profile"
 
     steps:
       - name: Checkout code
