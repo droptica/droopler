@@ -56,7 +56,7 @@ class ColorElement extends Color {
    * @return array
    *   The $element with prepared variables ready for input.html.twig.
    */
-  public static function preRenderColor($element) {
+  public static function preRenderColor(array $element) {
     $element['#attributes']['type'] = 'color';
     Element::setAttributes($element, [
       'id',

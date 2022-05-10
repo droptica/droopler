@@ -51,7 +51,7 @@ class CommerceMobileFilters extends BlockBase {
       'inside' => [
         '#type' => 'html_tag',
         '#tag' => 'button',
-        '#value' => $this->t($this->getConfiguration()['button_text']),
+        '#value' => $this->t($this->getConfiguration()['button_text']), // phpcs:ignore
         '#attributes' => [
           'class' => [
             'mobile-filter',

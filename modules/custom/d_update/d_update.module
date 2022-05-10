@@ -58,7 +58,7 @@ function d_update_checklistapi_checklist_items() {
       }
     }
     elseif (in_array($key, ['#title', '#weight'])) {
-      $value = t($value);
+      $value = t($value); // phpcs:ignore
     }
   });
 
