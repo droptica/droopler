@@ -2249,21 +2249,9 @@ function droopler_update_8137(&$sandbox) {
  */
 function droopler_update_8138(&$sandbox) {
   $values['droopler__droopler_update_8138_1'] = update_modules_configuration([
-    'd_p_tiles',
     'd_p_side_tiles',
+    'd_p_tiles'
   ], '8138');
-
-  \Drupal::service('d_update')->checklist()
-    ->saveProgress(['v3.1' => $values]);
-}
-
-/**
- * Droopler 3.1 Updating d_p_tiles paragraph field grouping.
- */
-function droopler_update_8139(&$sandbox) {
-  $values['droopler__droopler_update_8139_1'] = update_modules_configuration([
-    'd_p_tiles',
-  ], '8139');
 
   \Drupal::service('d_update')->checklist()
     ->saveProgress(['v3.1' => $values]);
