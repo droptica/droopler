@@ -2256,3 +2256,17 @@ function droopler_update_8138(&$sandbox) {
   \Drupal::service('d_update')->checklist()
     ->saveProgress(['v3.1' => $values]);
 }
+
+/**
+ * Droopler 3.1 Enabling d_mautic and updating d_content.
+ */
+function droopler_update_8139() {
+  \Drupal::service('module_installer')->install(['d_mautic']);
+
+  $values['droopler__droopler_update_8139_1'] = update_modules_configuration([
+    'd_content',
+  ], '8139');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v3.1' => $values]);
+}
