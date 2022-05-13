@@ -8,3 +8,37 @@ field.field.paragraph.d_p_side_by_side.field_d_p_sbs_items:
             d_mautic:
               enabled: true
               weight: 50
+
+field.field.node.content_page.field_page_section:
+  add:
+    dependencies:
+      config:
+        - field.field.node.content_page.field_meta_tags
+      module:
+        - media_library
+        - metatag
+    settings:
+      handler: 'default:paragraph'
+      handler_settings:
+        target_bundles:
+          d_mautic: d_mautic
+        target_bundles_drag_drop:
+          d_mautic:
+            weight: 25
+            enabled: true
+
+user.role.d_editor:
+  add:
+    dependencies:
+      config:
+        - paragraphs.paragraphs_type.d_mautic
+      module:
+        - content_translation
+        - contextual
+        - filter
+        - geysir
+        - node
+        - paragraphs
+        - system
+        - taxonomy
+        - toolbar
