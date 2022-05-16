@@ -4,11 +4,9 @@
   // Colorpicker + reset button.
   Drupal.behaviors.d_geysir = {
     attach: function (context, settings) {
-      $(context).ready(function () {
-        $('.geysir-add-type').on('click', function () {
+        $('.geysir-add-type', context).on('click', function () {
           $(this).find('input[name="op"]').mousedown();
-        })
-      });
+        });
     }
   };
 
