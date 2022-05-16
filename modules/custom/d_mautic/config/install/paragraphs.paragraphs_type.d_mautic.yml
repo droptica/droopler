@@ -1,6 +1,11 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - d_mautic
+  enforced:
+    module:
+      - d_mautic
 id: d_mautic
 label: 'Mautic form'
 icon_uuid: null

@@ -26,19 +26,3 @@ field.field.node.content_page.field_page_section:
           d_mautic:
             weight: 25
             enabled: true
-
-user.role.d_editor:
-  add:
-    dependencies:
-      config:
-        - paragraphs.paragraphs_type.d_mautic
-      module:
-        - content_translation
-        - contextual
-        - filter
-        - geysir
-        - node
-        - paragraphs
-        - system
-        - taxonomy
-        - toolbar
