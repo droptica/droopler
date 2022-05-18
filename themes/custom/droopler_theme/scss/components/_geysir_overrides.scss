@@ -64,15 +64,15 @@ $geysir-add-more-button: $color-hecuba !default;
   }
   .form-actions {
     margin-top: 1rem;
-    .button--primary {
-      color: #fff;
-      background: $primary;
-      font-weight: bold;
-    }
-    .button {
-      padding: $input-btn-padding-x $input-btn-padding-y;
-      border-radius: $btn-border-radius;
-    }
+  }
+  .button--primary {
+    color: #fff;
+    background: $primary;
+    font-weight: bold;
+  }
+  .button {
+    padding: $input-btn-padding-x $input-btn-padding-y;
+    border-radius: $btn-border-radius;
   }
   .paragraph-form .form-actions {
     margin-bottom: 1rem;
@@ -169,11 +169,8 @@ $geysir-add-more-button: $color-hecuba !default;
 }
 
 /* Geysir UI dialog */
-.ui-dialog.geysir-dialog {
+.ui-dialog {
   /* Form elements */
-  .js-form-item {
-    margin-bottom: 10px;
-  }
   .js-form-type-checkbox {
     padding-left: 0;
     .form-check-label {
@@ -303,6 +300,7 @@ $geysir-add-more-button: $color-hecuba !default;
     margin: 0 15px;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     .ajax-progress-throbber {
       position: absolute;
       top: 0;
@@ -314,6 +312,25 @@ $geysir-add-more-button: $color-hecuba !default;
       align-items: center;
       justify-content: center;
       background: rgba($white, 0.8);
+    }
+  }
+}
+
+.media-library-add-form {
+  $mainContainer: &; // save parent selector as variable
+
+  &--oembed {
+    display: flex;
+
+    #{$mainContainer}__input-wrapper {
+      fieldset {
+        margin-right: 10px;
+      }
+
+      .btn {
+        align-self: center;
+        margin-top: 0.5rem;
+      }
     }
   }
 }
