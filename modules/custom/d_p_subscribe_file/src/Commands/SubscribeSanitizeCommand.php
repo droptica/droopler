@@ -86,6 +86,7 @@ class SubscribeSanitizeCommand extends DrushCommands implements SanitizePluginIn
   public function messages(&$messages, InputInterface $input) {
     $options = $input->getOptions();
     $messages[] = dt('Sanitize subscriptions data name and email');
+    return $messages;
   }
 
 }

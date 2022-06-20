@@ -68,7 +68,7 @@ class ThemeLogoService {
    *   Default configuration object
    */
   protected function getCurrentThemeConfig() {
-    /** @var Drupal\Core\Config\ImmutableConfig $systemConfig */
+    /** @var \Drupal\Core\Config\ImmutableConfig $systemConfig */
     $systemConfig = $this->getConfig('system.theme');
     $currentTheme = $systemConfig->get('default');
 
