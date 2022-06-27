@@ -32,7 +32,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
   /**
    * Provides a file entity repository.
    *
-   * @var \Drupal\File\FileRepositoryInterface
+   * @var \Drupal\file\FileRepositoryInterface
    */
   protected $fileRepository;
 
@@ -53,7 +53,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *   Module handler interface.
    * @param \Drupal\Core\File\FileSystemInterface $file_system
    *   File system.
-   * @param \Drupal\File\FileRepositoryInterface $file_repository
+   * @param \Drupal\file\FileRepositoryInterface $file_repository
    *   Provides a file entity repository.
    */
   public function __construct(

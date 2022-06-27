@@ -183,6 +183,7 @@ class ConfigUpdate {
       }
       throw new \RuntimeException('The directory for the module configurations does not exist!');
     }
+    throw new \RuntimeException('The requested module does not exist!');
   }
 
   /**
