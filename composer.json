@@ -24,6 +24,7 @@
         "bower-asset/colorbox": "^1.6",
         "bower-asset/lazysizes": "^5.2",
         "bower-asset/masonry": "^4.2",
+        "cweagans/composer-patches": "^1.6",
         "drupal/admin_toolbar": "^3.0",
         "drupal/advagg": "^4.0",
         "drupal/better_exposed_filters": "^5.0",
@@ -76,6 +77,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-      "sort-packages": true
+        "sort-packages": true
+    },
+    "extra": {
+        "patches": {
+            "drupal/we_megamenu": {
+                "PHP 8.1 Compatibility": "https://www.drupal.org/files/issues/2022-02-24/we_megamenu_deprecated.patch"
+            }
+        }
     }
 }
