@@ -6,12 +6,28 @@
 If you want to run Droopler with PHP 8.x, you should include `cweagans/composer-patches` package in your `package.json`:
 ```json
 {
-  "require": {
-    "cweagans/composer-patches": "^1.6"
-  },
-  "extra": {
-    "enable-patching": true,
-  }
+    "require": {
+        "cweagans/composer-patches": "^1.6"
+    },
+    "extra": {
+        "enable-patching": true,
+    }
+}
+```
+
+### Composer 2.2
+If you are using Composer >= 2.2.0, remember to add these lines to your `composer.json`:
+```json
+{
+    "allow-plugins": {
+        "dealerdirect/phpcodesniffer-composer-installer": true,
+        "composer/installers": true,
+        "cweagans/composer-patches": true,
+        "drupal/console-extend-plugin": true,
+        "drupal/core-composer-scaffold": true,
+        "oomphinc/composer-installers-extender": true,
+        "zaporylie/composer-drupal-optimizations": true
+    }
 }
 ```
 
