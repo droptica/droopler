@@ -22,7 +22,6 @@
   const fs = require('fs');
   const rename = require("gulp-rename");
   const del = require('del');
-  const argv = require('yargs').argv;
 
   // Patterns
   const scss_pattern = '**/*.scss';
@@ -31,7 +30,6 @@
   // Theme directory
   const theme_dir = '.';
 
-
   // Subdirectories
   const scss_dir = theme_dir + '/scss';
   const css_dir = theme_dir + '/css';
@@ -39,11 +37,9 @@
   const jsmin_dir = theme_dir + '/js/min';
   const vendor_dir = theme_dir + '/js/vendor';
 
-
   // Inputs
   const scss_input = scss_dir + '/' + scss_pattern;
   const js_input = js_dir + '/' + js_pattern;
-
 
   // Dev SASS options
   const sassOptionsDev = {
@@ -60,7 +56,6 @@
   const autoprefixerOptions = {
     overrideBrowserslist: ['last 2 versions', '> 5%', 'Firefox ESR']
   };
-
 
   // MAIN TASKS
   // ----------------------------------------------------
@@ -81,14 +76,12 @@
       console.log('[ERROR] Working directory does not exist. Maybe it is not mounted by docker? Or there is a misspell?');
     }
 
-
     // Check for SCSS dir
     if (fs.existsSync(scss_dir)) {
       console.log('[OK] SCSS directory exists.');
     } else {
       console.log('[ERROR] SCSS directory does not exist. Create it and get to work!');
     }
-
 
     // Check for CSS dir
     if (fs.existsSync(css_dir)) {
@@ -121,7 +114,6 @@
     cb()
   }
 
-
   // Clean everything
   function clean(cb) {
     return del([
@@ -134,17 +126,11 @@
   const compile = gulp.parallel(sassCompile, jsCopyLibs, jsCompile);
   const dist = gulp.parallel(sassDist, jsCopyLibs, jsCompile);
 
-
   // HELPER TASKS
   // ----------------------------------------------------
 
   // Compile SASS
   function sassCompile() {
-    let profileUrl = argv.profile_url;
-    let variables = {};
-    if (typeof profileUrl !== 'undefined') {
-      variables = {profile_path: profileUrl};
-    }
     return gulp
       .src(scss_input)
       .pipe(sourcemaps.init())
@@ -178,14 +164,8 @@
     ], cb);
   }
 
-
   // Generate the production styles
   function sassDist() {
-    let profileUrl = argv.profile_url;
-    let variables = {};
-    if (typeof profileUrl !== 'undefined') {
-      variables = {profile_path: profileUrl};
-    }
     return gulp
       .src(scss_input)
       .pipe(sass(sassOptionsProd))
@@ -203,7 +183,6 @@
   exports.jsCompile = jsCompile;
   exports.sassDist = sassDist;
   exports.default = exports.watch;
-
 
   // For Docker - properly catch signals
   // Without this CTRL-C won't stop the app, it will send it to background
