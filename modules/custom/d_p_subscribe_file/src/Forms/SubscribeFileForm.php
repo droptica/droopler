@@ -11,13 +11,15 @@ use Drupal\paragraphs\ParagraphInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class SubscribeFileForm.
+ * File subscribe form.
  *
  * @package Drupal\d_p_subscribe_file\Forms
  */
 class SubscribeFileForm extends FormBase {
 
   /**
+   * An account implementation representing an anonymous user.
+   *
    * @var \Drupal\Core\Session\AccountInterface|\Drupal\Core\Session\AnonymousUserSession
    */
   protected $accountProxy;
@@ -29,6 +31,12 @@ class SubscribeFileForm extends FormBase {
    */
   protected $paragraph;
 
+  /**
+   * SubscribeFileForm constructor.
+   *
+   * @param \Drupal\Core\Session\AccountProxy $account_proxy
+   *   A proxied implementation of AccountInterface.
+   */
   public function __construct(AccountProxy $account_proxy) {
     $this->accountProxy = $account_proxy->getAccount();
   }
@@ -167,7 +175,8 @@ class SubscribeFileForm extends FormBase {
     $langcode = \Drupal::currentUser()->getPreferredLangcode();
     $result = $mail_manager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
     if ($result['result']) {
-      $this->messenger()->addStatus($this->t('We send download link, check Your e-mail.'));
+      $this->messenger()
+        ->addStatus($this->t('We send download link, check Your e-mail.'));
     }
 
   }

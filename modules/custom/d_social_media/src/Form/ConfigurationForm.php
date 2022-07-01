@@ -63,7 +63,7 @@ class ConfigurationForm extends ConfigFormBase {
     foreach (self::getMediaNames() as $name) {
       $form["link_$name"] = [
         '#type' => 'url',
-        '#title' => $this->t(ucfirst($name) . " link"),
+        '#title' => $this->t('@name link', ['@name' => ucfirst($name)]),
         '#default_value' => $config->get("link_$name"),
       ];
     }

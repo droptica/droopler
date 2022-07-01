@@ -5,14 +5,23 @@ namespace Drupal\d_demo\Service;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
+/**
+ * ThemeLogo service.
+ *
+ * @package Drupal\d_demo\Service
+ */
 class ThemeLogoService {
 
   /**
+   * Configuration object factory.
+   *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
   /**
+   * Manages a set of enabled modules.
+   *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
@@ -21,7 +30,9 @@ class ThemeLogoService {
    * ThemeLogoService constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   Configuration object factory.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   Manages a set of enabled modules.
    */
   public function __construct(ConfigFactoryInterface $configFactory, ModuleHandlerInterface $moduleHandler) {
     $this->configFactory = $configFactory;
@@ -40,9 +51,11 @@ class ThemeLogoService {
   /**
    * Returns editable config.
    *
-   * @param $name
+   * @param string $name
+   *   Config name.
    *
    * @return \Drupal\Core\Config\Config
+   *   Default configuration object.
    */
   protected function getConfig($name) {
     return $this->configFactory->getEditable($name);
@@ -52,9 +65,10 @@ class ThemeLogoService {
    * Returns current theme editable config.
    *
    * @return \Drupal\Core\Config\Config
+   *   Default configuration object
    */
   protected function getCurrentThemeConfig() {
-    /** @var Drupal\Core\Config\ImmutableConfig $systemConfig */
+    /** @var \Drupal\Core\Config\ImmutableConfig $systemConfig */
     $systemConfig = $this->getConfig('system.theme');
     $currentTheme = $systemConfig->get('default');
 
@@ -64,7 +78,8 @@ class ThemeLogoService {
   /**
    * Helper for updating current theme settings for logo field.
    *
-   * @param $logoPath
+   * @param string $logoPath
+   *   Path of logo.
    */
   protected function setCurrentThemeDemoLogo($logoPath) {
     if ($logoPath) {

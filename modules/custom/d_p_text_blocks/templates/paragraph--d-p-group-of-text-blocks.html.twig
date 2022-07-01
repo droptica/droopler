@@ -54,7 +54,7 @@
     <div{{ attributes.addClass(classes) }}>
       {% block paragraph_content %}
         <div class="container d-p-group-of-text-blocks-header-wrapper">
-          {{ content|without('field_d_p_tb_block_reference', 'field_d_cta_link') }}
+          {{ content.group_d_text_blocks_content }}
         </div>
       {% endblock %}
       {% block tiles_content %}
@@ -65,9 +65,9 @@
         {% endif %}
       {% endblock %}
       {% block paragraph_cta_content %}
-        {% if content.field_d_cta_link.0 %}
+        {% if content.group_d_text_blocks_cta %}
           <div class="container mt-4">
-            {{ content.field_d_cta_link }}
+            {{ content.group_d_text_blocks_cta }}
           </div>
         {% endif %}
       {% endblock %}

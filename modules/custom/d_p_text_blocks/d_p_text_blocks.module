@@ -38,7 +38,7 @@ function d_p_text_blocks_preprocess_field(&$variables) {
           $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($variables['element']['#object']);
 
           $columns = [
-            'md' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME),
+            'lg' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME),
             'sm' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME),
             'xs' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME),
           ];
@@ -79,7 +79,7 @@ function set_columns_sizes(array $items, array $column_count) {
     if (!empty($items_per_row)) {
       foreach ($items as $idx => $list_item) {
         /** @var \Drupal\Core\Template\Attribute $atr */
-        $item_attributes = $items[$idx]['attributes'];
+        $item_attributes = $list_item['attributes'];
         $class_prefix = 'col-' . ($breakpoint == 'xs' ? '' : $breakpoint . '-');
         if (($idx + 1) % $items_per_row == 0) {
           $item_attributes->addClass($breakpoint . '-grid-row-end-item');

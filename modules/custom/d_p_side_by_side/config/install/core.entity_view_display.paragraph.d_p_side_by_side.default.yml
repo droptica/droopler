@@ -13,6 +13,7 @@ dependencies:
     - entity_reference_revisions
     - link
     - text
+    - field_group
 id: paragraph.d_p_side_by_side.default
 targetEntityType: paragraph
 bundle: d_p_side_by_side
@@ -27,7 +28,7 @@ content:
       url_plain: false
       rel: ''
       target: ''
-    third_party_settings: {  }
+    third_party_settings: { }
     type: link
     region: content
   field_d_long_text:
@@ -35,8 +36,8 @@ content:
     weight: 2
     region: content
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
+    settings: { }
+    third_party_settings: { }
   field_d_main_title:
     type: string
     weight: 1
@@ -44,14 +45,14 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: { }
   field_d_media_icon:
     weight: 0
     label: hidden
     settings:
       view_mode: d_icon
       link: false
-    third_party_settings: {  }
+    third_party_settings: { }
     type: entity_reference_entity_view
     region: content
   field_d_p_sbs_items:
@@ -61,8 +62,48 @@ content:
     settings:
       view_mode: default
       link: ''
-    third_party_settings: {  }
+    third_party_settings: { }
     region: content
 hidden:
   field_d_settings: true
   search_api_excerpt: true
+third_party_settings:
+  field_group:
+    group_d_side_cta:
+      children:
+        - field_d_cta_link
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Call To Action'
+    group_d_side_content:
+      children:
+        - field_d_long_text
+        - field_d_media_icon
+        - field_d_main_title
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Side content'

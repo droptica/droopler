@@ -36,19 +36,25 @@ function droopler_install() {
     ->set('page.front', '/node/1')
     ->save();
 
+  /** @var \Drupal\Core\Extension\ModuleInstaller $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+
+  /** @var \Drupal\Core\Extension\ModuleHandler $module_handler */
+  $module_handler = \Drupal::service('module_handler');
+
   // Install init content. It will add an install task to be performed later.
-  \Drupal::service('module_installer')->install(['d_content_init']);
+  $module_installer->install(['d_content_init']);
 
   // Try to install custom init that alters the original one.
-  try {
-    \Drupal::service('module_installer')->install(['d_custom_init']);
+  if ($module_handler->moduleExists('d_custom_init')) {
+    $module_installer->install(['d_custom_init']);
   }
-  catch (MissingDependencyException $e) {
+  else {
     \Drupal::logger('droopler_install')
       ->notice('Custom content init not detected.');
   }
 
-  // Remove footer menu menu to avoid fatal error while trying to edit it
+  // Remove footer menu to avoid fatal error while trying to edit it
   // because of missing route.
   \Drupal::configFactory()->getEditable('system.menu.footer')->delete();
 
@@ -61,7 +67,7 @@ function droopler_install() {
 }
 
 /**
- * Implements hook_install_tasks()
+ * Implements hook_install_tasks().
  */
 function droopler_install_tasks() {
   $tasks = [
@@ -148,7 +154,7 @@ function droopler_install_module(string $module, array &$context) {
  * @todo To be moved to a new manager class.
  */
 function _droopler_import_config($module, $name) {
-  $config_path = drupal_get_path('module', $module) . '/config/install';
+  $config_path = \Drupal::service('extension.path.resolver')->getPath('module', $module) . '/config/install';
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
   $config_storage->write($name, $source->read($name));
@@ -317,7 +323,7 @@ function update_modules_configuration(array $modules, $update_number) {
  *   Array with all entities bundles.
  */
 function get_all_entity_bundles() {
-  $entityBundles = \Drupal::service('entity.manager')
+  $entityBundles = \Drupal::service('entity_type.manager')
     ->getAllBundleInfo();
   $bundles = [];
   foreach ($entityBundles as $entityBundle) {
@@ -524,7 +530,7 @@ function droopler_update_8103() {
   // because of missing route.
   \Drupal::configFactory()->getEditable('system.menu.footer')->delete();
 
-  /** Migrate old saved checklist configs to new state storage. */
+  // Migrate old saved checklist configs to new state storage.
   $updater->checklist()->migrateConfigProgressToStateProgress();
 
   // Install contrib modules.
@@ -680,7 +686,7 @@ function droopler_update_8103() {
   $configs = [
     'profile/droopler' => [
       'core.entity_form_display.contact_message.feedback.default' => '',
-      // @todo: These configs cause problems in logs, they must be double tested.
+      // @todo These configs cause problems in logs, they must be double tested.
       // 'simple_sitemap.settings' => '38979e56edc0ee9369928a174dbc5578',
       // 'user.role.anonymous' => '4ea4b28e3275b7add9c389aec75a5216',
       // 'user.role.authenticated' => 'ca382ea635e3da6144322e05e5c3f4a8',
@@ -694,9 +700,9 @@ function droopler_update_8103() {
     'd_p_subscribe_file' => [
       'views.view.subscribe_file_paragraph' => '',
     ],
-    // @todo: We must check the behavior of the language switcher after update.
+    // @todo We must check the behavior of the language switcher after update.
     // 'theme/droopler_theme' => [
-    //  'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
+    // 'block.block.languageswitcher' => 'b859a762deeb756585ae12b6dddcb25d',
     // ],
   ];
   $values['droopler__droopler_update_8103_5'] = $updater->importConfigs($configs);
@@ -737,7 +743,7 @@ function droopler_update_8103() {
         'taxonomy.vocabulary.d_product_categories' => 'bb47ec12d4ea223256d81c442cde2783',
         'simple_sitemap.bundle_settings.node.d_product' => 'f8dcc16f0e902d016eb25ba28c27666c',
         'block.block.exposedformproducts_listproducts_list' => '64a616778f4788996d6f5ee44722a0ae',
-        // todo: The updates below must be carefully tested, they can break existing sites (due to moved configs).
+        // @todo The updates below must be carefully tested, they can break existing sites (due to moved configs).
         'block.block.mobilefilterssubmit' => 'cf04a4ce3efb8e1db0594b00949644a2',
         'block.block.productcategoriestaxonomytermname' => '791b0420b472bb813403557acb2514c1',
         'block.block.resetfilters_2' => 'f45e47fc43e155355fbdffa3fd1c5173',
@@ -761,7 +767,7 @@ function droopler_update_8103() {
     $values['droopler__droopler_update_8103_8'] = $updater->importConfigs($configs);
 
     if (\Drupal::service('theme_handler')
-        ->getDefault() === 'droopler_subtheme') {
+      ->getDefault() === 'droopler_subtheme') {
       $updater->instantiateBlocksForSubtheme('droopler_subtheme', $configs);
     }
   }
@@ -931,7 +937,7 @@ function droopler_update_8104() {
         if ($sourceField->isEmpty()) {
           continue;
         }
-        $entityTargetFieldName = isset($fieldsMigrationSpecialCases[$entity->bundle()][$sourceFieldName]) ? $fieldsMigrationSpecialCases[$entity->bundle()][$sourceFieldName] : $targetFieldName;
+        $entityTargetFieldName = $fieldsMigrationSpecialCases[$entity->bundle()][$sourceFieldName] ?? $targetFieldName;
 
         $sourceValues = $sourceField->getValue();
 
@@ -968,11 +974,8 @@ function droopler_update_8104() {
 
   $values['droopler__droopler_update_8104_4'] = TRUE;
 
-  /**
-   *  Delete migrated fields.
-   */
-
-  /** @var $entityFieldManager EntityFieldManager */
+  // Delete migrated fields.
+  /** @var EntityFieldManager $entityFieldManager */
   $entityFieldManager = \Drupal::service('entity_field.manager');
 
   foreach ($listOfMigratedFields as $entityType => $migratedBundles) {
@@ -983,7 +986,7 @@ function droopler_update_8104() {
         if (isset($bundleAllFields[$fieldToDelete])) {
           $bundleAllFields[$fieldToDelete]->delete();
 
-          $newFieldName = isset($fieldsMigrationSpecialCases[$bundle][$fieldToDelete]) ? $fieldsMigrationSpecialCases[$bundle][$fieldToDelete] : $fieldsToMigrate[$fieldToDelete];
+          $newFieldName = $fieldsMigrationSpecialCases[$bundle][$fieldToDelete] ?? $fieldsToMigrate[$fieldToDelete];
 
           \Drupal::logger('droopler_update')
             ->info('Deleted @oldField field, it\'s values were migrated to @newField for all @bundle @type', [
@@ -1150,8 +1153,7 @@ function droopler_update_8105() {
 }
 
 /**
- * Droopler 2.0 beta-1 - update configuration modified since Droopler 2.0
- * alpha-2.
+ * Droopler 2.0 beta-1 - update configuration modified since 2.0 alpha-2.
  */
 function droopler_update_8106() {
   $updater = \Drupal::service('d_update');
@@ -1191,7 +1193,7 @@ function droopler_update_8106() {
 }
 
 /**
- * Droopler 2.0 beta3 add d_block paragraph to optional modules, enable d_p_media.
+ * Droopler 2.0 beta3 add d_block paragraph to some modules, enable d_p_media.
  */
 function droopler_update_8107() {
   $modules = ['d_blog', 'd_product'];
@@ -1330,7 +1332,7 @@ function droopler_update_8114() {
 }
 
 /**
- * Droopler 2.2 - extend paragraphs missing common fields (CTA, Icon, Long text).
+ * Droopler 2.2 - add missing common fields (CTA, Icon, Long text).
  */
 function droopler_update_8115() {
   /** @var Drupal\d_update\Updater $updater */
@@ -1394,7 +1396,7 @@ function droopler_update_8116() {
 }
 
 /**
- * Droopler 2.2 - add new field for content types allowing overwriting meta tags during node add/edit.
+ * Droopler 2.2 - add new field for content types for metatag support.
  */
 function droopler_update_8117() {
   /** @var Drupal\d_update\Updater $updater */
@@ -1541,7 +1543,7 @@ function droopler_update_8119() {
 }
 
 /**
- * Droopler 2.2 update paragraphs config fixing missing dependency and features changes.
+ * Droopler 2.2 fix missing dependency and features changes.
  */
 function droopler_update_8120() {
   /** @var Drupal\d_update\Updater $updater */
@@ -1713,7 +1715,7 @@ function droopler_update_8124() {
 }
 
 /**
- * Droopler 2.2 - remove "mt-5" spacing from CTA field in Reference Content Paragraph.
+ * Droopler 2.2 - remove spacing from CTA field in Reference Content Paragraph.
  */
 function droopler_update_8125() {
   /** @var Drupal\d_update\Updater $updater */
@@ -1887,7 +1889,7 @@ function droopler_update_8128(&$sandbox) {
 }
 
 /**
- * Droopler 2.2 Migrate background color
+ * Droopler 2.2 Migrate background color.
  */
 function droopler_update_8129(&$sandbox) {
   if (!isset($sandbox['total'])) {
@@ -1936,14 +1938,14 @@ function droopler_update_8129(&$sandbox) {
           $white = '#ffffff';
           $background_color_hex = str_replace('#', '', $background_color);
 
-          /**
+          /*
            * HSL algorithm.
            * @see https://stackoverflow.com/a/12228730
            */
           $lightness = function ($hex) {
-            $r = hexdec($hex[0].$hex[1]);
-            $g = hexdec($hex[2].$hex[3]);
-            $b = hexdec($hex[4].$hex[5]);
+            $r = hexdec($hex[0] . $hex[1]);
+            $g = hexdec($hex[2] . $hex[3]);
+            $b = hexdec($hex[4] . $hex[5]);
 
             return (max($r, $g, $b) + min($r, $g, $b)) / 510.0;
           };
@@ -2087,7 +2089,7 @@ function droopler_update_8131(&$sandbox) {
             ->referencedEntities();
           foreach ($items as $key => $item) {
             if ($item->hasField('field_media_image') && $image = $item->get('field_media_image')
-                ->first()) {
+              ->first()) {
               $alt = $image->get('alt')->getString();
               if (strstr($alt, '2x2')) {
                 $image->set('alt', trim(str_replace('2x2', '', $alt)));
@@ -2180,4 +2182,77 @@ function droopler_update_8133(&$sandbox) {
 
   $updater->checklist()
     ->saveProgress(['v3.0' => $values]);
+}
+
+/**
+ * Droopler 3.1 grant access contextual links permission to editor users.
+ */
+function droopler_update_8134() {
+  $permission = 'access contextual links';
+
+  $role = Role::load('d_editor');
+  $role->grantPermission($permission)
+    ->save();
+
+  $values['droopler__droopler_update_8134_1'] = $role->hasPermission($permission);
+
+  Drupal::service('d_update')
+    ->checklist()
+    ->saveProgress(['v3.1' => $values]);
+}
+
+/**
+ * Droopler 3.1 Add settings widget to the "d_p_side_by_side" module.
+ */
+function droopler_update_8135(&$sandbox) {
+  $values['droopler__droopler_update_8135_1'] = update_modules_configuration([
+    'd_p_side_by_side',
+  ], '8135');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v3.1' => $values]);
+}
+
+/**
+ * Droopler 3.1 Update CTA widget to the "d_p_carousel" module.
+ */
+function droopler_update_8136(&$sandbox) {
+  $values['droopler__droopler_update_8136_1'] = update_modules_configuration([
+    'd_p_carousel',
+  ], '8136');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v3.1' => $values]);
+}
+
+/**
+ * Droopler 3.1 Changing CTA widget settings configuration.
+ */
+function droopler_update_8137(&$sandbox) {
+  $values['droopler__droopler_update_8137_1'] = update_modules_configuration([
+    'd_p_counters',
+    'd_p_gallery',
+    'd_p_side_by_side',
+    'd_p_side_image',
+    'd_p_side_tiles',
+    'd_p_text_blocks',
+    'd_p_text_paged',
+    'd_p_text_with_bckg',
+  ], '8137');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v3.1' => $values]);
+}
+
+/**
+ * Droopler 3.1 Updating d_p_tiles and d_p_side_tiles paragraph field grouping.
+ */
+function droopler_update_8138(&$sandbox) {
+  $values['droopler__droopler_update_8138_1'] = update_modules_configuration([
+    'd_p_tiles',
+    'd_p_side_tiles',
+  ], '8138');
+
+  \Drupal::service('d_update')->checklist()
+    ->saveProgress(['v3.1' => $values]);
 }

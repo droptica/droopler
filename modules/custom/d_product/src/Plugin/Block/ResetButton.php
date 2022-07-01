@@ -88,7 +88,7 @@ class ResetButton extends BlockBase {
     }
 
     $link_content_markups[] = [
-      '#markup' => $this->t($this->configuration['button_text']),
+      '#markup' => $this->t($this->configuration['button_text']), // phpcs:ignore
     ];
 
     return [

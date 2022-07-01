@@ -4,10 +4,17 @@ namespace Drupal\d_p\Service;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 
+/**
+ * Paragraph service.
+ *
+ * @package Drupal\d_p\Service
+ */
 class ParentParagraphService {
 
   /**
-   * Returns referencing field id (Example: paragraph.d_p_tiles.field_d_media_image)
+   * Returns referencing field id.
+   *
+   * (Example: paragraph.d_p_tiles.field_d_media_image)
    *
    * @param \Drupal\Core\Entity\ContentEntityInterface $mediaEntity
    *   Media Entity to get parent field info.
@@ -15,7 +22,7 @@ class ParentParagraphService {
    * @return int|string|null
    *   Id of field referencing passed entity.
    */
-  public function getParentParagraphFieldId($mediaEntity) {
+  public function getParentParagraphFieldId(ContentEntityInterface $mediaEntity) {
     $parentField = $this->getReferencingField($mediaEntity);
 
     if ($parentField) {

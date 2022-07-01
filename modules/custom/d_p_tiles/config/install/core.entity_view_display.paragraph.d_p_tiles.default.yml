@@ -10,8 +10,67 @@ dependencies:
     - field.field.paragraph.d_p_tiles.field_d_settings
     - paragraphs.paragraphs_type.d_p_tiles
   module:
+    - field_group
     - link
     - text
+third_party_settings:
+  field_group:
+    group_d_tiles_content:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+        - field_d_long_text
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Text content of paragraph'
+    group_d_tiles_cta:
+      children:
+        - field_d_cta_link
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'CTA button'
+    group_d_tiles_gallery:
+      children:
+        - field_d_media_image
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Tiles gallery for masonry'
 id: paragraph.d_p_tiles.default
 targetEntityType: paragraph
 bundle: d_p_tiles
@@ -19,8 +78,6 @@ mode: default
 content:
   field_d_cta_link:
     type: link
-    weight: 4
-    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -29,38 +86,40 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 5
+    region: content
   field_d_long_text:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 3
     region: content
   field_d_main_title:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   field_d_media_icon:
-    weight: 0
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: d_icon
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 1
     region: content
   field_d_media_image:
-    weight: 3
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: d_tiles_gallery_fullscreen
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 4
     region: content
 hidden:
   field_d_settings: true

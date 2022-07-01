@@ -4,6 +4,7 @@ namespace Drupal\d_update\Commands;
 
 use Drupal\d_update\ConfigCompareInterface;
 use Drush\Commands\DrushCommands;
+use Drush\Drush;
 
 /**
  * Drush command for config hash generation.
@@ -44,12 +45,11 @@ class GenerateConfigHashCommand extends DrushCommands {
    */
   public function generate(string $config_name): void {
     $hash = $this->configCompare->generateHashFromDatabase($config_name);
-    drush_print(
+    Drush::output()->writeln(
       dt('Generated hash for config @config_name: @hash', [
         '@config_name' => $config_name,
         '@hash' => $hash,
-      ])
-    );
+      ]));
   }
 
 }

@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains d_p_subscribe install.
+ */
+
+use Drupal\Core\StreamWrapper\PrivateStream;
+
+/**
+ * Implements hook_requirements().
+ */
+function d_p_subscribe_file_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'runtime') {
+    $private_path = PrivateStream::basePath();
+    if ($private_path) {
+      $requirements['droopler'] = [
+        'title' => t('Droopler Paragraphs'),
+        'value' => t('Private file system path is set'),
+        'severity' => REQUIREMENT_INFO,
+      ];
+    }
+    else {
+      $requirements['droopler'] = [
+        'title' => t('Droopler Paragraphs'),
+        'value' => t('Private file system path is not set'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => t('You need set Private file system path. <a href=":prv-file">How to set the private files directory</a>.', [':prv-file' => 'https://www.drupal.org/node/2392959']),
+      ];
+    }
+  }
+
+  return $requirements;
+}

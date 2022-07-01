@@ -14,7 +14,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class ContentInitManagerBase.
+ * Content init manager base.
  *
  * @package Drupal\d_content_init
  */
@@ -23,31 +23,43 @@ abstract class ContentInitManagerBase {
   use StringTranslationTrait;
 
   /**
-   * @var \Drupal\Core\Entity\EntityTypeManager
+   * Manages entity type plugin definitions.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
+   * Serialization format.
+   *
    * @var \Drupal\Component\Serialization\SerializationInterface
    */
   protected $serialization;
 
   /**
+   * Logger channel.
+   *
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
   protected $logger;
 
   /**
+   * Current user account.
+   *
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
 
   /**
+   * Language manager service.
+   *
    * @var \Drupal\Core\Language\LanguageManagerInterface
    */
   protected $languageManager;
 
   /**
+   * Module handler.
+   *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
@@ -133,6 +145,7 @@ abstract class ContentInitManagerBase {
    *   Path of the YML file to import.
    *
    * @return mixed|bool
+   *   Return false or create content value.
    */
   protected function importFromFile($file) {
     $content = $this->getDecodedYmlFile($file);
@@ -163,6 +176,7 @@ abstract class ContentInitManagerBase {
    *   entity type has bundles, the bundle key has to be specified.
    *
    * @return \Drupal\Core\Entity\EntityInterface
+   *   Returns Entity object.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException

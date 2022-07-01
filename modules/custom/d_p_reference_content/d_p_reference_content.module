@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * File containing d_p_reference module.
+ */
+
 use Drupal\Core\Template\Attribute;
 
 /**
@@ -43,9 +48,13 @@ function d_p_reference_content_preprocess_paragraph__d_p_reference_content(array
 
   // Get latest blog node nids.
   // Selected nodes are excluded from results.
-  $auto_values = \Drupal::service('d_p_reference_content.content_helper')
-    ->getSortedContentByType('blog_post', 'created', 'DESC', $values);
+  /** @var \Drupal\d_p_reference_content\Helpers\ContentHelper $content_helper */
+  $content_helper = \Drupal::service('d_p_reference_content.content_helper');
+  $auto_values = $content_helper->getSortedContentByType('blog_post', 'created', 'DESC', $values);
   $merged_values = array_merge($values, $auto_values);
+
+  // Delete unpublished content.
+  $merged_values = $content_helper->getPublishedContent($merged_values);
 
   // Get max number of values.
   /** @var \Drupal\field\Entity\FieldConfig $def */
@@ -60,8 +69,7 @@ function d_p_reference_content_preprocess_paragraph__d_p_reference_content(array
   }
 
   // Replace content.
-  \Drupal::service('d_p_reference_content.content_helper')
-    ->replaceContent($variables, 'node', 'teaser_small', 'field_d_p_reference_content', $new_values);
+  $content_helper->replaceContent($variables, 'node', 'teaser_small', 'field_d_p_reference_content', $new_values);
 
   $variables['#cache']['tags'][] = 'node_list';
 }

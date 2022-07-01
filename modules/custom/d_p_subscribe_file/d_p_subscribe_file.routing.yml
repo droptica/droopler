@@ -1,9 +1,9 @@
 d_p_subscribe_file.downloadfile.checkLink:
   path: '/downloadfile/{paragraph_id}/{link_hash}'
-  defaults: 
+  defaults:
     _controller: '\Drupal\d_p_subscribe_file\Controller\DownloadFile::checkLink'
     _title: 'Download'
-  requirements: 
+  requirements:
     _permission: 'access content'
   link_hash: '^[a-zA-Z0-9_]+'
   paragraph_id: '^[0-9]+'

@@ -5,18 +5,22 @@ namespace Drupal\d_p\Helper;
 use Drupal\Component\Utility\NestedArray;
 
 /**
- * Provides helpers to perform operations on nested arrays and array keys of variable depth.
+ * Provides helpers.
+ *
+ * Provides helpers to perform operations on nested arrays and array keys of
+ * variable depth.
  */
 class NestedArrayHelper extends NestedArray {
 
   /**
    * Unsets the key of an array if the value is equal to privided one.
    *
-   * Loops through the prided multidimensional array and searches for provided value.
-   * If the value has been found, the array key gets unset.
+   * Loops through the prided multidimensional array and searches for provided
+   * value. If the value has been found, the array key gets unset.
    *
-   * If the target subset of the array is sequential and the unset has been called, the array gets reordered
-   * using array_values function to fix the key values after unset.
+   * If the target subset of the array is sequential and the unset has been
+   * called, the array gets reordered using array_values function to fix the
+   * key values after unset.
    *
    * @param array $array
    *   Multidimensional array to perform unset on.
@@ -24,9 +28,9 @@ class NestedArrayHelper extends NestedArray {
    *   Array with parents of value.
    * @param string $value
    *   Value to search for.
-   * @param null $key_existed
-   *   (optional) Referenced flag, TRUE if provided key exists and the value is equal to the provided one,
-   *   FALSE otherwise.
+   * @param bool|null $key_existed
+   *   (optional) Referenced flag, TRUE if provided key exists and the value is
+   *   equal to the provided one, FALSE otherwise.
    */
   public static function unsetValueIfEqualTo(array &$array, array $parents, string $value, &$key_existed = NULL) {
     $unset_key = array_pop($parents);

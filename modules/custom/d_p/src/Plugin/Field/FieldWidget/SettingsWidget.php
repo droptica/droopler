@@ -66,10 +66,7 @@ class SettingsWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public static function defaultSettings(): array {
-    return [
-        'filter_mode' => 1,
-        'allowed_settings' => [],
-      ] + parent::defaultSettings();
+    return ['filter_mode' => 1, 'allowed_settings' => []] + parent::defaultSettings();
   }
 
   /**
@@ -197,6 +194,14 @@ class SettingsWidget extends WidgetBase {
           ] + $options;
           break;
 
+        case 'checkboxes':
+          // Convert stdClass to array after deserialization.
+          $value = is_object($value) ? (array) $value : $value;
+          $element[$key] = [
+            '#default_value' => empty($value) ? $options['#default_value'] : $value,
+          ] + $options;
+          break;
+
         default:
           $value = $config->$key ?? $options['#default_value'];
 
@@ -257,7 +262,7 @@ class SettingsWidget extends WidgetBase {
         $values[$key] = $value;
       }
     }
-    if ($element['paragraph-theme']['#value'] === 'theme-custom') {
+    if (($element['paragraph-theme']['#value'] ?? NULL) === 'theme-custom') {
       $values[ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME] = [
         'background' => $element['background-theme-custom']['#value'],
         'text' => $element['text-theme-custom']['#value'],
@@ -272,6 +277,8 @@ class SettingsWidget extends WidgetBase {
    *
    * @param array $element
    *   Form element.
+   * @param string|null $parent_id
+   *   Id of a parent.
    */
   protected function processSettingAccess(array &$element, ?string $parent_id = NULL): void {
     $include_selected = (bool) $this->getSetting('filter_mode');
@@ -281,7 +288,7 @@ class SettingsWidget extends WidgetBase {
       $include_allowed = $include_selected && !$is_setting_allowed;
       $exclude_allowed = !$include_selected && $is_setting_allowed;
 
-      if ( $include_allowed || $exclude_allowed) {
+      if ($include_allowed || $exclude_allowed) {
         unset($element[$id]);
         continue;
       }
@@ -449,6 +456,7 @@ class SettingsWidget extends WidgetBase {
    * Getter for allowed settings.
    *
    * @return array
+   *   Allowed settings.
    */
   protected function getAllowedSettings(): array {
     return $this->getSetting('allowed_settings');

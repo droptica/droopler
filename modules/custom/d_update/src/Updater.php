@@ -11,6 +11,7 @@ use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Extension\Exception\UnknownExtensionException;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Config\StorageInterface;
@@ -92,6 +93,13 @@ class Updater {
   protected $logger;
 
   /**
+   * ExtensionPathResolver service.
+   *
+   * @var \Drupal\Core\Extension\ExtensionPathResolver
+   */
+  protected ExtensionPathResolver $extensionPathResolver;
+
+  /**
    * Constructs the Updater.
    *
    * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
@@ -106,31 +114,39 @@ class Updater {
    *   Config manager service.
    * @param \Drupal\d_update\UpdateChecklist $checklist
    *   Update Checklist service.
-   * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
+   * @param \Drupal\Core\Extension\ModuleExtensionList $module_extension_list
    *   Update Module Extension List service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   Config factory service.
+   * @param \Drupal\Core\Extension\ExtensionPathResolver $extension_path_resolver
+   *   The extension path resolver.
    */
-  public function __construct(ModuleInstallerInterface $module_installer,
-                              StorageInterface $config_storage,
-                              EntityTypeManagerInterface $entity_type_manager,
-                              ConfigCompareInterface $config_compare,
-                              ConfigManagerInterface $config_manager,
-                              UpdateChecklist $checklist,
-                              ModuleExtensionList $moduleExtensionList,
-                              ConfigFactoryInterface $config_factory) {
+  public function __construct(
+    ModuleInstallerInterface $module_installer,
+    StorageInterface $config_storage,
+    EntityTypeManagerInterface $entity_type_manager,
+    ConfigCompareInterface $config_compare,
+    ConfigManagerInterface $config_manager,
+    UpdateChecklist $checklist,
+    ModuleExtensionList $module_extension_list,
+    ConfigFactoryInterface $config_factory,
+    ExtensionPathResolver $extension_path_resolver
+  ) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;
     $this->entityTypeManager = $entity_type_manager;
     $this->configCompare = $config_compare;
     $this->configManager = $config_manager;
     $this->checklist = $checklist;
-    $this->moduleExtensionList = $moduleExtensionList;
+    $this->moduleExtensionList = $module_extension_list;
     $this->configFactory = $config_factory;
     $this->logger = $this->getLogger('d_update');
+    $this->extensionPathResolver = $extension_path_resolver;
   }
 
   /**
+   * Returns the update checklist.
+   *
    * @return \Drupal\d_update\UpdateChecklist
    *   Returns the update checklist.
    */
@@ -141,8 +157,9 @@ class Updater {
   /**
    * Import a config file if the module exists.
    *
-   * The method tries to read config files from the modules' 'install' or 'optional' directories,
-   * if the config has been found and the module exists - the config is imported.
+   * The method tries to read config files from the modules' 'install' or
+   * 'optional' directories, if the config has been found and the module
+   * exists - the config is imported.
    *
    * @param string $source
    *   Module/theme name.
@@ -152,8 +169,8 @@ class Updater {
    *   Hashed array with config data.
    *
    * @return bool
-   *   TRUE if the config was imported successfully or the module does not exist,
-   *   FALSE otherwise.
+   *   TRUE if the config was imported successfully or the module does not
+   *   exist, FALSE otherwise.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
@@ -201,7 +218,7 @@ class Updater {
    */
   public function readConfigFromFile($source, $name, $source_directory) {
     $source_info = $this->getSourceInformation($source);
-    $config_path = drupal_get_path($source_info['source_type'], $source_info['source']) . '/config';
+    $config_path = $this->extensionPathResolver->getPath($source_info['source_type'], $source_info['source']) . '/config';
     $source = new FileStorage($config_path . '/' . $source_directory);
 
     return $source->read($name);
@@ -217,7 +234,8 @@ class Updater {
    *   Array containing source_type and source name.
    */
   protected function getSourceInformation($source) {
-    // Parameter $source equal to "foo" means a module, "theme/foo" means a theme.
+    // Parameter $source equal to "foo" means a module, "theme/foo"
+    // means a theme.
     $source_type = 'module';
     $parts = explode('/', $source);
     if (count($parts) == 2) {
@@ -239,6 +257,9 @@ class Updater {
    *
    * @return bool
    *   Returns if all of the configs were imported successfully.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function importConfigs(array $configs) {
     $status = [];
@@ -346,7 +367,6 @@ class Updater {
         $data['uuid'] = $existingEntity->uuid();
       }
 
-      /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity */
       $entity = $storage->createFromStorageRecord($data);
 
       // If we need an update, we have to inform the storage about it.
@@ -415,7 +435,7 @@ class Updater {
   /**
    * Allows updating of single config, based on yml file.
    *
-   * TODO: Implement mechanism for "change" keyword.
+   * @todo Implement mechanism for "change" keyword.
    *
    * @param string $source
    *   Module/theme name.

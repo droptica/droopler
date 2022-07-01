@@ -4,6 +4,8 @@ Menu general layout styling.
 Here are styles responsible mainly for setting some basic layout for mobile and desktop menu design.
  */
 
+@use "sass:math";
+
 // Basic styling for menu list elements.
 li.we-mega-menu-li {
   padding: 0;
@@ -139,7 +141,7 @@ li.we-mega-menu-li {
     z-index: 100;
     width: $navbar-toggler-width;
     height: $navbar-toggler-height;
-    margin-right: $grid-gutter-width/4;
+    margin-right: math.div($grid-gutter-width, 4);
     padding: 0;
     border: none;
     border-radius: unset;
@@ -191,7 +193,7 @@ li.we-mega-menu-li {
         span.we-megamenu-nolink {
 
           a.we-mega-menu-li {
-            padding-right: $mobile-sidebar-items-spacing/2;
+            padding-right: math.div($mobile-sidebar-items-spacing, 2);
           }
         }
       }
@@ -339,4 +341,3 @@ li.we-mega-menu-li {
   // This includes creation of grid for megamenu col classes: "span3"
   @include views-grid();
 }
-

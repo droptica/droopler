@@ -12,19 +12,29 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\file\FileRepositoryInterface;
 use Drupal\media\Entity\Media;
 
 /**
- * Class ContentInitManagerMedia.
+ * Content init media manager.
  *
  * @package Drupal\d_content_init
  */
 class ContentInitManagerMedia extends ContentInitManagerBase {
 
   /**
+   * Helper that operate on files.
+   *
    * @var \Drupal\Core\File\FileSystemInterface
    */
   protected $fileSystem;
+
+  /**
+   * Provides a file entity repository.
+   *
+   * @var \Drupal\file\FileRepositoryInterface
+   */
+  protected $fileRepository;
 
   /**
    * ContentInitManagerMedia constructor.
@@ -43,6 +53,8 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *   Module handler interface.
    * @param \Drupal\Core\File\FileSystemInterface $file_system
    *   File system.
+   * @param \Drupal\file\FileRepositoryInterface $file_repository
+   *   Provides a file entity repository.
    */
   public function __construct(
     EntityTypeManagerInterface $entity_type_manager,
@@ -51,9 +63,11 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     AccountProxyInterface $current_user,
     LanguageManagerInterface $language_manager,
     ModuleHandlerInterface $module_handler,
-    FileSystemInterface $file_system) {
+    FileSystemInterface $file_system,
+    FileRepositoryInterface $file_repository) {
     parent::__construct($entity_type_manager, $serialization, $logger_factory, $current_user, $language_manager, $module_handler);
     $this->fileSystem = $file_system;
+    $this->fileRepository = $file_repository;
   }
 
   /**
@@ -62,7 +76,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @param array $media_array
    *   Array with definition of media to create.
    *
-   * @return \Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface|null
    *   Created media entity.
    */
   protected function createMediaImage(array $media_array) {
@@ -99,6 +113,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *   Alt text.
    *
    * @return \Drupal\Core\Entity\EntityInterface|void
+   *   Returns Entity object or void.
    */
   public function createMediaImageFromFile($path, $destination_directory, $alt) {
     // Build file URI.
@@ -138,7 +153,8 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @param string $alt
    *   Alt text.
    *
-   * @return \Drupal\Core\Entity\EntityInterface|void
+   * @return \Drupal\Core\Entity\EntityInterface|void|null
+   *   Returns Entity object or void.
    */
   public function createMediaImageFromFid($fid, $alt) {
     // Check if the media entity exists.
@@ -164,8 +180,10 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * Get media entity by the file URI.
    *
    * @param string $uri
+   *   String containing uri data.
    *
-   * @return \Drupal\Core\Entity\EntityInterface|void
+   * @return \Drupal\Core\Entity\EntityInterface|void|null
+   *   Returns Entity object or void.
    */
   protected function getMediaImageByUri($uri) {
     try {
@@ -189,8 +207,10 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * Get media entity by the file ID.
    *
    * @param int $fid
+   *   File id.
    *
-   * @return \Drupal\Core\Entity\EntityInterface|void
+   * @return \Drupal\Core\Entity\EntityInterface|void|null
+   *   Returns Entity object or void.
    */
   protected function getMediaImageByFid($fid) {
     try {
@@ -215,11 +235,11 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *
    * @param string $path
    *   The original file path.
-   *
    * @param string $uri
    *   The destination URI.
    *
-   * @return \Drupal\file\FileInterface|false
+   * @return \Drupal\file\FileInterface|false|null
+   *   Returns file entity or false.
    */
   protected function saveFile($path, $uri) {
     if (!file_exists($path)) {
@@ -228,7 +248,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     $file_data = file_get_contents($path);
     $final_dir = dirname($uri);
     $this->fileSystem->prepareDirectory($final_dir, FileSystemInterface::CREATE_DIRECTORY);
-    return file_save_data($file_data, $uri, FileSystemInterface::EXISTS_REPLACE);
+    return $this->fileRepository->writeData($file_data, $uri, FileSystemInterface::EXISTS_REPLACE);
   }
 
   /**
@@ -240,6 +260,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    *   Optional subdirectory.
    *
    * @return string
+   *   Returns file uri.
    */
   public function getFileUri($path, $directory) {
     $prefix = 'public://';

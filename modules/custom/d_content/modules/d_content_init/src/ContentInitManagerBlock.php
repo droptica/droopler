@@ -18,23 +18,29 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
- * Class ContentInitManagerBlock.
+ * Content init manager block.
  *
  * @package Drupal\d_content_init
  */
 class ContentInitManagerBlock extends ContentInitManagerBase {
 
   /**
+   * Universally Unique IDentifier.
+   *
    * @var \Drupal\Component\Uuid\UuidInterface
    */
   protected $uuid;
 
   /**
+   * Discovery and instantiation of block plugins.
+   *
    * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
   /**
+   * Manages the list of available themes.
+   *
    * @var \Drupal\Core\Extension\ThemeHandlerInterface
    */
   protected $themeHandler;
@@ -83,7 +89,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block
    *   Array with definition of block to create.
    *
-   * @return array|\Drupal\Core\Entity\EntityInterface
+   * @return array|\Drupal\Core\Entity\EntityInterface|null
    *   Created block entity.
    */
   protected function createBlockPlugin(array $block) {
@@ -111,7 +117,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block
    *   Array with definition of block to create.
    *
-   * @return \Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface|null
    *   Created block entity.
    */
   protected function createBlockContent(array $block) {
@@ -312,7 +318,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block_values
    *   Block values.
    */
-  protected function getCurrentThemeIfNotDefined(&$block_values) {
+  protected function getCurrentThemeIfNotDefined(array &$block_values) {
     if (!isset($block_values['theme']) || empty($block_values['theme'])) {
       $block_values['theme'] = $this->themeHandler->getDefault();
     }

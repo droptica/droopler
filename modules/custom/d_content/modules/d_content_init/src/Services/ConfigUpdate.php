@@ -8,7 +8,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
- * Class ConfigUpdate.
+ * Config update service.
  *
  * @package Drupal\d_commerce\Services
  */
@@ -52,8 +52,10 @@ class ConfigUpdate {
   }
 
   /**
-   * Searches for all files in the given path that contain in the name the
-   * value specified in the variable $configName.
+   * Searches for all files containing specified value.
+   *
+   * Searches for all files in the given path that contain in the name the value
+   * specified in the variable $configName.
    *
    * @param string $moduleName
    *   Module name.
@@ -181,6 +183,7 @@ class ConfigUpdate {
       }
       throw new \RuntimeException('The directory for the module configurations does not exist!');
     }
+    throw new \RuntimeException('The requested module does not exist!');
   }
 
   /**

@@ -27,8 +27,14 @@ function d_p_theme($existing, $type, $theme, $path) {
   ];
 }
 
+/**
+ * Returns responsive style ids.
+ *
+ * @return string[]
+ *   Array of responsive style ids.
+ */
 function d_p_responsive_style_ids() {
-  // @TODO should the helpers be a class?
+  // @todo should the helpers be a class?
   $styles_ids = [
     'responsive_image_2000',
     'responsive_image_768',
@@ -148,16 +154,17 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 /**
  * Move "heading_type" field from "Paragraph settings" under the main title.
  *
- * @param $form
+ * @param array $form
  *   The form that contains the d_settings field.
  */
-function d_p_move_heading_type(&$form) {
-  if (isset($form["field_d_settings"]["widget"][0]["value"]) && isset($form["field_d_main_title"])) {
+function d_p_move_heading_type(array &$form) {
+  if (isset($form["field_d_settings"]["widget"][0]["value"]["heading_type"]) && isset($form["field_d_main_title"])) {
     $widget = &$form["field_d_settings"]["widget"][0]["value"];
     $widget['heading_type']['#weight'] = $form["field_d_main_title"]["#weight"] + 0.5;
     $widget['heading_type']['#element_validate'] = ['d_p_heading_type_validate'];
 
-    // If field_d_main_title is in fieldgroup, locate it and move the heading_type under it.
+    // If field_d_main_title is in fieldgroup, locate it and move
+    // the heading_type under it.
     if (isset($form["#group_children"]["field_d_main_title"])) {
       $group = $form["#group_children"]["field_d_main_title"];
       $form["#group_children"]['heading_type'] = $group;
@@ -173,14 +180,16 @@ function d_p_move_heading_type(&$form) {
 /**
  * Custom validator for Heading Type.
  *
- * @param $element
+ * @param array $element
+ *   Array of element.
  * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   State of form.
  */
-function d_p_heading_type_validate($element, FormStateInterface $form_state) {
+function d_p_heading_type_validate(array $element, FormStateInterface $form_state) {
   $parents = [];
   foreach ($element["#parents"] as $index) {
     if (!in_array($index, ['widget', 'heading_type'], TRUE)
-        && !preg_match('/^group_/', $index)) {
+      && !preg_match('/^group_/', $index)) {
       $parents[] = $index;
     }
   }
@@ -274,10 +283,11 @@ function d_p_preprocess_field(&$variables) {
  *
  * @see: d_p_preprocess_textarea();
  */
-function d_p_centered_ckeditor_widget_content(&$element, FormStateInterface $form_state, $context, $paragraph_type) {
+function d_p_centered_ckeditor_widget_content(array &$element, FormStateInterface $form_state, array $context, $paragraph_type) {
   if ($context['widget'] instanceof TextareaWidget) {
     $paragraph_types = [];
-    \Drupal::moduleHandler()->invokeAll('d_p_centered_ckeditor_widget_paragraphs', [&$paragraph_types]);
+    \Drupal::moduleHandler()
+      ->invokeAll('d_p_centered_ckeditor_widget_paragraphs', [&$paragraph_types]);
     if (in_array($paragraph_type, $paragraph_types)) {
       $element['#d_p_ckeditor_centered'] = TRUE;
     }
@@ -288,6 +298,7 @@ function d_p_centered_ckeditor_widget_content(&$element, FormStateInterface $for
  * Implements hook_preprocess_HOOK().
  *
  * Make the content of the CKEditor centred for the specified paragraph types.
+ *
  * @see: d_p_centered_ckeditor_widget_content();
  */
 function d_p_preprocess_textarea(&$variables) {

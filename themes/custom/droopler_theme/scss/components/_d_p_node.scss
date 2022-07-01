@@ -2,14 +2,16 @@
  * Node reference paragraph.
  */
 
+@use "sass:math";
+
 // Colour variables used in this paragraph.
 $box-subtitle-color: $color-achillies !default;
 
 // Margins, paddings and sizing.
 $box-content-max-width: 490px !default;
-$box-padding: $grid-gutter-width / 2 !default;
+$box-padding: math.div($grid-gutter-width, 2) !default;
 $box-large-padding: $grid-gutter-width !default;
-$box-image-padding-bottom: $grid-gutter-width / 2 !default;
+$box-image-padding-bottom: math.div($grid-gutter-width, 2) !default;
 
 .paragraph--type--d-p-node {
   height: 100%;

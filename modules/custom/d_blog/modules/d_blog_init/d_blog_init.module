@@ -3,22 +3,20 @@
 /**
  * @file
  * Initialization of content for d_blog module.
- *
- * d_blog_init module.
  */
 
 /**
  * Alter content structure.
+ *
  * Implements hook_content_structure_alter()
  *
- * @param $structure
+ * @param array $structure
  *   The array with structure.
- *
- * @param $context
+ * @param string $context
  *   Which structure array is this?
  */
-function d_blog_init_content_structure_alter(&$structure, $context) {
-  $path = drupal_get_path('module', 'd_blog_init') . '/pages';
+function d_blog_init_content_structure_alter(array &$structure, string $context) {
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_blog_init') . '/pages';
 
   if ($context == 'all') {
     $structure['blog_post_1'] = ['file' => "$path/post_1.yml"];

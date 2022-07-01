@@ -47,7 +47,7 @@ function droopler_theme_preprocess_page(&$variables) {
 
   // Define header type variables.
   $variables['header_layout'] = $layout;
-  $variables['is_disabled_header'] =  $layout === 'header_disabled';
+  $variables['is_disabled_header'] = $layout === 'header_disabled';
   $variables['is_cta_header'] = $layout === 'header_with_cta';
 
   // Define default classes for containers.
@@ -71,7 +71,7 @@ function droopler_theme_preprocess_page(&$variables) {
     'class' => ['col-12', 'main-content'],
   ];
   $section_attributes = [
-    'class' => ['section',],
+    'class' => ['section'],
   ];
   $content_attributes = [
     'class' => ['main-content', 'col-md-12'],
@@ -95,8 +95,8 @@ function droopler_theme_preprocess_page(&$variables) {
 
   // Add attributes that depends of the page layout.
   if ($variables['is_cta_header']) {
-    $variables['page_attributes']->addClass(['landing-page-header',]);
-    $variables['section_attributes']->addClass(['header-section',]);
+    $variables['page_attributes']->addClass(['landing-page-header']);
+    $variables['section_attributes']->addClass(['header-section']);
   }
 
   $footer_regions = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
@@ -157,7 +157,7 @@ function droopler_theme_preprocess_menu_local_task(&$variables) {
   $link = $variables['element']['#link'];
   $url = $link['url'];
   $options = $url->getOptions();
-  $url->setOptions($options + $link['localized_options']);
+  $url->setOptions($options + ($link['localized_options'] ?? []));
   $variables['item'] = Link::fromTextAndUrl($link['title'], $url);
 }
 
@@ -165,7 +165,7 @@ function droopler_theme_preprocess_menu_local_task(&$variables) {
  * Implements hook_theme_suggestions_HOOK_alter() for links templates.
  */
 function droopler_theme_theme_suggestions_links_alter(array &$suggestions, array $variables) {
-  // ToDo get from core a variable to flag inline links.
+  // @todo get from core a variable to flag inline links.
   if (in_array('inline', $variables['attributes']['class'])) {
     $suggestions[] = 'links__inline';
   }
@@ -184,7 +184,7 @@ function droopler_theme_theme_suggestions_form_alter(array &$suggestions, array 
 }
 
 /**
- * Implements hook_theme_suggestions_page_alter.
+ * Implements hook_theme_suggestions_page_alter().
  */
 function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
   $route_match = \Drupal::routeMatch();
@@ -204,7 +204,7 @@ function droopler_theme_theme_suggestions_page_alter(array &$suggestions, array 
 }
 
 /**
- * Implements hook_preprocess_input() to add classes to inputs.
+ * Implements hook_preprocess_input().
  */
 function droopler_theme_preprocess_input(&$variables) {
   // For submit elements.
@@ -326,7 +326,7 @@ function droopler_theme_preprocess_field(&$variables) {
     $variables['#attached']['library'][] = 'd_product/d_product_slider';
     $vid = $variables['element']['#object']->vid->value;
     $slider = views_embed_view('product_images', 'block_1', $vid);
-    $variables['slider'] = render($slider);
+    $variables['slider'] = \Drupal::service('renderer')->render($slider);
   }
 }
 
@@ -398,7 +398,7 @@ function droopler_theme_show_title_block() {
  *   Layout name, defaults to null.
  */
 function droopler_theme_get_page_layout(array $variables) {
-  /** @var NodeInterface|null $node */
+  /** @var \Drupal\node\NodeInterface|null $node */
   $node = $variables['node'] ?? NULL;
   $layout = NULL;
 
@@ -439,7 +439,7 @@ function droopler_theme_library_info_alter(&$libraries, $extension) {
 
   // Make Droopler compatible with Drupal.org.
   // Enable libraries in profile directory.
-  $profile_libraries_dir = drupal_get_path('profile', 'droopler') . '/libraries';
+  $profile_libraries_dir = \Drupal::service('extension.path.resolver')->getPath('profile', 'droopler') . '/libraries';
   if (file_exists($profile_libraries_dir)) {
     foreach ($libraries as $name => &$info) {
       // Alter JS.
@@ -457,8 +457,10 @@ function droopler_theme_library_info_alter(&$libraries, $extension) {
 }
 
 /**
- * Take a list of assets and change their locations to profile directory if
- * needed.
+ * Change locations of assets.
+ *
+ * Take a list of assets and change their locations
+ * to profile directory if needed.
  *
  * @param string $profile_libraries_dir
  *   The /libraries directory path inside the profile.
@@ -502,11 +504,8 @@ function detect_browser() {
     }
   }
   switch ($user_browser) {
-    case 'MSIE':
-      $user_browser = 'Internet Explorer';
-      break;
-
     case 'Trident':
+    case 'MSIE':
       $user_browser = 'Internet Explorer';
       break;
 

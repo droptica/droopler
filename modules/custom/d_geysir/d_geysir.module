@@ -18,7 +18,7 @@ function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $root_path = DRUPAL_ROOT;
       $base_url = \Drupal::service('router.request_context')->getBaseUrl();
       $base_url = empty($base_url) ? '' : '/' . trim($base_url, '/') . '/';
-      $module_path = drupal_get_path('module', 'd_p');
+      $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_p');
       foreach ($form['description'] as $paragraph_name => $attributes) {
         $file_server_path = $root_path . '/' . $module_path . '/images/' . $paragraph_name . '.png';
         if (file_exists($file_server_path)) {
@@ -40,6 +40,7 @@ function d_geysir_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Add after build to add a CSS class to the form actions.
   if ($form_id === 'views_exposed_form' && strpos($form['#id'], 'views-exposed-form-media-library-widget') === 0) {
     $form['actions']['#attributes']['class'][] = 'media-library-view--form-actions';
+    $form['actions']['submit']['#attributes']['class'][] = 'button-override';
   }
 }
 
@@ -64,6 +65,7 @@ function d_geysir_field_widget_link_attributes_form_alter(&$element, &$form_stat
 
 /**
  * Implements hook_field_widget_form_alter().
+ *
  * Disable premature autofocus at modal's forms.
  */
 function d_geysir_field_widget_form_alter(&$element, &$form_state, $context) {
@@ -160,7 +162,7 @@ function d_geysir_form_media_library_add_form_upload_alter(array &$form, FormSta
  * @see seven_form_media_library_add_form_oembed_alter()
  */
 function d_geysir_form_media_library_add_form_oembed_alter(array &$form, FormStateInterface $form_state) {
-  $form['attributes']['class'][] = 'media-library-add-form--oembed';
+  $form['#attributes']['class'][] = 'media-library-add-form--oembed';
 
   // If no media items have been added yet, add a couple of styling classes
   // to the initial URL form.
@@ -206,23 +208,6 @@ function d_geysir_preprocess_item_list__media_library_add_form_media_list(array 
  */
 function d_geysir_preprocess_media_library_item__small(array &$variables) {
   $variables['content']['select']['#attributes']['class'][] = 'media-library-item__click-to-select-checkbox';
-}
-
-/**
- * @todo Remove this when https://www.drupal.org/project/drupal/issues/2999549
- * lands.
- *
- * @see \Drupal\media_library\Plugin\Field\FieldWidget\MediaLibraryWidget::formElement()
- * @see seven_preprocess_fieldset__media_library_widget
- */
-function d_geysir_preprocess_fieldset__media_library_widget(array &$variables) {
-  if (isset($variables['prefix']['weight_toggle'])) {
-    $variables['prefix']['weight_toggle']['#attributes']['class'][] = 'media-library-widget__toggle-weight';
-  }
-  if (isset($variables['suffix']['open_button'])) {
-    $variables['suffix']['open_button']['#attributes']['class'][] = 'media-library-open-button';
-    $variables['suffix']['open_button']['#attributes']['class'][] = 'button-override';
-  }
 }
 
 /**

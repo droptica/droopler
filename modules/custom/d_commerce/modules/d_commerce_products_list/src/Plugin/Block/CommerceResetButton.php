@@ -23,7 +23,7 @@ class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInt
   /**
    * Current Request.
    *
-   * @var Symfony\Component\HttpFoundation\Request
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $request;
 
@@ -127,7 +127,7 @@ class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInt
     }
 
     $link_content_markups[] = [
-      '#markup' => $this->t($this->getConfiguration()['button_text']),
+      '#markup' => $this->t($this->getConfiguration()['button_text']), // phpcs:ignore
     ];
     if (!empty($this->getConfiguration()['button_icon_class'])) {
       $link_content_markups[] = [

@@ -14,7 +14,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 
 /**
- * Implements hook_preprocess_HOOK.
+ * Implements hook_preprocess_HOOK().
  */
 function d_product_preprocess_node(&$variables) {
   $node = $variables['node'];
@@ -96,10 +96,10 @@ function d_product_form_alter(&$form, FormStateInterface $form_state, $form_id) 
           $subject = $subject->render();
           $subject = strlen($subject) > 100 ? substr($subject, 0, 97) . "..." : $subject;
 
-          $message = t(
-            'I would like to ask about @title, link - @link ',
-            ['@title' => $node->getTitle(), '@link' => $alias]
-          );
+          $message = t('I would like to ask about @title, link - @link', [
+            '@title' => $node->getTitle(),
+            '@link' => $alias,
+          ]);
           $form['subject']['widget'][0]['value']['#default_value'] = $subject;
           $form['message']['widget'][0]['value']['#default_value'] = $message;
         }
@@ -115,15 +115,20 @@ function d_product_preprocess_page(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   if (stripos($route_name, 'view.products_list') !== FALSE) {
     $pager_manager = \Drupal::service('pager.manager');
-    $variables['pager_total_items'] = $pager_manager->getPager(0)->getTotalItems();
+    $variables['pager_total_items'] = $pager_manager->getPager(0)
+      ->getTotalItems();
     $variables['#attached']['library'][] = 'd_product/d_product_select';
     $variables['#attached']['library'][] = 'd_product/d_product_searches';
   }
 
   // Remove title block from product listing and product page.
-  $no_title_routes = ['entity.node.canonical', 'entity.node.revision', 'view.products_list.products_list'];
+  $no_title_routes = [
+    'entity.node.canonical',
+    'entity.node.revision',
+    'view.products_list.products_list',
+  ];
   if (in_array($route_name, $no_title_routes)) {
-    $node = isset($variables['node']) ? $variables['node'] : NULL;
+    $node = $variables['node'] ?? NULL;
     if ($node && !($node instanceof NodeInterface)) {
       $node = Node::load($node);
     }
@@ -179,7 +184,7 @@ function d_product_preprocess_image_style(&$variables) {
 /**
  * Create custom term links.
  *
- * @param array $items
+ * @param object $items
  *   Store term ids.
  * @param string $element
  *   Facet path element.
@@ -187,7 +192,7 @@ function d_product_preprocess_image_style(&$variables) {
  * @return array
  *   Generated links.
  */
-function d_product_generate_term_links($items, $element) {
+function d_product_generate_term_links(object $items, $element) {
   $links = [];
   foreach ($items as $term_obj) {
     $tid = $term_obj->getValue();
@@ -197,7 +202,7 @@ function d_product_generate_term_links($items, $element) {
       'query' => ['f[0]' => $element . ':' . strtolower($name)],
     ];
     $link = Link::fromTextAndUrl(
-      t($name),
+      t($name), // phpcs:ignore
       Url::fromUri('internal:/products', $options)
     )->toString();
     $links[] = $link;
@@ -209,15 +214,17 @@ function d_product_generate_term_links($items, $element) {
 /**
  * Create ask_product_link.
  *
- * @param $node
+ * @param \Drupal\node\NodeInterface $node
+ *   A node object.
  *
  * @return array
+ *   Return link.
  */
-function d_product_generate_ask_product_link($node) {
+function d_product_generate_ask_product_link(NodeInterface $node) {
   $name = 'Ask for product';
   $options = ['query' => ['product' => $node->id()]];
   $link = Link::fromTextAndUrl(
-    t($name),
+    t($name), // phpcs:ignore
     Url::fromUri('internal:/contact#contact-message-feedback-form', $options)
   )->toRenderable();
   $link['#attributes'] = ['class' => ['btn btn-outline-primary']];

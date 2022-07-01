@@ -57,6 +57,7 @@
 {% set content_side_classes = [
   'content-inside-wrapper',
 ] %}
+{% set content_side_classes = content_side_classes|merge([text_class]) %}
 
 {% block paragraph %}
 <section {{ wrapper_attributes }}>
@@ -72,11 +73,11 @@
       <div class="{{ content_side_classes|join(' ') }}">
         <div class="container">
           <div class="row">
-            <div class="{{ text_class }} container-half">
-              {{ content.group_d_side_image_content|without('field_d_cta_link') }}
-              {% if content.group_d_side_image_content.field_d_cta_link.0 %}
+            <div class="container-half">
+              {{ content.group_d_side_image_content }}
+              {% if content.group_d_side_image_cta %}
                 <div class="mt-4">
-                  {{ content.group_d_side_image_content.field_d_cta_link }}
+                  {{ content.group_d_side_image_cta }}
                 </div>
               {% endif %}
             </div>

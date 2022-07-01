@@ -2,7 +2,7 @@
 
 /**
  * @file
- * d_update module.
+ * Contains d_update module.
  */
 
 use Drupal\Core\Url;
@@ -58,7 +58,7 @@ function d_update_checklistapi_checklist_items() {
       }
     }
     elseif (in_array($key, ['#title', '#weight'])) {
-      $value = t($value);
+      $value = t($value); // phpcs:ignore
     }
   });
 
@@ -85,7 +85,7 @@ function d_update_preprocess_menu__toolbar(&$variables) {
   else {
     unset($variables['items']['d_update.admin_update']);
   }
-  
+
   $variables['#attached']['library'][] = 'd_update/droopler';
 }
 
