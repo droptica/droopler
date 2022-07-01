@@ -1,6 +1,37 @@
 # Updating Droopler
 
 ## Droopler 3.1.0
+
+### PHP 8.x
+If you want to run Droopler with PHP 8.x, you should include `cweagans/composer-patches` package in your `composer.json`:
+```json
+{
+    "require": {
+        "cweagans/composer-patches": "^1.6"
+    },
+    "extra": {
+        "enable-patching": true,
+    }
+}
+```
+
+### Composer 2.2
+If you are using Composer >= 2.2.0, remember to add these lines to your `composer.json`:
+```json
+{
+    "allow-plugins": {
+        "dealerdirect/phpcodesniffer-composer-installer": true,
+        "composer/installers": true,
+        "cweagans/composer-patches": true,
+        "drupal/console-extend-plugin": true,
+        "drupal/core-composer-scaffold": true,
+        "oomphinc/composer-installers-extender": true,
+        "zaporylie/composer-drupal-optimizations": true
+    }
+}
+```
+
+### Droopler Commerce
 Class `DrooplerProductVariation` has been removed, if you want to restore it for your project, you can find it [here](https://github.com/droptica/droopler/tree/master/modules/custom/d_commerce/modules/d_commerce_product/src/Entity):
 
 You can attach it by using this hook:

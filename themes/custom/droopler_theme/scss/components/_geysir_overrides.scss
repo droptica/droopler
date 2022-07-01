@@ -65,7 +65,7 @@ $geysir-add-more-button: $color-hecuba !default;
   .form-actions {
     margin-top: 1rem;
   }
-  .button--primary {
+  .button--primary:not(.no-bootstrap) {
     color: #fff;
     background: $primary;
     font-weight: bold;
