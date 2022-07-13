@@ -505,7 +505,6 @@ function d_content_init_create_all($type = NULL) {
   if (empty($type) || $type === 'content') {
     $content_structure = [];
     $module_handler->alter('content_structure', $content_structure, $context);
-    var_dump($content_structure);
     d_content_init_add_nodes($content_structure);
   }
 
