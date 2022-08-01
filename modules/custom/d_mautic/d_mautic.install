@@ -22,7 +22,7 @@ function d_mautic_uninstall() {
   $ids = [];
   $allParagraphs = \Drupal::entityTypeManager()->getStorage('paragraph')->loadMultiple();
 
-  foreach ( $allParagraphs as $paragraph ) {
+  foreach ($allParagraphs as $paragraph) {
     $type = $paragraph->bundle();
     if ($type === 'd_mautic') {
       $ids[] = $paragraph->get('id')->getValue()[0]['value'];
