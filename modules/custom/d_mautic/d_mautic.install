@@ -12,3 +12,34 @@ function d_mautic_install() {
   Drupal::service('d_update')
     ->updateConfigurations('module/d_mautic', 'd_mautic.init');
 }
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Deletes node references to d_mautic paragraph after uninstalling module.
+ */
+function d_mautic_uninstall() {
+  $ids = [];
+  $allParagraphs = \Drupal::entityTypeManager()->getStorage('paragraph')->loadMultiple();
+
+  foreach ( $allParagraphs as $paragraph ) {
+    $type = $paragraph->bundle();
+    if ($type === 'd_mautic') {
+      $ids[] = $paragraph->get('id')->getValue()[0]['value'];
+    }
+  }
+
+  $allNodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple();
+  foreach ($allNodes as $node) {
+    if ($node->hasField('field_page_section')) {
+      $page_section = $node->get('field_page_section')->getValue();
+      foreach ($page_section as $index => $section) {
+        if (in_array($section['target_id'], $ids)) {
+          unset($page_section[$index]);
+          $node->field_page_section = $page_section;
+          $node->save();
+        }
+      }
+    }
+  }
+}
