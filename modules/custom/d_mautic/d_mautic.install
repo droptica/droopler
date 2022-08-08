@@ -5,6 +5,8 @@
  * Install, update, and uninstall functions for d_mautic.install.
  */
 
+use Drupal\field\Entity\FieldConfig;
+
 /**
  * Implements hook_install().
  */
@@ -15,10 +17,9 @@ function d_mautic_install() {
 
 /**
  * Implements hook_uninstall().
- *
- * Deletes node references to d_mautic paragraph after uninstalling module.
  */
 function d_mautic_uninstall() {
+  // Deletes node references to d_mautic paragraph after uninstalling module.
   $ids = [];
   $allParagraphs = \Drupal::entityTypeManager()->getStorage('paragraph')->loadMultiple();
 
@@ -42,4 +43,12 @@ function d_mautic_uninstall() {
       }
     }
   }
+
+  // Updates field configuration.
+  $field_instance = FieldConfig::loadByName('node', 'content_page', 'field_page_section');
+  $settings = $field_instance->getSetting('handler_settings');
+  unset($settings['target_bundles_drag_drop']['d_mautic']);
+  unset($settings['target_bundles']['d_mautic']);
+  $field_instance->setSetting('handler_settings', $settings);
+  $field_instance->save();
 }
