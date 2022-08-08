@@ -344,6 +344,17 @@ function droopler_theme_preprocess_block(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for menu_local_action.
+ */
+function droopler_theme_preprocess_menu_local_action(&$variables) {
+  $variables['link']['#options']['attributes']['class'] = [
+    'btn',
+    'btn-outline-primary',
+    'btn-sm',
+  ];
+}
+
+/**
  * Check if current route is node with paragraphs or other defined route.
  *
  * @return bool
