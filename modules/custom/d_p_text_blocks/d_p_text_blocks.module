@@ -45,7 +45,7 @@ function d_p_text_blocks_preprocess_field(&$variables) {
 
           // Enable grid setting.
           if ($setting_field->hasClass('with-grid')) {
-            set_columns_sizes($variables['items'], $columns);
+            d_p_text_blocks_set_columns_sizes($variables['items'], $columns);
           }
           else {
             $grid_size = 12;
@@ -74,7 +74,7 @@ function d_p_text_blocks_preprocess_field(&$variables) {
  * @param array $column_count
  *   Array with the number of columns for the selected breakpoints.
  */
-function set_columns_sizes(array $items, array $column_count) {
+function d_p_text_blocks_set_columns_sizes(array $items, array $column_count) {
   foreach ($column_count as $breakpoint => $items_per_row) {
     if (!empty($items_per_row)) {
       foreach ($items as $idx => $list_item) {
