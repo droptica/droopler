@@ -1,0 +1,36 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\ParagraphSetting;
+
+use Drupal\d_p\ParagraphSettingPluginBase;
+
+/**
+ * Plugin implementation of the '{{ plugin_id }}' modifier setting.
+ *
+ * @ParagraphSetting(
+ *   id = "{{ plugin_id }}",
+ *   label = @Translation("{{ plugin_label }}"),
+ * )
+ */
+class {{ class }} extends ParagraphSettingPluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function formElement(): array {
+    $element = parent::formElement();
+
+    return [
+      '#type' => 'textfield',
+      '#description' => $this->t('{{ plugin_label }}'),
+    ] + $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefaultValue() {
+    return '';
+  }
+
+}

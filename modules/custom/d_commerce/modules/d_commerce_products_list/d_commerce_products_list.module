@@ -30,7 +30,7 @@ function d_commerce_products_list_preprocess_commerce_product(&$variables) {
 /**
  * Implements hook_preprocess_THEME().
  */
-function d_commerce_product_preprocess_commerce_product__droopler_products__teaser(&$variables) {
+function d_commerce_products_list_preprocess_commerce_product__droopler_products__teaser(&$variables) {
   if (isset($variables['product']['variation_title'])) {
     $variation = $variables['product']['variation_title']['#object'];
     $view_builder = \Drupal::entityTypeManager()->getViewBuilder($variation->getEntityTypeId());

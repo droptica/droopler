@@ -1,0 +1,39 @@
+<?php
+
+namespace Drupal\{{ machine_name }}\Plugin\ParagraphSetting;
+
+use Drupal\d_p\ParagraphSettingPluginBase;
+
+/**
+ * Plugin implementation of the '{{ plugin_id }}' class modifier.
+ *
+ * @ParagraphSetting(
+ *   id = "{{ plugin_id }}",
+ *   label = @Translation("{{ plugin_label }}"),
+ *   settings = {
+ *      "parent" = "custom_class",
+ *   }
+ * )
+ */
+class {{ class }} extends ParagraphSettingPluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function formElement(): array {
+    $element = parent::formElement();
+
+    return [
+      '#type' => 'checkbox',
+      '#description' => $this->t('{{ plugin_label }}'),
+    ] + $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefaultValue() {
+    return '';
+  }
+
+}
