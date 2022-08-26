@@ -1,0 +1,15 @@
+services:
+  droopler.paragraph_generator:
+    class: Drupal\d_p\Generators\ParagraphModuleGenerator
+    tags:
+      -  { name: drush.generator }
+
+  droopler.setting_plugin_generator:
+    class: Drupal\d_p\Generators\SettingPluginGenerator
+    tags:
+      -  { name: drush.generator }
+
+  droopler.setting_class_plugin_generator:
+    class: Drupal\d_p\Generators\SettingClassPluginGenerator
+    tags:
+      -  { name: drush.generator }

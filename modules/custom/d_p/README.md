@@ -83,3 +83,11 @@ it instead. You can also use hooks to alter the widget forms:
 
 **Note:** This method is not recommended, as long as there is no other way to alter the form elements or validate them
 using the alter methods described above.
+
+### Drush generators ###
+
+You can use Drush to generate code for paragraphs and settings.
+Please remember that the paragraph's machine name **must be the same** as module's machine name!
+* `drush generate droopler-paragraph-module` - generates a module with a custom paragraph twig template. Please use your paragraph machine name as the module machine name.
+* `drush generate droopler-setting-plugin` - generates a plugin with custom setting plugin.
+* `drush generate droopler-setting-class-plugin` - generates a plugin with custom setting plugin (dependent on parent class plugin).
