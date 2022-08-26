@@ -20,7 +20,7 @@
     'container'
   ]
 %}
-{% if content %}
+{% if content|render|trim %}
   <div{{ attributes.addClass(classes) }}>
     {{ content }}
   </div>

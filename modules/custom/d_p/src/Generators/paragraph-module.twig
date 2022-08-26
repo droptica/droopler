@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * A module with {{ name }} paragraph.
+ */
+{% if preprocess %}
+
+use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+{% endif %}
+
+/**
+ * Implements hook_theme().
+ */
+function {{ machine_name }}_theme($existing, $type, $theme, $path): array {
+  return [
+    'paragraph__{{ machine_name }}' => [
+      'base hook' => 'paragraph',
+    ],
+  ];
+}
+
+{% if preprocess %}
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function {{ machine_name }}_preprocess_paragraph__{{ machine_name }}(array &$variables) {
+  $paragraph = $variables['paragraph'];
+  try {
+    /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
+    $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
+
+    $variables['foo'] = $setting_field->getSettingValue('foo');
+  }
+  catch (MissingConfigurationStorageFieldException $exception) {
+    \Drupal::logger('{{ machine_name }}')->error($exception->getMessage());
+  }
+}
+{% endif %}
