@@ -5,7 +5,6 @@ description: 'Ready to use site builder with paragraphs.'
 type: profile
 dependencies:
   # Core.
-  - ctools
   - drupal:block
   - drupal:block_content
   - drupal:breakpoint
@@ -15,6 +14,7 @@ dependencies:
   - drupal:contact
   - drupal:content_translation
   - drupal:contextual
+  - drupal:ctools
   - drupal:dblog
   - drupal:dynamic_page_cache
   - drupal:editor
