@@ -92,7 +92,7 @@ $d-p-single-text-box-grid-large-padding: $grid-gutter-width !default;
   .content-wrapper {
     position: relative;
     z-index: 2;
-    word-break: break-all;
+    hyphens: manual;
   }
 
   .d-p-text-block {
