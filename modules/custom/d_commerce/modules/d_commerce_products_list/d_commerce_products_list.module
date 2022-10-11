@@ -46,7 +46,9 @@ function d_commerce_products_list_preprocess_page(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
   if (stripos($route_name, 'view.droopler_commerce_products_list') !== FALSE) {
     $pager_manager = \Drupal::service('pager.manager');
-    $variables['pager_total_items'] = $pager_manager->getPager(0)->getTotalItems();
+    if ($pager = $pager_manager->getPager(0)) {
+      $variables['pager_total_items'] = $pager->getTotalItems();
+    }
     $variables['#attached']['library'][] = 'd_commerce_products_list/d_commerce_products_list_select';
     $variables['#attached']['library'][] = 'd_commerce_products_list/d_commerce_products_list_searches';
 
