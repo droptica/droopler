@@ -38,7 +38,7 @@ class SettingClassPluginGenerator extends BaseGenerator {
   protected function interact(InputInterface $input, OutputInterface $output) {
     $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
 
-    $vars = &$this->collectVars($input, $output, $questions);
+    $this->collectVars($input, $output, $questions);
 
     $this->addFile()
       ->path('src/Plugin/ParagraphSetting/{class}.php')

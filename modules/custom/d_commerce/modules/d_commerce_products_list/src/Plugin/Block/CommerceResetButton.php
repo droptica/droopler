@@ -74,25 +74,25 @@ class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInt
   public function blockForm($form, FormStateInterface $form_state) {
     $form['button_text'] = [
       '#type' => 'textfield',
-      '#title' => t('Button text'),
+      '#title' => $this->t('Button text'),
       '#default_value' => $this->getConfiguration()['button_text'] ?? 'Reset Filters',
     ];
 
     $form['button_class'] = [
       '#type' => 'textfield',
-      '#title' => t('Button class'),
+      '#title' => $this->t('Button class'),
       '#default_value' => $this->getConfiguration()['button_class'] ?? 'btn btn-outline-primary btn-sm btn-reset',
     ];
 
     $form['button_target'] = [
       '#type' => 'textfield',
-      '#title' => t('Button target'),
+      '#title' => $this->t('Button target'),
       '#default_value' => $this->getConfiguration()['button_target'] ?? '/shop',
     ];
 
     $form['button_icon_class'] = [
       '#type' => 'textfield',
-      '#title' => t('Button icon class'),
+      '#title' => $this->t('Button icon class'),
       '#default_value' => $this->getConfiguration()['button_icon_class'] ?? 'fas fa-times',
     ];
 

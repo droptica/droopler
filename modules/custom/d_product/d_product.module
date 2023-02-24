@@ -81,8 +81,8 @@ function d_product_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       'max-age' => 0,
     ];
     // Autofill contact form.
-    if (isset($_GET['product'])) {
-      $nid = $_GET['product'];
+    if (\Drupal::request()->query->has('product')) {
+      $nid = \Drupal::request()->query->get('product');
       $node = Node::load($nid);
       if ($node) {
         $user = User::load(\Drupal::currentUser()->id());

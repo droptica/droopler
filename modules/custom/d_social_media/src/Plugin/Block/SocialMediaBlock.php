@@ -3,7 +3,10 @@
 namespace Drupal\d_social_media\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\d_social_media\Form\ConfigurationForm;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a block contains links to social media.
@@ -13,14 +16,50 @@ use Drupal\d_social_media\Form\ConfigurationForm;
  *   admin_label = @Translation("Social Media Block"),
  * )
  */
-class SocialMediaBlock extends BlockBase {
+class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The config factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * Constructs a MyConfigBlock object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory service.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $configFactory) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->configFactory = $configFactory;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('config.factory')
+    );
+  }
 
   /**
    * {@inheritdoc}
    */
   public function build() {
     $links = [];
-    $config = \Drupal::config('d_social_media.settings');
+    $config = $this->configFactory->get('d_social_media.settings');
     foreach (ConfigurationForm::getMediaNames() as $name) {
       if (!empty($config->get("link_$name"))) {
         $links[] = [

@@ -385,7 +385,7 @@ function d_content_init_add_node(array $params) {
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_add_nodes(array $structure) {
-  foreach ($structure as $key => $page) {
+  foreach ($structure as $page) {
     $mid = d_content_init_add_node($page);
     if (!empty($page['children'])) {
       foreach ($page['children'] as $child) {

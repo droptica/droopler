@@ -1,17 +1,22 @@
-name: d_commerce_products_list (experimental)
-description: 'Provides a droopler products list.'
+name: 'Droopler Commerce Product List (experimental)'
+description: 'Provides the Droopler Commerce products list.'
 type: module
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 dependencies:
-  - d_commerce
-  - d_commerce_product
-  - better_exposed_filters
-  - facets
-  - facets_pretty_paths
-  - search_api
-  - search_api_db
-  - system
+  # Core:
+  - drupal:system
+
+  # Contrib:
+  - better_exposed_filters:better_exposed_filters
+  - facets:facets
+  - facets_pretty_paths:facets_pretty_paths
+  - search_api:search_api
+  - search_api_db:search_api_db
+
+  # Droopler:
+  - droopler:d_commerce
+  - droopler:d_commerce_product
+
 package: Droopler
 version: DROOPLER_VERSION
 core_incompatible: false

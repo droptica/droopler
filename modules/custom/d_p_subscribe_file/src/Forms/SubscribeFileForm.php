@@ -4,6 +4,7 @@ namespace Drupal\d_p_subscribe_file\Forms;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\Core\Link;
 use Drupal\d_p_subscribe_file\Entity\SubscribeFileEntity;
@@ -32,13 +33,34 @@ class SubscribeFileForm extends FormBase {
   protected $paragraph;
 
   /**
+   * Mail manager service.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mailManager;
+
+  /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
    * SubscribeFileForm constructor.
    *
    * @param \Drupal\Core\Session\AccountProxy $account_proxy
    *   A proxied implementation of AccountInterface.
+   * @param \Drupal\Core\Mail\MailManagerInterface $mail_manager
+   *   Mail manager.
    */
-  public function __construct(AccountProxy $account_proxy) {
+  public function __construct(
+    AccountProxy $account_proxy,
+    MailManagerInterface $mail_manager
+  ) {
     $this->accountProxy = $account_proxy->getAccount();
+    $this->mailManager = $mail_manager;
+    $this->currentUser = $account_proxy;
   }
 
   /**
@@ -46,7 +68,8 @@ class SubscribeFileForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('current_user')
+      $container->get('current_user'),
+      $container->get('plugin.manager.mail')
     );
   }
 
@@ -161,7 +184,6 @@ class SubscribeFileForm extends FormBase {
       ->view($display_settings);
     $body[0]['#text'] = str_replace("[download-button]", $rendered_download_link, $body[0]['#text']);
 
-    $mail_manager = \Drupal::service('plugin.manager.mail');
     $module = 'd_p_subscribe_file';
     $key = 'subscribe_form';
     $to = $form_state->getValue('mail');
@@ -172,8 +194,8 @@ class SubscribeFileForm extends FormBase {
       '#body' => $body,
     ];
 
-    $langcode = \Drupal::currentUser()->getPreferredLangcode();
-    $result = $mail_manager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
+    $langcode = $this->currentUser->getPreferredLangcode();
+    $result = $this->mailManager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
     if ($result['result']) {
       $this->messenger()
         ->addStatus($this->t('We send download link, check Your e-mail.'));

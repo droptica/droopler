@@ -6,7 +6,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
-use Drupal\file\Entity\File;
 use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -68,7 +67,7 @@ class DownloadFile extends ControllerBase {
    *   Return file entity.
    */
   private function getSubscribeFileEntity($field_name, $field_value) {
-    $subscribe_file_entity = \Drupal::entityTypeManager()
+    $subscribe_file_entity = $this->entityTypeManager
       ->getStorage('SubscribeFileEntity')
       ->loadByProperties([$field_name => $field_value]);
     if (empty($subscribe_file_entity)) {
@@ -86,7 +85,7 @@ class DownloadFile extends ControllerBase {
   private function checkLinkActive(EntityInterface $entity) {
     $created = $entity->get('created')->get(0)->getValue();
     if (time() > $created['value'] + 86400) {
-      $this->goHomeWithMessage(t('Link is not active, please add your email again'));
+      $this->goHomeWithMessage($this->t('Link is not active, please add your email again'));
     }
   }
 
@@ -115,7 +114,7 @@ class DownloadFile extends ControllerBase {
   public function getFile(string $file_hash) {
     $entity = $this->getSubscribeFileEntity('file_hash', $file_hash);
     $this->checkLinkActive($entity);
-    $file = File::load($entity->get('fid')->getValue()[0]['value']);
+    $file = $this->entityTypeManager->getStorage('file')->load($entity->get('fid')->getValue()[0]['value']);
     $uri = $file->getFileUri();
     $response = new BinaryFileResponse($uri);
     $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT);

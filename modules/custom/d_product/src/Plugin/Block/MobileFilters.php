@@ -22,13 +22,13 @@ class MobileFilters extends BlockBase {
   public function blockForm($form, FormStateInterface $form_state) {
     $form['button_text'] = [
       '#type' => 'textfield',
-      '#title' => t('Button text'),
+      '#title' => $this->t('Button text'),
       '#default_value' => $this->configuration['button_text'] ?? 'Filters',
     ];
 
     $form['button_class'] = [
       '#type' => 'textfield',
-      '#title' => t('Button class'),
+      '#title' => $this->t('Button class'),
       '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary',
     ];
 
@@ -62,8 +62,8 @@ class MobileFilters extends BlockBase {
           'data-target' => ['.region-sidebar-left'],
           'aria-expanded' => ['false'],
           'aria-controls' => ['.region-sidebar-left'],
-          'data-closed' => [t('Filters')],
-          'data-open' => [t('Close Filters')],
+          'data-closed' => [$this->t('Filters')],
+          'data-open' => [$this->t('Close Filters')],
         ],
       ],
     ];

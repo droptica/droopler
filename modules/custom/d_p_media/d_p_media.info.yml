@@ -1,27 +1,32 @@
-name: d_p_media
+name: 'Droopler Media Paragraph'
 description: 'Provides Media paragraph for Drupal.'
 type: module
-core: 8.x
-core_version_requirement: '^8 || ^9'
+core_version_requirement: ^9 || ^10
 dependencies:
-  - colorbox
-  - content_translation
-  - d_media
-  - d_p
-  - d_social_media
-  - field
-  - file
-  - image
-  - language
-  - media
-  - media_library
-  - node
-  - paragraphs
-  - path
-  - responsive_image
-  - svg_image
-  - svg_image_responsive
-  - user
-package: Paragraphs
+  # Core.
+  - drupal:content_translation
+  - drupal:field
+  - drupal:file
+  - drupal:image
+  - drupal:language
+  - drupal:media
+  - drupal:media_library
+  - drupal:node
+  - drupal:path
+  - drupal:responsive_image
+  - drupal:user
+
+  # Contrib.
+  - colorbox:colorbox
+  - paragraphs:paragraphs
+  - svg_image:svg_image
+  - svg_image:svg_image_responsive
+
+  # Droopler.
+  - droopler:d_media
+  - droopler:d_p
+  - droopler:d_social_media
+
+package: Droopler
 core_incompatible: false
 version: DROOPLER_VERSION

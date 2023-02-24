@@ -1,21 +1,27 @@
-name: d_p_tiles
+name: 'Droopler Tiles Gallery Paragraph'
 description: 'Provides a paragraph with Masonry tile gallery.'
 type: module
-core_version_requirement: '^8.9 || ^9'
-package: Paragraphs
+core_version_requirement: ^9 || ^10
+package: Droopler
 dependencies:
-  - 'colorbox:colorbox'
-  - 'd_media:d_media'
-  - 'd_p:d_p'
-  - 'drupal:content_translation'
-  - 'drupal:field'
-  - 'drupal:file'
-  - 'drupal:link'
-  - 'drupal:media'
-  - 'drupal:media_library'
-  - 'drupal:text'
-  - 'field_group:field_group'
-  - 'link_attributes:link_attributes'
-  - 'paragraphs:paragraphs'
+  # Core:
+  - drupal:content_translation
+  - drupal:field
+  - drupal:file
+  - drupal:link
+  - drupal:media
+  - drupal:media_library
+  - drupal:text
+
+  # Contrib:
+  - colorbox:colorbox
+  - field_group:field_group
+  - link_attributes:link_attributes
+  - paragraphs:paragraphs
+
+  # Droopler:
+  - droopler:d_media
+  - droopler:d_p
+
 version: DROOPLER_VERSION
 core_incompatible: false

@@ -292,7 +292,7 @@ class Updater {
 
     $module_data = $this->moduleExtensionList->getList();
     $modules = array_combine($modules, $modules);
-    if ($missing_modules = array_diff_key($modules, $module_data)) {
+    if (array_diff_key($modules, $module_data)) {
       return FALSE;
     }
 
@@ -308,9 +308,9 @@ class Updater {
    *   List of blocks configs to instantiate.
    */
   public function instantiateBlocksForSubtheme($subthemeName, array $configs) {
-    foreach ($configs as $baseTheme => $baseThemeConfigs) {
+    foreach ($configs as $baseThemeConfigs) {
       foreach ($baseThemeConfigs as $configName => $hash) {
-        $baseConfig = \Drupal::Config($configName)->getRawData();
+        $baseConfig = $this->configFactory->get($configName)->getRawData();
         unset($baseConfig['uuid']);
         $baseConfig['id'] = $baseConfig['id'] . '_' . $subthemeName;
         $baseConfig['theme'] = $subthemeName;

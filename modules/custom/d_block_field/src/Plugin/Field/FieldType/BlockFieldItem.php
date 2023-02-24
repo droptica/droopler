@@ -99,7 +99,7 @@ class BlockFieldItem extends FieldItemBase implements BlockFieldItemInterface {
     }
     // Unserialize the values.
     if (is_string($values['settings'])) {
-      $values['settings'] = unserialize($values['settings']);
+      $values['settings'] = unserialize($values['settings'], ['allowed_classes' => FALSE]);
     }
     parent::setValue($values, $notify);
   }

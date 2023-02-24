@@ -1,27 +1,32 @@
-name: d_commerce_product (experimental)
-core: 8.x
-core_version_requirement: ^8 || ^9
-description: 'Provides a droopler product type.'
+name: 'Droopler Commerce Product (experimental)'
+core_version_requirement: ^9 || ^10
+description: 'Provides the Droopler Commerce product type.'
 type: module
 dependencies:
-  - block
-  - commerce_order
-  - commerce_product
-  - entity_reference_revisions
-  - d_commerce
-  - field
-  - image
-  - media
-  - media_library
-  - metatag_open_graph_products
-  - options
-  - paragraphs
-  - path
-  - pathauto
-  - state_machine
-  - taxonomy
-  - text
-  - views
+  # Core:
+  - drupal:block
+  - drupal:field
+  - drupal:image
+  - drupal:media
+  - drupal:media_library
+  - drupal:options
+  - drupal:path
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:views
+
+  # Contrib:
+  - commerce:commerce_order
+  - commerce:commerce_product
+  - entity_reference_revisions:entity_reference_revisions
+  - metatag:metatag_open_graph_products
+  - paragraphs:paragraphs
+  - pathauto:pathauto
+  - state_machine:state_machine
+
+  # Droopler:
+  - droopler:d_commerce
+
 package: Droopler
 version: DROOPLER_VERSION
 core_incompatible: false

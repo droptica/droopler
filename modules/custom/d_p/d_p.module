@@ -228,7 +228,7 @@ function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, 
 
   if ($field_definition instanceof FieldConfig) {
     $config = $field_definition->id();
-    [$entity_type, $bundle, $field_name] = explode('.', $config);
+    [, $bundle, $field_name] = explode('.', $config);
 
     // Make the content of the CKEditor centred by default for the specified
     // paragraph types.

@@ -13,7 +13,6 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\file\FileRepositoryInterface;
-use Drupal\media\Entity\Media;
 
 /**
  * Content init media manager.
@@ -192,7 +191,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
       $query->condition('field_media_image.0.entity.uri', $uri);
       $entity_ids = $query->execute();
       $mid = reset($entity_ids);
-      return $mid ? Media::load($mid) : NULL;
+      return $mid ? $this->entityTypeManager->getStorage('media')->load($mid) : NULL;
     }
     catch (PluginNotFoundException $e) {
       $this->logger->error('Entity type "media" doesn\'t exist.');
@@ -219,7 +218,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
       $query->condition('field_media_image', $fid);
       $entity_ids = $query->execute();
       $mid = reset($entity_ids);
-      return $mid ? Media::load($mid) : NULL;
+      return $mid ? $this->entityTypeManager->getStorage('media')->load($mid) : NULL;
     }
     catch (PluginNotFoundException $e) {
       $this->logger->error('Entity type "media" doesn\'t exist.');

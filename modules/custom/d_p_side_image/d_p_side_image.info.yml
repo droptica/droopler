@@ -1,23 +1,28 @@
-name: d_p_side_image
-core: 8.x
-core_version_requirement: '^8 || ^9'
+name: 'Droopler Side Image Paragraph'
+core_version_requirement: ^9 || ^10
 description: 'Provides a paragraph with a side image.'
 type: module
 dependencies:
-  - content_translation
-  - d_media
-  - d_p
-  - field
-  - field_group
-  - image
-  - language
-  - link
-  - link_attributes
-  - media_library
-  - options
-  - paragraphs
-  - svg_image
-  - text
-package: Paragraphs
+  # Core:
+  - drupal:content_translation
+  - drupal:field
+  - drupal:image
+  - drupal:language
+  - drupal:link
+  - drupal:media_library
+  - drupal:options
+  - drupal:text
+
+  # Contrib:
+  - field_group:field_group
+  - link_attributes:link_attributes
+  - paragraphs:paragraphs
+  - svg_image:svg_image
+
+  # Droopler:
+  - droopler:d_media
+  - droopler:d_p
+
+package: Droopler
 version: DROOPLER_VERSION
 core_incompatible: false
