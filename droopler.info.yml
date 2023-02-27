@@ -1,5 +1,5 @@
 name: 'Droopler Profile'
-core_version_requirement: ^9 || ^10
+core_version_requirement: '^9.4 || ^10'
 description: 'Ready to use site builder with paragraphs.'
 type: profile
 dependencies:
@@ -12,6 +12,7 @@ dependencies:
   - 'checklistapi:checklistapi'
   - 'colorbox:colorbox'
   - 'config_update:config_update'
+  - 'contact_formatter:contact_formatter'
   - 'ctools:ctools'
   - 'droopler:d_block'
   - 'droopler:d_block_field'
@@ -41,6 +42,7 @@ dependencies:
   - 'droopler:d_search'
   - 'droopler:d_social_media'
   - 'droopler:d_update'
+  - 'droopler:droopler'
   - 'drupal:block'
   - 'drupal:block_content'
   - 'drupal:breakpoint'
@@ -60,6 +62,7 @@ dependencies:
   - 'drupal:history'
   - 'drupal:image'
   - 'drupal:language'
+  - 'drupal:link'
   - 'drupal:locale'
   - 'drupal:media'
   - 'drupal:media_library'
@@ -82,6 +85,7 @@ dependencies:
   - 'entity_reference_revisions:entity_reference_revisions'
   - 'features:features'
   - 'features:features_ui'
+  - 'field_group:field_group'
   - 'link_attributes:link_attributes'
   - 'metatag:metatag'
   - 'paragraphs:paragraphs'

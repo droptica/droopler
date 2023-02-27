@@ -1,8 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
-machine_name: d
-name: 'Droopler Common'
+machine_name: d_p
+name: 'Droopler Paragraphs'
 description: ''
 assignments:
   alter:
@@ -10,16 +10,14 @@ assignments:
     weight: -17
     core: true
     uuid: true
-    user_permissions: false
+    user_permissions: true
   base:
     enabled: true
     weight: -19
     types:
       config:
-        comment_type: comment_type
-        node_type: node_type
-      content:
-        user: user
+        paragraphs_type: paragraphs_type
+      content: {  }
   core:
     enabled: false
     weight: -13
@@ -42,7 +40,6 @@ assignments:
     types:
       config:
         features_bundle: features_bundle
-        paragraphs_type: paragraphs_type
     curated: true
     module:
       installed: true
@@ -62,13 +59,12 @@ assignments:
     enabled: true
     weight: -15
     types:
-      config:
-        responsive_image_style: responsive_image_style
+      config: {  }
   packages:
     enabled: true
     weight: -18
   profile:
-    enabled: false
+    enabled: true
     weight: -11
     curated: true
     standard:
@@ -83,7 +79,7 @@ assignments:
         shortcut_set: shortcut_set
         tour: tour
   site:
-    enabled: false
+    enabled: true
     weight: -12
     types:
       config:
@@ -95,5 +91,5 @@ assignments:
         taxonomy_vocabulary: taxonomy_vocabulary
         editor: editor
         filter_format: filter_format
-profile_name: ''
-is_profile: false
+profile_name: droopler
+is_profile: true
