@@ -3,7 +3,8 @@ core_version_requirement: ^9 || ^10
 description: 'Provides Media configuration for Drupal.'
 type: module
 dependencies:
-  # Core.
+  - colorbox:colorbox
+  - droopler:d_p
   - drupal:content_translation
   - drupal:field
   - drupal:file
@@ -14,16 +15,10 @@ dependencies:
   - drupal:path
   - drupal:responsive_image
   - drupal:user
-
-  # Contrib.
-  - colorbox:colorbox
   - paragraphs:paragraphs
   - svg_image:svg_image
   - svg_image:svg_image_responsive
 
-  # Droopler.
-  - droopler:d_p
-
-package: Droopler
+package: Droopler Common
 core_incompatible: false
 version: DROOPLER_VERSION

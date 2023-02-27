@@ -2,27 +2,22 @@ name: 'Droopler Gallery Paragraph'
 description: 'Provides a paragraph with a simple gallery.'
 type: module
 core_version_requirement: ^9 || ^10
-package: Droopler
+package: Droopler Paragraphs
 dependencies:
-  # Core.
+  - colorbox:colorbox
+  - droopler:d_media
+  - droopler:d_p
   - drupal:content_translation
-  - drupal:file
   - drupal:field
+  - drupal:file
   - drupal:image
   - drupal:link
   - drupal:media
   - drupal:media_library
   - drupal:text
-
-  # Contrib.
-  - colorbox:colorbox
   - field_group:field_group
   - link_attributes:link_attributes
   - paragraphs:paragraphs
-
-  # Droopler.
-  - droopler:d_media
-  - droopler:d_p
 
 version: DROOPLER_VERSION
 core_incompatible: false

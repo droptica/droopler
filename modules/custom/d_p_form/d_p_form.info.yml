@@ -3,7 +3,8 @@ core_version_requirement: ^9 || ^10
 description: 'Provides a paragraph with a form.'
 type: module
 dependencies:
-  # Core.
+  - droopler:d_media
+  - droopler:d_p
   - drupal:block
   - drupal:contact
   - drupal:contact_formatter
@@ -17,16 +18,10 @@ dependencies:
   - drupal:system
   - drupal:text
   - drupal:views
-
-  # Contrib.
   - entity_reference_revisions:entity_reference_revisions
   - field_group:field_group
   - paragraphs:paragraphs
 
-  # Droopler.
-  - droopler:d_media
-  - droopler:d_p
-
-package: Droopler
+package: Droopler Paragraphs
 version: DROOPLER_VERSION
 core_incompatible: false

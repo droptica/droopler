@@ -3,9 +3,8 @@ type: module
 core_version_requirement: ^9 || ^10
 description: 'Provide support for updating Droopler versions.'
 dependencies:
-  # Contrib:
   - config_update:config_update
   - checklistapi:checklistapi
 
-package: Droopler
+package: Droopler Common
 version: DROOPLER_VERSION

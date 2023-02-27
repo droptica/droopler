@@ -3,7 +3,10 @@ description: 'Provides Media paragraph for Drupal.'
 type: module
 core_version_requirement: ^9 || ^10
 dependencies:
-  # Core.
+  - colorbox:colorbox
+  - droopler:d_media
+  - droopler:d_p
+  - droopler:d_social_media
   - drupal:content_translation
   - drupal:field
   - drupal:file
@@ -15,18 +18,10 @@ dependencies:
   - drupal:path
   - drupal:responsive_image
   - drupal:user
-
-  # Contrib.
-  - colorbox:colorbox
   - paragraphs:paragraphs
   - svg_image:svg_image
   - svg_image:svg_image_responsive
 
-  # Droopler.
-  - droopler:d_media
-  - droopler:d_p
-  - droopler:d_social_media
-
-package: Droopler
+package: Droopler Paragraphs
 core_incompatible: false
 version: DROOPLER_VERSION

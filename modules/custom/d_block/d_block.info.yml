@@ -3,18 +3,6 @@ core_version_requirement: ^9 || ^10
 description: 'Provides "Block" paragraph and related configuration. It allows you to insert blocks into paragraphs.'
 type: module
 dependencies:
-  # Core.
-  - drupal:block
-  - drupal:block_content
-  - drupal:field
-  - drupal:language
-  - drupal:system
-
-  # Contrib.
-  - entity_reference_revisions:entity_reference_revisions
-  - paragraphs:paragraphs
-
-  # Droopler.
   - droopler:d_block_field
   - droopler:d_content
   - droopler:d_p
@@ -35,7 +23,14 @@ dependencies:
   - droopler:d_p_tiles
   - droopler:d_social_media
   - droopler:d_update
+  - drupal:block
+  - drupal:block_content
+  - drupal:field
+  - drupal:language
+  - drupal:system
+  - entity_reference_revisions:entity_reference_revisions
+  - paragraphs:paragraphs
 
-package: Droopler
+package: Droopler Paragraphs
 version: DROOPLER_VERSION
 core_incompatible: false

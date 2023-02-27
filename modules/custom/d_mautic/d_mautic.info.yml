@@ -3,14 +3,9 @@ core_version_requirement: ^9 || ^10
 description: 'Allows embedding of Mautic form via URL.'
 type: module
 dependencies:
-  # Core.
+  - droopler:d_update
   - drupal:field
-
-  # Contrib.
   - paragraphs:paragraphs
 
-  # Droopler.
-  - droopler:d_update
-
 version: DROOPLER_VERSION
-package: Droopler
+package: Droopler Common

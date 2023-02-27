@@ -3,23 +3,18 @@ core_version_requirement: ^9 || ^10
 description: 'Provides a paragraphs with just text.'
 type: module
 dependencies:
-  # Core:
+  - droopler:d_media
+  - droopler:d_p
   - drupal:content_translation
   - drupal:field
   - drupal:language
   - drupal:link
   - drupal:media_library
   - drupal:text
-
-  # Contrib:
   - field_group:field_group
   - link_attributes:link_attributes
   - paragraphs:paragraphs
 
-  # Droopler:
-  - droopler:d_media
-  - droopler:d_p
-
-package: Droopler
+package: Droopler Paragraphs
 version: DROOPLER_VERSION
 core_incompatible: false

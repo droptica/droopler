@@ -3,7 +3,6 @@ core_version_requirement: ^9 || ^10
 description: 'Provides base paragraph features.'
 type: module
 dependencies:
-  # Core.
   - drupal:content_translation
   - drupal:field
   - drupal:file
@@ -13,8 +12,6 @@ dependencies:
   - drupal:node
   - drupal:options
   - drupal:text
-
-  # Contrib.
   - entity_reference_display:entity_reference_display
   - entity_reference_revisions:entity_reference_revisions
   - features:features
@@ -23,7 +20,7 @@ dependencies:
   - metatag:metatag
   - paragraphs:paragraphs
 
-package: Droopler
+package: Droopler Common
 version: DROOPLER_VERSION
 libraries:
   - d_p/d_p_with_price

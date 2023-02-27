@@ -3,20 +3,15 @@ description: 'Provides the Droopler Commerce products list.'
 type: module
 core_version_requirement: ^9 || ^10
 dependencies:
-  # Core:
-  - drupal:system
-
-  # Contrib:
   - better_exposed_filters:better_exposed_filters
+  - droopler:d_commerce
+  - droopler:d_commerce_product
+  - drupal:system
   - facets:facets
   - facets_pretty_paths:facets_pretty_paths
   - search_api:search_api
   - search_api_db:search_api_db
 
-  # Droopler:
-  - droopler:d_commerce
-  - droopler:d_commerce_product
-
-package: Droopler
+package: Droopler Common
 version: DROOPLER_VERSION
 core_incompatible: false
