@@ -24,10 +24,10 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
-        type: views_query
+        type: search_api_query
         options:
           bypass_access: false
           skip_access: false
@@ -220,6 +220,7 @@ display:
           exposed: true
           expose:
             label: 'Newly Added'
+            field_identifier: search_api_id
           plugin_id: search_api
         title_1:
           id: title_1
@@ -232,6 +233,7 @@ display:
           exposed: true
           expose:
             label: 'Title Ascending'
+            field_identifier: title_1
           plugin_id: search_api
         title:
           id: title
@@ -244,6 +246,7 @@ display:
           exposed: true
           expose:
             label: 'Title Descending'
+            field_identifier: title
           plugin_id: search_api
       header: {  }
       footer: {  }

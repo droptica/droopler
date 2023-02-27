@@ -14,7 +14,6 @@ dependencies:
     - image.style.small_box_image
     - node.type.d_product
   module:
-    - lazy
     - media
     - user
 id: node.d_product.d_small_box
@@ -24,15 +23,15 @@ mode: d_small_box
 content:
   field_d_product_media:
     type: media_thumbnail
-    weight: 1
-    region: content
     label: hidden
     settings:
-      image_style: small_box_image
       image_link: content
-    third_party_settings:
-      lazy:
-        lazy_image: '1'
+      image_style: small_box_image
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   body: true
   field_d_ask_for_product: true
