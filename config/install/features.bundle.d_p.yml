@@ -13,14 +13,14 @@ assignments:
     user_permissions: true
   base:
     enabled: true
-    weight: -19
+    weight: -18
     types:
       config:
         paragraphs_type: paragraphs_type
       content: {  }
   core:
     enabled: false
-    weight: -13
+    weight: -14
     types:
       config:
         date_format: date_format
@@ -33,10 +33,10 @@ assignments:
         entity_view_mode: entity_view_mode
   dependency:
     enabled: true
-    weight: -9
+    weight: -10
   exclude:
     enabled: true
-    weight: -20
+    weight: -19
     types:
       config:
         features_bundle: features_bundle
@@ -48,24 +48,24 @@ assignments:
       namespace_any: false
   existing:
     enabled: true
-    weight: -10
+    weight: -11
   forward_dependency:
     enabled: true
-    weight: -14
+    weight: -15
   namespace:
-    enabled: false
-    weight: -16
+    enabled: true
+    weight: -9
   optional:
     enabled: true
-    weight: -15
+    weight: -16
     types:
       config: {  }
   packages:
     enabled: true
-    weight: -18
+    weight: -20
   profile:
-    enabled: true
-    weight: -11
+    enabled: false
+    weight: -12
     curated: true
     standard:
       files: true
@@ -79,8 +79,8 @@ assignments:
         shortcut_set: shortcut_set
         tour: tour
   site:
-    enabled: true
-    weight: -12
+    enabled: false
+    weight: -13
     types:
       config:
         action: action
@@ -91,5 +91,5 @@ assignments:
         taxonomy_vocabulary: taxonomy_vocabulary
         editor: editor
         filter_format: filter_format
-profile_name: droopler
-is_profile: true
+profile_name: ''
+is_profile: false

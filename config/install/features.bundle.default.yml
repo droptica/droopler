@@ -7,13 +7,13 @@ description: ''
 assignments:
   alter:
     enabled: true
-    weight: -16
+    weight: -18
     core: true
     uuid: true
     user_permissions: false
   base:
     enabled: false
-    weight: -17
+    weight: -13
     types:
       config:
         comment_type: comment_type
@@ -35,7 +35,7 @@ assignments:
         entity_view_mode: entity_view_mode
   dependency:
     enabled: true
-    weight: -9
+    weight: -16
   exclude:
     enabled: true
     weight: -20
@@ -54,22 +54,22 @@ assignments:
     weight: -10
   forward_dependency:
     enabled: true
-    weight: -13
+    weight: -15
   namespace:
     enabled: false
-    weight: -15
+    weight: -9
   optional:
     enabled: true
-    weight: -14
+    weight: -17
     types:
       config:
         responsive_image_style: responsive_image_style
   packages:
-    enabled: false
-    weight: -18
-  profile:
     enabled: true
     weight: -19
+  profile:
+    enabled: true
+    weight: -14
     curated: true
     standard:
       files: true

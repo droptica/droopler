@@ -13,7 +13,7 @@ assignments:
     user_permissions: false
   base:
     enabled: true
-    weight: -19
+    weight: -18
     types:
       config:
         comment_type: comment_type
@@ -22,7 +22,7 @@ assignments:
         user: user
   core:
     enabled: false
-    weight: -13
+    weight: -14
     types:
       config:
         date_format: date_format
@@ -35,10 +35,10 @@ assignments:
         entity_view_mode: entity_view_mode
   dependency:
     enabled: true
-    weight: -9
+    weight: -10
   exclude:
     enabled: true
-    weight: -20
+    weight: -19
     types:
       config:
         features_bundle: features_bundle
@@ -51,25 +51,25 @@ assignments:
       namespace_any: false
   existing:
     enabled: true
-    weight: -10
+    weight: -11
   forward_dependency:
     enabled: true
-    weight: -14
+    weight: -15
   namespace:
-    enabled: false
-    weight: -16
+    enabled: true
+    weight: -9
   optional:
     enabled: true
-    weight: -15
+    weight: -16
     types:
       config:
         responsive_image_style: responsive_image_style
   packages:
     enabled: true
-    weight: -18
+    weight: -20
   profile:
     enabled: false
-    weight: -11
+    weight: -12
     curated: true
     standard:
       files: true
@@ -84,7 +84,7 @@ assignments:
         tour: tour
   site:
     enabled: false
-    weight: -12
+    weight: -13
     types:
       config:
         action: action
