@@ -1,57 +1,60 @@
-name: "Droopler Content Page"
-core_version_requirement: ^9 || ^10
+name: 'Droopler Content Page'
+core_version_requirement: '^9.4 || ^10'
 description: 'Provides "Content Page" node type.'
 type: module
 dependencies:
-  - droopler:d_color
-  - droopler:d_media
-  - droopler:d_p
-  - droopler:d_p_banner
-  - droopler:d_p_carousel
-  - droopler:d_p_counters
-  - droopler:d_p_form
-  - droopler:d_p_gallery
-  - droopler:d_p_node
-  - droopler:d_p_reference_content
-  - droopler:d_p_side_by_side
-  - droopler:d_p_side_embed
-  - droopler:d_p_side_image
-  - droopler:d_p_side_tiles
-  - droopler:d_p_subscribe_file
-  - droopler:d_p_text_blocks
-  - droopler:d_p_text_paged
-  - droopler:d_p_text_with_bckg
-  - droopler:d_p_tiles
-  - drupal:block
-  - drupal:block_content
-  - drupal:ckeditor5
-  - drupal:content_translation
-  - drupal:editor
-  - drupal:field
-  - drupal:file
-  - drupal:image
-  - drupal:language
-  - drupal:link
-  - drupal:media
-  - drupal:media_library
-  - drupal:menu_link_content
-  - drupal:menu_ui
-  - drupal:node
-  - drupal:options
-  - drupal:path
-  - drupal:system
-  - drupal:text
-  - drupal:user
-  - drupal:views
-  - entity_reference_revisions:entity_reference_revisions
-  - field_group:field_group
-  - link_attributes:link_attributes
-  - metatag:metatag
-  - metatag:metatag_open_graph
-  - paragraphs:paragraphs
-  - simple_sitemap:simple_sitemap
-  - svg_image:svg_image
-
-package: Droopler Common
+  - 'droopler:d_color'
+  - 'droopler:d_media'
+  - 'droopler:d_p'
+  - 'droopler:d_p_banner'
+  - 'droopler:d_p_carousel'
+  - 'droopler:d_p_counters'
+  - 'droopler:d_p_form'
+  - 'droopler:d_p_gallery'
+  - 'droopler:d_p_node'
+  - 'droopler:d_p_reference_content'
+  - 'droopler:d_p_side_by_side'
+  - 'droopler:d_p_side_embed'
+  - 'droopler:d_p_side_image'
+  - 'droopler:d_p_side_tiles'
+  - 'droopler:d_p_subscribe_file'
+  - 'droopler:d_p_text_blocks'
+  - 'droopler:d_p_text_paged'
+  - 'droopler:d_p_text_with_bckg'
+  - 'droopler:d_p_tiles'
+  - 'drupal:block'
+  - 'drupal:block_content'
+  - 'drupal:ckeditor5'
+  - 'drupal:content_translation'
+  - 'drupal:contextual'
+  - 'drupal:editor'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:filter'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:menu_link_content'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:options'
+  - 'drupal:path'
+  - 'drupal:system'
+  - 'drupal:taxonomy'
+  - 'drupal:text'
+  - 'drupal:toolbar'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'field_group:field_group'
+  - 'link_attributes:link_attributes'
+  - 'metatag:metatag'
+  - 'metatag:metatag_open_graph'
+  - 'paragraphs:paragraphs'
+  - 'simple_sitemap:simple_sitemap'
+  - 'svg_image:svg_image'
+package: 'Droopler Common'
 version: DROOPLER_VERSION
 core_incompatible: false

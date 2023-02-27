@@ -1,6 +1,19 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.content_page
+    - taxonomy.vocabulary.tags
+  module:
+    - content_translation
+    - contextual
+    - filter
+    - node
+    - paragraphs
+    - system
+    - taxonomy
+    - toolbar
 id: d_editor
 label: Editor
 weight: 3
@@ -12,40 +25,26 @@ permissions:
   - 'access toolbar'
   - 'administer nodes'
   - 'bypass node access'
-  - 'create blog_post content'
   - 'create content translations'
   - 'create content_page content'
-  - 'create terms in blog_posts_category'
   - 'create terms in tags'
   - 'delete all revisions'
-  - 'delete any blog_post content'
   - 'delete any content_page content'
-  - 'delete blog_post revisions'
   - 'delete content translations'
   - 'delete content_page revisions'
-  - 'delete own blog_post content'
   - 'delete own content_page content'
-  - 'delete terms in blog_posts_category'
   - 'delete terms in tags'
-  - 'edit any blog_post content'
   - 'edit any content_page content'
-  - 'edit own blog_post content'
   - 'edit own content_page content'
-  - 'edit terms in blog_posts_category'
   - 'edit terms in tags'
-  - 'geysir manage paragraphs from front-end'
   - 'revert all revisions'
-  - 'revert blog_post revisions'
   - 'revert content_page revisions'
   - 'translate any entity'
-  - 'translate blog_post node'
-  - 'translate blog_posts_category taxonomy_term'
   - 'translate content_page node'
   - 'translate paragraph'
   - 'update content translations'
   - 'use text format full_html'
   - 'view all revisions'
-  - 'view blog_post revisions'
   - 'view content_page revisions'
   - 'view own unpublished content'
   - 'view the administration theme'
