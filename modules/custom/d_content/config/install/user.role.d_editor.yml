@@ -1,19 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - filter.format.full_html
-    - node.type.content_page
-    - taxonomy.vocabulary.tags
-  module:
-    - content_translation
-    - contextual
-    - filter
-    - node
-    - paragraphs
-    - system
-    - taxonomy
-    - toolbar
+dependencies: { }
 id: d_editor
 label: Editor
 weight: 3
