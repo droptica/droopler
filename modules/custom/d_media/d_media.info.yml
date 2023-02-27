@@ -1,24 +1,23 @@
 name: 'Droopler Media Integration'
-core_version_requirement: ^9 || ^10
+core_version_requirement: '^9.4 || ^10'
 description: 'Provides Media configuration for Drupal.'
 type: module
 dependencies:
-  - colorbox:colorbox
-  - droopler:d_p
-  - drupal:content_translation
-  - drupal:field
-  - drupal:file
-  - drupal:image
-  - drupal:language
-  - drupal:media
-  - drupal:node
-  - drupal:path
-  - drupal:responsive_image
-  - drupal:user
-  - paragraphs:paragraphs
-  - svg_image:svg_image
-  - svg_image:svg_image_responsive
-
-package: Droopler Common
+  - 'colorbox:colorbox'
+  - 'droopler:d_p'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:media'
+  - 'drupal:node'
+  - 'drupal:path'
+  - 'drupal:responsive_image'
+  - 'drupal:user'
+  - 'paragraphs:paragraphs'
+  - 'svg_image:svg_image'
+  - 'svg_image:svg_image_responsive'
+package: 'Droopler Common'
 core_incompatible: false
 version: DROOPLER_VERSION

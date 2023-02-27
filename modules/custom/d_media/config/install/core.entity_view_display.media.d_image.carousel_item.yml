@@ -6,7 +6,6 @@ dependencies:
     - field.field.media.d_image.field_media_image
     - media.type.d_image
   module:
-    - lazy
     - svg_image
 id: media.d_image.carousel_item
 targetEntityType: media
@@ -14,19 +13,19 @@ bundle: d_image
 mode: carousel_item
 content:
   field_media_image:
-    weight: 0
+    type: image
     label: hidden
     settings:
-      svg_attributes:
-        width: ''
-        height: ''
-      svg_render_as_image: true
-      image_style: ''
       image_link: ''
-    third_party_settings:
-      lazy:
-        lazy_image: '1'
-    type: image
+      image_style: ''
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true
