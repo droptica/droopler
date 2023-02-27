@@ -189,6 +189,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
       $query = $this->entityTypeManager->getStorage('media')->getQuery();
       $query->condition('bundle', 'd_image');
       $query->condition('field_media_image.0.entity.uri', $uri);
+      $query->accessCheck(FALSE);
       $entity_ids = $query->execute();
       $mid = reset($entity_ids);
       return $mid ? $this->entityTypeManager->getStorage('media')->load($mid) : NULL;
@@ -216,6 +217,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
       $query = $this->entityTypeManager->getStorage('media')->getQuery();
       $query->condition('bundle', 'd_image');
       $query->condition('field_media_image', $fid);
+      $query->accessCheck(FALSE);
       $entity_ids = $query->execute();
       $mid = reset($entity_ids);
       return $mid ? $this->entityTypeManager->getStorage('media')->load($mid) : NULL;
