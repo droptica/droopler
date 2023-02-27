@@ -1,25 +1,24 @@
 name: 'Droopler Side Tiles Paragraph'
-core_version_requirement: ^9 || ^10
+core_version_requirement: '^9.4 || ^10'
 description: 'Provides a paragraph with side Masonry tiles.'
 type: module
 dependencies:
-  - colorbox:colorbox
-  - droopler:d_media
-  - droopler:d_p
-  - droopler:d_p_side_image
-  - droopler:d_p_tiles
-  - drupal:content_translation
-  - drupal:field
-  - drupal:file
-  - drupal:language
-  - drupal:link
-  - drupal:media_library
-  - drupal:options
-  - drupal:text
-  - field_group:field_group
-  - link_attributes:link_attributes
-  - paragraphs:paragraphs
-
-package: Droopler Paragraphs
+  - 'colorbox:colorbox'
+  - 'droopler:d_media'
+  - 'droopler:d_p'
+  - 'droopler:d_p_side_image'
+  - 'droopler:d_p_tiles'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:media_library'
+  - 'drupal:options'
+  - 'drupal:text'
+  - 'field_group:field_group'
+  - 'link_attributes:link_attributes'
+  - 'paragraphs:paragraphs'
+package: 'Droopler Paragraphs'
 version: DROOPLER_VERSION
 core_incompatible: false

@@ -1,25 +1,24 @@
 name: 'Droopler Node Paragraph'
-core_version_requirement: ^9 || ^10
+core_version_requirement: '^9.4 || ^10'
 description: 'Provides a paragraph with node reference.'
 type: module
 dependencies:
-  - droopler:d_p
-  - drupal:content_translation
-  - drupal:field
-  - drupal:image
-  - drupal:language
-  - drupal:link
-  - drupal:node
-  - drupal:text
-  - drupal:user
-  - drupal:views
-  - entity_reference_display:entity_reference_display
-  - entity_reference_revisions:entity_reference_revisions
-  - field_group:field_group
-  - link_attributes:link_attributes
-  - paragraphs:paragraphs
-  - svg_image:svg_image
-
-package: Droopler Paragraphs
+  - 'droopler:d_p'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:node'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'entity_reference_display:entity_reference_display'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'field_group:field_group'
+  - 'link_attributes:link_attributes'
+  - 'paragraphs:paragraphs'
+  - 'svg_image:svg_image'
+package: 'Droopler Paragraphs'
 version: DROOPLER_VERSION
 core_incompatible: false
