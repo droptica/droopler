@@ -62,7 +62,7 @@ function droopler_install() {
   \Drupal::configFactory()
     ->getEditable('system.theme')
     ->set('default', 'droopler_theme')
-    ->set('admin', 'seven')
+    ->set('admin', 'claro')
     ->save();
 }
 
@@ -235,7 +235,7 @@ function droopler_enable_subtheme(array &$context) {
     \Drupal::configFactory()
       ->getEditable('system.theme')
       ->set('default', 'droopler_subtheme')
-      ->set('admin', 'seven')
+      ->set('admin', 'claro')
       ->save();
     $context['message'] = t('Installed %theme theme', ['%theme' => 'droopler_subtheme']);
   }
