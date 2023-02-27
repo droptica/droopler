@@ -137,8 +137,7 @@ function d_p_preprocess_paragraph(&$variables) {
  * Implements hook_form_alter().
  */
 function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  # $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
-
+  // $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
   // Create heading type selector under the title.
   if (isset($form["field_page_section"])) {
     // Locate all paragraph subforms.
@@ -233,8 +232,11 @@ function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, 
     // Make the content of the CKEditor centred by default for the specified
     // paragraph types.
     // @todo Adjust to CKEditor 5
-    // d_p_centered_ckeditor_widget_content($element, $form_state, $context, $bundle);
-
+    // d_p_centered_ckeditor_widget_content(
+    // $element,
+    // $form_state,
+    // $context,
+    // $bundle);
     // Add default value to the link class attribute.
     if ($field_name === 'field_d_cta_link' &&
       empty($element['url']['#default_value']) &&

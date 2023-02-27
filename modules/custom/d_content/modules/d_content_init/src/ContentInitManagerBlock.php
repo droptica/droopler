@@ -126,9 +126,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         'info' => $block['info']['title'],
       ]);
       $this->processFields($block, $block_entity);
-      if ($placed_block = $this->placeBlockContent($block, $block_entity)) {
-        // @todo Not needed anymore in Droopler 4.
-      }
+      $this->placeBlockContent($block, $block_entity);
       return $block_entity;
     }
     catch (PluginNotFoundException $e) {
