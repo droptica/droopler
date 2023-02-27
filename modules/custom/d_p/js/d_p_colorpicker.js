@@ -48,7 +48,7 @@
       }
 
       $(context).ready(function () {
-        $('.field--name-field-d-background-color', context).once().each(d_p_colorpicker);
+        $('.field--name-field-d-background-color', context).each(d_p_colorpicker);
       });
     }
   };

@@ -101,7 +101,7 @@
    */
   Drupal.behaviors.d_media_responsive_video = {
     attach: function (context) {
-      $('iframe.video-embed--cover', context).once('d-media-responsive-video').each(function () {
+      $('iframe.video-embed--cover', context).each(function () {
         $(this).dMediaResponsiveVideo();
       });
     }

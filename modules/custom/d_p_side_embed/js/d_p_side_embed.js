@@ -25,7 +25,7 @@
         $video.css(videoDimensions);
       }
 
-      $('.paragraph--type--d-p-side-embed', context).once('d_p_side_embed').each(function () {
+      $('.paragraph--type--d-p-side-embed', context).each(function () {
         var $this = $(this);
         var embedType = '';
         var $embedWrapper = $(this).find('.d-p-side-embed-embed');
@@ -66,7 +66,7 @@
         $embed.closest('.d-p-side-embed-embed').addClass(embedType + '-wrapper');
 
         // Set proper height for full width embed element.
-        $(window).once('d_p_side_embed_resize').on("resize", function () {
+        $(window).on("resize", function () {
           if ($(window).width() > 767) {
             var $contentH = parseInt($this.find('.embed-side-full .d-p-side-embed-content').innerHeight());
             if (!isNaN($contentH)) {
