@@ -49,7 +49,7 @@
       });
 
       // Close sidebar when clicked overflowed content.
-      $('.main-navbar', context)..click(function(e) {
+      $('.main-navbar', context).click(function(e) {
         var $clickTarget = $(e.target);
         if ($clickTarget.parents('.navbar-inner').length == 0 && $clickTarget.is('.navbar-inner') == false) {
           $ ('#navbar-main button.navbar-toggler:visible', context).click();

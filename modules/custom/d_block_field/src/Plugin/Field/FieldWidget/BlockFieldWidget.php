@@ -253,11 +253,10 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
    * Form element validation handler.
    */
   public function validate($element, FormStateInterface $form_state, $form) {
-    /** @var \Drupal\Core\Block\BlockManagerInterface $block_manager */
     $values = $form_state->getValues();
     $plugin_id = NestedArray::getValue($values, $element['plugin_id']['#parents']);
 
-    if (!empty($plugin_id) && $block_manager->hasDefinition($plugin_id)) {
+    if (!empty($plugin_id) && $this->blockManager->hasDefinition($plugin_id)) {
       // Clean up configuration settings.
       $settings = NestedArray::getValue($values, $element['settings']['#parents']);
 
