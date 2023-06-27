@@ -13,6 +13,7 @@ use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Component\Serialization\Yaml;
 use Drupal\search_api\Entity\Index;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
  * Save node with paragraphs. This is alterable in another init modules.
@@ -355,6 +356,14 @@ function d_content_init_add_node(array $params) {
     }
     else {
       $config['parent'] = 'menu_link_content:';
+    }
+
+    // Make sure that there is anything in we_megamenu's table config field.
+    if (\Drupal::service('module_handler')->moduleExists('we_megamenu')) {
+      $menu_config = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme');
+      if (empty($menu_config)) {
+        WeMegaMenuBuilder::saveConfig('main', 'droopler_theme', '{"menu_config":{}}');
+      }
     }
 
     // Save link.

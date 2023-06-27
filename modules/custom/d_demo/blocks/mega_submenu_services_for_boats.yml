@@ -1,0 +1,35 @@
+info:
+  type: block_content
+  bundle: content_block
+  title: 'Mega Menu For Boats'
+
+# Placement of the block in region.
+placement:
+  langcode: en
+  settings:
+    status: false
+    provider: block_content
+
+# Content block fields.
+fields:
+  field_d_main_title:
+    type: text
+    data: 'For boats'
+  field_d_long_text:
+    type: text_long
+    data:
+      - value: "<ul><li><a href='/regular-servicing'>Regular servicing</a></li><li><a href='/engine-installation'>Engine installation</a></li><li><a href='/engine-repair-and-overhaul'>Engine repair and overhaul</a></li></ul>"
+        format: full_html
+
+# Mega menu configuration.
+we_megamenu:
+  menu_name: main
+  parent_title: "Services"
+  row: 0
+  col: 1
+  col_config:
+    hidewhencollapse: ""
+    type: "we-mega-menu-col"
+    width: 3
+    class: ""
+    block_title: 0

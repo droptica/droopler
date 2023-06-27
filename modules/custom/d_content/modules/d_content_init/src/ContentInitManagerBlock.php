@@ -15,6 +15,7 @@ use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
  * Content init manager block.
@@ -126,7 +127,9 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         'info' => $block['info']['title'],
       ]);
       $this->processFields($block, $block_entity);
-      $this->placeBlockContent($block, $block_entity);
+      if ($placed_block = $this->placeBlockContent($block, $block_entity)) {
+        $this->placeBlockInWaMegaMenu($block, $placed_block);
+      }
       return $block_entity;
     }
     catch (PluginNotFoundException $e) {
@@ -197,6 +200,116 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
       'weight',
       'settings',
     ]));
+  }
+
+  /**
+   * Place block content in the we mega menu.
+   *
+   * @param array $block
+   *   Block content definition.
+   * @param \Drupal\Core\Entity\EntityInterface $block_entity
+   *   Block content entity.
+   *
+   * @return bool
+   *   TRUE on success, FALSE otherwise.
+   */
+  protected function placeBlockInWaMegaMenu(array $block, EntityInterface $block_entity) {
+    if (isset($block['we_megamenu']) && $this->moduleHandler->moduleExists('we_megamenu')) {
+      $menu_name = $block['we_megamenu']['menu_name'];
+      $parent_title = $block['we_megamenu']['parent_title'];
+      $parent_uuid = $this->searchForParentUuidInMegaMenuByTitle($menu_name, $parent_title);
+
+      if ($parent_uuid) {
+        $this->getCurrentThemeIfNotDefined($block['we_megamenu']);
+
+        $theme = $block['we_megamenu']['theme'];
+        $col_config = $block['we_megamenu']['col_config'];
+        $row = $block['we_megamenu']['row'];
+        $col = $block['we_megamenu']['col'];
+        $menu_config = WeMegaMenuBuilder::loadConfig($menu_name, $theme);
+
+        if (!isset($menu_config->menu_config->{$parent_uuid})) {
+          $submenu_config = $this->getDefaultMegaSubmenuConfig($parent_uuid);
+        }
+        else {
+          $submenu_config = $menu_config->menu_config->{$parent_uuid};
+        }
+
+        $col_content = new \stdClass();
+        $col_content->block_id = $block_entity->id();
+        $col_content->item_config = new \stdClass();
+
+        $col_cfg = new \stdClass();
+        $col_cfg->block = $block_entity->id();
+        $col_cfg->hidewhencollapse = $col_config['hidewhencollapse'];
+        $col_cfg->type = $col_config['type'];
+        $col_cfg->width = $col_config['width'];
+        $col_cfg->class = $col_config['class'];
+        $col_cfg->block_title = $col_config['block_title'];
+
+        $child_item = new \stdClass();
+        $child_item->col_content = $col_content;
+        $child_item->col_config = $col_cfg;
+
+        $submenu_config->rows_content[$row][$col] = $child_item;
+        $menu_config->menu_config->{$parent_uuid} = $submenu_config;
+        WeMegaMenuBuilder::saveConfig($menu_name, $theme, json_encode($menu_config));
+        \Drupal::cache('render')->invalidateAll();
+        return TRUE;
+      }
+    }
+    return FALSE;
+  }
+
+  /**
+   * Get default mega submenu configuration object.
+   *
+   * @param string $parent_uuid
+   *   UUID of the parent of this submenu.
+   *
+   * @return object
+   *   Configuration object.
+   */
+  protected function getDefaultMegaSubmenuConfig($parent_uuid) {
+    $submenu_config = new \stdClass();
+    $submenu_config->rows_content = [];
+    $submenu_config->submenu_config = new \stdClass();
+    $submenu_config->submenu_config->width = '';
+    $submenu_config->submenu_config->height = '';
+    $submenu_config->submenu_config->type = '';
+    $submenu_config->item_config = new \stdClass();
+    $submenu_config->item_config->level = 0;
+    $submenu_config->item_config->type = 'we-mega-menu-li';
+    $submenu_config->item_config->id = $parent_uuid;
+    $submenu_config->item_config->submenu = 1;
+    $submenu_config->item_config->hide_sub_when_collapse = '';
+    $submenu_config->item_config->group = '';
+    $submenu_config->item_config->class = '';
+    $submenu_config->item_config->{'data-icon'} = '';
+    $submenu_config->item_config->{'data-caption'} = '';
+    $submenu_config->item_config->{'data-alignsub'} = '';
+    $submenu_config->item_config->{'data-target'} = '_self';
+    return $submenu_config;
+  }
+
+  /**
+   * Search for UUID of the parent link item in the specified mega menu.
+   *
+   * @param string $menu_name
+   *   Machine name od the menu to search.
+   * @param string $parent_title
+   *   Parent title to find.
+   *
+   * @return bool|string
+   *   UUID if parent exists in the menu, FALSE otherwise.
+   */
+  protected function searchForParentUuidInMegaMenuByTitle($menu_name, $parent_title) {
+    foreach (WeMegaMenuBuilder::getMenuTree($menu_name) as $item) {
+      if ($item['title'] == $parent_title) {
+        return $item['derivativeId'];
+      }
+    }
+    return FALSE;
   }
 
   /**
