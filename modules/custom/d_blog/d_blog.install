@@ -24,6 +24,13 @@ function d_blog_install() {
     ->set('inherit_settings', 1)
     ->set('pass_arguments', 1)
     ->save();
+
+  // Setup Linkit to work with blog.
+  $linkit = \Drupal::configFactory()->getEditable('linkit.linkit_profile.content_nodes');
+  $matchers = $linkit->get("matchers");
+  $keys = array_keys($matchers);
+  $uuid = reset($keys);
+  $linkit->set("matchers.$uuid.settings.bundles.blog_post", "blog_post")->save();
 }
 
 /**
