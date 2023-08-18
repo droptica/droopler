@@ -2256,3 +2256,12 @@ function droopler_update_8138(&$sandbox) {
   \Drupal::service('d_update')->checklist()
     ->saveProgress(['v3.1' => $values]);
 }
+
+/**
+ * Droopler 3.3 Change AdvAgg JS minifier from JSqueeze to JShrink.
+ */
+function droopler_update_8139(&$sandbox) {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+  $updater->updateConfigurations('profile/droopler', 'advagg.8139');
+}
