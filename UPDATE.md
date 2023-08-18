@@ -13,10 +13,12 @@ Before updating to the next version, do the following steps to be able to upgrad
 #### 5. Uninstall following modules:
 - lazy
 - rdf
-#### 6. Migrate from CKEditor 4 to CKEditor 5
-- follow this instruction https://www.drupal.org/node/3223395#s-how-to-upgrade-fromckeditor-4-to-ckeditor-5
+#### 6. Upgrade from CKEditor 4 to CKEditor 5
+- follow [this instruction](https://www.drupal.org/node/3223395#s-how-to-upgrade-fromckeditor-4-to-ckeditor-5)
 
 Then you can update Droopler to the next version and upgrade to Drupal 10.
+
+At the end, recompile SCSS/JS assets.
 
 ## Droopler 3.1.0
 
