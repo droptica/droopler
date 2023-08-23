@@ -80,6 +80,9 @@
     },
     "extra": {
         "patches": {
+            "drupal/we_megamenu": {
+                "Check for empty col_config and col_content": "https://www.drupal.org/files/issues/2023-08-22/we_megamenu-3225104-5.patch"
+            },
             "drupal/checklistapi": {
                 "Logger error": "https://git.drupalcode.org/project/checklistapi/-/merge_requests/8.patch"
             }
