@@ -2,10 +2,10 @@
 
 namespace Drupal\d_content_init\Services;
 
-use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
  * Config update service.

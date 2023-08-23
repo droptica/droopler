@@ -5,12 +5,12 @@
  * File containing d_content_init module.
  */
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\menu_link_content\Entity\MenuLinkContent;
-use Drupal\Component\Serialization\Yaml;
 use Drupal\search_api\Entity\Index;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
