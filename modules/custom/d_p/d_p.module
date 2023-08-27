@@ -220,9 +220,9 @@ function d_p_module_implements_alter(&$implementations, $hook) {
 }
 
 /**
- * Implements hook_field_widget_form_alter().
+ * Implements hook_field_widget_single_element_form_alter().
  */
-function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, &$context) {
+function d_p_field_widget_single_element_form_alter(&$element, FormStateInterface $form_state, &$context) {
   $field_definition = $context['items']->getFieldDefinition();
 
   if ($field_definition instanceof FieldConfig) {
