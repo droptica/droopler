@@ -16,7 +16,7 @@ class SupportController extends ControllerBase {
    *   A render array for the info page.
    */
   public function render() {
-    $output = '<h3>' . $this->t('Droopler is a Drupal 8/9 profile designed to kickstart a new webpage in a few minutes') . '</h3>';
+    $output = '<h3>' . $this->t('Droopler is a Drupal 10 profile designed to kickstart a new webpage in a few minutes') . '</h3>';
     $output .= '<p>' . $this->t('More info about Droopler - <a href=":link">See official Droopler website</a>.', [':link' => 'https://droopler.com/']) . '</p>';
     $output .= '<h3>' . $this->t('Support') . '</h3>';
     $output .= '<p>' . $this->t('Do You need support with Droopler? -  <a href=":link">Droptica.com</a>.', [':link' => 'https://droptica.com']) . '</p>';
