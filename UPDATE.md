@@ -1,5 +1,25 @@
 # Updating Droopler
 
+## Droopler 3.2.0
+
+This is an interim release in which we change the minimal required Drupal version to 9.5, and we remove a dependencies to deprecated modules, before next release with Drupal 10 compatibility changes.
+
+Before updating to the next version, do the following steps to be able to upgrade to Drupal 10 in the smoothest possible way:
+
+#### 1. If you are using Drupal 8, or 9 but lower than 9.5, upgrade first to Drupal 9.5
+#### 2. Install Claro theme
+#### 3. Set Claro theme as Administration theme
+#### 4. Uninstall Seven theme
+#### 5. Uninstall following modules:
+- lazy
+- rdf
+#### 6. Upgrade from CKEditor 4 to CKEditor 5
+- follow [this instruction](https://www.drupal.org/node/3223395#s-how-to-upgrade-fromckeditor-4-to-ckeditor-5)
+
+Then you can update Droopler to the next version and upgrade to Drupal 10.
+
+At the end, recompile SCSS/JS assets.
+
 ## Droopler 3.1.0
 
 ### PHP 8.x
