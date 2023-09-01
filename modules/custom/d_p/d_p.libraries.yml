@@ -6,18 +6,17 @@ d_p:
     - core/jquery
     - core/jquery.once
     - core/drupal
-#    - d_p/d_p_ckeditor
+    - d_p/d_p_ckeditor
 
-# todo Adjust to Ckeditor5
-#d_p_ckeditor:
-#  version: VERSION
-#  js:
-#    js/d_p_ckeditor.js: {}
-#    js/d_p_colorpicker.js: {}
-#  dependencies:
-#    - core/jquery
-#    - core/jquery.once
-#    - core/drupal
+d_p_ckeditor:
+  version: VERSION
+  js:
+    js/d_p_ckeditor.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - core/drupal
+
 d_p_with_price:
   version: VERSION
   js:
