@@ -7,33 +7,51 @@
         d_p_ckeditor();
       });
 
-      function d_p_ckeditor_add_js(doc) {
-        var cssId = 'd_p_ckeditor';
-        if (!doc.getElementById(cssId)) {
-          // add css for cke_editable class in ckeditor
-          var head = doc.getElementsByTagName('head')[0];
-          var link = doc.createElement('link');
-          link.id = cssId;
-          link.rel = 'stylesheet';
-          link.type = 'text/css';
-          link.href = '/profiles/contrib/droopler/modules/custom/d_p/css/d_p_ckeditor.css';
-          head.appendChild(link);
-        }
-      }
-
+      // @todo: Rework this to better solution when it will be possible.
       function d_p_ckeditor() {
-        if (typeof CKEDITOR !== "undefined") {
-          for (let instanceName in CKEDITOR.instances) {
-            if (CKEDITOR.instances[instanceName].element.$.parentElement.classList.contains('d_p_ckeditor_centered')) {
-              if (typeof CKEDITOR.instances[instanceName].document !== 'undefined') {
-                d_p_ckeditor_add_js(CKEDITOR.instances[instanceName].document.$);
-              } else {
-                setTimeout(function () {
-                  d_p_ckeditor_add_js(CKEDITOR.instances[instanceName].document.$);
-                }, 500);
-              }
+        if (typeof Drupal.CKEditor5Instances !== "undefined") {
+          $(once('d_p_ckeditor_centered', '.d_p_ckeditor_centered', context)).each(function () {
+            let editor_id = $(this).find('textarea').attr('data-ckeditor5-id');
+            let editor = Drupal.CKEditor5Instances.get(editor_id);
+            let $editor_editable = $(this).find('.ck-editor__editable');
+            let $alignment_dropdown = $(this).find('.ck-toolbar-dropdown.ck-alignment-dropdown');
+
+            if (typeof editor === 'undefined' || !$editor_editable.length) {
+              return;
             }
-          }
+
+            // Set default alignment to center.
+            $editor_editable.children().each(function () {
+              if (!$(this).hasClass('text-align-left') && !$(this).hasClass('text-align-right') && !$(this).hasClass('.text-align-justify')) {
+                $(this).addClass('text-align-center');
+              }
+            });
+            editor.setData($editor_editable.html());
+
+            // Add text-align-left class to selected element.
+            $(once('d_p_alignment_dropdown', $alignment_dropdown)).on('click', function() {
+              $(once('d_p_alignment_dropdown_item_btn', $alignment_dropdown.find('.ck.ck-toolbar__items button'))).on('click', function() {
+                let current_alignment = editor.commands.get('alignment').value;
+                if (current_alignment === 'left') {
+                  editor.editing.view.change(writer => {
+                    if (typeof editor?.editing?.view?.document?.selection?.focus?.parent?.parent !== 'undefined') {
+                      writer.addClass('text-align-left', editor.editing.view.document.selection.focus.parent.parent);
+                    }
+                  });
+                }
+                else {
+                  editor.editing.view.change(writer => {
+                    if (typeof editor?.editing?.view?.document?.selection?.focus?.parent?.parent !== 'undefined') {
+                      writer.removeClass('text-align-left', editor.editing.view.document.selection.focus.parent.parent);
+                    }
+                  });
+                }
+                setTimeout(function() {
+                  editor.setData($editor_editable.html());
+                }, 100);
+              });
+            });
+          });
         } else {
           window.setTimeout(d_p_ckeditor, 500);
         }
