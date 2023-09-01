@@ -1,5 +1,9 @@
 # Updating Droopler
 
+## Droopler 3.3.0
+
+This is a release with Drupal 10 compatibility changes. Please do the steps from instruction for version 3.2.0 before updating to this version and upgrading to Drupal 10.
+
 ## Droopler 3.2.0
 
 This is an interim release in which we change the minimal required Drupal version to 9.5, and we remove a dependencies to deprecated modules, before next release with Drupal 10 compatibility changes.
