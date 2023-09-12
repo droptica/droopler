@@ -13,7 +13,7 @@
       if ($body.hasClass('d-theme-preceded')) {
         return;
       }
-      $(window).once('d_global_scrolled').scroll(function() {
+      $(window).scroll(function() {
         if ($(this).scrollTop() > 50) {
           $("body").addClass("scrolled");
         }
@@ -22,7 +22,7 @@
         }
       });
 
-      $( window ).once('d_global_resize').resize(function() {
+      $( window ).resize(function() {
         clampTitle();
       });
       clampTitle();
@@ -134,7 +134,6 @@
       var eventName = 'calculateDynamicHeaderOffset';
 
       $(window)
-        .once(eventName)
         .bind(eventName, Drupal.debounce(function () {
           var firstParagraph = $('.paragraph-sections section:first > .paragraph:first');
           var elementToObserve = firstParagraph;

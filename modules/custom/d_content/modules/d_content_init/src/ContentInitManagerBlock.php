@@ -254,7 +254,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         $submenu_config->rows_content[$row][$col] = $child_item;
         $menu_config->menu_config->{$parent_uuid} = $submenu_config;
         WeMegaMenuBuilder::saveConfig($menu_name, $theme, json_encode($menu_config));
-        we_megamenu_flush_render_cache();
+        \Drupal::cache('render')->invalidateAll();
         return TRUE;
       }
     }

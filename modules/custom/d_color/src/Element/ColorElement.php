@@ -2,8 +2,8 @@
 
 namespace Drupal\d_color\Element;
 
-use Drupal\Core\Render\Element\Color;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Element\Color;
 
 /**
  * Provides a form element for choosing a color with reset button.

@@ -4,7 +4,10 @@ namespace Drupal\d_product\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Provides a 'Reset button' Block.
@@ -15,7 +18,55 @@ use Drupal\Core\Url;
  *   category = @Translation("Facets"),
  * )
  */
-class ResetButton extends BlockBase {
+class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * Current Request.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $request;
+
+  /**
+   * CommerceResetButton constructor.
+   *
+   * @param array $configuration
+   *   Configuration options.
+   * @param string $plugin_id
+   *   Plugin id.
+   * @param mixed $plugin_definition
+   *   Plugin definition.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+   *   Request.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RequestStack $requestStack) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->request = $requestStack->getCurrentRequest();
+  }
+
+  /**
+   * Create.
+   *
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   Container.
+   * @param array $configuration
+   *   Configuration options.
+   * @param string $plugin_id
+   *   Plugin id.
+   * @param mixed $plugin_definition
+   *   Plugin definition.
+   *
+   * @return static
+   *   Static.
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('request_stack')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -23,25 +74,25 @@ class ResetButton extends BlockBase {
   public function blockForm($form, FormStateInterface $form_state) {
     $form['button_text'] = [
       '#type' => 'textfield',
-      '#title' => t('Button text'),
+      '#title' => $this->t('Button text'),
       '#default_value' => $this->configuration['button_text'] ?? 'Reset Filters',
     ];
 
     $form['button_class'] = [
       '#type' => 'textfield',
-      '#title' => t('Button class'),
+      '#title' => $this->t('Button class'),
       '#default_value' => $this->configuration['button_class'] ?? 'btn btn-outline-primary btn-sm btn-reset',
     ];
 
     $form['button_target'] = [
       '#type' => 'textfield',
-      '#title' => t('Button target'),
+      '#title' => $this->t('Button target'),
       '#default_value' => $this->configuration['button_target'] ?? '/products',
     ];
 
     $form['button_icon_class'] = [
       '#type' => 'textfield',
-      '#title' => t('Button icon class'),
+      '#title' => $this->t('Button icon class'),
       '#default_value' => $this->configuration['button_icon_class'] ?? 'fas fa-times',
     ];
 
@@ -67,7 +118,8 @@ class ResetButton extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    if (!isset($_REQUEST['f'])) {
+
+    if (!$this->request->get('f')) {
       return [
         '#markup' => '',
         '#cache' => [

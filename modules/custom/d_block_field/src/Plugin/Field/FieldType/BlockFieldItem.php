@@ -2,12 +2,12 @@
 
 namespace Drupal\d_block_field\Plugin\Field\FieldType;
 
-use Drupal\d_block_field\BlockFieldItemInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
+use Drupal\d_block_field\BlockFieldItemInterface;
 
 /**
  * Plugin implementation of the 'd_block_field' field type.
@@ -99,7 +99,7 @@ class BlockFieldItem extends FieldItemBase implements BlockFieldItemInterface {
     }
     // Unserialize the values.
     if (is_string($values['settings'])) {
-      $values['settings'] = unserialize($values['settings']);
+      $values['settings'] = unserialize($values['settings'], ['allowed_classes' => FALSE]);
     }
     parent::setValue($values, $notify);
   }

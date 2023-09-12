@@ -5,9 +5,9 @@
  * File containing d_p_form module.
  */
 
-use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
-use Drupal\d_p\ParagraphSettingTypesInterface;
 use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
+use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
 
 /**
  * Implements hook_options_list_alter().

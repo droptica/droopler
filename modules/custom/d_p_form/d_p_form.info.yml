@@ -1,33 +1,26 @@
 name: 'Droopler Form Paragraph'
-core: 8.x
-core_version_requirement: '^8 || ^9'
+core_version_requirement: ^10
 description: 'Provides a paragraph with a form.'
 type: module
 dependencies:
-  # Core.
-  - drupal:block
-  - drupal:contact
-  - drupal:contact_formatter
-  - drupal:content_translation
-  - drupal:field
-  - drupal:file
-  - drupal:language
-  - drupal:link
-  - drupal:media_library
-  - drupal:options
-  - drupal:system
-  - drupal:text
-  - drupal:views
-
-  # Contrib.
-  - entity_reference_revisions:entity_reference_revisions
-  - field_group:field_group
-  - paragraphs:paragraphs
-
-  # Droopler.
-  - droopler:d_media
-  - droopler:d_p
-
-package: Droopler
+  - 'droopler:d_media'
+  - 'droopler:d_p'
+  - 'drupal:block'
+  - 'drupal:contact'
+  - 'drupal:contact_formatter'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:media_library'
+  - 'drupal:options'
+  - 'drupal:system'
+  - 'drupal:text'
+  - 'drupal:views'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'field_group:field_group'
+  - 'paragraphs:paragraphs'
+package: 'Droopler Paragraphs'
 version: DROOPLER_VERSION
 core_incompatible: false

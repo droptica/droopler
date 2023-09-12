@@ -1,21 +1,20 @@
-name: d_p_side_by_side
-core: 8.x
-core_version_requirement: '^8 || ^9'
+name: 'Droopler Side By Side Paragraph'
+core_version_requirement: ^10
 description: 'Provides a paragraph with paragraphs side by side layout.'
 type: module
-package: Paragraphs
+package: 'Droopler Paragraphs'
 version: DROOPLER_VERSION
 dependencies:
-  - d_media
-  - d_p
-  - d_p_node
-  - d_p_text_blocks
-  - entity_reference_revisions
-  - field
-  - field_group
-  - link
-  - link_attributes
-  - media_library
-  - paragraphs
-  - text
+  - 'droopler:d_media'
+  - 'droopler:d_p'
+  - 'droopler:d_p_node'
+  - 'droopler:d_p_text_blocks'
+  - 'drupal:field'
+  - 'drupal:link'
+  - 'drupal:media_library'
+  - 'drupal:text'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'field_group:field_group'
+  - 'link_attributes:link_attributes'
+  - 'paragraphs:paragraphs'
 core_incompatible: false

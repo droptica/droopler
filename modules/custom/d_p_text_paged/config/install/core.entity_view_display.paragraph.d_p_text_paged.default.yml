@@ -11,9 +11,50 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_text_paged
   module:
     - d_p
+    - field_group
     - link
     - text
-    - field_group
+third_party_settings:
+  field_group:
+    group_d_text_paged_content:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+        - field_d_subtitle
+        - field_d_long_text
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Text paged content'
+    group_d_text_paged_cta:
+      children:
+        - field_d_cta_link
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Call To Action'
 id: paragraph.d_p_text_paged.default
 targetEntityType: paragraph
 bundle: d_p_text_paged
@@ -72,44 +113,3 @@ content:
     region: content
 hidden:
   search_api_excerpt: true
-third_party_settings:
-  field_group:
-    group_d_text_paged_content:
-      children:
-        - field_d_media_icon
-        - field_d_main_title
-        - field_d_subtitle
-        - field_d_long_text
-      parent_name: ''
-      weight: 0
-      format_type: html_element
-      region: content
-      format_settings:
-        id: ''
-        classes: ''
-        element: '<none>'
-        show_label: false
-        label_element: h3
-        label_element_classes: ''
-        attributes: ''
-        effect: none
-        speed: fast
-      label: 'Text paged content'
-    group_d_text_paged_cta:
-      children:
-        - field_d_cta_link
-      parent_name: ''
-      weight: 1
-      format_type: html_element
-      region: content
-      format_settings:
-        id: ''
-        classes: ''
-        element: '<none>'
-        show_label: false
-        label_element: h3
-        label_element_classes: ''
-        attributes: ''
-        effect: none
-        speed: fast
-      label: 'Call To Action'

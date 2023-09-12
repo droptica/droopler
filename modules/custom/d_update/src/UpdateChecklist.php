@@ -8,6 +8,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\d_update\Entity\Update;
 
 /**
@@ -18,6 +19,7 @@ use Drupal\d_update\Entity\Update;
 class UpdateChecklist {
 
   use MessengerTrait;
+  use StringTranslationTrait;
 
   /**
    * The Checklist API object.
@@ -254,8 +256,6 @@ class UpdateChecklist {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function saveProgress(array $values) {
-    $user = \Drupal::currentUser();
-
     $time = time();
     $num_changed_items = 0;
     $progress = $this->getChecklistSavedProgress();
@@ -267,14 +267,14 @@ class UpdateChecklist {
       ];
     }
     $progress['#changed'] = $time;
-    $progress['#changed_by'] = $user->id();
+    $progress['#changed_by'] = $this->account->id();
 
     $status = [
       'positive' => [],
       'negative' => [],
     ];
 
-    foreach ($values as $group_key => $group) {
+    foreach ($values as $group) {
       foreach ($group as $item_key => $item) {
         if (isset($progress['#items'][$item_key])) {
           $num_changed_items++;
@@ -287,7 +287,7 @@ class UpdateChecklist {
           $progress['#completed_items']++;
           $progress['#items'][$item_key] = [
             '#completed' => $time,
-            '#uid' => $user->id(),
+            '#uid' => $this->account->id(),
           ];
         }
         else {
@@ -304,7 +304,7 @@ class UpdateChecklist {
 
     $this->setChecklistSavedProgress($progress);
 
-    $message = \Drupal::translation()->formatPlural(
+    $message = $this->formatPlural(
       $num_changed_items,
       '%title progress has been saved. 1 item changed.',
       '%title progress has been saved. @count items changed.',

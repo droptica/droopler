@@ -16,7 +16,7 @@
     attach: function (context, settings) {
 
       // Auto submit on sort by change.
-      $("form#views-exposed-form-droopler-commerce-products-list-page-1 select", context).once('d_commerce_products_search_sort').change(function () {
+      $("form#views-exposed-form-droopler-commerce-products-list-page-1 select", context).change(function () {
         $(this).closest("form").submit();
       });
 
@@ -34,12 +34,12 @@
       var $button = $(".top-commerce-products-info .block-commerce-mobile-filters button.mobile-filter", context);
       var $buttonClose = $(".commerce-products-filters .block-commerce-mobile-filters-submit button.mobile-filter-close, .commerce-close-area", context);
 
-      $button.once('d_commerce_products_search_open').click(function () {
+      $button.click(function () {
         $(".region-facets-left", context).css("left", "0");
         $("body").addClass("commerce-navigation-bar-visible");
       });
 
-      $buttonClose.once('d_commerce_products_search_close').click(function () {
+      $buttonClose.click(function () {
         $(".region-facets-left", context).css("left", "-100%");
         $("body").removeClass("commerce-navigation-bar-visible");
       });

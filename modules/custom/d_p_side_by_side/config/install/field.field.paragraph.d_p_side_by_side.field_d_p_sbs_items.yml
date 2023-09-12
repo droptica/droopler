@@ -21,11 +21,11 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       d_p_node: d_p_node
       d_p_single_text_block: d_p_single_text_block
       d_p_media: d_p_media
+    negate: 0
     target_bundles_drag_drop:
       d_p_banner:
         weight: 22
@@ -55,11 +55,11 @@ settings:
         weight: 30
         enabled: false
       d_p_media:
-        enabled: true
         weight: 50
-      d_p_node:
         enabled: true
+      d_p_node:
         weight: 31
+        enabled: true
       d_p_reference_content:
         weight: 32
         enabled: false
@@ -79,8 +79,8 @@ settings:
         weight: 37
         enabled: false
       d_p_single_text_block:
-        enabled: true
         weight: 38
+        enabled: true
       d_p_subscribe_file:
         weight: 39
         enabled: false

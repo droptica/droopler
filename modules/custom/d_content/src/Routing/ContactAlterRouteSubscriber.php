@@ -2,6 +2,7 @@
 
 namespace Drupal\d_content\Routing;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -14,17 +15,33 @@ use Symfony\Component\Routing\RouteCollection;
 class ContactAlterRouteSubscriber extends RouteSubscriberBase {
 
   /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * Constructs a ContactAlterRouteSubscriber object.
+   *
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
+   */
+  public function __construct(ModuleHandlerInterface $module_handler) {
+    $this->moduleHandler = $module_handler;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function alterRoutes(RouteCollection $collection) {
     // Remove the /contact route.
-    if ($route = $collection->get('contact.site_page')) {
+    if ($collection->get('contact.site_page')) {
       $collection->remove('contact.site_page');
     }
 
-    $moduleHandler = \Drupal::service('module_handler');
-    if (!($moduleHandler->moduleExists('contact'))) {
-      if ($route = $collection->get('entity.user.contact_form')) {
+    if (!($this->moduleHandler->moduleExists('contact'))) {
+      if ($collection->get('entity.user.contact_form')) {
         $collection->remove('entity.user.contact_form');
       }
     }

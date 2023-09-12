@@ -21,23 +21,23 @@ mode: teaser_small
 content:
   field_blog_media_main_image:
     type: media_thumbnail
-    weight: 1
-    region: content
     label: hidden
     settings:
-      image_style: large_gallery_thumbnail
       image_link: content
-    third_party_settings:
-      lazy:
-        lazy_image: '1'
+      image_style: large_gallery_thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_blog_teaser:
     type: text_trimmed
-    weight: 2
-    region: content
     label: hidden
     settings:
       trim_length: 160
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   field_blog_category: true
   field_blog_sections: true

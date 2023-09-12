@@ -1,22 +1,21 @@
-name: d_p_subscribe_file
-core: 8.x
-core_version_requirement: '^8 || ^9'
+name: 'Droopler Subscribe File Paragraph'
+core_version_requirement: ^10
 description: 'Provides a paragraph with subscribe file.'
 type: module
 dependencies:
-  - content_translation
-  - d_media
-  - d_p
-  - d_p_subscribe_file
-  - field
-  - field_group
-  - file
-  - language
-  - media_library
-  - paragraphs
-  - text
-  - user
-  - views
-package: Paragraphs
+  - 'droopler:d_media'
+  - 'droopler:d_p'
+  - 'droopler:d_p_subscribe_file'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:language'
+  - 'drupal:media_library'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'field_group:field_group'
+  - 'paragraphs:paragraphs'
+package: 'Droopler Paragraphs'
 version: DROOPLER_VERSION
 core_incompatible: false

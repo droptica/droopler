@@ -3,3 +3,4 @@ services:
     class: Drupal\d_content\Routing\ContactAlterRouteSubscriber
     tags:
       - { name: event_subscriber }
+    arguments: ['@module_handler']

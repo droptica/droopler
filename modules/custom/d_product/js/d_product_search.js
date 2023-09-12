@@ -16,7 +16,7 @@
     attach: function (context, settings) {
 
       // Auto submit on sort by change.
-      $("form#views-exposed-form-products-list-products-list select", context).once('d_product_search_sort').change(function () {
+      $("form#views-exposed-form-products-list-products-list select", context).change(function () {
         $(this).closest("form").submit();
       });
 
@@ -34,17 +34,17 @@
       var $button = $(".top-product-info .block-mobile-filters button.mobile-filter", context);
       var $buttonClose = $(".region-facets-left button.mobile-filter-close, .close-area", context);
 
-      $button.once('d_product_search_open').click(function () {
+      $button.click(function () {
         $(".region-facets-left", context).css("left", "0");
         $("body").addClass("navigation-bar-visible");
       });
 
-      $buttonClose.once('d_product_search_close').click(function () {
+      $buttonClose.click(function () {
         $(".region-facets-left", context).css("left", "-100%");
         $("body").removeClass("navigation-bar-visible");
       });
 
-      $(window).once('d_product_resize_filters').resize(function () {
+      $(window).resize(function () {
         if (window.innerWidth >= 992) {
           $buttonClose.click();
         }

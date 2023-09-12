@@ -3,11 +3,11 @@
 namespace Drupal\d_p_subscribe_file\Commands;
 
 use Consolidation\AnnotatedCommand\CommandData;
+use Drupal\Core\Database\Connection;
 use Drush\Commands\DrushCommands;
 use Drush\Drupal\Commands\sql\SanitizePluginInterface;
 use Drush\Sql\SqlBase;
 use Symfony\Component\Console\Input\InputInterface;
-use Drupal\Core\Database\Connection;
 
 /**
  * Drush sql-sanitize plugin for sanitising some random data.
@@ -84,7 +84,6 @@ class SubscribeSanitizeCommand extends DrushCommands implements SanitizePluginIn
    * @inheritdoc
    */
   public function messages(&$messages, InputInterface $input) {
-    $options = $input->getOptions();
     $messages[] = dt('Sanitize subscriptions data name and email');
     return $messages;
   }
