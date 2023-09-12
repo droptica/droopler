@@ -82,7 +82,7 @@ function d_demo_create_bottom_footer_menu() {
  * Implements hook_install().
  */
 function d_demo_install() {
-  $config = \Drupal::configFactory()->getEditable('d_social_media.settings')
+  \Drupal::configFactory()->getEditable('d_social_media.settings')
     ->set('link_facebook', 'https://www.facebook.com/dropticacom/')
     ->set('link_twitter', 'https://twitter.com/droptica')
     ->set('link_youtube', 'https://www.youtube.com/channel/UCL_XD86NqAJppzw3w7QJqGw')

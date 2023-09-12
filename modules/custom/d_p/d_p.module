@@ -5,13 +5,13 @@
  * Contains d_paragraphs.module.
  */
 
-use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
-use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
+use Drupal\Core\Template\Attribute;
 use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
 use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
 
 /**
  * Implements hook_theme().
@@ -137,8 +137,7 @@ function d_p_preprocess_paragraph(&$variables) {
  * Implements hook_form_alter().
  */
 function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
-
+  // $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
   // Create heading type selector under the title.
   if (isset($form["field_page_section"])) {
     // Locate all paragraph subforms.
@@ -221,19 +220,23 @@ function d_p_module_implements_alter(&$implementations, $hook) {
 }
 
 /**
- * Implements hook_field_widget_form_alter().
+ * Implements hook_field_widget_single_element_form_alter().
  */
-function d_p_field_widget_form_alter(&$element, FormStateInterface $form_state, &$context) {
+function d_p_field_widget_single_element_form_alter(&$element, FormStateInterface $form_state, &$context) {
   $field_definition = $context['items']->getFieldDefinition();
 
   if ($field_definition instanceof FieldConfig) {
     $config = $field_definition->id();
-    [$entity_type, $bundle, $field_name] = explode('.', $config);
+    [, $bundle, $field_name] = explode('.', $config);
 
     // Make the content of the CKEditor centred by default for the specified
     // paragraph types.
-    d_p_centered_ckeditor_widget_content($element, $form_state, $context, $bundle);
-
+    // @todo Adjust to CKEditor 5
+    // d_p_centered_ckeditor_widget_content(
+    // $element,
+    // $form_state,
+    // $context,
+    // $bundle);
     // Add default value to the link class attribute.
     if ($field_name === 'field_d_cta_link' &&
       empty($element['url']['#default_value']) &&

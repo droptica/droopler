@@ -103,10 +103,11 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
       }
     }
 
-    throw new MissingConfigurationStorageFieldException(t("No instance of configuration storage found on entity @entity of bundle @bundle", [
-      '@entity' => $entity->getEntityType()->id(),
-      '@bundle' => $entity->bundle(),
-    ]));
+    throw new MissingConfigurationStorageFieldException(sprintf(
+      "No instance of configuration storage found on entity %s of bundle %s",
+      $entity->getEntityType()->id(),
+      $entity->bundle()
+    ));
   }
 
 }

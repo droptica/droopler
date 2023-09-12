@@ -24,24 +24,24 @@ bundle: d_product
 mode: full
 content:
   body:
-    label: above
     type: text_default
-    weight: 2
+    label: above
     settings: {  }
     third_party_settings: {  }
+    weight: 2
     region: content
   field_d_ask_for_product:
     type: boolean
-    weight: 6
-    region: content
     label: hidden
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
+    weight: 6
+    region: content
   field_d_product_link:
-    weight: 5
+    type: link
     label: hidden
     settings:
       trim_length: 80
@@ -50,49 +50,49 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 5
     region: content
   field_d_product_media:
     type: media_thumbnail
-    weight: 1
-    region: content
     label: hidden
     settings:
-      image_style: ''
       image_link: ''
-    third_party_settings:
-      lazy:
-        lazy_image: '1'
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_page_section:
     type: entity_reference_revisions_entity_view
-    weight: 7
-    region: content
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 7
+    region: content
   field_product_categories:
-    weight: 3
+    type: entity_reference_label
     label: above
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 3
     region: content
   field_tags:
-    weight: 4
+    type: entity_reference_label
     label: above
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 4
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_meta_tags: true
   langcode: true

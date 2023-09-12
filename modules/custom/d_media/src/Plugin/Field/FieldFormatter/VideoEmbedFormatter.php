@@ -2,6 +2,7 @@
 
 namespace Drupal\d_media\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
@@ -11,8 +12,6 @@ use Drupal\d_media\Service\ProviderManagerInterface;
 use Drupal\media\Entity\MediaType;
 use Drupal\media\Plugin\media\Source\OEmbedInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\image\Entity\ImageStyle;
 
 /**
  * Plugin implementation of the 'd_video_embed' formatter.
@@ -43,6 +42,13 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    * @var \Drupal\d_media\Service\ProviderManagerInterface
    */
   protected $providerManager;
+
+  /**
+   * Image style storage.
+   *
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  protected $imageStyleStorage;
 
   /**
    * Constructs an VideoEmbedFormatter instance.
@@ -279,10 +285,10 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
           'description' => $this->t('Video will cover entire available area and crop to the center.'),
         ],
         'image_style' => [
-          '#title' => t('Image style'),
+          '#title' => $this->t('Image style'),
           '#type' => 'select',
           '#default_value' => $this->getSetting(self::VIDEO_SETTINGS_CONFIG_NAME)['image_style'],
-          '#empty_option' => t('None (original image)'),
+          '#empty_option' => $this->t('None (original image)'),
           '#options' => $this->imageStyleOptions(),
         ],
       ],
@@ -329,14 +335,14 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    *   Array of image style options.
    */
   private function imageStyleOptions() {
-    $styles = ImageStyle::loadMultiple();
+    $styles = $this->imageStyleStorage->loadMultiple();
     $options = [];
     foreach ($styles as $name => $style) {
       $options[$name] = $style
         ->label();
     }
     if (empty($options)) {
-      $options[''] = t('No defined styles');
+      $options[''] = $this->t('No defined styles');
     }
 
     return $options;

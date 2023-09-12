@@ -1,30 +1,25 @@
 name: 'Droopler Paragraphs'
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^10
 description: 'Provides base paragraph features.'
 type: module
 dependencies:
-  # Core.
-  - drupal:content_translation
-  - drupal:field
-  - drupal:file
-  - drupal:image
-  - drupal:language
-  - drupal:link
-  - drupal:node
-  - drupal:options
-  - drupal:text
-
-  # Contrib.
-  - entity_reference_display:entity_reference_display
-  - entity_reference_revisions:entity_reference_revisions
-  - features:features
-  - field_group:field_group
-  - link_attributes:link_attributes
-  - metatag:metatag
-  - paragraphs:paragraphs
-
-package: Droopler
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:node'
+  - 'drupal:options'
+  - 'drupal:text'
+  - 'entity_reference_display:entity_reference_display'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'features:features'
+  - 'field_group:field_group'
+  - 'link_attributes:link_attributes'
+  - 'metatag:metatag'
+  - 'paragraphs:paragraphs'
+package: 'Droopler Common'
 version: DROOPLER_VERSION
 libraries:
   - d_p/d_p_with_price

@@ -1,24 +1,26 @@
 langcode: en
 status: true
 dependencies: {  }
-name: Paragraphs
 machine_name: d_p
-description: 'All Droopler paragraphs'
+name: 'Droopler Paragraphs'
+description: ''
 assignments:
   alter:
+    enabled: true
+    weight: -17
     core: true
     uuid: true
     user_permissions: true
-    enabled: true
-    weight: 0
   base:
+    enabled: true
+    weight: -18
     types:
       config:
         paragraphs_type: paragraphs_type
       content: {  }
-    enabled: true
-    weight: -2
   core:
+    enabled: false
+    weight: -14
     types:
       config:
         date_format: date_format
@@ -29,12 +31,12 @@ assignments:
         responsive_image_style: responsive_image_style
         user_role: user_role
         entity_view_mode: entity_view_mode
-    enabled: false
-    weight: 5
   dependency:
     enabled: true
-    weight: 15
+    weight: -10
   exclude:
+    enabled: true
+    weight: -19
     types:
       config:
         features_bundle: features_bundle
@@ -44,26 +46,26 @@ assignments:
       profile: true
       namespace: true
       namespace_any: false
-    enabled: true
-    weight: -5
   existing:
     enabled: true
-    weight: 12
+    weight: -11
   forward_dependency:
     enabled: true
-    weight: 4
+    weight: -15
   namespace:
     enabled: true
-    weight: 0
+    weight: -9
   optional:
+    enabled: false
+    weight: -16
     types:
       config: {  }
-    enabled: true
-    weight: 0
   packages:
     enabled: true
     weight: -20
   profile:
+    enabled: false
+    weight: -12
     curated: true
     standard:
       files: true
@@ -76,9 +78,9 @@ assignments:
         migration: migration
         shortcut_set: shortcut_set
         tour: tour
-    enabled: false
-    weight: 10
   site:
+    enabled: false
+    weight: -13
     types:
       config:
         action: action
@@ -89,7 +91,5 @@ assignments:
         taxonomy_vocabulary: taxonomy_vocabulary
         editor: editor
         filter_format: filter_format
-    enabled: false
-    weight: 7
 profile_name: ''
 is_profile: false

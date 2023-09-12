@@ -1,59 +1,52 @@
 name: 'Droopler Blog'
-core: 8.x
-core_version_requirement: '^8 || ^9'
+core_version_requirement: ^10
 description: 'Adds a blog to Droopler.'
 type: module
 dependencies:
-  # Core.
-  - drupal:block
-  - drupal:content_translation
-  - drupal:field
-  - drupal:file
-  - drupal:image
-  - drupal:language
-  - drupal:media
-  - drupal:media_library
-  - drupal:menu_ui
-  - drupal:node
-  - drupal:path
-  - drupal:responsive_image
-  - drupal:taxonomy
-  - drupal:text
-  - drupal:user
-  - drupal:views
-
-  # Contrib.
-  - ctools:ctools
-  - entity_reference_revisions:entity_reference_revisions
-  - metatag:metatag
-  - paragraphs:paragraphs
-  - pathauto:pathauto
-  - simple_sitemap:simple_sitemap
-  - svg_image:svg_image
-  - svg_image:svg_image_responsive
-  - tvi:tvi
-
-  # Droopler.
-  - droopler:d_block
-  - droopler:d_media
-  - droopler:d_p
-  - droopler:d_p_banner
-  - droopler:d_p_carousel
-  - droopler:d_p_counters
-  - droopler:d_p_form
-  - droopler:d_p_gallery
-  - droopler:d_p_node
-  - droopler:d_p_reference_content
-  - droopler:d_p_side_by_side
-  - droopler:d_p_side_embed
-  - droopler:d_p_side_image
-  - droopler:d_p_side_tiles
-  - droopler:d_p_subscribe_file
-  - droopler:d_p_text_blocks
-  - droopler:d_p_text_paged
-  - droopler:d_p_text_with_bckg
-  - droopler:d_p_tiles
-
+  - 'ctools:ctools'
+  - 'droopler:d_block'
+  - 'droopler:d_media'
+  - 'droopler:d_p'
+  - 'droopler:d_p_banner'
+  - 'droopler:d_p_carousel'
+  - 'droopler:d_p_counters'
+  - 'droopler:d_p_form'
+  - 'droopler:d_p_gallery'
+  - 'droopler:d_p_node'
+  - 'droopler:d_p_reference_content'
+  - 'droopler:d_p_side_by_side'
+  - 'droopler:d_p_side_embed'
+  - 'droopler:d_p_side_image'
+  - 'droopler:d_p_side_tiles'
+  - 'droopler:d_p_subscribe_file'
+  - 'droopler:d_p_text_blocks'
+  - 'droopler:d_p_text_paged'
+  - 'droopler:d_p_text_with_bckg'
+  - 'droopler:d_p_tiles'
+  - 'drupal:block'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:path'
+  - 'drupal:responsive_image'
+  - 'drupal:taxonomy'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'metatag:metatag'
+  - 'paragraphs:paragraphs'
+  - 'pathauto:pathauto'
+  - 'simple_sitemap:simple_sitemap'
+  - 'svg_image:svg_image'
+  - 'svg_image:svg_image_responsive'
+  - 'tvi:tvi'
 version: DROOPLER_VERSION
-package: Droopler
+package: 'Droopler Common'
 core_incompatible: false

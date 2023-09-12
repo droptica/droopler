@@ -34,7 +34,6 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       d_p_banner: d_p_banner
       d_p_form: d_p_form
@@ -52,13 +51,14 @@ settings:
       d_p_side_by_side: d_p_side_by_side
       d_p_tiles: d_p_tiles
       d_p_block: d_p_block
+    negate: 0
     target_bundles_drag_drop:
       d_p_banner:
-        enabled: true
         weight: 13
-      d_p_block:
         enabled: true
+      d_p_block:
         weight: 38
+        enabled: true
       d_p_blog_image:
         weight: 14
         enabled: false
@@ -66,41 +66,41 @@ settings:
         weight: 15
         enabled: false
       d_p_carousel:
-        enabled: true
         weight: 18
+        enabled: true
       d_p_carousel_item:
         weight: 19
         enabled: false
       d_p_form:
-        enabled: true
         weight: 16
+        enabled: true
       d_p_gallery:
-        enabled: true
         weight: 18
+        enabled: true
       d_p_group_of_counters:
-        enabled: true
         weight: 17
-      d_p_group_of_text_blocks:
         enabled: true
+      d_p_group_of_text_blocks:
         weight: 18
+        enabled: true
       d_p_node:
         weight: 31
         enabled: false
       d_p_reference_content:
-        enabled: true
         weight: 20
+        enabled: true
       d_p_side_by_side:
-        enabled: true
         weight: 33
+        enabled: true
       d_p_side_embed:
-        enabled: true
         weight: 26
+        enabled: true
       d_p_side_image:
-        enabled: true
         weight: 19
-      d_p_side_tiles:
         enabled: true
+      d_p_side_tiles:
         weight: 30
+        enabled: true
       d_p_single_counter:
         weight: 20
         enabled: false
@@ -108,15 +108,15 @@ settings:
         weight: 21
         enabled: false
       d_p_subscribe_file:
-        enabled: true
         weight: 22
+        enabled: true
       d_p_text_paged:
-        enabled: true
         weight: 23
+        enabled: true
       d_p_text_with_bckg:
-        enabled: true
         weight: 24
-      d_p_tiles:
         enabled: true
+      d_p_tiles:
         weight: 36
+        enabled: true
 field_type: entity_reference_revisions

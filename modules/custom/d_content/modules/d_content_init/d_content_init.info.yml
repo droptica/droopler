@@ -1,9 +1,8 @@
-name: d_content init
-description: 'Create demo content for Droopler.'
+name: 'Droopler Initial Content Installer'
+description: 'Installs initial content in Droopler.'
 type: module
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^10
 version: DROOPLER_VERSION
 dependencies:
-  - paragraphs
-package: Droopler
+  - paragraphs:paragraphs
+package: Droopler Common

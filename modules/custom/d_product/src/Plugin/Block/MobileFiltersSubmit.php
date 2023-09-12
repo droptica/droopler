@@ -22,13 +22,13 @@ class MobileFiltersSubmit extends BlockBase {
   public function blockForm($form, FormStateInterface $form_state) {
     $form['button_text'] = [
       '#type' => 'textfield',
-      '#title' => t('Button text'),
+      '#title' => $this->t('Button text'),
       '#default_value' => $this->configuration['button_text'] ?? 'Close Filters',
     ];
 
     $form['button_class'] = [
       '#type' => 'textfield',
-      '#title' => t('Button class'),
+      '#title' => $this->t('Button class'),
       '#default_value' => $this->configuration['button_class'] ?? 'btn btn-primary',
     ];
 

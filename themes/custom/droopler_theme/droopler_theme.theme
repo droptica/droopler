@@ -452,14 +452,14 @@ function droopler_theme_library_info_alter(&$libraries, $extension) {
   // Enable libraries in profile directory.
   $profile_libraries_dir = \Drupal::service('extension.path.resolver')->getPath('profile', 'droopler') . '/libraries';
   if (file_exists($profile_libraries_dir)) {
-    foreach ($libraries as $name => &$info) {
+    foreach ($libraries as &$info) {
       // Alter JS.
       if (isset($info['js'])) {
         droopler_theme_change_asset_location($profile_libraries_dir, $info['js']);
       }
       // Alter CSS.
       if (isset($info['css'])) {
-        foreach ($info['css'] as $type => &$scripts) {
+        foreach ($info['css'] as &$scripts) {
           droopler_theme_change_asset_location($profile_libraries_dir, $scripts);
         }
       }

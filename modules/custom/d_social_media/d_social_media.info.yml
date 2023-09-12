@@ -1,10 +1,9 @@
-name: d_social_media
+name: 'Droopler Social Media Block'
 description: Provide blocks including links to social media.
 type: module
-core: 8.x
-core_version_requirement: ^8 || ^9
-package: Droopler
+core_version_requirement: ^10
+package: Droopler Common
 version: DROOPLER_VERSION
 configure: d_social_media.settings
-dependecies:
-  - block
+dependencies:
+  - drupal:block

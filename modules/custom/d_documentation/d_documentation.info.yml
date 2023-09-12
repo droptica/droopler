@@ -1,24 +1,17 @@
-name: 'Droopler Documentation'
-core: 8.x
-core_version_requirement: ^8 || ^9
-description: 'Module with documentation content.'
+name: 'Droopler Documentation Nodes'
+core_version_requirement: ^10
+description: 'Module with documentation content for Droopler.'
 type: module
 dependencies:
-  # Core.
-  - drupal:block
-  - drupal:system
-
-  # Contrib.
-  - we_megamenu:we_megamenu
-
-  # Droopler.
   - droopler:d_content_init
   - droopler:d_media
   - droopler:d_p_media
   - droopler:d_p_reference_content
   - droopler:d_social_media
+  - drupal:block
+  - drupal:system
 
-package: Droopler
+package: Droopler Common
 version: DROOPLER_VERSION
 libraries:
   - droopler_theme/global-styling

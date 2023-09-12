@@ -2,12 +2,12 @@
 
 namespace Drupal\d_content\Plugin\CKEditorPlugin;
 
+use Drupal\ckeditor\CKEditorPluginBase;
+use Drupal\ckeditor\CKEditorPluginContextualInterface;
+use Drupal\ckeditor\CKEditorPluginInterface;
 use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\editor\Entity\Editor;
-use Drupal\ckeditor\CKEditorPluginBase;
-use Drupal\ckeditor\CKEditorPluginInterface;
-use Drupal\ckeditor\CKEditorPluginContextualInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

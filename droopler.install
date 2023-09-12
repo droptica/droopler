@@ -62,7 +62,7 @@ function droopler_install() {
   \Drupal::configFactory()
     ->getEditable('system.theme')
     ->set('default', 'droopler_theme')
-    ->set('admin', 'seven')
+    ->set('admin', 'claro')
     ->save();
 }
 
@@ -235,7 +235,7 @@ function droopler_enable_subtheme(array &$context) {
     \Drupal::configFactory()
       ->getEditable('system.theme')
       ->set('default', 'droopler_subtheme')
-      ->set('admin', 'seven')
+      ->set('admin', 'claro')
       ->save();
     $context['message'] = t('Installed %theme theme', ['%theme' => 'droopler_subtheme']);
   }
@@ -279,7 +279,7 @@ function droopler_enable_subtheme_postprocess(array &$context) {
     // Copy configuration of the WeMegaMenu from base to subtheme.
     if ($base_menu = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme')) {
       WeMegaMenuBuilder::saveConfig('main', 'droopler_subtheme', json_encode($base_menu));
-      we_megamenu_flush_render_cache();
+      \Drupal::cache('render')->invalidateAll();
     }
 
     $context['message'] = t('Theme %theme configured.', ['%theme' => 'droopler_subtheme']);
@@ -2255,4 +2255,13 @@ function droopler_update_8138(&$sandbox) {
 
   \Drupal::service('d_update')->checklist()
     ->saveProgress(['v3.1' => $values]);
+}
+
+/**
+ * Droopler 3.3 Change AdvAgg JS minifier from JSqueeze to JShrink.
+ */
+function droopler_update_8139(&$sandbox) {
+  /** @var Drupal\d_update\Updater $updater */
+  $updater = \Drupal::service('d_update');
+  $updater->updateConfigurations('profile/droopler', 'advagg.8139');
 }

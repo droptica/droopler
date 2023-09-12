@@ -14,15 +14,17 @@ bundle: d_image
 mode: d_blog_image
 content:
   field_media_image:
-    weight: 0
+    type: responsive_image
     label: hidden
     settings:
       responsive_image_style: blog_images_style
       image_link: ''
-    third_party_settings:
-      lazy:
-        lazy_image: '1'
-    type: responsive_image
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

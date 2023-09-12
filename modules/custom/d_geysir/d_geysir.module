@@ -64,11 +64,11 @@ function d_geysir_field_widget_link_attributes_form_alter(&$element, &$form_stat
 }
 
 /**
- * Implements hook_field_widget_form_alter().
+ * Implements hook_field_widget_single_element_form_alter().
  *
  * Disable premature autofocus at modal's forms.
  */
-function d_geysir_field_widget_form_alter(&$element, &$form_state, $context) {
+function d_geysir_field_widget_single_element_form_alter(&$element, &$form_state, $context) {
   $element["open_button"]["#attributes"]["data-disabled-focus"] = 'false';
 }
 

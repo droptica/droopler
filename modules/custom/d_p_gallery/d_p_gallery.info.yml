@@ -1,23 +1,22 @@
-name: d_p_gallery
+name: 'Droopler Gallery Paragraph'
 description: 'Provides a paragraph with a simple gallery.'
 type: module
-core: 8.x
-core_version_requirement: '^8 || ^9'
-package: Paragraphs
+core_version_requirement: ^10
+package: 'Droopler Paragraphs'
 dependencies:
-  - colorbox
-  - content_translation
-  - d_media
-  - d_p
-  - field
-  - field_group
-  - file
-  - image
-  - link
-  - link_attributes
-  - media
-  - media_library
-  - paragraphs
-  - text
+  - 'colorbox:colorbox'
+  - 'droopler:d_media'
+  - 'droopler:d_p'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:link'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:text'
+  - 'field_group:field_group'
+  - 'link_attributes:link_attributes'
+  - 'paragraphs:paragraphs'
 version: DROOPLER_VERSION
 core_incompatible: false

@@ -7,7 +7,7 @@
       setBorders();
       var timeout;
 
-      $(window).once('d_social_media_resize').resize(function () {
+      $(window).resize(function () {
         clearTimeout(timeout);
         timeout = setTimeout(setBorders, 100);
       });

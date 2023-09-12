@@ -3,6 +3,7 @@ slick:
   version: VERSION
   license:
     name: MIT
+    url: https://github.com/kenwheeler/slick/#license
     gpl-compatible: false
   js:
     /libraries/slick-carousel/slick/slick.min.js: { minified: true }
@@ -17,5 +18,5 @@ d_p_carousel:
   dependencies:
     - core/jquery
     - core/drupal
-    - core/jquery.once
+    - core/once
     - d_p_carousel/slick

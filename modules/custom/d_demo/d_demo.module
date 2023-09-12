@@ -85,6 +85,7 @@ function d_demo_block_structure_alter(&$structure, $context) {
     $structure['aircrafts'] = ['file' => "$path/mega_submenu_services_for_aircrafts.yml"];
     $structure['spacecrafts'] = ['file' => "$path/mega_submenu_services_for_spacecrafts.yml"];
   }
+
   if ($context == 'all') {
     $structure['footer_office_1'] = ['file' => "$path/footer_office_1.yml"];
     $structure['footer_office_2'] = ['file' => "$path/footer_office_2.yml"];

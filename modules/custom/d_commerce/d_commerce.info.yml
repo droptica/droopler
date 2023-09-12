@@ -1,14 +1,8 @@
 name: 'Droopler Commerce (experimental)'
-core: 8.x
-core_version_requirement: ^8 || ^9
-description: 'Provides a droopler with commerce module.'
+core_version_requirement: ^10
+description: 'Provides the Droopler integration with Commerce module.'
 type: module
 dependencies:
-  # Core.
-  - drupal:block
-  - drupal:user
-
-  # Contrib.
   - colorbox:colorbox
   - commerce:commerce
   - commerce:commerce_cart
@@ -18,7 +12,9 @@ dependencies:
   - commerce:commerce_product
   - commerce:commerce_promotion
   - commerce:commerce_tax
+  - drupal:block
+  - drupal:user
 
-package: Droopler
+package: Droopler Common
 version: DROOPLER_VERSION
 core_incompatible: false
