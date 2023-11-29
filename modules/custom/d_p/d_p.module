@@ -142,6 +142,10 @@ function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if (isset($form["field_page_section"])) {
     // Locate all paragraph subforms.
     for ($i = 0; $i <= $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
+      if (!isset($form["field_page_section"]["widget"][$i]["subform"])) {
+        return;
+      }
+
       d_p_move_heading_type($form["field_page_section"]["widget"][$i]["subform"]);
     }
   }
