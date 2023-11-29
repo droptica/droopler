@@ -166,6 +166,10 @@ class ContentHelper {
    *   Content without unpublished nodes.
    */
   public function getPublishedContent(array $values) {
+    if (empty($values)) {
+      return [];
+    }
+
     $nids = [];
     foreach ($values as $value) {
       $nids[] = $value['target_id'];
