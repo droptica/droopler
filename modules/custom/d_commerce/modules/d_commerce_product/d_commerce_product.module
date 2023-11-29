@@ -129,7 +129,7 @@ function _d_commerce_product_get_title(ProductInterface $product) {
     $title = $product->getTitle();
   }
   else {
-    $title = $product->getDefaultVariation()->getTitle();
+    $title = $product->getDefaultVariation() ? $product->getDefaultVariation()->getTitle() : $product->getTitle();
   }
 
   return $title;
