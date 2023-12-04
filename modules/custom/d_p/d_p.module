@@ -310,12 +310,3 @@ function d_p_preprocess_textarea(&$variables) {
     $variables['wrapper_attributes']->addClass('d_p_ckeditor_centered');
   }
 }
-
-function d_p_link_attributes_plugin_alter(array &$plugins) {
-  // Set a default value for the target attribute.
-  $plugins['target']['default_value'] = '_blank';
-//  $plugins['class']['default_value'] = '_blank';
-//  dd($plugins);
-
-
-}
