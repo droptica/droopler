@@ -240,7 +240,8 @@ function d_p_field_widget_single_element_form_alter(&$element, FormStateInterfac
     // Add default value to the link class attribute.
     if ($field_name === 'field_d_cta_link' &&
       empty($element['url']['#default_value']) &&
-      empty($element['options']['attributes']['class']['#default_value'])
+      empty($element['options']['attributes']['class']['#default_value']) &&
+      !isset($element['attributes']['#value']['class'])
     ) {
       if (in_array($bundle, ['d_p_group_of_counters'])) {
         $default_value = 'btn btn-secondary';
@@ -308,4 +309,13 @@ function d_p_preprocess_textarea(&$variables) {
   if ($variables['element']['#d_p_ckeditor_centered'] ?? FALSE) {
     $variables['wrapper_attributes']->addClass('d_p_ckeditor_centered');
   }
+}
+
+function d_p_link_attributes_plugin_alter(array &$plugins) {
+  // Set a default value for the target attribute.
+  $plugins['target']['default_value'] = '_blank';
+//  $plugins['class']['default_value'] = '_blank';
+//  dd($plugins);
+
+
 }
