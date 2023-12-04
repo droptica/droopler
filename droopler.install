@@ -2191,10 +2191,11 @@ function droopler_update_8134() {
   $permission = 'access contextual links';
 
   $role = Role::load('d_editor');
-  $role->grantPermission($permission)
-    ->save();
+  if (is_object($role)) {
+    $role->grantPermission($permission)->save();
 
-  $values['droopler__droopler_update_8134_1'] = $role->hasPermission($permission);
+    $values['droopler__droopler_update_8134_1'] = $role->hasPermission($permission);
+  }
 
   Drupal::service('d_update')
     ->checklist()
