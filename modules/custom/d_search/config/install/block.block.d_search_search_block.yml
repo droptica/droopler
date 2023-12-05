@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+id: 'd_search_search_block'
+theme: 'droopler_theme'
+region: 'header_secondary'
+weight: 1
+provider: 'd_search'
+plugin: 'search_page_link'
+settings:
+  label: 'Search page link'
+  label_display: 0
+visibility: { }
