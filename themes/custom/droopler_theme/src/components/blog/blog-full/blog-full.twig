@@ -1,0 +1,53 @@
+{{ attach_library('droopler_theme/blog-full') }}
+
+{% set base_class = blog_full_base_class|default('blog-full') %}
+{% set modifiers = blog_full_modifiers|default([]) %}
+
+<article {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('header', [], base_class) }} data-theme="theme-dark">
+    <div {{ bem('background', [], base_class) }}>
+      <div {{ bem('background-media', [], base_class) }}>
+        {% block main_image %}
+        {% endblock %}
+      </div>
+
+      <div {{ bem('background-overlay', [], base_class) }}>
+        {% include '@droopler_theme/base/overlay/overlay.twig'%}
+      </div>
+    </div>
+
+    <div {{ bem('header-content', [], base_class) }}>
+      <div {{ bem('header-content-container', [], base_class, ['container']) }}>
+        <div {{ bem('header-content-wrapper', [], base_class, ['row']) }}>
+          <div {{ bem('header-content-column', [], base_class, ['col-12', 'first-child-no-spacer']) }}>
+            <div {{ bem('author-attributes', [], base_class) }}>
+              {% include "@droopler_theme/base/body-text/body-text.twig" with {
+                text: author ~ ' / ' ~ date
+              } %}
+
+            </div>
+
+            {% include "@droopler_theme/base/heading/heading.twig" with {
+              heading_tag: 'h1',
+              label: label
+            } %}
+
+            <div {{ bem('category', [], base_class) }}>
+              {% block category %}
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div {{ bem('blog-sections', [], base_class) }}>
+    {% block blog_sections %}
+    {% endblock %}
+  </div>
+
+</article>

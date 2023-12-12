@@ -1,0 +1,10 @@
+{% for item in items %}
+  {% if not label_hidden %}
+    {% include "@droopler_theme/base/heading/heading.twig" with {
+      heading_tag: 'h3',
+    }%}
+  {% endif %}
+  {% include "@droopler_theme/base/body-text/body-text.twig" with {
+    text: item.content,
+  } %}
+{% endfor %}

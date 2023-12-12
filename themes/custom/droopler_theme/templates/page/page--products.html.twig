@@ -1,0 +1,34 @@
+{% extends '@droopler_theme/page/page.twig' %}
+
+{% block content %}
+  {% embed '@droopler_theme/d-p-text-paged/d-p-text-paged.twig' with {
+    additional_classes: [
+      'margin-bottom-none',
+      'margin-top-none',
+      'padding-bottom-medium',
+      'padding-top-medium',
+    ],
+    component_attributes: {
+      'data-theme': 'theme-primary',
+    }
+  } %}
+    {% block header %}
+      {% include '@droopler_theme/base/heading/heading.twig' with {
+        heading_tag: 'h2',
+        label: page['#title'],
+      }%}
+    {% endblock %}
+  {% endembed %}
+
+  {% embed '@droopler_theme/page-views/page-views.twig' %}
+    {% block top_content %}
+      {{ page.top_content }}
+    {% endblock %}
+    {% block aside %}
+      {{ page.aside }}
+    {% endblock %}
+    {% block page_content %}
+      {{ page.content }}
+    {% endblock %}
+  {% endembed %}
+{% endblock %}

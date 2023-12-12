@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_product\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
@@ -59,9 +61,6 @@ class MobileFilters extends BlockBase {
             $this->configuration['button_class'],
           ],
           'type' => ['button'],
-          'data-target' => ['.region-sidebar-left'],
-          'aria-expanded' => ['false'],
-          'aria-controls' => ['.region-sidebar-left'],
           'data-closed' => [$this->t('Filters')],
           'data-open' => [$this->t('Close Filters')],
         ],

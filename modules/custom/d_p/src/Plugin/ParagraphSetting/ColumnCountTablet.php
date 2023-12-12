@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 /**
@@ -9,7 +11,7 @@ namespace Drupal\d_p\Plugin\ParagraphSetting;
  *   id = "column_count_tablet",
  *   label = @Translation("Column count (tablet)"),
  *   settings = {
- *      "weight" = 1,
+ *      "weight" = 91,
  *   }
  * )
  */

@@ -1,0 +1,19 @@
+info:
+    type: d_product
+    title: 'SkyMaster 44 GTR'
+field_d_product_media:
+    type: media_image
+    directory: demo
+    files: [{ path: d_product_init/planeasset3.png, alt: 'Title / Subtitle' }]
+body:
+    type: text
+    data: 'Efficient engine with a seamless automatic transmission integration.'
+field_product_categories:
+    type: taxonomy
+    data: { vid: d_product_categories, terms: ['Jet Engines'] }
+field_tags:
+    type: taxonomy
+    data: { vid: tags, terms: [Engines, Jet] }
+field_d_product_link:
+    type: cta
+    data: { link: null, text: 'Buy now' }

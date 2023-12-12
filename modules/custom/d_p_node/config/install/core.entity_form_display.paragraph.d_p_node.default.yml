@@ -15,44 +15,46 @@ third_party_settings:
       children:
         - group_basic
         - group_settings
+      label: Tabs
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
-      region: content
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         direction: horizontal
-      label: Tabs
+        width_breakpoint: 450
     group_basic:
       children:
         - field_d_display_mode
         - field_d_node_reference
+      label: Basic
+      region: content
       parent_name: group_tabs
       weight: 20
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: open
+        description: ''
         required_fields: true
-      label: Basic
     group_settings:
       children:
         - field_d_settings
+      label: Settings
+      region: content
       parent_name: group_tabs
       weight: 21
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: Settings
 id: paragraph.d_p_node.default
 targetEntityType: paragraph
 bundle: d_p_node
@@ -65,37 +67,29 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_d_node_reference:
+    type: entity_reference_autocomplete
     weight: 2
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_d_settings:
+    type: field_d_p_set_settings
     weight: 3
+    region: content
     settings:
       filter_mode: '1'
       allowed_settings:
-        custom_class:
+        paragraph_theme:
           status: '1'
+        add-dividers:
+          status: 0
+        custom_class:
+          status: 0
           modifiers:
-            paragraph-theme:
-              status: '1'
-            with-divider:
-              status: 0
-            with-grid:
-              status: 0
-            with-price:
-              status: 0
-            with-tiles:
-              status: 0
-            full-width:
-              status: 0
-            half-transparent:
-              status: 0
             margin-bottom:
               status: 0
             margin-top:
@@ -104,13 +98,7 @@ content:
               status: 0
             padding-top:
               status: 0
-            header-into-columns:
-              status: 0
-            stripe-sidebar:
-              status: 0
-            tile:
-              status: 0
-        column_count:
+        column_count_desktop:
           status: 0
         column_count_mobile:
           status: 0
@@ -118,19 +106,42 @@ content:
           status: 0
         embed_layout:
           status: 0
-        featured_images:
+        with-grid:
+          status: 0
+        with-price:
+          status: 0
+        with-tiles:
+          status: 0
+        tiles_featured_images:
           status: 0
         form_layout:
           status: 0
+        full-width:
+          status: 0
         heading_type:
           status: 0
-        side_image_layout:
+        image_side:
           status: 0
-        side_tiles_layout:
+        image_width:
           status: 0
+        left_side_content:
+          status: 0
+        header-into-columns:
+          status: 0
+        with-price-in-sidebar:
+          status: 0
+        tiles_side:
+          status: 0
+      plugins_settings:
+        paragraph_theme:
+          allowed_themes:
+            - theme-light
+            - theme-dark
+            - theme-primary
+            - theme-secondary
+            - theme-custom
+          default_theme: theme-light
     third_party_settings: {  }
-    type: field_d_p_set_settings
-    region: content
 hidden:
   created: true
   status: true

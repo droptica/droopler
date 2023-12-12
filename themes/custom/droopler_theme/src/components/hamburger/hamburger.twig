@@ -1,0 +1,9 @@
+{{ attach_library('droopler_theme/hamburger') }}
+
+{% set base_class = hamburger_base_class|default('hamburger') %}
+
+<button {{ bem(base_class) }}>
+  <span {{ bem('line', [], base_class) }}></span>
+  <span {{ bem('line', [], base_class) }}></span>
+  <span {{ bem('line', [], base_class) }}></span>
+</button>

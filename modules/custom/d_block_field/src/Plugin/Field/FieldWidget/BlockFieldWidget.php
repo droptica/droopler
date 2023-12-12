@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_block_field\Plugin\Field\FieldWidget;
 
 use Drupal\Component\Utility\NestedArray;
@@ -154,13 +156,9 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
     ));
 
     $values = $form_state->getValues();
-    $item->plugin_id = (isset($values[$field_name][$delta]['plugin_id'])) ? $values[$field_name][$delta]['plugin_id'] : $item->plugin_id;
-    if (!empty($values[$field_name][$delta]['settings'])) {
-      $item->settings = $values[$field_name][$delta]['settings'];
-    }
-    else {
-      $item->settings = $item->settings ?: [];
-    }
+
+    $plugin_id = $values[$field_name][$delta]['plugin_id'] ?? ($item->__get('plugin_id') ?: '');
+    $settings = !empty($values[$field_name][$delta]['settings']) ? $values[$field_name][$delta]['settings'] : ($item->__get('settings') ?: []);
 
     $options = [];
     $definitions = $this->fieldManager->getBlockDefinitions();
@@ -170,17 +168,15 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
     }
 
     // Make sure the plugin id is allowed, if not clear all settings.
-    if ($item->plugin_id && !isset($definitions[$item->plugin_id])) {
-      $item->plugin_id = '';
-      $item->setting = [];
-    }
+    $item->__set('plugin_id', isset($definitions[$plugin_id]) ? $plugin_id : '');
+    $item->__set('settings', isset($definitions[$plugin_id]) ? $settings : []);
 
     $element['plugin_id'] = [
       '#type' => 'select',
       '#title' => $this->t('Block'),
       '#options' => $options,
       '#empty_option' => $this->t('- None -'),
-      '#default_value' => $item->plugin_id,
+      '#default_value' => $item->__get('plugin_id'),
       '#required' => $element['#required'],
     ];
 
@@ -200,7 +196,6 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
 
       // If block plugin exists get the block's configuration form.
       if ($block_instance = $item->getBlock()) {
-        /** @var \Drupal\Core\Plugin\Context\ContextRepositoryInterface $context_repository */
         $form_state->setTemporaryValue('gathered_contexts', $this->contextRepository->getAvailableContexts());
 
         $element['settings'] += $block_instance->buildConfigurationForm([], $form_state);
@@ -241,8 +236,8 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
 
     // Set the label #value to the default block instance's label.
     $plugin_id = $trigger_element['#value'];
-    /** @var \Drupal\Core\Block\BlockPluginInterface $block_instance */
     if ($block_instance = $this->blockManager->createInstance($plugin_id)) {
+      /** @var \Drupal\Core\Block\BlockPluginInterface $block_instance */
       $settings_element['label']['#value'] = $block_instance->label();
     }
 
@@ -310,16 +305,20 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
       // values into block configuration.
       if (!empty($value['plugin_id']) && !empty($value['settings']) && $block = $this->blockManager->createInstance($value['plugin_id'])) {
         $elements = &$form[$field_name]['widget'][$value['_original_delta']]['settings'];
-        $subform_state = SubformState::createForSubform($elements, $form_state->getCompleteForm(), $form_state);
+        $complete_form = $form_state->getCompleteForm();
+        $subform_state = SubformState::createForSubform($elements, $complete_form, $form_state);
         $block->submitConfigurationForm($elements, $subform_state);
+
         // If this block is context-aware, set the context mapping.
         if ($block instanceof ContextAwarePluginInterface && $block->getContextDefinitions()) {
           $context_mapping = $subform_state->getValue('context_mapping', []);
           $block->setContextMapping($context_mapping);
         }
+
         $value['settings'] = $block->getConfiguration();
       }
     }
+
     return $values;
   }
 

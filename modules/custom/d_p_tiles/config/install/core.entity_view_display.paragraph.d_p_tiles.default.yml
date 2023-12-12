@@ -17,16 +17,16 @@ third_party_settings:
   field_group:
     group_d_tiles_content:
       children:
-        - field_d_media_icon
-        - field_d_main_title
         - field_d_long_text
+      label: Content
       parent_name: ''
-      weight: 0
-      format_type: html_element
       region: content
+      weight: 2
+      format_type: html_element
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -34,17 +34,17 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'Text content of paragraph'
     group_d_tiles_cta:
       children:
         - field_d_cta_link
+      label: 'CTA button'
       parent_name: ''
-      weight: 0
-      format_type: html_element
       region: content
+      weight: 3
+      format_type: html_element
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -52,17 +52,17 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'CTA button'
     group_d_tiles_gallery:
       children:
         - field_d_media_image
+      label: 'Tiles gallery for masonry'
       parent_name: ''
-      weight: 0
-      format_type: html_element
       region: content
+      weight: 4
+      format_type: html_element
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -70,7 +70,26 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'Tiles gallery for masonry'
+    group_d_tiles_content_header:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+      label: 'Content Header'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: paragraph.d_p_tiles.default
 targetEntityType: paragraph
 bundle: d_p_tiles

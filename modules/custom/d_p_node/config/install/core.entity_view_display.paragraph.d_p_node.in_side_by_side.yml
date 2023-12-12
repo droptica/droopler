@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.in_side_by_side
+    - field.field.paragraph.d_p_node.field_d_display_mode
+    - field.field.paragraph.d_p_node.field_d_node_reference
+    - field.field.paragraph.d_p_node.field_d_settings
+    - paragraphs.paragraphs_type.d_p_node
+  module:
+    - entity_reference_display
+    - field_group
+third_party_settings:
+  field_group:
+    group_d_content:
+      children:
+        - field_d_node_reference
+      label: Content
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: paragraph.d_p_node.in_side_by_side
+targetEntityType: paragraph
+bundle: d_p_node
+mode: in_side_by_side
+content:
+  field_d_node_reference:
+    type: entity_reference_display_default
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+      display_field: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_d_display_mode: true
+  field_d_settings: true
+  search_api_excerpt: true

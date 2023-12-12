@@ -1,0 +1,9 @@
+{{ attach_library('droopler_theme/social-media-list') }}
+
+{% set base_class = social_media_list_base_class|default('social-media-list') %}
+{% set modifiers = social_media_list_modifiers|default([]) %}
+
+<ul {{ bem(base_class, (modifiers)) }}>
+  {% block items %}
+  {% endblock %}
+</ul>

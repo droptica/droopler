@@ -1,0 +1,27 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-gallery/d-p-gallery.twig' %}
+      {% block header %}
+        {{ content.group_d_gallery_header }}
+      {% endblock %}
+
+      {% block content %}
+        {{ content.group_d_gallery_content }}
+      {% endblock %}
+
+        {% block items %}
+          {{ content.group_d_gallery_items }}
+        {% endblock %}
+
+        {% block cta %}
+          {{ content.group_d_gallery_cta }}
+        {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_d_gallery_header', 'group_d_gallery_content', 'group_d_gallery_items', 'group_d_gallery_cta') }}
+  {% endblock %}
+
+{% endembed %}

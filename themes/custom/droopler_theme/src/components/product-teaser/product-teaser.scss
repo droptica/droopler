@@ -1,0 +1,50 @@
+@import "../../scss/init";
+
+:root {
+  --product-teaser-image-height: 135px;
+}
+
+.product-teaser {
+  position: relative;
+
+  --media-height: var(--product-teaser-image-height);
+
+  $root: &;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: var(--product-teaser-border);
+  box-shadow: var(--product-teaser-box-shadow);
+  padding-block: 1rem;
+
+  &__image {
+    position: relative;
+    overflow: hidden;
+
+    img {
+      @include centered-absolute;
+
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  &__content {
+    padding: 1rem 0.75rem 0;
+    color: var(--product-teaser-text-color);
+  }
+
+  &__link {
+    @include filling-absolute;
+  }
+
+  .heading {
+    font-size: $font-size-lg;
+    color: inherit;
+  }
+
+  &:hover .heading {
+    text-decoration: underline;
+  }
+}

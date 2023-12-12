@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_media\Plugin\Provider;
 
 use Drupal\Core\Plugin\PluginBase;

@@ -1,0 +1,5 @@
+{{ attach_library('droopler_theme/overlay') }}
+
+{% set base_class = overlay_base_class|default('overlay') %}
+
+<div {{ bem(base_class) }}></div>

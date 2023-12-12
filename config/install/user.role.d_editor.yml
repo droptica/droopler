@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.content_page
+  module:
+    - content_translation
+    - contextual
+    - filter
+    - node
+    - paragraphs
+    - system
+    - taxonomy
+    - toolbar
+id: d_editor
+label: Editor
+weight: 3
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'administer nodes'
+  - 'bypass node access'
+  - 'create content translations'
+  - 'create content_page content'
+  - 'delete all revisions'
+  - 'delete any content_page content'
+  - 'delete content translations'
+  - 'delete content_page revisions'
+  - 'delete own content_page content'
+  - 'edit any content_page content'
+  - 'edit own content_page content'
+  - 'revert all revisions'
+  - 'revert content_page revisions'
+  - 'translate any entity'
+  - 'translate content_page node'
+  - 'translate paragraph'
+  - 'update content translations'
+  - 'use text format full_html'
+  - 'view all revisions'
+  - 'view content_page revisions'
+  - 'view own unpublished content'
+  - 'view the administration theme'

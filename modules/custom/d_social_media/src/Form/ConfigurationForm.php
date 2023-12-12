@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_social_media\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
@@ -7,8 +9,6 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Provide class ConfigurationForm.
- *
- * @package Drupal\d_social_media\Form
  *
  * @todo Please add validateForm method.
  */

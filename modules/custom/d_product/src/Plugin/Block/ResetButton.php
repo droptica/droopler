@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_product\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
@@ -7,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -23,12 +26,12 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * Current Request.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Symfony\Component\HttpFoundation\Request
    */
-  protected $request;
+  protected Request $request;
 
   /**
-   * CommerceResetButton constructor.
+   * Reset button constructor.
    *
    * @param array $configuration
    *   Configuration options.
@@ -45,21 +48,9 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
   }
 
   /**
-   * Create.
-   *
-   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-   *   Container.
-   * @param array $configuration
-   *   Configuration options.
-   * @param string $plugin_id
-   *   Plugin id.
-   * @param mixed $plugin_definition
-   *   Plugin definition.
-   *
-   * @return static
-   *   Static.
+   * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -118,7 +109,6 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function build() {
-
     if (!$this->request->get('f')) {
       return [
         '#markup' => '',

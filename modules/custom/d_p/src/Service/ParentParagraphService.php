@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Service;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 
 /**
  * Paragraph service.
- *
- * @package Drupal\d_p\Service
  */
 class ParentParagraphService {
 
@@ -45,10 +45,10 @@ class ParentParagraphService {
    *   Field referencing passed media entity.
    */
   protected function getReferencingField(ContentEntityInterface $mediaEntity) {
-    if ($mediaEntity && isset($mediaEntity->_referringItem) && method_exists($mediaEntity->_referringItem, 'getParent')) {
-      /** @var \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem $parentEntity */
+    if (isset($mediaEntity->_referringItem) && method_exists($mediaEntity->_referringItem, 'getParent')) {
       return $mediaEntity->_referringItem->getParent();
     }
+
     return NULL;
   }
 

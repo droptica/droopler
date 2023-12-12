@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p;
 
 /**
  * Provides interface for select type paragraph settings.
- *
- * @package Drupal\d_p
  */
-interface ParagraphSettingSelectInterface {
+interface ParagraphSettingSelectInterface extends ParagraphSettingInterface {
 
   /**
    * Getter for select element available options.

@@ -1,0 +1,24 @@
+{{ attach_library('droopler_theme/price-block') }}
+
+{% set base_class = price_block_base_class|default('price-block') %}
+{% set modifiers = price_block_modifiers|default([]) %}
+{% set additional_classes = price_block_additional_classes|default([]) %}
+
+{% if sidebar %}
+  {% set modifiers = modifiers|merge(['sidebar']) %}
+{% endif %}
+
+<div {{ bem(base_class, modifiers, '', additional_classes) }}>
+  <div {{ bem('spinner', [], base_class, ['spinner-border']) }} role="status">
+    <span class="sr-only"></span>
+  </div>
+  <div {{ bem('data', [], base_class) }}>
+    <span {{ bem('value', [], base_class) }}></span>
+    <span {{ bem('currency', [], base_class) }}></span>
+  </div>
+  <div {{ bem('change', [], base_class) }}>
+    <div {{ bem('arrow', [], base_class) }}></div>
+    <div {{ bem('percentage', [], base_class) }}></div>
+  </div>
+  <div {{ bem('timestamp', [], base_class) }}></div>
+</div>

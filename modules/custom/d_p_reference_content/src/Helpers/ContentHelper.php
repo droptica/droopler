@@ -1,45 +1,38 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p_reference_content\Helpers;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Entity\EntityDisplayRepository;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Content helper.
  */
 class ContentHelper {
-  /**
-   * The database connection.
-   *
-   * @var \Drupal\Core\Database\Connection
-   */
-  private $connection;
 
   /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  private $entityTypeManager;
-
-  /**
-   * ContentHelper constructor.
+   * Content helper constructor.
    *
    * @param \Drupal\Core\Database\Connection $connection
    *   The database connection.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
+   * @param \Drupal\Core\Entity\EntityDisplayRepository $entityDisplayRepository
+   *   The entity display repository.
    */
-  public function __construct(Connection $connection, EntityTypeManagerInterface $entityTypeManager) {
-    $this->connection = $connection;
-    $this->entityTypeManager = $entityTypeManager;
-  }
+  public function __construct(
+    private readonly Connection $connection,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly EntityDisplayRepository $entityDisplayRepository
+  ) {}
 
   /**
    * Get nids from selected content type.
    *
-   * @param string $type
+   * @param array $type
    *   Content type.
    * @param string $sortBy
    *   Table name used for sorting.
@@ -51,11 +44,15 @@ class ContentHelper {
    * @return mixed
    *   Return ids.
    */
-  public function getSortedContentByType(string $type, string $sortBy, string $sort, array $values) {
+  public function getSortedContentByType(array $type, string $sortBy, string $sort, array $values) {
+    if (empty($type)) {
+      return [];
+    }
+
     $query = $this->connection->select('node_field_data', 'nfd')
       ->fields('nfd', ['nid', 'created'])
       ->orderBy($sortBy, $sort)
-      ->condition('nfd.type', $type);
+      ->condition('nfd.type', $type, 'IN');
 
     $result = $query->execute();
 
@@ -67,9 +64,7 @@ class ContentHelper {
       ];
     }
 
-    $result = $this->excludeFromResults($data, $values);
-
-    return $result;
+    return $this->excludeFromResults($data, $values);
   }
 
   /**
@@ -125,15 +120,13 @@ class ContentHelper {
    * @return array
    *   New data.
    */
-  private function excludeFromResults(array $data, array $values) {
+  private function excludeFromResults(array $data, array $values): array {
     // Remove data if target exist.
     foreach ($values as $target) {
       unset($data[$target['target_id']]);
     }
 
-    $result = $this->prepareFieldValues($data);
-
-    return $result;
+    return $this->prepareFieldValues($data);
   }
 
   /**
@@ -145,7 +138,7 @@ class ContentHelper {
    * @return array
    *   Data with target_id.
    */
-  private function prepareFieldValues(array $data) {
+  private function prepareFieldValues(array $data): array {
     $result = [];
     foreach ($data as $item) {
       $result[] = [
@@ -165,10 +158,14 @@ class ContentHelper {
    * @return array
    *   Content without unpublished nodes.
    */
-  public function getPublishedContent(array $values) {
+  public function getPublishedContent(array $values): array {
     $nids = [];
     foreach ($values as $value) {
       $nids[] = $value['target_id'];
+    }
+
+    if (empty($nids)) {
+      return [];
     }
 
     $results = $this->connection->select('node_field_data', 'nfd')
@@ -187,6 +184,33 @@ class ContentHelper {
     }
 
     return array_values($values);
+  }
+
+  /**
+   * Get list of content types that have available view mode.
+   *
+   * @param string $view_mode
+   *   String with view mode.
+   *
+   * @return array
+   *   Array of content types.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function getContentTypes(string $view_mode = 'reference_content'): array {
+    $filtered_content_types = [];
+
+    $content_types = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
+    foreach ($content_types as $content_type) {
+      $view_modes = $this->entityDisplayRepository
+        ->getViewModeOptionsByBundle('node', $content_type->id());
+      if (array_search($view_mode, array_keys($view_modes))) {
+        $filtered_content_types[] = $content_type->id();
+      }
+    }
+
+    return $filtered_content_types;
   }
 
 }

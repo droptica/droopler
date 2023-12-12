@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_update\Commands;
 
 use Drupal\d_update\ConfigCompareInterface;
@@ -8,8 +10,6 @@ use Drush\Drush;
 
 /**
  * Drush command for config hash generation.
- *
- * @package Drupal\d_update\Commands
  */
 class GenerateConfigHashCommand extends DrushCommands {
 
@@ -21,7 +21,7 @@ class GenerateConfigHashCommand extends DrushCommands {
   protected $configCompare;
 
   /**
-   * GenerateConfigHashCommand constructor.
+   * Generate config hash command constructor.
    *
    * @param \Drupal\d_update\ConfigCompareInterface $config_compare
    *   Config compare service.

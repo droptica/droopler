@@ -1,0 +1,10 @@
+@import "../../scss/init";
+
+.d-p-blog-image:not(.full-width) {
+  width: 100%;
+  margin: var(--content-spacer-m) auto;
+
+  @include media-breakpoint-up(md) {
+    width: 44em;
+  }
+}

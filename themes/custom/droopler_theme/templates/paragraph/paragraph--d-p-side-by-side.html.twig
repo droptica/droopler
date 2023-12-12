@@ -1,0 +1,23 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-side-by-side/d-p-side-by-side.twig' with {
+      with_grid: paragraph.enabledGrid,
+    }%}
+      {% block heading %}
+        {{ content.group_d_heading }}
+      {% endblock %}
+      {% block content %}
+        {{ content.group_d_content }}
+      {% endblock %}
+      {% block cta %}
+        {{ content.group_d_cta }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_d_heading', 'group_d_content', 'group_d_cta') }}
+  {% endblock %}
+
+{% endembed %}

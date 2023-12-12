@@ -1,0 +1,56 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "gitAuthor": "Renovate Bot <renovate-bot@droptica.com>",
+  "extends": [
+    "config:base",
+    ":preserveSemverRanges",
+    ":rebaseStalePrs",
+    ":enableVulnerabilityAlertsWithLabel('security')",
+    "group:recommended"
+  ],
+  "ignorePresets": [":prHourlyLimit2"],
+  "packageRules": [
+    {
+      "managers": ["composer"],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "groupName": "Other dependencies",
+      "rangeStrategy": "update-lockfile"
+    },
+    {
+      "managers": ["composer"],
+      "matchPackagePatterns": ["^drupal/"],
+      "rangeStrategy": "update-lockfile",
+      "groupName": "Drupal contributed modules"
+    },
+    {
+      "managers": ["composer"],
+      "matchPackagePatterns": [
+        "^drupal/core-recommended",
+        "^drupal/core-composer-scaffold",
+        "^drupal/core-project-message",
+        "^drupal/core-vendor-hardening",
+        "^drupal/core-dev",
+        "^drupal/core"
+      ],
+      "rangeStrategy": "update-lockfile",
+      "groupName": "Drupal core"
+    },
+    {
+      "managers": ["npm"],
+      "rangeStrategy": "update-lockfile",
+      "groupName": "NPM dependencies",
+      "bumpVersion": "patch",
+      "schedule": ["every weekend"]
+    },
+    {
+      "managers": ["npm"],
+      "matchPaths": ["themes/custom/**"],
+      "rangeStrategy": "update-lockfile",
+      "groupName": "Theme dependencies",
+      "bumpVersion": "patch",
+      "schedule": ["every weekend"]
+    }
+  ]
+}

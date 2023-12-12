@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -22,7 +24,7 @@ class MarginBottom extends ParagraphSettingPluginBase implements ParagraphSettin
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     $element = parent::formElement();
 
     return [
@@ -37,11 +39,11 @@ class MarginBottom extends ParagraphSettingPluginBase implements ParagraphSettin
    */
   public function getOptions(): array {
     return [
-      'margin-bottom-default' => $this->t('Default'),
+      'margin-bottom-none' => $this->t('None'),
       'margin-bottom-small' => $this->t('Small'),
       'margin-bottom-medium' => $this->t('Medium'),
-      'margin-bottom-big' => $this->t('Big'),
-      'margin-bottom-none' => $this->t('None'),
+      'margin-bottom-large' => $this->t('Large'),
+      'margin-bottom-extra-large' => $this->t('Extra large'),
     ];
   }
 
@@ -49,7 +51,7 @@ class MarginBottom extends ParagraphSettingPluginBase implements ParagraphSettin
    * {@inheritdoc}
    */
   public function getDefaultValue() {
-    return 'margin-bottom-default';
+    return 'margin-bottom-none';
   }
 
 }

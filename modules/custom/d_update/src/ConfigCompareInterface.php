@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_update;
 
 /**
  * Provides an interface for configuration comparison.
- *
- * @package Drupal\d_update
  */
 interface ConfigCompareInterface {
 

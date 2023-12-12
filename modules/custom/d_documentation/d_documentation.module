@@ -5,6 +5,8 @@
  * Contains d_documentation module.
  */
 
+declare(strict_types = 1);
+
 /**
  * Implements hook_content_structure_alter().
  */
@@ -55,11 +57,6 @@ function d_documentation_content_structure_alter(&$structure, $context) {
           'file' => "$path/d_p_text.yml",
           'link' => 'Text Paragraph',
           'weight' => 60,
-        ],
-        'd_p_text_bg' => [
-          'file' => "$path/d_p_text_bg.yml",
-          'link' => 'Text With Background Paragraph',
-          'weight' => 70,
         ],
         'd_p_counters' => [
           'file' => "$path/d_p_counters.yml",

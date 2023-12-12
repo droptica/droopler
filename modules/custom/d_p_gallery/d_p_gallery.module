@@ -5,19 +5,7 @@
  * File containing Gallery Paragraph module.
  */
 
-/**
- * Implements hook_theme().
- */
-function d_p_gallery_theme($existing, $type, $theme, $path) {
-  return [
-    'paragraph__d_p_gallery' => [
-      'base hook' => 'paragraph',
-    ],
-    'field__paragraph__field_d_media_image__d_p_gallery' => [
-      'base hook' => 'field',
-    ],
-  ];
-}
+declare(strict_types = 1);
 
 /**
  * Implements hook_d_p_centered_ckeditor_widget_paragraphs().

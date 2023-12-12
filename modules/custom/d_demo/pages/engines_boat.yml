@@ -21,9 +21,9 @@ field_page_section:
           data: '<p>We manufacture modern engines for boats and ships. Our experts from the maritime industry are constantly developing our range of products.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-light
           heading_type: h1
-          side_image_layout: right-wide
+          image_side: right
     -
       paragraph_type: d_p_text_paged
       data:
@@ -35,7 +35,10 @@ field_page_section:
           data: '<p>We have over 20 years of experience in the production of engines for marine industry.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -51,8 +54,8 @@ field_page_section:
           data: '<h3> Future B400 </h3> <p>Excellent and powerful engine for speed boats. A wide range of power. Designed and created by a team of experienced mechanics, engineers and marine experts.</p> <ul> <li>Engine performance: 1 x 4 HP / 2.9 kW</li> <li>Fuel type: gasoline</li> <li>Boat type: outboard</li> <li>Max speed: 250 km/h</li> <li>Fuel consumption: 5l / 100 miles</li> </ul>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left
+          paragraph_theme: theme-secondary
+          image_side: left
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -68,18 +71,20 @@ field_page_section:
                 data: '<p><ul> <li>Basic servicing</li> <li>Full annual servicing</li> <li>Oil and filter changes</li> </ul></p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
             -
               field_d_long_text:
                 type: text_long
                 data: '<p><ul> <li>Transmission fluid inspection</li> <li>Water pump replacement</li> <li>And more ...</li> </ul></p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: with-tiles theme-primary header-margin-none padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 2
+          custom_class: padding-top-medium padding-bottom-medium
+          paragraph_theme: theme-primary
+          column_count_desktop: 2
+          column_count_tablet: 2
+          column_count_mobile: 1
+          with-tiles: 1
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -92,15 +97,14 @@ field_page_section:
             link: 'internal:/products'
             text: 'View All'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-4
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          full-width: 1
+          with-grid: 1
+          column_count_desktop: 3
+          column_count_tablet: 3
+          column_count_mobile: 1
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -153,14 +157,10 @@ field_page_section:
             link: 'internal:/blog'
             text: 'View all'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-5
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: padding-top-none theme-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-none
     -
       paragraph_type: d_p_banner
       data:
@@ -181,10 +181,13 @@ field_page_section:
           type: cta
           data:
             link: 'internal:/contact'
-            text: 'CONTACT US'
+            text: 'Contact us'
+            options:
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-extra-large padding-bottom-extra-large
+          paragraph_theme: theme-dark
 field_teaser_media_image:
   type: media_image
   directory: demo

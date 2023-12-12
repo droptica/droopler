@@ -14,8 +14,12 @@ field_page_section:
           data: 'Droopler Typography'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-light
           heading_type: h1
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
         field_d_long_text:
           type: text_long
           data: |
@@ -49,7 +53,7 @@ field_page_section:
             <p>Class aptent taciti sociosqu ad litora <a href="https://droopler.com">torquent per conubia nostra</a>, per inceptos himenaeos. Vestibulum id tempor lorem. <strong><a href="https://droopler.com">Proin finibus ut urna sed congue.</a></strong> Sed sagittis dolor ac justo aliquam tempus. Proin interdum dignissim posuere. Nullam nisl felis, volutpat in faucibus congue, viverra egestas justo. Morbi non suscipit elit, at vulputate magna. Nunc pharetra metus mauris, ac semper nunc volutpat nec. Sed accumsan sapien dignissim felis fringilla condimentum.</p>
 
             <div class="table-responsive">
-            <table border="1" cellpadding="1" cellspacing="1" style="width: 500px;" summary="And its summary">
+            <table border="1" cellpadding="1" cellspacing="1" style="width: 500px; max-width: 100%;" summary="And its summary">
                 <caption>Example table</caption>
                 <thead>
                     <tr>
@@ -156,61 +160,69 @@ field_page_section:
           directory: demo
           files:
             -
-              path: d_demo/demo_bootstrap.svg
+              path: d_demo/demo_bootstrap.png
               alt: 'Bootstrap icon'
         field_d_main_title:
           type: text
-          data: 'Bootstrap 4 Components'
+          data: 'Bootstrap 5 Components'
         field_d_long_text:
           type: text_long
           data: |
             <h2>Alerts</h2>
 
-            <div class="alert alert-success alert-dismissable fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a class="alert-link" href="#">alert link</a>.
+              <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div class="alert alert-info alert-dismissable" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a class="alert-link" href="#">alert link</a>.
+              <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div class="alert alert-warning alert-dismissable" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a class="alert-link" href="#">alert link</a>.
+              <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div class="alert alert-danger alert-dismissable" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a class="alert-link" href="#">alert link</a>.
+              <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit <a class="alert-link" href="#">alert link</a>.
+              <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
             <div class="alert alert-success" role="alert">
-                <h4 class="alert-heading">Well done!</h4>
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#" class="alert-link">alert link</a>.</p>
+              <h4 class="alert-heading">Well done!</h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit <a class="alert-link" href="#">alert link</a>.
+              </p>
             </div>
 
             <h2>Badges</h2>
 
-            <h1>Heading 1 <span class="badge badge-secondary">Secondary</span></h1>
-            <h2>Heading 2 <span class="badge badge-primary">Primary</span></h2>
-            <h3>Heading 3 <span class="badge badge-success">Success</span></h3>
-            <h4>Heading 4 <span class="badge badge-info">Info</span></h4>
-            <h5>Heading 5 <span class="badge badge-warning">Warning</span></h5>
-            <h6>Heading 6 <span class="badge badge-danger">Danger</span></h6>
+            <h1>Heading 1 <span class="badge text-bg-primary">Primary</span></h1>
+            <h2>Heading 2 <span class="badge text-bg-secondary">Secondary</span></h2>
+            <h3>Heading 3 <span class="badge text-bg-success">Success</span></h3>
+            <h4>Heading 4 <span class="badge text-bg-danger">Danger</span></h4>
+            <h5>Heading 5 <span class="badge text-bg-warning">Warning</span></h5>
+            <h6>Heading 6 <span class="badge text-bg-info">Info</span></h6>
 
             <p>
-                Paragraph <span class="badge badge-secondary">Secondary</span>
-                <span class="badge badge-primary">Primary</span>
-                <span class="badge badge-success">Success</span>
-                <span class="badge badge-info">Info</span>
-                <span class="badge badge-warning">Warning</span>
-                <span class="badge badge-danger">Danger</span>
+              Paragraph <span class="badge text-bg-primary">Primary</span>
+              <span class="badge text-bg-secondary">Secondary</span>
+              <span class="badge text-bg-success">Success</span>
+              <span class="badge text-bg-danger">Danger</span>
+              <span class="badge text-bg-warning">Warning</span>
+              <span class="badge text-bg-info">Info</span>
             </p>
+
             <p>
-                Alternate pill-style <span class="badge badge-pill badge-secondary">Default</span>
-                <span class="badge badge-pill badge-primary">Primary</span>
-                <span class="badge badge-pill badge-success">Success</span>
-                <span class="badge badge-pill badge-info">Info</span>
-                <span class="badge badge-pill badge-warning">Warning</span>
-                <span class="badge badge-pill badge-danger">Danger</span>
+              Alternate pill-style <span class="badge rounded-pill text-bg-primary">Primary</span>
+              <span class="badge rounded-pill text-bg-secondary">Secondary</span>
+              <span class="badge rounded-pill text-bg-success">Success</span>
+              <span class="badge rounded-pill text-bg-danger">Danger</span>
+              <span class="badge rounded-pill text-bg-warning">Warning</span>
+              <span class="badge rounded-pill text-bg-info">Info</span>
             </p>
 
             <h2>Breadcrumb</h2>
@@ -282,87 +294,71 @@ field_page_section:
             </div>
 
             <h2>Accordions</h2>
-            <div id="accordion" class="accordion">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <a class="btn btn-link" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Collapsible Group Item #1</a>
-                        </h5>
-                    </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, diam ac condimentum tincidunt, dolor mauris iaculis justo, in feugiat tellus sapien a velit. Etiam vehicula mi ut egestas tincidunt. Morbi at viverra massa. Morbi sit amet sem mauris. Phasellus fringilla est nec felis imperdiet molestie. Vestibulum convallis velit risus, at aliquam lectus fermentum vitae. Vestibulum tempor pellentesque urna ut fermentum. Nullam id purus vehicula, posuere tortor quis, aliquam felis.
-                        </div>
-                    </div>
+
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Accordion Item #1</button>
+                </h2>
+                <div class="accordion-collapse collapse show" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et nisi massa. Nullam pellentesque, quam non imperdiet lobortis, nunc nunc hendrerit massa, malesuada faucibus dui ipsum feugiat lectus. Suspendisse potenti. Cras cursus eu velit vitae ultrices. Aliquam porttitor erat non quam finibus tempus.
+                  </div>
                 </div>
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <a class="btn btn-link" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Collapsible Group Item #2</a>
-                        </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div class="card-body">
-                            Pellentesque ullamcorper mattis elit, eget facilisis nibh ornare nec. Nunc et tincidunt diam, ut ornare neque. Mauris eget interdum leo, quis condimentum mi. Cras vulputate commodo felis sed aliquam. Praesent dapibus eleifend nisl a congue. Phasellus convallis nisi nec risus pellentesque varius. Ut id libero interdum, varius nisl quis, dapibus justo. Mauris sed ullamcorper odio. Phasellus porttitor lorem dui, ac lobortis arcu mattis nec. Mauris a nunc eu turpis ultricies ullamcorper. Vestibulum et nisi nec est ultricies aliquam. Donec urna justo, dignissim vel vehicula at, faucibus sit amet magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                        </div>
-                    </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Accordion Item #2</button>
+                </h2>
+                <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et nisi massa. Nullam pellentesque, quam non imperdiet lobortis, nunc nunc hendrerit massa, malesuada faucibus dui ipsum feugiat lectus. Suspendisse potenti. Cras cursus eu velit vitae ultrices. Aliquam porttitor erat non quam finibus tempus.
+                  </div>
                 </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <a class="btn btn-link" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Collapsible Group Item #3</a>
-                        </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                        <div class="card-body">
-                            Curabitur eget tellus accumsan, elementum diam non, suscipit nisi. Etiam aliquet mattis facilisis. Donec id turpis neque. Quisque felis ex, varius et mollis vitae, ornare eget nisl. Aenean facilisis est non consectetur mattis. Suspendisse potenti. Etiam viverra quam at arcu fermentum, in ultricies leo pulvinar. Phasellus dignissim tortor non leo tempor, id consequat enim consectetur. Donec euismod dolor dui, sit amet rutrum mauris bibendum ut. Sed sed volutpat sapien. Etiam vitae justo tristique, convallis est sed, pharetra urna.
-                        </div>
-                    </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Accordion Item #3</button>
+                </h2>
+                <div class="accordion-collapse collapse" id="collapseThree" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et nisi massa. Nullam pellentesque, quam non imperdiet lobortis, nunc nunc hendrerit massa, malesuada faucibus dui ipsum feugiat lectus. Suspendisse potenti. Cras cursus eu velit vitae ultrices. Aliquam porttitor erat non quam finibus tempus.
+                  </div>
                 </div>
+              </div>
             </div>
 
             <h2>Dropdown menu</h2>
-            <div class="dropdown open clearfix">
-                <button class="btn btn-secondary dropdown-toggle sr-only" type="button" id="dropdownMenu2">
-                    Dropdown
-                </button>
-                <div class="dropdown-menu dropdown-menu-always-show" aria-labelledby="dropdownMenu2">
-                    <h6 class="dropdown-header">Dropdown header</h6>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <a class="dropdown-item active" href="#">Active item</a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Second header</h6>
-                    <a class="dropdown-item" href="#">Something different</a>
-                    <a class="dropdown-item disabled" href="#">Other stuff</a>
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Primary
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu4">
-                    <h6 class="dropdown-header">Dropdown header</h6>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item active" href="#">Active item</a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Second header</h6>
-                    <a class="dropdown-item" href="#">Something different</a>
-                    <a class="dropdown-item disabled" href="#">Other stuff</a>
-                </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                <ul class="dropdown-menu">
+                    <li><h6 class="dropdown-header">Dropdown header</h6></li>
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item active" href="#">Active item</a></li>
+                    <li><div class="dropdown-divider"></div></li>
+                    <li><h6 class="dropdown-header">Second header</h6></li>
+                    <li><a class="dropdown-item" href="#">Something different</a></li>
+                    <li><a class="dropdown-item disabled" href="#">Other stuff</a></li>
+                </ul>
             </div>
 
             <h2>Jumbotron</h2>
-            <div class="jumbotron">
-                <h1 class="display-3">Hello, world!</h1>
-                <p class="lead">Curabitur eget tellus accumsan, elementum diam non, suscipit nisi. Etiam aliquet mattis facilisis. Donec id turpis neque.</p>
-                <hr class="my-4">
-                <p>Etiam viverra quam at arcu fermentum, in ultricies leo pulvinar. Phasellus dignissim tortor non leo tempor, id consequat enim consectetur.</p>
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <div class="p-5 mb-4 bg-light rounded-3">
+              <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold text-left">Hello, world!</h1>
+                <p>
+                  Curabitur eget tellus accumsan, elementum diam non, suscipit nisi. Etiam aliquet mattis facilisis. Donec id turpis neque.
                 </p>
+                <hr>
+                <p>
+                  Etiam viverra quam at arcu fermentum, in ultricies leo pulvinar. Phasellus dignissim tortor non leo tempor, id consequat enim consectetur.
+                </p>
+                <p>
+                  <button class="btn btn-primary" type="button">Learn more</button>
+                </p>
+              </div>
             </div>
 
             <h2>List group</h2>
@@ -403,15 +399,13 @@ field_page_section:
             </div>
 
             <h2>Modal</h2>
-            <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
+            <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#myModal">Launch modal</button>
             <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 id="myModalLabel" class="modal-title">Modal title</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit tincidunt iaculis. Phasellus hendrerit sem non dui commodo, vel iaculis nulla tincidunt.</p>
@@ -427,7 +421,7 @@ field_page_section:
                 <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
                 <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -464,16 +458,16 @@ field_page_section:
 
             <h2>Popover</h2>
             <p>
-                <button class="btn btn-secondary" type="button" data-container="body" data-toggle="popover" data-placement="left" data-title="Popover title" data-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
+                <button class="btn btn-secondary" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-title="Popover title" data-bs-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
                     Popover on left
                 </button>
-                <button class="btn btn-secondary" type="button" data-container="body" data-toggle="popover" data-placement="top" data-title="Popover title" data-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
+                <button class="btn btn-secondary" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-title="Popover title" data-bs-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
                     Popover on top
                 </button>
-                <button class="btn btn-secondary" type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Popover title" data-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
+                <button class="btn btn-secondary" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-title="Popover title" data-bs-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
                     Popover on bottom
                 </button>
-                <button class="btn btn-secondary" type="button" data-container="body" data-toggle="popover" data-placement="right" data-title="Popover title" data-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
+                <button class="btn btn-secondary" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-title="Popover title" data-bs-content="Donec aliquet ligula ligula, non porta arcu aliquet non.">
                     Popover on right
                 </button>
             </p>
@@ -491,11 +485,17 @@ field_page_section:
 
             <h2>Tooltips</h2>
             <p>
-                <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
-                <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
-                <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
-                <button class="btn btn-secondary" type="button" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+                <button class="btn btn-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">Tooltip on top</button>
+                <button class="btn btn-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">Tooltip on right</button>
+                <button class="btn btn-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">Tooltip on bottom</button>
+                <button class="btn btn-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Tooltip on left">Tooltip on left</button>
             </p>
+        field_d_settings:
+          type: field_p_configuration_storage
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
 
 field_teaser_media_image:
   type: media_image

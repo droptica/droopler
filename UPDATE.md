@@ -1,28 +1,31 @@
 # Updating Droopler
 
-## Droopler 3.3.0
+## Droopler 4.0.0
 
-This is a release with Drupal 10 compatibility changes. Please do the steps from instruction for version 3.2.0 before updating to this version and upgrading to Drupal 10.
+It's a completely new Droopler version. There is no backwards compatibility from Droopler 4.0 to lower.
 
-## Droopler 3.2.0
+> You can try to run it on your existing database with lower Droopler version but there is no guarantee it would work.
 
-This is an interim release in which we change the minimal required Drupal version to 9.5, and we remove a dependencies to deprecated modules, before next release with Drupal 10 compatibility changes.
 
-Before updating to the next version, do the following steps to be able to upgrade to Drupal 10 in the smoothest possible way:
+### Changes
 
-#### 1. If you are using Drupal 8, or 9 but lower than 9.5, upgrade first to Drupal 9.5
-#### 2. Install Claro theme
-#### 3. Set Claro theme as Administration theme
-#### 4. Uninstall Seven theme
-#### 5. Uninstall following modules:
-- lazy
-- rdf
-#### 6. Upgrade from CKEditor 4 to CKEditor 5
-- follow [this instruction](https://www.drupal.org/node/3223395#s-how-to-upgrade-fromckeditor-4-to-ckeditor-5)
+Front-end:
+- New theme and STARTERKITs based on Bootstrap 5 and Radix.
+- Paragraph templates based on the front-end single directory components (TWIG, SCSS and JS in one directory).
+- The style colors, spacers and component parameters are easily changeable by editing the CSS variables.
+- There is an easy way to extend the component, overwrite it completely or create a new one.
 
-Then you can update Droopler to the next version and upgrade to Drupal 10.
-
-At the end, recompile SCSS/JS assets.
+Back-end:
+- Based on Drupal 10.
+- Full compatibility with PHP 8.1.
+- Unnecessary code has been removed from the custom modules.
+- Most of the custom code has been changed to object-oriented.
+- Some unused or unnecessary modules have been removed.
+- The [Geysir](https://www.drupal.org/project/geysir) has been replaced by the [Frontend editing](https://www.drupal.org/project/frontend_editing) module.
+- Blog (`d_blog`) and Product (`d_product`) modules dependencies have been removed from the main `composer.json` file.
+- The issues from PHP CodeSniffer have been reviewed and fixed.
+- The issues from PHP Stan have been reviewed and fixed.
+- Integration with Drupal Commerce (`d_commerce`) has been temporarily removed. Will be restored with the next version.
 
 ## Droopler 3.1.0
 

@@ -1,0 +1,20 @@
+:root {
+  --tiles-gallery-sizer-width: 25%;
+}
+
+.tiles-gallery {
+  margin: calc(#{var(--tiles-gallery-item-padding)} / -2) 0;
+  background: var(--tiles-gallery-background-color);
+
+  &--half-width-sizer {
+    --tiles-gallery-sizer-width: 50%;
+    --tiles-gallery-item-standard-width-desktop: 50%;
+    --tiles-gallery-item-featured-width-desktop: 100%;
+    --tiles-gallery-item-standard-width-mobile: 50%;
+    --tiles-gallery-item-featured-width-mobile: 100%;
+  }
+
+  &__sizer {
+    width: var(--tiles-gallery-sizer-width);
+  }
+}

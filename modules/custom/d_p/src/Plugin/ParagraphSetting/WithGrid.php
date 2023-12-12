@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -11,7 +13,6 @@ use Drupal\d_p\ParagraphSettingPluginBase;
  *   id = "with-grid",
  *   label = @Translation("Enable grid"),
  *   settings = {
- *      "parent" = "custom_class",
  *      "weight" = 40,
  *   }
  * )
@@ -21,7 +22,7 @@ class WithGrid extends ParagraphSettingPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     $element = parent::formElement();
 
     return [

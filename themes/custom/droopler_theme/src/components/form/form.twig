@@ -1,0 +1,8 @@
+{{ attach_library('droopler_theme/form') }}
+
+{% set base_class = form_base_class|default('form') %}
+{% set modifiers = form_modifiers|default([]) %}
+
+<form {{ bem(base_class, modifiers) }}>
+  {{ children }}
+</form>

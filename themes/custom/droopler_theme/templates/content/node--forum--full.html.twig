@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Template for a forum node in full display mode.
+ */
+#}
+{% include "@radix/content/node.twig" %}
+  {% block content %}
+    <div class="row">
+      <div class="col-md-8">
+        {% if display_submitted %}
+          <footer>
+            <div{{ author_attributes.addClass('mb-4', 'lead') }}>
+              {% trans %}Posted by {{ author_name }} on {{ date }}{% endtrans %}
+              {{ metadata }}
+            </div>
+          </footer>
+        {% endif %}
+
+        {% if content.taxonomy_forums %}
+          <div class="mb-4">
+            {{ content.taxonomy_forums }}
+          </div>
+        {% endif %}
+
+        {{ content|without('taxonomy_forums', 'comment_forum') }}
+
+        <hr/>
+
+        {{ content.comment_forum }}
+      </div>
+    </div>
+  {% endblock %}

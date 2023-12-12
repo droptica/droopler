@@ -1,0 +1,33 @@
+{{ attach_library('droopler_theme/reference-content') }}
+
+{% set base_class = reference_content_base_class|default('reference-content') %}
+{% set modifiers = reference_content_modifiers|default([]) %}
+
+<article {{ bem(base_class, modifiers, '', ['col-sm-6', 'col-lg-3']) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+    <div {{ bem('image', [], base_class) }}>
+      <a href="{{ url }}">
+        {% block image %}
+        {% endblock %}
+      </a>
+    </div>
+  <div {{ bem('teaser', [], base_class) }}>
+    <a href="{{ url }}">
+      {% include "@droopler_theme/base/heading/heading.twig" with {
+        heading_tag: 'h2',
+        label: label
+      } %}
+    </a>
+
+    {% block content %}
+    {% endblock %}
+
+    {% embed "@droopler_theme/cta-links/cta-links.twig" %}
+      {% block links %}
+        <a href="{{ url }}">Learn more</a>
+      {% endblock %}
+    {% endembed %}
+  </div>
+</article>

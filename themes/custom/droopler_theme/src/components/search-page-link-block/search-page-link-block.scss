@@ -1,0 +1,14 @@
+.search-page-link-block {
+  .search-page-link {
+    display: block;
+    background-color: var(--header-search-page-link-color);
+    mask: url("../../../src/assets/images/search-icon.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    color: transparent;
+
+    &:hover {
+      background-color: var(--header-search-page-link-color-hover);
+    }
+  }
+}

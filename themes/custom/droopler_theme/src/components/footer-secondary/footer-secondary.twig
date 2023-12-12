@@ -1,0 +1,14 @@
+{{ attach_library('droopler_theme/footer-secondary') }}
+
+{% set base_class = 'footer-secondary' %}
+
+<div {{ bem(base_class) }} data-theme="theme-dark">
+  <div {{ bem('content', [], base_class, ['container']) }}>
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', [], base_class, ['col-md-12', 'col-12']) }}>
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>

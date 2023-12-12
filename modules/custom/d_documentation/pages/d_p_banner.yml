@@ -17,8 +17,12 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-primary
           heading_type: h1
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -30,7 +34,10 @@ field_page_section:
           data: '<p>This version of the Banner Paragraph includes everything literally. There is the main title with a smaller subtitle, an SVG icon above, some longer body text and a big CTA button. The image below adapts to the screen thanks to Backstretch JS library. This paragraph looks excellent when used as a first one, directly below site navigation.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_banner
       data:
@@ -61,9 +68,12 @@ field_page_section:
           data:
             link: 'internal:/documentation/banner-paragraph'
             text: 'Call To Action!'
+            options:
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-extra-large padding-bottom-extra-large
+          paragraph_theme: theme-dark
     -
       paragraph_type: d_p_text_paged
       data:
@@ -75,7 +85,10 @@ field_page_section:
           data: '<p>Do you prefer minimalism over complexity? Remember that only header and image fields are mandatory. You can drop all those icons, subtitles, long texts and CTAs. Sticking to a straightforward version is ok. It still looks nice.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_banner
       data:
@@ -91,7 +104,8 @@ field_page_section:
           data: 'Main Title'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-extra-large padding-bottom-extra-large
+          paragraph_theme: theme-dark
     -
       paragraph_type: d_p_text_paged
       data:
@@ -103,7 +117,10 @@ field_page_section:
           data: '<p>You can alter the banner entirely by applying a "half-transparent" option. It adds an overlay over the image and pulls the text into the left side. An additional "theme invert" option makes the text black.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_banner
       data:
@@ -122,15 +139,19 @@ field_page_section:
               alt: Motor
         field_d_long_text:
           type: text_long
-          data: '<p class="text-align-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.</p>'
+          data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.</p>'
         field_d_cta_link:
           type: cta
           data:
             link: 'internal:/documentation/banner-paragraph'
             text: 'Call To Action!'
+            options:
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: half-transparent theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-large padding-bottom-large
+          paragraph_theme: theme-dark
+          left_side_content: true
 field_teaser_media_image:
   type: media_image
   directory: demo

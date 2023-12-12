@@ -2,7 +2,7 @@
 <img src="https://droopler-demo.droptica.com/themes/custom/droopler_subtheme/logo.svg" width=300 alt="Droopler Logo" />
 
 ## What is Droopler?
-Droopler is a Drupal 10 profile designed to build corporate websites. It's based on the latest frontend technologies, including Bootstrap 4. The maintainer of Droopler is [Droptica](https://www.droptica.com).
+Droopler is a Drupal 10 profile designed to build corporate websites. It's based on the latest frontend technologies, including Bootstrap 5. The maintainer of Droopler is [Droptica](https://www.droptica.com).
 
 [![Build Status](https://github.com/droptica/droopler/workflows/Drupal%20coding%20standards/badge.svg?branch=master)](https://github.com/droptica/droopler/actions)
 
@@ -22,7 +22,7 @@ The Droopler profile should be installed via Composer. We recommend using [Droop
 
 ```json
 "require": {
-  "droptica/droopler": "^8.3.1"
+  "droptica/droopler": "^10.0.0"
 }
 ```
 
@@ -31,9 +31,10 @@ And run **composer update**.
 In case of unexpected problems please update your main composer.json to comply with the latest [Droopler skeleton repository](https://github.com/droptica/droopler_project). You may run into some issues with libraries and their directories.
 
 # Documentation
-* [Droopler Commerce](modules/custom/d_commerce/README.md) - This distribution provides full Drupal Commerce integration.
+* [Droopler Product](modules/custom/d_product/README.md) - This distribution provides Drupal Product functionality.
+* [Droopler Blog](modules/custom/d_blog/README.md) - This distribution provides Drupal Blog functionality.
 * [Updating Droopler](UPDATE.md) - A guide on updating the distribution between major versions.
 * [Using d_settings](modules/custom/d_p/README.md) - How to create new paragraph settings and modify existing ones.
 * [Using SCSS](https://github.com/droptica/droopler_project/blob/master/README.md) - How to handle SCSS using Node.
 * [Creating CSS subtheme](themes/custom/droopler_theme/STARTERKIT_CSS/README.md) - How to create a simple subtheme with CSS inheritance.
-* [Creating SCSS subtheme](themes/custom/droopler_theme/STARTERKIT_SCSS/README.md) - How to create a comlex subtheme with SCSS variables.
+* [Creating SCSS subtheme](themes/custom/droopler_theme/STARTERKIT_SCSS/README.md) - How to create a complex subtheme with SCSS variables.

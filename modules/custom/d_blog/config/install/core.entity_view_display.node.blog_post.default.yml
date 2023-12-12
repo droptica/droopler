@@ -10,51 +10,111 @@ dependencies:
     - node.type.blog_post
   module:
     - entity_reference_revisions
+    - field_group
     - metatag
     - user
+third_party_settings:
+  field_group:
+    group_blog_category:
+      children:
+        - field_blog_category
+      label: 'Blog category'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_blog_main_image:
+      children:
+        - field_blog_media_main_image
+      label: 'Blog main image'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_blog_sections:
+      children:
+        - field_blog_sections
+      label: 'Blog sections'
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: node.blog_post.default
 targetEntityType: node
 bundle: blog_post
 mode: default
 content:
   field_blog_category:
-    weight: 1
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 2
     region: content
   field_blog_media_main_image:
     type: entity_reference_entity_view
-    weight: 3
     label: hidden
     settings:
       view_mode: d_blog_image
       link: false
     third_party_settings: {  }
+    weight: 3
     region: content
   field_blog_sections:
     type: entity_reference_revisions_entity_view
-    weight: 4
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 3
     region: content
   field_meta_tags:
-    weight: 5
-    label: above
+    type: metatag_empty_formatter
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 4
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 5
+    region: content
 hidden:
   field_blog_teaser: true
   langcode: true

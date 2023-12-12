@@ -5,21 +5,10 @@
  * Contains d_p_side_by_side module.
  */
 
-use Drupal\Core\Entity\EntityTypeInterface;
+declare(strict_types = 1);
 
-/**
- * Implements hook_theme().
- */
-function d_p_side_by_side_theme($existing, $type, $theme, $path) {
-  return [
-    'paragraph__d_p_side_by_side' => [
-      'base hook' => 'paragraph',
-    ],
-    'field__field_d_p_sbs_items' => [
-      'base hook' => 'field',
-    ],
-  ];
-}
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\d_p_side_by_side\Entity\SideBySide;
 
 /**
  * Implements hook_entity_info_alter().
@@ -36,13 +25,10 @@ function d_p_side_by_side_entity_bundle_field_info_alter(&$fields, EntityTypeInt
 }
 
 /**
- * Implements hook_preprocess().
- *
- * Check if side by side contains non-empty header.
+ * Implements hook_entity_bundle_info_alter().
  */
-function d_p_side_by_side_preprocess_paragraph__d_p_side_by_side(&$variables, $hook) {
-  $variables['has_header'] = FALSE;
-  if (isset($variables['content']['field_d_long_text'][0]) || isset($variables['content']['field_d_main_title'][0])) {
-    $variables['has_header'] = TRUE;
+function d_p_side_by_side_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['paragraph']['d_p_side_by_side'])) {
+    $bundles['paragraph']['d_p_side_by_side']['class'] = SideBySide::class;
   }
 }

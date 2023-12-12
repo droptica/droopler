@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Module to extend the default claro theme behaviour.
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_node_edit_form_alter().
+ *
+ * Add admin library.
+ *
+ * @see hook_form_FORM_ID_alter()
+ */
+function d_claro_form_node_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#attached']['library'][] = 'd_application/admin';
+}
+
+/**
+ * Implements hook_form_node_form_alter().
+ *
+ * Add admin library.
+ *
+ * @see hook_form_FORM_ID_alter()
+ */
+function d_claro_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#attached']['library'][] = 'd_claro/admin';
+}

@@ -1,0 +1,11 @@
+info:
+  type: block_plugin
+  plugin: 'search_page_link'
+  langcode: en
+  region: header_secondary
+  weight: 1
+  settings:
+    status: true
+    provider: d_search
+    label: 'Search page link'
+    label_display: 0

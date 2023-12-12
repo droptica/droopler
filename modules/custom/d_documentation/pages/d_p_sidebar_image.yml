@@ -17,8 +17,12 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-primary
           heading_type: h1
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -30,7 +34,10 @@ field_page_section:
           data: '<p>This paragraph is one of the most interesting visual features of Droopler. It allows you to put an image to a side, and fill the rest with text. There''s a possibility to use a header, icon and CTA link.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -60,14 +67,12 @@ field_page_section:
             link: 'internal:/documentation/sidebar-image-paragraph'
             text: 'Call To Action!'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-secondary
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: right
+          image_side: right
+          paragraph_theme: theme-primary
+
     -
       paragraph_type: d_p_text_paged
       data:
@@ -79,7 +84,10 @@ field_page_section:
           data: '<p>Side Image Paragraph does not need all those complicated fields around the text. Use it with only a header and see that it is an excellent way to create feature lists.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -95,8 +103,8 @@ field_page_section:
               alt: 'Event 3'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left
+          image_side: left
+          paragraph_theme: theme-primary
     -
       paragraph_type: d_p_text_paged
       data:
@@ -108,7 +116,10 @@ field_page_section:
           data: '<p>So now... Let''s put the paragraphs together, with image side changing from right to left. This layout is the most used method of displaying this Side Image element of Droopler.</p> <p>You can enable the "Invert theme" options to alter the look of this paragraph. You can change the background to a light one and the font color will turn dark. See the last example.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -127,8 +138,8 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: right
+          image_side: right
+          paragraph_theme: theme-primary
     -
       paragraph_type: d_p_side_image
       data:
@@ -147,8 +158,8 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left
+          image_side: left
+          paragraph_theme: theme-primary
     -
       paragraph_type: d_p_side_image
       data:
@@ -167,8 +178,8 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: right
+          image_side: right
+          paragraph_theme: theme-primary
     -
       paragraph_type: d_p_side_image
       data:
@@ -187,8 +198,7 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary all-example padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left
+          image_side: left
     -
       paragraph_type: d_p_text_paged
       data:
@@ -200,7 +210,10 @@ field_page_section:
           data: '<p>There is a higher version available, with a wider image. If you select the "Right (wide)" or "Left (wide)" side of the image, the paragraph looks like this:</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -219,8 +232,9 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: right-wide
+          image_side: right
+          image_width: wide
+          paragraph_theme: theme-primary
     -
       paragraph_type: d_p_side_image
       data:
@@ -239,8 +253,9 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: wide-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left-wide
+          image_side: left
+          image_width: wide
+          paragraph_theme: theme-primary
 field_teaser_media_image:
   type: media_image
   directory: demo

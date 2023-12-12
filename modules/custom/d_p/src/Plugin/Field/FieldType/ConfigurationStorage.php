@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\Field\FieldType;
 
 use Drupal\Core\Entity\FieldableEntityInterface;
@@ -49,9 +51,18 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
   }
 
   /**
-   * {@inheritdoc}
+   * Overrides \Drupal\Core\TypedData\TypedData::setValue().
+   *
+   * @param object|array|string|null $values
+   *   A property values.
+   * @param bool $notify
+   *   (optional) Whether to notify the parent object of the change. Defaults to
+   *   TRUE. If a property is updated from a parent object, set it as FALSE to
+   *   avoid being notified again.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\ReadOnlyException
    */
-  public function setValue($values, $notify = TRUE) {
+  public function setValue($values, $notify = TRUE): void {
     $config_value = [
       'value' => '',
     ];
@@ -93,7 +104,7 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
   /**
    * {@inheritdoc}
    */
-  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity):? ConfigurationStorageFieldItemListInterface {
+  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity): ?ConfigurationStorageFieldItemListInterface {
     /** @var \Drupal\field\FieldConfigInterface[] $fiels_definitions */
     $fiels_definitions = $entity->getFieldDefinitions();
 

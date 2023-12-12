@@ -1,0 +1,17 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-block/d-p-block.twig' with {
+      is_full_width: paragraph.fullWidth,
+    }%}
+      {% block content %}
+        {{ content.field_block }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('field_block') }}
+  {% endblock %}
+
+{% endembed %}

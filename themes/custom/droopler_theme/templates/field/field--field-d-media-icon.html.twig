@@ -1,0 +1,5 @@
+{% for item in items %}
+  {% include "@droopler_theme/base/media-icon/media-icon.twig" with {
+    icon: item.content
+  } %}
+{% endfor %}

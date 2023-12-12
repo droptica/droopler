@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -11,6 +13,9 @@ use Drupal\d_p\ParagraphSettingSelectInterface;
  * @ParagraphSetting(
  *   id = "heading_type",
  *   label = @Translation("Heading type"),
+ *   settings = {
+ *      "weight" = -10
+ *   }
  * )
  */
 class HeadingType extends ParagraphSettingPluginBase implements ParagraphSettingSelectInterface {
@@ -18,7 +23,7 @@ class HeadingType extends ParagraphSettingPluginBase implements ParagraphSetting
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     $element = parent::formElement();
 
     return [

@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_content_init\Services;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelInterface;
 
 /**
  * Config update service.
- *
- * @package Drupal\d_commerce\Services
  */
 class ConfigUpdate {
 
@@ -19,24 +20,24 @@ class ConfigUpdate {
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
-  protected $configFactory;
+  protected ConfigFactoryInterface $configFactory;
 
   /**
    * Manages modules.
    *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
-  protected $moduleHandler;
+  protected ModuleHandlerInterface $moduleHandler;
 
   /**
    * Logger.
    *
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
-  protected $logger;
+  protected LoggerChannelInterface $logger;
 
   /**
-   * ConfigUpdate constructor.
+   * Config update constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory.
@@ -67,7 +68,7 @@ class ConfigUpdate {
    * @return array
    *   Array of configs names.
    */
-  public function getConfigsFilesNames($moduleName, $path, $regex) {
+  public function getConfigsFilesNames($moduleName, $path, $regex): array {
     $configsFileNames = [];
     try {
       $filesNames = scandir($this->getConfigsPath($moduleName, $path));
@@ -122,6 +123,7 @@ class ConfigUpdate {
     if (is_array($parts) && !empty($parts)) {
       return $parts;
     }
+
     throw new \RuntimeException('Invalid config name: ' . $config);
   }
 

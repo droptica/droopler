@@ -5,43 +5,11 @@
  * File containing d_blog module.
  */
 
-use Drupal\Core\Site\Settings;
-use Drupal\node\NodeInterface;
+declare(strict_types = 1);
 
-/**
- * Implements hook_theme().
- */
-function d_blog_theme($existing, $type, $theme, $path) {
-  return [
-    'node__blog_post' => [
-      'base hook' => 'node',
-    ],
-    'node__blog_post__thumbnail' => [
-      'base hook' => 'node',
-    ],
-    'node__blog_post__teaser' => [
-      'base hook' => 'node',
-    ],
-    'node__blog_post__teaser_small' => [
-      'base hook' => 'node',
-    ],
-    'paragraph__d_p_blog_image' => [
-      'base hook' => 'paragraph',
-    ],
-    'field__node__field_blog_media_main_image__blog_post' => [
-      'base hook' => 'field',
-    ],
-    'page__blog' => [
-      'base hook' => 'page',
-    ],
-    'page__taxonomy__term__blog_posts_category' => [
-      'base hook' => 'page',
-    ],
-    'pager__blog_listing__page' => [
-      'base hook' => 'pager',
-    ],
-  ];
-}
+use Drupal\Core\Site\Settings;
+use Drupal\d_blog\Entity\BlogImage;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_preprocess_links().
@@ -91,5 +59,14 @@ function d_blog_node_links_alter(array &$links, NodeInterface $node, array &$con
     if (strpos($key, 'comment__field') !== FALSE) {
       unset($links[$key]);
     }
+  }
+}
+
+/**
+ * Generate hook to change class for paragraph 'blog-image'.
+ */
+function d_blog_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['paragraph']['d_p_blog_image'])) {
+    $bundles['paragraph']['d_p_blog_image']['class'] = BlogImage::class;
   }
 }

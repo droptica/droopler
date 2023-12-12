@@ -1,0 +1,14 @@
+:root {
+  --overlay-display: block;
+  --overlay-width: 100%;
+  --overlay-height: 100%;
+  --overlay-opacity: 0.8;
+}
+
+.overlay {
+  display: var(--overlay-display);
+  width: var(--overlay-width);
+  height: var(--overlay-height);
+  background: var(--overlay-background-color);
+  opacity: var(--overlay-opacity);
+}

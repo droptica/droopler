@@ -8,7 +8,7 @@ dependencies:
     - droopler_theme
 id: droopler_theme_mobile_filters_submit
 theme: droopler_theme
-region: facets_left
+region: aside
 weight: -8
 provider: null
 plugin: mobile_filters_submit
@@ -22,6 +22,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /products
     negate: false
     context_mapping: {  }
+    pages: /products

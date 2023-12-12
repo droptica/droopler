@@ -5,6 +5,8 @@
  * Paragraphs features API documentation.
  */
 
+declare(strict_types = 1);
+
 /**
  * Collects paragraph types to center its ckeditor content.
  *

@@ -1,0 +1,7 @@
+{% embed '@droopler_theme/d-p-node/d-p-node.twig' with {
+  columns: paragraph.parentColumnSettings,
+} %}
+  {% block content %}
+    {{ content.group_d_content }}
+  {% endblock %}
+{% endembed %}

@@ -5,15 +5,16 @@
  * File containing d_content_init module.
  */
 
+declare(strict_types = 1);
+
 use Drupal\Component\Serialization\Yaml;
-use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\search_api\Entity\Index;
 use Drupal\taxonomy\Entity\Term;
-use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
  * Save node with paragraphs. This is alterable in another init modules.
@@ -21,12 +22,12 @@ use Drupal\we_megamenu\WeMegaMenuBuilder;
  * @param array $node_to_create
  *   Array node with paragraph content.
  *
- * @return int
+ * @return string|int|null
  *   Node ID.
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function d_content_init_save_node(array $node_to_create): int {
+function d_content_init_save_node(array $node_to_create): string|int|null {
   $node = Node::create($node_to_create['info']);
 
   foreach ($node_to_create as $field_name => $field_value) {
@@ -68,14 +69,14 @@ function d_content_init_save_entity(array $entity_to_create, $entity_type, $uuid
 /**
  * Fill the field.
  *
- * @param Drupal\Core\Entity\EntityInterface $entity
+ * @param Drupal\Core\Entity\ContentEntityInterface $entity
  *   Entity object to set fields.
  * @param string $name
  *   Name of the field.
  * @param array $value
  *   Field array (type and value).
  */
-function d_content_init_fill_field(EntityInterface $entity, $name, array $value) {
+function d_content_init_fill_field(ContentEntityInterface $entity, string $name, array $value) {
   // Allow other init modules to add their fields types.
   \Drupal::moduleHandler()->alter('init_field', $entity, $name, $value);
 
@@ -92,7 +93,7 @@ function d_content_init_fill_field(EntityInterface $entity, $name, array $value)
  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function d_content_init_init_field_alter(EntityInterface &$entity, string &$name, array &$value) {
+function d_content_init_init_field_alter(ContentEntityInterface &$entity, string &$name, array &$value) {
   /**
    * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
    */
@@ -140,11 +141,9 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
       $destination_dir = $value['dst_dir'] ?? '';
       // Add all files.
       foreach ($files as $file) {
-        /**
-         * @var \Drupal\file\FileInterface $file_object
-         */
+        /** @var \Drupal\file\FileInterface $file_object */
         $file_object = d_content_init_get_file($file['file'], $destination_dir);
-        if (!empty($file_object)) {
+        if ($file_object !== FALSE) {
           $params = ["target_id" => $file_object->id()];
           if ($type == 'image') {
             if (!empty($file['alt'])) {
@@ -168,7 +167,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
         }
         else {
           $new_child['data'] = $child;
-          $new_child['paragraph_type'] = $value['subtype'] ?? '';
+          $new_child['paragraph_type'] = $value['subtype'];
         }
         $child_paragraph = d_content_init_fill_paragraph($new_child);
         $entity->$name->appendItem($child_paragraph);
@@ -183,7 +182,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
         $path = d_content_init_parse_file_path($file['path'] ?? '');
         $alt = $file['alt'] ?? '';
         $media_entity = $media_manager->createMediaImageFromFile($path, $destination_directory, $alt);
-        if ($entity) {
+        if ($media_entity) {
           $entity->$name->appendItem($media_entity);
         }
         else {
@@ -208,7 +207,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
           \Drupal::logger('d_content_init')
             ->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
               '@id' => $entity->id(),
-              '@type' => $entity->getEntityType(),
+              '@type' => $entity->getEntityType()->getLabel(),
               '@field' => $name,
             ]);
         }
@@ -332,12 +331,10 @@ function d_content_init_add_node(array $params) {
   $nid = d_content_init_save_node($page_array);
 
   // Set homepage.
-  if ($homepage = isset($page_array['info']['homepage'])) {
-    if ($homepage) {
-      $config = \Drupal::configFactory()->getEditable('system.site');
-      $config->set('page.front', '/node/' . $nid)->save();
-      $params['parent'] = 'standard.front_page';
-    }
+  if (isset($page_array['info']['homepage'])) {
+    $config = \Drupal::configFactory()->getEditable('system.site');
+    $config->set('page.front', '/node/' . $nid)->save();
+    $params['parent'] = 'standard.front_page';
   }
 
   // If title is not empty add menu link.
@@ -356,14 +353,6 @@ function d_content_init_add_node(array $params) {
     }
     else {
       $config['parent'] = 'menu_link_content:';
-    }
-
-    // Make sure that there is anything in we_megamenu's table config field.
-    if (\Drupal::service('module_handler')->moduleExists('we_megamenu')) {
-      $menu_config = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme');
-      if (empty($menu_config)) {
-        WeMegaMenuBuilder::saveConfig('main', 'droopler_theme', '{"menu_config":{}}');
-      }
     }
 
     // Save link.
@@ -526,9 +515,12 @@ function d_content_init_create_all($type = NULL) {
     }
 
     if ($module_handler->moduleExists('search')) {
+      /** @var \Drupal\search\SearchPageRepositoryInterface $search_page_repository */
       $search_page_repository = \Drupal::service('search.search_page_repository');
       foreach ($search_page_repository->getIndexableSearchPages() as $entity) {
-        $entity->getPlugin()->updateIndex();
+        /** @var \Drupal\search\Plugin\SearchIndexingInterface $plugin */
+        $plugin = $entity->getPlugin();
+        $plugin->updateIndex();
       }
     }
   }

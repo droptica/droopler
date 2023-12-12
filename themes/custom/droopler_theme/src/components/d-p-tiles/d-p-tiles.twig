@@ -1,0 +1,39 @@
+{{ attach_library('droopler_theme/d-p-tiles') }}
+
+{% set base_class = d_p_tiles_base_class|default('d-p-tiles') %}
+{% set modifiers = d_p_tiles_modifiers|default([])|merge([tiles_side]) %}
+
+<section {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    <div {{ bem('header', [], base_class, ['container']) }}>
+      <div {{ bem('header-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('header-column', [], base_class, ['col-12']) }}>
+          {% block content_header %}
+          {% endblock %}
+
+          {% include '@droopler_theme/base/divider/divider.twig' %}
+
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <div {{ bem('gallery', [], base_class) }}>
+      {% block gallery %}
+      {% endblock %}
+    </div>
+
+    <div {{ bem('footer', [], base_class, ['container']) }}>
+      <div {{ bem('footer-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('footer-column', [], base_class, ['col-12']) }}>
+          {% block cta %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

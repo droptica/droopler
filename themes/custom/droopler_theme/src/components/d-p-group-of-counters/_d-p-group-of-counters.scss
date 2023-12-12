@@ -1,0 +1,63 @@
+@import "../../scss/init";
+
+.d-p-group-of-counters {
+  --divider-last-child-display: inline-block;
+
+  position: relative;
+
+  .content-wrapper {
+    @include centered-flex-row;
+  }
+
+  &__header {
+    .heading {
+      margin-top: var(--content-spacer-m);
+    }
+
+    .body-text {
+      margin-top: var(--content-spacer-m);
+    }
+
+    .divider {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  &__header-column,
+  &__items-wrapper,
+  &__footer-column {
+    position: relative;
+    text-align: center;
+  }
+
+  &__items-wrapper {
+    justify-content: center;
+  }
+
+  &__background {
+    @include filling-absolute;
+  }
+
+  &__background-media {
+    @include covering-media;
+
+    .media {
+      height: 100%;
+    }
+  }
+
+  &__background-overlay {
+    @include filling-absolute;
+  }
+
+  &__content {
+    z-index: 1;
+  }
+
+  &__footer {
+    .cta-links {
+      margin-top: var(--content-spacer-l);
+    }
+  }
+}

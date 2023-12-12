@@ -1,49 +1,24 @@
-child-styling:
+style:
   version: VERSION
   css:
-    theme:
-      css/print.css: { media: print }
-      css/style.css: {}
-
-child-scripts:
-  version: VERSION
+    base:
+      build/css/main.style.css: {}
   js:
-    js/min/global.min.js: {}
+    build/js/main.script.js: {}
   dependencies:
-    - core/jquery
-    - core/jquery.once
     - core/drupal
+    - core/jquery
 
-# Libraries for the SCSS version
-dropbutton:
-  version: VERSION
-  css:
-    component:
-      css/libraries/dropbutton.css: { weight: -10 }
-file:
-  version: VERSION
-  css:
-    component:
-      css/libraries/file.css: { weight: -10 }
-maintenance_page:
+overrides:
   version: VERSION
   css:
     theme:
-      css/libraries/maintenance.css: {}
+      build/css/overrides.style.css: {}
   dependencies:
-    - system/maintenance
-    - droopler_theme/global-styling
+    - core/drupal
+    - core/jquery
 
-## Uncomment this to enable Font Awesome support.
-## Look into STARTERKIT.info.yml too.
-
-# font-awesome:
-#   remote: https://fortawesome.github.io/Font-Awesome/
-#   version: 5.1.0
-#   license:
-#     name: MIT
-#     url: https://fortawesome.github.io/Font-Awesome/license/
-#     gpl-compatible: true
-#   css:
-#     theme:
-#       //use.fontawesome.com/releases/v5.1.0/css/all.css: { type: external, minified: true }
+# We create component libraries automatically, no need to be listed here
+# as long as they keep the same name for the folder,JS and CSS file
+# you may extend the libraries if necessary
+# @see `includes/theme.inc` & @see: https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21theme.api.php/function/hook_library_info_build/9.2.x

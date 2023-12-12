@@ -1,53 +1,37 @@
-name: 'Droopler Theme'
-type: theme
-description: 'A flexible Booststrap based theme, with many regions and a responsive, mobile-first layout.'
+name: Droopler Theme
+description: A theme based on Radix.
+screenshot: screenshot.png
+core_version_requirement: '^10'
 version: DROOPLER_VERSION
-core_version_requirement: ^10
-base theme: false
+engine: twig
+type: theme
+base theme: radix
 
-libraries:
-  - droopler_theme/global-styling
-  - droopler_theme/global-scripts
-  - droopler_theme/lato
-  - droopler_theme/fontello
-  - droopler_theme/social_media
-  - droopler_theme/bootstrap
-
-libraries-extend:
-  core/drupal.dropbutton:
-    - droopler_theme/dropbutton
-  file/drupal.file:
-    - droopler_theme/file
-
-ckeditor5-stylesheets:
-  - css/ckeditor.css
+'interface translation project': droopler_theme
+'interface translation server pattern': 'themes/custom/droopler_theme/translations/%language.po'
 
 regions:
-  header: Header
-  secondary_menu: 'Secondary menu'
-  primary_menu: 'Primary menu'
-  lang_menu: 'Language menu'
-  page_top_content: 'Page top'
-  page_top: 'Page top'
-  page_bottom: 'Page bottom'
-  page_bottom_content: 'Page bottom'
-  highlighted: Highlighted
-  featured_top: 'Featured top'
-  breadcrumb: Breadcrumb
-  admin_tabs: 'Admin tabs'
+  header_branding: Header Branding
+  header_secondary: Header Secondary
+  header_primary: Header Primary
+  admin_tabs: Admin tabs
   content: Content
-  facets_top: 'Facets top'
-  facets_left_top: 'Facets left top'
-  facets_left: 'Facets left'
-  sidebar_left: 'Sidebar left'
-  sidebar_right: 'Sidebar right'
-  featured_bottom_first: 'Featured bottom first'
-  featured_bottom_second: 'Featured bottom second'
-  featured_bottom_third: 'Featured bottom third'
-  footer_first: 'Footer first'
-  footer_second: 'Footer second'
-  footer_third: 'Footer third'
-  footer_fourth: 'Footer fourth'
-  footer_fifth: 'Footer fifth'
-  footer_sixth: 'Footer sixth'
-  footer_main: 'Footer Main'
+  top_content: Top content
+  aside: Aside
+  footer_primary_first: Footer Primary First
+  footer_primary_second: Footer Primary Second
+  footer_primary_third: Footer Primary Third
+  footer_primary_fourth: Footer Primary Fourth
+  footer_primary_fifth: Footer Primary Fifth
+  footer_primary_sixth: Footer Primary Sixth
+  footer_secondary: Footer Secondary
+
+libraries:
+  - droopler_theme/style
+
+ckeditor_stylesheets:
+  - build/css/main.style.css
+
+components:
+  namespaces:
+    droopler_theme: src/components

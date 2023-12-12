@@ -1,0 +1,20 @@
+{% embed "@droopler_theme/product/product.twig" %}
+  {% block basic %}
+    {{ content.group_product_basic }}
+  {% endblock %}
+
+  {% block content %}
+    {% if node.askForProductSwitch %}
+      {{ content.group_product_link }}
+    {% endif %}
+    {{ content.group_product_content }}
+  {% endblock %}
+
+  {% block taxonomy %}
+    {{ content.group_product_taxonomy }}
+  {% endblock %}
+
+  {% block page_sections %}
+    {{ content.group_product_page_sections }}
+  {% endblock %}
+{% endembed %}

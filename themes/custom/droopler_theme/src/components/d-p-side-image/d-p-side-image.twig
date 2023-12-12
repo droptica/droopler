@@ -1,0 +1,43 @@
+{{ attach_library('droopler_theme/d-p-side-image') }}
+
+{% set base_class = d_p_side_image_base_class|default('d-p-side-image') %}
+{% set modifiers = d_p_side_image_modifiers|default([]) %}
+{% set image_side = image_side|default(false) %}
+
+{% if image_width == 'wide' %}
+  {% set wide_image = 'col-md-6 col-lg-7' %}
+  {% set content_column_count = image_side == 'right' ? '5' : '5 offset-md-7' %}
+  {% set content_column_count_lg = image_side == 'right' ? '4' : '4 offset-lg-8' %}
+  {% set content_column_count_wide = image_side == 'right' ? '4' : '4 offset-xl-8' %}
+{% else %}
+  {% set content_column_count = image_side == 'right' ? '5' : '5 offset-md-7' %}
+{% endif %}
+
+{% set content_classes = [
+  'col-md-' ~ content_column_count,
+  'col-lg-' ~ content_column_count_lg,
+  content_column_count_wide ? 'col-xl-' ~ content_column_count_wide : '',
+  'col-12'
+] %}
+
+<section {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  <div {{ bem('background', [], base_class, [wide_image ?? 'col-md-6', image_side]) }}>
+    {% block background %}
+    {% endblock %}
+  </div>
+  <div {{ bem('content', [], base_class, ['container', image_side]) }}>
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', [], base_class, content_classes) }}>
+        {% block header %}
+        {% endblock %}
+
+        {% include '@droopler_theme/base/divider/divider.twig' %}
+
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+{{ attach_library('droopler_theme/block') }}
+
+{% set base_class = block_base_class|default('block') %}
+{% set modifiers = block_modifiers|default([]) %}
+{% set with_divider = block_with_divider|default(false) %}
+
+<div {{ bem(base_class) }}>
+  {{ title_prefix }}
+
+  {% if label %}
+    {% include "@droopler_theme/base/heading/heading.twig" with {
+      heading_tag: 'h2',
+      label: label
+    } %}
+
+    {% if with_divider %}
+      {% include "@droopler_theme/base/divider/divider.twig" %}
+    {% endif %}
+
+  {% endif %}
+
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>

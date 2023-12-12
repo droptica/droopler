@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * Template for a Figure.
+ */
+#}
+{% include '@radix/figure/figure.twig' with {
+  image: node,
+  caption: caption,
+  utility_classes: classes|split(' '),
+} %}

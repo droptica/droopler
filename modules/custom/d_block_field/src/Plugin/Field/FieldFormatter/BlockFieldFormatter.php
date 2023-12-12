@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_block_field\Plugin\Field\FieldFormatter;
 
 use Drupal\Component\Plugin\Exception\ContextException;

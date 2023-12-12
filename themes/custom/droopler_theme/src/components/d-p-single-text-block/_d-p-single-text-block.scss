@@ -1,0 +1,129 @@
+@import "../../scss/init";
+
+:root {
+  --single-text-block-tile-padding: 2px;
+}
+
+.d-p-single-text-block {
+  $root: &;
+
+  --cta-max-width: none;
+  --media-width: 100%;
+  --media-height: 100%;
+  --media-img-display: inline-block;
+
+  &--has-media-background {
+    padding-block: 130px;
+  }
+
+  &--in-side-by-side {
+    .heading {
+      @include heading(2);
+    }
+
+    .cta-links {
+      margin-top: var(--content-spacer-m);
+    }
+  }
+
+  &--in-group {
+    position: relative;
+
+    .heading {
+      @include heading(5);
+    }
+
+    .cta-links {
+      margin-top: var(--content-spacer-m);
+    }
+
+    &__content {
+      .body-text {
+        margin-top: var(--content-spacer-m);
+      }
+    }
+  }
+
+  &--tile {
+    .heading {
+      @include heading(4);
+
+      @include media-breakpoint-up(lg) {
+        @include heading(3);
+      }
+    }
+
+    .cta-links {
+      margin: 0;
+
+      a {
+        --dp-bs-btn-active-bg: transparent;
+        --dp-bs-btn-active-border-color: none;
+        --dp-bs-btn-hover-bg: transparent;
+        --dp-bs-btn-hover-border-color: none;
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: transparent;
+        border: none;
+        text-indent: -9999px;
+        margin: 0;
+      }
+    }
+
+    .row & {
+      padding: var(--single-text-block-tile-padding);
+    }
+
+    #{$root}__background {
+      transition: 0.3s;
+      width: calc(100% - var(--single-text-block-tile-padding) * 2);
+    }
+
+    #{$root}__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: var(--single-text-block-tile-background);
+    }
+
+    &:hover {
+      #{$root}__background {
+        transform: scale(1.01);
+      }
+    }
+
+    &#{$root}--has-media-background {
+      padding-block: 0;
+
+      #{$root}__wrapper {
+        padding: var(--content-spacer-xl) var(--content-spacer-m);
+      }
+    }
+  }
+
+  &--grid-column {
+    text-align: center;
+  }
+
+  &__background {
+    @include filling-absolute;
+  }
+
+  &__background-media {
+    @include covering-media;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .media-icon {
+    margin-bottom: var(--content-spacer-s);
+  }
+}

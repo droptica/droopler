@@ -1,0 +1,54 @@
+@import "../../scss/init";
+
+:root {
+  --tiles-content-column-padding: 7vw;
+}
+
+.d-p-side-tiles {
+  $root: &;
+
+  --media-width: 100%;
+  --media-height: 100%;
+
+  position: relative;
+  border-top: 2px solid var(--tiles-gallery-background-color);
+  border-bottom: 2px solid var(--tiles-gallery-background-color);
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+    align-items: center;
+  }
+
+  &__gallery {
+    background: var(--tiles-gallery-background-color);
+    outline: var(--tiles-gallery-item-padding) solid var(--tiles-gallery-background-color);
+
+    @include media-breakpoint-up(md) {
+      @include filling-absolute;
+
+      width: 50%;
+
+      #{$root}--right & {
+        left: 50%;
+      }
+    }
+  }
+
+  &__content-column {
+    #{$root}--left & {
+      padding-left: var(--tiles-content-column-padding);
+    }
+
+    #{$root}--right & {
+      padding-left: var(--tiles-content-column-padding);
+    }
+
+    .heading {
+      margin-top: var(--content-spacer-s);
+    }
+
+    .cta-links {
+      margin-top: var(--content-spacer-m);
+    }
+  }
+}

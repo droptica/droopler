@@ -1,5 +1,5 @@
 name: 'Droopler Side Image Paragraph'
-core_version_requirement: ^10
+core_version_requirement: '^9.4 || ^10'
 description: 'Provides a paragraph with a side image.'
 type: module
 dependencies:
@@ -10,13 +10,16 @@ dependencies:
   - 'drupal:image'
   - 'drupal:language'
   - 'drupal:link'
+  - 'drupal:media'
   - 'drupal:media_library'
   - 'drupal:options'
+  - 'drupal:responsive_image'
   - 'drupal:text'
   - 'field_group:field_group'
   - 'link_attributes:link_attributes'
   - 'paragraphs:paragraphs'
   - 'svg_image:svg_image'
+  - 'svg_image:svg_image_responsive'
 package: 'Droopler Paragraphs'
 version: DROOPLER_VERSION
 core_incompatible: false

@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
+    - facets.facet.tags_taxonomy_term_name
     - field.field.node.d_product.body
     - field.field.node.d_product.field_d_ask_for_product
     - field.field.node.d_product.field_d_product_link
@@ -13,11 +14,111 @@ dependencies:
     - field.field.node.d_product.field_tags
     - node.type.d_product
   module:
+    - d_entity_reference_formatter
+    - d_p
+    - d_product
     - entity_reference_revisions
-    - link
-    - media
+    - field_group
     - text
     - user
+third_party_settings:
+  field_group:
+    group_product_basic:
+      children:
+        - field_d_product_media
+      label: 'Product basic'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_product_content:
+      children:
+        - body
+      label: 'Product content'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_product_taxonomy:
+      children:
+        - field_product_categories
+        - field_tags
+      label: 'Product taxonomy'
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_product_page_sections:
+      children:
+        - field_page_section
+      label: 'Product page sections'
+      parent_name: ''
+      region: content
+      weight: 3
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_product_link:
+      children:
+        - field_d_product_link
+      label: 'Product link'
+      parent_name: ''
+      region: content
+      weight: 4
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: node.d_product.full
 targetEntityType: node
 bundle: d_product
@@ -28,40 +129,27 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 2
-    region: content
-  field_d_ask_for_product:
-    type: boolean
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
     weight: 6
     region: content
   field_d_product_link:
-    type: link
+    type: button_link_formatter
     label: hidden
     settings:
-      trim_length: 80
+      trim_length: '80'
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: 0
+      target: 0
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_d_product_media:
-    type: media_thumbnail
+    type: d_product_gallery_formatter
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+      enable_navigation: '1'
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   field_page_section:
     type: entity_reference_revisions_entity_view
@@ -70,30 +158,29 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 7
+    weight: 8
     region: content
   field_product_categories:
-    type: entity_reference_label
+    type: d_entity_reference_facet_link
     label: above
     settings:
-      link: false
+      facet: product_categories_taxonomy_term_name
+      raw_value_label: '1'
     third_party_settings: {  }
-    weight: 3
+    weight: 6
     region: content
   field_tags:
-    type: entity_reference_label
+    type: d_entity_reference_facet_link
     label: above
     settings:
-      link: false
+      facet: tags_taxonomy_term_name
+      raw_value_label: '1'
     third_party_settings: {  }
-    weight: 4
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
+    weight: 7
     region: content
 hidden:
+  field_d_ask_for_product: true
   field_meta_tags: true
   langcode: true
+  links: true
   search_api_excerpt: true

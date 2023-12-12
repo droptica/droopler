@@ -1,0 +1,13 @@
+{% embed "@droopler_theme/blog/blog-teaser/blog-teaser.twig" %}
+  {% block image %}
+    {{ content.group_blog_image }}
+  {% endblock %}
+
+  {% block content %}
+    {{ content.group_blog_teaser }}
+  {% endblock %}
+
+  {% block category %}
+    {{ content.group_blog_category }}
+  {% endblock %}
+{% endembed %}

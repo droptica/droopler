@@ -10,8 +10,8 @@ dependencies:
     - droopler_theme
 id: droopler_theme_product_categories_taxonomy_term_name
 theme: droopler_theme
-region: facets_left
-weight: -11
+region: aside
+weight: -10
 provider: null
 plugin: 'facet_block:product_categories_taxonomy_term_name'
 settings:
@@ -23,6 +23,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /products
     negate: false
     context_mapping: {  }
+    pages: /products

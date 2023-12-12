@@ -1,0 +1,9 @@
+{% embed "@droopler_theme/social-media-list/social-media-list.twig" %}
+  {% block items %}
+    {% for link in links %}
+      {% include "@droopler_theme/social-media-item/social-media-item.twig" with {
+        item: link
+      }%}
+    {% endfor %}
+  {% endblock %}
+{% endembed %}

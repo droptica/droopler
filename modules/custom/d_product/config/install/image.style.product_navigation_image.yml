@@ -4,11 +4,11 @@ dependencies: {  }
 name: product_navigation_image
 label: 'Product Navigation Image'
 effects:
-  3e64dd33-16b9-4a50-b290-d526e547b320:
-    uuid: 3e64dd33-16b9-4a50-b290-d526e547b320
-    id: image_scale
-    weight: 2
+  534caca1-485d-495e-ab7d-127c843b8774:
+    uuid: 534caca1-485d-495e-ab7d-127c843b8774
+    id: image_scale_and_crop
+    weight: 1
     data:
-      width: 175
-      height: 175
-      upscale: false
+      width: 320
+      height: 240
+      anchor: center-center

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -17,7 +19,7 @@ class CustomClass extends ParagraphSettingPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     $element = parent::formElement();
 
     return [

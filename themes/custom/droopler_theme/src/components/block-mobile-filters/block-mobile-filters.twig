@@ -1,0 +1,15 @@
+{{ attach_library('droopler_theme/block-mobile-filters') }}
+
+{% set base_class = block_mobile_filters_base_class|default('block-mobile-filters') %}
+{% set modifiers = block_mobile_filters_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+</div>

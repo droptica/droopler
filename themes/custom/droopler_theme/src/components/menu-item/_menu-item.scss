@@ -1,0 +1,31 @@
+.menu-item, .submenu-item {
+  &__link {
+    display: block;
+    text-decoration: none;
+  }
+}
+
+.menu-item {
+  $root: &;
+
+  &__toggler {
+    .icon {
+      #{$root}--has-submenu:not(.open) &--close {
+        display: none;
+      }
+
+      #{$root}--has-submenu.open &--open {
+        display: none;
+      }
+    }
+  }
+}
+
+.submenu-item {
+  &--has-submenu {
+    &.open > .submenu-item__element > .submenu-item__toggler .icon--open,
+    &:not(.open) > .submenu-item__element > .submenu-item__toggler .icon--close {
+      display: none;
+    }
+  }
+}

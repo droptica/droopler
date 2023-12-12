@@ -1,0 +1,16 @@
+{% embed "@droopler_theme/blog/blog-full/blog-full.twig" with {
+  author: author_name|striptags|raw,
+  date: node.getCreatedTime()|date('d.m.Y')
+}%}
+  {% block main_image %}
+    {{ content.group_blog_main_image }}
+  {% endblock %}
+
+  {% block blog_sections %}
+    {{ content.group_blog_sections }}
+  {% endblock %}
+
+  {% block category %}
+    {{ content.group_blog_category }}
+  {% endblock %}
+{% endembed %}

@@ -1,0 +1,103 @@
+.icon {
+  $root: &;
+
+  &::before {
+    display: inline-block;
+    width: 1em;
+    margin: 0 0.2em;
+    line-height: 1em;
+    text-align: center;
+    font-family: fontello;
+    font-variant: normal;
+    text-transform: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @at-root #{$root}--cw#{&} { content: "\e800"; }
+
+    @at-root #{$root}--left-open#{&} { content: "\e801"; }
+
+    @at-root #{$root}--down-open#{&} { content: "\e802"; }
+
+    @at-root #{$root}--right-open#{&} { content: "\e803"; }
+
+    @at-root #{$root}--down-open-1#{&} { content: "\e804"; }
+
+    @at-root #{$root}--up-open#{&} { content: "\e805"; }
+
+    @at-root #{$root}--right-open-1#{&} { content: "\e806"; }
+
+    @at-root #{$root}--up-open-1#{&} { content: "\e807"; }
+
+    @at-root #{$root}--right-open-mini#{&} { content: "\e808"; }
+
+    @at-root #{$root}--down-open-mini#{&} { content: "\e809"; }
+
+    @at-root #{$root}--down-open-big#{&} { content: "\e80a"; }
+
+    @at-root #{$root}--left-open-big#{&} { content: "\e80b"; }
+
+    @at-root #{$root}--up-open-mini#{&} { content: "\e80c"; }
+
+    @at-root #{$root}--left-open-mini#{&} { content: "\e80d"; }
+
+    @at-root #{$root}--right-open-big#{&} { content: "\e80e"; }
+
+    @at-root #{$root}--up-open-big#{&} { content: "\e80f"; }
+
+    @at-root #{$root}--menu-1#{&} { content: "\e810"; }
+
+    @at-root #{$root}--menu-2#{&} { content: "\e811"; }
+
+    @at-root #{$root}--menu-outline#{&} { content: "\e812"; }
+
+    @at-root #{$root}--left-open-1#{&} { content: "\e813"; }
+
+    @at-root #{$root}--left-open-3#{&} { content: "\e814"; }
+
+    @at-root #{$root}--right-open-3#{&} { content: "\e815"; }
+
+    @at-root #{$root}--up-open-3#{&} { content: "\e816"; }
+
+    @at-root #{$root}--down-circle#{&} { content: "\e817"; }
+
+    @at-root #{$root}--left-circle#{&} { content: "\e818"; }
+
+    @at-root #{$root}--right-circle#{&} { content: "\e819"; }
+
+    @at-root #{$root}--up-circle#{&} { content: "\e81a"; }
+
+    @at-root #{$root}--down-open-3#{&} { content: "\e81b"; }
+
+    @at-root #{$root}--down-open-2#{&} { content: "\f004"; }
+
+    @at-root #{$root}--up-open-2#{&} { content: "\f005"; }
+
+    @at-root #{$root}--right-open-2#{&} { content: "\f006"; }
+
+    @at-root #{$root}--left-open-2#{&} { content: "\f007"; }
+
+    @at-root #{$root}--menu-3#{&} { content: "\f008"; }
+
+    @at-root #{$root}--move#{&} { content: "\f047"; }
+
+    @at-root #{$root}--twitter#{&} { content: "\f099"; }
+
+    @at-root #{$root}--menu#{&} { content: "\f0c9"; }
+
+    @at-root #{$root}--linkedin#{&} { content: "\f0e1"; }
+
+    @at-root #{$root}--circle#{&} { content: "\f111"; }
+
+    @at-root #{$root}--youtube#{&} { content: "\f16a"; }
+
+    @at-root #{$root}--instagram#{&} { content: "\f16d"; }
+
+    @at-root #{$root}--dribbble#{&} { content: "\f17d"; }
+
+    @at-root #{$root}--facebook#{&} { content: "\f308"; }
+
+    @at-root #{$root}--hand-pointer-o#{&} { content: "\f25a"; }
+  }
+}

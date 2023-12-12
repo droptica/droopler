@@ -1,0 +1,34 @@
+{{ attach_library('droopler_theme/d-p-side-embed') }}
+
+{% set base_class = d_p_side_embed_base_class|default('d-p-side-embed') %}
+{% set modifiers = d_p_side_embed_modifiers|default([]) %}
+{% set embed_side = 'left' %}
+
+{% if paragraph.getEmbedSide %}
+  {% set modifiers = modifiers|merge(['embed-' ~ paragraph.getEmbedSide]) %}
+  {% set embed_side = paragraph.getEmbedSide %}
+{% endif %}
+
+<section {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('embed', [], base_class,) }}>
+    {% block embed %}
+    {% endblock %}
+  </div>
+
+  <div {{ bem('content', [], base_class, ['container']) }}>
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', [], base_class, ['col-md-6', embed_side == 'left' ? 'offset-md-6' : '']) }}>
+        {% block header %}
+        {% endblock %}
+
+        {% include '@droopler_theme/base/divider/divider.twig' %}
+
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>

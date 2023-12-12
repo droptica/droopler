@@ -1,0 +1,30 @@
+{{ attach_library('d_p_carousel/slick') }}
+{{ attach_library('droopler_theme/carousel') }}
+{{ attach_library('droopler_theme/product-gallery') }}
+
+{% set base_class = product_gallery_base_class|default('product-gallery') %}
+
+<section {{ bem(base_class) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div
+    {{ bem('main-image', [], base_class) }}
+      data-slick='{{ single_items.settings }}'
+  >
+    {% for item in single_items.items %}
+      {{ item }}
+    {% endfor %}
+  </div>
+
+  {% if nav_items %}
+    <div
+      {{ bem('small-images', [], base_class) }}
+      data-slick='{{ nav_items.settings }}'
+    >
+      {% for item in nav_items.items %}
+        {{ item }}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>

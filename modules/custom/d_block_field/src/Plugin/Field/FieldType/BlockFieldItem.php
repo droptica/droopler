@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_block_field\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
@@ -116,7 +118,7 @@ class BlockFieldItem extends FieldItemBase implements BlockFieldItemInterface {
     $block_manager = \Drupal::service('plugin.manager.block');
 
     /** @var \Drupal\Core\Block\BlockPluginInterface $block_instance */
-    $block_instance = $block_manager->createInstance($this->plugin_id, $this->settings);
+    $block_instance = $block_manager->createInstance($this->plugin_id, $this->settings ?? []);
 
     $plugin_definition = $block_instance->getPluginDefinition();
 

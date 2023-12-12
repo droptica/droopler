@@ -1,0 +1,54 @@
+@import "../../scss/init";
+
+.d-p-group-of-text-blocks {
+  $root: &;
+
+  --divider-last-child-display: inline-block;
+
+  &__header-wrapper {
+    &--single {
+      text-align: center;
+
+      .heading {
+        margin-top: var(--content-spacer-s);
+      }
+    }
+
+    &--columns {
+      --media-icon-display: inline-block;
+
+      margin-bottom: var(--content-spacer-l);
+    }
+  }
+
+  &__footer {
+    text-align: center;
+
+    .cta-links {
+      margin-top: var(--content-spacer-m);
+    }
+  }
+
+  &--with-grid {
+    #{$root}__items {
+      border-top: 2px solid var(--group-of-text-blocks-grid-color);
+      border-left: 2px solid var(--group-of-text-blocks-grid-color);
+    }
+  }
+
+  &__items {
+    margin-top: var(--content-spacer-s);
+  }
+
+  &__items-wrapper {
+    overflow: hidden;
+
+    #{$root}--with-grid & {
+      > div,
+      > section {
+        border-right: 2px solid var(--group-of-text-blocks-grid-color);
+        border-bottom: 2px solid var(--group-of-text-blocks-grid-color);
+      }
+    }
+  }
+}

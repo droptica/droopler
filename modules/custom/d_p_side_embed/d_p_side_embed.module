@@ -5,49 +5,15 @@
  * Contains d_p_side_embed module.
  */
 
-use Drupal\Core\Template\Attribute;
-use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
-use Drupal\d_p\ParagraphSettingTypesInterface;
-use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+declare(strict_types = 1);
+
+use Drupal\d_p_side_embed\Entity\SideEmbed;
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_entity_bundle_info_alter().
  */
-function d_p_side_embed_preprocess_paragraph__d_p_side_embed(array &$variables) {
-  $paragraph = $variables['paragraph'];
-
-  try {
-    /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
-    $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
-    $variables['embed_side'] = $setting_field
-      ->getSettingValue(ParagraphSettingTypesInterface::PARAGRAPH_SETTING_EMBED_LAYOUT);
+function d_p_side_embed_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['paragraph']['d_p_side_embed'])) {
+    $bundles['paragraph']['d_p_side_embed']['class'] = SideEmbed::class;
   }
-  catch (MissingConfigurationStorageFieldException $exception) {
-    \Drupal::logger('d_p_side_embed')->error($exception->getMessage());
-  }
-
-  // Process embed code.
-  $field_embed = $paragraph->get('field_d_embed')->get(0);
-  if ($field_embed) {
-    $embed = $field_embed->getValue();
-    $variables['embed'] = $embed['value'];
-  }
-
-  $variables['embed_side_attributes'] = new Attribute();
-  $variables['content_side_attributes'] = new Attribute();
-  $variables['content_fields_attributes'] = new Attribute();
-  $variables['d_p_side_embed_wrapper_attributes'] = new Attribute();
-
-  $variables['#attached']['library'][] = 'd_p_side_embed/d_p_side_embed';
-}
-
-/**
- * Implements hook_theme().
- */
-function d_p_side_embed_theme($existing, $type, $theme, $path) {
-  return [
-    'paragraph__d_p_side_embed' => [
-      'base hook' => 'paragraph',
-    ],
-  ];
 }

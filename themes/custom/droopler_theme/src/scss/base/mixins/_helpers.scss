@@ -1,0 +1,52 @@
+@mixin centered-absolute() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin centered-flex-column() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin centered-flex-row() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin filling-absolute() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@mixin covering-media {
+  height: 100%;
+
+  picture {
+    width: 100%;
+    height: 100%;
+
+    img {
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+@mixin max-lines($lines: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}

@@ -1,16 +1,16 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Validation;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\d_p\Helper\NestedArrayHelper;
-use Drupal\geysir\Form\GeysirModalParagraphForm;
+use Drupal\paragraphs_edit\Form\ParagraphEditForm;
 
 /**
  * Provides paragraph settings validator.
- *
- * @package Drupal\d_p\Validation
  */
 class ParagraphSettingsValidation {
 
@@ -24,13 +24,7 @@ class ParagraphSettingsValidation {
    */
   public static function validateColumnCount(array $element, FormStateInterface $form_state) {
     $column_count_value = $form_state->getValue($element['#parents']);
-    $form_object = $form_state->getFormObject();
-    if ($form_object instanceof GeysirModalParagraphForm) {
-      $paragraph_bundle = $form_object->getEntity()->bundle();
-    }
-    else {
-      $paragraph_bundle = self::getParentParagraphBundleId($element, $form_state);
-    }
+    $paragraph_bundle = self::getParentParagraphBundleId($element, $form_state);
 
     if (!is_string($paragraph_bundle)) {
       return;
@@ -46,13 +40,12 @@ class ParagraphSettingsValidation {
     if (!in_array($column_count_value, $valid_number_of_columns)) {
       $form_state->setError(
         $element,
-        new TranslatableMarkup('The allowed number of columns for @field is @column_number', [
+        (new TranslatableMarkup('The allowed number of columns for @field is @column_number', [
           '@column_number' => implode(', ', $valid_number_of_columns),
           '@field' => $element['#title'],
-        ])
+        ]))->render()
       );
     }
-
   }
 
   /**
@@ -68,12 +61,22 @@ class ParagraphSettingsValidation {
    */
   protected static function getParentParagraphBundleId(array $element, FormStateInterface $form_state): ?string {
     $parents_reversed = array_reverse($element['#array_parents'], TRUE);
-    $paragraph_subform_position = array_search('subform', $parents_reversed);
 
-    $form_parents = array_slice($element['#array_parents'], 0, count($element['#array_parents']) - $paragraph_subform_position);
-    $parent_paragraph_form_element = NestedArrayHelper::getParentElement($form_state->getCompleteForm(), $form_parents);
+    if ($paragraph_subform_position = array_search('subform', $parents_reversed)) {
+      $form_parents = array_slice($element['#array_parents'], 0, $paragraph_subform_position);
+      $parent_paragraph_form_element = NestedArrayHelper::getParentElement($form_state->getCompleteForm(), $form_parents);
 
-    return $parent_paragraph_form_element['#paragraph_type'] ?? NULL;
+      return $parent_paragraph_form_element['#paragraph_type'] ?? NULL;
+    }
+
+    // The above method does not work for the frontend editing module, so we
+    // try to get paragraph type id from the callback object.
+    $build_info = $form_state->getBuildInfo();
+    if (isset($build_info['callback_object']) && $build_info['callback_object'] instanceof ParagraphEditForm) {
+      return $build_info['callback_object']->getEntity()->bundle();
+    }
+
+    return NULL;
   }
 
 }

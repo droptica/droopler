@@ -5,13 +5,28 @@
  * File containing d_product module.
  */
 
+declare(strict_types = 1);
+
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
-use Drupal\Core\Url;
+use Drupal\d_product\Entity\Product;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_theme().
+ */
+function d_product_theme() {
+  return [
+    'd_product_gallery' => [
+      'render element' => 'element',
+      'variables' => [
+        'single_items' => NULL,
+        'nav_items' => NULL,
+      ],
+    ],
+  ];
+}
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -35,16 +50,6 @@ function d_product_preprocess_node(&$variables) {
         if (isset($variables['content']['field_d_product_link'])) {
           $variables['link'] = $variables['content']['field_d_product_link'];
           unset($variables['content']['field_d_product_link']);
-        }
-      }
-    }
-
-    if (isset($variables['view_mode']) && $variables['view_mode'] == 'full') {
-      if ($node->hasField('field_d_ask_for_product')) {
-        $field_d_ask_for_product = $node->get('field_d_ask_for_product');
-        $field_d_ask_for_product = $field_d_ask_for_product->getValue();
-        if (isset($field_d_ask_for_product[0]['value']) && $field_d_ask_for_product[0]['value'] == 1) {
-          $variables['link_ask_for_product'] = d_product_generate_ask_product_link($node);
         }
       }
     }
@@ -118,7 +123,6 @@ function d_product_preprocess_page(&$variables) {
     if ($pager = $pager_manager->getPager(0)) {
       $variables['pager_total_items'] = $pager->getTotalItems();
     }
-    $variables['#attached']['library'][] = 'd_product/d_product_select';
     $variables['#attached']['library'][] = 'd_product/d_product_searches';
   }
 
@@ -146,95 +150,6 @@ function d_product_preprocess_page(&$variables) {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function d_product_preprocess_field(&$variables) {
-  $variables['is_product'] = FALSE;
-
-  if ($variables['element']['#bundle'] == 'd_product' && $variables['element']['#view_mode'] != 'teaser') {
-    $variables['is_product'] = TRUE;
-    $items = $variables['element']['#items'];
-    switch ($variables['field_name']) {
-      case 'field_tags':
-        $variables['links'] = d_product_generate_term_links(
-          $items,
-          'tags_taxonomy_term_name'
-        );
-        break;
-
-      case 'field_product_categories':
-        $variables['links'] = d_product_generate_term_links(
-          $items,
-          'product_categories_taxonomy_term_name'
-        );
-        break;
-    }
-  }
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function d_product_preprocess_image_style(&$variables) {
-  if ($variables['style_name'] === 'product_thumbnail_pc') {
-    $variables['image'] = [
-      '#theme' => 'd_media_canvas_image',
-      '#image' => $variables['image'],
-    ];
-  }
-}
-
-/**
- * Create custom term links.
- *
- * @param object $items
- *   Store term ids.
- * @param string $element
- *   Facet path element.
- *
- * @return array
- *   Generated links.
- */
-function d_product_generate_term_links(object $items, $element) {
-  $links = [];
-  foreach ($items as $term_obj) {
-    $tid = $term_obj->getValue();
-    $term = Term::load($tid['target_id']);
-    $name = $term->getName();
-    $options = [
-      'query' => ['f[0]' => $element . ':' . strtolower($name)],
-    ];
-    $link = Link::fromTextAndUrl(
-      t($name), // phpcs:ignore
-      Url::fromUri('internal:/products', $options)
-    )->toString();
-    $links[] = $link;
-  }
-
-  return $links;
-}
-
-/**
- * Create ask_product_link.
- *
- * @param \Drupal\node\NodeInterface $node
- *   A node object.
- *
- * @return array
- *   Return link.
- */
-function d_product_generate_ask_product_link(NodeInterface $node) {
-  $name = 'Ask for product';
-  $options = ['query' => ['product' => $node->id()]];
-  $link = Link::fromTextAndUrl(
-    t($name), // phpcs:ignore
-    Url::fromUri('internal:/contact#contact-message-feedback-form', $options)
-  )->toRenderable();
-  $link['#attributes'] = ['class' => ['btn btn-outline-primary']];
-  return $link;
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
 function d_product_preprocess_pager(&$variables) {
 
   if (isset($variables['theme_hook_original']) && $variables['theme_hook_original'] == 'pager__products_list') {
@@ -254,4 +169,13 @@ function d_product_preprocess_pager(&$variables) {
  */
 function d_product_views_plugins_argument_alter(array &$plugins) {
   $plugins['node_vid']['class'] = 'Drupal\d_product\Plugin\views\argument\NodeVid';
+}
+
+/**
+ * Generate hook to change class for node 'product'.
+ */
+function d_product_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['node']['d_product'])) {
+    $bundles['node']['d_product']['class'] = Product::class;
+  }
 }

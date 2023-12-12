@@ -1,0 +1,2 @@
+!function(a,c){"use strict";c.behaviors.d_p_carousel={attach:function(c){a("[data-slick]",c).each((function(c,s){var i=a(s),e=i.children().length,l=i.data("slick");e>=2&&(i.slick(),l.slidesToShow>=e&&i.addClass("carousel-fixed"))}))}}}(jQuery,Drupal);
+//# sourceMappingURL=carousel.js.map

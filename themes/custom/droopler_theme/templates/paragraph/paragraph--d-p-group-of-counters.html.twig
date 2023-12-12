@@ -1,0 +1,29 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-group-of-counters/d-p-group-of-counters.twig' with {
+      columns: paragraph.columnSettings,
+    } %}
+      {% block background %}
+        {{ content.group_d_counters_background }}
+      {% endblock %}
+
+      {% block header %}
+        {{ content.group_d_counters_header }}
+      {% endblock %}
+
+      {% block items %}
+        {{ content.group_d_counters_reference }}
+      {% endblock %}
+
+      {% block cta %}
+        {{ content.group_d_counters_cta }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_d_counters_background', 'group_d_counters_header', 'group_d_counters_reference', 'group_d_counters_cta') }}
+  {% endblock %}
+
+{% endembed %}

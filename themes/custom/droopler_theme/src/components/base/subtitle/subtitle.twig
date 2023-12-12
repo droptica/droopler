@@ -1,0 +1,7 @@
+{{ attach_library('droopler_theme/subtitle') }}
+
+{% set base_class = subtitle_base_class|default('subtitle') %}
+
+<h3 {{ bem(base_class) }}>
+  {{ label }}
+</h3>

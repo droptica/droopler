@@ -13,7 +13,6 @@ mode: default
 content:
   field_media_oembed_video:
     type: d_video_embed
-    weight: 0
     label: hidden
     settings:
       player_settings:
@@ -25,6 +24,7 @@ content:
         cover: '1'
         image_style: ''
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

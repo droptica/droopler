@@ -1,0 +1,15 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-blog-text/d-p-blog-text.twig' %}
+      {% block content %}
+        {{ content.group_blog_text_content }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_blog_text_content') }}
+  {% endblock %}
+
+{% endembed %}

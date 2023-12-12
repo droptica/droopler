@@ -1,0 +1,14 @@
+{{ attach_library('droopler_theme/facets-result-item') }}
+
+{% set base_class = facet_item_base_class|default('facets-result-item') %}
+{% set modifiers = facet_item_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers)}}>
+{% if is_active %}
+  <span {{ bem('status', [], base_class, ['js-facet-deactivate']) }}></span>
+{% endif %}
+<span {{ bem('value', [], base_class) }}>{{ value }}</span>
+{% if show_count %}
+  <span {{ bem('count', [], base_class) }}>{{ count }}</span>
+{% endif %}
+</div>

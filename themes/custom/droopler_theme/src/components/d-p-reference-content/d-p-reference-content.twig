@@ -1,0 +1,41 @@
+{{ attach_library('droopler_theme/d-p-reference-content') }}
+
+{% set base_class = d_p_reference_content_base_class|default('d-p-reference-content') %}
+{% set modifiers = d_p_reference_content_modifiers|default([]) %}
+
+<section {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    <div {{ bem('header', [], base_class, ['container']) }}>
+      <div {{ bem('header-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('header-column', [], base_class, ['col-12']) }}>
+          {% block header %}
+          {% endblock %}
+
+          {% include '@droopler_theme/base/divider/divider.twig' %}
+
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <div {{ bem('items', [], base_class, ['container-fluid']) }}>
+      <div {{ bem('items-wrapper', [], base_class, ['row']) }}>
+        {% block items %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div {{ bem('cta', [], base_class, ['container']) }}>
+      <div {{ bem('cta-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('cta-column', [], base_class, ['col-12']) }}>
+          {% block cta %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

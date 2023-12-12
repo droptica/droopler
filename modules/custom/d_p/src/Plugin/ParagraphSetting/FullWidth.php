@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -9,10 +11,7 @@ use Drupal\d_p\ParagraphSettingPluginBase;
  *
  * @ParagraphSetting(
  *   id = "full-width",
- *   label = @Translation("Full width"),
- *   settings = {
- *      "parent" = "custom_class",
- *   }
+ *   label = @Translation("Full width")
  * )
  */
 class FullWidth extends ParagraphSettingPluginBase {
@@ -20,7 +19,7 @@ class FullWidth extends ParagraphSettingPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     $element = parent::formElement();
 
     return [

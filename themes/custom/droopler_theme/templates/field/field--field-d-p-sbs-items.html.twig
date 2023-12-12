@@ -1,0 +1,6 @@
+{% for item in items %}
+  {% include '@droopler_theme/d-p-side-by-side-item/d-p-side-by-side-item.twig' with {
+    content: item.content,
+    side_by_side_addtional_classes: ['content-column', 'col-sm-6', 'item-' ~ loop.index]
+  } %}
+{% endfor %}

@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p;
 
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Provides interface for paragraph setting plugins.
- *
- * @package Drupal\d_p
  */
 interface ParagraphSettingInterface {
 
@@ -23,12 +23,12 @@ interface ParagraphSettingInterface {
    * Paragraph setting form element.
    *
    * This is a main setting component used, to build the form
-   * containg all of the settings.
+   * contain all the settings.
    *
    * @return array
    *   Form element.
    */
-  public function formElement(): array;
+  public function formElement(array $settings = []): array;
 
   /**
    * Getter for plugin id.
@@ -112,5 +112,16 @@ interface ParagraphSettingInterface {
    *   Validation rules.
    */
   public function getValidationRulesDefinition(): array;
+
+  /**
+   * Get plugin settings form.
+   *
+   * @param array $values
+   *   The existing plugin settings default values.
+   *
+   * @return array
+   *   The plugin settings form.
+   */
+  public function getPluginSettingsForm(array $values = []): array;
 
 }

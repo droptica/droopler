@@ -1,0 +1,22 @@
+{{ attach_library('droopler_theme/product-teaser') }}
+
+{% set base_class = product_teaser_base_class|default('product-teaser') %}
+{% set modifiers = product_teaser_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  <div {{ bem('image', [], base_class) }}>
+    {{ main_image }}
+  </div>
+  <div {{ bem('content', [], base_class) }}>
+    {{ category }}
+    {{ title_prefix }}
+    {% if label %}
+      {% include '@droopler_theme/base/heading/heading.twig' with {
+        heading_tag: 'h2',
+        label: label
+      } %}
+    {% endif %}
+    {{ title_suffix }}
+  </div>
+  <a {{ bem('link', [], base_class) }} href="{{ url }}" rel="bookmark"></a>
+</div>

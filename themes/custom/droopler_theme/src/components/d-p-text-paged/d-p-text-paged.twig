@@ -1,0 +1,52 @@
+{{ attach_library('droopler_theme/d-p-text-paged') }}
+
+{% set base_class = d_p_text_paged_base_class|default('d-p-text-paged') %}
+{% set modifiers = d_p_text_paged_modifiers|default([]) %}
+{% set additional_classes = additional_classes|default([]) %}
+{% set component_attributes = component_attributes|default([]) %}
+
+{% set content_wrapper_additiona_classes = ['row'] %}
+{% if text_align == 'center' or text_align == 'end' %}
+  {% set content_wrapper_additiona_classes = content_wrapper_additiona_classes|merge(['justify-content-' ~ text_align]) %}
+{% endif %}
+
+{% set content_additional_classes = [
+  columns['column_count_desktop'] ? 'col-lg-' ~ columns['column_count_desktop'],
+  columns['column_count_tablet'] ? 'col-sm-' ~ columns['column_count_tablet'],
+  columns['column_count_mobile'] ? 'col-' ~ columns['column_count_mobile'],
+] %}
+
+<section {{ bem(base_class, modifiers, '', additional_classes, component_attributes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {%  if block('background')|spaceless %}
+    <div {{ bem('background', [], base_class) }}>
+      <div {{ bem('background-media', [], base_class) }}>
+        {% block background %}
+        {% endblock %}
+      </div>
+
+      <div {{ bem('background-overlay', [], base_class) }}>
+        {% include '@droopler_theme/base/overlay/overlay.twig'%}
+      </div>
+    </div>
+  {% endif %}
+
+  <div {{ bem('content', [], base_class, ['container', 'text-' ~ text_align]) }}>
+    <div {{ bem('content-wrapper', [], base_class, content_wrapper_additiona_classes) }}>
+      <div {{ bem('content-column', [], base_class, content_additional_classes) }}>
+        {% block header %}
+        {% endblock %}
+
+        {% include "@droopler_theme/base/divider/divider.twig" %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% block cta %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>

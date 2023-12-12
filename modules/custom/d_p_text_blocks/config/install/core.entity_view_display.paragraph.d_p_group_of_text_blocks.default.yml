@@ -10,22 +10,23 @@ dependencies:
     - field.field.paragraph.d_p_group_of_text_blocks.field_d_settings
     - paragraphs.paragraphs_type.d_p_group_of_text_blocks
   module:
+    - d_p
     - entity_reference_revisions
     - field_group
-    - link
     - text
 third_party_settings:
   field_group:
     group_d_text_blocks_cta:
       children:
         - field_d_cta_link
+      label: 'Call to Action'
       parent_name: ''
-      weight: 5
-      format_type: html_element
       region: content
+      weight: 4
+      format_type: html_element
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -33,19 +34,57 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'Call to Action'
-    group_d_text_blocks_content:
+    group_d_text_blocks_reference:
+      children:
+        - field_d_p_tb_block_reference
+      label: 'Blocks reference'
+      parent_name: ''
+      region: content
+      weight: 3
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_body_text:
+      children:
+        - field_d_long_text
+      label: 'Body text'
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_header:
       children:
         - field_d_media_icon
         - field_d_main_title
-        - field_d_long_text
+      label: Header
       parent_name: ''
+      region: content
       weight: 0
       format_type: html_element
-      region: content
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -53,14 +92,13 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: Basic
 id: paragraph.d_p_group_of_text_blocks.default
 targetEntityType: paragraph
 bundle: d_p_group_of_text_blocks
 mode: default
 content:
   field_d_cta_link:
-    weight: 5
+    type: button_link_formatter
     label: hidden
     settings:
       trim_length: 80
@@ -69,40 +107,40 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 5
     region: content
   field_d_long_text:
-    weight: 3
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 4
     region: content
   field_d_main_title:
-    weight: 2
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   field_d_media_icon:
-    weight: 1
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: d_icon
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 1
     region: content
   field_d_p_tb_block_reference:
     type: entity_reference_revisions_entity_view
-    weight: 4
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
   field_d_settings: true

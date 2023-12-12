@@ -4,3 +4,4 @@ services:
     arguments:
       - '@database'
       - '@entity_type.manager'
+      - '@entity_display.repository'

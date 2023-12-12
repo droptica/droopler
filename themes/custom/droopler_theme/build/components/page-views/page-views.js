@@ -1,0 +1,2 @@
+!function(e,i){"use strict";i.behaviors.page_views_products={attach:function(i,c){var t=e(".mobile-filter",i),s=e(".mobile-filter-close",i),l=e(".page-views__aside",i);t.click((function(){l.css("left",0)})),s.click((function(){l.css("left","-100%")}))}}}(jQuery,Drupal);
+//# sourceMappingURL=page-views.js.map

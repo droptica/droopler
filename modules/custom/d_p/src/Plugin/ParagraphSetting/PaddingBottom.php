@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -22,7 +24,7 @@ class PaddingBottom extends ParagraphSettingPluginBase implements ParagraphSetti
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     $element = parent::formElement();
 
     return [
@@ -37,10 +39,11 @@ class PaddingBottom extends ParagraphSettingPluginBase implements ParagraphSetti
    */
   public function getOptions(): array {
     return [
-      'padding-bottom-default' => $this->t('Default'),
-      'padding-bottom-small' => $this->t('Small'),
-      'padding-bottom-big' => $this->t('Big'),
       'padding-bottom-none' => $this->t('None'),
+      'padding-bottom-small' => $this->t('Small'),
+      'padding-bottom-medium' => $this->t('Medium'),
+      'padding-bottom-large' => $this->t('Large'),
+      'padding-bottom-extra-large' => $this->t('Extra large'),
     ];
   }
 
@@ -48,7 +51,7 @@ class PaddingBottom extends ParagraphSettingPluginBase implements ParagraphSetti
    * {@inheritdoc}
    */
   public function getDefaultValue() {
-    return 'padding-bottom-default';
+    return 'padding-bottom-medium';
   }
 
 }

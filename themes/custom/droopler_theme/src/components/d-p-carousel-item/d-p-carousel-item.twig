@@ -1,0 +1,28 @@
+{{ attach_library('droopler_theme/d-p-carousel-item') }}
+
+{% set base_class = d_p_carousel_item_base_class|default('d-p-carousel-item') %}
+{% set modifiers = d_p_carousel_item_modifiers|default([]) %}
+{% set link = d_p_carousel_item_link|default('') %}
+
+<div {{ bem(base_class, modifiers) }} {{ link ? 'data-has-link' }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    {% block content %}
+    {% endblock %}
+
+    {% set has_description = block('description')|render|striptags|trim is not empty %}
+
+    {% if has_description %}
+      {% include '@droopler_theme/base/divider/divider.twig' %}
+      
+      {% block description %}
+      {% endblock %}
+    {% endif %}
+
+    {% if link %}
+      <a {{ bem('link', [], base_class) }} href="{{ link }}"></a>
+    {% endif %}
+  </div>
+</div>

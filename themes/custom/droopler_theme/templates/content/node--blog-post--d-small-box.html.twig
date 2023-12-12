@@ -1,0 +1,9 @@
+{% embed '@droopler_theme/small-box/small-box.twig' with {
+  small_box_title: label,
+  small_box_description: 'Details'|t,
+  small_box_link_to_content: url
+} %}
+  {% block content %}
+    {{ content.group_d_content }}
+  {% endblock %}
+{% endembed %}

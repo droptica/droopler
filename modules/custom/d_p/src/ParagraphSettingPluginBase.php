@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -9,17 +11,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides base plugin implementation for paragraph setting plugins.
- *
- * @package Drupal\d_p
  */
 abstract class ParagraphSettingPluginBase extends PluginBase implements ParagraphSettingInterface, ContainerFactoryPluginInterface {
+
 
   /**
    * Paragraph setting plugin manager.
    *
    * @var \Drupal\d_p\ParagraphSettingPluginManagerInterface
    */
-  protected $settingManager;
+  protected ParagraphSettingPluginManagerInterface $settingManager;
 
   /**
    * Constructs paragraph plugin instance.
@@ -61,10 +62,10 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     return [
       '#title' => $this->label(),
-      "#default_value" => $this->getDefaultValue(),
+      '#default_value' => $this->getDefaultValue(),
       '#weight' => $this->getWeight(),
       '#plugin' => $this,
     ];
@@ -137,6 +138,13 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
    * {@inheritdoc}
    */
   public function getValidationRulesDefinition(): array {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPluginSettingsForm(array $values = []): array {
     return [];
   }
 

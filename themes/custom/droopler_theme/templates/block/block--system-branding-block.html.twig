@@ -1,20 +1,25 @@
 {#
 /**
  * @file
- * Droopler's theme implementation for a branding block.
- *
- * Each branding element variable (logo, name, slogan) is only available if
- * enabled in the block configuration.
- *
- * Available variables:
- * - site_logo: Logo for site as defined in Appearance or theme settings.
- * - site_name: Name for site as defined in Site information settings.
- * - site_slogan: Slogan for site as defined in Site information settings.
+ * Template for the branding block.
  */
 #}
-{% set attributes = attributes.addClass('site-branding') %}
-  {% if site_logo %}
-    <a href="{{ path('<front>') }}" title="{{ 'Skip to the home page'|t }}" rel="home" class="float-left site-logo logo-{{ site_logo|split('.')|last }}">
-      <img src="{{ site_logo }}" alt="{{ 'Skip to the home page'|t }}" />
-    </a>
-  {% endif %}
+{% embed '@radix/block/block.twig' with {
+  html_tag: 'div',
+  utility_classes: [
+    'block--system-branding',
+  ],
+} %}
+
+  {% block content %}
+    {% include '@droopler_theme/navbar/navbar-brand.twig' with {
+      image: site_logo,
+      width: '100%',
+      height: 'auto',
+      path: path('<front>'),
+      alt: 'Skip to the home page',
+      title: 'Skip to the home page',
+    } %}
+  {% endblock %}
+
+{% endembed %}

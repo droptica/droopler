@@ -1,0 +1,25 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-side-tiles/d-p-side-tiles.twig' with {
+      tiles_side: paragraph.tilesSide
+    } %}
+      {% block gallery %}
+        {{ content.group_d_side_tiles_gallery }}
+      {% endblock %}
+
+      {% block content_header %}
+        {{ content.group_d_side_tiles_content_head }}
+      {% endblock %}
+
+      {% block content %}
+        {{ content.group_d_side_tiles_content }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_d_side_tiles_gallery', 'group_d_side_tiles_content_head', 'group_d_side_tiles_content') }}
+  {% endblock %}
+
+{% endembed %}

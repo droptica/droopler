@@ -5,6 +5,8 @@
  * Contains d_demo module.
  */
 
+declare(strict_types = 1);
+
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -19,28 +21,69 @@ function d_demo_content_structure_alter(&$structure, $context) {
       'weight' => -50,
     ];
     $structure['invest'] = ['file' => "$path/invest.yml"];
+
     $structure['services'] = [
       'file' => "$path/services.yml",
       'link' => 'Services',
       'weight' => 20,
+      'children' => [
+        'services_engine_testing_services' => [
+          'file' => "$path/services_engine_testing_services.yml",
+          'link' => 'Engine testing services',
+          'weight' => 1,
+        ],
+        'services_engine_repair' => [
+          'file' => "$path/services_engine_repair.yml",
+          'link' => 'Engine repair',
+          'weight' => 2,
+        ],
+        'services_engine_oil_change' => [
+          'file' => "$path/services_engine_oil_change.yml",
+          'link' => 'Engine oil change',
+          'weight' => 3,
+        ],
+        'services_regular_servicing' => [
+          'file' => "$path/services_regular_servicing.yml",
+          'link' => 'Regular servicing',
+          'weight' => 4,
+        ],
+        'services_engine_installation' => [
+          'file' => "$path/services_engine_installation.yml",
+          'link' => 'Engine installation',
+          'weight' => 5,
+        ],
+        'services_engine_repair_and_overhaul' => [
+          'file' => "$path/services_engine_repair_and_overhaul.yml",
+          'link' => 'Engine repair and overhaul',
+          'weight' => 6,
+        ],
+        'services_ad_hoc_engine_repairs' => [
+          'file' => "$path/services_ad_hoc_engine_repairs.yml",
+          'link' => 'Ad-hoc engine repairs',
+          'weight' => 7,
+        ],
+        'services_engine_overhaul' => [
+          'file' => "$path/services_engine_overhaul.yml",
+          'link' => 'Engine overhaul',
+          'weight' => 8,
+        ],
+        'services_monitoring_and_assessment' => [
+          'file' => "$path/services_monitoring_and_assessment.yml",
+          'link' => 'Monitoring and assessment',
+          'weight' => 9,
+        ],
+      ],
     ];
-    $structure['services_engine_installation'] = ['file' => "$path/services_engine_installation.yml"];
-    $structure['services_engine_overhaul'] = ['file' => "$path/services_engine_overhaul.yml"];
-    $structure['services_monitoring_and_assessment'] = ['file' => "$path/services_monitoring_and_assessment.yml"];
-    $structure['services_engine_repair_and_overhaul'] = ['file' => "$path/services_engine_repair_and_overhaul.yml"];
-    $structure['services_engine_repair'] = ['file' => "$path/services_engine_repair.yml"];
-    $structure['services_engine_oil_change'] = ['file' => "$path/services_engine_oil_change.yml"];
-    $structure['services_engine_testing_services'] = ['file' => "$path/services_engine_testing_services.yml"];
+
     $structure['services_for_aircrafts'] = ['file' => "$path/services_for_aircrafts.yml"];
     $structure['services_for_boats'] = ['file' => "$path/services_for_boats.yml"];
     $structure['services_for_cars'] = ['file' => "$path/services_for_cars.yml"];
-    $structure['services_regular_servicing '] = ['file' => "$path/services_regular_servicing.yml"];
-    $structure['services_ad_hoc_engine_repairs'] = ['file' => "$path/services_ad_hoc_engine_repairs.yml"];
-    $structure['services_regular_servicing'] = ['file' => "$path/services_regular_servicing.yml"];
     $structure['services_for_spacecrafts'] = ['file' => "$path/services_for_spacecrafts.yml"];
+
     $structure['contact'] = ['file' => "$path/contact.yml"];
     $structure['about_us'] = ['file' => "$path/about_us.yml"];
     $structure['careers'] = ['file' => "$path/careers.yml"];
+
     $structure['engines_car'] = [
       'file' => "$path/engines_car.yml",
       'link' => 'Car Engines',
@@ -62,12 +105,15 @@ function d_demo_content_structure_alter(&$structure, $context) {
       'file' => "$path/engines_boat.yml",
       'link' => 'Boat Engines',
       'parent' => 'd_demo.engines',
+      'weight' => 3,
     ];
     $structure['engines_aircraft'] = [
       'file' => "$path/engines_aircraft.yml",
       'link' => 'Aircraft Engines',
       'parent' => 'd_demo.engines',
+      'weight' => 4,
     ];
+
     $structure['gdpr'] = ['file' => "$path/gdpr.yml"];
     $structure['terms_of_service'] = ['file' => "$path/terms_of_service.yml"];
     $structure['privacy_policy'] = ['file' => "$path/privacy_policy.yml"];
@@ -79,12 +125,6 @@ function d_demo_content_structure_alter(&$structure, $context) {
  */
 function d_demo_block_structure_alter(&$structure, $context) {
   $path = \Drupal::service('extension.path.resolver')->getPath('module', 'd_demo') . '/blocks';
-  if ($context == 'block_second_run') {
-    $structure['cars'] = ['file' => "$path/mega_submenu_services_for_cars.yml"];
-    $structure['boats'] = ['file' => "$path/mega_submenu_services_for_boats.yml"];
-    $structure['aircrafts'] = ['file' => "$path/mega_submenu_services_for_aircrafts.yml"];
-    $structure['spacecrafts'] = ['file' => "$path/mega_submenu_services_for_spacecrafts.yml"];
-  }
 
   if ($context == 'all') {
     $structure['footer_office_1'] = ['file' => "$path/footer_office_1.yml"];
@@ -94,6 +134,7 @@ function d_demo_block_structure_alter(&$structure, $context) {
     $structure['footer_others'] = ['file' => "$path/footer_others.yml"];
     $structure['footer_secondary_menu'] = ['file' => "$path/footer_secondary_menu.yml"];
     $structure['d_social_media_footer'] = ['file' => "$path/d_social_media_footer.yml"];
+    $structure['header_search_link'] = ['file' => "$path/header_search_link.yml"];
     $structure['secondary_menu'] = ['file' => "$path/secondary_menu.yml"];
     $structure['bottom_footer_menu'] = ['file' => "$path/bottom_footer_menu.yml"];
   }
@@ -114,7 +155,6 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
             case 'textfield':
             case 'email':
               $formElement['#attributes']['placeholder'] = $formElement['#title'];
-              $formElement['#title_display'] = 'invisible';
               break;
 
             case 'item':
@@ -122,7 +162,10 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
               if (!empty($formElement['widget']['#title'])) {
                 $title = $formElement['widget']['#title'];
                 $formElement['widget'][0]['value']['#attributes']['placeholder'] = $title;
-                $formElement['widget'][0]['value']['#title_display'] = 'invisible';
+
+                if ($formElement['widget'][0]['value']['#type'] != 'textfield') {
+                  $formElement['widget'][0]['value']['#title_display'] = 'invisible';
+                }
               }
               break;
           }
@@ -145,14 +188,12 @@ function d_demo_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
         $wrapper['name']['#disabled'] = TRUE;
         $wrapper['name']['#required'] = TRUE;
         $wrapper['name']['#attributes']['placeholder'] = $wrapper['name']['#title'];
-        $wrapper['name']['#title_display'] = 'invisible';
       }
       if ($wrapper['mail']['#type'] == 'item') {
         $wrapper['mail']['#type'] = 'textfield';
         $wrapper['mail']['#disabled'] = TRUE;
         $wrapper['mail']['#required'] = TRUE;
         $wrapper['mail']['#attributes']['placeholder'] = $wrapper['mail']['#title'];
-        $wrapper['mail']['#title_display'] = 'invisible';
       }
 
       $form['name_and_mail'] = $wrapper;

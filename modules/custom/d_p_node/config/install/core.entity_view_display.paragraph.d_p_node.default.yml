@@ -8,29 +8,44 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_node
   module:
     - entity_reference_display
+    - field_group
+third_party_settings:
+  field_group:
+    group_d_content:
+      children:
+        - field_d_node_reference
+      label: Content
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: paragraph.d_p_node.default
 targetEntityType: paragraph
 bundle: d_p_node
 mode: default
 content:
   field_d_node_reference:
-    weight: 0
+    type: entity_reference_display_default
     label: hidden
     settings:
-      display_field: ''
       view_mode: default
       link: false
+      display_field: ''
     third_party_settings: {  }
-    type: entity_reference_display_default
-    region: content
-  field_d_settings:
     weight: 1
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
     region: content
 hidden:
   field_d_display_mode: true
+  field_d_settings: true
   search_api_excerpt: true

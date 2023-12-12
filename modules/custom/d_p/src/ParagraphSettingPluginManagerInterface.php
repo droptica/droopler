@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p;
 
 /**
  * Provides interface for paragraph setting plugin manager.
- *
- * @package Drupal\d_p
  */
 interface ParagraphSettingPluginManagerInterface {
 
@@ -54,10 +54,13 @@ interface ParagraphSettingPluginManagerInterface {
   /**
    * Getter for settings form built from all plugin instances.
    *
+   * @param array $plugins_settings
+   *   Array of plugins settings to be applied to the form element.
+   *
    * @return array
    *   Form elements.
    */
-  public function getSettingsForm(): array;
+  public function getSettingsForm(array $plugins_settings = []): array;
 
   /**
    * Getter for settings form available options built from all plugin instances.

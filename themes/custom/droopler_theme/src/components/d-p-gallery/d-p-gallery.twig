@@ -1,0 +1,31 @@
+{{ attach_library('droopler_theme/d-p-gallery') }}
+
+{% set base_class = d_p_gallery_base_class|default('d-p-gallery') %}
+{% set modifiers = d_p_gallery_modifiers|default([]) %}
+
+<section {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class, ['container', 'first-child-no-spacer']) }}>
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', [], base_class, ['col-12']) }}>
+        {% block header %}
+        {% endblock %}
+
+        {% include "@droopler_theme/base/divider/divider.twig" %}
+
+        {% block content %}
+        {% endblock %}
+
+        <div {{ bem('items', [], base_class) }}>
+          {% block items %}
+          {% endblock %}
+        </div>
+
+        {% block cta %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>

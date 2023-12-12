@@ -1,0 +1,27 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-form/d-p-form.twig' with { 'form_placement': paragraph.getFormLayout } %}
+      {% block background %}
+        {{ content.group_d_form_background }}
+      {% endblock %}
+
+      {% block header %}
+        {{ content.group_d_form_header }}
+      {% endblock %}
+
+      {% block content %}
+        {{ content.group_d_form_content }}
+      {% endblock %}
+
+      {% block form %}
+        {{ content.group_d_form_fields }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_d_form_background', 'group_d_form_header', 'group_d_form_content', 'group_d_form_fields') }}
+  {% endblock %}
+
+{% endembed %}

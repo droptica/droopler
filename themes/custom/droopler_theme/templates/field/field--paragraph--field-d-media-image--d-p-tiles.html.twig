@@ -1,0 +1,9 @@
+{% embed "@droopler_theme/tiles-gallery/tiles-gallery.twig" with {
+  tiles_gallery_modifiers: ['quarter-width-sizer'],
+}%}
+  {% block items %}
+    {% for item in items %}
+      {{ item.content }}
+    {% endfor %}
+  {% endblock %}
+{% endembed %}

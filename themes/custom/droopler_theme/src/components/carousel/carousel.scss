@@ -1,0 +1,61 @@
+@import "../../scss/init";
+@import "../../scss/base/variables/slick";
+@import "@library/slick-carousel/slick/slick-theme";
+
+:root {
+  --slick-arrow-size: 40px;
+  --slick-arrow-opacity: 0.2;
+  --slick-arrow-hover-opacity: 0.3;
+  --slick-arrow-disabled-opacity: 0.1;
+  --slick-arrow-position-mobile: 0;
+  --slick-arrow-position-desktop: calc((45px - (3rem * 0.5)) * -1);
+  --slick-arrow-position-desktop-full-width: calc(45px - (3rem * 0.5));
+}
+
+.slick {
+  &-prev,
+  &-next {
+    width: var(--slick-arrow-size);
+    height: var(--slick-arrow-size);
+    opacity: var(--slick-arrow-opacity);
+
+    &::before {
+      font-size: var(--slick-arrow-size);
+    }
+
+    &:hover {
+      opacity: var(--slick-arrow-hover-opacity);
+    }
+
+    &-disabled {
+      opacity: var(--slick-arrow-disabled-opacity);
+      cursor: default;
+    }
+  }
+
+  &-prev {
+    z-index: 1;
+    left: var(--slick-arrow-position-mobile);
+
+    @include media-breakpoint-up(md) {
+      left: var(--slick-arrow-position-desktop);
+
+      [data-full-width="true"] & {
+        left: var(--slick-arrow-position-desktop-full-width);
+      }
+    }
+  }
+
+  &-next {
+    z-index: 1;
+    right: var(--slick-arrow-position-mobile);
+
+    @include media-breakpoint-up(md) {
+      right: var(--slick-arrow-position-desktop);
+
+      [data-full-width="true"] & {
+        right: var(--slick-arrow-position-desktop-full-width);
+      }
+    }
+  }
+}

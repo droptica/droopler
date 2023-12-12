@@ -1,0 +1,6 @@
+{% include '@droopler_theme/block-facets/block-facets.twig' with {
+  block_facets_modifiers: [
+    'filter-block',
+    content[0]['#facet'].fieldIdentifier|replace({'_': '-'})
+  ]
+} %}

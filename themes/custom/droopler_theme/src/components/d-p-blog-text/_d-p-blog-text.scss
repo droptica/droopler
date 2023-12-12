@@ -1,0 +1,12 @@
+@import "../../scss/init";
+
+.d-p-blog-text {
+  --body-text-font-size: 1.25rem;
+
+  width: 85%;
+  margin: var(--content-spacer-m) auto;
+
+  @include media-breakpoint-up(md) {
+    width: 44em;
+  }
+}

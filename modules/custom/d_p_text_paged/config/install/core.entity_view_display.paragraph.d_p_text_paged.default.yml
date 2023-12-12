@@ -5,6 +5,7 @@ dependencies:
     - field.field.paragraph.d_p_text_paged.field_d_cta_link
     - field.field.paragraph.d_p_text_paged.field_d_long_text
     - field.field.paragraph.d_p_text_paged.field_d_main_title
+    - field.field.paragraph.d_p_text_paged.field_d_media_background_image
     - field.field.paragraph.d_p_text_paged.field_d_media_icon
     - field.field.paragraph.d_p_text_paged.field_d_settings
     - field.field.paragraph.d_p_text_paged.field_d_subtitle
@@ -12,23 +13,20 @@ dependencies:
   module:
     - d_p
     - field_group
-    - link
     - text
 third_party_settings:
   field_group:
     group_d_text_paged_content:
       children:
-        - field_d_media_icon
-        - field_d_main_title
-        - field_d_subtitle
         - field_d_long_text
+      label: 'Text paged content'
       parent_name: ''
-      weight: 0
-      format_type: html_element
       region: content
+      weight: 1
+      format_type: html_element
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -36,17 +34,17 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'Text paged content'
     group_d_text_paged_cta:
       children:
         - field_d_cta_link
+      label: 'Call To Action'
       parent_name: ''
-      weight: 1
-      format_type: html_element
       region: content
+      weight: 3
+      format_type: html_element
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -54,62 +52,110 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'Call To Action'
+    group_d_text_paged_header:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+        - field_d_subtitle
+      label: 'Text paged header'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_td_text_paged_background:
+      children:
+        - field_d_media_background_image
+      label: 'Text paged background'
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: paragraph.d_p_text_paged.default
 targetEntityType: paragraph
 bundle: d_p_text_paged
 mode: default
 content:
   field_d_cta_link:
-    weight: 4
+    type: button_link_formatter
     label: hidden
     settings:
       trim_length: 80
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
-    type: link
+    weight: 4
     region: content
   field_d_long_text:
-    weight: 3
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 3
     region: content
   field_d_main_title:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
+    region: content
+  field_d_media_background_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: text_paged
+      link: false
+    third_party_settings: {  }
+    weight: 3
     region: content
   field_d_media_icon:
-    weight: 0
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: d_icon
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 0
     region: content
   field_d_settings:
-    weight: 5
+    type: field_configuration_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: field_configuration_formatter
+    weight: 4
     region: content
   field_d_subtitle:
-    weight: 2
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
 hidden:
   search_api_excerpt: true

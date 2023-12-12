@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\Field;
+
+use Drupal\d_p\Enum\ParagraphSettingInterface;
 
 /**
  * Provides interface for configuration storage field item list.
- *
- * @package Drupal\d_p\Plugin\Field
  */
 interface ConfigurationStorageFieldItemListInterface {
 
@@ -81,18 +83,18 @@ interface ConfigurationStorageFieldItemListInterface {
   /**
    * Check if the given setting exists.
    *
-   * @param string $setting_name
+   * @param \Drupal\d_p\Enum\ParagraphSettingInterface $setting_name
    *   Setting name to be searched.
    *
    * @return bool
    *   True if setting was found, false otherwise.
    */
-  public function hasSettingValue(string $setting_name): bool;
+  public function hasSettingValue(ParagraphSettingInterface $setting_name): bool;
 
   /**
    * Returns given setting value if available.
    *
-   * @param string $setting_name
+   * @param \Drupal\d_p\Enum\ParagraphSettingInterface $setting_name
    *   Setting name.
    * @param mixed|null $default
    *   Default value to be used.
@@ -100,18 +102,18 @@ interface ConfigurationStorageFieldItemListInterface {
    * @return mixed|null
    *   Setting value or default if not found or empty.
    */
-  public function getSettingValue(string $setting_name, $default = NULL);
+  public function getSettingValue(ParagraphSettingInterface $setting_name, $default = NULL);
 
   /**
    * Setter for setting value.
    *
-   * @param string $name
+   * @param \Drupal\d_p\Enum\ParagraphSettingInterface $name
    *   Setting name.
    * @param mixed $value
    *   Setting value.
    *
    * @return $this
    */
-  public function setSettingValue(string $name, $value): self;
+  public function setSettingValue(ParagraphSettingInterface $name, $value): self;
 
 }

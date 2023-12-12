@@ -1,17 +1,20 @@
 name: 'Droopler Reference Content Paragraph'
 type: module
-core_version_requirement: ^10
+core_version_requirement: '^9.4 || ^10'
 dependencies:
   - 'droopler:d_media'
   - 'droopler:d_p'
   - 'drupal:field'
+  - 'drupal:image'
   - 'drupal:link'
+  - 'drupal:media'
   - 'drupal:media_library'
   - 'drupal:node'
   - 'drupal:text'
   - 'field_group:field_group'
   - 'link_attributes:link_attributes'
   - 'paragraphs:paragraphs'
+  - 'svg_image:svg_image'
 version: DROOPLER_VERSION
 package: 'Droopler Paragraphs'
 core_incompatible: false

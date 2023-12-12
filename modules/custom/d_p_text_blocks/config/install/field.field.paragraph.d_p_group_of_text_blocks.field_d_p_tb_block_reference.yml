@@ -21,17 +21,11 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       d_p_single_text_block: d_p_single_text_block
       d_p_node: d_p_node
+    negate: 0
     target_bundles_drag_drop:
-      d_p_group_of_text_blocks:
-        weight: 7
-        enabled: false
-      d_p_single_text_block:
-        enabled: true
-        weight: 10
       d_p_banner:
         weight: 21
         enabled: false
@@ -56,19 +50,22 @@ settings:
       d_p_group_of_counters:
         weight: 28
         enabled: false
+      d_p_group_of_text_blocks:
+        weight: 7
+        enabled: false
       d_p_node:
-        enabled: true
         weight: 30
+        enabled: true
       d_p_reference_content:
         weight: 31
+        enabled: false
+      d_p_side_by_side:
+        weight: 33
         enabled: false
       d_p_side_embed:
         weight: 32
         enabled: false
       d_p_side_image:
-        weight: 33
-        enabled: false
-      d_p_side_by_side:
         weight: 33
         enabled: false
       d_p_side_tiles:
@@ -77,14 +74,14 @@ settings:
       d_p_single_counter:
         weight: 35
         enabled: false
+      d_p_single_text_block:
+        weight: 10
+        enabled: true
       d_p_subscribe_file:
         weight: 37
         enabled: false
       d_p_text_paged:
         weight: 38
-        enabled: false
-      d_p_text_with_bckg:
-        weight: 39
         enabled: false
       d_p_tiles:
         weight: 40

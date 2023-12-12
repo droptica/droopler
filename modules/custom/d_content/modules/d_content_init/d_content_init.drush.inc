@@ -5,6 +5,8 @@
  * Contains the code to generate the custom drush commands.
  */
 
+declare(strict_types = 1);
+
 /**
  * Implements hook_drush_command().
  */

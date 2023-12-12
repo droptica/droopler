@@ -1,0 +1,7 @@
+{% embed "@droopler_theme/cta-links/cta-links.twig" %}
+  {% block links %}
+    {% for item in items %}
+      {{ item.content }}
+    {% endfor %}
+  {% endblock %}
+{% endembed %}

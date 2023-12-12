@@ -1,0 +1,10 @@
+{% embed '@droopler_theme/d-p-carousel-item/d-p-carousel-item.twig' with {
+  d_p_carousel_item_link: paragraph.link
+} %}
+  {% block content %}
+    {{ content.group_d_content }}
+  {% endblock %}
+  {% block description %}
+    {{ content.group_d_description }}
+  {% endblock %}
+{% endembed %}

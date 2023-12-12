@@ -1,0 +1,9 @@
+@import "../../scss/init";
+
+.page {
+  &__content-wrapper {
+    --heading-margin: 0 0 var(--content-spacer-s) 0;
+
+    margin: var(--content-spacer-l) var(--content-spacer-none);
+  }
+}

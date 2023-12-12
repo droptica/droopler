@@ -17,8 +17,12 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-primary
           heading_type: h1
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -30,7 +34,11 @@ field_page_section:
           data: '<p>This paragraph allows you to show a list of content. By default, you can see the latest blog post. If you want to show some other nodes, you can select them in the edit form.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_reference_content
       data:
@@ -52,14 +60,10 @@ field_page_section:
             link: 'internal:/documentation/reference-content-paragraph'
             text: 'View all'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-5
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-light
 field_teaser_media_image:
   type: media_image
   directory: demo

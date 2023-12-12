@@ -1,0 +1,12 @@
+{{ attach_library('droopler_theme/menu') }}
+
+{% set base_class = menu_base_class|default('menu') %}
+{% set modifiers = menu_modifiers|default([]) %}
+
+<ul {{ bem(base_class, (modifiers)) }} >
+  {% for item in items %}
+    {% include "@droopler_theme/menu-item/menu-item.twig" with {
+      item: item
+    } %}
+  {% endfor %}
+</ul>

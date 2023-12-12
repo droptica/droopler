@@ -1,0 +1,58 @@
+{{ attach_library('droopler_theme/d-p-group-of-counters') }}
+
+{% set base_class = d_p_group_of_counters_base_class|default('d-p-group-of-counters') %}
+{% set modifiers = d_p_group_of_counters_modifiers|default([]) %}
+
+{% set items_classes = [
+  'row',
+  columns.column_count_desktop ? 'row-cols-lg-' ~ columns.column_count_desktop,
+  columns.column_count_tablet ? 'row-cols-md-' ~ columns.column_count_tablet,
+  columns.column_count_mobile ? 'row-cols-' ~ columns.column_count_mobile,
+] %}
+
+<section {{ bem(base_class, (modifiers)) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('background', [], base_class) }}>
+    <div {{ bem('background-media', [], base_class) }}>
+      {% block background %}
+      {% endblock %}
+    </div>
+
+    <div {{ bem('background-overlay', [], base_class) }}>
+      {% include '@droopler_theme/base/overlay/overlay.twig'%}
+    </div>
+  </div>
+
+  <div {{ bem('content', [], base_class, ['container']) }}>
+    {% if block('header')|spaceless %}
+      <div {{ bem('header', [], base_class) }}>
+        <div {{ bem('header-wrapper', [], base_class, ['row']) }}>
+          <div {{ bem('header-column', [], base_class, ['col-12']) }}>
+            {% block header %}
+            {% endblock %}
+
+            {% include "@droopler_theme/base/divider/divider.twig" %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div {{ bem('items', [], base_class) }}>
+      <div {{ bem('items-wrapper', [], base_class, items_classes) }}>
+        {% block items %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div {{ bem('footer', [], base_class) }}>
+      <div {{ bem('footer-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('footer-column', [], base_class, ['col-12']) }}>
+          {% block cta %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

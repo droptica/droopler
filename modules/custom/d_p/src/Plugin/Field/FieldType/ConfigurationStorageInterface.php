@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\Field\FieldType;
 
 use Drupal\Core\Entity\FieldableEntityInterface;
@@ -7,8 +9,6 @@ use Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface;
 
 /**
  * Provides interface for configuration storage field.
- *
- * @package Drupal\d_p\Plugin\Field\FieldType
  */
 interface ConfigurationStorageInterface {
 
@@ -23,6 +23,6 @@ interface ConfigurationStorageInterface {
    *
    * @throws \Drupal\d_p\Exception\MissingConfigurationStorageFieldException
    */
-  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity):? ConfigurationStorageFieldItemListInterface;
+  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity): ?ConfigurationStorageFieldItemListInterface;
 
 }

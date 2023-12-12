@@ -1,0 +1,14 @@
+{{ attach_library('d_p_counters/in-viewport') }}
+{{ attach_library('d_p_counters/countup') }}
+{{ attach_library('droopler_theme/counter') }}
+
+{% set base_class = d_p_counter_base_class|default('d-p-counter') %}
+{% set modifiers = d_p_counter_modifiers|default([]) %}
+{% set additional_classes = (d_p_counter_additional_classes|default([])|merge(['col'])) %}
+
+<div {{ bem(base_class, modifiers, '', additional_classes) }}>
+  <div {{ bem('content', [], base_class) }}>
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>

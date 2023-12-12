@@ -1,0 +1,22 @@
+:root {
+  --footer-primary-padding-top: 3rem;
+  --footer-primary-padding-bottom: 3rem;
+}
+
+.footer-primary {
+  padding-top: var(--footer-primary-padding-top);
+  padding-bottom: var(--footer-primary-padding-bottom);
+  background-color: var(--footer-primary-background-color);
+
+  &__content-wrapper {
+    margin-top: calc(var(--content-spacer-m) * -1);
+  }
+
+  .block {
+    margin-top: var(--content-spacer-m);
+
+    .divider {
+      display: none;
+    }
+  }
+}

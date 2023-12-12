@@ -1,0 +1,29 @@
+{{ attach_library('droopler_theme/d-p-single-text-block') }}
+
+{% set base_class = d_p_single_text_blocks_base_class|default('d-p-single-text-block') %}
+{% set modifiers = d_p_single_text_blocks_modifiers|default([])|merge([
+  has_background ? 'has-media-background',
+]) %}
+{% set additional_classes = d_p_single_text_block_additional_classes|default([]) %}
+{% set styles = customTheme|join(';') %}
+
+<div {{ bem(base_class, modifiers, '', additional_classes) }} style="{{ styles }}">
+  {% block background %}
+  {% endblock %}
+
+  <div {{ bem('content', [], base_class) }}>
+    {% block header %}
+    {% endblock %}
+
+    {% include "@droopler_theme/base/divider/divider.twig" %}
+
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  {% if with_price %}
+    {% include "@droopler_theme/price-block/price-block.twig" with {
+      sidebar: with_price_in_sidebar
+    } %}
+  {% endif %}
+</div>

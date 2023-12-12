@@ -1,0 +1,20 @@
+:root {
+  --social-media-item-padding: 1rem;
+  --social-media-item-border-width: 1px;
+  --social-media-item-font-size: 2rem;
+  --social-media-item-margin-left: 0;
+}
+
+.social-media-item {
+  border-left: var(--social-media-item-border-width) solid var(--social-media-border-color);
+  margin-left: var(--social-media-item-margin-left);
+  font-size: var(--social-media-item-font-size);
+
+  &:first-child {
+    border-color: transparent;
+  }
+
+  &__icon {
+    padding: var(--social-media-item-padding);
+  }
+}

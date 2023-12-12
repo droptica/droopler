@@ -14,19 +14,41 @@ dependencies:
     - image.style.small_box_image
     - node.type.d_product
   module:
-    - media
+    - d_media
+    - field_group
     - user
+third_party_settings:
+  field_group:
+    group_d_content:
+      children:
+        - field_d_product_media
+      label: Content
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: node.d_product.d_small_box
 targetEntityType: node
 bundle: d_product
 mode: d_small_box
 content:
   field_d_product_media:
-    type: media_thumbnail
+    type: d_media_single_media
     label: hidden
     settings:
-      image_link: content
       image_style: small_box_image
+      image_link: content
       image_loading:
         attribute: lazy
     third_party_settings: {  }

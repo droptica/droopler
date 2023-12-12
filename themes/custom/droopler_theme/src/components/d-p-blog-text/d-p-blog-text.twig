@@ -1,0 +1,12 @@
+{{ attach_library('droopler_theme/d-p-blog-text') }}
+
+{% set base_class = blog_text_base_class|default('d-p-blog-text') %}
+{% set modifiers = blog_text_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% block content %}
+  {% endblock %}
+</div>

@@ -1,0 +1,7 @@
+{{ attach_library('droopler_theme/media-icon') }}
+
+{% set base_class = media_icon_base_class|default('media-icon') %}
+
+<div {{ bem(base_class) }}>
+  {{ icon }}
+</div>

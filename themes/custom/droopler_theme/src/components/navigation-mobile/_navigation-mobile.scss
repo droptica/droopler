@@ -1,0 +1,156 @@
+@import "../../scss/init";
+
+:root {
+  --navigation-mobile-level: 1; // Default value for depth level of submenus
+  --navigation-mobile-item-indentation-horizontal: 1rem;
+  --navigation-mobile-item-indentation-vertical: 0.35rem;
+}
+
+.navigation-mobile {
+  --overlay-background-color: var(--navigation-mobile-overlay-background-color);
+  --overlay-opacity: 0.2;
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height-mobile));
+  overflow: hidden;
+  pointer-events: none;
+
+  &.open {
+    pointer-events: auto;
+  }
+
+  &__overlay {
+    position: absolute;
+    right: 0;
+    width: 100vw;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+
+    @at-root .open #{&} {
+      opacity: 1;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    transform: translateX(100%);
+    overflow: auto;
+    background-color: var(--navigation-mobile-background-color);
+    transition: transform 0.75s ease-in-out;
+
+    @at-root .open #{&} {
+      transform: translateX(0);
+    }
+  }
+
+  .block,
+  .search-page-link-block {
+    &::after {
+      content: "";
+      display: block;
+      width: calc(100% - 2 * var(--navigation-mobile-item-indentation-horizontal));
+      height: 1px;
+      margin-left: var(--navigation-mobile-item-indentation-horizontal);
+      background-color: var(--navigation-mobile-block-border-color);
+    }
+  }
+
+  .menu {
+    padding-block: var(--navigation-mobile-item-indentation-vertical);
+
+    .menu-item {
+      &__element {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+      }
+
+      &__link {
+        position: relative;
+        display: inline-block;
+        flex-grow: 1;
+        padding: var(--navigation-mobile-item-indentation-vertical) var(--navigation-mobile-item-indentation-horizontal);
+        font-size: 1.25rem;
+        line-height: 2rem;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+
+      &__toggler {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 50%;
+        padding: 0.2rem var(--navigation-mobile-item-indentation-horizontal);
+      }
+    }
+  }
+
+  .submenu {
+    max-height: 0;
+    background-color: var(--navigation-mobile-submenu-background-color);
+    overflow: hidden;
+    transition: max-height 0.75s cubic-bezier(0, 1, 0, 1);
+
+    &.open {
+      max-height: 1000px;
+      transition: max-height 1s ease-in-out;
+    }
+
+    .submenu-item {
+      &:first-child {
+        margin-top: var(--navigation-mobile-item-indentation-vertical);
+      }
+
+      &:last-child {
+        margin-bottom: var(--navigation-mobile-item-indentation-vertical);
+      }
+
+      &__link {
+        padding: var(--navigation-mobile-item-indentation-vertical) var(--navigation-mobile-item-indentation-horizontal);
+        color: var(--navigation-mobile-submenu-link-color);
+
+        &:hover {
+          color: var(--navigation-mobile-submenu-link-color-hover);
+        }
+      }
+
+      &--active {
+        > .submenu-item__element > .submenu-item__link {
+          color: var(--navigation-mobile-submenu-link-color-active);
+        }
+      }
+
+      &--has-submenu {
+        .submenu-item {
+          &__element {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            padding-left: calc(var(--navigation-mobile-level) * var(--navigation-mobile-item-indentation-horizontal));
+          }
+
+          &__toggler {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 50%;
+            padding: 0.2rem var(--navigation-mobile-item-indentation-horizontal);
+          }
+        }
+      }
+    }
+  }
+
+  .search-page-link {
+    margin: var(--navigation-mobile-item-indentation-vertical) var(--navigation-mobile-item-indentation-horizontal);
+  }
+}

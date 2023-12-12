@@ -1,0 +1,68 @@
+{{ attach_library('droopler_theme/blog-teaser') }}
+
+{% set base_class = blog_teaser_base_class|default('blog-teaser') %}
+{% set modifiers = blog_teaser_modifiers|default([]) %}
+
+<article {{ bem(base_class, modifiers, '', ['container']) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('row', [], base_class, ['row']) }}>
+    <div {{ bem('header', ['mobile'], base_class, ['col-12']) }}>
+      <div {{ bem('metadata', [], base_class) }}>
+        {{ node.getCreatedTime()|date('d.m.Y') }} /
+        <div {{ bem('category', [], base_class) }}>
+          {% block category %}
+          {% endblock %}
+        </div>
+      </div>
+
+      <div {{ bem('heading', [], base_class) }}>
+        <a href="{{ url }}">
+          {% include "@droopler_theme/base/heading/heading.twig" with {
+            heading_tag: 'h2',
+            label: label,
+          } %}
+        </a>
+      </div>
+      {% include "@droopler_theme/base/divider/divider.twig" %}
+    </div>
+
+    <div {{ bem('image', [], base_class, ['col-md-7', 'col-xl-6']) }}>
+      <a href="{{ url }}">
+        {% block image %}
+        {% endblock %}
+      </a>
+    </div>
+
+    <div {{ bem('content', [], base_class, ['col-md-5', 'col-xl-5', 'offset-xl-1']) }}>
+      <div {{ bem('header', ['desktop'], base_class) }}>
+        <div {{ bem('metadata', [], base_class) }}>
+          {{ node.getCreatedTime()|date('d.m.Y') }} /
+          <div {{ bem('category', [], base_class) }}>
+            {# Applied due to the double occurrence of this block. #}
+            {{ block('category') }}
+          </div>
+        </div>
+
+        <div {{ bem('heading', [], base_class) }}>
+          <a href="{{ url }}">
+            {% include "@droopler_theme/base/heading/heading.twig" with {
+              heading_tag: 'h2',
+              label: label,
+            } %}
+          </a>
+        </div>
+
+        {% include "@droopler_theme/base/divider/divider.twig" %}
+      </div>
+
+      {% block content %}
+      {% endblock %}
+
+      <div {{ bem('cta', [], base_class) }}>
+        <a href="{{ url }}">Read article...</a>
+      </div>
+    </div>
+  </div>
+</article>

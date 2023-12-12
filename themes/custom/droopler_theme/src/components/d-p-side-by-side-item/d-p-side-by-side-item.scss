@@ -1,0 +1,41 @@
+@import "../../scss/init";
+
+.d-p-side-by-side-item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  .media-icon + .heading {
+    margin-top: var(--content-spacer-s);
+  }
+
+  &.item-1 {
+    .media--overlay {
+      @include media-breakpoint-up(sm) {
+        margin-left: calc(100% - 50vw);
+      }
+    }
+  }
+
+  &.item-2 {
+    .media--overlay {
+      @include media-breakpoint-up(sm) {
+        margin-right: calc(100% - 50vw);
+      }
+    }
+  }
+
+  .media--overlay {
+    @include filling-absolute;
+
+    @include media-breakpoint-up(sm) {
+      width: 50vw;
+    }
+
+    img {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}

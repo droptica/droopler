@@ -1,0 +1,65 @@
+@import "../../scss/init";
+
+.d-p-side-by-side {
+  $root: &;
+
+  --side-item-padding: 7vw;
+
+  overflow-x: hidden;
+
+  &__header-row {
+    .heading {
+      margin-top: var(--content-spacer-s);
+    }
+
+    .body-text {
+      margin-top: var(--content-spacer-xs);
+    }
+  }
+
+  &__content-row {
+    display: flex;
+    margin-top: var(--content-spacer-m);
+  }
+
+  &--with-grid {
+    #{$root}__content-wrapper {
+      border-top: 2px solid var(--side-by-side-grid-color);
+      border-bottom: 2px solid var(--side-by-side-grid-color);
+    }
+    #{$root}__content-row {
+      & > div:not(:first-child) {
+        @include media-breakpoint-down(sm) {
+          border-top: 2px solid var(--side-by-side-grid-color);
+        }
+
+        @include media-breakpoint-up(sm) {
+          border-left: 2px solid var(--side-by-side-grid-color);
+        }
+      }
+    }
+  }
+
+  &__header-row,
+  &__cta-row {
+    text-align: center;
+  }
+
+  &__cta-container {
+    .cta-links {
+      margin-top: var(--content-spacer-m);
+    }
+  }
+
+  .item-1 {
+    @include media-breakpoint-up(sm) {
+      padding-right: var(--side-item-padding);
+    }
+  }
+
+  .item-2 {
+    @include media-breakpoint-up(sm) {
+      padding-left: var(--side-item-padding);
+    }
+  }
+}

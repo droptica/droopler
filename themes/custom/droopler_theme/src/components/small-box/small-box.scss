@@ -1,0 +1,36 @@
+@import "../../scss/init";
+
+.small-box {
+  text-align: center;
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--dp-bs-link-color);
+      text-decoration: underline;
+    }
+  }
+
+  &__heading {
+    margin-top: var(--content-spacer-m);
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--heading-color);
+    }
+  }
+
+  &__description {
+    margin-top: var(--content-spacer-s);
+    letter-spacing: 1.4px;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    color: var(--dp-bs-link-color);
+  }
+}

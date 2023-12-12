@@ -3,6 +3,7 @@ countup:
   version: VERSION
   license:
     name: MIT
+    url: https://github.com/inorganik/countUp.js/blob/master/LICENSE.md
     gpl-compatible: false
   js:
     /libraries/countup/dist/countUp.min.js: { minified: true }
@@ -12,6 +13,7 @@ countup-dev:
   version: VERSION
   license:
     name: MIT
+    url: https://github.com/inorganik/countUp.js/blob/master/LICENSE.md
     gpl-compatible: false
   js:
     /libraries/countup/dist/countUp.js: { }
@@ -21,17 +23,7 @@ in-viewport:
   version: VERSION
   license:
     name: MIT
+    url: https://github.com/vvo/in-viewport/blob/master/LICENSE
     gpl-compatible: false
   js:
     /libraries/in-viewport/build/in-viewport.min.js: { minified: true }
-
-d_p_counters:
-  version: VERSION
-  js:
-    js/d_p_counters.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
-    - core/jquery.once
-    - d_p_counters/in-viewport
-    - d_p_counters/countup

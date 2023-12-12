@@ -1,0 +1,28 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-carousel/d-p-carousel.twig' with {
+      is_full_width: paragraph.fullWidth,
+      carousel_settings: paragraph.carouselSettings,
+      dividers: paragraph.hasDividers,
+    } %}
+      {% block heading %}
+        {{ content.group_d_heading }}
+      {% endblock %}
+      {% block subheading %}
+        {{ content.group_d_subheading }}
+      {% endblock %}
+      {% block content %}
+        {{ content.group_d_content }}
+      {% endblock %}
+      {% block cta %}
+        {{ content.group_d_cta }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_d_heading', 'group_d_subheading', 'group_d_content', 'group_d_cta') }}
+  {% endblock %}
+
+{% endembed %}

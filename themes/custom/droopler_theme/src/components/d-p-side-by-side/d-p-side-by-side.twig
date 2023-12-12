@@ -1,0 +1,38 @@
+{{ attach_library('droopler_theme/d-p-side-by-side') }}
+
+{% set base_class = side_by_side_base_class|default('d-p-side-by-side') %}
+{% set modifiers = side_by_side_modifiers|default([]) %}
+
+{% if with_grid %}
+  {% set modifiers = modifiers|merge(['with-grid']) %}
+{% endif %}
+
+<section {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class, []) }}>
+    <div {{ bem('header-container', [], base_class, ['container']) }}>
+      <div {{ bem('header-row', [], base_class, ['row']) }}>
+        {% block heading %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div {{ bem('content-wrapper', [], base_class) }}>
+      <div {{ bem('content-container', [], base_class, ['container']) }}>
+        <div {{ bem('content-row', [], base_class, ['row']) }}>
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <div {{ bem('cta-container', [], base_class, ['container']) }}>
+      <div {{ bem('cta-row', [], base_class, ['row']) }}>
+        {% block cta %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>

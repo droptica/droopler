@@ -1,0 +1,24 @@
+@import "../../scss/init";
+
+.footer-secondary {
+  background-color: var(--footer-secondary-background-color);
+
+  &__content-column {
+    text-align: center;
+  }
+
+  .nav {
+    justify-content: center;
+    flex-direction: column;
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+    }
+
+    .nav-link {
+      color: var(--footer-secondary-link-color);
+      font-weight: 700;
+      padding: 0.5rem 2.2rem;
+    }
+  }
+}

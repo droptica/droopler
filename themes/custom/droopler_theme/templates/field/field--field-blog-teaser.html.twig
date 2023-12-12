@@ -1,0 +1,5 @@
+{% for item in items %}
+  {% include "@droopler_theme/base/body-text/body-text.twig" with {
+    text: item.content
+  }%}
+{% endfor %}

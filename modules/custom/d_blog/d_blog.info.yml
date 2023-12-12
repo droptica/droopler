@@ -1,5 +1,5 @@
 name: 'Droopler Blog'
-core_version_requirement: ^10
+core_version_requirement: '^9.4 || ^10'
 description: 'Adds a blog to Droopler.'
 type: module
 dependencies:
@@ -21,7 +21,6 @@ dependencies:
   - 'droopler:d_p_subscribe_file'
   - 'droopler:d_p_text_blocks'
   - 'droopler:d_p_text_paged'
-  - 'droopler:d_p_text_with_bckg'
   - 'droopler:d_p_tiles'
   - 'drupal:block'
   - 'drupal:content_translation'
@@ -40,6 +39,7 @@ dependencies:
   - 'drupal:user'
   - 'drupal:views'
   - 'entity_reference_revisions:entity_reference_revisions'
+  - 'field_group:field_group'
   - 'metatag:metatag'
   - 'paragraphs:paragraphs'
   - 'pathauto:pathauto'

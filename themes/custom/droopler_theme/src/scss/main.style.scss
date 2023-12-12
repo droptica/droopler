@@ -1,0 +1,31 @@
+@import "base/fonts";
+@import "init";
+@import "bootstrap/bootstrap";
+@import "base/themes";
+@import "base/margins";
+@import "base/paddings";
+@import "pages/search";
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+section {
+  background-color: var(--section-background-color);
+}
+
+.first-child-no-spacer {
+  > :first-child,
+  > :only-child {
+    margin-top: 0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+}

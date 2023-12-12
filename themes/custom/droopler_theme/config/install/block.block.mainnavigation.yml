@@ -1,5 +1,5 @@
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - system.menu.main
@@ -9,7 +9,7 @@ dependencies:
     - droopler_theme
 id: mainnavigation
 theme: droopler_theme
-region: primary_menu
+region: header_primary
 weight: 0
 provider: null
 plugin: 'system_menu_block:main'

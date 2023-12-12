@@ -1,0 +1,5 @@
+services:
+  d_twig_extensions.bem:
+    class: Drupal\d_twig_extensions\BemFunction
+    tags:
+      - { name: twig.extension }

@@ -21,9 +21,9 @@ field_page_section:
           data: '<p>Reliability and perfect quality. These are the engine features for aircraft manufactured by our company. We also provide a full range of support services.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
-          side_image_layout: right-wide
+          paragraph_theme: theme-light
+          image_side: right
     -
       paragraph_type: d_p_text_paged
       data:
@@ -35,7 +35,11 @@ field_page_section:
           data: '<p>We have over 20 years of experience in the production of engines for the aviation industry.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-light
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -51,8 +55,8 @@ field_page_section:
           data: '<h3> JetSpeed 5000 </h3> <p>Excellent and powerful engine for medium-sized jets. Designed and created by a team of experienced mechanics, engineers and aviation experts.</p> <ul> <li>Compact design</li> <li>Excellent thrust-to-weight ratio, low power consumption</li> <li>Max. thrust: 1,300 N*</li> <li>Outer diameter: 272 mm</li> <li>Length: 625 mm</li> <li>Weight: 90.5 kg</li> </ul>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left
+          paragraph_theme: theme-secondary
+          image_side: left
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -68,18 +72,21 @@ field_page_section:
                 data: '<p><ul> <li>Parts and engine lease</li> <li>Repair Management</li> <li>Spare Parts Supply</li> </ul></p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
+                paragraph_theme: theme-primary
             -
               field_d_long_text:
                 type: text_long
                 data: '<p><ul> <li>Basic servicing</li> <li>Full annual servicing</li> <li>Oil and filter changes</li> </ul></p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
+                paragraph_theme: theme-primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: with-tiles theme-primary header-margin-none padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 2
+          paragraph_theme: theme-primary
+          column_count_desktop: 2
+          column_count_tablet: 1
+          column_count_mobile: 1
+          with-tiles: 1
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -92,15 +99,15 @@ field_page_section:
             link: 'internal:/products'
             text: 'View All'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-4
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          full-width: 1
+          with-grid: 1
+          paragraph_theme: theme-light
+          column_count_desktop: 3
+          column_count_tablet: 3
+          column_count_mobile: 1
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -153,14 +160,9 @@ field_page_section:
             link: 'internal:/blog'
             text: 'View all'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-5
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: padding-top-none theme-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_banner
       data:
@@ -181,10 +183,13 @@ field_page_section:
           type: cta
           data:
             link: 'internal:/contact'
-            text: 'CONTACT US'
+            text: 'Contact us'
+            options:
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-extra-large padding-bottom-extra-large
+          paragraph_theme: theme-dark
 field_teaser_media_image:
   type: media_image
   directory: demo

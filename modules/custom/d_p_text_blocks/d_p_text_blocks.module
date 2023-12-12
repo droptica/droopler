@@ -2,126 +2,22 @@
 
 /**
  * @file
- * Contains d_paragraphs_text_blocks.module..
+ * Contains d_paragraphs_text_blocks.module.
  */
 
-use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
-use Drupal\d_p\ParagraphSettingTypesInterface;
-use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
+declare(strict_types = 1);
+
+use Drupal\d_p_text_blocks\Entity\GroupOfTextBlock;
+use Drupal\d_p_text_blocks\Entity\SingleTextBlock;
 
 /**
- * Implements hook_theme().
+ * Implements hook_entity_bundle_info_alter().
  */
-function d_p_text_blocks_theme($existing, $type, $theme, $path) {
-  return [
-    'paragraph__d_p_group_of_text_blocks' => [
-      'base hook' => 'paragraph',
-    ],
-    'paragraph__d_p_single_text_block' => [
-      'base hook' => 'paragraph',
-    ],
-    'field__field_d_p_tb_block_reference' => [
-      'base hook' => 'field',
-    ],
-  ];
-}
-
-/**
- * Implements hook_preprocess_field().
- */
-function d_p_text_blocks_preprocess_field(&$variables) {
-  if ($variables['element']['#entity_type'] == 'paragraph') {
-    if ($variables['element']['#bundle'] == 'd_p_group_of_text_blocks') {
-      if ($variables['field_name'] == 'field_d_p_tb_block_reference') {
-        try {
-          /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
-          $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($variables['element']['#object']);
-
-          $columns = [
-            'lg' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_SETTING_NAME),
-            'sm' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_TABLET_SETTING_NAME),
-            'xs' => $setting_field->getSettingValue(ParagraphSettingTypesInterface::COLUMN_COUNT_MOBILE_SETTING_NAME),
-          ];
-
-          // Enable grid setting.
-          if ($setting_field->hasClass('with-grid')) {
-            d_p_text_blocks_set_columns_sizes($variables['items'], $columns);
-          }
-          else {
-            $grid_size = 12;
-            $classes = [];
-            foreach ($columns as $breakpoint => $value) {
-              $breakpoint_string = $breakpoint === 'xs' ? '' : $breakpoint . '-';
-              $classes[] = 'col-' . $breakpoint_string . ($grid_size / $value);
-            }
-
-            $variables['column_class'] = implode(' ', $classes);
-          }
-        }
-        catch (MissingConfigurationStorageFieldException $exception) {
-          \Drupal::logger('d_p_text_blocks')->error($exception->getMessage());
-        }
-      }
-    }
+function d_p_text_blocks_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['paragraph']['d_p_group_of_text_blocks'])) {
+    $bundles['paragraph']['d_p_group_of_text_blocks']['class'] = GroupOfTextBlock::class;
   }
-}
-
-/**
- * Set columns sizes for defined breakpoints.
- *
- * @param array $items
- *   Single block text items array.
- * @param array $column_count
- *   Array with the number of columns for the selected breakpoints.
- */
-function d_p_text_blocks_set_columns_sizes(array $items, array $column_count) {
-  foreach ($column_count as $breakpoint => $items_per_row) {
-    if (!empty($items_per_row)) {
-      foreach ($items as $idx => $list_item) {
-        /** @var \Drupal\Core\Template\Attribute $atr */
-        $item_attributes = $list_item['attributes'];
-        $class_prefix = 'col-' . ($breakpoint == 'xs' ? '' : $breakpoint . '-');
-        if (($idx + 1) % $items_per_row == 0) {
-          $item_attributes->addClass($breakpoint . '-grid-row-end-item');
-        }
-        if (count($items) % $items_per_row != 0 && $idx >= count($items) - count($items) % $items_per_row) {
-          $item_attributes->addClass($class_prefix . '6');
-        }
-        else {
-          $item_attributes->addClass($class_prefix . 12 / $items_per_row);
-        }
-      }
-    }
+  if (isset($bundles['paragraph']['d_p_single_text_block'])) {
+    $bundles['paragraph']['d_p_single_text_block']['class'] = SingleTextBlock::class;
   }
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function d_p_text_blocks_preprocess_paragraph__d_p_single_text_block(array &$variables) {
-  $paragraph = $variables['paragraph'];
-
-  try {
-    /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
-    $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
-
-    $variables['with_price'] = $setting_field->hasClass('with-price');
-  }
-  catch (MissingConfigurationStorageFieldException $exception) {
-    \Drupal::logger('d_p_text_blocks')->error($exception->getMessage());
-  }
-
-  // Set background image if field is not empty.
-  // This overrides background color settings.
-  $field_image = $paragraph->get('field_d_media_background')->first();
-  if (!empty($field_image)) {
-    $variables['image_class'] = $variables['text_class'] = 'col-md-12';
-  }
-}
-
-/**
- * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
- */
-function d_p_text_blocks_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
-  $paragraph_types[] = 'd_p_group_of_text_blocks';
 }

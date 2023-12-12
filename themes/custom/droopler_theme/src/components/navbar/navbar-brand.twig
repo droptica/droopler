@@ -1,0 +1,24 @@
+{% import _self as navbar_brand %}
+{% set utility_classes = utility_classes|join(' ') %}
+
+{% if path %}
+  <a href="{{ path }}" title="{{ title }}" class="navbar-brand d-flex align-items-center {{ utility_classes }}" aria-label="{{ text }}">
+    {% if image %}
+      {{ navbar_brand.image(image, width, height, alt) }}
+    {% endif %}
+    {{ text }}
+  </a>
+{% else %}
+  <span class="navbar-brand h1 mb-0 {{ utility_classes }}" aria-label="{{ text }}">
+    {% if image %}
+      {{ navbar_brand.image(image, width, height, alt) }}
+    {% endif %}
+    {{ text }}
+  </span>
+{% endif %}
+
+{% macro image(src, width, height, alt) %}
+  {% set height_attr = height != 'auto' ? 'height="' ~ height ~ '"'  %}
+
+  <img src="{{ src }}" width="{{ width|default(30) }}" {{ height_attr }} alt="{{ alt|default('') }}" class="me-2" />
+{% endmacro %}

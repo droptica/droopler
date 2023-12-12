@@ -1,0 +1,77 @@
+@import "../../scss/init";
+
+.d-p-form {
+  $root: &;
+
+  --media-width: 100%;
+  --media-height: 100%;
+
+  position: relative;
+
+  &__background {
+    @include filling-absolute;
+  }
+
+  &__background-media {
+    @include covering-media;
+  }
+
+  &__background-overlay {
+    @include filling-absolute;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__content-wrapper {
+    justify-content: center;
+  }
+
+  &__content-column {
+    &--header {
+      .divider:last-child {
+        display: inline-block;
+      }
+
+      #{$root}--bottom & {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #{$root}--left & {
+        order: 1;
+
+        @include media-breakpoint-up(md) {
+          order: 2;
+        }
+      }
+
+      .heading,
+      .media-icon {
+        margin-top: var(--content-spacer-s);
+      }
+    }
+
+    &--form {
+      #{$root}--left & {
+        order: 2;
+
+        @include media-breakpoint-up(md) {
+          order: 1;
+        }
+      }
+
+      .form-item {
+        margin-top: var(--content-spacer-s);
+      }
+
+      .form-actions {
+        margin-top: var(--content-spacer-m);
+        text-align: center;
+      }
+    }
+  }
+}

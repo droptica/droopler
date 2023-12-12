@@ -1,0 +1,11 @@
+{{ attach_library('droopler_theme/d-p-block') }}
+
+{% set base_class = d_p_block_base_class|default('d-p-block') %}
+{% set modifiers = d_p_block_modifiers|default([]) %}
+
+<section {{ bem(base_class, (modifiers)) }}>
+  <div {{ bem('content', [], base_class, [is_full_width ? '' : 'container']) }}>
+    {% block content %}
+    {% endblock %}
+  </div>
+</section>

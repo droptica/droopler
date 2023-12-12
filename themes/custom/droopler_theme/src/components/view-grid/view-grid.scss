@@ -1,0 +1,17 @@
+@import "../../scss/init";
+
+.view-grid {
+  margin-block: var(--content-spacer-m);
+  row-gap: 3rem;
+
+  &__item {
+    &:hover {
+      transform: scale(1.01);
+      transition: 0.3s;
+    }
+
+    & > * {
+      height: 100%;
+    }
+  }
+}

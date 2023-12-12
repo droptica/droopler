@@ -8,8 +8,8 @@ dependencies:
     - droopler_theme
 id: droopler_theme_reset_filters_top
 theme: droopler_theme
-region: facets_left
-weight: -12
+region: aside
+weight: -11
 provider: null
 plugin: reset_button
 settings:
@@ -24,6 +24,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /products
     negate: false
     context_mapping: {  }
+    pages: /products

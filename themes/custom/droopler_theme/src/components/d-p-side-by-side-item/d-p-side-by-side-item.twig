@@ -1,0 +1,9 @@
+{{ attach_library('droopler_theme/d-p-side-by-side-item') }}
+
+{% set base_class = side_by_side_items_base_class|default('d-p-side-by-side-item') %}
+{% set modifiers = side_by_side_items_modifiers|default([]) %}
+{% set additional_classes = side_by_side_addtional_classes|default([]) %}
+
+<div {{ bem(base_class, modifiers, '', additional_classes) }}>
+  {{ content }}
+</div>

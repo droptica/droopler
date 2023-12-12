@@ -17,8 +17,12 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          paragraph_theme: theme-primary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -30,7 +34,11 @@ field_page_section:
           data: '<p>Carousel Paragraph is another type of list. The items are sliding from right to left, one by one. You decide how many items are visible. Below you can see a full version of the carousel. With icon, description and fully equipped boxes.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_carousel
       data:
@@ -70,6 +78,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Car
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -89,6 +99,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Boat
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -108,6 +120,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Settings
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -127,6 +141,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Bag
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -146,6 +162,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Telephone
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -165,6 +183,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: File
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -184,6 +204,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Plane
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -203,15 +225,20 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Download
+                  options:
+                    type: primary
         field_d_cta_link:
           type: cta
           data:
             link: 'internal:/documentation/carousel-paragraph'
             text: 'See more'
+            options:
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 4
+          column_count_desktop: 4
+          column_count_tablet: 2
+          column_count_mobile: 1
     -
       paragraph_type: d_p_text_paged
       data:
@@ -223,7 +250,11 @@ field_page_section:
           data: '<p>The Carousel is perfect for presenting a sliding list of logotypes. If you organize an event with the help of sponsors or cooperate with a lot of partners, you usually want to honor them on your website. Of course, you can wrap each item with a hyperlink.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_carousel
       data:
@@ -247,6 +278,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: BTU
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -260,6 +293,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: 'Cube Inc.'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -273,6 +308,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: 'Atlantic Jetlines'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -286,6 +323,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: 'Rock World Cafe'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -299,6 +338,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: YETI
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -312,10 +353,13 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Droopler
+                  options:
+                    type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: logos-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 4
+          column_count_desktop: 4
+          column_count_tablet: 2
+          column_count_mobile: 1
     -
       paragraph_type: d_p_text_paged
       data:
@@ -327,7 +371,11 @@ field_page_section:
           data: '<p>Does only one item in the Carousel make sense at all? Of course! With one piece of content visible at the time, you can build a list of testimonials. The image field serves as a person''s photo, and the description field holds the opinion.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_carousel
       data:
@@ -368,8 +416,9 @@ field_page_section:
                 data: '<p><em>Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend. Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna mi. Nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</em></p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: opinions-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 1
+          column_count_desktop: 1
+          column_count_tablet: 1
+          column_count_mobile: 1
     -
       paragraph_type: d_p_text_paged
       data:
@@ -381,7 +430,11 @@ field_page_section:
           data: '<p>What if you want four columns in the row in a carousel with precisely four items? There would be nothing to slide! Droopler is prepared for such edge cases. It automatically decreases column count to show a list as a slider. Look at the example below. There are four items in four columns, automatically fitted into three columns.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_carousel
       data:
@@ -421,6 +474,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Car
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -440,6 +495,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Boat
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -459,6 +516,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Settings
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -478,6 +537,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Bag
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -497,10 +558,13 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Telephone
+                  options:
+                    type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: columns-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 4
+          column_count_desktop: 4
+          column_count_tablet: 2
+          column_count_mobile: 1
     -
       paragraph_type: d_p_text_paged
       data:
@@ -512,7 +576,11 @@ field_page_section:
           data: '<p>Choose the "With dividers" option to add a vertical border to all items. The background becomes dark, the text is white now. Choose the "Full width" option to span the paragraph 100% width.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_carousel
       data:
@@ -531,8 +599,11 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-divider full-width-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          column_count_desktop: 3
+          column_count_tablet: 2
+          column_count_mobile: 1
+          full-width: 1
+          add-dividers: 1
         field_d_p_cs_item_reference:
           type: paragraph_reference
           subtype: d_p_carousel_item
@@ -556,6 +627,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Car
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -575,6 +648,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Boat
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -594,6 +669,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Settings
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -613,6 +690,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Bag
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -632,6 +711,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: Telephone
+                  options:
+                    type: primary
 field_teaser_media_image:
   type: media_image
   directory: demo

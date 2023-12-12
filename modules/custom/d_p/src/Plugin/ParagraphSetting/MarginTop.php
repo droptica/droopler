@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -22,7 +24,7 @@ class MarginTop extends ParagraphSettingPluginBase implements ParagraphSettingSe
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     $element = parent::formElement();
 
     return [
@@ -37,11 +39,11 @@ class MarginTop extends ParagraphSettingPluginBase implements ParagraphSettingSe
    */
   public function getOptions(): array {
     return [
-      'margin-top-default' => $this->t('Default'),
+      'margin-top-none' => $this->t('None'),
       'margin-top-small' => $this->t('Small'),
       'margin-top-medium' => $this->t('Medium'),
-      'margin-top-big' => $this->t('Big'),
-      'margin-top-none' => $this->t('None'),
+      'margin-top-large' => $this->t('Large'),
+      'margin-top-extra-large' => $this->t('Extra large'),
     ];
   }
 
@@ -49,7 +51,7 @@ class MarginTop extends ParagraphSettingPluginBase implements ParagraphSettingSe
    * {@inheritdoc}
    */
   public function getDefaultValue() {
-    return 'margin-top-default';
+    return 'margin-top-none';
   }
 
 }

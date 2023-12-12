@@ -2,8 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.content_page.field_header_cta
-    - field.field.node.content_page.field_header_layout
     - field.field.node.content_page.field_meta_tags
     - field.field.node.content_page.field_page_section
     - field.field.node.content_page.field_teaser_media_image
@@ -11,7 +9,6 @@ dependencies:
     - node.type.content_page
   module:
     - field_group
-    - link_attributes
     - media_library
     - metatag
     - paragraphs
@@ -29,14 +26,14 @@ third_party_settings:
       format_type: tabs
       format_settings:
         classes: ''
+        show_empty_fields: false
         id: ''
-        direction: horizontal
+        direction: vertical
+        width_breakpoint: 650
       group_basic:
         children:
           - title
           - langcode
-          - field_header_layout
-          - field_header_cta
           - status
         parent_name: group_tabs
         weight: 15
@@ -67,8 +64,6 @@ third_party_settings:
       children:
         - title
         - group_seo
-        - field_header_layout
-        - field_header_cta
         - langcode
         - status
       label: Basic
@@ -119,29 +114,6 @@ content:
   created:
     type: datetime_timestamp
     weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_header_cta:
-    type: link_attributes
-    weight: 3
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-      enabled_attributes:
-        id: true
-        name: true
-        target: true
-        rel: true
-        class: true
-        accesskey: true
-        aria-label: false
-        title: false
-    third_party_settings: {  }
-  field_header_layout:
-    type: options_select
-    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }

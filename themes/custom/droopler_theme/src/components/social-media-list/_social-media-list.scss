@@ -1,0 +1,18 @@
+:root {
+  --social-media-list-justify-content: center;
+  --social-media-list-margin-left: 0;
+}
+
+.social-media-list {
+  display: flex;
+  justify-content: var(--social-media-list-justify-content);
+  flex-wrap: wrap;
+  margin-left: var(--social-media-list-margin-left);
+  padding-left: 0;
+  list-style: none;
+  overflow: hidden;
+
+  .social-media-item {
+    margin-top: var(--content-spacer-s);
+  }
+}

@@ -1,0 +1,26 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-side-image/d-p-side-image.twig' with {
+      image_side: paragraph.imageSide,
+      image_width: paragraph.imageWidth
+    } %}
+      {% block background %}
+        {{ content.group_d_side_image_background }}
+      {% endblock %}
+
+      {% block header %}
+        {{ content.group_d_side_image_header }}
+      {% endblock %}
+
+      {% block content %}
+        {{ content.group_d_side_image_content }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_d_side_image_background', 'group_d_side_image_header', 'group_d_side_image_content') }}
+  {% endblock %}
+
+{% endembed %}

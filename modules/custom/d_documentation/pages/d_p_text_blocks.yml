@@ -17,8 +17,12 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-primary
           heading_type: h1
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -30,7 +34,11 @@ field_page_section:
           data: '<p>This paragraph is a typical component of every company website. You can use it to list some features or present a list of guest/sponsors at your event. Each item gets its title, icon, description and CTA button. So many possibilities!</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -49,6 +57,8 @@ field_page_section:
           data:
             link: 'internal:/documentation/text-blocks-paragraph'
             text: 'Call To Action!'
+            options:
+              type: primary
         field_d_p_tb_block_reference:
           type: paragraph_reference
           data:
@@ -71,6 +81,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/text-blocks-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: secondary
             -
               field_d_media_icon:
                 type: media_image
@@ -90,6 +102,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/text-blocks-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: secondary
             -
               field_d_media_icon:
                 type: media_image
@@ -109,6 +123,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/text-blocks-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: secondary
             -
               field_d_media_icon:
                 type: media_image
@@ -128,6 +144,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/text-blocks-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: secondary
             -
               field_d_media_icon:
                 type: media_image
@@ -147,6 +165,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/text-blocks-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: secondary
             -
               field_d_media_icon:
                 type: media_image
@@ -166,10 +186,15 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/text-blocks-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: secondary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          paragraph_theme: theme-light
+          column_count_desktop: 3
+          column_count_tablet: 3
+          column_count_mobile: 1
+
     -
       paragraph_type: d_p_text_paged
       data:
@@ -181,7 +206,11 @@ field_page_section:
           data: '<p>Here you can see a simpler version of Text Blocks Paragraph. There are no icons or CTAs. It looks clean. Have you noticed an increased number of columns? With Droopler you can choose how many columns you want to have in one row (1-12).</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -221,8 +250,10 @@ field_page_section:
                 data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: basic-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 4
+          paragraph_theme: theme-light
+          column_count_desktop: 4
+          column_count_tablet: 4
+          column_count_mobile: 1
     -
       paragraph_type: d_p_text_paged
       data:
@@ -234,7 +265,11 @@ field_page_section:
           data: '<p>Choose the "Invert theme" option to invert all paragraph colors. The background becomes dark, the text is white now. Choose the "Full width" option to span the paragraph 100% width.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -246,8 +281,11 @@ field_page_section:
           data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-primary full-width padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 4
+          paragraph_theme: theme-primary
+          column_count_desktop: 4
+          column_count_tablet: 4
+          column_count_mobile: 1
+          full-width: true
         field_d_p_tb_block_reference:
           type: paragraph_reference
           data:
@@ -260,7 +298,7 @@ field_page_section:
                 data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
+                paragraph_theme: theme-primary
             -
               field_d_main_title:
                 type: text
@@ -270,7 +308,7 @@ field_page_section:
                 data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
+                paragraph_theme: theme-primary
             -
               field_d_main_title:
                 type: text
@@ -280,7 +318,7 @@ field_page_section:
                 data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
+                paragraph_theme: theme-primary
             -
               field_d_main_title:
                 type: text
@@ -290,7 +328,7 @@ field_page_section:
                 data: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
+                paragraph_theme: theme-primary
     -
       paragraph_type: d_p_text_paged
       data:
@@ -302,7 +340,11 @@ field_page_section:
           data: '<p>This paragraph accepts not only text blocks. You can put a node inside it. Check the "Enable grid" option to put everything into a grid.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -318,15 +360,15 @@ field_page_section:
             link: 'internal:/documentation/text-blocks-paragraph'
             text: 'Call to Action!'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-4
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid nodes-grid-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          paragraph_theme: theme-light
+          column_count_desktop: 3
+          column_count_tablet: 3
+          column_count_mobile: 1
+          full-width: true
+          with-grid: true
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -378,14 +420,23 @@ field_page_section:
           data: '<p>You can convert all paragraph items to clickable tiles with an image background. In this example, we enabled the "Paragraph header in two columns" option.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-tiles header-into-columns theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 4
+          paragraph_theme: theme-light
+          column_count_desktop: 4
+          column_count_tablet: 4
+          column_count_mobile: 1
+          full-width: true
+          with-tiles: true
+          header-into-columns: true
         field_d_main_title:
           type: text
           data: 'Main Title'
@@ -414,9 +465,12 @@ field_page_section:
                   data:
                     link: 'internal:/boats'
                     text: 'For boat manufacturers'
+                    options:
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-default'
+                  paragraph_theme: theme-light
+                  heading_type: h3
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -435,9 +489,12 @@ field_page_section:
                   data:
                     link: 'internal:/aircrafts'
                     text: 'For airplane manufacturers'
+                    options:
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-default'
+                  paragraph_theme: theme-light
+                  heading_type: h3
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -456,9 +513,12 @@ field_page_section:
                   data:
                     link: 'internal:/cars'
                     text: 'For car manufacturers'
+                    options:
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-default'
+                  paragraph_theme: theme-light
+                  heading_type: h3
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -477,9 +537,12 @@ field_page_section:
                   data:
                     link: 'internal:/spacecrafts'
                     text: 'For spaceship manufacturers'
+                    options:
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-gray'
+                  paragraph_theme: theme-light
+                  heading_type: h3
 field_teaser_media_image:
   type: media_image
   directory: demo

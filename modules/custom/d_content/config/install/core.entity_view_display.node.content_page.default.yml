@@ -2,8 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.content_page.field_header_cta
-    - field.field.node.content_page.field_header_layout
     - field.field.node.content_page.field_meta_tags
     - field.field.node.content_page.field_page_section
     - field.field.node.content_page.field_teaser_media_image
@@ -19,24 +17,22 @@ bundle: content_page
 mode: default
 content:
   field_meta_tags:
-    weight: 1
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 1
     region: content
   field_page_section:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
 hidden:
-  field_header_cta: true
-  field_header_layout: true
   field_teaser_media_image: true
   field_teaser_text: true
   langcode: true

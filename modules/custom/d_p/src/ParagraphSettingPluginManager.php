@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p;
 
 use Drupal\Component\Plugin\Exception\PluginException;
@@ -8,11 +10,10 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\Plugin\DefaultPluginManager;
+use Psr\Log\LoggerInterface;
 
 /**
  * The plugin manager for paragraph settings plugins.
- *
- * @package Drupal\d_p
  */
 class ParagraphSettingPluginManager extends DefaultPluginManager implements ParagraphSettingPluginManagerInterface {
 
@@ -23,7 +24,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
    *
    * @var \Psr\Log\LoggerInterface
    */
-  protected $logger;
+  protected LoggerInterface $logger;
 
   /**
    * Creates the discovery object.
@@ -82,8 +83,9 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
   /**
    * {@inheritdoc}
    */
-  public function getSettingsForm(): array {
-    $cache = $this->cacheGet(self::SETTINGS_FORM_STORAGE_CID);
+  public function getSettingsForm(array $plugins_settings = []): array {
+    $cid = self::SETTINGS_FORM_STORAGE_CID . ':' . md5(serialize($plugins_settings));
+    $cache = $this->cacheGet($cid);
 
     if ($cache) {
       $form = $cache->data;
@@ -95,7 +97,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
       foreach ($plugins as $plugin) {
         if (!$plugin->isSubtype()) {
-          $form[$plugin->id()] = $plugin->formElement();
+          $form[$plugin->id()] = $plugin->formElement($plugins_settings[$plugin->id()] ?? []);
         }
       }
 
@@ -107,7 +109,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
       $this->moduleHandler->alter('d_settings', $form);
 
-      $this->cacheSet(self::SETTINGS_FORM_STORAGE_CID, $form, Cache::PERMANENT, [self::SETTINGS_FORM_STORAGE_CID]);
+      $this->cacheSet($cid, $form, Cache::PERMANENT, [self::SETTINGS_FORM_STORAGE_CID]);
     }
 
     return $form;
@@ -122,6 +124,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
     foreach ($this->getSettingsForm() as $id => $element) {
       $options[$id] = [
         'label' => $element['#title'],
+        'plugin' => $element['#plugin'],
       ];
       $modifiers = self::SETTINGS_SUBTYPE_ID;
       if (isset($element[$modifiers])) {

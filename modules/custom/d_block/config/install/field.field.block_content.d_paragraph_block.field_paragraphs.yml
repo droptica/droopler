@@ -17,7 +17,6 @@ dependencies:
     - paragraphs.paragraphs_type.d_p_side_tiles
     - paragraphs.paragraphs_type.d_p_subscribe_file
     - paragraphs.paragraphs_type.d_p_text_paged
-    - paragraphs.paragraphs_type.d_p_text_with_bckg
     - paragraphs.paragraphs_type.d_p_tiles
   module:
     - entity_reference_revisions
@@ -46,7 +45,6 @@ settings:
       d_p_reference_content: d_p_reference_content
       d_p_subscribe_file: d_p_subscribe_file
       d_p_text_paged: d_p_text_paged
-      d_p_text_with_bckg: d_p_text_with_bckg
       d_p_side_embed: d_p_side_embed
       d_p_side_tiles: d_p_side_tiles
       d_p_side_by_side: d_p_side_by_side
@@ -85,9 +83,6 @@ settings:
       d_p_text_paged:
         enabled: true
         weight: -35
-      d_p_text_with_bckg:
-        enabled: true
-        weight: -34
       d_p_side_embed:
         enabled: true
         weight: -33

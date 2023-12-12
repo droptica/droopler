@@ -1,18 +1,16 @@
 name: 'Droopler Demo Content'
-core_version_requirement: ^10
+core_version_requirement: '^9.4 || ^10'
 description: 'Module with demo content for Droopler.'
 type: module
 dependencies:
-  - droopler:d_content_init
-  - droopler:d_media
-  - droopler:d_p_media
-  - droopler:d_p_reference_content
-  - droopler:d_social_media
-  - drupal:block
-  - drupal:system
-  - we_megamenu:we_megamenu
-
-package: Droopler Common
+  - 'droopler:d_content_init'
+  - 'droopler:d_media'
+  - 'droopler:d_p_media'
+  - 'droopler:d_p_reference_content'
+  - 'droopler:d_social_media'
+  - 'drupal:block'
+  - 'drupal:system'
+package: 'Droopler Common'
 version: DROOPLER_VERSION
 libraries:
   - droopler_theme/global-styling

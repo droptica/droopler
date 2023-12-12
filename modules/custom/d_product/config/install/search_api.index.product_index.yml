@@ -9,8 +9,8 @@ dependencies:
     - core.entity_view_mode.node.full
   module:
     - taxonomy
-    - search_api
     - node
+    - search_api
 id: product_index
 name: 'Product Index'
 description: ''
@@ -20,7 +20,7 @@ field_settings:
     label: 'Aggregated field'
     property_path: aggregated_field
     type: text
-    boost: !!float 3
+    boost: 3.0
     configuration:
       type: concat
       fields:
@@ -31,10 +31,20 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: body
     type: text
-    boost: !!float 2
+    boost: 2.0
     dependencies:
       config:
         - field.storage.node.body
+  category_name:
+    label: 'Product categories » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_product_categories:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_product_categories
+      module:
+        - taxonomy
   description:
     label: 'Product categories » Taxonomy term » Description'
     datasource_id: 'entity:node'
@@ -55,26 +65,6 @@ field_settings:
         - field.storage.node.field_tags
       module:
         - taxonomy
-  name:
-    label: 'Product categories » Taxonomy term » Name'
-    datasource_id: 'entity:node'
-    property_path: 'field_product_categories:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_product_categories
-      module:
-        - taxonomy
-  name_1:
-    label: 'Tags » Taxonomy term » Name'
-    datasource_id: 'entity:node'
-    property_path: 'field_tags:entity:name'
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_tags
-      module:
-        - taxonomy
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -88,7 +78,7 @@ field_settings:
     type: text
     configuration:
       roles:
-        anonymous: anonymous
+        - anonymous
       view_mode:
         'entity:node':
           d_product: full
@@ -99,11 +89,27 @@ field_settings:
     type: boolean
     indexed_locked: true
     type_locked: true
+    dependencies:
+      module:
+        - node
+  tag_name:
+    label: 'Tags » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_tags:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+      module:
+        - taxonomy
   title:
     label: Title
     datasource_id: 'entity:node'
     property_path: title
     type: string
+    dependencies:
+      module:
+        - node
   uid:
     label: uid
     datasource_id: 'entity:node'
@@ -111,6 +117,9 @@ field_settings:
     type: integer
     indexed_locked: true
     type_locked: true
+    dependencies:
+      module:
+        - node
 datasource_settings:
   'entity:node':
     bundles:
@@ -127,16 +136,20 @@ processor_settings:
     weights:
       preprocess_query: -30
   entity_status: {  }
+  entity_type: {  }
   html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
     all_fields: true
     fields:
       - aggregated_field
       - body
+      - category_name
       - description
       - description_1
-      - name
-      - name_1
       - rendered_item
+      - tag_name
       - title
     title: true
     alt: true
@@ -146,21 +159,29 @@ processor_settings:
       h2: 3
       h3: 2
       strong: 2
-    weights:
-      preprocess_index: -15
-      preprocess_query: -15
   ignore_character:
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
     all_fields: true
     fields:
       - aggregated_field
       - body
+      - category_name
       - description
       - description_1
-      - name
-      - name_1
       - rendered_item
+      - tag_name
       - title
-    ignorable: '[''¿¡!?,.:;]'
+    ignorable: "['¿¡!?,.:;]"
+    ignorable_classes:
+      - Pc
+      - Pd
+      - Pe
+      - Pf
+      - Pi
+      - Po
+      - Ps
     strip:
       character_sets:
         Cc: 0
@@ -183,25 +204,26 @@ processor_settings:
         Zl: 0
         Zp: 0
         Zs: 0
-    weights:
-      preprocess_index: -10
-      preprocess_query: -10
   ignorecase:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
     all_fields: true
     fields:
       - aggregated_field
       - body
+      - category_name
       - description
       - description_1
-      - name
-      - name_1
       - rendered_item
+      - tag_name
       - title
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
+  language_with_fallback: {  }
   rendered_item: {  }
   stemmer:
+    weights:
+      preprocess_index: 0
+      preprocess_query: 0
     all_fields: true
     fields:
       - aggregated_field
@@ -212,10 +234,10 @@ processor_settings:
     exceptions:
       mexican: mexic
       texan: texa
-    weights:
-      preprocess_index: 0
-      preprocess_query: 0
   stopwords:
+    weights:
+      preprocess_index: -5
+      preprocess_query: -2
     all_fields: true
     fields:
       - aggregated_field
@@ -259,10 +281,10 @@ processor_settings:
       - was
       - will
       - with
-    weights:
-      preprocess_index: -5
-      preprocess_query: -2
   tokenizer:
+    weights:
+      preprocess_index: -6
+      preprocess_query: -6
     all_fields: true
     fields:
       - aggregated_field
@@ -271,30 +293,28 @@ processor_settings:
       - description_1
       - rendered_item
     spaces: ''
+    ignored: ._-
     overlap_cjk: 1
     minimum_word_size: '2'
-    weights:
-      preprocess_index: -6
-      preprocess_query: -6
   transliteration:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
     all_fields: true
     fields:
       - aggregated_field
       - body
+      - category_name
       - description
       - description_1
-      - name
-      - name_1
       - rendered_item
+      - tag_name
       - title
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
 tracker_settings:
   default:
     indexing_order: fifo
 options:
-  index_directly: true
   cron_limit: 50
+  index_directly: true
   track_changes_in_references: true
 server: db_server

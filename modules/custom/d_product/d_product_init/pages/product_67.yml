@@ -1,0 +1,19 @@
+info:
+    type: d_product
+    title: 'OceanRider 67 Quantum'
+field_d_product_media:
+    type: media_image
+    directory: demo
+    files: [{ path: d_product_init/boatasset2.png, alt: 'Title / Subtitle' }]
+body:
+    type: text
+    data: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+field_product_categories:
+    type: taxonomy
+    data: { vid: d_product_categories, terms: ['Boat Engines'] }
+field_tags:
+    type: taxonomy
+    data: { vid: tags, terms: [Engines, Boat] }
+field_d_product_link:
+    type: cta
+    data: { link: null, text: 'Buy now' }

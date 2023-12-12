@@ -1,0 +1,131 @@
+@import "../../scss/init";
+
+.block-facets {
+  $root: &;
+
+  margin-top: var(--content-spacer-m);
+
+  .heading {
+    @include heading(5);
+
+    color: var(--category-heading);
+    letter-spacing: 0.5px;
+  }
+
+  &__content {
+    color: var(--body-text-color);
+
+    .item-list {
+      &__links {
+        margin-top: var(--content-spacer-xs);
+        list-style: none;
+        padding: 0;
+
+        .facet-item {
+          a {
+            color: var(--body-text-color);
+            text-transform: capitalize;
+            display: block;
+          }
+        }
+      }
+    }
+
+    .facet-item {
+      a {
+        color: var(--body-text-color);
+        text-transform: capitalize;
+        display: block;
+
+        &.is-active {
+          color: var(--facet-active-text-color);
+        }
+      }
+    }
+
+    .block-facet {
+      &--links {
+        margin-top: 3rem;
+      }
+    }
+  }
+
+  &--reset-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &#block-resetfilters {
+      @include media-breakpoint-down(lg) {
+        display: none;
+      }
+    }
+
+    &__content {
+      .btn-reset {
+        padding: 0.375rem;
+        letter-spacing: 0.08rem;
+      }
+    }
+  }
+
+  &--filter-block {
+    &__content {
+      margin-top: var(--content-spacer-xs);
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        & .facets-result-item__value {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &--tag-name {
+    #{$root}__content {
+      @include media-breakpoint-up(lg) {
+        margin-top: var(--content-spacer-l);
+      }
+    }
+
+    .facet-item {
+      display: inline-block;
+      line-height: normal;
+      margin: 0 0.375rem 0.375rem 0;
+
+      a {
+        border: 0.1rem solid var(--facet-tag-border-color);
+        padding: 0.5rem;
+
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+          text-decoration: none;
+        }
+
+        &:hover {
+          border: 0.1rem solid var(--facet-tag-border-color-hover);
+          background: var(--facet-tag-bg-color);
+          color: var(--facet-tag-text-color);
+          text-decoration: none;
+        }
+      }
+
+      &__value {
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

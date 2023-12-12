@@ -1,0 +1,57 @@
+@import "../../../scss/init";
+
+:root {
+  --media-width: auto;
+  --media-height: auto;
+  --media-img-display: block;
+  --media-img-width: auto;
+  --media-img-height: auto;
+  --media-overlay-background-color: rgb(0 0 0 / 20%);
+  --media-overlay-opacity: 0.2;
+}
+
+.media {
+  width: var(--media-width);
+  height: var(--media-height);
+
+  picture,
+  img {
+    display: var(--media-img-display);
+    max-width: 100%;
+    width: var(--media-img-width);
+    height: var(--media-img-height);
+  }
+
+  &--overlay {
+    position: relative;
+
+    &::before {
+      @include filling-absolute;
+
+      content: "";
+      background-color: var(--media-overlay-background-color);
+    }
+
+    img {
+      opacity: var(--media-overlay-opacity);
+    }
+  }
+
+  &--background {
+    *:not(.contextual) {
+      width: 100%;
+      height: 100%;
+    }
+
+    iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+}

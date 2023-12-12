@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -22,7 +24,7 @@ class PaddingTop extends ParagraphSettingPluginBase implements ParagraphSettingS
   /**
    * {@inheritdoc}
    */
-  public function formElement(): array {
+  public function formElement(array $settings = []): array {
     $element = parent::formElement();
 
     return [
@@ -37,10 +39,11 @@ class PaddingTop extends ParagraphSettingPluginBase implements ParagraphSettingS
    */
   public function getOptions(): array {
     return [
-      'padding-top-default' => $this->t('Default'),
-      'padding-top-small' => $this->t('Small'),
-      'padding-top-big' => $this->t('Big'),
       'padding-top-none' => $this->t('None'),
+      'padding-top-small' => $this->t('Small'),
+      'padding-top-medium' => $this->t('Medium'),
+      'padding-top-large' => $this->t('Large'),
+      'padding-top-extra-large' => $this->t('Extra large'),
     ];
   }
 
@@ -48,7 +51,7 @@ class PaddingTop extends ParagraphSettingPluginBase implements ParagraphSettingS
    * {@inheritdoc}
    */
   public function getDefaultValue() {
-    return 'padding-top-default';
+    return 'padding-top-medium';
   }
 
 }

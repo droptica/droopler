@@ -12,15 +12,94 @@ dependencies:
   module:
     - d_p
     - entity_reference_revisions
-    - link
+    - field_group
     - text
+third_party_settings:
+  field_group:
+    group_d_content:
+      children:
+        - field_d_p_cs_item_reference
+      label: Content
+      parent_name: ''
+      region: content
+      weight: 3
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_cta:
+      children:
+        - field_d_cta_link
+      label: Cta
+      parent_name: ''
+      region: content
+      weight: 4
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_subheading:
+      children:
+        - field_d_long_text
+      label: Subheading
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_heading:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+      label: Heading
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: paragraph.d_p_carousel.default
 targetEntityType: paragraph
 bundle: d_p_carousel
 mode: default
 content:
   field_d_cta_link:
-    weight: 6
+    type: button_link_formatter
     label: hidden
     settings:
       trim_length: 80
@@ -29,47 +108,41 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 6
     region: content
   field_d_long_text:
-    weight: 3
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 3
     region: content
   field_d_main_title:
-    weight: 2
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   field_d_media_icon:
-    weight: 1
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: d_icon
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 1
     region: content
   field_d_p_cs_item_reference:
     type: entity_reference_revisions_entity_view
-    weight: 4
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    region: content
-  field_d_settings:
-    weight: 5
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: field_configuration_formatter
+    weight: 4
     region: content
 hidden:
+  field_d_settings: true
   search_api_excerpt: true

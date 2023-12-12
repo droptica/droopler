@@ -11,9 +11,69 @@ dependencies:
     - image.style.responsive_image_768
     - node.type.blog_post
   module:
+    - field_group
     - media
     - text
     - user
+third_party_settings:
+  field_group:
+    group_blog_category:
+      children:
+        - field_blog_category
+      label: 'Blog category'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_blog_image:
+      children:
+        - field_blog_media_main_image
+      label: 'Blog image'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_blog_teaser:
+      children:
+        - field_blog_teaser
+      label: 'Blog teaser'
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: node.blog_post.teaser
 targetEntityType: node
 bundle: blog_post
@@ -25,7 +85,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 0
+    weight: 3
     region: content
   field_blog_media_main_image:
     type: media_thumbnail
@@ -36,19 +96,19 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 2
+    weight: 4
     region: content
   field_blog_teaser:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 5
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 6
     region: content
 hidden:
   field_blog_sections: true

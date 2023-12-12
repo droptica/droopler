@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_content_init;
 
 use Drupal\Component\Serialization\SerializationInterface;
@@ -7,6 +9,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityPublishedInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
@@ -15,8 +18,6 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
  * Content init manager base.
- *
- * @package Drupal\d_content_init
  */
 abstract class ContentInitManagerBase {
 
@@ -65,7 +66,7 @@ abstract class ContentInitManagerBase {
   protected $moduleHandler;
 
   /**
-   * ContentInitManagerBase constructor.
+   * Content init manager base constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
@@ -224,13 +225,13 @@ abstract class ContentInitManagerBase {
    *   Field name to process.
    * @param array $field
    *   Data to save into field.
-   * @param \Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
    *   Entity to operate on.
    *
-   * @return bool|\Drupal\Core\Entity\EntityInterface
+   * @return bool|\Drupal\Core\Entity\FieldableEntityInterface
    *   Updated entity on success, FALSE otherwise.
    */
-  protected function processField($field_name, array $field, EntityInterface &$entity) {
+  protected function processField($field_name, array $field, FieldableEntityInterface &$entity) {
     if (!$entity->hasField($field_name)) {
       $this->logger->error($this->t('Missing field: @field', [
         '@field' => $field_name,

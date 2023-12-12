@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_update\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;

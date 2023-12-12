@@ -2,11 +2,11 @@
 
 namespace Drupal\droopler\Installer\Form;
 
-use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Extension\ModuleExtensionList;
 
 /**
  * A form class to customize Droopler installation process.
@@ -16,21 +16,14 @@ class AdditionalComponentsForm extends FormBase {
   use StringTranslationTrait;
 
   /**
-   * Module extension list.
-   *
-   * @var \Drupal\Core\Extension\ModuleExtensionList
-   */
-  private $moduleExtensionList;
-
-  /**
    * Constructs a new class instance.
    *
-   * @param \Drupal\Core\Extension\ModuleExtensionList $module_extension_list
+   * @param \Drupal\Core\Extension\ModuleExtensionList $moduleExtensionList
    *   The module extension list.
    */
-  public function __construct(ModuleExtensionList $module_extension_list) {
-    $this->moduleExtensionList = $module_extension_list;
-  }
+  public function __construct(
+    private readonly ModuleExtensionList $moduleExtensionList
+  ) {}
 
   /**
    * {@inheritdoc}
@@ -42,59 +35,57 @@ class AdditionalComponentsForm extends FormBase {
   }
 
   /**
-   * Modules to enable directly from Droopler installator.
+   * Modules to enable directly from Droopler installer.
    *
    * @var string[]
    */
-  private $modules = [
-    'd_blog' => 'This module allows you to create professional blog posts, with all Droopler paragraphs',
-    'd_product' => 'This module provides the way to showcase your products without advanced e-commerce features',
-    'd_commerce' => 'Out-of-the-box support for Commerce module for Drupal.',
-  ];
-
-  /**
-   * List of all d_commerce dependencies.
-   *
-   * @var string[]
-   */
-  private $commerceModules = [
-    'commerce',
-    'commerce_cart',
-    'commerce_checkout',
-    'commerce_payment',
-    'commerce_price',
-    'commerce_product',
-    'commerce_promotion',
-    'commerce_tax',
+  private array $modules = [
+    'd_blog' => [
+      'description' => 'This module allows you to create professional blog posts, with all Droopler paragraphs',
+      'dependencies' => [
+        'tvi',
+      ],
+    ],
+    'd_product' => [
+      'description' => 'This module provides the way to showcase your products without advanced e-commerce features',
+      'dependencies' => [
+        'better_exposed_filters',
+        'facets',
+        'search_api',
+      ],
+    ],
   ];
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'droopler_additional_modules_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $this->messenger()->deleteAll();
 
     $form['#title'] = $this->t('Install & configure Droopler components');
 
-    foreach ($this->modules as $name => $description) {
+    foreach ($this->modules as $name => $data) {
       $disabled = !$this->moduleExist($name);
-      if ($name == 'd_commerce' && !$this->modulesExists($this->commerceModules)) {
-        $description = $this->t('Out-of-the-box support for Commerce module for Drupal. You have to install additional modules to enable this checkbox. <a href="@readme" target="_blank">Read more</a>.',
-        ['@readme' => 'https://github.com/droptica/droopler/blob/master/README.md']);
+
+      if (!empty($data['dependencies']) && !$this->modulesExists($data['dependencies'])) {
+        $description = $this->t('Out-of-the-box support for @name module for Drupal. You have to install additional modules to enable this checkbox. <a href="@readme" target="_blank">Read more</a>.', [
+          '@name' => $name,
+          '@readme' => 'https://github.com/droptica/droopler/blob/master/README.md',
+        ]);
         $disabled = TRUE;
       }
 
       $form['install']['module_' . $name] = [
         '#type' => 'checkbox',
         '#title' => $name,
-        '#description' => $this->t('@description', ['@description' => $description]),
+        '#description' => $this->t('@description', ['@description' => $description ?? $data['description']]),
         '#disabled' => $disabled,
       ];
     }
@@ -121,6 +112,7 @@ class AdditionalComponentsForm extends FormBase {
       '#button_type' => 'primary',
       '#submit' => ['::submitForm'],
     ];
+
     return $form;
   }
 
@@ -132,8 +124,8 @@ class AdditionalComponentsForm extends FormBase {
     $build_info = $form_state->getBuildInfo();
     $install_state = $build_info['args'];
 
-    $install_modules = $additional_modules = $documentation_module = [];
-    foreach ($this->modules as $name => $desc) {
+    $install_modules = $additional_modules = [];
+    foreach ($this->modules as $name => $data) {
       if ($values['module_' . $name]) {
         $install_modules[] = $name;
       }
@@ -171,10 +163,10 @@ class AdditionalComponentsForm extends FormBase {
    * @param string $module_name
    *   Module name.
    *
-   * @return \Drupal\Core\Extension\Extension|mixed
+   * @return bool
    *   Return TRUE if module exist.
    */
-  private function moduleExist($module_name) {
+  private function moduleExist(string $module_name): bool {
     $modules_data = $this->moduleExtensionList->getList();
     return !empty($modules_data[$module_name]);
   }
@@ -188,12 +180,13 @@ class AdditionalComponentsForm extends FormBase {
    * @return bool
    *   Return TRUE if all modules exist.
    */
-  private function modulesExists(array $modules) {
+  private function modulesExists(array $modules): bool {
     foreach ($modules as $module) {
       if (!$this->moduleExist($module)) {
         return FALSE;
       }
     }
+
     return TRUE;
   }
 

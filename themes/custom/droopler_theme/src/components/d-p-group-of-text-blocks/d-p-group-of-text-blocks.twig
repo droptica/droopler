@@ -1,0 +1,64 @@
+{{ attach_library('droopler_theme/d-p-group-of-text-blocks') }}
+
+{% set base_class = d_p_group_of_text_blocks_base_class|default('d-p-group-of-text-blocks') %}
+{% set modifiers = d_p_group_of_text_blocks_modifiers|default([]) %}
+
+{% if with_grid %}
+  {% set modifiers = modifiers|merge(['with-grid']) %}
+{% endif %}
+
+{% if with_tiles %}
+  {% set modifiers = modifiers|merge(['with-tiles']) %}
+{% endif %}
+
+{% set items_classes = [
+  'row',
+  columns.column_count_desktop ? 'row-cols-lg-' ~ columns.column_count_desktop,
+  columns.column_count_tablet ? 'row-cols-md-' ~ columns.column_count_tablet,
+  columns.column_count_mobile ? 'row-cols-' ~ columns.column_count_mobile,
+] %}
+
+{% set has_header = block('header')|render|striptags|trim is not empty %}
+{% set header_column_classes = [header_into_columns ? 'col-md-6' : 'col-12'] %}
+
+<section {{ bem(base_class, (modifiers)) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    <div {{ bem('header', [], base_class, ['container']) }}>
+      <div {{ bem('header-wrapper', [header_into_columns ? 'columns' : 'single'], base_class, ['row']) }}>
+        {% if has_header %}
+          <div {{ bem('header-column', [], base_class, header_column_classes) }}>
+            {% block header %}
+            {% endblock %}
+
+            {% include "@droopler_theme/base/divider/divider.twig" %}
+          </div>
+        {% endif %}
+        <div {{ bem('header-column', [], base_class, header_column_classes) }}>
+          <div {{ bem('body-content', [], base_class) }}>
+            {% block body_content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div {{ bem('items', [], base_class, [is_full_width ? 'container-fluid' : 'container']) }}>
+      <div {{ bem('items-wrapper', [], base_class, items_classes) }}>
+        {% block items %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div {{ bem('footer', [], base_class, ['container']) }}>
+      <div {{ bem('footer-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('footer-column', [], base_class, ['col-12']) }}>
+          {% block cta %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

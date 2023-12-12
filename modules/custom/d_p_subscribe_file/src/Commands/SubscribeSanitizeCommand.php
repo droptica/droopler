@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p_subscribe_file\Commands;
 
 use Consolidation\AnnotatedCommand\CommandData;
@@ -10,7 +12,7 @@ use Drush\Sql\SqlBase;
 use Symfony\Component\Console\Input\InputInterface;
 
 /**
- * Drush sql-sanitize plugin for sanitising some random data.
+ * Drush sql-sanitize plugin for sanitizing some random data.
  */
 class SubscribeSanitizeCommand extends DrushCommands implements SanitizePluginInterface {
 
@@ -22,7 +24,7 @@ class SubscribeSanitizeCommand extends DrushCommands implements SanitizePluginIn
   protected $database;
 
   /**
-   * SubscribeSanitizeCommand constructor.
+   * Subscribe sanitize command constructor.
    *
    * @param \Drupal\Core\Database\Connection $database
    *   The database.

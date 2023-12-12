@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_content_init;
 
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Serialization\SerializationInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -16,8 +19,6 @@ use Drupal\file\FileRepositoryInterface;
 
 /**
  * Content init media manager.
- *
- * @package Drupal\d_content_init
  */
 class ContentInitManagerMedia extends ContentInitManagerBase {
 
@@ -36,7 +37,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
   protected $fileRepository;
 
   /**
-   * ContentInitManagerMedia constructor.
+   * Content init manager media constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
@@ -111,10 +112,10 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
    * @param string $alt
    *   Alt text.
    *
-   * @return \Drupal\Core\Entity\EntityInterface|void
+   * @return \Drupal\Core\Entity\EntityInterface|null
    *   Returns Entity object or void.
    */
-  public function createMediaImageFromFile($path, $destination_directory, $alt) {
+  public function createMediaImageFromFile($path, $destination_directory, $alt): EntityInterface|null {
     // Build file URI.
     $file_uri = $this->getFileUri($path, $destination_directory);
 

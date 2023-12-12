@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_demo\Service;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -7,8 +9,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
  * ThemeLogo service.
- *
- * @package Drupal\d_demo\Service
  */
 class ThemeLogoService {
 
@@ -27,7 +27,7 @@ class ThemeLogoService {
   protected $moduleHandler;
 
   /**
-   * ThemeLogoService constructor.
+   * Theme logo service constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Configuration object factory.

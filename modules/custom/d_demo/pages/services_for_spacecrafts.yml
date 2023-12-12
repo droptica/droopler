@@ -22,18 +22,14 @@ field_page_section:
             link: 'internal:/contact'
             text: 'Contact us'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                target: _self
+              type: primary
         field_d_long_text:
           type: text_long
           data: '<p>We offer a wide range of services to our customers who have bought our aircraft engines. Our experienced team of mechanics and specialists will provide high quality of service. Contact our company to arrange a service date and time.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left-wide
+          paragraph_theme: theme-secondary
+          image_side: left
     -
       paragraph_type: d_p_carousel
       data:
@@ -74,8 +70,9 @@ field_page_section:
                 data: '<p><em>The Drooplengines company is an excellent business partner who has carried out services at the highest level. Thanks to cooperation with Drooplengines, we have reduced the company''s operating costs associated with servicing our engines.</em></p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 1
+          column_count_desktop: 1
+          column_count_tablet: 1
+          column_count_mobile: 1
     -
       paragraph_type: d_p_group_of_counters
       data:
@@ -123,8 +120,10 @@ field_page_section:
                 data: 'Products and parts'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 4
+          paragraph_theme: theme-primary
+          column_count_desktop: 4
+          column_count_tablet: 2
+          column_count_mobile: 1
     -
       paragraph_type: d_p_text_paged
       data:
@@ -136,7 +135,10 @@ field_page_section:
           data: '<p1>Our company has many certificates confirming the high quality of our services: ISO 14001:2015, ISO 9001:2015 and BS OHSAS 18001:2007.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
 field_teaser_media_image:
   type: media_image
   directory: demo

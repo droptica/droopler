@@ -1,0 +1,51 @@
+{{ attach_library('droopler_theme/d-p-banner') }}
+
+{% set base_class = d_p_banner_base_class|default('d-p-banner') %}
+{% set modifiers = d_p_banner_modifiers|default([]) %}
+{% set left_side_content = left_side_content|default(false) %}
+
+{% if left_side_content %}
+  {% set modifiers = modifiers|merge(['left-side-content']) %}
+{% endif %}
+
+{# CONTENT SETTINGS #}
+{% set content_column_count = left_side_content ? '5' : '12' %}
+
+<section {{ bem(base_class, (modifiers)) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  <div {{ bem('background', [], base_class) }}>
+    <div {{ bem('background-media', [], base_class) }}>
+      {% block background %}
+      {% endblock %}
+    </div>
+
+    <div {{ bem('background-overlay', [], base_class) }}>
+      {% include '@droopler_theme/base/overlay/overlay.twig'%}
+    </div>
+  </div>
+
+  <div {{ bem('content', [], base_class, ['container', 'first-child-no-spacer']) }} {{ left_side_content ? 'data-theme="theme-light"' : ''}}>
+    {% if left_side_content %}
+      <div {{ bem('content-overlay', [], base_class) }}>
+        {% include '@droopler_theme/base/overlay/overlay.twig' %}
+      </div>
+    {% endif %}
+
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', [], base_class, [
+        'col-lg-' ~ content_column_count,
+        'col-12',
+        'first-child-no-spacer'
+      ]) }}>
+        {% block content_header %}
+        {% endblock %}
+
+        {% include '@droopler_theme/base/divider/divider.twig' %}
+
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>

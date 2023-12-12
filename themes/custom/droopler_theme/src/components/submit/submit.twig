@@ -1,0 +1,5 @@
+{{ attach_library('droopler_theme/cta') }}
+
+{% set base_class = cta_base_class|default('btn') %}
+
+<input{{ bem(base_class, [], '', [base_class ~ '-' ~ type]) }}>

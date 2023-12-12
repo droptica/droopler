@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\Field\FieldWidget;
 
-use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\d_p\Enum\ParagraphSettingTypes;
+use Drupal\d_p\ParagraphSettingInterface;
 use Drupal\d_p\ParagraphSettingPluginManagerInterface;
 use Drupal\d_p\ParagraphSettingSelectInterface;
-use Drupal\d_p\ParagraphSettingTypesInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -26,31 +28,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class SettingsWidget extends WidgetBase {
 
   /**
-   * Custom class setting name.
-   *
-   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
-   * Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   *
-   * @see https://www.drupal.org/project/droopler/issues/3180465
-   */
-  const CSS_CLASS_SETTING_NAME = 'custom_class';
-
-  /**
-   * Heading setting name.
-   *
-   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
-   * Use \Drupal\d_p\ParagraphSettingTypesInterface instead.
-   *
-   * @see https://www.drupal.org/project/droopler/issues/3180465
-   */
-  const HEADING_TYPE_SETTING_NAME = 'heading_type';
-
-  /**
    * The paragraph setting plugin manager.
    *
    * @var \Drupal\d_p\ParagraphSettingPluginManagerInterface
    */
-  protected $paragraphSettingsManager;
+  protected ParagraphSettingPluginManagerInterface $paragraphSettingsManager;
 
   /**
    * {@inheritdoc}
@@ -66,7 +48,11 @@ class SettingsWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public static function defaultSettings(): array {
-    return ['filter_mode' => 1, 'allowed_settings' => []] + parent::defaultSettings();
+    return [
+      'filter_mode' => 1,
+      'allowed_settings' => [],
+      'plugins_settings' => [],
+    ] + parent::defaultSettings();
   }
 
   /**
@@ -89,8 +75,13 @@ class SettingsWidget extends WidgetBase {
       '#title' => $this->t('Allowed settings'),
     ];
 
-    $options = $this->paragraphSettingsManager->getSettingsFormOptions();
+    $form['plugins_settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Plugins settings'),
+      '#access' => FALSE,
+    ];
 
+    $options = $this->paragraphSettingsManager->getSettingsFormOptions();
     $allowed_settings = $this->getAllowedSettings();
 
     foreach ($options as $id => $option) {
@@ -104,6 +95,11 @@ class SettingsWidget extends WidgetBase {
           ],
         ],
       ];
+
+      if ($plugin_form = $this->getPluginSettingsForm($option['plugin'])) {
+        $form['plugins_settings']['#access'] = TRUE;
+        $form['plugins_settings'][$id] = $plugin_form;
+      }
 
       $subtype = ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID;
       if (isset($option[$subtype])) {
@@ -121,6 +117,31 @@ class SettingsWidget extends WidgetBase {
     }
 
     return $form;
+  }
+
+  /**
+   * Get plugin settings form.
+   *
+   * @param \Drupal\d_p\ParagraphSettingInterface $plugin
+   *   The plugin to get form for.
+   *
+   * @return array
+   *   The form.
+   */
+  private function getPluginSettingsForm(ParagraphSettingInterface $plugin): array {
+    $plugins_settings = $this->getPluginsSettings();
+    $plugin_form = $plugin->getPluginSettingsForm($plugins_settings[$plugin->id()] ?? []);
+
+    if (empty($plugin_form)) {
+      return [];
+    }
+
+    return [
+      '#type' => 'fieldset',
+      '#title' => $this->t('@setting_type Settings', [
+        '@setting_type' => $plugin->label(),
+      ]),
+    ] + $plugin_form;
   }
 
   /**
@@ -142,7 +163,8 @@ class SettingsWidget extends WidgetBase {
    *   The available configuration for this parapraph bundle.
    */
   private function getConfigOptions(): array {
-    $form = $this->paragraphSettingsManager->getSettingsForm();
+    $plugins_settings = $this->getPluginsSettings();
+    $form = $this->paragraphSettingsManager->getSettingsForm($plugins_settings);
     $this->processSettingAccess($form);
 
     return $form;
@@ -216,7 +238,7 @@ class SettingsWidget extends WidgetBase {
       }
     }
     // Paragraph theme field.
-    if (isset($element['paragraph-theme'])) {
+    if (isset($element['paragraph_theme'])) {
       $this->processCustomThemeElements($element, $config);
     }
 
@@ -262,8 +284,9 @@ class SettingsWidget extends WidgetBase {
         $values[$key] = $value;
       }
     }
-    if (($element['paragraph-theme']['#value'] ?? NULL) === 'theme-custom') {
-      $values[ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME] = [
+
+    if (($element['paragraph_theme']['#value'] ?? NULL) === 'theme-custom') {
+      $values[ParagraphSettingTypes::THEME_COLORS->value] = [
         'background' => $element['background-theme-custom']['#value'],
         'text' => $element['text-theme-custom']['#value'],
       ];
@@ -354,7 +377,7 @@ class SettingsWidget extends WidgetBase {
    */
   protected function processCustomThemeElements(array &$element, object $config): void {
     $selector_string = $this->getSelectorStringFromElement($element);
-    $config_name = ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME;
+    $config_name = ParagraphSettingTypes::THEME_COLORS->value;
     $element['background-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Background color',
@@ -362,7 +385,7 @@ class SettingsWidget extends WidgetBase {
       '#weight' => 101,
       '#states' => [
         'visible' => [
-          ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [
+          ':input[name="' . $selector_string . '[0][value][paragraph_theme]"]' => [
             'value' => 'theme-custom',
           ],
         ],
@@ -376,7 +399,7 @@ class SettingsWidget extends WidgetBase {
       '#weight' => 102,
       '#states' => [
         'visible' => [
-          ':input[name="' . $selector_string . '[0][value][paragraph-theme]"]' => [
+          ':input[name="' . $selector_string . '[0][value][paragraph_theme]"]' => [
             'value' => 'theme-custom',
           ],
         ],
@@ -463,6 +486,16 @@ class SettingsWidget extends WidgetBase {
   }
 
   /**
+   * Getter for plugin settings.
+   *
+   * @return array
+   *   Allowed settings.
+   */
+  protected function getPluginsSettings(): array {
+    return $this->getSetting('plugins_settings');
+  }
+
+  /**
    * Check whether given setting was allowed in the setting configuration.
    *
    * @param string $id
@@ -471,7 +504,7 @@ class SettingsWidget extends WidgetBase {
    *   The parent setting id, null if there is not parent.
    *
    * @return bool
-   *   True if this settings is allowed, false otherwise.
+   *   True if settings is allowed, false otherwise.
    */
   protected function isSettingAllowed(string $id, ?string $parent_id): bool {
     $settings = $this->getAllowedSettings();
@@ -480,70 +513,6 @@ class SettingsWidget extends WidgetBase {
       ($settings[$parent_id][ParagraphSettingPluginManagerInterface::SETTINGS_SUBTYPE_ID][$id]['status'] ?: 0) : ($settings[$id]['status'] ?? 0);
 
     return (bool) $is_setting_allowed;
-  }
-
-  /**
-   * Returns default options for select fields.
-   *
-   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
-   * As this is working on the particular field instance,
-   * we have unified and moved all the methods directly to the field list class:
-   * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
-   *
-   * @see https://www.drupal.org/project/droopler/issues/3180465
-   */
-  public static function getModifierDefaults() {
-    /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
-    $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
-    $custom_class_plugin_id = ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME;
-
-    /** @var \Drupal\d_p\ParagraphSettingInterface $custom_class_plugin */
-    $custom_class_plugin = $pluginManager->getPluginById($custom_class_plugin_id);
-    /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
-    $plugins = $custom_class_plugin->getChildrenPlugins();
-
-    $defaults = [];
-
-    foreach ($plugins as $plugin) {
-      if ($plugin instanceof ParagraphSettingSelectInterface) {
-        $defaults[] = [
-          'options' => $plugin->getOptions(),
-          'default' => $plugin->getDefaultValue(),
-        ];
-      }
-    }
-
-    return $defaults;
-  }
-
-  /**
-   * Get the default value for config option.
-   *
-   * @param string $option_name
-   *   Config option name.
-   *
-   * @return mixed|null
-   *   Option default value, null if not found.
-   *
-   * @deprecated in droopler:8.x-2.2 and is removed from droopler:8.x-2.3.
-   * As this is working on the particular field instance,
-   * we have unified and moved all the methods directly to the field list class:
-   * Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface
-   *
-   * @see https://www.drupal.org/project/droopler/issues/3180465
-   */
-  public static function getConfigOptionDefaultValue(string $option_name) {
-    try {
-      /** @var \Drupal\d_p\ParagraphSettingPluginManagerInterface $pluginManager */
-      $pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
-      /** @var \Drupal\d_p\ParagraphSettingInterface $plugin */
-      $plugin = $pluginManager->getPluginById($option_name);
-
-      return $plugin->getDefaultValue();
-    }
-    catch (PluginException $exception) {
-      return NULL;
-    }
   }
 
 }

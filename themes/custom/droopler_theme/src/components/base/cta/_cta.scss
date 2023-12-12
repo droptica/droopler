@@ -1,0 +1,28 @@
+:root {
+  --cta-width: 100%;
+  --cta-max-width: 18rem;
+  --cta-margin-top-bottom: 0.25rem;
+  --cta-font-weight: 500;
+  --cta-letter-spacing: 0;
+  --cta-text-transform: none;
+}
+
+.btn {
+  --dp-bs-btn-font-weight: var(--cta-font-weight);
+
+  width: var(--cta-width);
+  max-width: var(--cta-max-width);
+  letter-spacing: var(--cta-letter-spacing);
+  text-transform: var(--cta-text-transform);
+  margin-block: var(--cta-margin-top-bottom);
+
+  &-block {
+    --cta-width: 100%;
+    --cta-max-width: none;
+  }
+
+  &-link {
+    --cta-width: auto;
+    --cta-max-width: none;
+  }
+}

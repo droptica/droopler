@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_color\Element;
 
 use Drupal\Core\Render\Element;

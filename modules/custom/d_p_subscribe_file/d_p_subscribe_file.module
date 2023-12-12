@@ -5,6 +5,8 @@
  * Contains d_p_subscribe module.
  */
 
+declare(strict_types = 1);
+
 use Drupal\Core\Render\Markup;
 use Drupal\d_p_subscribe_file\Forms\SubscribeFileForm;
 
@@ -26,9 +28,6 @@ function d_p_subscribe_file_preprocess_paragraph__d_p_subscribe_file(array &$var
  */
 function d_p_subscribe_file_theme($existing, $type, $theme, $path) {
   return [
-    'paragraph__d_p_subscribe_file' => [
-      'base hook' => 'paragraph',
-    ],
     'd_p_subscribe_file_download_page' => [
       'variables' => ['body' => NULL],
     ],

@@ -1,0 +1,8 @@
+{{ attach_library('droopler_theme/search-page-link-block') }}
+
+{% set base_class = search_page_link_block_base_class|default('search-page-link-block') %}
+
+<div {{ bem(base_class) }}>
+  {% block content %}
+  {% endblock %}
+</div>

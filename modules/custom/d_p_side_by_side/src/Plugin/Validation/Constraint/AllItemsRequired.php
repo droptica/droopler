@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p_side_by_side\Plugin\Validation\Constraint;
 
 use Symfony\Component\Validator\Constraint;
@@ -19,21 +21,21 @@ class AllItemsRequired extends Constraint {
    *
    * @var string
    */
-  public $message = '%name field requires exactly %number items.';
+  public string $message = '%name field requires exactly %number items.';
 
   /**
    * The number option.
    *
    * @var int
    */
-  public $number;
+  public int $number;
 
   /**
    * The name option.
    *
    * @var string
    */
-  public $name;
+  public string $name;
 
   /**
    * {@inheritdoc}

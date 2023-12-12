@@ -1,0 +1,5 @@
+services:
+  d_frontend_editing.route_subscriber:
+    class: Drupal\d_frontend_editing\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

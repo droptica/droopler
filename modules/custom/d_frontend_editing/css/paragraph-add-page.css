@@ -1,0 +1,73 @@
+ul.paragraphs-add-dialog-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  justify-content: center;
+}
+
+ul.paragraphs-add-dialog-list li {
+  position: relative;
+  list-style: none;
+  height: 90px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+  border: 2px solid black;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s;
+  padding: 5px;
+}
+
+ul.paragraphs-add-dialog-list li:hover {
+  opacity: 0.8;
+}
+
+ul.paragraphs-add-dialog-list li > img {
+  height: 50px;
+}
+
+ul.paragraphs-add-dialog-list li > .button.button--small {
+  display: block;
+  padding: 60px 5px 5px;
+  height: calc(100% - 65px);
+  width: calc(100% - 10px);
+  border-radius: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+
+.editing-container {
+  background-color: #fff !important;
+}
+
+button.editing-container__toggle,
+button.editing-container__close {
+  background-size: cover;
+  opacity: 1;
+}
+
+div.frontend-editing-actions {
+  top: 24px;
+  left: 10px;
+}
+
+div.frontend-editing-actions::before {
+  background-color: #e8e8e8;
+  color: color-mix(in HSL, white, black);
+  font-size: 1rem;
+  left: 0;
+  margin: 0;
+  padding: 0 2px;
+  width: fit-content;
+}
+
+div.frontend-editing-actions a,
+div.frontend-editing-actions .frontend-editing__action:last-child {
+  border: 1px solid color-mix(in HSL, black, white);
+}

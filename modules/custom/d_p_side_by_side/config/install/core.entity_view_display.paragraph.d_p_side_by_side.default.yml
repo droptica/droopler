@@ -10,22 +10,24 @@ dependencies:
     - field.field.paragraph.d_p_side_by_side.field_d_settings
     - paragraphs.paragraphs_type.d_p_side_by_side
   module:
+    - d_p
     - entity_reference_revisions
     - field_group
-    - link
     - text
 third_party_settings:
   field_group:
-    group_d_side_cta:
+    group_d_content:
       children:
-        - field_d_cta_link
+        - field_d_p_sbs_items
+      label: Content
       parent_name: ''
+      region: content
       weight: 1
       format_type: html_element
-      region: content
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -33,19 +35,20 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'Call To Action'
-    group_d_side_content:
+    group_d_heading:
       children:
-        - field_d_long_text
         - field_d_media_icon
         - field_d_main_title
+        - field_d_long_text
+      label: Heading
       parent_name: ''
+      region: content
       weight: 0
       format_type: html_element
-      region: content
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         element: '<none>'
         show_label: false
         label_element: h3
@@ -53,14 +56,32 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: 'Side content'
+    group_d_cta:
+      children:
+        - field_d_cta_link
+      label: CTA
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: paragraph.d_p_side_by_side.default
 targetEntityType: paragraph
 bundle: d_p_side_by_side
 mode: default
 content:
   field_d_cta_link:
-    weight: 4
+    type: button_link_formatter
     label: hidden
     settings:
       trim_length: 80
@@ -69,40 +90,40 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 6
     region: content
   field_d_long_text:
     type: text_default
-    weight: 2
-    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 5
+    region: content
   field_d_main_title:
     type: string
-    weight: 1
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 4
+    region: content
   field_d_media_icon:
-    weight: 0
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: d_icon
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 3
     region: content
   field_d_p_sbs_items:
     type: entity_reference_revisions_entity_view
-    weight: 3
     label: hidden
     settings:
-      view_mode: default
+      view_mode: in_side_by_side
       link: ''
     third_party_settings: {  }
+    weight: 4
     region: content
 hidden:
   field_d_settings: true

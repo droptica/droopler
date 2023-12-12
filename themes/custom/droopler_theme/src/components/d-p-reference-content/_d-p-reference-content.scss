@@ -1,0 +1,46 @@
+@import "../../scss/init";
+
+.d-p-reference-content {
+  --media-img-width: 100%;
+
+  &__header-column,
+  &__cta-column {
+    text-align: center;
+  }
+
+  &__header {
+    .heading {
+      margin-top: var(--content-spacer-m);
+    }
+  }
+
+  &__items {
+    margin-top: var(--content-spacer-l);
+  }
+
+  &__items-wrapper {
+    justify-content: center;
+
+    & > article {
+      padding: 0 var(--content-spacer-none) var(--content-spacer-xs);
+    }
+
+    @include media-breakpoint-up(lg) {
+      & > article:not(:last-child) {
+        padding-right: var(--content-spacer-xs);
+      }
+    }
+
+    @include media-breakpoint-up(sm) {
+      & > article:nth-child(2n+1) {
+        padding-right: var(--content-spacer-xs);
+      }
+    }
+  }
+
+  &__cta {
+    .cta-links {
+      margin-top: var(--content-spacer-s);
+    }
+  }
+}

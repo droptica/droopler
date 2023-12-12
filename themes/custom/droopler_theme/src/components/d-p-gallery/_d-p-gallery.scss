@@ -1,0 +1,34 @@
+@import "../../scss/init";
+
+.d-p-gallery {
+  &__content {
+    text-align: center;
+
+    .body-text,
+    .heading {
+      margin-top: var(--content-spacer-m);
+    }
+
+    .cta-links {
+      margin-top: var(--content-spacer-l);
+    }
+  }
+
+  &__items {
+    margin-top: var(--content-spacer-m);
+    display: grid;
+    grid-gap: var(--content-spacer-l) var(--content-spacer-l);
+
+    @include media-breakpoint-up(xs) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

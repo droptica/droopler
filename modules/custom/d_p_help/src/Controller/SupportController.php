@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p_help\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

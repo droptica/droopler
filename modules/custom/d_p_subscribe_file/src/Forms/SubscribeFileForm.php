@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p_subscribe_file\Forms;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\d_p_subscribe_file\Entity\SubscribeFileEntity;
 use Drupal\paragraphs\ParagraphInterface;
@@ -13,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * File subscribe form.
- *
- * @package Drupal\d_p_subscribe_file\Forms
  */
 class SubscribeFileForm extends FormBase {
 
@@ -30,24 +31,24 @@ class SubscribeFileForm extends FormBase {
    *
    * @var \Drupal\paragraphs\ParagraphInterface
    */
-  protected $paragraph;
+  protected ParagraphInterface $paragraph;
 
   /**
    * Mail manager service.
    *
    * @var \Drupal\Core\Mail\MailManagerInterface
    */
-  protected $mailManager;
+  protected MailManagerInterface $mailManager;
 
   /**
    * The current user.
    *
    * @var \Drupal\Core\Session\AccountInterface
    */
-  protected $currentUser;
+  protected AccountInterface $currentUser;
 
   /**
-   * SubscribeFileForm constructor.
+   * Subscribe file form constructor.
    *
    * @param \Drupal\Core\Session\AccountProxy $account_proxy
    *   A proxied implementation of AccountInterface.
@@ -66,7 +67,7 @@ class SubscribeFileForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): static {
     return new static(
       $container->get('current_user'),
       $container->get('plugin.manager.mail')
@@ -97,18 +98,27 @@ class SubscribeFileForm extends FormBase {
     if (empty($this->paragraph)) {
       return $form;
     }
-    $form['name'] = [
+
+    $form['form_items'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'form-wrapper',
+          'form-items',
+        ],
+      ],
+    ];
+
+    $form['form_items']['name'] = [
       '#type' => 'textfield',
-      '#title_display' => 'invisible',
-      '#title' => $this->t('Name'),
+      '#title' => $this->t('Enter your name'),
       '#required' => TRUE,
       '#attributes' => ['placeholder' => $this->t('Enter your name')],
     ];
 
-    $form['mail'] = [
+    $form['form_items']['mail'] = [
       '#type' => 'email',
-      '#title_display' => 'invisible',
-      '#title' => $this->t('E-mail'),
+      '#title' => $this->t('Enter your email to get download link'),
       '#required' => TRUE,
       '#attributes' => ['placeholder' => $this->t('Enter your email to get download link')],
     ];
@@ -119,10 +129,29 @@ class SubscribeFileForm extends FormBase {
       '#value' => $file[0]['target_id'],
     ];
 
-    $form['submit'] = [
+    $form['form_items']['form_actions'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'form-actions',
+        ],
+      ],
+    ];
+
+    $form['form_items']['form_actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->paragraph->get('field_d_p_sf_download_button')->value,
-      '#attributes' => ['class' => ['btn-secondary']],
+      '#button_type' => $this->paragraph->get('field_d_p_sf_download_type')->getString(),
+    ];
+
+    $form['form_consents'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'form-wrapper',
+          'form-consents',
+        ],
+      ],
     ];
 
     // Keep compatibility with older Droopler.
@@ -130,17 +159,13 @@ class SubscribeFileForm extends FormBase {
     if ($this->paragraph->hasField('field_d_p_sf_consent')) {
       $consents = $this->paragraph->get('field_d_p_sf_consent')->getValue();
       foreach ($consents as $key => $consent) {
-        $form["consent_$key"] = [
+        $form['form_consents']["consent_$key"] = [
           '#type' => 'checkbox',
           '#title' => $consent['value'],
           '#required' => TRUE,
         ];
       }
     }
-
-    $form['#attributes'] = [
-      'class' => ['d-p-subscribe-file-form'],
-    ];
 
     return $form;
   }
@@ -168,7 +193,7 @@ class SubscribeFileForm extends FormBase {
       ->getValue();
     $link_options = [
       'absolute' => TRUE,
-      'attributes' => ['class' => 'btn-primary btn-orange'],
+      'attributes' => ['class' => 'btn btn-secondary'],
     ];
     $download_link = Link::createFromRoute($button_text[0]['value'], 'd_p_subscribe_file.downloadfile.checkLink', [
       'paragraph_id' => $this->paragraph->id(),

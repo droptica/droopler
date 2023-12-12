@@ -10,8 +10,8 @@ dependencies:
     - droopler_theme
 id: droopler_theme_exposed_form_products_list_products_list
 theme: droopler_theme
-region: facets_top
-weight: -14
+region: top_content
+weight: -11
 provider: null
 plugin: 'views_exposed_filter_block:products_list-products_list'
 settings:
@@ -23,6 +23,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /products
     negate: false
     context_mapping: {  }
+    pages: /products

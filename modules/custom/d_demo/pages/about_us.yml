@@ -25,16 +25,12 @@ field_page_section:
             link: 'internal:/contact'
             text: 'Contact us'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-secondary
-                target: _self
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-primary
           heading_type: h1
-          side_image_layout: left
+          image_side: left
     -
       paragraph_type: d_p_text_paged
       data:
@@ -46,7 +42,10 @@ field_page_section:
           data: '<p>Our company''s mission is to provide excellent and reliable products<br />with high-quality customer service.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -69,15 +68,11 @@ field_page_section:
             link: 'internal:/careers'
             text: Careers
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                target: _self
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class:  theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: right
+          image_side: right
+          paragraph_theme: theme-secondary
     -
       paragraph_type: d_p_banner
       data:
@@ -97,14 +92,11 @@ field_page_section:
             link: 'internal:/investor-relations'
             text: 'Read more'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                target: _self
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-dark
+          custom_class: padding-top-extra-large padding-bottom-extra-large
 field_teaser_media_image:
   type: media_image
   directory: demo

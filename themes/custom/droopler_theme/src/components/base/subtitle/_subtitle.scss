@@ -1,0 +1,14 @@
+:root {
+  --subtitle-margin: 0;
+  --subtitle-font-size: 1.125rem;
+  --subtitle-font-weight: normal;
+  --subtitle-text-transform: none;
+}
+
+.subtitle {
+  margin: var(--subtitle-margin);
+  font-size: var(--subtitle-font-size);
+  font-weight: var(--subtitle-font-weight);
+  text-transform: var(--subtitle-text-transform);
+  color: var(--subtitle-color);
+}

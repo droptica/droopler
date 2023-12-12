@@ -1,8 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
-machine_name: d_p
 name: 'Droopler Paragraphs'
+machine_name: d_p
 description: ''
 assignments:
   alter:
@@ -59,7 +59,8 @@ assignments:
     enabled: false
     weight: -16
     types:
-      config: {  }
+      config:
+        responsive_image_style: responsive_image_style
   packages:
     enabled: true
     weight: -20

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\Field;
 
 use Drupal\Component\Plugin\Exception\PluginException;
@@ -8,13 +10,14 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
+use Drupal\d_p\Enum\ParagraphSettingInterface;
+use Drupal\d_p\Enum\ParagraphSettingTypes;
+use Drupal\d_p\ParagraphSettingPluginManagerInterface;
 use Drupal\d_p\ParagraphSettingSelectInterface;
-use Drupal\d_p\ParagraphSettingTypesInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Provides field item list class for configuration storage field type.
- *
- * @package Drupal\d_p\Plugin\Field
  */
 class ConfigurationStorageFieldItemList extends FieldItemList implements ConfigurationStorageFieldItemListInterface {
   use LoggerChannelTrait;
@@ -24,19 +27,19 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    *
    * @var \Psr\Log\LoggerInterface
    */
-  protected $logger;
+  protected LoggerInterface $logger;
 
   /**
    * Paragraph setting plugin manager.
    *
    * @var \Drupal\d_p\ParagraphSettingPluginManagerInterface
    */
-  protected $pluginManager;
+  protected ParagraphSettingPluginManagerInterface $pluginManager;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(DataDefinitionInterface $definition, $name = NULL, TypedDataInterface $parent = NULL) {
+  public function __construct(DataDefinitionInterface $definition, $name = NULL, ?TypedDataInterface $parent = NULL) {
     parent::__construct($definition, $name, $parent);
 
     $this->pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');
@@ -49,7 +52,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
   public function getValue() {
     $value = parent::getValue();
 
-    return $value[0] ?? new \StdClass();
+    return !empty($value[0]) ? $value[0] : new \StdClass();
   }
 
   /**
@@ -102,7 +105,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    *   Classes string.
    */
   protected function getClassesValue() {
-    return $this->getValue()->{ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME} ?? '';
+    return $this->getValue()->{ParagraphSettingTypes::CSS_CLASS->value} ?? '';
   }
 
   /**
@@ -112,19 +115,9 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    *   Array of CSS classes.
    */
   protected function getClassesArrayValue(): array {
-    $classes = $classes_value = $this->getClassesValue();
+    $classes_value = $this->getClassesValue();
 
-    if (is_object($classes_value)) {
-      $classes = get_object_vars($classes_value);
-    }
-    elseif (is_string($classes_value)) {
-      $classes = explode(self::CSS_CLASS_DELIMITER, $classes_value);
-    }
-    elseif (!is_array($classes)) {
-      $classes = [];
-    }
-
-    return $classes;
+    return explode(self::CSS_CLASS_DELIMITER, $classes_value);
   }
 
   /**
@@ -173,7 +166,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    */
   public function setClasses(array $classes): void {
     $values = $this->getValue();
-    $values->{ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME} = implode(self::CSS_CLASS_DELIMITER, array_unique($classes));
+    $values->{ParagraphSettingTypes::CSS_CLASS->value} = implode(self::CSS_CLASS_DELIMITER, array_unique($classes));
 
     $this->setEncodedValue($values);
   }
@@ -185,7 +178,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    *   Classes stored in the field value.
    */
   protected function processDefaultClasses(array &$classes) {
-    $defaults = $this->getStorageItemDefaultClasses(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME);
+    $defaults = $this->getStorageItemDefaultClasses(ParagraphSettingTypes::CSS_CLASS->value);
     foreach ($defaults as $modifier) {
       $existing_classes = array_intersect($modifier['options'], $classes);
       // Add default classes if any value from options is not present.
@@ -204,22 +197,24 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
   /**
    * {@inheritdoc}
    */
-  public function hasSettingValue(string $setting_name): bool {
+  public function hasSettingValue(ParagraphSettingInterface $setting_name): bool {
     return !is_null($this->getSettingValue($setting_name));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getSettingValue(string $setting_name, $default = NULL) {
-    return $this->getValue()->$setting_name ?? $this->getStorageItemDefaultValue($setting_name) ?? $default;
+  public function getSettingValue(ParagraphSettingInterface $setting_name, $default = NULL) {
+    $setting_name_value = $setting_name->value;
+    return $this->getValue()->$setting_name_value ?? $this->getStorageItemDefaultValue($setting_name_value) ?? $default;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setSettingValue(string $name, $value): ConfigurationStorageFieldItemListInterface {
+  public function setSettingValue(ParagraphSettingInterface $name, $value): ConfigurationStorageFieldItemListInterface {
     $values = $this->getValue();
+    $name = $name->value;
     $values->$name = $value;
 
     $this->setEncodedValue($values);
@@ -288,7 +283,6 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
 
     try {
       $plugin = $this->loadStorageItemById($storage_id);
-      /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
       $class_plugins = $plugin->getChildrenPlugins();
 
       foreach ($class_plugins as $plugin) {

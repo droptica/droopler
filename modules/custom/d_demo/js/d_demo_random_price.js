@@ -8,27 +8,22 @@
    */
   Drupal.behaviors.d_demo_random_price = {
     attach: function (context, settings) {
-      // @todo Replace document.ready with Drupal.behaviors.
-      $(document).ready(function () {
-        var $wrapper = $('.wrapper-d_p_single_text_block', context);
-        if ($wrapper.hasClass('with-price')) {
-          setInterval(function () {
-              var number = ((2000 + Math.floor(Math.random() * 1000)) / 100).toFixed(2);
-              var timestamp = (Date.now() / 1000) - Math.floor( Math.random() * 31 * 24 * 3600);
+      if ($('.price-block', context).length !== 0) {
+        setInterval(function () {
+          let number = ((2000 + Math.floor(Math.random() * 1000)) / 100).toFixed(2);
+          let timestamp = (Date.now() / 1000) - Math.floor( Math.random() * 31 * 24 * 3600);
+          let change = 0;
 
-              if (localStorage.getItem('price')) {
-                var oldPrice = localStorage.getItem('price');
-                var change = Math.round((((number - oldPrice) * 100) / oldPrice) * 100) / 100;
-              } else {
-                var change = 0;
-              }
-              localStorage.setItem('price', number);
-              var cssClass = 'testing';
-              setPrice(number, change, timestamp, 'EUR', cssClass);
-            },
-            5000);
-        }
-      });
+          if (localStorage.getItem('price')) {
+            let oldPrice = localStorage.getItem('price');
+            change = Math.round((((number - oldPrice) * 100) / oldPrice) * 100) / 100;
+          }
+          localStorage.setItem('price', number);
+
+          window.setPrice(number, change, timestamp, 'EUR');
+        }, 5000);
+      }
     }
   };
+
 })(jQuery, Drupal);

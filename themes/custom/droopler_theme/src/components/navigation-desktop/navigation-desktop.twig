@@ -1,0 +1,15 @@
+{{ attach_library('droopler_theme/navigation-desktop') }}
+
+{% set base_class = navigation_desktop_base_class|default('navigation-desktop') %}
+
+<div {{ bem(base_class) }}>
+  <div {{ bem('top-content', [], base_class) }}>
+    {% block top_content %}
+    {% endblock %}
+  </div>
+
+  <div {{ bem('bottom-content', [], base_class) }}>
+    {% block bottom_content %}
+    {% endblock %}
+  </div>
+</div>

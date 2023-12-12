@@ -1,0 +1,82 @@
+{{ attach_library('droopler_theme/page') }}
+
+{% set base_class = page_base_class|default('page') %}
+
+<div {{ bem(base_class) }}>
+  <main {{ bem('main', [], base_class) }}>
+    {% block header %}
+    <header {{ bem('header', [], base_class) }}>
+      {% embed "@droopler_theme/header/header.twig" %}
+        {% block branding %}
+          {{ page.header_branding }}
+        {% endblock %}
+
+        {% block navigation_desktop %}
+          {% embed "@droopler_theme/navigation-desktop/navigation-desktop.twig" %}
+            {% block top_content %}
+              {{ page.header_secondary }}
+            {% endblock %}
+
+            {% block bottom_content %}
+              {{ page.header_primary }}
+            {% endblock %}
+          {% endembed %}
+        {% endblock %}
+
+        {% block navigation_mobile %}
+          {% embed "@droopler_theme/navigation-mobile/navigation-mobile.twig" %}
+            {% block content %}
+              {{ page.header_primary }}
+              {{ page.header_secondary }}
+            {% endblock %}
+          {% endembed %}
+        {% endblock %}
+      {% endembed %}
+    </header>
+    {% endblock header %}
+
+    {% block admin_tabs %}
+    {% if page.admin_tabs %}
+      <div {{ bem('admin-tabs', [], base_class, ['container']) }}>
+        {{ page.admin_tabs }}
+      </div>
+    {% endif %}
+    {% endblock admin_tabs %}
+
+    {% block content %}
+      <div {{ bem('content', [], base_class, ['container']) }}>
+        <div {{ bem('content-wrapper', [], base_class) }}>
+          {% include '@droopler_theme/base/heading/heading.twig' with {
+            heading_tag: 'h1',
+            label: page['#title'],
+          } %}
+
+          {{ page.content }}
+        </div>
+      </div>
+    {% endblock content %}
+  </main>
+
+  {% block footer %}
+  <footer {{ bem('footer', [], base_class) }}>
+    {% embed "@droopler_theme/footer-primary/footer-primary.twig" %}
+      {% block columns %}
+        {% for region in footer_primary_regions %}
+          {% embed "@droopler_theme/footer-primary-column/footer-primary-column.twig" with {
+            column_count: (12 / footer_primary_regions_count)|round(0, 'floor') } %}
+            {% block content %}
+              {{ region }}
+            {% endblock %}
+          {% endembed %}
+        {% endfor %}
+      {% endblock %}
+    {% endembed %}
+
+    {% embed "@droopler_theme/footer-secondary/footer-secondary.twig" %}
+      {% block content %}
+        {{ page.footer_secondary }}
+      {% endblock %}
+    {% endembed %}
+  </footer>
+  {% endblock footer %}
+</div>

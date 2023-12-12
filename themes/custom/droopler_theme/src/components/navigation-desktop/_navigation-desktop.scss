@@ -1,0 +1,132 @@
+.navigation-desktop {
+  &__top-content {
+    display: flex;
+    justify-content: flex-end;
+
+    .menu {
+      display: flex;
+
+      .menu-item {
+        &__link {
+          padding: 0.9rem;
+          color: var(--header-search-page-link-color);
+
+          &:hover {
+            color: var(--header-search-page-link-color-hover);
+          }
+        }
+      }
+    }
+
+    .search-page-link-block,
+    .language-switcher-language-url {
+      display: flex;
+      align-items: center;
+    }
+
+    .language-switcher-language-url {
+      a {
+        color: var(--header-search-page-link-color);
+
+        &.is-active,
+        &:hover {
+          color: var(--header-search-page-link-color-hover);
+        }
+      }
+    }
+  }
+
+  &__bottom-content {
+    .menu {
+      display: flex;
+
+      .menu-item {
+        position: relative;
+
+        &__link {
+          padding: 0 1.2rem;
+          line-height: 2.7rem;
+          font-weight: 500;
+          color: var(--navigation-desktop-bottom-menu-link-color);
+        }
+
+        &__toggler {
+          display: none;
+        }
+
+        &:hover {
+          .menu-item__link {
+            color: var(--navigation-desktop-bottom-menu-link-color-hover);
+          }
+
+          > .submenu {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .submenu {
+      display: none;
+      position: absolute;
+      background-color: var(--navigation-desktop-bottom-submenu-background-color);
+
+      .submenu-item {
+        &__link {
+          padding: 0 1.2rem;
+          line-height: 2.9rem;
+          white-space: nowrap;
+          color: var(--navigation-desktop-bottom-submenu-link-color);
+
+          &:hover {
+            color: var(--navigation-desktop-bottom-submenu-link-color-hover);
+          }
+        }
+
+        &--active {
+          > .submenu-item__element > .submenu-item__link {
+            color: var(--navigation-desktop-bottom-submenu-link-color-active);
+          }
+        }
+
+        &--has-submenu {
+          position: relative;
+
+          .submenu-item {
+            &__element {
+              display: flex;
+              justify-content: space-between;
+              align-items: stretch;
+            }
+
+            &__toggler {
+              transform: rotate(-90deg);
+              color: var(--navigation-desktop-bottom-submenu-link-color);
+
+              &.close {
+                display: none;
+              }
+            }
+          }
+
+          .submenu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+          }
+
+          &:hover {
+            > .submenu {
+              display: block;
+            }
+
+            > .submenu-item__element > .submenu-item__toggler {
+              color: var(--navigation-desktop-bottom-submenu-link-color-hover);
+            }
+          }
+        }
+      }
+    }
+  }
+}

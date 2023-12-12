@@ -5,22 +5,27 @@
  * Contains d_p_node module.
  */
 
+declare(strict_types = 1);
+
+use Drupal\d_p_node\Entity\BlogPostNode;
+use Drupal\d_p_node\Entity\ContentPageNode;
+use Drupal\d_p_node\Entity\NodeParagraph;
+use Drupal\d_p_node\Entity\ProductNode;
+
 /**
- * Implements hook_theme().
+ * Implements hook_entity_bundle_info_alter().
  */
-function d_p_node_theme($existing, $type, $theme, $path) {
-  return [
-    'node__blog_post__d_small_box' => [
-      'base hook' => 'node',
-    ],
-    'node__content_page__d_small_box' => [
-      'base hook' => 'node',
-    ],
-    'node__d_product__d_small_box' => [
-      'base hook' => 'node',
-    ],
-    'paragraph__d_p_node__default' => [
-      'base hook' => 'paragraph',
-    ],
-  ];
+function d_p_node_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['node']['d_product'])) {
+    $bundles['node']['d_product']['class'] = ProductNode::class;
+  }
+  if (isset($bundles['node']['blog_post'])) {
+    $bundles['node']['blog_post']['class'] = BlogPostNode::class;
+  }
+  if (isset($bundles['node']['content_page'])) {
+    $bundles['node']['content_page']['class'] = ContentPageNode::class;
+  }
+  if (isset($bundles['paragraph']['d_p_node'])) {
+    $bundles['paragraph']['d_p_node']['class'] = NodeParagraph::class;
+  }
 }

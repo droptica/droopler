@@ -1,0 +1,37 @@
+@import "../../scss/init";
+
+.product {
+  padding-top: var(--content-spacer-l);
+  padding-bottom: var(--content-spacer-l);
+
+  &__content-column {
+    &--basic {
+      .heading {
+        @include heading(3);
+      }
+
+      .product_gallery {
+        margin-top: var(--content-spacer-l);
+      }
+    }
+
+    &--content {
+      --cta-width: 100%;
+      --cta-max-width: none;
+
+      padding-top: var(--content-spacer-l);
+
+      @include media-breakpoint-up(lg) {
+        padding-top: var(--content-spacer-none);
+      }
+
+      .field__label,
+      .heading {
+        @include heading(5);
+
+        display: block;
+        margin: var(--content-spacer-m) var(--content-spacer-none) var(--content-spacer-xs);
+      }
+    }
+  }
+}

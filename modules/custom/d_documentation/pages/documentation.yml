@@ -24,7 +24,8 @@ field_page_section:
           data: '<p class="text-align-center">Droopler utilizes Paragraphs to build content in a comfortable, Lego-like way. Take a while to see the examples of each Paragraph. You will be surprised how much you can achieve.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-dark
+          custom_class: padding-top-extra-large padding-bottom-extra-large
           heading_type: h1
     -
       paragraph_type: d_p_group_of_text_blocks
@@ -54,6 +55,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/banner-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -73,6 +76,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/form-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -92,6 +97,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/text-blocks-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -111,6 +118,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/sidebar-image-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -130,6 +139,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/subscribe-file-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -149,25 +160,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/text-paragraph'
                   text: 'Learn more...'
-            -
-              field_d_media_icon:
-                type: media_image
-                directory: demo
-                files:
-                  -
-                    path: d_demo/demo_paragraph_text_bg.png
-                    alt: 'Paragraph Text With Background Icon'
-              field_d_main_title:
-                type: text
-                data: 'Text With Background'
-              field_d_long_text:
-                type: text_long
-                data: '<p>Similar to Text Paragraph but with additional background image (and a white mask over it).</p>'
-              field_d_cta_link:
-                type: cta
-                data:
-                  link: 'internal:/documentation/text-bg-paragraph'
-                  text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -187,6 +181,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/gallery-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -206,6 +202,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/carousel-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -225,6 +223,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/counters-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -244,6 +244,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/sidebar-embed-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -263,6 +265,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/tiles-paragraphs'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -282,6 +286,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/reference-content-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -301,6 +307,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/side-by-side-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
 
             - field_d_media_icon:
                 type: media_image
@@ -319,11 +327,13 @@ field_page_section:
                 data:
                   link: 'internal:/documentation/block-paragraph'
                   text: 'Learn more...'
+                  options:
+                    type: primary
 
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          paragraph_theme: theme-light
+          column_count_desktop: 3
 field_teaser_media_image:
   type: media_image
   directory: demo

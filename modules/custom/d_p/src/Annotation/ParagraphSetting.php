@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Annotation;
 
 use Drupal\Component\Annotation\Plugin;
 
 /**
  * Defines a ParagraphSetting item annotation object.
- *
- * @package Drupal\d_p\Annotation
  *
  * @see plugin_api
  *

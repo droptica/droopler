@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_media\Service;
+
+use Drupal\d_media\Plugin\Provider\ProviderPluginInterface;
 
 /**
  * Interface for the class that gathers the provider plugins.
@@ -15,10 +19,10 @@ interface ProviderManagerInterface {
    * @param string $user_input
    *   The user input to test against the plugins.
    *
-   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|bool
+   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|false
    *   The relevant plugin or FALSE on failure.
    */
-  public function filterApplicableDefinitions(array $definitions, $user_input);
+  public function filterApplicableDefinitions(array $definitions, $user_input): ProviderPluginInterface|false;
 
   /**
    * Load a provider from user input.
@@ -26,10 +30,10 @@ interface ProviderManagerInterface {
    * @param string $input
    *   Input provided from a field.
    *
-   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|bool
-   *   The loaded plugin.
+   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|false
+   *   The loaded plugin or FALSE on failure.
    */
-  public function loadProviderFromInput($input);
+  public function loadProviderFromInput($input): ProviderPluginInterface|false;
 
   /**
    * Load a plugin definition from an input.
@@ -37,9 +41,9 @@ interface ProviderManagerInterface {
    * @param string $input
    *   An input string.
    *
-   * @return array
-   *   A plugin definition.
+   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|false
+   *   The relevant plugin or FALSE on failure.
    */
-  public function loadDefinitionFromInput($input);
+  public function loadDefinitionFromInput($input): ProviderPluginInterface|false;
 
 }

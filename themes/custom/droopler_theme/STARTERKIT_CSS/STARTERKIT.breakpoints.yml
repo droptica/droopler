@@ -1,0 +1,24 @@
+STARTERKIT.small:
+  label: small
+  mediaQuery: 'all and (min-width: 768px) and (max-width: 991px)'
+  weight: 0
+  multipliers:
+    - 1x
+STARTERKIT.medium:
+  label: medium
+  mediaQuery: 'all and (min-width: 992px) and (max-width: 1199px)'
+  weight: 1
+  multipliers:
+    - 1x
+STARTERKIT.large:
+  label: large
+  mediaQuery: 'all and (min-width: 1200px) and (max-width: 1399px)'
+  weight: 2
+  multipliers:
+    - 1x
+STARTERKIT.extra:
+  label: extra
+  mediaQuery: 'all and (min-width: 1400px)'
+  weight: 3
+  multipliers:
+    - 1x

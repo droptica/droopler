@@ -5,15 +5,17 @@
  * Contains d_paragraphs_text_paged.module..
  */
 
+declare(strict_types = 1);
+
+use Drupal\d_p_text_paged\Entity\TextPaged;
+
 /**
- * Implements hook_theme().
+ * Implements hook_entity_bundle_info_alter().
  */
-function d_p_text_paged_theme($existing, $type, $theme, $path) {
-  return [
-    'paragraph__d_p_text_paged' => [
-      'base hook' => 'paragraph',
-    ],
-  ];
+function d_p_text_paged_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['paragraph']['d_p_text_paged'])) {
+    $bundles['paragraph']['d_p_text_paged']['class'] = TextPaged::class;
+  }
 }
 
 /**

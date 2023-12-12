@@ -1,0 +1,19 @@
+info:
+    type: d_product
+    title: 'SkyMaster 12 S 3000'
+field_d_product_media:
+    type: media_image
+    directory: demo
+    files: [{ path: d_product_init/planeasset4.jpg, alt: 'Title / Subtitle' }]
+body:
+    type: text
+    data: 'Modern engine with top-tier safety features and eco-friendly design.'
+field_product_categories:
+    type: taxonomy
+    data: { vid: d_product_categories, terms: ['Jet Engines'] }
+field_tags:
+    type: taxonomy
+    data: { vid: tags, terms: [Engines, Jet] }
+field_d_product_link:
+    type: cta
+    data: { link: null, text: 'Buy now' }

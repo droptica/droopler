@@ -22,15 +22,12 @@ field_page_section:
             link: 'internal:#'
             text: 'Read more'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                target: _self
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
+          paragraph_theme: theme-dark
+          custom_class: padding-top-extra-large padding-bottom-extra-large
     -
       paragraph_type: d_p_text_paged
       data:
@@ -42,7 +39,10 @@ field_page_section:
           data: '<p>Our company deals with engine oil change services for each type of engine: diesel, gasoline, gas and hybrid. We only use the best oils from well-known brands. Each engine is placed in our IT system, thanks to which customers receive notifications about the upcoming oil change date every year.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_form
       data:
@@ -61,8 +61,8 @@ field_page_section:
           data: feedback
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           form_layout: bottom
+          paragraph_theme: theme-primary
 field_teaser_media_image:
   type: media_image
   directory: demo

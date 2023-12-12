@@ -1,24 +1,24 @@
 droopler_theme.small:
   label: small
-  mediaQuery: 'all and (min-width: 34em) and (max-width: 47em)'
+  mediaQuery: 'all and (min-width: 768px) and (max-width: 991px)'
   weight: 0
   multipliers:
     - 1x
 droopler_theme.medium:
   label: medium
-  mediaQuery: 'all and (min-width: 48em) and (max-width: 61em)'
+  mediaQuery: 'all and (min-width: 992px) and (max-width: 1199px)'
   weight: 1
   multipliers:
     - 1x
 droopler_theme.large:
   label: large
-  mediaQuery: 'all and (min-width: 62em) and (max-width: 74em)'
+  mediaQuery: 'all and (min-width: 1200px) and (max-width: 1399px)'
   weight: 2
   multipliers:
     - 1x
 droopler_theme.extra:
   label: extra
-  mediaQuery: 'all and (min-width: 75em)'
+  mediaQuery: 'all and (min-width: 1400px)'
   weight: 3
   multipliers:
     - 1x

@@ -1,0 +1,83 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.reference_content
+    - field.field.node.blog_post.field_blog_category
+    - field.field.node.blog_post.field_blog_media_main_image
+    - field.field.node.blog_post.field_blog_sections
+    - field.field.node.blog_post.field_blog_teaser
+    - field.field.node.blog_post.field_meta_tags
+    - node.type.blog_post
+  module:
+    - field_group
+    - text
+    - user
+third_party_settings:
+  field_group:
+    group_blog_image:
+      children:
+        - field_blog_media_main_image
+      label: 'Blog image'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_blog_content:
+      children:
+        - field_blog_teaser
+      label: 'Blog content'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: node.blog_post.reference_content
+targetEntityType: node
+bundle: blog_post
+mode: reference_content
+content:
+  field_blog_media_main_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: reference_content
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_blog_teaser:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  field_blog_category: true
+  field_blog_sections: true
+  field_meta_tags: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

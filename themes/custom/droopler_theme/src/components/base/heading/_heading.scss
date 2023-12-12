@@ -1,0 +1,10 @@
+:root {
+  --heading-margin: 0;
+  --heading-text-transform: none;
+}
+
+.heading {
+  margin: var(--heading-margin);
+  text-transform: var(--heading-text-transform);
+  color: var(--heading-color);
+}

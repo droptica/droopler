@@ -1,0 +1,20 @@
+{% embed '@droopler_theme/d-p-single-text-block/d-p-single-text-block--group.twig' with {
+  has_background: paragraph.mediaBackground,
+  is_tile: paragraph.parentEnabledTiles,
+  is_grid: paragraph.parentEnabledGrid,
+  with_price: paragraph.enabledPrice,
+  with_price_in_sidebar: paragraph.priceInSidebar,
+  d_p_single_text_blocks_modifiers: ['in-group'],
+} %}
+  {% block background %}
+    {{ content.group_d_block_background }}
+  {% endblock %}
+
+  {% block header %}
+    {{ content.group_d_header }}
+  {% endblock %}
+
+  {% block content %}
+    {{ content.group_d_block_content }}
+  {% endblock %}
+{% endembed %}

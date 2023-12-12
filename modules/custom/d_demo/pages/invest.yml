@@ -21,9 +21,9 @@ field_page_section:
           data: '<p>This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
           heading_type: h1
-          side_image_layout: right-wide
+          paragraph_theme: theme-light
+          image_side: right
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -39,14 +39,18 @@ field_page_section:
               data:
                 field_d_long_text:
                   type: text_long
-                  data: '<p><h3>Drooplengines</h3></p>'
+                  data: '<h3>Drooplengines</h3>'
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'with-price testing'
+                  with-price: 1
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid padding-bottom-none theme-default padding-top-default margin-top-default margin-bottom-default
-          column_count: 1
+          custom_class: padding-bottom-none
+          full-width: 1
+          with-grid: 1
+          column_count_desktop: 1
+          column_count_tablet: 1
+          column_count_mobile: 1
     -
       paragraph_type: d_p_text_paged
       data:
@@ -108,10 +112,13 @@ field_page_section:
                 </tbody>
             </table>
             </div>
-
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -165,10 +172,14 @@ field_page_section:
                 </tbody>
             </table>
             </div>
-
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-none padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-none
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -187,8 +198,8 @@ field_page_section:
           data: '<p>John Smith</p> <p>ul. Stacyjna 1<br>53-613 Wrocław</p> <p>Mobile: +48 333 444 222</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left-wide
+          paragraph_theme: theme-light
+          image_side: left
 field_teaser_media_image:
   type: media_image
   directory: demo

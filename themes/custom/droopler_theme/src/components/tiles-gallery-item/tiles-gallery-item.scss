@@ -1,0 +1,66 @@
+@import "../../scss/init";
+
+:root {
+  --tiles-gallery-item-standard-width-desktop: 25%;
+  --tiles-gallery-item-standard-width-mobile: 50%;
+  --tiles-gallery-item-featured-width-desktop: 50%;
+  --tiles-gallery-item-featured-width-mobile: 100%;
+  --tiles-gallery-item-padding: 2px;
+}
+
+.tiles-gallery-item {
+  $root: &;
+
+  padding: var(--tiles-gallery-item-padding);
+
+  img {
+    width: 100%;
+  }
+
+  &--standard {
+    width: var(--tiles-gallery-item-standard-width-mobile);
+
+    @include media-breakpoint-up(md) {
+      width: var(--tiles-gallery-item-standard-width-desktop);
+    }
+  }
+
+  &--featured {
+    width: var(--tiles-gallery-item-featured-width-mobile);
+
+    @include media-breakpoint-up(md) {
+      width: var(--tiles-gallery-item-featured-width-desktop);
+    }
+  }
+
+  &__item-content {
+    position: relative;
+  }
+
+  .video-embed {
+    display: block;
+    height: 0;
+    width: 100%;
+  }
+
+  &__caption {
+    @include filling-absolute;
+    @include centered-flex-column;
+
+    background: var(--tiles-gallery-item-caption-background);
+    color: var(--tiles-gallery-item-caption-text-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+
+    #{$root}:hover & {
+      opacity: 0.5;
+    }
+
+    &-title {
+      @include heading(4);
+
+      font-weight: 600;
+    }
+  }
+}

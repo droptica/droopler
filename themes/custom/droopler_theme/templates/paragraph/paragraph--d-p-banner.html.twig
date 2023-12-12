@@ -1,0 +1,25 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-banner/d-p-banner.twig' with {
+      left_side_content: paragraph.leftSideContent
+    } %}
+      {% block background %}
+        {{ content.group_d_banner_background }}
+      {% endblock %}
+
+      {% block content_header %}
+        {{ content.group_d_banner_content_header }}
+      {% endblock %}
+
+      {% block content %}
+        {{ content.group_d_banner_content }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_d_banner_background', 'group_d_banner_content_header', 'group_d_banner_content') }}
+  {% endblock %}
+
+{% endembed %}

@@ -1,0 +1,12 @@
+# Schema for the configuration files of the STARTERKIT theme.
+
+STARTERKIT.settings:
+  type: theme_settings
+  label: 'STARTERKIT settings'
+  mapping:
+    mobile_breakpoint:
+      type: integer
+      label: 'Mobile breakpoint'
+    tablet_breakpoint:
+      type: integer
+      label: 'Tablet breakpoint'

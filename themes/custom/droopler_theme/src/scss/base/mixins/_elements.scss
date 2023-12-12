@@ -1,0 +1,38 @@
+@mixin divider {
+  &::after {
+    content: "";
+    display: block;
+    width: 3.125rem;
+    height: 0.125rem;
+    margin-top: 1.375rem;
+    margin-bottom: 1.51rem;
+    background-color: var(--divider-background-color);
+
+    @at-root .text-center & {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+@mixin filter-icon {
+  border: var(--mobile-filter-border);
+
+  &::after {
+    position: absolute;
+    content: "";
+    mask-image: url("../../assets/icons/funnel.svg");
+    background-color: var(--mobile-filter-icon-color);
+    mask-repeat: no-repeat;
+    mask-position: right top 0;
+    width: 1.875rem;
+    height: 1.875rem;
+    right: 0.9375rem;
+  }
+
+  &:hover {
+    &::after {
+      background-color: var(--mobile-filter-icon-color-hover);
+    }
+  }
+}

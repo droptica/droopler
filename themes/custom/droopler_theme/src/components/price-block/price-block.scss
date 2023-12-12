@@ -1,0 +1,115 @@
+@import "../../scss/init";
+
+.price-block {
+  $root: &;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__spinner {
+    color: var(--price-block-color-spinner);
+  }
+
+  &__data {
+    @include heading(3);
+
+    font-weight: $font-weight-bold;
+  }
+
+  &__change {
+    display: flex;
+    align-items: center;
+
+    &.up {
+      color: var(--price-block-color-up);
+
+      #{$root}__arrow {
+        border-bottom: 16px solid var(--price-block-color-up);
+      }
+    }
+
+    &.down {
+      color: var(--price-block-color-down);
+
+      #{$root}__arrow {
+        border-top: 16px solid var(--price-block-color-down);
+      }
+    }
+  }
+
+  &__arrow {
+    width: 0;
+    height: 0;
+    margin-right: var(--content-spacer-m);
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+  }
+
+  &__timestamp {
+    margin-top: var(--content-spacer-m);
+  }
+
+  &--sidebar {
+    position: absolute;
+    padding: 0;
+    justify-content: center;
+    background-color: var(--price-block-color-sidebar-background);
+    color: var(--price-block-color-sidebar);
+
+    & > div {
+      padding: 0 5px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      top: 0;
+      min-width: 170px;
+      height: 100%;
+      right: 0;
+
+      .item-2 & {
+        left: 0;
+        right: auto;
+      }
+    }
+
+    @include media-breakpoint-down(xl) {
+      flex-direction: row;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      min-height: 70px;
+
+      .item-1 &,
+      .item-2 & {
+        width: 50vw;
+      }
+
+      .item-1 & {
+        margin-left: calc(100% - 50vw);
+      }
+
+      .item-2 & {
+        margin-right: calc(100% - 50vw);
+      }
+
+      #{$root}__timestamp {
+        margin-top: 0;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      .item-1 &,
+      .item-2 & {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &:not(&--sidebar) {
+    position: relative;
+    color: var(--price-block-color);
+  }
+}

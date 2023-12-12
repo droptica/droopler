@@ -20,15 +20,17 @@ third_party_settings:
       children:
         - group_basic
         - group_settings
+      label: Tabs
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
-      region: content
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         direction: horizontal
-      label: Tabs
+        width_breakpoint: 450
     group_basic:
       children:
         - field_d_main_title
@@ -36,129 +38,138 @@ third_party_settings:
         - field_d_media_icon
         - field_d_long_text
         - field_d_forms
+      label: Basic
+      region: content
       parent_name: group_tabs
       weight: 10
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: Basic
     group_settings:
       children:
         - field_d_settings
+      label: Settings
+      region: content
       parent_name: group_tabs
       weight: 11
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: Settings
 id: paragraph.d_p_form.default
 targetEntityType: paragraph
 bundle: d_p_form
 mode: default
 content:
   field_d_forms:
+    type: options_select
     weight: 5
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_d_long_text:
+    type: text_textarea
     weight: 4
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_d_main_title:
+    type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_d_media_background:
     type: media_library_widget
     weight: 2
+    region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
-    region: content
   field_d_media_icon:
     type: media_library_widget
     weight: 3
+    region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
-    region: content
   field_d_settings:
+    type: field_d_p_set_settings
     weight: 12
+    region: content
     settings:
       filter_mode: '1'
       allowed_settings:
-        heading_type:
-          status: '1'
-        form_layout:
-          status: '1'
         custom_class:
           status: '1'
           modifiers:
-            padding-bottom:
-              status: '1'
-            paragraph-theme:
-              status: '1'
             margin-bottom:
               status: '1'
             margin-top:
               status: '1'
+            padding-bottom:
+              status: '1'
             padding-top:
               status: '1'
-            stripe-sidebar:
-              status: 0
-            tile:
-              status: 0
-            with-divider:
-              status: 0
-            with-tiles:
-              status: 0
-            half-transparent:
-              status: 0
-            with-grid:
-              status: 0
-            with-price:
-              status: 0
-            header-into-columns:
-              status: 0
-            full-width:
-              status: 0
-        side_image_layout:
+        form_layout:
+          status: '1'
+        heading_type:
+          status: '1'
+        paragraph_theme:
+          status: '1'
+        add-dividers:
           status: 0
-        column_count_tablet:
-          status: 0
-        side_tiles_layout:
-          status: 0
-        featured_images:
+        column_count_desktop:
           status: 0
         column_count_mobile:
           status: 0
+        column_count_tablet:
+          status: 0
         embed_layout:
           status: 0
-        column_count:
+        with-grid:
           status: 0
+        with-price:
+          status: 0
+        with-tiles:
+          status: 0
+        tiles_featured_images:
+          status: 0
+        full-width:
+          status: 0
+        image_side:
+          status: 0
+        image_width:
+          status: 0
+        left_side_content:
+          status: 0
+        header-into-columns:
+          status: 0
+        with-price-in-sidebar:
+          status: 0
+        tiles_side:
+          status: 0
+      plugins_settings:
+        paragraph_theme:
+          allowed_themes:
+            - theme-light
+            - theme-dark
+            - theme-primary
+            - theme-secondary
+            - theme-custom
+          default_theme: theme-primary
     third_party_settings: {  }
-    type: field_d_p_set_settings
-    region: content
 hidden:
   created: true
   status: true

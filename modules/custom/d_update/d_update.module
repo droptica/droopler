@@ -5,6 +5,8 @@
  * Contains d_update module.
  */
 
+declare(strict_types = 1);
+
 use Drupal\Core\Url;
 use Drupal\d_update\Entity\Update;
 use Symfony\Component\Yaml\Yaml;
@@ -34,6 +36,10 @@ function d_update_checklistapi_checklist_info() {
  */
 function d_update_checklistapi_checklist_items() {
   $tasks = Yaml::parse(file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'updates.yml'));
+
+  if (empty($tasks)) {
+    return [];
+  }
 
   foreach ($tasks as $version => $updates) {
     foreach ($updates as $key => $update) {

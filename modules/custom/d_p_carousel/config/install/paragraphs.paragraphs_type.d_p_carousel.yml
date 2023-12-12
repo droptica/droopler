@@ -1,9 +1,11 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  content:
+    - 'file:file:32282668-6bf4-473a-b23f-647d909fc845'
 id: d_p_carousel
 label: Carousel
-icon_uuid: null
-icon_default: null
+icon_uuid: 32282668-6bf4-473a-b23f-647d909fc845
+icon_default: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAACYBAMAAABT+LtaAAAAJ1BMVEUAAAAAAAAZbbr/hxr/////gg//8ub/+PL/6dX/3bz/0qn/t3X/pFE0EvAsAAAAAXRSTlMAQObYZgAAAXBJREFUaN7t2sFNw0AQheFhaMDpYDUVICEOSBwj4M4NrpRACXRADZRABTSGWDATZ1Bmx85uEvv9p7DM+pPw4oAUQgghhBBCCCGEEEIIIVTSqkFzQjqq3BkQIH1AgABZIiIiFElEogjLd4l2Zec9xO6xu0RL7ryPSF8hYpd9hPP18y4H0fmUvx1Afq/CLmLnI0j678T8fcXDi7Gd9xEWUa0M0Rf1kKTzLmJG2UfsfByRIoTGIPoyigiQOoje+GNCRhxhjv+e6Ku6j5U4knS3g5j5wKPefwrbeZZiRKdDb1pErOsWOb/86WL02y+beb2oQcyu5CBmPoJQ8K8V0tUAQrrHT+cd5PpBkSkpcvW2jTze7h95fh8iTy81kLuPTeTmdV0DWd9/NkFa/Lha3Pj2RzjXI6utOhqxni+6CGRyQ+Tw/2IDGYd00XUfmX6EF4bkZnm6gBSdruj6QhGazY0HAgQIECBAgGx0usjOTupTUQ36Av6SyyWgeIR+AAAAAElFTkSuQmCC'
 description: 'Items scrolled by Slick library.'
 behavior_plugins: {  }

@@ -28,11 +28,12 @@ field_page_section:
           data:
             link: 'internal:/products'
             text: 'Browse engines'
-            class: 'btn btn-primary'
+            options:
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: half-transparent theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          heading_type: h1
+          paragraph_theme: theme-dark
+          custom_class: padding-top-extra-large padding-bottom-extra-large
     -
       paragraph_type: d_p_carousel
       data:
@@ -41,8 +42,10 @@ field_page_section:
           data: 'Top Actions'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-divider theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 6
+          paragraph_theme: theme-secondary
+          column_count_desktop: 6
+          column_count_tablet: 2
+          column_count_mobile: 1
         field_d_p_cs_item_reference:
           type: paragraph_reference
           subtype: d_p_carousel_item
@@ -63,6 +66,8 @@ field_page_section:
                 data:
                   link: 'internal:/documentation'
                   text: 'Download specs'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -79,6 +84,8 @@ field_page_section:
                 data:
                   link: 'internal:/careers'
                   text: 'Find a job'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -95,6 +102,8 @@ field_page_section:
                 data:
                   link: 'internal:/contact'
                   text: 'Get support'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -111,6 +120,8 @@ field_page_section:
                 data:
                   link: 'internal:/products'
                   text: 'Find parts'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -128,6 +139,8 @@ field_page_section:
                 data:
                   link: 'internal:/contact'
                   text: 'Contact us'
+                  options:
+                    type: primary
             -
               field_d_media_icon:
                 type: media_image
@@ -145,6 +158,8 @@ field_page_section:
                 data:
                   link: 'internal:/about-us'
                   text: More
+                  options:
+                    type: primary
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -160,15 +175,14 @@ field_page_section:
             link: 'internal:/products'
             text: 'View All'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-4
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          column_count_desktop: 3
+          column_count_tablet: 3
+          column_count_mobile: 1
+          with-grid: true
+          full-width: true
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -214,8 +228,13 @@ field_page_section:
       data:
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-tiles theme-gray header-into-columns padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 4
+          paragraph_theme: theme-secondary
+          column_count_desktop: 4
+          column_count_tablet: 4
+          column_count_mobile: 1
+          full-width: 1
+          with-tiles: 1
+          header-into-columns: 1
         field_d_main_title:
           type: text
           data: Services
@@ -244,9 +263,11 @@ field_page_section:
                   data:
                     link: 'internal:/boats'
                     text: 'For boat manufacturers'
+                    options:
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-default'
+                  heading_type: h3
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -265,9 +286,11 @@ field_page_section:
                   data:
                     link: 'internal:/aircrafts'
                     text: 'For airplane manufacturers'
+                    options:
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-default'
+                  heading_type: h3
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -286,9 +309,11 @@ field_page_section:
                   data:
                     link: 'internal:/cars'
                     text: 'For car manufacturers'
+                    options:
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-default'
+                  heading_type: h3
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -307,9 +332,11 @@ field_page_section:
                   data:
                     link: 'internal:/spacecrafts'
                     text: 'For spaceship manufacturers'
+                    options:
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'tile theme-default'
+                  heading_type: h3
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -318,8 +345,11 @@ field_page_section:
           data: 'Who uses our engines'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          column_count_desktop: 3
+          column_count_tablet: 3
+          column_count_mobile: 1
+          with-tiles: true
+          custom_class: padding-top-medium padding-bottom-none
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -339,7 +369,6 @@ field_page_section:
                   data: Marine
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -355,7 +384,6 @@ field_page_section:
                   data: Aviation
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -371,7 +399,6 @@ field_page_section:
                   data: Automotive
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
     -
       paragraph_type: d_p_reference_content
       data:
@@ -384,14 +411,10 @@ field_page_section:
             link: 'internal:/blog'
             text: 'View all'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-5
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: padding-top-default padding-bottom-default theme-default margin-top-default margin-bottom-default
+          custom_class: padding-top-none padding-bottom-medium
     -
       paragraph_type: d_p_side_by_side
       data:
@@ -411,11 +434,7 @@ field_page_section:
                     link: 'internal:/investor-relations'
                     text: 'Learn more'
                     options:
-                      attributes:
-                        class:
-                          - btn
-                          - btn-primary
-                          - mt-4
+                      type: primary
                 field_d_media_background:
                   type: media_image
                   directory: demo
@@ -425,7 +444,8 @@ field_page_section:
                       alt: Buildings
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: 'theme-default with-price testing stripe-sidebar'
+                  with-price: 1
+                  with-price-in-sidebar: 1
             -
               paragraph_type: d_p_single_text_block
               data:
@@ -438,14 +458,9 @@ field_page_section:
                     link: 'internal:/careers'
                     text: 'Learn more'
                     options:
-                      attributes:
-                        class:
-                          - btn
-                          - btn-primary
-                          - mt-4
+                      type: primary
                 field_d_settings:
                   type: field_p_configuration_storage
-                  custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
                 field_d_media_background:
                   type: media_image
                   directory: demo
@@ -455,7 +470,7 @@ field_page_section:
                       alt: Workers
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-none padding-bottom-none
 field_teaser_media_image:
   type: media_image
   directory: demo

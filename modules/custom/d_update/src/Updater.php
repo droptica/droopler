@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_update;
 
-use Drupal\block\Entity\Block;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
@@ -19,6 +20,7 @@ use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\block\Entity\Block;
 use Drupal\d_p\Helper\NestedArrayHelper;
 
 /**
@@ -357,10 +359,11 @@ class Updater {
       // If this is field config, handle it properly.
       /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
       $storage = $this->entityTypeManager->getStorage($entity_type);
+      /** @var \Drupal\Core\Config\Entity\ConfigEntityTypeInterface $entity_type */
+      $entity_type = $storage->getEntityType();
 
       // Try to load the existing config.
-      $id = $storage->getIDFromConfigName($name, $storage->getEntityType()
-        ->getConfigPrefix());
+      $id = $storage->getIDFromConfigName($name, $entity_type->getConfigPrefix());
       $existingEntity = $storage->load($id);
       if (!empty($existingEntity)) {
         // Set the proper UUID to avoid conflicts.
@@ -371,7 +374,7 @@ class Updater {
 
       // If we need an update, we have to inform the storage about it.
       if (!empty($existingEntity)) {
-        $entity->original = $existingEntity;
+        $entity->set('original', $existingEntity);
         $entity->enforceIsNew(FALSE);
       }
 
@@ -514,7 +517,7 @@ class Updater {
    * @return bool
    *   Return if the config was changed successfully.
    */
-  private function modifyConfig($configName, array $newConfig, array $expectedConfig = NULL) {
+  private function modifyConfig($configName, array $newConfig, array $expectedConfig = []) {
     $configName = $this->replacePlaceholders($configName);
     $config = $this->configFactory->getEditable($configName);
     $configData = $config->get();

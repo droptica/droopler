@@ -1,0 +1,89 @@
+@import "../../scss/init";
+
+.d-p-subscribe-file {
+  --media-width: 100%;
+  --media-height: 100%;
+  --dp-bs-link-color: var(--subscribe-file-link-color);
+  --dp-bs-link-hover-color: var(--subscribe-file-link-hover-color);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__background {
+    @include filling-absolute;
+  }
+
+  &__background-media {
+    @include covering-media;
+  }
+
+  &__background-overlay {
+    @include filling-absolute;
+  }
+
+  &__content {
+    --body-text-color: var(--subscribe-file-body-text-color);
+
+    z-index: 1;
+  }
+
+  &__content-column {
+    text-align: center;
+
+    .media-icon {
+      --media-width: auto;
+      --media-height: auto;
+    }
+
+    .heading {
+      margin-top: var(--content-spacer-s);
+    }
+
+    .form {
+      .form-items {
+        margin-top: var(--content-spacer-m);
+
+        @include media-breakpoint-up(md) {
+          display: flex;
+          column-gap: calc(#{var(--content-spacer-m)} / 2);
+        }
+
+        .form-item,
+        .form-actions {
+          margin-top: var(--content-spacer-s);
+
+          @include media-breakpoint-up(md) {
+            margin-top: 0;
+          }
+        }
+      }
+
+      .form-consents {
+        margin-top: var(--content-spacer-m);
+
+        .form-check:not(:first-child) {
+          margin-top: var(--content-spacer-s);
+        }
+      }
+
+      .btn {
+        margin: 0;
+      }
+    }
+
+    &--additional-info {
+      .body-text {
+        margin-top: var(--content-spacer-m);
+      }
+    }
+  }
+}

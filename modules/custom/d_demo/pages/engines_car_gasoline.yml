@@ -21,9 +21,9 @@ field_page_section:
           data: '<p>We offer several models of gasoline engines for the automotive market. We manufacture complete sets of engines and also offer parts for petrol engines.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-light
           heading_type: h1
-          side_image_layout: right-wide
+          image_side: right
     -
       paragraph_type: d_p_text_paged
       data:
@@ -35,7 +35,10 @@ field_page_section:
           data: '<p>We have over 20 years of experience in the production of engines for automotive industry.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_side_image
       data:
@@ -51,8 +54,8 @@ field_page_section:
           data: '<h3> Cobra 100 </h3> <p>Excellent and powerful gasoline engine for cars. A wide range of power. Designed and created by a team of experienced mechanics and engineers. Perfect for small city cars and large SUVs.</p> <ul> <li>1.4 L (1,360 cc) Euro 5 70-72 kW</li> <li>1.6 L (1,598 cc) Euro 5 72-88 kW</li> <li>1.6 L (1,598 cc) Euro 4 103-120 kW</li> <li>1.6 L (1,598 cc) Euro 5 103-120 kW</li> <li>1.6 L (1,598 cc) Euro 4 128-152 kW</li> </ul>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_image_layout: left
+          paragraph_theme: theme-secondary
+          image_side: left
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -68,18 +71,19 @@ field_page_section:
                 data: '<p><ul> <li>Change the engine oil</li> <li>Replace the oil filter</li> <li>Replace the spark plugs</li> </ul></p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
             -
               field_d_long_text:
                 type: text_long
                 data: '<p><ul> <li>Inspect and replace the timing belt</li> <li>Check for any Error codes in the ECU</li> <li>Use scan tool read trouble code</li> </ul></p>'
               field_d_settings:
                 type: field_p_configuration_storage
-                custom_class: theme-default
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: with-tiles theme-primary header-margin-none padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 2
+          paragraph_theme: theme-primary
+          column_count_desktop: 2
+          column_count_tablet: 2
+          column_count_mobile: 1
+          with-tiles: 1
     -
       paragraph_type: d_p_group_of_text_blocks
       data:
@@ -92,15 +96,14 @@ field_page_section:
             link: 'internal:/products'
             text: 'View All'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-4
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-width with-grid theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          column_count: 3
+          full-width: 1
+          with-grid: 1
+          column_count_desktop: 3
+          column_count_tablet: 3
+          column_count_mobile: 1
         field_d_p_tb_block_reference:
           type: paragraph_reference
           subtype: paragraphs_wrapper
@@ -153,14 +156,10 @@ field_page_section:
             link: 'internal:/blog'
             text: 'View all'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-primary
-                  - mt-5
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: padding-top-none theme-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-none
     -
       paragraph_type: d_p_banner
       data:
@@ -181,10 +180,13 @@ field_page_section:
           type: cta
           data:
             link: 'internal:/contact'
-            text: 'CONTACT US'
+            text: 'Contact us'
+            options:
+              type: primary
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          custom_class: padding-top-extra-large padding-bottom-extra-large
+          paragraph_theme: theme-dark
 field_teaser_media_image:
   type: media_image
   directory: demo

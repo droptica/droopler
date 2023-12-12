@@ -1,0 +1,33 @@
+@import "../../scss/init";
+
+.d-p-side-image {
+  --media-width: 100%;
+  --media-height: 100%;
+
+  position: relative;
+
+  &__background {
+    @include covering-media;
+
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .right {
+    @include media-breakpoint-up(md) {
+      left: unset;
+      right: 0;
+    }
+  }
+
+  .heading {
+    margin-top: var(--content-spacer-s);
+  }
+
+  .cta-links {
+    margin-top: var(--content-spacer-m);
+  }
+}

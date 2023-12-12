@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_d_p_sf_download_type
+    - paragraphs.paragraphs_type.d_p_subscribe_file
+  module:
+    - d_p
+id: paragraph.d_p_subscribe_file.field_d_p_sf_download_type
+field_name: field_d_p_sf_download_type
+entity_type: paragraph
+bundle: d_p_subscribe_file
+label: 'Download button type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: button_type

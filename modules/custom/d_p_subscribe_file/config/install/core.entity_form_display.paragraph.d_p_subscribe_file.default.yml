@@ -10,6 +10,7 @@ dependencies:
     - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_consent
     - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_download_button
     - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_download_page
+    - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_download_type
     - field.field.paragraph.d_p_subscribe_file.field_d_p_sf_mail_body
     - field.field.paragraph.d_p_subscribe_file.field_d_settings
     - field.field.paragraph.d_p_subscribe_file.field_file_download
@@ -27,15 +28,17 @@ third_party_settings:
         - group_basic
         - group_form_messages
         - group_settings
+      label: Tabs
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
-      region: content
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         direction: horizontal
-      label: Tabs
+        width_breakpoint: 450
     group_basic:
       children:
         - field_d_main_title
@@ -44,70 +47,71 @@ third_party_settings:
         - field_d_long_text
         - field_d_p_sf_additional_info
         - translation
+      label: Basic
+      region: content
       parent_name: group_tabs
       weight: 20
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: open
+        description: ''
         required_fields: true
-      label: Basic
     group_form_messages:
       children:
         - field_file_download
         - field_d_p_sf_consent
         - field_d_p_sf_download_button
+        - field_d_p_sf_download_type
         - field_d_p_sf_download_page
         - field_d_p_sf_mail_body
+      label: 'Form & Messages'
+      region: content
       parent_name: group_tabs
       weight: 21
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: 'Form & Messages'
     group_settings:
       children:
         - field_d_settings
+      label: Settings
+      region: content
       parent_name: group_tabs
       weight: 22
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: Settings
 id: paragraph.d_p_subscribe_file.default
 targetEntityType: paragraph
 bundle: d_p_subscribe_file
 mode: default
 content:
   field_d_long_text:
+    type: text_textarea
     weight: 4
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_d_main_title:
+    type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_d_media_background:
     type: media_library_widget
     weight: 2
@@ -123,45 +127,51 @@ content:
       media_types: {  }
     third_party_settings: {  }
   field_d_p_sf_additional_info:
+    type: text_textarea
     weight: 5
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_d_p_sf_consent:
+    type: text_textfield
     weight: 6
+    region: content
     settings:
       size: 60
       placeholder: 'Enter consent label (HTML is allowed).'
     third_party_settings: {  }
-    type: text_textfield
-    region: content
   field_d_p_sf_download_button:
+    type: string_textfield
     weight: 7
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_d_p_sf_download_page:
-    weight: 8
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
     type: text_textarea
-    region: content
-  field_d_p_sf_mail_body:
     weight: 9
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
+  field_d_p_sf_download_type:
+    type: button_type_widget
+    weight: 8
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_d_p_sf_mail_body:
+    type: text_textarea
+    weight: 10
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_d_settings:
     type: field_d_p_set_settings
     weight: 11
@@ -169,63 +179,72 @@ content:
     settings:
       filter_mode: '1'
       allowed_settings:
-        heading_type:
-          status: '1'
         custom_class:
           status: '1'
           modifiers:
-            padding-bottom:
-              status: '1'
-            paragraph-theme:
-              status: '1'
             margin-bottom:
               status: '1'
             margin-top:
               status: '1'
+            padding-bottom:
+              status: '1'
             padding-top:
               status: '1'
-            stripe-sidebar:
-              status: 0
-            tile:
-              status: 0
-            with-divider:
-              status: 0
-            with-tiles:
-              status: 0
-            half-transparent:
-              status: 0
-            with-grid:
-              status: 0
-            with-price:
-              status: 0
-            header-into-columns:
-              status: 0
-            full-width:
-              status: 0
-        side_image_layout:
+        heading_type:
+          status: '1'
+        paragraph_theme:
+          status: '1'
+        add-dividers:
           status: 0
-        column_count_tablet:
-          status: 0
-        form_layout:
-          status: 0
-        side_tiles_layout:
-          status: 0
-        featured_images:
+        column_count_desktop:
           status: 0
         column_count_mobile:
           status: 0
+        column_count_tablet:
+          status: 0
         embed_layout:
           status: 0
-        column_count:
+        with-grid:
           status: 0
+        with-price:
+          status: 0
+        with-tiles:
+          status: 0
+        tiles_featured_images:
+          status: 0
+        form_layout:
+          status: 0
+        full-width:
+          status: 0
+        image_side:
+          status: 0
+        image_width:
+          status: 0
+        left_side_content:
+          status: 0
+        header-into-columns:
+          status: 0
+        with-price-in-sidebar:
+          status: 0
+        tiles_side:
+          status: 0
+      plugins_settings:
+        paragraph_theme:
+          allowed_themes:
+            - theme-light
+            - theme-dark
+            - theme-primary
+            - theme-secondary
+            - theme-custom
+          default_theme: theme-primary
     third_party_settings: {  }
   field_file_download:
+    type: file_generic
     weight: 5
+    region: content
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
-    type: file_generic
-    region: content
   translation:
     weight: 6
     region: content

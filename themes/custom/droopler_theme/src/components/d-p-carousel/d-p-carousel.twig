@@ -1,0 +1,56 @@
+{{ attach_library('d_p_carousel/slick') }}
+{{ attach_library('droopler_theme/carousel') }}
+{{ attach_library('droopler_theme/d-p-carousel') }}
+
+{% set base_class = d_p_carousel_base_class|default('d-p-carousel') %}
+{% set modifiers = d_p_carousel_modifiers|default([]) %}
+{% set is_full_width = is_full_width|default(FALSE) %}
+{% set carousel_settings = carousel_settings|default('') %}
+
+<section {{ bem(base_class, modifiers) }} {{ dividers ? 'data-has-dividers' }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% set container_classes = ['container', 'first-child-no-spacer'] %}
+  {% set items_classes = not is_full_width ? container_classes : [] %}
+
+  <div {{ bem('content', [], base_class) }}>
+    <div {{ bem('header', [], base_class, container_classes) }}>
+      <div {{ bem('header-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('header-column', [], base_class, ['col-12']) }}>
+          {% block heading %}
+          {% endblock %}
+
+          {% include '@droopler_theme/base/divider/divider.twig' %}
+
+          {% block subheading %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <div {{ bem('carousel', [], base_class, [is_full_width ? 'container-fluid' : 'container']) }}>
+      <div {{ bem('carousel-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('carousel-column', [], base_class, ['col-12']) }}>
+          <div
+            {{ bem('items', [], base_class, items_classes) }}
+            data-full-width="{{ is_full_width ? 'true' : 'false' }}"
+            data-slick="{{ carousel_settings }}"
+          >
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div {{ bem('footer', [], base_class, container_classes) }}>
+      <div {{ bem('footer-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('footer-column', [], base_class, ['col-12']) }}>
+          {% block cta %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

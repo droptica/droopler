@@ -1,0 +1,30 @@
+@import "../../scss/init";
+
+.block-exposed-filters.views-exposed-form {
+  width: 100%;
+
+  .select2 {
+    &-selection {
+      height: 100%;
+
+      &__rendered {
+        padding: 0.625rem 4rem 0.625rem 1.5rem;
+      }
+
+      &__arrow {
+        width: 30px;
+        height: 30px;
+        aspect-ratio: 1;
+        background-image: url("../../assets/images/arrow.svg");
+        background-repeat: no-repeat;
+        right: 0;
+        top: 50%;
+        translate: -50% -50%;
+
+        b {
+          display: none;
+        }
+      }
+    }
+  }
+}

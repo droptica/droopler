@@ -1,0 +1,28 @@
+{{ attach_library('droopler_theme/d-p-side-tiles') }}
+
+{% set base_class = d_p_side_tiles_base_class|default('d-p-side-tiles') %}
+{% set modifiers = d_p_side_tiles_modifiers|default([])|merge([tiles_side]) %}
+
+<section {{ bem(base_class, modifiers, '', ['tiles-gallery-parent']) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('gallery', [], base_class) }}>
+    {% block gallery %}
+    {% endblock %}
+  </div>
+
+    <div {{ bem('content', [], base_class, ['container']) }}>
+      <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+        <div {{ bem('content-column', [], base_class, ['col-12', 'col-md-6']|merge(tiles_side == 'left' ? ['offset-md-6'] : [])) }}>
+          {% block content_header %}
+          {% endblock %}
+
+          {% include '@droopler_theme/base/divider/divider.twig' %}
+
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+</section>

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 /**
@@ -9,7 +11,7 @@ namespace Drupal\d_p\Plugin\ParagraphSetting;
  *   id = "column_count_mobile",
  *   label = @Translation("Column count (mobile)"),
  *   settings = {
- *      "weight" = 2,
+ *      "weight" = 92,
  *   }
  * )
  */

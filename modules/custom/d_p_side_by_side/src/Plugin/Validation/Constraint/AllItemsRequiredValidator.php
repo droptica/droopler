@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_p_side_by_side\Plugin\Validation\Constraint;
 
 use Symfony\Component\Validator\Constraint;
@@ -11,9 +13,14 @@ use Symfony\Component\Validator\ConstraintValidator;
 class AllItemsRequiredValidator extends ConstraintValidator {
 
   /**
-   * {@inheritdoc}
+   * Checks if the passed value is valid.
+   *
+   * @param mixed $entity
+   *   The entity to validate.
+   * @param \Drupal\d_p_side_by_side\Plugin\Validation\Constraint\AllItemsRequired $constraint
+   *   The constraint to validate.
    */
-  public function validate($entity, Constraint $constraint) {
+  public function validate(mixed $entity, Constraint $constraint): void {
     if (!isset($entity)) {
       return;
     }

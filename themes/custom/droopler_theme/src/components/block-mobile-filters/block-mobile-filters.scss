@@ -1,0 +1,36 @@
+@import "../../scss/init";
+
+.block-mobile-filters {
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+
+  &__content {
+    .mobile-filter {
+      @include filter-icon;
+
+      position: relative;
+      padding: 0 1.25rem;
+      margin: 0;
+      font-size: 0;
+      height: 3.125rem;
+      text-align: start;
+      min-width: 50px;
+
+      @include media-breakpoint-up(md) {
+        font-size: var(--dp-bs-btn-font-size);
+        min-width: 13.75rem;
+      }
+
+      &::after {
+        @include centered-absolute;
+
+        @include media-breakpoint-up(md) {
+          top: unset;
+          left: unset;
+          transform: unset;
+        }
+      }
+    }
+  }
+}

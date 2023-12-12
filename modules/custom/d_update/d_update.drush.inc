@@ -5,6 +5,8 @@
  * File declaring drush commands.
  */
 
+declare(strict_types = 1);
+
 use Drush\Drush;
 
 /**

@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains d_frontend_editing module.
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\RevisionableInterface;
+
+/**
+ * Implements hook_entity_view_alter().
+ *
+ * Add the d_frontend_editing library to the entity view in the same way as
+ * in the original module.
+ *
+ * @see frontend_editing_entity_view_alter()
+ */
+function d_frontend_editing_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  // Don't do this for embedded entities.
+  if (isset($build['#embed'])) {
+    return;
+  }
+
+  // Only do this, if user has access to frontend editing.
+  if (
+    !\Drupal::currentUser()->hasPermission('access frontend editing') ||
+    ($entity instanceof RevisionableInterface && !$entity->isLatestRevision()) ||
+    !$entity->access('update')
+  ) {
+    return;
+  }
+
+  $build['#attached']['library'][] = 'd_frontend_editing/paragraph-add-page';
+}

@@ -1,0 +1,41 @@
+{{ attach_library('droopler_theme/menu-item') }}
+
+{% set base_class = menu_item_base_class|default('menu-item') %}
+{% set modifiers = menu_item_modifiers|default([]) %}
+{% set depth = depth|default(-1) %}
+
+{% if item.in_active_trail %}
+  {% set modifiers = modifiers|merge(['active']) %}
+{% endif %}
+
+{% if item.below %}
+  {% set modifiers = modifiers|merge(['has-submenu']) %}
+{% endif %}
+
+<li {{ bem(base_class, modifiers) }} {% if depth >= 0 %}style="--navigation-mobile-level: {{ depth }}"{% endif %}>
+  <span {{ bem('element', [], base_class) }}>
+    <a {{ bem('link', [], base_class) }} href="{{ item.url }}">
+      {{ item.title }}
+    </a>
+    {% if item.below %}
+      <a {{ bem('toggler', [], base_class) }} href="#">
+        {% include "@droopler_theme/base/icon/icon.twig" with {
+          icon_modifiers: ['open'],
+          icon_name: 'down-open-big'
+        } %}
+        {% include "@droopler_theme/base/icon/icon.twig" with {
+          icon_modifiers: ['close'],
+          icon_name: 'up-open-big'
+        } %}
+      </a>
+    {% endif %}
+  </span>
+  {% if item.below %}
+    {% include "@droopler_theme/menu/menu.twig" with {
+      menu_base_class: 'submenu',
+      menu_item_base_class: 'submenu-item',
+      items: item.below,
+      depth: depth + 1
+    } %}
+  {% endif %}
+</li>

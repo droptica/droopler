@@ -1,0 +1,38 @@
+@import "../../scss/init";
+
+.reference-content {
+  padding: var(--content-spacer-none);
+  display: flex;
+  flex-direction: column;
+
+  &__teaser {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: var(--reference-content-background-color);
+    padding: var(--content-spacer-l);
+    color: var(--reference-content-text-color);
+    gap: var(--content-spacer-m);
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: var(--reference-content-text-color);
+
+      &:hover {
+        text-decoration: underline;
+        color: var(--reference-content-text-color);
+      }
+    }
+  }
+
+  .heading {
+    @include heading(5);
+
+    --heading-color: var(--reference-content-text-color);
+  }
+
+  .body-text {
+    --body-text-color: var(--reference-content-text-color);
+  }
+}

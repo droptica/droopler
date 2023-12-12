@@ -1,0 +1,42 @@
+@import "../../scss/init";
+
+.d-p-text-paged {
+  position: relative;
+
+  &__background {
+    @include filling-absolute;
+  }
+
+  &__background-media {
+    @include covering-media;
+
+    .media {
+      height: 100%;
+    }
+  }
+
+  &__background-overlay {
+    @include filling-absolute;
+  }
+
+  &__content {
+    position: relative;
+  }
+
+  &__content-column {
+    .subtitle,
+    .cta-links,
+    .heading {
+      margin-top: var(--content-spacer-m);
+    }
+
+    .divider {
+      margin-bottom: var(--content-spacer-none);
+    }
+
+    .body-text {
+      width: 100%;
+      margin-top: var(--content-spacer-m);
+    }
+  }
+}

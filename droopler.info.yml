@@ -1,24 +1,22 @@
 name: 'Droopler Profile'
-core_version_requirement: ^10
+core_version_requirement: '^9.4 || ^10'
 description: 'Ready to use site builder with paragraphs.'
 type: profile
 dependencies:
   - 'admin_toolbar:admin_toolbar'
   - 'admin_toolbar:admin_toolbar_tools'
-  - 'advagg:advagg'
-  - 'advagg:advagg_css_minify'
-  - 'advagg:advagg_js_minify'
-  - 'advagg:advagg_mod'
   - 'checklistapi:checklistapi'
   - 'colorbox:colorbox'
+  - 'components:components'
   - 'config_update:config_update'
   - 'contact_formatter:contact_formatter'
   - 'ctools:ctools'
   - 'droopler:d_block'
   - 'droopler:d_block_field'
+  - 'droopler:d_claro'
   - 'droopler:d_content'
   - 'droopler:d_content_init'
-  - 'droopler:d_geysir'
+  - 'droopler:d_frontend_editing'
   - 'droopler:d_lang_dropdown'
   - 'droopler:d_media'
   - 'droopler:d_p'
@@ -37,9 +35,9 @@ dependencies:
   - 'droopler:d_p_subscribe_file'
   - 'droopler:d_p_text_blocks'
   - 'droopler:d_p_text_paged'
-  - 'droopler:d_p_text_with_bckg'
   - 'droopler:d_p_tiles'
   - 'droopler:d_social_media'
+  - 'droopler:d_twig_extensions'
   - 'droopler:d_update'
   - 'drupal:block'
   - 'drupal:block_content'
@@ -84,7 +82,6 @@ dependencies:
   - 'features:features_ui'
   - 'field_group:field_group'
   - 'link_attributes:link_attributes'
-  - 'linkit:linkit'
   - 'metatag:metatag'
   - 'paragraphs:paragraphs'
   - 'pathauto:pathauto'
@@ -98,6 +95,6 @@ themes:
   - droopler_theme
 distribution:
   name: 'Droopler Profile'
-version: 3.3.0-rc1
+version: 4.0.0
 project: droopler
 core_incompatible: false

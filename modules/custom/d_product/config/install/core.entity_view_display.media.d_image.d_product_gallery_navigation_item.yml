@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.d_product_gallery_navigation_item
+    - field.field.media.d_image.field_media_image
+    - image.style.product_navigation_image
+    - media.type.d_image
+  module:
+    - svg_image
+id: media.d_image.d_product_gallery_navigation_item
+targetEntityType: media
+bundle: d_image
+mode: d_product_gallery_navigation_item
+content:
+  field_media_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: product_navigation_image
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\d_update;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Config Compare service.
- *
- * @package Drupal\d_update
  */
 class ConfigCompare implements ConfigCompareInterface {
 
@@ -19,7 +19,7 @@ class ConfigCompare implements ConfigCompareInterface {
   protected $configFactory;
 
   /**
-   * ConfigCompare constructor.
+   * Config compare constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   Config factory service.

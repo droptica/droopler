@@ -1,9 +1,11 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  content:
+    - 'file:file:b7c64a28-427b-42c7-b890-6ba2cdd680ba'
 id: d_p_text_paged
 label: 'Text page'
-icon_uuid: null
-icon_default: null
+icon_uuid: b7c64a28-427b-42c7-b890-6ba2cdd680ba
+icon_default: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAACXCAMAAABnXuSOAAAATlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/hxr/hxoAAAAAAAAAAAD/hxr/hxoAAAD/hxoAAAAAAAAAAAAAAAAAAAD/hxqzpUkIAAAAGHRSTlMAgOyHO4guNRcSDkamB09sXTBCF/MgcGSAbWBvAAABCUlEQVR42u3cS07DMBSG0VBS+iK82kLY/0YRqBJCYpCQkPxOz1mApW/ga3viCgAAAAAAAAAAAIARrdplEJLmM2RXle4Ssq1KJySNkDRC0ghJIySNkDRC0vwl5O20msCp+feQx3YSQoRcCBEiRIgQIZ28tr8qL2S7mULtGl82IWmEpBGS5spCznez240S8nAzu42QZYbczq42tQojJE3Hzb6eXW38CvkSGnKuZ7c1tQpzZSH73XBNNUzM1Hr5saIQIWM9rNYRIc1+uIjNXgAhaYSkEZJm5JDDfU/H0JCn956ehQgRIkSIkG/HQ0+pB2Jn6VeUzoQIKYWQNELSCEmztJDFfLmzCELSfABCw1Yn74xkewAAAABJRU5ErkJggg=='
 description: 'A simple text paragraph.'
 behavior_plugins: {  }

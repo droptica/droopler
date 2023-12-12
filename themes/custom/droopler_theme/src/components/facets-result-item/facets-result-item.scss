@@ -1,0 +1,25 @@
+.facets-result-item {
+  display: flex;
+  align-items: center;
+
+  &__status {
+    display: flex;
+
+    &::before {
+      content: "";
+      background-image: url("../../assets/icons/x.svg");
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+  }
+
+  &__count {
+    margin-left: auto;
+  }
+
+  &__value {
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  }
+}

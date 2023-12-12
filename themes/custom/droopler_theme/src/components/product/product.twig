@@ -1,0 +1,41 @@
+{{ attach_library('droopler_theme/product') }}
+
+{% set base_class = 'product' %}
+{% set modifiers = product_modifiers|default([]) %}
+
+<article {{ bem(base_class, modifiers) }}>
+  <div {{ bem('content', [], base_class, ['container', 'first-child-no-spacer']) }}>
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', ['basic'], base_class, ['col-lg-8', 'col-md-12']) }}>
+        {% include "@droopler_theme/base/heading/heading.twig" with {
+          heading_tag: 'h1',
+          label: label,
+        }%}
+
+        {% block basic %}
+        {% endblock %}
+      </div>
+      <div {{ bem('content-column', ['content'], base_class, ['col-lg-4', 'col-md-12']) }}>
+        {% include "@droopler_theme/base/cta/cta.twig" with {
+          url: node.askForProductLink,
+          title: 'Ask for product'|t,
+          type: 'outline-primary',
+        }%}
+
+        {% block content %}
+        {% endblock %}
+
+        <div {{ bem('taxonomy', [], base_class) }}>
+          {% block taxonomy %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+    <div {{ bem('content-column', [], base_class, ['col-12']) }}>
+      <div {{ bem('page-sections', [], base_class) }}>
+        {% block page_sections %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,8 @@
+{{ attach_library('droopler_theme/heading') }}
+
+{% set heading_tag = heading_tag|default('h2') %}
+{% set base_class = heading_base_class|default('heading') %}
+
+<{{ heading_tag }} {{ bem(base_class) }}>
+  {{ label }}
+</{{ heading_tag }}>

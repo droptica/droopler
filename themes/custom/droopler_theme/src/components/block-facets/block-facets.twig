@@ -1,0 +1,23 @@
+{{ attach_library('droopler_theme/block-facets') }}
+
+{% set base_class = block_facets_base_class|default('block-facets') %}
+{% set modifiers = block_facets_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+
+  {% if label %}
+    {% include '@droopler_theme/base/heading/heading.twig' with {
+      heading_tag: 'h2',
+      label: label
+    } %}
+  {% endif %}
+
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+</div>

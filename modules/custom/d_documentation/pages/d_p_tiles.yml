@@ -17,8 +17,12 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-primary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-primary
           heading_type: h1
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -30,7 +34,11 @@ field_page_section:
           data: '<p>The Tiles Paragraphs utilize Masonry to deliver an excellent gallery experience. All images get arranged to fit the screen width. You can manipulate the display by paragraph settings field. You can choose number of pictures which should be two times larger than the others. The "/" character separates the title and subtitle. Below there are four paragraphs - two Tile Galleries and two Side Tiles.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_tiles
       data:
@@ -66,15 +74,11 @@ field_page_section:
             -
               path: d_demo/d_demo_aircraft_tiles_1_5.jpg
               alt: 'Title / Subtitle'
-        field_d_cta_link:
-          type: cta
-          data:
-            link: 'internal:/documentation/tiles-paragraphs'
-            text: 'See more'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: full-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          featured_images: 1
+          paragraph_theme: theme-light
+          tiles_featured_images: 1
+          custom_class: padding-top-medium padding-bottom-none
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -97,10 +101,7 @@ field_page_section:
             link: 'internal:/documentation/tiles-paragraphs'
             text: 'Call To Action!'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-secondary
+              type: primary
         field_d_media_image:
           type: media_image
           directory: demo
@@ -119,8 +120,8 @@ field_page_section:
               alt: 'Title / Subtitle'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: second-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_tiles_layout: right
+          paragraph_theme: theme-primary
+          tiles_side: right
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -143,10 +144,7 @@ field_page_section:
             link: 'internal:/documentation/tiles-paragraphs'
             text: 'Call To Action!'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-secondary
+              type: primary
         field_d_media_image:
           type: media_image
           directory: demo
@@ -165,8 +163,8 @@ field_page_section:
               alt: 'Title / Subtitle'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: third-example theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_tiles_layout: left
+          paragraph_theme: theme-primary
+          tiles_side: left
     -
       paragraph_type: d_p_tiles
       data:
@@ -191,7 +189,8 @@ field_page_section:
               alt: 'Title / Subtitle'
         field_d_settings:
           type: field_p_configuration_storage
-          featured_images: 3
+          tiles_featured_images: 3
+          custom_class: padding-top-none padding-bottom-none
     -
       paragraph_type: d_p_side_tiles
       data:
@@ -214,10 +213,7 @@ field_page_section:
             link: 'internal:/documentation/tiles-paragraphs'
             text: 'Call To Action!'
             options:
-              attributes:
-                class:
-                  - btn
-                  - btn-secondary
+              type: secondary
         field_d_media_image:
           type: media_image
           directory: demo
@@ -236,8 +232,9 @@ field_page_section:
               alt: 'Title / Subtitle'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-secondary padding-top-default padding-bottom-default margin-top-default margin-bottom-default
-          side_tiles_layout: left
+          paragraph_theme: theme-light
+          custom_class: padding-top-medium padding-bottom-medium
+          tiles_side: left
 
 field_teaser_media_image:
   type: media_image

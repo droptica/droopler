@@ -1,0 +1,79 @@
+@import "../../../scss/init";
+
+:root {
+  --body-text-font-size: 1rem;
+  --body-text-font-size-mobile: 0.875rem;
+
+  // Table.
+  --body-text-table-cell-padding: 0.75rem;
+  --body-text-table-border-width: 2px;
+}
+
+.body-text {
+  color: var(--body-text-color);
+  font-size: var(--body-text-font-size-mobile);
+
+  @include media-breakpoint-up(md) {
+    font-size: var(--body-text-font-size);
+  }
+
+  > *:not(:last-child) {
+    margin-bottom: var(--content-spacer-s);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &:not(.alert-heading) {
+      color: var(--body-text-heading-color);
+    }
+  }
+
+  strong {
+    color: var(--body-text-strong-color);
+  }
+
+  pre {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "liberation mono", "courier new", monospace;
+    white-space: normal;
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      padding: var(--body-text-table-cell-padding);
+      border-top: var(--body-text-table-border-width) solid var(--body-text-table-th-color);
+      background: var(--body-text-table-th-background-color);
+      text-align: center;
+      font-weight: 700;
+      text-transform: uppercase;
+      vertical-align: middle;
+      line-height: 1.2;
+      color: var(--body-text-table-th-color);
+      font-size: 1rem;
+    }
+
+    td {
+      padding: var(--body-text-table-cell-padding);
+      border: var(--body-text-table-border-width) solid var(--body-text-table-th-color);
+    }
+
+    tr:nth-of-type(odd) {
+      background: var(--body-text-table-tr-odd-background-color);
+    }
+
+    tr:nth-of-type(even) {
+      background: var(--body-text-table-tr-even-background-color);
+    }
+  }
+
+  ul {
+    li {
+      text-align: left;
+    }
+  }
+}

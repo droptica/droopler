@@ -1,0 +1,2 @@
+!function(t,a){"use strict";a.behaviors.d_p_counters={attach:function(a,n){var u=0,i={useEasing:!0,useGrouping:!0,separator:" ",decimal:","};t("[data-count]",a).each((function(){inViewport(this,(function(a){var n="upcnt"+u++;t(a).attr("id",n),new CountUp(n,0,t(a).data("count"),0,2,i).start()}))}))}}}(jQuery,Drupal);
+//# sourceMappingURL=counter.js.map

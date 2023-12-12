@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.d_product_gallery
     - field.field.media.d_image.field_media_image
+    - image.style.gallery_fullscreen
     - image.style.product_main_image
     - media.type.d_image
   module:
@@ -18,11 +19,11 @@ content:
     label: hidden
     settings:
       colorbox_node_style: product_main_image
-      colorbox_node_style_first: product_main_image
-      colorbox_image_style: ''
-      colorbox_gallery: field_page
+      colorbox_node_style_first: ''
+      colorbox_image_style: gallery_fullscreen
+      colorbox_gallery: page
       colorbox_gallery_custom: ''
-      colorbox_caption: auto
+      colorbox_caption: alt
       colorbox_caption_custom: ''
     third_party_settings: {  }
     weight: 0

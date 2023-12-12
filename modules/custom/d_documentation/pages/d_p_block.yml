@@ -17,8 +17,12 @@ field_page_section:
           data: 'Droopler Documentation'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-invert padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-primary
           heading_type: h1
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -37,7 +41,11 @@ field_page_section:
           just the title of the block is overwritten here.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
 
     - paragraph_type: d_p_block
       data:
@@ -50,7 +58,6 @@ field_page_section:
               label: 'Social Media Block'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-default padding-top-default padding-bottom-default margin-top-default margin-bottom-default text-center
     -
       paragraph_type: d_p_text_paged
       data:
@@ -68,7 +75,11 @@ field_page_section:
           Block Paragraph like we did bellow.</p>'
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: theme-gray padding-top-default padding-bottom-default margin-top-default margin-bottom-default
+          paragraph_theme: theme-secondary
+          column_count_desktop: 12
+          column_count_tablet: 12
+          column_count_mobile: 12
+          text_align: center
     -
       paragraph_type: d_p_block
       data:
@@ -83,7 +94,6 @@ field_page_section:
               label_display: FALSE
         field_d_settings:
           type: field_p_configuration_storage
-          custom_class: padding-top-none padding-bottom-none margin-top-default margin-bottom-default
 
 field_teaser_media_image:
   type: media_image

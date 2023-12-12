@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.d_product.field_tags
     - node.type.d_product
   module:
+    - entity_reference_revisions
     - link
     - metatag
     - text
@@ -22,14 +23,14 @@ bundle: d_product
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
     region: content
   field_d_product_link:
-    weight: 5
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -38,47 +39,54 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 5
     region: content
   field_d_product_media:
-    type: entity_reference_entity_view
-    weight: 1
-    label: hidden
+    type: entity_reference_label
+    label: above
     settings:
-      view_mode: d_product_image
-      link: false
+      link: true
     third_party_settings: {  }
+    weight: 8
     region: content
   field_meta_tags:
-    weight: 6
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 6
+    region: content
+  field_page_section:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 7
     region: content
   field_product_categories:
-    weight: 3
+    type: entity_reference_label
     label: above
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 3
     region: content
   field_tags:
-    weight: 4
+    type: entity_reference_label
     label: above
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 4
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_d_ask_for_product: true
-  field_page_section: true
   langcode: true
   search_api_excerpt: true
