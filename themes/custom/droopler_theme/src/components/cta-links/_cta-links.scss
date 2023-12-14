@@ -1,0 +1,17 @@
+@import "../../scss/init";
+
+:root {
+  --cta-links-spacing: 1rem;
+  --cta-links-alignment: left;
+  --cta-links-display: flex;
+  --cta-links-flex-wrap: wrap;
+}
+
+.cta-links {
+  --cta-margin-top-bottom: 0;
+
+  display: var(--cta-links-display);
+  flex-wrap: var(--cta-links-flex-wrap);
+  gap: var(--cta-links-spacing);
+  justify-content: var(--cta-links-alignment);
+}

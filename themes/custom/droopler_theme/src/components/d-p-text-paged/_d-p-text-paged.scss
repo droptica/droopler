@@ -21,6 +21,18 @@
 
   &__content {
     position: relative;
+
+    &.text-start {
+      --cta-links-alignment: left;
+    }
+
+    &.text-end {
+      --cta-links-alignment: right;
+    }
+
+    &.text-center {
+      --cta-links-alignment: center;
+    }
   }
 
   &__content-column {
