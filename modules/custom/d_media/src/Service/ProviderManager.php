@@ -27,7 +27,7 @@ class ProviderManager extends DefaultPluginManager implements ProviderManagerInt
   /**
    * {@inheritdoc}
    */
-  public function filterApplicableDefinitions(array $definitions, $user_input): ProviderPluginInterface|false {
+  public function filterApplicableDefinitions(array $definitions, $user_input): array|false {
     foreach ($definitions as $definition) {
       $is_applicable = $definition['class']::isApplicable($user_input);
       if ($is_applicable) {
@@ -43,13 +43,19 @@ class ProviderManager extends DefaultPluginManager implements ProviderManagerInt
    */
   public function loadProviderFromInput($input): ProviderPluginInterface|false {
     $definition = $this->loadDefinitionFromInput($input);
-    return $definition ? $this->createInstance($definition['id'], ['input' => $input]) : FALSE;
+    if ($definition) {
+      $provider_plugin = $this->createInstance($definition['id'], ['input' => $input]);
+      assert($provider_plugin instanceof ProviderPluginInterface);
+      return $provider_plugin;
+    }
+
+    return FALSE;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function loadDefinitionFromInput($input): ProviderPluginInterface|false {
+  public function loadDefinitionFromInput($input): array|false {
     return $this->filterApplicableDefinitions($this->getDefinitions(), $input);
   }
 

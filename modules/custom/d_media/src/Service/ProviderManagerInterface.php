@@ -12,17 +12,17 @@ use Drupal\d_media\Plugin\Provider\ProviderPluginInterface;
 interface ProviderManagerInterface {
 
   /**
-   * Get the provider applicable to the given user input.
+   * Get the provider definition applicable to the given user input.
    *
    * @param array $definitions
    *   A list of definitions to test against.
    * @param string $user_input
    *   The user input to test against the plugins.
    *
-   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|false
-   *   The relevant plugin or FALSE on failure.
+   * @return array|false
+   *   The relevant provider definition or FALSE on failure.
    */
-  public function filterApplicableDefinitions(array $definitions, $user_input): ProviderPluginInterface|false;
+  public function filterApplicableDefinitions(array $definitions, $user_input): array|false;
 
   /**
    * Load a provider from user input.
@@ -41,9 +41,9 @@ interface ProviderManagerInterface {
    * @param string $input
    *   An input string.
    *
-   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|false
+   * @return array|false
    *   The relevant plugin or FALSE on failure.
    */
-  public function loadDefinitionFromInput($input): ProviderPluginInterface|false;
+  public function loadDefinitionFromInput($input): array|false;
 
 }
