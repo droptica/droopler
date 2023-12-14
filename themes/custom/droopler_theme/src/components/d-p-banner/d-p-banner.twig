@@ -41,7 +41,11 @@
         {% block content_header %}
         {% endblock %}
 
+        {% set has_content_header = block('content_header')|render|striptags|trim is not empty %}
+
+        {% if has_content_header %}
         {% include '@droopler_theme/base/divider/divider.twig' %}
+        {% endif %}
 
         {% block content %}
         {% endblock %}
