@@ -39,7 +39,10 @@ class ButtonLinkWidget extends LinkWithAttributesWidget {
       '#default_value' => $options['type'] ?? ButtonTypeEnum::Primary->value,
     ];
 
-    return $element + parent::formElement($items, $delta, $element, $form, $form_state);
+    $parent_elements = parent::formElement($items, $delta, $element, $form, $form_state);
+    $parent_elements["title"]["#required"] = TRUE;
+
+    return $element + $parent_elements;
   }
 
   /**
