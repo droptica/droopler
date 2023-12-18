@@ -14,7 +14,7 @@ declare(strict_types = 1);
  * libraries.yml file). You can directly use the component name as a library,
  * e.g.: {{ attach_library('STARTERKIT/block') }}.
  */
-function STARTERKIT_library_info_build() {
+function starterkit_library_info_build() {
   $theme_handler = \Drupal::service('theme_handler');
   $theme_path = $theme_handler->getTheme('STARTERKIT')->getPath();
 
@@ -58,7 +58,7 @@ function STARTERKIT_library_info_build() {
  * Automatically extends existing components libraries if the file with the
  * same name as the library exists in the build/components/extends directory.
  */
-function STARTERKIT_library_info_alter(&$libraries, $extension) {
+function starterkit_library_info_alter(&$libraries, $extension) {
   $theme_handler = \Drupal::service('theme_handler');
   $theme_path = $theme_handler->getTheme('STARTERKIT')->getPath();
 

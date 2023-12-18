@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\droopler\Installer\Form;
 
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Extension\ModuleExtensionList;
 
 /**
  * A form class to customize Droopler installation process.
@@ -37,7 +39,7 @@ class AdditionalComponentsForm extends FormBase {
   /**
    * Modules to enable directly from Droopler installer.
    *
-   * @var string[]
+   * @var array<string, array>
    */
   private array $modules = [
     'd_blog' => [

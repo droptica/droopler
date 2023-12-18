@@ -54,7 +54,6 @@ class GalleryFormatter extends EntityReferenceEntityFormatter {
     ];
   }
 
-
   /**
    * Builds a renderable array for a field value.
    *
