@@ -20,7 +20,7 @@ jobs:
     container: droptica/phpcs
 
     env:
-      CODE_SNIFFER_PATH: "/"
+      CODE_SNIFFER_PATH: "droopler.* src/ modules/custom/ themes/custom/"
       CODE_SNIFFER_IGNORE: "*md,*.css,*.txt,*.info,*interactive_ui/react_slider/js*,*pl-sk/*,*pattern-lab/*,*_twig-components/*"
       CODE_SNIFFER_EXTENSIONS: "php,inc,install,module,info,test,profile,theme"
 
