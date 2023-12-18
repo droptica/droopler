@@ -39,7 +39,7 @@ class AdditionalComponentsForm extends FormBase {
   /**
    * Modules to enable directly from Droopler installer.
    *
-   * @var string[]
+   * @var array<string, array>
    */
   private array $modules = [
     'd_blog' => [
