@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\droopler\Installer\Form;
 
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Extension\ModuleExtensionList;
 
 /**
  * A form class to customize Droopler installation process.
