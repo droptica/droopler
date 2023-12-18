@@ -20,7 +20,7 @@ jobs:
     container: droptica/phpcs
 
     env:
-      PHP_VERSION: "8.1"
+      CODE_SNIFFER_PATH: "/"
       CODE_SNIFFER_IGNORE: "*md,*.css,*.txt,*.info,*interactive_ui/react_slider/js*,*pl-sk/*,*pattern-lab/*,*_twig-components/*"
       CODE_SNIFFER_EXTENSIONS: "php,inc,install,module,info,test,profile,theme"
 
@@ -29,5 +29,5 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Verify coding standards
-        run: phpcs --ignore=${{ env.CODE_SNIFFER_IGNORE }} --extensions=${{ env.CODE_SNIFFER_EXTENSIONS}} --standard=Drupal,DrupalPractice --report=full,gitblame
+        run: phpcs ${{ env.CODE_SNIFFER_PATH }} --ignore=${{ env.CODE_SNIFFER_IGNORE }} --extensions=${{ env.CODE_SNIFFER_EXTENSIONS}} --standard=Drupal,DrupalPractice --report=full,gitblame
 
