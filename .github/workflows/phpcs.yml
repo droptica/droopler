@@ -28,6 +28,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Allow phpcs composer installer
+        run: composer config --global --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+
+      - name: Download Drupal coding standards
+        run: composer global require --no-progress --no-suggest --no-scripts --no-plugins --optimize-autoloader slevomat/coding-standard drupal/coder
+
       - name: Add Drupal coding standards to phpcs
         run: phpcs --config-set installed_paths $HOME/.composer/vendor/drupal/coder/coder_sniffer,$HOME/.composer/vendor/slevomat/coding-standard
 
