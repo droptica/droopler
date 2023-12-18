@@ -16,7 +16,8 @@ jobs:
   Verify:
     name: "Verify Drupal coding standards"
 
-    runs-on: "droptica/phpcs"
+    runs-on: ubuntu-latest
+    container: droptica/phpcs
 
     env:
       PHP_VERSION: "8.1"
