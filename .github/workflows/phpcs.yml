@@ -30,4 +30,3 @@ jobs:
 
       - name: Verify coding standards
         run: phpcs ${{ env.CODE_SNIFFER_PATH }} --ignore=${{ env.CODE_SNIFFER_IGNORE }} --extensions=${{ env.CODE_SNIFFER_EXTENSIONS}} --standard=Drupal,DrupalPractice --report=full,gitblame
-
