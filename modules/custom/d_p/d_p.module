@@ -139,11 +139,11 @@ function d_p_preprocess_paragraph(&$variables) {
 function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
   // Create heading type selector under the title.
-  if (isset($form["field_page_section"])) {
+  if (isset($form["field_page_section"]["widget"]["#max_delta"])) {
     // Locate all paragraph subforms.
     for ($i = 0; $i <= $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
       if (!isset($form["field_page_section"]["widget"][$i]["subform"])) {
-        return;
+        continue;
       }
 
       d_p_move_heading_type($form["field_page_section"]["widget"][$i]["subform"]);
