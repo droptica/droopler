@@ -2,7 +2,6 @@
 
 .d-p-carousel {
   --divider-last-child-display: inline-block;
-  --cta-links-alignment: center;
 
   &[data-has-dividers] .d-p-carousel-item:not(:first-child, [aria-hidden="true"]+[aria-hidden="false"], [aria-hidden="false"]+[aria-hidden="true"]) {
     &::before {
