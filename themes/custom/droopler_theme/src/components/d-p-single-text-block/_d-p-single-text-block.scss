@@ -110,6 +110,10 @@
     text-align: center;
   }
 
+  &__wrapper {
+    height: 100%;
+  }
+
   &__background {
     @include filling-absolute;
   }
@@ -121,9 +125,29 @@
   &__content {
     position: relative;
     z-index: 1;
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto min-content min-content 1fr min-content;
   }
 
   .media-icon {
     margin-bottom: var(--content-spacer-s);
+    grid-row: 1;
+  }
+
+  .heading {
+    grid-row: 2;
+  }
+
+  .divider {
+    grid-row: 3;
+  }
+
+  .body-text {
+    grid-row: 4;
+  }
+
+  .cta-links {
+    grid-row: 5;
   }
 }
