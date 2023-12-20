@@ -40,7 +40,7 @@ class ButtonLinkWidget extends LinkWithAttributesWidget {
     ];
 
     $parent_elements = parent::formElement($items, $delta, $element, $form, $form_state);
-    $parent_elements["title"]["#required"] = TRUE;
+    $parent_elements['title']['#required'] = TRUE;
 
     return $element + $parent_elements;
   }
