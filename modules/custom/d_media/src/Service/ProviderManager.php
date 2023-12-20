@@ -43,13 +43,7 @@ class ProviderManager extends DefaultPluginManager implements ProviderManagerInt
    */
   public function loadProviderFromInput($input): ProviderPluginInterface|false {
     $definition = $this->loadDefinitionFromInput($input);
-    if ($definition) {
-      $provider_plugin = $this->createInstance($definition['id'], ['input' => $input]);
-      assert($provider_plugin instanceof ProviderPluginInterface);
-      return $provider_plugin;
-    }
-
-    return FALSE;
+    return $definition ? $this->createInstance($definition['id'], ['input' => $input]) : FALSE;
   }
 
   /**
