@@ -175,6 +175,13 @@ class SettingsWidget extends WidgetBase {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $config = $items->getValue();
+    $config_options = $this->getConfigOptions();
+
+    // If there are no settings, do not display empty fieldset.
+    if (empty($config_options)) {
+      return $element;
+    }
+
     // Set up the form element for this widget.
     $element += [
       '#type' => 'fieldset',
@@ -183,7 +190,6 @@ class SettingsWidget extends WidgetBase {
       ],
     ];
 
-    $config_options = $this->getConfigOptions();
     foreach ($config_options as $key => $options) {
       $value = $config->$key ?? '';
       $type = $options['#subtype'] ?? $options['#type'];
