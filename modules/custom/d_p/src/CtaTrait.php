@@ -15,11 +15,11 @@ trait CtaTrait {
    * {@inheritdoc}
    */
   public function getLink(): ?string {
-    if (!$this->hasField('field_d_cta_link')) {
+    if (!$this->hasField('field_d_cta_single_link')) {
       return NULL;
     }
 
-    $link_field = $this->get('field_d_cta_link');
+    $link_field = $this->get('field_d_cta_single_link');
 
     if ($link_field->isEmpty()) {
       return NULL;
