@@ -34,7 +34,7 @@
 
   <div {{ bem('content', [], base_class, ['container']) }}>
     <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
-      <div {{ bem('content-column', ['header'], base_class, [content_classes]) }}>
+      <div {{ bem('content-column', ['header'], base_class, [content_classes, 'first-child-no-spacer']) }}>
         {% block header %}
         {% endblock %}
 
