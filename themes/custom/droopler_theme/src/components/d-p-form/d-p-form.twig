@@ -32,22 +32,33 @@
     </div>
   </div>
 
-  <div {{ bem('content', [], base_class, ['container']) }}>
-    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
-      <div {{ bem('content-column', ['header'], base_class, [content_classes]) }}>
-        {% block header %}
-        {% endblock %}
+    <div {{ bem('content', [], base_class, ['container']) }}>
+      <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
 
-        {% include '@droopler_theme/base/divider/divider.twig' %}
+        {% set has_header = block('header')|render|striptags('<img>')|trim is not empty %}
+        {% set has_content = block('content')|render|striptags|trim is not empty %}
 
-        {% block content %}
-        {% endblock %}
-      </div>
+        {% if has_header or has_content %}
+          <div {{ bem('content-column', ['header'], base_class, [content_classes]) }}>
 
-      <div {{ bem('content-column', ['form'], base_class, [form_classes]) }}>
-        {% block form %}
-        {% endblock %}
+            {% if has_header %}
+              {% block header %}
+              {% endblock %}
+
+              {% if has_content %}
+                {% include '@droopler_theme/base/divider/divider.twig' %}
+              {% endif %}
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+          </div>
+        {% endif %}
+
+        <div {{ bem('content-column', ['form'], base_class, [form_classes]) }}>
+          {% block form %}
+          {% endblock %}
+        </div>
       </div>
     </div>
-  </div>
 </section>
