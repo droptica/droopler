@@ -27,6 +27,7 @@
 
   &__content-wrapper {
     justify-content: center;
+    row-gap: var(--content-spacer-s);
   }
 
   &__content-column {
@@ -61,6 +62,12 @@
 
         @include media-breakpoint-up(md) {
           order: 1;
+        }
+      }
+
+      .form-wrapper:first-child {
+        .form-item:first-child {
+          margin-top: var(--content-spacer-none);
         }
       }
 

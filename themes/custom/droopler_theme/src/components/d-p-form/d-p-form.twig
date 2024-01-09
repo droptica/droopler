@@ -39,8 +39,7 @@
         {% set has_content = block('content')|render|striptags|trim is not empty %}
 
         {% if has_header or has_content %}
-          <div {{ bem('content-column', ['header'], base_class, [content_classes]) }}>
-
+          <div {{ bem('content-column', ['header'], base_class, [content_classes, 'first-child-no-spacer']) }}>
             {% if has_header %}
               {% block header %}
               {% endblock %}
