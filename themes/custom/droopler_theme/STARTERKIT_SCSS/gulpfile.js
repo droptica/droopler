@@ -20,7 +20,7 @@
   const uglify = require('gulp-uglify');
   const pump = require('pump');
   const fs = require('fs');
-  const rename = require("gulp-rename");
+  const rename = require('gulp-rename');
   const del = require('del');
 
   // Patterns
