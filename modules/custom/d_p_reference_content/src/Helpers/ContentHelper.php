@@ -171,6 +171,10 @@ class ContentHelper {
       $nids[] = $value['target_id'];
     }
 
+    if (empty($nids)) {
+      return [];
+    }
+
     $results = $this->connection->select('node_field_data', 'nfd')
       ->fields('nfd', ['nid'])
       ->condition('nfd.status', 1)
