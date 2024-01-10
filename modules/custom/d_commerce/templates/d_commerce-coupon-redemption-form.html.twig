@@ -24,11 +24,13 @@
       <h3> {{ 'Applied coupons'|t }} </h3>
       <div class="table-responsive">
         <table>
-          {% for key, coupon in form.coupons if key|first != '#' %}
-            <tr>
-              <td> {{ coupon.code }} </td>
-              <td> {{ coupon.remove_button }} </td>
-            </tr>
+          {% for key, coupon in form.coupons %}
+            {% if key|first != '#' %}
+              <tr>
+                <td> {{ coupon.code }} </td>
+                <td> {{ coupon.remove_button }} </td>
+              </tr>
+            {% endif %}
           {% endfor %}
         </table>
       </div>
