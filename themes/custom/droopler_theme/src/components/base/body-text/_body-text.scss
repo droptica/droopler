@@ -4,6 +4,15 @@
   --body-text-font-size: 1rem;
   --body-text-font-size-mobile: 0.875rem;
 
+  // Pre - code.
+  --pre-code-color: #353535;
+  --pre-code-background: hsla(0,0%,78%,.3);
+  --pre-code-border: 1px solid #c4c4c4;
+  --pre-code-min-width: 200px;
+
+  // Blockquote.
+  --blockquote-border: 5px solid #ccc;
+
   // Table.
   --body-text-table-cell-padding: 0.75rem;
   --body-text-table-border-width: 2px;
@@ -38,7 +47,27 @@
 
   pre {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "liberation mono", "courier new", monospace;
-    white-space: normal;
+    background: var(--pre-code-background);
+    border: var(--pre-code-border);
+    border-radius: $border-radius-sm;
+    color: var(--pre-code-color);
+    direction: ltr;
+    font-style: normal;
+    min-width: var(--pre-code-min-width);
+    padding: var(--content-spacer-s);
+    tab-size: 4;
+    text-align: left;
+    white-space: pre-wrap;
+  }
+
+  blockquote {
+    border-left: var(--blockquote-border);
+    font-style: italic;
+    margin-left: var(--content-spacer-none);
+    margin-right: var(--content-spacer-none);
+    overflow: hidden;
+    padding-left: var(--content-spacer-m);
+    padding-right: var(--content-spacer-m);
   }
 
   table {
