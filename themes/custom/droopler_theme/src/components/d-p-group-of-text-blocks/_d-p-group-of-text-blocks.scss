@@ -42,6 +42,8 @@
 
   &__items-wrapper {
     overflow: hidden;
+    padding-left: var(--content-spacer-m);
+    padding-right: var(--content-spacer-m);
 
     #{$root}--with-grid & {
       > div,
