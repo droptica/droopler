@@ -5,8 +5,10 @@
  * The main profile file.
  */
 
-use Drupal\Core\Form\FormStateInterface;
+declare(strict_types = 1);
+
 use Drupal\Core\Extension\Extension;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_system_info_alter().

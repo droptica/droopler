@@ -12,7 +12,6 @@ dependencies:
   module:
     - d_p
     - field_group
-    - link_attributes
     - media_library
     - text
 third_party_settings:
@@ -84,21 +83,22 @@ bundle: d_p_tiles
 mode: default
 content:
   field_d_cta_link:
-    type: link_attributes
+    type: button_link_widget
     weight: 5
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
       enabled_attributes:
-        id: true
-        name: true
-        target: true
-        rel: true
-        class: true
-        accesskey: true
-        aria-label: false
-        title: false
+        id: id
+        name: name
+        target: target
+        rel: rel
+        class: class
+        accesskey: 0
+        aria-label: 0
+        title: 0
+      widget_default_open: expandIfValuesSet
     third_party_settings: {  }
   field_d_long_text:
     type: text_textarea

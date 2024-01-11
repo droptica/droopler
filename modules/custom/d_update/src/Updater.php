@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\d_update;
 
+use Drupal\block\Entity\Block;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
@@ -20,7 +21,6 @@ use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\block\Entity\Block;
 use Drupal\d_p\Helper\NestedArrayHelper;
 
 /**
