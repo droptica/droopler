@@ -11,8 +11,6 @@
   --media-height: 100%;
 
   position: relative;
-  border-top: 2px solid var(--tiles-gallery-background-color);
-  border-bottom: 2px solid var(--tiles-gallery-background-color);
 
   @include media-breakpoint-up(md) {
     display: flex;
@@ -21,7 +19,6 @@
 
   &__gallery {
     background: var(--tiles-gallery-background-color);
-    outline: var(--tiles-gallery-item-padding) solid var(--tiles-gallery-background-color);
 
     @include media-breakpoint-up(md) {
       @include filling-absolute;
