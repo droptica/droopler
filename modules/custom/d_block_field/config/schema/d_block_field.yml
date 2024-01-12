@@ -28,11 +28,14 @@ field.field_settings.d_block_field:
   type: mapping
   label: 'Block field settings'
   mapping:
-    plugin_ids:
+    plugin_categories:
       type: sequence
-      label: 'Plugin ids'
+      label: 'Plugin categories'
       sequence:
         type: string
+    plugin_categories_exclude:
+      type: boolean
+      label: 'Exclude selected categories'
 
 field.value.d_block_field:
   type: mapping
