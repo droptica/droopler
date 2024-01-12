@@ -162,8 +162,8 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
       $item->settings = $item->settings ?: [];
     }
 
-    $categories = array_filter($this->getFieldSetting('plugin_categories'));
-    $categories_exclude = $this->getFieldSetting('plugin_categories_exclude');
+    $categories = array_filter($this->getFieldSetting('plugin_categories') ?? []);
+    $categories_exclude = $this->getFieldSetting('plugin_categories_exclude') ?? FALSE;
 
     $options = [];
     $definitions = $this->fieldManager->getBlockDefinitions();
