@@ -165,73 +165,13 @@ class BlockFieldFormatter extends FormatterBase {
         '#plugin_id' => $block_instance->getPluginId(),
         '#base_plugin_id' => $block_instance->getBaseId(),
         '#derivative_plugin_id' => $block_instance->getDerivativeId(),
-        'content' => $this->processBlockBuild($block_instance),
+        'content' => $block_instance->build(),
       ];
 
       $this->renderer->addCacheableDependency($elements[$delta], $block_instance);
     }
+
     return $elements;
-  }
-
-  /**
-   * Get processed block build.
-   *
-   * @param \Drupal\Core\Block\BlockPluginInterface $block_instance
-   *   The Block Plugin Interface.
-   *
-   * @return array
-   *   The Block Build.
-   */
-  private function processBlockBuild(BlockPluginInterface $block_instance): array {
-    $block_build = $block_instance->build();
-
-    // Entity view node block without recursive node rendering.
-    if ($block_instance->getBaseId() === 'entity_view') {
-      $node = $block_build['#node'] ?? NULL;
-
-      if ($node instanceof NodeInterface) {
-        $sections = $node->hasField('field_page_section') && !$node->get('field_page_section')->isEmpty()
-          ? $node->get('field_page_section')->referencedEntities()
-          : NULL;
-
-        if (!$sections) {
-          return $block_build;
-        }
-
-        $block_build['content']['#node'] = $node->set(
-          'field_page_section',
-          $this->getAllowedSectionsForEntityViewBlock($sections)
-        );
-      }
-    }
-
-    return $block_build;
-  }
-
-  /**
-   * Get allowed references for page section field.
-   *
-   * @param array $sections
-   *   All referenced entities from field page section.
-   *
-   * @return array
-   *   Allowed referenced entities for field page section.
-   */
-  private function getAllowedSectionsForEntityViewBlock(array $sections): array {
-    foreach ($sections as $key => $paragraph) {
-      if ($paragraph instanceof ParagraphInterface && $paragraph->getType() === 'd_p_block') {
-        $field_block_value = $paragraph->hasField('field_block') && !$paragraph->get('field_block')->isEmpty()
-          ? $paragraph->get('field_block')->getValue()
-          : NULL;
-        $field_block_value = reset($field_block_value);
-
-        if (isset($field_block_value['plugin_id']) && $field_block_value['plugin_id'] === 'entity_view:node') {
-          unset($sections[$key]);
-        }
-      }
-    }
-
-    return $sections;
   }
 
 }

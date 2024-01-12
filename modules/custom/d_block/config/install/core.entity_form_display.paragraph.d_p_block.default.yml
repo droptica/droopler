@@ -15,59 +15,61 @@ third_party_settings:
       children:
         - group_basic
         - group_settings
+      label: Tabs
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
-      region: content
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: horizontal
-      label: Tabs
     group_basic:
       children:
         - field_block
+      label: Basic
+      region: content
       parent_name: group_tabs
       weight: 5
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: open
+        description: ''
         required_fields: true
-      label: Basic
     group_settings:
       children:
         - field_d_settings
+      label: Settings
+      region: content
       parent_name: group_tabs
       weight: 6
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: Settings
 id: paragraph.d_p_block.default
 targetEntityType: paragraph
 bundle: d_p_block
 mode: default
 content:
   field_block:
+    type: d_block_field_default
     weight: 1
+    region: content
     settings:
       plugin_id: ''
       settings: {  }
       configuration_form: full
     third_party_settings: {  }
-    type: d_block_field_default
-    region: content
   field_d_settings:
+    type: field_d_p_set_settings
     weight: 7
+    region: content
     settings:
       filter_mode: '1'
       allowed_settings:
@@ -121,8 +123,6 @@ content:
         column_count:
           status: 0
     third_party_settings: {  }
-    type: field_d_p_set_settings
-    region: content
 hidden:
   created: true
   status: true
