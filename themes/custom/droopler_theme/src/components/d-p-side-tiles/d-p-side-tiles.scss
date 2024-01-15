@@ -40,6 +40,10 @@
       padding-left: var(--tiles-content-column-padding);
     }
 
+    #{$root}--right & {
+      padding-right: var(--tiles-content-column-padding);
+    }
+
     .heading {
       margin-top: var(--content-spacer-s);
     }
