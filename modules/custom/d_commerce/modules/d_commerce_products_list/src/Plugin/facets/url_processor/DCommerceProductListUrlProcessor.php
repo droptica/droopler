@@ -38,7 +38,9 @@ class DCommerceProductListUrlProcessor extends FacetsPrettyPathsUrlProcessor {
         // and get the number of total rows.
         $view = Views::getView($attributes->get('view_id'));
         $view->setDisplay($attributes->get('display_id'));
-        $view->setArguments($url->getRouteParameters());
+        if ($url->isRouted()) {
+          $view->setArguments($url->getRouteParameters());
+        }
         $view->execute();
 
         if ($view->total_rows) {
