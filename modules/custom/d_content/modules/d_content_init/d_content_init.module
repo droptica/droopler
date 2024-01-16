@@ -208,7 +208,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
           \Drupal::logger('d_content_init')
             ->error('Entity search returned no results in entity #@id of type "@type" (field "@field").', [
               '@id' => $entity->id(),
-              '@type' => $entity->getEntityType(),
+              '@type' => $entity->getEntityType()->getLabel(),
               '@field' => $name,
             ]);
         }

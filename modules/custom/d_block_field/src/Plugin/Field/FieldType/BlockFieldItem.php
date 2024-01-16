@@ -28,7 +28,8 @@ class BlockFieldItem extends FieldItemBase implements BlockFieldItemInterface {
    */
   public static function defaultFieldSettings() {
     return [
-      'plugin_ids' => [],
+      'plugin_categories' => [],
+      'plugin_categories_exclude' => FALSE,
     ] + parent::defaultFieldSettings();
   }
 
@@ -73,6 +74,33 @@ class BlockFieldItem extends FieldItemBase implements BlockFieldItemInterface {
       ],
       'indexes' => ['plugin_id' => ['plugin_id']],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
+    $categories = \Drupal::service('plugin.manager.block')->getCategories();
+    foreach ($categories as $category) {
+      $category_name = (string) $category;
+      $options[$category_name] = $category_name;
+    }
+
+    $element['plugin_categories'] = [
+      '#title' => $this->t('Plugins categories'),
+      '#description' => $this->t('Leave empty to allow all plugin categories.'),
+      '#type' => 'checkboxes',
+      '#options' => $options ?? [],
+      '#default_value' => $this->getSetting('plugin_categories'),
+    ];
+    $element['plugin_categories_exclude'] = [
+      '#title' => $this->t('Exclude selected categories'),
+      '#description' => $this->t('If unchecked, only plugins from selected categories will be available. If checked, plugins from selected categories will be excluded.'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->getSetting('plugin_categories_exclude'),
+    ];
+
+    return $element;
   }
 
   /**
@@ -134,20 +162,6 @@ class BlockFieldItem extends FieldItemBase implements BlockFieldItemInterface {
     }
 
     return $block_instance;
-  }
-
-  /**
-   * Validates plugin_ids table select element.
-   */
-  public static function validatePluginIds(array &$element, FormStateInterface $form_state, &$complete_form) {
-    $value = array_filter($element['#value']);
-    if (array_keys($element['#options']) == array_keys($value)) {
-      $form_state->setValueForElement($element, []);
-    }
-    else {
-      $form_state->setValueForElement($element, $value);
-    }
-    return $element;
   }
 
 }

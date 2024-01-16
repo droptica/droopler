@@ -139,9 +139,13 @@ function d_p_preprocess_paragraph(&$variables) {
 function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
   // Create heading type selector under the title.
-  if (isset($form["field_page_section"])) {
+  if (isset($form["field_page_section"]["widget"]["#max_delta"])) {
     // Locate all paragraph subforms.
     for ($i = 0; $i <= $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
+      if (!isset($form["field_page_section"]["widget"][$i]["subform"])) {
+        continue;
+      }
+
       d_p_move_heading_type($form["field_page_section"]["widget"][$i]["subform"]);
     }
   }
@@ -240,7 +244,8 @@ function d_p_field_widget_single_element_form_alter(&$element, FormStateInterfac
     // Add default value to the link class attribute.
     if ($field_name === 'field_d_cta_link' &&
       empty($element['url']['#default_value']) &&
-      empty($element['options']['attributes']['class']['#default_value'])
+      empty($element['options']['attributes']['class']['#default_value']) &&
+      !isset($element['attributes']['#value']['class'])
     ) {
       if (in_array($bundle, ['d_p_group_of_counters'])) {
         $default_value = 'btn btn-secondary';
