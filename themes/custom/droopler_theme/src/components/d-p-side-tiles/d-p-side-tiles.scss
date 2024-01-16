@@ -56,4 +56,12 @@
       margin-top: var(--content-spacer-m);
     }
   }
+
+  @include media-breakpoint-down(md) {
+    &.padding-top-none {
+      #{$root}__content {
+        margin-top: calc(#{var(--tiles-gallery-item-padding)} * 2);
+      }
+    }
+  }
 }
