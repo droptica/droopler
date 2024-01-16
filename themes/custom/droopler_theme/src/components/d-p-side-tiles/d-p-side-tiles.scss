@@ -53,3 +53,13 @@
     }
   }
 }
+
+.tiles-gallery-parent.padding-top-none {
+  @include media-breakpoint-down(md) {
+    .d-p-side-tiles {
+      &__content {
+        margin-top: calc(#{var(--tiles-gallery-item-padding)} * 1.5);
+      }
+    }
+  }
+}
