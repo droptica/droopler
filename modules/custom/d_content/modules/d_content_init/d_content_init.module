@@ -96,7 +96,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
   /**
    * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
    */
-  $media_manager = Drupal::service('d_content_init.manager_media');
+  $media_manager = \Drupal::service('d_content_init.manager_media');
   $type = $value['type'] ?? '';
   $data = $value['data'] ?? [];
 
@@ -417,7 +417,7 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
     $directory .= $dst_dir . '/';
     if (!Drupal::service('file_system')
       ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
-      Drupal::logger('file')
+      \Drupal::logger('file')
         ->warning('Directory %directory could not be created or is not accessible.', ['%directory' => $directory]);
       return FALSE;
     }
@@ -493,10 +493,10 @@ function d_content_init_create_all($type = NULL) {
   if (empty($type) || $type === 'block' || $type === 'block_second_run') {
     $block_structure = [];
     if ($type != 'block') {
-      $context = $type;
+      $block_context = $type;
     }
-    $module_handler->alter('block_structure', $block_structure, $context);
-    Drupal::service('d_content_init.manager_block')
+    $module_handler->alter('block_structure', $block_structure, $block_context);
+    \Drupal::service('d_content_init.manager_block')
       ->importFromFiles($block_structure);
   }
 
@@ -513,7 +513,7 @@ function d_content_init_create_all($type = NULL) {
     // to modify it and create media entities.
     $media_structure = [];
     $module_handler->alter('media_structure', $media_structure, $context);
-    Drupal::service('d_content_init.manager_media')
+    \Drupal::service('d_content_init.manager_media')
       ->importFromFiles($media_structure);
   }
 
@@ -532,6 +532,8 @@ function d_content_init_create_all($type = NULL) {
       }
     }
   }
+
+
 }
 
 /**
