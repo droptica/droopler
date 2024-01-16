@@ -26,8 +26,9 @@ class DCommerceProductListUrlProcessor extends FacetsPrettyPathsUrlProcessor {
     $attributes = $this->request->attributes;
 
     foreach ($results as &$result) {
-      if ($result->getUrl()->toString() === $this->request->getRequestUri()) {
-        $base_url = new Url($result->getUrl()->getRouteName());
+      $url = $result->getUrl();
+      if ($url->toString() === $this->request->getRequestUri()) {
+        $base_url = new Url($url->getRouteName());
         $result->setUrl($base_url);
         $result->setActiveState(TRUE);
       }
@@ -37,7 +38,9 @@ class DCommerceProductListUrlProcessor extends FacetsPrettyPathsUrlProcessor {
         // and get the number of total rows.
         $view = Views::getView($attributes->get('view_id'));
         $view->setDisplay($attributes->get('display_id'));
-        $view->setArguments($result->getUrl()->getRouteParameters());
+        if ($url->isRouted()) {
+          $view->setArguments($url->getRouteParameters());
+        }
         $view->execute();
 
         if ($view->total_rows) {
