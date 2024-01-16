@@ -56,13 +56,11 @@
       margin-top: var(--content-spacer-m);
     }
   }
-}
 
-.tiles-gallery-parent.padding-top-none {
   @include media-breakpoint-down(md) {
-    .d-p-side-tiles {
-      &__content {
-        margin-top: calc(#{var(--tiles-gallery-item-padding)} * 1.5);
+    &.padding-top-none {
+      #{$root}__content {
+        margin-top: calc(#{var(--tiles-gallery-item-padding)} * 2);
       }
     }
   }
