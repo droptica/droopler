@@ -31,7 +31,21 @@ function d_p_gallery_preprocess_colorbox_formatter(array &$variables): void {
   if ($variables['settings']['colorbox_gallery'] !== 'custom') {
     return;
   }
-  $fieldParent = $variables['item']->getEntity()->_referringItem->getEntity();
-  $parent_id = $fieldParent->get('id')->getString();
-  $variables['attributes']['data-colorbox-gallery'] = $parent_id;
+
+  $field_parent = $variables['item']->getEntity();
+
+  if (!$field_parent) {
+    return;
+  }
+
+  $referring_item = $field_parent->_referringItem?->getEntity();
+
+  if (!$referring_item) {
+    return;
+  }
+
+  $parent_id = $referring_item->get('id')->getString();
+
+  $variables['#cache']['max-age'] = 0;
+  $variables['attributes']['data-colorbox-gallery'] = $variables['attributes']['data-colorbox-gallery'] . "-" . $parent_id;
 }
