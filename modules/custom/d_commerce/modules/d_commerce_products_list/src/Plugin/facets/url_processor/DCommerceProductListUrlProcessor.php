@@ -28,7 +28,7 @@ class DCommerceProductListUrlProcessor extends FacetsPrettyPathsUrlProcessor {
     foreach ($results as &$result) {
       $url = $result->getUrl();
       if ($url->toString() === $this->request->getRequestUri()) {
-        $base_url = new Url($result->getUrl()->getRouteName());
+        $base_url = new Url($url->getRouteName());
         $result->setUrl($base_url);
         $result->setActiveState(TRUE);
       }
