@@ -6,7 +6,7 @@
   Drupal.behaviors.dpColorpicker = {
     attach: function (context, settings) {
       $(context).ready(function () {
-        $('.form-type-d-color', context).each(function () {
+        $('.js-form-type-d-color', context).each(function () {
           var $element = $(this);
 
           var $color = $element.children('.form-d-color').first();

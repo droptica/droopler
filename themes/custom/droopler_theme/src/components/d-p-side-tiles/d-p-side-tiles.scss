@@ -37,11 +37,15 @@
 
   &__content-column {
     #{$root}--left & {
-      padding-left: var(--tiles-content-column-padding);
+      @include media-breakpoint-up(md) {
+        padding-left: var(--tiles-content-column-padding);
+      }
     }
 
     #{$root}--right & {
-      padding-left: var(--tiles-content-column-padding);
+      @include media-breakpoint-up(md) {
+        padding-right: var(--tiles-content-column-padding);
+      }
     }
 
     .heading {
