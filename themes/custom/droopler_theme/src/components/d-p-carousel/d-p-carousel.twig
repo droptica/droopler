@@ -13,6 +13,7 @@
 
   {% set container_classes = ['container', 'first-child-no-spacer'] %}
   {% set items_classes = not is_full_width ? container_classes : [] %}
+  {% set has_heading = block('heading')|render|striptags('<img>')|trim is not empty %}
 
   <div {{ bem('content', [], base_class) }}>
     <div {{ bem('header', [], base_class, container_classes) }}>
@@ -21,7 +22,9 @@
           {% block heading %}
           {% endblock %}
 
-          {% include '@droopler_theme/base/divider/divider.twig' %}
+          {% if has_heading %}
+            {% include '@droopler_theme/base/divider/divider.twig' %}
+          {% endif %}
 
           {% block subheading %}
           {% endblock %}
