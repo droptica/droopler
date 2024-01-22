@@ -16,6 +16,8 @@
   // Table.
   --body-text-table-cell-padding: 0.75rem;
   --body-text-table-border-width: 2px;
+  --body-text-color-image-max-width: 100%;
+  --body-text-color-image-height: auto;
 }
 
 .body-text {
@@ -104,5 +106,10 @@
     li {
       text-align: left;
     }
+  }
+
+  img {
+    max-width: var(--body-text-color-image-max-width);
+    height: var(--body-text-color-image-height);
   }
 }

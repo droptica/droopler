@@ -37,11 +37,15 @@
 
   &__content-column {
     #{$root}--left & {
-      padding-left: var(--tiles-content-column-padding);
+      @include media-breakpoint-up(md) {
+        padding-left: var(--tiles-content-column-padding);
+      }
     }
 
     #{$root}--right & {
-      padding-left: var(--tiles-content-column-padding);
+      @include media-breakpoint-up(md) {
+        padding-right: var(--tiles-content-column-padding);
+      }
     }
 
     .heading {
@@ -50,6 +54,14 @@
 
     .cta-links {
       margin-top: var(--content-spacer-m);
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    &.padding-top-none {
+      #{$root}__content {
+        margin-top: calc(#{var(--tiles-gallery-item-padding)} * 2);
+      }
     }
   }
 }
