@@ -19,10 +19,10 @@
     <div {{ bem('header', [], base_class, container_classes) }}>
       <div {{ bem('header-wrapper', [], base_class, ['row']) }}>
         <div {{ bem('header-column', [], base_class, ['col-12']) }}>
-          {% block heading %}
-          {% endblock %}
 
           {% if has_heading %}
+            {% block heading %}
+            {% endblock %}
             {% include '@droopler_theme/base/divider/divider.twig' %}
           {% endif %}
 
