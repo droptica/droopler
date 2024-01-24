@@ -2,8 +2,13 @@
 
   {% block component_content %}
     {% embed '@droopler_theme/d-p-tiles/d-p-tiles.twig' %}
+
+      {% block content_header_media_icon %}
+        {{ content.group_d_tiles_content_header.field_d_media_icon }}
+      {% endblock %}
+
       {% block content_header %}
-        {{ content.group_d_tiles_content_header }}
+        {{ content.group_d_tiles_content_header|without('field_d_media_icon') }}
       {% endblock %}
 
       {% block content %}
