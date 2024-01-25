@@ -2,16 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.gallery_item
+    - core.entity_view_mode.media.gallery_item_colorbox
     - field.field.media.d_image.field_media_image
     - image.style.gallery_fullscreen
     - media.type.d_image
   module:
     - svg_image
-id: media.d_image.gallery_item
+id: media.d_image.gallery_item_colorbox
 targetEntityType: media
 bundle: d_image
-mode: gallery_item
+mode: gallery_item_colorbox
 content:
   field_media_image:
     type: image
