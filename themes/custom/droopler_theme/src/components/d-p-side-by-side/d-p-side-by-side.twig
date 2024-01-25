@@ -2,6 +2,7 @@
 
 {% set base_class = side_by_side_base_class|default('d-p-side-by-side') %}
 {% set modifiers = side_by_side_modifiers|default([]) %}
+{% set has_heading = block('heading')|render|striptags('<img>')|trim is not empty %}
 
 {% if with_grid %}
   {% set modifiers = modifiers|merge(['with-grid']) %}
@@ -14,8 +15,16 @@
   <div {{ bem('content', [], base_class, []) }}>
     <div {{ bem('header-container', [], base_class, ['container']) }}>
       <div {{ bem('header-row', [], base_class, ['row']) }}>
-        {% block heading %}
-        {% endblock %}
+        <div {{ bem('header-column', [], base_class, ['col-12']) }}>
+          {% if has_heading %}
+            {% block heading %}
+            {% endblock %}
+            {% include '@droopler_theme/base/divider/divider.twig' %}
+          {% endif %}
+
+          {% block subheading %}
+          {% endblock %}
+        </div>
       </div>
     </div>
 
