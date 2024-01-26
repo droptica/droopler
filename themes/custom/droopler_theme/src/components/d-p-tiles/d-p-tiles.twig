@@ -11,9 +11,11 @@
     <div {{ bem('header', [], base_class) }}>
       <div {{ bem('header-wrapper', [], base_class, ['row']) }}>
         <div {{ bem('header-column', [], base_class, ['col-12']) }}>
-          {% block content_header_media_icon %}
-          {% endblock %}
-          <div {{ bem('header-title-and-descrition', [], base_class, ['container']) }}>
+          <div {{ bem('header-media', [], base_class, []) }}>
+            {% block content_header_media %}
+            {% endblock %}
+          </div>
+          <div {{ bem('header-content', [], base_class, ['container']) }}>
             {% block content_header %}
             {% endblock %}
 

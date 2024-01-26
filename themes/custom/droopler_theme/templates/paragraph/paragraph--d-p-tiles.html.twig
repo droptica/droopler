@@ -3,12 +3,12 @@
   {% block component_content %}
     {% embed '@droopler_theme/d-p-tiles/d-p-tiles.twig' %}
 
-      {% block content_header_media_icon %}
-        {{ content.group_d_tiles_content_header.field_d_media_icon }}
+      {% block content_header_media %}
+        {{ content.group_d_tiles_header_media }}
       {% endblock %}
 
       {% block content_header %}
-        {{ content.group_d_tiles_content_header|without('field_d_media_icon') }}
+        {{ content.group_d_tiles_content_header }}
       {% endblock %}
 
       {% block content %}
@@ -26,7 +26,7 @@
   {% endblock %}
 
   {% block content %}
-    {{ content|without('group_d_tiles_content_header', 'group_d_tiles_content', 'group_d_tiles_gallery', 'group_d_tiles_cta') }}
+    {{ content|without('group_d_tiles_header_media', 'group_d_tiles_content_header', 'group_d_tiles_content', 'group_d_tiles_gallery', 'group_d_tiles_cta') }}
   {% endblock %}
 
 {% endembed %}
