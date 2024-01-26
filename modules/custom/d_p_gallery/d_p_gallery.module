@@ -13,3 +13,37 @@ declare(strict_types = 1);
 function d_p_gallery_d_p_centered_ckeditor_widget_paragraphs(array &$paragraph_types) {
   $paragraph_types[] = 'd_p_gallery';
 }
+
+/**
+ * Prepares variables for colorbox formatter templates.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - item: An ImageItem object.
+ *   - item_attributes: An optional associative array of html attributes to be
+ *     placed in the img tag.
+ *   - entity: An entity object.
+ *   - settings: Formatter settings array.
+ */
+function d_p_gallery_preprocess_colorbox_formatter(array &$variables) {
+  if ($variables['settings']['colorbox_gallery'] !== 'custom') {
+    return;
+  }
+
+  $field_parent = $variables['item']->getEntity();
+
+  if (!$field_parent) {
+    return;
+  }
+
+  $referring_item = $field_parent->_referringItem?->getEntity();
+
+  if (!$referring_item) {
+    return;
+  }
+
+  $parent_id = $referring_item->get('id')->getString();
+
+  $variables['#cache']['max-age'] = 0;
+  $variables['attributes']['data-colorbox-gallery'] = $variables['attributes']['data-colorbox-gallery'] . "-" . $parent_id;
+}
