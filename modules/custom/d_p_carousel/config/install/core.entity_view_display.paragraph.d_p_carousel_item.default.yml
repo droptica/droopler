@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.d_p_carousel_item.field_d_cta_link
+    - field.field.paragraph.d_p_carousel_item.field_d_cta_single_link
     - field.field.paragraph.d_p_carousel_item.field_d_long_text
     - field.field.paragraph.d_p_carousel_item.field_d_main_title
     - field.field.paragraph.d_p_carousel_item.field_d_media_icon
@@ -82,6 +82,6 @@ content:
     weight: 1
     region: content
 hidden:
-  field_d_cta_link: true
+  field_d_cta_single_link: true
   field_d_settings: true
   search_api_excerpt: true
