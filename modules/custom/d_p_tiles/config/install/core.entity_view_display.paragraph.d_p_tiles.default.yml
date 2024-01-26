@@ -72,9 +72,27 @@ third_party_settings:
         speed: fast
     group_d_tiles_content_header:
       children:
-        - field_d_media_icon
         - field_d_main_title
       label: 'Content Header'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_tiles_header_media:
+      children:
+        - field_d_media_icon
+      label: 'Content Header Media'
       parent_name: ''
       region: content
       weight: 0
@@ -129,7 +147,7 @@ content:
       view_mode: d_icon
       link: false
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   field_d_media_image:
     type: entity_reference_entity_view

@@ -8,16 +8,22 @@
   {{ title_suffix }}
 
   <div {{ bem('content', [], base_class) }}>
-    <div {{ bem('header', [], base_class, ['container']) }}>
+    <div {{ bem('header', [], base_class) }}>
       <div {{ bem('header-wrapper', [], base_class, ['row']) }}>
         <div {{ bem('header-column', [], base_class, ['col-12']) }}>
-          {% block content_header %}
-          {% endblock %}
+          <div {{ bem('header-media', [], base_class, []) }}>
+            {% block content_header_media %}
+            {% endblock %}
+          </div>
+          <div {{ bem('header-content', [], base_class, ['container']) }}>
+            {% block content_header %}
+            {% endblock %}
 
-          {% include '@droopler_theme/base/divider/divider.twig' %}
+            {% include '@droopler_theme/base/divider/divider.twig' %}
 
-          {% block content %}
-          {% endblock %}
+            {% block content %}
+            {% endblock %}
+          </div>
         </div>
       </div>
     </div>
