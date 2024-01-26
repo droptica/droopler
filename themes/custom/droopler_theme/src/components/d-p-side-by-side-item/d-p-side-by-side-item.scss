@@ -16,12 +16,45 @@
         margin-left: calc(100% - 50vw);
       }
     }
+    .d-p-node,
+    .d-p-single-text-block {
+      &::before {
+        content: "";
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100vw;
+        position: absolute;
+        background-color: inherit;
+        @include media-breakpoint-up(sm) {
+          width: 50vw;
+        }
+      }
+    }
   }
+
+
+
 
   &.item-2 {
     .media--overlay {
       @include media-breakpoint-up(sm) {
         margin-right: calc(100% - 50vw);
+      }
+    }
+    .d-p-node,
+    .d-p-single-text-block {
+      &::before {
+        content: "";
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100vw;
+        position: absolute;
+        background-color: inherit;
+        @include media-breakpoint-up(sm) {
+          width: 50vw;
+        }
       }
     }
   }
