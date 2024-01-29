@@ -3,10 +3,15 @@
 :root {
   --body-text-font-size: 1rem;
   --body-text-font-size-mobile: 0.875rem;
+
+  // Table.
   --body-text-table-cell-padding: 0.75rem;
   --body-text-table-border-width: 2px;
   --body-text-color-image-max-width: 100%;
   --body-text-color-image-height: auto;
+
+  // Pre-code.
+  --pre-code-min-width: 200px;
 }
 
 .body-text {
@@ -38,7 +43,27 @@
 
   pre {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "liberation mono", "courier new", monospace;
-    white-space: normal;
+    background: var(--pre-code-background);
+    border: var(--pre-code-border);
+    border-radius: $border-radius-sm;
+    color: var(--pre-code-color);
+    direction: ltr;
+    font-style: normal;
+    min-width: var(--pre-code-min-width);
+    padding: var(--content-spacer-s);
+    tab-size: 4;
+    text-align: left;
+    white-space: pre-wrap;
+  }
+
+  blockquote {
+    border-left: var(--blockquote-border);
+    font-style: italic;
+    margin-left: var(--content-spacer-none);
+    margin-right: var(--content-spacer-none);
+    overflow: hidden;
+    padding-left: var(--content-spacer-m);
+    padding-right: var(--content-spacer-m);
   }
 
   table {
