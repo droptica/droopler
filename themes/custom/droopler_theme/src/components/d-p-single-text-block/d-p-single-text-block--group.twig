@@ -27,7 +27,9 @@
       {% block header %}
       {% endblock %}
 
-      {% include "@droopler_theme/base/divider/divider.twig" %}
+      {% if block('content')|trim is not empty %}
+        {% include "@droopler_theme/base/divider/divider.twig" %}
+      {% endif %}
 
       {% block content %}
       {% endblock %}
