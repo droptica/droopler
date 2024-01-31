@@ -45,6 +45,10 @@
   }
 
   &--tile {
+    .divider {
+      justify-self: center;
+    }
+
     .heading {
       @include heading(4);
 
@@ -108,6 +112,10 @@
 
   &--grid-column {
     text-align: center;
+
+    .divider {
+      justify-self: center;
+    }
   }
 
   &__wrapper {
