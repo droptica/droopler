@@ -12,7 +12,8 @@
 {% endif %}
 
 {% set items_classes = [
-  'row',
+  'd-flex',
+  'flex-wrap',
   columns.column_count_desktop ? 'row-cols-lg-' ~ columns.column_count_desktop,
   columns.column_count_tablet ? 'row-cols-md-' ~ columns.column_count_tablet,
   columns.column_count_mobile ? 'row-cols-' ~ columns.column_count_mobile,
