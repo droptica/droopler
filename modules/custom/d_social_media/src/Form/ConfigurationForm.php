@@ -4,8 +4,10 @@ declare(strict_types = 1);
 
 namespace Drupal\d_social_media\Form;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provide class ConfigurationForm.
@@ -18,6 +20,17 @@ class ConfigurationForm extends ConfigFormBase {
    * Configuration name.
    */
   const CONFIGURATION_NAME = 'd_social_media.settings';
+
+  /**
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected ModuleHandlerInterface $moduleHandler;
+
+  public static function create(ContainerInterface $container) {
+    $configForm = parent::create($container);
+    $configForm->moduleHandler = $container->get('module_handler');
+    return $configForm;
+  }
 
   /**
    * Get defined social media machine names.
@@ -59,6 +72,14 @@ class ConfigurationForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config(self::CONFIGURATION_NAME);
+
+    if ($this->moduleHandler && !$this->moduleHandler->moduleExists('config_translation')) {
+      $form['hint'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'i',
+        '#value' => $this->t('* If you intend to translate this form, consider installing the Config Translation module (a new tab will appear).'),
+      ];
+    }
 
     foreach (self::getMediaNames() as $name) {
       $form["link_$name"] = [
