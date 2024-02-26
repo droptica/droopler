@@ -26,6 +26,9 @@ class ConfigurationForm extends ConfigFormBase {
    */
   protected ModuleHandlerInterface $moduleHandler;
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container) {
     $configForm = parent::create($container);
     $configForm->moduleHandler = $container->get('module_handler');
