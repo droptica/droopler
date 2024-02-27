@@ -22,7 +22,7 @@ class ConfigurationForm extends ConfigFormBase {
   const CONFIGURATION_NAME = 'd_social_media.settings';
 
   /**
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   * Module Handler service.
    */
   protected ModuleHandlerInterface $moduleHandler;
 
