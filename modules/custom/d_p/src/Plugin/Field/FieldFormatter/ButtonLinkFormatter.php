@@ -30,6 +30,14 @@ class ButtonLinkFormatter extends LinkFormatter {
     foreach ($elements as $key => $element) {
       unset($elements[$key]['#type']);
       $elements[$key]['#theme'] = 'd_button_link';
+
+      // Add compatibility with the Drupal 10.2 Link module changes.
+      if (empty($elements[$key]['#options'])) {
+        $elements[$key]['#options'] = [
+          'type' => $element['#url']->getOption('type'),
+          'attributes' => $element['#url']->getOption('attributes'),
+        ];
+      }
     }
 
     return $elements;
