@@ -1,6 +1,10 @@
 # Updating Droopler
 
-## Droopler 4.0.0
+## Droopler 4.0.0-alpha2
+
+This version contains bug fixes and improvements according to the new versions of the core and modules.
+
+## Droopler 4.0.00-alpha1
 
 It's a completely new Droopler version. There is no backwards compatibility from Droopler 4.0 to lower.
 
