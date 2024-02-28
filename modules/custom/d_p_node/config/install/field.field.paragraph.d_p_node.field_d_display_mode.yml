@@ -11,7 +11,7 @@ field_name: field_d_display_mode
 entity_type: paragraph
 bundle: d_p_node
 label: 'Display mode'
-description: ''
+description: 'You can add more display modes <a href="/admin/structure/paragraphs_type/d_p_node/fields/paragraph.d_p_node.field_d_display_mode">here</a>'
 required: true
 translatable: false
 default_value: {  }
@@ -19,6 +19,5 @@ default_value_callback: ''
 settings:
   exclude:
     d_small_box: d_small_box
-    teaser: teaser
-  negate: 1
+  negate: true
 field_type: entity_reference_display

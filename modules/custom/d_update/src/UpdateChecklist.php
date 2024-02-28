@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace Drupal\d_update;
 
+use Drupal\checklistapi\ChecklistapiChecklist;
+use Drupal\checklistapi\Storage\StateStorage;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\checklistapi\ChecklistapiChecklist;
-use Drupal\checklistapi\Storage\StateStorage;
 use Drupal\d_update\Entity\Update;
 
 /**

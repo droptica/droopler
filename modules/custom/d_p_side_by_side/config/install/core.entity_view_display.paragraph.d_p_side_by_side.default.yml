@@ -22,7 +22,7 @@ third_party_settings:
       label: Content
       parent_name: ''
       region: content
-      weight: 1
+      weight: 2
       format_type: html_element
       format_settings:
         classes: ''
@@ -39,7 +39,6 @@ third_party_settings:
       children:
         - field_d_media_icon
         - field_d_main_title
-        - field_d_long_text
       label: Heading
       parent_name: ''
       region: content
@@ -62,7 +61,26 @@ third_party_settings:
       label: CTA
       parent_name: ''
       region: content
-      weight: 2
+      weight: 3
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_subheading:
+      children:
+        - field_d_long_text
+      label: Subheading
+      parent_name: ''
+      region: content
+      weight: 1
       format_type: html_element
       format_settings:
         classes: ''
@@ -97,7 +115,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 4
     region: content
   field_d_main_title:
     type: string

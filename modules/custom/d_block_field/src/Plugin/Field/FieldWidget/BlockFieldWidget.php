@@ -156,15 +156,20 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
     ));
 
     $values = $form_state->getValues();
-
     $plugin_id = $values[$field_name][$delta]['plugin_id'] ?? ($item->__get('plugin_id') ?: '');
     $settings = !empty($values[$field_name][$delta]['settings']) ? $values[$field_name][$delta]['settings'] : ($item->__get('settings') ?: []);
+
+    $categories = array_filter($this->getFieldSetting('plugin_categories') ?? []);
+    $categories_exclude = $this->getFieldSetting('plugin_categories_exclude') ?? FALSE;
 
     $options = [];
     $definitions = $this->fieldManager->getBlockDefinitions();
     foreach ($definitions as $id => $definition) {
       $category = (string) $definition['category'];
-      $options[$category][$id] = $definition['admin_label'];
+
+      if (empty($categories) || ($categories_exclude xor in_array($category, $categories))) {
+        $options[$category][$id] = $definition['admin_label'];
+      }
     }
 
     // Make sure the plugin id is allowed, if not clear all settings.

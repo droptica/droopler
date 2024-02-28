@@ -169,6 +169,7 @@ class BlockFieldFormatter extends FormatterBase {
 
       $this->renderer->addCacheableDependency($elements[$delta], $block_instance);
     }
+
     return $elements;
   }
 
