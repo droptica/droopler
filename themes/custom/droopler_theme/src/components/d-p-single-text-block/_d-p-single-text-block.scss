@@ -12,10 +12,6 @@
   --media-height: 100%;
   --media-img-display: inline-block;
 
-  &--has-media-background {
-    padding-block: 130px;
-  }
-
   &--in-side-by-side {
     .heading {
       @include heading(2);
