@@ -44,32 +44,40 @@
     }
   }
 
-  &__content-column {
-    position: relative;
-    z-index: 1;
-    background: var(--section-background-color);
+  &__content {
+    background: inherit;
 
-    #{$root}--embed-left & {
-      padding-left: var(--content-offset);
+    &-wrapper {
+      background: inherit;
     }
 
-    #{$root}--embed-right &, #{$root}--embed-full & {
-      padding-right: var(--content-offset);
-    }
+    &-column {
+      position: relative;
+      z-index: 1;
+      background: inherit;
 
-    #{$root}--embed-full & {
-      @include media-breakpoint-up(md) {
-        padding-block: var(--content-spacer-l);
+      #{$root}--embed-left & {
+        padding-left: var(--content-offset);
+      }
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 50vw;
-          height: 100%;
-          z-index: -1;
-          background: inherit;
+      #{$root}--embed-right &, #{$root}--embed-full & {
+        padding-right: var(--content-offset);
+      }
+
+      #{$root}--embed-full & {
+        @include media-breakpoint-up(md) {
+          padding-block: var(--content-spacer-l);
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50vw;
+            height: 100%;
+            z-index: -1;
+            background: inherit;
+          }
         }
       }
     }
