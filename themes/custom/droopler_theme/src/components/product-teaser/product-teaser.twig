@@ -13,7 +13,7 @@
     {% if label %}
       {% include '@droopler_theme/base/heading/heading.twig' with {
         heading_tag: 'h2',
-        label: label
+        label: label[0]['#context'].value|slice(0, 40) ~ (label[0]['#context'].value|length > 40 ? '...' : '')
       } %}
     {% endif %}
     {{ title_suffix }}
