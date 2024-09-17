@@ -83,6 +83,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 12
           total_pages: 0
           id: 0
@@ -149,14 +150,14 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: none
+        type: search_api_none
         options: {  }
       empty: {  }
       sorts:
-        search_api_id:
-          id: search_api_id
+        nid:
+          id: nid
           table: search_api_index_product_index
-          field: search_api_id
+          field: nid
           relationship: none
           group_type: group
           admin_label: ''
@@ -240,7 +241,7 @@ display:
     position: 1
     display_options:
       cache:
-        type: none
+        type: search_api_none
       defaults:
         cache: false
       display_description: 'Products list with teasers'
