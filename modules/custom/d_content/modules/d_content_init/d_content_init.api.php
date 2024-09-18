@@ -5,7 +5,7 @@
  * Hooks provided by the Content init module.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * Gathers array of search_api indices to index.

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_block_field\Plugin\Field\FieldFormatter;
 
@@ -69,7 +69,7 @@ class BlockFieldLabelFormatter extends FormatterBase {
     $view_mode,
     array $third_party_settings,
     RendererInterface $renderer,
-    AccountInterface $current_user
+    AccountInterface $current_user,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
     $this->renderer = $renderer;

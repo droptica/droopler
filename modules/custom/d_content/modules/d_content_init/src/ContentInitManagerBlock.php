@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_content_init;
 
@@ -75,7 +75,8 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     ModuleHandlerInterface $module_handler,
     UuidInterface $uuid,
     BlockManagerInterface $block_manager,
-    ThemeHandlerInterface $theme_handler) {
+    ThemeHandlerInterface $theme_handler,
+  ) {
     parent::__construct($entity_type_manager, $serialization, $logger_factory, $current_user, $language_manager, $module_handler);
     $this->uuid = $uuid;
     $this->blockManager = $block_manager;

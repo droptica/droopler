@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_update;
 
@@ -68,10 +68,12 @@ class UpdateChecklist {
    * @param \Drupal\checklistapi\Storage\StateStorage $state_storage
    *   Storage for checklist config.
    */
-  public function __construct(ConfigFactoryInterface $config_factory,
-                              ModuleHandlerInterface $module_handler,
-                              AccountInterface $account,
-                              StateStorage $state_storage) {
+  public function __construct(
+    ConfigFactoryInterface $config_factory,
+    ModuleHandlerInterface $module_handler,
+    AccountInterface $account,
+    StateStorage $state_storage,
+  ) {
     $this->configFactory = $config_factory;
     $this->moduleHandler = $module_handler;
     $this->account = $account;

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_update;
 
@@ -132,7 +132,7 @@ class Updater {
     UpdateChecklist $checklist,
     ModuleExtensionList $module_extension_list,
     ConfigFactoryInterface $config_factory,
-    ExtensionPathResolver $extension_path_resolver
+    ExtensionPathResolver $extension_path_resolver,
   ) {
     $this->moduleInstaller = $module_installer;
     $this->configStorage = $config_storage;

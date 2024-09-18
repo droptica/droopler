@@ -5,7 +5,7 @@
  * The main profile file.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Form\FormStateInterface;

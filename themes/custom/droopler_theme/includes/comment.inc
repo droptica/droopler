@@ -5,4 +5,4 @@
  * Theme and preprocess functions for comments.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);

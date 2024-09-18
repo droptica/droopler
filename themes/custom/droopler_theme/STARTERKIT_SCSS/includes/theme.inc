@@ -5,7 +5,7 @@
  * Custom theme hooks.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * Implements hook_library_info_build().

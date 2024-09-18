@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_p_reference_content\Helpers;
 
@@ -26,7 +26,7 @@ class ContentHelper {
   public function __construct(
     private readonly Connection $connection,
     private readonly EntityTypeManagerInterface $entityTypeManager,
-    private readonly EntityDisplayRepository $entityDisplayRepository
+    private readonly EntityDisplayRepository $entityDisplayRepository,
   ) {}
 
   /**

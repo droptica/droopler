@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\droopler\Installer\Form;
 
@@ -24,7 +24,7 @@ class AdditionalComponentsForm extends FormBase {
    *   The module extension list.
    */
   public function __construct(
-    private readonly ModuleExtensionList $moduleExtensionList
+    private readonly ModuleExtensionList $moduleExtensionList,
   ) {}
 
   /**

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_content_init;
 
@@ -87,7 +87,8 @@ abstract class ContentInitManagerBase {
     LoggerChannelFactory $logger_factory,
     AccountProxyInterface $current_user,
     LanguageManagerInterface $language_manager,
-    ModuleHandlerInterface $module_handler) {
+    ModuleHandlerInterface $module_handler,
+  ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->serialization = $serialization;
     $this->logger = $logger_factory->get('d_content_init');

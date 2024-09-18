@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_p_subscribe_file\Forms;
 
@@ -57,7 +57,7 @@ class SubscribeFileForm extends FormBase {
    */
   public function __construct(
     AccountProxy $account_proxy,
-    MailManagerInterface $mail_manager
+    MailManagerInterface $mail_manager,
   ) {
     $this->accountProxy = $account_proxy->getAccount();
     $this->mailManager = $mail_manager;

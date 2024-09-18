@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_media\Plugin\Field\FieldFormatter;
 
@@ -83,7 +83,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
     $view_mode,
     array $third_party_settings,
     ProviderManagerInterface $provider_manager,
-    EntityStorageInterface $image_style_storage
+    EntityStorageInterface $image_style_storage,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
     $this->providerManager = $provider_manager;

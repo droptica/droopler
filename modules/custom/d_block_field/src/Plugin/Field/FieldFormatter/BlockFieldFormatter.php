@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\d_block_field\Plugin\Field\FieldFormatter;
 
@@ -93,7 +93,7 @@ class BlockFieldFormatter extends FormatterBase {
     ContextRepositoryInterface $context_repository,
     ContextHandlerInterface $context_handler,
     RendererInterface $renderer,
-    AccountInterface $current_user
+    AccountInterface $current_user,
   ) {
     parent::__construct(
       $plugin_id,
