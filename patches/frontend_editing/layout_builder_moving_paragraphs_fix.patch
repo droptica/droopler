@@ -1,0 +1,163 @@
+diff --git a/frontend_editing.module b/frontend_editing.module
+index ab8d022..b904891 100644
+--- a/frontend_editing.module
++++ b/frontend_editing.module
+@@ -25,6 +25,7 @@ use Drupal\frontend_editing\Ajax\EntityPreviewCommand;
+ use Drupal\frontend_editing\Ajax\ScrollTopCommand;
+ use Drupal\frontend_editing\Form\ParagraphAddForm;
+ use Drupal\frontend_editing\Form\ParagraphDeleteForm;
++use Drupal\node\NodeInterface;
+ use Drupal\paragraphs\ParagraphInterface;
+ 
+ /**
+@@ -121,6 +122,11 @@ function frontend_editing_entity_view_alter(&$build, EntityInterface $entity, En
+   if (isset($build['#embed'])) {
+     return;
+   }
++
++  if (isset($build['_layout_builder']) && $display->isLayoutBuilderEnabled()) {
++    _frontend_editing_process_layout_builder_sections($build['_layout_builder'], $entity);
++  }
++
+   if (\Drupal::moduleHandler()->moduleExists('preview')) {
+     // Check if preview is allowed.
+     $preview_config = \Drupal::config('preview.settings')->get('enabled') ?? [];
+@@ -343,6 +349,21 @@ function frontend_editing_entity_view_alter(&$build, EntityInterface $entity, En
+         ],
+       ],
+     ];
++
++    $its_lb = 0;
++    if ($parent_entity instanceof NodeInterface) {
++      /** @var \Drupal\Core\Entity\EntityDisplayRepository entity_display_repository */
++      $entity_display_repository = \Drupal::service('entity_display.repository');
++
++      $view_mode = $build['#parent_field_view_mode'] ?? 'full';
++      $view_mode = $view_mode === '_custom' ? 'full' : $view_mode;
++
++      $view_display = $entity_display_repository
++        ->getViewDisplay($parent_entity->getEntityTypeId(), $parent_entity->bundle(), $view_mode);
++
++      $its_lb = $view_display->getThirdPartySetting('layout_builder', 'enabled') ? 1 : 0;
++    }
++
+     if (\Drupal::service('frontend_editing.paragraphs_helper')->allowUp($entity)->isAllowed()) {
+       $build['frontend_editing']['common_actions']['move_paragraphs']['up'] = [
+         '#type' => 'link',
+@@ -352,6 +373,7 @@ function frontend_editing_entity_view_alter(&$build, EntityInterface $entity, En
+         ], [
+           'query' => [
+             'view_mode_id' => $build['#parent_field_view_mode'] ?? 'default',
++            'its_lb' => $its_lb,
+           ],
+         ]),
+         '#attributes' => [
+@@ -373,6 +395,7 @@ function frontend_editing_entity_view_alter(&$build, EntityInterface $entity, En
+         ], [
+           'query' => [
+             'view_mode_id' => $build['#parent_field_view_mode'] ?? 'default',
++            'its_lb' => $its_lb,
+           ],
+         ]),
+         '#attributes' => [
+@@ -440,6 +463,39 @@ function frontend_editing_entity_view_alter(&$build, EntityInterface $entity, En
+   }
+ }
+ 
++/**
++ * Process layout builder sections to add a wrapper to content of field_page_section.
++ */
++function _frontend_editing_process_layout_builder_sections(&$layout_builder, $entity) {
++  foreach ($layout_builder as &$element) {
++    if (is_array($element)) {
++      if (isset($element['#plugin_id']) && strpos($element['#plugin_id'], 'field_page_section') !== FALSE) {
++        $view_mode = $element['#view_mode'] ?? 'default';
++        $derivative_plugin_id = $element['#derivative_plugin_id'] ?? 'unknown';
++        $field_name = explode(':', $derivative_plugin_id);
++        $field_name = end($field_name);
++
++        $selector = $entity->getEntityTypeId() . '--' . $entity->id() . '--' . $field_name . '--' . $view_mode;
++
++        if (isset($element['content'])) {
++          $element['content']['#theme_wrappers'] = [
++            'container' => [
++              '#attributes' => [
++                'data-frontend-editing' => $selector,
++                'class' => [
++                  'frontend-editing-field-wrapper',
++                ],
++              ],
++            ],
++          ];
++        }
++      }
++
++      _frontend_editing_process_layout_builder_sections($element, $entity);
++    }
++  }
++}
++
+ /**
+  * Implements hook_theme().
+  */
+diff --git a/src/Controller/FrontendEditingController.php b/src/Controller/FrontendEditingController.php
+index 6e74d5c..1b39090 100644
+--- a/src/Controller/FrontendEditingController.php
++++ b/src/Controller/FrontendEditingController.php
+@@ -405,7 +405,12 @@ class FrontendEditingController extends ControllerBase {
+       $message = $this->t('The paragraph could not be moved up.');
+     }
+     if ($request->isXmlHttpRequest()) {
+-      return $this->ajaxUpdateParagraphs($paragraph, $message, $request->get('view_mode_id', 'default'));
++      return $this->ajaxUpdateParagraphs(
++        $paragraph,
++        $message,
++        $request->get('view_mode_id', 'default'),
++        (bool) $request->get('its_lb', '0')
++      );
+     }
+     if (!empty($message)) {
+       $this->messenger()->addError($message);
+@@ -422,7 +427,11 @@ class FrontendEditingController extends ControllerBase {
+       $message = $this->t('The paragraph could not be moved down.');
+     }
+     if ($request->isXmlHttpRequest()) {
+-      return $this->ajaxUpdateParagraphs($paragraph, $message, $request->get('view_mode_id', 'default'));
++      return $this->ajaxUpdateParagraphs(        $paragraph,
++        $message,
++        $request->get('view_mode_id', 'default'),
++        (bool) $request->get('its_lb', '0')
++      );
+     }
+     return new RedirectResponse($this->paragraphsHelper->getRedirectUrl($paragraph)->toString());
+   }
+@@ -440,19 +449,26 @@ class FrontendEditingController extends ControllerBase {
+    * @return \Drupal\Core\Ajax\AjaxResponse
+    *   The ajax response.
+    */
+-  protected function ajaxUpdateParagraphs(ParagraphInterface $paragraph, $message, $view_mode_id = 'default') {
++  protected function ajaxUpdateParagraphs(ParagraphInterface $paragraph, $message, $view_mode_id = 'default', $its_lb = FALSE) {
+     $response = new AjaxResponse();
+     if ($message) {
+       $response->addCommand(new MessageCommand($message, NULL, ['type' => 'error']));
+     }
+-    $updated_content = $paragraph->getParentEntity()->get($paragraph->get('parent_field_name')->value)->view($view_mode_id);
++
++    if ($its_lb) {
++      $updated_content = $paragraph->getParentEntity()->get($paragraph->get('parent_field_name')->value)->view();
++    }
++    else {
++      $updated_content = $paragraph->getParentEntity()->get($paragraph->get('parent_field_name')->value)->view($view_mode_id);
++    }
++
+     foreach (Element::getVisibleChildren($updated_content) as $delta) {
+       $item = $updated_content[$delta];
+       if (!empty($item['#pre_render'])) {
+         $updated_content[$delta]['#parent_field_view_mode'] = $updated_content['#view_mode'];
+       }
+     }
+-    $selector = '[data-frontend-editing="' . $paragraph->getParentEntity()->getEntityTypeId() . '--' . $paragraph->getParentEntity()->id() . '--' . $paragraph->get('parent_field_name')->value . '--' . $view_mode_id . '"]';
++    $selector = '[data-frontend-editing="' . $paragraph->getParentEntity()->getEntityTypeId() . '--' . $paragraph->getParentEntity()->id() . '--' . $paragraph->get('parent_field_name')->value . '--' . ($its_lb ? 'default' : $view_mode_id) . '"]';
+     $response->addCommand(new HtmlCommand($selector, $updated_content));
+     return $response;
+   }

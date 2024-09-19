@@ -3,7 +3,8 @@ description: 'Provides Product content type and related configuration.'
 type: module
 core_version_requirement: '^9.4 || ^10'
 dependencies:
-  - 'better_exposed_filters:better_exposed_filters'
+  - 'better_exposed_filters:better_exposed_filters',
+  - 'bootstrap_layout_builder:bootstrap_layout_builder',
   - 'colorbox:colorbox'
   - 'd_p:d_p'
   - 'droopler:d_block'

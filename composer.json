@@ -25,6 +25,7 @@
         "bower-asset/masonry": "^4.2",
         "cweagans/composer-patches": "^1.6",
         "drupal/admin_toolbar": "^3.0",
+        "drupal/bootstrap_layout_builder": "^2.1",
         "drupal/checklistapi": "^2.0",
         "drupal/colorbox": "^2.0",
         "drupal/config_update": "2.0.x-dev@dev",
@@ -77,6 +78,9 @@
             "drupal/core": {
                 "Claro - vertical tabs overflow": "https://git.drupalcode.org/project/drupal/-/merge_requests/5376.patch",
                 "Claro - paragraphs overflow": "https://www.drupal.org/files/issues/2023-01-25/3145188-37_0.patch"
+            },
+            "drupal/frontend_editing": {
+                "Frontend Editing - layout builder moving paragraphs fix": "patches/frontend_editing/layout_builder_moving_paragraphs_fix.patch"
             }
         }
     }
