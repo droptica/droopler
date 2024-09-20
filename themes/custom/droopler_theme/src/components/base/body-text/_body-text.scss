@@ -12,6 +12,7 @@
 .body-text {
   color: var(--body-text-color);
   font-size: var(--body-text-font-size-mobile);
+  text-align: left;
 
   @include media-breakpoint-up(md) {
     font-size: var(--body-text-font-size);
@@ -62,12 +63,16 @@
       border: var(--body-text-table-border-width) solid var(--body-text-table-th-color);
     }
 
-    tr:nth-of-type(odd) {
-      background: var(--body-text-table-tr-odd-background-color);
-    }
+    tr {
+      color: var(--body-text-table-tr-color);
 
-    tr:nth-of-type(even) {
-      background: var(--body-text-table-tr-even-background-color);
+      &:nth-of-type(odd) {
+        background: var(--body-text-table-tr-odd-background-color);
+      }
+
+      &:nth-of-type(even) {
+        background: var(--body-text-table-tr-even-background-color);
+      }
     }
   }
 
