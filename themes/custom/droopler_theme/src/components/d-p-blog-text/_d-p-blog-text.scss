@@ -7,6 +7,10 @@
   margin: var(--content-spacer-m) auto;
 
   @include media-breakpoint-up(md) {
-    width: 44em;
+    max-width: 85%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    max-width: 55%;
   }
 }
