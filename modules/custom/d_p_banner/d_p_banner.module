@@ -8,12 +8,12 @@
 declare(strict_types = 1);
 
 use Drupal\d_p_banner\Entity\Banner;
-
-/**
- * Implements hook_entity_bundle_info_alter().
- */
-function d_p_banner_entity_bundle_info_alter(array &$bundles): void {
-  if (isset($bundles['paragraph']['d_p_banner'])) {
-    $bundles['paragraph']['d_p_banner']['class'] = Banner::class;
-  }
-}
+//
+///**
+// * Implements hook_entity_bundle_info_alter().
+// */
+//function d_p_banner_entity_bundle_info_alter(array &$bundles): void {
+//  if (isset($bundles['paragraph']['d_p_banner'])) {
+//    $bundles['paragraph']['d_p_banner']['class'] = Banner::class;
+//  }
+//}

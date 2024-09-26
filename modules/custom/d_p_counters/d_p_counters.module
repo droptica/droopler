@@ -6,14 +6,14 @@
  */
 
 declare(strict_types = 1);
-
-use Drupal\d_p_counters\Entity\GroupOfCounters;
-
-/**
- * Implements hook_entity_bundle_info_alter().
- */
-function d_p_counters_entity_bundle_info_alter(array &$bundles): void {
-  if (isset($bundles['paragraph']['d_p_group_of_counters'])) {
-    $bundles['paragraph']['d_p_group_of_counters']['class'] = GroupOfCounters::class;
-  }
-}
+//
+//use Drupal\d_p_counters\Entity\GroupOfCounters;
+//
+///**
+// * Implements hook_entity_bundle_info_alter().
+// */
+//function d_p_counters_entity_bundle_info_alter(array &$bundles): void {
+//  if (isset($bundles['paragraph']['d_p_group_of_counters'])) {
+//    $bundles['paragraph']['d_p_group_of_counters']['class'] = GroupOfCounters::class;
+//  }
+//}

@@ -9,15 +9,15 @@ declare(strict_types = 1);
 
 use Drupal\d_p_text_blocks\Entity\GroupOfTextBlock;
 use Drupal\d_p_text_blocks\Entity\SingleTextBlock;
-
-/**
- * Implements hook_entity_bundle_info_alter().
- */
-function d_p_text_blocks_entity_bundle_info_alter(array &$bundles): void {
-  if (isset($bundles['paragraph']['d_p_group_of_text_blocks'])) {
-    $bundles['paragraph']['d_p_group_of_text_blocks']['class'] = GroupOfTextBlock::class;
-  }
-  if (isset($bundles['paragraph']['d_p_single_text_block'])) {
-    $bundles['paragraph']['d_p_single_text_block']['class'] = SingleTextBlock::class;
-  }
-}
+//
+///**
+// * Implements hook_entity_bundle_info_alter().
+// */
+//function d_p_text_blocks_entity_bundle_info_alter(array &$bundles): void {
+//  if (isset($bundles['paragraph']['d_p_group_of_text_blocks'])) {
+//    $bundles['paragraph']['d_p_group_of_text_blocks']['class'] = GroupOfTextBlock::class;
+//  }
+//  if (isset($bundles['paragraph']['d_p_single_text_block'])) {
+//    $bundles['paragraph']['d_p_single_text_block']['class'] = SingleTextBlock::class;
+//  }
+//}

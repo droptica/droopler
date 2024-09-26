@@ -25,7 +25,7 @@ function d_p_node_entity_bundle_info_alter(array &$bundles): void {
   if (isset($bundles['node']['content_page'])) {
     $bundles['node']['content_page']['class'] = ContentPageNode::class;
   }
-  if (isset($bundles['paragraph']['d_p_node'])) {
-    $bundles['paragraph']['d_p_node']['class'] = NodeParagraph::class;
-  }
+//  if (isset($bundles['paragraph']['d_p_node'])) {
+//    $bundles['paragraph']['d_p_node']['class'] = NodeParagraph::class;
+//  }
 }

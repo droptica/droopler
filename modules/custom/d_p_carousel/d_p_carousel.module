@@ -6,18 +6,18 @@
  */
 
 declare(strict_types = 1);
-
-use Drupal\d_p_carousel\Entity\Carousel;
-use Drupal\d_p_carousel\Entity\CarouselItem;
-
-/**
- * Implements hook_entity_bundle_info_alter().
- */
-function d_p_carousel_entity_bundle_info_alter(array &$bundles): void {
-  if (isset($bundles['paragraph']['d_p_carousel'])) {
-    $bundles['paragraph']['d_p_carousel']['class'] = Carousel::class;
-  }
-  if (isset($bundles['paragraph']['d_p_carousel_item'])) {
-    $bundles['paragraph']['d_p_carousel_item']['class'] = CarouselItem::class;
-  }
-}
+//
+//use Drupal\d_p_carousel\Entity\Carousel;
+//use Drupal\d_p_carousel\Entity\CarouselItem;
+//
+///**
+// * Implements hook_entity_bundle_info_alter().
+// */
+//function d_p_carousel_entity_bundle_info_alter(array &$bundles): void {
+//  if (isset($bundles['paragraph']['d_p_carousel'])) {
+//    $bundles['paragraph']['d_p_carousel']['class'] = Carousel::class;
+//  }
+//  if (isset($bundles['paragraph']['d_p_carousel_item'])) {
+//    $bundles['paragraph']['d_p_carousel_item']['class'] = CarouselItem::class;
+//  }
+//}

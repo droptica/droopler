@@ -15,10 +15,10 @@ use Drupal\paragraphs\Entity\Paragraph;
 /**
  * Provides additional functionality for text paged paragraphs.
  */
-class TextPaged extends Paragraph implements ColumnCountInterface, TextAlignInterface, FullWidthInterface {
+class TextPaged extends Paragraph implements FullWidthInterface {
 
-  use ColumnCountTrait;
-  use TextAlignTrait;
+//  use ColumnCountTrait;
+//  use TextAlignTrait;
   use FullWidthTrait;
 
 }
