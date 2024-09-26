@@ -7,8 +7,6 @@
 .d-p-single-text-block {
   $root: &;
 
-  --cta-max-width: none;
-  --media-width: 100%;
   --media-height: 100%;
   --media-img-display: inline-block;
 
@@ -41,6 +39,10 @@
   }
 
   &--tile {
+    .divider {
+      justify-self: center;
+    }
+
     .heading {
       @include heading(4);
 
@@ -104,6 +106,10 @@
 
   &--grid-column {
     text-align: center;
+
+    .divider {
+      justify-self: center;
+    }
   }
 
   &__wrapper {
