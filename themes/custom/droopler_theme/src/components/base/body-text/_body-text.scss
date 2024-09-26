@@ -9,9 +9,6 @@
   --body-text-table-border-width: 2px;
   --body-text-color-image-max-width: 100%;
   --body-text-color-image-height: auto;
-
-  // Pre-code.
-  --pre-code-min-width: 200px;
 }
 
 .body-text {
@@ -49,7 +46,6 @@
     color: var(--pre-code-color);
     direction: ltr;
     font-style: normal;
-    min-width: var(--pre-code-min-width);
     padding: var(--content-spacer-s);
     tab-size: 4;
     text-align: left;
