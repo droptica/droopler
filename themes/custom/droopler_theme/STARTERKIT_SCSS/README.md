@@ -3,7 +3,7 @@ This is a starter child theme of `droopler_theme`, you may use it as a derivativ
 
 Assume your new theme will be called `foobar`.
 
-1. Copy and rename `STARTERKIT_CSS` to your custom theme location, like `web/themes/custom/foobar`.
+1. Copy and rename `STARTERKIT_SCSS` to your custom theme location, like `web/themes/custom/foobar`.
 2. Change all `STARTERKIT` references to `foobar` (including content and file names).
 3. Change `STARTERKIT.rename.yml` to `foobar.info.yml`.
 
