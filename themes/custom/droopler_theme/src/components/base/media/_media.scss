@@ -6,6 +6,7 @@
   --media-img-display: block;
   --media-img-width: auto;
   --media-img-height: auto;
+  --media-overlay-background-color: rgb(0 0 0 / 20%);
   --media-overlay-opacity: 0.2;
 }
 
@@ -28,6 +29,11 @@
       @include filling-absolute;
 
       content: "";
+      background-color: var(--media-overlay-background-color);
+    }
+
+    img {
+      opacity: var(--media-overlay-opacity);
     }
   }
 
@@ -42,7 +48,6 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      pointer-events: none;
     }
 
     img {

@@ -9,6 +9,8 @@ declare(strict_types = 1);
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
 
 /**
@@ -155,3 +157,12 @@ function d_p_preprocess_textarea(&$variables) {
     $variables['wrapper_attributes']->addClass('d_p_ckeditor_centered');
   }
 }
+//
+//function d_p_preprocess(&$variables)
+//{
+//  $node = Node::load(110);
+////  dd($node);
+//
+//  $paragraph = Paragraph::load(175);
+//  dd($paragraph);
+//}
