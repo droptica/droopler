@@ -1,2 +1,28 @@
-!function(e,s){s.behaviors.select2={attach:function(s,t){e("[data-select2] .form-select",s).each((function(){e(this).find(".form-select").hasClass("select2-hidden-accessible")||e(this).select2({minimumResultsForSearch:-1,width:"100%"})}))}}}(jQuery,Drupal);
+/******/ (function() { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!*******************************************!*\
+  !*** ./src/components/select2/select2.js ***!
+  \*******************************************/
+(function ($, Drupal) {
+  /**
+   * Attaches select2 widget.
+   *
+   * @type {{attach: Drupal.behaviors.sm_nice_select.attach}}
+   */
+  Drupal.behaviors.select2 = {
+    attach: function attach(context, settings) {
+      $('[data-select2] .form-select', context).each(function () {
+        if ($(this).find('.form-select').hasClass('select2-hidden-accessible')) {
+          return;
+        }
+        $(this).select2({
+          minimumResultsForSearch: -1,
+          width: '100%'
+        });
+      });
+    }
+  };
+})(jQuery, Drupal);
+/******/ })()
+;
 //# sourceMappingURL=select2.js.map

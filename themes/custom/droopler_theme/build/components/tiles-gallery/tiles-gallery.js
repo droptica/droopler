@@ -1,2 +1,156 @@
-!function(){function t(t,i){return function(t){if(Array.isArray(t))return t}(t)||function(t,e){var i=null==t?null:"undefined"!=typeof Symbol&&t[Symbol.iterator]||t["@@iterator"];if(null!=i){var r,n,s,o,l=[],a=!0,c=!1;try{if(s=(i=i.call(t)).next,0===e){if(Object(i)!==i)return;a=!1}else for(;!(a=(r=s.call(i)).done)&&(l.push(r.value),l.length!==e);a=!0);}catch(t){c=!0,n=t}finally{try{if(!a&&null!=i.return&&(o=i.return(),Object(o)!==o))return}finally{if(c)throw n}}return l}}(t,i)||function(t,i){if(!t)return;if("string"==typeof t)return e(t,i);var r=Object.prototype.toString.call(t).slice(8,-1);"Object"===r&&t.constructor&&(r=t.constructor.name);if("Map"===r||"Set"===r)return Array.from(t);if("Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r))return e(t,i)}(t,i)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function e(t,e){(null==e||e>t.length)&&(e=t.length);for(var i=0,r=new Array(e);i<e;i++)r[i]=t[i];return r}!function(e,i){"use strict";function r(t,i){this.defaultSettings={itemSelector:".tiles-gallery-item",sizerSelector:".tiles-gallery__sizer",parentSelector:".tiles-gallery-parent",captionSelector:".tiles-gallery-item__caption",captionTitleSelector:".tiles-gallery-item__caption-title",captionSubtitleSelector:".tiles-gallery-item__caption-subtitle",videoSelector:".video-embed",standardImageSelector:".tiles-gallery-item--standard img"},this.settings=e.extend(!0,this.defaultSettings,i||{}),this.$wrapper=t,this.$parent=this.$wrapper.closest(this.settings.parentSelector),this.$masonry=null,this.initMasonry(),this.prepareTilesCaptions()}r.prototype.initMasonry=function(){this.$masonry=this.$wrapper.masonry({itemSelector:this.settings.itemSelector,columnWidth:this.settings.sizerSelector,percentPosition:!0}),this.bindMasonryEvents(),this.$masonry.masonry("layout")},r.prototype.bindMasonryEvents=function(){var t=this;this.$masonry.on("layoutComplete",(function(){t.$parent.css("min-height",t.$wrapper.height()),t.resizeVideos()}))},r.prototype.resizeVideos=function(){var t=this.$wrapper.find(this.settings.videoSelector),i=this.$wrapper.find(this.settings.standardImageSelector).height();t.each((function(){e(this).css("height",i+"px")}))},r.prototype.prepareTilesCaptions=function(){var i=this;this.$wrapper.find(this.settings.itemSelector).each((function(){var r=e(this).find("img");if(0!=r.length){var n=t(r.attr("alt").split("/",2),2),s=n[0],o=n[1];void 0!==s&&e(this).find(i.settings.captionTitleSelector).text(s),void 0!==o&&e(this).find(i.settings.captionSubtitleSelector).text(o)}else e(this).find(i.settings.captionSelector).remove()}))},r.jQueryInterface=function(t){return this.each((function(){new r(e(this),t)}))},e.fn.tilesGallery=r.jQueryInterface,i.behaviors.tilesGallery={attach:function(t){e(once("tiles-gallery",".tiles-gallery",t)).tilesGallery()}}}(jQuery,Drupal)}();
+/******/ (function() { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!*******************************************************!*\
+  !*** ./src/components/tiles-gallery/tiles-gallery.js ***!
+  \*******************************************************/
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+(function ($, Drupal) {
+  'use strict';
+
+  /**
+   * TilesGallery 'class'.
+   *
+   * @param {jQuery} $wrapper
+   *   Main wrapper of tiles gallery..
+   * @param {object} settings
+   *   Object with settings to override default with.
+   *
+   * @constructor
+   */
+  function TilesGallery($wrapper, settings) {
+    /**
+     * Default settings.
+     */
+    this.defaultSettings = {
+      itemSelector: '.tiles-gallery-item',
+      sizerSelector: '.tiles-gallery__sizer',
+      parentSelector: '.tiles-gallery-parent',
+      captionSelector: '.tiles-gallery-item__caption',
+      captionTitleSelector: '.tiles-gallery-item__caption-title',
+      captionSubtitleSelector: '.tiles-gallery-item__caption-subtitle',
+      videoSelector: '.video-embed',
+      standardImageSelector: '.tiles-gallery-item--standard img'
+    };
+
+    /**
+     * Apply custom settings.
+     *
+     * @type {object}
+     */
+    this.settings = $.extend(true, this.defaultSettings, settings || {});
+
+    /**
+     * Main wrapper.
+     *
+     * @type {jQuery}
+     */
+    this.$wrapper = $wrapper;
+
+    /**
+     * Parent item.
+     *
+     * @type {jQuery}
+     */
+    this.$parent = this.$wrapper.closest(this.settings.parentSelector);
+
+    /**
+     * Item with masonry initialized.
+     *
+     * @type {jQuery}
+     */
+    this.$masonry = null;
+    this.initMasonry();
+    this.prepareTilesCaptions();
+  }
+
+  /**
+   * Init masonry.
+   */
+  TilesGallery.prototype.initMasonry = function () {
+    this.$masonry = this.$wrapper.masonry({
+      itemSelector: this.settings.itemSelector,
+      columnWidth: this.settings.sizerSelector,
+      percentPosition: true
+    });
+    this.bindMasonryEvents();
+    this.$masonry.masonry('layout');
+  };
+
+  /**
+   * Bind masonry events.
+   */
+  TilesGallery.prototype.bindMasonryEvents = function () {
+    var self = this;
+    this.$masonry.on('layoutComplete', function () {
+      self.$parent.css('min-height', self.$wrapper.height());
+      self.resizeVideos();
+    });
+  };
+
+  /**
+   * Resize videos.
+   */
+  TilesGallery.prototype.resizeVideos = function () {
+    var $videos = this.$wrapper.find(this.settings.videoSelector);
+    var imageHeight = this.$wrapper.find(this.settings.standardImageSelector).height();
+    $videos.each(function () {
+      $(this).css('height', imageHeight + 'px');
+    });
+  };
+
+  /**
+   * Prepare tiles captions.
+   */
+  TilesGallery.prototype.prepareTilesCaptions = function () {
+    var self = this;
+    this.$wrapper.find(this.settings.itemSelector).each(function () {
+      var $image = $(this).find('img');
+      if ($image.length == 0) {
+        $(this).find(self.settings.captionSelector).remove();
+        return;
+      }
+      var _$image$attr$split = $image.attr('alt').split('/', 2),
+        _$image$attr$split2 = _slicedToArray(_$image$attr$split, 2),
+        title = _$image$attr$split2[0],
+        subtitle = _$image$attr$split2[1];
+      if (title !== undefined) {
+        $(this).find(self.settings.captionTitleSelector).text(title);
+      }
+      if (subtitle !== undefined) {
+        $(this).find(self.settings.captionSubtitleSelector).text(subtitle);
+      }
+    });
+  };
+
+  /**
+   * A jQuery interface.
+   *
+   * @param {object} settings
+   *   Object with settings to override defaults with.
+   *
+   * @returns {jQuery}
+   */
+  TilesGallery.jQueryInterface = function (settings) {
+    return this.each(function () {
+      new TilesGallery($(this), settings);
+    });
+  };
+  $.fn.tilesGallery = TilesGallery.jQueryInterface;
+
+  /**
+   * Main behavior for tiles gallery.
+   */
+  Drupal.behaviors.tilesGallery = {
+    attach: function attach(context) {
+      $(once('tiles-gallery', '.tiles-gallery', context)).tilesGallery();
+    }
+  };
+})(jQuery, Drupal);
+/******/ })()
+;
 //# sourceMappingURL=tiles-gallery.js.map

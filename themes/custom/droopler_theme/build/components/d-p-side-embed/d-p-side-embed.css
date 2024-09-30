@@ -36,16 +36,10 @@
   width: 100%;
   height: 100%;
 }
-.d-p-side-embed__content {
-  background: inherit;
-}
-.d-p-side-embed__content-wrapper {
-  background: inherit;
-}
 .d-p-side-embed__content-column {
   position: relative;
   z-index: 1;
-  background: inherit;
+  background: var(--section-background-color);
 }
 .d-p-side-embed--embed-left .d-p-side-embed__content-column {
   padding-left: var(--content-offset);

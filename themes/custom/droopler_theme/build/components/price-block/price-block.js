@@ -1,2 +1,32 @@
-!function(e,c){"use strict";c.behaviors.priceComponent={attach:function(c,n){window.setPrice=function(n,i,t,o){e(document).ready((function(){e(".price-block",c).each((function(){var c=e(this),r=new Date(1e3*t),a=i>=0;c.find(".price-block__spinner").remove(),c.find(".price-block__value").html(n),c.find(".price-block__currency").html(o),c.find(".price-block__timestamp").html(r.getHours()+":"+r.getMinutes()+":"+r.getSeconds()),c.find(".price-block__percentage").html(i+"%"),c.find(".price-block__change").removeClass(a?"down":"up").addClass(a?"up":"down")}))}))}}}}(jQuery,Drupal);
+/******/ (function() { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!***************************************************!*\
+  !*** ./src/components/price-block/price-block.js ***!
+  \***************************************************/
+(function ($, Drupal) {
+  'use strict';
+
+  Drupal.behaviors.priceComponent = {
+    attach: function attach(context, settings) {
+      window.setPrice = function (price, change, timestamp, currency) {
+        $(document).ready(function () {
+          var $container = $('.price-block', context);
+          $container.each(function () {
+            var $this = $(this);
+            var date = new Date(timestamp * 1000);
+            var positive_change = change >= 0;
+            $this.find('.price-block__spinner').remove();
+            $this.find('.price-block__value').html(price);
+            $this.find('.price-block__currency').html(currency);
+            $this.find('.price-block__timestamp').html(date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds());
+            $this.find('.price-block__percentage').html(change + '%');
+            $this.find('.price-block__change').removeClass(positive_change ? 'down' : 'up').addClass(positive_change ? 'up' : 'down');
+          });
+        });
+      };
+    }
+  };
+})(jQuery, Drupal);
+/******/ })()
+;
 //# sourceMappingURL=price-block.js.map

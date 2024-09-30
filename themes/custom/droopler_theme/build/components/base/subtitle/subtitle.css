@@ -1,3 +1,16 @@
-:root{--subtitle-margin:0;--subtitle-font-size:1.125rem;--subtitle-font-weight:normal;--subtitle-text-transform:none}.subtitle{color:var(--subtitle-color);font-size:var(--subtitle-font-size);font-weight:var(--subtitle-font-weight);margin:var(--subtitle-margin);text-transform:var(--subtitle-text-transform)}
+:root {
+  --subtitle-margin: 0;
+  --subtitle-font-size: 1.125rem;
+  --subtitle-font-weight: normal;
+  --subtitle-text-transform: none;
+}
+
+.subtitle {
+  margin: var(--subtitle-margin);
+  font-size: var(--subtitle-font-size);
+  font-weight: var(--subtitle-font-weight);
+  text-transform: var(--subtitle-text-transform);
+  color: var(--subtitle-color);
+}
 
 /*# sourceMappingURL=subtitle.css.map*/

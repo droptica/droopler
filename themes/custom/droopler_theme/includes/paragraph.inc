@@ -303,3 +303,42 @@ function _get_tablet_breakpoint_size(): int {
   $theme_tablet_breakpoint_value = theme_get_setting('tablet_breakpoint') ?? theme_get_setting('tablet_breakpoint', 'droopler_theme') ?? 992;
   return (int) $theme_tablet_breakpoint_value;
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function droopler_theme_preprocess_paragraph__d_p_reference_content(array &$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $variables['d_p_reference_content_wrapper_attributes'] = new Attribute();
+
+  // Current manually values.
+  $reference_content = $paragraph->get('field_d_p_reference_content');
+  $values = $reference_content->getValue();
+
+  // Get latest blog node nids.
+  // Selected nodes are excluded from results.
+  $available_content_types = _get_content_types();
+  $auto_values = _get_sorted_content_by_type($available_content_types, 'created', 'DESC', $values);
+  $merged_values = array_merge($values, $auto_values);
+
+  // Delete unpublished content.
+  $merged_values = _get_published_content($merged_values);
+
+  // Get max number of values.
+  /** @var \Drupal\field\Entity\FieldConfig $def */
+  $def = $reference_content->getDataDefinition();
+  $cardinality = $def->getFieldStorageDefinition()->getCardinality();
+  $min = min(count($merged_values), $cardinality);
+
+  // Build an array with new values.
+  $new_values = [];
+  for ($i = 0; $i < $min; $i++) {
+    $new_values[] = $merged_values[$i];
+  }
+
+  // Replace content.
+  _replace_content($variables, 'node', 'reference_content', 'field_d_p_reference_content', $new_values);
+
+  $variables['#cache']['tags'][] = 'node_list';
+}

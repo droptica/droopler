@@ -1,3 +1,11 @@
-.d-p-blog-image:not(.full-width){margin:var(--content-spacer-m) auto;width:100%}@media (min-width:768px){.d-p-blog-image:not(.full-width){width:44em}}
+.d-p-blog-image:not(.full-width) {
+  width: 100%;
+  margin: var(--content-spacer-m) auto;
+}
+@media (min-width: 768px) {
+  .d-p-blog-image:not(.full-width) {
+    width: 44em;
+  }
+}
 
 /*# sourceMappingURL=d-p-blog-image.css.map*/

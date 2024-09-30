@@ -40,7 +40,6 @@ block-mobile-filters:
     - core/drupal
     - core/once
 
-
 masonry:
   version: VERSION
   js:
@@ -49,6 +48,50 @@ masonry:
 tiles-gallery:
   dependencies:
    - droopler_theme/masonry
+
+slick:
+  remote: http://kenwheeler.github.io/slick/
+  version: VERSION
+  license:
+    name: MIT
+    gpl-compatible: false
+    url: https://github.com/kenwheeler/slick/blob/master/LICENSE
+  js:
+    /libraries/slick-carousel/slick/slick.min.js: { minified: true }
+  css:
+    component:
+      /libraries/slick-carousel/slick/slick.css: { }
+
+countup:
+  remote: http://github.com/inorganik/countUp.js
+  version: VERSION
+  license:
+    name: MIT
+    url: https://github.com/inorganik/countUp.js/blob/master/LICENSE.md
+    gpl-compatible: false
+  js:
+    /libraries/countup/dist/countUp.min.js: { minified: true }
+
+countup-dev:
+  remote: http://github.com/inorganik/countUp.js
+  version: VERSION
+  license:
+    name: MIT
+    url: https://github.com/inorganik/countUp.js/blob/master/LICENSE.md
+    gpl-compatible: false
+  js:
+    /libraries/countup/dist/countUp.js: { }
+
+in-viewport:
+  remote: http://github.com/vvo/in-viewport
+  version: VERSION
+  license:
+    name: MIT
+    url: https://github.com/vvo/in-viewport/blob/master/LICENSE
+    gpl-compatible: false
+  js:
+    /libraries/in-viewport/build/in-viewport.min.js: { minified: true }
+
 
 # We create component libraries automatically, no need to be listed here
 # as long as they keep the same name for the folder,JS and CSS file

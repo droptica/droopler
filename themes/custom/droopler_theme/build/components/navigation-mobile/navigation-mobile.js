@@ -1,2 +1,176 @@
-!function(e,t){"use strict";function n(t,n){this.defaultSettings={bodyMenuOpenClass:"overflow-hidden",menuToggleItemSelector:".hamburger",menuOverlaySelector:".navigation-mobile__overlay",menuItemWithSubmenuSelector:".menu-item--has-submenu",submenuToggleItemSelector:".menu-item__toggler",submenuSelector:".submenu",childMenuItemWithSubmenuSelector:".submenu-item--has-submenu",childSubmenuToggleSelector:".submenu-item__toggler",openClass:"open"},this.settings=e.extend(!0,this.defaultSettings,n||{}),this.$wrapper=t,this.$menuToggleItem=e(this.settings.menuToggleItemSelector),this.$submenuToggleItem=t.find(this.settings.submenuToggleItemSelector),this.$childSubmenuToggleItem=t.find(this.settings.childSubmenuToggleSelector),this.$overlay=t.find(this.settings.menuOverlaySelector),this.bindNavigationToggleAction(),this.bindNavigationSubmenuToggleAction(),this.bindChildSubmenuItemToggleAction(),this.openActiveSubmenu()}n.prototype.bindNavigationToggleAction=function(){var t=this;this.$menuToggleItem.click((function(){e(this).toggleClass(t.settings.openClass),t.$wrapper.toggleClass(t.settings.openClass),e("body").toggleClass(t.settings.bodyMenuOpenClass)})),this.$overlay.click((function(){e(t.$menuToggleItem).trigger("click")}))},n.prototype.bindNavigationSubmenuToggleAction=function(){var t=this;this.$submenuToggleItem.click((function(n){n.stopPropagation();var s=e(this).closest(t.settings.menuItemWithSubmenuSelector);s.toggleClass(t.settings.openClass),s.find(t.settings.submenuSelector).first().toggleClass(t.settings.openClass)}))},n.prototype.bindChildSubmenuItemToggleAction=function(){var t=this;this.$childSubmenuToggleItem.click((function(n){n.stopPropagation();var s=e(this).closest(t.settings.childMenuItemWithSubmenuSelector);s.toggleClass(t.settings.openClass),s.find(t.settings.submenuSelector).first().toggleClass(t.settings.openClass)}))},n.jQueryInterface=function(t){return this.each((function(){new n(e(this),t)}))},n.prototype.openActiveSubmenu=function(){var t=this.$wrapper.find(".menu-item--active, .submenu-item--active");t.length&&(t.removeClass("open"),t.hasClass("menu-item--active")&&(t.parents(".menu-item--has-submenu").addClass("open"),t.parents(".menu-item--has-submenu").find(".submenu").first().addClass("open")),t.hasClass("submenu-item--active")&&t.parents(".submenu-item--has-submenu, .menu-item--has-submenu").each((function(){e(this).addClass("open"),e(this).find(".submenu").first().addClass("open"),e(this).removeClass("submenu-item--active")})))},e.fn.navigationMobile=n.jQueryInterface,t.behaviors.navigationMobile={attach:function(t){e(once("navigation-mobile",".navigation-mobile",t)).each((function(){new n(e(this),{openingItemSelector:".hamburger",childMenuItemWithSubmenuSelector:".submenu-item--has-submenu",childSubmenuToggleSelector:".submenu-item__toggler"})}))}}}(jQuery,Drupal);
+/******/ (function() { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!***************************************************************!*\
+  !*** ./src/components/navigation-mobile/navigation-mobile.js ***!
+  \***************************************************************/
+(function ($, Drupal) {
+  'use strict';
+
+  /**
+   * Navigation mobile 'class'.
+   *
+   * @param {jQuery} $wrapper
+   *   Main wrapper of tiles gallery.
+   * @param {object} settings
+   *   Object with settings to override default with.
+   *
+   * @constructor
+   */
+  function NavigationMobile($wrapper, settings) {
+    /**
+     * Default settings.
+     */
+    this.defaultSettings = {
+      bodyMenuOpenClass: 'overflow-hidden',
+      menuToggleItemSelector: '.hamburger',
+      menuOverlaySelector: '.navigation-mobile__overlay',
+      menuItemWithSubmenuSelector: '.menu-item--has-submenu',
+      submenuToggleItemSelector: '.menu-item__toggler',
+      submenuSelector: '.submenu',
+      childMenuItemWithSubmenuSelector: '.submenu-item--has-submenu',
+      childSubmenuToggleSelector: '.submenu-item__toggler',
+      openClass: 'open'
+    };
+
+    /**
+     * Apply custom settings.
+     *
+     * @type {object}
+     */
+    this.settings = $.extend(true, this.defaultSettings, settings || {});
+
+    /**
+     * Main wrapper.
+     *
+     * @type {jQuery}
+     */
+    this.$wrapper = $wrapper;
+
+    /**
+     * Menu toggle item.
+     *
+     * @type {jQuery}
+     */
+    this.$menuToggleItem = $(this.settings.menuToggleItemSelector);
+
+    /**
+     * Submenu toggle item for main menu items.
+     *
+     * @type {jQuery}
+     */
+    this.$submenuToggleItem = $wrapper.find(this.settings.submenuToggleItemSelector);
+
+    /**
+     * Submenu toggle item for submenu items (nested).
+     *
+     * @type {jQuery}
+     */
+    this.$childSubmenuToggleItem = $wrapper.find(this.settings.childSubmenuToggleSelector);
+
+    /**
+     * Overlay.
+     *
+     * @type {jQuery}
+     */
+    this.$overlay = $wrapper.find(this.settings.menuOverlaySelector);
+    this.bindNavigationToggleAction();
+    this.bindNavigationSubmenuToggleAction();
+    this.bindChildSubmenuItemToggleAction();
+    this.openActiveSubmenu();
+  }
+
+  /**
+   * Bind navigation toggle action.
+   */
+  NavigationMobile.prototype.bindNavigationToggleAction = function () {
+    var self = this;
+    this.$menuToggleItem.click(function () {
+      $(this).toggleClass(self.settings.openClass);
+      self.$wrapper.toggleClass(self.settings.openClass);
+      $('body').toggleClass(self.settings.bodyMenuOpenClass);
+    });
+    this.$overlay.click(function () {
+      $(self.$menuToggleItem).trigger('click');
+    });
+  };
+
+  /**
+   * Bind navigation submenu toggle action.
+   */
+  NavigationMobile.prototype.bindNavigationSubmenuToggleAction = function () {
+    var self = this;
+    this.$submenuToggleItem.click(function (event) {
+      event.stopPropagation();
+      var $parentMenuItem = $(this).closest(self.settings.menuItemWithSubmenuSelector);
+      $parentMenuItem.toggleClass(self.settings.openClass);
+      $parentMenuItem.find(self.settings.submenuSelector).first().toggleClass(self.settings.openClass);
+    });
+  };
+
+  /**
+   * Bind submenu item toggle action for nested submenu items.
+   */
+  NavigationMobile.prototype.bindChildSubmenuItemToggleAction = function () {
+    var self = this;
+    this.$childSubmenuToggleItem.click(function (event) {
+      event.stopPropagation();
+      var $childSubmenuItem = $(this).closest(self.settings.childMenuItemWithSubmenuSelector);
+      $childSubmenuItem.toggleClass(self.settings.openClass);
+      $childSubmenuItem.find(self.settings.submenuSelector).first().toggleClass(self.settings.openClass);
+    });
+  };
+
+  /**
+   * A jQuery interface.
+   *
+   * @param {object} settings
+   *   Object with settings to override defaults with.
+   *
+   * @returns {jQuery}
+   */
+  NavigationMobile.jQueryInterface = function (settings) {
+    return this.each(function () {
+      new NavigationMobile($(this), settings);
+    });
+  };
+
+  /**
+   * Opens active submenu.
+   */
+  NavigationMobile.prototype.openActiveSubmenu = function () {
+    var $activeMenuItem = this.$wrapper.find('.menu-item--active, .submenu-item--active');
+    if ($activeMenuItem.length) {
+      $activeMenuItem.removeClass('open');
+      if ($activeMenuItem.hasClass('menu-item--active')) {
+        $activeMenuItem.parents('.menu-item--has-submenu').addClass('open');
+        $activeMenuItem.parents('.menu-item--has-submenu').find('.submenu').first().addClass('open');
+      }
+      if ($activeMenuItem.hasClass('submenu-item--active')) {
+        $activeMenuItem.parents('.submenu-item--has-submenu, .menu-item--has-submenu').each(function () {
+          $(this).addClass('open');
+          $(this).find('.submenu').first().addClass('open');
+          $(this).removeClass('submenu-item--active');
+        });
+      }
+    }
+  };
+  $.fn.navigationMobile = NavigationMobile.jQueryInterface;
+
+  /**
+   * Main behavior for navigation mobile.
+   */
+  Drupal.behaviors.navigationMobile = {
+    attach: function attach(context) {
+      $(once('navigation-mobile', '.navigation-mobile', context)).each(function () {
+        var navigationMobileInstance = new NavigationMobile($(this), {
+          openingItemSelector: '.hamburger',
+          childMenuItemWithSubmenuSelector: '.submenu-item--has-submenu',
+          childSubmenuToggleSelector: '.submenu-item__toggler'
+        });
+      });
+    }
+  };
+})(jQuery, Drupal);
+/******/ })()
+;
 //# sourceMappingURL=navigation-mobile.js.map

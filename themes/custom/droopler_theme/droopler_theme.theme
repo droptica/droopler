@@ -10,9 +10,15 @@ declare(strict_types = 1);
 use Drupal\Core\Form\FormStateInterface;
 
 // Include all files from the includes directory.
-$includes_path = dirname(__FILE__) . '/includes/*.inc';
+$includes_path = __DIR__ . '/includes/helpers/*.inc';
 foreach (glob($includes_path) as $filename) {
-  require_once dirname(__FILE__) . '/includes/' . basename($filename);
+  require_once __DIR__ . '/includes/helpers/' . basename($filename);
+}
+
+// Include all files from the includes directory.
+$includes_path = __DIR__ . '/includes/*.inc';
+foreach (glob($includes_path) as $filename) {
+  require_once __DIR__ . '/includes/' . basename($filename);
 }
 
 /**
