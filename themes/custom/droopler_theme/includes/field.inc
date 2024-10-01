@@ -7,6 +7,8 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\Template\Attribute;
+
 /**
  * Implements template_preprocess_field().
  */
@@ -36,4 +38,20 @@ function droopler_theme_preprocess_field(&$variables) {
       }
     }
   }
+
+  if ($variables['field_type'] === 'link' && $variables['element']['#formatter'] === 'ala') {
+    foreach ($variables['items'] as $delta => $item) {
+      $custom_classes = $variables['items'][$delta]['content']['#options']['attributes']['custom_classes'] ?? NULL;
+      if (!$custom_classes) {
+        continue;
+      }
+
+      $variables['items'][$delta]['content']['#options']['attributes']['class'][] = $custom_classes;
+      $class = $variables['items'][$delta]['content']['#options']['class'] ?? '';
+      $variables['items'][$delta]['content']['#options']['class'] = $class ? $class . ' ' . $custom_classes : $custom_classes;
+    }
+
+    $variables['#attached']['library'][] = 'droopler_theme/cta';
+  }
+
 }
