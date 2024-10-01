@@ -1,8 +1,14 @@
 @import "../../scss/init";
 
-.form {
+.form, .webform-submission-form {
   .form-control {
     --dp-bs-body-color: var(--form-input-color);
+  }
+
+  .form-item {
+    input.form-control {
+      color: var(--form-input-color);
+    }
   }
 
   .form-check {

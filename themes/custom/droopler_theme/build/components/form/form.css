@@ -1,15 +1,18 @@
-.form .form-control {
+.form .form-control, .webform-submission-form .form-control {
   --dp-bs-body-color: var(--form-input-color);
 }
-.form .form-check .form-checkbox {
+.form .form-item input.form-control, .webform-submission-form .form-item input.form-control {
+  color: var(--form-input-color);
+}
+.form .form-check .form-checkbox, .webform-submission-form .form-check .form-checkbox {
   float: none;
   margin-right: 0.5rem;
 }
-.form .form-check .form-checkbox:checked {
+.form .form-check .form-checkbox:checked, .webform-submission-form .form-check .form-checkbox:checked {
   background-color: var(--checkbox-color);
   border-color: var(--checkbox-color);
 }
-.form .form-check .form-check-label {
+.form .form-check .form-check-label, .webform-submission-form .form-check .form-check-label {
   color: var(--body-text-color);
 }
 
