@@ -25,13 +25,12 @@ function droopler_theme_preprocess_field(&$variables) {
       : NULL;
   }
 
-  if ($variables['element']['#bundle'] === 'd_p_tiles') {
+  if ($variables['element']['#bundle'] === 'd_p_tiles' && $variables['element']['#field_name'] !== 'field_d_media_icon') {
     $featured_images = $entity->hasField('field_featured_images') && !$entity->get('field_featured_images')->isEmpty()
       ? $entity->get('field_featured_images')->getString()
       : NULL;
     $featured_images = empty($featured_images) ? [] : explode(',', (string) $featured_images);
     $featured_images = array_map('intval', $featured_images);
-
     foreach ($featured_images as $image_number) {
       if ($image_number > 0 && !empty($variables['items'][$image_number - 1])) {
         $variables['items'][$image_number - 1]['content']['#view_mode'] = 'tiles_gallery_fullscreen_featured';
