@@ -1,5 +1,7 @@
 @import "../../scss/init";
 
+$media-min-height: 30vh;
+
 .d-p-side-by-side-item {
   display: flex;
   position: relative;
@@ -16,6 +18,12 @@
         margin-left: calc(100% - 50vw);
       }
     }
+
+    &:last-child {
+      &:has(.media--overlay) {
+        min-height: $media-min-height;
+      }
+    }
   }
 
   &.item-2 {
@@ -24,6 +32,16 @@
         margin-right: calc(100% - 50vw);
       }
     }
+
+    &:last-child {
+      &:has(.media--overlay) {
+        min-height: $media-min-height;
+      }
+    }
+  }
+
+  &.item-1:has(.media--overlay) + .item-2:has(.media--overlay) {
+    min-height: $media-min-height;
   }
 
   .media--overlay {

@@ -12,10 +12,19 @@
     margin-left: calc(100% - 50vw);
   }
 }
+.d-p-side-by-side-item.item-1:last-child:has(.media--overlay) {
+  min-height: 30vh;
+}
 @media (min-width: 576px) {
   .d-p-side-by-side-item.item-2 .media--overlay {
     margin-right: calc(100% - 50vw);
   }
+}
+.d-p-side-by-side-item.item-2:last-child:has(.media--overlay) {
+  min-height: 30vh;
+}
+.d-p-side-by-side-item.item-1:has(.media--overlay) + .item-2:has(.media--overlay) {
+  min-height: 30vh;
 }
 .d-p-side-by-side-item .media--overlay {
   position: absolute;
