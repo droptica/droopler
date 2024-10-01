@@ -22,6 +22,10 @@ class FrontendEditingController extends FrontendEditingControllerBase {
     $paragraph_type_storage = $this->entityTypeManager()->getStorage('paragraphs_type');
 
     foreach ($build['#items'] as $key => $item) {
+      if (!isset($item['#attributes']['name'])) {
+        continue;
+      }
+
       $paragraph_type_id = str_replace([$parent_field_name . '_', '_add_more'], '', $item['#attributes']['name']);
 
       if ($paragraph_type = $paragraph_type_storage->load($paragraph_type_id)) {

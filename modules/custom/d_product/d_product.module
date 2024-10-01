@@ -60,9 +60,11 @@ function d_product_preprocess_node(&$variables) {
  * Implements hook_form_alter().
  */
 function d_product_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
+  if ($form_id === 'views_exposed_form') {
+  }
   // Add placeholder to contact form.
-  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-products-list-products-list') {
+  if ($form_id == 'views_exposed_form' && in_array($form['#id'], ['views-exposed-form-products-list-products-list', 'views-exposed-form-products-list-product-list-block'])) {
+//    dd($form);
     $form['aggregated_field']['#attributes']['placeholder'] = t('Search products...');
     $form['sort_by']['#title'] = '';
     $form['sort_by']['#attributes']['placeholder'] = t('Placeholder');
