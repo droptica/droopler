@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 566f2956-870f-4727-8418-f79e0651f6bb
+  bundle: d_product
+  default_langcode: en
+  depends:
+    ea8ea609-a779-4a1f-865a-5a27241bd268: media
+    88585eb5-f981-4e79-9d5c-402a04c11d37: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    295083c5-1811-4cf2-965e-915af002356c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'JetStream 36 Zen'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'JetStream 36 Zen | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/jetstream-36-zen'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/planeasset2.png?itok=6PVL5z_y'
+  path:
+    -
+      alias: /products/jetstream-36-zen
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: ea8ea609-a779-4a1f-865a-5a27241bd268
+  field_product_categories:
+    -
+      entity: 88585eb5-f981-4e79-9d5c-402a04c11d37
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 295083c5-1811-4cf2-965e-915af002356c

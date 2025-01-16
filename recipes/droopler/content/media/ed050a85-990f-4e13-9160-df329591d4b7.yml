@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ed050a85-990f-4e13-9160-df329591d4b7
+  bundle: d_image
+  default_langcode: en
+  depends:
+    4bc5b50b-d9d9-470e-818c-ef310d40c119: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_engine_boat_1.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 4bc5b50b-d9d9-470e-818c-ef310d40c119
+      alt: 'Engine boat'
+      title: ''
+      width: 1280
+      height: 853

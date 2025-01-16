@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2
+  bundle: d_image
+  default_langcode: en
+  depends:
+    150b8947-c15a-40ba-b3e9-8404894956ff: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_engine_car_5.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 150b8947-c15a-40ba-b3e9-8404894956ff
+      alt: Engine
+      title: ''
+      width: 1920
+      height: 1271

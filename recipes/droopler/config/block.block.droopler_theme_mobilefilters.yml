@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:mobile_filters:97f6e1da-3543-475e-93e4-bea115d6aaea'
+  module:
+    - block_content
+    - system
+  theme:
+    - droopler_theme
+id: droopler_theme_mobilefilters
+theme: droopler_theme
+region: top_content
+weight: -13
+provider: null
+plugin: 'block_content:97f6e1da-3543-475e-93e4-bea115d6aaea'
+settings:
+  id: 'block_content:97f6e1da-3543-475e-93e4-bea115d6aaea'
+  label: 'Mobile filters'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/products\r\n/products-0"

@@ -1,0 +1,967 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 98372b00-1e9d-421e-bbbb-ad847c617c13
+  bundle: content_page
+  default_langcode: en
+  depends:
+    87c1f5aa-6ea3-46f0-ba4f-5e1346715642: media
+    1431ac7b-7d01-4f3a-92df-554c4d674128: media
+    9144e122-080e-41fe-af56-63d0f261a89b: media
+    3c2190a2-4c3e-45eb-a344-a812d2a4bbfa: media
+    ed050a85-990f-4e13-9160-df329591d4b7: media
+    51551c0e-0d75-49c7-bebe-5abd88bc0eaf: media
+    8272f9ba-0866-44d8-ab9f-1797dfba5148: media
+    67400b1c-fa54-4484-af74-229667be496f: media
+    36f74a3f-2355-4c28-9f55-b58f51dba53e: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Sidebar Image Paragraph'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Sidebar Image Paragraph | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/documentation/sidebar-image-paragraph'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /documentation/sidebar-image-paragraph
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 74a08803-cd5e-45a0-a718-1b7ef984acde
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_main_title:
+            -
+              value: 'Sidebar Image Paragraph'
+          field_d_subtitle:
+            -
+              value: 'Droopler Documentation'
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6813a656-d44c-43d3-9c68-179195e64aba
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: "<p>This paragraph is one of the most interesting visual features of Droopler. It allows you to put an image to a side, and fill the rest with text. There's a possibility to use a header, icon and CTA link.</p>"
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Full Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: dc730340-fcbb-4486-90de-0445cb28828b
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/sidebar-image-paragraph'
+              title: 'Call To Action!'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: 87c1f5aa-6ea3-46f0-ba4f-5e1346715642
+          field_d_media_icon:
+            -
+              entity: 1431ac7b-7d01-4f3a-92df-554c4d674128
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: right
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f1cfbf52-f5cd-4ae1-89ad-2584947cde95
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>Side Image Paragraph does not need all those complicated fields around the text. Use it with only a header and see that it is an excellent way to create feature lists.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Basic Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f8aeb40d-554b-4b72-8756-4317dba27e30
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: 9144e122-080e-41fe-af56-63d0f261a89b
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e4170c8b-d793-491d-87aa-31ade795ce22
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>So now... Let''s put the paragraphs together, with image side changing from right to left. This layout is the most used method of displaying this Side Image element of Droopler.</p><p>You can enable the "Invert theme" options to alter the look of this paragraph. You can change the background to a light one and the font color will turn dark. See the last example.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: "Let's put it together!"
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 476cc03c-3125-4776-a20c-bd663d5a0509
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: 3c2190a2-4c3e-45eb-a344-a812d2a4bbfa
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: right
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ae7d9617-89c7-47c4-916b-788e973782cb
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: ed050a85-990f-4e13-9160-df329591d4b7
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 70d49f45-453e-4c87-a904-f085afbadf6e
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: 51551c0e-0d75-49c7-bebe-5abd88bc0eaf
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: right
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7c9d5547-c6ee-445b-8472-724b11e38be6
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: 8272f9ba-0866-44d8-ab9f-1797dfba5148
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 80af2483-6864-40a2-bd89-30cf7dadef00
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>There is a higher version available, with a wider image. If you select the "Right (wide)" or "Left (wide)" side of the image, the paragraph looks like this:</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Wide Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6049738c-0cc8-4a6b-a4c1-8a679cae2499
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: 67400b1c-fa54-4484-af74-229667be496f
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: right
+          field_image_width:
+            -
+              value: wide
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1e2d6f95-11cc-483d-8677-742c32dd23db
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: 36f74a3f-2355-4c28-9f55-b58f51dba53e
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: wide
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Discover possibilities of Droopler distribution for Drupal.'

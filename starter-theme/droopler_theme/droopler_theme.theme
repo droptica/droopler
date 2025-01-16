@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * Theme functions.
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Form\FormStateInterface;
+
+// Include all files from the includes directory.
+$includes_path = __DIR__ . '/includes/helpers/*.inc';
+foreach (glob($includes_path) as $filename) {
+  require_once __DIR__ . '/includes/helpers/' . basename($filename);
+}
+
+// Include all files from the includes directory.
+$includes_path = __DIR__ . '/includes/*.inc';
+foreach (glob($includes_path) as $filename) {
+  require_once __DIR__ . '/includes/' . basename($filename);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function droopler_theme_preprocess_html(&$variables) {
+  $variables['attributes']['data-theme'] = 'theme-light';
+}
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function droopler_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  $form['droopler_settings'] = [
+    '#type' => 'details',
+    '#title' => t('Droopler settings'),
+    '#open' => TRUE,
+  ];
+
+  $form['droopler_settings']['mobile_breakpoint'] = [
+    '#type' => 'number',
+    '#title' => t('Mobile breakpoint'),
+    '#default_value' => theme_get_setting('mobile_breakpoint'),
+    '#description' => t('The breakpoint for mobile devices.'),
+    '#min' => 0,
+  ];
+
+  $form['droopler_settings']['tablet_breakpoint'] = [
+    '#type' => 'number',
+    '#title' => t('Tablet breakpoint'),
+    '#default_value' => theme_get_setting('tablet_breakpoint'),
+    '#description' => t('The breakpoint for tablet devices.'),
+    '#min' => 0,
+  ];
+
+  // Social media settings.
+  $media_names = _get_social_media_names();
+  $form['social_media_settings'] = [
+    '#type' => 'details',
+    '#title' => t('Social media settings'),
+    '#open' => TRUE,
+  ];
+  $form['social_media_settings']['hint'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'i',
+    '#value' => t('* If you intend to translate this form, consider installing the Config Translation module (a new tab will appear).'),
+  ];
+  foreach ($media_names as $name) {
+    $form['social_media_settings']["link_$name"] = [
+      '#type' => 'url',
+      '#title' => t('@name link', ['@name' => ucfirst($name)]),
+      '#default_value' => theme_get_setting("link_$name"),
+    ];
+  }
+
+  // Search page link.
+  $form['search_page_settings'] = [
+    '#type' => 'details',
+    '#title' => t('Search page settings'),
+    '#open' => TRUE,
+  ];
+  $form['search_page_settings']["search_page_link"] = [
+    '#type' => 'textfield',
+    '#title' => t('Search page link'),
+    '#default_value' => theme_get_setting("search_page_link"),
+  ];
+}

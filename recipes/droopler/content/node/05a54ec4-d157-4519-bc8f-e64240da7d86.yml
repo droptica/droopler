@@ -1,0 +1,175 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 05a54ec4-d157-4519-bc8f-e64240da7d86
+  bundle: content_page
+  default_langcode: en
+  depends:
+    b2241dee-0307-49c8-9ff7-2c2da6c48fca: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Blog posts'
+  created:
+    -
+      value: 1727770883
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Blog posts | test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/blog-posts'
+  path:
+    -
+      alias: /blog-posts
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d23357aa-8f65-45fb-8475-c7155dbeba15
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727770903
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#FFFFFF'
+              opacity: 0.0
+          field_d_main_title:
+            -
+              value: Blog
+          field_d_media_background:
+            -
+              entity: b2241dee-0307-49c8-9ff7-2c2da6c48fca
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 2b6dccec-7bc7-4636-9786-ee116d3ba2db
+          bundle: d_p_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727771208
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#FFFFFF'
+              opacity: 0.0
+          field_block:
+            -
+              plugin_id: 'views_block:blog_listing-block_1'
+              settings:
+                id: 'views_block:blog_listing-block_1'
+                label: ''
+                label_display: false
+                provider: views
+                views_label: ''
+                items_per_page: none
+          field_full_width:
+            -
+              value: false
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_small
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light

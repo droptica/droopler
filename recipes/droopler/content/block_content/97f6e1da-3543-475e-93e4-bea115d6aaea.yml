@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 97f6e1da-3543-475e-93e4-bea115d6aaea
+  bundle: mobile_filters
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Mobile filters'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  field_button_class:
+    -
+      value: 'btn btn-outline-primary'
+  field_button_text:
+    -
+      value: Filters

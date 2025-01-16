@@ -1,0 +1,280 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 6d229ed6-0249-4567-82fb-31d5e8bfaec6
+  bundle: content_page
+  default_langcode: en
+  depends:
+    15052e0e-8398-47f7-80b9-a161e0cbe281: media
+    881b46df-795c-4d92-a422-f23f6821ee34: media
+    12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Engine Installation'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Engine Installation | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/engine-installation'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_engine_car_5.jpg?itok=6g2LoTgI'
+  path:
+    -
+      alias: /engine-installation
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6e60690a-019d-4888-8924-9469d2d6b37f
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:#'
+              title: 'Read more'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_main_title:
+            -
+              value: 'Engine installation'
+          field_d_media_background:
+            -
+              entity: 15052e0e-8398-47f7-80b9-a161e0cbe281
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_extra_large
+          field_padding_top:
+            -
+              value: padding_top_extra_large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: fb6cf9b8-7656-464b-85dc-6143fb772ccb
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>Our company deals with installing engines on boats and ships. Our experienced team of engineers transports ready engines to the site and installs them in engine rooms or onboard ships.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Our services'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ead8a9cd-5bf5-4a05-974e-31636ca40b11
+          bundle: d_p_form
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_main_title:
+            -
+              value: 'Schedule a date and time for your service'
+          field_d_media_background:
+            -
+              entity: 881b46df-795c-4d92-a422-f23f6821ee34
+          field_d_webform:
+            -
+              target_id: contact
+              default_data: ''
+              status: open
+              open: ''
+              close: ''
+          field_form_layout:
+            -
+              value: bottom
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+  field_teaser_media_image:
+    -
+      entity: 12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2
+  field_teaser_text:
+    -
+      value: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'

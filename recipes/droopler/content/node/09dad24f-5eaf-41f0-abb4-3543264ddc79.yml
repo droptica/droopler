@@ -1,0 +1,566 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 09dad24f-5eaf-41f0-abb4-3543264ddc79
+  bundle: content_page
+  default_langcode: en
+  depends:
+    e52b453d-ea2f-4ec2-85ca-61aa27f915ee: media
+    1431ac7b-7d01-4f3a-92df-554c4d674128: media
+    f3c7727b-0da8-46b6-a2e4-cd979dd9acc0: media
+    cac1779b-c3e9-4d54-a962-2ce0d8757d87: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Banner Paragraph'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Banner Paragraph | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/documentation/banner-paragraph'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /documentation/banner-paragraph
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d809d81b-f8d9-4a09-a8a8-0354fa2f93af
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_main_title:
+            -
+              value: 'Banner Paragraph'
+          field_d_subtitle:
+            -
+              value: 'Droopler Documentation'
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a7025380-4586-4cb2-a8a2-4d2352c33458
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>This version of the Banner Paragraph includes everything literally. There is the main title with a smaller subtitle, an SVG icon above, some longer body text and a big CTA button. The image below adapts to the screen thanks to Backstretch JS library. This paragraph looks excellent when used as a first one, directly below site navigation.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Full Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1b0bfcc4-b223-47ea-9807-fe58ca313375
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/banner-paragraph'
+              title: 'Call To Action!'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p class="text-align-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: e52b453d-ea2f-4ec2-85ca-61aa27f915ee
+          field_d_media_icon:
+            -
+              entity: 1431ac7b-7d01-4f3a-92df-554c4d674128
+          field_d_subtitle:
+            -
+              value: Subtitle
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_extra_large
+          field_padding_top:
+            -
+              value: padding_top_extra_large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e9b91c8c-f7a3-485f-8c06-66c5ba97ac76
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>Do you prefer minimalism over complexity? Remember that only header and image fields are mandatory. You can drop all those icons, subtitles, long texts and CTAs. Sticking to a straightforward version is ok. It still looks nice.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Basic Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 650273ca-52e3-4c09-9718-8eeecce1bf3b
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: f3c7727b-0da8-46b6-a2e4-cd979dd9acc0
+          field_heading_type:
+            -
+              value: h2
+
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_extra_large
+          field_padding_top:
+            -
+              value: padding_top_extra_large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c9b43344-ccfc-49fc-81fb-3abc15f9a0be
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>You can alter the banner entirely by applying a "half-transparent" option. It adds an overlay over the image and pulls the text into the left side. An additional "theme invert" option makes the text black.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Half-transparent Example:'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 884a763f-0090-4d99-be2d-fae09d6f83c1
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/banner-paragraph'
+              title: 'Call To Action!'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: cac1779b-c3e9-4d54-a962-2ce0d8757d87
+          field_d_subtitle:
+            -
+              value: Subtitle
+          field_heading_type:
+            -
+              value: h2
+
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_large
+          field_padding_top:
+            -
+              value: padding-top-large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Discover possibilities of Droopler distribution for Drupal.'

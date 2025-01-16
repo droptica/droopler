@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.search_page_link
+  module:
+    - metatag
+id: block_content.search_page_link.metatag
+field_name: metatag
+entity_type: block_content
+bundle: search_page_link
+label: 'Metatags (Hidden field for JSON support)'
+description: 'The computed meta tags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag_computed

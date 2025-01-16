@@ -1,0 +1,143 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 33fd0a37-8245-42fa-a4f3-62d158ee31f7
+  bundle: content_page
+  default_langcode: en
+  depends:
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Privacy Policy'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Privacy Policy | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Our privacy policy.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/privacy-policy'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Our privacy policy.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /privacy-policy
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6f7579f7-d59b-4eec-bdb7-0ddf5635ba8f
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dui libero, congue at pellentesque eu, porta sit amet dui. Sed at gravida nunc. Duis vitae quam metus. Aliquam ut ante at eros imperdiet varius. Curabitur sit amet aliquet leo. Etiam ante orci, tempus quis dapibus non, pulvinar ac est. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer maximus, ligula vel euismod condimentum, metus ligula vulputate erat, quis malesuada metus sapien sit amet arcu.</p><p>Integer egestas volutpat lectus vel elementum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque pharetra in dolor eu dictum. Phasellus ultrices, odio vel elementum molestie, justo mi volutpat neque, non porttitor urna dolor id velit. Nunc molestie erat et molestie semper. Nullam sagittis hendrerit sapien vel sagittis. Duis commodo lorem a dolor mattis, faucibus convallis turpis dapibus. Fusce ipsum urna, laoreet ut libero in, ultrices tincidunt lectus. Phasellus sollicitudin libero nec hendrerit ultricies. Proin et interdum lorem, id mollis dui. Vestibulum condimentum sem non bibendum interdum. Sed vitae sodales lectus, vitae tincidunt odio.</p><p>Proin a metus nisl. Quisque arcu nisl, consectetur et feugiat non, posuere eget urna. Integer blandit convallis varius. Curabitur diam lorem, consectetur at volutpat eu, gravida quis neque. Fusce tincidunt aliquam lacus, sit amet consequat enim malesuada quis. Etiam eu ullamcorper lacus, eu tempus magna. Donec magna enim, condimentum tristique urna ac, condimentum vehicula ligula. In hac habitasse platea dictumst.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Privacy Policy'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Our privacy policy.'

@@ -1,0 +1,458 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3ce24292-f15b-4b64-b16d-f3f48dfdf7ea
+  bundle: content_page
+  default_langcode: en
+  depends:
+    a3b99936-39cb-4f92-99bd-a033e6ba6a3e: media
+    e01ad644-7024-4049-81df-f9cf9560d335: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Investor relations'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Investor relations | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/investor-relations'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_investors_1.jpg?itok=ftnoZcV3'
+  path:
+    -
+      alias: /investor-relations
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 76d562d2-5f9d-49d8-9fa5-421adb440ec8
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'For Investors'
+          field_d_media_background:
+            -
+              entity: a3b99936-39cb-4f92-99bd-a033e6ba6a3e
+          field_heading_type:
+            -
+              value: h1
+          field_image_side:
+            -
+              value: right
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d6c0c6f1-d9a6-4312-a38f-af09aea4e7de
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 1
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 1
+          field_d_main_title:
+            -
+              value: 'Stock market'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 2f296b4d-52d5-4358-a42f-9d34d7021b93
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<h3>Drooplengines</h3>'
+                      format: full_html
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: true
+          field_full_width:
+            -
+              value: true
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 52c3d5bc-f6ac-4931-b41e-650596a08c74
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<div class="table-responsive"><table class="table table-striped"><thead><tr><th>Date</th><th>Title</th></tr></thead><tbody><tr><td scope="row">05.12.2019</td><td>8th annual Global Market Conference</td></tr><tr><td scope="row">17.12.2019</td><td>The Investor Conference in London</td></tr><tr><td scope="row">02.01.2020</td><td>Consolidated report for the 2010</td></tr><tr><td scope="row">13.02.2020</td><td>Meeting with Investors in Paris</td></tr><tr><td scope="row">15.03.2020</td><td>Engine Producers Market Conference in Berlin</td></tr><tr><td scope="row">06.04.2020</td><td>First Quarter 2019 Financial Results</td></tr><tr><td scope="row">23.05.2020</td><td>The Investor Conference in Warsaw</td></tr><tr><td scope="row">04.07.2020</td><td>Second Quarter 2019 Financial Results</td></tr><tr><td scope="row">19.09.2020</td><td>The Investor Conference in London</td></tr><tr><td scope="row">05.10.2020</td><td>Third Quarter 2019 Financial Results</td></tr></tbody></table></div>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Investor Calendar'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 28f0ec22-b652-44c9-aa82-4f67ad25f51a
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<div class="table-responsive"><table class="table table-striped"><thead><tr><th>Date</th><th>Code</th></tr></thead><tbody><tr><td scope="row">Report Q4 2019</td><td>Drooplengines Reports Fourth Quarter 2019 Financial Results</td></tr><tr><td scope="row">Report Q3 2019</td><td>Drooplengines Reports Third Quarter 2019 Financial Results</td></tr><tr><td scope="row">Report Q2 2019</td><td>Drooplengines Reports Second Quarter 2019 Financial Results</td></tr><tr><td scope="row">Report Q1 2019</td><td>Drooplengines Reports First Quarter 2019 Financial Results</td></tr><tr><td scope="row">Report Q4 2018</td><td>Drooplengines Reports Fourth Quarter 2018 Financial Results</td></tr><tr><td scope="row">Report Q3 2018</td><td>Drooplengines Reports Third Quarter 2018 Financial Results</td></tr><tr><td scope="row">Report Q2 2018</td><td>Drooplengines Reports Second Quarter 2018 Financial Results</td></tr><tr><td scope="row">Report Q1 2018</td><td>Drooplengines Reports First Quarter 2018 Financial Results</td></tr></tbody></table></div>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: Reports
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_none
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9d996576-a2f9-43ac-a440-1544cc822584
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>John Smith</p><p>ul. Stacyjna 1<br>53-613 Wrocław</p><p>Mobile: +48 333 444 222</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Contact for Investors'
+          field_d_media_background:
+            -
+              entity: e01ad644-7024-4049-81df-f9cf9560d335
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: a3b99936-39cb-4f92-99bd-a033e6ba6a3e
+  field_teaser_text:
+    -
+      value: 'This section contains information useful for our investors. On this page we publish the current price for shares, calendar and events.'

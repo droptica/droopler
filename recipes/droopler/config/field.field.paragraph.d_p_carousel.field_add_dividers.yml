@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_add_dividers
+    - paragraphs.paragraphs_type.d_p_carousel
+id: paragraph.d_p_carousel.field_add_dividers
+field_name: field_add_dividers
+entity_type: paragraph
+bundle: d_p_carousel
+label: 'Add Dividers'
+description: 'Items have dividers between them.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

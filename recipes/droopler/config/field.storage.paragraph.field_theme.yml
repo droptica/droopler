@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_theme
+field_name: field_theme
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: theme-light
+      label: Light
+    -
+      value: theme-dark
+      label: Dark
+    -
+      value: theme-primary
+      label: Primary
+    -
+      value: theme-secondary
+      label: Secondary
+    -
+      value: theme-custom
+      label: Custom
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

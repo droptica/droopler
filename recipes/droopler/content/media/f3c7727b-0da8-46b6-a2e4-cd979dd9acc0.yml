@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f3c7727b-0da8-46b6-a2e4-cd979dd9acc0
+  bundle: d_image
+  default_langcode: en
+  depends:
+    c00707bb-77e8-4b55-93de-0d45a97077ea: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_car_engine_contact.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: c00707bb-77e8-4b55-93de-0d45a97077ea
+      alt: Contact
+      title: ''
+      width: 1920
+      height: 1046

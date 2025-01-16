@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_width
+    - paragraphs.paragraphs_type.d_p_side_image
+  module:
+    - options
+id: paragraph.d_p_side_image.field_image_width
+field_name: field_image_width
+entity_type: paragraph
+bundle: d_p_side_image
+label: 'Image width'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: normal
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:social_media:9b38fda4-aeec-4d86-9341-5bd313cb51fa'
+  module:
+    - block_content
+  theme:
+    - droopler_theme
+id: droopler_theme_followus
+theme: droopler_theme
+region: footer_primary_sixth
+weight: 0
+provider: null
+plugin: 'block_content:9b38fda4-aeec-4d86-9341-5bd313cb51fa'
+settings:
+  id: 'block_content:9b38fda4-aeec-4d86-9341-5bd313cb51fa'
+  label: 'Follow us'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

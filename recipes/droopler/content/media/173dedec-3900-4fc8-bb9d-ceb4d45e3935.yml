@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 173dedec-3900-4fc8-bb9d-ceb4d45e3935
+  bundle: d_image
+  default_langcode: en
+  depends:
+    c132c886-1581-4fac-a22b-88f35f716fd5: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_product_init_jetspeed-600-4.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: c132c886-1581-4fac-a22b-88f35f716fd5
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 720
+      height: 520

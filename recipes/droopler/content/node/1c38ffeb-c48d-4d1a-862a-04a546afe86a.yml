@@ -1,0 +1,98 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 1c38ffeb-c48d-4d1a-862a-04a546afe86a
+  bundle: d_product
+  default_langcode: en
+  depends:
+    6e84451f-9889-4f06-9d9e-d89e486818e0: media
+    3dd71773-da14-4627-9a21-b210fea7fcf2: media
+    9f409211-680c-4fbe-8fce-29a959cc88e5: media
+    173dedec-3900-4fc8-bb9d-ceb4d45e3935: media
+    88585eb5-f981-4e79-9d5c-402a04c11d37: taxonomy_term
+    46398700-8813-4a92-9199-7c90e4638d1b: taxonomy_term
+    c56edca2-dd95-4a3e-baae-df66ea232938: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'JetSpeed 600'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'JetSpeed 600 | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Jet engine for medium aircrafts. For many years appreciated by dozens of airlines from around the world. The engine is made of the most modern parts.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/jetspeed-600'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Jet engine for medium aircrafts. For many years appreciated by dozens of airlines from around the world. The engine is made of the most modern parts.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_product_init_jetspeed-600-1.jpg?itok=mvcxbc_d'
+  path:
+    -
+      alias: /products/jetspeed-600
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Jet engine for medium aircrafts. For many years appreciated by dozens of airlines from around the world. The engine is made of the most modern parts.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 6e84451f-9889-4f06-9d9e-d89e486818e0
+    -
+      entity: 3dd71773-da14-4627-9a21-b210fea7fcf2
+    -
+      entity: 9f409211-680c-4fbe-8fce-29a959cc88e5
+    -
+      entity: 173dedec-3900-4fc8-bb9d-ceb4d45e3935
+  field_product_categories:
+    -
+      entity: 88585eb5-f981-4e79-9d5c-402a04c11d37
+  field_tags:
+    -
+      entity: 46398700-8813-4a92-9199-7c90e4638d1b
+    -
+      entity: c56edca2-dd95-4a3e-baae-df66ea232938

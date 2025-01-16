@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8e7b91bc-9e47-489c-a767-f23980b858f7
+  bundle: d_image
+  default_langcode: en
+  depends:
+    e48a4e73-36ea-4ded-993c-c74de522c98c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: demo_paragraph_banner.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: e48a4e73-36ea-4ded-993c-c74de522c98c
+      alt: 'Paragraph Banner Icon'
+      title: ''
+      width: 200
+      height: 152

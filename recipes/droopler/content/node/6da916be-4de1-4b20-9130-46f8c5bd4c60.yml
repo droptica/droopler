@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 6da916be-4de1-4b20-9130-46f8c5bd4c60
+  bundle: d_product
+  default_langcode: en
+  depends:
+    b1247d6e-03c3-4888-843c-9578f7e006f5: media
+    ddf431bf-4af1-4c15-b230-73cdcbd0fdb6: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    6ed6e45c-5886-4066-9341-1c40e92c6643: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'SeaWave 14 GTR'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'SeaWave 14 GTR | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Sleek engine design with noise-reduction technology for a quieter ride.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/seawave-14-gtr'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Sleek engine design with noise-reduction technology for a quieter ride.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/boatasset2.png?itok=jv_snlsT'
+  path:
+    -
+      alias: /products/seawave-14-gtr
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Sleek engine design with noise-reduction technology for a quieter ride.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: b1247d6e-03c3-4888-843c-9578f7e006f5
+  field_product_categories:
+    -
+      entity: ddf431bf-4af1-4c15-b230-73cdcbd0fdb6
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 6ed6e45c-5886-4066-9341-1c40e92c6643

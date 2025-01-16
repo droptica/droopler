@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_form_layout
+    - paragraphs.paragraphs_type.d_p_form
+  module:
+    - options
+id: paragraph.d_p_form.field_form_layout
+field_name: field_form_layout
+entity_type: paragraph
+bundle: d_p_form
+label: 'Form layout'
+description: 'Choose form layout'
+required: true
+translatable: false
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,37 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: acc22f88-d51a-46dc-9edb-7c0110535964
+  bundle: content_block
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Footer Office 1'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  field_d_long_text:
+    -
+      value: '<p>ul. Stacyjna 1<br>53-613 Wrocław<br>Polska</p>'
+      format: full_html
+  field_d_main_title:
+    -
+      value: HEADQUARTERS

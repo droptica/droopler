@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_text_align
+field_name: field_text_align
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: start
+      label: Left
+    -
+      value: end
+      label: Right
+    -
+      value: center
+      label: Center
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

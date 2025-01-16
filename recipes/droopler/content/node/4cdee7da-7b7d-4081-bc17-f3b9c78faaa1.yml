@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4cdee7da-7b7d-4081-bc17-f3b9c78faaa1
+  bundle: d_product
+  default_langcode: en
+  depends:
+    9d2aa1c5-8894-4f01-a368-f38bd45f5fcd: media
+    ddf431bf-4af1-4c15-b230-73cdcbd0fdb6: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    6ed6e45c-5886-4066-9341-1c40e92c6643: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'OceanRider 20 X 100'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'OceanRider 20 X 100 | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Reliable engine with a proven track record of minimal maintenance needs.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/oceanrider-20-x-100'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Reliable engine with a proven track record of minimal maintenance needs.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/boatasset1.jpg?itok=QMWwfj-N'
+  path:
+    -
+      alias: /products/oceanrider-20-x-100
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Reliable engine with a proven track record of minimal maintenance needs.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 9d2aa1c5-8894-4f01-a368-f38bd45f5fcd
+  field_product_categories:
+    -
+      entity: ddf431bf-4af1-4c15-b230-73cdcbd0fdb6
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 6ed6e45c-5886-4066-9341-1c40e92c6643

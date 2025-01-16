@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 24dde11e-6150-453a-a8ce-5051671221a3
+  bundle: d_product
+  default_langcode: en
+  depends:
+    315ff1dc-c95e-4e5b-91b8-963b433f2640: media
+    88585eb5-f981-4e79-9d5c-402a04c11d37: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    295083c5-1811-4cf2-965e-915af002356c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'SkyMaster 69 Z 150'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'SkyMaster 69 Z 150 | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Versatile engine suitable for both on-road and off-road activities.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/skymaster-69-z-150'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Versatile engine suitable for both on-road and off-road activities.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/planeasset3.png?itok=VY8DFYDf'
+  path:
+    -
+      alias: /products/skymaster-69-z-150
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Versatile engine suitable for both on-road and off-road activities.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 315ff1dc-c95e-4e5b-91b8-963b433f2640
+  field_product_categories:
+    -
+      entity: 88585eb5-f981-4e79-9d5c-402a04c11d37
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 295083c5-1811-4cf2-965e-915af002356c

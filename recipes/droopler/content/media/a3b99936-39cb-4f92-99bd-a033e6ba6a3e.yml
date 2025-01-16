@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a3b99936-39cb-4f92-99bd-a033e6ba6a3e
+  bundle: d_image
+  default_langcode: en
+  depends:
+    ce242038-1de6-4264-b1e0-5b47fd831678: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_investors_1.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: ce242038-1de6-4264-b1e0-5b47fd831678
+      alt: Investors
+      title: ''
+      width: 1280
+      height: 718

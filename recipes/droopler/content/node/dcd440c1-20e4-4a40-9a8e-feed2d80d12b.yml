@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: dcd440c1-20e4-4a40-9a8e-feed2d80d12b
+  bundle: d_product
+  default_langcode: en
+  depends:
+    b1247d6e-03c3-4888-843c-9578f7e006f5: media
+    ddf431bf-4af1-4c15-b230-73cdcbd0fdb6: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    6ed6e45c-5886-4066-9341-1c40e92c6643: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'OceanRider 67 Quantum'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'OceanRider 67 Quantum | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/oceanrider-67-quantum'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/boatasset2.png?itok=jv_snlsT'
+  path:
+    -
+      alias: /products/oceanrider-67-quantum
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: b1247d6e-03c3-4888-843c-9578f7e006f5
+  field_product_categories:
+    -
+      entity: ddf431bf-4af1-4c15-b230-73cdcbd0fdb6
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 6ed6e45c-5886-4066-9341-1c40e92c6643

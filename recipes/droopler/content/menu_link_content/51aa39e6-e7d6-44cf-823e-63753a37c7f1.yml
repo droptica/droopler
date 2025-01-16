@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 51aa39e6-e7d6-44cf-823e-63753a37c7f1
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    60d1ef62-0896-45c3-b6e7-62cc7e9b95fd: menu_link_content
+    09582d23-7c9f-4d8a-974c-00964f3c6dea: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Tiles Paragraphs'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 09582d23-7c9f-4d8a-974c-00964f3c6dea
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 110
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:60d1ef62-0896-45c3-b6e7-62cc7e9b95fd'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

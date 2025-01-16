@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 4a7cdf0b-da1f-4140-8c7e-0db12502639a
+  bundle: reset_button
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: Filters
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  field_button_class:
+    -
+      value: 'btn btn-outline-primary btn-sm btn-reset'
+  field_button_icon_class:
+    -
+      value: 'fas fa-times'
+  field_button_target:
+    -
+      value: /products
+  field_button_text:
+    -
+      value: 'Reset Filters'

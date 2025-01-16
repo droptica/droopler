@@ -1,0 +1,475 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 690dbb08-70c4-472b-94c3-7380353a0d8f
+  bundle: content_page
+  default_langcode: en
+  depends:
+    b449ce8d-4631-4e14-9a9e-65fd835513b8: media
+    5c6c3c0b-154c-4d78-aea1-9bc888284a22: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: Careers
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Careers | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Join our great Team today! At Drooplengines, we employ over 2,000 experienced experts and engineers. We provide fantastic opportunities for professional development.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/careers'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Join our great Team today! At Drooplengines, we employ over 2,000 experienced experts and engineers. We provide fantastic opportunities for professional development.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo_educational_4.jpg?itok=Fs74ERNI'
+  path:
+    -
+      alias: /careers
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 10264217-e67d-4479-bf22-89d156e9302b
+          bundle: d_p_side_embed
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_embed:
+            -
+              value: '<iframe allow="autoplay" width="560" height="315" src="https://www.youtube.com/embed/6yO16tVGC1w?showinfo=0&amp;rel=0&amp;modestbranding=1&amp;title=&amp;fs=0&amp;controls=0" frameborder="0" allowfullscreen=""></iframe>'
+          field_d_long_text:
+            -
+              value: '<p>At Drooplengines, we employ over 2,000 experienced experts and engineers. We provide fantastic opportunities for professional development. Join our great Team today!</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Work with Us'
+          field_embed_side:
+            -
+              value: left
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 2e735aaa-c9df-4ce4-ae2e-a15660071480
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p class="text-align-center">We constantly seek <strong>new talents.</strong></p><p class="text-align-center">Open aplications:</p><div class="table-responsive"><table class="table table-striped"><thead><tr><th>Job title</th><th>Location</th><th>Ref. number</th><th>&nbsp;</th></tr></thead><tbody><tr><td scope="row">Engineer</td><td>London</td><td>138991</td><td><a href="#">Apply</a></td></tr><tr><td scope="row">Engineer</td><td>Berlin</td><td>498403</td><td><a href="#">Apply</a></td></tr><tr><td scope="row">Engine designer</td><td>Berlin</td><td>434324</td><td><a href="#">Apply</a></td></tr><tr><td scope="row">Marketing Manager</td><td>London</td><td>234667</td><td><a href="#">Apply</a></td></tr><tr><td scope="row">Sales Manager</td><td>Paris</td><td>453422</td><td><a href="#">Apply</a></td></tr></tbody></table></div>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Job offers'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 021a91c1-b8af-439b-abb0-5cce50b7a8d4
+          bundle: d_p_group_of_counters
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_counter_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 84fc7cd9-a94e-4bfb-a9cc-d44265593768
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: Plants
+                  field_d_number:
+                    -
+                      value: 8
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 9c362952-b76f-4e53-ac5d-ce5e61ed3f4f
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Offices worldwide'
+                  field_d_number:
+                    -
+                      value: 21
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 7d8c1c11-8894-461b-a3a4-7329f7c3b9b0
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: Employees
+                  field_d_number:
+                    -
+                      value: 2000
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: b0ed651e-1232-4f6d-8fd2-c82dbc95923e
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Products and parts'
+                  field_d_number:
+                    -
+                      value: 15000
+          field_d_main_title:
+            -
+              value: 'Our company in numbers'
+          field_d_media_background:
+            -
+              entity: b449ce8d-4631-4e14-9a9e-65fd835513b8
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b867c411-5e56-4ed7-9654-8bdf6c0af851
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_cta_link:
+            -
+              uri: 'internal:/contact'
+              title: 'Contact us'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Get in touch for career or job-related questions, find company insights and updates or meet our employees.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Stay up to date'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: 5c6c3c0b-154c-4d78-aea1-9bc888284a22
+  field_teaser_text:
+    -
+      value: 'Join our great Team today! At Drooplengines, we employ over 2,000 experienced experts and engineers. We provide fantastic opportunities for professional development.'

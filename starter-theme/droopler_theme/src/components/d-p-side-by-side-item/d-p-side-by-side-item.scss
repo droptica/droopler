@@ -1,0 +1,59 @@
+@import "../../scss/init";
+
+$media-min-height: 30vh;
+
+.d-p-side-by-side-item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  .media-icon + .heading {
+    margin-top: var(--content-spacer-s);
+  }
+
+  &.item-1 {
+    .media--overlay {
+      @include media-breakpoint-up(sm) {
+        margin-left: calc(100% - 50vw);
+      }
+    }
+
+    &:last-child {
+      &:has(.media--overlay) {
+        min-height: $media-min-height;
+      }
+    }
+  }
+
+  &.item-2 {
+    .media--overlay {
+      @include media-breakpoint-up(sm) {
+        margin-right: calc(100% - 50vw);
+      }
+    }
+
+    &:last-child {
+      &:has(.media--overlay) {
+        min-height: $media-min-height;
+      }
+    }
+  }
+
+  &.item-1:has(.media--overlay) + .item-2:has(.media--overlay) {
+    min-height: $media-min-height;
+  }
+
+  .media--overlay {
+    @include filling-absolute;
+
+    @include media-breakpoint-up(sm) {
+      width: 50vw;
+    }
+
+    img {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.reset_button
+id: block_content.reset_button.changed
+field_name: changed
+entity_type: block_content
+bundle: reset_button
+label: Changed
+description: 'The time that the content block was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

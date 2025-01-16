@@ -1,0 +1,16 @@
+{% embed "@droopler_theme/block/block.twig" with {
+  block_modifiers: ['exposed-filters'],
+  with_divider: TRUE
+}%}
+  {% block content %}
+    {% embed "@droopler_theme/social-media-list/social-media-list.twig" %}
+      {% block items %}
+        {% for link in social_media_links %}
+          {% include "@droopler_theme/social-media-item/social-media-item.twig" with {
+            item: link
+          }%}
+        {% endfor %}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+{% endembed %}

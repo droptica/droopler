@@ -1,0 +1,784 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e763b8dc-13ec-4561-b37b-59d693f770e9
+  bundle: content_page
+  default_langcode: en
+  depends:
+    a41586d5-98b5-4d1d-ae2e-7913daa2ed12: media
+    1026d93b-dd65-4149-8b1a-aee135ef0225: media
+    4236a3a1-dadd-4bf2-af7f-8154d7509b83: node
+    233f25fd-cf0a-46ca-bffe-a08bc0d33043: node
+    9c22e3c8-48d3-45b7-ae3d-17073a660b60: node
+    8be666d1-50b5-4bca-a99b-c79ed5838026: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Gasoline Engines'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Gasoline Engines | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Our high quality gasoline car engines. We manufacture complete sets of engines and also offer parts for petrol engines.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/gasoline-engines'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Our high quality gasoline car engines. We manufacture complete sets of engines and also offer parts for petrol engines.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_engine_car_engine_gasoline.jpg?itok=Ziol13iz'
+  path:
+    -
+      alias: /gasoline-engines
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 34833752-3c55-461a-87eb-302bfec5ed4a
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>We offer several models of gasoline engines for the automotive market. We manufacture complete sets of engines and also offer parts for petrol engines.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Gasoline engines'
+          field_d_media_background:
+            -
+              entity: a41586d5-98b5-4d1d-ae2e-7913daa2ed12
+          field_heading_type:
+            -
+              value: h1
+          field_image_side:
+            -
+              value: right
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: bebd2fbc-d879-472a-b4b2-750078a4423f
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>We have over 20 years of experience in the production of engines for automotive industry.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'We are an expert in car engines'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ad0452d9-a745-424b-9d49-c4a8de6033bc
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<h3>Cobra 100</h3><p>Excellent and powerful gasoline engine for cars. A wide range of power. Designed and created by a team of experienced mechanics and engineers. Perfect for small city cars and large SUVs.</p><ul><li>1.4 L (1,360 cc) Euro 5 70-72 kW</li><li>1.6 L (1,598 cc) Euro 5 72-88 kW</li><li>1.6 L (1,598 cc) Euro 4 103-120 kW</li><li>1.6 L (1,598 cc) Euro 5 103-120 kW</li><li>1.6 L (1,598 cc) Euro 4 128-152 kW</li></ul>'
+              format: full_html
+          field_d_media_background:
+            -
+              entity: 1026d93b-dd65-4149-8b1a-aee135ef0225
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c9167eef-d367-4523-abbb-a848b5d2a2b1
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 2
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_main_title:
+            -
+              value: 'Our services for gasoline engines'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: bee7f1fb-efe5-46fb-bd3e-9e42a2a4aab0
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p>&nbsp;</p><ul><li>Change the engine oil</li><li>Replace the oil filter</li><li>Replace the spark plugs</li></ul><p>&nbsp;</p>'
+                      format: full_html
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-primary
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 96a4b28b-c86d-4c22-8370-ecf86948012b
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p>&nbsp;</p><ul><li>Inspect and replace the timing belt</li><li>Check for any Error codes in the ECU</li><li>Use scan tool read trouble code</li></ul><p>&nbsp;</p>'
+                      format: full_html
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-primary
+          field_enable_grid:
+            -
+              value: false
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 70ddfce1-f5d9-4a2e-bcfc-cf650126e02a
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 3
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 3
+          field_d_cta_link:
+            -
+              uri: 'internal:/products'
+              title: 'View All'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_main_title:
+            -
+              value: 'Other products'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 7a56408e-06ee-4248-99d4-6134d857c84f
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 4236a3a1-dadd-4bf2-af7f-8154d7509b83
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: b0bbe12b-5702-4d85-88b3-cdfc8d1422cf
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 233f25fd-cf0a-46ca-bffe-a08bc0d33043
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 0dba5937-2255-4e5c-8688-b30ee3e76c7c
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 9c22e3c8-48d3-45b7-ae3d-17073a660b60
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: false
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b1152d38-770a-4a5c-89c7-1f3190937436
+          bundle: d_p_reference_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/blog'
+              title: 'View all'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_main_title:
+            -
+              value: 'Related articles'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_none
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 93e2325e-bba2-4737-9ac0-0ab04225e367
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/contact'
+              title: 'Contact us'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p class="text-align-center">Contact our sales team to schedule product presentation.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: "IT'S TIME TO MAKE YOUR MOVE"
+          field_d_media_background:
+            -
+              entity: 8be666d1-50b5-4bca-a99b-c79ed5838026
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_extra_large
+          field_padding_top:
+            -
+              value: padding_top_extra_large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+  field_teaser_media_image:
+    -
+      entity: 1026d93b-dd65-4149-8b1a-aee135ef0225
+  field_teaser_text:
+    -
+      value: 'Our high quality gasoline car engines. We manufacture complete sets of engines and also offer parts for petrol engines.'

@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.reset_button
+    - field.field.block_content.reset_button.field_button_class
+    - field.field.block_content.reset_button.field_button_icon_class
+    - field.field.block_content.reset_button.field_button_target
+    - field.field.block_content.reset_button.field_button_text
+id: block_content.reset_button.default
+targetEntityType: block_content
+bundle: reset_button
+mode: default
+content:
+  field_button_class:
+    type: string_textfield
+    weight: 27
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_button_icon_class:
+    type: string_textfield
+    weight: 29
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_button_target:
+    type: string_textfield
+    weight: 28
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_button_text:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

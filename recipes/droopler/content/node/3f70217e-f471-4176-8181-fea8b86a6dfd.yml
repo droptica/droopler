@@ -1,0 +1,156 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3f70217e-f471-4176-8181-fea8b86a6dfd
+  bundle: d_product
+  default_langcode: en
+  depends:
+    91054e21-de2c-4ebb-9035-5e7b6954fc7f: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    50df45eb-56ca-41bc-bf82-0998ab1429b3: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'UrbanZ 19 Elite'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'UrbanZ 19 Elite | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Cutting-edge engine that balances power with fuel economy.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/urbanz-19-elite'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Cutting-edge engine that balances power with fuel economy.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/asset8.png?itok=xfBann25'
+  path:
+    -
+      alias: /products/urbanz-19-elite
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: '<p>Cutting-edge engine that balances power with fuel economy.</p>'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 91054e21-de2c-4ebb-9035-5e7b6954fc7f
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: cd40a296-fb73-4be8-8564-7340ab3e4780
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080383
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_main_title:
+            -
+              value: test
+          field_d_subtitle:
+            -
+              value: test
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9c4ca017-65e3-46fc-8585-1e69c3af49e3
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080410
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_main_title:
+            -
+              value: 'Test 2'
+          field_d_subtitle:
+            -
+              value: 'Test 2'
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 50df45eb-56ca-41bc-bf82-0998ab1429b3

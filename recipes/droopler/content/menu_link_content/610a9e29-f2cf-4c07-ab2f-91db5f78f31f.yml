@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 610a9e29-f2cf-4c07-ab2f-91db5f78f31f
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    5888ed0e-e7d8-4350-b65d-553a14035856: menu_link_content
+    6eb7a4f0-824d-4a29-9063-df1e0bfb495f: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Regular servicing'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 6eb7a4f0-824d-4a29-9063-df1e0bfb495f
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 4
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:5888ed0e-e7d8-4350-b65d-553a14035856'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

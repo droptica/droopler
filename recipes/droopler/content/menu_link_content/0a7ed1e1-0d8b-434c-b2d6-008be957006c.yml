@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 0a7ed1e1-0d8b-434c-b2d6-008be957006c
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    c6bacabf-1fb9-4d85-b133-cb3d1a17c731: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Home
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: c6bacabf-1fb9-4d85-b133-cb3d1a17c731
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: standard.front_page
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 15433d4b-04e0-4d13-8ba3-c51ef02e7626
+  bundle: d_product
+  default_langcode: en
+  depends:
+    c238b088-a136-40e0-8065-c3f2f9462b5b: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    50df45eb-56ca-41bc-bf82-0998ab1429b3: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'TurboX 25 Prime'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'TurboX 25 Prime | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Turbocharged engine designed for those seeking thrilling performance.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/turbox-25-prime'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Turbocharged engine designed for those seeking thrilling performance.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/asset5.png?itok=D158G28Y'
+  path:
+    -
+      alias: /products/turbox-25-prime
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Turbocharged engine designed for those seeking thrilling performance.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: c238b088-a136-40e0-8065-c3f2f9462b5b
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 50df45eb-56ca-41bc-bf82-0998ab1429b3

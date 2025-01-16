@@ -1,0 +1,295 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_carousel.field_add_dividers
+    - field.field.paragraph.d_p_carousel.field_additional_classes
+    - field.field.paragraph.d_p_carousel.field_background_theme_custom
+    - field.field.paragraph.d_p_carousel.field_column_count_desktop
+    - field.field.paragraph.d_p_carousel.field_column_count_mobile
+    - field.field.paragraph.d_p_carousel.field_column_count_tablet
+    - field.field.paragraph.d_p_carousel.field_d_cta_link
+    - field.field.paragraph.d_p_carousel.field_d_long_text
+    - field.field.paragraph.d_p_carousel.field_d_main_title
+    - field.field.paragraph.d_p_carousel.field_d_media_icon
+    - field.field.paragraph.d_p_carousel.field_d_p_cs_item_reference
+    - field.field.paragraph.d_p_carousel.field_full_width
+    - field.field.paragraph.d_p_carousel.field_heading_type
+    - field.field.paragraph.d_p_carousel.field_margin_bottom
+    - field.field.paragraph.d_p_carousel.field_margin_top
+    - field.field.paragraph.d_p_carousel.field_padding_bottom
+    - field.field.paragraph.d_p_carousel.field_padding_top
+    - field.field.paragraph.d_p_carousel.field_text_theme_custom
+    - field.field.paragraph.d_p_carousel.field_theme
+    - paragraphs.paragraphs_type.d_p_carousel
+  module:
+    - ala
+    - color_field
+    - conditional_fields
+    - field_group
+    - media_library
+    - paragraphs
+    - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_items
+        - group_settings
+      label: Tabs
+      region: content
+      parent_name: ''
+      weight: 6
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 450
+    group_settings:
+      children:
+        - field_theme
+        - field_background_theme_custom
+        - field_text_theme_custom
+        - field_heading_type
+        - field_add_dividers
+        - field_full_width
+        - field_column_count_desktop
+        - field_column_count_tablet
+        - field_column_count_mobile
+        - field_margin_top
+        - field_margin_bottom
+        - field_padding_top
+        - field_padding_bottom
+        - field_additional_classes
+      label: Settings
+      region: content
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_items:
+      children:
+        - field_d_p_cs_item_reference
+      label: Items
+      region: content
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_basic:
+      children:
+        - field_d_main_title
+        - field_d_media_icon
+        - field_d_long_text
+        - field_d_cta_link
+      label: Basic
+      region: content
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+id: paragraph.d_p_carousel.default
+targetEntityType: paragraph
+bundle: d_p_carousel
+mode: default
+content:
+  field_add_dividers:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_additional_classes:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_background_theme_custom:
+    type: color_field_widget_html5
+    weight: 2
+    region: content
+    settings:
+      show_extra: false
+    third_party_settings:
+      conditional_fields:
+        65f55e98-fd7a-45ce-a0a6-750677044156:
+          entity_type: paragraph
+          bundle: d_p_text_paged
+          dependee: field_theme
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: theme-custom
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_column_count_desktop:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_column_count_mobile:
+    type: options_select
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_column_count_tablet:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_d_cta_link:
+    type: ala_field_widget
+    weight: 5
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      ala_link_class_settings: global
+      ala_link_class: ''
+      ala_link_icon: false
+      ala_link_roles: false
+      ala_link_color: false
+      ala_link_extra: true
+      ala_link_target: '1'
+    third_party_settings: {  }
+  field_d_long_text:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_d_main_title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_d_media_icon:
+    type: media_library_widget
+    weight: 3
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_d_p_cs_item_reference:
+    type: entity_reference_paragraphs
+    weight: 4
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: d_p_carousel_item
+    third_party_settings: {  }
+  field_full_width:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_heading_type:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_margin_bottom:
+    type: options_select
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_margin_top:
+    type: options_select
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_padding_bottom:
+    type: options_select
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_padding_top:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_text_theme_custom:
+    type: color_field_widget_html5
+    weight: 3
+    region: content
+    settings:
+      show_extra: false
+    third_party_settings:
+      conditional_fields:
+        277e65c4-d6c2-4c9c-aed0-20108efea588:
+          entity_type: paragraph
+          bundle: d_p_text_paged
+          dependee: field_theme
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: theme-custom
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_theme:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,628 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 09582d23-7c9f-4d8a-974c-00964f3c6dea
+  bundle: content_page
+  default_langcode: en
+  depends:
+    7349f593-6511-4892-99f2-6fc71a07b302: media
+    79f59eb2-6489-42ab-91ee-5940ba07cf1e: media
+    224c068d-f79e-4a7d-823a-7e72381ac147: media
+    abaca01e-ae60-45ff-9b34-ca65ed629af3: media
+    7e433b88-2899-44b7-9afe-48ba072b95ac: media
+    0babefd0-5838-472f-8e5c-0e504f3b9cdd: media
+    1431ac7b-7d01-4f3a-92df-554c4d674128: media
+    12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2: media
+    3175871d-9d43-446c-b4fb-a66bf6858484: media
+    a3b28503-1b5f-4d8f-bb43-62806d57961b: media
+    b2241dee-0307-49c8-9ff7-2c2da6c48fca: media
+    dcd0fb7a-d62f-40fe-ac72-5ef3b16ff7a2: media
+    50682773-a368-42e0-9826-2c76c53f763d: media
+    ea0dc262-4d91-4cea-a826-3859ae0a34e3: media
+    881b46df-795c-4d92-a422-f23f6821ee34: media
+    0e5ffbee-9143-4ada-bacf-726b6b2606bd: media
+    d66feb53-0a34-40ef-aa1c-ff8cf14cb2cf: media
+    e9a846a6-3166-40df-a6d6-d1cad94756bc: media
+    dde26382-9a78-48bb-82d4-6dceff6d5172: media
+    85de3f2b-f0f3-47ab-ab7f-47b3915151d6: media
+    122beb2a-83e4-4711-998e-bc05d7fe5f24: media
+    87c1f5aa-6ea3-46f0-ba4f-5e1346715642: media
+    b8ed3918-a45c-481e-9e32-3bf5e9b1daf6: media
+    f3c7727b-0da8-46b6-a2e4-cd979dd9acc0: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Tiles Paragraphs'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Tiles Paragraphs | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/documentation/tiles-paragraphs'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /documentation/tiles-paragraphs
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3fc80fec-f0ab-4967-a451-85b00594f2f3
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_main_title:
+            -
+              value: 'Tiles Paragraphs'
+          field_d_subtitle:
+            -
+              value: 'Droopler Documentation'
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3ffc2509-ae94-4ad0-9041-5d64dda5b844
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>The Tiles Paragraphs utilize Masonry to deliver an excellent gallery experience. All images get arranged to fit the screen width. You can manipulate the display by paragraph settings field. You can choose number of pictures which should be two times larger than the others. The "/" character separates the title and subtitle. Below there are four paragraphs - two Tile Galleries and two Side Tiles.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Full Gallery & Side Tiles Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 256345ba-e2c5-4f03-b585-31ab7002b02e
+          bundle: d_p_tiles
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_icon:
+            -
+              entity: 7349f593-6511-4892-99f2-6fc71a07b302
+          field_d_media_image:
+            -
+              entity: 79f59eb2-6489-42ab-91ee-5940ba07cf1e
+            -
+              entity: 224c068d-f79e-4a7d-823a-7e72381ac147
+            -
+              entity: abaca01e-ae60-45ff-9b34-ca65ed629af3
+            -
+              entity: 7e433b88-2899-44b7-9afe-48ba072b95ac
+            -
+              entity: 0babefd0-5838-472f-8e5c-0e504f3b9cdd
+          field_featured_images:
+            -
+              value: '1'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_none
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1081683d-bf4f-45f5-b450-67cd93d26176
+          bundle: d_p_side_tiles
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/tiles-paragraphs'
+              title: 'Call To Action!'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_icon:
+            -
+              entity: 1431ac7b-7d01-4f3a-92df-554c4d674128
+          field_d_media_image:
+            -
+              entity: 12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2
+            -
+              entity: 3175871d-9d43-446c-b4fb-a66bf6858484
+            -
+              entity: a3b28503-1b5f-4d8f-bb43-62806d57961b
+            -
+              entity: b2241dee-0307-49c8-9ff7-2c2da6c48fca
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+          field_tiles_gallery_side:
+            -
+              value: right
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7d6c7fb6-6903-411f-a9f3-50518a72bca8
+          bundle: d_p_side_tiles
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/tiles-paragraphs'
+              title: 'Call To Action!'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Curabitur consectetur nec ante ac ornare.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_icon:
+            -
+              entity: 1431ac7b-7d01-4f3a-92df-554c4d674128
+          field_d_media_image:
+            -
+              entity: dcd0fb7a-d62f-40fe-ac72-5ef3b16ff7a2
+            -
+              entity: 50682773-a368-42e0-9826-2c76c53f763d
+            -
+              entity: ea0dc262-4d91-4cea-a826-3859ae0a34e3
+            -
+              entity: 881b46df-795c-4d92-a422-f23f6821ee34
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+          field_tiles_gallery_side:
+            -
+              value: left
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 39b574ea-9cb8-4b56-b0a4-d01b81254724
+          bundle: d_p_tiles
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_media_image:
+            -
+              entity: 0e5ffbee-9143-4ada-bacf-726b6b2606bd
+            -
+              entity: d66feb53-0a34-40ef-aa1c-ff8cf14cb2cf
+            -
+              entity: e9a846a6-3166-40df-a6d6-d1cad94756bc
+            -
+              entity: dde26382-9a78-48bb-82d4-6dceff6d5172
+            -
+              entity: 85de3f2b-f0f3-47ab-ab7f-47b3915151d6
+          field_featured_images:
+            -
+              value: '3'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_none
+          field_padding_top:
+            -
+              value: padding_top_none
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 2e568c7a-5bac-4e9c-bf90-8a672f42430c
+          bundle: d_p_side_tiles
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/tiles-paragraphs'
+              title: 'Call To Action!'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-secondary'
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_icon:
+            -
+              entity: 7349f593-6511-4892-99f2-6fc71a07b302
+          field_d_media_image:
+            -
+              entity: 122beb2a-83e4-4711-998e-bc05d7fe5f24
+            -
+              entity: 87c1f5aa-6ea3-46f0-ba4f-5e1346715642
+            -
+              entity: b8ed3918-a45c-481e-9e32-3bf5e9b1daf6
+            -
+              entity: f3c7727b-0da8-46b6-a2e4-cd979dd9acc0
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+          field_tiles_gallery_side:
+            -
+              value: left
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Discover possibilities of Droopler distribution for Drupal.'

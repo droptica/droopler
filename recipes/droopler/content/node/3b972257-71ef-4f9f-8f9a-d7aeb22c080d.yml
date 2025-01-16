@@ -1,0 +1,784 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3b972257-71ef-4f9f-8f9a-d7aeb22c080d
+  bundle: content_page
+  default_langcode: en
+  depends:
+    6164814b-5df0-4c62-850a-2ac8786a6bf2: media
+    51551c0e-0d75-49c7-bebe-5abd88bc0eaf: media
+    4236a3a1-dadd-4bf2-af7f-8154d7509b83: node
+    233f25fd-cf0a-46ca-bffe-a08bc0d33043: node
+    9c22e3c8-48d3-45b7-ae3d-17073a660b60: node
+    49fa8ff0-d3c5-4775-9808-5f4ea953256c: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Aircraft Engines'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Aircraft Engines | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'We are experts in aircraft engines. Reliability and perfect quality. These are the engine features for aircraft manufactured by our company.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/aircraft-engines'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'We are experts in aircraft engines. Reliability and perfect quality. These are the engine features for aircraft manufactured by our company.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_engine_airplane_3.jpg?itok=bonkkPwQ'
+  path:
+    -
+      alias: /aircraft-engines
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: fdd06f51-4b23-4d1e-981b-962b9e738fe1
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Reliability and perfect quality. These are the engine features for aircraft manufactured by our company. We also provide a full range of support services.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Aircraft engines'
+          field_d_media_background:
+            -
+              entity: 6164814b-5df0-4c62-850a-2ac8786a6bf2
+          field_heading_type:
+            -
+              value: h1
+          field_image_side:
+            -
+              value: right
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d4f68240-f711-4078-b942-c102b36200ba
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>We have over 20 years of experience in the production of engines for the aviation industry.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'We are an expert in aircraft engines'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: bbe9dc81-b2b2-49c7-af46-e8ea4042a1d8
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<h3>JetSpeed 5000</h3><p>Excellent and powerful engine for medium-sized jets. Designed and created by a team of experienced mechanics, engineers and aviation experts.</p><ul><li>Compact design</li><li>Excellent thrust-to-weight ratio, low power consumption</li><li>Max. thrust: 1,300 N*</li><li>Outer diameter: 272 mm</li><li>Length: 625 mm</li><li>Weight: 90.5 kg</li></ul>'
+              format: full_html
+          field_d_media_background:
+            -
+              entity: 51551c0e-0d75-49c7-bebe-5abd88bc0eaf
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3a46e3e6-0846-436f-8d6d-6bcfdbe9879a
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 2
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_main_title:
+            -
+              value: 'Our services for aircraft engines'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 409f2916-4c42-46b6-9166-24328e4efb2c
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p>&nbsp;</p><ul><li>Parts and engine lease</li><li>Repair Management</li><li>Spare Parts Supply</li></ul><p>&nbsp;</p>'
+                      format: full_html
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-primary
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 0ac10e83-4295-4b7b-abb6-1573749354c9
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p>&nbsp;</p><ul><li>Basic servicing</li><li>Full annual servicing</li><li>Oil and filter changes</li></ul><p>&nbsp;</p>'
+                      format: full_html
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-primary
+          field_enable_grid:
+            -
+              value: false
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 38abd12e-ce3d-4f2f-ae42-3c83282c9676
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 3
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 3
+          field_d_cta_link:
+            -
+              uri: 'internal:/products'
+              title: 'View All'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_main_title:
+            -
+              value: 'Other products'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 04b71531-0829-46ff-a9fb-6bc66f62b348
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 4236a3a1-dadd-4bf2-af7f-8154d7509b83
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: a2bcf621-5739-4c85-a330-0956ba29ed02
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 233f25fd-cf0a-46ca-bffe-a08bc0d33043
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 075f9fd6-4766-4398-bdde-3f7a43d5190e
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 9c22e3c8-48d3-45b7-ae3d-17073a660b60
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: true
+          field_full_width:
+            -
+              value: true
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b6011e19-e649-4f0f-9561-b2f3ef1d4d52
+          bundle: d_p_reference_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/blog'
+              title: 'View all'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_main_title:
+            -
+              value: 'Related articles'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: dc3ddb45-25bc-4b90-a7be-a59267c1efb7
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/contact'
+              title: 'Contact us'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p class="text-align-center">Contact our sales team to schedule product presentation.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: "IT'S TIME TO MAKE YOUR MOVE"
+          field_d_media_background:
+            -
+              entity: 49fa8ff0-d3c5-4775-9808-5f4ea953256c
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_extra_large
+          field_padding_top:
+            -
+              value: padding_top_extra_large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+  field_teaser_media_image:
+    -
+      entity: 6164814b-5df0-4c62-850a-2ac8786a6bf2
+  field_teaser_text:
+    -
+      value: 'We are experts in aircraft engines. Reliability and perfect quality. These are the engine features for aircraft manufactured by our company.'

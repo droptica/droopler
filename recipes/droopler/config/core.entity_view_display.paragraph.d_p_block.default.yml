@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_block.field_additional_classes
+    - field.field.paragraph.d_p_block.field_background_theme_custom
+    - field.field.paragraph.d_p_block.field_block
+    - field.field.paragraph.d_p_block.field_full_width
+    - field.field.paragraph.d_p_block.field_margin_bottom
+    - field.field.paragraph.d_p_block.field_margin_top
+    - field.field.paragraph.d_p_block.field_padding_bottom
+    - field.field.paragraph.d_p_block.field_padding_top
+    - field.field.paragraph.d_p_block.field_text_theme_custom
+    - field.field.paragraph.d_p_block.field_theme
+    - paragraphs.paragraphs_type.d_p_block
+  module:
+    - block_field
+id: paragraph.d_p_block.default
+targetEntityType: paragraph
+bundle: d_p_block
+mode: default
+content:
+  field_block:
+    type: block_field
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_additional_classes: true
+  field_background_theme_custom: true
+  field_full_width: true
+  field_margin_bottom: true
+  field_margin_top: true
+  field_padding_bottom: true
+  field_padding_top: true
+  field_text_theme_custom: true
+  field_theme: true
+  search_api_excerpt: true

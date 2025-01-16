@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 9e16458e-bbaa-4d0a-b4e4-6c556865f791
+  bundle: d_product
+  default_langcode: en
+  depends:
+    4b98744e-771b-4a43-a8a4-a2ce0f585c00: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    50df45eb-56ca-41bc-bf82-0998ab1429b3: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'HighwayStar 29 GT'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'HighwayStar 29 GT | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Modern engine with top-tier safety features and eco-friendly design.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/highwaystar-29-gt'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Modern engine with top-tier safety features and eco-friendly design.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/asset6.png?itok=fruSHpgM'
+  path:
+    -
+      alias: /products/highwaystar-29-gt
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Modern engine with top-tier safety features and eco-friendly design.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 4b98744e-771b-4a43-a8a4-a2ce0f585c00
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 50df45eb-56ca-41bc-bf82-0998ab1429b3

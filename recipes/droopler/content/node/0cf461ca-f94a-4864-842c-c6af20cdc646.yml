@@ -1,0 +1,598 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0cf461ca-f94a-4864-842c-c6af20cdc646
+  bundle: content_page
+  default_langcode: en
+  depends:
+    d4454512-1414-49cf-b888-48f11b4a39a0: media
+    70a7b234-9fe2-454e-8ad5-4ff7b2b02f47: media
+    91b71ace-e12e-4c7d-9c37-55b1b528bc05: media
+    e4b3314d-3d15-4e91-a931-f98f5e9af17c: media
+    d21f6509-7b9c-4c85-8913-760d7a918235: media
+    1431ac7b-7d01-4f3a-92df-554c4d674128: media
+    b449ce8d-4631-4e14-9a9e-65fd835513b8: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Counters Paragraph'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Counters Paragraph | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/documentation/counters-paragraph'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /documentation/counters-paragraph
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ae68848e-8e69-497e-ae03-6eeab62edd8e
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_main_title:
+            -
+              value: 'Counters Paragraph'
+          field_d_subtitle:
+            -
+              value: 'Droopler Documentation'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 335ff903-53e7-4baf-8738-684b49d2ade4
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: "<p>This type of paragraph is popular on the company's websites. It contains some significant numbers on the background of your choice. The mask is put on an image to improve readability. You may use the icon above the title to enhance the visual effect.</p>"
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Full Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3bd09bc5-f547-4d73-b16c-8ab13640e977
+          bundle: d_p_group_of_counters
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 4
+          field_column_count_mobile:
+            -
+              value: 2
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_counter_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 2662099e-4e38-446d-b4e9-dfc678d6fac6
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Imsum'
+                  field_d_media_icon:
+                    -
+                      entity: d4454512-1414-49cf-b888-48f11b4a39a0
+                  field_d_number:
+                    -
+                      value: 100
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 6cea5c13-4584-4e3b-903f-a549be115c62
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Sit'
+                  field_d_media_icon:
+                    -
+                      entity: 70a7b234-9fe2-454e-8ad5-4ff7b2b02f47
+                  field_d_number:
+                    -
+                      value: 223
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: fc15d684-d581-43f4-b67b-5deb78deac3e
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Amet Consectetur'
+                  field_d_media_icon:
+                    -
+                      entity: 91b71ace-e12e-4c7d-9c37-55b1b528bc05
+                  field_d_number:
+                    -
+                      value: 2543
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 87f09012-5c4a-42f9-91bf-4cd766c17d9c
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Adipiscing Elit'
+                  field_d_media_icon:
+                    -
+                      entity: e4b3314d-3d15-4e91-a931-f98f5e9af17c
+                  field_d_number:
+                    -
+                      value: 15
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/counters-paragraph'
+              title: 'See more'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_background:
+            -
+              entity: d21f6509-7b9c-4c85-8913-760d7a918235
+          field_d_media_icon:
+            -
+              entity: 1431ac7b-7d01-4f3a-92df-554c4d674128
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 2db94cde-13fa-44a1-ba1f-801c071030c8
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: "<p>The title and the icon are not necessary at all. What's more, you don't need a lot of counters. Even one will work fine. Just see the most basic version below.</p>"
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Basic Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b53b3e93-968e-4b0f-9bf6-972195b1320b
+          bundle: d_p_group_of_counters
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_counter_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 14025a6b-ab34-47e9-9c75-ab925d32ce7d
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Imsum'
+                  field_d_number:
+                    -
+                      value: 100
+          field_d_media_background:
+            -
+              entity: b449ce8d-4631-4e14-9a9e-65fd835513b8
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Discover possibilities of Droopler distribution for Drupal.'

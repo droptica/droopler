@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:content_block:b2a4f8eb-b0d7-4984-8baf-c34c980486fa'
+  module:
+    - block_content
+  theme:
+    - droopler_theme
+id: droopler_theme_block_content_b2a4f8eb_b0d7_4984_8baf_c34c980486fa
+theme: droopler_theme
+region: footer_primary_fifth
+weight: 0
+provider: null
+plugin: 'block_content:b2a4f8eb-b0d7-4984-8baf-c34c980486fa'
+settings:
+  id: 'block_content:b2a4f8eb-b0d7-4984-8baf-c34c980486fa'
+  label: 'Footer Others'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

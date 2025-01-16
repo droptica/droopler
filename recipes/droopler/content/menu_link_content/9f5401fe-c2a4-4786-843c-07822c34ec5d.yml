@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 9f5401fe-c2a4-4786-843c-07822c34ec5d
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    5888ed0e-e7d8-4350-b65d-553a14035856: menu_link_content
+    f43e3cc1-7179-4252-97db-8fda74ab54f7: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Engine repair'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: f43e3cc1-7179-4252-97db-8fda74ab54f7
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 2
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:5888ed0e-e7d8-4350-b65d-553a14035856'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

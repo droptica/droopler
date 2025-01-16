@@ -1,0 +1,1142 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f1ff8d13-1f72-4829-8725-8aa9ff92d7b7
+  bundle: content_page
+  default_langcode: en
+  depends:
+    5c6c3c0b-154c-4d78-aea1-9bc888284a22: media
+    8e7b91bc-9e47-489c-a767-f23980b858f7: media
+    4a83806d-cb60-4a31-a784-a6266db9698d: media
+    8184de1d-8edc-41a9-ba32-2d3f3afcd054: media
+    13e3576f-2840-4704-b4d1-aaa2ff36bf21: media
+    922f8ae7-20f9-4b36-a140-e051217aa964: media
+    3d492178-96f5-4bb3-9b75-e7b88bd10f53: media
+    ab4fd14f-d495-4815-b1a3-0c1ee694f39f: media
+    9fd186e9-078d-4617-a39b-ccad9137bfa4: media
+    bab79460-67bc-4561-b6f7-568a359466ee: media
+    26f4dd0c-ef27-4904-bb2c-a1e384f64df6: media
+    2d026598-7f3c-4120-adcf-2153106b3a97: media
+    dd65e86a-ea09-4acd-b236-fb4afba6b6a4: media
+    5a0e154d-9843-4aaa-864b-87a4a3044519: media
+    6a208f98-e0fd-46cc-b8c8-c82b71852f83: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: Documentation
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Documentation | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Discover possibilities of Droopler distribution for Drupal .'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/documentation'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Discover possibilities of Droopler distribution for Drupal .'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /documentation
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 5dc773c4-9ada-4e68-8753-ac6d6c6eb217
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p class="text-align-center">Droopler utilizes Paragraphs to build content in a comfortable, Lego-like way. Take a while to see the examples of each Paragraph. You will be surprised how much you can achieve.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Droopler Documentation'
+          field_d_media_background:
+            -
+              entity: 5c6c3c0b-154c-4d78-aea1-9bc888284a22
+          field_d_subtitle:
+            -
+              value: 'See what Droopler is capable of!'
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_extra_large
+          field_padding_top:
+            -
+              value: padding_top_extra_large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e5cc77d2-d0db-4013-88d7-2d92c8eb83d5
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 3
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 3
+          field_d_main_title:
+            -
+              value: 'Available Paragraphs'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d36096de-8bd6-41b1-9acd-f0b5a1717fe0
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/banner-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>A typical banner with text and CTA button, located on top of a large background image.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Banner
+                  field_d_media_icon:
+                    -
+                      entity: 8e7b91bc-9e47-489c-a767-f23980b858f7
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: aaf05cd4-1554-4100-a5d2-3f47f229a2a9
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/form-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: "<p>A Drupal form with an image background. Bootstrap 4 controls the form's styling.</p>"
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Form
+                  field_d_media_icon:
+                    -
+                      entity: 4a83806d-cb60-4a31-a784-a6266db9698d
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: af1a45b8-6df2-4dbf-8c2c-19c87ba0ba1e
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/text-blocks-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>A group of text block. Each of them contains an icon, title, body and CTA.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Text Blocks'
+                  field_d_media_icon:
+                    -
+                      entity: 8184de1d-8edc-41a9-ba32-2d3f3afcd054
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 33969985-8f32-4543-a20a-2f77b59df175
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/sidebar-image-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>Full width Paragraph with an image moved to the left or right side. Often used one after another.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Sidebar Image'
+                  field_d_media_icon:
+                    -
+                      entity: 13e3576f-2840-4704-b4d1-aaa2ff36bf21
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 603ce087-7be9-4081-a25a-7f62681972d3
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/subscribe-file-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>A simple form that allows file download in exchange of user e-mail. Contains consent fields.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Subscribe For File'
+                  field_d_media_icon:
+                    -
+                      entity: 922f8ae7-20f9-4b36-a140-e051217aa964
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 29c00ea7-3234-4e3d-a314-c920266f78ca
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/text-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>A simple text that can be extended by headers, icon or CTA. Designed to show long text content.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Text
+                  field_d_media_icon:
+                    -
+                      entity: 3d492178-96f5-4bb3-9b75-e7b88bd10f53
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 52bf726a-fd7b-4a15-8fac-9872c2a2c2b8
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/gallery-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>A very simple gallery with Colorbox library support. It shows four images in a row.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Gallery
+                  field_d_media_icon:
+                    -
+                      entity: ab4fd14f-d495-4815-b1a3-0c1ee694f39f
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: f2cce33f-1b88-44a8-b560-285c8ca06e9a
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>A Slick-based carousel that allows you to make a vertically scrollable list of items.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Carousel
+                  field_d_media_icon:
+                    -
+                      entity: 9fd186e9-078d-4617-a39b-ccad9137bfa4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: b931eaeb-1f6c-4262-845e-8f93ad02c677
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/counters-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>A list of important company numbers that are counted up when they enter the viewport.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Counters
+                  field_d_media_icon:
+                    -
+                      entity: bab79460-67bc-4561-b6f7-568a359466ee
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d4159f07-4dae-474e-904e-1d115a2ab248
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/sidebar-embed-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>With this Paragraph, you can put an external iframe on our website (ex. Google Maps or YouTube).</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Sidebar Embed'
+                  field_d_media_icon:
+                    -
+                      entity: 26f4dd0c-ef27-4904-bb2c-a1e384f64df6
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 8688516c-f210-4acc-9913-ddf822f2951a
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/tiles-paragraphs'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>Tiles and Sidebar Tiles - two similar paragraphs with a great looking, Masonry gallery.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Tiles Paragraphs'
+                  field_d_media_icon:
+                    -
+                      entity: 2d026598-7f3c-4120-adcf-2153106b3a97
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 10332ab6-0781-41fd-8d61-27b0ab0edb46
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/reference-content-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>This paragraph allows you to show a list of content, like latest blog posts.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Reference Content Paragraph'
+                  field_d_media_icon:
+                    -
+                      entity: dd65e86a-ea09-4acd-b236-fb4afba6b6a4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 6c7b1261-5bd6-476c-aaa8-1c1c95dad1ab
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/side-by-side-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>This paragraph allows you put two pieces of content next to each other.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Side By Side Paragraph'
+                  field_d_media_icon:
+                    -
+                      entity: 5a0e154d-9843-4aaa-864b-87a4a3044519
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: be1fe392-69ce-4251-9325-84257d6a3508
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/documentation/block-paragraph'
+                      title: 'Learn more...'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_long_text:
+                    -
+                      value: '<p>Paragraph allowing embedding Drupal blocks.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Block
+                  field_d_media_icon:
+                    -
+                      entity: 6a208f98-e0fd-46cc-b8c8-c82b71852f83
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: false
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Discover possibilities of Droopler distribution for Drupal .'

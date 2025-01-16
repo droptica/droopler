@@ -1,0 +1,429 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: aa2674b4-755f-49b5-a9c2-54cefa4d39a3
+  bundle: content_page
+  default_langcode: en
+  depends:
+    8272f9ba-0866-44d8-ab9f-1797dfba5148: media
+    0ddc7a58-7cb7-4a62-a7d4-2a23ff01c32c: media
+    b00d8098-6b0a-4e8b-87e9-6d7eb63d9fd4: media
+    b449ce8d-4631-4e14-9a9e-65fd835513b8: media
+    12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'For spacecrafts'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'For spacecrafts | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/spacecrafts'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_engine_car_5.jpg?itok=6g2LoTgI'
+  path:
+    -
+      alias: /spacecrafts
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b5cdc9ac-4590-4368-bf05-d26a34e84223
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_cta_link:
+            -
+              uri: 'internal:/contact'
+              title: 'Contact us'
+              options:
+                type: primary
+          field_d_long_text:
+            -
+              value: '<p>We offer a wide range of services to our customers who have bought our aircraft engines. Our experienced team of mechanics and specialists will provide high quality of service. Contact our company to arrange a service date and time.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'For spacecrafts'
+          field_d_media_background:
+            -
+              entity: 8272f9ba-0866-44d8-ab9f-1797dfba5148
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 15b9f667-e544-45ce-b5b2-1527cdc261f7
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_main_title:
+            -
+              value: 'Our happy customers'
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: c07bd45c-414f-4157-95b8-c28c0f54fbd9
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_long_text:
+                    -
+                      value: '<p><em>Our company is very satisfied with the level of Drooplengines services. The company team provided us with full technical support from the very beginning of our cooperation.</em></p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'John Smith, BlackStar Limited'
+                  field_d_media_icon:
+                    -
+                      entity: 0ddc7a58-7cb7-4a62-a7d4-2a23ff01c32c
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d40ef4da-a933-4ab8-9489-b034134a49d8
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_long_text:
+                    -
+                      value: "<p><em>The Drooplengines company is an excellent business partner who has carried out services at the highest level. Thanks to cooperation with Drooplengines, we have reduced the company's operating costs associated with servicing our engines.</em></p>"
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Anna Novak, LAD Fleet Management'
+                  field_d_media_icon:
+                    -
+                      entity: b00d8098-6b0a-4e8b-87e9-6d7eb63d9fd4
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 426ab7a8-79a1-4898-b1a4-2f8c4f42b7f5
+          bundle: d_p_group_of_counters
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_counter_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 1f313077-ba32-479a-866f-5ef7e0813089
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: Plants
+                  field_d_number:
+                    -
+                      value: 8
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: cbfa9f08-bdf4-4fac-9943-eb7d4e73b972
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Offices worldwide'
+                  field_d_number:
+                    -
+                      value: 21
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 9365c08d-5bed-4876-bd35-191aae1d97bc
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: Employees
+                  field_d_number:
+                    -
+                      value: 2000
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: ee6a4f63-804f-4aab-b768-ee6549ac199d
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Products and parts'
+                  field_d_number:
+                    -
+                      value: 15000
+          field_d_main_title:
+            -
+              value: 'Our company in numbers'
+          field_d_media_background:
+            -
+              entity: b449ce8d-4631-4e14-9a9e-65fd835513b8
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0be9ea2c-2ebe-4e59-8e33-e3d637e8de2b
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_long_text:
+            -
+              value: '<p1>Our company has many certificates confirming the high quality of our services: ISO 14001:2015, ISO 9001:2015 and BS OHSAS 18001:2007.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Integrated Quality Management'
+  field_teaser_media_image:
+    -
+      entity: 12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2
+  field_teaser_text:
+    -
+      value: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'

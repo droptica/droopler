@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0d01781e-290a-4412-a7fa-2f450d31a77d
+  bundle: d_product
+  default_langcode: en
+  depends:
+    0ffdd5a9-3b4f-4ec7-bf61-a2fba698b91a: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    50df45eb-56ca-41bc-bf82-0998ab1429b3: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'TurboX 56 SE'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'TurboX 56 SE | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Versatile engine suitable for both on-road and off-road activities.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/turbox-56-se'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Versatile engine suitable for both on-road and off-road activities.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/asset10.jpg?itok=wdeG32jx'
+  path:
+    -
+      alias: /products/turbox-56-se
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Versatile engine suitable for both on-road and off-road activities.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 0ffdd5a9-3b4f-4ec7-bf61-a2fba698b91a
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 50df45eb-56ca-41bc-bf82-0998ab1429b3

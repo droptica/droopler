@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8ce534be-457b-4ec2-bb8d-cc19cd5c4689
+  bundle: d_image
+  default_langcode: en
+  depends:
+    3165b9ec-c8a9-4661-a1cc-6a4ebd91e945: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_mechanism.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 3165b9ec-c8a9-4661-a1cc-6a4ebd91e945
+      alt: Mechanism
+      title: ''
+      width: 2000
+      height: 1335

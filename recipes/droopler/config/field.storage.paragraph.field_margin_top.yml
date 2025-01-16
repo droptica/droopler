@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_margin_top
+field_name: field_margin_top
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: margin_top_none
+      label: None
+    -
+      value: margin_top_small
+      label: Small
+    -
+      value: margin_top_medium
+      label: Medium
+    -
+      value: margin_top_large
+      label: Large
+    -
+      value: margin_top_extra_large
+      label: 'Extra large'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e4fd7237-18ea-4639-803a-0ad7280842ab
+  bundle: d_image
+  default_langcode: en
+  depends:
+    3f2de6d0-0a85-4080-99ea-821135437a13: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_monitoring_and_assessment.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 3f2de6d0-0a85-4080-99ea-821135437a13
+      alt: Engine
+      title: ''
+      width: 1920
+      height: 1448

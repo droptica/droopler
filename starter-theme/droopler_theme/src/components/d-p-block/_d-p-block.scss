@@ -1,0 +1,7 @@
+.d-p-block {
+  text-align: center;
+
+  &:has(.view-products-list) {
+    text-align: left;
+  }
+}

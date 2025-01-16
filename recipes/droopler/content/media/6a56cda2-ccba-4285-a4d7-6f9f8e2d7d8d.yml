@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6a56cda2-ccba-4285-a4d7-6f9f8e2d7d8d
+  bundle: d_image
+  default_langcode: en
+  depends:
+    f8fb7405-ba51-4383-b71f-da6e174d3752: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_icon_cog.svg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: f8fb7405-ba51-4383-b71f-da6e174d3752
+      alt: 'Get support'
+      title: ''
+      width: 0
+      height: 0

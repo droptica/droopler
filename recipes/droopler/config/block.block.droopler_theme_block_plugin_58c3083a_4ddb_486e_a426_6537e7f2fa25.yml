@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.secondary-menu
+  module:
+    - system
+  theme:
+    - droopler_theme
+id: droopler_theme_block_plugin_58c3083a_4ddb_486e_a426_6537e7f2fa25
+theme: droopler_theme
+region: header_secondary
+weight: -14
+provider: null
+plugin: 'system_menu_block:secondary-menu'
+settings:
+  id: 'system_menu_block:secondary-menu'
+  label: 'Secondary menu'
+  label_display: '0'
+  provider: system_menu_block
+  status: true
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

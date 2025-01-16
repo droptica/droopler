@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7e44aaa9-425f-43a3-b060-77dd60ca8752
+  bundle: d_image
+  default_langcode: en
+  depends:
+    52e620a7-59ef-4b5a-94c8-9539a879b4ed: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: planeasset4.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 52e620a7-59ef-4b5a-94c8-9539a879b4ed
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 1000
+      height: 1000

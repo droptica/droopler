@@ -1,0 +1,99 @@
+style:
+  version: VERSION
+  css:
+    base:
+      build/css/main.style.css: {}
+  js:
+    build/js/main.script.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+navigation-mobile:
+  dependencies:
+    - core/jquery
+    - core/once
+    - core/drupal
+
+select2-library:
+  remote: https://github.com/WeCodePixels/theia-sticky-sidebar
+  version: 1.7
+  license:
+    name: MIT
+    url: https://github.com/WeCodePixels/theia-sticky-sidebar/blob/master/LICENSE.txt
+    gpl-compatible: false
+  js:
+    /libraries/select2/dist/js/select2.js: { minified: true }
+  css:
+    base:
+      /libraries/select2/dist/css/select2.css: { minified: true }
+
+select2:
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - droopler_theme/select2-library
+
+block-mobile-filters:
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+masonry:
+  version: VERSION
+  js:
+    /libraries/masonry/dist/masonry.pkgd.min.js: {}
+
+tiles-gallery:
+  dependencies:
+   - droopler_theme/masonry
+
+slick:
+  remote: http://kenwheeler.github.io/slick/
+  version: VERSION
+  license:
+    name: MIT
+    gpl-compatible: false
+    url: https://github.com/kenwheeler/slick/blob/master/LICENSE
+  js:
+    /libraries/slick-carousel/slick/slick.min.js: { minified: true }
+  css:
+    component:
+      /libraries/slick-carousel/slick/slick.css: { }
+
+countup:
+  remote: http://github.com/inorganik/countUp.js
+  version: VERSION
+  license:
+    name: MIT
+    url: https://github.com/inorganik/countUp.js/blob/master/LICENSE.md
+    gpl-compatible: false
+  js:
+    /libraries/countup/dist/countUp.min.js: { minified: true }
+
+countup-dev:
+  remote: http://github.com/inorganik/countUp.js
+  version: VERSION
+  license:
+    name: MIT
+    url: https://github.com/inorganik/countUp.js/blob/master/LICENSE.md
+    gpl-compatible: false
+  js:
+    /libraries/countup/dist/countUp.js: { }
+
+in-viewport:
+  remote: http://github.com/vvo/in-viewport
+  version: VERSION
+  license:
+    name: MIT
+    url: https://github.com/vvo/in-viewport/blob/master/LICENSE
+    gpl-compatible: false
+  js:
+    /libraries/in-viewport/build/in-viewport.min.js: { minified: true }
+
+
+# We create component libraries automatically, no need to be listed here
+# as long as they keep the same name for the folder,JS and CSS file
+# you may extend the libraries if necessary
+# @see `includes/theme.inc` & @see: https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21theme.api.php/function/hook_library_info_build/9.2.x

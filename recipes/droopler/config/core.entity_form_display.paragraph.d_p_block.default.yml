@@ -1,0 +1,188 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_block.field_additional_classes
+    - field.field.paragraph.d_p_block.field_background_theme_custom
+    - field.field.paragraph.d_p_block.field_block
+    - field.field.paragraph.d_p_block.field_full_width
+    - field.field.paragraph.d_p_block.field_margin_bottom
+    - field.field.paragraph.d_p_block.field_margin_top
+    - field.field.paragraph.d_p_block.field_padding_bottom
+    - field.field.paragraph.d_p_block.field_padding_top
+    - field.field.paragraph.d_p_block.field_text_theme_custom
+    - field.field.paragraph.d_p_block.field_theme
+    - paragraphs.paragraphs_type.d_p_block
+  module:
+    - block_field
+    - color_field
+    - conditional_fields
+    - field_group
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_basic
+        - group_settings
+      label: Tabs
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 450
+    group_basic:
+      children:
+        - field_block
+        - field_block_reference
+      label: Basic
+      region: content
+      parent_name: group_tabs
+      weight: 5
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+    group_settings:
+      children:
+        - field_theme
+        - field_background_theme_custom
+        - field_text_theme_custom
+        - field_full_width
+        - field_margin_top
+        - field_margin_bottom
+        - field_padding_top
+        - field_padding_bottom
+        - field_additional_classes
+      label: Settings
+      region: content
+      parent_name: group_tabs
+      weight: 6
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: paragraph.d_p_block.default
+targetEntityType: paragraph
+bundle: d_p_block
+mode: default
+content:
+  field_additional_classes:
+    type: string_textfield
+    weight: 17
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_background_theme_custom:
+    type: color_field_widget_html5
+    weight: 9
+    region: content
+    settings:
+      show_extra: false
+    third_party_settings:
+      conditional_fields:
+        65f55e98-fd7a-45ce-a0a6-750677044156:
+          entity_type: paragraph
+          bundle: d_p_text_paged
+          dependee: field_theme
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: theme-custom
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_block:
+    type: block_field_default
+    weight: 18
+    region: content
+    settings:
+      plugin_id: ''
+      settings: {  }
+      configuration_form: full
+    third_party_settings: {  }
+  field_full_width:
+    type: boolean_checkbox
+    weight: 11
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_margin_bottom:
+    type: options_select
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_margin_top:
+    type: options_select
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_padding_bottom:
+    type: options_select
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_padding_top:
+    type: options_select
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_text_theme_custom:
+    type: color_field_widget_html5
+    weight: 10
+    region: content
+    settings:
+      show_extra: false
+    third_party_settings:
+      conditional_fields:
+        277e65c4-d6c2-4c9c-aed0-20108efea588:
+          entity_type: paragraph
+          bundle: d_p_text_paged
+          dependee: field_theme
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: theme-custom
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_theme:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

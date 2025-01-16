@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_enable_grid
+    - paragraphs.paragraphs_type.d_p_group_of_text_blocks
+id: paragraph.d_p_group_of_text_blocks.field_enable_grid
+field_name: field_enable_grid
+entity_type: paragraph
+bundle: d_p_group_of_text_blocks
+label: 'Enable grid'
+description: 'Adds a thin grid around all boxes.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

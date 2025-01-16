@@ -1,0 +1,14 @@
+{% embed '@droopler_theme/page-views/page-views.twig' with {
+  page_views_products_modifiers: ['text-align-left'],
+  pager_total_items: view.pager.total_items,
+}%}
+  {% block top_content %}
+    {{ drupal_region('top_content') }}
+  {% endblock %}
+  {% block aside %}
+    {{ drupal_region('aside') }}
+  {% endblock %}
+  {% block page_content %}
+    {% include '@droopler_theme/view-grid/view-grid.twig' %}
+  {% endblock %}
+{% endembed %}

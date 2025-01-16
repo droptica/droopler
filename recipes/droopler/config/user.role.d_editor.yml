@@ -1,0 +1,198 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_block
+    - block_content.type.d_paragraph_block
+    - block_content.type.mobile_filters
+    - block_content.type.mobile_filters_submit
+    - block_content.type.reset_button
+    - block_content.type.search_page_link
+    - block_content.type.social_media
+    - filter.format.full_html
+    - media.type.d_document
+    - media.type.d_image
+    - media.type.d_video
+    - node.type.blog_post
+    - node.type.content_page
+    - node.type.d_product
+    - taxonomy.vocabulary.blog_posts_category
+    - taxonomy.vocabulary.d_product_categories
+    - taxonomy.vocabulary.tags
+  module:
+    - block_content
+    - content_translation
+    - contextual
+    - filter
+    - frontend_editing
+    - layout_builder
+    - media
+    - menu_admin_per_menu
+    - node
+    - paragraphs
+    - path
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
+    - webform
+id: d_editor
+label: Editor
+weight: 3
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access block library'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access frontend editing'
+  - 'access media overview'
+  - 'access shortcuts'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access webform help'
+  - 'access webform overview'
+  - 'access webform submission user'
+  - 'add paragraphs'
+  - 'administer block content'
+  - 'administer bottom-footer-menu menu items'
+  - 'administer footer menu items'
+  - 'administer main menu items'
+  - 'administer nodes'
+  - 'administer secondary-menu menu items'
+  - 'bypass node access'
+  - 'create and edit custom blocks'
+  - 'create blog_post content'
+  - 'create content translations'
+  - 'create content_block block content'
+  - 'create content_page content'
+  - 'create d_document media'
+  - 'create d_image media'
+  - 'create d_paragraph_block block content'
+  - 'create d_product content'
+  - 'create d_video media'
+  - 'create mobile_filters block content'
+  - 'create mobile_filters_submit block content'
+  - 'create reset_button block content'
+  - 'create search_page_link block content'
+  - 'create social_media block content'
+  - 'create terms in blog_posts_category'
+  - 'create terms in d_product_categories'
+  - 'create terms in tags'
+  - 'create url aliases'
+  - 'create webform'
+  - 'customize shortcut links'
+  - 'delete all revisions'
+  - 'delete any blog_post content'
+  - 'delete any content_block block content'
+  - 'delete any content_block block content revisions'
+  - 'delete any content_page content'
+  - 'delete any d_document media'
+  - 'delete any d_image media'
+  - 'delete any d_paragraph_block block content'
+  - 'delete any d_paragraph_block block content revisions'
+  - 'delete any d_product content'
+  - 'delete any d_video media'
+  - 'delete any mobile_filters block content'
+  - 'delete any mobile_filters block content revisions'
+  - 'delete any mobile_filters_submit block content'
+  - 'delete any mobile_filters_submit block content revisions'
+  - 'delete any reset_button block content'
+  - 'delete any reset_button block content revisions'
+  - 'delete any search_page_link block content'
+  - 'delete any search_page_link block content revisions'
+  - 'delete any social_media block content'
+  - 'delete any social_media block content revisions'
+  - 'delete any webform'
+  - 'delete any webform submission'
+  - 'delete blog_post revisions'
+  - 'delete content translations'
+  - 'delete content_page revisions'
+  - 'delete d_product revisions'
+  - 'delete own blog_post content'
+  - 'delete own content_page content'
+  - 'delete own d_document media'
+  - 'delete own d_image media'
+  - 'delete own d_product content'
+  - 'delete own d_video media'
+  - 'delete own webform'
+  - 'delete own webform submission'
+  - 'delete term revisions in blog_posts_category'
+  - 'delete term revisions in d_product_categories'
+  - 'delete term revisions in tags'
+  - 'delete terms in blog_posts_category'
+  - 'delete terms in d_product_categories'
+  - 'delete terms in tags'
+  - 'edit any blog_post content'
+  - 'edit any content_block block content'
+  - 'edit any content_page content'
+  - 'edit any d_document media'
+  - 'edit any d_image media'
+  - 'edit any d_paragraph_block block content'
+  - 'edit any d_product content'
+  - 'edit any d_video media'
+  - 'edit any mobile_filters block content'
+  - 'edit any mobile_filters_submit block content'
+  - 'edit any reset_button block content'
+  - 'edit any search_page_link block content'
+  - 'edit any social_media block content'
+  - 'edit any webform'
+  - 'edit any webform submission'
+  - 'edit behavior plugin settings'
+  - 'edit own blog_post content'
+  - 'edit own content_page content'
+  - 'edit own d_document media'
+  - 'edit own d_image media'
+  - 'edit own d_product content'
+  - 'edit own d_video media'
+  - 'edit own webform'
+  - 'edit own webform submission'
+  - 'edit terms in blog_posts_category'
+  - 'edit terms in d_product_categories'
+  - 'edit terms in tags'
+  - 'move paragraphs'
+  - 'revert all revisions'
+  - 'revert any content_block block content revisions'
+  - 'revert any d_paragraph_block block content revisions'
+  - 'revert any mobile_filters block content revisions'
+  - 'revert any mobile_filters_submit block content revisions'
+  - 'revert any reset_button block content revisions'
+  - 'revert any search_page_link block content revisions'
+  - 'revert any social_media block content revisions'
+  - 'revert blog_post revisions'
+  - 'revert content_page revisions'
+  - 'revert d_product revisions'
+  - 'revert term revisions in blog_posts_category'
+  - 'revert term revisions in d_product_categories'
+  - 'revert term revisions in tags'
+  - 'switch shortcut sets'
+  - 'translate any entity'
+  - 'translate blog_post node'
+  - 'translate blog_posts_category taxonomy_term'
+  - 'translate content_page node'
+  - 'translate editable entities'
+  - 'translate paragraph'
+  - 'update content translations'
+  - 'use text format full_html'
+  - 'view all revisions'
+  - 'view any content_block block content history'
+  - 'view any d_document media revisions'
+  - 'view any d_image media revisions'
+  - 'view any d_paragraph_block block content history'
+  - 'view any d_video media revisions'
+  - 'view any mobile_filters block content history'
+  - 'view any mobile_filters_submit block content history'
+  - 'view any reset_button block content history'
+  - 'view any search_page_link block content history'
+  - 'view any social_media block content history'
+  - 'view any webform submission'
+  - 'view blog_post revisions'
+  - 'view content_page revisions'
+  - 'view d_product revisions'
+  - 'view own unpublished content'
+  - 'view own webform submission'
+  - 'view term revisions in blog_posts_category'
+  - 'view term revisions in d_product_categories'
+  - 'view term revisions in tags'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'

@@ -1,0 +1,280 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 66895fb2-2c33-449f-907e-2a716f2afaaf
+  bundle: content_page
+  default_langcode: en
+  depends:
+    e4fd7237-18ea-4639-803a-0ad7280842ab: media
+    49fa8ff0-d3c5-4775-9808-5f4ea953256c: media
+    12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Monitoring and assessment'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Monitoring and assessment | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/monitoring-and-assessment'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_engine_car_5.jpg?itok=6g2LoTgI'
+  path:
+    -
+      alias: /monitoring-and-assessment
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 84bbc45d-e941-46bc-93aa-c30cddd55f31
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:#'
+              title: 'Read more'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_main_title:
+            -
+              value: 'Monitoring and assessment'
+          field_d_media_background:
+            -
+              entity: e4fd7237-18ea-4639-803a-0ad7280842ab
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_extra_large
+          field_padding_top:
+            -
+              value: padding_top_extra_large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: cfbf87c6-d041-4b52-8d54-edeacedcecb9
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>We provide our clients with the service of monitoring and testing jet engines. Tests can be carried out on-site or at our air base. In our work we use high-class measuring equipment and computers.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Our services'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c6dcc739-bb2c-4b57-b3dc-0a2af9d6d246
+          bundle: d_p_form
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_main_title:
+            -
+              value: 'Schedule a date and time for your service'
+          field_d_media_background:
+            -
+              entity: 49fa8ff0-d3c5-4775-9808-5f4ea953256c
+          field_d_webform:
+            -
+              target_id: contact
+              default_data: ''
+              status: open
+              open: ''
+              close: ''
+          field_form_layout:
+            -
+              value: bottom
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+  field_teaser_media_image:
+    -
+      entity: 12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2
+  field_teaser_text:
+    -
+      value: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'

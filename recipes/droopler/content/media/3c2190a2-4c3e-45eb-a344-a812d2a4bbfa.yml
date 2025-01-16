@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 3c2190a2-4c3e-45eb-a344-a812d2a4bbfa
+  bundle: d_image
+  default_langcode: en
+  depends:
+    d9889509-0907-4c8f-8faf-6e58c6d2472d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_engine_car_2.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: d9889509-0907-4c8f-8faf-6e58c6d2472d
+      alt: 'Engine Car'
+      title: ''
+      width: 1280
+      height: 718

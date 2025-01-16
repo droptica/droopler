@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 922f8ae7-20f9-4b36-a140-e051217aa964
+  bundle: d_image
+  default_langcode: en
+  depends:
+    8d4a4877-6dc5-4714-aef4-35427c92ef97: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: demo_paragraph_subscribe_file.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 8d4a4877-6dc5-4714-aef4-35427c92ef97
+      alt: 'Paragraph Subscribe For File Icon'
+      title: ''
+      width: 200
+      height: 152

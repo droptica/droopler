@@ -1,0 +1,2280 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 27b8e13e-43b7-46f2-9128-119d66a48043
+  bundle: content_page
+  default_langcode: en
+  depends:
+    7349f593-6511-4892-99f2-6fc71a07b302: media
+    ffb090bf-e319-4e85-afac-7cae8783dc59: media
+    19c5a479-a1eb-45a9-9968-4d66254af530: media
+    6a56cda2-ccba-4285-a4d7-6f9f8e2d7d8d: media
+    5d6b6264-aead-4220-a3ae-552a54bf44b4: media
+    a8e39a0e-043d-40a8-aace-f0db84a561eb: media
+    cac9d039-7cbf-4e87-a799-d5db66efe7e5: media
+    26aefc36-55a4-4255-82a3-1db3725d5eb1: media
+    c313877c-3e8c-4567-b71a-ecb1db419812: media
+    56911bf5-bd64-492c-90a7-97edee430a09: media
+    20da8002-c0df-45ba-a769-ac36d6d9aab4: media
+    30c83456-4ddf-4832-bc90-0b5dcd3a4777: media
+    f87a1231-7051-437f-9c4e-0bfe79c6db89: media
+    390951de-5882-4303-8a30-dc2a4807846e: media
+    0ddc7a58-7cb7-4a62-a7d4-2a23ff01c32c: media
+    b00d8098-6b0a-4e8b-87e9-6d7eb63d9fd4: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Carousel Paragraph'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Carousel Paragraph | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/documentation/carousel-paragraph'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /documentation/carousel-paragraph
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a4b26653-0369-4f77-aeb3-cdc2e9f6f4c7
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_main_title:
+            -
+              value: 'Carousel Paragraph'
+          field_d_subtitle:
+            -
+              value: 'Droopler Documentation'
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 04d42eae-bdd3-4768-bda5-dc52195546c0
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>Carousel Paragraph is another type of list. The items are sliding from right to left, one by one. You decide how many items are visible. Below you can see a full version of the carousel. With icon, description and fully equipped boxes.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Full Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 5f05d5e0-a4d5-41ce-83c0-e80b8fd3f83f
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_add_dividers:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 4
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/carousel-paragraph'
+              title: 'See more'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_icon:
+            -
+              entity: 7349f593-6511-4892-99f2-6fc71a07b302
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 0fa007bc-a899-4d45-8a0f-731d8ae39e57
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Car
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: ffb090bf-e319-4e85-afac-7cae8783dc59
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d27a1799-79ef-4052-8197-6e0abafc5fd7
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Boat
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Amet'
+                  field_d_media_icon:
+                    -
+                      entity: 19c5a479-a1eb-45a9-9968-4d66254af530
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: dcb34994-d32a-4fc7-b696-8ad6e0700ba8
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Settings
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: 6a56cda2-ccba-4285-a4d7-6f9f8e2d7d8d
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: f4e1928b-b374-4a23-8fbb-5e98d6418faf
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Bag
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Amet'
+                  field_d_media_icon:
+                    -
+                      entity: 5d6b6264-aead-4220-a3ae-552a54bf44b4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: abacb750-e393-42ca-95bd-19550434293c
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Telephone
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: a8e39a0e-043d-40a8-aace-f0db84a561eb
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: c1db3373-1d5d-4c51-a6ab-d4d7a8353400
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: File
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Amet'
+                  field_d_media_icon:
+                    -
+                      entity: cac9d039-7cbf-4e87-a799-d5db66efe7e5
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 50f21ef0-72dc-4108-af07-162a722a6730
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Plane
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: 26aefc36-55a4-4255-82a3-1db3725d5eb1
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 28c1bea5-0424-4101-bb41-3232d261037b
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Download
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Amet'
+                  field_d_media_icon:
+                    -
+                      entity: c313877c-3e8c-4567-b71a-ecb1db419812
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: cdb5735f-83d3-4cb1-b52b-e5b96feac21a
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>The Carousel is perfect for presenting a sliding list of logotypes. If you organize an event with the help of sponsors or cooperate with a lot of partners, you usually want to honor them on your website. Of course, you can wrap each item with a hyperlink.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Logos Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e8e8763d-ecd4-47ec-86b8-e4790dc4f902
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_add_dividers:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 4
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d0736214-3a53-4fcc-a272-7a8426d8b41e
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: BTU
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 56911bf5-bd64-492c-90a7-97edee430a09
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 0d84263d-d073-4039-974a-dd0567679529
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: 'Cube Inc.'
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 20da8002-c0df-45ba-a769-ac36d6d9aab4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 135de365-2538-46f5-aea9-58ab959e2fa3
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: 'Atlantic Jetlines'
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 30c83456-4ddf-4832-bc90-0b5dcd3a4777
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: adebaed2-cc2c-418a-b9dc-6a34d93e4805
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: 'Rock World Cafe'
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: f87a1231-7051-437f-9c4e-0bfe79c6db89
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 3de22563-5e08-42cd-8f7a-a03e59802fd3
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: YETI
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 390951de-5882-4303-8a30-dc2a4807846e
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 9a386106-3a0a-4a10-9130-8e72a1c5db33
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Droopler
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 7349f593-6511-4892-99f2-6fc71a07b302
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 12ea7a0e-2590-4578-8388-986b0f0dd3b5
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: "<p>Does only one item in the Carousel make sense at all? Of course! With one piece of content visible at the time, you can build a list of testimonials. The image field serves as a person's photo, and the description field holds the opinion.</p>"
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Opinions Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 59995958-52fa-40db-ab57-1703e60d794c
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_add_dividers:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 1
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 1
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: fd581f87-8731-4d58-a2f7-da607ac19543
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Aenean feugiat dui sit amet condimentum volutpat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</em></p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'John Smith, CEO of Cube Inc.'
+                  field_d_media_icon:
+                    -
+                      entity: 0ddc7a58-7cb7-4a62-a7d4-2a23ff01c32c
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 7d1c4f9d-dd40-4919-a2aa-95a6d8df1ac9
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p><em>Cras malesuada fermentum felis at vulputate. In commodo nunc sed mi placerat eleifend. Morbi maximus, enim at sagittis lobortis, ante quam pulvinar nulla, vel gravida diam magna mi. Nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</em></p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Anna Novak, Chief Architect of BTU'
+                  field_d_media_icon:
+                    -
+                      entity: b00d8098-6b0a-4e8b-87e9-6d7eb63d9fd4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 021508a4-bdd3-4b0f-b261-6d4bfd47d0c5
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>What if you want four columns in the row in a carousel with precisely four items? There would be nothing to slide! Droopler is prepared for such edge cases. It automatically decreases column count to show a list as a slider. Look at the example below. There are four items in four columns, automatically fitted into three columns.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Columns Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 874d1cac-deca-45e0-b273-e62f32ef100a
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_add_dividers:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 4
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_icon:
+            -
+              entity: 7349f593-6511-4892-99f2-6fc71a07b302
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: efb08399-709b-42f0-bf10-a7b04e81cf25
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Car
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: ffb090bf-e319-4e85-afac-7cae8783dc59
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: a4760b1e-b70b-4e2e-9028-4a6955ac35e5
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Boat
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Amet'
+                  field_d_media_icon:
+                    -
+                      entity: 19c5a479-a1eb-45a9-9968-4d66254af530
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: ab37169c-cab1-45b1-8f6c-b78b8dc35e09
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Settings
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: 6a56cda2-ccba-4285-a4d7-6f9f8e2d7d8d
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: e869ba58-3ed7-4039-9cf7-f5ee29b15018
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Bag
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Amet'
+                  field_d_media_icon:
+                    -
+                      entity: 5d6b6264-aead-4220-a3ae-552a54bf44b4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: fac014be-142c-4eb6-867f-630b3cc2f86b
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Telephone
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: a8e39a0e-043d-40a8-aace-f0db84a561eb
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8fb19bb9-6ed3-4413-87d1-af359092f8b9
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>Choose the "With dividers" option to add a vertical border to all items. The background becomes dark, the text is white now. Choose the "Full width" option to span the paragraph 100% width.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Full Width With Divider Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c33bec1d-cf8c-4c66-909a-7c28e0be6461
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_add_dividers:
+            -
+              value: true
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 3
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida. Duis tristique sem non interdum ultricies. Nunc vitae viverra lacus. Vivamus vel mollis nisi. Sed ut fermentum lorem. Vestibulum non accumsan eros, sit amet tempus ex.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_icon:
+            -
+              entity: 7349f593-6511-4892-99f2-6fc71a07b302
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 299977b7-e188-4b77-9555-6d39726ee63b
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Car
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: ffb090bf-e319-4e85-afac-7cae8783dc59
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 259086ee-9788-4626-9087-b74b9365aaf8
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Boat
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Amet'
+                  field_d_media_icon:
+                    -
+                      entity: 19c5a479-a1eb-45a9-9968-4d66254af530
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 16342416-7073-48d2-85c5-f13d88844184
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Settings
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: 6a56cda2-ccba-4285-a4d7-6f9f8e2d7d8d
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 77f852a3-e70e-4f26-a76f-af09d822e838
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Bag
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Dolor Amet'
+                  field_d_media_icon:
+                    -
+                      entity: 5d6b6264-aead-4220-a3ae-552a54bf44b4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: bcc3562b-0d2b-4717-9efc-c28d215fc064
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Telephone
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_long_text:
+                    -
+                      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus tristique dui dignissim gravida.</p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Lorem Ipsum'
+                  field_d_media_icon:
+                    -
+                      entity: a8e39a0e-043d-40a8-aace-f0db84a561eb
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_full_width:
+            -
+              value: true
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Discover possibilities of Droopler distribution for Drupal.'

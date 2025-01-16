@@ -1,0 +1,547 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: bad811c8-b48a-4ff8-b59d-e2ffbf7847f2
+  bundle: content_page
+  default_langcode: en
+  depends:
+    0ddc7a58-7cb7-4a62-a7d4-2a23ff01c32c: media
+    b00d8098-6b0a-4e8b-87e9-6d7eb63d9fd4: media
+    122beb2a-83e4-4711-998e-bc05d7fe5f24: media
+    a7f41d0e-88f2-42dd-9f4d-0b14273099e0: media
+    15052e0e-8398-47f7-80b9-a161e0cbe281: media
+    3175871d-9d43-446c-b4fb-a66bf6858484: media
+    b449ce8d-4631-4e14-9a9e-65fd835513b8: media
+    12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'For Boats'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'For Boats | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/boats'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_engine_car_5.jpg?itok=6g2LoTgI'
+  path:
+    -
+      alias: /boats
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 98c37785-84cc-4c96-a6f4-b44d0843f5b9
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_main_title:
+            -
+              value: 'Our happy customers'
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 4a484c3a-7608-4503-be63-6f1e7d032f5d
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_long_text:
+                    -
+                      value: '<p><em>Our company is very satisfied with the level of Drooplengines services. The company team provided us with full technical support from the very beginning of our cooperation.</em></p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'John Smith, BlackStar Limited'
+                  field_d_media_icon:
+                    -
+                      entity: 0ddc7a58-7cb7-4a62-a7d4-2a23ff01c32c
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 49ae986f-36c7-4c84-a023-b4ff58d0830e
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_long_text:
+                    -
+                      value: "<p><em>The Drooplengines company is an excellent business partner who has carried out services at the highest level. Thanks to cooperation with Drooplengines, we have reduced the company's operating costs associated with servicing our engines.</em></p>"
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: 'Anna Novak, LAD Fleet Management'
+                  field_d_media_icon:
+                    -
+                      entity: b00d8098-6b0a-4e8b-87e9-6d7eb63d9fd4
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8c39da40-556f-448f-b443-6e8636efd826
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_cta_link:
+            -
+              uri: 'internal:/contact'
+              title: 'Contact us'
+              options:
+                type: primary
+          field_d_long_text:
+            -
+              value: '<p>We offer a wide range of services to our customers who have bought our boat engines. Our experienced team of mechanics and specialists will provide high quality of service. Contact our company to arrange a service date and time.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'For boats'
+          field_d_media_background:
+            -
+              entity: 122beb2a-83e4-4711-998e-bc05d7fe5f24
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 5ebacf24-f2ff-40bc-aec8-9c02b14e5630
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_main_title:
+            -
+              value: 'Our services for boat engines'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d6c740c4-f545-43da-b87c-da68352a385d
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/regular-servicing'
+                      title: 'Regular servicing'
+                      options:
+                        type: primary
+                  field_d_main_title:
+                    -
+                      value: 'Regular servicing'
+                  field_d_media_background:
+                    -
+                      entity: a7f41d0e-88f2-42dd-9f4d-0b14273099e0
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: b759b487-45da-48aa-ae5d-eb44c49a96f8
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/engine-installation'
+                      title: 'Engine installation'
+                      options:
+                        type: primary
+                  field_d_main_title:
+                    -
+                      value: 'Engine installation'
+                  field_d_media_background:
+                    -
+                      entity: 15052e0e-8398-47f7-80b9-a161e0cbe281
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 67066c5e-a224-4ebd-bddb-e5d73a6ce892
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/engine-repair-and-overhaul'
+                      title: 'Engine repair and overhaul'
+                      options:
+                        type: primary
+                  field_d_main_title:
+                    -
+                      value: 'Engine repair and overhaul'
+                  field_d_media_background:
+                    -
+                      entity: 3175871d-9d43-446c-b4fb-a66bf6858484
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6873b22b-b4d5-4c96-bf41-2ff9949ddcc9
+          bundle: d_p_group_of_counters
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_counter_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: dbf9f497-f6c2-4c77-8d34-b5054c1cfdc5
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: Plants
+                  field_d_number:
+                    -
+                      value: 8
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 3ce16909-4d7d-464b-a6a5-0e90856efe04
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Offices worldwide'
+                  field_d_number:
+                    -
+                      value: 21
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: acdbd050-eea5-4d43-87f6-f61f3d49aa6d
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: Employees
+                  field_d_number:
+                    -
+                      value: 2000
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: a39afc0e-9beb-4602-b3ac-eb77f84594d0
+                  bundle: d_p_single_counter
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_main_title:
+                    -
+                      value: 'Products and parts'
+                  field_d_number:
+                    -
+                      value: 15000
+          field_d_main_title:
+            -
+              value: 'Our company in numbers'
+          field_d_media_background:
+            -
+              entity: b449ce8d-4631-4e14-9a9e-65fd835513b8
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 75d52ef3-5a07-4f2a-8f8d-bee1b2f3c4f8
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_long_text:
+            -
+              value: '<p3>Our company has many certificates confirming the high quality of our services: ISO 14001:2015, ISO 9001:2015 and BS OHSAS 18001:2007.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Integrated Quality Management'
+  field_teaser_media_image:
+    -
+      entity: 12ded80b-808c-4ca5-bb3a-0c5bf43c7dc2
+  field_teaser_text:
+    -
+      value: 'We provide a lot of services related to engines. Check our services dedicated to your industry.'

@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0ffdd5a9-3b4f-4ec7-bf61-a2fba698b91a
+  bundle: d_image
+  default_langcode: en
+  depends:
+    92771abd-2db1-4210-bbb9-8f3716b8be4c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: asset10.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 92771abd-2db1-4210-bbb9-8f3716b8be4c
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 1000
+      height: 1000

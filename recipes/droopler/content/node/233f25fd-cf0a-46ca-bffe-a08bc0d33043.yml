@@ -1,0 +1,98 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 233f25fd-cf0a-46ca-bffe-a08bc0d33043
+  bundle: d_product
+  default_langcode: en
+  depends:
+    ba361bd1-3613-478c-8181-03482ff2c2ae: media
+    10dce4df-a088-4a57-b56a-c28fc7cdeaf8: media
+    6b2b4d2a-d5d6-4577-bc7f-efd768d1d501: media
+    3e4080f4-ebaa-47ee-8188-bb94b08418a8: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    b77c5c15-9e56-4fc1-a85d-c43f906ce6be: taxonomy_term
+    8969656d-d4f4-4183-afb6-706394592a1d: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Centurion 3000'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Centurion 3000 | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'New engine for cars developed by top engineers and industry specialists. Ideal for city and off-road cars.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/centurion-3000'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'New engine for cars developed by top engineers and industry specialists. Ideal for city and off-road cars.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_product_init_centurion-3000-1.jpg?itok=N7XnX5KR'
+  path:
+    -
+      alias: /products/centurion-3000
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'New engine for cars developed by top engineers and industry specialists. Ideal for city and off-road cars.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: ba361bd1-3613-478c-8181-03482ff2c2ae
+    -
+      entity: 10dce4df-a088-4a57-b56a-c28fc7cdeaf8
+    -
+      entity: 6b2b4d2a-d5d6-4577-bc7f-efd768d1d501
+    -
+      entity: 3e4080f4-ebaa-47ee-8188-bb94b08418a8
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: b77c5c15-9e56-4fc1-a85d-c43f906ce6be
+    -
+      entity: 8969656d-d4f4-4183-afb6-706394592a1d

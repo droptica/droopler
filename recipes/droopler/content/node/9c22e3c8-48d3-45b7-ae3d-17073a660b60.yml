@@ -1,0 +1,95 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 9c22e3c8-48d3-45b7-ae3d-17073a660b60
+  bundle: d_product
+  default_langcode: en
+  depends:
+    89000a5c-0141-43c7-bd87-065f90df02fb: media
+    a86bc264-026b-4ecf-91b0-99968e185fcf: media
+    f2bafe81-0ec5-4786-91b7-b02b6c6d73d5: media
+    c4ad88fe-ec6e-4e1c-9794-993a698ad7da: media
+    ddf431bf-4af1-4c15-b230-73cdcbd0fdb6: taxonomy_term
+    7538e3ca-6c10-44e6-8d5c-e786f36d9000: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Marine-XT 550'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Marine-XT 550 | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Engine for small motor boats. Mounted outside the boat. 40 horsepower ensures excellent performance and low fuel consumption.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/marine-xt-550'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Engine for small motor boats. Mounted outside the boat. 40 horsepower ensures excellent performance and low fuel consumption.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_product_init_machine-xt-550-1.jpg?itok=fMtYG52W'
+  path:
+    -
+      alias: /products/marine-xt-550
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Engine for small motor boats. Mounted outside the boat. 40 horsepower ensures excellent performance and low fuel consumption.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 89000a5c-0141-43c7-bd87-065f90df02fb
+    -
+      entity: a86bc264-026b-4ecf-91b0-99968e185fcf
+    -
+      entity: f2bafe81-0ec5-4786-91b7-b02b6c6d73d5
+    -
+      entity: c4ad88fe-ec6e-4e1c-9794-993a698ad7da
+  field_product_categories:
+    -
+      entity: ddf431bf-4af1-4c15-b230-73cdcbd0fdb6
+  field_tags:
+    -
+      entity: 7538e3ca-6c10-44e6-8d5c-e786f36d9000

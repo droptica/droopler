@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2b2c3d60-1134-4c4c-8b82-4c7e619cfb7f
+  bundle: d_image
+  default_langcode: en
+  depends:
+    466d76b0-216d-4268-9e5a-504258db60ca: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_factory.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 466d76b0-216d-4268-9e5a-504258db60ca
+      alt: Factory
+      title: ''
+      width: 2000
+      height: 1333

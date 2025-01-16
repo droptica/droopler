@@ -1,0 +1,98 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4236a3a1-dadd-4bf2-af7f-8154d7509b83
+  bundle: d_product
+  default_langcode: en
+  depends:
+    d687bc75-8783-49cb-bcc0-8e0e91f1e6f8: media
+    263f3521-e65d-4559-9669-ed799ed6461e: media
+    994692ab-31cb-432f-82e1-d9b4dcf38e5d: media
+    fedf3eb2-1ddd-43b0-9cf5-75af2b4ab6d7: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    b77c5c15-9e56-4fc1-a85d-c43f906ce6be: taxonomy_term
+    70a4e6c1-c1a7-4fbc-912f-5da2974af5d0: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Super Charged Engine v12'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Super Charged Engine v12 | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Modern automotive engine for sports vehicles. Excellent performance with moderate fuel consumption.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/super-charged-engine-v12'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Modern automotive engine for sports vehicles. Excellent performance with moderate fuel consumption.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_product_init_super-charged-engine-1.jpg?itok=nW36qOXW'
+  path:
+    -
+      alias: /products/super-charged-engine-v12
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Modern automotive engine for sports vehicles. Excellent performance with moderate fuel consumption.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: d687bc75-8783-49cb-bcc0-8e0e91f1e6f8
+    -
+      entity: 263f3521-e65d-4559-9669-ed799ed6461e
+    -
+      entity: 994692ab-31cb-432f-82e1-d9b4dcf38e5d
+    -
+      entity: fedf3eb2-1ddd-43b0-9cf5-75af2b4ab6d7
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: b77c5c15-9e56-4fc1-a85d-c43f906ce6be
+    -
+      entity: 70a4e6c1-c1a7-4fbc-912f-5da2974af5d0

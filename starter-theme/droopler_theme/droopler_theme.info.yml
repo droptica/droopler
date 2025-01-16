@@ -1,0 +1,38 @@
+name: Droopler Theme
+description: A theme based on Radix.
+screenshot: screenshot.png
+core_version_requirement: '^10'
+version: DROOPLER_VERSION
+engine: twig
+type: theme
+base theme: radix
+
+'interface translation project': droopler_theme
+'interface translation server pattern': 'themes/custom/droopler_theme/translations/%language.po'
+
+regions:
+  header_branding: Header Branding
+  header_secondary: Header Secondary
+  header_primary: Header Primary
+  admin_tabs: Admin tabs
+  content: Content
+  top_content: Top content
+  aside: Aside
+  footer_primary_first: Footer Primary First
+  footer_primary_second: Footer Primary Second
+  footer_primary_third: Footer Primary Third
+  footer_primary_fourth: Footer Primary Fourth
+  footer_primary_fifth: Footer Primary Fifth
+  footer_primary_sixth: Footer Primary Sixth
+  footer_secondary: Footer Secondary
+
+libraries:
+  - droopler_theme/style
+  - droopler_theme/d_lang_dropdown
+
+ckeditor_stylesheets:
+  - build/css/main.style.css
+
+components:
+  namespaces:
+    droopler_theme: src/components

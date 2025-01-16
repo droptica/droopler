@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 71093dc9-85f6-4dbf-8088-d0740a3f7c73
+  bundle: d_image
+  default_langcode: en
+  depends:
+    0f42802a-a120-497f-a25e-e455b68df14f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_tile_plane.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 0f42802a-a120-497f-a25e-e455b68df14f
+      alt: Airplane
+      title: ''
+      width: 768
+      height: 512

@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: ce3f5bf6-aeb8-4f85-a616-887a6e0134a9
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    7b4528a3-7a88-4755-91f8-d8937264ae10: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Products
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 7b4528a3-7a88-4755-91f8-d8937264ae10
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

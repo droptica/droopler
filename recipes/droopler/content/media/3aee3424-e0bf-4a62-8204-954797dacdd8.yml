@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 3aee3424-e0bf-4a62-8204-954797dacdd8
+  bundle: d_image
+  default_langcode: en
+  depends:
+    90f53b11-3b70-4cc6-bc5d-ac38e0ca0a4b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: demo_bootstrap.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 90f53b11-3b70-4cc6-bc5d-ac38e0ca0a4b
+      alt: 'Bootstrap icon'
+      title: ''
+      width: 400
+      height: 330

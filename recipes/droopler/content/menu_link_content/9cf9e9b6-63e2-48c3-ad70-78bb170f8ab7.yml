@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 9cf9e9b6-63e2-48c3-ad70-78bb170f8ab7
+  bundle: menu_link_content
+  default_langcode: en
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: GDPR
+  menu_name:
+    -
+      value: bottom-footer-menu
+  link:
+    -
+      uri: 'internal:/gdpr'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: 2
+  expanded:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

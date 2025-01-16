@@ -1,0 +1,98 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: ca5c14ca-afab-4c38-9600-ad8702a290d8
+  bundle: d_paragraph_block
+  default_langcode: en
+  depends:
+    cac1779b-c3e9-4d54-a962-2ce0d8757d87: media
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Blog term header'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 94d05a6b-c1e7-469a-bc19-42b05ec3fb27
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1730895158
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#FFFFFF'
+              opacity: 0.0
+          field_d_main_title:
+            -
+              value: '[term:name]'
+          field_d_media_background:
+            -
+              entity: cac1779b-c3e9-4d54-a962-2ce0d8757d87
+          field_heading_type:
+            -
+              value: h2
+          field_image_side:
+            -
+              value: left
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary

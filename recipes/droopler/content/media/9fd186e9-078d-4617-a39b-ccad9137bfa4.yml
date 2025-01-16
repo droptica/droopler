@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9fd186e9-078d-4617-a39b-ccad9137bfa4
+  bundle: d_image
+  default_langcode: en
+  depends:
+    69239568-1759-4be2-a82f-cc2cb9159d6c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: demo_paragraph_carousel.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 69239568-1759-4be2-a82f-cc2cb9159d6c
+      alt: 'Paragraph Carousel Icon'
+      title: ''
+      width: 200
+      height: 152

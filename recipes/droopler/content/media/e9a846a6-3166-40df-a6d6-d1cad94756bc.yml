@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e9a846a6-3166-40df-a6d6-d1cad94756bc
+  bundle: d_image
+  default_langcode: en
+  depends:
+    8b38ce14-6df4-4dbd-afd8-4beb30c54737: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_tiles_2_3.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 8b38ce14-6df4-4dbd-afd8-4beb30c54737
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 768
+      height: 512

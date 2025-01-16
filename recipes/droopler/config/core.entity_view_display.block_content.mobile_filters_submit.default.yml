@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.mobile_filters_submit
+    - field.field.block_content.mobile_filters_submit.field_button_class
+    - field.field.block_content.mobile_filters_submit.field_button_text
+id: block_content.mobile_filters_submit.default
+targetEntityType: block_content
+bundle: mobile_filters_submit
+mode: default
+content: {  }
+hidden:
+  field_button_class: true
+  field_button_text: true
+  langcode: true
+  search_api_excerpt: true

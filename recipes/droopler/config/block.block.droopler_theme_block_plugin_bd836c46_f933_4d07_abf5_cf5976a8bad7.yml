@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.bottom-footer-menu
+  module:
+    - system
+  theme:
+    - droopler_theme
+id: droopler_theme_block_plugin_bd836c46_f933_4d07_abf5_cf5976a8bad7
+theme: droopler_theme
+region: footer_secondary
+weight: 0
+provider: null
+plugin: 'system_menu_block:bottom-footer-menu'
+settings:
+  id: 'system_menu_block:bottom-footer-menu'
+  label: 'Bottom footer menu'
+  label_display: '0'
+  provider: system_menu_block
+  status: true
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

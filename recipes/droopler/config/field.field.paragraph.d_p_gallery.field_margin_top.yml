@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_margin_top
+    - paragraphs.paragraphs_type.d_p_gallery
+  module:
+    - options
+id: paragraph.d_p_gallery.field_margin_top
+field_name: field_margin_top
+entity_type: paragraph
+bundle: d_p_gallery
+label: 'Margin top'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: margin_top_none
+default_value_callback: ''
+settings: {  }
+field_type: list_string

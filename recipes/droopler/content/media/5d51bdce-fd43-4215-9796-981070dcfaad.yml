@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5d51bdce-fd43-4215-9796-981070dcfaad
+  bundle: d_image
+  default_langcode: en
+  depends:
+    1486e6d1-26c5-4dfd-bf8a-fb4c7284c35a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_architecture.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 1486e6d1-26c5-4dfd-bf8a-fb4c7284c35a
+      alt: Architecture
+      title: ''
+      width: 1920
+      height: 1280

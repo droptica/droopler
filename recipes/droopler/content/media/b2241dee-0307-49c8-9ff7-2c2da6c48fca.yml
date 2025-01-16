@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b2241dee-0307-49c8-9ff7-2c2da6c48fca
+  bundle: d_image
+  default_langcode: en
+  depends:
+    915d7f3a-b49d-4b68-b1ca-0958e668cc47: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_enginge_repair_1.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 915d7f3a-b49d-4b68-b1ca-0958e668cc47
+      alt: 'Engine repair'
+      title: ''
+      width: 1920
+      height: 1285

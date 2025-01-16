@@ -1,0 +1,543 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: cc0444ca-742d-4911-b517-de724e0da8ee
+  bundle: content_page
+  default_langcode: en
+  depends:
+    64fd1014-3841-4559-8418-505392e6a16e: media
+    5d51bdce-fd43-4215-9796-981070dcfaad: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: Contact
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Contact | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Our dedicated support and sales teams will answer any questions related to our products and services. Please check our office addresses or send us an email.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/contact'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Our dedicated support and sales teams will answer any questions related to our products and services. Please check our office addresses or send us an email.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_architecture.jpg?itok=4T3F0ZHc'
+  path:
+    -
+      alias: /contact
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a73fe0e5-5125-4504-9814-93cec8374d17
+          bundle: d_p_side_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Our dedicated support and sales teams will answer any questions related to our products and services. Please check our office addresses or send us an email.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: Contact
+          field_d_media_background:
+            -
+              entity: 64fd1014-3841-4559-8418-505392e6a16e
+          field_heading_type:
+            -
+              value: h1
+          field_image_side:
+            -
+              value: right
+          field_image_width:
+            -
+              value: normal
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7a8351f2-ed65-47ce-8e25-629343f99e04
+          bundle: d_p_form
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_long_text:
+            -
+              value: '<p>Please use our contact form to send us a message. We will contact you within 24 hours.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Contact Form'
+          field_d_media_background:
+            -
+              entity: 5d51bdce-fd43-4215-9796-981070dcfaad
+          field_d_webform:
+            -
+              target_id: contact
+              default_data: ''
+              status: open
+              open: ''
+              close: ''
+          field_form_layout:
+            -
+              value: right
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d364b877-bd43-49c6-9fce-6f3b93c3109f
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 4
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_main_title:
+            -
+              value: 'Our offices'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d0e51ac4-64ca-4b30-9067-585f55717482
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p>Wrocław<br>Stacyjna 1<br>53-613 Wrocław<br>Polska</p><p><a href="tel:713223233" title="Call to: 71 32 23 233">71 32 23 233</a></p><p><a href="mailto:wroclaw@droptica.com" title="Mail to: wroclaw@droptica.com">wroclaw@droptica.com</a></p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Wrocław
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 387394ac-60c2-43fd-a182-e4139200c06d
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p>Gdańsk<br>Azymutalna 9<br>80-298 Gdańsk<br>Polska</p><p><a href="tel:713223233" title="Call to: 71 32 23 233">71 32 23 233</a></p><p><a href="mailto:gdansk@droptica.com" title="Mail to: gdansk@droptica.com">gdansk@droptica.com</a></p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Gdańsk
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: b6f9f679-bb94-4723-9937-b071a73b6012
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p>Rzeszów<br>Warszawska 18<br>35-202 Rzeszów<br>Polska</p><p><a href="tel:713223233" title="Call to: 71 32 23 233">71 32 23 233</a></p><p><a href="mailto:rzeszow@droptica.com" title="Mail to: rzeszow@droptica.com">rzeszow@droptica.com</a></p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Rzeszów
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 17c82533-29e4-4ce9-bc74-21ed5568bdfb
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_long_text:
+                    -
+                      value: '<p>Toruń<br>Grudziądzka 46-48<br>87-100 Toruń<br>Polska</p><p><a href="tel:713223233" title="Call to: 71 32 23 233">71 32 23 233</a></p><p><a href="mailto:torun@droptica.com" title="Mail to: torun@droptica.com">torun@droptica.com</a></p>'
+                      format: full_html
+                  field_d_main_title:
+                    -
+                      value: Toruń
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: false
+          field_full_width:
+            -
+              value: true
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 512c8942-7cc9-45fa-94c0-f42b307754c8
+          bundle: d_p_side_embed
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_embed:
+            -
+              value: '<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10019.591321160302!2d16.973667!3d51.1103452!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2sie!4v1564423228931!5m2!1spl!2sie" frameborder="0" style="border:0" allowfullscreen></iframe>'
+          field_d_long_text:
+            -
+              value: '<p>Check our office locations on the map.<br>Check how to get to our offices.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Find us'
+          field_embed_side:
+            -
+              value: full
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: 5d51bdce-fd43-4215-9796-981070dcfaad
+  field_teaser_text:
+    -
+      value: 'Our dedicated support and sales teams will answer any questions related to our products and services. Please check our office addresses or send us an email.'

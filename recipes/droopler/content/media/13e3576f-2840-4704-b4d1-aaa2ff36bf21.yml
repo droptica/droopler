@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 13e3576f-2840-4704-b4d1-aaa2ff36bf21
+  bundle: d_image
+  default_langcode: en
+  depends:
+    ccceabc6-1e1f-4559-9e87-164deb83436f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: demo_paragraph_side_image.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: ccceabc6-1e1f-4559-9e87-164deb83436f
+      alt: 'Paragraph Side Image Icon'
+      title: ''
+      width: 200
+      height: 152

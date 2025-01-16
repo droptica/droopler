@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_padding_top
+    - paragraphs.paragraphs_type.d_p_form
+  module:
+    - options
+id: paragraph.d_p_form.field_padding_top
+field_name: field_padding_top
+entity_type: paragraph
+bundle: d_p_form
+label: 'Padding Top'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: padding_top_medium
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a webform submission form.
+ *
+ * Available variables:
+ * - form: The webform submission form.
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('droopler_theme/form') }}
+
+{% set base_class = form_base_class|default('form') %}
+{% set modifiers = form_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  {{ form }}
+</div>

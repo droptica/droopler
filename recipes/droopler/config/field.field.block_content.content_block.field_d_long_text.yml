@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_block
+    - field.storage.block_content.field_d_long_text
+  module:
+    - text
+id: block_content.content_block.field_d_long_text
+field_name: field_d_long_text
+entity_type: block_content
+bundle: content_block
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 881b46df-795c-4d92-a422-f23f6821ee34
+  bundle: d_image
+  default_langcode: en
+  depends:
+    a4fcb013-033b-4bbb-8acd-09aa7a4a9ab0: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_regular_servicing_2.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: a4fcb013-033b-4bbb-8acd-09aa7a4a9ab0
+      alt: Servicing
+      title: ''
+      width: 1920
+      height: 1280

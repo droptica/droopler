@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8272f9ba-0866-44d8-ab9f-1797dfba5148
+  bundle: d_image
+  default_langcode: en
+  depends:
+    bb6e597e-3f03-4c6f-bbe3-0fe166566c5e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_services_spacecrafts.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: bb6e597e-3f03-4c6f-bbe3-0fe166566c5e
+      alt: 'For spacecrafts'
+      title: ''
+      width: 1920
+      height: 1280

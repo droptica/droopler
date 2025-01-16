@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b19b14c3-ee58-4733-80be-e1e211597502
+  bundle: d_product
+  default_langcode: en
+  depends:
+    315ff1dc-c95e-4e5b-91b8-963b433f2640: media
+    88585eb5-f981-4e79-9d5c-402a04c11d37: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    295083c5-1811-4cf2-965e-915af002356c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'JetStream 9 Ultra'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'JetStream 9 Ultra | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Reliable engine with a proven track record of minimal maintenance needs.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/jetstream-9-ultra'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Reliable engine with a proven track record of minimal maintenance needs.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/planeasset3.png?itok=VY8DFYDf'
+  path:
+    -
+      alias: /products/jetstream-9-ultra
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Reliable engine with a proven track record of minimal maintenance needs.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 315ff1dc-c95e-4e5b-91b8-963b433f2640
+  field_product_categories:
+    -
+      entity: 88585eb5-f981-4e79-9d5c-402a04c11d37
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 295083c5-1811-4cf2-965e-915af002356c

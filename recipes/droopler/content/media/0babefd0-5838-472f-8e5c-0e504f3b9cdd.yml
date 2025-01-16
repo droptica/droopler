@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0babefd0-5838-472f-8e5c-0e504f3b9cdd
+  bundle: d_image
+  default_langcode: en
+  depends:
+    eac9e844-a869-44f9-8e91-f5d4ebd71f1c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_aircraft_tiles_1_5.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: eac9e844-a869-44f9-8e91-f5d4ebd71f1c
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 1920
+      height: 1448

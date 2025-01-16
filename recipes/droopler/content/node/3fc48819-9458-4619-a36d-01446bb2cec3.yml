@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3fc48819-9458-4619-a36d-01446bb2cec3
+  bundle: d_product
+  default_langcode: en
+  depends:
+    b1247d6e-03c3-4888-843c-9578f7e006f5: media
+    ddf431bf-4af1-4c15-b230-73cdcbd0fdb6: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    6ed6e45c-5886-4066-9341-1c40e92c6643: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'MarineForce 58 Sport'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'MarineForce 58 Sport | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Robust engine built for long-lasting durability and consistent performance.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/marineforce-58-sport'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Robust engine built for long-lasting durability and consistent performance.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/boatasset2.png?itok=jv_snlsT'
+  path:
+    -
+      alias: /products/marineforce-58-sport
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Robust engine built for long-lasting durability and consistent performance.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: b1247d6e-03c3-4888-843c-9578f7e006f5
+  field_product_categories:
+    -
+      entity: ddf431bf-4af1-4c15-b230-73cdcbd0fdb6
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 6ed6e45c-5886-4066-9341-1c40e92c6643

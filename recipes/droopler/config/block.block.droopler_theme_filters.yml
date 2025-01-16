@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:reset_button:4a7cdf0b-da1f-4140-8c7e-0db12502639a'
+  module:
+    - block_content
+    - system
+  theme:
+    - droopler_theme
+id: droopler_theme_filters
+theme: droopler_theme
+region: aside
+weight: -11
+provider: null
+plugin: 'block_content:4a7cdf0b-da1f-4140-8c7e-0db12502639a'
+settings:
+  id: 'block_content:4a7cdf0b-da1f-4140-8c7e-0db12502639a'
+  label: Filters
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /products

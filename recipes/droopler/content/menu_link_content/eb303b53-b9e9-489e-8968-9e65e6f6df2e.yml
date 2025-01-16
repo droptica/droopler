@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: eb303b53-b9e9-489e-8968-9e65e6f6df2e
+  bundle: menu_link_content
+  default_langcode: en
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'About Us'
+  menu_name:
+    -
+      value: secondary-menu
+  link:
+    -
+      uri: 'internal:/about-us'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

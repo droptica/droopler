@@ -1,0 +1,98 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 02cf3af5-8897-4a6e-960d-b999c7e2a24b
+  bundle: d_product
+  default_langcode: en
+  depends:
+    29a22332-f76c-4ff6-8b71-93d911365dd8: media
+    57f8107c-cc0c-4806-8290-42db5ca9462f: media
+    ff948c01-96cd-4484-91bc-620fa02aa573: media
+    255cc891-8bd6-4dd1-b73f-68341c9b8782: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    b77c5c15-9e56-4fc1-a85d-c43f906ce6be: taxonomy_term
+    cd6d1f32-e568-4e3f-8a00-758f394c523a: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Auto Engine ST 40'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Auto Engine ST 40 | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Car engine for small cars. Manufactured for the first time in 2010. Since then, several versions with different powers have been created.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/auto-engine-st-40'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Car engine for small cars. Manufactured for the first time in 2010. Since then, several versions with different powers have been created.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_product_init_auto-engine-st-40-1.jpg?itok=vfDRZHX4'
+  path:
+    -
+      alias: /products/auto-engine-st-40
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Car engine for small cars. Manufactured for the first time in 2010. Since then, several versions with different powers have been created.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 29a22332-f76c-4ff6-8b71-93d911365dd8
+    -
+      entity: 57f8107c-cc0c-4806-8290-42db5ca9462f
+    -
+      entity: ff948c01-96cd-4484-91bc-620fa02aa573
+    -
+      entity: 255cc891-8bd6-4dd1-b73f-68341c9b8782
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: b77c5c15-9e56-4fc1-a85d-c43f906ce6be
+    -
+      entity: cd6d1f32-e568-4e3f-8a00-758f394c523a

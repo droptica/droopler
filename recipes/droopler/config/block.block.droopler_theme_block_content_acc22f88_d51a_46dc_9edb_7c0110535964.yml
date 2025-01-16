@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:content_block:acc22f88-d51a-46dc-9edb-7c0110535964'
+  module:
+    - block_content
+  theme:
+    - droopler_theme
+id: droopler_theme_block_content_acc22f88_d51a_46dc_9edb_7c0110535964
+theme: droopler_theme
+region: footer_primary_first
+weight: 0
+provider: null
+plugin: 'block_content:acc22f88-d51a-46dc-9edb-7c0110535964'
+settings:
+  id: 'block_content:acc22f88-d51a-46dc-9edb-7c0110535964'
+  label: 'Footer Office 1'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

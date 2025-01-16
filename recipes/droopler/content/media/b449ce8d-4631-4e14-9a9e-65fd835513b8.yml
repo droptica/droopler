@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b449ce8d-4631-4e14-9a9e-65fd835513b8
+  bundle: d_image
+  default_langcode: en
+  depends:
+    41a26ce1-f110-4e80-91c5-6b867f3b38bb: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: demo_bg_2.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 41a26ce1-f110-4e80-91c5-6b867f3b38bb
+      alt: 'Abstract Background'
+      title: ''
+      width: 1920
+      height: 1280

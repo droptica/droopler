@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: abbe6750-da49-4ba8-b396-9d4dffa8539c
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    5888ed0e-e7d8-4350-b65d-553a14035856: menu_link_content
+    6d9cd288-8a15-4a21-bd9a-b7a762c5de66: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Engine overhaul'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 6d9cd288-8a15-4a21-bd9a-b7a762c5de66
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 8
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:5888ed0e-e7d8-4350-b65d-553a14035856'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

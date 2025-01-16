@@ -1,83 +1,157 @@
 {
-    "name": "droptica/droopler_b5",
-    "description": "Droopler installation profile for Drupal 9/10.",
-    "type": "drupal-profile",
-    "license": "GPL-2.0+",
-    "authors": [
-        {
-            "name": "",
-            "role": ""
-        }
-    ],
-    "repositories": {
-        "drupal": {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        },
-        "asset": {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
+  "name": "droptica/droopler-project",
+  "description": "Project template for Droopler with Composer",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://www.droopler.com",
+  "support": {
+    "docs": "https://www.droopler.com/developers",
+    "issues": "https://www.drupal.org/project/issues/droopler?categories=All"
+  },
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
     },
-    "require": {
-        "php": ">=8.1",
-        "bower-asset/colorbox": "^1.6",
-        "bower-asset/masonry": "^4.2",
-        "cweagans/composer-patches": "^1.6",
-        "drupal/admin_toolbar": "^3.0",
-        "drupal/checklistapi": "^2.0",
-        "drupal/colorbox": "^2.0",
-        "drupal/config_update": "2.0.x-dev@dev",
-        "drupal/contact_formatter": "^2.0",
-        "drupal/components":"^3.0",
-        "drupal/core": "^10.0",
-        "drupal/entity_reference_display": "^2.0",
-        "drupal/entity_reference_revisions": "^1.3",
-        "drupal/features": "5.0.x-dev@dev",
-        "drupal/field_group": "^3.0",
-        "drupal/frontend_editing": "^1.2",
-        "drupal/google_analytics": "^4.0",
-        "drupal/google_tag": "^2.0",
-        "drupal/link_attributes": "^1.1 || ^2.1",
-        "drupal/metatag": "^1.2 || ^2.0",
-        "drupal/paragraphs": "^1.1",
-        "drupal/pathauto": "^1.0",
-        "drupal/radix": "^5.0",
-        "drupal/redirect": "^1.0-beta1",
-        "drupal/simple_sitemap": "^4.1",
-        "drupal/smtp": "^1.0@beta",
-        "drupal/svg_image": "^3.0",
-        "npm-asset/countup": "^1.9",
-        "npm-asset/in-viewport": "^3.6",
-        "npm-asset/jquery-ui-touch-punch": "^0.2",
-        "npm-asset/select2": "^4.0.4",
-        "npm-asset/slick-carousel": "^1.8"
-    },
-    "replace": {
-        "bower-asset/desandro-matches-selector": "*",
-        "bower-asset/ev-emitter": "*",
-        "bower-asset/fizzy-ui-utils": "*",
-        "bower-asset/get-size": "*",
-        "bower-asset/jquery": "*",
-        "bower-asset/outlayer": "*"
-    },
-    "conflict": {
-        "drupal/drupal": "*"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true,
-        "platform": {
-            "php": "8.1.0"
-        }
-    },
-    "extra": {
-        "patches": {
-            "drupal/core": {
-                "Claro - vertical tabs overflow": "https://git.drupalcode.org/project/drupal/-/merge_requests/5376.patch",
-                "Claro - paragraphs overflow": "https://www.drupal.org/files/issues/2023-01-25/3145188-37_0.patch"
-            }
-        }
+    "asset": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
     }
+  },
+  "require": {
+    "php": ">=8.1",
+    "bower-asset/colorbox": "^1.6",
+    "bower-asset/masonry": "^4.2",
+    "composer/installers": "^2.2",
+    "cweagans/composer-patches": "^1.6",
+    "drupal/admin_toolbar": "^3.0",
+    "drupal/ala": "^2.5",
+    "drupal/better_exposed_filters": "^7.0",
+    "drupal/block_field": "^1.0@RC",
+    "drupal/bootstrap_layout_builder": "^2.1",
+    "drupal/checklistapi": "^2.0",
+    "drupal/color_field": "^3.0",
+    "drupal/colorbox": "^2.0",
+    "drupal/components": "^3.0",
+    "drupal/conditional_fields": "^4.0@alpha",
+    "drupal/config_update": "2.0.x-dev@dev",
+    "drupal/contact_formatter": "^2.0",
+    "drupal/core-composer-scaffold": "^10.0",
+    "drupal/core-recommended": "^10.0",
+    "drupal/dashboard": "^2.0",
+    "drupal/default_content": "^2.0@alpha",
+    "drupal/emulsify_twig": "^5.0",
+    "drupal/entity_reference_display": "^2.0",
+    "drupal/entity_reference_revisions": "^1.3",
+    "drupal/facets": "^2.0",
+    "drupal/features": "5.0.x-dev@dev",
+    "drupal/field_group": "^3.0",
+    "drupal/field_validation": "^1.1",
+    "drupal/frontend_editing": "1.7.3",
+    "drupal/gin": "^4.0",
+    "drupal/gin_toolbar": "^2.0",
+    "drupal/google_analytics": "^4.0",
+    "drupal/google_tag": "^2.0",
+    "drupal/link_attributes": "^1.1 || ^2.1",
+    "drupal/menu_admin_per_menu": "^1.6",
+    "drupal/metatag": "^1.2 || ^2.0",
+    "drupal/paragraphs": "^1.1",
+    "drupal/pathauto": "^1.0",
+    "drupal/project_browser": "^1.0@beta",
+    "drupal/radix": "^5.0",
+    "drupal/redirect": "^1.0-beta1",
+    "drupal/redis": "^1.7",
+    "drupal/search_api": "^1.29",
+    "drupal/simple_sitemap": "^4.1",
+    "drupal/smtp": "^1.0@beta",
+    "drupal/svg_image": "^3.0",
+    "drupal/tvi": "2.0.x-dev@dev",
+    "drupal/twig_tweak": "^3.4",
+    "drupal/webform": "^6.2",
+    "drush/drush": "^13",
+    "npm-asset/countup": "^1.9",
+    "npm-asset/in-viewport": "^3.6",
+    "npm-asset/jquery-ui-touch-punch": "^0.2",
+    "npm-asset/select2": "^4.0.4",
+    "npm-asset/slick-carousel": "^1.8",
+    "oomphinc/composer-installers-extender": "^2.0",
+    "platformsh/config-reader": "^2.4"
+  },
+  "require-dev": {
+    "drupal/core-dev": "^10.0",
+    "drupal/devel": "^5.0",
+    "ericmartel/codeception-email": "^1.0",
+    "droptica/codeception-package": "^10.8"
+  },
+  "replace": {
+    "bower-asset/desandro-matches-selector": "*",
+    "bower-asset/ev-emitter": "*",
+    "bower-asset/fizzy-ui-utils": "*",
+    "bower-asset/get-size": "*",
+    "bower-asset/jquery": "*",
+    "bower-asset/outlayer": "*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "drupal/console-extend-plugin": true,
+      "drupal/core-composer-scaffold": true,
+      "oomphinc/composer-installers-extender": true,
+      "zaporylie/composer-drupal-optimizations": true,
+      "phpstan/extension-installer": true,
+      "php-http/discovery": true,
+      "tbachert/spi": true
+    },
+    "preferred-install": {
+      "*": "dist"
+    }
+  },
+  "extra": {
+    "enable-patching": true,
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "web/"
+      }
+    },
+    "installer-types": ["bower-asset", "npm-asset"],
+    "installer-paths": {
+      "web/core": ["type:drupal-core"],
+      "web/libraries/{$name}": ["type:drupal-library", "type:git", "type:bower-asset", "type:npm-asset"],
+      "web/modules/contrib/{$name}": ["type:drupal-module"],
+      "web/themes/contrib/{$name}": ["type:drupal-theme"],
+      "recipes/{$name}": ["type:drupal-recipe"],
+      "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+      "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+      "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+    },
+    "patches": {
+      "drupal/core": {
+        "Claro - vertical tabs overflow": "https://git.drupalcode.org/project/drupal/-/merge_requests/5376.patch",
+        "Claro - paragraphs overflow": "https://www.drupal.org/files/issues/2023-01-25/3145188-37_0.patch"
+      },
+      "drupal/features": {
+        "[3375425] Deprecated function: Creation of dynamic property": "https://www.drupal.org/files/issues/2023-07-19/3375425-3.patch"
+      },
+      "drupal/frontend_editing": {
+        "Frontend Editing - layout builder moving paragraphs fix": "https://www.drupal.org/files/issues/2024-09-23/layout_builder_moving_paragraphs_fix.patch",
+        "Frontend Editing module improves for Droopler": "patches/frontend_editing/frontend_editing_module_improves_for_droopler.patch"
+      },
+      "drupal/paragraphs": {
+        "The 'paragraph' entity type did not specify a translation handler.": "https://www.drupal.org/files/issues/2021-01-22/paragraph-entity-type-did-not-specify-translation-halder-3031598-45.patch"
+      }
+    }
+  }
 }

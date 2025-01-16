@@ -1,0 +1,166 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: de3e04f3-a6cc-49f3-890f-3763a9c90697
+  bundle: blog_post
+  default_langcode: en
+  depends:
+    34287fe2-7381-4b72-9661-0e2191bd5a33: taxonomy_term
+    2b2c3d60-1134-4c4c-8b82-4c7e619cfb7f: media
+    603b00a7-4fb8-4c52-af22-28e4f1e51168: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'New factory location'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'New factory location | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Finally we have another factory. Factory is located in Radom in Poland. This location is well communicated with rest of the Europe.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/blog/new-factory-location'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Finally we have another factory. Factory is located in Radom in Poland. This location is well communicated with rest of the Europe.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_factory.jpg?itok=AKD0Ka06'
+  path:
+    -
+      alias: /blog/new-factory-location
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_blog_category:
+    -
+      entity: 34287fe2-7381-4b72-9661-0e2191bd5a33
+  field_blog_media_main_image:
+    -
+      entity: 2b2c3d60-1134-4c4c-8b82-4c7e619cfb7f
+  field_blog_sections:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 05c89387-1281-4724-a67e-c6e2daa3d191
+          bundle: d_p_blog_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_long_text:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna. Sed vel ex pretium, consectetur nisi nec, aliquet orci. Donec placerat lorem euismod leo scelerisque cursus. Pellentesque commodo neque sed ipsum hendrerit dapibus. Phasellus placerat lectus eu commodo ultricies. Vivamus enim metus, aliquet eu consequat eget, imperdiet in massa. Duis arcu nisl, ullamcorper a malesuada id, rhoncus in lacus. Maecenas volutpat accumsan nunc id condimentum. Curabitur id sapien posuere, varius nisl non, varius elit. Curabitur lacinia ultrices neque dignissim rutrum. Donec eu arcu ex. Morbi sit amet blandit elit. Vestibulum non leo at diam iaculis vestibulum. Aenean et est ullamcorper, porta turpis sit amet, semper enim. Ut hendrerit eu purus in vulputate. Integer ullamcorper vulputate laoreet. Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui et velit ullamcorper, vel pulvinar nisl blandit. Mauris pretium cursus libero nec eleifend. Proin mauris magna, fermentum quis dui sit amet, sodales porta enim. Nam dictum libero at consequat consectetur. Fusce consectetur urna nisi, at congue nisi pharetra sed.'
+              format: full_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6e32c513-c89e-4db0-aca3-c294b55100c8
+          bundle: d_p_blog_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_long_text:
+            -
+              value: '<p>asdfasdfasdf</p>'
+              format: full_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1b2fd545-038e-4b00-bdba-dce165242059
+          bundle: d_p_blog_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_media_image:
+            -
+              entity: 603b00a7-4fb8-4c52-af22-28e4f1e51168
+          field_d_p_blog_image_full_width:
+            -
+              value: true
+  field_blog_teaser:
+    -
+      value: 'Finally we have another factory. Factory is located in Radom in Poland. This location is well communicated with rest of the Europe.'
+      format: full_html

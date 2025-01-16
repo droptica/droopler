@@ -1,0 +1,73 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.product_index
+    - views.view.products_list
+  module:
+    - search_api
+id: tags_taxonomy_term_name_block
+name: 'Tags » Taxonomy term » Name'
+weight: 0
+min_count: 0
+missing: false
+missing_label: others
+url_alias: tags_taxonomy_term_name_block
+facet_source_id: 'search_api:views_block__products_list__product_list_block'
+field_identifier: tag_name
+query_operator: or
+hard_limit: 0
+exclude: false
+use_hierarchy: false
+keep_hierarchy_parents_active: false
+hierarchy:
+  type: taxonomy
+  config: {  }
+expand_hierarchy: false
+enable_parent_when_child_gets_disabled: true
+widget:
+  type: links
+  config:
+    show_numbers: false
+    soft_limit: 0
+    show_reset_link: false
+    reset_text: 'Show all'
+    hide_reset_when_no_selection: false
+    soft_limit_settings:
+      show_less_label: 'Show less'
+      show_more_label: 'Show more'
+empty_behavior:
+  behavior: none
+only_visible_when_facet_source_is_visible: false
+show_only_one_result: false
+show_title: false
+processor_configs:
+  active_widget_order:
+    processor_id: active_widget_order
+    weights:
+      sort: 20
+    settings:
+      sort: DESC
+  count_widget_order:
+    processor_id: count_widget_order
+    weights:
+      sort: 30
+    settings:
+      sort: DESC
+  display_value_widget_order:
+    processor_id: display_value_widget_order
+    weights:
+      sort: 40
+    settings:
+      sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
+  url_processor_handler:
+    processor_id: url_processor_handler
+    weights:
+      pre_query: 50
+      build: 15
+    settings: {  }

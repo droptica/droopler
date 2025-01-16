@@ -1,0 +1,183 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_group_of_counters.field_additional_classes
+    - field.field.paragraph.d_p_group_of_counters.field_background_theme_custom
+    - field.field.paragraph.d_p_group_of_counters.field_column_count_desktop
+    - field.field.paragraph.d_p_group_of_counters.field_column_count_mobile
+    - field.field.paragraph.d_p_group_of_counters.field_column_count_tablet
+    - field.field.paragraph.d_p_group_of_counters.field_d_counter_reference
+    - field.field.paragraph.d_p_group_of_counters.field_d_cta_link
+    - field.field.paragraph.d_p_group_of_counters.field_d_long_text
+    - field.field.paragraph.d_p_group_of_counters.field_d_main_title
+    - field.field.paragraph.d_p_group_of_counters.field_d_media_background
+    - field.field.paragraph.d_p_group_of_counters.field_d_media_icon
+    - field.field.paragraph.d_p_group_of_counters.field_heading_type
+    - field.field.paragraph.d_p_group_of_counters.field_margin_bottom
+    - field.field.paragraph.d_p_group_of_counters.field_margin_top
+    - field.field.paragraph.d_p_group_of_counters.field_padding_bottom
+    - field.field.paragraph.d_p_group_of_counters.field_padding_top
+    - field.field.paragraph.d_p_group_of_counters.field_text_theme_custom
+    - field.field.paragraph.d_p_group_of_counters.field_theme
+    - paragraphs.paragraphs_type.d_p_group_of_counters
+  module:
+    - ala
+    - entity_reference_revisions
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_d_counters_background:
+      children:
+        - field_d_media_background
+      label: 'Counters background'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_counters_cta:
+      children:
+        - field_d_cta_link
+      label: 'Call To Action'
+      parent_name: ''
+      region: content
+      weight: 3
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_counters_reference:
+      children:
+        - field_d_counter_reference
+      label: 'Counters reference'
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_counters_header:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+        - field_d_long_text
+      label: 'Counter header'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: paragraph.d_p_group_of_counters.default
+targetEntityType: paragraph
+bundle: d_p_group_of_counters
+mode: default
+content:
+  field_d_counter_reference:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: d_p_group_of_counters
+      link: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_d_cta_link:
+    type: ala
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+      ala_link_view_class: element
+      ala_link_view_icon: inside
+      ala_link_view_icon_position: left
+      ala_link_view_roles: hide
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_d_long_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_d_main_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_d_media_background:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: counter
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_d_media_icon:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: d_icon
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  field_additional_classes: true
+  field_background_theme_custom: true
+  field_column_count_desktop: true
+  field_column_count_mobile: true
+  field_column_count_tablet: true
+  field_heading_type: true
+  field_margin_bottom: true
+  field_margin_top: true
+  field_padding_bottom: true
+  field_padding_top: true
+  field_text_theme_custom: true
+  field_theme: true
+  search_api_excerpt: true

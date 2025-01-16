@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: d129a31f-2492-4951-a8dd-3079129b830b
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    6cb77d97-d8fc-46bc-b63e-abff859d9d04: menu_link_content
+    3066dd27-3174-4374-9578-a40623070672: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Boat Engines'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 3066dd27-3174-4374-9578-a40623070672
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -49
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:6cb77d97-d8fc-46bc-b63e-abff859d9d04'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_images
+    - paragraphs.paragraphs_type.d_p_tiles
+id: paragraph.d_p_tiles.field_featured_images
+field_name: field_featured_images
+entity_type: paragraph
+bundle: d_p_tiles
+label: 'Featured images'
+description: 'Comma separated image numbers. Example: 1,4,7'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

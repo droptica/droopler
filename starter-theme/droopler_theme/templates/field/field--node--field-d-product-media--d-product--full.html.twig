@@ -1,0 +1,10 @@
+{% include '@droopler_theme/product-gallery/product-gallery.twig' with {
+  single_items: {
+    settings: '{"slidesToShow":1,"slidesToScroll":1,"arrows":true,"fade":true,"asNavFor":".product-gallery__small-images","centerPadding":"100px"}',
+    items: single_items_list,
+  },
+  nav_items: {
+    settings: '{"slidesToShow":4,"slidesToScroll":1,"arrows":false,"focusOnSelect":true,"asNavFor":".product-gallery__main-image"}',
+    items: navigation_items_list,
+  }
+} %}

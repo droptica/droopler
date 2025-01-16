@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 5a988903-aaab-49c2-9761-132e819be555
+  bundle: d_product
+  default_langcode: en
+  depends:
+    9d2aa1c5-8894-4f01-a368-f38bd45f5fcd: media
+    ddf431bf-4af1-4c15-b230-73cdcbd0fdb6: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    6ed6e45c-5886-4066-9341-1c40e92c6643: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'MarineForce 24 Sport'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'MarineForce 24 Sport | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Innovative engine with state-of-the-art technology for optimal power output.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/marineforce-24-sport'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Innovative engine with state-of-the-art technology for optimal power output.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/boatasset1.jpg?itok=QMWwfj-N'
+  path:
+    -
+      alias: /products/marineforce-24-sport
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Innovative engine with state-of-the-art technology for optimal power output.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 9d2aa1c5-8894-4f01-a368-f38bd45f5fcd
+  field_product_categories:
+    -
+      entity: ddf431bf-4af1-4c15-b230-73cdcbd0fdb6
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 6ed6e45c-5886-4066-9341-1c40e92c6643

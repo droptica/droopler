@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 9eb9384a-1592-44e7-a73f-b1174624a194
+  bundle: d_product
+  default_langcode: en
+  depends:
+    a4090fd0-e475-4904-9eb2-ff5dc47f592f: media
+    88585eb5-f981-4e79-9d5c-402a04c11d37: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    295083c5-1811-4cf2-965e-915af002356c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'CloudCruiser 66 Elite'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'CloudCruiser 66 Elite | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Compact engine design, ideal for tight spaces without compromising on power.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/cloudcruiser-66-elite'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Compact engine design, ideal for tight spaces without compromising on power.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/planeasset1.png?itok=UjgM2xiz'
+  path:
+    -
+      alias: /products/cloudcruiser-66-elite
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Compact engine design, ideal for tight spaces without compromising on power.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: a4090fd0-e475-4904-9eb2-ff5dc47f592f
+  field_product_categories:
+    -
+      entity: 88585eb5-f981-4e79-9d5c-402a04c11d37
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 295083c5-1811-4cf2-965e-915af002356c

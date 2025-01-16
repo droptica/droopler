@@ -1,0 +1,456 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 9b61d430-2fb7-45d3-8462-84f3f767a93b
+  bundle: content_page
+  default_langcode: en
+  depends:
+    7349f593-6511-4892-99f2-6fc71a07b302: media
+    50682773-a368-42e0-9826-2c76c53f763d: media
+    67400b1c-fa54-4484-af74-229667be496f: media
+    e52b453d-ea2f-4ec2-85ca-61aa27f915ee: media
+    fd7b1dbd-3852-49d1-88af-926ec6227973: media
+    a3b28503-1b5f-4d8f-bb43-62806d57961b: media
+    51551c0e-0d75-49c7-bebe-5abd88bc0eaf: media
+    ea0dc262-4d91-4cea-a826-3859ae0a34e3: media
+    8272f9ba-0866-44d8-ab9f-1797dfba5148: media
+    ed050a85-990f-4e13-9160-df329591d4b7: media
+    87c1f5aa-6ea3-46f0-ba4f-5e1346715642: media
+    49fa8ff0-d3c5-4775-9808-5f4ea953256c: media
+    122beb2a-83e4-4711-998e-bc05d7fe5f24: media
+    9144e122-080e-41fe-af56-63d0f261a89b: media
+    aeddfeb0-e1fa-407b-9821-b8efc725716b: media
+    a41586d5-98b5-4d1d-ae2e-7913daa2ed12: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Gallery Paragraph'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Gallery Paragraph | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/documentation/gallery-paragraph'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /documentation/gallery-paragraph
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6a6c6293-c558-438e-823e-adf9a6808ea0
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_main_title:
+            -
+              value: 'Gallery Paragraph'
+          field_d_subtitle:
+            -
+              value: 'Droopler Documentation'
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 818625dd-aabd-4c9b-8e84-3a07e464d6d7
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>The Gallery Paragraph is a significant part of Droopler. It allows you to arrange your images as thumbnails and show their full version on click. It is possible to add an icon and some description. The perfect number of items is 12. Why? On a desktop, there are four images in the row, on a tablet - three, on horizontal mobile - two and one for the smaller screens.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Full Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9d9f9b84-f268-49e1-b204-7fb7ad62370c
+          bundle: d_p_gallery
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/documentation/gallery-paragraph'
+              title: 'See more'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum mi elit, id commodo ligula viverra vitae. Aliquam lorem diam, lobortis at ante et, gravida blandit enim. Ut bibendum egestas sem. Nulla porttitor lorem in erat maximus, id vulputate est auctor. Curabitur consectetur nec ante ac ornare. Nam aliquam elit ex. Nam feugiat nulla pulvinar nunc commodo, eget faucibus mauris egestas.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_icon:
+            -
+              entity: 7349f593-6511-4892-99f2-6fc71a07b302
+          field_d_media_image:
+            -
+              entity: 50682773-a368-42e0-9826-2c76c53f763d
+            -
+              entity: 67400b1c-fa54-4484-af74-229667be496f
+            -
+              entity: e52b453d-ea2f-4ec2-85ca-61aa27f915ee
+            -
+              entity: fd7b1dbd-3852-49d1-88af-926ec6227973
+            -
+              entity: a3b28503-1b5f-4d8f-bb43-62806d57961b
+            -
+              entity: 51551c0e-0d75-49c7-bebe-5abd88bc0eaf
+            -
+              entity: ea0dc262-4d91-4cea-a826-3859ae0a34e3
+            -
+              entity: 8272f9ba-0866-44d8-ab9f-1797dfba5148
+            -
+              entity: ed050a85-990f-4e13-9160-df329591d4b7
+            -
+              entity: 87c1f5aa-6ea3-46f0-ba4f-5e1346715642
+            -
+              entity: 49fa8ff0-d3c5-4775-9808-5f4ea953256c
+            -
+              entity: 122beb2a-83e4-4711-998e-bc05d7fe5f24
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f0aea3bd-9324-4548-bfde-e8252afc539a
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: "<p>Let's simplify the gallery. It looks cool also without the icon and the description. Please notice that a smaller amount of items does not look nice on lower resolutions.</p>"
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Basic Example'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f937ab6d-462a-449a-a8a3-e611e851da76
+          bundle: d_p_gallery
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_main_title:
+            -
+              value: 'Main Title'
+          field_d_media_image:
+            -
+              entity: 9144e122-080e-41fe-af56-63d0f261a89b
+            -
+              entity: 8272f9ba-0866-44d8-ab9f-1797dfba5148
+            -
+              entity: aeddfeb0-e1fa-407b-9821-b8efc725716b
+            -
+              entity: a41586d5-98b5-4d1d-ae2e-7913daa2ed12
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Discover possibilities of Droopler distribution for Drupal.'

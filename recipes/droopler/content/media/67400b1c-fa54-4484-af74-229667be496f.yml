@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 67400b1c-fa54-4484-af74-229667be496f
+  bundle: d_image
+  default_langcode: en
+  depends:
+    fd45c009-924a-4559-9ce1-7722959d3966: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_enginge_overhaul_1.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: fd45c009-924a-4559-9ce1-7722959d3966
+      alt: 'Engine overhaul'
+      title: ''
+      width: 1920
+      height: 1278

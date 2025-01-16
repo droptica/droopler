@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b00d8098-6b0a-4e8b-87e9-6d7eb63d9fd4
+  bundle: d_image
+  default_langcode: en
+  depends:
+    07899b04-4a28-4331-9c21-74d63b6dc0bc: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_face_2.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 07899b04-4a28-4331-9c21-74d63b6dc0bc
+      alt: 'Anna Novak'
+      title: ''
+      width: 192
+      height: 192

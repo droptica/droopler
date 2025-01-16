@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 73326aff-70a8-4073-84e3-5aea01bc816f
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    6cb77d97-d8fc-46bc-b63e-abff859d9d04: menu_link_content
+    18877654-6a84-4f0e-a1e0-d1ef64fa9c4a: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Car Engines'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 18877654-6a84-4f0e-a1e0-d1ef64fa9c4a
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: true
+  parent:
+    -
+      value: 'menu_link_content:6cb77d97-d8fc-46bc-b63e-abff859d9d04'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

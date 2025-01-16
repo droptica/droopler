@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 50682773-a368-42e0-9826-2c76c53f763d
+  bundle: d_image
+  default_langcode: en
+  depends:
+    275bea98-af46-4786-995b-20bf7d7a4a86: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_tile_spaceship.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 275bea98-af46-4786-995b-20bf7d7a4a86
+      alt: Spaceship
+      title: ''
+      width: 768
+      height: 512

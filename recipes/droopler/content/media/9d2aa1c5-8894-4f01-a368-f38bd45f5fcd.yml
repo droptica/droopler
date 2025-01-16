@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9d2aa1c5-8894-4f01-a368-f38bd45f5fcd
+  bundle: d_image
+  default_langcode: en
+  depends:
+    5e1571ba-04dd-4b2f-b911-faf701f6665f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: boatasset1.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 5e1571ba-04dd-4b2f-b911-faf701f6665f
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 1000
+      height: 1000

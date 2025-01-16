@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c313877c-3e8c-4567-b71a-ecb1db419812
+  bundle: d_image
+  default_langcode: en
+  depends:
+    18ff5bbe-6fe1-44e2-89c9-307369669243: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_icon_download.svg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 18ff5bbe-6fe1-44e2-89c9-307369669243
+      alt: 'Download specs'
+      title: ''
+      width: 0
+      height: 0

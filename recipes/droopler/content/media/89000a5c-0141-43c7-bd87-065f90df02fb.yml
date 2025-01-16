@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 89000a5c-0141-43c7-bd87-065f90df02fb
+  bundle: d_image
+  default_langcode: en
+  depends:
+    87b2665b-4662-4fc9-8a03-38ba5176a75a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_product_init_machine-xt-550-1.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 87b2665b-4662-4fc9-8a03-38ba5176a75a
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 1000
+      height: 1000

@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 06af361b-714f-4b4a-a837-67bc5a7716b5
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    5888ed0e-e7d8-4350-b65d-553a14035856: menu_link_content
+    66895fb2-2c33-449f-907e-2a716f2afaaf: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Monitoring and assessment'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 66895fb2-2c33-449f-907e-2a716f2afaaf
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 9
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:5888ed0e-e7d8-4350-b65d-553a14035856'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

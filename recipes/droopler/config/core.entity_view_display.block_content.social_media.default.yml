@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.social_media
+id: block_content.social_media.default
+targetEntityType: block_content
+bundle: social_media
+mode: default
+content: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true

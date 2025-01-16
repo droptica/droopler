@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.reset_button
+    - field.field.block_content.reset_button.field_button_class
+    - field.field.block_content.reset_button.field_button_icon_class
+    - field.field.block_content.reset_button.field_button_target
+    - field.field.block_content.reset_button.field_button_text
+id: block_content.reset_button.default
+targetEntityType: block_content
+bundle: reset_button
+mode: default
+content: {  }
+hidden:
+  field_button_class: true
+  field_button_icon_class: true
+  field_button_target: true
+  field_button_text: true
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d21f6509-7b9c-4c85-8913-760d7a918235
+  bundle: d_image
+  default_langcode: en
+  depends:
+    528b46ec-1d72-4e43-b80a-621373fa5e52: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_buildings.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 528b46ec-1d72-4e43-b80a-621373fa5e52
+      alt: Buildings
+      title: ''
+      width: 960
+      height: 402

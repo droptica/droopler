@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.d_product_categories
+id: taxonomy_term.d_product_categories.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: d_product_categories
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

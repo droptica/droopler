@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bc44b70c-3def-4038-a631-bf5efd1a05da
+  bundle: d_image
+  default_langcode: en
+  depends:
+    311da23e-ff8e-4e55-ba9a-3a328f404e75: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: ab862157-f3a3-43b0-9b67-a4e3880112a6.jpeg
+  created:
+    -
+      value: 1737017607
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/welcome'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 311da23e-ff8e-4e55-ba9a-3a328f404e75
+      alt: 'drupal developer'
+      title: ''
+      width: 4096
+      height: 2731

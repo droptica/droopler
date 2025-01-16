@@ -1,0 +1,178 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fb21bec4-2aec-41c4-90a7-45a618b3040e
+  bundle: blog_post
+  default_langcode: en
+  depends:
+    34287fe2-7381-4b72-9661-0e2191bd5a33: taxonomy_term
+    efd79ffc-a535-4ec7-b786-f94b6ed0ca60: media
+    ac1c1ded-7b73-4b4a-86b5-958b4c47edf7: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'ABC Automotive bought 10 000 engines from DrooplerEngines'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'ABC Automotive bought 10 000 engines from DrooplerEngines | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'ABC Automotive is world leader in car manufacturing. Our engines will be used in their new car models UMI 4S coupe.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/blog/abc-automotive-bought-10-000-engines-drooplerengines'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'ABC Automotive is world leader in car manufacturing. Our engines will be used in their new car models UMI 4S coupe.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_new_cars.jpg?itok=QeiHX_iv'
+  path:
+    -
+      alias: /blog/abc-automotive-bought-10-000-engines-drooplerengines
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_blog_category:
+    -
+      entity: 34287fe2-7381-4b72-9661-0e2191bd5a33
+  field_blog_media_main_image:
+    -
+      entity: efd79ffc-a535-4ec7-b786-f94b6ed0ca60
+  field_blog_sections:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 65e1f409-1f31-43ef-aec7-90e1b4f9164a
+          bundle: d_p_blog_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_long_text:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna. Sed vel ex pretium, consectetur nisi nec, aliquet orci. Donec placerat lorem euismod leo scelerisque cursus. Pellentesque commodo neque sed ipsum hendrerit dapibus. Phasellus placerat lectus eu commodo ultricies. Vivamus enim metus, aliquet eu consequat eget, imperdiet in massa. Duis arcu nisl, ullamcorper a malesuada id, rhoncus in lacus. Maecenas volutpat accumsan nunc id condimentum. Curabitur id sapien posuere, varius nisl non, varius elit. Curabitur lacinia ultrices neque dignissim rutrum. Donec eu arcu ex. Morbi sit amet blandit elit. Vestibulum non leo at diam iaculis vestibulum. Aenean et est ullamcorper, porta turpis sit amet, semper enim. Ut hendrerit eu purus in vulputate. Integer ullamcorper vulputate laoreet. Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui et velit ullamcorper, vel pulvinar nisl blandit. Mauris pretium cursus libero nec eleifend. Proin mauris magna, fermentum quis dui sit amet, sodales porta enim. Nam dictum libero at consequat consectetur. Fusce consectetur urna nisi, at congue nisi pharetra sed.'
+              format: full_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ab45deb0-3964-426e-a030-98b0d0d658b8
+          bundle: d_p_blog_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_media_image:
+            -
+              entity: ac1c1ded-7b73-4b4a-86b5-958b4c47edf7
+          field_d_p_blog_image_full_width:
+            -
+              value: true
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 2b1f057b-3287-49dc-a777-0be869fab153
+          bundle: d_p_blog_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_long_text:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna. Sed vel ex pretium, consectetur nisi nec, aliquet orci. Donec placerat lorem euismod leo scelerisque cursus. Pellentesque commodo neque sed ipsum hendrerit dapibus. Phasellus placerat lectus eu commodo ultricies. Vivamus enim metus, aliquet eu consequat eget, imperdiet in massa. Duis arcu nisl, ullamcorper a malesuada id, rhoncus in lacus. Maecenas volutpat accumsan nunc id condimentum. Curabitur id sapien posuere, varius nisl non, varius elit. Curabitur lacinia ultrices neque dignissim rutrum. Donec eu arcu ex. Morbi sit amet blandit elit. Vestibulum non leo at diam iaculis vestibulum. Aenean et est ullamcorper, porta turpis sit amet, semper enim. Ut hendrerit eu purus in vulputate. Integer ullamcorper vulputate laoreet. Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui et velit ullamcorper, vel pulvinar nisl blandit. Mauris pretium cursus libero nec eleifend. Proin mauris magna, fermentum quis dui sit amet, sodales porta enim. Nam dictum libero at consequat consectetur. Fusce consectetur urna nisi, at congue nisi pharetra sed.'
+              format: full_html
+  field_blog_teaser:
+    -
+      value: 'ABC Automotive is world leader in car manufacturing. Our engines will be used in their new car models UMI 4S coupe.'
+      format: full_html

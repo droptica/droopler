@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 9af1758c-9349-4396-9ffb-6bf880ccbbc5
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    6cb77d97-d8fc-46bc-b63e-abff859d9d04: menu_link_content
+    3b972257-71ef-4f9f-8f9a-d7aeb22c080d: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Aircraft Engines'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 3b972257-71ef-4f9f-8f9a-d7aeb22c080d
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:6cb77d97-d8fc-46bc-b63e-abff859d9d04'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

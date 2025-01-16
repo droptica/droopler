@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8be666d1-50b5-4bca-a99b-c79ed5838026
+  bundle: d_image
+  default_langcode: en
+  depends:
+    525ad15c-83e8-482a-be2e-647a2883eb01: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_car_diesel_gasoline_engine_contact.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 525ad15c-83e8-482a-be2e-647a2883eb01
+      alt: 'Car Engine'
+      title: ''
+      width: 1920
+      height: 1046

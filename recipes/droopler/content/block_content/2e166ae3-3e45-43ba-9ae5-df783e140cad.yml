@@ -1,0 +1,37 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 2e166ae3-3e45-43ba-9ae5-df783e140cad
+  bundle: content_block
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Footer Engines'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  field_d_long_text:
+    -
+      value: "<ul> <li><a href='/car-engines' title='Car engines'>Car engines</a></li> <li><a href='/boat-engines' title='Boat engines'>Boat engines</a></li> <li><a href='/aircraft-engines' title='Aircraft engines'>Aircraft engines</a></li> </ul>"
+      format: full_html
+  field_d_main_title:
+    -
+      value: Engines

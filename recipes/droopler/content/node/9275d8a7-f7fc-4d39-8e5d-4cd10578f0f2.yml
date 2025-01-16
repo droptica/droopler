@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 9275d8a7-f7fc-4d39-8e5d-4cd10578f0f2
+  bundle: d_product
+  default_langcode: en
+  depends:
+    4b98744e-771b-4a43-a8a4-a2ce0f585c00: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    50df45eb-56ca-41bc-bf82-0998ab1429b3: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Speedster 10 Rush'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Speedster 10 Rush | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Cutting-edge engine that balances power with fuel economy.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/speedster-10-rush'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Cutting-edge engine that balances power with fuel economy.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/asset6.png?itok=fruSHpgM'
+  path:
+    -
+      alias: /products/speedster-10-rush
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Cutting-edge engine that balances power with fuel economy.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 4b98744e-771b-4a43-a8a4-a2ce0f585c00
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 50df45eb-56ca-41bc-bf82-0998ab1429b3

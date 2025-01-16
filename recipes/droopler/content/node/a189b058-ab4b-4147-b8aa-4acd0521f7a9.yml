@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: a189b058-ab4b-4147-b8aa-4acd0521f7a9
+  bundle: d_product
+  default_langcode: en
+  depends:
+    7e44aaa9-425f-43a3-b060-77dd60ca8752: media
+    88585eb5-f981-4e79-9d5c-402a04c11d37: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    295083c5-1811-4cf2-965e-915af002356c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'JetStream 8 Plus'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'JetStream 8 Plus | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Cutting-edge engine that balances power with fuel economy.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/jetstream-8-plus'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Cutting-edge engine that balances power with fuel economy.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/planeasset4.jpg?itok=BFXEhzBb'
+  path:
+    -
+      alias: /products/jetstream-8-plus
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Cutting-edge engine that balances power with fuel economy.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 7e44aaa9-425f-43a3-b060-77dd60ca8752
+  field_product_categories:
+    -
+      entity: 88585eb5-f981-4e79-9d5c-402a04c11d37
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 295083c5-1811-4cf2-965e-915af002356c

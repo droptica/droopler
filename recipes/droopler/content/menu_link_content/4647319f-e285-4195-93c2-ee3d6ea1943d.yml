@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 4647319f-e285-4195-93c2-ee3d6ea1943d
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    5888ed0e-e7d8-4350-b65d-553a14035856: menu_link_content
+    104d43bf-f3fd-48f7-9a6a-0f86aa5c2d6e: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Engine testing services'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 104d43bf-f3fd-48f7-9a6a-0f86aa5c2d6e
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 1
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:5888ed0e-e7d8-4350-b65d-553a14035856'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

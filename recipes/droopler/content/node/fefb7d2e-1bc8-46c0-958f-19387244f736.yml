@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fefb7d2e-1bc8-46c0-958f-19387244f736
+  bundle: d_product
+  default_langcode: en
+  depends:
+    315ff1dc-c95e-4e5b-91b8-963b433f2640: media
+    88585eb5-f981-4e79-9d5c-402a04c11d37: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    295083c5-1811-4cf2-965e-915af002356c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'JetStream 39 Z 50'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'JetStream 39 Z 50 | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Advanced engine offering high fuel efficiency and reduced noise.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/jetstream-39-z-50'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Advanced engine offering high fuel efficiency and reduced noise.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/planeasset3.png?itok=VY8DFYDf'
+  path:
+    -
+      alias: /products/jetstream-39-z-50
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Advanced engine offering high fuel efficiency and reduced noise.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 315ff1dc-c95e-4e5b-91b8-963b433f2640
+  field_product_categories:
+    -
+      entity: 88585eb5-f981-4e79-9d5c-402a04c11d37
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 295083c5-1811-4cf2-965e-915af002356c

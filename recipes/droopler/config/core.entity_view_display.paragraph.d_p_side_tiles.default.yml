@@ -1,0 +1,163 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.d_tiles_gallery_fullscreen
+    - core.entity_view_mode.media.tiles_fullscreen
+    - field.field.paragraph.d_p_side_tiles.field_additional_classes
+    - field.field.paragraph.d_p_side_tiles.field_background_theme_custom
+    - field.field.paragraph.d_p_side_tiles.field_d_cta_link
+    - field.field.paragraph.d_p_side_tiles.field_d_long_text
+    - field.field.paragraph.d_p_side_tiles.field_d_main_title
+    - field.field.paragraph.d_p_side_tiles.field_d_media_icon
+    - field.field.paragraph.d_p_side_tiles.field_d_media_image
+    - field.field.paragraph.d_p_side_tiles.field_heading_type
+    - field.field.paragraph.d_p_side_tiles.field_margin_bottom
+    - field.field.paragraph.d_p_side_tiles.field_margin_top
+    - field.field.paragraph.d_p_side_tiles.field_padding_bottom
+    - field.field.paragraph.d_p_side_tiles.field_padding_top
+    - field.field.paragraph.d_p_side_tiles.field_text_theme_custom
+    - field.field.paragraph.d_p_side_tiles.field_theme
+    - field.field.paragraph.d_p_side_tiles.field_tiles_gallery_side
+    - paragraphs.paragraphs_type.d_p_side_tiles
+  module:
+    - ala
+    - colorbox
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_d_side_tiles_content:
+      children:
+        - field_d_long_text
+        - field_d_cta_link
+      label: Content
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_side_tiles_gallery:
+      children:
+        - field_d_media_image
+      label: 'Tiles gallery for masonry'
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_side_tiles_content_head:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+      label: 'Content Header'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: paragraph.d_p_side_tiles.default
+targetEntityType: paragraph
+bundle: d_p_side_tiles
+mode: default
+content:
+  field_d_cta_link:
+    type: ala
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+      ala_link_view_class: element
+      ala_link_view_icon: inside
+      ala_link_view_icon_position: left
+      ala_link_view_roles: hide
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_d_long_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_d_main_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_d_media_icon:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: d_icon
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_d_media_image:
+    type: colorbox_view_modes
+    label: hidden
+    settings:
+      colorbox_view_mode: d_tiles_gallery_fullscreen
+      colorbox_modal_view_mode: tiles_fullscreen
+      colorbox_gallery: post
+      colorbox_gallery_custom: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_d_subtitle:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_additional_classes: true
+  field_background_theme_custom: true
+  field_heading_type: true
+  field_margin_bottom: true
+  field_margin_top: true
+  field_padding_bottom: true
+  field_padding_top: true
+  field_text_theme_custom: true
+  field_theme: true
+  field_tiles_gallery_side: true
+  search_api_excerpt: true

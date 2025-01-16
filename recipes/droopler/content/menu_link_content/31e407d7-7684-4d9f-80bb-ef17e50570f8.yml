@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 31e407d7-7684-4d9f-80bb-ef17e50570f8
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    73326aff-70a8-4073-84e3-5aea01bc816f: menu_link_content
+    e763b8dc-13ec-4561-b37b-59d693f770e9: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Gasoline Engines'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: e763b8dc-13ec-4561-b37b-59d693f770e9
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 1
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:73326aff-70a8-4073-84e3-5aea01bc816f'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

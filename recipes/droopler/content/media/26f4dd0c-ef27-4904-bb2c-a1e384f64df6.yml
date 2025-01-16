@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 26f4dd0c-ef27-4904-bb2c-a1e384f64df6
+  bundle: d_image
+  default_langcode: en
+  depends:
+    ce38b3cf-89af-41e8-926c-02ff8f8f4397: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: demo_paragraph_embed.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: ce38b3cf-89af-41e8-926c-02ff8f8f4397
+      alt: 'Paragraph Embed Icon'
+      title: ''
+      width: 200
+      height: 152

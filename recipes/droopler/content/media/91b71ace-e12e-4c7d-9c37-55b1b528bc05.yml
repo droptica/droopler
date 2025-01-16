@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 91b71ace-e12e-4c7d-9c37-55b1b528bc05
+  bundle: d_image
+  default_langcode: en
+  depends:
+    9fa0756c-699b-4a1c-a6fe-87c11fc563cb: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_icon_car_white.svg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 9fa0756c-699b-4a1c-a6fe-87c11fc563cb
+      alt: 'Car icon'
+      title: ''
+      width: 0
+      height: 0

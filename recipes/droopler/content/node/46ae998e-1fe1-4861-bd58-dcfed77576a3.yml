@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 46ae998e-1fe1-4861-bd58-dcfed77576a3
+  bundle: d_product
+  default_langcode: en
+  depends:
+    4b98744e-771b-4a43-a8a4-a2ce0f585c00: media
+    be3c633f-1285-4ec8-aaab-7e42da3b07ae: taxonomy_term
+    bfbc20d3-442b-467e-af13-3d8aba41544c: taxonomy_term
+    50df45eb-56ca-41bc-bf82-0998ab1429b3: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'HighwayStar 30 XR'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'HighwayStar 30 XR | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/products/highwaystar-30-xr'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/asset6.png?itok=fruSHpgM'
+  path:
+    -
+      alias: /products/highwaystar-30-xr
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Performance-driven engine with enhanced airflow and combustion efficiency.'
+      format: full_html
+      summary: ''
+  field_d_product_media:
+    -
+      entity: 4b98744e-771b-4a43-a8a4-a2ce0f585c00
+  field_product_categories:
+    -
+      entity: be3c633f-1285-4ec8-aaab-7e42da3b07ae
+  field_tags:
+    -
+      entity: bfbc20d3-442b-467e-af13-3d8aba41544c
+    -
+      entity: 50df45eb-56ca-41bc-bf82-0998ab1429b3

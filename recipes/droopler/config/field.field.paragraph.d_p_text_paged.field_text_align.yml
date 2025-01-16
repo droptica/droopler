@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_align
+    - paragraphs.paragraphs_type.d_p_text_paged
+  module:
+    - options
+id: paragraph.d_p_text_paged.field_text_align
+field_name: field_text_align
+entity_type: paragraph
+bundle: d_p_text_paged
+label: 'Text Align'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: center
+default_value_callback: ''
+settings: {  }
+field_type: list_string

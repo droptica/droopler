@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ea8ea609-a779-4a1f-865a-5a27241bd268
+  bundle: d_image
+  default_langcode: en
+  depends:
+    f2df84ba-6139-49b8-8d51-4282a63ac5f8: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: planeasset2.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: f2df84ba-6139-49b8-8d51-4282a63ac5f8
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 640
+      height: 427

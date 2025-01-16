@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_additional_classes
+    - paragraphs.paragraphs_type.d_p_gallery
+id: paragraph.d_p_gallery.field_additional_classes
+field_name: field_additional_classes
+entity_type: paragraph
+bundle: d_p_gallery
+label: 'Additional classes'
+description: 'Please separate multiple classes by spaces.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

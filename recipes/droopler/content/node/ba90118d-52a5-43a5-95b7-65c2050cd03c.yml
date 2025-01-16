@@ -1,0 +1,178 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ba90118d-52a5-43a5-95b7-65c2050cd03c
+  bundle: blog_post
+  default_langcode: en
+  depends:
+    34287fe2-7381-4b72-9661-0e2191bd5a33: taxonomy_term
+    8ce534be-457b-4ec2-bb8d-cc19cd5c4689: media
+    0350b886-1838-4b34-9324-3229ae9e3a2b: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Centurion V750 is the fastest airplane engine on the planet'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Centurion V750 is the fastest airplane engine on the planet | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'DrooplerEngines together with Airplanes Pro tested new aircraft engine Centurion V750 on Mojave desert in California, USA.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/blog/centurion-v750-fastest-airplane-engine-planet'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'DrooplerEngines together with Airplanes Pro tested new aircraft engine Centurion V750 on Mojave desert in California, USA.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/d_demo_mechanism.jpg?itok=58OOfOyj'
+  path:
+    -
+      alias: /blog/centurion-v750-fastest-airplane-engine-planet
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_blog_category:
+    -
+      entity: 34287fe2-7381-4b72-9661-0e2191bd5a33
+  field_blog_media_main_image:
+    -
+      entity: 8ce534be-457b-4ec2-bb8d-cc19cd5c4689
+  field_blog_sections:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3c93d3a2-1336-4c7b-9468-9aa4ce789650
+          bundle: d_p_blog_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_long_text:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna. Sed vel ex pretium, consectetur nisi nec, aliquet orci. Donec placerat lorem euismod leo scelerisque cursus. Pellentesque commodo neque sed ipsum hendrerit dapibus. Phasellus placerat lectus eu commodo ultricies. Vivamus enim metus, aliquet eu consequat eget, imperdiet in massa. Duis arcu nisl, ullamcorper a malesuada id, rhoncus in lacus. Maecenas volutpat accumsan nunc id condimentum. Curabitur id sapien posuere, varius nisl non, varius elit. Curabitur lacinia ultrices neque dignissim rutrum. Donec eu arcu ex. Morbi sit amet blandit elit. Vestibulum non leo at diam iaculis vestibulum. Aenean et est ullamcorper, porta turpis sit amet, semper enim. Ut hendrerit eu purus in vulputate. Integer ullamcorper vulputate laoreet. Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui et velit ullamcorper, vel pulvinar nisl blandit. Mauris pretium cursus libero nec eleifend. Proin mauris magna, fermentum quis dui sit amet, sodales porta enim. Nam dictum libero at consequat consectetur. Fusce consectetur urna nisi, at congue nisi pharetra sed.'
+              format: full_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 54be8e02-913a-4799-9d89-6c49f0578512
+          bundle: d_p_blog_image
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_media_image:
+            -
+              entity: 0350b886-1838-4b34-9324-3229ae9e3a2b
+          field_d_p_blog_image_full_width:
+            -
+              value: false
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c5425a3f-5432-480e-af37-a647d74c4f15
+          bundle: d_p_blog_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_long_text:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lobortis est. Aliquam nec rhoncus magna, sed ultrices tellus. Praesent congue mollis sem, in commodo massa. Integer ullamcorper dapibus est, vel iaculis purus rhoncus eu. Cras consectetur velit at nunc luctus aliquet. Quisque cursus mattis vestibulum. Etiam sed massa et magna sollicitudin dictum vitae non urna. Sed vel ex pretium, consectetur nisi nec, aliquet orci. Donec placerat lorem euismod leo scelerisque cursus. Pellentesque commodo neque sed ipsum hendrerit dapibus. Phasellus placerat lectus eu commodo ultricies. Vivamus enim metus, aliquet eu consequat eget, imperdiet in massa. Duis arcu nisl, ullamcorper a malesuada id, rhoncus in lacus. Maecenas volutpat accumsan nunc id condimentum. Curabitur id sapien posuere, varius nisl non, varius elit. Curabitur lacinia ultrices neque dignissim rutrum. Donec eu arcu ex. Morbi sit amet blandit elit. Vestibulum non leo at diam iaculis vestibulum. Aenean et est ullamcorper, porta turpis sit amet, semper enim. Ut hendrerit eu purus in vulputate. Integer ullamcorper vulputate laoreet. Quisque eget ornare sapien. Nunc placerat ultricies ipsum. Etiam consectetur dui et velit ullamcorper, vel pulvinar nisl blandit. Mauris pretium cursus libero nec eleifend. Proin mauris magna, fermentum quis dui sit amet, sodales porta enim. Nam dictum libero at consequat consectetur. Fusce consectetur urna nisi, at congue nisi pharetra sed.'
+              format: full_html
+  field_blog_teaser:
+    -
+      value: 'DrooplerEngines together with Airplanes Pro tested new aircraft engine Centurion V750 on Mojave desert in California, USA.'
+      format: full_html

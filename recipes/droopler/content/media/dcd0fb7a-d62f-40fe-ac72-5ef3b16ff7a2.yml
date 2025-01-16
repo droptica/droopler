@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: dcd0fb7a-d62f-40fe-ac72-5ef3b16ff7a2
+  bundle: d_image
+  default_langcode: en
+  depends:
+    6ccb2d5b-d969-420e-81c4-c9f4d9a757ad: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_demo_motor.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: 6ccb2d5b-d969-420e-81c4-c9f4d9a757ad
+      alt: Motor
+      title: ''
+      width: 2000
+      height: 1124

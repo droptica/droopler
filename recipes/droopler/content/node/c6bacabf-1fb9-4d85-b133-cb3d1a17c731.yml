@@ -1,0 +1,1534 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: c6bacabf-1fb9-4d85-b133-cb3d1a17c731
+  bundle: content_page
+  default_langcode: en
+  depends:
+    dcd0fb7a-d62f-40fe-ac72-5ef3b16ff7a2: media
+    c313877c-3e8c-4567-b71a-ecb1db419812: media
+    5d6b6264-aead-4220-a3ae-552a54bf44b4: media
+    6a56cda2-ccba-4285-a4d7-6f9f8e2d7d8d: media
+    cac9d039-7cbf-4e87-a799-d5db66efe7e5: media
+    a8e39a0e-043d-40a8-aace-f0db84a561eb: media
+    7c28410e-160f-48a8-bcdd-6eddd74fb4e2: media
+    4236a3a1-dadd-4bf2-af7f-8154d7509b83: node
+    233f25fd-cf0a-46ca-bffe-a08bc0d33043: node
+    9c22e3c8-48d3-45b7-ae3d-17073a660b60: node
+    36f74a3f-2355-4c28-9f55-b58f51dba53e: media
+    71093dc9-85f6-4dbf-8088-d0740a3f7c73: media
+    aeddfeb0-e1fa-407b-9821-b8efc725716b: media
+    50682773-a368-42e0-9826-2c76c53f763d: media
+    19c5a479-a1eb-45a9-9968-4d66254af530: media
+    26aefc36-55a4-4255-82a3-1db3725d5eb1: media
+    ffb090bf-e319-4e85-afac-7cae8783dc59: media
+    d21f6509-7b9c-4c85-8913-760d7a918235: media
+    32ab47c8-c3bc-450a-9781-ace0076962df: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Home Page'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Home Page | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'We produce the most powerful and efficient engines on the planet. Check our incredible portfolio of different types of engines and choose the best option for you.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'We produce the most powerful and efficient engines on the planet. Check our incredible portfolio of different types of engines and choose the best option for you.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /home-page
+      langcode: en
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ae50ba6e-4d00-42d5-992e-a54585d32779
+          bundle: d_p_banner
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/products'
+              title: 'Browse engines'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>We produce the most powerful and efficient engines on the planet. Check our incredible portfolio of different types of engines and choose the best option for you.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'The most efficient engines in the world'
+          field_d_media_background:
+            -
+              entity: dcd0fb7a-d62f-40fe-ac72-5ef3b16ff7a2
+          field_d_subtitle:
+            -
+              value: 'For cars, boats, planes and spaceships'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_extra_large
+          field_padding_top:
+            -
+              value: padding_top_extra_large
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-dark
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 60c55359-e320-415e-8854-1e5bcb506044
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_add_dividers:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 6
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 2
+          field_d_main_title:
+            -
+              value: 'Top Actions'
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 9431a7f3-fdcc-4c66-9b6a-070bec92a672
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation'
+                      title: 'Download specs'
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_main_title:
+                    -
+                      value: 'Download specs'
+                  field_d_media_icon:
+                    -
+                      entity: c313877c-3e8c-4567-b71a-ecb1db419812
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 71b694a1-38f0-4c02-84aa-8fb4f10226d4
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/careers'
+                      title: 'Find a job'
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_main_title:
+                    -
+                      value: 'Find a job'
+                  field_d_media_icon:
+                    -
+                      entity: 5d6b6264-aead-4220-a3ae-552a54bf44b4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 3ec4a714-c309-4cb9-94b3-8b946f2b6d0a
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/contact'
+                      title: 'Get support'
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_main_title:
+                    -
+                      value: 'Get support'
+                  field_d_media_icon:
+                    -
+                      entity: 6a56cda2-ccba-4285-a4d7-6f9f8e2d7d8d
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 361d9391-d3e6-4d39-a4c6-038e9659c368
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/products'
+                      title: 'Find parts'
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_main_title:
+                    -
+                      value: 'Find parts'
+                  field_d_media_icon:
+                    -
+                      entity: cac9d039-7cbf-4e87-a799-d5db66efe7e5
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 04fb7b25-e577-4304-948c-b831ebe8b6d2
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/contact'
+                      title: 'Contact us'
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_main_title:
+                    -
+                      value: 'Contact us'
+                  field_d_media_icon:
+                    -
+                      entity: a8e39a0e-043d-40a8-aace-f0db84a561eb
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 2a9d941f-c8d7-47e9-90a9-5e1e991039aa
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/about-us'
+                      title: More
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_main_title:
+                    -
+                      value: More
+                  field_d_media_icon:
+                    -
+                      entity: 7c28410e-160f-48a8-bcdd-6eddd74fb4e2
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b95b4052-6c9a-4407-b1eb-6c5fde3349f9
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 3
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 3
+          field_d_cta_link:
+            -
+              uri: 'internal:/products'
+              title: 'View All'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_long_text:
+            -
+              value: '<p>Since 2008, when company DrooplerEngines was founded, our engineers designed and produced many world-class engines. Here we selected top of the top of our engines. Check their possibilities.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Featured products'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: ce798e2e-93b8-4d6e-bd19-2b2b1f426aab
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 4236a3a1-dadd-4bf2-af7f-8154d7509b83
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 4a434c22-8823-412f-8dee-f82c02fe6e73
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 233f25fd-cf0a-46ca-bffe-a08bc0d33043
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 4e839f9c-13a7-4eef-b092-741c72a98d53
+                  bundle: d_p_node
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_display_mode:
+                    -
+                      value: d_small_box
+                  field_d_node_reference:
+                    -
+                      entity: 9c22e3c8-48d3-45b7-ae3d-17073a660b60
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: true
+          field_full_width:
+            -
+              value: true
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 573291ae-4562-4d57-8f35-b365d16cb6bb
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 4
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 4
+          field_d_long_text:
+            -
+              value: '<p>In DrooplerEngines we not only produce world-class engines but also provide a lot of services related to engines. Check our services dedicated to your industry.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: Services
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: f85eaa5c-1ea1-4e96-8423-11def2ce3508
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/boats'
+                      title: 'For boat manufacturers'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_main_title:
+                    -
+                      value: 'For boat manufacturers'
+                  field_d_media_background:
+                    -
+                      entity: 36f74a3f-2355-4c28-9f55-b58f51dba53e
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: center
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 39cf7a13-5acb-4941-8286-f7b744c19834
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/aircrafts'
+                      title: 'For airplane manufacturers'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_main_title:
+                    -
+                      value: 'For airplane manufacturers'
+                  field_d_media_background:
+                    -
+                      entity: 71093dc9-85f6-4dbf-8088-d0740a3f7c73
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: center
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 292f35b2-51cc-486e-abb2-ea450167f3a0
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/cars'
+                      title: 'For car manufacturers'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_main_title:
+                    -
+                      value: 'For car manufacturers'
+                  field_d_media_background:
+                    -
+                      entity: aeddfeb0-e1fa-407b-9821-b8efc725716b
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: center
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: dd88e3f0-2879-4dcf-bcfb-2f394b5946e7
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/spacecrafts'
+                      title: 'For spaceship manufacturers'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_main_title:
+                    -
+                      value: 'For spaceship manufacturers'
+                  field_d_media_background:
+                    -
+                      entity: 50682773-a368-42e0-9826-2c76c53f763d
+                  field_heading_type:
+                    -
+                      value: h3
+                  field_text_align:
+                    - value: center
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: false
+          field_full_width:
+            -
+              value: true
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 95c5af9d-4cac-42a1-ae20-7f902c1f28cc
+          bundle: d_p_group_of_text_blocks
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 3
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 3
+          field_d_main_title:
+            -
+              value: 'Who uses our engines'
+          field_d_p_tb_block_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: ec7f2d61-f84a-4c89-8b2f-7b834c4ad27b
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_main_title:
+                    -
+                      value: Marine
+                  field_d_media_icon:
+                    -
+                      entity: 19c5a479-a1eb-45a9-9968-4d66254af530
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: center
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: f38ca1bb-bcaf-48ce-9743-83d5605b2771
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_main_title:
+                    -
+                      value: Aviation
+                  field_d_media_icon:
+                    -
+                      entity: 26aefc36-55a4-4255-82a3-1db3725d5eb1
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: center
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 049e5a05-6f0d-40a8-97be-f130feb0aefc
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_main_title:
+                    -
+                      value: Automotive
+                  field_d_media_icon:
+                    -
+                      entity: ffb090bf-e319-4e85-afac-7cae8783dc59
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: center
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: false
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_none
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 100c6d79-6f2c-4f34-ab52-6ca0fa1dc239
+          bundle: d_p_reference_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_cta_link:
+            -
+              uri: 'internal:/blog'
+              title: 'View all'
+              options:
+                attributes:
+                  target: ''
+                  id: ''
+                  name: ''
+                  rel: ''
+                  custom_classes: ''
+                  accesskey: ''
+                class: 'btn btn-primary'
+          field_d_main_title:
+            -
+              value: Blog
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_none
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0d284a47-f8da-4e1b-9e88-497bb3cf322a
+          bundle: d_p_side_by_side
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_p_sbs_items:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 47394abd-56c2-4d97-be18-8131aba1c5ea
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/investor-relations'
+                      title: 'Learn more'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_main_title:
+                    -
+                      value: 'For investors'
+                  field_d_media_background:
+                    -
+                      entity: d21f6509-7b9c-4c85-8913-760d7a918235
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 07ad00ce-20e4-4c57-9d62-47e3191e5162
+                  bundle: d_p_single_text_block
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080283
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_d_cta_link:
+                    -
+                      uri: 'internal:/careers'
+                      title: 'Learn more'
+                      options:
+                        attributes:
+                          target: ''
+                          id: ''
+                          name: ''
+                          rel: ''
+                          custom_classes: ''
+                          accesskey: ''
+                        class: 'btn btn-primary'
+                  field_d_main_title:
+                    -
+                      value: Career
+                  field_d_media_background:
+                    -
+                      entity: 32ab47c8-c3bc-450a-9781-ace0076962df
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_align:
+                    - value: start
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_enable_grid:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_none
+          field_padding_top:
+            -
+              value: padding_top_none
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'We produce the most powerful and efficient engines on the planet. Check our incredible portfolio of different types of engines and choose the best option for you.'

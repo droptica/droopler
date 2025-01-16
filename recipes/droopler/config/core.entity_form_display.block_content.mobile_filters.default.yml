@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.mobile_filters
+    - field.field.block_content.mobile_filters.field_button_class
+    - field.field.block_content.mobile_filters.field_button_text
+id: block_content.mobile_filters.default
+targetEntityType: block_content
+bundle: mobile_filters
+mode: default
+content:
+  field_button_class:
+    type: string_textfield
+    weight: 27
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_button_text:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

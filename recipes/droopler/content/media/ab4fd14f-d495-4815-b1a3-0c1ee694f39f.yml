@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ab4fd14f-d495-4815-b1a3-0c1ee694f39f
+  bundle: d_image
+  default_langcode: en
+  depends:
+    c66a21ad-f7f4-41dc-bd3c-d35cbbb9f9fd: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: demo_paragraph_gallery.png
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: c66a21ad-f7f4-41dc-bd3c-d35cbbb9f9fd
+      alt: 'Paragraph Gallery Icon'
+      title: ''
+      width: 200
+      height: 152

@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: be082687-b35a-4f04-9b53-1ac0a27728a6
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    60d1ef62-0896-45c3-b6e7-62cc7e9b95fd: menu_link_content
+    a6e167cf-296f-49d3-b454-872a4938ca0f: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Block Paragraph'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: a6e167cf-296f-49d3-b454-872a4938ca0f
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 15
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:60d1ef62-0896-45c3-b6e7-62cc7e9b95fd'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

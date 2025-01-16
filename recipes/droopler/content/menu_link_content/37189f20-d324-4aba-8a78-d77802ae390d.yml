@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 37189f20-d324-4aba-8a78-d77802ae390d
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    05a54ec4-d157-4519-bc8f-e64240da7d86: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Blog
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 05a54ec4-d157-4519-bc8f-e64240da7d86
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -44
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'

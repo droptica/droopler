@@ -1,0 +1,160 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.d_p_form.field_additional_classes
+    - field.field.paragraph.d_p_form.field_background_theme_custom
+    - field.field.paragraph.d_p_form.field_d_long_text
+    - field.field.paragraph.d_p_form.field_d_main_title
+    - field.field.paragraph.d_p_form.field_d_media_background
+    - field.field.paragraph.d_p_form.field_d_media_icon
+    - field.field.paragraph.d_p_form.field_d_webform
+    - field.field.paragraph.d_p_form.field_form_layout
+    - field.field.paragraph.d_p_form.field_heading_type
+    - field.field.paragraph.d_p_form.field_margin_bottom
+    - field.field.paragraph.d_p_form.field_margin_top
+    - field.field.paragraph.d_p_form.field_padding_bottom
+    - field.field.paragraph.d_p_form.field_padding_top
+    - field.field.paragraph.d_p_form.field_text_theme_custom
+    - field.field.paragraph.d_p_form.field_theme
+    - paragraphs.paragraphs_type.d_p_form
+  module:
+    - field_group
+    - text
+    - webform
+third_party_settings:
+  field_group:
+    group_d_form_background:
+      children:
+        - field_d_media_background
+      label: 'Form background'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_form_content:
+      children:
+        - field_d_long_text
+      label: 'Form content'
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_form_fields:
+      children:
+        - field_d_webform
+        - field_d_forms
+      label: 'Form fields'
+      parent_name: ''
+      region: content
+      weight: 3
+      format_type: html_element
+      format_settings:
+        classes: ''
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_d_form_header:
+      children:
+        - field_d_media_icon
+        - field_d_main_title
+      label: Header
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '<none>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: paragraph.d_p_form.default
+targetEntityType: paragraph
+bundle: d_p_form
+mode: default
+content:
+  field_d_long_text:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_d_main_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_d_media_background:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: d_responsive_background
+      link: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_d_media_icon:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: d_icon
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_d_webform:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+hidden:
+  field_additional_classes: true
+  field_background_theme_custom: true
+  field_form_layout: true
+  field_heading_type: true
+  field_margin_bottom: true
+  field_margin_top: true
+  field_padding_bottom: true
+  field_padding_top: true
+  field_text_theme_custom: true
+  field_theme: true
+  search_api_excerpt: true

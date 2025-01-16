@@ -1,0 +1,716 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: a6e167cf-296f-49d3-b454-872a4938ca0f
+  bundle: content_page
+  default_langcode: en
+  depends:
+    56911bf5-bd64-492c-90a7-97edee430a09: media
+    20da8002-c0df-45ba-a769-ac36d6d9aab4: media
+    30c83456-4ddf-4832-bc90-0b5dcd3a4777: media
+    f87a1231-7051-437f-9c4e-0bfe79c6db89: media
+    390951de-5882-4303-8a30-dc2a4807846e: media
+    7349f593-6511-4892-99f2-6fc71a07b302: media
+    5028f7ff-9811-4097-886b-d31b727c54a3: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Block Paragraph'
+  created:
+    -
+      value: 1727080283
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Block Paragraph | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/documentation/block-paragraph'
+    -
+      tag: meta
+      attributes:
+        property: 'og:description'
+        content: 'Discover possibilities of Droopler distribution for Drupal.'
+    -
+      tag: meta
+      attributes:
+        property: 'og:image'
+        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+  path:
+    -
+      alias: /documentation/block-paragraph
+      langcode: en
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_page_section:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 93d02368-92fc-4f44-a29d-20b2f4515d73
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_main_title:
+            -
+              value: 'Block Paragraph'
+          field_d_subtitle:
+            -
+              value: 'Droopler Documentation'
+          field_heading_type:
+            -
+              value: h1
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-primary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3d475cfc-0901-46b5-9864-1028375d55cd
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>There are times, creating pages using paragraphs, we need to embed a block with views result, or some custom block. In that kind of situation with help comes Block Paragraph. You can use it to embed any block that can be placed in the <a href="/admin/structure/block">Block Layout</a>, so it gives us quite a lot of possibilities.</p><p>Below we have an example of embedding a block with Social Icons - the same block is also placed in our footer, just the title of the block is overwritten here.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Example #1'
+          field_d_subtitle:
+            -
+              value: 'Plugin Block'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e8e8fb49-a6bd-445a-aa4c-880398c54cd3
+          bundle: d_p_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_block:
+            -
+              plugin_id: 'block_content:a8632c3d-6241-4d36-94b3-e519f93a5f66'
+              settings:
+                id: 'block_content:a8632c3d-6241-4d36-94b3-e519f93a5f66'
+                label: 'Social media'
+                label_display: visible
+                provider: block_content
+                status: true
+                info: ''
+                view_mode: full
+          field_full_width:
+            -
+              value: false
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d5832ddb-6ccf-4279-976a-b6a6188cc640
+          bundle: d_p_text_paged
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080283
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 12
+          field_column_count_mobile:
+            -
+              value: 12
+          field_column_count_tablet:
+            -
+              value: 12
+          field_d_long_text:
+            -
+              value: '<p>Quite often you probably noticed, that there is a common content shared between multiple subpages. Let''s think for example of "Our Partners" section or "Contact us" banner. Instead of adding identical paragraphs over again, you could create Content Block with that paragraph and embed it in all pages using Block Paragraph like we did bellow.</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Example #2'
+          field_d_subtitle:
+            -
+              value: 'Content Block with Paragraphs'
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_align:
+            -
+              value: center
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-secondary
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 11349fcc-7e3e-4f73-8e88-7af844e0ea23
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727689504
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_add_dividers:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#FFFFFF'
+              opacity: 0.0
+          field_column_count_desktop:
+            -
+              value: 4
+          field_column_count_mobile:
+            -
+              value: 1
+          field_column_count_tablet:
+            -
+              value: 3
+          field_d_main_title:
+            -
+              value: 'Our Partners'
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 879c84e9-e4b1-4968-9372-bc83f03b7a2d
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727689504
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#FFFFFF'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: ''
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 56911bf5-bd64-492c-90a7-97edee430a09
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: f966a101-6676-4e37-b245-d57c69e748b7
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727689573
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#FFFFFF'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: ''
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 20da8002-c0df-45ba-a769-ac36d6d9aab4
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: a7da2676-8e2d-4ca8-98d0-c4707d1523ee
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727689606
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#FFFFFF'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: ''
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 30c83456-4ddf-4832-bc90-0b5dcd3a4777
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 7eca76f4-63ea-4e29-aac6-32e66e28f097
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727689632
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#FFFFFF'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: ''
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: f87a1231-7051-437f-9c4e-0bfe79c6db89
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 044d2f61-14ae-46d8-9b20-738752534cb0
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727689672
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#FFFFFF'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: ''
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 390951de-5882-4303-8a30-dc2a4807846e
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 71a7d5a5-7c35-4eda-b94a-30f9e01d2213
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727689698
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_background_theme_custom:
+                    -
+                      color: '#FFFFFF'
+                      opacity: 0.0
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: ''
+                      options:
+                        attributes:
+                          class:
+                            - ''
+                  field_d_media_icon:
+                    -
+                      entity: 7349f593-6511-4892-99f2-6fc71a07b302
+                  field_heading_type:
+                    -
+                      value: h2
+                  field_text_theme_custom:
+                    -
+                      color: '#000000'
+                      opacity: 0.0
+                  field_theme:
+                    -
+                      value: theme-light
+          field_full_width:
+            -
+              value: false
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+  field_teaser_media_image:
+    -
+      entity: 5028f7ff-9811-4097-886b-d31b727c54a3
+  field_teaser_text:
+    -
+      value: 'Discover possibilities of Droopler distribution for Drupal.'

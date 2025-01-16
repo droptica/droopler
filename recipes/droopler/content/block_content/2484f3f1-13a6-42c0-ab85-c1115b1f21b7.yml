@@ -1,0 +1,285 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 2484f3f1-13a6-42c0-ab85-c1115b1f21b7
+  bundle: d_paragraph_block
+  default_langcode: en
+  depends:
+    56911bf5-bd64-492c-90a7-97edee430a09: media
+    20da8002-c0df-45ba-a769-ac36d6d9aab4: media
+    30c83456-4ddf-4832-bc90-0b5dcd3a4777: media
+    f87a1231-7051-437f-9c4e-0bfe79c6db89: media
+    390951de-5882-4303-8a30-dc2a4807846e: media
+    7349f593-6511-4892-99f2-6fc71a07b302: media
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Block With Paragraphs Example'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ef32fe68-1566-4e50-9fd9-d4985fc9c826
+          bundle: d_p_carousel
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1727080282
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_d_main_title:
+            -
+              value: 'Our Partners'
+          field_d_p_cs_item_reference:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: ca34bf97-2a88-4cd8-bb9b-a6d035f81a16
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080282
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: BTU
+                      options:
+                        type: primary
+                  field_d_media_icon:
+                    -
+                      entity: 56911bf5-bd64-492c-90a7-97edee430a09
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 8723459c-1f15-473a-83d8-0933127146d0
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080282
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: 'Cube Inc.'
+                      options:
+                        type: primary
+                  field_d_media_icon:
+                    -
+                      entity: 20da8002-c0df-45ba-a769-ac36d6d9aab4
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: fd467d62-537f-4898-a03f-ae3bd03d33be
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080282
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: 'Atlantic Jetlines'
+                      options:
+                        type: primary
+                  field_d_media_icon:
+                    -
+                      entity: 30c83456-4ddf-4832-bc90-0b5dcd3a4777
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 58f15ddf-23e4-4880-8426-9d185999d63d
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080282
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: 'Rock World Cafe'
+                      options:
+                        type: primary
+                  field_d_media_icon:
+                    -
+                      entity: f87a1231-7051-437f-9c4e-0bfe79c6db89
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: c5802c68-9636-498e-b918-b59e89899cfc
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080282
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: YETI
+                      options:
+                        type: primary
+                  field_d_media_icon:
+                    -
+                      entity: 390951de-5882-4303-8a30-dc2a4807846e
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 7a03c833-2609-44c8-afae-6ccb0547936c
+                  bundle: d_p_carousel_item
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1727080282
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_d_cta_single_link:
+                    -
+                      uri: 'internal:/documentation/carousel-paragraph'
+                      title: Droopler
+                      options:
+                        type: primary
+                  field_d_media_icon:
+                    -
+                      entity: 7349f593-6511-4892-99f2-6fc71a07b302

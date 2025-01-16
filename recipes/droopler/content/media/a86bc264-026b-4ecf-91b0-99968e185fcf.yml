@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a86bc264-026b-4ecf-91b0-99968e185fcf
+  bundle: d_image
+  default_langcode: en
+  depends:
+    c2d0c6f6-0624-4f15-998d-a58ed328ecb7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: d_product_init_machine-xt-550-2.jpg
+  created:
+    -
+      value: 1727080283
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_image:
+    -
+      entity: c2d0c6f6-0624-4f15-998d-a58ed328ecb7
+      alt: 'Title / Subtitle'
+      title: ''
+      width: 720
+      height: 520

@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: f6d6ef18-1518-4229-a7cc-ce79dbc5b8be
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    60d1ef62-0896-45c3-b6e7-62cc7e9b95fd: menu_link_content
+    09dad24f-5eaf-41f0-abb4-3543264ddc79: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Banner Paragraph'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 09dad24f-5eaf-41f0-abb4-3543264ddc79
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 10
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:60d1ef62-0896-45c3-b6e7-62cc7e9b95fd'
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://ddevappname.ddev.site/home-page'
