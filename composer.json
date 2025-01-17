@@ -1,6 +1,6 @@
 {
-  "name": "droptica/droopler-project",
-  "description": "Project template for Droopler with Composer",
+  "name": "droptica/droopler",
+  "description": "Droopler - SEO Friendly CMS & Site Builder - is a Drupal-based website builder that helps you create beautiful, fast, and easy-to-manage websites",
   "type": "project",
   "license": "GPL-2.0-or-later",
   "homepage": "https://www.droopler.com",
@@ -74,14 +74,11 @@
     "npm-asset/jquery-ui-touch-punch": "^0.2",
     "npm-asset/select2": "^4.0.4",
     "npm-asset/slick-carousel": "^1.8",
-    "oomphinc/composer-installers-extender": "^2.0",
-    "platformsh/config-reader": "^2.4"
+    "oomphinc/composer-installers-extender": "^2.0"
   },
   "require-dev": {
     "drupal/core-dev": "^10.0",
-    "drupal/devel": "^5.0",
-    "ericmartel/codeception-email": "^1.0",
-    "droptica/codeception-package": "^10.8"
+    "drupal/devel": "^5.0"
   },
   "replace": {
     "bower-asset/desandro-matches-selector": "*",
@@ -90,11 +87,6 @@
     "bower-asset/get-size": "*",
     "bower-asset/jquery": "*",
     "bower-asset/outlayer": "*"
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
-    }
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -107,10 +99,8 @@
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "composer/installers": true,
       "cweagans/composer-patches": true,
-      "drupal/console-extend-plugin": true,
       "drupal/core-composer-scaffold": true,
       "oomphinc/composer-installers-extender": true,
-      "zaporylie/composer-drupal-optimizations": true,
       "phpstan/extension-installer": true,
       "php-http/discovery": true,
       "tbachert/spi": true
