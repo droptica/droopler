@@ -39,6 +39,7 @@ cp -r starter-theme/ web/themes/custom/
 
 # Move droopler.info.yml to the project.
 mv droopler.info.yml web/profiles/droopler/droopler.info.yml
+mv droopler.profile web/profiles/droopler/droopler.profile
 
 ask_yes_no() {
     while true; do
