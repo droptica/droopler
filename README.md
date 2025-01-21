@@ -18,7 +18,11 @@ After the script finishes you can choose to run the Droopler installation via th
 
 Type `ddev launch` to open the Droopler installation in your browser.
 
-Type `ddev drush site-install droopler && ddev drush cr` to install Droopler via the command line.
+#### To install Droopler via the command line:
+
+Type `ddev drush site-install droopler` to install clean Droopler.
+
+Type `ddev drush site-install droopler install_configure_form.enable_demo_content=1` if you wish to install demo content. 
 
 ## Issues
 
