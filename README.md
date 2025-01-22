@@ -1,4 +1,4 @@
-# Droopler 5.0.3
+# Droopler 5.0.4
 
 Droopler is a Drupal 10 profile designed to kickstart a new webpage in a few minutes. It's based on the latest frontend technologies, including Bootstrap 5. The maintainer of Droopler is Droptica.
 
