@@ -5,7 +5,7 @@
  * Theme content helper functions.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * Get nids from selected content type.
@@ -86,7 +86,6 @@ function _replace_content(array &$variables, string $entity_type, string $view_m
     }
   }
 }
-
 
 /**
  * Exclude values from result.

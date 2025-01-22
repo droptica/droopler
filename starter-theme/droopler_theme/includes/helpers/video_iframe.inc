@@ -2,16 +2,39 @@
 
 /**
  * @file
+ * Helper functions for video iframe handling.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\media\Entity\Media;
 
+/**
+ * Calculate aspect ratio.
+ *
+ * @param int $height
+ *   The height.
+ * @param int $width
+ *   The width.
+ *
+ * @return float
+ *   The aspect ratio.
+ */
 function _calculate_aspect_ratio(int $height, int $width): float {
   return $height / $width;
 }
 
+/**
+ * Get video src.
+ *
+ * @param \Drupal\media\Entity\Media $media
+ *   The media entity.
+ * @param string $view_mode
+ *   The view mode.
+ *
+ * @return string
+ *   The video src.
+ */
 function _get_video_src(Media $media, string $view_mode): string {
   $provider = _get_video_provider($media);
   if (!$provider) {
@@ -32,7 +55,16 @@ function _get_video_src(Media $media, string $view_mode): string {
   return $video_base_url . $video_id . '?' . $player_settings;
 }
 
-function _get_video_id(Media $media): string|null {
+/**
+ * Get video ID.
+ *
+ * @param \Drupal\media\Entity\Media $media
+ *   The media entity.
+ *
+ * @return string|null
+ *   The video ID or null if not found.
+ */
+function _get_video_id(Media $media): ?string {
   if ($media->bundle() !== 'd_video') {
     return NULL;
   }
@@ -45,7 +77,7 @@ function _get_video_id(Media $media): string|null {
     return NULL;
   }
 
-  return match (true) {
+  return match (TRUE) {
     str_contains($oembed_url, 'youtube.com') =>
       (preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $oembed_url, $matches) && !empty($matches[1]))
         ? $matches[1]
@@ -60,10 +92,18 @@ function _get_video_id(Media $media): string|null {
         : NULL,
     default => NULL,
   };
-
 }
 
-function _get_video_provider(Media $media): string|null {
+/**
+ * Get video provider.
+ *
+ * @param \Drupal\media\Entity\Media $media
+ *   The media entity.
+ *
+ * @return string|null
+ *   The video provider or null if not found.
+ */
+function _get_video_provider(Media $media): ?string {
   $oembed_url = $media->hasField('field_media_oembed_video') && !$media->get('field_media_oembed_video')->isEmpty()
     ? $media->get('field_media_oembed_video')->value
     : NULL;
@@ -72,21 +112,43 @@ function _get_video_provider(Media $media): string|null {
     return NULL;
   }
 
-  return match (true) {
+  return match (TRUE) {
     str_contains($oembed_url, 'youtube.com'), str_contains($oembed_url, 'youtu.be') => 'youtube',
     str_contains($oembed_url, 'vimeo.com') => 'vimeo',
     default => NULL,
   };
 }
 
-function _get_video_base_url(string $provider): string|null {
-  return match($provider) {
+/**
+ * Get video base URL.
+ *
+ * @param string $provider
+ *   The video provider.
+ *
+ * @return string|null
+ *   The video base URL or null if not found.
+ */
+function _get_video_base_url(string $provider): ?string {
+  return match ($provider) {
     'youtube' => 'https://www.youtube.com/embed/',
     'vimeo' => 'https://player.vimeo.com/video/',
     default => NULL,
   };
 }
 
+/**
+ * Get player settings.
+ *
+ * @param string $view_mode
+ *   The view mode.
+ * @param string $video_id
+ *   The video ID.
+ * @param string $provider
+ *   The video provider.
+ *
+ * @return array
+ *   The player settings.
+ */
 function _get_player_settings(string $view_mode, string $video_id, string $provider): array {
   $settings = [
     'autoplay' => 0,
@@ -101,10 +163,12 @@ function _get_player_settings(string $view_mode, string $video_id, string $provi
     case 'd_tiles_gallery_fullscreen':
     case 'tiles_gallery_fullscreen_featured':
       break;
+
     case 'counter':
       $settings['autoplay'] = 1;
       $settings['mute'] = 1;
       break;
+
     case 'd_banner':
     case 'd_responsive_background':
     case 'd_responsive_background_overlay':
@@ -120,7 +184,7 @@ function _get_player_settings(string $view_mode, string $video_id, string $provi
     unset(
       $settings['autoplay'],
       $settings['loop'],
-      $settings['muted']
+      $settings['mute']
     );
     $settings['background'] = 1;
   }
@@ -128,13 +192,23 @@ function _get_player_settings(string $view_mode, string $video_id, string $provi
   return $settings;
 }
 
+/**
+ * Get video classes.
+ *
+ * @param string $view_mode
+ *   The view mode.
+ *
+ * @return array
+ *   The video classes.
+ */
 function _get_video_classes(string $view_mode): array {
- $classes = ['video-embed'];
+  $classes = ['video-embed'];
 
   switch ($view_mode) {
     case 'd_tiles_gallery_fullscreen':
     case 'tiles_gallery_fullscreen_featured':
       break;
+
     default:
       $classes[] = 'video-embed--cover';
       break;

@@ -5,7 +5,7 @@
  * Theme and preprocess functions for fields.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Render\Element;
 
@@ -20,13 +20,13 @@ function droopler_theme_preprocess_field(&$variables) {
   $entity = $variables["element"]["#object"];
 
   if ($field_type === 'entity_reference' && $view_mode === 'd_small_box' && $formatter === 'media_thumbnail') {
-      $items = Element::getVisibleChildren($variables['element']);
-      foreach ($items as $key => $delta) {
-        if ($key == 0) {
-          continue;
-        }
-        unset($variables['items'][$delta]);
+    $items = Element::getVisibleChildren($variables['element']);
+    foreach ($items as $key => $delta) {
+      if ($key == 0) {
+        continue;
       }
+      unset($variables['items'][$delta]);
+    }
   }
 
   if ($field_name === 'field_media_oembed_video' && isset($variables['items']) && $view_mode !== 'media_library') {
@@ -59,7 +59,7 @@ function droopler_theme_preprocess_field(&$variables) {
       $featured_images = $entity->hasField('field_featured_images') && !$entity->get('field_featured_images')->isEmpty()
         ? $entity->get('field_featured_images')->getString()
         : NULL;
-      $featured_images = empty($featured_images) ? [] : explode(',', (string)$featured_images);
+      $featured_images = empty($featured_images) ? [] : explode(',', (string) $featured_images);
       $featured_images = array_map('intval', $featured_images);
       foreach ($featured_images as $image_number) {
         if ($image_number > 0 && !empty($variables['items'][$image_number - 1])) {
@@ -83,7 +83,6 @@ function droopler_theme_preprocess_field(&$variables) {
       $variables['#attached']['library'][] = 'droopler_theme/cta';
     }
   }
-
 
   if ($field_name === 'field_d_product_media') {
     $single_items = [];

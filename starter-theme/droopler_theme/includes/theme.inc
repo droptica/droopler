@@ -5,7 +5,7 @@
  * Custom theme hooks.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;

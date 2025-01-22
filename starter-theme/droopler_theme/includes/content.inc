@@ -5,7 +5,7 @@
  * Theme and preprocess functions for nodes.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
@@ -27,7 +27,7 @@ function droopler_theme_preprocess_taxonomy_term(array &$variables): void {
   $filter_name = match ($taxonomy_bundle) {
     'd_product_categories' => 'product_categories_taxonomy_term_name_block',
     'tags' => 'tags_taxonomy_term_name_block',
-    default => null,
+    default => NULL,
   };
 
   if (!$filter_name) {
@@ -67,4 +67,3 @@ function droopler_theme_preprocess_node(&$variables) {
     }
   }
 }
-

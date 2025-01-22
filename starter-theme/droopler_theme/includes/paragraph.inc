@@ -5,7 +5,7 @@
  * Theme and preprocess functions for paragraphs.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Template\Attribute;
@@ -106,7 +106,7 @@ function droopler_theme_preprocess_paragraph(array &$variables): void {
     ? (bool) $paragraph->get('field_enable_price')->getString()
     : NULL;
 
-  // Show the price in the sidebar	.
+  // Show the price in the sidebar.
   $variables['paragraph']->priceInSidebar = $paragraph->hasField('field_price_in_sidebar') && !$paragraph->get('field_price_in_sidebar')->isEmpty()
     ? (bool) $paragraph->get('field_price_in_sidebar')->getString()
     : NULL;
@@ -144,7 +144,7 @@ function droopler_theme_preprocess_paragraph(array &$variables): void {
  * Set paragraph attributes setting classes.
  *
  * @param array $variables
- *  Variables.
+ *   Variables array.
  */
 function _set_paragraph_attributes_setting_classes(array &$variables): void {
   $setting_fields = [
@@ -164,7 +164,7 @@ function _set_paragraph_attributes_setting_classes(array &$variables): void {
     }
   }
 
-  // Additional classes for paragraphs
+  // Additional classes for paragraphs.
   $additional_classes = $paragraph->hasField('field_additional_classes') && !$paragraph->get('field_additional_classes')->isEmpty()
     ? explode(' ', $paragraph->get('field_additional_classes')->getString())
     : NULL;
@@ -178,9 +178,9 @@ function _set_paragraph_attributes_setting_classes(array &$variables): void {
  * Set paragraph column count settings.
  *
  * @param array $variables
- *  Variables.
+ *   Variables array.
  * @param \Drupal\paragraphs\Entity\Paragraph|null $parent
- *  Parent paragraph.
+ *   Parent paragraph.
  */
 function _set_paragraph_column_count_settings(array &$variables, ParagraphInterface|null $parent = NULL): void {
   $column_count_fields = [
@@ -213,9 +213,9 @@ function _set_paragraph_column_count_settings(array &$variables, ParagraphInterf
  * Set paragraph theme settings.
  *
  * @param array $variables
- *  Variables.
+ *   Variables array.
  * @param array $attributes
- *  Attributes.
+ *   Attributes array.
  */
 function _set_paragraph_theme_settings(array &$variables, array &$attributes): void {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
@@ -252,7 +252,7 @@ function _set_paragraph_theme_settings(array &$variables, array &$attributes): v
  * Set paragraph carousel settings.
  *
  * @param array $variables
- *  Variables.
+ *   Variables array.
  */
 function _set_paragraph_carousel_settings(array &$variables): void {
   $variables['paragraph']->carouselSettings = Json::encode([

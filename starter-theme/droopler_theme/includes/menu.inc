@@ -5,4 +5,4 @@
  * Theme and preprocess functions for menus.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);

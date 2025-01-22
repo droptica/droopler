@@ -5,7 +5,7 @@
  * Theme and preprocess functions for blocks.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\block_content\BlockContentInterface;
 use Drupal\Core\Url;
@@ -147,8 +147,7 @@ function droopler_theme_preprocess_block(array &$variables): void {
           '#cache' => [
             'contexts' => ['url.query_args:f'],
           ],
-
-      ];
+        ];
     }
   }
 }

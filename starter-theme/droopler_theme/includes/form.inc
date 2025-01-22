@@ -5,7 +5,7 @@
  * Theme and preprocess functions for forms.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
@@ -25,7 +25,10 @@ function droopler_theme_preprocess_input__submit(&$variables) {
  */
 function droopler_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Add placeholder to contact form.
-  if ($form_id == 'views_exposed_form' && in_array($form['#id'], ['views-exposed-form-products-list-products-list', 'views-exposed-form-products-list-product-list-block'])) {
+  if ($form_id == 'views_exposed_form' && in_array(
+      $form['#id'],
+      ['views-exposed-form-products-list-products-list', 'views-exposed-form-products-list-product-list-block'])
+  ) {
     $form['aggregated_field']['#attributes']['placeholder'] = t('Search products...');
     $form['sort_by']['#title'] = '';
     $form['sort_by']['#attributes']['placeholder'] = t('Placeholder');
