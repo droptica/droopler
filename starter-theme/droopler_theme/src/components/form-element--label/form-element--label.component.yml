@@ -1,0 +1,19 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Form Element Label
+status: experimental
+description: The structure and necessary styling for displaying a form element label.
+props:
+  type: object
+  properties:
+    title:
+      type: ['string', 'null']
+      description: The label's text.
+    title_display:
+      type: ['string', 'null']
+      description: Elements title_display setting.
+    required:
+      type: ['null', 'boolean']
+      description: An indicator for whether the associated form element is required.
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      description: A list of HTML attributes for the label.

@@ -1,3 +1,4 @@
+/* stylelint-disable */
 @mixin heading($heading-level) {
   @if $heading-level == 1 {
     @include font-size($h1-font-size);
@@ -13,3 +14,4 @@
     @include font-size($h6-font-size);
   }
 }
+/* stylelint-enable */

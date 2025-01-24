@@ -3,7 +3,10 @@
 .d-p-carousel {
   --divider-last-child-display: inline-block;
 
-  &[data-has-dividers] .d-p-carousel-item:not(:first-child, [aria-hidden="true"]+[aria-hidden="false"], [aria-hidden="false"]+[aria-hidden="true"]) {
+  &[data-has-dividers] .d-p-carousel-item:not(
+  :first-child,
+  [aria-hidden="true"]+[aria-hidden="false"],
+  [aria-hidden="false"]+[aria-hidden="true"]) {
     &::before {
       content: "";
       position: absolute;

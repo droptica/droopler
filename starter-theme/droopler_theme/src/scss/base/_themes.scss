@@ -1,3 +1,5 @@
+@use "sass:color";
+
 *[data-theme="theme-light"] {
   --dp-bs-body-color: #{$color-hecuba};
   --form-input-color: #{$color-troilus};
@@ -12,7 +14,7 @@
   --body-text-table-th-color: #{$color-odysseus};
   --body-text-table-th-background-color: #{$color-agamemnon};
   --body-text-table-tr-odd-background-color: #{$color-paris};
-  --body-text-table-tr-even-background-color: #{adjust-color($color-paris, $lightness: 4%)};
+  --body-text-table-tr-even-background-color: #{color.adjust($color-paris, $lightness: 4%)};
   --heading-color: #{$color-agamemnon};
   --subtitle-color: #{$color-cassandra};
   --checkbox-color: #{$color-agamemnon};

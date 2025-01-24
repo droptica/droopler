@@ -4,7 +4,8 @@
  * Template for a pager.
  */
 #}
-{% include '@radix/pagination/pagination.twig' with {
+{% include 'radix:pagination' with {
   items: items,
-  alignment: 'center'
+  alignment: 'center',
+  utility_classes: 'mt-5'
 } %}

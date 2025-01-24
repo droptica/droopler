@@ -1,1 +1,12 @@
-{% include "@radix/form/form-element.twig" %}
+{%
+  include "radix:form-element" with {
+  errors,
+  prefix,
+  suffix,
+  type,
+  name,
+  label,
+  label_display,
+  description_display,
+}
+%}

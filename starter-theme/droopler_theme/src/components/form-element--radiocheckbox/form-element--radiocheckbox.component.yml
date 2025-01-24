@@ -1,0 +1,35 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Form Element Radio Checkbox
+status: experimental
+description: A form element that supports radio and checkbox elements.
+props:
+  type: object
+  properties:
+    form_element_radiocheckbox_attributes:
+      type: Drupal\Core\Template\Attribute
+      description: HTML attributes for the containing element.
+    type:
+      type: string
+      description: The type of the element.
+    name:
+      type: string
+      description: The name of the element.
+    label:
+      type: string
+      description: The label element.
+    title_display:
+      type: ['array', 'string', 'null']
+      description: Title display setting.
+    disabled:
+      type: ['boolean', 'null', 'string']
+      description: True if the element is disabled, null if not specified.
+    errors:
+      type: ['array', 'string', 'null']
+      description: Any errors for this form element.
+    description_display:
+      type: ['array', 'string', 'null']
+      description: Description display setting.
+slots:
+  children:
+    type: string
+    description: The form element content.

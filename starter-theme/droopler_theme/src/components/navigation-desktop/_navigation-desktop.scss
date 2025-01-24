@@ -55,8 +55,10 @@
         }
 
         &:hover {
-          .menu-item__link {
-            color: var(--navigation-desktop-bottom-menu-link-color-hover);
+          .menu-item {
+            &__link {
+              color: var(--navigation-desktop-bottom-menu-link-color-hover);
+            }
           }
 
           > .submenu {
@@ -84,7 +86,7 @@
         }
 
         &--active {
-          > .submenu-item__element > .submenu-item__link {
+          > .submenu-item__element > .submenu-item__link { /* stylelint-disable-line */
             color: var(--navigation-desktop-bottom-submenu-link-color-active);
           }
         }
@@ -121,7 +123,7 @@
               display: block;
             }
 
-            > .submenu-item__element > .submenu-item__toggler {
+            > .submenu-item__element > .submenu-item__toggler { /* stylelint-disable-line */
               color: var(--navigation-desktop-bottom-submenu-link-color-hover);
             }
           }

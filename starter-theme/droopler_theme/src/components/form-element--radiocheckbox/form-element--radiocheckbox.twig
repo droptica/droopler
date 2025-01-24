@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Template for a checkbox form element.
+ *
+ * @ingroup themeable
+ */
+#}
+{% set form_element_radiocheckbox_attributes = attributes ?: create_attribute() %}
+{% set disabled = disabled|default(false) %}
+{%
+  set form_element_radiocheckbox_classes = [
+    'js-form-item',
+    'form-item',
+    'form-check',
+    'form-type-' ~ type|clean_class,
+    'js-form-type-' ~ type|clean_class,
+    'form-item-' ~ name|clean_class,
+    'js-form-item-' ~ name|clean_class,
+    title_display not in ['after', 'before'] ? 'form-no-label',
+    disabled ? 'form-disabled',
+    errors is not empty ? 'form-item--error',
+  ]|merge(form_element__radiocheckbox_utility_classes ?: [])
+%}
+{%
+  set description_classes = [
+    'description',
+    'form-text',
+    'text-muted',
+    description_display == 'invisible' ? 'visually-hidden',
+  ]
+%}
+<div {{ form_element_radiocheckbox_attributes.addClass(form_element_radiocheckbox_classes) }}>
+  {{ children }}
+
+  {{ label }}
+
+  {% if errors %}
+    <div class="invalid-feedback">
+      {{ errors }}
+    </div>
+  {% endif %}
+
+  {% if description.content %}
+    <small{{description.attributes.addClass(description_classes)}}>
+      {{ description.content }}
+    </small>
+  {% endif %}
+</div>

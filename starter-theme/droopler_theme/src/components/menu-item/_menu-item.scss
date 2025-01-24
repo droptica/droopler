@@ -1,4 +1,5 @@
-.menu-item, .submenu-item {
+.menu-item,
+.submenu-item {
   &__link {
     display: block;
     text-decoration: none;
@@ -22,9 +23,11 @@
 }
 
 .submenu-item {
+/* stylelint-disable */
   &--has-submenu {
     &.open > .submenu-item__element > .submenu-item__toggler .icon--open,
     &:not(.open) > .submenu-item__element > .submenu-item__toggler .icon--close {
+/* stylelint-enable */
       display: none;
     }
   }

@@ -1,0 +1,43 @@
+# Form Element Label
+
+A form element label is a component used to display a label for a form element. It is typically used in conjunction with form elements such as text fields, text areas, inputs and others.
+
+## Key Features
+
+- Supports various form elements.
+- Customizable label text.
+- Handles required field indicators.
+- Compatible with Radix 6 and Bootstrap 5.3.
+
+## Template Structure
+
+The template structure for the form element label is defined in the `form-element--label.twig` file. It includes the following key elements:
+
+- `title`: The label's text.
+- `title_display`: Elements title_display setting.
+- `required`: An indicator for whether the associated form element is required.
+- `attributes`: A list of HTML attributes for the label.
+
+## Customization
+
+You can customize the form element label by modifying the Twig template or by overriding the default classes and attributes. The following properties are available for customization:
+
+- `title`: Set the label text.
+- `title_display`: Control the display of the label (e.g., 'after', 'invisible').
+- `required`: Indicate if the form element is required.
+- `attributes`: Add custom HTML attributes to the label.
+
+## Usage
+
+An overkill include example with all the properties:
+
+```twig
+{% include "radix:form-element--label" with {
+  required: true,
+  title: "Label",
+  title_display: "after",
+  attributes: {
+    class: "form-label",
+  }
+} %}
+```

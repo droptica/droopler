@@ -1,3 +1,9 @@
-{% include '@droopler_theme/submit/submit.twig' with {
-  type: button_type ?? 'primary',
-} %}
+{{ attach_library('droopler_theme/cta') }}
+
+{%
+  include 'radix:input' with {
+    attributes: attributes.removeClass('button'),
+    remove_form_control: true,
+    input_utility_classes: ['btn', 'btn-primary']
+  }
+%}

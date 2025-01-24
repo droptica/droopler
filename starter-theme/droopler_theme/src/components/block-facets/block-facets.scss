@@ -80,8 +80,10 @@
       &:hover,
       &:active,
       &:focus {
-        & .facets-result-item__value {
-          text-decoration: underline;
+        & .facets-result-item {
+          &__value {
+            text-decoration: underline;
+          }
         }
       }
     }

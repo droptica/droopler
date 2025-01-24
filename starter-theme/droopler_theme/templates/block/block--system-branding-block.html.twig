@@ -4,22 +4,13 @@
  * Template for the branding block.
  */
 #}
-{% embed '@radix/block/block.twig' with {
-  html_tag: 'div',
-  utility_classes: [
-    'block--system-branding',
-  ],
-} %}
-
-  {% block content %}
-    {% include '@droopler_theme/navbar/navbar-brand.twig' with {
-      image: site_logo,
-      width: '100%',
-      height: 'auto',
-      path: path('<front>'),
-      alt: 'Skip to the home page',
-      title: 'Skip to the home page',
-    } %}
-  {% endblock %}
-
-{% endembed %}
+{% block content %}
+  {% include '@droopler_theme/navbar/navbar-brand.twig' with {
+    image: site_logo,
+    width: '100%',
+    height: 'auto',
+    path: path('<front>'),
+    alt: 'Skip to the home page',
+    title: 'Skip to the home page',
+  } %}
+{% endblock %}

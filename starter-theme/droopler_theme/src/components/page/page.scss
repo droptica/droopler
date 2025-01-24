@@ -6,7 +6,8 @@
 
     margin: var(--content-spacer-l) var(--content-spacer-none);
   }
-  &:has(.layout-builder__layout) {
+
+  &:has(.layout-builder__layout) { /* stylelint-disable-line */
     overflow: hidden;
   }
 }

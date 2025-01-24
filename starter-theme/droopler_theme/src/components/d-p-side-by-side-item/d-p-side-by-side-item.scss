@@ -13,42 +13,48 @@ $media-min-height: 30vh;
   }
 
   &.item-1 {
-    .media--overlay {
-      @include media-breakpoint-up(sm) {
-        margin-left: calc(100% - 50vw);
+    .media {
+      &--overlay {
+        @include media-breakpoint-up(sm) {
+          margin-left: calc(100% - 50vw);
+        }
       }
     }
 
     &:last-child {
-      &:has(.media--overlay) {
+      &:has(.media--overlay) { /* stylelint-disable-line */
         min-height: $media-min-height;
       }
     }
   }
 
   &.item-2 {
-    .media--overlay {
-      @include media-breakpoint-up(sm) {
-        margin-right: calc(100% - 50vw);
+    .media {
+      &--overlay {
+        @include media-breakpoint-up(sm) {
+          margin-right: calc(100% - 50vw);
+        }
       }
     }
 
     &:last-child {
-      &:has(.media--overlay) {
+      &:has(.media--overlay) { /* stylelint-disable-line */
         min-height: $media-min-height;
       }
     }
   }
 
-  &.item-1:has(.media--overlay) + .item-2:has(.media--overlay) {
+  &.item-1:has(.media--overlay) + .item-2:has(.media--overlay) { /* stylelint-disable-line */
     min-height: $media-min-height;
   }
 
-  .media--overlay {
-    @include filling-absolute;
+  .media {
+    &--overlay {
+      @include filling-absolute;
 
-    @include media-breakpoint-up(sm) {
-      width: 50vw;
+      @include media-breakpoint-up(sm) {
+        width: 50vw;
+      }
     }
 
     img {

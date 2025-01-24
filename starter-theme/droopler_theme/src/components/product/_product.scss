@@ -10,8 +10,10 @@
         @include heading(3);
       }
 
-      .product_gallery {
-        margin-top: var(--content-spacer-l);
+      .product {
+        &_gallery {
+          margin-top: var(--content-spacer-l);
+        }
       }
     }
 
@@ -25,6 +27,7 @@
         padding-top: var(--content-spacer-none);
       }
 
+      /* stylelint-disable-next-line */
       .field__label,
       .heading {
         @include heading(5);
