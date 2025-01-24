@@ -1,0 +1,76 @@
+{#
+/**
+ * @file
+ * Theme override for a Nav component.
+ *
+ * Available config:
+ * - alignment: left | right | center | vertical.
+ * - style: tabs | pills
+ * - fill: fill | justify
+ * - dropdown_direction: dropstart | dropend
+ * - nav_utility_classes: An array of utility classes.
+ * - nav_link_utility_classes: An array of utility classes.
+ */
+#}
+{% import _self as menus %}
+{%
+  set alignment_classes = {
+    'right': 'justify-content-end',
+    'center': 'justify-content-center',
+    'vertical': 'flex-column',
+    'left': ''
+  }
+%}
+
+{% set alignment = alignment_classes[alignment] ?? '' %}
+{% set dropdown_direction = dropdown_direction ?? 'dropend' %}
+{% set style = style ? 'nav-' ~ style : '' %}
+{% set fill = fill ? 'nav-' ~ fill : '' %}
+
+{%
+  set nav_classes = [
+    'nav',
+    style,
+    alignment,
+    fill
+  ]|merge(nav_utility_classes ?: [])
+%}
+
+{% if items %}
+  <ul {{ attributes.addClass(nav_classes) }}>
+    {% block nav_items %}
+      {% for item in items %}
+        {%
+          set nav_item_classes = [
+            'nav-item',
+            item.in_active_trail ? 'active' : '',
+            item.is_expanded and item.below ? 'dropdown' : ''
+          ]|merge(nav_item_utility_classes ?: [])
+        %}
+        {%
+          set nav_link_classes = [
+            'nav-link',
+            item.in_active_trail ? 'active' : ''
+          ]|merge(nav_link_utility_classes ?: [])
+        %}
+        {% if item.link.options.attributes.class is iterable %}
+          {% set nav_link_classes = nav_link_classes|merge(item.link.options.attributes.class) %}
+        {% elseif item.link.options.attributes.class %}
+          {% set nav_link_classes = nav_link_classes|merge([item.link.options.attributes.class]) %}
+        {% endif %}
+        <li{{ item.attributes.addClass(nav_item_classes) }}>
+          {% if item.is_expanded and item.below %}
+            <span class="{{ nav_link_classes|merge(['dropdown-toggle'])|join(' ') }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{ item.link }}</span>
+            {%
+              include 'radix:dropdown-menu' with {
+                items: item.below,
+              }
+            %}
+          {% elseif item.link %}
+            <span class="{{ nav_link_classes|join(' ') }}">{{ item.link }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% endblock %}
+  </ul>
+{% endif %}
