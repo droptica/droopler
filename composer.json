@@ -74,7 +74,8 @@
     "npm-asset/jquery-ui-touch-punch": "^0.2",
     "npm-asset/select2": "^4.0.4",
     "npm-asset/slick-carousel": "^1.8",
-    "oomphinc/composer-installers-extender": "^2.0"
+    "oomphinc/composer-installers-extender": "^2.0",
+    "wikimedia/composer-merge-plugin": "^2.1"
   },
   "require-dev": {
     "drupal/core-dev": "^10.0",
@@ -96,20 +97,26 @@
   "config": {
     "sort-packages": true,
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true,
       "composer/installers": true,
       "cweagans/composer-patches": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
       "drupal/core-composer-scaffold": true,
       "oomphinc/composer-installers-extender": true,
-      "phpstan/extension-installer": true,
       "php-http/discovery": true,
-      "tbachert/spi": true
+      "phpstan/extension-installer": true,
+      "tbachert/spi": true,
+      "wikimedia/composer-merge-plugin": true
     },
     "preferred-install": {
       "*": "dist"
     }
   },
   "extra": {
+    "merge-plugin": {
+      "include": [
+        "web/modules/contrib/webform/composer.libraries.json"
+      ]
+    },
     "enable-patching": true,
     "drupal-scaffold": {
       "locations": {
