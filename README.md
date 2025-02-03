@@ -1,4 +1,4 @@
-# Droopler 5.0.5
+# Droopler 5.0.6
 
 Droopler is a Drupal 10 profile designed to kickstart a new webpage in a few minutes. It's based on the latest frontend technologies, including Bootstrap 5. The maintainer of Droopler is Droptica.
 
@@ -22,7 +22,7 @@ Type `ddev launch` to open the Droopler installation in your browser.
 
 Type `ddev drush site-install droopler` to install clean Droopler.
 
-Type `ddev drush site-install droopler install_configure_form.enable_demo_content=1` if you wish to install demo content. 
+Type `ddev drush site-install droopler install_configure_form.enable_demo_content=1` if you wish to install demo content.
 
 ## Issues
 
