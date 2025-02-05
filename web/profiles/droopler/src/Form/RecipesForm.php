@@ -4,7 +4,6 @@ namespace Drupal\droopler\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\Checkboxes;
 
 /**
  * Provides a form to choose optional recipes during installation.
@@ -58,17 +57,18 @@ final class RecipesForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     global $install_state;
 
-    // Initialize parameters if not set
+    // Initialize parameters if not set.
     if (!isset($install_state['parameters'])) {
-        $install_state['parameters'] = [];
+      $install_state['parameters'] = [];
     }
 
-    // Reset recipes array
+    // Reset recipes array.
     $install_state['parameters']['recipes'] = [];
 
-    // Check if default content is selected
+    // Check if default content is selected.
     if (!empty($form_state->getValue('recipes')['default_content'])) {
-        $install_state['parameters']['recipes'][] = 'default_content';
+      $install_state['parameters']['recipes'][] = 'default_content';
     }
   }
+
 }

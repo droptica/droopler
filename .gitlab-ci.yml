@@ -22,16 +22,13 @@ include:
 # https://git.drupalcode.org/project/gitlab_templates/-/blob/main/includes/include.drupalci.variables.yml
 # Uncomment the lines below if you want to override any of the variables. The following is just an example.
 ################
-# variables:
-#   SKIP_ESLINT: '1'
-#   OPT_IN_TEST_NEXT_MAJOR: '1'
-#   _CURL_TEMPLATES_REF: 'main'
 variables:
+#   OPT_IN_TEST_NEXT_MAJOR: '1'
   SKIP_ESLINT: '1'
   SKIP_CSPELL: '1'
   SKIP_STYLELINT: '1'
-  _CURL_TEMPLATES_REF: 1.6.14
-
+  _WEB_ROOT: 'alternative-name'
+  _SHOW_ENVIRONMENT_VARIABLES: 1
 
 composer:
   variables:
