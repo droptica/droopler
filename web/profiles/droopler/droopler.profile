@@ -84,6 +84,10 @@ function droopler_install_tasks_alter(array &$tasks, array $install_state): void
 
     $tasks = $tasks_before + $our_tasks + $tasks_after;
   }
+
+  // Set the language code to English.
+  $GLOBALS['install_state']['parameters'] += ['langcode' => 'en'];
+  $tasks['install_select_language']['run'] = INSTALL_TASK_SKIP;
 }
 
 /**
