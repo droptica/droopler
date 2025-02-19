@@ -496,6 +496,69 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
+          uuid: 10264217-e67d-4479-bf22-89d156e9302c
+          bundle: d_p_side_embed
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1737018843
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_background_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_d_embed:
+            -
+              value: '<iframe src="https://forms.gle/eEX4cmYA1xpoBSMz6" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>'
+          field_d_long_text:
+            -
+              value: '<p>Your feedback is invaluable! This short, anonymous survey will help us understand what works well and what we can improve.<br>&nbsp;</p><p>It only takes 2-3 minutes to complete!<br>&nbsp;</p><p>Thank you for helping us grow Droopler! 🚀</p>'
+              format: full_html
+          field_d_main_title:
+            -
+              value: 'Help Us Improve Droopler CMS!'
+          field_embed_side:
+            -
+              value: right
+          field_heading_type:
+            -
+              value: h2
+          field_margin_bottom:
+            -
+              value: margin_bottom_none
+          field_margin_top:
+            -
+              value: margin_top_none
+          field_padding_bottom:
+            -
+              value: padding_bottom_medium
+          field_padding_top:
+            -
+              value: padding_top_medium
+          field_text_theme_custom:
+            -
+              color: '#000000'
+              opacity: 0.0
+          field_theme:
+            -
+              value: theme-light
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
           uuid: 85666411-0895-424b-95fb-64e53daf2be0
           bundle: d_p_text_paged
           default_langcode: en
