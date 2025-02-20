@@ -9,23 +9,6 @@
     "issues": "https://www.drupal.org/project/issues/droopler?categories=All"
   },
   "repositories": {
-    "drupal/ala": {
-      "type": "package",
-      "package": {
-        "name": "drupal/ala",
-        "version": "dev-2.x-d11",
-        "source": {
-        "url": "https://git.drupalcode.org/project/ala.git",
-        "type": "git",
-          "reference": "e4fcfdc567d53f28b3cbcf0da1918abe876886d8"
-        },
-        "autoload": {
-          "psr-4": {
-            "Drupal\\ala\\": "src/"
-          }
-        }
-      }
-    },
     "drupal": {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
@@ -42,10 +25,10 @@
     "composer/installers": "^2.2",
     "cweagans/composer-patches": "^1.6",
     "drupal/admin_toolbar": "^3.0",
-    "drupal/ala": "dev-2.x-d11",
+    "drupal/ala": "^2.5",
     "drupal/better_exposed_filters": "^7.0",
     "drupal/block_field": "^1.0@RC",
-    "drupal/bootstrap_layout_builder": "^2.2",
+    "drupal/bootstrap_layout_builder": "^2.1",
     "drupal/checklistapi": "^2.0",
     "drupal/coffee": "^2.0",
     "drupal/color_field": "^3.0",
@@ -54,9 +37,8 @@
     "drupal/conditional_fields": "^4.0@alpha",
     "drupal/config_update": "2.0.x-dev@dev",
     "drupal/contact_formatter": "^2.0",
-    "drupal/core-composer-scaffold": "^11",
-    "drupal/core-project-message": "^11",
-    "drupal/core-recommended": "^11",
+    "drupal/core-composer-scaffold": "^10.0",
+    "drupal/core-recommended": "^10.0",
     "drupal/dashboard": "^2.0",
     "drupal/default_content": "^2.0@alpha",
     "drupal/emulsify_twig": "^5.0",
@@ -64,8 +46,8 @@
     "drupal/entity_reference_revisions": "^1.3",
     "drupal/facets": "^2.0",
     "drupal/field_group": "^3.0",
-    "drupal/field_validation": "^3.0@beta",
-    "drupal/frontend_editing": "1.8.10",
+    "drupal/field_validation": "^1.1",
+    "drupal/frontend_editing": "^1.8.10",
     "drupal/gin": "^4.0",
     "drupal/gin_toolbar": "^2.0",
     "drupal/google_analytics": "^4.0",
@@ -76,7 +58,7 @@
     "drupal/paragraphs": "^1.1",
     "drupal/pathauto": "^1.0",
     "drupal/project_browser": "^1.0@beta",
-    "drupal/radix": "^6.0.1",
+    "drupal/radix": "^6.0",
     "drupal/redirect": "^1.0-beta1",
     "drupal/redis": "^1.7",
     "drupal/search_api": "^1.29",
@@ -85,9 +67,8 @@
     "drupal/svg_image": "^3.0",
     "drupal/tvi": "2.0.x-dev@dev",
     "drupal/twig_tweak": "^3.4",
-    "drupal/webform": "6.3.0-beta1",
+    "drupal/webform": "^6.2",
     "drush/drush": "^13",
-    "mglaman/composer-drupal-lenient": "^1.0",
     "npm-asset/countup": "^1.9",
     "npm-asset/in-viewport": "^3.6",
     "npm-asset/jquery-ui-touch-punch": "^0.2",
@@ -97,7 +78,7 @@
     "wikimedia/composer-merge-plugin": "^2.1"
   },
   "require-dev": {
-    "drupal/core-dev": "^11",
+    "drupal/core-dev": "^10.0",
     "drupal/devel": "^5.0"
   },
   "replace": {
@@ -120,8 +101,6 @@
       "cweagans/composer-patches": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "drupal/core-composer-scaffold": true,
-      "drupal/core-project-message": true,
-      "mglaman/composer-drupal-lenient": true,
       "oomphinc/composer-installers-extender": true,
       "php-http/discovery": true,
       "phpstan/extension-installer": true,
@@ -166,9 +145,6 @@
       "drupal/paragraphs": {
         "The 'paragraph' entity type did not specify a translation handler.": "https://www.drupal.org/files/issues/2021-01-22/paragraph-entity-type-did-not-specify-translation-halder-3031598-45.patch"
       }
-    },
-    "drupal-lenient": {
-      "allowed-list": ["drupal/ala"]
     }
   }
 }
