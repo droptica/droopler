@@ -1,0 +1,16 @@
+name: form
+props:
+  type: object
+  properties:
+    form_base_class:
+      type: string
+      default: form
+      description: 'The base class of the form.'
+    form_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the form.'
+    children:
+      type: array
+      default: []
+      description: 'The children of the form.'

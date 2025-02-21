@@ -1,11 +1,11 @@
-{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+{% embed 'droopler_theme:paragraph' %}
 
   {% block component_content %}
-    {% embed '@droopler_theme/d-p-group-of-text-blocks/d-p-group-of-text-blocks.twig' with {
+    {% embed 'droopler_theme:paragraph-d-p-group-of-text-blocks' with {
       columns: paragraph.columnSettings,
       is_full_width: paragraph.fullWidth,
       with_grid: paragraph.enabledGrid,
-    }%}
+    } %}
       {% block header %}
         {{ content.group_d_header }}
       {% endblock %}

@@ -1,0 +1,16 @@
+name: tiles-gallery
+props:
+  type: object
+  properties:
+    tiles_gallery_base_class:
+      type: string
+      default: tiles-gallery
+    tiles_gallery_modifiers:
+      type: array
+      default: []
+slots:
+  items:
+    title: Items
+    description: 'The items of the component.'
+    required: true
+

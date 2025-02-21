@@ -1,0 +1,8 @@
+{% set base_class = user_display_name_base_class|default('user-display-name') %}
+{% set modifiers = user_display_name_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  <span{{ attributes }}>
+    {{ displayname }}
+  </span>
+</div>

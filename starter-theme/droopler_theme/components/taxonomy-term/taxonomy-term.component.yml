@@ -1,0 +1,20 @@
+name: taxonomy-term
+props:
+  type: object
+  properties:
+    taxonomy_term_base_class:
+      type: string
+      default: taxonomy-term
+      description: 'The base class of the taxonomy term.'
+    type:
+      type: string
+      default: ''
+      description: 'The type of the taxonomy term.'
+    url:
+      type: string
+      default: ''
+      description: 'The URL of the taxonomy term.'
+    title:
+      type: string
+      default: ''
+      description: 'The title of the taxonomy term.'

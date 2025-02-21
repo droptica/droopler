@@ -1,0 +1,21 @@
+name: page
+props:
+  type: object
+  properties:
+    page_base_class:
+      type: string
+      default: page
+      description: 'The base class of the page.'
+slots:
+  content:
+    title: Content
+    description: 'The content of the component.'
+  header:
+    title: Header
+    description: 'The header of the page.'
+  admin_tabs:
+    title: Admin tabs
+    description: 'The admin tabs of the page.'
+  footer:
+    title: Footer
+    description: 'The footer of the page.'

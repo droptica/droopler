@@ -1,0 +1,11 @@
+name: d-p-block
+props:
+  type: object
+  properties:
+    is_full_width:
+      type: boolean
+      default: false
+slots:
+  content:
+    title: Content
+    description: 'The content of the component.'

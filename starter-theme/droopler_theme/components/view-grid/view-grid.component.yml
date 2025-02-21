@@ -1,0 +1,16 @@
+name: view-grid
+props:
+  type: object
+  properties:
+    view_grid_base_class:
+      type: string
+      default: view-grid
+      description: 'The base class of the view grid.'
+    view_grid_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the view grid.'
+    rows:
+      type: array
+      default: []
+      description: 'The rows of the view grid.'

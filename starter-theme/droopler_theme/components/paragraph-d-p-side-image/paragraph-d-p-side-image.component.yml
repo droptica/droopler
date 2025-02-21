@@ -1,0 +1,20 @@
+name: d-p-side-image
+props:
+  type: object
+  properties:
+    image_side:
+      type: string
+      default: 'left'
+    image_width:
+      type: string
+      default: 'wide'
+slots:
+  background:
+    title: Background
+    description: 'The background of the component.'
+  header:
+    title: Header
+    description: 'The header of the component.'
+  content:
+    title: Content
+    description: 'The content of the component.'

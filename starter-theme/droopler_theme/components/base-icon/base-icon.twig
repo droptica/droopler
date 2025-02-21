@@ -1,0 +1,8 @@
+{% set base_class = icon_base_class|default('icon') %}
+{% set modifiers = icon_modifiers|default([]) %}
+
+{% if icon_name %}
+  {% set modifiers = modifiers|merge([icon_name]) %}
+{% endif %}
+
+<span {{ bem(base_class, modifiers) }}></span>

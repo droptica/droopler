@@ -1,0 +1,11 @@
+name: base-body-text
+props:
+  type: object
+  properties:
+    body_text_base_class:
+      type: string
+      default: body-text
+  text:
+    type: string
+    default: ''
+    description: 'The text of the component.'

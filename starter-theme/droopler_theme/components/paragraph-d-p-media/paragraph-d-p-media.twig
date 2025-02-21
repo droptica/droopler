@@ -1,0 +1,10 @@
+{% set base_class = media_base_class|default('d-p-media') %}
+{% set modifiers = media_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% block content %}
+  {% endblock %}
+</div>

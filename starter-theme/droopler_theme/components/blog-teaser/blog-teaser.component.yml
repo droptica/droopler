@@ -1,0 +1,30 @@
+name: blog-teaser
+props:
+  type: object
+  properties:
+    blog_teaser_base_class:
+      type: string
+      default: blog-teaser
+      description: 'The base class of the blog teaser.'
+    blog_teaser_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the blog teaser.'
+    node:
+      type: object
+      default: {}
+      description: 'The node of the blog teaser.'
+    url:
+      type: string
+      default: ''
+      description: 'The URL of the blog teaser.'
+slots:
+  category:
+    title: Category
+    description: 'The category of the blog teaser.'
+  image:
+    title: Image
+    description: 'The image of the blog teaser.'
+  content:
+    title: Content
+    description: 'The content of the blog teaser.'

@@ -1,0 +1,6 @@
+{% set base_class = cta_links_base_class|default('cta-links') %}
+
+<div {{ bem(base_class) }}>
+  {% block links %}
+  {% endblock %}
+</div>

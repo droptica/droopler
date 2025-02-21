@@ -1,0 +1,34 @@
+name: blog-full
+props:
+  type: object
+  properties:
+    blog_full_base_class:
+      type: string
+      default: blog-full
+      description: 'The base class of the blog full.'
+    blog_full_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the blog full.'
+    author:
+      type: string
+      default: 'Anonymous'
+      description: 'The author of the blog full.'
+    date:
+      type: string
+      default: ''
+      description: 'The date of the blog full.'
+    label:
+      type: string
+      default: ''
+      description: 'The label of the blog full.'
+slots:
+  main_image:
+    title: Main image
+    description: 'The main image of the blog full.'
+  category:
+    title: Category
+    description: 'The category of the blog full.'
+  blog_sections:
+    title: Blog sections
+    description: 'The blog sections of the blog full.'

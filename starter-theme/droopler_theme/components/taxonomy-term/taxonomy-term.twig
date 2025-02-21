@@ -1,0 +1,5 @@
+{% set base_class = taxonomy_term_base_class|default('taxonomy-term') %}
+
+<a {{ bem(base_class, [], '', [base_class ~ '-' ~ type]) }} href="{{ url }}">
+  {{ title }}
+</a>

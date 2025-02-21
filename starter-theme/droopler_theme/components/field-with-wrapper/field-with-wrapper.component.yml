@@ -1,0 +1,26 @@
+name: field-with-wrapper
+props:
+  type: object
+  properties:
+    field_base_class:
+      title: Field base class
+      type: string
+      description: 'The base class of the field.'
+    field_modifiers:
+      title: Field modifiers
+      type: array
+      description: 'The modifiers of the field.'
+    label_tag:
+      title: Label tag
+      type: string
+      description: 'The tag of the label.'
+    label_hidden:
+      title: Label hidden
+      type:
+        - boolean
+        - string
+      description: 'Whether the label is hidden.'
+    items:
+      title: Items
+      type: array
+      description: 'The items of the field.'

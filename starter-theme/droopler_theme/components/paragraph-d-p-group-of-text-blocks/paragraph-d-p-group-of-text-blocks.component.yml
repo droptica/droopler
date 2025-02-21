@@ -1,0 +1,35 @@
+name: d-p-group-of-text-blocks
+props:
+  type: object
+  properties:
+    columns:
+      type: object
+      properties:
+        column_count_desktop:
+          type: string
+          default: null
+        column_count_tablet:
+          type: string
+          default: null
+        column_count_mobile:
+          type: string
+          default: null
+    is_full_width:
+      type: boolean
+      default: false
+    with_grid:
+      type: boolean
+      default: false
+slots:
+  header:
+    title: Header
+    description: 'The header of the component.'
+  body_content:
+    title: Body content
+    description: 'The content of the component.'
+  items:
+    title: Items
+    description: 'The items of the component.'
+  cta:
+    title: Call to action
+    description: 'The call to action of the component.'

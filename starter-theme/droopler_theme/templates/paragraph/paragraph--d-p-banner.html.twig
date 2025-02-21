@@ -1,7 +1,7 @@
-{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+{% embed 'droopler_theme:paragraph' %}
 
   {% block component_content %}
-    {% embed '@droopler_theme/d-p-banner/d-p-banner.twig' %}
+    {% embed 'droopler_theme:paragraph-d-p-banner' %}
       {% block background %}
         {{ content.group_d_banner_background }}
       {% endblock %}

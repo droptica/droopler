@@ -1,0 +1,13 @@
+name: base-heading
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      default: ''
+    heading_tag:
+      type: string
+      default: h2
+    heading_base_class:
+      type: string
+      default: heading

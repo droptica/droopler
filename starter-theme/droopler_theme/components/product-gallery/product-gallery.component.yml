@@ -1,0 +1,15 @@
+name: product-gallery
+props:
+  type: object
+  properties:
+    product_gallery_base_class:
+      type: string
+      default: product-gallery
+    single_items:
+      type: object
+      default: {}
+      description: 'The single items of the product gallery.'
+    nav_items:
+      type: object
+      default: {}
+      description: 'The navigation items of the product gallery.'

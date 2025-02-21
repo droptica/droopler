@@ -1,0 +1,16 @@
+name: tiles-gallery-item
+props:
+  type: object
+  properties:
+    tiles_gallery_item_base_class:
+      type: string
+      default: tiles-gallery-item
+      description: 'The base class of the tiles gallery item.'
+    tiles_gallery_item_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the tiles gallery item.'
+slots:
+  content:
+    title: Content
+    description: 'The content of the tiles gallery item.'

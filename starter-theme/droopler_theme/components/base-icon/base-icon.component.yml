@@ -1,0 +1,12 @@
+name: base-icon
+props:
+  type: object
+  properties:
+    icon_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the icon.'
+    icon_name:
+      type: string
+      default: ''
+      description: 'The name of the icon.'

@@ -1,0 +1,26 @@
+name: Nav
+props:
+  type: object
+  properties:
+    alignment:
+      type: string
+      default: null
+    dropdown_direction:
+      type: string
+      default: null
+    style:
+      type: string
+      default: null
+    fill:
+      type: string
+      default: null
+    nav_utility_classes:
+      type: array
+      default: []
+    items:
+      type: array
+      default: []
+slots:
+  nav_items:
+    title: Nav items
+    description: 'The items of the navigation.'

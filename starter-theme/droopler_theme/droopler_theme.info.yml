@@ -1,7 +1,7 @@
 name: Droopler Theme
 description: A theme based on Radix.
 screenshot: screenshot.png
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 version: DROOPLER_VERSION
 engine: twig
 type: theme
@@ -35,4 +35,4 @@ ckeditor_stylesheets:
 
 components:
   namespaces:
-    droopler_theme: src/components
+    droopler_theme: components

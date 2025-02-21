@@ -1,0 +1,20 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Navbar brand
+status: experimental
+description: Navbar Brand description
+props:
+  type: object
+  properties:
+    navbar_brand_utility_classes:
+      type: array
+      items:
+        type: string
+      title: Navbar Brand Utility Classes
+      default: []
+      description: An array of utility classes. Use to add extra Bootstrap utility classes or custom CSS classes over to this component.
+    attributes:
+      type: Drupal\Core\Template\Attribute
+slots:
+  logo:
+    type: string
+    description: The logo of the site.

@@ -1,0 +1,28 @@
+name: details
+props:
+  type: object
+  properties:
+    attributes:
+      type: Drupal\Core\Template\Attribute
+    summary_attributes:
+      type: Drupal\Core\Template\Attribute
+    required:
+      type: boolean
+      default: false
+      description: 'Whether the details element is required.'
+    errors:
+      type: array
+      default: []
+      description: 'An array of error messages.'
+    description:
+      type: string
+      default: ''
+      description: 'The description of the details element.'
+    children:
+      type: array
+      default: []
+      description: 'The children of the details element.'
+    value:
+      type: string
+      default: ''
+      description: 'The value of the details element.'

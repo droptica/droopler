@@ -1,0 +1,31 @@
+name: d-p-group-of-counters
+props:
+  type: object
+  properties:
+    columns:
+      type: object
+      properties:
+        column_count_desktop:
+          type: string
+          default: null
+        column_count_tablet:
+          type: string
+          default: null
+        column_count_mobile:
+          type: string
+          default: null
+slots:
+  background:
+    title: Background
+    description: 'The background of the component.'
+  header:
+    title: Header
+    description: 'The header of the component.'
+  items:
+    title: Items
+    description: 'The items of the component.'
+    required: true
+  cta:
+    title: Call to action
+    description: 'The call to action of the component.'
+

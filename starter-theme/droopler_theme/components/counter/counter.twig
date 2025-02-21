@@ -1,0 +1,6 @@
+{{ attach_library('droopler_theme/in-viewport') }}
+{{ attach_library('droopler_theme/countup') }}
+
+{% set base_class = counter_base_class|default('counter') %}
+
+<span {{ bem(base_class) }} data-count="{{ content }}">0</span>

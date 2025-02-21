@@ -1,0 +1,12 @@
+name: base-media-icon
+props:
+  type: object
+  properties:
+    media_icon_base_class:
+      type: string
+      default: 'media-icon'
+      description: 'The base class of the media icon.'
+slots:
+  icon:
+    title: Icon
+    description: 'The icon of the media.'

@@ -11,7 +11,7 @@
     </div>
 
     <div {{ bem('background-overlay', [], base_class) }}>
-      {% include '@droopler_theme/base/overlay/overlay.twig'%}
+      {% include 'droopler_theme:base-overlay'%}
     </div>
   </div>
 
@@ -20,12 +20,12 @@
       <div {{ bem('header-content-wrapper', [], base_class, ['row']) }}>
         <div {{ bem('header-content-column', [], base_class, ['col-12', 'first-child-no-spacer']) }}>
           <div {{ bem('author-attributes', [], base_class) }}>
-            {% include "@droopler_theme/base/body-text/body-text.twig" with {
+            {% include "droopler_theme:base-body-text" with {
               text: fields.uid.content|striptags ~ ' / ' ~ fields.created.content|striptags
             } %}
           </div>
 
-          {% include "@droopler_theme/base/heading/heading.twig" with {
+          {% include "droopler_theme:base-heading" with {
             heading_tag: 'h1',
             label: fields.title.content
           } %}

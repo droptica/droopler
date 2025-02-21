@@ -1,0 +1,28 @@
+name: facets-result-item
+props:
+  type: object
+  properties:
+    facet_item_base_class:
+      type: string
+      default: facets-result-item
+      description: 'The base class of the facet item.'
+    facet_item_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the facet item.'
+    is_active:
+      type: boolean
+      default: false
+      description: 'Whether the facet item is active.'
+    show_count:
+      type: boolean
+      default: false
+      description: 'Whether the count should be shown.'
+    value:
+      type: string
+      default: ''
+      description: 'The value of the facet item.'
+    count:
+      type: integer
+      default: 0
+      description: 'The count of the facet item.'

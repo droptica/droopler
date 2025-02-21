@@ -1,0 +1,12 @@
+name: search-page-link-block
+props:
+  type: object
+  properties:
+    search_page_link_block_base_class:
+      type: string
+      default: search-page-link-block
+      description: 'The base class of the search page link block.'
+slots:
+  content:
+    title: Content
+    description: 'The content of the search page link block.'

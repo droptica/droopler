@@ -1,0 +1,44 @@
+name: d-p-text-paged
+props:
+  type: object
+  properties:
+    d_p_text_paged_base_class:
+      type: string
+      default: d-p-text-paged
+    d_p_text_paged_modifiers:
+      type: array
+      default: []
+    additional_classes:
+      type: array
+      default: []
+    component_attributes:
+      type: array
+      default: []
+    text_align:
+      type: string
+      default: ''
+    columns:
+      type: object
+      properties:
+        column_count_desktop:
+          type: string
+          default: null
+        column_count_tablet:
+          type: string
+          default: null
+        column_count_mobile:
+          type: string
+          default: null
+slots:
+  background:
+    title: Background
+    description: 'The background of the component.'
+  header:
+    title: Header
+    description: 'The header of the component.'
+  content:
+    title: Content
+    description: 'The content of the component.'
+  cta:
+    title: Call to action
+    description: 'The call to action of the component.'

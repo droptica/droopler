@@ -1,0 +1,18 @@
+name: block-exposed-filters
+props:
+  type: object
+  properties:
+    block_exposed_filters_base_class:
+      type: string
+      default: block-exposed-filters
+      description: 'The base class of the block exposed filters.'
+    block_exposed_filters_modifiers:
+      type: array
+      default: []
+    label:
+      type: string
+      default: ''
+slots:
+  content:
+    title: Content
+    description: 'The content of the block exposed filters.'

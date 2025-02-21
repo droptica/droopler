@@ -1,0 +1,82 @@
+Subject: [PATCH] Fix DI
+---
+Index: src/Plugin/Field/FieldFormatter/AdvancedLinkAttributesFieldFormatter.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Plugin/Field/FieldFormatter/AdvancedLinkAttributesFieldFormatter.php b/src/Plugin/Field/FieldFormatter/AdvancedLinkAttributesFieldFormatter.php
+--- a/src/Plugin/Field/FieldFormatter/AdvancedLinkAttributesFieldFormatter.php	(revision e4fcfdc567d53f28b3cbcf0da1918abe876886d8)
++++ b/src/Plugin/Field/FieldFormatter/AdvancedLinkAttributesFieldFormatter.php	(date 1740044940361)
+@@ -4,12 +4,15 @@
+ 
+ use Drupal\Component\Utility\Html;
+ use Drupal\Component\Utility\Unicode;
++use Drupal\Core\Field\FieldDefinitionInterface;
+ use Drupal\Core\Field\FieldItemListInterface;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Path\PathValidatorInterface;
+ use Drupal\Core\Render\Markup;
+ use Drupal\Core\Session\AccountInterface;
+ use Drupal\Core\Utility\Token;
+ use Drupal\link\Plugin\Field\FieldFormatter\LinkFormatter;
++use Symfony\Component\DependencyInjection\ContainerInterface;
+ 
+ /**
+  * Plugin implementation of the 'AdvancedLinkFormatter' formatter.
+@@ -40,14 +43,49 @@
+   protected $currentUser;
+ 
+   /**
+-   * Constructor for AdvancedLinkAttributesFieldFormatter.
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
++    return new static(
++      $plugin_id,
++      $plugin_definition,
++      $configuration['field_definition'],
++      $configuration['settings'],
++      $configuration['label'],
++      $configuration['view_mode'],
++      $configuration['third_party_settings'],
++      $container->get('path.validator'),
++      $container->get('token'),
++      $container->get('current_user')
++    );
++  }
++
++  /**
++   * Constructs a new AdvancedLinkAttributesFieldFormatter.
+    *
+-   * @param Drupal\Core\Utility\Token $token
+-   *   The token.
+-   * @param \Drupal\Core\Session\AccountInterface $current_user
+-   *   The current user.
++   * @param string $plugin_id
++   *   The plugin ID for the formatter.
++   * @param mixed $plugin_definition
++   *   The plugin implementation definition.
++   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
++   *   The definition of the field to which the formatter is associated.
++   * @param array $settings
++   *   The formatter settings.
++   * @param string $label
++   *   The formatter label display setting.
++   * @param string $view_mode
++   *   The view mode.
++   * @param array $third_party_settings
++   *   Third party settings.
++   * @param \Drupal\Core\Path\PathValidatorInterface $path_validator
++   *   The path validator service.
++   * @param \Drupal\Core\Utility\Token $token
++   *    The token.
++   * @param  \Drupal\Core\Session\AccountInterface $current_user
++   *    The current user.
+    */
+-  public function __construct(Token $token, AccountInterface $current_user) {
++  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, PathValidatorInterface $path_validator, Token $token, AccountInterface $current_user) {
++    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings, $path_validator);
+     $this->token = $token;
+     $this->currentUser = $current_user;
+   }

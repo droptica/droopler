@@ -1,0 +1,20 @@
+name: d-p-side-by-side-item
+props:
+  type: object
+  properties:
+    side_by_side_items_base_class:
+      type: string
+      default: 'd-p-side-by-side-item'
+      description: 'The base class of the side by side items.'
+    side_by_side_items_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the side by side items.'
+    side_by_side_addtional_classes:
+      type: array
+      default: []
+      description: 'Additional classes for the side by side items.'
+    content:
+      type: string
+      default: ''
+      description: 'The content of the side by side item.'

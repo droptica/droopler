@@ -1,0 +1,15 @@
+name: user-display-name
+props:
+  type: object
+  properties:
+    user_display_name_base_class:
+      type: string
+      default: user-display-name
+      description: 'The base class of the user display name.'
+    user_display_name_modifiers:
+      type: array
+      default: []
+    displayname:
+      type: string
+      default: ''
+      description: 'The display name of the user.'

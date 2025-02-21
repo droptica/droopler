@@ -1,0 +1,10 @@
+name: social-media-item
+props:
+  type: object
+  properties:
+    social_media_item_base_class:
+      type: string
+      default: social-media-item
+    item:
+      type: object
+      default: {}

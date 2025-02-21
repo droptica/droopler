@@ -1,0 +1,25 @@
+name: page-views
+props:
+  type: object
+  properties:
+    page_views_products_base_class:
+      type: string
+      default: page-views
+    page_views_products_modifiers:
+      type: array
+      default: []
+    pager_total_items:
+      type:
+        - string
+        - integer
+      default: null
+slots:
+  aside:
+    title: Aside
+    description: 'The aside of the page.'
+  top_content:
+    title: Top content
+    description: 'The top content of the page.'
+  page_content:
+    title: Page content
+    description: 'The content of the page.'

@@ -1,0 +1,22 @@
+name: d-p-node
+props:
+  type: object
+  properties:
+    columns:
+      type:
+        - object
+        - 'null'
+      properties:
+        column_count_desktop:
+          type: string
+          default: null
+        column_count_tablet:
+          type: string
+          default: null
+        column_count_mobile:
+          type: string
+          default: null
+slots:
+  content:
+    title: Content
+    description: 'The content of the component.'

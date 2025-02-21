@@ -1,0 +1,16 @@
+name: base-media
+props:
+  type: object
+  properties:
+    media_base_class:
+      type: string
+      default: 'media'
+      description: 'The base class of the media.'
+    media_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the media.'
+slots:
+  content:
+    title: Content
+    description: 'The content of the component.'

@@ -1,7 +1,7 @@
-{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+{% embed 'droopler_theme:paragraph' %}
 
   {% block component_content %}
-    {% embed '@droopler_theme/d-p-text-paged/d-p-text-paged.twig' with {
+    {% embed 'droopler_theme:d-p-text-paged' with {
       columns: paragraph.columnSettings,
       text_align: paragraph.textAlign
     } %}

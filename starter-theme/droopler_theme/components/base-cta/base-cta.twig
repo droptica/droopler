@@ -1,0 +1,5 @@
+{% set base_class = cta_base_class|default('btn') %}
+
+<a {{ bem(base_class, [], '', [base_class ~ '-' ~ type]) }} href="{{ url }}" role="button">
+  {{ title }}
+</a>

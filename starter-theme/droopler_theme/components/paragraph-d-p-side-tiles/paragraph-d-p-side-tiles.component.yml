@@ -1,0 +1,17 @@
+name: d-p-side-tiles
+props:
+  type: object
+  properties:
+    tiles_side:
+      type: string
+      default: 'left'
+slots:
+  gallery:
+    title: Gallery
+    description: 'The gallery of the component.'
+  content_header:
+    title: Content header
+    description: 'The content header of the component.'
+  content:
+    title: Content
+    description: 'The content of the component.'

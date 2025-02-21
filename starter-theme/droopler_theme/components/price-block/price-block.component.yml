@@ -1,0 +1,16 @@
+name: price-block
+props:
+  type: object
+  properties:
+    price_block_base_class:
+      type: string
+      default: price-block
+    price_block_modifiers:
+      type: array
+      default: []
+    price_block_additional_classes:
+      type: array
+      default: []
+    sidebar:
+      type: boolean
+      default: false

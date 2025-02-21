@@ -1,2 +1,0 @@
-!function(e,t){"use strict";t.behaviors.d_demo_random_price={attach:function(t,o){0!==e(".price-block",t).length&&setInterval((function(){var e=((2e3+Math.floor(1e3*Math.random()))/100).toFixed(2),t=Date.now()/1e3-Math.floor(31*Math.random()*24*3600),o=0;if(localStorage.getItem("price")){var a=localStorage.getItem("price");o=Math.round(100*(e-a)/a*100)/100}localStorage.setItem("price",e),window.setPrice(e,o,t,"EUR")}),5e3)}}}(jQuery,Drupal);
-//# sourceMappingURL=demo-random-price.js.map

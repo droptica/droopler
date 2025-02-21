@@ -1,0 +1,15 @@
+name: block-mobile-filters
+props:
+  type: object
+  properties:
+    block_mobile_filters_base_class:
+      type: string
+      default: block-mobile-filters
+      description: 'The base class of the block mobile filters.'
+    block_mobile_filters_modifiers:
+      type: array
+      default: []
+slots:
+  content:
+    title: Content
+    description: 'The content of the block mobile filters.'

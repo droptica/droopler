@@ -1,0 +1,16 @@
+name: social-media-list
+props:
+  type: object
+  properties:
+    social_media_list_base_class:
+      type: string
+      default: social-media-list
+    social_media_list_modifiers:
+      type: array
+      default: []
+slots:
+  items:
+    title: Items
+    description: 'The items of the component.'
+    required: true
+

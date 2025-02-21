@@ -1,0 +1,26 @@
+name: d-p-subscribe-file
+props:
+  type: object
+  properties:
+    d_p_subscribe_file_base_class:
+      type: string
+      default: 'd-p-subscribe-file'
+    d_p_subscribe_file_modifiers:
+      type: array
+      default: []
+slots:
+  content:
+    title: Content
+    description: 'The content of the component.'
+  background:
+    title: Background
+    description: 'The background of the component.'
+  content_header:
+    title: Content header
+    description: 'The content header of the component.'
+  form:
+    title: Form
+    description: 'The form of the component.'
+  additional_info:
+    title: Additional info
+    description: 'The additional info of the component.'

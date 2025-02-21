@@ -1,0 +1,15 @@
+name: block-mobile-filters-submit
+props:
+  type: object
+  properties:
+    block_mobile_filters_submit_base_class:
+      type: string
+      default: block-mobile-filters-submit
+      description: 'The base class of the block mobile filters submit.'
+    block_mobile_filters_submit_modifiers:
+      type: array
+      default: []
+slots:
+  content:
+    title: Content
+    description: 'The content of the block mobile filters submit.'

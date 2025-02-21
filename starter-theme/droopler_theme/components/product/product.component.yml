@@ -1,0 +1,29 @@
+name: product
+props:
+  type: object
+  properties:
+    product_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the product.'
+    label:
+      type: string
+      default: ''
+      description: 'The label of the product.'
+    node:
+      type: object
+      default: {}
+      description: 'The node of the product.'
+slots:
+  basic:
+    title: Basic
+    description: 'The basic information of the product.'
+  content:
+    title: Content
+    description: 'The content of the product.'
+  taxonomy:
+    title: Taxonomy
+    description: 'The taxonomy of the product.'
+  page_sections:
+    title: Page sections
+    description: 'The page sections of the product.'

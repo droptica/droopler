@@ -1,0 +1,29 @@
+name: d-p-side-by-side
+props:
+  type: object
+  properties:
+    with_grid:
+      type:
+        - string
+        - boolean
+        - 'null'
+      default: false
+    dividers:
+      type:
+        - string
+        - boolean
+        - 'null'
+      default: false
+slots:
+  heading:
+    title: Heading
+    description: 'The heading of the component.'
+  subheading:
+    title: Subheading
+    description: 'The subheading of the component.'
+  content:
+    title: Content
+    description: 'The content of the component.'
+  cta:
+    title: Call to action
+    description: 'The call to action of the component.'

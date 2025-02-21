@@ -1,0 +1,5 @@
+{% set base_class = body_text_base_class|default('body-text') %}
+
+<div {{ bem(base_class) }}>
+  {{ text }}
+</div>

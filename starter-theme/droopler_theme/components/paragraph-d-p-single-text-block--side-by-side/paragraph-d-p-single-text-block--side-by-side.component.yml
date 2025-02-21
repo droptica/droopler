@@ -1,0 +1,32 @@
+name: d-p-single-text-block--side-by-side
+props:
+  type: object
+  properties:
+    d_p_single_text_block_additional_classes:
+      type: array
+      default: []
+    d_p_single_text_blocks_modifiers:
+      type: array
+      default: []
+    d_p_single_text_blocks_base_class:
+      type: string
+      default: 'd-p-single-text-block'
+    is_tile:
+      type: boolean
+      default: false
+    is_grid:
+      type: boolean
+      default: false
+    with_price:
+      type: boolean
+      default: false
+slots:
+  background:
+    title: Background
+    description: 'The background of the component.'
+  header:
+    title: Header
+    description: 'The header of the component.'
+  content:
+    title: Content
+    description: 'The content of the component.'

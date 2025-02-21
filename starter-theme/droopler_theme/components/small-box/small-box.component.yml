@@ -1,0 +1,32 @@
+name: small-box
+props:
+  type: object
+  properties:
+    small_box_base_class:
+      type: string
+      default: small-box
+      description: 'The base class of the small box.'
+    small_box_modifiers:
+      type: array
+      default: []
+      description: 'The modifiers of the small box.'
+    small_box_additional_classes:
+      type: string
+      default: ''
+      description: 'Additional classes for the small box.'
+    small_box_title:
+      type: string
+      default: ''
+      description: 'The title of the small box.'
+    small_box_description:
+      type: string
+      default: ''
+      description: 'The description of the small box.'
+    small_box_link_to_content:
+      type: string
+      default: ''
+      description: 'The link to the content of the small box.'
+slots:
+  content:
+    title: Content
+    description: 'The content of the small box.'

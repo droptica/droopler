@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Template for Navbar brand component.
+ *
+ * Available config:
+ * - text: the text to use for the brand.
+ * - path: the path for the link. Leave blank for no link.
+ * - image:
+ *   - src: The source of the image
+ *   - width: The width of the image
+ *   - height: The height of the image
+ *   - alt: The alternative text of the image
+ * - navbar_brand_utility_classes: An array of utility classes.
+ */
+#}
+{% import _self as navbar_brand %}
+{% set navbar_brand_utility_classes = navbar_brand_utility_classes|join(' ') %}
+
+{% if path %}
+  <a href="{{ path }}" class="navbar-brand {{ navbar_brand_utility_classes }}" {% if text is defined and text is not empty %}aria-label="{{ text }}"{% endif %}>
+    {% block logo %}
+      <div class="navbar-brand__logo">
+        {% if image %}
+          {{ navbar_brand.image(image, width, height, alt) }}
+        {% endif %}
+      </div>
+
+      {% if text or site_slogan %}
+        <div class="navbar-brand__text d-flex flex-column">
+          {% if text %}
+            <span>{{ text }}</span>
+          {% endif %}
+
+          {% if site_slogan %}
+            <span class="small text-muted">{{ site_slogan }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endblock %}
+  </a>
+{% else %}
+  <span class="navbar-brand h1 mb-0 {{ navbar_brand_utility_classes }}" {% if text is defined and text is not empty %}aria-label="{{ text }}"{% endif %}>
+    {% if image %}
+      {{ navbar_brand.image(image, width, height, alt) }}
+    {% endif %}
+
+    {{ text }}
+  </span>
+{% endif %}
+
+{% macro image(src, width, height, alt) %}
+  {% set height_attribute = height != 'auto' ? 'height="' ~ height ~ '"'  %}
+  <img src="{{ src }}" width="{{ width|default(140) }}" {{ height_attribute }} alt="{{ alt|default('') }}" />
+{% endmacro %}

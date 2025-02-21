@@ -1,0 +1,25 @@
+name: d-p-carousel
+props:
+  type: object
+  properties:
+    is_full_width:
+      type: boolean
+      default: false
+    dividers:
+      type: boolean
+      default: false
+    carousel_settings:
+      type: string
+slots:
+  heading:
+    title: Heading
+    description: 'The heading of the component.'
+  subheading:
+    title: Subheading
+    description: 'The subheading of the component.'
+  content:
+    title: Content
+    description: 'The content of the component.'
+  cta:
+    title: Call to action
+    description: 'The call to action of the component.'

@@ -1,0 +1,11 @@
+name: base-subtitle
+props:
+  type: object
+  properties:
+    subtitle_base_class:
+      type: string
+      default: subtitle
+    label:
+      type: string
+      default: ''
+      description: 'The label of the subtitle.'

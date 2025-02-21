@@ -1,0 +1,16 @@
+name: d-p-carousel-item
+props:
+  type: object
+  properties:
+    d_p_carousel_item_link:
+      type:
+        - string
+        - 'null'
+      default: ''
+slots:
+  content:
+    title: Content
+    description: 'The content of the component.'
+  description:
+    title: Description
+    description: 'The description of the component.'

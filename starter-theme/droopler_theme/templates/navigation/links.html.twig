@@ -5,7 +5,7 @@
  */
 #}
 {% if links -%}
-  {% embed '@droopler_theme/nav/nav.twig' with {
+  {% embed 'droopler_theme:nav' with {
     items: links,
   } %}
     {% block items %}

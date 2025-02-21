@@ -1,0 +1,18 @@
+name: block-facets
+props:
+  type: object
+  properties:
+    block_facets_base_class:
+      type: string
+      default: block-facets
+      description: 'The base class of the block facets.'
+    block_facets_modifiers:
+      type: array
+      default: []
+    label:
+      type: string
+      default: ''
+slots:
+  content:
+    title: Content
+    description: 'The content of the block facets.'

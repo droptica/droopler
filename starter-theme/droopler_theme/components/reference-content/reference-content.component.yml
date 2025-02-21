@@ -1,0 +1,17 @@
+name: reference-content
+props:
+  type: object
+  properties:
+    reference_content_base_class:
+      type: string
+      default: reference-content
+    reference_content_modifiers:
+      type: array
+      default: []
+slots:
+  image:
+    title: Image
+    description: 'The image of the reference content.'
+  content:
+    title: Content
+    description: 'The content of the reference content.'

@@ -1,0 +1,16 @@
+name: base-cta
+props:
+  type: object
+  properties:
+    attributes:
+      type: object
+      default: {}
+    type:
+      type: string
+      default: ''
+    title:
+      type: string
+      default: ''
+    url:
+      type: string
+      default: ''

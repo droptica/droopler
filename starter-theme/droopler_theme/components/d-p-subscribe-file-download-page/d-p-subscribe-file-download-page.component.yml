@@ -1,0 +1,14 @@
+name: d-p-subscribe-file-download-page
+props:
+  type: object
+  properties:
+    d_p_subscribe_file_base_class:
+      type: string
+      default: 'd-p-subscribe-file-download-page'
+    d_p_subscribe_file_modifiers:
+      type: array
+      default: []
+slots:
+  content:
+    title: Content
+    description: 'The content of the component.'
