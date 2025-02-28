@@ -2264,3 +2264,14 @@ function droopler_update_8139(&$sandbox) {
   $updater = \Drupal::service('d_update');
   $updater->updateConfigurations('profile/droopler', 'advagg.8139');
 }
+
+/**
+ * Droopler PreReq 3.4 - Uninstall and remove the AdvAgg module.
+ */
+function droopler_update_8140() {
+    $values['droopler__droopler_update_8140_1'] = \Drupal::service('module_installer')
+      ->uninstall(['advagg'], TRUE);
+
+    \Drupal::service('d_update')->checklist()
+      ->saveProgress(['v3.4' => $values]);
+}

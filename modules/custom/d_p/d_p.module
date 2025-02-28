@@ -216,7 +216,7 @@ function d_p_heading_type_validate(array $element, FormStateInterface $form_stat
  */
 function d_p_module_implements_alter(&$implementations, $hook) {
   // Form alter hook runs as last.
-  if ($hook == 'form_alter') {
+  if ($hook == 'form_alter' && in_array('d_p', $implementations)) {
     $group = $implementations['d_p'];
     unset($implementations['d_p']);
     $implementations['d_p'] = $group;

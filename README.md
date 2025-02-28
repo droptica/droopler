@@ -22,7 +22,7 @@ The Droopler profile should be installed via Composer. We recommend using [Droop
 
 ```json
 "require": {
-  "droptica/droopler": "^8.3.1"
+  "droptica/droopler": "^3"
 }
 ```
 
@@ -36,4 +36,15 @@ In case of unexpected problems please update your main composer.json to comply w
 * [Using d_settings](modules/custom/d_p/README.md) - How to create new paragraph settings and modify existing ones.
 * [Using SCSS](https://github.com/droptica/droopler_project/blob/master/README.md) - How to handle SCSS using Node.
 * [Creating CSS subtheme](themes/custom/droopler_theme/STARTERKIT_CSS/README.md) - How to create a simple subtheme with CSS inheritance.
-* [Creating SCSS subtheme](themes/custom/droopler_theme/STARTERKIT_SCSS/README.md) - How to create a comlex subtheme with SCSS variables.
+* [Creating SCSS subtheme](themes/custom/droopler_theme/STARTERKIT_SCSS/README.md) - How to create a complex subtheme with SCSS variables.
+
+## How to upgrade Droopler from 3.3.x to 3.5.x for Drupal 11
+
+1. Run `composer require droptica/droopler:^3.4.0 --with-all-dependencies`.
+2. Run `drush updb`.
+3. Run `drush cr`.
+4. Run `composer require droptica/droopler:^3.5.0 --no-update`.
+5. Update the remaining required packages for compatibility with Drupal 11, e.g., `drupal/core-recommended: ^11.0`.
+6. Run `composer update`.
+7. Run `drush updb`.
+8. Run `drush cr`. 
