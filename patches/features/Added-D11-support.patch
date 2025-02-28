@@ -1,0 +1,217 @@
+From 2a8638e7215154e35854836c16ef6697d868e6c4 Mon Sep 17 00:00:00 2001
+From: Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+Date: Sat, 31 Aug 2024 20:43:45 +0800
+Subject: [PATCH 1/6] Issue #3447460: Drupal 11 compatibility for Features
+ module
+
+---
+ composer.json                                       | 2 +-
+ features.info.yml                                   | 2 +-
+ modules/features_ui/features_ui.info.yml            | 2 +-
+ modules/features_ui/src/Form/FeaturesExportForm.php | 4 +++-
+ 4 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/composer.json b/composer.json
+index ed71c86..1440436 100644
+--- a/composer.json
++++ b/composer.json
+@@ -5,7 +5,7 @@
+     "license": "GPL-2.0-or-later",
+     "homepage": "https://www.drupal.org/project/features",
+     "require": {
+-        "drupal/core": "^9.4 || ^10",
++        "drupal/core": "^9.4 || ^10 || ^11",
+         "drupal/config_update": "^1.4 || ^2"
+     },
+     "extra": {
+diff --git a/features.info.yml b/features.info.yml
+index f2ded86..d79262d 100644
+--- a/features.info.yml
++++ b/features.info.yml
+@@ -2,7 +2,7 @@ name: 'Features'
+ type: module
+ description: 'Enables administrators to package configuration into modules.'
+ package: Development
+-core_version_requirement: ^9.4 || ^10
++core_version_requirement: ^9.4 || ^10 || ^11
+ dependencies:
+   - drupal:config
+   - config_update:config_update
+diff --git a/modules/features_ui/features_ui.info.yml b/modules/features_ui/features_ui.info.yml
+index c5b9406..71336a8 100644
+--- a/modules/features_ui/features_ui.info.yml
++++ b/modules/features_ui/features_ui.info.yml
+@@ -2,7 +2,7 @@ name: Features UI
+ type: module
+ description: 'Provides the user interface for Features.'
+ package: Development
+-core_version_requirement: ^9.4 || ^10
++core_version_requirement: ^9.4 || ^10 || ^11
+ configure: features.assignment
+ dependencies:
+   - features:features
+diff --git a/modules/features_ui/src/Form/FeaturesExportForm.php b/modules/features_ui/src/Form/FeaturesExportForm.php
+index fce19ed..c891941 100644
+--- a/modules/features_ui/src/Form/FeaturesExportForm.php
++++ b/modules/features_ui/src/Form/FeaturesExportForm.php
+@@ -378,7 +378,9 @@ class FeaturesExportForm extends FormBase implements TrustedCallbackInterface {
+     foreach ($package->getDependencies() as $dependency) {
+       $package_config['dependencies'][] = [
+         'name' => $dependency,
+-        'label' => $this->moduleHandler->moduleExists($dependency) ? $this->moduleHandler->getName($dependency) : $dependency,
++        'label' => $this->moduleHandler->moduleExists($dependency)
++                  ? $this->moduleList->getName($dependency)
++                  : $dependency,
+         'class' => '',
+       ];
+     }
+--
+GitLab
+
+
+From 6e094e170dcfd36e80730156ed1ca12adcdcdea1 Mon Sep 17 00:00:00 2001
+From: Paulo Henrique Cota Starling <paulocs@ciandt.com>
+Date: Wed, 17 Nov 2021 15:48:25 -0300
+Subject: [PATCH 2/6] Adding verification to check if the module is not a
+ feature module
+
+---
+ src/Drush/Commands/FeaturesCommands.php | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/Drush/Commands/FeaturesCommands.php b/src/Drush/Commands/FeaturesCommands.php
+index d9d21c6..9bffd78 100644
+--- a/src/Drush/Commands/FeaturesCommands.php
++++ b/src/Drush/Commands/FeaturesCommands.php
+@@ -769,6 +769,11 @@ class FeaturesCommands extends DrushCommands implements ContainerInjectionInterf
+         throw new DomainException(dt('No such feature is installed: @module', $dt_args));
+       }
+
++      $is_feature_module = $this->manager->isFeatureModule($feature->getExtension());
++      if (!$is_feature_module) {
++        throw new DomainException(dt('@module is not a feature module.', $dt_args));
++      }
++
+       // Forcefully revert all components of a feature.
+       if ($force) {
+         $components = $feature->getConfigOrig();
+--
+GitLab
+
+
+From 8713b48243666c62a31ed2fa1a266d5deeb0db66 Mon Sep 17 00:00:00 2001
+From: Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+Date: Sun, 1 Sep 2024 21:35:30 +0800
+Subject: [PATCH 3/6] https://www.drupal.org/node/3310017
+
+---
+ modules/features_ui/src/Form/FeaturesExportForm.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/modules/features_ui/src/Form/FeaturesExportForm.php b/modules/features_ui/src/Form/FeaturesExportForm.php
+index c891941..6dffa5b 100644
+--- a/modules/features_ui/src/Form/FeaturesExportForm.php
++++ b/modules/features_ui/src/Form/FeaturesExportForm.php
+@@ -379,7 +379,7 @@ class FeaturesExportForm extends FormBase implements TrustedCallbackInterface {
+       $package_config['dependencies'][] = [
+         'name' => $dependency,
+         'label' => $this->moduleHandler->moduleExists($dependency)
+-                  ? $this->moduleList->getName($dependency)
++                  ? \Drupal::service('extension.list.module')->getName($dependency)
+                   : $dependency,
+         'class' => '',
+       ];
+--
+GitLab
+
+
+From 3066b40629de3aeb651d624d6fa9f6e1a7c6cd24 Mon Sep 17 00:00:00 2001
+From: Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+Date: Sun, 1 Sep 2024 21:59:33 +0800
+Subject: [PATCH 4/6] const CORE_VERSION_REQUIREMENT = '^10.3 || ^11';
+
+---
+ src/FeaturesBundleInterface.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/FeaturesBundleInterface.php b/src/FeaturesBundleInterface.php
+index 07cd609..ebe8e6c 100644
+--- a/src/FeaturesBundleInterface.php
++++ b/src/FeaturesBundleInterface.php
+@@ -7,7 +7,7 @@ namespace Drupal\features;
+  */
+ interface FeaturesBundleInterface {
+
+-  const CORE_VERSION_REQUIREMENT = '^9.4 || ^10';
++  const CORE_VERSION_REQUIREMENT = '^10.3 || ^11';
+
+   const DEFAULT_BUNDLE = 'default';
+
+--
+GitLab
+
+
+From 30fa8520cb65f0ef86f66dc11073eb6a9507521a Mon Sep 17 00:00:00 2001
+From: jmf3658 <jfullmer@austin.utexas.edu>
+Date: Fri, 22 Nov 2024 08:22:25 -0700
+Subject: [PATCH 5/6] Unit test dataProviders must be static methods
+
+---
+ tests/src/Unit/FeaturesManagerTest.php | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tests/src/Unit/FeaturesManagerTest.php b/tests/src/Unit/FeaturesManagerTest.php
+index 2205d3c..da1055f 100644
+--- a/tests/src/Unit/FeaturesManagerTest.php
++++ b/tests/src/Unit/FeaturesManagerTest.php
+@@ -215,7 +215,7 @@ EOT
+   /**
+    * Data provider for ::testGetFullName().
+    */
+-  public function providerTestGetFullName() {
++  public static function providerTestGetFullName() {
+     return [
+       [NULL, 'name', 'name'],
+       [FeaturesManagerInterface::SYSTEM_SIMPLE_CONFIG, 'name', 'name'],
+@@ -811,7 +811,7 @@ EOT
+   /**
+    * {@inheritDoc}
+    */
+-  public function providerTestMergeInfoArray() {
++  public static function providerTestMergeInfoArray() {
+     $data = [];
+     $data['empty-info'] = [[], [], []];
+     $data['override-info'] = [
+--
+GitLab
+
+
+From 40732dfd317473d9913c9e97d0cf7e4d68a78934 Mon Sep 17 00:00:00 2001
+From: jmf3658 <jfullmer@austin.utexas.edu>
+Date: Fri, 22 Nov 2024 08:25:36 -0700
+Subject: [PATCH 6/6] Creation of dynamic properties are deprecated
+
+---
+ tests/src/Unit/FeaturesManagerTest.php | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/tests/src/Unit/FeaturesManagerTest.php b/tests/src/Unit/FeaturesManagerTest.php
+index da1055f..c2c4714 100644
+--- a/tests/src/Unit/FeaturesManagerTest.php
++++ b/tests/src/Unit/FeaturesManagerTest.php
+@@ -41,6 +41,13 @@ class FeaturesManagerTest extends UnitTestCase {
+   const PROFILE_NAME = 'my_profile';
+   use ProphecyTrait;
+
++  /**
++   * The core extension resolver.
++   *
++   * @var \Drupal\Core\Extension\ExtensionPathResolver
++   */
++  protected $extensionPathResolver;
++
+   /**
+    * The feature manager interface.
+    *
+--
+GitLab
