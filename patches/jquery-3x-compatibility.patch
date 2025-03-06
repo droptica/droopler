@@ -1,0 +1,17 @@
+diff --git a/core.libraries.yml b/core.libraries.yml
+index 5a4d983ad5..c5696149b5 100644
+--- a/core.libraries.yml
++++ b/core.libraries.yml
+@@ -750,10 +750,10 @@ internal.floating-ui:
+ 
+ jquery:
+   remote: https://github.com/jquery/jquery
+-  version: "4.0.0-beta.2"
++  version: "3.7.1"
+   license:
+     name: MIT
+-    url: https://raw.githubusercontent.com/jquery/jquery/4.0.0-beta.2/LICENSE.txt
++    url: https://github.com/jquery/jquery/blob/3.7.1/LICENSE.txt
+     gpl-compatible: true
+   js:
+     assets/vendor/jquery/jquery.min.js: { minified: true, weight: -20 }
