@@ -48,3 +48,6 @@ In case of unexpected problems please update your main composer.json to comply w
 6. Run `composer update`.
 7. Run `drush updb`.
 8. Run `drush cr`. 
+
+### Drupal 11 compatibility
+Since Drupal 11 is using jQuery 4.x and Droopler is using Bootstrap 4 which needs jQuery 3.x, we need to keep jQuery 3.x compatibility. There is a patch included in the repository to make it work. However, if you can't apply the patch, feel free to patches-ignore in your project's composer.json and apply your own patch.
