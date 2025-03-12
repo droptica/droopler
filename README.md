@@ -50,4 +50,31 @@ In case of unexpected problems please update your main composer.json to comply w
 8. Run `drush cr`. 
 
 ### Drupal 11 compatibility
+
+#### jQuery
 Since Drupal 11 is using jQuery 4.x and Droopler is using Bootstrap 4 which needs jQuery 3.x, we need to keep jQuery 3.x compatibility. There is a patch included in the repository to make it work. However, if you can't apply the patch, feel free to patches-ignore in your project's composer.json and apply your own patch.
+
+#### Features
+At the time of writing this, the features module is not compatible with Drupal 11. We are using mglaman/composer-drupal-lenient composer plugin to install it and apply the patch.
+
+Before you update to droopler 3.5.x, please make sure you have added the following to your composer.json:
+
+```json
+"config": {
+    "allow-plugins": {
+        "mglaman/composer-drupal-lenient": true
+    }
+},
+```
+
+and 
+
+```json
+"extra": {
+    "drupal-lenient": {
+        "allowed-list": ["drupal/features"]
+    }
+}
+```
+
+More information about the mglaman/composer-drupal-lenient plugin can be found here: https://www.drupal.org/docs/develop/using-composer/using-the-lenient-composer-plugin

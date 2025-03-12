@@ -2270,7 +2270,7 @@ function droopler_update_8139(&$sandbox) {
  */
 function droopler_update_8140() {
   $module_installer = \Drupal::service('module_installer');
-  
+
   $values['droopler__droopler_update_8140_1'] = $module_installer
     ->uninstall(['advagg'], TRUE);
 
@@ -2278,7 +2278,7 @@ function droopler_update_8140() {
     ->install(['entity'], TRUE);
 
   \Drupal::service('d_update')->checklist()
-  ->saveProgress(['v3.4' => $values]);
+    ->saveProgress(['v3.4' => $values]);
 
   drupal_flush_all_caches();
 }
