@@ -2269,9 +2269,16 @@ function droopler_update_8139(&$sandbox) {
  * Droopler PreReq 3.4 - Uninstall and remove the AdvAgg module.
  */
 function droopler_update_8140() {
-  $values['droopler__droopler_update_8140_1'] = \Drupal::service('module_installer')
+  $module_installer = \Drupal::service('module_installer');
+  
+  $values['droopler__droopler_update_8140_1'] = $module_installer
     ->uninstall(['advagg'], TRUE);
 
+  $values['droopler__droopler_update_8140_2'] = $module_installer
+    ->install(['entity'], TRUE);
+
   \Drupal::service('d_update')->checklist()
-    ->saveProgress(['v3.4' => $values]);
+  ->saveProgress(['v3.4' => $values]);
+
+  drupal_flush_all_caches();
 }

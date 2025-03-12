@@ -37,7 +37,7 @@
         "drupal/facets": "^2.0",
         "drupal/features": "3.13.0",
         "drupal/field_group": "^3.0",
-        "drupal/geysir": "^2.1@RC",
+        "drupal/geysir": "^2.1.1",
         "drupal/google_analytics": "^4.0",
         "drupal/google_tag": "^2.0",
         "drupal/link_attributes": "^2.1",
@@ -88,7 +88,11 @@
             },
             "drupal/core": {
                 "Keep jQuery 3.x compatibility": "web/profiles/contrib/droopler/patches/jquery-3x-compatibility.patch"
+            },
+            "drupal/geysir": {
+                "Fix class not found error": "web/profiles/contrib/droopler/patches/geysir.patch"
             }
         }
     }
 }
+
