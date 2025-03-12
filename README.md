@@ -49,10 +49,12 @@ In case of unexpected problems please update your main composer.json to comply w
 7. Run `drush updb`.
 8. Run `drush cr`. 
 
-### Drupal 11 compatibility
+### Drupal 11 compatibility (droopler 3.5.x update)
 
 #### jQuery
 Since Drupal 11 is using jQuery 4.x and Droopler is using Bootstrap 4 which needs jQuery 3.x, we need to keep jQuery 3.x compatibility. There is a patch included in the repository to make it work. However, if you can't apply the patch, feel free to patches-ignore in your project's composer.json and apply your own patch.
+
+If you are seeing jQuery errors after updating to droopler 3.5.x, disable drupal js aggregation, clear cache, and enable it again.
 
 #### Features
 At the time of writing this, the features module is not compatible with Drupal 11. We are using mglaman/composer-drupal-lenient composer plugin to install it and apply the patch.
@@ -78,3 +80,8 @@ and
 ```
 
 More information about the mglaman/composer-drupal-lenient plugin can be found here: https://www.drupal.org/docs/develop/using-composer/using-the-lenient-composer-plugin
+
+#### SCSS
+Droopler was started many years ago with SCSS support. Since then SCSS has evolved and a lot of things have changed, some got deprecated and some got removed. Because version 3.x of droopler is not under active development, we will not update it to the latest version of sass. However, feel free to contribute if you want to have it updated.
+
+If you see in your subtheme warnings about deprecated SCSS functions, please take a look at the package.json file in the droopler_theme directory. You will see that we are using gulp-dart-sass 1.0.2 and older version of sass to avoid warnings. You can do the same in your subtheme to avoid warnings.
