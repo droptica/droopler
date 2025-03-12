@@ -1,0 +1,17 @@
+diff --git a/geysir.module b/geysir.module
+index 2b6b5d2..f45c905 100644
+--- a/geysir.module
++++ b/geysir.module
+@@ -110,7 +110,11 @@ function geysir_entity_type_build(array &$entity_types) {
+     $entity_types['paragraph']->setLinkTemplate('delete-form', '/paragraphs/{paragraph}/delete');
+ 
+     $route_provider = $entity_types['paragraph']->getHandlerClass('route_provider');
+-    $route_provider['html'] = AdminHtmlRouteProvider::class;
++    // During first install, the AdminHtmlRouteProvider class is not available, because entity module is not installed yet.
++    // After running all updates, clearing the cache will load the AdminHtmlRouteProvider class.
++    if (class_exists(AdminHtmlRouteProvider::class)) {
++      $route_provider['html'] = AdminHtmlRouteProvider::class;
++    }
+     $entity_types['paragraph']->setHandlerClass('route_provider', $route_provider);
+ 
+   }
