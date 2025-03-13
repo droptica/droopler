@@ -90,7 +90,7 @@
     "drupal/metatag": "^1.2 || ^2.0",
     "drupal/paragraphs": "^1.1",
     "drupal/pathauto": "^1.0",
-    "drupal/project_browser": "^1.0@beta",
+    "drupal/project_browser": "^2.0@alpha",
     "drupal/radix": "^6.0.1",
     "drupal/redirect": "^1.0-beta1",
     "drupal/redis": "^1.7",
@@ -102,12 +102,12 @@
     "drupal/twig_tweak": "^3.4",
     "drupal/webform": "6.3.0-beta1",
     "drush/drush": "^13",
+    "mably/slick": "^1.8",
     "mglaman/composer-drupal-lenient": "^1.0",
     "npm-asset/countup": "^1.9",
     "npm-asset/in-viewport": "^3.6",
     "npm-asset/jquery-ui-touch-punch": "^0.2",
     "npm-asset/select2": "^4.1",
-    "mably/slick": "^1.8",
     "oomphinc/composer-installers-extender": "^2.0",
     "wikimedia/composer-merge-plugin": "^2.1"
   },
@@ -183,6 +183,9 @@
       },
       "drupal/ala": {
         "Fixed DI.": "patches/ala/ala_fix_di.patch"
+      },
+      "drupal/admin_toolbar": {
+        "https://www.drupal.org/project/admin_toolbar/issues/3506824": "https://git.drupalcode.org/project/admin_toolbar/-/merge_requests/117.patch"
       }
     },
     "drupal-lenient": {
