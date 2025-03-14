@@ -84,10 +84,11 @@
                 "Attempt to modify property col_content on null": "https://www.drupal.org/files/issues/2022-03-30/3270040-6.patch"
             },
             "drupal/features": {
-                "Added D11 support": "https://www.drupal.org/files/issues/2024-07-30/features-3447460.patch"
+                "Added D11 support": "https://www.drupal.org/files/issues/2024-07-30/features-3447460.patch",
+                "Fix PHP 8.3 deprecation": "web/profiles/contrib/droopler/patches/features-php-83-deprecation.patch"
             },
-            "drupal/geysir": {
-                "Fix class not found error": "web/profiles/contrib/droopler/patches/geysir.patch"
+            "drupal/core": {
+                "Keep jQuery 3.x compatibility": "web/profiles/contrib/droopler/patches/jquery-3x-compatibility.patch"
             }
         }
     }

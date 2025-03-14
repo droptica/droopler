@@ -1,0 +1,25 @@
+diff --git a/src/FeaturesGenerationMethodManager.php b/src/FeaturesGenerationMethodManager.php
+index 9ede58e..0c2483b 100644
+--- a/src/FeaturesGenerationMethodManager.php
++++ b/src/FeaturesGenerationMethodManager.php
+@@ -11,6 +11,20 @@ use Drupal\Core\Plugin\DefaultPluginManager;
+  */
+ class FeaturesGenerationMethodManager extends DefaultPluginManager {
+ 
++  /**
++   * Cache key prefix.
++   *
++   * @var string
++   */
++  protected $cacheKeyPrefix;
++
++  /**
++   * Cache key.
++   *
++   * @var string
++   */
++  protected $cacheKey;
++
+   /**
+    * Constructs a new FeaturesGenerationMethodManager object.
+    *
