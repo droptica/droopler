@@ -37,7 +37,7 @@
         "drupal/facets": "^2.0",
         "drupal/features": "3.13.0",
         "drupal/field_group": "^3.0",
-        "drupal/geysir": "^2.1@RC",
+        "drupal/geysir": "^2.1.1",
         "drupal/google_analytics": "^4.0",
         "drupal/google_tag": "^2.0",
         "drupal/link_attributes": "^2.1",
@@ -85,7 +85,11 @@
             },
             "drupal/features": {
                 "Added D11 support": "https://www.drupal.org/files/issues/2024-07-30/features-3447460.patch"
+            },
+            "drupal/geysir": {
+                "Fix class not found error": "web/profiles/contrib/droopler/patches/geysir.patch"
             }
         }
     }
 }
+
