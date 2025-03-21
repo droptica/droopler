@@ -1,0 +1,49 @@
+@import "../../scss/init";
+
+:root {
+  --product-teaser-image-height: 205px;
+}
+
+.d-product--full {
+
+  .product-intro {
+    @include media-breakpoint-up(xl) {
+      padding-left: 6rem;
+    }
+
+    .field--name-field-product-categories {
+      margin-top: -1.5rem;
+    }
+
+    .field--name-field-product-categories,
+    .field--name-field-tags {
+      a {
+        color: $primary;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .body-text {
+      --body-text-font-size: 14px;
+
+      padding-bottom: var(--content-spacer-l);
+      margin-bottom: var(--content-spacer-s);
+      border-bottom: 1px solid #F0F3FA;
+      color: #2C343B;
+    }
+
+  }
+
+  .product-header-container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+    }
+  }
+}

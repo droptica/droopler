@@ -1,0 +1,8 @@
+.d-p-block {
+  text-align: center;
+  color: var(--dp-bs-body-color);
+
+  &:has(.view-products-list) {
+    text-align: left;
+  }
+}

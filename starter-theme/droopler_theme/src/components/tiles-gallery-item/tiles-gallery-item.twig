@@ -1,0 +1,19 @@
+{{ attach_library('droopler_theme/tiles-gallery-item') }}
+
+{% set base_class = tiles_gallery_item_base_class|default('tiles-gallery-item') %}
+{% set modifiers = tiles_gallery_item_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('item-content', [], base_class) }}>
+    {% block content %}
+    {% endblock %}
+
+    <div {{ bem('caption', [], base_class) }}>
+      <span {{ bem('caption-title', [], base_class) }}></span>
+      <span {{ bem('caption-subtitle', [], base_class) }}></span>
+    </div>
+  </div>
+</div>

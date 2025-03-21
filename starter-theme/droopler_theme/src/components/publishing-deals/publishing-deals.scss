@@ -1,0 +1,30 @@
+@import "../../scss/init";
+
+.publishing-deals {
+  .nav-tabs {
+    --dp-bs-nav-tabs-link-active-bg: #F06E00;
+    --dp-bs-nav-link-color: #515C65;
+    --dp-bs-nav-link-hover-color: #12110C;
+    --dp-bs-nav-tabs-border-width: 0;
+    --dp-bs-nav-tabs-border-radius: 8px;
+    --dp-bs-nav-tabs-link-active-color: white;
+    --dp-bs-nav-link-padding-x: 33px;
+    --dp-bs-nav-link-padding-y: 16px;
+    font-family: $font-montserrat;
+    font-weight: $font-weight-medium;
+
+    .nav-link:not(.active):hover {
+      background-color: #F2F4F7;
+    }
+  }
+
+  .view-empty {
+    text-align: center;
+    font-size: 2rem;
+    color: #F06E00;
+    font-weight: $font-weight-semibold;
+    padding: 10rem 1rem;
+    border-top: 1px solid #DADADA;
+    border-bottom: 1px solid #DADADA;
+  }
+}

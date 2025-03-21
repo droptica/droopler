@@ -1,0 +1,41 @@
+{% set d_p_banner_add_divider = FALSE %}
+<div data-theme="theme-dark" class="research-header">
+  {% embed '@droopler_theme/d-p-banner/d-p-banner.twig' with {
+    d_p_banner_add_divider: false,
+    d_p_banner_additional_classes: [
+      'd-p-banner--resource-header',
+      'margin-top-none',
+      'margin-bottom-none',
+      'padding-top-medium',
+      'padding-bottom-medium',
+      'remove-divider'
+    ],
+  } %}
+    {% block background %}
+      {{ content.field_d_product_media[0] }}
+    {% endblock %}
+
+    {% block content_header %}
+      <div class="d-flex align-items-center flex-column flex-md-row">
+        <div class="first-child-no-spacer text-align-left research-header__content">
+          <div class="media-icon first-child-no-spacer">
+            {% include '@droopler_theme/base/heading/heading.twig' with {
+              heading_tag: 'h1',
+              label
+            } %}
+          </div>
+          <div class="divider"></div>
+          <div class="body-text">
+            <p>{{ 'Droopler documentation'|t }}</p>
+          </div>
+        </div>
+        {% if content.field_resource_link.0 %}
+          <div class="ml-auto research-header__link">
+            <a href="{{ content.field_resource_link.0['#url'].toString() }}" target="_blank"
+               class="btn btn-primary">{{ "Go to resource"|t }}</a>
+          </div>
+        {% endif %}
+      </div>
+    {% endblock %}
+  {% endembed %}
+</div>

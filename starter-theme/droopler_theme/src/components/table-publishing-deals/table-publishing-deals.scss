@@ -1,0 +1,88 @@
+@import "../../scss/init";
+
+.table-publishing-deals {
+  text-align: left;
+  font-size: 0.875rem;
+  color: var(--oa-publishing-deals-secondary-color);
+  min-width: 48rem;
+
+  thead {
+    background-color: var(--oa-publishing-deals-secondary-color);
+    color: var(--oa-publishing-deals-thertiary-color);
+
+    th {
+      padding: var(--content-spacer-ml);
+      font-size: 14px;
+      font-weight: $font-weight-semibold;
+
+      &.views-field-title {
+        width: 14.063rem;
+      }
+
+      &.views-field-field-inleiding {
+        width: 46.375rem;
+      }
+
+      &.views-field-field-looptijd-deal {
+        width: 14.063rem;
+      }
+    }
+  }
+
+  tr {
+    td {
+      padding: var(--content-spacer-ml);
+
+      &.views-field-title {
+        font-weight: $font-weight-semibold;
+
+        a:not(:hover):not(:focus) {
+          color: var(--oa-publishing-deals-secondary-color);
+        }
+      }
+
+      &.views-field-field-looptijd-deal {
+        font-weight: $font-weight-semibold;
+      }
+    }
+
+    &.row-body {
+      background-color: var(--oa-publishing-deals-quaternary-color);
+
+      td {
+        vertical-align: top;
+      }
+    }
+  }
+
+  .btn-collapse {
+    font-size: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    padding: 0;
+    margin: 0;
+
+
+    .icon {
+      transition: all ease .3s;
+      display: block;
+      width: 100%;
+      height: 100%;
+      mask-image: url("../../assets/images/arrow.svg");
+
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      mask-size: 1.125rem;
+      background-color: var(--oa-publishing-deals-thertiary-color);
+    }
+
+    &[aria-expanded="true"] {
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

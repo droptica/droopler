@@ -1,7 +1,7 @@
-{% embed 'droopler_theme:paragraph' %}
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
 
   {% block component_content %}
-    {% embed 'droopler_theme:paragraph-d-p-carousel' with {
+    {% embed '@droopler_theme/d-p-carousel/d-p-carousel.twig' with {
       is_full_width: paragraph.fullWidth,
       carousel_settings: paragraph.carouselSettings,
       dividers: paragraph.hasDividers,

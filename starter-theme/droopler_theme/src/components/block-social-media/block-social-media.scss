@@ -1,0 +1,15 @@
+@import "../../scss/init";
+
+.block-social-media {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+
+  .heading {
+    font-family: $font-montserrat;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+  }
+}

@@ -1,0 +1,42 @@
+@import "../../../scss/init";
+
+:root {
+  --heading-margin: 0;
+  --heading-text-transform: none;
+}
+
+.heading {
+  margin: var(--heading-margin);
+  text-transform: var(--heading-text-transform);
+  color: var(--heading-color);
+}
+
+h1,
+.h1 {
+  @include typography('h1');
+}
+
+h2,
+.h2 {
+  @include typography('h2');
+}
+
+h3,
+.h3 {
+  @include typography('h3');
+}
+
+h4,
+.h4 {
+  @include typography('h4');
+}
+
+h5,
+.h5 {
+  @include typography('h5');
+}
+
+h6,
+.h6 {
+  @include typography('h6');
+}

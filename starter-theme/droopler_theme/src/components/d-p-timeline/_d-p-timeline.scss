@@ -1,0 +1,33 @@
+@import "../../scss/init";
+
+.d-p-timeline {
+
+  .heading {
+    margin-top: var(--content-spacer-s);
+  }
+
+  &__header-column,
+  &__footer-column {
+    text-align: center;
+  }
+
+  &__items,
+  &__footer {
+    margin-top: var(--content-spacer-m);
+  }
+
+  &__items {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 11px;
+      width: 2px;
+      height: 100%;
+      background-color: $primary;
+      z-index: 1;
+    }
+  }
+}

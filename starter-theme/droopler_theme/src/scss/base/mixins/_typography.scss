@@ -1,0 +1,11 @@
+@use "sass:map";
+
+@import "../typography";
+
+@mixin typography($name) {
+  $styles: map.get($typography-map, $name);
+
+  @each $property, $value in $styles {
+    #{$property}: $value;
+  }
+}

@@ -1,0 +1,23 @@
+@import "../../scss/init";
+
+.d-p-blog-image {
+  &:not(.full-width) {
+    width: 100%;
+    margin: var(--content-spacer-m) auto;
+
+    @include media-breakpoint-up(md) {
+      width: 44em;
+    }
+  }
+
+  &.full-width {
+    img {
+      width: 100%;
+    }
+  }
+
+  .video-embed--blog {
+    width: 100%;
+    height: 100%;
+  }
+}

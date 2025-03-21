@@ -1,0 +1,18 @@
+{% extends "@droopler_theme/node-basic/node-basic.twig" %}
+
+{% block main_content %}
+  <div>
+    {{ content.field_inleiding }}
+  </div>
+  {% include "@droopler_theme/licence-data/licence-data.twig" with {
+    items: [
+      {
+        publisher: content.field_uitgever,
+        deal_duration: content.field_looptijd_deal,
+        status_licence: content.field_status_licentie,
+      },
+    ]
+  }%}
+
+  {{ content|without('field_inleiding', 'field_uitgever', 'field_looptijd_deal', 'field_status_licentie', 'field_annual_information') }}
+{% endblock %}

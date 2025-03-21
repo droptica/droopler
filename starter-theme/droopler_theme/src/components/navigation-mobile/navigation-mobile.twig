@@ -1,0 +1,14 @@
+{{ attach_library('droopler_theme/navigation-mobile') }}
+
+{% set base_class = navigation_mobile_base_class|default('navigation-mobile') %}
+
+<div {{ bem(base_class) }}>
+  <div {{ bem('overlay', [], base_class) }}>
+    {% include '@droopler_theme/base/overlay/overlay.twig'%}
+  </div>
+
+  <div {{ bem('content', [], base_class) }}>
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>

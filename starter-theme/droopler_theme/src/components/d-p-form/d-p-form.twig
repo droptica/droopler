@@ -1,0 +1,63 @@
+{{ attach_library('droopler_theme/d-p-form') }}
+
+{% set base_class = d_p_banner_base_class|default('d-p-form') %}
+{% set modifiers = d_p_form_modifiers|default([]) %}
+{% if form_placement %}
+  {% set modifiers = modifiers|merge([form_placement]) %}
+{% endif %}
+
+{% if form_placement == 'left' %}
+  {% set content_classes = 'col-md-5 col-12' %}
+  {% set form_classes = 'col-md-7 col-12' %}
+{% elseif form_placement == 'right' %}
+  {% set content_classes = 'col-md-5 col-12' %}
+  {% set form_classes = 'col-md-7 col-12' %}
+{% else %}
+  {% set content_classes = 'col-md-8' %}
+  {% set form_classes = 'col-md-8' %}
+{% endif %}
+
+<section {{ bem(base_class, (modifiers)) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('background', [], base_class) }}>
+    <div {{ bem('background-media', [], base_class) }}>
+      {% block background %}
+      {% endblock %}
+    </div>
+
+    <div {{ bem('background-overlay', [], base_class) }}>
+      {% include '@droopler_theme/base/overlay/overlay.twig' %}
+    </div>
+  </div>
+
+    <div {{ bem('content', [], base_class, ['container']) }}>
+      <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+
+        {% set has_header = block('header')|render|striptags('<img>')|trim is not empty %}
+        {% set has_content = block('content')|render|striptags|trim is not empty %}
+
+        {% if has_header or has_content %}
+          <div {{ bem('content-column', ['header'], base_class, [content_classes, 'first-child-no-spacer']) }}>
+            {% if has_header %}
+              {% block header %}
+              {% endblock %}
+
+              {% if has_content %}
+                {% include '@droopler_theme/base/divider/divider.twig' %}
+              {% endif %}
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+          </div>
+        {% endif %}
+
+        <div {{ bem('content-column', ['form'], base_class, [form_classes]) }}>
+          {% block form %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+</section>

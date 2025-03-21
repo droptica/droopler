@@ -1,0 +1,44 @@
+@import "../../scss/init";
+
+.block-mobile-filters {
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+
+  &__content {
+    padding: 0;
+    height: 100%;
+
+    .mobile-filter {
+      @include filter-icon;
+
+      position: relative;
+      padding: 0 1.25rem;
+      margin: 0;
+      font-size: 0;
+      height: 100%;
+      text-align: center;
+      min-width: 50px;
+
+      @include media-breakpoint-up(md) {
+        font-size: var(--dp-bs-btn-font-size);
+        min-width: 13.75rem;
+        padding: 0.25rem 1.25rem;
+
+        &:after {
+          display: none;
+        }
+      }
+
+      &::after {
+        @include centered-absolute;
+
+        @include media-breakpoint-up(md) {
+          top: unset;
+          left: unset;
+          transform: unset;
+        }
+      }
+    }
+  }
+}

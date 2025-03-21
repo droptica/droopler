@@ -1,0 +1,11 @@
+@import "../../scss/init";
+
+.counter {
+  margin: 0;
+  color: var(--counter-color);
+  font-size: 2.5rem;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 3.5rem;
+  }
+}

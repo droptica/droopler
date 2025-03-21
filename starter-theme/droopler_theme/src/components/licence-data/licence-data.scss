@@ -1,0 +1,50 @@
+@import "../../scss/init";
+
+.licence-data {
+  &__heading {
+    h2 {
+      @include typography('h4');
+    }
+  }
+
+  &-item {
+    margin-bottom: var(--content-spacer-ml);
+  }
+
+  table {
+    th {
+      width: 14.063rem;
+    }
+
+    td,
+    th {
+      padding: var(--content-spacer-s) var(--content-spacer-m);
+    }
+  }
+
+
+  .status-licentie-99,
+  .status-licentie-110 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 24px;
+      background-size: 24px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .status-licentie-99:before {
+    background-image: url("../../assets/icons/current.svg");
+  }
+
+  .status-licentie-110:before {
+    background-image: url("../../assets/icons/archive.svg");
+  }
+}

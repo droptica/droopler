@@ -1,0 +1,32 @@
+{{ attach_library('droopler_theme/d-p-side-image') }}
+
+{% set base_class = d_p_side_image_base_class|default('d-p-side-image') %}
+{% set modifiers = d_p_side_image_modifiers|default([]) %}
+{% set image_side = image_side|default(false) %}
+
+{% set content_classes = [
+  'col-md-5',
+  'col-12',
+  image_side == 'left' ? 'ms-auto' : 'me-auto',
+  'first-child-no-spacer',
+] %}
+
+<section {{ bem(base_class, modifiers) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  <div {{ bem('background', image_width == 'wide' ? ['image-wide'] : [], base_class, ['col-md-6', image_side]) }}>
+    {% block background %}
+    {% endblock %}
+  </div>
+  <div {{ bem('content', [], base_class, ['container', image_side]) }}>
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', image_width == 'wide' ? ['image-wide'] : [], base_class, content_classes) }}>
+        {% block header %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>

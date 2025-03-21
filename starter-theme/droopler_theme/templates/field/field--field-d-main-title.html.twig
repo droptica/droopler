@@ -1,6 +1,6 @@
 {% for item in items %}
-  {% include "droopler_theme:base-heading" with {
-    heading_tag: heading_tag|default('h2'),
+  {% include "@droopler_theme/base/heading/heading.twig" with {
+    heading_tag: heading_tag,
     label: item.content
   }%}
 {% endfor %}

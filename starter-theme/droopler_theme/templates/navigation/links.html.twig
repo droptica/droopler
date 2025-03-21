@@ -5,9 +5,10 @@
  */
 #}
 {% if links -%}
-  {% embed 'droopler_theme:nav' with {
+  {% embed '@radix/nav/nav.twig' with {
     items: links,
   } %}
+
     {% block items %}
       {% for item in links %}
         <li{{ item.attributes.addClass('nav-item') }}>

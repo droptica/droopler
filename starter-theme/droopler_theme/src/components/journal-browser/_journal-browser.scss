@@ -1,0 +1,81 @@
+@import "../../scss/init";
+
+.journal-browser {
+  text-align: left;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--content-spacer-m);
+
+
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+    }
+
+    &-left-side {
+      .heading {
+        @include typography('h5')
+      }
+
+      .body-text,
+      .journal-browser-container {
+        margin-top: var(--content-spacer-s);
+      }
+
+      .heading,
+      .body-text {
+        max-width: 540px;
+      }
+    }
+
+    &-right-side {
+      @include media-breakpoint-up(md) {
+        max-width: 330px;
+      }
+
+      .body-text {
+        margin-bottom: var(--content-spacer-s);
+      }
+
+      .btn {
+        margin-bottom: 0;
+        width: auto;
+      }
+    }
+
+    .journal-browser-container {
+      display: flex;
+      gap: var(--content-spacer-s);
+
+      input {
+        margin: 0;
+
+        &[type="text"] {
+          max-width: 540px;
+          padding: 18px;
+          height: 60px;
+          background-color: transparent;
+          border-color: $color-nestor;
+
+          &::placeholder {
+            color: $color-nestor;
+          }
+        }
+
+        &[type="submit"] {
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+.right-side-disabled {
+  .journal-browser {
+    &__content-right-side {
+      display: none;
+    }
+  }
+}

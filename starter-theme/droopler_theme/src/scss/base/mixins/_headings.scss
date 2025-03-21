@@ -1,17 +1,18 @@
-/* stylelint-disable */
+@use "sass:map";
+
+$heading-font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size
+);
+
 @mixin heading($heading-level) {
-  @if $heading-level == 1 {
-    @include font-size($h1-font-size);
-  } @else if $heading-level == 2 {
-    @include font-size($h2-font-size);
-  } @else if $heading-level == 3 {
-    @include font-size($h3-font-size);
-  } @else if $heading-level == 4 {
-    @include font-size($h4-font-size);
-  } @else if $heading-level == 5 {
-    @include font-size($h5-font-size);
-  } @else if $heading-level == 6 {
-    @include font-size($h6-font-size);
+  $font-size: map.get($heading-font-sizes, $heading-level);
+
+  @if $font-size {
+    @include font-size($font-size);
   }
 }
-/* stylelint-enable */

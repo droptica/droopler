@@ -1,0 +1,15 @@
+@import "../../scss/init";
+
+.pagination {
+  --dp-bs-pagination-border-width: 0;
+  --dp-bs-pagination-active-bg: #{$color-paris};
+  --dp-bs-pagination-disabled-bg: #{$color-paris};
+  --dp-bs-pagination-hover-bg: #{$color-paris};
+  --dp-bs-pagination-focus-bg: #{$color-paris};
+  --dp-bs-pagination-active-color: #{$primary};
+  --dp-bs-pagination-hover-color: #{$primary};
+  --dp-bs-pagination-focus-color: #{$primary};
+  --dp-bs-pagination-color: #{$color-aeneas};
+  --dp-bs-border-radius: 2px;
+  font-weight: #{$font-weight-semibold};
+}

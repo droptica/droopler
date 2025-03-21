@@ -1,0 +1,117 @@
+@import "../../../scss/init";
+
+.calendar-teaser {
+  $root: &;
+
+  margin-top: var(--content-spacer-m);
+  padding-bottom: var(--content-spacer-m);
+  border-bottom: 1px solid var(--blog-teaser-divider);
+
+  @include media-breakpoint-up(lg) {
+    border: none;
+    margin-top: var(--content-spacer-l);
+    padding-bottom: var(--content-spacer-none);
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    @include media-breakpoint-down(md) {
+      padding: 0;
+    }
+  }
+
+  &__header {
+    background-color: var(--section-background-color);
+  }
+
+  &__date {
+    background-color: $color-paris;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: $font-weight-semibold;
+
+    &--desktop {
+      height: 145px;
+
+      @include media-breakpoint-down(md) {
+        display: none;
+      }
+    }
+
+    &--mobile {
+      margin-bottom: var(--content-spacer-s);
+      display: inline-block;
+      padding: var(--content-spacer-xs) var(--content-spacer-s);
+      color: $color-paris;
+      background-color: $color-agamemnon;
+
+      @include media-breakpoint-up(md) {
+        display: none;
+      }
+    }
+  }
+
+  &__metadata {
+    color: var(--category-text);
+    font-size: 0.84rem;
+  }
+
+  &__category {
+    display: inline-block;
+    font-weight: $font-weight-semibold;
+    margin-bottom: var(--content-spacer-s);
+
+    @include media-breakpoint-down(md) {
+      display: block;
+    }
+
+    &:hover a,
+    a {
+      color: var(--category-text);
+      margin-right: var(--content-spacer-xs);
+    }
+  }
+
+  &__heading {
+    a,
+    a:hover {
+      color: var(--heading-color);
+    }
+
+    .heading {
+      font-size: 28px;
+      line-height: 32px;
+      font-weight: $font-weight-semibold;
+      margin-top: 0;
+    }
+  }
+
+  &__cta {
+    margin-top: var(--content-spacer-m);
+
+    @include media-breakpoint-up(lg) {
+      margin-top: var(--content-spacer-l);
+    }
+
+    a {
+      text-transform: uppercase;
+      margin-top: var(--content-spacer-l);
+    }
+  }
+
+  .body-text {
+    margin-top: var(--content-spacer-s);
+  }
+}

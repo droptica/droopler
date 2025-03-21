@@ -1,0 +1,9 @@
+@import "../../scss/init";
+
+.d-p-node {
+  .small-box {
+    &__title {
+      @include max-lines(2);
+    }
+  }
+}

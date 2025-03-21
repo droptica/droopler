@@ -30,7 +30,7 @@
  * @see template_preprocess_forum_list()
  */
 #}
-{% extends 'radix:table' %}
+{% extends '@radix/table/table.twig' %}
   {% block table %}
     <table id="forum-{{ forum_id }}" class="table">
       {% block header %}

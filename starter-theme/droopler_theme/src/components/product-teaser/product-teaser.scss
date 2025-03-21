@@ -1,0 +1,68 @@
+@import "../../scss/init";
+
+:root {
+  --product-teaser-image-height: 205px;
+}
+
+.product-teaser {
+  position: relative;
+
+  --media-height: var(--product-teaser-image-height);
+
+  $root: &;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #D8DDEB;
+
+    img {
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__content {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
+    color: var(--product-teaser-text-color);
+  }
+
+  &__categories {
+    a {
+      color: $primary;
+      margin-right: 7px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__link {
+    @include filling-absolute;
+  }
+
+  .heading {
+    @include typography('card-title');
+  }
+
+  .body-text {
+    @include typography('body-l');
+    color: $color-nestor;
+    flex-grow: 1;
+  }
+
+  &:hover .heading {
+    text-decoration: underline;
+  }
+}

@@ -15,8 +15,6 @@ const glob = require('glob');
 require('laravel-mix-stylelint');
 require('laravel-mix-copy-watched');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const fs = require('fs-extra');
-
 
 /*
  |--------------------------------------------------------------------------
@@ -71,16 +69,10 @@ mix.browserSync({
  */
 mix.sass('src/scss/main.style.scss', 'css');
 
-glob.sync('components/**/src/*.scss').forEach((sourcePath) => {
-  // Remove the src/ from the path.
+glob.sync('src/components/**/*.scss').forEach((sourcePath) => {
   const destinationPath = sourcePath.replace(/^src\/(components\/.+)\/_?(.+)\.scss$/, '$1/$2.css');
-  mix.sass(sourcePath, destinationPath).after(() => {
-    // Copy the compiled CSS to the correct location.
-    if (sourcePath.startsWith('components/') && destinationPath.endsWith('.scss')) {
-      const newDestinationPath = destinationPath.replace('.scss', '.css').replace(/\/src\//, '/');
-      fs.copySync('build/' + destinationPath + '.css', newDestinationPath);
-    }
-  });
+
+  mix.sass(sourcePath, destinationPath);
 });
 
 /*
@@ -90,16 +82,10 @@ glob.sync('components/**/src/*.scss').forEach((sourcePath) => {
  */
 mix.js('src/js/main.script.js', 'js');
 
-glob.sync('components/**/*.js').forEach((sourcePath) => {
+glob.sync('src/components/**/*.js').forEach((sourcePath) => {
   const destinationPath = sourcePath.replace(/^src\/(components\/.+)\/(.+)\.js$/, '$1/$2.js');
 
-  mix.js(sourcePath, destinationPath).after(() => {
-    // Copy the compiled JS to the correct location.
-    if (sourcePath.startsWith('components/')) {
-      const newDestinationPath = destinationPath.replace(/\/src\//, '/');
-      fs.copySync('build/' + destinationPath, newDestinationPath);
-    }
-  });
+  mix.js(sourcePath, destinationPath);
 });
 /*
  |--------------------------------------------------------------------------

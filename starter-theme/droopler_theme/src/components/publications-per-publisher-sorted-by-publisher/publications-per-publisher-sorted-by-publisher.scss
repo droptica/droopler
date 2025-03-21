@@ -1,0 +1,174 @@
+@import "../../scss/init";
+
+.publications-per-publisher-sorted-by-publisher {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: var(--oa-graph-block-background-color);
+  border-radius: 0.25rem;
+  padding: var(--content-spacer-m) var(--content-spacer-l);
+
+  @include media-breakpoint-down(lg) {
+    padding: var(--content-spacer-s);
+  }
+
+  .grafiekfilters {
+    width: 100%;
+    margin-left: auto;
+    margin-bottom: var(--content-spacer-m);
+    order: 0;
+    border-bottom: var(--content-spacer-m);
+
+    @include media-breakpoint-up(lg) {
+      max-width: 408px;
+    }
+
+    .dropdown-toggle {
+      width: 100%;
+      min-width: 100%;
+      text-align: left;
+      background-color: var(--oa-graph-block-tertiary-color);
+      background-image: url("../../assets/icons/dropdown-arrow.svg");
+      background-size: var(--content-spacer-s) var(--content-spacer-xs);
+      background-repeat: no-repeat;
+      background-position: calc(100% - var(--content-spacer-xs)) center;
+      font-weight: $font-weight-normal;
+      color: var(--oa-graph-block-text-color);
+      --dp-bs-btn-padding-x: var(--content-spacer-xs);
+      --dp-bs-btn-padding-y: var(--content-spacer-xs);
+
+      &:after {
+        display: none;
+      }
+    }
+
+    .dropdown-menu {
+      width: 100%;
+      padding: var(--content-spacer-s);
+    }
+
+    .item {
+      color: var(--oa-graph-block-text-blue);
+      font-size: 0.875rem;
+
+      &:hover {
+        color: var(--oa-publishing-deals-primary-color);
+        cursor: pointer;
+      }
+
+      &:not(:first-child) {
+        margin-top: 0.75rem;
+      }
+
+      label {
+        display: flex;
+        cursor: pointer;
+      }
+
+      input[type="checkbox"] {
+        display: none;
+
+        + label:before {
+          content: "";
+          border-radius: 2px;
+          display: inline-block;
+          margin-right: var(--content-spacer-xs);
+          vertical-align: middle;
+          color: transparent;
+          width: 24px;
+          height: 24px;
+          border: 1px solid var(--oa-graph-block-text-color);
+          text-align: center;
+          margin-top: calc(var(--content-spacer-xxs) * -1) ;
+          background-image: unset;
+          background-size: 12px 9px;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        &:checked + label:before {
+          border-color: var(--oa-graph-block-primary-color);
+          color: var(--oa-graph-block-primary-color);
+          background-image: url("../../assets/icons/graph-filter-icon-mark.svg");
+        }
+      }
+    }
+  }
+
+  .lijngrafiek {
+    order: 1;
+    margin-bottom: var(--content-spacer-l);
+
+    @include media-breakpoint-down(md) {
+      margin-left: 1.688rem;
+    }
+
+    .x-as line,
+    .y-as line {
+      stroke: var(--oa-graph-block-primary-color);
+      stroke-width: 1px;
+      stroke-linecap: square;
+    }
+
+    .x-as text,
+    .y-as text {
+      font-weight: 700;
+      font-style: normal;
+      fill: var(--oa-graph-block-primary-color);
+      font-size: 0.75rem;
+
+      @include media-breakpoint-down(md) {
+        font-size: 0.5rem;
+      }
+    }
+
+    .lijn {
+      polyline {
+        stroke: var(--oa-graph-block-fourth-color);
+        stroke-width: 1px;
+        stroke-linecap: round;
+      }
+
+      circle {
+        r: 4;
+        fill: var(--oa-graph-block-fourth-color);
+      }
+
+      &.actief {
+        polyline {
+          cursor: pointer;
+          stroke: var(--oa-graph-block-primary-color);
+          stroke-width: 2px;
+        }
+
+        circle {
+          r: 6;
+          fill: var(--oa-graph-block-primary-color);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    background-image: url("../../assets/images/open-access-logo.svg");
+    width: 143px;
+    height: 25px;
+    order: 2;
+    margin-left: auto;
+  }
+}
+
+.svg-ballon {
+  background-color: var(--oa-graph-block-text-color);
+  padding: var(--content-spacer-xxs) var(--content-spacer-xs);
+  color: white;
+  font-family: "effra", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin-left: 0.625rem;
+  margin-top: -1.25rem;
+  z-index: 10;
+}

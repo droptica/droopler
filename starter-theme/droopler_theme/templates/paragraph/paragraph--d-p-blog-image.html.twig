@@ -1,7 +1,7 @@
-{% embed 'droopler_theme:paragraph' %}
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
 
   {% block component_content %}
-    {% embed 'droopler_theme:paragraph-d-p-blog-image' with {
+    {% embed '@droopler_theme/d-p-blog-image/d-p-blog-image.twig' with {
       is_full_width: paragraph.fullWidthSwitch,
     } %}
       {% block content %}

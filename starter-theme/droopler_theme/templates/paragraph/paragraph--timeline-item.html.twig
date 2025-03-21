@@ -1,0 +1,11 @@
+{% embed '@droopler_theme/d-p-timeline-item/d-p-timeline-item.twig' %}
+  {% block date %}
+    {{ content.group_date|render|replace({'//': '<br>'})|raw }}
+  {% endblock %}
+  {% block heading %}
+    {{ content.group_heading }}
+  {% endblock %}
+  {% block description %}
+    {{ content.group_description }}
+  {% endblock %}
+{% endembed %}

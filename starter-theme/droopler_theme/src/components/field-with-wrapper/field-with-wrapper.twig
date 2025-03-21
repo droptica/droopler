@@ -1,0 +1,14 @@
+{% set base_class = field_base_class|default('field') %}
+{% set modifiers = field_modifiers|default(['name-' ~ field_name|clean_class, 'type-' ~ field_type|clean_class]) %}
+{% set label_tag = label_tag|default('div') %}
+
+<div{{ bem(base_class, (modifiers)) }}>
+  {% if label_hidden != '1' %}
+    <{{ label_tag }} {{ bem('label', [], base_class) }}>{{ label }}</{{ label_tag }}>
+  {% endif %}
+  <div {{ bem('items', [], base_class) }}>
+    {% for item in items %}
+      {{ item.content }}
+    {% endfor %}
+  </div>
+</div>

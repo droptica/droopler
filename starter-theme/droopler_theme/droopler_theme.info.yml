@@ -15,6 +15,7 @@ regions:
   header_secondary: Header Secondary
   header_primary: Header Primary
   admin_tabs: Admin tabs
+  above_content: Above content
   content: Content
   top_content: Top content
   aside: Aside
@@ -24,7 +25,8 @@ regions:
   footer_primary_fourth: Footer Primary Fourth
   footer_primary_fifth: Footer Primary Fifth
   footer_primary_sixth: Footer Primary Sixth
-  footer_secondary: Footer Secondary
+  footer_secondary: Footer Secondary First
+  footer_secondary_second: Footer Secondary Second
 
 libraries:
   - droopler_theme/style
@@ -35,4 +37,4 @@ ckeditor_stylesheets:
 
 components:
   namespaces:
-    droopler_theme: components
+    droopler_theme: src/components

@@ -1,0 +1,116 @@
+{{ attach_library('droopler_theme/table-publishing-deals') }}
+{{ attach_library('droopler_theme/table-responsive') }}
+
+{% set classes = [
+  'cols-' ~ header|length,
+  responsive ? 'responsive-enabled',
+  sticky ? 'sticky-enabled',
+  'table-publishing-deals',
+  'table',
+] %}
+<div class="table-responsive">
+
+  <table{{ attributes.addClass(classes) }}>
+    {% if caption_needed %}
+      <caption>
+        {% if caption %}
+          {{ caption }}
+        {% else %}
+          {{ title }}
+        {% endif %}
+        {% if (summary_element is not empty) %}
+          {{ summary_element }}
+        {% endif %}
+      </caption>
+    {% endif %}
+    {% if header %}
+      <thead>
+      <tr>
+        {% for key, column in header %}
+          {% if column.default_classes %}
+            {% set column_classes = [
+              'views-field',
+              'views-field-' ~ fields[key],
+            ] %}
+          {% endif %}
+        <th{{ column.attributes.addClass(column_classes).setAttribute('scope', 'col') }}>
+          {%- if column.wrapper_element -%}
+            <{{ column.wrapper_element }}>
+            {%- if column.url -%}
+              <a href="{{ column.url }}" title="{{ column.title }}"
+                 rel="nofollow">{{ column.content }}{{ column.sort_indicator }}</a>
+            {%- else -%}
+              {{ column.content }}{{ column.sort_indicator }}
+            {%- endif -%}
+            </{{ column.wrapper_element }}>
+          {%- else -%}
+            {%- if column.url -%}
+              <a href="{{ column.url }}" title="{{ column.title }}"
+                 rel="nofollow">{{ column.content }}{{ column.sort_indicator }}</a>
+            {%- else -%}
+              {{- column.content }}{{ column.sort_indicator }}
+            {%- endif -%}
+          {%- endif -%}
+          </th>
+        {% endfor %}
+      </tr>
+      </thead>
+    {% endif %}
+    <tbody>
+    {% set row_id = 1 %}
+    {% for row in rows %}
+      {% set row_attributes = row.attributes %}
+      {% set row_classes = [
+        'row-id-' ~ row_id,
+        row.columns.body ? 'row-body' : 'row-header',
+      ] %}
+      {% if row.columns.body %}
+        {% set row_classes = row_classes|merge([
+          'collapse',
+          'collapse-id-' ~ row_id,
+        ]) %}
+        {% set row_attributes = row_attributes.setAttribute('id', 'collapseId' ~ row_id) %}
+      {% endif %}
+
+      <tr{{ row_attributes.addClass(row_classes) }}>
+        {% for key, column in row.columns %}
+          {% if column.default_classes %}
+            {% set column_classes = [
+              'views-field'
+            ] %}
+            {% for field in column.fields %}
+              {% set column_classes = column_classes|merge(['views-field-' ~ field]) %}
+            {% endfor %}
+          {% endif %}
+        <td{{ column.attributes.addClass(column_classes) }}>
+          {% if key == 'nothing' %}
+            <button class="btn btn-primary btn-collapse" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseId{{ row_id }}" aria-expanded="false"
+                    aria-controls="collapseId{{ row_id }}">
+              {{ 'open'|t }}
+              <span class="icon"></span>
+            </button>
+          {% else %}
+            {%- if column.wrapper_element -%}
+              <{{ column.wrapper_element }}>
+              {% for content in column.content %}
+                {{ content.separator }}{{ content.field_output }}
+              {% endfor %}
+              </{{ column.wrapper_element }}>
+            {%- else -%}
+              {% for content in column.content %}
+                {{- content.separator }}{{ content.field_output -}}
+              {% endfor %}
+            {%- endif %}
+          {% endif %}
+          </td>
+        {% endfor %}
+      </tr>
+
+      {% if row.columns.body %}
+        {% set row_id = row_id + 1 %}
+      {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Template for a Node.
+ */
+#}
+
+{{ attach_library('droopler_theme/product-full') }}
+
+{# Include the node template from Radix theme and pass the page variable as TRUE. #}
+{% include "@radix/content/node.twig" with {
+  page: TRUE,
+} %}

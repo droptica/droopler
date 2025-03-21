@@ -1,0 +1,16 @@
+@import "../../scss/init";
+
+:root {
+  --subscribe-file-download-page-padding: var(--content-spacer-xl) 0 0;
+  --subscribe-file-download-page-text-align: center;
+  --subscribe-file-download-page-btn-margin: var(--content-spacer-xl) auto;
+}
+
+.d-p-subscribe-file-download-page {
+  padding: var(--subscribe-file-download-page-padding);
+  text-align: var(--subscribe-file-download-page-text-align);
+
+  .btn {
+    margin: var(--subscribe-file-download-page-btn-margin);
+  }
+}

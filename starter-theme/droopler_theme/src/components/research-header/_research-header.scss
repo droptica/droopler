@@ -1,0 +1,50 @@
+@import "../../scss/init";
+
+.research-header {
+  --divider-last-child-display: inline-block;
+
+  .d-p-banner {
+    &__content-column {
+      text-align: left;
+    }
+    .media-icon {
+      justify-content: flex-start;
+
+      img {
+        max-width: 390px;
+        width: 100%;
+      }
+    }
+  }
+
+  &__link {
+    min-width: 300px;
+    margin-right: auto;
+
+    @include media-breakpoint-up(md) {
+      margin-right: unset;
+      margin-left: auto;
+    }
+  }
+
+  .heading {
+    text-transform: unset;
+  }
+
+  .heading,
+  .body-text {
+    max-width: 786px;
+  }
+
+  .divider {
+    background-color: $primary;
+  }
+
+  .remove-divider {
+    .d-p-banner__content-column {
+      > .divider {
+        display: none;
+      }
+    }
+  }
+}

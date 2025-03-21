@@ -1,0 +1,39 @@
+@import "../../scss/init";
+
+.node-basic {
+  $root: &;
+
+  &__header {
+    background-color: var(--section-background-color);
+
+    #{$root}__author-attributes {
+      .body-text {
+        @include typography('body-xl');
+        color: $color-nestor;
+      }
+    }
+
+    #{$root}__category {
+      margin-top: var(--content-spacer-m);
+
+      a {
+        color: $color-paris;
+        background-color: $primary;
+        padding: var(--content-spacer-xs);
+        border-radius: 2px;
+      }
+    }
+
+    &--calendar-item {
+      #{$root}__author-attributes--blog-post {
+        display: none;
+      }
+    }
+
+    &--blog-post {
+      #{$root}__author-attributes--calendar-item {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{% embed "@droopler_theme/calendar/calendar-teaser/calendar-teaser.twig" %}
+  {% block date %}
+    {{ content.group_date }}
+  {% endblock %}
+
+  {% block content %}
+    {{ content.group_content }}
+  {% endblock %}
+
+  {% block category %}
+    {{ content.group_blog_category }}
+  {% endblock %}
+{% endembed %}

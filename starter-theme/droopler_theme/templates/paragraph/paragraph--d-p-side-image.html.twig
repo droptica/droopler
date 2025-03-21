@@ -1,7 +1,7 @@
-{% embed 'droopler_theme:paragraph' %}
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
 
   {% block component_content %}
-    {% embed 'droopler_theme:paragraph-d-p-side-image' with {
+    {% embed '@droopler_theme/d-p-side-image/d-p-side-image.twig' with {
       image_side: paragraph.imageSide,
       image_width: paragraph.imageWidth
     } %}

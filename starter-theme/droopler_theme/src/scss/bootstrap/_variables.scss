@@ -3,57 +3,58 @@
 // Prefix.
 $prefix: "dp-bs-" !default;
 
+// Grid row columns
+$grid-row-columns: 12;
+
 // Grid columns.
 $grid-gutter-width: 3rem !default;
 
 // Typography.
-$font-size-root: 14px !default;
+$font-size-root: 16px !default;
 $font-size-base: 1rem !default;
 $font-weight-bold: 700 !default;
 $font-family-sans-serif: "Inter", sans-serif !default;
+$font-montserrat: "Montserrat", sans-serif !default;
 $h1-font-size: $font-size-base * 3.44 !default;
 $h2-font-size: $font-size-base * 3 !default;
 $headings-font-weight: $font-weight-bold !default;
 
 // Links.
 $link-decoration: none;
+$link-color: #1262ed !default;
 
 // Colors.
-$color-agamemnon: #023047 !default; // Main, primary color, it changes backgrounds, menu and link color.
-$color-nestor: #8ecae6 !default; // Alt lines, em text. Bootstrap secondary.
-$color-achilles: #fb8500 !default;
+$color-agamemnon: #13121C !default; // Main, primary color, it changes backgrounds, menu and link color.
+$color-nestor: #515c65 !default; // Alt lines, em text. Bootstrap secondary.
+$color-achilles: #3D50FD !default;
 $color-odysseus: #fff !default;
 $color-diomedes: #d3d7d9 !default;
 $color-patroclus: #979797 !default;
 $color-thersites: #dee2e6 !default;
+$color-aegeus: #14274C !default;
 
 // The Trojans
 // To use: Chromius Euphemus Hector Demoleon
 $color-priam: #6a7173 !default;
-$color-hecuba: #727272 !default;
+$color-hecuba: #000 !default;
 $color-troilus: #4c4c4c !default;
-$color-cassandra: #232526 !default;
-$color-aeneas: #8e8a89 !default;
+$color-cassandra: #12110c !default;
+$color-aeneas: #484951 !default;
 $color-leto: #f1f1f1 !default;
-$color-serpedon: #39b54a !default;
+$color-serpedon: #566a76 !default;
 $color-acamas: #232526 !default;
+$color-hades: #e3e1f5 !default;
 
 // The accents
 // To use: Helen Iphis Clymene Phobos Deimos Apollo
-$color-hector: #d3d3d3 !default;
-$color-paris: #f5f7f9 !default;
+$color-hector: #f8f9fc !default;
+$color-paris: #F0F3FA !default;
 $color-iphis: #ababab !default;
+$color-clymene: #dadada !default;
 
 // Bootstrap variables overrides.
 $primary: $color-achilles !default;
-$secondary: $color-agamemnon !default;
-
-// $success: $green !default;
-// $info: $cyan !default;
-// $warning: $yellow !default;
-// $danger: $red !default;
-// $light: $gray-100 !default;
-// $dark: $gray-900 !default;
+$secondary: $color-paris !default;
 
 // Corners.
 $enable-rounded: true !default;
@@ -63,6 +64,11 @@ $btn-font-weight: $font-weight-bold !default;
 $btn-padding-y: 1rem !default;
 $btn-padding-x: 1rem !default;
 $btn-border-width: 2px !default;
+$btn-padding-y-lg: 1rem !default;
+$btn-padding-x-lg: 2rem !default;
+$btn-font-size-lg: 16px;
+$btn-padding-y-sm: 0.75rem !default;
+$btn-padding-x-sm: 1.125rem !default;
 
 // Paragraphs.
 $paragraph-margin-bottom: 0 !default;

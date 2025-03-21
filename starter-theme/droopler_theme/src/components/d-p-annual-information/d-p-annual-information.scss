@@ -1,0 +1,35 @@
+@import "../../scss/init";
+
+.d-p-annual-information {
+  display: flex;
+  align-items: center;
+  gap: var(--content-spacer-s);
+
+  &:not(:last-of-type) {
+    margin-bottom: var(--content-spacer-xs);
+  }
+
+  &__year {
+    @include typography("body-l-semibold");
+
+    width: 75px;
+    text-align: end;
+  }
+
+  &__value {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    max-width: 544px;
+  }
+
+  &__bar {
+    @include typography("body-m-bold");
+
+    height: 4px;
+    background-color: $primary;
+    width: 100%;
+  }
+}

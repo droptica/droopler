@@ -1,0 +1,11 @@
+{{ attach_library('droopler_theme/social-media-item') }}
+
+{% set base_class = social_media_item_base_class|default('social-media-item') %}
+
+<li {{ bem(base_class) }}>
+  <a {{ bem('icon', [], base_class) }} href="{{ item.link }}" target="_blank" aria-label="{{ item.name }}">
+    {% include "@droopler_theme/base/icon/icon.twig" with {
+      icon_name: item.name
+    }%}
+  </a>
+</li>

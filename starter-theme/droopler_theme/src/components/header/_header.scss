@@ -1,0 +1,60 @@
+@import "../../scss/init";
+
+:root {
+  --header-height-mobile: 5rem;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--header-height-mobile);
+  z-index: 100;
+  box-shadow: 0px 0px 96px -48px #00000066;
+
+  &__content-column {
+    display: flex;
+    align-items: center;
+
+    &--left {
+      .navbar-brand {
+        max-width: 12rem;
+
+        @include media-breakpoint-up(md) {
+          max-width: 15rem;
+        }
+
+        @include media-breakpoint-up(lg) {
+          max-width: 20rem;
+        }
+      }
+    }
+
+    &--right {
+      display: flex;
+      justify-content: end;
+    }
+
+    .navigation-desktop {
+      display: none;
+
+      @include media-breakpoint-up(lg) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--content-spacer-s);
+      }
+    }
+
+    .navigation-mobile {
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+    }
+
+    .hamburger {
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+    }
+  }
+}

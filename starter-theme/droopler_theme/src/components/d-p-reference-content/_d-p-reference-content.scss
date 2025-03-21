@@ -1,0 +1,60 @@
+@import "../../scss/init";
+
+$items-gap: var(--content-spacer-xs) / 2 ;
+
+.d-p-reference-content {
+  --media-img-width: 100%;
+
+  &__header-column,
+  &__cta-column {
+    text-align: center;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--content-spacer-xxml);
+  }
+
+  &__header {
+    .heading {
+      @include typography(h2);
+
+      margin-top: var(--content-spacer-m);
+    }
+  }
+
+  &__items-wrapper {
+    justify-content: center;
+    display: flex;
+    gap: var(--content-spacer-s);
+
+    & > article {
+      padding: 0 var(--content-spacer-none) var(--content-spacer-xs);
+    }
+
+    @include media-breakpoint-up(sm) {
+      & > article {
+        width: calc(50% - ($items-gap));
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      & > article {
+        width: calc(25% - ($items-gap));
+      }
+    }
+  }
+
+  &__cta {
+    --cta-width: auto;
+
+    .cta-links {
+      margin-top: var(--content-spacer-s);
+
+      a {
+        @include typography(montserrat-button);
+      }
+    }
+  }
+}

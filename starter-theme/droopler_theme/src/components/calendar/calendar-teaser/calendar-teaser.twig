@@ -1,0 +1,44 @@
+{{ attach_library('droopler_theme/calendar-teaser') }}
+
+{% set base_class = blog_teaser_base_class|default('calendar-teaser') %}
+{% set modifiers = blog_teaser_modifiers|default([]) %}
+{% set has_categories = block('category')|render|striptags()|trim is not empty %}
+
+<article {{ bem(base_class, modifiers, '', ['container']) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('row', [], base_class, ['row']) }}>
+
+    <div {{ bem('date', ['desktop'], base_class, ['col-md-3']) }}>
+      {% block date %}
+        {{ node.getCreatedTime()|date('j M Y') }}
+      {% endblock %}
+    </div>
+    <div {{ bem('content', ['blog-teaser'], base_class, ['col-md-9']) }}>
+      <div {{ bem('metadata', [], base_class) }}>
+        <div {{ bem('date', ['mobile'], base_class) }}>
+          {{ block('date') }}
+        </div>
+        {% if has_categories %}
+          <div {{ bem('category', [], base_class) }}>
+            {% block category %}
+            {% endblock %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div {{ bem('heading', [], base_class) }}>
+        <a href="{{ url }}">
+          {% include "@droopler_theme/base/heading/heading.twig" with {
+            heading_tag: 'h2',
+            label: label,
+          } %}
+        </a>
+      </div>
+
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+</article>

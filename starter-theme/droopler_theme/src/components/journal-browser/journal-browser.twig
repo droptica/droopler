@@ -1,0 +1,16 @@
+{{ attach_library('droopler_theme/journal-browser') }}
+
+{% set base_class = journal_browser_base_class|default('journal-browser') %}
+
+<div {{ bem(base_class) }}>
+  <div {{ bem('content', ['journal-browser'], base_class) }}>
+    <div {{ bem('content-left-side', [], base_class) }}>
+      {% block left_side %}
+      {% endblock %}
+    </div>
+    <div {{ bem('content-right-side', [], base_class) }}>
+      {% block right_side %}
+      {% endblock %}
+    </div>
+  </div>
+</div>

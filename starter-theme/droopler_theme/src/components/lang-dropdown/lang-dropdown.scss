@@ -1,0 +1,34 @@
+@import "../../scss/init";
+
+.language-switcher-language-url {
+  @include typography("regular-16-semibold");
+
+  @include media-breakpoint-up(lg) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dropdown {
+    text-transform: uppercase;
+
+    @include media-breakpoint-down(lg) {
+      display: flex;
+      justify-content: center;
+      margin: var(--content-spacer-s);
+    }
+
+    &-item:active {
+      background-color: $color-paris;
+    }
+  }
+
+  a {
+    color: var(--header-language-switcher-link-color);
+
+    &.is-active,
+    &:hover {
+      color: var(--header-language-switcher-link-color-hover);
+    }
+  }
+}

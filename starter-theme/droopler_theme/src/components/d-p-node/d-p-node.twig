@@ -1,0 +1,20 @@
+{{ attach_library('droopler_theme/d-p-node') }}
+
+{% set base_class = d_p_node_base_class|default('d-p-node') %}
+{% set modifiers = d_p_node_modifiers|default([]) %}
+{% set additional_classes = d_p_node_additional_classes|default([])|merge([
+  columns.column_count_desktop ? 'col-lg-' ~ 12 / columns.column_count_desktop,
+  columns.column_count_tablet ? 'col-sm-' ~ 12 / columns.column_count_tablet,
+  columns.column_count_mobile ? 'col-xs-' ~ 12 / columns.column_count_mobile,
+  'first-child-no-spacer',
+]) %}
+
+<div {{ bem(base_class, modifiers, '', additional_classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>

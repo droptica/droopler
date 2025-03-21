@@ -1,0 +1,21 @@
+{{ attach_library('droopler_theme/licence-data') }}
+
+{% set base_class = 'licence-data' %}
+{% set has_items = block('items')|render|striptags|trim is not empty %}
+
+{% if has_items %}
+  <div {{ bem(base_class, [], '', ['margin-top-small', 'margin-bottom-small']) }}>
+    <div {{ bem('heading', [], base_class) }}>
+      <h2 class="h3">{{ 'Licence data'|t }}</h2>
+    </div>
+    <div {{ bem('items', [], base_class) }}>
+      {% block items %}
+        {% for item in items %}
+          {% include "@droopler_theme/licence-data-item/licence-data-item.twig" with {
+            item
+          } %}
+        {% endfor %}
+      {% endblock %}
+    </div>
+  </div>
+{% endif %}

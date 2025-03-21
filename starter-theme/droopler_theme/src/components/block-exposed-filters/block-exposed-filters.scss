@@ -1,0 +1,49 @@
+@import "../../scss/init";
+
+.block-exposed-filters {
+  $root: &;
+  &.views-exposed-form {
+    width: 100%;
+
+    .select2 {
+      &-selection {
+        height: 100%;
+        @include typography('text-14-regular');
+
+        &--single {
+          border: none;
+          background-color: $color-paris;
+        }
+        &__rendered {
+          padding: var(--content-spacer-xxs) var(--content-spacer-s);
+          color: $color-agamemnon;
+        }
+
+        &__arrow {
+          width: 14px;
+          height: 14px;
+          aspect-ratio: 1;
+          mask-image: url("../../assets/images/arrow.svg");
+          mask-repeat: no-repeat;
+          mask-size: 14px;
+          background-color: $color-agamemnon;
+          right: 0;
+          top: 50%;
+          translate: -50% -50%;
+
+          b {
+            display: none;
+          }
+        }
+      }
+    }
+
+    #{$root}__content {
+      padding: 0;
+
+      .form {
+        display: block;
+      }
+    }
+  }
+}

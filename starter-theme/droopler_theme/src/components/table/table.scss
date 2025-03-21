@@ -1,0 +1,24 @@
+@import "../../scss/init";
+
+table {
+  font-size: 0.875rem;
+  min-width: 100%;
+
+  thead {
+    background-color: var(--oa-table-secondary-color);
+    color: var(--oa-table-thertiary-color);
+  }
+
+  tr {
+    border-bottom: 0.063rem solid var(--oa-table-quaternary-color);
+
+    th {
+      font-weight: $font-weight-semibold;
+    }
+
+    td,
+    th {
+      padding: var(--content-spacer-ml);
+    }
+  }
+}

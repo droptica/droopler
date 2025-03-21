@@ -1,0 +1,28 @@
+@import "../../scss/init";
+
+.page {
+  &__content-wrapper {
+    --heading-margin: 0 0 var(--content-spacer-s) 0;
+
+    margin: var(--content-spacer-l) var(--content-spacer-none);
+  }
+
+  &:has(.layout-builder__layout) {
+    overflow: hidden;
+  }
+
+  &__footer {
+    --divider-width: 100%;
+    --divider-last-child-display: block;
+    --divider-margin-top: var(--content-spacer-m);
+    --divider-margin-bottom: var(--content-spacer-ml);
+    --divider-background-color: #2C343B;
+    --divider-height: 1px;
+
+    background-color: var(--footer-primary-background-color);
+  }
+
+  &__header {
+    background-color: var(--section-background-color);
+  }
+}

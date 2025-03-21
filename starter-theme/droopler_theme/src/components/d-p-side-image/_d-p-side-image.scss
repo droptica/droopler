@@ -1,0 +1,79 @@
+@import "../../scss/init";
+
+$image-wide-offset: 160px;
+
+.d-p-side-image {
+  --media-width: 100%;
+  --media-height: 100%;
+  --cta-links-alignment: left;
+
+  position: relative;
+
+  &__background {
+    @include covering-media;
+
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    &--image-wide {
+      @include media-breakpoint-up(md) {
+        width: calc(50% + #{$image-wide-offset});
+      }
+    }
+
+    iframe {
+      position: static;
+      transform: unset;
+
+      @include media-breakpoint-down(md) {
+        aspect-ratio: 16/9;
+      }
+    }
+  }
+
+  &__content-column {
+    &--image-wide {
+      @include media-breakpoint-up(md) {
+        width: calc(41.6667% - #{$image-wide-offset});
+      }
+    }
+  }
+
+  .right {
+    @include media-breakpoint-up(md) {
+      left: unset;
+      right: 0;
+    }
+  }
+
+  .heading {
+    @include typography(h2);
+
+    margin-top: var(--content-spacer-s);
+  }
+
+  .subtitle {
+    @include typography(subtitle);
+
+    color: $color-priam;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+
+  .body-text {
+    margin-top: var(--content-spacer-m);
+  }
+
+  .cta-links {
+    --cta-width: auto;
+
+    margin-top: var(--content-spacer-m);
+
+    a {
+      @include typography(montserrat-button);
+    }
+  }
+}

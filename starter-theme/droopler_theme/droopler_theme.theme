@@ -5,9 +5,10 @@
  * Theme functions.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\facets\FacetInterface;
 
 // Include all files from the includes directory.
 $includes_path = __DIR__ . '/includes/helpers/*.inc';
@@ -26,6 +27,40 @@ foreach (glob($includes_path) as $filename) {
  */
 function droopler_theme_preprocess_html(&$variables) {
   $variables['attributes']['data-theme'] = 'theme-light';
+}
+
+function droopler_theme_preprocess_facets_result_item(&$variables) {
+  $filter_raw_value = $variables['raw_value'] ?? NULL;
+
+  if (!$filter_raw_value) {
+    return;
+  }
+
+  $facet = $variables['facet'] ?? NULL;
+  if (!$facet instanceof FacetInterface) {
+    return;
+  }
+
+  $facet_id = $facet->id();
+
+  if ($facet_id === 'product_categories_taxonomy_term_name_block') {
+    $taxonomy_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
+      'name' => $filter_raw_value
+    ]);
+
+    if (!empty($taxonomy_term)) {
+      $taxonomy_term = reset($taxonomy_term);
+      $taxonomy_term_icon_media = $taxonomy_term->hasField('field_icon') && !$taxonomy_term->get('field_icon')->isEmpty()
+        ? $taxonomy_term->get('field_icon')->entity
+        : NULL;
+
+      if ($taxonomy_term_icon_media) {
+        $view_builder = \Drupal::entityTypeManager()->getViewBuilder('media');
+        $variables['icon'] = $view_builder->view($taxonomy_term_icon_media, 'default'); // Choose the display mode
+      }
+    }
+  }
+
 }
 
 /**
@@ -68,7 +103,7 @@ function droopler_theme_form_system_theme_settings_alter(&$form, FormStateInterf
   ];
   foreach ($media_names as $name) {
     $form['social_media_settings']["link_$name"] = [
-      '#type' => 'url',
+      '#type' => $name === 'mail' ? 'email' : 'url',
       '#title' => t('@name link', ['@name' => ucfirst($name)]),
       '#default_value' => theme_get_setting("link_$name"),
     ];
@@ -87,3 +122,9 @@ function droopler_theme_form_system_theme_settings_alter(&$form, FormStateInterf
   ];
 }
 
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function droopler_theme_preprocess_menu(&$variables): void {
+  $variables['current_langcode'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+}

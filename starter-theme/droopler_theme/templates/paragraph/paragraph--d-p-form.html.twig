@@ -1,7 +1,7 @@
-{% embed 'droopler_theme:paragraph' %}
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
 
   {% block component_content %}
-    {% embed 'droopler_theme:paragraph-d-p-form' with { 'form_placement': paragraph.getFormLayout } %}
+    {% embed '@droopler_theme/d-p-form/d-p-form.twig' with { 'form_placement': paragraph.getFormLayout } %}
       {% block background %}
         {{ content.group_d_form_background }}
       {% endblock %}

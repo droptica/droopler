@@ -1,0 +1,41 @@
+{{ attach_library('droopler_theme/node-basic') }}
+
+{% set base_class = 'node-basic' %}
+
+{%
+  set classes = [
+  'node',
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  node.bundle|clean_class,
+  node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
+  'node-basic',
+  'margin-bottom-small',
+]|merge(utility_classes ? utility_classes : [])
+%}
+
+{%
+  set content_classes = [
+  'node__content',
+  'container',
+]|merge(content_utility_classes ? content_utility_classes : [])
+%}
+
+<article{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% block content %}
+    <header {{ bem('header', [], base_class, ['margin-bottom-small', 'padding-top-medium', 'padding-bottom-medium']) }} data-theme="theme-secondary">
+      <div {{ bem('header__content', [], base_class, ['container']) }}>
+        <h1>{{ label }}</h1>
+      </div>
+    </header>
+    <div{{ content_attributes.addClass(content_classes) }}>
+      {% block main_content %}
+        {{ content }}
+      {% endblock %}
+    </div>
+  {% endblock %}
+</article>

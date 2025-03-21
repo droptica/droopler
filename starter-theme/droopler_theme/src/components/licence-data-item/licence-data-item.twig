@@ -1,0 +1,32 @@
+{% set base_class = 'licence-data-item' %}
+
+<div {{ bem(base_class) }}>
+  <table>
+    <tbody>
+    {% if item.publisher %}
+      <tr>
+        <th>{{ 'Publisher'|t }}:</th>
+        <td>{{ item.publisher }}</td>
+      </tr>
+    {% endif %}
+    {% if item.deal_duration %}
+      <tr>
+        <th>{{ 'Deal duration'|t }}:</th>
+        <td>{{ item.deal_duration }}</td>
+      </tr>
+    {% endif %}
+    {% if item.deals %}
+      {{ item.deals }}
+    {% endif %}
+    {% if item.status_licence %}
+      <tr>
+        <th>{{ 'Status licence'|t }}:</th>
+        <td>{{ item.status_licence }}</td>
+      </tr>
+    {% endif %}
+    </tbody>
+  </table>
+  {% if item.read_more %}
+    <a href="{{ item.read_more }}" {{ bem('read-more', [], base_class, ['btn', 'btn-sm', 'btn-primary', 'my-4']) }}>{{ 'Read more'|t }}</a>
+  {% endif %}
+</div>

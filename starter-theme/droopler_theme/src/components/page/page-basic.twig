@@ -1,0 +1,19 @@
+{% embed  "@droopler_theme/page/page.twig" %}
+  {% block content %}
+    <div {{ bem('content', [], base_class, ) }}>
+      <div {{ bem('content-wrapper', [], base_class) }}>
+        <header {{ bem('header', [], base_class, ['margin-bottom-small', 'padding-top-medium', 'padding-bottom-medium']) }} data-theme="theme-secondary">
+          <div {{ bem('header__content', [], base_class, ['container']) }}>
+            {% include '@droopler_theme/base/heading/heading.twig' with {
+              heading_tag: 'h1',
+              label: page['#title'],
+            } %}
+          </div>
+        </header>
+        <div {{ bem('content-content', [], base_class, ['container']) }}>
+          {{ page.content }}
+        </div>
+      </div>
+    </div>
+  {% endblock content %}
+{% endembed %}

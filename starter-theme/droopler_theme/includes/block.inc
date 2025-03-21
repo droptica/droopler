@@ -5,7 +5,7 @@
  * Theme and preprocess functions for blocks.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use Drupal\block_content\BlockContentInterface;
 use Drupal\Core\Url;
@@ -30,7 +30,7 @@ function droopler_theme_preprocess_block(array &$variables): void {
       if (!empty($social_media_link)) {
         $links[] = [
           'name' => $name,
-          'link' => $social_media_link,
+          'link' => $name === 'mail' ? 'mailto:' . $social_media_link : $social_media_link,
         ];
       }
     }
@@ -147,7 +147,8 @@ function droopler_theme_preprocess_block(array &$variables): void {
           '#cache' => [
             'contexts' => ['url.query_args:f'],
           ],
-        ];
+
+      ];
     }
   }
 }

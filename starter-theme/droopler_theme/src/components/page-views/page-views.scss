@@ -1,0 +1,91 @@
+@import "../../scss/init";
+
+.page-views {
+  --overlay-background-color: var(--navigation-mobile-overlay-background-color);
+  --overlay-opacity: 0.2;
+
+  &__overlay {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 90vw;
+    height: 100%;
+    opacity: 0;
+    margin-left: auto;
+
+    .navigation-bar-visible & {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+
+  &__filters {
+    align-items: flex-end;
+
+    .form-item-sort-by {
+      max-width: 170px;
+      margin-left: auto;
+    }
+  }
+
+  &__content {
+    margin-top: var(--content-spacer-m);
+  }
+
+  &__content-column {
+    .view-grid {
+      --dp-bs-gutter-x: var(--content-spacer-s);
+    }
+
+    &--aside {
+      transition: translate 0.5s;
+
+      @include media-breakpoint-down(lg) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 85%;
+        height: 100%;
+        translate: -100% 0;
+        z-index: 503;
+        background-color: $white;
+        padding: 1.5rem 1.5rem;
+      }
+
+      .navigation-bar-visible & {
+        translate: 0 0;
+      }
+    }
+  }
+
+  &__count-products {
+    @include typography('text-12-regular');
+
+    @include media-breakpoint-down(lg) {
+      display: none;
+    }
+  }
+
+  &__count {
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+
+  &__top-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .form-select {
+      @include media-breakpoint-down(md) {
+        min-width: 200px;
+        width: calc(100% - 4rem);
+      }
+    }
+  }
+}

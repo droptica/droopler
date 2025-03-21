@@ -1,0 +1,13 @@
+{{ attach_library('droopler_theme/tiles-gallery') }}
+
+{% set base_class = tiles_gallery_base_class|default('tiles-gallery') %}
+{% set modifiers = tiles_gallery_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  <div {{ bem('sizer', [], base_class) }}></div>
+
+  <div {{ bem('items', [], base_class) }}>
+    {% block items %}
+    {% endblock %}
+  </div>
+</div>

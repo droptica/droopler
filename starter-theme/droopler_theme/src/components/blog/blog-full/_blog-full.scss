@@ -1,0 +1,89 @@
+@import "../../../scss/init";
+
+.blog-full {
+  --media-width: 100%;
+  --media-height: 100%;
+
+  &__header {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+
+    @include media-breakpoint-up(lg) {
+      min-height: 700px;
+    }
+  }
+
+  &__header-content {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: var(--content-spacer-m) 0;
+
+    @include media-breakpoint-down(lg) {
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  &__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    .media {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__header-content-column {
+    text-align: center;
+  }
+
+  .heading {
+    @include heading(4);
+
+    margin-top: var(--content-spacer-m);
+    letter-spacing: 1px;
+
+    @include media-breakpoint-up(lg) {
+      @include heading(2);
+    }
+  }
+
+  &__category {
+    margin-top: var(--content-spacer-m);
+    display: none;
+
+    &:has(a) {
+      display: block;
+    }
+
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__background-media {
+    @include covering-media;
+  }
+
+  &__background-overlay {
+    @include filling-absolute;
+  }
+
+  &__blog-sections {
+    margin-block: var(--content-spacer-l);
+
+    & img {
+      margin: var(--content-spacer-l) auto;
+    }
+  }
+}

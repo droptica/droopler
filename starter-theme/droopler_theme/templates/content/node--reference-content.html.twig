@@ -1,6 +1,15 @@
-{% embed "droopler_theme:reference-content" %}
+
+{% embed "@droopler_theme/reference-content/reference-content.twig" %}
   {% block image %}
-    {{ content.group_image }}
+    {% if content.group_image.field_teaser_media_image is defined %}
+      {{ content.group_image.field_teaser_media_image[0] }}
+    {% else %}
+      {{ content.group_image.field_d_product_media[0] }}
+    {% endif %}
+  {% endblock %}
+
+  {% block date %}
+    {{ node.createdTime|format_date('node_format') }}
   {% endblock %}
 
   {% block content %}

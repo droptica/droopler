@@ -1,11 +1,10 @@
 <?php
 
 /**
- * @file
- * Theme and preprocess functions for links.
+ * @file Theme and preprocess functions for links.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use Drupal\node\NodeInterface;
 
@@ -29,9 +28,6 @@ function droopler_theme_node_links_alter(array &$links, NodeInterface $node, arr
   }
 }
 
-/**
- * Implements hook_preprocess_file_link().
- */
 function droopler_theme_preprocess_file_link(array &$variables): void {
   $file = $variables['file'];
   if ($file->_referringItem->getParent()?->getName() === 'field_media_file') {

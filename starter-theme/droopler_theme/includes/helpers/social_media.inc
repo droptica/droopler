@@ -5,7 +5,7 @@
  * Theme social media helper functions.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /**
  * Get social media names.
@@ -21,5 +21,7 @@ function _get_social_media_names(): array {
     'instagram',
     'linkedin',
     'dribbble',
+    'rss',
+    'mail'
   ];
 }

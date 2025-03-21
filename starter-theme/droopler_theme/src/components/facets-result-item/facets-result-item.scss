@@ -1,0 +1,32 @@
+@import "../../scss/init";
+
+.facets-result-item {
+  display: flex;
+  align-items: center;
+
+  &__status {
+    display: flex;
+
+    &::before {
+      content: "";
+      mask-image: url("../../assets/icons/x.svg");
+      mask-size: 20px;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      background-color: white;
+    }
+  }
+
+  &__count {
+    margin-left: auto;
+  }
+
+  &__value {
+    text-transform: capitalize;
+  }
+
+  &__icon {
+    margin-right: var(--content-spacer-xs);
+  }
+}

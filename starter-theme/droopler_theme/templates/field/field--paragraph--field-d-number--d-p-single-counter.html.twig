@@ -1,5 +1,5 @@
 {% for item in items %}
-  {% include "droopler_theme:counter" with {
+  {% include "@droopler_theme/counter/counter.twig" with {
     content: item.content
   }%}
 {% endfor %}

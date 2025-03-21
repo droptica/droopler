@@ -1,0 +1,11 @@
+{{ attach_library('droopler_theme/media') }}
+
+{% set base_class = media_base_class|default('media') %}
+{% set modifiers = media_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers) }}>
+  {{ title_suffix.contextual_links }}
+
+  {% block content %}
+  {% endblock %}
+</div>

@@ -1,7 +1,7 @@
-{% embed 'droopler_theme:paragraph' %}
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
 
   {% block component_content %}
-    {% embed 'droopler_theme:paragraph-d-p-reference-content' %}
+    {% embed '@droopler_theme/d-p-reference-content/d-p-reference-content.twig' %}
       {% block header %}
         {{ content.group_header }}
       {% endblock %}

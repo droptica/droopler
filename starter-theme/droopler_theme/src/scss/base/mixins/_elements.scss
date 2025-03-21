@@ -16,23 +16,15 @@
 }
 
 @mixin filter-icon {
-  border: var(--mobile-filter-border);
-
   &::after {
     position: absolute;
     content: "";
     mask-image: url("../../assets/icons/funnel.svg");
-    background-color: var(--mobile-filter-icon-color);
+    background-color: $color-odysseus;
     mask-repeat: no-repeat;
     mask-position: right top 0;
-    width: 1.875rem;
-    height: 1.875rem;
+    width: 1.4rem;
+    height: 1.4rem;
     right: 0.9375rem;
-  }
-
-  &:hover {
-    &::after {
-      background-color: var(--mobile-filter-icon-color-hover);
-    }
   }
 }

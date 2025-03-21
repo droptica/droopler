@@ -1,0 +1,59 @@
+@import "../../scss/init";
+
+.reference-content {
+  padding: var(--content-spacer-none);
+  display: flex;
+  flex-direction: column;
+  
+  &__teaser {
+    box-shadow: 0px 12px 16px -4px #17171C14;
+    border: 1px solid #E2E5E9;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: var(--reference-content-background-color);
+    padding: var(--content-spacer-xl) var(--content-spacer-m) var(--content-spacer-m);
+    color: var(--reference-content-text-color);
+    gap: var(--content-spacer-m);
+  }
+
+  &__date {
+    @include typography(subtitle);
+
+    color: $color-priam;
+    text-transform: uppercase;
+  }
+
+  &__image {
+    .media {
+      width: var(--media-img-width);
+      height: var(--media-img-height);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+
+  .heading {
+    @include typography(h5);
+
+    --heading-color: var(--reference-content-text-color);
+  }
+
+  .body-text {
+    --body-text-color: var(--reference-content-text-color);
+  }
+
+  .cta-links {
+    margin-top: auto;
+
+    a {
+      @include typography(montserrat-button-sm);
+    }
+  }
+}

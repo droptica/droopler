@@ -1,0 +1,30 @@
+{{ attach_library('droopler_theme/d-p-timeline-item') }}
+
+{% set base_class = d_p_timeline_base_class|default('d-p-timeline-item') %}
+{% set modifiers = d_p_timeline_modifiers|default([]) %}
+{% set additional_classes = additional_classes|default([]) %}
+{% set component_attributes = component_attributes|default([]) %}
+
+<div {{ bem(base_class, modifiers, '', additional_classes, component_attributes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', ['items'], base_class) }}>
+      <div {{ bem('date', [], base_class) }}>
+        {% block date %}
+        {% endblock %}
+      </div>
+    <div {{ bem('text', [], base_class) }}>
+
+      <div {{ bem('heading', [], base_class, ['first-child-no-spacer']) }}>
+        {% block heading %}
+        {% endblock %}
+      </div>
+      <div {{ bem('description', [], base_class) }}>
+        {% block description %}
+        {% endblock %}
+      </div>
+    </div>
+
+  </div>
+</div>

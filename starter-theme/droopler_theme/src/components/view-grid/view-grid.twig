@@ -1,0 +1,12 @@
+{{ attach_library('droopler_theme/view-grid') }}
+
+{% set base_class = view_grid_base_class|default('view-grid') %}
+{% set modifiers = view_grid_modifiers|default([]) %}
+
+<div {{ bem(base_class, modifiers, '', ['row']) }}>
+  {% for row in rows %}
+    <div {{ bem('item', [], base_class, ['col-md-6', 'col-lg-4']) }} >
+      {{ row.content }}
+    </div>
+  {% endfor %}
+</div>

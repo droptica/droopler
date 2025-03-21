@@ -1,0 +1,20 @@
+{{ attach_library('droopler_theme/d-p-annual-information') }}
+
+{% set base_class = d_p_annual_information_base_class|default('d-p-annual-information') %}
+{% set modifiers = d_p_annual_information_modifiers|default([]) %}
+
+<section {{ bem(base_class, (modifiers)) }}>
+  <div {{ bem('year', [], base_class) }}>
+    {% block year %}
+    {% endblock %}
+  </div>
+
+  <div {{ bem('value', [], base_class) }}>
+    <div {{ bem('data', [], base_class) }}>
+      {% block data %}
+      {% endblock %}
+    </div>
+    <div {{ bem('bar', [], base_class) }}>
+    </div>
+  </div>
+</section>

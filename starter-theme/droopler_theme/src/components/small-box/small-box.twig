@@ -1,0 +1,37 @@
+{{ attach_library('droopler_theme/small-box') }}
+
+{% set base_class = small_box_base_class|default('small-box') %}
+{% set modifiers = small_box_modifiers|default([]) %}
+{% set additional_classes = small_box_additional_classes|default([]) %}
+
+{% set title = small_box_title|default('') %}
+{% set description = small_box_description|default('') %}
+{% set link_to_content = small_box_link_to_content|default('') %}
+
+<div {{ bem(base_class, modifiers, '', additional_classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    <div {{ bem('image', [], base_class) }}>
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    {% if title or description %}
+      <div {{ bem('texts', [], base_class) }}>
+        <div {{ bem('title', [], base_class) }}>
+          <a {{ bem('link', [], base_class) }} href="{{ link_to_content }}">
+            <h2 {{ bem('heading', [], base_class) }}>
+              {{ title }}
+            </h2>
+          </a>
+        </div>
+
+        <div {{ bem('description', [], base_class) }}>
+          <a {{ bem('link', [], base_class) }} href="{{ link_to_content }}">{{ description }}</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,192 @@
+@import "../../scss/init";
+
+.publications-per-publisher-sorted-by-year {
+  text-align: left;
+  margin: 0 0 2em;
+  overflow: hidden;
+  background: var(--oa-graph-block-background-color);
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 0.25rem;
+  padding: var(--content-spacer-m) var(--content-spacer-l);
+
+  @include media-breakpoint-down(lg) {
+    padding: var(--content-spacer-s);
+  }
+
+  label {
+    order: 0;
+    width: 100%;
+  }
+
+  .graph_inner {
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--content-spacer-xs);
+
+    @include media-breakpoint-down(lg) {
+      gap: var(--content-spacer-s);
+    }
+  }
+
+  select {
+    order: 1;
+    width: 100%;
+    margin-left: auto;
+    max-width: 229px;
+    padding: var(--content-spacer-xs);
+    border: none;
+    border-radius: 8px;
+    background-color: var(--oa-graph-block-tertiary-color);
+    appearance:none;
+    background-image: url("../../assets/icons/dropdown-arrow.svg");
+    background-size: var(--content-spacer-s) var(--content-spacer-xs);
+    background-repeat: no-repeat;
+    background-position: calc(100% - var(--content-spacer-xs)) center;
+
+    @include media-breakpoint-down(lg) {
+      max-width: 100%;
+      margin-bottom: var(--content-spacer-m);
+    }
+  }
+
+  .total_wrapper {
+    margin-top: var(--content-spacer-ml);
+    order: 3;
+    display: flex;
+    background-color: var(--oa-graph-block-primary-color);
+    padding: var(--content-spacer-xs) var(--content-spacer-s);
+    border-radius: 4px;
+    gap: var(--content-spacer-xs);
+
+    h2,
+    h3 {
+      color: var(--oa-graph-block-tertiary-color);
+      font-size: 2rem;
+      margin: 0;
+
+      @include media-breakpoint-down(lg) {
+        font-size: 1rem;
+      }
+    }
+
+    .total {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .rij {
+    width: 100%;
+    position: relative;
+    opacity: 0;
+
+    &.hello {
+      opacity: 1;
+    }
+
+    &.bye {
+      opacity: 0;
+    }
+  }
+
+  .row {
+    align-items: center;
+  }
+
+  .publisher {
+    width: 33%;
+    font-weight: $font-weight-semibold;
+    font-size: 1rem;
+    color: var(--oa-graph-block-text-blue);
+
+    @include media-breakpoint-down(lg) {
+      font-size: 0.75rem;
+      font-weight: $font-weight-normal;
+      width: 50%;
+    }
+  }
+
+  .publications {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 67%;
+    padding-left: 1em;
+
+    @include media-breakpoint-down(lg) {
+      width: 50%;
+    }
+
+    .bar {
+      background-color: var(--oa-graph-block-primary-color);
+      height: 0.25rem;
+
+      &-label {
+        font-size: 0.875rem;
+        font-weight: $font-weight-semibold;
+        color: var(--oa-graph-block-text-blue);
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+
+  .notfound {
+    font-size: 2rem;
+    font-weight: $font-weight-semibold;
+    color: var(--oa-graph-block-primary-color);
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    background-image: url("../../assets/images/open-access-logo.svg");
+    width: 143px;
+    height: 25px;
+    order: 4;
+    margin-left: auto;
+    margin-top: auto;
+  }
+}
+
+ul.quicktabs-tabs {
+  margin: var(--content-spacer-s) 0 0;
+  text-align: left;
+  padding-left: 0;
+
+  li {
+    display: inline-block;
+    margin: 0;
+
+    a {
+      background: transparent;
+      padding: var(--content-spacer-s) var(--content-spacer-m);
+      color: var(--oa-graph-block-text-color);
+      display: block;
+      border-radius: var(--content-spacer-xs) var(--content-spacer-xs) 0 0;
+      cursor: pointer;
+
+      @include media-breakpoint-down(lg) {
+        padding: var(--content-spacer-xs) var(--content-spacer-s);
+      }
+
+      &:hover {
+        color: $color-agamemnon;
+        background: $color-paris;
+      }
+    }
+
+    &.active a {
+      background: var(--oa-graph-block-primary-color);
+      color: var(--oa-graph-block-tertiary-color);
+    }
+  }
+
+  #selectUitgevers {
+    width: 32%;
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: var(--oa-graph-block-primary-color);
+  }
+}

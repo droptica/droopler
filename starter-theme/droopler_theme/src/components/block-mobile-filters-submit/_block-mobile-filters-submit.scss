@@ -1,0 +1,13 @@
+@import "../../scss/init";
+
+.block-mobile-filters-submit {
+  &__content {
+    text-align: center;
+  }
+
+  .mobile-filter-close {
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+}

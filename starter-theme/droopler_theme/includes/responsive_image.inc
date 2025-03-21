@@ -1,11 +1,10 @@
 <?php
 
 /**
- * @file
- * Theme and preprocess functions for responsive image.
+ * @file Theme and preprocess functions for responsive image.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use Drupal\Core\Site\Settings;
 

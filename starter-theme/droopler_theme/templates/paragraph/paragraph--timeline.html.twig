@@ -1,0 +1,24 @@
+{% embed '@droopler_theme/templates/paragraph/paragraph.html.twig' %}
+
+  {% block component_content %}
+    {% embed '@droopler_theme/d-p-timeline/d-p-timeline.twig' %}
+      {% block heading %}
+        {{ content.group_timeline_header }}
+      {% endblock %}
+      {% block description %}
+        {{ content.group_timeline_description }}
+      {% endblock %}
+      {% block content %}
+        {{ content.group_timeline_items }}
+      {% endblock %}
+      {% block cta %}
+        {{ content.group_call_to_action }}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+
+  {% block content %}
+    {{ content|without('group_timeline_header', 'group_timeline_description', 'group_timeline_items', 'group_call_to_action') }}
+  {% endblock %}
+
+{% endembed %}

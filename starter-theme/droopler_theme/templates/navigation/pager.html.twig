@@ -4,7 +4,9 @@
  * Template for a pager.
  */
 #}
-{% include 'radix:pagination' with {
+{{ attach_library('droopler_theme/pagination') }}
+
+{% include '@radix/pagination/pagination.twig' with {
   items: items,
   alignment: 'center',
   utility_classes: 'mt-5'

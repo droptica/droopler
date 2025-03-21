@@ -1,0 +1,14 @@
+{{ attach_library('droopler_theme/block-mobile-filters-submit') }}
+
+{% set base_class = block_mobile_filters_submit_base_class|default('block-mobile-filters-submit') %}
+{% set modifiers = block_mobile_filters_submit_modifiers|default([]) %}
+
+<div {{ bem(base_class, (modifiers)) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  <div {{ bem('content', [], base_class, ['mt-4']) }}>
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+</div>

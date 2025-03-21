@@ -1,0 +1,53 @@
+{{ attach_library('droopler_theme/d-p-subscribe-file') }}
+
+{% set base_class = d_p_subscribe_file_base_class|default('d-p-subscribe-file') %}
+{% set modifiers = d_p_subscribe_file_modifiers|default([]) %}
+
+<section {{ bem(base_class, (modifiers)) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <div {{ bem('background', [], base_class) }}>
+    <div {{ bem('background-media', [], base_class) }}>
+      {% block background %}
+      {% endblock %}
+    </div>
+
+    <div {{ bem('background-overlay', [], base_class) }}>
+      {% include '@droopler_theme/base/overlay/overlay.twig'%}
+    </div>
+  </div>
+
+  <div {{ bem('content', [], base_class, ['container']) }}>
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', ['content'], base_class, [
+        'col-12',
+        'first-child-no-spacer'
+      ]) }}>
+        {% block content_header %}
+        {% endblock %}
+
+        {% include '@droopler_theme/base/divider/divider.twig' %}
+
+        {% block content %}
+        {% endblock %}
+      </div>
+
+      <div {{ bem('content-column', ['form'], base_class, [
+        'col-12',
+        'offset-lg-1',
+        'col-lg-10',
+      ]) }}>
+        {% block form %}
+        {% endblock %}
+      </div>
+
+      <div {{ bem('content-column', ['additional-info'], base_class, [
+        'col-12',
+      ]) }}>
+        {% block additional_info %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>

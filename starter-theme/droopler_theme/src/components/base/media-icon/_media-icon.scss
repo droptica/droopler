@@ -1,0 +1,15 @@
+:root {
+  --media-icon-display: flex;
+  --media-icon-align-items: center;
+  --media-icon-justify-content: center;
+}
+
+.media-icon {
+  display: var(--media-icon-display);
+  align-items: var(--media-icon-align-items);
+  justify-content: var(--media-icon-justify-content);
+
+  .text-center > & img {
+    margin-inline: auto;
+  }
+}

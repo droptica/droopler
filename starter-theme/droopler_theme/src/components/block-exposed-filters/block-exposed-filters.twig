@@ -1,0 +1,23 @@
+{{ attach_library('droopler_theme/select2') }}
+{{ attach_library('droopler_theme/block-exposed-filters') }}
+
+{% set base_class = block_exposed_filters_base_class|default('block-exposed-filters') %}
+{% set modifiers = block_exposed_filters_modifiers|default([]) %}
+
+<div {{ bem(base_class) }} data-select2>
+  {{ title_prefix }}
+
+  {% if label %}
+    {% include '@droopler_theme/base/heading/heading.twig' with {
+      heading_tag: 'h2',
+      label: label
+    } %}
+  {% endif %}
+
+  {{ title_suffix }}
+
+  <div {{ bem('content', [], base_class) }}>
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>

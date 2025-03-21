@@ -43,7 +43,12 @@ block-mobile-filters:
 masonry:
   version: VERSION
   js:
-    /libraries/masonry/dist/masonry.pkgd.min.js: {}
+    /libraries/masonry/dist/masonry.pkgd.min.js: { external: true, minified: true }
+    /libraries/imagesloaded/imagesloaded.pkgd.min.js: { external: true, minified: true }
+
+tiles-gallery:
+  dependencies:
+   - droopler_theme/masonry
 
 slick:
   remote: http://kenwheeler.github.io/slick/
@@ -53,10 +58,10 @@ slick:
     gpl-compatible: false
     url: https://github.com/kenwheeler/slick/blob/master/LICENSE
   js:
-    /libraries/slick/slick/slick.min.js: { minified: true }
+    /libraries/slick-carousel/slick/slick.min.js: { minified: true }
   css:
     component:
-      /libraries/slick/slick/slick.css: { }
+      /libraries/slick-carousel/slick/slick.css: { }
 
 countup:
   remote: http://github.com/inorganik/countUp.js

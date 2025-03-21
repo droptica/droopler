@@ -1,7 +1,6 @@
 @import "base/fonts";
 @import "init";
 @import "bootstrap/bootstrap";
-@import "base/buttons";
 @import "base/themes";
 @import "base/margins";
 @import "base/paddings";
@@ -22,6 +21,22 @@ section {
   }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+}
+
+@each $justify in start, center, end {
+  .justify-items-#{$justify} {
+    justify-items: #{$justify};
+  }
+}
+
+
 .frontend-editing {
   &__action {
     &--after,
@@ -30,16 +45,13 @@ section {
 
       svg {
         background-color: $color-agamemnon;
+        border-radius: 100%;
+        border: 2px solid $color-paris;
+
+        path {
+          stroke: $color-paris;
+        }
       }
     }
   }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--heading-color);
 }

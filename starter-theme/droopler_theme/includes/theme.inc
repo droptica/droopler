@@ -5,59 +5,53 @@
  * Custom theme hooks.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 
 /**
- * Implements hook_library_info_alter().
+ * Implements hook_library_info_build().
  *
- *  Automatically creates components libraries (Not visible in theme's
- *  libraries.yml file). You can directly use the component name as a library,
- *  e.g.: {{ attach_library('droopler_theme/block') }}.
+ * Automatically creates components libraries (Not visible in theme's
+ * libraries.yml file). You can directly use the component name as a library,
+ * e.g.: {{ attach_library('droopler_theme/block') }}.
  */
-function droopler_theme_library_info_alter(&$libraries, $extension) {
-    if ($extension == 'droopler_theme') {
-        $theme_handler = \Drupal::service('theme_handler');
-        $theme_path = $theme_handler->getTheme('droopler_theme')->getPath();
+function droopler_theme_library_info_build() {
+  $theme_handler = \Drupal::service('theme_handler');
+  $theme_path = $theme_handler->getTheme('droopler_theme')->getPath();
 
-        $extensions = ['css', 'js'];
-        $directory = $theme_path . '/components';
-        $extensions = array_map('preg_quote', $extensions);
-        $extensions = implode('|', $extensions);
+  $extensions = ['css', 'js'];
+  $directory = $theme_path . '/build/components';
+  $extensions = array_map('preg_quote', $extensions);
+  $extensions = implode('|', $extensions);
 
-        \Drupal::logger('sandbox')->info('droopler_theme_library_info_build');
-        if (!is_dir($directory)) {
-            return [];
-        }
+  if (!is_dir($directory)) {
+    return [];
+  }
 
-        $file_scan = \Drupal::service('file_system')->scanDirectory(
-          $directory,
-          "#^(?!.*\/src\/).*\.(?:{$extensions})$#"
-        );
-        foreach ($file_scan as $file) {
-            $parts = explode('.', $file->filename);
-            $extension = end($parts);
-            switch ($extension) {
-                case 'css':
-                    $libraries[$file->name][$extension] = [
-                      'component' => [
-                        '/' . $file->uri => [],
-                      ],
-                    ];
-                    break;
+  $file_scan = \Drupal::service('file_system')->scanDirectory($directory, "/{$extensions}$/");
+  $libraries = [];
+  foreach ($file_scan as $file) {
+    $parts = explode('.', $file->filename);
+    $extension = end($parts);
+    switch ($extension) {
+      case 'css':
+        $libraries[$file->name][$extension] = [
+          'component' => [
+            '/' . $file->uri => [],
+          ],
+        ];
+        break;
 
-                case 'js':
-                    $libraries[$file->name][$extension] = [
-                      '/' . $file->uri => [],
-                    ];
-                    break;
-            }
-        }
+      case 'js':
+        $libraries[$file->name][$extension] = [
+          '/' . $file->uri => [],
+        ];
+        break;
     }
-
-    return $libraries;
+  }
+  return $libraries;
 }
 
 /**

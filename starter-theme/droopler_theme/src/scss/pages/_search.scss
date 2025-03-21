@@ -1,6 +1,6 @@
 .path-search {
-  #search-form {
-    margin-bottom: var(--content-spacer-s);
+  .search-form {
+    --cta-width: auto;
 
     @include media-breakpoint-up(sm) {
       > .container-inline {
@@ -11,35 +11,47 @@
           flex: 1;
           margin-bottom: 0;
           margin-right: 10px;
+
+          input {
+            padding: 1rem 1.5rem;
+          }
         }
 
         .form-submit {
-          margin-top: 30px;
+          margin-top: 28px;
         }
       }
     }
-  }
 
-  .page {
-    &__content {
-      ul,
-      ol {
-        padding-left: 1rem;
-      }
+    + h2 {
+      margin-bottom: var(--content-spacer-m);
+      margin-top: var(--content-spacer-l);
+    }
 
-      ul {
-        li {
-          margin: 0;
-          padding: 0.2em 0.5em 0 0;
+    ~ ul,
+    ~ ol {
+      padding-left: 1rem;
+
+      li {
+        &::marker {
+          font-size: 1.5rem;
+          color: var(--dp-bs-link-color);
         }
       }
+    }
 
-      ol {
-        li:not(:last-child) {
-          border-bottom: 1px solid var(--search-results-list-item-border);
-          padding-bottom: var(--content-spacer-s);
-          margin-bottom: var(--content-spacer-s);
-        }
+    ~ ul {
+      li {
+        margin: 0;
+        padding: 0.2em 0.5em 0 0;
+      }
+    }
+
+    ~ ol {
+      li:not(:last-child) {
+        border-bottom: 1px solid var(--search-results-list-item-border);
+        padding-bottom: var(--content-spacer-s);
+        margin-bottom: var(--content-spacer-s);
       }
     }
   }

@@ -1,0 +1,28 @@
+{% extends '@droopler_theme/page/page.twig' %}
+
+{% block content %}
+  {% embed '@droopler_theme/d-p-text-paged/d-p-text-paged.twig' with {
+    additional_classes: [
+      'margin-bottom-none',
+      'margin-top-none',
+      'padding-bottom-medium',
+      'padding-top-medium',
+    ],
+    component_attributes: {
+      'data-theme': 'theme-primary',
+    }
+  } %}
+    {% block header %}
+      {% include '@droopler_theme/base/heading/heading.twig' with {
+        heading_tag: 'h2',
+        label: page['#title'],
+      }%}
+    {% endblock %}
+  {% endembed %}
+
+  <div {{ bem('content', [], base_class) }}>
+    <div {{ bem('content-wrapper', [], base_class) }}>
+      {{ page.content }}
+    </div>
+  </div>
+{% endblock %}

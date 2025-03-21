@@ -8,21 +8,48 @@
 }
 
 .btn {
-  --dp-bs-btn-font-weight: var(--cta-font-weight);
+  &-primary {
+    --#{$prefix}btn-color: #{$color-odysseus};
+    --#{$prefix}btn-hover-color: #{$color-odysseus}
+  }
+  &-secondary,
+  &-outline-secondary {
+    --#{$prefix}btn-color: #{$color-agamemnon};
+    --#{$prefix}btn-hover-color: #{$color-agamemnon}
+  }
+}
 
-  width: var(--cta-width);
-  max-width: var(--cta-max-width);
-  letter-spacing: var(--cta-letter-spacing);
-  text-transform: var(--cta-text-transform);
-  margin-block: var(--cta-margin-top-bottom);
+[data-theme="theme-dark"],
+[data-theme="theme-primary"] {
+  .btn-outline-primary {
+    --#{$prefix}btn-color: #{$color-odysseus};
+    --#{$prefix}btn-hover-color: #{$color-odysseus}
+  }
+}
 
-  &-block {
-    --cta-width: 100%;
-    --cta-max-width: none;
+.btn-primary {
+  @include button-variant(
+    $color-achilles,
+    $color-achilles,
+    $color-odysseus,
+    darken($color-achilles, 10%),
+    darken($color-achilles, 10%)
+  );
+}
+
+.btn-link {
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
   }
 
-  &-link {
-    --cta-width: auto;
-    --cta-max-width: none;
-  }
+  @include button-variant(
+    transparent,
+    transparent,
+    $color-achilles,
+    transparent,
+    transparent,
+    darken($color-achilles, 10%)
+  );
 }

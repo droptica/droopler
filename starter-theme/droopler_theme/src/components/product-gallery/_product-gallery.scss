@@ -1,0 +1,68 @@
+@import "../../scss/init";
+
+.product-gallery {
+  --slick-arrow-opacity: 0.8;
+  --slick-arrow-hover-opacity: 0.9;
+  --slick-arrow-disabled-opacity: 0.5;
+  --slick-arrow-position-offset: 0.5rem;
+  --slick-arrow-position-mobile: var(--slick-arrow-position-offset);
+  --slick-arrow-position-desktop: var(--slick-arrow-position-offset);
+
+  .slick {
+    &-prev {
+      background-color: var(--product-slick-arrow-background-color);
+
+      &::before {
+        content: "\e80d";
+      }
+
+      &:hover {
+        background-color: var(--product-slick-arrow-background-color);
+      }
+    }
+
+    &-next {
+      background-color: var(--product-slick-arrow-background-color);
+
+      &::before {
+        content: "\e808";
+      }
+
+      &:hover {
+        background-color: var(--product-slick-arrow-background-color);
+      }
+    }
+  }
+
+  &__main-image {
+    margin-top: var(--content-spacer-m);
+  }
+
+  &__small-images {
+    margin-left: calc(#{var(--content-spacer-xs)} / -2);
+    margin-right: calc(#{var(--content-spacer-xs)} / -2);
+    margin-top: var(--content-spacer-m);
+
+    .slick {
+      &-slide {
+        margin-left: calc(#{var(--content-spacer-xs)} / 2);
+        margin-right: calc(#{var(--content-spacer-xs)} / 2);
+      }
+
+      &-track {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &.carousel-fixed {
+      .slick-track {
+        transform: none !important;
+      }
+    }
+
+    img {
+      cursor: pointer;
+    }
+  }
+}

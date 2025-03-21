@@ -1,0 +1,30 @@
+{{ attach_library('droopler_theme/node-basic') }}
+
+{% set base_class = 'node-basic' %}
+{% set content_type = fields.type.content|raw|striptags|spaceless %}
+<header {{ bem('header', [content_type], base_class, ['padding-top-medium', 'padding-bottom-medium']) }} data-theme="theme-secondary">
+  <div {{ bem('header__content', [], base_class, ['container']) }}>
+    <div {{ bem('author-attributes', ['blog-post'], base_class) }}>
+      {% include "@droopler_theme/base/body-text/body-text.twig" with {
+        text: fields.created.content|striptags
+      } %}
+    </div>
+
+    <div {{ bem('author-attributes', ['calendar-item'], base_class) }}>
+      {% include "@droopler_theme/base/body-text/body-text.twig" with {
+        text: fields.field_calendar_date.content|striptags
+      } %}
+    </div>
+
+    {% include "@droopler_theme/base/heading/heading.twig" with {
+      heading_tag: 'h1',
+      label: fields.title.content
+    } %}
+
+    {% if fields.field_blog_category.content|raw|striptags|spaceless is not empty %}
+      <div {{ bem('category', [], base_class) }}>
+        {{ fields.field_blog_category.content }}
+      </div>
+    {% endif %}
+  </div>
+</header>

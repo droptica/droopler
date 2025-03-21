@@ -1,0 +1,69 @@
+@import "../../scss/init";
+
+.d-p-timeline-item {
+  position: relative;
+  margin-top: var(--content-spacer-l);
+
+
+  &__date {
+    color: $primary;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--content-spacer-m);
+    font-weight: $font-weight-semibold;
+
+    &:before {
+      content: '';
+      width: 24px;
+      height: 24px;
+      border-radius: 100%;
+      background-color: $primary;
+    }
+
+    @include media-breakpoint-up(md) {
+      width: 205px;
+      min-width: 205px;
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-down(md) {
+      br {
+        display: none;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+    }
+  }
+
+  .heading {
+    margin-top: 0;
+    @include typography('h5');
+    font-weight: $font-weight-semibold;
+  }
+
+  &__description {
+    @include media-breakpoint-up(md) {
+      font-size: 18px;
+      margin-top: var(--content-spacer-m);
+      font-weight: 400;
+      line-height: 27px;
+    }
+
+    margin-top: var(--content-spacer-s);
+  }
+
+  &__text {
+    @include media-breakpoint-down(md) {
+      margin-top: var(--content-spacer-xs);
+      padding-left: 48px;
+    }
+  }
+}

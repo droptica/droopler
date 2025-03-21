@@ -1,0 +1,71 @@
+@import "../../scss/init";
+
+.form {
+  display: flex;
+  gap: var(--content-spacer-xs);
+  flex-direction: column;
+
+  .form-control {
+    --dp-bs-body-bg: var(--form-input-color);
+    --dp-bs-body-color: var(--form-input-text-color);
+    border: none;
+  }
+
+  &-floating {
+    .form-control {
+      ~ label {
+        color: var(--form-input-text-color);
+
+        &::after {
+          background-color: var(--form-input-color);
+          color: var(--form-input-text-color);
+        }
+      }
+
+      &:placeholder-shown {
+        ~ label {
+          color: var(--form-input-text-color);
+          
+          &::after {
+            background-color: var(--form-input-color);
+          }
+        }
+      }
+
+      &:not(:placeholder-shown) {
+        ~ label {
+          color: var(--form-input-text-color);
+
+          &::after {
+            background-color: var(--form-input-color);
+            color: var(--form-input-text-color);
+          }
+        }
+      }
+    }
+  }
+
+  textarea.form-textarea {
+    min-height: 150px;
+  }
+
+  .form-check {
+    .form-checkbox {
+      float: none;
+      margin-right: 0.5rem;
+
+      &:checked {
+        background-color: var(--checkbox-color);
+        border-color: var(--checkbox-color);
+      }
+    }
+
+    .form-check-label {
+      color: var(--body-text-color);
+    }
+  }
+
+  select {
+    min-height: 58px;
+  }
+}

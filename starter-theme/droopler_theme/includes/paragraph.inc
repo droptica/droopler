@@ -5,12 +5,13 @@
  * Theme and preprocess functions for paragraphs.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Template\Attribute;
 use Drupal\link\Plugin\Field\FieldType\LinkItem;
 use Drupal\paragraphs\ParagraphInterface;
+use Drupal\taxonomy\TermInterface;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -81,34 +82,9 @@ function droopler_theme_preprocess_paragraph(array &$variables): void {
     ? (bool) $paragraph->get('field_enable_grid')->getString()
     : NULL;
 
-  // Enable tiles.
-  $variables['paragraph']->enabledTiles = $paragraph->hasField('field_enable_tiles') && !$paragraph->get('field_enable_tiles')->isEmpty()
-    ? (bool) $paragraph->get('field_enable_tiles')->getString()
-    : NULL;
-
-  // Paragraph header in two columns.
-  $variables['paragraph']->headerIntoColumns = $paragraph->hasField('field_two_col_header') && !$paragraph->get('field_two_col_header')->isEmpty()
-    ? (bool) $paragraph->get('field_two_col_header')->getString()
-    : NULL;
-
   // Add Dividers.
   $variables['paragraph']->hasDividers = $paragraph->hasField('field_add_dividers') && !$paragraph->get('field_add_dividers')->isEmpty()
     ? (bool) $paragraph->get('field_add_dividers')->getString()
-    : NULL;
-
-  // Left side content.
-  $variables['paragraph']->leftSideContent = $paragraph->hasField('field_left_side_content') && !$paragraph->get('field_left_side_content')->isEmpty()
-    ? (bool) $paragraph->get('field_left_side_content')->getString()
-    : NULL;
-
-  // Enable price.
-  $variables['paragraph']->enabledPrice = $paragraph->hasField('field_enable_price') && !$paragraph->get('field_enable_price')->isEmpty()
-    ? (bool) $paragraph->get('field_enable_price')->getString()
-    : NULL;
-
-  // Show the price in the sidebar.
-  $variables['paragraph']->priceInSidebar = $paragraph->hasField('field_price_in_sidebar') && !$paragraph->get('field_price_in_sidebar')->isEmpty()
-    ? (bool) $paragraph->get('field_price_in_sidebar')->getString()
     : NULL;
 
   // Media background.
@@ -128,23 +104,40 @@ function droopler_theme_preprocess_paragraph(array &$variables): void {
       ? (bool) $parent->get('field_enable_grid')->getString()
       : NULL;
 
-    // Parent enabled tiles.
-    $variables['paragraph']->parentEnabledTiles = $parent->hasField('field_enable_tiles') && !$parent->get('field_enable_tiles')->isEmpty()
-      ? (bool) $parent->get('field_enable_tiles')->getString()
-      : NULL;
-
     // parentColumnSettings.
     _set_paragraph_column_count_settings($variables, $parent);
   }
 
   $variables['attributes'] = new Attribute($attributes);
+
+  _override_taxonomy_term_name_token($variables);
+}
+
+/**
+ * Override taxonomy term name token.
+ *
+ * @param array $variables
+ *  Variables.
+ */
+function _override_taxonomy_term_name_token(array &$variables): void {
+  if (!isset($variables['content']['field_d_main_title'][0]['#context']['value'])) {
+    return;
+  }
+
+  $term = \Drupal::routeMatch()->getParameter('taxonomy_term');
+  if (!$term instanceof TermInterface) {
+    return;
+  }
+
+  $term_name = &$variables['content']['field_d_main_title'][0]['#context']['value'];
+  $term_name = str_replace('[term:name]', $term->getName(), $term_name);
 }
 
 /**
  * Set paragraph attributes setting classes.
  *
  * @param array $variables
- *   Variables array.
+ *  Variables.
  */
 function _set_paragraph_attributes_setting_classes(array &$variables): void {
   $setting_fields = [
@@ -164,7 +157,7 @@ function _set_paragraph_attributes_setting_classes(array &$variables): void {
     }
   }
 
-  // Additional classes for paragraphs.
+  // Additional classes for paragraphs
   $additional_classes = $paragraph->hasField('field_additional_classes') && !$paragraph->get('field_additional_classes')->isEmpty()
     ? explode(' ', $paragraph->get('field_additional_classes')->getString())
     : NULL;
@@ -178,9 +171,9 @@ function _set_paragraph_attributes_setting_classes(array &$variables): void {
  * Set paragraph column count settings.
  *
  * @param array $variables
- *   Variables array.
+ *  Variables.
  * @param \Drupal\paragraphs\Entity\Paragraph|null $parent
- *   Parent paragraph.
+ *  Parent paragraph.
  */
 function _set_paragraph_column_count_settings(array &$variables, ParagraphInterface|null $parent = NULL): void {
   $column_count_fields = [
@@ -213,9 +206,9 @@ function _set_paragraph_column_count_settings(array &$variables, ParagraphInterf
  * Set paragraph theme settings.
  *
  * @param array $variables
- *   Variables array.
+ *  Variables.
  * @param array $attributes
- *   Attributes array.
+ *  Attributes.
  */
 function _set_paragraph_theme_settings(array &$variables, array &$attributes): void {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
@@ -235,7 +228,7 @@ function _set_paragraph_theme_settings(array &$variables, array &$attributes): v
       : NULL;
 
     if ($background_color) {
-      $attributes['style'][] = 'background-color: ' . $background_color . ';';
+      $attributes['style'][] = sprintf('background-color: %s; --overlay-background-color: %s;', $background_color, $background_color);
     }
 
     $text_color = $paragraph->hasField('field_text_theme_custom') && !$paragraph->get('field_text_theme_custom')->isEmpty()
@@ -243,7 +236,7 @@ function _set_paragraph_theme_settings(array &$variables, array &$attributes): v
       : NULL;
 
     if ($text_color) {
-      $attributes['style'][] = 'color: ' . $text_color . ';';
+      $attributes['style'][] = sprintf('color: %s;', $text_color);
     }
   }
 }
@@ -252,7 +245,7 @@ function _set_paragraph_theme_settings(array &$variables, array &$attributes): v
  * Set paragraph carousel settings.
  *
  * @param array $variables
- *   Variables array.
+ *  Variables.
  */
 function _set_paragraph_carousel_settings(array &$variables): void {
   $variables['paragraph']->carouselSettings = Json::encode([
@@ -261,7 +254,7 @@ function _set_paragraph_carousel_settings(array &$variables): void {
     'slidesToScroll' => 1,
     'swipeToSlide' => TRUE,
     'touchMove' => TRUE,
-    'autoplay' => TRUE,
+    'autoplay' => FALSE,
     'autoplaySpeed' => 3000,
     'responsive' => [
       [
@@ -302,43 +295,4 @@ function _get_mobile_breakpoint_size(): int {
 function _get_tablet_breakpoint_size(): int {
   $theme_tablet_breakpoint_value = theme_get_setting('tablet_breakpoint') ?? theme_get_setting('tablet_breakpoint', 'droopler_theme') ?? 992;
   return (int) $theme_tablet_breakpoint_value;
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function droopler_theme_preprocess_paragraph__d_p_reference_content(array &$variables) {
-  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
-  $paragraph = $variables['paragraph'];
-  $variables['d_p_reference_content_wrapper_attributes'] = new Attribute();
-
-  // Current manually values.
-  $reference_content = $paragraph->get('field_d_p_reference_content');
-  $values = $reference_content->getValue();
-
-  // Get latest blog node nids.
-  // Selected nodes are excluded from results.
-  $available_content_types = _get_content_types();
-  $auto_values = _get_sorted_content_by_type($available_content_types, 'created', 'DESC', $values);
-  $merged_values = array_merge($values, $auto_values);
-
-  // Delete unpublished content.
-  $merged_values = _get_published_content($merged_values);
-
-  // Get max number of values.
-  /** @var \Drupal\field\Entity\FieldConfig $def */
-  $def = $reference_content->getDataDefinition();
-  $cardinality = $def->getFieldStorageDefinition()->getCardinality();
-  $min = min(count($merged_values), $cardinality);
-
-  // Build an array with new values.
-  $new_values = [];
-  for ($i = 0; $i < $min; $i++) {
-    $new_values[] = $merged_values[$i];
-  }
-
-  // Replace content.
-  _replace_content($variables, 'node', 'reference_content', 'field_d_p_reference_content', $new_values);
-
-  $variables['#cache']['tags'][] = 'node_list';
 }

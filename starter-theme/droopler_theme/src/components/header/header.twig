@@ -1,0 +1,23 @@
+{{ attach_library('droopler_theme/header') }}
+
+{% set base_class = header_base_class|default('header') %}
+
+<div {{ bem(base_class) }} data-theme="theme-light">
+  <div {{ bem('content', [], base_class, ['container']) }}>
+    <div {{ bem('content-wrapper', [], base_class, ['row']) }}>
+      <div {{ bem('content-column', ['left'], base_class, ['col-md-3', 'col-8']) }}>
+        {% block branding %}
+        {% endblock %}
+      </div>
+      <div {{ bem('content-column', ['right'], base_class, ['offset-md-1', 'col-md-8', 'col-4']) }}>
+        {% include "@droopler_theme/hamburger/hamburger.twig" %}
+
+        {% block navigation_mobile %}
+        {% endblock %}
+
+        {% block navigation_desktop %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
