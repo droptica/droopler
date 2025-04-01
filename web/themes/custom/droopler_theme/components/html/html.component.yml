@@ -1,0 +1,48 @@
+name: html
+props:
+  type: object
+  properties:
+    logged_in:
+      type: boolean
+      default: false
+      description: 'Whether the user is logged in or not.'
+    node_type:
+      type: string
+      default: ''
+      description: 'The node type of the current node.'
+    db_offline:
+      type: boolean
+      default: false
+      description: 'Whether the database is offline or not.'
+    html_attributes:
+      type: Drupal\Core\Template\Attribute
+      description: 'The HTML attributes of the component.'
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      description: 'The attributes of the component.'
+    placeholder_token:
+      type: string
+      default: ''
+      description: 'The placeholder token.'
+    head_title:
+      type: string
+      default: ''
+      description: 'The head title of the page.'
+    page_top:
+      type:
+        - array
+        - 'null'
+      default: []
+      description: 'The page top region.'
+    page:
+      type:
+        - array
+        - 'null'
+      default: []
+      description: 'The page region.'
+    page_bottom:
+      type:
+        - array
+        - 'null'
+      default: []
+      description: 'The page bottom region.'
