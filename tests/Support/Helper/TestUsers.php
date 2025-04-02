@@ -36,7 +36,7 @@ class TestUsers extends \Codeception\Module
             try {
                 $user = \Drupal::entityTypeManager()->getStorage('user')->create([
                     'name' => $value['name'],
-                    'mail' => $faker->email,
+                    'mail' => $faker->email(),
                     'roles' => $value['role'],
                     'pass' => 'password',
                     'status' => 1,

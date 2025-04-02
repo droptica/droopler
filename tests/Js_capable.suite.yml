@@ -54,7 +54,8 @@ modules:
             cleanup_failed: false
             cleanup_suite: false
         - Tests\Support\Helper\MailPit:
-            url: 'http://web/'
-            port: '8025'
+            url: 'https://droop-1.ddev.site'
+            port: '8026'
             deleteEmailsAfterScenario: true
+        - Tests\Support\Helper\MailHelper
         - DrupalAcceptance

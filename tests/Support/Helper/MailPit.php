@@ -466,6 +466,18 @@ class MailPit extends Module
     }
 
     /**
+     * Count Emails.
+     *
+     * Returns the number of emails in the current inbox
+     *
+     * @return int Number of emails
+     */
+    public function countEmails(): int
+    {
+        return count($this->currentInbox);
+    }
+
+    /**
      * Sort Emails.
      *
      * Sorts the inbox based on the timestamp
