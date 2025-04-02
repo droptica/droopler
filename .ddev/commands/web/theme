@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+THEME_DIR="/var/www/html/web/themes/custom/droopler_theme"
+
+# Install droopler_theme npm packages.
+cd  ${THEME_DIR}
+npm install
+
+# Check if user wants instant-update.
+if [ "$1" == "watch" ]; then
+  npm run watch
+elif [ "$1" == "dev" ]; then
+  echo "Compiling DEV version."
+  npm run dev
+else
+  echo "Compiling PRODUCTION, minified version."
+  npm run production
+fi

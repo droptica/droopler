@@ -1,0 +1,65 @@
+actor: CompareTester
+modules:
+    enabled:
+        - Tests\Support\Helper\Compare
+        - Tests\Support\Helper\DrupalHelper
+        - Tests\Support\Helper\PageLoad
+        - WebDriver:
+             host: selenium
+             url: http://apache
+             browser: chrome
+             curl:
+                 CURLOPT_TIMEOUT: 1200
+        - VisualCeption:
+            maximumDeviation: 0
+            saveCurrentImageIfFailure: true
+            report: true
+            templateFile: "/tests/test_template/custom_template.php"
+        - DrupalBootstrap:
+            root: '/var/www/html/web'
+        - DrupalWatchdog:
+            level: 'ERROR'
+            channels:
+            php: 'WARNING'
+        - DrupalDrush
+        - DrupalUser:
+            default_role: 'authenticated'
+            driver: 'WebDriver'
+            cleanup_test: false
+            cleanup_failed: false
+            cleanup_suite: false
+
+env:
+    mobile:
+         modules:
+            config:
+                WebDriver:
+                    capabilities:
+                       "goog:chromeOptions":
+                            'w3c': false
+                            mobileEmulation:
+                                 deviceMetrics:
+                                     width: 320
+                                     height: 15000
+    tablet:
+         modules:
+            config:
+                WebDriver:
+                    capabilities:
+                       "goog:chromeOptions":
+                            'w3c': false
+                            mobileEmulation:
+                                 deviceMetrics:
+                                     width: 800
+                                     height: 12000
+    desktop:
+         modules:
+            config:
+                WebDriver:
+                    capabilities:
+                       "goog:chromeOptions":
+                            'w3c': false
+                            mobileEmulation:
+                                 deviceMetrics:
+                                     width: 1920
+                                     height: 12000

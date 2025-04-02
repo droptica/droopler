@@ -112,8 +112,15 @@
     "wikimedia/composer-merge-plugin": "^2.1"
   },
   "require-dev": {
+    "codeception/codeception": "^5.1",
+    "codeception/module-asserts": "^3.0",
+    "codeception/module-db": "^3.1",
+    "codeception/module-webdriver": "^3.2",
+    "codeception/visualception": "^5.0",
     "drupal/core-dev": "^11",
-    "drupal/devel": "^5.0"
+    "drupal/devel": "^5.0",
+    "guncha25/drupal-codeception": "^10.0",
+    "koehnlein/codeception-email-mailpit": "^0.3.1"
   },
   "replace": {
     "bower-asset/desandro-matches-selector": "*",

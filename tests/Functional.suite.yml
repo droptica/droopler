@@ -1,0 +1,46 @@
+# Codeception Test Suite Configuration
+#
+# Suite for functional (integration) tests
+# Emulate web requests and make application process them
+# Include one of framework modules (Symfony2, Yii2, Laravel5) to use it
+
+class_name: FunctionalTester
+modules:
+    enabled:
+        # add framework module here
+        - Tests\Support\Helper\Functional
+        - Db
+        - PhpBrowser:
+             url: http://apache
+             curl:
+                 CURLOPT_TIMEOUT: 1200
+        - \Codeception\Module\Drupal8\Drupal8:
+            root: '/web'
+            site_dir: 'default'
+            env: 'prod'
+            relative: no
+        - SuiteVariablesStorage
+        - \Codeception\Module\Drupal8\ManageUsers:
+            defaultPass: "123"
+
+            roles_admin: &roles_admin
+              2: "authenticated user"
+              3: administrator
+
+#            custom_fields: &custom_fields
+#              field_first_name: 'Fname'
+#              field_last_name: 'Lname'
+#              field_mobile: '123456789'
+
+            users:
+              admin_user:
+                name: admin_user
+                email: admin_user@example.com
+                roles: *roles_admin
+                custom_fields: []
+#                custom_fields:
+#                  <<: *custom_fields
+
+            create: true                 # Whether to create all defined test users at the start of the suite.
+            delete: true                 # Whether to delete all defined test users at the end of the suite.
+

@@ -1,0 +1,11 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit (internal) tests.
+
+class_name: UnitTester
+modules:
+    enabled:
+        - Asserts
+        - Tests\Support\Helper\Unit
+        - DrupalBootstrap:
+            root: '/var/www/html/web'

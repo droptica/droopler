@@ -1,0 +1,54 @@
+actor: VisualTester
+modules:
+    enabled:
+        - Tests\Support\Helper\Visual
+        - Tests\Support\Helper\DrupalHelper
+        - Tests\Support\Helper\PageLoad
+        - WebDriver:
+             host: selenium
+             url: http://apache
+             browser: chrome
+             curl:
+                 CURLOPT_TIMEOUT: 1200
+             "goog:chromeOptions":
+                 'w3c': false
+        - VisualCeption:
+            maximumDeviation: 0
+            saveCurrentImageIfFailure: true
+            report: true
+            templateFile: "/tests/test_template/visual_custom_template.php"
+
+env:
+    mobile:
+         modules:
+            config:
+                WebDriver:
+                    capabilities:
+                       "goog:chromeOptions":
+                            'w3c': false
+                            mobileEmulation:
+                                 deviceMetrics:
+                                     width: 320
+                                     height: 15000
+    tablet:
+         modules:
+            config:
+                WebDriver:
+                    capabilities:
+                       "goog:chromeOptions":
+                            'w3c': false
+                            mobileEmulation:
+                                 deviceMetrics:
+                                     width: 800
+                                     height: 12000
+    desktop:
+         modules:
+            config:
+                WebDriver:
+                    capabilities:
+                       "goog:chromeOptions":
+                            'w3c': false
+                            mobileEmulation:
+                                 deviceMetrics:
+                                     width: 1920
+                                     height: 12000

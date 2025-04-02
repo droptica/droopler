@@ -1,0 +1,60 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: JSCapableTester
+step_decorators:
+    - \Codeception\Step\TryTo
+    - \Codeception\Step\Retry
+modules:
+    enabled:
+        - Db:
+             dsn: 'mysql:host=db:3306;dbname=db'
+             user: 'db'
+             password: 'db'
+             dump: '_data/dump.sql'
+             populate: false
+             cleanup: false
+             reconnect: true
+        - WebDriver:
+             host: selenium-chrome
+             url: http://web/
+             browser: chrome
+             curl:
+                CURLOPT_TIMEOUT: 1200
+             capabilities:
+                "goog:chromeOptions":
+                    args: [
+                      '--no-sandbox',
+                      '--disable-dev-shm-usage',
+                      '--disable-gpu',
+                      '--window-size=1920,1080',
+                    ]
+                    'w3c': false
+                    mobileEmulation:
+                        deviceMetrics:
+                            width: 1920
+                            height: 2500
+        - Asserts
+        - Tests\Support\Helper\Acceptance
+        - Tests\Support\Helper\JSCapable
+        - Tests\Support\Helper\PageLoad
+        - Tests\Support\Helper\DrupalHelper
+        - Tests\Support\Helper\TestDrupalAcceptance
+        - Tests\Support\Helper\TestUsers
+        - DrupalBootstrap:
+            root: '/var/www/html/web'
+        - DrupalDrush
+        - DrupalUser:
+            default_role: 'authenticated'
+            driver: 'WebDriver'
+            cleanup_test: false
+            cleanup_failed: false
+            cleanup_suite: false
+        - Tests\Support\Helper\MailPit:
+            url: 'http://web/'
+            port: '8025'
+            deleteEmailsAfterScenario: true
+        - DrupalAcceptance
