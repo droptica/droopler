@@ -68,16 +68,14 @@ setup_js_capable:
     - apt-get install -yqq default-mysql-client
     - echo "ServerName web" >> /etc/apache2/apache2.conf
     - a2enmod rewrite
-    - cat > /etc/apache2/sites-available/000-default.conf << 'EOL'
-      <VirtualHost *:80>
-        ServerName web
-        DocumentRoot /var/www/html/web
-        <Directory /var/www/html/web>
-          AllowOverride All
-          Require all granted
-        </Directory>
-      </VirtualHost>
-      EOL
+    - echo '<VirtualHost *:80>' > /etc/apache2/sites-available/000-default.conf
+    - echo '  ServerName web' >> /etc/apache2/sites-available/000-default.conf
+    - echo '  DocumentRoot /var/www/html/web' >> /etc/apache2/sites-available/000-default.conf
+    - echo '  <Directory /var/www/html/web>' >> /etc/apache2/sites-available/000-default.conf
+    - echo '    AllowOverride All' >> /etc/apache2/sites-available/000-default.conf
+    - echo '    Require all granted' >> /etc/apache2/sites-available/000-default.conf
+    - echo '  </Directory>' >> /etc/apache2/sites-available/000-default.conf
+    - echo '</VirtualHost>' >> /etc/apache2/sites-available/000-default.conf
     - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
     - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
     - service apache2 restart
@@ -121,16 +119,14 @@ setup_acceptance:
     - apt-get install -yqq default-mysql-client
     - echo "ServerName web" >> /etc/apache2/apache2.conf
     - a2enmod rewrite
-    - cat > /etc/apache2/sites-available/000-default.conf << 'EOL'
-      <VirtualHost *:80>
-        ServerName web
-        DocumentRoot /var/www/html/web
-        <Directory /var/www/html/web>
-          AllowOverride All
-          Require all granted
-        </Directory>
-      </VirtualHost>
-      EOL
+    - echo '<VirtualHost *:80>' > /etc/apache2/sites-available/000-default.conf
+    - echo '  ServerName web' >> /etc/apache2/sites-available/000-default.conf
+    - echo '  DocumentRoot /var/www/html/web' >> /etc/apache2/sites-available/000-default.conf
+    - echo '  <Directory /var/www/html/web>' >> /etc/apache2/sites-available/000-default.conf
+    - echo '    AllowOverride All' >> /etc/apache2/sites-available/000-default.conf
+    - echo '    Require all granted' >> /etc/apache2/sites-available/000-default.conf
+    - echo '  </Directory>' >> /etc/apache2/sites-available/000-default.conf
+    - echo '</VirtualHost>' >> /etc/apache2/sites-available/000-default.conf
     - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
     - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
     - service apache2 restart
