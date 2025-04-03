@@ -4,6 +4,7 @@
 - GitLab CI pipeline is configured but fails with "413 Request Entity Too Large" error
 - Need to implement JS_capable and Acceptance tests
 - **Step 1 implemented**: Basic CI configuration with artifact size optimization
+- **Step 2 implemented**: Added JS_capable tests with Selenium Chrome and MariaDB
 
 ## Implementation Steps
 
@@ -13,10 +14,10 @@
 - [x] Set up caching for dependencies
 
 ### Step 2: Add JS_capable Tests
-- [  ] Configure JS_capable test environment with Selenium Chrome
-- [  ] Set up MariaDB service
-- [  ] Run Codeception JS_capable tests
-- [  ] Collect test results
+- [x] Configure JS_capable test environment with Selenium Chrome
+- [x] Set up MariaDB service
+- [x] Run Codeception JS_capable tests
+- [x] Collect test results
 
 ### Step 3: Add Acceptance Tests
 - [  ] Configure Acceptance test environment

@@ -8,11 +8,12 @@
 # The full documentation is on https://project.pages.drupalcode.org/gitlab_templates/
 ################
 
-# Step 1: Basic CI Configuration
-# This is a simplified version to get the build working first
+# Step 1 & 2: Basic CI Configuration with JS_capable tests
+# Implementing a step-by-step approach to get tests working
 
 stages:
   - build
+  - test
 
 variables:
   # PHP and MariaDB versions
@@ -34,6 +35,11 @@ variables:
   SKIP_CSPELL: "1"
   SKIP_STYLELINT: "1"
   _SHOW_ENVIRONMENT_VARIABLES: "1"
+  # Database configuration
+  MYSQL_DATABASE: "db"
+  MYSQL_ROOT_PASSWORD: "root"
+  MYSQL_USER: "db"
+  MYSQL_PASSWORD: "db"
 
 # Cache composer dependencies to speed up builds
 cache:
@@ -53,7 +59,7 @@ build:
     - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
   script:
     # Install project dependencies
-    - composer install --no-progress --prefer-dist --optimize-autoloader --no-dev
+    - composer install --no-progress --prefer-dist --optimize-autoloader
     # Remove unnecessary files to reduce artifact size
     - find . -name ".git" -type d -exec rm -rf {} +; true
     - find vendor -name "tests" -type d -exec rm -rf {} +; true
@@ -70,7 +76,65 @@ build:
       - drush/
       - config/
       - recipes/
+      - tests/
+      - codeception.yml
     exclude:
       - "**/.git/**"
       - "**/node_modules/**"
     expire_in: 1 hour
+
+js_capable_tests:
+  stage: test
+  image: php:${PHP_VERSION}-cli
+  services:
+    - name: mariadb:${MARIADB_VERSION}
+      alias: db
+    - name: selenium/standalone-chrome:latest
+      alias: selenium-chrome
+  dependencies:
+    - build
+  before_script:
+    # Install required PHP extensions and dependencies
+    - apt-get update -yqq
+    - apt-get install -yqq git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
+    - docker-php-ext-install zip gd pdo_mysql
+    # Install additional dependencies for Codeception
+    - apt-get install -yqq default-mysql-client
+    # Set up Apache for Drupal
+    - apt-get install -yqq apache2 libapache2-mod-php
+    - a2enmod rewrite
+    - echo "ServerName localhost" >> /etc/apache2/apache2.conf
+    # Configure Apache virtual host
+    - echo '<VirtualHost *:80>
+        ServerName web
+        DocumentRoot /var/www/html/web
+        <Directory /var/www/html/web>
+            AllowOverride All
+            Require all granted
+        </Directory>
+      </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+    # Create symbolic link to web directory
+    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
+    - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
+    # Start Apache
+    - service apache2 start
+    # Wait for services to be ready
+    - sleep 10
+  script:
+    # Install Codeception
+    - composer require codeception/codeception --dev
+    - composer require codeception/module-webdriver --dev
+    - composer require codeception/module-db --dev
+    - composer require codeception/module-asserts --dev
+    - composer require codeception/module-phpbrowser --dev
+    # Create database dump if needed
+    - echo "CREATE DATABASE IF NOT EXISTS db;" | mysql -h db -u root -p${MYSQL_ROOT_PASSWORD}
+    # Run JS_capable tests
+    - php vendor/bin/codecept run Js_capable --xml
+  artifacts:
+    when: always
+    paths:
+      - tests/_output/
+    reports:
+      junit: tests/_output/report.xml
+    expire_in: 1 week
