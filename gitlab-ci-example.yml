@@ -1,0 +1,296 @@
+variables:
+  # Keeping this low helps jobs find an available runner without waiting.
+  # @see https://git.drupalcode.org/project/gitlab_templates/-/blob/main/includes/include.drupalci.main.yml?ref_type=heads
+  KUBERNETES_CPU_REQUEST: 2
+  COMPOSER_MIRROR_PATH_REPOS: 1
+  # For faster performance, don't audit dependencies automatically. We have
+  # a dedicated job for this.
+  COMPOSER_NO_AUDIT: 1
+  COMPOSER_NO_INTERACTION: 1
+  BUILD_DIR: drupal-cms
+  _PROJECT_ROOT: $CI_PROJECT_DIR/$BUILD_DIR
+  _WEB_ROOT: web
+
+.deploy-rules: &deploy-rules
+  # Deploy when we push to a release branch (not in a fork).
+  - if: $CI_COMMIT_BRANCH =~ /^([0-9]+\.)?[0-9]+\.x$/ && $CI_PIPELINE_SOURCE == "push" && $CI_PROJECT_ROOT_NAMESPACE == "project"
+  # Deploy when we push a tag.
+  - if: $CI_COMMIT_TAG
+  # Don't deploy in any other circumstance.
+  - when: never
+
+# Define when this pipeline runs.
+workflow:
+  rules:
+    # Run on merge requests.
+    - if: $CI_MERGE_REQUEST_IID || $CI_PIPELINE_SOURCE == 'merge_request_event'
+    # Run on a regular schedule (i.e., nightly builds).
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    # Run when manually triggered via the web UI.
+    - if: $CI_PIPELINE_SOURCE == "web"
+    # Run when manually triggered via the Web IDE.
+    - if: $CI_PIPELINE_SOURCE == "webide"
+    # Also run in any circumstance where we'd do a deployment.
+    - *deploy-rules
+
+default:
+  # New pushes can stop the current job and start a new one.
+  interruptible: true
+  image:
+    # This image has a version of SQLite that is compatible with Drupal 11.
+    name: 'drupalci/php-8.3-ubuntu-apache:production'
+  retry:
+    max: 2
+    when:
+      - unknown_failure
+      - api_failure
+      - stuck_or_timeout_failure
+      - runner_system_failure
+      - scheduler_failure
+
+# The canonical list of Drupal CMS components that are part of this repository.
+.components: &components
+  - DIR: drupal_cms_olivero
+    URL: 'git@git.drupal.org:project/drupal_cms_olivero.git'
+  - DIR: project_template
+    URL: 'git@git.drupal.org:project/cms.git'
+  - DIR: recipes/drupal_cms_accessibility_tools
+    URL: 'git@git.drupal.org:project/drupal_cms_accessibility_tools.git'
+  - DIR: recipes/drupal_cms_admin_ui
+    URL: 'git@git.drupal.org:project/drupal_cms_admin_ui.git'
+  - DIR: recipes/drupal_cms_ai
+    URL: 'git@git.drupal.org:project/drupal_cms_ai.git'
+  - DIR: recipes/drupal_cms_analytics
+    URL: 'git@git.drupal.org:project/drupal_cms_analytics.git'
+  - DIR: recipes/drupal_cms_anti_spam
+    URL: 'git@git.drupal.org:project/drupal_cms_anti_spam.git'
+  - DIR: recipes/drupal_cms_authentication
+    URL: 'git@git.drupal.org:project/drupal_cms_authentication.git'
+  - DIR: recipes/drupal_cms_blog
+    URL: 'git@git.drupal.org:project/drupal_cms_blog.git'
+  - DIR: recipes/drupal_cms_case_study
+    URL: 'git@git.drupal.org:project/drupal_cms_case_study.git'
+  - DIR: recipes/drupal_cms_content_type_base
+    URL: 'git@git.drupal.org:project/drupal_cms_content_type_base.git'
+  - DIR: recipes/drupal_cms_events
+    URL: 'git@git.drupal.org:project/drupal_cms_events.git'
+  - DIR: recipes/drupal_cms_forms
+    URL: 'git@git.drupal.org:project/drupal_cms_forms.git'
+  - DIR: recipes/drupal_cms_google_analytics
+    URL: 'git@git.drupal.org:project/drupal_cms_google_analytics.git'
+  - DIR: recipes/drupal_cms_image
+    URL: 'git@git.drupal.org:project/drupal_cms_image.git'
+  - DIR: recipes/drupal_cms_news
+    URL: 'git@git.drupal.org:project/drupal_cms_news.git'
+  - DIR: recipes/drupal_cms_page
+    URL: 'git@git.drupal.org:project/drupal_cms_page.git'
+  - DIR: recipes/drupal_cms_person
+    URL: 'git@git.drupal.org:project/drupal_cms_person.git'
+  - DIR: recipes/drupal_cms_privacy_basic
+    URL: 'git@git.drupal.org:project/drupal_cms_privacy_basic.git'
+  - DIR: recipes/drupal_cms_project
+    URL: 'git@git.drupal.org:project/drupal_cms_project.git'
+  - DIR: recipes/drupal_cms_remote_video
+    URL: 'git@git.drupal.org:project/drupal_cms_remote_video.git'
+  - DIR: recipes/drupal_cms_search
+    URL: 'git@git.drupal.org:project/drupal_cms_search.git'
+  - DIR: recipes/drupal_cms_seo_basic
+    URL: 'git@git.drupal.org:project/drupal_cms_seo_basic.git'
+  - DIR: recipes/drupal_cms_seo_tools
+    URL: 'git@git.drupal.org:project/drupal_cms_seo_tools.git'
+  - DIR: recipes/drupal_cms_starter
+    URL: 'git@git.drupal.org:project/drupal_cms_starter.git'
+
+.create-project: &create-project
+  - composer create-project drupal/cms --stability=dev --no-install --repository='{"type":"path","url":"project_template"}' $BUILD_DIR
+
+# Creates a Drupal CMS code base with dev dependencies installed.
+build test project:
+  stage: test
+  script:
+    # If this is a merge request branch, ensure that any recipe which requires the
+    # target branch (e.g., `"drupal/drupal_cms_ai": "1.x-dev"`) will know to refer
+    # to the detached HEAD we're operating from.
+    - if [ $CI_PIPELINE_SOURCE == "merge_request_event" ]; then find . -maxdepth 2 -type d -name 'drupal_cms_*' -exec composer config extra.branch-alias.dev-$CI_COMMIT_SHA $CI_MERGE_REQUEST_TARGET_BRANCH_NAME-dev --working-dir={} ';' ; fi
+    - *create-project
+    # Generate `composer.json` by merging our dev requirements into the project template.
+    - .ddev/homeadditions/bin/generate-composer-json > $BUILD_DIR/composer.json
+    - cd $BUILD_DIR
+    - if [ -n "$CANARY_CORE_RECOMMENDED" ]; then composer require --no-update "drupal/core-recommended:$CANARY_CORE_RECOMMENDED"; fi
+    - if [ -n "$CANARY_PREFER_STABLE" ]; then composer config prefer-stable $CANARY_PREFER_STABLE; fi
+    # Install dependencies. Suppress scripts to prevent XB's JavaScript from being built.
+    # @see dev.composer.json
+    - composer install --no-scripts
+    # Remove all `.git` directories in the built project.
+    - find . -depth -type d -name '.git' -exec rm -r -f {} ';'
+  artifacts:
+    paths:
+      - $BUILD_DIR
+    expire_in: 1 hour
+
+.test-base:
+  stage: test
+  needs:
+    - 'build test project'
+  services:
+    - name: 'drupalci/mysql-8'
+      alias: database
+  variables:
+    DDEV_PRIMARY_URL: http://localhost/$_WEB_ROOT
+    SIMPLETEST_DB: mysql://drupaltestbot:drupaltestbotpw@database/mysql
+    MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome", "goog:chromeOptions":{"w3c": true, "args":["--no-sandbox","--ignore-certificate-errors", "--allow-insecure-localhost", "--headless", "--dns-prefetch-disable"]}}, "http://selenium:4444"]'
+  before_script:
+    # Set up Apache to point to the project's document root.
+    - ln -s -f $_PROJECT_ROOT/$_WEB_ROOT /var/www/html/$_WEB_ROOT
+    - chown -R www-data:www-data $_PROJECT_ROOT/$_WEB_ROOT
+    - service apache2 start
+
+.phpunit-base:
+  extends: .test-base
+  script:
+    - cd $BUILD_DIR
+    - sudo SIMPLETEST_BASE_URL=$DDEV_PRIMARY_URL SIMPLETEST_DB=$SIMPLETEST_DB MINK_DRIVER_ARGS_WEBDRIVER="$MINK_DRIVER_ARGS_WEBDRIVER" SYMFONY_DEPRECATIONS_HELPER=disabled -u www-data vendor/bin/phpunit --display-skipped --log-junit $CI_PROJECT_DIR/junit.xml --configuration=$_WEB_ROOT/core $PHPUNIT_OPTIONS
+  artifacts:
+    paths:
+      - $BUILD_DIR/$_WEB_ROOT/sites/simpletest
+    when: on_failure
+    expire_in: 3 days
+    reports:
+      junit: junit.xml
+
+run PHP tests:
+  extends: .phpunit-base
+  parallel:
+    matrix:
+      *components
+  variables:
+    # Skip performance tests by default.
+    PHPUNIT_OPTIONS: '--exclude-group=OpenTelemetry $CI_PROJECT_DIR/$DIR'
+  rules:
+    # Don't test the `drupal_cms_analytics` recipe, because it is a metapackage.
+    - if: $DIR =~ /\/drupal_cms_analytics$/
+      when: never
+    - if: $PERFORMANCE_TEST == "1"
+      when: never
+    - when: on_success
+
+test performance:
+  extends: .phpunit-base
+  services:
+    - name: selenium/standalone-chrome:latest
+      alias: selenium
+      variables:
+        JAVA_OPTS: '-Dwebdriver.chrome.logfile=/builds/chromedriver.log'
+        SE_NODE_OVERRIDE_MAX_SESSIONS: 'true'
+        SE_NODE_MAX_SESSIONS: '16'
+        SE_SESSION_RETRY_INTERVAL: '1'
+        SE_SESSION_REQUEST_TIMEOUT: '10'
+        SE_START_XVFB: 'false'
+        SE_START_VNC: 'false'
+    - !reference ['.test-base', 'services']
+  variables:
+    PHPUNIT_OPTIONS: '--group=OpenTelemetry ./recipes/drupal_cms_starter'
+
+run end-to-end tests:
+  extends: .test-base
+  before_script:
+    # Install Cypress' system dependencies.
+    # See https://docs.cypress.io/guides/getting-started/installing-cypress#UbuntuDebian
+    - apt-get update
+    - apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xauth xvfb
+    - !reference ['.test-base', 'before_script']
+  variables:
+    # @see cypress.config.js
+    DDEV_DOCROOT: $_PROJECT_ROOT/$_WEB_ROOT
+  script:
+    - npm clean-install
+    - npm test
+  rules:
+    - if: $PERFORMANCE_TEST == "1"
+      when: never
+    - when: on_success
+  artifacts:
+    paths:
+      - cypress
+    when: on_failure
+    expire_in: 3 days
+
+audit dependencies:
+  stage: test
+  needs:
+    - 'build test project'
+  script:
+    - composer audit --working-dir=$BUILD_DIR
+  allow_failure: true
+  rules:
+    - if: $PERFORMANCE_TEST == "1"
+      when: never
+    - when: on_success
+
+# Check spelling in the documentation.
+check spelling:
+  stage: test
+  rules:
+    # Only do this if Markdown files in the docs directory changed because of
+    # a push, or a change in a merge request.
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "push"
+      changes:
+        - docs/**/*.md
+  script: npx cspell --show-suggestions --show-context --no-progress docs
+
+# Generates a ZIP file that can be downloaded by the public to spin
+# up projects with Drupal CMS.
+# IMPORTANT: This job MUST be named `drupal.org release`.
+drupal.org release:
+  stage: deploy
+  # We don't need any artifacts from previous stages.
+  # @see https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html#prevent-a-job-from-fetching-artifacts
+  dependencies: []
+  before_script:
+    - apt-get update
+    - apt-get install zip
+  script:
+    - *create-project
+    # Use the `zip` utility, rather than `composer archive`, to ensure that the project
+    # will be extracted into its own directory.
+    # @see https://drupal.org/i/3493356
+    - zip --quiet --recurse-paths drupal-cms $BUILD_DIR
+  artifacts:
+    paths:
+      - drupal-cms.zip
+
+subtree split:
+  stage: deploy
+  image: phenaproxima/splitsh-ci
+  # We don't need any artifacts from previous stages.
+  # @see https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html#prevent-a-job-from-fetching-artifacts
+  dependencies: []
+  cache:
+    key: splitsh-$CI_COMMIT_REF_NAME
+    paths:
+      # @see https://github.com/splitsh/lite/blob/master/splitter/cache.go#L26
+      - .git/splitsh.db
+  parallel:
+    matrix:
+      *components
+  before_script:
+    # We need to identify ourselves to Git in order to push.
+    - git config --global user.name "Drupal CMS Bot"
+    - git config --global user.email "70095-drupal-cms-bot@users.noreply.drupalcode.org"
+    # Ensure we can push to the remotes.
+    - eval "$(ssh-agent -s)"
+    - ssh-add - < "${SSH_PRIVATE_KEY}"
+    - mkdir ~/.ssh
+    - cp $SSH_KNOWN_HOSTS ~/.ssh/known_hosts
+    # Test that we can connect successfully.
+    - ssh -T git@git.drupal.org
+  script:
+    # We'll need the full commit history to do the subtree splits.
+    - git fetch --unshallow origin $CI_COMMIT_REF_NAME
+    - COMMIT=`/splitsh-lite --prefix=$DIR/`
+    - git checkout -b split $COMMIT
+    - git remote set-url origin $URL
+    - git remote -v
+    - if [[ -n "$CI_COMMIT_BRANCH" ]]; then git push origin HEAD:$CI_COMMIT_BRANCH; elif [[ -n "$CI_COMMIT_TAG" ]]; then git tag --force $CI_COMMIT_TAG && git push origin $CI_COMMIT_TAG; fi
+  rules:
+    - *deploy-rules
