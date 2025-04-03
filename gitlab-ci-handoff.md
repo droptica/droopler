@@ -5,6 +5,8 @@
 - Need to implement JS_capable and Acceptance tests
 - **Step 1 implemented**: Basic CI configuration with artifact size optimization
 - **Step 2 implemented**: Added JS_capable tests with Selenium Chrome and MariaDB
+- **Step 3 implemented**: Added Acceptance tests with PhpBrowser and MariaDB
+- **Step 4 implemented**: Optimized Docker images and fixed Apache configuration
 
 ## Implementation Steps
 
@@ -20,19 +22,20 @@
 - [x] Collect test results
 
 ### Step 3: Add Acceptance Tests
-- [  ] Configure Acceptance test environment
-- [  ] Set up MariaDB service
-- [  ] Run Codeception Acceptance tests
-- [  ] Collect test results
+- [x] Configure Acceptance test environment
+- [x] Set up MariaDB service
+- [x] Run Codeception Acceptance tests
+- [x] Collect test results
 
 ### Step 4: Optimize Pipeline
-- [  ] Further optimize artifact handling
-- [  ] Implement caching strategies
-- [  ] Add test result reporting
+- [x] Further optimize artifact handling
+- [x] Use specialized Docker images (drupalci/php-8.3-apache, drupalci/mariadb-10.6)
+- [x] Fix Apache configuration issues
+- [x] Add debugging commands for troubleshooting
 
 ## Requirements
 - PHP 8.3
-- MariaDB 10.11
+- MariaDB 10.6
 - Selenium Chrome for JS_capable tests
 - Codeception testing framework
 

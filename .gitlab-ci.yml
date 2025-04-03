@@ -8,7 +8,7 @@
 # The full documentation is on https://project.pages.drupalcode.org/gitlab_templates/
 ################
 
-# Step 1 & 2: Basic CI Configuration with JS_capable tests
+# Step 1, 2 & 3: CI Configuration with JS_capable and Acceptance tests
 # Implementing a step-by-step approach to get tests working
 
 stages:
@@ -16,9 +16,6 @@ stages:
   - test
 
 variables:
-  # PHP and MariaDB versions
-  PHP_VERSION: "8.3"
-  MARIADB_VERSION: "10.11"
   # Reduce artifact size
   COMPOSER_CACHE_DIR: "${CI_PROJECT_DIR}/.composer-cache"
   # Avoid composer memory issues
@@ -49,7 +46,7 @@ cache:
 
 build:
   stage: build
-  image: php:${PHP_VERSION}-cli
+  image: drupalci/php-8.3-apache
   before_script:
     # Install required PHP extensions and dependencies
     - apt-get update -yqq
@@ -73,26 +70,27 @@ build:
     - find vendor -name "docs" -type d -exec rm -rf {} +; true
     - find vendor -name "documentation" -type d -exec rm -rf {} +; true
     - find vendor -name "examples" -type d -exec rm -rf {} +; true
+    # List directories to verify structure
+    - ls -la
   artifacts:
     name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
     paths:
       - vendor/
       - web/
-      - drush/
-      - config/
       - recipes/
       - tests/
       - codeception.yml
-    exclude:
-      - "**/.git/**"
-      - "**/node_modules/**"
+      # Only include these directories if they exist
+      - drush/
+      - config/
     expire_in: 1 hour
 
 js_capable_tests:
   stage: test
-  image: php:${PHP_VERSION}-cli
+  # Use the specified Drupal CI image
+  image: drupalci/php-8.3-apache
   services:
-    - name: mariadb:${MARIADB_VERSION}
+    - name: drupalci/mariadb-10.6
       alias: db
     - name: selenium/standalone-chrome:latest
       alias: selenium-chrome
@@ -110,11 +108,9 @@ js_capable_tests:
     - docker-php-ext-install zip gd pdo_mysql
     # Install additional dependencies for Codeception
     - apt-get install -yqq default-mysql-client
-    # Set up Apache for Drupal
-    - apt-get install -yqq apache2 libapache2-mod-php
-    - a2enmod rewrite
-    - echo "ServerName localhost" >> /etc/apache2/apache2.conf
     # Configure Apache virtual host
+    - echo "ServerName web" >> /etc/apache2/apache2.conf
+    - a2enmod rewrite
     - echo '<VirtualHost *:80>
         ServerName web
         DocumentRoot /var/www/html/web
@@ -127,9 +123,12 @@ js_capable_tests:
     - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
     - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
     # Start Apache
-    - service apache2 start
+    - service apache2 restart
     # Wait for services to be ready
     - sleep 10
+    # List directories to verify structure
+    - ls -la
+    - ls -la tests/
   script:
     # Install Codeception
     - composer require codeception/codeception --dev
@@ -141,6 +140,66 @@ js_capable_tests:
     - echo "CREATE DATABASE IF NOT EXISTS db;" | mysql -h db -u root -p${MYSQL_ROOT_PASSWORD}
     # Run JS_capable tests
     - php vendor/bin/codecept run Js_capable --xml
+  artifacts:
+    when: always
+    paths:
+      - tests/_output/
+    reports:
+      junit: tests/_output/report.xml
+    expire_in: 1 week
+
+acceptance_tests:
+  stage: test
+  # Use the specified Drupal CI image
+  image: drupalci/php-8.3-apache
+  services:
+    - name: drupalci/mariadb-10.6
+      alias: db
+  dependencies:
+    - build
+  before_script:
+    # Install required PHP extensions and dependencies
+    - apt-get update -yqq
+    - apt-get install -yqq git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
+    # Install Imagick extension
+    - apt-get install -yqq libmagickwand-dev --no-install-recommends
+    - pecl install imagick
+    - docker-php-ext-enable imagick
+    # Install other required extensions
+    - docker-php-ext-install zip gd pdo_mysql
+    # Install additional dependencies for Codeception
+    - apt-get install -yqq default-mysql-client
+    # Configure Apache virtual host
+    - echo "ServerName web" >> /etc/apache2/apache2.conf
+    - a2enmod rewrite
+    - echo '<VirtualHost *:80>
+        ServerName web
+        DocumentRoot /var/www/html/web
+        <Directory /var/www/html/web>
+            AllowOverride All
+            Require all granted
+        </Directory>
+      </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+    # Create symbolic link to web directory
+    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
+    - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
+    # Start Apache
+    - service apache2 restart
+    # Wait for services to be ready
+    - sleep 10
+    # List directories to verify structure
+    - ls -la
+    - ls -la tests/
+  script:
+    # Install Codeception
+    - composer require codeception/codeception --dev
+    - composer require codeception/module-phpbrowser --dev
+    - composer require codeception/module-db --dev
+    - composer require codeception/module-asserts --dev
+    # Create database dump if needed
+    - echo "CREATE DATABASE IF NOT EXISTS db;" | mysql -h db -u root -p${MYSQL_ROOT_PASSWORD}
+    # Run Acceptance tests
+    - php vendor/bin/codecept run Acceptance --xml
   artifacts:
     when: always
     paths:
