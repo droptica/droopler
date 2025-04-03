@@ -66,7 +66,7 @@ class SidebarTilesParagraphCest
         $I->attachImage($I, 'test.png');
         $I->click(MTOFormField::field_d_media_image($page_elements)->__get('open-button'));
         $I->attachImage($I, 'test.jpeg');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('sidebartiles_url', $url);

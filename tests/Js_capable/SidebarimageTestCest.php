@@ -58,7 +58,7 @@ class SidebarimageTestCest
         $I->attachImage($I, 'test.jpeg');
         $I->fillWysiwygEditor(FormField::field_d_long_text($page_elements), 'Lorem ipsum');
         $I->fillLinkField(FormField::field_d_cta_link($page_elements), 'http://example.com', 'Example');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('text_url', $url);

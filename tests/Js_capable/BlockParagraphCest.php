@@ -53,22 +53,13 @@ class BlockParagraphCest
         $I->click('.dropbutton-toggle button');
         $I->addNewParagraph('d_p_block', $page_elements);
         $I->wait(5);
-        $I->selectOption(FormField::field_block($page_elements)->__get('plugin-id'), 'Social Media Block');
+        $I->selectOption(FormField::field_block($page_elements)->__get('plugin-id'), 'Content block');
         $I->wait(5);
         $I->fillField(
             ['name' => 'field_page_section[0][subform][field_block][0][settings][label]'],
-            'Social Media Block test'
+            'Content block test'
         );
         $I->click(Locator::lastElement('.dropbutton-toggle button'));
-        $page_elements = $page_elements->next();
-        $I->addNewParagraph('d_p_block', $page_elements);
-        $I->wait(5);
-        $I->selectOption(FormField::field_block($page_elements)->__get('plugin-id'), 'Search page link');
-        $I->wait(5);
-        $I->fillField(
-            ['name' => 'field_page_section[1][subform][field_block][0][settings][label]'],
-            'Search page link test'
-        );
         $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();

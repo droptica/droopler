@@ -58,14 +58,13 @@ class FormParagraphCest
         $I->click(MTOFormField::field_d_media_icon($page_elements)->__get('open-button'));
         $I->attachImage($I, 'mask.png');
         $I->fillCk5WysiwygEditor(FormField::field_d_long_text($page_elements), 'Lorem');
-        $I->clickOn(FormField::field_d_forms($page_elements));
         $I->wait(5);
         $I->selectOption(
             "//select[contains(@data-drupal-selector, 
-            'edit-field-page-section-0-subform-field-d-forms')]",
-            "feedback"
+            'edit-field-page-section-0-subform-field-d-webform-0-target-id')]",
+            "contact"
         );
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('form_url', $url);
@@ -86,10 +85,10 @@ class FormParagraphCest
         $I->seeVar($src_icon);
         $I->assertStringContainsString('mask', $src_icon);
         $I->seeElement('#edit-name');
-        $I->seeElement('#edit-mail');
-        $I->seeElement('#edit-subject-0-value');
-        $I->seeElement('#edit-message-0-value');
-        $I->seeElement('#edit-submit');
+        $I->seeElement('#edit-email');
+        $I->seeElement('#edit-subject');
+        $I->seeElement('#edit-message');
+        $I->seeElement('#edit-actions');
     }
 
     /**

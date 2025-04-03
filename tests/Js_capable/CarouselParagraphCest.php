@@ -77,7 +77,7 @@ class CarouselParagraphCest
         $I->attachImage($I, 'mask.png');
         $I->fillCk5WysiwygEditor(FormField::field_d_long_text($page_item), 'LoremLorem');
         $I->fillSingleLinkField(FormField::field_d_cta_single_link($page_item), 'http://en.droptica.localhost/blog');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('carousel_url', $url);

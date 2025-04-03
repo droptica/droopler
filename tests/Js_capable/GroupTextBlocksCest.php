@@ -70,7 +70,7 @@ class GroupTextBlocksCest
         $I->attachImage($I, 'mask.png');
         $I->fillCk5WysiwygEditor(FormField::field_d_long_text($page_item), 'LoremLorem');
         $I->fillLinkField(FormField::field_d_cta_link($page_item), 'http://example.com', 'Example');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('group_text_blocks_url', $url);

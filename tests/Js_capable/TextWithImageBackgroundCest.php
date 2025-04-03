@@ -60,7 +60,7 @@ class TextWithImageBackgroundCest
         $I->attachImage($I, 'test.jpeg');
         $I->fillCk5WysiwygEditor(FormField::field_d_long_text($page_elements), 'LongTextKrzysiek');
         $I->fillLinkField(FormField::field_d_cta_link($page_elements), 'http://example.com', 'Example');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('TextWithImageBackground_url', $url);

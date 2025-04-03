@@ -11,7 +11,10 @@ database:
     version: "10.11"
 use_dns_when_possible: true
 composer_version: "2"
-web_environment: []
+web_environment:
+     - LIST_PAGES=/user/login,/
+     - DEV_URI=http://drop:Xnp79X@droo-codeception.dev-21.droptica.org
+     - DEV_NO_COMPARE=
 corepack_enable: true
 ddev_version_constraint: '>=1.24.0'
 

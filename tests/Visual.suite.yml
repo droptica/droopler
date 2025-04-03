@@ -6,7 +6,7 @@ modules:
         - Tests\Support\Helper\PageLoad
         - WebDriver:
              host: selenium
-             url: http://apache
+             url: http://web
              browser: chrome
              curl:
                  CURLOPT_TIMEOUT: 1200

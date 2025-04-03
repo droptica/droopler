@@ -46,7 +46,7 @@ class ReferenceContentCest
         $I->amOnPage('/node/add/content_page/');
         $I->seeVar(MTOFormField::title());
         $I->fillTextField(FormField::title(), self::TITLE_CONTENT_PAGE);
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('test_content_url', $url);
@@ -82,7 +82,7 @@ class ReferenceContentCest
         $selector = "//*[contains(@data-drupal-selector, " .
                     "'edit-field-page-section-0-subform-field-d-p-reference-content-0')]";
         $I->fillField($selector, self::TITLE_CONTENT_PAGE);
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('reference_content_url', $url);

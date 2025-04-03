@@ -58,7 +58,7 @@ class TextPagedParagraphCest
         $I->attachImage($I, 'mask.png');
         $I->fillCk5WysiwygEditor(FormField::field_d_long_text($page_elements), 'Loremlorem');
         $I->fillLinkField(FormField::field_d_cta_link($page_elements), 'http://example.com', 'Example');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('text_url', $url);

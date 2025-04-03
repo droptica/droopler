@@ -73,7 +73,7 @@ class GroupOfCountersParagraphCest
         $I->fillTextField(FormField::field_d_main_title($page_item), 'New job opportunities');
         $I->click(MTOFormField::field_d_media_icon($page_item)->__get('open-button'));
         $I->attachImage($I, 'test.png');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('group_counters_url', $url);

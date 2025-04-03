@@ -70,7 +70,7 @@ class SideBySideParagraphCest
         $I->scrollTo('#edit-submit');
         $I->fillCk5WysiwygEditor(FormField::field_d_long_text($page_item->next()), 'LoremLorem-right');
         $I->makeScreenshot();
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('text_url', $url);

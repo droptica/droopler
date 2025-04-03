@@ -64,7 +64,7 @@ class SidebarEmbedParagraphCest
         frameborder="0" allowfullscreen=""></iframe>'
         );
         $I->fillLinkField(FormField::field_d_cta_link($page_elements), 'http://example.com', 'Example');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $url = $I->grabFromCurrentUrl();
         Fixtures::add('sidebarembed_url', $url);

@@ -67,7 +67,7 @@ class GalleryParagraphCest
         $I->attachImage($I, 'test.jpeg');
         $I->click(MTOFormField::field_d_media_image($page_elements)->__get('open-button'));
         $I->attachImage($I, 'test.jpeg');
-        $I->clickOn(FormField::submit());
+        $I->click('#gin-sticky-edit-submit');
         $I->waitPageLoad(30);
         $I->makeScreenshot('dodanie-nodea.png');
         $url = $I->grabFromCurrentUrl();
