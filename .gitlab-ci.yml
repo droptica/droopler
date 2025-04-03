@@ -54,6 +54,11 @@ build:
     # Install required PHP extensions and dependencies
     - apt-get update -yqq
     - apt-get install -yqq git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
+    # Install Imagick extension
+    - apt-get install -yqq libmagickwand-dev --no-install-recommends
+    - pecl install imagick
+    - docker-php-ext-enable imagick
+    # Install other required extensions
     - docker-php-ext-install zip gd pdo_mysql
     # Install Composer
     - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -97,6 +102,11 @@ js_capable_tests:
     # Install required PHP extensions and dependencies
     - apt-get update -yqq
     - apt-get install -yqq git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
+    # Install Imagick extension
+    - apt-get install -yqq libmagickwand-dev --no-install-recommends
+    - pecl install imagick
+    - docker-php-ext-enable imagick
+    # Install other required extensions
     - docker-php-ext-install zip gd pdo_mysql
     # Install additional dependencies for Codeception
     - apt-get install -yqq default-mysql-client
