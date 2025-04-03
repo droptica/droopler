@@ -46,19 +46,11 @@ cache:
 
 build:
   stage: build
-  image: drupalci/php-8.3-apache:production
+  image: drupalci/php-8.3-ubuntu-apache:production
   before_script:
-    # Install required PHP extensions and dependencies
+    # Install required dependencies
     - apt-get update -yqq
-    - apt-get install -yqq git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
-    # Install Imagick extension
-    - apt-get install -yqq libmagickwand-dev --no-install-recommends
-    - pecl install imagick
-    - docker-php-ext-enable imagick
-    # Install other required extensions
-    - docker-php-ext-install zip gd pdo_mysql
-    # Install Composer
-    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - apt-get install -yqq git unzip
   script:
     # Install project dependencies
     - composer install --no-progress --prefer-dist --optimize-autoloader
@@ -88,7 +80,7 @@ build:
 js_capable_tests:
   stage: test
   # Use the specified Drupal CI image
-  image: drupalci/php-8.3-apache:production
+  image: drupalci/php-8.3-ubuntu-apache:production
   services:
     - name: drupalci/mariadb-10.6:production
       alias: db
@@ -97,16 +89,8 @@ js_capable_tests:
   dependencies:
     - build
   before_script:
-    # Install required PHP extensions and dependencies
-    - apt-get update -yqq
-    - apt-get install -yqq git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
-    # Install Imagick extension
-    - apt-get install -yqq libmagickwand-dev --no-install-recommends
-    - pecl install imagick
-    - docker-php-ext-enable imagick
-    # Install other required extensions
-    - docker-php-ext-install zip gd pdo_mysql
     # Install additional dependencies for Codeception
+    - apt-get update -yqq
     - apt-get install -yqq default-mysql-client
     # Configure Apache virtual host
     - echo "ServerName web" >> /etc/apache2/apache2.conf
@@ -151,23 +135,15 @@ js_capable_tests:
 acceptance_tests:
   stage: test
   # Use the specified Drupal CI image
-  image: drupalci/php-8.3-apache:production
+  image: drupalci/php-8.3-ubuntu-apache:production
   services:
     - name: drupalci/mariadb-10.6:production
       alias: db
   dependencies:
     - build
   before_script:
-    # Install required PHP extensions and dependencies
-    - apt-get update -yqq
-    - apt-get install -yqq git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
-    # Install Imagick extension
-    - apt-get install -yqq libmagickwand-dev --no-install-recommends
-    - pecl install imagick
-    - docker-php-ext-enable imagick
-    # Install other required extensions
-    - docker-php-ext-install zip gd pdo_mysql
     # Install additional dependencies for Codeception
+    - apt-get update -yqq
     - apt-get install -yqq default-mysql-client
     # Configure Apache virtual host
     - echo "ServerName web" >> /etc/apache2/apache2.conf
