@@ -51,9 +51,11 @@ build:
     # Install required dependencies
     - apt-get update -yqq
     - apt-get install -yqq git unzip
+    # Check PHP modules
+    - php -m
   script:
-    # Install project dependencies
-    - composer install --no-progress --prefer-dist --optimize-autoloader
+    # Install project dependencies, ignoring the Imagick requirement
+    - composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-req=ext-imagick
     # Remove unnecessary files to reduce artifact size
     - find . -name ".git" -type d -exec rm -rf {} +; true
     - find vendor -name "tests" -type d -exec rm -rf {} +; true
@@ -114,12 +116,12 @@ js_capable_tests:
     - ls -la
     - ls -la tests/
   script:
-    # Install Codeception
-    - composer require codeception/codeception --dev
-    - composer require codeception/module-webdriver --dev
-    - composer require codeception/module-db --dev
-    - composer require codeception/module-asserts --dev
-    - composer require codeception/module-phpbrowser --dev
+    # Install Codeception, ignoring the Imagick requirement
+    - composer require codeception/codeception --dev --ignore-platform-req=ext-imagick
+    - composer require codeception/module-webdriver --dev --ignore-platform-req=ext-imagick
+    - composer require codeception/module-db --dev --ignore-platform-req=ext-imagick
+    - composer require codeception/module-asserts --dev --ignore-platform-req=ext-imagick
+    - composer require codeception/module-phpbrowser --dev --ignore-platform-req=ext-imagick
     # Create database dump if needed
     - echo "CREATE DATABASE IF NOT EXISTS db;" | mysql -h db -u root -p${MYSQL_ROOT_PASSWORD}
     # Run JS_capable tests
@@ -167,11 +169,11 @@ acceptance_tests:
     - ls -la
     - ls -la tests/
   script:
-    # Install Codeception
-    - composer require codeception/codeception --dev
-    - composer require codeception/module-phpbrowser --dev
-    - composer require codeception/module-db --dev
-    - composer require codeception/module-asserts --dev
+    # Install Codeception, ignoring the Imagick requirement
+    - composer require codeception/codeception --dev --ignore-platform-req=ext-imagick
+    - composer require codeception/module-phpbrowser --dev --ignore-platform-req=ext-imagick
+    - composer require codeception/module-db --dev --ignore-platform-req=ext-imagick
+    - composer require codeception/module-asserts --dev --ignore-platform-req=ext-imagick
     # Create database dump if needed
     - echo "CREATE DATABASE IF NOT EXISTS db;" | mysql -h db -u root -p${MYSQL_ROOT_PASSWORD}
     # Run Acceptance tests
