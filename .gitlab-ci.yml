@@ -54,13 +54,12 @@ build:
     # Check PHP modules
     - php -m
   script:
-    # Create a custom composer.json for CI without visualception
-    - cp composer.json composer.json.bak
-    - php -r 'file_put_contents("composer.json", json_encode(array_merge_recursive(json_decode(file_get_contents("composer.json"), true), ["replace" => ["codeception/visualception" => "*"]]), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));'
-    # Install project dependencies
-    - composer install --no-progress --prefer-dist --optimize-autoloader
-    # Restore original composer.json
-    - mv composer.json.bak composer.json
+    # Install project dependencies with --no-scripts to avoid autoload generation
+    - composer install --no-progress --prefer-dist --optimize-autoloader --no-scripts
+    # Remove the problematic visualception package
+    - rm -rf vendor/codeception/visualception
+    # Generate autoload files after removing the problematic package
+    - composer dump-autoload --optimize
     # Remove unnecessary files to reduce artifact size
     - find . -name ".git" -type d -exec rm -rf {} +; true
     - find vendor -name "tests" -type d -exec rm -rf {} +; true
@@ -120,22 +119,9 @@ js_capable_tests:
     # List directories to verify structure
     - ls -la
     - ls -la tests/
+    # Verify visualception is removed
+    - if [ -d "vendor/codeception/visualception" ]; then echo "ERROR: visualception still exists"; exit 1; fi
   script:
-    # Create a temporary composer.json for installing Codeception without visualception
-    - echo '{
-        "require-dev": {
-          "codeception/codeception": "^5.0",
-          "codeception/module-webdriver": "^3.2",
-          "codeception/module-db": "^3.1",
-          "codeception/module-asserts": "^3.0",
-          "codeception/module-phpbrowser": "^3.0"
-        },
-        "replace": {
-          "codeception/visualception": "*"
-        }
-      }' > codeception-composer.json
-    # Install Codeception without visualception
-    - composer install --no-progress --working-dir=. --no-interaction -q --no-ansi --no-scripts --no-plugins --prefer-dist --no-dev --classmap-authoritative --no-cache --ignore-platform-reqs --profile --file=codeception-composer.json
     # Create database dump if needed
     - echo "CREATE DATABASE IF NOT EXISTS db;" | mysql -h db -u root -p${MYSQL_ROOT_PASSWORD}
     # Run JS_capable tests
@@ -182,21 +168,9 @@ acceptance_tests:
     # List directories to verify structure
     - ls -la
     - ls -la tests/
+    # Verify visualception is removed
+    - if [ -d "vendor/codeception/visualception" ]; then echo "ERROR: visualception still exists"; exit 1; fi
   script:
-    # Create a temporary composer.json for installing Codeception without visualception
-    - echo '{
-        "require-dev": {
-          "codeception/codeception": "^5.0",
-          "codeception/module-phpbrowser": "^3.0",
-          "codeception/module-db": "^3.1",
-          "codeception/module-asserts": "^3.0"
-        },
-        "replace": {
-          "codeception/visualception": "*"
-        }
-      }' > codeception-composer.json
-    # Install Codeception without visualception
-    - composer install --no-progress --working-dir=. --no-interaction -q --no-ansi --no-scripts --no-plugins --prefer-dist --no-dev --classmap-authoritative --no-cache --ignore-platform-reqs --profile --file=codeception-composer.json
     # Create database dump if needed
     - echo "CREATE DATABASE IF NOT EXISTS db;" | mysql -h db -u root -p${MYSQL_ROOT_PASSWORD}
     # Run Acceptance tests
