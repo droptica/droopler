@@ -46,7 +46,7 @@ cache:
 
 build:
   stage: build
-  image: drupalci/php-8.3-apache
+  image: drupalci/php-8.3-apache:production
   before_script:
     # Install required PHP extensions and dependencies
     - apt-get update -yqq
@@ -88,9 +88,9 @@ build:
 js_capable_tests:
   stage: test
   # Use the specified Drupal CI image
-  image: drupalci/php-8.3-apache
+  image: drupalci/php-8.3-apache:production
   services:
-    - name: drupalci/mariadb-10.6
+    - name: drupalci/mariadb-10.6:production
       alias: db
     - name: selenium/standalone-chrome:latest
       alias: selenium-chrome
@@ -151,9 +151,9 @@ js_capable_tests:
 acceptance_tests:
   stage: test
   # Use the specified Drupal CI image
-  image: drupalci/php-8.3-apache
+  image: drupalci/php-8.3-apache:production
   services:
-    - name: drupalci/mariadb-10.6
+    - name: drupalci/mariadb-10.6:production
       alias: db
   dependencies:
     - build
