@@ -6,9 +6,7 @@ variables:
   FF_NETWORK_PER_BUILD: "1"
 
 stages:
-#  - test
   - prepare
-#  - test
 
 create-project:
   stage: prepare
