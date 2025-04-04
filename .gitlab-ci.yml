@@ -35,7 +35,7 @@ install_drupal:
     - name: 'drupalci/mysql-8'
       alias: database
   variables:
-    SIMPLETEST_DB: "mysql://drupal:drupal@database/drupal"
+    SIMPLETEST_DB: "mysql://root:root@database/drupal"
     SIMPLETEST_BASE_URL: "http://web"
   needs:
     - job: create-project
@@ -51,7 +51,9 @@ install_drupal:
     # Create database
     - apt-get update -yqq
     - apt-get install -yqq default-mysql-client
-    - mysql -h database -u drupal -pdrupal -e "CREATE DATABASE IF NOT EXISTS drupal;"
+    - mysql -h database -u root -proot -e "CREATE DATABASE IF NOT EXISTS drupal;"
+    - mysql -h database -u root -proot -e "GRANT ALL PRIVILEGES ON drupal.* TO 'drupal'@'%' IDENTIFIED BY 'drupal';"
+    - mysql -h database -u root -proot -e "FLUSH PRIVILEGES;"
     
     # Start web server
     - php -S 0.0.0.0:80 -t web/ &
@@ -61,8 +63,8 @@ install_drupal:
     - echo "<?php" > web/sites/default/settings.php
     - echo "\$databases['default']['default'] = [" >> web/sites/default/settings.php
     - echo "  'database' => 'drupal'," >> web/sites/default/settings.php
-    - echo "  'username' => 'drupal'," >> web/sites/default/settings.php
-    - echo "  'password' => 'drupal'," >> web/sites/default/settings.php
+    - echo "  'username' => 'root'," >> web/sites/default/settings.php
+    - echo "  'password' => 'root'," >> web/sites/default/settings.php
     - echo "  'prefix' => ''," >> web/sites/default/settings.php
     - echo "  'host' => 'database'," >> web/sites/default/settings.php
     - echo "  'port' => '3306'," >> web/sites/default/settings.php
