@@ -12,12 +12,11 @@ modules:
                  CURLOPT_TIMEOUT: 1200
              "goog:chromeOptions":
                  'w3c': false
-        # VisualCeption module removed due to Imagick dependency issues in CI
-        # - VisualCeption:
-        #     maximumDeviation: 0
-        #     saveCurrentImageIfFailure: true
-        #     report: true
-        #     templateFile: "/tests/test_template/visual_custom_template.php"
+        - VisualCeption:
+            maximumDeviation: 0
+            saveCurrentImageIfFailure: true
+            report: true
+            templateFile: "/tests/test_template/visual_custom_template.php"
 
 env:
     mobile:
