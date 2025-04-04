@@ -1,160 +1,70 @@
-################
-# GitLabCI template for Drupal projects.
-#
-# This template is designed to give any Contrib maintainer everything they need to test, without requiring modification.
-# It is also designed to keep up to date with Core Development automatically through the use of include files that can be centrally maintained.
-# As long as you include the project, ref and three files below, any future updates added by the Drupal Association will be used in your
-# pipelines automatically. However, you can modify this template if you have additional needs for your project.
-# The full documentation is on https://project.pages.drupalcode.org/gitlab_templates/
-################
-
-# Step 1: CI Configuration - Build with Acceptance tests
-# Focusing on build step and running Acceptance tests
+variables:
+  MYSQL_DATABASE: "db"
+  MYSQL_USER: "db"
+  MYSQL_PASSWORD: "db"
+  MYSQL_ROOT_PASSWORD: "root"
+  FF_NETWORK_PER_BUILD: "1"
 
 stages:
-  - build
+  - prepare
+  - test
 
-variables:
-  COMPOSER_CACHE_DIR: "${CI_PROJECT_DIR}/.composer-cache"
-  COMPOSER_MEMORY_LIMIT: -1
-  COMPOSER_NO_INTERACTION: "1"
-  _WEB_ROOT: "web"
-  GIT_DEPTH: "1"
-  GIT_STRATEGY: "fetch"
-  SKIP_ESLINT: "1"
-  SKIP_CSPELL: "1"
-  SKIP_STYLELINT: "1"
-  _SHOW_ENVIRONMENT_VARIABLES: "1"
-  # Database configuration for MariaDB service
-  MYSQL_DATABASE: "drupal"
-  MYSQL_ROOT_PASSWORD: "drupal"
-  MYSQL_USER: "drupal"
-  MYSQL_PASSWORD: "drupal"
-  # Test configuration
-  SIMPLETEST_BASE_URL: "http://web"
+# Etap przygotowania: instalujemy zależności i budujemy codeception
+prepare:
+  stage: prepare
+  image: drupalci/php-8.3-ubuntu-apache:production
+  script:
+    - composer install
+    - ./vendor/bin/codecept build
+    - ./vendor/bin/drush status
+  cache:
+    key: ${CI_PROJECT_NAME}-composer
+    paths:
+      - vendor/
+  artifacts:
+    paths:
+      - vendor/
+      - tests/_support/_generated/
+    expire_in: 1 hour
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - .composer-cache/
-
-build:
-  stage: build
+# Testy Acceptance (bez JS)
+test_acceptance:
+  stage: test
+  needs: ["prepare"]
   image: drupalci/php-8.3-ubuntu-apache:production
   services:
     - name: drupalci/mariadb-10.6:production
       alias: db
-      variables:
-        MYSQL_DATABASE: "drupal"
-        MYSQL_ROOT_PASSWORD: "drupal"
-        MYSQL_USER: "drupal"
-        MYSQL_PASSWORD: "drupal"
+  before_script:
+    - php -S 0.0.0.0:80 -t web/ &
+    - echo "127.0.0.1 web" >> /etc/hosts
+    # opcjonalnie: import dumpa lub site-install jeśli potrzebne
   script:
-    # Install dependencies
-    - apt-get update -yqq
-    - apt-get install -yqq git unzip default-mysql-client
-    - composer install --no-progress --prefer-dist --optimize-autoloader --no-scripts
-    - rm -rf vendor/codeception/visualception
-    - composer dump-autoload --optimize
-    
-    # Check environment
-    - php -v
-    - echo "Checking for DDEV..."
-    - if command -v ddev &> /dev/null; then
-        echo "DDEV is available";
-        ddev --version;
-        echo "Checking Drupal status...";
-        ddev drush status;
-      else
-        echo "DDEV is not available in this environment";
-        echo "This is expected in CI environments";
-        echo "Checking Drupal files...";
-        ls -la web/;
-        if [ -f "web/index.php" ]; then
-          echo "Drupal files are present";
-        else
-          echo "Drupal files are missing";
-          exit 1;
-        fi;
-      fi
-    
-    # Configure Apache for Acceptance tests
-    - echo "Setting up Apache for Acceptance tests..."
-    - echo "ServerName web" >> /etc/apache2/apache2.conf
-    - a2enmod rewrite
-    - echo '<VirtualHost *:80>' > /etc/apache2/sites-available/000-default.conf
-    - echo '  ServerName web' >> /etc/apache2/sites-available/000-default.conf
-    - echo '  DocumentRoot /var/www/html/web' >> /etc/apache2/sites-available/000-default.conf
-    - echo '  <Directory /var/www/html/web>' >> /etc/apache2/sites-available/000-default.conf
-    - echo '    AllowOverride All' >> /etc/apache2/sites-available/000-default.conf
-    - echo '    Require all granted' >> /etc/apache2/sites-available/000-default.conf
-    - echo '  </Directory>' >> /etc/apache2/sites-available/000-default.conf
-    - echo '</VirtualHost>' >> /etc/apache2/sites-available/000-default.conf
-    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
-    - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
-    - service apache2 restart
-    
-    # Try to run Acceptance tests
-    - echo "Attempting to run Acceptance tests..."
-    #- echo "Checking database connection..."
-    #- mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
-    - echo "Running Acceptance tests..."
-    - php vendor/bin/codecept run Acceptance --debug || echo "Acceptance tests failed, but continuing build"
-    
+    - ./vendor/bin/codecept run Acceptance
   artifacts:
-    name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
+    when: always
     paths:
-      - vendor/
-      - web/
-      - recipes/
-      - tests/
-      - codeception.yml
-      - drush/
-      - config/
       - tests/_output/
-    expire_in: 1 hour
+    expire_in: 1 week
 
-# Test jobs are temporarily disabled while we focus on the build process
-# Uncomment these when ready to proceed with testing
-
-#js_capable_tests:
-#  stage: test
-#  image: drupalci/php-8.3-ubuntu-apache:production
-#  services:
-#    - name: drupalci/mariadb-10.6:production
-#      alias: db
-#      variables:
-#        MYSQL_DATABASE: "drupal"
-#        MYSQL_ROOT_PASSWORD: "drupal"
-#        MYSQL_USER: "drupal"
-#        MYSQL_PASSWORD: "drupal"
-#    - name: selenium/standalone-chrome:latest
-#      alias: selenium-chrome
-#  dependencies:
-#    - build
-#  script:
-#    - apt-get update -yqq
-#    - apt-get install -yqq default-mysql-client
-#    # Configure Apache
-#    - echo "ServerName web" >> /etc/apache2/apache2.conf
-#    - a2enmod rewrite
-#    - echo '<VirtualHost *:80>' > /etc/apache2/sites-available/000-default.conf
-#    - echo '  ServerName web' >> /etc/apache2/sites-available/000-default.conf
-#    - echo '  DocumentRoot /var/www/html/web' >> /etc/apache2/sites-available/000-default.conf
-#    - echo '  <Directory /var/www/html/web>' >> /etc/apache2/sites-available/000-default.conf
-#    - echo '    AllowOverride All' >> /etc/apache2/sites-available/000-default.conf
-#    - echo '    Require all granted' >> /etc/apache2/sites-available/000-default.conf
-#    - echo '  </Directory>' >> /etc/apache2/sites-available/000-default.conf
-#    - echo '</VirtualHost>' >> /etc/apache2/sites-available/000-default.conf
-#    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
-#    - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
-#    - service apache2 restart
-#    # Run tests
-#    - php vendor/bin/codecept run Js_capable --xml
-#  artifacts:
-#    when: always
-#    paths:
-#      - tests/_output/
-#    reports:
-#      junit: tests/_output/report.xml
-#    expire_in: 1 week
+# Testy Js_capable (z Selenium)
+test_js_capable:
+  stage: test
+  needs: ["prepare"]
+  image: drupalci/php-8.3-ubuntu-apache:production
+  services:
+    - name: drupalci/mariadb-10.6:production
+      alias: db
+    - name: selenium/standalone-chrome:latest
+      alias: selenium-chrome
+  before_script:
+    - php -S 0.0.0.0:80 -t web/ &
+    - HOST_IP=$(hostname -I | cut -d' ' -f1)
+    - sed -i "s|http://web/|http://$HOST_IP/|g" tests/Js_capable.suite.yml
+  script:
+    - ./vendor/bin/codecept run Js_capable
+  artifacts:
+    when: always
+    paths:
+      - tests/_output/
+    expire_in: 1 week
