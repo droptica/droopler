@@ -31,7 +31,8 @@ install_drupal:
     - job: create-project
       artifacts: true
   script:
-    - cd $BUILD_DIR
+    - pwd
+    - ls -al
     - composer install
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
