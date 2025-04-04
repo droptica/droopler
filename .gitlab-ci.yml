@@ -77,19 +77,9 @@ install_drupal:
     # Install Drupal with Drush
     - ./vendor/bin/drush site:install droopler --account-name=admin --account-pass=admin --site-name="Droopler CI" -y || echo "Drush site install failed, but continuing"
     - ./vendor/bin/drush status
-    
-    # Create a copy of autoload.php in the expected location
-    - mkdir -p /var/www/html/web/
-    - cp web/autoload.php /var/www/html/web/autoload.php || echo "Could not copy autoload.php"
-    
-    # Run Codeception build
-    #- ./vendor/bin/codecept build
-    
-    # Check if DrupalBootstrap can find autoload.php
-    - php -r "require '/var/www/html/web/autoload.php'; echo 'Autoload.php loaded successfully\n';" || echo "Failed to load autoload.php"
-    
+
     # Run tests with debug output
-    - ./vendor/bin/codecept run Acceptance --vv --xml || echo "Acceptance tests failed, but continuing"
+    - ./vendor/bin/codecept run Acceptance -vv --xml || echo "Acceptance tests failed, but continuing"
   artifacts:
     when: always
     paths:
