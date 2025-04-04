@@ -15,15 +15,11 @@ create-project:
   image: drupalci/php-8.3-ubuntu-apache:production
   script:
     - composer install --no-progress --prefer-dist --optimize-autoloader
-    # Set up Drupal environment for Codeception
-    - mkdir -p /var/www/html
-    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
-    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
-    # Check if symlinks were created correctly
-    - ls -la /var/www/html/
-    - ls -la /var/www/html/web/ || echo "Web directory not found in /var/www/html/"
     # Check for autoload.php
     - find ${CI_PROJECT_DIR} -name "autoload.php"
+    # Create the web/sites/default/settings.php file if it doesn't exist
+    - mkdir -p web/sites/default
+    - cp web/sites/default/default.settings.php web/sites/default/settings.php || echo "Could not copy default settings"
   artifacts:
     paths:
       - vendor/
@@ -39,26 +35,56 @@ install_drupal:
     - name: 'drupalci/mysql-8'
       alias: database
   variables:
-    DB_URL: mysql://drupal:drupal@database/drupal
-    SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
+    SIMPLETEST_DB: "mysql://drupal:drupal@database/drupal"
     SIMPLETEST_BASE_URL: "http://web"
   needs:
     - job: create-project
       artifacts: true
   script:
-    - composer install
+    # Set up Drupal environment for Codeception
+    - mkdir -p /var/www/html
+    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
+    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
+    - ls -la /var/www/html/
+    - ls -la /var/www/html/web/ || echo "Web directory not found in /var/www/html/"
+    
+    # Create database
+    - apt-get update -yqq
+    - apt-get install -yqq default-mysql-client
+    - mysql -h database -u drupal -pdrupal -e "CREATE DATABASE IF NOT EXISTS drupal;"
+    
+    # Start web server
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
-    - php web/core/scripts/drupal install droopler
-    # Create database
-    # - mysql -h database -u drupal -pdrupal -e "CREATE DATABASE IF NOT EXISTS drupal;"
-    # Install Drupal
-    # - ./vendor/bin/drush site:install droopler --db-url=mysql://drupal:drupal@database/drupal --account-name=admin --account-pass=admin --site-name="Droopler CI" -y || echo "Drush site install failed, but continuing"
+    
+    # Create settings.php with database connection
+    - echo "<?php" > web/sites/default/settings.php
+    - echo "\$databases['default']['default'] = [" >> web/sites/default/settings.php
+    - echo "  'database' => 'drupal'," >> web/sites/default/settings.php
+    - echo "  'username' => 'drupal'," >> web/sites/default/settings.php
+    - echo "  'password' => 'drupal'," >> web/sites/default/settings.php
+    - echo "  'prefix' => ''," >> web/sites/default/settings.php
+    - echo "  'host' => 'database'," >> web/sites/default/settings.php
+    - echo "  'port' => '3306'," >> web/sites/default/settings.php
+    - echo "  'namespace' => 'Drupal\\\\Core\\\\Database\\\\Driver\\\\mysql'," >> web/sites/default/settings.php
+    - echo "  'driver' => 'mysql'," >> web/sites/default/settings.php
+    - echo "];" >> web/sites/default/settings.php
+    - cat web/sites/default/settings.php
+    
+    # Install Drupal with Drush
+    - ./vendor/bin/drush site:install droopler --account-name=admin --account-pass=admin --site-name="Droopler CI" -y || echo "Drush site install failed, but continuing"
     - ./vendor/bin/drush status
+    
+    # Create a copy of autoload.php in the expected location
+    - mkdir -p /var/www/html/web/
+    - cp web/autoload.php /var/www/html/web/autoload.php || echo "Could not copy autoload.php"
+    
     # Run Codeception build
     - ./vendor/bin/codecept build
+    
     # Check if DrupalBootstrap can find autoload.php
     - php -r "require '/var/www/html/web/autoload.php'; echo 'Autoload.php loaded successfully\n';" || echo "Failed to load autoload.php"
+    
     # Run tests with debug output
     - ./vendor/bin/codecept run Acceptance --debug --xml || echo "Acceptance tests failed, but continuing"
   artifacts:
