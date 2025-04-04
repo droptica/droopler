@@ -94,9 +94,9 @@ js_capable_tests:
     - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
     - service apache2 restart
     # Verify database connection
-    - echo "Waiting for database to be ready..."
-    - sleep 10
-    - mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
+    #- echo "Waiting for database to be ready..."
+    #- sleep 10
+    #- mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
     # Run tests
     - php vendor/bin/codecept run Js_capable --xml
   artifacts:
@@ -138,9 +138,9 @@ acceptance_tests:
     - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
     - service apache2 restart
     # Verify database connection
-    - echo "Waiting for database to be ready..."
-    - sleep 10
-    - mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
+    #- echo "Waiting for database to be ready..."
+    #- sleep 10
+    #- mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
     # Run tests
     - php vendor/bin/codecept run Acceptance --xml
   artifacts:
