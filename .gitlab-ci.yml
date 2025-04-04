@@ -1,7 +1,7 @@
 variables:
-  MYSQL_DATABASE: "db"
-  MYSQL_USER: "db"
-  MYSQL_PASSWORD: "db"
+  MYSQL_DATABASE: "drupal"
+  MYSQL_USER: "drupal"
+  MYSQL_PASSWORD: "drupal"
   MYSQL_ROOT_PASSWORD: "root"
   FF_NETWORK_PER_BUILD: "1"
 
@@ -23,10 +23,11 @@ install_drupal:
   stage: install
   image: drupalci/php-8.3-ubuntu-apache:production
   services:
-    - name: drupalci/mariadb-10.6:production
-      alias: db
+    - name: 'drupalci/mysql-8'
+      alias: database
   variables:
-    DB_URL: "mysql://db:db@db/db"
+    DB_URL: mysql://drupal:drupal@database/mysql
+    SIMPLETEST_DB: mysql://drupal:drupal@database/mysql
   needs:
     - job: create-project
       artifacts: true
@@ -36,8 +37,8 @@ install_drupal:
     - echo "127.0.0.1 web" >> /etc/hosts
     - ./vendor/bin/drush status
     # instalacja Drupala 10 profilem 'standard' (lub 'minimal')
-    - ./vendor/bin/drush site:install -y
-#      --db-url="$DB_URL" \
+    - ./vendor/bin/drush site:install -y \
+      --db-url="drupal"
 #      --account-name=admin \
 #      --account-pass=admin \
 #      --site-name="Drupal CI"
