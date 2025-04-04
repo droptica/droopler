@@ -6,93 +6,117 @@ variables:
   FF_NETWORK_PER_BUILD: "1"
 
 stages:
-  - prepare
-  - test
+  - test_droopler
+#  - prepare
+#  - test
 
-# Etap przygotowania: instalujemy zależności i budujemy codeception
-prepare:
-  stage: prepare
+test_droopler:
+  stage: test
   image: drupalci/php-8.3-ubuntu-apache:production
+  services:
+    - name: drupalci/mariadb-10.6:production
+      alias: db
   before_script:
     - composer install
+    - ./vendor/bin/drush recipes:list
+    - echo "=== Dostępne przepisy ==="
+    - ./vendor/bin/drush recipes:list
+    - echo "=== Sprawdzam pliki recipe ==="
+    - find . -name "recipe.yml"
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
-    - ./vendor/bin/drush si -y
+    - ./vendor/bin/drush si minimal -y \
+      --db-url="mysql://db:db@db/db" \
+      --account-name=admin \
+      --account-pass=admin \
+      --site-name="Droopler CI"
     - ./vendor/bin/drush recipes:install droopler
   script:
-    # Set up Drupal environment for Codeception
-    - mkdir -p /var/www/html
-    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
-    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
-    - ./vendor/bin/codecept build
-    - ls -la /var/www/html/
-    - ls -la /var/www/html/web/
-    - echo "Checking for Drupal autoload.php..."
-    - if [ -f "/var/www/html/web/autoload.php" ]; then
-        echo "Drupal autoload.php exists";
-      else
-        echo "Drupal autoload.php not found, checking other locations...";
-        find ${CI_PROJECT_DIR} -name "autoload.php";
-      fi
-    - ./vendor/bin/drush status || echo "Drush status failed, but continuing"
-  cache:
-    key: ${CI_PROJECT_NAME}-composer
-    paths:
-      - vendor/
-  artifacts:
-    paths:
-      - vendor/
-      - web/
-      - tests/
-      - tests/_support/_generated/
-    expire_in: 1 hour
-
-# Testy Acceptance (bez JS)
-test_acceptance:
-  stage: test
-  needs: ["prepare"]
-  image: drupalci/php-8.3-ubuntu-apache:production
-  services:
-    - name: drupalci/mariadb-10.6:production
-      alias: db
-  before_script:
-    # Set up Drupal environment
-    - mkdir -p /var/www/html
-    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
-    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
-    - php -S 0.0.0.0:80 -t web/ &
-    - echo "127.0.0.1 web" >> /etc/hosts
-    # opcjonalnie: import dumpa lub site-install jeśli potrzebne
-  script:
-    - ./vendor/bin/codecept run Acceptance || echo "Acceptance tests failed, but continuing"
-  artifacts:
-    when: always
-    paths:
-      - tests/_output/
-    expire_in: 1 week
-
-# Testy Js_capable (z Selenium)
-test_js_capable:
-  stage: test
-  needs: ["prepare"]
-  image: drupalci/php-8.3-ubuntu-apache:production
-  services:
-    - name: drupalci/mariadb-10.6:production
-      alias: db
-    - name: selenium/standalone-chrome:latest
-      alias: selenium-chrome
-  before_script:
-    # Set up Drupal environment
-    - mkdir -p /var/www/html
-    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
-    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
-    - php -S 0.0.0.0:80 -t web/ &
-    - HOST_IP=$(hostname -I | cut -d' ' -f1)
-    - sed -i "s|http://web/|http://$HOST_IP/|g" tests/Js_capable.suite.yml
-  script:
-    - ./vendor/bin/codecept run Js_capable || echo "Js_capable tests failed, but continuing"
-  artifacts:
-    when: always
-    paths:
-      - tests/_output/
-    expire_in: 1 week
+    - ./vendor/bin/codecept run Acceptance
+# Etap przygotowania: instalujemy zależności i budujemy codeception
+#prepare:
+#  stage: prepare
+#  image: drupalci/php-8.3-ubuntu-apache:production
+#  before_script:
+#    - composer install
+#    - php -S 0.0.0.0:80 -t web/ &
+#    - echo "127.0.0.1 web" >> /etc/hosts
+#    - ./vendor/bin/drush si -y
+#    - ./vendor/bin/drush recipes:install droopler
+#  script:
+#    # Set up Drupal environment for Codeception
+#    - mkdir -p /var/www/html
+#    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
+#    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
+#    - ./vendor/bin/codecept build
+#    - ls -la /var/www/html/
+#    - ls -la /var/www/html/web/
+#    - echo "Checking for Drupal autoload.php..."
+#    - if [ -f "/var/www/html/web/autoload.php" ]; then
+#        echo "Drupal autoload.php exists";
+#      else
+#        echo "Drupal autoload.php not found, checking other locations...";
+#        find ${CI_PROJECT_DIR} -name "autoload.php";
+#      fi
+#    - ./vendor/bin/drush status || echo "Drush status failed, but continuing"
+#  cache:
+#    key: ${CI_PROJECT_NAME}-composer
+#    paths:
+#      - vendor/
+#  artifacts:
+#    paths:
+#      - vendor/
+#      - web/
+#      - tests/
+#      - tests/_support/_generated/
+#    expire_in: 1 hour
+#
+## Testy Acceptance (bez JS)
+#test_acceptance:
+#  stage: test
+#  needs: ["prepare"]
+#  image: drupalci/php-8.3-ubuntu-apache:production
+#  services:
+#    - name: drupalci/mariadb-10.6:production
+#      alias: db
+#  before_script:
+#    # Set up Drupal environment
+#    - mkdir -p /var/www/html
+#    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
+#    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
+#    - php -S 0.0.0.0:80 -t web/ &
+#    - echo "127.0.0.1 web" >> /etc/hosts
+#    # opcjonalnie: import dumpa lub site-install jeśli potrzebne
+#  script:
+#    - ./vendor/bin/codecept run Acceptance || echo "Acceptance tests failed, but continuing"
+#  artifacts:
+#    when: always
+#    paths:
+#      - tests/_output/
+#    expire_in: 1 week
+#
+## Testy Js_capable (z Selenium)
+#test_js_capable:
+#  stage: test
+#  needs: ["prepare"]
+#  image: drupalci/php-8.3-ubuntu-apache:production
+#  services:
+#    - name: drupalci/mariadb-10.6:production
+#      alias: db
+#    - name: selenium/standalone-chrome:latest
+#      alias: selenium-chrome
+#  before_script:
+#    # Set up Drupal environment
+#    - mkdir -p /var/www/html
+#    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
+#    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
+#    - php -S 0.0.0.0:80 -t web/ &
+#    - HOST_IP=$(hostname -I | cut -d' ' -f1)
+#    - sed -i "s|http://web/|http://$HOST_IP/|g" tests/Js_capable.suite.yml
+#  script:
+#    - ./vendor/bin/codecept run Js_capable || echo "Js_capable tests failed, but continuing"
+#  artifacts:
+#    when: always
+#    paths:
+#      - tests/_output/
+#    expire_in: 1 week
