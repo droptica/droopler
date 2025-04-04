@@ -13,7 +13,9 @@ create-project:
   image: drupalci/php-8.3-ubuntu-apache:production
   script:
     - composer create-project drupal/recommended-project:^10 --no-interaction --no-install $BUILD_DIR
-    - cd $BUILD_DIR
+    - pwd
+    - ls -al $BUILD_DIR
+#    - cd $BUILD_DIR
     - composer install
   artifacts:
     paths:
