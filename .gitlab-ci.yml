@@ -1,7 +1,7 @@
 variables:
-  MYSQL_DATABASE: "drupal"
-  MYSQL_USER: "drupal"
-  MYSQL_PASSWORD: "drupal"
+  MYSQL_DATABASE: "mysql"  # Using 'mysql' as in the example
+  MYSQL_USER: "drupaltestbot"  # Using the same user as in the example
+  MYSQL_PASSWORD: "drupaltestbotpw"  # Using the same password as in the example
   MYSQL_ROOT_PASSWORD: "root"
   FF_NETWORK_PER_BUILD: "1"
   BUILD_DIR: "."  # Use current directory as build directory
@@ -15,6 +15,8 @@ create-project:
   image: drupalci/php-8.3-ubuntu-apache:production
   script:
     - composer install --no-progress --prefer-dist --optimize-autoloader
+    # Remove visualception to avoid Imagick dependency issues
+    - rm -rf vendor/codeception/visualception
     # Check for autoload.php
     - find ${CI_PROJECT_DIR} -name "autoload.php"
     # Create the web/sites/default/settings.php file if it doesn't exist
@@ -35,7 +37,7 @@ install_drupal:
     - name: 'drupalci/mysql-8'
       alias: database
   variables:
-    SIMPLETEST_DB: "mysql://root:root@database/drupal"
+    SIMPLETEST_DB: "mysql://drupaltestbot:drupaltestbotpw@database/mysql"
     SIMPLETEST_BASE_URL: "http://web"
   needs:
     - job: create-project
@@ -48,12 +50,11 @@ install_drupal:
     - ls -la /var/www/html/
     - ls -la /var/www/html/web/ || echo "Web directory not found in /var/www/html/"
     
-    # Create database
+    # Install MySQL client and check database
     - apt-get update -yqq
     - apt-get install -yqq default-mysql-client
-    - mysql -h database -u root -proot -e "CREATE DATABASE IF NOT EXISTS drupal;"
-    - mysql -h database -u root -proot -e "GRANT ALL PRIVILEGES ON drupal.* TO 'drupal'@'%' IDENTIFIED BY 'drupal';"
-    - mysql -h database -u root -proot -e "FLUSH PRIVILEGES;"
+    - echo "Checking database connection..."
+    - mysql -h database -u drupaltestbot -pdrupaltestbotpw -e "SHOW DATABASES;"
     
     # Start web server
     - php -S 0.0.0.0:80 -t web/ &
@@ -62,9 +63,9 @@ install_drupal:
     # Create settings.php with database connection
     - echo "<?php" > web/sites/default/settings.php
     - echo "\$databases['default']['default'] = [" >> web/sites/default/settings.php
-    - echo "  'database' => 'drupal'," >> web/sites/default/settings.php
-    - echo "  'username' => 'root'," >> web/sites/default/settings.php
-    - echo "  'password' => 'root'," >> web/sites/default/settings.php
+    - echo "  'database' => 'mysql'," >> web/sites/default/settings.php
+    - echo "  'username' => 'drupaltestbot'," >> web/sites/default/settings.php
+    - echo "  'password' => 'drupaltestbotpw'," >> web/sites/default/settings.php
     - echo "  'prefix' => ''," >> web/sites/default/settings.php
     - echo "  'host' => 'database'," >> web/sites/default/settings.php
     - echo "  'port' => '3306'," >> web/sites/default/settings.php
