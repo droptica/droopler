@@ -31,17 +31,19 @@ install_drupal:
     - job: create-project
       artifacts: true
   script:
-    - pwd
-    - ls -al
     - composer install
+    - ls -al ./vendor/drush/drush
+    - ls -al ./vendor/bin/drush
+    - ls -al ./vendor
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
+    - ./vendor/bin/drush status
     # instalacja Drupala 10 profilem 'standard' (lub 'minimal')
-    - ./vendor/bin/drush --root=web site:install standard -y \
-      --db-url="$DB_URL" \
-      --account-name=admin \
-      --account-pass=admin \
-      --site-name="Drupal CI"
+#    - ./vendor/bin/drush --root=web site:install standard -y \
+#      --db-url="$DB_URL" \
+#      --account-name=admin \
+#      --account-pass=admin \
+#      --site-name="Drupal CI"
   artifacts:
     paths:
       - $BUILD_DIR/web/sites/default
