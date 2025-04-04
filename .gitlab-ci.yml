@@ -84,7 +84,7 @@ install_drupal:
 
     # Run tests with debug output
     - ./vendor/bin/codecept build
-    - ./vendor/bin/codecept run CI -vv --xml || echo "CI tests failed, but continuing"
+    - ./vendor/bin/codecept run Acceptance -vv --xml || echo "CI tests failed, but continuing"
   artifacts:
     when: always
     paths:
