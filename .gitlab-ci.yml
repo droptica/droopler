@@ -14,11 +14,15 @@ prepare:
   stage: prepare
   image: drupalci/php-8.3-ubuntu-apache:production
   before_script:
-    - composer install
+  - composer install
+  - php -S 0.0.0.0:80 -t web/ &
+  - echo "127.0.0.1 web" >> /etc/hosts
+  - ./vendor/bin/drush site-install droopler -y \
+      --db-url="mysql://db:db@db/db" \
+      --account-name=admin \
+      --account-pass=admin \
+      --site-name="Droopler CI"
   script:
-    - php -S 0.0.0.0:80 -t web/ &
-    - echo "127.0.0.1 web" >> /etc/hosts
-    - ./vendor/bin/drush site-install droopler -y
     # Set up Drupal environment for Codeception
     - mkdir -p /var/www/html
     - ln -sf ${CI_PROJECT_DIR} /var/www/html/
