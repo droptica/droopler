@@ -1,0 +1,19 @@
+# Codeception Test Suite Configuration
+#
+# Simple test suite for CI testing
+
+actor: CITester
+modules:
+  enabled:
+    - PhpBrowser:
+        url: http://web/
+        verify: false
+        curl:
+          CURLOPT_TIMEOUT: 1200
+          CURLOPT_SSL_VERIFYHOST: 0
+          CURLOPT_SSL_VERIFYPEER: 0
+          CURLOPT_RETURNTRANSFER: true
+    - Tests\Support\Helper\DrupalHelper
+    - DrupalBootstrap:
+        root: '/var/www/html/web'
+step_decorators: ~
