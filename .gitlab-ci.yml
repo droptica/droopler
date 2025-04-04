@@ -26,7 +26,7 @@ variables:
   SKIP_CSPELL: "1"
   SKIP_STYLELINT: "1"
   _SHOW_ENVIRONMENT_VARIABLES: "1"
-  # Database configuration
+  # Database configuration for MariaDB service
   MYSQL_DATABASE: "drupal"
   MYSQL_ROOT_PASSWORD: "drupal"
   MYSQL_USER: "drupal"
@@ -67,6 +67,11 @@ js_capable_tests:
   services:
     - name: drupalci/mariadb-10.6:production
       alias: db
+      variables:
+        MYSQL_DATABASE: "drupal"
+        MYSQL_ROOT_PASSWORD: "drupal"
+        MYSQL_USER: "drupal"
+        MYSQL_PASSWORD: "drupal"
     - name: selenium/standalone-chrome:latest
       alias: selenium-chrome
   dependencies:
@@ -88,10 +93,10 @@ js_capable_tests:
     - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
     - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
     - service apache2 restart
-    # Set up database
-    - mysql -h db -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
-    - mysql -h db -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-    - mysql -h db -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
+    # Verify database connection
+    - echo "Waiting for database to be ready..."
+    - sleep 10
+    - mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
     # Run tests
     - php vendor/bin/codecept run Js_capable --xml
   artifacts:
@@ -108,6 +113,11 @@ acceptance_tests:
   services:
     - name: drupalci/mariadb-10.6:production
       alias: db
+      variables:
+        MYSQL_DATABASE: "drupal"
+        MYSQL_ROOT_PASSWORD: "drupal"
+        MYSQL_USER: "drupal"
+        MYSQL_PASSWORD: "drupal"
   dependencies:
     - build
   script:
@@ -127,10 +137,10 @@ acceptance_tests:
     - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
     - chown -R www-data:www-data ${CI_PROJECT_DIR}/web
     - service apache2 restart
-    # Set up database
-    - mysql -h db -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
-    - mysql -h db -u root -p${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-    - mysql -h db -u root -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
+    # Verify database connection
+    - echo "Waiting for database to be ready..."
+    - sleep 10
+    - mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
     # Run tests
     - php vendor/bin/codecept run Acceptance --xml
   artifacts:
