@@ -96,8 +96,8 @@ build:
     
     # Try to run Acceptance tests
     - echo "Attempting to run Acceptance tests..."
-    - echo "Checking database connection..."
-    - mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
+    #- echo "Checking database connection..."
+    #- mysql -h db -u drupal -pdrupal -e "SHOW DATABASES;"
     - echo "Running Acceptance tests..."
     - php vendor/bin/codecept run Acceptance --debug || echo "Acceptance tests failed, but continuing build"
     
