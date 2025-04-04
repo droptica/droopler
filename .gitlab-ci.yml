@@ -18,11 +18,10 @@ test_droopler:
       alias: db
   before_script:
     - composer install
-    - echo "=== Sprawdzam pliki recipe ==="
-    - find . -name "recipe.yml"
+    - find web/core/profiles -name "minimal.info.yml"
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
-    - ./vendor/bin/drush si minimal -y \
+    - ./vendor/bin/drush --root=web si minimal -y \
       --db-url="mysql://db:db@db/db" \
       --account-name=admin \
       --account-pass=admin \
