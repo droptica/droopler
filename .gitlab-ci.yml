@@ -1,7 +1,7 @@
 variables:
-  MYSQL_DATABASE: "mysql"  # Using 'mysql' as in the example
-  MYSQL_USER: "drupaltestbot"  # Using the same user as in the example
-  MYSQL_PASSWORD: "drupaltestbotpw"  # Using the same password as in the example
+  MYSQL_DATABASE: "db"  # Changed to match Codeception config
+  MYSQL_USER: "db"  # Changed to match Codeception config
+  MYSQL_PASSWORD: "db"  # Changed to match Codeception config
   MYSQL_ROOT_PASSWORD: "root"
   FF_NETWORK_PER_BUILD: "1"
   BUILD_DIR: "."  # Use current directory as build directory
@@ -35,9 +35,9 @@ install_drupal:
   image: drupalci/php-8.3-ubuntu-apache:production
   services:
     - name: 'drupalci/mysql-8'
-      alias: database
+      alias: db  # Changed to match Codeception config
   variables:
-    SIMPLETEST_DB: "mysql://drupaltestbot:drupaltestbotpw@database/mysql"
+    SIMPLETEST_DB: "mysql://db:db@db/db"  # Changed to match Codeception config
     SIMPLETEST_BASE_URL: "http://web"
   needs:
     - job: create-project
@@ -54,7 +54,7 @@ install_drupal:
     - apt-get update -yqq
     - apt-get install -yqq default-mysql-client
     - echo "Checking database connection..."
-    - mysql -h database -u drupaltestbot -pdrupaltestbotpw -e "SHOW DATABASES;"
+    - mysql -h db -u db -pdb -e "SHOW DATABASES;"
     
     # Start web server
     - php -S 0.0.0.0:80 -t web/ &
@@ -63,11 +63,11 @@ install_drupal:
     # Create settings.php with database connection
     - echo "<?php" > web/sites/default/settings.php
     - echo "\$databases['default']['default'] = [" >> web/sites/default/settings.php
-    - echo "  'database' => 'mysql'," >> web/sites/default/settings.php
-    - echo "  'username' => 'drupaltestbot'," >> web/sites/default/settings.php
-    - echo "  'password' => 'drupaltestbotpw'," >> web/sites/default/settings.php
+    - echo "  'database' => 'db'," >> web/sites/default/settings.php
+    - echo "  'username' => 'db'," >> web/sites/default/settings.php
+    - echo "  'password' => 'db'," >> web/sites/default/settings.php
     - echo "  'prefix' => ''," >> web/sites/default/settings.php
-    - echo "  'host' => 'database'," >> web/sites/default/settings.php
+    - echo "  'host' => 'db'," >> web/sites/default/settings.php
     - echo "  'port' => '3306'," >> web/sites/default/settings.php
     - echo "  'namespace' => 'Drupal\\\\Core\\\\Database\\\\Driver\\\\mysql'," >> web/sites/default/settings.php
     - echo "  'driver' => 'mysql'," >> web/sites/default/settings.php
