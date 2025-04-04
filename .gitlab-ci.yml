@@ -13,6 +13,11 @@ stages:
 prepare:
   stage: prepare
   image: drupalci/php-8.3-ubuntu-apache:production
+  before_script:
+    - vendor/bin/drush site-install droopler -y \
+      --db-url="mysql://db:db@db/db" \
+      --account-name=admin \
+      --account-pass=admin
   script:
     - composer install
     # Set up Drupal environment for Codeception
