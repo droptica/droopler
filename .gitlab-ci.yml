@@ -14,7 +14,7 @@ create-project:
   image: drupalci/php-8.3-ubuntu-apache:production
   script:
     - composer create-project drupal/recommended-project:^10 --no-interaction --no-install $BUILD_DIR
-    - composer install --working-dir=$BUILD_DIR
+    - composer install
   artifacts:
     paths:
       - $BUILD_DIR
@@ -32,7 +32,7 @@ install_drupal:
       artifacts: true
   script:
     - cd $BUILD_DIR
-#    - composer install
+    - composer install
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
     # instalacja Drupala 10 profilem 'standard' (lub 'minimal')
