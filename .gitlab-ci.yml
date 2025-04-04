@@ -17,11 +17,7 @@ prepare:
     - composer install
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
-    - ./vendor/bin/drush si -y \
-      --db-url="mysql://db:db@db/db" \
-      --account-name=admin \
-      --account-pass=admin \
-      --site-name="Droopler CI"
+    - ./vendor/bin/drush si -y
     - ./vendor/bin/drush recipes:install droopler
   script:
     # Set up Drupal environment for Codeception
