@@ -46,17 +46,14 @@ install_drupal:
     - job: create-project
       artifacts: true
   script:
-    # Set up Drupal environment for Codeception
-    - mkdir -p /var/www/html
-    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
-    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
-    # Start web server
+    - composer install
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
+    - php web/core/scripts/drupal install droopler
     # Create database
     # - mysql -h database -u drupal -pdrupal -e "CREATE DATABASE IF NOT EXISTS drupal;"
     # Install Drupal
-    - ./vendor/bin/drush site:install droopler --db-url=mysql://drupal:drupal@database/drupal --account-name=admin --account-pass=admin --site-name="Droopler CI" -y || echo "Drush site install failed, but continuing"
+    # - ./vendor/bin/drush site:install droopler --db-url=mysql://drupal:drupal@database/drupal --account-name=admin --account-pass=admin --site-name="Droopler CI" -y || echo "Drush site install failed, but continuing"
     - ./vendor/bin/drush status
     # Run Codeception build
     - ./vendor/bin/codecept build
