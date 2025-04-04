@@ -32,14 +32,11 @@ install_drupal:
       artifacts: true
   script:
     - composer install
-    - ls -al ./vendor/drush/drush
-    - ls -al ./vendor/bin/drush
-    - ls -al ./vendor
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
     - ./vendor/bin/drush status
     # instalacja Drupala 10 profilem 'standard' (lub 'minimal')
-#    - ./vendor/bin/drush --root=web site:install standard -y \
+    - ./vendor/bin/drush site:install droopler -y
 #      --db-url="$DB_URL" \
 #      --account-name=admin \
 #      --account-pass=admin \
