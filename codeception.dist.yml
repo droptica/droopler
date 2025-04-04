@@ -1,0 +1,27 @@
+actor: Tester
+namespace: Tests
+support_namespace: Support
+paths:
+  tests: tests
+  output: tests/_output
+  data: tests/Support/Data
+  support: tests/Support
+  envs: tests/_envs
+actor_suffix: Tester
+settings:
+  colors: true
+  memory_limit: 1024M
+  strict_xml: true
+extensions:
+  enabled:
+    - Codeception\Extension\RunFailed
+modules:
+  config:
+    Db:
+      dsn: 'mysql:host=database:3306;dbname=mysql'
+      user: 'drupaltestbot'
+      password: 'drupaltestbotpw'
+      dump: 'tests/_data/dump.sql'
+      populate: false
+      cleanup: false
+      reconnect: true

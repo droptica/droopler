@@ -15,8 +15,12 @@ create-project:
   image: drupalci/php-8.3-ubuntu-apache:production
   script:
     - composer install --no-progress --prefer-dist --optimize-autoloader
-    # Remove visualception to avoid Imagick dependency issues
-    - rm -rf vendor/codeception/visualception
+    # Install Imagick extension and VisualCeption
+    - apt-get update -yqq
+    - apt-get install -yqq libmagickwand-dev imagemagick
+    - pecl install imagick
+    - docker-php-ext-enable imagick
+    - composer require codeception/visualception --dev
     # Check for autoload.php
     - find ${CI_PROJECT_DIR} -name "autoload.php"
     # Create the web/sites/default/settings.php file if it doesn't exist
@@ -79,11 +83,8 @@ install_drupal:
     - ./vendor/bin/drush status
 
     # Run tests with debug output
-    # Temporarily disable Visual suite to avoid VisualCeption errors
-    - mv tests/Visual.suite.yml tests/Visual.suite.yml.disabled || echo "Visual suite already disabled"
     - ./vendor/bin/codecept build
     - ./vendor/bin/codecept run CI -vv --xml || echo "CI tests failed, but continuing"
-    - mv tests/Visual.suite.yml.disabled tests/Visual.suite.yml || echo "Visual suite not found to restore"
   artifacts:
     when: always
     paths:
