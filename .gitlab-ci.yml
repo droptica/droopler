@@ -36,7 +36,7 @@ install_drupal:
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
     - ./vendor/bin/drush status
-    - php web/core/scripts/drupal install --db-url=mysql://drupal:drupal@mysql/database
+    - php web/core/scripts/drupal install droopler
     # instalacja Drupala 10 profilem 'standard' (lub 'minimal')
 #    - ./vendor/bin/drush site:install -y
 #      --db-url="drupal"
