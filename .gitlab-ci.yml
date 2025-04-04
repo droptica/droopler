@@ -79,6 +79,7 @@ install_drupal:
     - ./vendor/bin/drush status
 
     # Run tests with debug output
+    - ./vendor/bin/codecept build
     - ./vendor/bin/codecept run CI -vv --xml || echo "CI tests failed, but continuing"
   artifacts:
     when: always
