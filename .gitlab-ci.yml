@@ -37,12 +37,8 @@ install_drupal:
     - echo "127.0.0.1 web" >> /etc/hosts
     - ./vendor/bin/drush status
     - php web/core/scripts/drupal install droopler
-    # instalacja Drupala 10 profilem 'standard' (lub 'minimal')
-#    - ./vendor/bin/drush site:install -y
-#      --db-url="drupal"
-#      --account-name=admin \
-#      --account-pass=admin \
-#      --site-name="Drupal CI"
+    - ./vendor/bin/drush status
+    - ./vendor/bin/codecept run Acceptance --xml
   artifacts:
     paths:
       - $BUILD_DIR/web/sites/default
