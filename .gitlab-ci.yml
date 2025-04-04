@@ -18,10 +18,7 @@ prepare:
   script:
     - php -S 0.0.0.0:80 -t web/ &
     - echo "127.0.0.1 web" >> /etc/hosts
-    - ./vendor/bin/drush site-install droopler -y \
-      --db-url="mysql://db:db@db/db" \
-      --account-name=admin \
-      --account-pass=admin  
+    - ./vendor/bin/drush site-install droopler -y
     # Set up Drupal environment for Codeception
     - mkdir -p /var/www/html
     - ln -sf ${CI_PROJECT_DIR} /var/www/html/
