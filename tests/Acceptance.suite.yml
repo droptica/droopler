@@ -15,7 +15,6 @@ modules:
           CURLOPT_SSL_VERIFYHOST: 0
           CURLOPT_SSL_VERIFYPEER: 0
           CURLOPT_RETURNTRANSFER: true
-    - Db
     - Tests\Support\Helper\Acceptance
     - Tests\Support\Helper\DrupalHelper
     - DrupalBootstrap:
