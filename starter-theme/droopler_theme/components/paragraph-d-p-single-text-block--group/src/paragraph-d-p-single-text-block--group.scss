@@ -24,7 +24,7 @@
     }
 
     .cta-links {
-      margin-top: var(--content-spacer-m);
+      margin-top: var(--content-spacer-s);
     }
 
     &__content {
@@ -127,6 +127,12 @@
 
   .heading {
     grid-row: 2;
+
+    @include media-breakpoint-up(md) {
+      padding-top: 0.625rem;
+      padding-bottom: 0.625rem;
+      line-height: 2rem;
+    }
   }
 
   .divider {
@@ -135,6 +141,7 @@
 
   .body-text {
     grid-row: 4;
+    margin-top: var(--content-spacer-xs);
   }
 
   .cta-links {

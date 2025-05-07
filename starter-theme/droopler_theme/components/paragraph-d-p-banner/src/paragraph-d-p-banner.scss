@@ -1,11 +1,11 @@
 @import "../../../src/scss/init";
 
 :root {
-  --banner-content-text-alignment: center;
+  --banner-content-text-alignment: left;
 }
 
 .d-p-banner {
-  --heading-text-transform: uppercase;
+  --heading-text-transform: none;
   --media-width: 100%;
   --media-height: 100%;
   --cta-links-alignment: var(--banner-content-text-alignment);
@@ -50,6 +50,17 @@
 
     text-align: var(--banner-content-text-alignment);
 
+    @include media-breakpoint-up(lg) {
+      &.col-12 {
+        max-width: 768px;
+        padding: 0;
+      }
+    }
+
+    .divider {
+      display: block;
+    }
+
     .media-icon {
       --media-width: auto;
       --media-height: auto;
@@ -64,7 +75,7 @@
     }
 
     .cta-links {
-      margin-top: var(--content-spacer-xxl);
+      margin-top: var(--content-spacer-xl);
     }
   }
 }

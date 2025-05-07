@@ -26,6 +26,15 @@
         @include media-breakpoint-up(lg) {
           max-width: 20rem;
         }
+
+        &__logo {
+          padding: 0.5rem;
+          max-height: 4rem;
+
+          img {
+            max-height: 3rem;
+          }
+        }
       }
     }
 

@@ -12,6 +12,10 @@
   {% set modifiers = modifiers|merge(['grid-column']) %}
 {% endif %}
 
+{% if paragraph.textAlign %}
+  {% set additional_classes = additional_classes|merge(['text-' ~ paragraph.textAlign]) %}
+{% endif %}
+
 <div {{ bem(base_class, modifiers, '', additional_classes) }}>
   <div {{ bem('wrapper', [], base_class) }}>
     <div {{ bem('background', [], base_class) }}>
@@ -24,8 +28,6 @@
     <div {{ bem('content', [], base_class) }}>
       {% block header %}
       {% endblock %}
-
-      {% include "droopler_theme:base-divider" %}
 
       {% block content %}
       {% endblock %}

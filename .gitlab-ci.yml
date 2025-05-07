@@ -1,14 +1,3 @@
-################
-# GitLabCI template for Drupal projects.
-#
-# This template is designed to give any Contrib maintainer everything they need to test, without requiring modification.
-# It is also designed to keep up to date with Core Development automatically through the use of include files that can be centrally maintained.
-# As long as you include the project, ref and three files below, any future updates added by the Drupal Association will be used in your
-# pipelines automatically. However, you can modify this template if you have additional needs for your project.
-# The full documentation is on https://project.pages.drupalcode.org/gitlab_templates/
-################
-# For information on alternative values for 'ref' see https://project.pages.drupalcode.org/gitlab_templates/info/templates-version/
-# To test a Drupal 7 project, change the first include filename from .main.yml to .main-d7.yml
 include:
   - project: $_GITLAB_TEMPLATES_REPO
     ref: $_GITLAB_TEMPLATES_REF
@@ -16,20 +5,164 @@ include:
       - '/includes/include.drupalci.main.yml'
       - '/includes/include.drupalci.variables.yml'
       - '/includes/include.drupalci.workflows.yml'
-#
-################
-# Pipeline configuration variables are defined with default values and descriptions in the file
-# https://git.drupalcode.org/project/gitlab_templates/-/blob/main/includes/include.drupalci.variables.yml
-# Uncomment the lines below if you want to override any of the variables. The following is just an example.
-################
+
 variables:
-#   OPT_IN_TEST_NEXT_MAJOR: '1'
+  MYSQL_DATABASE: "drupal"
+  MYSQL_USER: "drupaltestbot"
+  MYSQL_PASSWORD: "drupaltestbotpw"
+  MYSQL_ROOT_PASSWORD: "root"
+  FF_NETWORK_PER_BUILD: "1"
   SKIP_ESLINT: '1'
   SKIP_CSPELL: '1'
   SKIP_STYLELINT: '1'
   _WEB_ROOT: 'alternative-name'
   _SHOW_ENVIRONMENT_VARIABLES: 1
+  _PHPCS_EXTRA: '--ignore=tests/*'
 
 composer:
+  extends: .composer-base
+  before_script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends $PHPIZE_DEPS php-imagick imagemagick libmagickwand-dev
+    - pecl install imagick
+    - docker-php-ext-enable imagick
   variables:
     DRUPAL_CORE: "11.1.0"
+  artifacts:
+    exclude:
+      - '.git'
+      - '.git/**/*'
+      - '$_WEB_ROOT/**/.git'
+      - '$_WEB_ROOT/**/.git/**/*'
+      - 'vendor/**/.git'
+      - 'vendor/**/.git/**/*'
+      - '$_WEB_ROOT/core/node_modules/**/*'
+    paths:
+      - .
+
+tests:
+  stage: test
+  dependencies: []  # This ensures no artifacts from previous jobs are used
+  # Use a PHP-specific Docker image with Chrome pre-installed
+  image: drupalci/php-8.3-ubuntu-apache:production
+  services:
+    - name: 'drupalci/mysql-8'
+      alias: database
+  variables:
+    _WEB_ROOT: 'web'
+    SIMPLETEST_DB: "mysql://drupaltestbot:drupaltestbotpw@database/drupal"
+    SIMPLETEST_BASE_URL: "http://web"
+  script:
+    # === Environment Setup ===
+    - apt-get update -yqq
+    # Install necessary tools: wget, unzip, curl, gnupg (for Chrome key), mysql-client, xvfb (needed?), imagick deps
+    - apt-get install -yqq wget unzip curl gnupg default-mysql-client xvfb libmagickwand-dev imagemagick jq
+
+    # Install Chrome
+    - echo "Installing Chrome..."
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+    - apt-get update -yqq
+    - apt-get install -yqq google-chrome-stable
+    - echo "Installed Chrome version:"
+    - google-chrome --version
+
+    # Install matching ChromeDriver dynamically
+    - echo "Installing matching ChromeDriver..."
+    - bash .gitlab-ci/install-chromedriver.sh
+
+    # Install Imagick for VisualCeption
+    - echo "Installing Imagick..."
+    - pecl install imagick
+    - docker-php-ext-enable imagick
+    - echo "Verifying Imagick status:"
+    - php -m | grep imagick || { echo "Imagick not loaded!"; exit 1; }
+
+    # Try to copy the starter theme with error handling
+    - mkdir -p web/themes/custom/ || echo "Could not create themes directory, but continuing"
+    - if [ -d "starter-theme/droopler_theme" ] && [ -d "web/themes/custom" ]; then
+    -   cp -r starter-theme/droopler_theme web/themes/custom/ || echo "Could not copy starter theme, but continuing"
+    - else
+    -   echo "Either starter theme directory not found or destination directory not created, skipping"
+    - fi
+
+    # === Composer Install ===
+    - echo "Installing Composer dependencies..."
+    - composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
+
+    # === Drupal Setup ===
+    - echo "Setting up Drupal environment..."
+    - mkdir -p /var/www/html
+    - ln -sf ${CI_PROJECT_DIR} /var/www/html/
+    - ln -sf ${CI_PROJECT_DIR}/web /var/www/html/web
+
+    # Start web server
+    - echo "Starting PHP web server..."
+    - php -S 0.0.0.0:80 -t web/ &
+    - sleep 2 # Give server a moment to start
+    - echo "127.0.0.1 web" >> /etc/hosts
+
+    # Check database connection
+    - echo "Checking database connection..."
+    - mysql -h database -u drupaltestbot -pdrupaltestbotpw -e "SHOW DATABASES;"
+
+    # Create database if it doesn't exist
+    - echo "Creating database if not exists..."
+    - mysql -h database -u drupaltestbot -pdrupaltestbotpw -e "CREATE DATABASE IF NOT EXISTS drupal;"
+
+    # Create settings.php with database connection
+    - echo "Creating settings.php..."
+    - cp web/sites/default/default.settings.php web/sites/default/settings.php
+    - echo "\$databases['default']['default'] = [
+      'database' => 'drupal',
+      'username' => 'drupaltestbot',
+      'password' => 'drupaltestbotpw',
+      'prefix' => '',
+      'host' => 'database',
+      'port' => '3306',
+      'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+      'driver' => 'mysql',
+      ];" >> web/sites/default/settings.php
+    # Add hash salt (important!)
+    - echo "\$settings['hash_salt'] = 'dummy-salt-for-ci-tests-replace-me-later';" >> web/sites/default/settings.php
+
+    # Install Drupal with Drush
+    - echo "Installing Drupal via Drush..."
+    - ./vendor/bin/drush site-install droopler install_configure_form.enable_demo_content=1 --account-name=admin --account-pass=admin --site-name="Droopler CI" -y
+
+    # === WebDriver Setup ===
+    # Start ChromeDriver in background
+    - echo "Starting ChromeDriver..."
+    - /usr/local/bin/chromedriver --port=9515 --url-base=/wd/hub --verbose --log-path=./chromedriver.log > chromedriver.stdout.log 2> chromedriver.stderr.log &
+    - sleep 5 # Give ChromeDriver more time to start fully
+    - echo "Checking ChromeDriver status..."
+    - curl -v http://localhost:9515/status || { echo "Could not connect to ChromeDriver!"; exit 1; }
+
+    # === Run Tests ===
+    # Build Codeception
+    - echo "Building Codeception..."
+    - ./vendor/bin/codecept build
+
+    # Run only Acceptance for now
+    - echo "Running Acceptance tests..."
+    - ./vendor/bin/codecept run Acceptance --xml --env gitlab
+
+    # Output success message (if tests pass)
+    - echo "Codeception tests completed."
+
+  after_script:
+    - echo "--- ChromeDriver stdout log --- (if file exists)"
+    - cat chromedriver.stdout.log || echo "chromedriver.stdout.log not found."
+    - echo "--- ChromeDriver stderr log --- (if file exists)"
+    - cat chromedriver.stderr.log || echo "chromedriver.stderr.log not found."
+    - echo "--- End ChromeDriver Logs ---"
+
+  artifacts:
+    when: always
+    paths:
+      - tests/_output/
+      - web/sites/default/settings.php # Useful for debugging db connection
+      - chromedriver.log
+      - chromedriver.stdout.log
+      - chromedriver.stderr.log
+    expire_in: 1 day

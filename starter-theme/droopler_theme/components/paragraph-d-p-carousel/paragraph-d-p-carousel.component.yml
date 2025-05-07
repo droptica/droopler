@@ -3,10 +3,10 @@ props:
   type: object
   properties:
     is_full_width:
-      type: boolean
+      type: ["boolean", "null"]
       default: false
     dividers:
-      type: boolean
+      type: ["boolean", "null"]
       default: false
     carousel_settings:
       type: string

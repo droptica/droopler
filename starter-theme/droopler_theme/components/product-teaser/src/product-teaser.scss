@@ -14,13 +14,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: var(--product-teaser-border);
-  box-shadow: var(--product-teaser-box-shadow);
   padding-block: 1rem;
 
   &__image {
     position: relative;
     overflow: hidden;
+    align-content: center;
+    border: 1px solid $color-gray;
+    border-radius: 0.5rem;
+
+    @include media-breakpoint-up(lg) {
+      height: 205px;
+    }
 
     img {
       @include centered-absolute;
@@ -30,18 +35,28 @@
     }
   }
 
-  &__content {
-    padding: 1rem 0.75rem 0;
+  &__product-content {
+    padding: var(--content-spacer-s) 0 var(--content-spacer-xs);
     color: var(--product-teaser-text-color);
+
+    .heading {
+      @include typography('card-title');
+
+      min-height: 3rem;
+    }
+
+    .categories {
+      color: var(--category-text);
+      margin-bottom: var(--content-spacer-xs);
+    }
   }
 
   &__link {
     @include filling-absolute;
   }
 
-  .heading {
-    font-size: $font-size-lg;
-    color: inherit;
+  .product-button {
+    width: fit-content;
   }
 
   &:hover .heading {

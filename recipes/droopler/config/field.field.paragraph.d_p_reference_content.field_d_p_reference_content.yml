@@ -3,6 +3,8 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_d_p_reference_content
+    - node.type.blog_post
+    - node.type.d_product
     - paragraphs.paragraphs_type.d_p_reference_content
 id: paragraph.d_p_reference_content.field_d_p_reference_content
 field_name: field_d_p_reference_content
@@ -17,9 +19,12 @@ default_value_callback: ''
 settings:
   handler: 'default:node'
   handler_settings:
-    target_bundles: null
+    target_bundles:
+      blog_post: blog_post
+      d_product: d_product
     sort:
       field: _none
+      direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: blog_post
 field_type: entity_reference

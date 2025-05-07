@@ -1,0 +1,10 @@
+modules:
+  config:
+    Db:
+      dsn: 'mysql:host=db:3306;dbname=db'
+      user: 'db'
+      password: 'db'
+    Tests\Support\Helper\MailPit:
+      url: 'https://url.ddev.site' #change me
+      port: '8026'
+      deleteEmailsAfterScenario: true

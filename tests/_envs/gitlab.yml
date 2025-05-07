@@ -1,0 +1,24 @@
+modules:
+  config:
+    Db:
+      dsn: 'mysql:host=database:3306;dbname=drupal'
+      user: 'drupaltestbot'
+      password: 'drupaltestbotpw'
+    WebDriver:
+      host: localhost
+      port: 9515
+      url: 'http://web'
+      browser: chrome
+      window_size: 1920x1080
+      capabilities:
+        "goog:chromeOptions":
+          args: [
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--headless',
+            '--window-size=1920,1080',
+          ]
+  remove:
+    - Tests\Support\Helper\MailPit
+    - Tests\Support\Helper\MailHelper

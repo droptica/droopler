@@ -8,21 +8,77 @@
 }
 
 .btn {
-  --dp-bs-btn-font-weight: var(--cta-font-weight);
+  --#{$prefix}btn-border-radius: 0.5rem;
+  --#{$prefix}btn-font-family: $font-family-sans-serif;
+  --#{$prefix}btn-font-weight: 500;
+  --#{$prefix}btn-border-width: 1px;
+  --#{$prefix}btn-line-height: 1.5rem;
+  --#{$prefix}btn-font-size: 0.875rem;
 
-  width: var(--cta-width);
-  max-width: var(--cta-max-width);
-  letter-spacing: var(--cta-letter-spacing);
-  text-transform: var(--cta-text-transform);
-  margin-block: var(--cta-margin-top-bottom);
-
-  &-block {
-    --cta-width: 100%;
-    --cta-max-width: none;
+  @include media-breakpoint-up(lg) {
+    --#{$prefix}btn-padding-x: 1.25rem;
+    --#{$prefix}btn-padding-y: 0.75rem;
   }
 
-  &-link {
-    --cta-width: auto;
-    --cta-max-width: none;
+  &.btn-lg {
+    --#{$prefix}btn-font-size: 1rem;
+
+    @include media-breakpoint-up(lg) {
+      --#{$prefix}btn-padding-x: 2rem;
+      --#{$prefix}btn-padding-y: 1rem;
+    }
   }
+
+  &.btn-sm {
+    --#{$prefix}btn-font-size: 0.75rem;
+
+    @include media-breakpoint-up(lg) {
+      --#{$prefix}btn-padding-x: 1rem;
+      --#{$prefix}btn-padding-y: 0.25rem;
+    }
+  }
+
+  &-primary {
+    --#{$prefix}btn-color: #{$color-odysseus};
+    --#{$prefix}btn-hover-color: #{$color-odysseus};
+
+    @include button-variant(
+      $color-achilles,
+      $color-achilles,
+      $color-odysseus,
+      darken($color-achilles, 10%),
+      darken($color-achilles, 10%)
+    );
+  }
+
+  &-secondary,
+  &-outline-secondary {
+    --#{$prefix}btn-color: #{$color-agamemnon};
+    --#{$prefix}btn-hover-color: #{$color-agamemnon};
+  }
+}
+
+[data-theme="theme-dark"],
+[data-theme="theme-primary"] {
+  .btn-outline-primary {
+    --#{$prefix}btn-color: #{$color-odysseus};
+    --#{$prefix}btn-hover-color: #{$color-odysseus};
+  }
+}
+
+.btn-link {
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @include button-variant(
+    transparent,
+    transparent,
+    $color-achilles,
+    transparent,
+    transparent,
+    darken($color-achilles, 10%)
+  );
 }

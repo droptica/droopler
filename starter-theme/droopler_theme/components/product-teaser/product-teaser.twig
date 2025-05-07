@@ -5,8 +5,10 @@
   <div {{ bem('image', [], base_class) }}>
     {{ main_image }}
   </div>
-  <div {{ bem('content', [], base_class) }}>
-    {{ category }}
+  <div {{ bem('product-content', [], base_class) }}>
+    <div class="categories">
+      {{ category }}
+    </div>
     {{ title_prefix }}
     {% if label %}
       {% include 'droopler_theme:base-heading' with {
@@ -17,4 +19,5 @@
     {{ title_suffix }}
   </div>
   <a {{ bem('link', [], base_class) }} href="{{ url }}" rel="bookmark"></a>
+  <a href="{{ url }}" class="btn btn-primary btn-sm product-button">See product</a>
 </div>

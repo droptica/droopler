@@ -1,3 +1,5 @@
+@import "../../../src/scss/init";
+
 .navigation-desktop {
   &__top-content {
     display: flex;
@@ -7,9 +9,16 @@
       display: flex;
 
       .menu-item {
+
+        & + .menu-item {
+          margin-left: 2rem;
+        }
+
         &__link {
-          padding: 0.9rem;
+          padding: 0.5rem;
           color: var(--header-search-page-link-color);
+          font-weight: 500;
+          font-size: $font-size-sm;
 
           &:hover {
             color: var(--header-search-page-link-color-hover);
@@ -43,15 +52,29 @@
       .menu-item {
         position: relative;
 
+        & + .menu-item {
+          margin-left: 1rem;
+        }
+
         &__link {
-          padding: 0 1.2rem;
-          line-height: 2.7rem;
-          font-weight: 500;
+          line-height: 2.5rem;
+          font-weight: 600;
           color: var(--navigation-desktop-bottom-menu-link-color);
         }
 
+        &__element {
+          display: flex;
+          align-items: center;
+          padding: 10px 8px;
+        }
+
         &__toggler {
-          display: none;
+          color: var(--navigation-desktop-bottom-menu-link-color);
+          padding-left: 4px;
+
+          & .icon:before {
+            font-weight: 600;
+          }
         }
 
         &:hover {
@@ -72,13 +95,21 @@
       display: none;
       position: absolute;
       background-color: var(--navigation-desktop-bottom-submenu-background-color);
+      border: 1px solid var(--navigation-desktop-bottom-submenu-border-color);
+      border-radius: 0.25rem;
+      padding: 1rem 0;
 
       .submenu-item {
+        & + .submenu-item {
+          margin-top: 8px;
+        }
+
         &__link {
           padding: 0 1.2rem;
-          line-height: 2.9rem;
+          line-height: 2.375rem;
           white-space: nowrap;
           color: var(--navigation-desktop-bottom-submenu-link-color);
+          font-weight: 600;
 
           &:hover {
             color: var(--navigation-desktop-bottom-submenu-link-color-hover);

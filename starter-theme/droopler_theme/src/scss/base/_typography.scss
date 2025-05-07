@@ -1,0 +1,116 @@
+@use "sass:map";
+
+$typography-map: (
+  h1: (
+    font-family: "Inter",
+    font-size: 56px,
+    font-weight: 600,
+    line-height: 67.77px,
+    letter-spacing: -2%,
+  ),
+  h2: (
+    font-family: "Inter",
+    font-size: 43px,
+    font-weight: 600,
+    line-height: 52px,
+    letter-spacing: -2%,
+  ),
+  h3: (
+    font-family: "Inter",
+    font-size: 40px,
+    font-weight: 600,
+    line-height: 44px,
+  ),
+  h4: (
+    font-family: "Inter",
+    font-size: 32px,
+    font-weight: 600,
+    line-height: 38.73px,
+    letter-spacing: -2%,
+  ),
+  h5: (
+    font-family: "Inter",
+    font-size: 24px,
+    font-weight: 600,
+    line-height: 28px,
+  ),
+  subtitle: (
+    font-family: "Inter",
+    font-size: 14px,
+    font-weight: 600,
+    line-height: 16.94px,
+  ),
+  body-xl: (
+    font-family: "Inter",
+    font-size: 18px,
+    line-height: 27px,
+    font-weight: 400
+  ),
+  body-l: (
+    font-family: "Inter",
+    font-size: 16px,
+    line-height: 24px,
+    font-weight: 400
+  ),
+  body-l-semibold: (
+    font-family: "Inter",
+    font-size: 16px,
+    line-height: 24px,
+    font-weight: 600
+  ),
+  body-m: (
+    font-family: "Inter",
+    font-size: 14px,
+    line-height: 21px,
+    font-weight: 400
+  ),
+  body-m-bold: (
+    font-family: "Inter",
+    font-size: 14px,
+    line-height: 21px,
+    font-weight: 600
+  ),
+  // unnamed
+  menu-secondary: (
+    font-family: "Inter",
+    font-size: 14px,
+    line-height: 22px,
+    font-weight: 500
+  ),
+  regular-16-semibold: (
+    font-family: "Inter",
+    font-size: 16px,
+    line-height: 22px,
+    font-weight: 600
+  ),
+  montserrat-button: (
+    font-family: "Montserrat",
+    font-size: 16px,
+    line-height: 24px,
+    font-weight: 500
+  ),
+  montserrat-button-sm: (
+    font-family: "Montserrat",
+    font-size: 14px,
+    line-height: 24px,
+    font-weight: 500
+  ),
+  text-12-regular: (
+    font-family: "Inter",
+    font-size: 12px,
+    line-height: 24px,
+    font-weight: 500
+  ),
+  text-14-regular: (
+    font-family: "Inter",
+    font-size: 14px,
+    line-height: 21px,
+    font-weight: 500
+  ),
+  card-title: (
+    font-family: "Inter",
+    font-size: 20px,
+    line-height: 24px,
+    font-weight: 600
+  )
+);

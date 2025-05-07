@@ -5,10 +5,10 @@
 ### Version 5
 
 
-This branch is for 5.x version of Droopler.
-The newest code for 5.x is always on [Drupal.org/project/droopler](https://www.drupal.org/project/droopler).
+This branch is for 5.1.x version of Droopler.
+The newest code for 5.1.x is always on [Drupal.org/project/droopler](https://www.drupal.org/project/droopler).
 
-Default development branch is 5.x.
+Default development branch is 5.1.x.
 
 Last releases/tags you can find here https://git.drupalcode.org/project/droopler/-/tags
 

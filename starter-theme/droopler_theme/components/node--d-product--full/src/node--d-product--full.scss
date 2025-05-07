@@ -1,0 +1,45 @@
+@import "../../../src/scss/init";
+
+.node--d-product--full {
+  .layout.row {
+    .col-lg-6 {
+      @include media-breakpoint-up(lg) {
+        padding-left: var(--content-spacer-xxml);
+        padding-right: var(--content-spacer-xxml);
+      }
+    }
+  }
+
+  .block {
+    h1.h4 {
+      @include typography(h4);
+    }
+
+    .body-text {
+      color: var(--product-text-body-color);
+      padding: var(--content-spacer-m) 0;
+      border-bottom: 1px solid var(--product-text-body-border-color);
+
+      @include typography(body-m);
+    }
+
+    .field {
+      &--name-field-tags {
+        h3 {
+          @include typography(card-title);
+
+          margin-top: var(--content-spacer-m);
+          margin-bottom: var(--content-spacer-s);
+        }
+
+        .field {
+          &__items {
+            a {
+              @include typography(body-m);
+            }
+          }
+        }
+      }
+    }
+  }
+}

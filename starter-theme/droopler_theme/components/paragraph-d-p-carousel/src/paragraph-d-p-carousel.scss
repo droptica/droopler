@@ -22,9 +22,47 @@
     margin-top: var(--content-spacer-s);
   }
 
+  @include media-breakpoint-up(lg) {
+    &__carousel.container {
+      padding: 0;
+    }
+  }
+
+
+
   &__header-column,
   &__footer-column {
     text-align: center;
+  }
+
+  &__items {
+    .slick-prev,
+    .slick-next, {
+      opacity: 0.75;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:before {
+        font-size: 0;
+        display: block;
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    .slick-prev {
+      &:before {
+        content: url('../../src/assets/icons/button-left.svg');
+      }
+    }
+
+    .slick-next {
+      &:before {
+        content: url('../../src/assets/icons/button-right.svg');
+      }
+    }
   }
 
   &__items,

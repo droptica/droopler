@@ -12,13 +12,13 @@ props:
       type: string
       default: 'd-p-single-text-block'
     is_tile:
-      type: boolean
+      type: ["boolean", "null"]
       default: false
     is_grid:
-      type: boolean
+      type: ["boolean", "null"]
       default: false
     with_price:
-      type: boolean
+      type: ["boolean", "null"]
       default: false
 slots:
   background:

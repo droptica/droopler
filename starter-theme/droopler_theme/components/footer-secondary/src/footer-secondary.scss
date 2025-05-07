@@ -5,6 +5,20 @@
 
   &__content-column {
     text-align: center;
+    border-top: 1px solid var(--footer-secondary-border-color);
+    padding-top: var(--content-spacer-m);
+    padding-bottom: var(--content-spacer-xl);
+
+    .block--type-social-media {
+      display: flex;
+      align-items: baseline;
+
+      .heading {
+        @include typography(card-title);
+
+        font-weight: 400;
+      }
+    }
   }
 
   .nav {

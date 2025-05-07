@@ -34,16 +34,25 @@ elements: |-
     '#title': Subject
     '#placeholder': Subject
     '#required': true
+    '#wrapper_attributes':
+      class:
+        - mb-2
     '#test': 'Testing contact webform from [site:name]'
   message:
     '#type': textarea
     '#title': Message
     '#placeholder': Message
     '#required': true
+    '#wrapper_attributes':
+      class:
+        - mb-2
     '#test': 'Please ignore this email.'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
+    '#attributes':
+      class:
+        - text-end
     '#submit__label': 'Send message'
 css: ''
 javascript: ''

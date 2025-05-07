@@ -1,7 +1,28 @@
+@import "../../../src/scss/init";
+
 .d-p-block {
   text-align: center;
 
   &:has(.view-products-list) {
     text-align: left;
+
+    .page-views {
+      &__content-column {
+        &--aside {
+          padding: 0 var(--content-spacer-s) 0 0;
+        }
+
+        .view-grid.row {
+          row-gap: 0;
+
+          .col-lg-4 {
+            @include media-breakpoint-up(lg) {
+              padding-left: var(--content-spacer-xs);
+              padding-right: var(--content-spacer-xs);
+            }
+          }
+        }
+      }
+    }
   }
 }

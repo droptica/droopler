@@ -1,8 +1,8 @@
 {
   "name": "droptica/droopler",
-  "version": "5.0.x-dev",
+  "version": "dev-5.1.x",
   "description": "Droopler - SEO Friendly CMS & Site Builder - is a Drupal-based website builder that helps you create beautiful, fast, and easy-to-manage websites",
-  "type": "drupal-profile",
+  "type": "project",
   "license": "GPL-2.0-or-later",
   "homepage": "https://www.droopler.com",
   "support": {
@@ -10,24 +10,6 @@
     "issues": "https://www.drupal.org/project/issues/droopler?categories=All"
   },
   "repositories": {
-    "drupal/ala": {
-      "type": "package",
-      "package": {
-        "name": "drupal/ala",
-        "version": "dev-2.x-d11",
-        "type": "drupal-module",
-        "source": {
-          "url": "https://git.drupalcode.org/project/ala.git",
-          "type": "git",
-          "reference": "e4fcfdc567d53f28b3cbcf0da1918abe876886d8"
-        },
-        "autoload": {
-          "psr-4": {
-            "Drupal\\ala\\": "src/"
-          }
-        }
-      }
-    },
     "drupal": {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
@@ -42,10 +24,9 @@
         "name": "mably/slick",
         "version": "1.8.2",
         "type": "drupal-library",
-        "source": {
-          "url": "https://github.com/mably/slick.git",
-          "type": "git",
-          "reference": "topic/jquery4"
+        "dist": {
+          "url": "https://github.com/mably/slick/archive/refs/heads/topic/jquery4.zip",
+          "type": "zip"
         }
       }
     }
@@ -57,7 +38,7 @@
     "composer/installers": "^2.2",
     "cweagans/composer-patches": "^1.6",
     "drupal/admin_toolbar": "^3.0",
-    "drupal/ala": "dev-2.x-d11",
+    "drupal/ala": "^2.6",
     "drupal/better_exposed_filters": "^7.0",
     "drupal/block_field": "^1.0@RC",
     "drupal/bootstrap_layout_builder": "^2.2",
@@ -112,8 +93,15 @@
     "wikimedia/composer-merge-plugin": "^2.1"
   },
   "require-dev": {
-    "drupal/core-dev": "^11",
-    "drupal/devel": "^5.0"
+      "codeception/codeception": "^5.1",
+      "codeception/module-asserts": "^3.0",
+      "codeception/module-db": "^3.1",
+      "codeception/module-webdriver": "^3.2",
+      "codeception/visualception": "^5.0",
+      "drupal/core-dev": "^11",
+      "drupal/devel": "^5.0",
+      "guncha25/drupal-codeception": "^10.0",
+      "koehnlein/codeception-email-mailpit": "^0.3.1"
   },
   "replace": {
     "bower-asset/desandro-matches-selector": "*",
@@ -174,6 +162,9 @@
       "drupal/core": {
         "Claro - vertical tabs overflow": "https://git.drupalcode.org/project/drupal/-/merge_requests/5376.patch",
         "Claro - paragraphs overflow": "https://www.drupal.org/files/issues/2023-01-25/3145188-37_0.patch"
+      },
+      "drupal/frontend_editing": {
+        "https://www.drupal.org/project/frontend_editing/issues/3517064": "https://git.drupalcode.org/project/frontend_editing/-/merge_requests/110.diff"
       },
       "drupal/paragraphs": {
         "The 'paragraph' entity type did not specify a translation handler.": "https://www.drupal.org/files/issues/2021-01-22/paragraph-entity-type-did-not-specify-translation-halder-3031598-45.patch"

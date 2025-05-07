@@ -18,46 +18,46 @@ use Drupal\node\NodeInterface;
  *  e.g.: {{ attach_library('droopler_theme/block') }}.
  */
 function droopler_theme_library_info_alter(&$libraries, $extension) {
-    if ($extension == 'droopler_theme') {
-        $theme_handler = \Drupal::service('theme_handler');
-        $theme_path = $theme_handler->getTheme('droopler_theme')->getPath();
+  if ($extension == 'droopler_theme') {
+    $theme_handler = \Drupal::service('theme_handler');
+    $theme_path = $theme_handler->getTheme('droopler_theme')->getPath();
 
-        $extensions = ['css', 'js'];
-        $directory = $theme_path . '/components';
-        $extensions = array_map('preg_quote', $extensions);
-        $extensions = implode('|', $extensions);
+    $extensions = ['css', 'js'];
+    $directory = $theme_path . '/components';
+    $extensions = array_map('preg_quote', $extensions);
+    $extensions = implode('|', $extensions);
 
-        \Drupal::logger('sandbox')->info('droopler_theme_library_info_build');
-        if (!is_dir($directory)) {
-            return [];
-        }
-
-        $file_scan = \Drupal::service('file_system')->scanDirectory(
-          $directory,
-          "#^(?!.*\/src\/).*\.(?:{$extensions})$#"
-        );
-        foreach ($file_scan as $file) {
-            $parts = explode('.', $file->filename);
-            $extension = end($parts);
-            switch ($extension) {
-                case 'css':
-                    $libraries[$file->name][$extension] = [
-                      'component' => [
-                        '/' . $file->uri => [],
-                      ],
-                    ];
-                    break;
-
-                case 'js':
-                    $libraries[$file->name][$extension] = [
-                      '/' . $file->uri => [],
-                    ];
-                    break;
-            }
-        }
+    \Drupal::logger('sandbox')->info('droopler_theme_library_info_build');
+    if (!is_dir($directory)) {
+      return [];
     }
 
-    return $libraries;
+    $file_scan = \Drupal::service('file_system')->scanDirectory(
+      $directory,
+      "#^(?!.*\/src\/).*\.(?:{$extensions})$#"
+    );
+    foreach ($file_scan as $file) {
+      $parts = explode('.', $file->filename);
+      $extension = end($parts);
+      switch ($extension) {
+        case 'css':
+          $libraries[$file->name][$extension] = [
+            'component' => [
+              '/' . $file->uri => [],
+            ],
+          ];
+          break;
+
+        case 'js':
+          $libraries[$file->name][$extension] = [
+            '/' . $file->uri => [],
+          ];
+          break;
+      }
+    }
+  }
+
+  return $libraries;
 }
 
 /**

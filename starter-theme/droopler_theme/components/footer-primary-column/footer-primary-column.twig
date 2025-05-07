@@ -2,7 +2,7 @@
 
 {% set base_class = footer_primary_column_base_class|default('footer-primary-column') %}
 
-<div {{ bem(base_class, [], '', ['col-6', 'col-md-3', 'col-lg-' ~ column_count]) }}>
+<div {{ bem(base_class, [], '', ['col-12', 'col-lg-' ~ column_count]) }}>
   {% block content %}
   {% endblock %}
 </div>

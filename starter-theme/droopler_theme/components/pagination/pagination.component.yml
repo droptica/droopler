@@ -1,0 +1,69 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Pagination
+status: experimental
+description: 'Documentation and examples for displaying pagination to indicate a series of related content exists across multiple pages.'
+props:
+  type: object
+  properties:
+    size:
+      type: string
+      title: Size
+      description: 'Determines the size of the pagination. `"sm"` for smaller pagination, `"lg"` for larger pagination. Leave empty for default size.'
+      enum:
+        - ''
+        - sm
+        - lg
+    alignment:
+      type: string
+      title: Alignment
+      description: 'Determines the alignment of the pagination component. Can be one of `"start"` (default alignment), `"end"` (right aligned), `"center"` (center aligned), or `"vertical"` (vertically stacked).'
+      enum:
+        - ''
+        - start
+        - end
+        - center
+        - vertical
+    show_first:
+      type: boolean
+      title: Show first
+      description: 'Determines whether the first page link should be displayed.'
+    show_last:
+      type: boolean
+      title: Show last
+      description: 'Determines whether the last page link should be displayed.'
+    show_ellipsis:
+      type: boolean
+      title: Show ellipsis
+      description: 'Determines whether the ellipsis should be displayed.'
+pagination_utility_classes:
+  type: array
+  items:
+    type: string
+  description: 'Additional utility classes added to the pagination component.'
+items:
+  type: array
+  items:
+    type: object
+    properties:
+      href:
+        type: string
+      text:
+        type: string
+      pagination_classes:
+        type: array
+        items:
+          type: string
+      pagination_utility_classes:
+        type: array
+        items:
+          type: string
+      pagination_attributes:
+        type: Drupal\Core\Template\Attribute
+  description: 'The items to be displayed in the pagination component.'
+slots:
+  pagination_next:
+    type: object
+    description: 'The next page link.'
+  pagination_previous:
+    type: object
+    description: 'The previous page link.'

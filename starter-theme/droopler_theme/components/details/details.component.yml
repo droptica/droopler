@@ -7,19 +7,19 @@ props:
     summary_attributes:
       type: Drupal\Core\Template\Attribute
     required:
-      type: boolean
+      type: [boolean, 'null']
       default: false
-      description: 'Whether the details element is required.'
+      description: 'Specifies if the details element is required.'
     errors:
-      type: array
+      type: ['array', 'string', 'null']
       default: []
-      description: 'An array of error messages.'
+      description: 'Any errors for this details element, may not be set.'
     description:
-      type: string
+      type: ['string', 'null']
       default: ''
-      description: 'The description of the details element.'
+      description: 'The description of the details element, may not be set.'
     children:
-      type: array
+      type: ['array', 'string', 'null']
       default: []
       description: 'The children of the details element.'
     value:

@@ -2,7 +2,12 @@
 
 *[data-theme="theme-light"] {
   --dp-bs-body-color: #{$color-hecuba};
-  --form-input-color: #{$color-troilus};
+  --dp-bs-link-color-rgb: #{$color-achilles};
+  --dp-bs-link-hover-color-rgb: #{$primary};
+  --form-input-background-color: #{$color-odysseus};
+  --form-input-border-color: #{$color-gray};
+  --form-input-color: #{$color-agamemnon};
+  --form-input-text-color: #{$color-agamemnon};
   --section-background-color: #{$color-odysseus};
   --overlay-background-color: #{$color-odysseus};
   --divider-background-color: #{$color-achilles};
@@ -22,7 +27,7 @@
   --subscribe-file-body-text-color: #{$color-cassandra};
   --subscribe-file-link-color: #{$color-cassandra};
   --subscribe-file-link-hover-color: #{$color-cassandra};
-  --counter-color: #{$color-hecuba};
+  --counter-color: #{$primary};
   --footer-link-color: #{$color-troilus};
   --footer-link-hover-color: #{$color-cassandra};
   --footer-primary-background-color: #{$color-odysseus};
@@ -37,23 +42,29 @@
   --navigation-mobile-submenu-link-color: #{$color-cassandra};
   --navigation-mobile-submenu-link-color-active: #{$color-nestor};
   --navigation-mobile-submenu-link-color-hover: #{$color-nestor};
-  --navigation-desktop-top-menu-link-color: #{$color-iphis};
-  --navigation-desktop-top-menu-link-color-hover: #{$color-agamemnon};
-  --navigation-desktop-bottom-menu-link-color: #{$color-cassandra};
-  --navigation-desktop-bottom-menu-link-color-hover: #{$color-agamemnon};
-  --navigation-desktop-bottom-submenu-background-color: #{$color-acamas};
-  --navigation-desktop-bottom-submenu-link-color: #{$color-odysseus};
-  --navigation-desktop-bottom-submenu-link-color-active: #{$color-nestor};
-  --navigation-desktop-bottom-submenu-link-color-hover: #{$color-nestor};
-  --header-search-page-link-color: #{$color-iphis};
-  --header-search-page-link-color-hover: #{$color-agamemnon};
+  --navigation-desktop-top-menu-link-color: #{$color-nestor};
+  --navigation-desktop-top-menu-link-color-hover: #{$primary};
+  --navigation-desktop-bottom-menu-link-color: #{$color-hecuba};
+  --navigation-desktop-bottom-menu-link-color-hover: #{$primary};
+  --navigation-desktop-bottom-submenu-background-color: #{$color-odysseus};
+  --navigation-desktop-bottom-submenu-link-color: #{$color-hecuba};
+  --navigation-desktop-bottom-submenu-link-color-active: #{$primary};
+  --navigation-desktop-bottom-submenu-link-color-hover: #{$primary};
+  --navigation-desktop-bottom-submenu-border-color: #{$color-gray};
+  --header-search-page-link-color: #{$color-darkgray};
+  --header-search-page-link-color-hover: #{$primary};
+  --header-language-switcher-link-color: #{$color-hecuba};
+  --header-language-switcher-link-color-hover: #{$primary};
+  --product-text-body-border-color: #{$color-paris};
+  --product-text-body-color: #{$color-darkgray};
   --category-heading: #{$color-agamemnon};
-  --category-text: #{$color-hecuba};
-  --facet-tag-border-color: #{$color-diomedes};
+  --category-text: #{$primary};
+  --facet-tag-border-color: #{$color-clymene};
   --facet-tag-border-color-hover: #{$color-patroclus};
   --facet-tag-bg-color: #{$color-leto};
   --facet-tag-text-color: #{$color-priam};
-  --facet-active-text-color: #{$color-troilus};
+  --facet-active-text-color: #{$color-odysseus};
+  --facet-active-bg-color: #{$color-achilles};
   --exposed-filter-border-color-mobile: #{$color-hector};
   --exposed-filter-border-color-desktop: #{$color-priam};
   --product-teaser-text-color: #{$color-agamemnon};
@@ -66,8 +77,8 @@
   --mobile-filter-icon-color: #828282;
   --mobile-filter-icon-color-hover: #{$color-odysseus};
   --mobile-filter-border: 2px solid #{$color-hector};
-  --reference-content-background-color: #{$color-hecuba};
-  --reference-content-text-color: #{$color-odysseus};
+  --reference-content-background-color: #{$color-odysseus};
+  --reference-content-text-color: #{$color-acamas};
   --blog-teaser-divider: #{$color-diomedes};
   --side-by-side-grid-color: #{$color-paris};
   --group-of-text-blocks-grid-color: #{$color-paris};
@@ -78,34 +89,42 @@
   --price-block-color-up: #{$color-serpedon};
   --price-block-color-down: #{$color-agamemnon};
   --single-text-block-tile-background: #{$color-odysseus};
+  --single-text-block-text-color: #{$color-nestor};
   --search-results-list-item-border: #{$color-hector};
+  --blockquote-border-color: #{$color-hades};
+  --blockquote-subtitle-text-color: #{$color-nestor};
 }
 
 *[data-theme="theme-dark"] {
-  --dp-bs-body-color: #{$color-odysseus};
-  --dp-bs-link-color: #{$color-odysseus};
+  --body-text-heading-color: #{$color-paris};
+  --dp-bs-body-color: #{$color-paris};
+  --dp-bs-link-color: #{$color-agamemnon};
   --dp-bs-link-color-rgb: #{to-rgb($color-odysseus)};
   --dp-bs-link-hover-color: #{$color-odysseus};
   --dp-bs-link-hover-color-rgb: #{to-rgb($color-odysseus)};
-  --form-input-color: #{$color-troilus};
-  --section-background-color: #{$color-cassandra};
+  --form-input-background-color: #{$color-darkgray};
+  --form-input-border-color: transparent;
+  --form-input-color: #{$color-paris};
+  --form-input-text-color: #{$color-paris};
+  --section-background-color: #{$color-agamemnon};
   --overlay-background-color: #{$color-cassandra};
-  --divider-background-color: #{$color-nestor};
-  --body-text-color: #{$color-odysseus};
+  --divider-background-color: #{$primary};
+  --carousel-body-text-color: #{$color-odysseus};
+  --body-text-color: #{$color-paris};
   --heading-color: #{$color-odysseus};
-  --subtitle-color: #{$color-odysseus};
+  --subtitle-color: #{$color-paris};
   --checkbox-color: #{$color-nestor};
   --subscribe-file-body-text-color: #{$color-odysseus};
   --subscribe-file-link-color: #{$color-odysseus};
   --subscribe-file-link-hover-color: #{$color-odysseus};
-  --banner-body-text-color: #{$color-odysseus};
+  --banner-body-text-color: #{$color-paris};
   --counter-color: #{$color-odysseus};
   --carousel-body-text-color-hover: #{$color-agamemnon};
   --carousel-item-divider-color: #{$color-iphis};
   --footer-link-color: #{$color-thersites};
   --footer-link-hover-color: #{$color-odysseus};
-  --footer-primary-background-color: #{$color-cassandra};
-  --footer-secondary-background-color: #{$color-hecuba};
+  --footer-primary-background-color: #{$color-agamemnon};
+  --footer-secondary-background-color: #{$color-cassandra};
   --footer-secondary-link-color: #{$color-odysseus};
   --social-media-border-color: #{rgba($color-odysseus, 0.2)};
   --hamburger-line-background-color: #{$color-odysseus};
@@ -156,20 +175,26 @@
   --price-block-color-up: #{$color-serpedon};
   --price-block-color-down: #{$color-agamemnon};
   --single-text-block-tile-background: #{$color-cassandra};
+  --single-text-block-text-color: #{$color-odysseus};
   --search-results-list-item-border: #{$color-hector};
 }
 
 *[data-theme="theme-primary"] {
+  --body-text-heading-color: #{$color-paris};
   --dp-bs-body-color: #{$color-odysseus};
-  --form-input-color: #{$color-troilus};
+  --form-input-background-color: #{$color-darkgray};
+  --form-input-border-color: transparent;
+  --form-input-color: #{$color-paris};
+  --form-input-text-color: #{$color-agamemnon};
   --section-background-color: #{$color-agamemnon};
-  --overlay-background-color: #{$color-agamemnon};
-  --divider-background-color: #{$color-nestor};
-  --body-text-color: #{$color-odysseus};
-  --heading-color: #{$color-nestor};
-  --subtitle-color: #{$color-odysseus};
+  --overlay-background-color: #{rgb($color-black, 0.65)};
+  --divider-background-color: #{$color-achilles};
+  --carousel-body-text-color: #{$color-odysseus};
+  --body-text-color: #{$color-paris};
+  --heading-color: #{$color-odysseus};
+  --subtitle-color: #{$color-paris};
   --checkbox-color: #{$color-nestor};
-  --banner-body-text-color: #{$color-odysseus};
+  --banner-body-text-color: #{$color-paris};
   --subscribe-file-body-text-color: #{$color-odysseus};
   --subscribe-file-link-color: #{$color-odysseus};
   --subscribe-file-link-hover-color: #{$color-odysseus};
@@ -178,9 +203,11 @@
   --carousel-item-divider-color: #{$color-iphis};
   --footer-link-color: #{$color-thersites};
   --footer-link-hover-color: #{$color-odysseus};
-  --footer-primary-background-color: #{$color-cassandra};
-  --footer-secondary-background-color: #{$color-hecuba};
+  --footer-primary-background-color: #{$color-agamemnon};
+  --footer-secondary-background-color: #{$color-agamemnon};
+  --footer-secondary-border-color: #{$color-darkgray};
   --footer-secondary-link-color: #{$color-odysseus};
+  --social-media-item-color: #{$color-odysseus};
   --social-media-border-color: #{rgba($color-odysseus, 0.2)};
   --hamburger-line-background-color: #{$color-odysseus};
   --navigation-mobile-overlay-background-color: #{$color-cassandra};
@@ -230,15 +257,22 @@
   --price-block-color-up: #{$color-serpedon};
   --price-block-color-down: #{$color-cassandra};
   --single-text-block-tile-background: #{$color-agamemnon};
+  --single-text-block-text-color: #{$color-odysseus};
   --search-results-list-item-border: #{$color-hector};
 }
 
 *[data-theme="theme-secondary"] {
+  --body-text-heading-color: #{$color-agamemnon};
   --dp-bs-body-color: #{$color-hecuba};
-  --form-input-color: #{$color-troilus};
+  --form-input-background-color: #{$color-odysseus};
+  --form-input-border-color: #{$color-light-900};
+  --form-input-color: #{$color-gray-50};
+  --form-input-text-color: #{$color-agamemnon};
   --section-background-color: #{$color-paris};
   --overlay-background-color: #{$color-paris};
   --divider-background-color: #{$color-achilles};
+  --carousel-heading-color: #{$primary};
+  --carousel-body-text-color: #{$color-aeneas};
   --carousel-body-text-color-hover: #{$color-agamemnon};
   --carousel-item-divider-color: #{$color-iphis};
   --body-text-color: #{$color-hecuba};
@@ -249,7 +283,7 @@
   --subscribe-file-body-text-color: #{$color-cassandra};
   --subscribe-file-link-color: #{$color-cassandra};
   --subscribe-file-link-hover-color: #{$color-cassandra};
-  --counter-color: #{$color-cassandra};
+  --counter-color: #{$primary};
   --footer-link-color: #{$color-thersites};
   --footer-link-hover-color: #{$color-cassandra};
   --footer-primary-background-color: #{$color-odysseus};
@@ -304,12 +338,14 @@
   --price-block-color-up: #{$color-serpedon};
   --price-block-color-down: #{$color-agamemnon};
   --single-text-block-tile-background: #{$color-odysseus};
+  --single-text-block-text-color: #{$color-agamemnon};
   --search-results-list-item-border: #{$color-hector};
 }
 
 *[data-theme="theme-custom"] {
   --dp-bs-body-color: "inherit";
-  --form-input-color: #{$color-troilus};
+  --form-input-color: #{$color-paris};
+  --form-input-text-color: #{$color-agamemnon};
   --section-background-color: "inherit";
   --overlay-background-color: "inherit";
   --divider-background-color: #{$color-agamemnon};
@@ -377,5 +413,6 @@
   --price-block-color-up: #{$color-serpedon};
   --price-block-color-down: #{$color-agamemnon};
   --single-text-block-tile-background: "inherit";
+  --dp-bs-pagination-active-bg: #fff;
   --search-results-list-item-border: #{$color-hector};
 }

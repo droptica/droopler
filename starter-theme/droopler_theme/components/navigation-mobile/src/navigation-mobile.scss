@@ -83,6 +83,7 @@
         line-height: 2rem;
         text-transform: uppercase;
         z-index: 2;
+        color: var(--navigation-mobile-submenu-link-color);
       }
 
       &__toggler {
@@ -91,6 +92,7 @@
         justify-content: flex-end;
         width: 50%;
         padding: 0.2rem var(--navigation-mobile-item-indentation-horizontal);
+        color: var(--navigation-mobile-submenu-link-color)
       }
     }
   }
@@ -148,6 +150,7 @@
             justify-content: flex-end;
             width: 50%;
             padding: 0.2rem var(--navigation-mobile-item-indentation-horizontal);
+            color: var(--navigation-mobile-submenu-link-color)
           }
         }
       }

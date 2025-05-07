@@ -1,4 +1,3 @@
-
 {#
 /**
  * @file
@@ -26,13 +25,14 @@
  * @ingroup themeable
  */
 #}
-{%
+
+{% 
   set body_classes = [
-  logged_in ? 'user-logged-in',
-  not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
-  node_type ? 'page-node-type-' ~ node_type|clean_class,
-  db_offline ? 'db-offline',
-]
+    logged_in ? 'user-logged-in',
+    root_path ? 'path-' ~ root_path|clean_class : 'path-frontpage',
+    node_type ? 'page-node-type-' ~ node_type|clean_class,
+    db_offline ? 'db-offline',
+  ]
 %}
 <!DOCTYPE html>
 <html{{ html_attributes }}>

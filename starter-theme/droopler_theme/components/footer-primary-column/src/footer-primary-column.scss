@@ -43,7 +43,9 @@
   }
 
   .heading {
-    @include heading(6);
+    @include typography(h5);
+
+    font-weight: 400;
   }
 
   .body-text {

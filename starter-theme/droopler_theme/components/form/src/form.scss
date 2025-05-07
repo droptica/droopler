@@ -3,6 +3,27 @@
 .form {
   .form-control {
     --dp-bs-body-color: var(--form-input-color);
+    background-color: var(--form-input-background-color);
+    border-color: var(--form-input-border-color);
+  }
+
+  .form-floating {
+    label {
+      color: var(--form-input-color);
+    }
+
+    & > .form-control:focus,
+    & > .form-control:not(:placeholder-shown),
+    & > .form-control-plaintext,
+    & > .form-select {
+      & ~ label {
+        color: var(--form-input-color);
+
+        &::after {
+          background-color: transparent;
+        }
+      }
+    }
   }
 
   .form-check {

@@ -1,25 +1,29 @@
 @import "../../../src/scss/init";
 
 .block-exposed-filters.views-exposed-form {
-  width: 100%;
-
   .select2 {
     &-selection {
       height: 100%;
+      background-color: $color-paris;
+      border: none;
+      border-radius: 0.125rem;
+      display: flex;
+      align-items: center;
 
       &__rendered {
-        padding: 0.625rem 4rem 0.625rem 1.5rem;
+        @include typography('text-14-regular');
+        padding: var(--content-spacer-xs) var(--content-spacer-s);
+        color: var(--form-input-text-color);
+        font-weight: 500;
       }
 
       &__arrow {
-        width: 30px;
-        height: 30px;
         aspect-ratio: 1;
         background-image: url("../../src/assets/images/arrow.svg");
         background-repeat: no-repeat;
-        right: 0;
-        top: 50%;
-        translate: -50% -50%;
+        position: relative;
+        height: 1rem;
+        width: 2rem;
 
         b {
           display: none;

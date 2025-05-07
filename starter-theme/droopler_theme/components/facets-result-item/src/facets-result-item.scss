@@ -1,16 +1,16 @@
 .facets-result-item {
   display: flex;
-  align-items: center;
 
   &__status {
     display: flex;
 
     &::before {
-      content: "";
-      background-image: url("../../src/assets/icons/x.svg");
-      width: 20px;
-      height: 20px;
+      content: url("../../src/assets/icons/x-white.svg");
+      width: 25px;
+      height: 14px;
       display: inline-block;
+      position: relative;
+      top: 2px;
     }
   }
 

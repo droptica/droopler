@@ -54,7 +54,8 @@
   }
 
   &__count-products {
-    font-size: 1.5rem;
+    @include typography('text-12-regular');
+    font-weight: 400;
 
     @include media-breakpoint-down(lg) {
       display: none;
@@ -69,8 +70,14 @@
 
   &__top-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 1rem;
+
+    &.col-lg-4 {
+      @include media-breakpoint-up(lg) {
+        padding-right: var(--content-spacer-xs);
+      }
+    }
 
     .form-select {
       @include media-breakpoint-down(md) {

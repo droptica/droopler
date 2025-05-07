@@ -26,6 +26,8 @@ fi
 
 # Configure DDEV if not already done.
 test -d .ddev || ddev config --project-type=drupal11 --docroot=web --php-version=8.3 --ddev-version-constraint=">=1.24.0" --project-name="$NAME"
+# Install the Selenium add-on.
+ddev add-on get ddev/ddev-selenium-standalone-chrome
 # Start your engines.
 ddev start
 # Install dependencies if not already done.

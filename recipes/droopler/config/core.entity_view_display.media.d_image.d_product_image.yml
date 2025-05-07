@@ -4,7 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.d_product_image
     - field.field.media.d_image.field_media_image
-    - image.style.product_thumbnail_pc
+    - image.style.product_thumbnail_320x205
     - media.type.d_image
   module:
     - svg_image
@@ -18,7 +18,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: product_thumbnail_pc
+      image_style: product_thumbnail_320x205
       image_loading:
         attribute: lazy
       svg_attributes:

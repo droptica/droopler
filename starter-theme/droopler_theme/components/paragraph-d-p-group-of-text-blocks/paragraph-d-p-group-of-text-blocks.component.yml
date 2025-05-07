@@ -15,10 +15,10 @@ props:
           type: string
           default: null
     is_full_width:
-      type: boolean
+      type: ["boolean", "null"]
       default: false
     with_grid:
-      type: boolean
+      type: ["boolean", "null"]
       default: false
 slots:
   header:

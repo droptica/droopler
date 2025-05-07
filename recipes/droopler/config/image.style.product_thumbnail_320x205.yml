@@ -1,0 +1,15 @@
+uuid: ef672672-0d54-4143-a600-b08a76056757
+langcode: en
+status: true
+dependencies: {  }
+name: product_thumbnail_320x205
+label: 'Product thumbnail (320x205)'
+effects:
+  13562b67-4ee8-48a8-8ec1-f020bf16ac7a:
+    uuid: 13562b67-4ee8-48a8-8ec1-f020bf16ac7a
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 320
+      height: 205
+      anchor: center-center

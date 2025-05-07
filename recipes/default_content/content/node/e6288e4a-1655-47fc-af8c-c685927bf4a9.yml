@@ -6,6 +6,10 @@ _meta:
   default_langcode: en
   depends:
     7349f593-6511-4892-99f2-6fc71a07b302: media
+    fb21bec4-2aec-41c4-90a7-45a618b3040e: node
+    c50f85fd-0b6a-419f-9f5d-3f08b40043c5: node
+    ba90118d-52a5-43a5-95b7-65c2050cd03c: node
+    de3e04f3-a6cc-49f3-890f-3763a9c90697: node
     5028f7ff-9811-4097-886b-d31b727c54a3: media
 default:
   revision_uid:
@@ -16,7 +20,7 @@ default:
       value: true
   uid:
     -
-      target_id: 0
+      target_id: 1
   title:
     -
       value: 'Reference Content Paragraph'
@@ -34,7 +38,7 @@ default:
       tag: meta
       attributes:
         name: title
-        content: 'Reference Content Paragraph | test'
+        content: 'Reference Content Paragraph | Drush Site-Install'
     -
       tag: meta
       attributes:
@@ -44,7 +48,7 @@ default:
       tag: link
       attributes:
         rel: canonical
-        href: 'https://ddevappname.ddev.site/documentation/reference-content-paragraph'
+        href: 'https://droopler51-1.ddev.site/documentation/reference-content-paragraph'
     -
       tag: meta
       attributes:
@@ -54,7 +58,7 @@ default:
       tag: meta
       attributes:
         property: 'og:image'
-        content: 'https://ddevappname.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=0N6-Bu1F'
+        content: 'https://droopler51-1.ddev.site/sites/default/files/styles/responsive_image_2000/public/demo/demo-logo.svg?itok=3XTmEL_6'
   path:
     -
       alias: /documentation/reference-content-paragraph
@@ -255,6 +259,15 @@ default:
           field_d_media_icon:
             -
               entity: 7349f593-6511-4892-99f2-6fc71a07b302
+          field_d_p_reference_content:
+            -
+              entity: fb21bec4-2aec-41c4-90a7-45a618b3040e
+            -
+              entity: c50f85fd-0b6a-419f-9f5d-3f08b40043c5
+            -
+              entity: ba90118d-52a5-43a5-95b7-65c2050cd03c
+            -
+              entity: de3e04f3-a6cc-49f3-890f-3763a9c90697
           field_heading_type:
             -
               value: h2

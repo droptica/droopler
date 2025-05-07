@@ -1,1 +1,34 @@
-{% include "droopler_theme:details" %}
+{#
+/**
+ * @file
+ * Theme override for a details element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the details element.
+ * - errors: (optional) Any errors for this details element, may not be set.
+ * - title: (optional) The title of the element, may not be set.
+ * - description: (optional) The description of the element, may not be set.
+ * - children: (optional) The children of the element, may not be set.
+ * - value: (optional) The value of the element, may not be set.
+ */
+#}
+{# First, ensure children is properly handled #}
+{% set component_children = [] %}
+{% if children is defined %}
+  {% if children is iterable %}
+    {% set component_children = children %}
+  {% else %}
+    {# If children is a string, we need to pass it as value instead #}
+    {% set component_value = children %}
+    {% set component_children = [] %}
+  {% endif %}
+{% endif %}
+
+{% include "droopler_theme:details" with {
+  required: required|default(false),
+  errors: errors|default([]),
+  children: component_children,
+  title: title|default(''),
+  description: description|default(''),
+  value: component_value|default(value|default(''))
+} %}

@@ -29,6 +29,10 @@
   .heading {
     @include heading(5);
 
+    @include media-breakpoint-up('lg') {
+      line-height: 2rem;
+    }
+
     --heading-color: var(--reference-content-text-color);
   }
 

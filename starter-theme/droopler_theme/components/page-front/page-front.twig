@@ -1,0 +1,9 @@
+{% extends "droopler_theme:page" %}
+
+{% block content %}
+  <div {{ bem('content', [], base_class, ['container']) }}>
+    <div {{ bem('content-wrapper', [], base_class) }}>
+      {{ page.content }}
+    </div>
+  </div>
+{% endblock content %}

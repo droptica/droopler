@@ -1,0 +1,27 @@
+@import "../../../src/scss/init";
+
+:root {
+ --dp-bs-pagination-padding-y: var(--content-spacer-xs);
+ --dp-bs-pagination-padding-x: var(--content-spacer-xs);
+}
+
+.pagination-wrapper {
+  .pagination {
+    .pager {
+      &__item {
+        min-width: 2.125rem;
+        min-height: 2.125rem;
+        text-align: center;
+        padding-left: var(--content-spacer-xxxs);
+        padding-right: var(--content-spacer-xxxs);
+
+        a {
+          @include typography(subtitle);
+
+          padding: var(--dp-bs-pagination-padding-y) var(--dp-bs-pagination-padding-x);
+          border: none;
+        }
+      }
+    }
+  }
+}

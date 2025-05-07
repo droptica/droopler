@@ -74,7 +74,12 @@ mix.sass('src/scss/main.style.scss', 'css');
 glob.sync('components/**/src/*.scss').forEach((sourcePath) => {
   // Remove the src/ from the path.
   const destinationPath = sourcePath.replace(/^src\/(components\/.+)\/_?(.+)\.scss$/, '$1/$2.css');
-  mix.sass(sourcePath, destinationPath).after(() => {
+  mix.sass(sourcePath, destinationPath, {
+    sassOptions: {
+      // Prepend all variable imports to each component file
+      data: '@import "src/scss/bootstrap/variables'
+    }
+  }).after(() => {
     // Copy the compiled CSS to the correct location.
     if (sourcePath.startsWith('components/') && destinationPath.endsWith('.scss')) {
       const newDestinationPath = destinationPath.replace('.scss', '.css').replace(/\/src\//, '/');

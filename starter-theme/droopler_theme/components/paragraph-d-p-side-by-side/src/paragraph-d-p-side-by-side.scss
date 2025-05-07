@@ -24,10 +24,12 @@
 
   &--with-grid {
     #{$root}__content-wrapper {
+      margin-top: var(--content-spacer-m);
       border-top: 2px solid var(--side-by-side-grid-color);
       border-bottom: 2px solid var(--side-by-side-grid-color);
     }
     #{$root}__content-row {
+      margin-top: var(--content-spacer-none);
       & > div:not(:first-child) {
         @include media-breakpoint-down(sm) {
           border-top: 2px solid var(--side-by-side-grid-color);

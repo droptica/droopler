@@ -1,10 +1,21 @@
+@import "../../../src/scss/init";
+
 :root {
   --heading-margin: 0;
   --heading-text-transform: none;
+  --heading-font-weight: 600;
 }
 
 .heading {
   margin: var(--heading-margin);
   text-transform: var(--heading-text-transform);
   color: var(--heading-color);
+}
+
+@include media-breakpoint-up(md) {
+  @for $i from 1 through 5 {
+    h#{$i} {
+      @include typography("h#{$i}");
+    }
+  }
 }

@@ -199,7 +199,7 @@ third_party_settings:
           section_attributes: null
           regions_classes:
             blb_region_col_1: ''
-            blb_region_col_2: ' d-flex flex-column gap-4'
+            blb_region_col_2: ' d-flex flex-column justify-content-center'
           regions_attributes:
             blb_region_col_1: null
             blb_region_col_2: null
@@ -232,29 +232,10 @@ third_party_settings:
                 view_mode: view_mode
               formatter:
                 type: text_default
-                label: above
+                label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            weight: 0
-            additional: {  }
-          a4976ba1-6396-4c7c-a7e1-3237903d8608:
-            uuid: a4976ba1-6396-4c7c-a7e1-3237903d8608
-            region: blb_region_col_2
-            configuration:
-              id: 'field_block:node:d_product:field_product_categories'
-              label: Categories
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: default
-                third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           eeb25e79-536f-4317-b75f-3b11529ef575:
             uuid: eeb25e79-536f-4317-b75f-3b11529ef575
@@ -273,26 +254,7 @@ third_party_settings:
                 settings:
                   view_mode: default
                 third_party_settings: {  }
-            weight: 2
-            additional: {  }
-          0fcb397b-c94c-4608-8e3b-a4c89cccd810:
-            uuid: 0fcb397b-c94c-4608-8e3b-a4c89cccd810
-            region: blb_region_col_1
-            configuration:
-              id: 'field_block:node:d_product:title'
-              label: Title
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: hidden
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-            weight: 0
+            weight: 3
             additional: {  }
           d97085e3-60b5-4e3a-9561-541885324486:
             uuid: d97085e3-60b5-4e3a-9561-541885324486
@@ -310,6 +272,44 @@ third_party_settings:
                 label: hidden
                 settings:
                   view_mode: gallery_item
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          0fcb397b-c94c-4608-8e3b-a4c89cccd810:
+            uuid: 0fcb397b-c94c-4608-8e3b-a4c89cccd810
+            region: blb_region_col_2
+            configuration:
+              id: 'field_block:node:d_product:title'
+              label: Title
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          a4976ba1-6396-4c7c-a7e1-3237903d8608:
+            uuid: a4976ba1-6396-4c7c-a7e1-3237903d8608
+            region: blb_region_col_2
+            configuration:
+              id: 'field_block:node:d_product:field_product_categories'
+              label: Categories
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
                 third_party_settings: {  }
             weight: 1
             additional: {  }
@@ -440,7 +440,7 @@ third_party_settings:
             additional: {  }
         third_party_settings: {  }
 _core:
-  default_config_hash: 9v3gssFc4pkta12OWenSOMFIvQ9BhVAJG8wWio8p3YU
+  default_config_hash: SOvo7w70tv9mBQubQCwBs-RO8DVyfLNqwTqvr1xjLzs
 id: node.d_product.full
 targetEntityType: node
 bundle: d_product

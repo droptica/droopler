@@ -1,0 +1,104 @@
+{{ attach_library('droopler_theme/node--d-product--full') }}
+
+{#
+/**
+ * @file
+ * Template for a Node.
+ * Available variables:
+  * - node: The node entity.
+  * - label: The title of the node.
+  * - author_name: The name of the author.
+  * - author_picture: The picture of the author.
+  * - date: The date of the node.
+  * - content: All node items. Use {{ content }} to print them all,
+  *   or print a subset such as {{ content.field_example }}. Use
+  *   {{ content|without('field_example') }} to temporarily suppress the printing
+  *   of a given child element.
+  * - author: The author of the node.
+  * - display_submitted: Whether submission information should be displayed.
+  * - attributes: HTML attributes for the containing element.
+  * - title_attributes: HTML attributes for the title.
+  * - content_attributes: HTML attributes for the content.
+  * - author_attributes: HTML attributes for the author.
+  * - node_content_classes: A list of HTML classes for the node content.
+  * - author_utility_classes: A list of HTML classes for the author.
+  * - node_utility_classes: A list of HTML classes for the node.
+  * - node_content_utility_classes: A list of HTML classes for the node content.
+  * - view_mode: View mode; for example, 'full', 'teaser'.
+  * - page: Flag for the full page state.
+  * - title_prefix: Additional output populated by modules, intended to be displayed in front of the main title tag that appears in the template.
+  * - title_suffix: Additional output populated by modules, intended to be displayed after the main title tag that appears in the template.
+  *
+ */
+#}
+{%
+  set node_classes = [
+  'node',
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  node.bundle|clean_class,
+  node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
+  'node--' ~ view_mode|clean_class,
+  'node--' ~ node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
+  'view-mode--' ~ view_mode|clean_class,
+]|merge(node_utility_classes ?: [])
+%}
+
+{%
+  set author_classes = [
+  'author',
+]|merge(author_utility_classes ?: [])
+%}
+
+{%
+  set node_content_classes = [
+  'node__content',
+]|merge(node_content_utility_classes ?: [])
+%}
+
+{% set node_attributes = attributes ?: create_attribute() %}
+
+<article {{ node_attributes.addClass(node_classes) }}>
+  {% block node_title_prefix %}
+    {{ title_prefix }}
+  {% endblock %}
+
+  {% block node_title %}
+    {% if not page %}
+      {%
+        include 'droopler_theme:heading' with {
+        content: label|default(''),
+        heading_html_tag: heading_html_tag|default('h2'),
+        title_link: title_link|default(url),
+        heading_attributes: title_attributes,
+      }
+      %}
+    {% endif %}
+  {% endblock %}
+
+  {% block node_title_suffix %}
+    {{ title_suffix }}
+  {% endblock %}
+
+  {% block node_metadata %}
+    {% if display_submitted %}
+      <footer>
+        <div {{ author_attributes.addClass(author_classes) }}>
+          {{ author_picture }}
+
+          {{ 'Submitted by @author on @date'|t({
+            '@author': author_name,
+            '@date': date
+          }) }}
+        </div>
+      </footer>
+    {% endif %}
+  {% endblock %}
+
+  <div {{ content_attributes.addClass(node_content_classes) }}>
+    {% block node_content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+</article>
