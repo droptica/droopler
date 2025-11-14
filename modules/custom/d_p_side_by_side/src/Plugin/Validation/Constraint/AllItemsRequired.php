@@ -38,7 +38,7 @@ class AllItemsRequired extends Constraint {
   /**
    * {@inheritdoc}
    */
-  public function getRequiredOptions() {
+  public function getRequiredOptions(): array {
     return ['number', 'name'];
   }
 
