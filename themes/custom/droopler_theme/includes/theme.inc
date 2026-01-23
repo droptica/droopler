@@ -8,13 +8,13 @@
 declare(strict_types = 1);
 
 /**
- * Implements hook_library_info_build().
+ * Implements hook_library_info_alter().
  *
  * Automatically creates components libraries (Not visible in theme's
  * libraries.yml file). You can directly use the component name as a library,
  * e.g.: {{ attach_library('droopler_theme/block') }}.
  */
-function droopler_theme_library_info_build() {
+function droopler_theme_library_info_alter(&$libraries, $extension): void {
   $theme_handler = \Drupal::service('theme_handler');
   $theme_path = $theme_handler->getTheme('droopler_theme')->getPath();
 
@@ -24,11 +24,10 @@ function droopler_theme_library_info_build() {
   $extensions = implode('|', $extensions);
 
   if (!is_dir($directory)) {
-    return [];
+    return;
   }
 
   $file_scan = \Drupal::service('file_system')->scanDirectory($directory, "/{$extensions}$/");
-  $libraries = [];
   foreach ($file_scan as $file) {
     $parts = explode('.', $file->filename);
     $extension = end($parts);
@@ -48,7 +47,6 @@ function droopler_theme_library_info_build() {
         break;
     }
   }
-  return $libraries;
 }
 
 /**
