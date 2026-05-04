@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 /**
- * sql:sanitize integration using Drush 13+ listeners (not deprecated hooks).
+ * Integrates d_p_subscribe_file with sql:sanitize via Drush 13+ listeners.
  *
  * @see https://www.drush.org/latest/listeners/
  */
@@ -25,11 +25,28 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 #[AsEventListener(method: 'onConsoleTerminate')]
 final class SubscribeSqlSanitizeListener {
 
+  /**
+   * Constructs a SubscribeSqlSanitizeListener object.
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
+   * @param \Psr\Log\LoggerInterface $logger
+   *   The module logger channel.
+   */
   public function __construct(
     protected Connection $database,
     protected LoggerInterface $logger,
   ) {}
 
+  /**
+   * Factory: creates the listener via the Drupal service container.
+   *
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   The service container.
+   *
+   * @return static
+   *   The listener instance.
+   */
   public static function create(ContainerInterface $container): self {
     return new self(
       $container->get('database'),
@@ -37,12 +54,24 @@ final class SubscribeSqlSanitizeListener {
     );
   }
 
+  /**
+   * Adds a confirmation-line message before sql:sanitize runs.
+   *
+   * @param \Drush\Event\SanitizeConfirmsEvent $event
+   *   The confirms event object.
+   */
   public function onSanitizeConfirms(SanitizeConfirmsEvent $event): void {
     if ($this->applies()) {
       $event->addMessage((string) dt('Sanitize subscriptions data name and email'));
     }
   }
 
+  /**
+   * Runs subscription sanitizing after sql:sanitize completes successfully.
+   *
+   * @param \Symfony\Component\Console\Event\ConsoleTerminateEvent $event
+   *   The console terminate event.
+   */
   public function onConsoleTerminate(ConsoleTerminateEvent $event): void {
     $command = $event->getCommand();
     if ($command === NULL || $command->getName() !== 'sql:sanitize') {
@@ -54,6 +83,12 @@ final class SubscribeSqlSanitizeListener {
     $this->sanitize($event->getInput()->getOptions());
   }
 
+  /**
+   * Sanitizes email and name columns in d_p_subscribe_file.
+   *
+   * @param array $cli_options
+   *   Drush / SQL driver options passed from the invoking command input.
+   */
   protected function sanitize(array $cli_options): void {
     if (!$this->applies()) {
       return;
@@ -94,6 +129,12 @@ final class SubscribeSqlSanitizeListener {
     $this->logger->notice((string) dt('Subscriptions data sanitized.'));
   }
 
+  /**
+   * Returns whether the subscriptions table exists in the schema.
+   *
+   * @return bool
+   *   TRUE when the entity table exists and sanitization applies.
+   */
   protected function applies(): bool {
     return $this->database->schema()->tableExists('d_p_subscribe_file');
   }

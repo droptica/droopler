@@ -25,7 +25,7 @@ final class SettingClassPluginGenerator extends BaseGenerator {
    * {@inheritdoc}
    */
   protected function generate(array &$vars, AssetCollection $assets): void {
-    $ir = $this->createInterviewer($vars);
+    $ir                   = $this->createInterviewer($vars);
     $vars['machine_name'] = $ir->askMachineName();
     $vars['name']         = $ir->askName();
     $vars['plugin_label'] = $ir->askPluginLabel();

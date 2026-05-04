@@ -6,10 +6,13 @@ namespace Drupal\d_search\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a link to the site's search page without requiring core Search module.
+ * Provides a configurable search link without the core Search module.
  *
  * @Block(
  *   id = "search_page_link",
@@ -17,7 +20,40 @@ use Drupal\Core\Url;
  *   category = @Translation("Search"),
  * )
  */
-class SearchPageLink extends BlockBase {
+class SearchPageLink extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * Constructs a SearchPageLink block plugin instance.
+   *
+   * @param array $configuration
+   *   The plugin configuration.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler service.
+   */
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    protected ModuleHandlerInterface $moduleHandler,
+  ) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('module_handler'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -35,10 +71,13 @@ class SearchPageLink extends BlockBase {
     $form['path'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Search page path'),
-      '#description' => $this->t('Internal path, e.g. %example. Leave empty to use the default core Search route when the Search module is enabled, or %fallback when it is not.', [
-        '%example' => '/products',
-        '%fallback' => '/search',
-      ]),
+      '#description' => $this->t(
+        'Internal path, e.g. %example. Leave empty for the core Search route if that module exists, otherwise %fallback.',
+        [
+          '%example' => '/products',
+          '%fallback' => '/search',
+        ]
+      ),
       '#default_value' => $this->configuration['path'],
     ];
     return $form;
@@ -70,14 +109,16 @@ class SearchPageLink extends BlockBase {
 
   /**
    * Resolves where the search link should point.
+   *
+   * @return \Drupal\Core\Url
+   *   The URL object for the link render element.
    */
   protected function getSearchDestination(): Url {
     $path_config = trim($this->configuration['path']);
     if ($path_config !== '') {
       return Url::fromUri('internal:' . (str_starts_with($path_config, '/') ? $path_config : '/' . $path_config));
     }
-    $module_handler = \Drupal::moduleHandler();
-    if ($module_handler->moduleExists('search')) {
+    if ($this->moduleHandler->moduleExists('search')) {
       return Url::fromRoute('search.view');
     }
     return Url::fromUri('internal:/search');

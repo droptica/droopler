@@ -29,9 +29,9 @@ function d_product_update_8002() {
 /**
  * Ensures node body field storage exists (Drupal 11.3+ compatibility).
  *
- * Core no longer ships field.storage.node.body with the Node module as of 11.3.x;
- * distributors should ship their own copy. Existing sites that already use the
- * body field are left unchanged.
+ * Core no longer ships field.storage.node.body with the Node module as of
+ * 11.3.x; distributors should ship their own copy. Existing sites that already
+ * use the body field are left unchanged.
  *
  * @see https://www.drupal.org/node/3540814
  */
