@@ -2,6 +2,8 @@
 //
 // config/colors.scss
 //
+@use 'sass:color';
+
 // $color-priam - Main gray
 //
 // markup:
@@ -89,4 +91,4 @@ $color-iphis: #ababab !default;
 // For example check _d_p_banner.scss
 
 $link-color: $color-agamemnon !default;
-$link-hover-color: darken($link-color, 5%) !default;
+$link-hover-color: color.adjust($link-color, $lightness: -5%) !default;
