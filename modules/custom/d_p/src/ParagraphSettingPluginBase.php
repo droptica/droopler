@@ -43,6 +43,7 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    // @phpstan-ignore-next-line Drupal uses late static binding for subclass factories.
     return new static(
       $configuration,
       $plugin_id,

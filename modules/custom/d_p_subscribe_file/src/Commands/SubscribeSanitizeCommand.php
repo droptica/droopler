@@ -5,7 +5,7 @@ namespace Drupal\d_p_subscribe_file\Commands;
 use Consolidation\AnnotatedCommand\CommandData;
 use Drupal\Core\Database\Connection;
 use Drush\Commands\DrushCommands;
-use Drush\Drupal\Commands\sql\SanitizePluginInterface;
+use Drush\Commands\sql\sanitize\SanitizePluginInterface;
 use Drush\Sql\SqlBase;
 use Symfony\Component\Console\Input\InputInterface;
 

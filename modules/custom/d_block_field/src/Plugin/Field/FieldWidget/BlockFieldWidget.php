@@ -90,6 +90,7 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    // @phpstan-ignore-next-line Drupal uses late static binding for plugin factory pattern.
     return new static(
       $plugin_id,
       $plugin_definition,

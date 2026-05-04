@@ -39,7 +39,7 @@ class ParagraphModifiersHelper {
    * @param \Drupal\paragraphs\Entity\Paragraph $paragraph
    *   Paragraph to be analyzed.
    */
-  public function __construct(Paragraph $paragraph = NULL) {
+  public function __construct(?Paragraph $paragraph = NULL) {
     if ($paragraph) {
       $this->analyzeParagraph($paragraph);
     }

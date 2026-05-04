@@ -67,6 +67,7 @@ class SubscribeFileForm extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
+    // @phpstan-ignore-next-line Drupal uses late static binding for plugin factory pattern.
     return new static(
       $container->get('current_user'),
       $container->get('plugin.manager.mail')

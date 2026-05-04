@@ -7,6 +7,7 @@
 
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\node\Entity\Node;
@@ -426,7 +427,7 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
   // Save the file.
   $data = file_get_contents(d_content_init_parse_file_path($path));
   $filename = basename($path);
-  $image = \Drupal::service('file.repository')->writeData($data, $directory . $filename, FileSystemInterface::EXISTS_REPLACE);
+  $image = \Drupal::service('file.repository')->writeData($data, $directory . $filename, FileExists::Replace);
   return $image;
 }
 

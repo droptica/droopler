@@ -279,7 +279,7 @@ function droopler_enable_subtheme_postprocess(array &$context) {
     // Copy configuration of the WeMegaMenu from base to subtheme.
     if ($base_menu = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme')) {
       WeMegaMenuBuilder::saveConfig('main', 'droopler_subtheme', json_encode($base_menu));
-      \Drupal::cache('render')->invalidateAll();
+      \Drupal::cache('render')->deleteAll();
     }
 
     $context['message'] = t('Theme %theme configured.', ['%theme' => 'droopler_subtheme']);

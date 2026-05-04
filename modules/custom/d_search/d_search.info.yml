@@ -1,9 +1,10 @@
 name: 'Droopler Search'
 description: 'Extends Drupal search functionality.'
 type: module
-core_version_requirement: ^10 || ^11
+core_version_requirement: ^11.3 || ^12
 dependencies:
-  - drupal:search
+  - drupal:block
+  - drupal:user
 
 package: Droopler Common
 version: DROOPLER_VERSION

@@ -60,6 +60,7 @@ class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInt
    *   Static.
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    // @phpstan-ignore-next-line Drupal uses late static binding for plugin factory pattern.
     return new static(
       $configuration,
       $plugin_id,

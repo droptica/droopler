@@ -8,6 +8,7 @@ use Drupal\Component\Serialization\SerializationInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
@@ -249,7 +250,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     $file_data = file_get_contents($path);
     $final_dir = dirname($uri);
     $this->fileSystem->prepareDirectory($final_dir, FileSystemInterface::CREATE_DIRECTORY);
-    return $this->fileRepository->writeData($file_data, $uri, FileSystemInterface::EXISTS_REPLACE);
+    return $this->fileRepository->writeData($file_data, $uri, FileExists::Replace);
   }
 
   /**

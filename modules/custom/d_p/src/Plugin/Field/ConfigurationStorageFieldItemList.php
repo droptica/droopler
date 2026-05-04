@@ -36,7 +36,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
   /**
    * {@inheritdoc}
    */
-  public function __construct(DataDefinitionInterface $definition, $name = NULL, TypedDataInterface $parent = NULL) {
+  public function __construct(DataDefinitionInterface $definition, $name = NULL, ?TypedDataInterface $parent = NULL) {
     parent::__construct($definition, $name, $parent);
 
     $this->pluginManager = \Drupal::service('d_p.paragraph_settings.plugin.manager');

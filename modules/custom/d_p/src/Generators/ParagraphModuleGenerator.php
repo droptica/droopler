@@ -1,58 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Generators;
 
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
+use DrupalCodeGenerator\GeneratorType;
 
 /**
- * The class that adds Droopler Paragraph generator to Drush.
+ * Registers the drush generator for new Droopler paragraph modules.
  */
-class ParagraphModuleGenerator extends BaseGenerator {
+#[Generator(
+  name: 'droopler-paragraph-module',
+  description: 'Generates a Droopler Paragraph module.',
+  aliases: ['dropar'],
+  templatePath: __DIR__,
+  type: GeneratorType::OTHER,
+)]
+final class ParagraphModuleGenerator extends BaseGenerator {
 
   /**
    * {@inheritdoc}
    */
-  protected $name = 'droopler-paragraph-module';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir                   = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name']         = $ir->askName();
+    $vars['preprocess']   = $ir->confirm('Would you like to create a sample preprocess function to read paragraph settings?', TRUE);
+    $vars['template']     = 'paragraph--' . str_replace('_', '-', $vars['machine_name']);
 
-  /**
-   * {@inheritdoc}
-   */
-  protected $description = 'Generates a Droopler Paragraph module.';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected $alias = 'dropar';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected $templatePath = __DIR__;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::moduleQuestions();
-    $questions['preprocess'] = new ConfirmationQuestion('Would you like to create a sample preprocess function to read paragraph settings?', TRUE);
-
-    $vars = &$this->collectVars($input, $output, $questions);
-    $vars['template'] = 'paragraph--' . str_replace('_', '-', $vars['machine_name']);
-
-    $this->addFile()
-      ->path('{machine_name}.module')
+    $assets->addFile('{machine_name}.module')
       ->template('paragraph-module.twig');
-
-    $this->addFile()
-      ->path('{machine_name}.info.yml')
+    $assets->addFile('{machine_name}.info.yml')
       ->template('paragraph-info.twig');
-
-    $this->addFile()
-      ->path('templates/{template}.html.twig')
+    $assets->addFile('templates/{template}.html.twig')
       ->template('paragraph-template.twig');
   }
 

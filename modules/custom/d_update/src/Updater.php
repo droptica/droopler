@@ -514,7 +514,7 @@ class Updater {
    * @return bool
    *   Return if the config was changed successfully.
    */
-  private function modifyConfig($configName, array $newConfig, array $expectedConfig = NULL) {
+  private function modifyConfig($configName, array $newConfig, ?array $expectedConfig = NULL) {
     $configName = $this->replacePlaceholders($configName);
     $config = $this->configFactory->getEditable($configName);
     $configData = $config->get();
