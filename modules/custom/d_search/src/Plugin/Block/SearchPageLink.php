@@ -47,6 +47,7 @@ class SearchPageLink extends BlockBase implements ContainerFactoryPluginInterfac
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+    // @phpstan-ignore-next-line Drupal uses late static binding for plugin factory pattern.
     return new static(
       $configuration,
       $plugin_id,
