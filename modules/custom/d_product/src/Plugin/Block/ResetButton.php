@@ -120,7 +120,7 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
    */
   public function build() {
 
-    if ($this->request === NULL || !$this->request->query->get('f')) {
+    if ($this->request === NULL || empty($this->request->query->all('f'))) {
       return [
         '#markup' => '',
         '#cache' => [
