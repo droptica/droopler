@@ -89,7 +89,7 @@ class ContentHelper {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function replaceContent(array &$variables, string $entity_type, string $view_mode, string $field, array $new_values) {
+  public function replaceContent(array &$variables, string $entity_type, string $view_mode, string $field, array $new_values): void {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['elements']['#paragraph'];
     $paragraph->set($field, $new_values);

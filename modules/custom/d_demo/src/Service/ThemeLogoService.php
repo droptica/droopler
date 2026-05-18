@@ -40,7 +40,7 @@ class ThemeLogoService {
   /**
    * Function helps set current theme new demo logo.
    */
-  public function setThemeDemoLogo() {
+  public function setThemeDemoLogo(): void {
     $demoModulePath = $this->moduleHandler->getModule('d_demo')->getPath();
 
     $this->setCurrentThemeDemoLogo($demoModulePath . '/assets/demo-logo.svg');
@@ -79,7 +79,7 @@ class ThemeLogoService {
    * @param string $logoPath
    *   Path of logo.
    */
-  protected function setCurrentThemeDemoLogo($logoPath) {
+  protected function setCurrentThemeDemoLogo(string $logoPath): void {
     if ($logoPath) {
       $currentThemeSettings = $this->getCurrentThemeConfig();
       $currentThemeSettings->set('logo.use_default', FALSE);

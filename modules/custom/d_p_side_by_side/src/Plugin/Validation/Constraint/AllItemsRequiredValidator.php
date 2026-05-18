@@ -13,7 +13,7 @@ class AllItemsRequiredValidator extends ConstraintValidator {
   /**
    * {@inheritdoc}
    */
-  public function validate($entity, Constraint $constraint) {
+  public function validate(mixed $entity, Constraint $constraint): void {
     if (!isset($entity)) {
       return;
     }

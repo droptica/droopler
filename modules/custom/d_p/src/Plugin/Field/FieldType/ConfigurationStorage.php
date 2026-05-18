@@ -60,7 +60,7 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
   /**
    * {@inheritdoc}
    */
-  public function setValue($values, $notify = TRUE) {
+  public function setValue($values, $notify = TRUE): void {
     $config_value = ['value' => ''];
 
     if (is_object($values)) {

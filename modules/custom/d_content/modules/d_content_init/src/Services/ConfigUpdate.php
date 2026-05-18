@@ -89,7 +89,7 @@ class ConfigUpdate {
    * @param string $path
    *   The path to the directory with the configuration for the module.
    */
-  public function createBlocksConfigs(array $configs, $path) {
+  public function createBlocksConfigs(array $configs, string $path): void {
     $theme = $this->configFactory->get('system.theme')->get('default');
     $storage = new FileStorage($path);
     foreach ($configs as $themeConfigName) {
@@ -194,7 +194,7 @@ class ConfigUpdate {
    * @param string $regex
    *   Regular expresion pattern to search in configuration file names.
    */
-  public function importConfigs($moduleName, $path, $regex) {
+  public function importConfigs(string $moduleName, string $path, string $regex): void {
     $configs = $this->getConfigsFilesNames($moduleName, $path, $regex);
     try {
       $this->createBlocksConfigs($configs, $this->getConfigsPath($moduleName, $path));
@@ -214,7 +214,7 @@ class ConfigUpdate {
    * @param string $regex
    *   Regular expresion pattern to search in configuration file names.
    */
-  public function deleteConfigs($moduleName, $path, $regex) {
+  public function deleteConfigs(string $moduleName, string $path, string $regex): void {
     $theme = $this->configFactory->get('system.theme')->get('default');
     $configs = $this->getConfigsFilesNames($moduleName, $path, $regex);
     foreach ($configs as $themeConfigName) {

@@ -318,7 +318,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block_values
    *   Block values.
    */
-  protected function getCurrentThemeIfNotDefined(array &$block_values) {
+  protected function getCurrentThemeIfNotDefined(array &$block_values): void {
     if (!isset($block_values['theme']) || empty($block_values['theme'])) {
       $block_values['theme'] = $this->themeHandler->getDefault();
     }

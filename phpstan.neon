@@ -1,6 +1,5 @@
 parameters:
-    # Drupal community baseline (per Matt Glaman).
-    level: 5
+    level: 6
 
     paths:
         - droopler.install
@@ -19,6 +18,31 @@ parameters:
         - test
 
     ignoreErrors:
+        # Drupal render/form/settings arrays are mixed-shape by design.
+        -
+            identifier: missingType.iterableValue
+            reportUnmatched: false
+        # Drupal core plugin/field base classes carry stub-only generics.
+        -
+            identifier: missingType.generics
+            reportUnmatched: false
+        # Legacy procedural hooks (.install/.theme/.module) don't need full typing.
+        -
+            identifier: missingType.return
+            paths:
+                - '*.install'
+                - '*.theme'
+                - '*.module'
+                - '*.inc'
+            reportUnmatched: false
+        -
+            identifier: missingType.parameter
+            paths:
+                - '*.install'
+                - '*.theme'
+                - '*.module'
+                - '*.inc'
+            reportUnmatched: false
         -
             message: "#^Unsafe usage of new static#"
             reportUnmatched: false
@@ -65,6 +89,8 @@ parameters:
         - */Drush/Listeners/*
         # drupal/commerce is an optional contrib dependency, not required.
         - modules/custom/d_commerce/*
+        # STARTERKIT_* are scaffolding templates, not runtime code.
+        - themes/custom/*/STARTERKIT_*/*
 
     phpVersion: 80300
 

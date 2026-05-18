@@ -8,6 +8,7 @@ use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Template\Attribute;
 use Drupal\d_p\Helper\ParagraphSettingsAccessor;
 use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\paragraphs\ParagraphInterface;
 
 /**
  * Hook implementations for the d_p_tiles module.
@@ -77,7 +78,7 @@ class Hooks {
   /**
    * Switch selected gallery images to the featured view mode.
    */
-  protected function markFeaturedImages(array &$variables, $paragraph): void {
+  protected function markFeaturedImages(array &$variables, ParagraphInterface $paragraph): void {
     $variables['wrapper_attributes'] = new Attribute();
 
     $featured_images_setting = (string) ParagraphSettingsAccessor::value(

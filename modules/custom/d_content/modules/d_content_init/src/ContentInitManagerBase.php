@@ -127,7 +127,7 @@ abstract class ContentInitManagerBase {
    * @param array $structure
    *   Structure of the content to import.
    */
-  public function importFromFiles(array $structure) {
+  public function importFromFiles(array $structure): void {
     foreach ($structure as $data) {
       if (!$this->importFromFile($data['file'])) {
         $this->logger->error($this->t('Entity from @file was not created.', [
@@ -199,7 +199,7 @@ abstract class ContentInitManagerBase {
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   Entity to operate on.
    */
-  protected function processFields(array $block, EntityInterface &$entity) {
+  protected function processFields(array $block, EntityInterface &$entity): void {
     try {
       if (isset($block['fields'])) {
         foreach ($block['fields'] as $field_name => $field) {

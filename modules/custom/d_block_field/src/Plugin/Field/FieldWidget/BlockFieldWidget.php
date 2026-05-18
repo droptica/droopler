@@ -183,7 +183,7 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
   /**
    * {@inheritdoc}
    */
-  protected function formSingleElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
+  protected function formSingleElement(FieldItemListInterface $items, mixed $delta, array $element, array &$form, FormStateInterface $form_state): array {
     $element = parent::formSingleElement($items, $delta, $element, $form, $form_state);
     // For a single element propagate the field's title/description onto the
     // inner `plugin_id` select.
