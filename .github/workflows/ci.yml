@@ -50,9 +50,15 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-php${{ matrix.php }}-${{ hashFiles('composer.json') }}
+          key: composer-php${{ matrix.php }}-nopatches-${{ hashFiles('composer.json') }}
           restore-keys: |
-            composer-php${{ matrix.php }}-
+            composer-php${{ matrix.php }}-nopatches-
+
+      - name: Strip runtime patches from composer.json
+        run: |
+          tmp="$(mktemp)"
+          jq 'del(.extra.patches)' composer.json > "$tmp"
+          mv "$tmp" composer.json
 
       - name: Install project dependencies
         run: composer install --ignore-platform-reqs --prefer-dist --no-progress --no-interaction
@@ -87,9 +93,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-php${{ matrix.php }}-${{ hashFiles('composer.json') }}
+          key: composer-php${{ matrix.php }}-nopatches-${{ hashFiles('composer.json') }}
           restore-keys: |
-            composer-php${{ matrix.php }}-
+            composer-php${{ matrix.php }}-nopatches-
 
       - name: Cache PHPStan result cache
         uses: actions/cache@v4
@@ -98,6 +104,12 @@ jobs:
           key: phpstan-php${{ matrix.php }}-${{ github.sha }}
           restore-keys: |
             phpstan-php${{ matrix.php }}-
+
+      - name: Strip runtime patches from composer.json
+        run: |
+          tmp="$(mktemp)"
+          jq 'del(.extra.patches)' composer.json > "$tmp"
+          mv "$tmp" composer.json
 
       - name: Install project dependencies
         run: composer install --ignore-platform-reqs --prefer-dist --no-progress --no-interaction
