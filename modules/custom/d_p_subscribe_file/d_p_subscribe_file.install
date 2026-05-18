@@ -1,36 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @file
- * Contains d_p_subscribe install.
+ * Install, update and uninstall functions for the d_p_subscribe_file module.
  */
-
-use Drupal\Core\StreamWrapper\PrivateStream;
 
 /**
- * Implements hook_requirements().
+ * Implements hook_install().
  */
-function d_p_subscribe_file_requirements($phase) {
-  $requirements = [];
+function d_p_subscribe_file_install(): void {
+  \Drupal::configFactory()->getEditable('system.mail')
+    ->set('interface.d_p_subscribe_file', 'subscribe_file_html_mail')
+    ->save();
+}
 
-  if ($phase == 'runtime') {
-    $private_path = PrivateStream::basePath();
-    if ($private_path) {
-      $requirements['droopler'] = [
-        'title' => t('Droopler Paragraphs'),
-        'value' => t('Private file system path is set'),
-        'severity' => REQUIREMENT_INFO,
-      ];
-    }
-    else {
-      $requirements['droopler'] = [
-        'title' => t('Droopler Paragraphs'),
-        'value' => t('Private file system path is not set'),
-        'severity' => REQUIREMENT_ERROR,
-        'description' => t('You need set Private file system path. <a href=":prv-file">How to set the private files directory</a>.', [':prv-file' => 'https://www.drupal.org/node/2392959']),
-      ];
-    }
-  }
+/**
+ * Implements hook_uninstall().
+ */
+function d_p_subscribe_file_uninstall(): void {
+  \Drupal::configFactory()->getEditable('system.mail')
+    ->clear('interface.d_p_subscribe_file')
+    ->save();
+}
 
-  return $requirements;
+/**
+ * Route d_p_subscribe_file emails through the dedicated HTML mail plugin.
+ */
+function d_p_subscribe_file_update_8001(): void {
+  \Drupal::configFactory()->getEditable('system.mail')
+    ->set('interface.d_p_subscribe_file', 'subscribe_file_html_mail')
+    ->save();
 }

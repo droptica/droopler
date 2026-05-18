@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -22,19 +24,19 @@ class PaddingBottom extends ParagraphSettingPluginBase implements ParagraphSetti
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#description' => $this->t('Choose the size of bottom padding.'),
       '#type' => 'select',
       '#options' => $this->getOptions(),
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function getOptions(): array {
     return [
       'padding-bottom-default' => $this->t('Default'),
@@ -47,7 +49,8 @@ class PaddingBottom extends ParagraphSettingPluginBase implements ParagraphSetti
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 'padding-bottom-default';
   }
 

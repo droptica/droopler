@@ -1,95 +1,105 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_media\Plugin\Provider;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Template\Attribute;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * A base for the provider plugins.
+ * Base class for video-embed provider plugins.
  */
-abstract class ProviderPluginBase extends PluginBase implements ProviderPluginInterface {
+abstract class ProviderPluginBase extends PluginBase implements ProviderPluginInterface, ContainerFactoryPluginInterface {
 
   /**
-   * An array of settings from formatter for player.
+   * Image-style effect ids that expose width/height as data, used for spacers.
    *
-   * @var array
+   * @var string[]
    */
-  protected $playerSettings = [];
-
-  /**
-   * An array of settings from formatter for video.
-   *
-   * @var array
-   */
-  protected $videoSettings = [];
-
-  /**
-   * Base URL of the provider, with a placeholder for video ID.
-   *
-   * @var string
-   */
-  protected $baseUrl;
-
-  /**
-   * The ID of the video.
-   *
-   * @var string
-   */
-  protected $videoId;
-
-  /**
-   * The input that caused the embed provider to be selected.
-   *
-   * @var string
-   */
-  protected $input;
-
-  /**
-   * Array of available image style effects for the spacer element.
-   */
-  const SCALE_AND_CROP_EFFECTS = [
+  protected const array SCALE_AND_CROP_EFFECTS = [
     'image_scale_and_crop',
     'focal_point_scale_and_crop',
     'image_scale',
   ];
 
   /**
-   * Create a plugin with the given input.
+   * Player settings provided by the formatter.
    *
-   * @param array $configuration
-   *   The configuration of the plugin.
-   * @param string $plugin_id
-   *   The plugin id.
-   * @param array $plugin_definition
-   *   The plugin definition.
-   *
-   * @throws \Exception
+   * @var array<string, mixed>
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition) {
+  protected array $playerSettings = [];
+
+  /**
+   * Video settings provided by the formatter.
+   *
+   * @var array<string, mixed>
+   */
+  protected array $videoSettings = [];
+
+  /**
+   * Base URL of the provider, with a `%s` placeholder for the video id.
+   */
+  protected string $baseUrl;
+
+  /**
+   * The id of the video extracted from the user input.
+   */
+  protected string $videoId;
+
+  /**
+   * The original input that caused the embed provider to be selected.
+   */
+  protected string $input;
+
+  /**
+   * @throws \InvalidArgumentException
+   *   When the configured input doesn't match the plugin's URL pattern.
+   */
+  public function __construct(
+    array $configuration,
+    string $plugin_id,
+    array $plugin_definition,
+    protected readonly EntityTypeManagerInterface $entityTypeManager,
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     if (!static::isApplicable($configuration['input'])) {
-      throw new \Exception('Tried to create a video provider plugin with invalid input.');
+      throw new \InvalidArgumentException('Tried to create a video provider plugin with invalid input.');
     }
 
-    $this->input = $configuration['input'];
-    $this->videoId = $this->getIdFromInput($configuration['input']);
+    $this->input = (string) $configuration['input'];
+    $id = static::getIdFromInput($this->input);
+    $this->videoId = $id === FALSE ? '' : $id;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function isApplicable($input) {
-    $id = static::getIdFromInput($input);
-
-    return !empty($id);
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    // @phpstan-ignore-next-line Drupal uses late static binding for plugin factory.
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('entity_type.manager'),
+    );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function renderEmbedCode() {
+  public static function isApplicable(string $input): bool {
+    return !empty(static::getIdFromInput($input));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function renderEmbedCode(): array {
     $output = [
       '#theme' => 'd_media_video_embed',
       '#attributes' => new Attribute([
@@ -98,16 +108,12 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
         'allowfullscreen' => 'allowfullscreen',
         'data-provider' => $this->getPluginDefinition()['id'],
         'data-aspect-ratio' => $this->calculateAspectRatio(),
-        'class' => [
-          'video-embed',
-        ],
+        'class' => ['video-embed'],
       ]),
     ];
 
     if (!empty($this->videoSettings['image_style'])) {
-
       $this->getSpacerAttributes($output);
-
     }
     if (!empty($this->videoSettings['cover'])) {
       $output['#attributes']->addClass('video-embed--cover');
@@ -120,89 +126,82 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   /**
    * {@inheritdoc}
    */
-  public function setPlayerSettings(array $settings) {
+  public function setPlayerSettings(array $settings): void {
     $this->playerSettings = $settings;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setVideoSettings(array $settings) {
+  public function setVideoSettings(array $settings): void {
     $this->videoSettings = $settings;
   }
 
   /**
-   * Get the ID of the video.
-   *
-   * @return string
-   *   The video ID.
+   * Get the id of the video.
    */
-  protected function getVideoId() {
+  protected function getVideoId(): string {
     return $this->videoId;
   }
 
   /**
-   * Get the input which caused this plugin to be selected.
-   *
-   * @return string
-   *   The raw input from the user.
+   * Get the original user input that caused the plugin to be selected.
    */
-  protected function getInput() {
+  protected function getInput(): string {
     return $this->input;
   }
 
   /**
-   * Create query string.
-   *
-   * @return string
-   *   Query string to be added to url.
+   * Build the query string for the embed URL.
    */
-  protected function constructQuery() {
+  protected function constructQuery(): string {
     return http_build_query($this->playerSettings);
   }
 
   /**
-   * Construct source attribute.
-   *
-   * @return string
-   *   Src attribute.
+   * Build the `src` attribute for the embed iframe.
    */
-  protected function constructSrc() {
+  protected function constructSrc(): string {
     $url = sprintf($this->baseUrl, $this->getVideoId());
 
     $query = $this->constructQuery();
-    if (!empty($query)) {
-      $url .= "?$query";
+    if ($query !== '') {
+      $url .= '?' . $query;
     }
 
     return $url;
   }
 
   /**
-   * Calculate aspect ratio of the video.
-   *
-   * @return float|int
-   *   Aspect ratio.
+   * Aspect ratio (height ÷ width) for the embed; defaults to 1 when unknown.
    */
-  protected function calculateAspectRatio() {
+  protected function calculateAspectRatio(): float|int {
     $video_data = $this->oEmbedData();
-    return (isset($video_data->height) && isset($video_data->width)) ? $video_data->height / $video_data->width : 1;
+    if (!isset($video_data->height, $video_data->width)) {
+      return 1;
+    }
+    if (!is_numeric($video_data->height) || !is_numeric($video_data->width) || (float) $video_data->width === 0.0) {
+      return 1;
+    }
+    return $video_data->height / $video_data->width;
   }
 
   /**
-   * Adds spacer attributes to the output based on selected image style.
-   *
-   * @param array $output
-   *   Contains theme and attributes data.
+   * Attach spacer attributes (width / height) sourced from the image style.
    */
-  protected function getSpacerAttributes(array &$output) {
+  protected function getSpacerAttributes(array &$output): void {
     $imageStyleSetting = $this->videoSettings['image_style'];
 
-    $effects = \Drupal::service('entity_type.manager')
+    /** @var \Drupal\image\ImageStyleInterface|null $image_style */
+    $image_style = $this->entityTypeManager
       ->getStorage('image_style')
-      ->load($imageStyleSetting)->getEffects()->getConfiguration();
-    foreach ($effects as $effect) {
-      if (in_array($effect['id'], self::SCALE_AND_CROP_EFFECTS) && !empty($effect['data'])) {
+      ->load($imageStyleSetting);
+    if ($image_style === NULL) {
+      return;
+    }
+
+    foreach ($image_style->getEffects()->getConfiguration() as $effect) {
+      if (in_array($effect['id'], self::SCALE_AND_CROP_EFFECTS, TRUE) && !empty($effect['data'])) {
         $output['#spacer_attributes'] = new Attribute([
           'width' => $effect['data']['width'],
           'height' => $effect['data']['height'],

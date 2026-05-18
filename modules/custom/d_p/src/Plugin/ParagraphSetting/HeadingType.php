@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -18,19 +20,19 @@ class HeadingType extends ParagraphSettingPluginBase implements ParagraphSetting
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#description' => $this->t('Select the type of heading to use with this paragraph.'),
       '#type' => 'select',
       '#options' => $this->getOptions(),
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function getOptions(): array {
     return [
       'h1' => $this->t('H1'),
@@ -45,7 +47,8 @@ class HeadingType extends ParagraphSettingPluginBase implements ParagraphSetting
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 'h2';
   }
 

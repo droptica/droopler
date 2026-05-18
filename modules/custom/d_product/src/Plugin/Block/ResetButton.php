@@ -152,7 +152,7 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
           'class' => $this->configuration['button_class'],
           'target' => '_self',
         ],
-        '#url' => URL::fromUserInput($this->configuration['button_target']),
+        '#url' => Url::fromUserInput($this->configuration['button_target']),
         '#cache' => [
           'contexts' => ['url.query_args:f'],
         ],

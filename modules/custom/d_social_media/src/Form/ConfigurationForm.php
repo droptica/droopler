@@ -30,7 +30,7 @@ class ConfigurationForm extends ConfigFormBase {
   public static function getMediaNames() {
     return [
       'facebook',
-      'twitter',
+      'x',
       'youtube',
       'instagram',
       'linkedin',

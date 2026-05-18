@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @file
  * Contains update functions for d_media module.
@@ -8,15 +10,15 @@
 /**
  * Allow upload svg to media image field.
  */
-function d_media_update_8001() {
-  Drupal::service('d_update')
+function d_media_update_8001(): void {
+  \Drupal::service('d_update')
     ->updateConfigurations('module/d_media', 'd_media.enable_svg_upload');
 }
 
 /**
  * Enable lazy loading on media entities.
  */
-function d_media_update_8002() {
+function d_media_update_8002(): void {
   \Drupal::service('d_update')
     ->updateConfigurations('module/d_media', 'd_media.8002');
 }

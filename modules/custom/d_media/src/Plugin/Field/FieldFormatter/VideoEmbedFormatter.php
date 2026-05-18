@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_media\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -8,6 +10,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\d_media\Service\ProviderManagerInterface;
 use Drupal\media\Entity\MediaType;
 use Drupal\media\Plugin\media\Source\OEmbedInterface;
@@ -29,49 +32,13 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   /**
    * Name for the video settings in the formatter.
    */
-  const VIDEO_SETTINGS_CONFIG_NAME = 'video_settings';
+  public const string VIDEO_SETTINGS_CONFIG_NAME = 'video_settings';
 
   /**
    * Name for the player settings in the formatter.
    */
-  const PLAYER_SETTINGS_CONFIG_NAME = 'player_settings';
+  public const string PLAYER_SETTINGS_CONFIG_NAME = 'player_settings';
 
-  /**
-   * The embed provider plugin manager.
-   *
-   * @var \Drupal\d_media\Service\ProviderManagerInterface
-   */
-  protected $providerManager;
-
-  /**
-   * Image style storage.
-   *
-   * @var \Drupal\Core\Entity\EntityStorageInterface
-   */
-  protected $imageStyleStorage;
-
-  /**
-   * Constructs an VideoEmbedFormatter instance.
-   *
-   * @param string $plugin_id
-   *   The plugin ID for the formatter.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
-   *   The definition of the field to which the formatter is associated.
-   * @param array $settings
-   *   The formatter settings.
-   * @param string $label
-   *   The formatter label display setting.
-   * @param string $view_mode
-   *   The view mode.
-   * @param array $third_party_settings
-   *   Any third party settings.
-   * @param \Drupal\d_media\Service\ProviderManagerInterface $provider_manager
-   *   The video embed provider manager.
-   * @param \Drupal\Core\Entity\EntityStorageInterface $image_style_storage
-   *   The entity storage class.
-   */
   public function __construct(
     $plugin_id,
     $plugin_definition,
@@ -80,18 +47,16 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
     $label,
     $view_mode,
     array $third_party_settings,
-    ProviderManagerInterface $provider_manager,
-    EntityStorageInterface $image_style_storage
+    protected readonly ProviderManagerInterface $providerManager,
+    protected readonly EntityStorageInterface $imageStyleStorage,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
-    $this->providerManager = $provider_manager;
-    $this->imageStyleStorage = $image_style_storage;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     // @phpstan-ignore-next-line Drupal uses late static binding for plugin factory pattern.
     return new static(
       $plugin_id,
@@ -102,14 +67,14 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
       $configuration['view_mode'],
       $configuration['third_party_settings'],
       $container->get('d_media.video_provider_manager'),
-      $container->get('entity_type.manager')->getStorage('image_style')
+      $container->get('entity_type.manager')->getStorage('image_style'),
     );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode) {
+  public function viewElements(FieldItemListInterface $items, $langcode): array {
     $element = [];
 
     foreach ($items as $delta => $item) {
@@ -119,7 +84,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
       }
 
       $provider = $this->providerManager->loadProviderFromInput($value);
-      if (!$provider) {
+      if ($provider === FALSE) {
         continue;
       }
 
@@ -134,7 +99,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
+  public static function defaultSettings(): array {
     return parent::defaultSettings() + [
       self::PLAYER_SETTINGS_CONFIG_NAME => [
         'autoplay' => 0,
@@ -152,9 +117,9 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
     $form = parent::settingsForm($form, $form_state);
-    // Player settings.
+
     $form[self::PLAYER_SETTINGS_CONFIG_NAME] = [
       '#type' => 'details',
       '#title' => $this->t('Player settings'),
@@ -162,7 +127,6 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
     ];
     $this->addFormSettings(self::PLAYER_SETTINGS_CONFIG_NAME, $form);
 
-    // Video settings.
     $form[self::VIDEO_SETTINGS_CONFIG_NAME] = [
       '#type' => 'details',
       '#title' => $this->t('Video settings'),
@@ -176,14 +140,12 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   /**
    * {@inheritdoc}
    */
-  public function settingsSummary() {
+  public function settingsSummary(): array {
     $summary = parent::settingsSummary();
 
-    // Player settings.
     $summary[] = $this->t('Player settings');
     $this->addSettingsSummary(self::PLAYER_SETTINGS_CONFIG_NAME, $summary);
 
-    // Video settings.
     $summary[] = $this->t('Video settings');
     $this->addSettingsSummary(self::VIDEO_SETTINGS_CONFIG_NAME, $summary);
 
@@ -193,32 +155,25 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
   /**
    * {@inheritdoc}
    */
-  public static function isApplicable(FieldDefinitionInterface $field_definition) {
+  public static function isApplicable(FieldDefinitionInterface $field_definition): bool {
     if ($field_definition->getTargetEntityTypeId() !== 'media') {
       return FALSE;
     }
-
-    if (parent::isApplicable($field_definition)) {
-      $media_type = $field_definition->getTargetBundle();
-
-      if ($media_type) {
-        $media_type = MediaType::load($media_type);
-        return $media_type && $media_type->getSource() instanceof OEmbedInterface;
-      }
+    if (!parent::isApplicable($field_definition)) {
+      return FALSE;
     }
-
-    return FALSE;
+    $media_bundle = $field_definition->getTargetBundle();
+    if ($media_bundle === NULL) {
+      return FALSE;
+    }
+    $media_type = MediaType::load($media_bundle);
+    return $media_type !== NULL && $media_type->getSource() instanceof OEmbedInterface;
   }
 
   /**
    * Add fields with formatter settings to the form.
-   *
-   * @param string $type
-   *   Type of the settings.
-   * @param array $form
-   *   Form array.
    */
-  protected function addFormSettings($type, array &$form) {
+  protected function addFormSettings(string $type, array &$form): void {
     $settings_values = $this->getSetting($type);
     foreach ($this->getSettingsDefinitions($type) as $setting_name => $setting) {
       if (!isset($setting['#type']) || $setting['#type'] === 'checkbox') {
@@ -228,39 +183,33 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
           '#description' => $setting['description'],
           '#default_value' => $settings_values[$setting_name],
         ];
+        continue;
       }
-      else {
-        $form[$type][$setting_name] = $setting;
-      }
+      $form[$type][$setting_name] = $setting;
     }
   }
 
   /**
-   * Add summary section for a type of config.
-   *
-   * @param string $type
-   *   Type of the settings.
-   * @param array $summary
-   *   The summary for formatter settings.
+   * Add summary lines for a settings group.
    */
-  protected function addSettingsSummary($type, array &$summary) {
+  protected function addSettingsSummary(string $type, array &$summary): void {
     $settings_values = $this->getSetting($type);
     foreach ($this->getSettingsDefinitions($type) as $setting_name => $setting) {
       $summary[] = $setting['#title'] . ': ' . $this->settingState($settings_values[$setting_name]);
     }
-
   }
 
   /**
-   * Get settings definitions including name, label, descriptions, etc.
+   * Get settings definitions (name, label, descriptions, …) for a group.
    *
    * @param string $type
-   *   Type of the settings.
+   *   Settings group key, or empty string to return all groups.
    *
-   * @return array
-   *   Settings definition, such as name, label and description.
+   * @return array<string, mixed>
+   *   Settings definitions for the requested group, or the full structure
+   *   when `$type` is empty.
    */
-  protected function getSettingsDefinitions($type = '') {
+  protected function getSettingsDefinitions(string $type = ''): array {
     $settings = [
       self::PLAYER_SETTINGS_CONFIG_NAME => [
         'autoplay' => [
@@ -295,57 +244,33 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
       ],
     ];
 
-    if (!empty($settings[$type])) {
-      return $settings[$type];
-    }
-
-    return $settings;
+    return $settings[$type] ?? $settings;
   }
 
   /**
-   * Human readable state of the setting.
-   *
-   * @param int $value
-   *   Value of the setting.
-   *
-   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
-   *   The word describing setting state.
+   * Human-readable state of a boolean-like setting.
    */
-  protected function settingState($value) {
-    switch ((string) $value) {
-      case '0':
-        $state = $this->t('disabled');
-        break;
-
-      case '1':
-        $state = $this->t('enabled');
-        break;
-
-      default:
-        $state = $value;
-        break;
-    }
-
-    return $state;
+  protected function settingState(mixed $value): TranslatableMarkup|string {
+    return match ((string) $value) {
+      '0' => $this->t('disabled'),
+      '1' => $this->t('enabled'),
+      default => (string) $value,
+    };
   }
 
   /**
-   * Gets image styles option available for the field.
+   * Image style options available for the field.
    *
-   * @return array
-   *   Array of image style options.
+   * @return array<string, string|\Stringable>
    */
-  private function imageStyleOptions() {
-    $styles = $this->imageStyleStorage->loadMultiple();
+  protected function imageStyleOptions(): array {
     $options = [];
-    foreach ($styles as $name => $style) {
-      $options[$name] = $style
-        ->label();
+    foreach ($this->imageStyleStorage->loadMultiple() as $name => $style) {
+      $options[$name] = $style->label();
     }
-    if (empty($options)) {
+    if ($options === []) {
       $options[''] = $this->t('No defined styles');
     }
-
     return $options;
   }
 

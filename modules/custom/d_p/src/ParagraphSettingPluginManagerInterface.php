@@ -1,69 +1,56 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p;
 
+use Drupal\Component\Plugin\Exception\PluginException;
+
 /**
- * Provides interface for paragraph setting plugin manager.
- *
- * @package Drupal\d_p
+ * Provides interface for the paragraph setting plugin manager.
  */
 interface ParagraphSettingPluginManagerInterface {
 
-  const SETTINGS_FORM_STORAGE_CID = 'paragraph_setting_plugins:settings_form';
+  public const string SETTINGS_FORM_STORAGE_CID = 'paragraph_setting_plugins:settings_form';
 
-  const SETTINGS_SUBTYPE_ID = 'modifiers';
+  public const string SETTINGS_SUBTYPE_ID = 'modifiers';
 
   /**
    * Getter for all plugin instances.
    *
-   * @return array
-   *   Plugin instances.
+   * @return array<string, \Drupal\d_p\ParagraphSettingInterface>
+   *   Plugin instances keyed by plugin id.
    */
   public function getAll(): array;
 
   /**
-   * Gets plugin instance by id.
+   * Gets a plugin instance by id.
    *
-   * This is a simple wrapper for createInstance method.
-   * It is possible that we will load plugin configuration
-   * automatically by bundle in some future version.
-   * In that case we don't want to use the createInstance method
-   * directly.
-   *
-   * @param string $plugin_id
-   *   Plugin id.
-   *
-   * @return object|\Drupal\d_p\ParagraphSettingInterface
-   *   Instance of paragraph setting plugin.
+   * Simple wrapper for createInstance(); kept separate so future versions can
+   * load plugin configuration automatically by bundle without changing
+   * consumers.
    *
    * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
-  public function getPluginById(string $plugin_id);
+  public function getPluginById(string $plugin_id): ParagraphSettingInterface;
 
   /**
-   * Load all children plugins by given plugin id.
+   * Load all children plugins by parent plugin id.
    *
-   * @param string $parent_plugin_id
-   *   Parent plugin id.
-   *
-   * @return array
-   *   Plugin instances.
+   * @return array<string, \Drupal\d_p\ParagraphSettingInterface>
    */
   public function getAllChildrenPlugins(string $parent_plugin_id): array;
 
   /**
-   * Getter for settings form built from all plugin instances.
-   *
-   * @return array
-   *   Form elements.
+   * Settings form built from all plugin instances.
    */
   public function getSettingsForm(): array;
 
   /**
-   * Getter for settings form available options built from all plugin instances.
+   * Settings form available options built from all plugin instances.
    *
-   * @return array
-   *   An array containing all plugin names and its subplugins, keyed by id.
+   * @return array<string, array{label: mixed, modifiers?: array<string, array{label: mixed}>}>
+   *   Plugin names with their subplugins, keyed by id.
    */
   public function getSettingsFormOptions(): array;
 

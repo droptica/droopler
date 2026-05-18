@@ -3,3 +3,13 @@ modules/develop/
 themes/contrib/
 .idea/
 libraries/
+
+# Composer-managed dev dependencies (installed locally for phpcs/phpstan).
+/vendor/
+/composer.lock
+
+# PHPStan result cache.
+/.phpstan-cache/
+
+# AI assistant working notes (do not commit).
+/MODERNIZATION.md

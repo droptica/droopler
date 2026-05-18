@@ -31,7 +31,7 @@ final class ParagraphModuleGenerator extends BaseGenerator {
     $vars['preprocess']   = $ir->confirm('Would you like to create a sample preprocess function to read paragraph settings?', TRUE);
     $vars['template']     = 'paragraph--' . str_replace('_', '-', $vars['machine_name']);
 
-    $assets->addFile('{machine_name}.module')
+    $assets->addFile('src/Hook/Hooks.php')
       ->template('paragraph-module.twig');
     $assets->addFile('{machine_name}.info.yml')
       ->template('paragraph-info.twig');

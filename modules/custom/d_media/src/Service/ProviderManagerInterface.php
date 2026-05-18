@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_media\Service;
 
+use Drupal\d_media\Plugin\Provider\ProviderPluginInterface;
+
 /**
- * Interface for the class that gathers the provider plugins.
+ * Interface for the class that gathers the video-embed provider plugins.
  */
 interface ProviderManagerInterface {
 
@@ -15,31 +19,25 @@ interface ProviderManagerInterface {
    * @param string $user_input
    *   The user input to test against the plugins.
    *
-   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|bool
-   *   The relevant plugin or FALSE on failure.
+   * @return array<string, mixed>|false
+   *   The matching plugin definition or FALSE if none applies.
    */
-  public function filterApplicableDefinitions(array $definitions, $user_input);
+  public function filterApplicableDefinitions(array $definitions, string $user_input): array|false;
 
   /**
-   * Load a provider from user input.
+   * Load a provider from a free-form user input.
    *
-   * @param string $input
-   *   Input provided from a field.
-   *
-   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|bool
-   *   The loaded plugin.
+   * @return \Drupal\d_media\Plugin\Provider\ProviderPluginInterface|false
+   *   The loaded plugin or FALSE if no provider matched.
    */
-  public function loadProviderFromInput($input);
+  public function loadProviderFromInput(string $input): ProviderPluginInterface|false;
 
   /**
-   * Load a plugin definition from an input.
+   * Load a plugin definition from a free-form input.
    *
-   * @param string $input
-   *   An input string.
-   *
-   * @return array
-   *   A plugin definition.
+   * @return array<string, mixed>|false
+   *   The plugin definition or FALSE if none matched.
    */
-  public function loadDefinitionFromInput($input);
+  public function loadDefinitionFromInput(string $input): array|false;
 
 }

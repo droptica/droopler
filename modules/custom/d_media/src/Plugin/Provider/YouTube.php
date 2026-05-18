@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_media\Plugin\Provider;
 
 /**
@@ -15,12 +17,13 @@ class YouTube extends ProviderPluginBase {
   /**
    * {@inheritdoc}
    */
-  protected $baseUrl = 'https://www.youtube.com/embed/%s';
+  protected string $baseUrl = 'https://www.youtube.com/embed/%s';
 
   /**
    * {@inheritdoc}
    */
-  public static function getIdFromInput($input) {
+  #[\Override]
+  public static function getIdFromInput(string $input): string|false {
     preg_match('/^https?:\/\/(www\.)?((?!.*list=)youtube\.com\/watch\?.*v=|youtu\.be\/)(?<id>[0-9A-Za-z_-]*)/', $input, $matches);
     return $matches['id'] ?? FALSE;
   }
@@ -28,33 +31,34 @@ class YouTube extends ProviderPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function oEmbedData() {
-    return (object) json_decode(file_get_contents('https://www.youtube.com/oembed?url=' . $this->getInput()));
+  #[\Override]
+  public function oEmbedData(): object {
+    $response = @file_get_contents('https://www.youtube.com/oembed?url=' . $this->getInput());
+    if ($response === FALSE) {
+      return new \stdClass();
+    }
+    $decoded = json_decode($response);
+    return is_object($decoded) ? $decoded : new \stdClass();
   }
 
   /**
-   * Get the time index for when the given video starts.
-   *
-   * @return int
-   *   The time index where the video should start based on the URL.
+   * Time index (in seconds) parsed from the YouTube URL `t=` parameter.
    */
-  protected function getTimeIndex() {
+  protected function getTimeIndex(): int {
     preg_match('/[&\?]t=((?<hours>\d+)h)?((?<minutes>\d+)m)?(?<seconds>\d+)s?/', $this->getInput(), $matches);
-
-    $hours = !empty($matches['hours']) ? $matches['hours'] : 0;
-    $minutes = !empty($matches['minutes']) ? $matches['minutes'] : 0;
-    $seconds = !empty($matches['seconds']) ? $matches['seconds'] : 0;
-
+    $hours = !empty($matches['hours']) ? (int) $matches['hours'] : 0;
+    $minutes = !empty($matches['minutes']) ? (int) $matches['minutes'] : 0;
+    $seconds = !empty($matches['seconds']) ? (int) $matches['seconds'] : 0;
     return $hours * 3600 + $minutes * 60 + $seconds;
   }
 
   /**
-   * Extract the language preference from the URL for use in closed captioning.
+   * Closed-caption language preference parsed from the URL.
    *
    * @return string|false
-   *   The language preference if one exists or FALSE if one could not be found.
+   *   Language code or FALSE when no preference is present.
    */
-  protected function getLanguagePreference() {
+  protected function getLanguagePreference(): string|false {
     preg_match('/[&\?]hl=(?<language>[a-z\-]*)/', $this->getInput(), $matches);
     return $matches['language'] ?? FALSE;
   }
@@ -62,25 +66,25 @@ class YouTube extends ProviderPluginBase {
   /**
    * {@inheritdoc}
    */
-  protected function constructQuery() {
+  #[\Override]
+  protected function constructQuery(): string {
     $query = $this->playerSettings + [
       'start' => $this->getTimeIndex(),
     ];
 
-    // Add language param.
     $language = $this->getLanguagePreference();
-    if ($language) {
+    if ($language !== FALSE) {
       $query['cc_lang_pref'] = $language;
     }
 
-    // Youtube accepts mute param, not muted.
+    // YouTube uses `mute`, not `muted`.
     if (isset($query['muted'])) {
       $query['mute'] = $query['muted'];
       unset($query['muted']);
     }
 
-    // If video is supposed to loop then add a playlist param with the video ID.
-    if (isset($query['loop']) && $query['loop'] == 1) {
+    // Looping requires the playlist param to point at the same video.
+    if (isset($query['loop']) && (int) $query['loop'] === 1) {
       $query['playlist'] = $this->getVideoId();
     }
 
