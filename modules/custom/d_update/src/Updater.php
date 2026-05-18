@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Drupal\d_update;
 
-use Drupal\block\Entity\Block;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
-use Drupal\Core\Config\Entity\ConfigEntityStorageInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ConfigManagerInterface;
+use Drupal\Core\Config\Entity\ConfigEntityStorageInterface;
+use Drupal\Core\Config\Entity\ConfigEntityTypeInterface;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Config\StorageInterface;
@@ -23,6 +23,7 @@ use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\block\Entity\Block;
 use Drupal\d_p\Helper\NestedArrayHelper;
 
 /**
@@ -42,6 +43,9 @@ class Updater {
 
   protected const string LOGGER_CHANNEL = 'd_update';
 
+  /**
+   * Logger channel for d_update.
+   */
   protected readonly LoggerChannelInterface $logger;
 
   public function __construct(
@@ -119,7 +123,7 @@ class Updater {
    * Import multiple config files at once.
    *
    * @param array<string, array<string, string>> $configs
-   *   `[source => [config_name => hash]]`.
+   *   Mapping of `source => [config_name => hash]`.
    *
    * @return bool
    *   TRUE iff every config was imported (or its module was missing).
@@ -142,6 +146,11 @@ class Updater {
    *
    * @param string[] $modules
    *   Module machine names.
+   * @param bool $enable_dependencies
+   *   When TRUE, recursively install missing dependencies.
+   *
+   * @return bool
+   *   TRUE on success, FALSE when the list is empty or unknown modules appear.
    *
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
@@ -165,7 +174,7 @@ class Updater {
    * @param string $subthemeName
    *   Machine name of the subtheme to clone blocks into.
    * @param array<string, array<string, string>> $configs
-   *   `[base_theme => [block_config_name => hash]]`.
+   *   Mapping of `base_theme => [block_config_name => hash]`.
    */
   public function instantiateBlocksForSubtheme(string $subthemeName, array $configs): void {
     foreach ($configs as $baseThemeConfigs) {
@@ -188,9 +197,16 @@ class Updater {
   /**
    * Create / overwrite a config entity (or plain config) from imported data.
    *
+   * @param string $name
+   *   Config name (the YAML file basename without extension).
    * @param array<string, mixed>|false $data
    *   Config data as read from the source file. Passing FALSE returns FALSE
    *   (defensive — kept for backwards compatibility with old callers).
+   * @param string $hash
+   *   Hash strategy understood by ::verifyHash() (`override`, empty, or value).
+   *
+   * @return bool
+   *   TRUE when the import succeeded, FALSE when aborted by hash mismatch.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
@@ -230,8 +246,10 @@ class Updater {
   }
 
   /**
-   * Apply a declarative YAML diff (`delete` / `delete_value` / `change` / `add`)
-   * over each config listed in `config/update/<name>.yml`.
+   * Apply a declarative YAML diff over each config in an update file.
+   *
+   * Reads `config/update/<name>.yml` and applies any of the supported
+   * operations (`delete`, `delete_value`, `change`, `add`) per config entry.
    */
   public function updateConfigurations(string $source, string $name): bool {
     $data = $this->readConfigFromFile($source, $name, 'update');
@@ -289,6 +307,7 @@ class Updater {
    * Resolve `source_type` (`module` / `theme`) and `source` (machine name).
    *
    * @return array{source_type: string, source: string}
+   *   Source descriptor parsed from a `type/name` string.
    */
   protected function getSourceInformation(string $source): array {
     $parts = explode('/', $source);
@@ -323,7 +342,9 @@ class Updater {
    * Write data to a config entity, updating in place when one already exists.
    */
   protected function writeEntityConfig(ConfigEntityStorageInterface $storage, string $name, array $data): bool {
-    $id = $storage->getIDFromConfigName($name, $storage->getEntityType()->getConfigPrefix());
+    $entityType = $storage->getEntityType();
+    assert($entityType instanceof ConfigEntityTypeInterface);
+    $id = $storage->getIDFromConfigName($name, $entityType->getConfigPrefix());
     $existingEntity = $storage->load($id);
     if ($existingEntity !== NULL) {
       $data['uuid'] = $existingEntity->uuid();

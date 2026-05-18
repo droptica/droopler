@@ -23,12 +23,12 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * Current Request.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Symfony\Component\HttpFoundation\Request|null
    */
   protected $request;
 
   /**
-   * CommerceResetButton constructor.
+   * Constructs a new ResetButton block plugin.
    *
    * @param array $configuration
    *   Configuration options.
@@ -120,7 +120,7 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
    */
   public function build() {
 
-    if (!$this->request->get('f')) {
+    if ($this->request === NULL || !$this->request->query->get('f')) {
       return [
         '#markup' => '',
         '#cache' => [

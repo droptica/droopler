@@ -18,10 +18,12 @@
 
   <exclude-pattern>*/vendor/*</exclude-pattern>
   <exclude-pattern>*/node_modules/*</exclude-pattern>
-  <exclude-pattern>*/contrib/*</exclude-pattern>
+  <exclude-pattern>*/modules/contrib/*</exclude-pattern>
+  <exclude-pattern>*/themes/contrib/*</exclude-pattern>
   <exclude-pattern>*/themes/custom/*/build/*</exclude-pattern>
   <exclude-pattern>*/themes/custom/*/dist/*</exclude-pattern>
-  <exclude-pattern>*/themes/custom/*/STARTERKIT_*/dist/*</exclude-pattern>
+  <exclude-pattern>*/themes/custom/*/STARTERKIT_*</exclude-pattern>
+  <exclude-pattern>*/src/Generators/*</exclude-pattern>
   <exclude-pattern>*/themes/custom/*/css/*</exclude-pattern>
   <exclude-pattern>*/themes/custom/*/assets/*</exclude-pattern>
   <exclude-pattern>*pattern-lab/*</exclude-pattern>
@@ -40,8 +42,17 @@
   <exclude-pattern>*.min.css</exclude-pattern>
   <exclude-pattern>*.min.js</exclude-pattern>
 
-  <rule ref="Drupal" />
+  <rule ref="Drupal">
+    <!-- Profile ships explicit version: keys; drupal.org packaging auto-key sniff is noise. -->
+    <exclude name="Drupal.InfoFiles.AutoAddedKeys"/>
+  </rule>
   <rule ref="DrupalPractice" />
+
+  <!-- Views OPML/RSS templates legitimately emit `<?xml ?>` (XML, not PHP). -->
+  <rule ref="Generic.PHP.DisallowShortOpenTag">
+    <exclude-pattern>*/views-view-opml.html.twig</exclude-pattern>
+    <exclude-pattern>*/views-view-rss.html.twig</exclude-pattern>
+  </rule>
 
   <!-- Require the strict types declaration in every PHP file. -->
   <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>

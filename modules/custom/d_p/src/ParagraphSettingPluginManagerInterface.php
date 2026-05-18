@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\d_p;
 
-use Drupal\Component\Plugin\Exception\PluginException;
-
 /**
  * Provides interface for the paragraph setting plugin manager.
  */
@@ -38,6 +36,7 @@ interface ParagraphSettingPluginManagerInterface {
    * Load all children plugins by parent plugin id.
    *
    * @return array<string, \Drupal\d_p\ParagraphSettingInterface>
+   *   Children plugins keyed by their plugin id.
    */
   public function getAllChildrenPlugins(string $parent_plugin_id): array;
 

@@ -7,8 +7,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
  * ThemeLogo service.
- *
- * @package Drupal\d_demo\Service
  */
 class ThemeLogoService {
 
@@ -27,7 +25,7 @@ class ThemeLogoService {
   protected $moduleHandler;
 
   /**
-   * ThemeLogoService constructor.
+   * Constructs a new ThemeLogoService.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Configuration object factory.

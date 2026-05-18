@@ -20,6 +20,9 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
   protected const string LOGGER_CHANNEL = 'd_p';
 
+  /**
+   * Logger channel for the d_p plugin manager.
+   */
   protected readonly LoggerChannelInterface $logger;
 
   /**

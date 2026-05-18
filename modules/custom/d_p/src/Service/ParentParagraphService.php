@@ -8,7 +8,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 
 /**
- * Resolves the referencing field of an entity (e.g. a media inside a paragraph).
+ * Resolves the referencing field of an entity (e.g. media inside a paragraph).
  */
 class ParentParagraphService {
 

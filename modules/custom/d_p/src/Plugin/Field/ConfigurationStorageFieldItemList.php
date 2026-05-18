@@ -7,8 +7,6 @@ namespace Drupal\d_p\Plugin\Field;
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Field\FieldItemList;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\TypedData\DataDefinitionInterface;
-use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\d_p\ParagraphSettingInterface;
 use Drupal\d_p\ParagraphSettingPluginManagerInterface;
 use Drupal\d_p\ParagraphSettingSelectInterface;
@@ -28,16 +26,15 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
 
   protected const string LOGGER_CHANNEL = 'd_p';
 
+  /**
+   * Lazily resolved paragraph-setting plugin manager.
+   */
   protected ?ParagraphSettingPluginManagerInterface $pluginManager = NULL;
 
-  protected ?LoggerInterface $logger = NULL;
-
   /**
-   * {@inheritdoc}
+   * Lazily resolved logger channel.
    */
-  public function __construct(DataDefinitionInterface $definition, $name = NULL, ?TypedDataInterface $parent = NULL) {
-    parent::__construct($definition, $name, $parent);
-  }
+  protected ?LoggerInterface $logger = NULL;
 
   /**
    * {@inheritdoc}
@@ -178,6 +175,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * Stored classes value normalised to an array of strings.
    *
    * @return string[]
+   *   List of class names extracted from the field value.
    */
   protected function getClassesArrayValue(): array {
     $classes_value = $this->getClassesValue();
@@ -208,9 +206,10 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
   protected function processDefaultClasses(array &$classes): void {
     $defaults = $this->getStorageItemDefaultClasses(ParagraphSettingTypesInterface::CSS_CLASS_SETTING_NAME);
     foreach ($defaults as $modifier) {
+      $default = (string) $modifier['default'];
       $existing_classes = array_intersect($modifier['options'], $classes);
       if ($existing_classes === []) {
-        $classes[] = $modifier['default'];
+        $classes[] = $default;
         continue;
       }
       if (count($existing_classes) <= 1) {
@@ -218,8 +217,8 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
       }
       // Strip an accidentally-added default when another concrete option was
       // also selected for the same modifier group.
-      if (in_array($modifier['default'], $existing_classes, TRUE)) {
-        $key = array_search($modifier['default'], $classes, TRUE);
+      if (in_array($default, $existing_classes, TRUE)) {
+        $key = array_search($default, $classes, TRUE);
         if ($key !== FALSE) {
           unset($classes[$key]);
         }
@@ -237,9 +236,10 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
   }
 
   /**
-   * Wrap an arbitrary value in the storage `[ ['value' => '<json>'] ]` shape.
+   * Wrap an arbitrary value in the storage shape.
    *
    * @return array{0: array{value: string|false}}
+   *   Storage-shaped array, ready for FieldItemList::setValue().
    */
   protected function toEncodedValue(mixed $value): array {
     return [
@@ -263,6 +263,7 @@ class ConfigurationStorageFieldItemList extends FieldItemList implements Configu
    * Storage item default classes — one entry per select-style child plugin.
    *
    * @return array<int, array{options: array<int|string>, default: mixed}>
+   *   One entry per select-style child plugin, keyed by group index.
    */
   protected function getStorageItemDefaultClasses(string $storage_id): array {
     $defaults = [];

@@ -15,8 +15,6 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
  * Content init manager base.
- *
- * @package Drupal\d_content_init
  */
 abstract class ContentInitManagerBase {
 
@@ -65,7 +63,7 @@ abstract class ContentInitManagerBase {
   protected $moduleHandler;
 
   /**
-   * ContentInitManagerBase constructor.
+   * Constructs a new ContentInitManagerBase.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
@@ -86,7 +84,8 @@ abstract class ContentInitManagerBase {
     LoggerChannelFactory $logger_factory,
     AccountProxyInterface $current_user,
     LanguageManagerInterface $language_manager,
-    ModuleHandlerInterface $module_handler) {
+    ModuleHandlerInterface $module_handler,
+  ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->serialization = $serialization;
     $this->logger = $logger_factory->get('d_content_init');

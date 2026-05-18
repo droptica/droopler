@@ -233,7 +233,7 @@ class SettingsWidget extends WidgetBase {
    */
   protected function buildNumberElement(array &$element, string $key, array $options, mixed $value): void {
     $element[$key] = [
-      '#default_value' => (!empty($value) && $value !== '') ? $value : $options['#default_value'],
+      '#default_value' => !empty($value) ? $value : $options['#default_value'],
       '#min' => $element[$key]['#min'] ?? NULL,
       '#max' => $element[$key]['#max'] ?? NULL,
     ] + $options;
@@ -309,7 +309,7 @@ class SettingsWidget extends WidgetBase {
   }
 
   /**
-   * Populate modifier elements with defaults sourced from the plugin definition.
+   * Populate modifier elements with defaults from the plugin definition.
    *
    * @param array $element
    *   Form element (mutated in place).
@@ -360,7 +360,7 @@ class SettingsWidget extends WidgetBase {
     $element['background-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Background color',
-      '#default_value' => $current?->background ?? '#ffffff',
+      '#default_value' => $current->background ?? '#ffffff',
       '#weight' => 101,
       '#states' => [
         'visible' => [
@@ -374,7 +374,7 @@ class SettingsWidget extends WidgetBase {
     $element['text-theme-custom'] = [
       '#type' => 'd_color',
       '#title' => 'Text color',
-      '#default_value' => $current?->text ?? '#000000',
+      '#default_value' => $current->text ?? '#000000',
       '#weight' => 102,
       '#states' => [
         'visible' => [
@@ -397,6 +397,7 @@ class SettingsWidget extends WidgetBase {
    * Parse a CSS class list out of a free-form string.
    *
    * @return string[]
+   *   List of CSS class names.
    */
   protected function getCssClassListFromString(?string $value): array {
     if ($value === NULL) {
@@ -410,6 +411,7 @@ class SettingsWidget extends WidgetBase {
    * Normalise a CSS class list from any stored value.
    *
    * @return string[]
+   *   List of CSS class names.
    */
   protected function getCssClassList(mixed $value): array {
     if (is_array($value)) {

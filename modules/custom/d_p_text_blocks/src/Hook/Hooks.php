@@ -97,7 +97,7 @@ class Hooks {
    * Implements hook_d_p_centered_ckeditor_widget_paragraphs().
    */
   #[Hook('d_p_centered_ckeditor_widget_paragraphs')]
-  public function dPCenteredCkeditorWidgetParagraphs(array &$paragraph_types): void {
+  public function dpCenteredCkeditorWidgetParagraphs(array &$paragraph_types): void {
     $paragraph_types[] = 'd_p_group_of_text_blocks';
   }
 

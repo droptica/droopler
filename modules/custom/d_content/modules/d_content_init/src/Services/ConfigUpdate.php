@@ -9,8 +9,6 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
  * Config update service.
- *
- * @package Drupal\d_commerce\Services
  */
 class ConfigUpdate {
 
@@ -36,7 +34,7 @@ class ConfigUpdate {
   protected $logger;
 
   /**
-   * ConfigUpdate constructor.
+   * Constructs a new ConfigUpdate service.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory.
@@ -119,7 +117,7 @@ class ConfigUpdate {
    */
   public function getConfigNameParts($config) {
     $parts = explode('.', $config);
-    if (is_array($parts) && !empty($parts)) {
+    if ($parts !== []) {
       return $parts;
     }
     throw new \RuntimeException('Invalid config name: ' . $config);

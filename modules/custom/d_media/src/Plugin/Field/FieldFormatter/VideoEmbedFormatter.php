@@ -262,6 +262,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    * Image style options available for the field.
    *
    * @return array<string, string|\Stringable>
+   *   Image style options keyed by style machine name.
    */
   protected function imageStyleOptions(): array {
     $options = [];

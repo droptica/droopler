@@ -8,8 +8,6 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Provide class ConfigurationForm.
  *
- * @package Drupal\d_social_media\Form
- *
  * @todo Please add validateForm method.
  */
 class ConfigurationForm extends ConfigFormBase {

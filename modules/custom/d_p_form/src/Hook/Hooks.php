@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Drupal\d_p_form\Hook;
 
-use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\d_p\Helper\ParagraphSettingsAccessor;
 use Drupal\d_p\ParagraphSettingTypesInterface;
+use Drupal\field\FieldConfigInterface;
 
 /**
  * Hook implementations for the d_p_form module.
@@ -21,7 +21,7 @@ class Hooks {
   public function optionsListAlter(array &$options, array $context): void {
     // The "personal" contact form makes an error.
     $field_definition = $context['fieldDefinition'] ?? NULL;
-    if ($field_definition instanceof FieldDefinitionInterface
+    if ($field_definition instanceof FieldConfigInterface
       && $field_definition->id() === 'paragraph.d_p_form.field_d_forms'
     ) {
       unset($options['personal']);

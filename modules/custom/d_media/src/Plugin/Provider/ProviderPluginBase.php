@@ -56,6 +56,8 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
   protected string $input;
 
   /**
+   * Constructs a new provider plugin instance.
+   *
    * @throws \InvalidArgumentException
    *   When the configured input doesn't match the plugin's URL pattern.
    */

@@ -5,9 +5,9 @@
  * Contains d_commerce_products_list module.
  */
 
-use Drupal\commerce_product\Entity\ProductInterface;
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\commerce_product\Entity\ProductInterface;
 use Drupal\facets\Entity\Facet;
 use Drupal\search_api\Plugin\views\query\SearchApiQuery;
 use Drupal\views\ViewExecutable;

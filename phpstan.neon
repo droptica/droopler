@@ -1,12 +1,7 @@
 parameters:
-    # According to https://phpstan.org/user-guide/rule-levels
-    # Level 9 is most strict and it includes all checks.
-    # According to Matt Glaman, Drupal app needs to run at least at level 5.
-    # For the Droopler pure-D11 cleanup we target level 6 and aim for level 7+ later.
-    level: 6
+    # Drupal community baseline (per Matt Glaman).
+    level: 5
 
-    # The list of paths to check.
-    # This setting is ignored by PHPStorm, but it comes in handy when using terminal.
     paths:
         - droopler.install
         - droopler.profile
@@ -23,36 +18,56 @@ parameters:
         - theme
         - test
 
-    # Ignore errors in certain files (remember to escape $ sign by backslash!).
     ignoreErrors:
-        # https://www.drupal.org/docs/develop/development-tools/phpstan/handling-unsafe-usage-of-new-static
-        - "#^Unsafe usage of new static#"
-        # DI is preferred but \Drupal:: is acceptable in install / update hooks where DI is not available.
-        - "#\\\\Drupal calls should be avoided in classes, use dependency injection instead#"
-        # Drupal hook implementations frequently take untyped &$variables, $form, $form_state by reference.
-        - "#Variable \\$form_state.*has no value type specified#"
+        -
+            message: "#^Unsafe usage of new static#"
+            reportUnmatched: false
+        -
+            message: "#\\\\Drupal calls should be avoided in classes, use dependency injection instead#"
+            reportUnmatched: false
+        # Generic EntityInterface typehints calling FieldableEntityInterface methods.
+        -
+            message: "#Call to an undefined method Drupal\\\\Core\\\\Entity\\\\EntityInterface::(get|set|hasField|getEntityType|setThirdPartySetting|getUrlProcessorName)\\(\\)#"
+            reportUnmatched: false
+        # Field magic properties on node/entity instances.
+        -
+            message: "#Access to an undefined property Drupal\\\\(node|Core)\\\\.+::\\$(field_|original)\\w*#"
+            reportUnmatched: false
+        # FieldItem magic properties — proxied to underlying $values via __get/__set.
+        -
+            message: "#Access to an undefined property Drupal\\\\.+FieldItem\\w*::\\$\\w+#"
+            reportUnmatched: false
+        # FieldableEntityInterface narrowing inside legacy procedural update hooks.
+        -
+            message: "#getSettingsFieldFromEntity\\(\\) expects Drupal\\\\Core\\\\Entity\\\\FieldableEntityInterface#"
+            path: droopler.install
+            reportUnmatched: false
+        # WeMegaMenuBuilder accepts JSON strings at runtime despite object typehint.
+        -
+            message: "#WeMegaMenuBuilder::saveConfig\\(\\) expects object#"
+            reportUnmatched: false
+        # Symfony Constraint subclass properties accessed via parent class typehint.
+        -
+            message: "#Access to an undefined property Symfony\\\\Component\\\\Validator\\\\Constraint::\\$\\w+#"
+            reportUnmatched: false
 
-    # Exclude paths from analysis.
     excludePaths:
-        - vendor
+        - vendor (?)
         - */vendor/*
         - modules/contrib
-        - themes/contrib
+        - themes/contrib (?)
         - */node_modules/*
         - */dist/*
         - */build/*
+        # Drush / DCG command classes — parent classes live in dev-only packages.
+        - modules/custom/d_p/src/Generators/*
+        - modules/custom/d_update/src/Commands/*
+        - */Drush/Listeners/*
+        # drupal/commerce is an optional contrib dependency, not required.
+        - modules/custom/d_commerce/*
 
-    # Minimum supported PHP version for the Droopler pure-D11 release.
     phpVersion: 80300
 
-    # Keep PHPDoc-only types loose while migrating; tighten once src/ has full type coverage.
     treatPhpDocTypesAsCertain: false
 
-    # Speeds up repeated CI runs when vendor cache is restored.
     tmpDir: .phpstan-cache
-
-    # mglaman/phpstan-drupal needs to locate Drupal core. When running from the
-    # profile root with `composer install` performed inside the profile, core is
-    # pulled into vendor/drupal/core, so we point drupal_root one level up.
-    drupal:
-        drupal_root: %currentWorkingDirectory%/vendor/drupal

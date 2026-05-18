@@ -31,6 +31,7 @@ class ProviderManager extends DefaultPluginManager implements ProviderManagerInt
       ProviderPluginInterface::class,
       VideoEmbedProvider::class,
     );
+    $this->setCacheBackend($cache_backend, 'd_media_providers');
   }
 
   /**

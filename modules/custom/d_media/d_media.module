@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * @file
  * Module file for d_media.
@@ -11,6 +9,8 @@ declare(strict_types=1);
  * Module-implemented hooks (`hook_theme`, `hook_form_FORM_ID_alter`) have been
  * moved to `src/Hook/Hooks.php`.
  */
+
+declare(strict_types=1);
 
 use Drupal\Core\Template\Attribute;
 use Drupal\image\Entity\ImageStyle;
@@ -30,7 +30,11 @@ function template_preprocess_d_media_canvas_image(array &$variables): void {
     return;
   }
 
-  $scaling = $style->getEffects()->getIterator()->current();
+  $scaling = NULL;
+  foreach ($style->getEffects() as $effect) {
+    $scaling = $effect;
+    break;
+  }
   if ($scaling === NULL) {
     return;
   }

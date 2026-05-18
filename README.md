@@ -2,7 +2,7 @@
 <img src="https://droopler-demo.droptica.com/themes/custom/droopler_subtheme/logo.svg" width=300 alt="Droopler Logo" />
 
 ## What is Droopler?
-Droopler is a Drupal 10 profile designed to build corporate websites. It's based on the latest frontend technologies, including Bootstrap 4. The maintainer of Droopler is [Droptica](https://www.droptica.com).
+Droopler is a Drupal 11 / 12 installation profile designed to build corporate websites. It targets PHP 8.3+ and is based on Bootstrap 4 on the front-end. The maintainer of Droopler is [Droptica](https://www.droptica.com).
 
 [![Build Status](https://github.com/droptica/droopler/workflows/Drupal%20coding%20standards/badge.svg?branch=master)](https://github.com/droptica/droopler/actions)
 
@@ -12,10 +12,15 @@ Droopler is a Drupal 10 profile designed to build corporate websites. It's based
 * **Composer template**: [github.com/droptica/droopler_project](https://github.com/droptica/droopler_project)
 * **Drupal.org project**: [drupal.org/project/droopler](https://www.drupal.org/project/droopler)
 
-For the latest news please subscribe to our [Facebook](https://www.facebook.com/Droopler/) and [Twitter](https://twitter.com/DrooplerCMS).
+For the latest news please subscribe to our [Facebook](https://www.facebook.com/Droopler/) and [X](https://x.com/DrooplerCMS).
 
 ## What's in this repository?
 This repository contains a Drupal profile. When you put it in the `/profiles/contrib/droopler` directory, the Drupal installer gets modified and installs base Droopler theme, some module dependencies, and demo content.
+
+## Requirements
+* Drupal `^11.3 || ^12`
+* PHP `>= 8.3` (CI matrix: 8.3 / 8.4 / 8.5)
+* Composer 2.2+
 
 ## Installation
 The Droopler profile should be installed via Composer. We recommend using [Droopler skeleton repository](https://github.com/droptica/droopler_project). If you are starting from the scratch - in the **require** section of your composer.json put:
@@ -85,3 +90,22 @@ More information about the mglaman/composer-drupal-lenient plugin can be found h
 Droopler was started many years ago with SCSS support. Since then SCSS has evolved and a lot of things have changed, some got deprecated and some got removed. Because version 3.x of droopler is not under active development, we will not update it to the latest version of sass. However, feel free to contribute if you want to have it updated.
 
 If you see in your subtheme warnings about deprecated SCSS functions, please take a look at the package.json file in the droopler_theme directory. You will see that we are using gulp-dart-sass 1.0.2 and older version of sass to avoid warnings. You can do the same in your subtheme to avoid warnings.
+
+## Drupal 11 / 12 + PHP 8.3+ modernization
+
+This branch brings Droopler in line with Drupal 11.3+ / 12 and PHP 8.3+:
+
+* Every legacy procedural hook that Drupal core allows to be class-based has been moved to `#[Hook]` attribute classes under each module's `src/Hook/` namespace. Hooks that Drupal still requires to stay procedural (`hook_install`, `hook_schema`, `hook_update_N`, `hook_requirements`, `template_preprocess_*`, etc.) are left untouched on purpose.
+* All source files declare `declare(strict_types=1);` and use constructor property promotion (`protected readonly ...`) for DI. Services are autowired where possible.
+* Twitter/X rebranding applied to the bundled social-media configuration and theme (icon + label).
+* Static analysis is enforced in CI on every PR: **PHPCS** (Drupal + DrupalPractice + Slevomat) and **PHPStan level 5** (`mglaman/phpstan-drupal`), both running across the PHP 8.3 / 8.4 / 8.5 matrix. No baseline file — the profile is clean on its own.
+* `composer.json` declares `composer/installers` + `extra.installer-paths` so that running `composer install` directly inside the profile (e.g. for local phpcs/phpstan work) lands contrib modules at `modules/contrib/`. When Droopler is consumed as a dependency, the root project's installer-paths win — this entry is a no-op for end users.
+
+### Upgrading custom code
+
+If you maintain custom modules built on top of Droopler, the breaking changes you are most likely to hit are:
+
+* Constructor signatures of several core Droopler services (`Updater`, `UpdateChecklist`, `ProviderManager`, etc.) gained typed properties and DI via constructor promotion. If you extended them, update the parent call.
+* `Updater::writeEntityConfig()` now asserts `ConfigEntityTypeInterface` — pass config-entity storages only.
+* Plugin manager `d_media.provider_manager` now wires a cache backend (`d_media_providers`). Custom Provider plugins that relied on the unwired manager get caching for free.
+* The `d_p_subscribe_file` module ships a custom `SubscribeFileHtmlMail` mail plugin so download notifications render HTML. Override the `d_p_subscribe_file` mail plugin in your settings if you need a different transport.

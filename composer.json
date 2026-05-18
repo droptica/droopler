@@ -24,6 +24,7 @@
         "bower-asset/colorbox": "^1.6",
         "bower-asset/lazysizes": "^5.2",
         "bower-asset/masonry": "^4.2",
+        "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7.3",
         "drupal/admin_toolbar": "^3.6",
         "drupal/better_exposed_filters": "^7.1",
@@ -99,6 +100,10 @@
         }
     },
     "extra": {
+        "installer-paths": {
+            "modules/contrib/{$name}": ["type:drupal-module"],
+            "themes/contrib/{$name}": ["type:drupal-theme"]
+        },
         "patches": {
             "drupal/core": {
                 "jQuery 3.7.1 instead of core jQuery 4 (contrib compatibility)": "web/profiles/contrib/droopler/patches/jquery-3.7.1-compat-core-11.3.patch"

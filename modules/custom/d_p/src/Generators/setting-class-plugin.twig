@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Drupal\{{ machine_name }}\Plugin\ParagraphSetting;
+namespace Drupal\{{machine_name }
+}ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
 
@@ -17,25 +18,31 @@ use Drupal\d_p\ParagraphSettingPluginBase;
  *   }
  * )
  */
-class {{ class }} extends ParagraphSettingPluginBase {
+class {{
 
   /**
-   * {@inheritdoc}
+   *
    */
-  #[\Override]
-  public function formElement(): array {
-    return [
-      '#type' => 'checkbox',
-      '#description' => $this->t('{{ plugin_label }}'),
-    ] + parent::formElement();
-  }
+  class}
+} extends ParagraphSettingPluginBase {
 
-  /**
-   * {@inheritdoc}
-   */
-  #[\Override]
-  public function getDefaultValue(): mixed {
-    return '';
-  }
+/**
+ * {@inheritdoc}
+ */
+#[\Override]
+public function formElement(): array {
+  return [
+    '#type' => 'checkbox',
+    '#description' => $this->t('{{ plugin_label }}'),
+  ] + parent::formElement();
+}
+
+/**
+ * {@inheritdoc}
+ */
+#[\Override]
+public function getDefaultValue(): mixed {
+  return '';
+}
 
 }

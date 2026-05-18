@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\d_update;
 
-use Drupal\checklistapi\ChecklistapiChecklist;
-use Drupal\checklistapi\Storage\StateStorage;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\checklistapi\ChecklistapiChecklist;
+use Drupal\checklistapi\Storage\StateStorage;
 use Drupal\d_update\Entity\Update;
 
 /**
@@ -51,7 +51,8 @@ class UpdateChecklist {
     protected readonly AccountInterface $account,
     StateStorage $state_storage,
   ) {
-    $this->checkListStateStorage = $state_storage->setChecklistId(self::CHECKLIST_ID);
+    $state_storage->setChecklistId(self::CHECKLIST_ID);
+    $this->checkListStateStorage = $state_storage;
   }
 
   /**
@@ -234,6 +235,8 @@ class UpdateChecklist {
    *
    * @param string[] $keys
    *   Update ids.
+   * @param bool $status
+   *   Status value to persist on each Update entity.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */

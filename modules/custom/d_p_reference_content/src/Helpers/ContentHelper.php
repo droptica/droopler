@@ -24,7 +24,7 @@ class ContentHelper {
   private $entityTypeManager;
 
   /**
-   * ContentHelper constructor.
+   * Constructs a new ContentHelper.
    *
    * @param \Drupal\Core\Database\Connection $connection
    *   The database connection.
@@ -173,10 +173,6 @@ class ContentHelper {
     $nids = [];
     foreach ($values as $value) {
       $nids[] = $value['target_id'];
-    }
-
-    if (empty($nids)) {
-      return [];
     }
 
     $results = $this->connection->select('node_field_data', 'nfd')

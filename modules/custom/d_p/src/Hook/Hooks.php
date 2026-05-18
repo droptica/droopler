@@ -305,6 +305,7 @@ class Hooks {
       return;
     }
 
+    /** @var string[] $paragraph_types */
     $paragraph_types = [];
     $this->moduleHandler->invokeAll('d_p_centered_ckeditor_widget_paragraphs', [&$paragraph_types]);
     if (in_array($paragraph_type, $paragraph_types, TRUE)) {

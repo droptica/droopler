@@ -19,8 +19,9 @@ use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
  * `try { … } catch (Missing… $e) { return NULL; }` boilerplate.
  *
  * Marked `final` — this is a static value-object utility, not an extension
- * point. Override the underlying `ConfigurationStorage::getSettingsFieldFromEntity()`
- * if you need different lookup behaviour.
+ * point. Override the underlying
+ * `ConfigurationStorage::getSettingsFieldFromEntity()` if you need different
+ * lookup behaviour.
  */
 final class ParagraphSettingsAccessor {
 
@@ -39,6 +40,8 @@ final class ParagraphSettingsAccessor {
   /**
    * Read a single setting from `$entity`, falling back to `$default`.
    *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
+   *   Entity that may carry a paragraph configuration storage field.
    * @param string $setting_name
    *   Setting machine name (e.g. one of
    *   {@see \Drupal\d_p\ParagraphSettingTypesInterface}'s constants).

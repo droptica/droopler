@@ -35,6 +35,7 @@ class Hooks {
    * Implements hook_checklistapi_checklist_info().
    *
    * @return array<string, array<string, mixed>>
+   *   Checklist definitions keyed by checklist id.
    */
   #[Hook('checklistapi_checklist_info')]
   public function checklistapiChecklistInfo(): array {
@@ -43,7 +44,7 @@ class Hooks {
         '#title' => $this->t('Droopler update instructions'),
         '#path' => '/admin/config/development/droopler-update',
         '#description' => $this->t('Provides steps to keep your Droopler site up to date.'),
-        // Callback must be resolvable via function_exists(); see d_update.module.
+        // Callback resolved via function_exists(); see d_update.module.
         '#callback' => 'd_update_checklistapi_checklist_items',
         '#storage' => 'state',
       ],
