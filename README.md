@@ -98,8 +98,37 @@ This branch brings Droopler in line with Drupal 11.3+ / 12 and PHP 8.3+:
 * Every legacy procedural hook that Drupal core allows to be class-based has been moved to `#[Hook]` attribute classes under each module's `src/Hook/` namespace. Hooks that Drupal still requires to stay procedural (`hook_install`, `hook_schema`, `hook_update_N`, `hook_requirements`, `template_preprocess_*`, etc.) are left untouched on purpose.
 * All source files declare `declare(strict_types=1);` and use constructor property promotion (`protected readonly ...`) for DI. Services are autowired where possible.
 * Twitter/X rebranding applied to the bundled social-media configuration and theme (icon + label).
-* Static analysis is enforced in CI on every PR: **PHPCS** (Drupal + DrupalPractice + Slevomat) and **PHPStan level 5** (`mglaman/phpstan-drupal`), both running across the PHP 8.3 / 8.4 / 8.5 matrix. No baseline file — the profile is clean on its own.
+* Static analysis is enforced in CI on every PR: **PHPCS** (Drupal + DrupalPractice + Slevomat) and **PHPStan level 6** (`mglaman/phpstan-drupal`), both running across the PHP 8.3 / 8.4 / 8.5 matrix. No baseline file — the profile is clean on its own.
 * `composer.json` declares `composer/installers` + `extra.installer-paths` so that running `composer install` directly inside the profile (e.g. for local phpcs/phpstan work) lands contrib modules at `modules/contrib/`. When Droopler is consumed as a dependency, the root project's installer-paths win — this entry is a no-op for end users.
+
+### Known install caveat: pathauto 1.15+ on Drupal 11.3
+
+Droopler requires `drupal/pathauto: ^1.14`, which under default Composer resolution will still pick up 1.15+ (whatever is the latest tag). That is intentional — runtime is unaffected — but **pathauto 1.15 (released after the OOP-hooks rework) crashes the very first `install_configure_form` submit** on Drupal 11.3.x with:
+
+```
+Symfony\Component\DependencyInjection\Exception\RuntimeException:
+  You have requested a synthetic service ("kernel"). The DIC does not know how to construct this service.
+```
+
+What is happening:
+
+* During `SiteConfigureForm::submitForm()` Drupal calls `User::load(1)`. Loading the user fires `hook_entity_base_field_info`.
+* Pathauto 1.15 collects that hook on the OOP class `Drupal\pathauto\Hook\PathautoEntityHooks`, so Drupal asks the container for the class instance.
+* The container at this point is still the install-time `ContainerBuilder`. Resolving the constructor graph eventually touches `theme.registry`, whose 9th constructor argument is `@kernel`. `kernel` is registered as a synthetic service but the instance has not been attached to *this* builder yet — boom.
+* Pathauto 1.14 keeps `pathauto_entity_base_field_info()` as a procedural function. Procedural hooks are dispatched directly by `ModuleHandler` without going through `ClassResolver`, so the broken chain is never walked during install.
+
+Practical impact:
+
+* `drush site-install droopler ...` fails on the first run on pathauto 1.15+.
+* In the UI installer the configure-site step shows the error page, **but refreshing continues the install** — by the time you refresh, the container has been rebuilt with synthetics fully attached and the hook resolves fine. From that point on the site runs normally.
+
+Workarounds during install on pathauto 1.15+:
+
+* **UI installer**: when the error page appears at the configure-site step, refresh the browser. The container has been rebuilt fully by then, so the install continues normally from the same task.
+* **Drush installer**: run `drush site-install ... -y` once (it will fail with the synthetic-kernel error), then run it a second time. The second invocation reuses the warmed container and finishes.
+* **Pin to 1.14**: if you cannot afford the manual retry (e.g. CI/CD seeding), constrain `drupal/pathauto: "~1.14.0"` in your root `composer.json` (or add a `conflict` on `drupal/pathauto: 1.15.0`). Runtime is identical between 1.14 and 1.15.
+
+This is a one-shot install-time glitch only; once the site is up, both pathauto versions behave the same.
 
 ### Upgrading custom code
 
