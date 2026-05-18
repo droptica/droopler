@@ -21,7 +21,7 @@ use Drupal\d_block_field\BlockFieldItemInterface;
  *   id = "d_block_field",
  *   label = @Translation("Block (plugin)"),
  *   description = @Translation("Stores an instance of a configurable or custom block."),
- *   category = @Translation("Reference"),
+ *   category = "reference",
  *   default_widget = "d_block_field_default",
  *   default_formatter = "d_block_field",
  * )
