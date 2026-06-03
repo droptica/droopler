@@ -2,8 +2,10 @@
 
 /**
  * @file
- * Update function for d_commerce.
+ * Installation and update functions for Droopler Products module.
  */
+
+use Drupal\field\Entity\FieldStorageConfig;
 
 /**
  * Implements hook_update_8001().
@@ -20,6 +22,27 @@ function d_product_update_8002() {
   \Drupal::service('d_update')->importConfigs([
     'd_product' => [
       'metatag.metatag_defaults.node__d_product' => '',
+    ],
+  ]);
+}
+
+/**
+ * Ensures node body field storage exists (Drupal 11.3+ compatibility).
+ *
+ * Core no longer ships field.storage.node.body with the Node module as of
+ * 11.3.x; distributors should ship their own copy. Existing sites that already
+ * use the body field are left unchanged.
+ *
+ * @see https://www.drupal.org/node/3540814
+ */
+function d_product_update_8003() {
+  if (FieldStorageConfig::loadByName('node', 'body')) {
+    return;
+  }
+
+  \Drupal::service('d_update')->importConfigs([
+    'd_product' => [
+      'field.storage.node.body' => '',
     ],
   ]);
 }

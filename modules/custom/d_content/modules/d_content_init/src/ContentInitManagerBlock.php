@@ -19,8 +19,6 @@ use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
  * Content init manager block.
- *
- * @package Drupal\d_content_init
  */
 class ContentInitManagerBlock extends ContentInitManagerBase {
 
@@ -46,7 +44,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
   protected $themeHandler;
 
   /**
-   * ContentInitManagerBlock constructor.
+   * Constructs a new ContentInitManagerBlock.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
@@ -76,7 +74,8 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
     ModuleHandlerInterface $module_handler,
     UuidInterface $uuid,
     BlockManagerInterface $block_manager,
-    ThemeHandlerInterface $theme_handler) {
+    ThemeHandlerInterface $theme_handler,
+  ) {
     parent::__construct($entity_type_manager, $serialization, $logger_factory, $current_user, $language_manager, $module_handler);
     $this->uuid = $uuid;
     $this->blockManager = $block_manager;
@@ -152,8 +151,8 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param \Drupal\Core\Entity\EntityInterface $block_entity
    *   Block content entity.
    *
-   * @return bool|\Drupal\Core\Entity\EntityInterface
-   *   Created block entity or FALSE.
+   * @return bool|\Drupal\Core\Entity\EntityInterface|null
+   *   Block entity on success, FALSE for empty placement, NULL on failure.
    */
   protected function placeBlockContent(array $block, EntityInterface $block_entity) {
     try {
@@ -254,7 +253,8 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
         $submenu_config->rows_content[$row][$col] = $child_item;
         $menu_config->menu_config->{$parent_uuid} = $submenu_config;
         WeMegaMenuBuilder::saveConfig($menu_name, $theme, json_encode($menu_config));
-        \Drupal::cache('render')->invalidateAll();
+        // phpcs:ignore DrupalPractice.Objects.GlobalDrupal.GlobalDrupal -- one-shot cache clear after menu config write; full DI requires extending the parent constructor signature.
+        \Drupal::cache('render')->deleteAll();
         return TRUE;
       }
     }
@@ -318,7 +318,7 @@ class ContentInitManagerBlock extends ContentInitManagerBase {
    * @param array $block_values
    *   Block values.
    */
-  protected function getCurrentThemeIfNotDefined(array &$block_values) {
+  protected function getCurrentThemeIfNotDefined(array &$block_values): void {
     if (!isset($block_values['theme']) || empty($block_values['theme'])) {
       $block_values['theme'] = $this->themeHandler->getDefault();
     }

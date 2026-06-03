@@ -35,7 +35,7 @@ class AdditionalComponentsForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): static {
     return new static(
       $container->get('extension.list.module')
     );
@@ -127,7 +127,7 @@ class AdditionalComponentsForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $values = $form_state->getValues();
     $build_info = $form_state->getBuildInfo();
     $install_state = $build_info['args'];

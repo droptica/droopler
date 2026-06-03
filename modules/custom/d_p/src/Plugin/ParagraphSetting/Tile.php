@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -21,19 +23,19 @@ class Tile extends ParagraphSettingPluginBase {
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#type' => 'checkbox',
       '#description' => $this->t('Stretch the background and turn the box into tile.'),
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 0;
   }
 

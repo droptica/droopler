@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\Field\FieldType;
 
 use Drupal\Core\Entity\FieldableEntityInterface;
@@ -10,7 +12,7 @@ use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
 use Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface;
 
 /**
- * Plugin implementation of the 'field_p_settings' field type.
+ * Plugin implementation of the 'field_p_configuration_storage' field type.
  *
  * @FieldType(
  *   id = "field_p_configuration_storage",
@@ -25,9 +27,14 @@ use Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface;
 class ConfigurationStorage extends FieldItemBase implements ConfigurationStorageInterface {
 
   /**
+   * Stored field type id, kept here as a typed constant to avoid magic strings.
+   */
+  public const string FIELD_TYPE = 'field_p_configuration_storage';
+
+  /**
    * {@inheritdoc}
    */
-  public static function schema(FieldStorageDefinitionInterface $field_definition) {
+  public static function schema(FieldStorageDefinitionInterface $field_definition): array {
     return [
       'columns' => [
         'value' => [
@@ -41,30 +48,28 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
 
   /**
    * {@inheritdoc}
+   *
+   * Returns a decoded `\stdClass` (or NULL when storage is empty), so consumers
+   * can read configuration via property access.
    */
   public function getValue() {
     $values = parent::getValue();
-
     return json_decode($values['value'] ?? '');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setValue($values, $notify = TRUE) {
-    $config_value = [
-      'value' => '',
-    ];
+  public function setValue($values, $notify = TRUE): void {
+    $config_value = ['value' => ''];
 
     if (is_object($values)) {
       $config_value['value'] = json_encode($values);
     }
-
-    if (is_string($values)) {
+    elseif (is_string($values)) {
       $config_value['value'] = $values;
     }
-
-    if (is_array($values) && isset($values['value'])) {
+    elseif (is_array($values) && isset($values['value'])) {
       $config_value = $values;
     }
 
@@ -75,38 +80,34 @@ class ConfigurationStorage extends FieldItemBase implements ConfigurationStorage
    * {@inheritdoc}
    */
   public function isEmpty() {
-    $value = $this->get('value')->getValue();
-
-    return $value === NULL;
+    return $this->get('value')->getValue() === NULL;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
-    $properties['value'] = DataDefinition::create('string')
-      ->setLabel(t('Config Settings'));
-
-    return $properties;
+  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
+    return [
+      'value' => DataDefinition::create('string')->setLabel(t('Config Settings')),
+    ];
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity):? ConfigurationStorageFieldItemListInterface {
-    /** @var \Drupal\field\FieldConfigInterface[] $fiels_definitions */
-    $fiels_definitions = $entity->getFieldDefinitions();
-
-    foreach ($fiels_definitions as $field_name => $field) {
-      if ($field->getType() == 'field_p_configuration_storage') {
-        return $entity->$field_name;
+  public static function getSettingsFieldFromEntity(FieldableEntityInterface $entity): ConfigurationStorageFieldItemListInterface {
+    foreach ($entity->getFieldDefinitions() as $field_name => $field_definition) {
+      if ($field_definition->getType() === self::FIELD_TYPE) {
+        /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $field */
+        $field = $entity->get($field_name);
+        return $field;
       }
     }
 
     throw new MissingConfigurationStorageFieldException(sprintf(
-      "No instance of configuration storage found on entity %s of bundle %s",
+      'No instance of configuration storage found on entity %s of bundle %s.',
       $entity->getEntityType()->id(),
-      $entity->bundle()
+      $entity->bundle(),
     ));
   }
 

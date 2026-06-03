@@ -8,6 +8,7 @@ use Drupal\Component\Serialization\SerializationInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
@@ -16,8 +17,6 @@ use Drupal\file\FileRepositoryInterface;
 
 /**
  * Content init media manager.
- *
- * @package Drupal\d_content_init
  */
 class ContentInitManagerMedia extends ContentInitManagerBase {
 
@@ -36,7 +35,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
   protected $fileRepository;
 
   /**
-   * ContentInitManagerMedia constructor.
+   * Constructs a new ContentInitManagerMedia.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
@@ -63,7 +62,8 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     LanguageManagerInterface $language_manager,
     ModuleHandlerInterface $module_handler,
     FileSystemInterface $file_system,
-    FileRepositoryInterface $file_repository) {
+    FileRepositoryInterface $file_repository,
+  ) {
     parent::__construct($entity_type_manager, $serialization, $logger_factory, $current_user, $language_manager, $module_handler);
     $this->fileSystem = $file_system;
     $this->fileRepository = $file_repository;
@@ -249,7 +249,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     $file_data = file_get_contents($path);
     $final_dir = dirname($uri);
     $this->fileSystem->prepareDirectory($final_dir, FileSystemInterface::CREATE_DIRECTORY);
-    return $this->fileRepository->writeData($file_data, $uri, FileSystemInterface::EXISTS_REPLACE);
+    return $this->fileRepository->writeData($file_data, $uri, FileExists::Replace);
   }
 
   /**

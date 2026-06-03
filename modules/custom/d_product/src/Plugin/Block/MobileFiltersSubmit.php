@@ -38,7 +38,7 @@ class MobileFiltersSubmit extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function blockSubmit($form, FormStateInterface $formState) {
+  public function blockSubmit($form, FormStateInterface $formState): void {
     $this->configuration['button_text'] = $formState->getValue('button_text');
     $this->configuration['button_class'] = $formState->getValue('button_class');
   }

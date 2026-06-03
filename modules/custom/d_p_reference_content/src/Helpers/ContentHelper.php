@@ -24,7 +24,7 @@ class ContentHelper {
   private $entityTypeManager;
 
   /**
-   * ContentHelper constructor.
+   * Constructs a new ContentHelper.
    *
    * @param \Drupal\Core\Database\Connection $connection
    *   The database connection.
@@ -89,7 +89,7 @@ class ContentHelper {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function replaceContent(array &$variables, string $entity_type, string $view_mode, string $field, array $new_values) {
+  public function replaceContent(array &$variables, string $entity_type, string $view_mode, string $field, array $new_values): void {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['elements']['#paragraph'];
     $paragraph->set($field, $new_values);
@@ -173,10 +173,6 @@ class ContentHelper {
     $nids = [];
     foreach ($values as $value) {
       $nids[] = $value['target_id'];
-    }
-
-    if (empty($nids)) {
-      return [];
     }
 
     $results = $this->connection->select('node_field_data', 'nfd')

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_update\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -11,22 +13,15 @@ use Drupal\Core\Entity\EntityChangedInterface;
 interface UpdateInterface extends ContentEntityInterface, EntityChangedInterface {
 
   /**
-   * Returns if an update was successful during update hook.
-   *
-   * @return bool
-   *   Update was successful or not.
+   * Whether the update hook ran successfully.
    */
-  public function wasSuccessfulByHook();
+  public function wasSuccessfulByHook(): bool;
 
   /**
-   * Set successful_by_hook field value.
+   * Set the `successful_by_hook` flag.
    *
-   * @param bool $success
-   *   Update was successful or not.
-   *
-   * @return mixed
-   *   This object.
+   * @return $this
    */
-  public function setSuccessfulByHook($success);
+  public function setSuccessfulByHook(bool $success): self;
 
 }

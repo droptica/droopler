@@ -45,7 +45,11 @@ function d_mautic_uninstall() {
   }
 
   // Updates field configuration.
+  /** @var \Drupal\field\Entity\FieldConfig|null $field_instance */
   $field_instance = FieldConfig::loadByName('node', 'content_page', 'field_page_section');
+  if ($field_instance === NULL) {
+    return;
+  }
   $settings = $field_instance->getSetting('handler_settings');
   unset($settings['target_bundles_drag_drop']['d_mautic']);
   unset($settings['target_bundles']['d_mautic']);

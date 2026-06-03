@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -21,19 +23,19 @@ class HalfTransparent extends ParagraphSettingPluginBase {
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#type' => 'checkbox',
       '#description' => $this->t('Moves the text to the left and adds a transparent overlay.'),
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 0;
   }
 

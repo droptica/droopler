@@ -279,7 +279,7 @@ function droopler_enable_subtheme_postprocess(array &$context) {
     // Copy configuration of the WeMegaMenu from base to subtheme.
     if ($base_menu = WeMegaMenuBuilder::loadConfig('main', 'droopler_theme')) {
       WeMegaMenuBuilder::saveConfig('main', 'droopler_subtheme', json_encode($base_menu));
-      \Drupal::cache('render')->invalidateAll();
+      \Drupal::cache('render')->deleteAll();
     }
 
     $context['message'] = t('Theme %theme configured.', ['%theme' => 'droopler_subtheme']);
@@ -323,7 +323,7 @@ function update_modules_configuration(array $modules, $update_number) {
  *   Array with all entities bundles.
  */
 function get_all_entity_bundles() {
-  $entityBundles = \Drupal::service('entity_type.manager')
+  $entityBundles = \Drupal::service('entity_type.bundle.info')
     ->getAllBundleInfo();
   $bundles = [];
   foreach ($entityBundles as $entityBundle) {
@@ -878,11 +878,8 @@ function droopler_update_8104() {
     $values['droopler__droopler_update_8104_3'] = TRUE;
   }
 
-  /**
-   * Migrate images to media fields.
-   *
-   * @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager
-   */
+  // Migrate images to media fields.
+  /** @var \Drupal\d_content_init\ContentInitManagerMedia $media_manager */
   $media_manager = Drupal::service('d_content_init.manager_media');
 
   $fieldsToMigrate = [
@@ -949,7 +946,7 @@ function droopler_update_8104() {
           }
         }
         catch (InvalidArgumentException $e) {
-          $errorsWhileMigrating[$entity->bundle()][$sourceField] = $sourceFieldName;
+          $errorsWhileMigrating[$entity->bundle()][$sourceFieldName] = $sourceFieldName;
 
           \Drupal::logger('droopler_update')
             ->error('Exception while migrating media images for @sourceField to @targetField at @bundle @type.', [
@@ -975,7 +972,7 @@ function droopler_update_8104() {
   $values['droopler__droopler_update_8104_4'] = TRUE;
 
   // Delete migrated fields.
-  /** @var EntityFieldManager $entityFieldManager */
+  /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entityFieldManager */
   $entityFieldManager = \Drupal::service('entity_field.manager');
 
   foreach ($listOfMigratedFields as $entityType => $migratedBundles) {
@@ -983,8 +980,9 @@ function droopler_update_8104() {
       $bundleAllFields = $entityFieldManager->getFieldDefinitions($entityType, $bundle);
 
       foreach ($migratedBundleFields as $fieldToDelete) {
-        if (isset($bundleAllFields[$fieldToDelete])) {
-          $bundleAllFields[$fieldToDelete]->delete();
+        $definition = $bundleAllFields[$fieldToDelete] ?? NULL;
+        if ($definition instanceof FieldConfig) {
+          $definition->delete();
 
           $newFieldName = $fieldsMigrationSpecialCases[$bundle][$fieldToDelete] ?? $fieldsToMigrate[$fieldToDelete];
 
@@ -2189,6 +2187,7 @@ function droopler_update_8133(&$sandbox) {
  */
 function droopler_update_8134() {
   $permission = 'access contextual links';
+  $values = [];
 
   if ($role = Role::load('d_editor')) {
     $role->grantPermission($permission)->save();

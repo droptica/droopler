@@ -1,0 +1,10 @@
+# Schema for the configuration files of the Droopler Search module.
+
+block.settings.search_page_link:
+  type: block_settings
+  label: 'Search page link block settings'
+  mapping:
+    path:
+      type: string
+      label: 'Search page path'
+      description: 'Internal path override. Leave empty for automatic behavior.'

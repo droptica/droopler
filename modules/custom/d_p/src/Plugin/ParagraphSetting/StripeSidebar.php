@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -21,19 +23,19 @@ class StripeSidebar extends ParagraphSettingPluginBase {
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#type' => 'checkbox',
       '#description' => $this->t('Works only if "Enable price" is turned on. Enables a black sidebar on the right.'),
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 0;
   }
 

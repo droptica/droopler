@@ -5,4 +5,12 @@ services:
 
   d_p.paragraph_settings.plugin.manager:
     class: Drupal\d_p\ParagraphSettingPluginManager
-    parent: default_plugin_manager
+    arguments:
+      - '@container.namespaces'
+      - '@cache.discovery'
+      - '@module_handler'
+      - '@logger.factory'
+
+  # Autowire aliases.
+  Drupal\d_p\Service\ParentParagraphService: '@d_p.entity_parent_paragraph'
+  Drupal\d_p\ParagraphSettingPluginManagerInterface: '@d_p.paragraph_settings.plugin.manager'

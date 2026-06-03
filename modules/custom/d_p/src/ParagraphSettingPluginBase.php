@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -9,45 +11,28 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides base plugin implementation for paragraph setting plugins.
- *
- * @package Drupal\d_p
  */
 abstract class ParagraphSettingPluginBase extends PluginBase implements ParagraphSettingInterface, ContainerFactoryPluginInterface {
 
-  /**
-   * Paragraph setting plugin manager.
-   *
-   * @var \Drupal\d_p\ParagraphSettingPluginManagerInterface
-   */
-  protected $settingManager;
-
-  /**
-   * Constructs paragraph plugin instance.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\d_p\ParagraphSettingPluginManagerInterface $setting_manager
-   *   Paragraph setting plugin manager.
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ParagraphSettingPluginManagerInterface $setting_manager) {
+  public function __construct(
+    array $configuration,
+    string $plugin_id,
+    mixed $plugin_definition,
+    protected readonly ParagraphSettingPluginManagerInterface $settingManager,
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-
-    $this->settingManager = $setting_manager;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
+    // @phpstan-ignore-next-line Drupal uses late static binding for subclass factories.
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('d_p.paragraph_settings.plugin.manager')
+      $container->get('d_p.paragraph_settings.plugin.manager'),
     );
   }
 
@@ -55,7 +40,7 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
    * {@inheritdoc}
    */
   public function getSettings(): array {
-    return $this->pluginDefinition['settings'];
+    return $this->pluginDefinition['settings'] ?? [];
   }
 
   /**
@@ -64,7 +49,7 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
   public function formElement(): array {
     return [
       '#title' => $this->label(),
-      "#default_value" => $this->getDefaultValue(),
+      '#default_value' => $this->getDefaultValue(),
       '#weight' => $this->getWeight(),
       '#plugin' => $this,
     ];
@@ -87,7 +72,7 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  public function getDefaultValue(): mixed {
     return NULL;
   }
 

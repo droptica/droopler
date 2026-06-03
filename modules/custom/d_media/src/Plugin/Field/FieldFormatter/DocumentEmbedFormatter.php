@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_media\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\file\FileInterface;
+use Drupal\media\MediaInterface;
 
 /**
  * Plugin implementation for the d_document_embed formatter.
@@ -12,32 +15,35 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
  * @FieldFormatter(
  *   id = "d_document_embed",
  *   label = @Translation("Document embed"),
- * field_types = {
- *   "file",
+ *   field_types = {
+ *     "file",
  *   }
  * )
  */
-class DocumentEmbedFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
+class DocumentEmbedFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode) {
+  public function viewElements(FieldItemListInterface $items, $langcode): array {
     $elements = [];
     foreach ($items as $delta => $item) {
-      /** @var \Drupal\media\Entity\Media $entity */
       $entity = $item->getEntity();
-      $name = $entity->getName();
-      /** @var \Drupal\file\Entity\File $file */
-      $file = $item->view()['#file'];
-      $fileUrl = $file->createFileUrl(FALSE);
+      if (!$entity instanceof MediaInterface) {
+        continue;
+      }
+      $view = $item->view();
+      $file = $view['#file'] ?? NULL;
+      if (!$file instanceof FileInterface) {
+        continue;
+      }
+
       $elements[$delta] = [
         '#theme' => 'd_media_document_embed',
-        '#link' => $fileUrl,
-        '#name' => $name,
+        '#link' => $file->createFileUrl(FALSE),
+        '#name' => $entity->getName(),
       ];
     }
-
     return $elements;
   }
 

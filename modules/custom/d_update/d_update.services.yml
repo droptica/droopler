@@ -3,13 +3,14 @@ services:
     class: Drupal\d_update\ConfigCompare
     arguments:
       - '@config.factory'
+
   d_update.update_checklist:
     class: Drupal\d_update\UpdateChecklist
     arguments:
       - '@config.factory'
-      - '@module_handler'
       - '@current_user'
       - '@checklistapi_storage.state'
+
   d_update:
     class: Drupal\d_update\Updater
     arguments:
@@ -22,9 +23,16 @@ services:
       - '@extension.list.module'
       - '@config.factory'
       - '@extension.path.resolver'
+      - '@logger.factory'
+
   d_update.drush.generate_config_hash_command:
-    class: \Drupal\d_update\Commands\GenerateConfigHashCommand
+    class: Drupal\d_update\Commands\GenerateConfigHashCommand
     arguments:
       - '@d_update.config_compare'
     tags:
       - { name: drush.command }
+
+  # Autowire aliases.
+  Drupal\d_update\ConfigCompareInterface: '@d_update.config_compare'
+  Drupal\d_update\UpdateChecklist: '@d_update.update_checklist'
+  Drupal\d_update\Updater: '@d_update'

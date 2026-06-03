@@ -8,8 +8,6 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Provide class ConfigurationForm.
  *
- * @package Drupal\d_social_media\Form
- *
  * @todo Please add validateForm method.
  */
 class ConfigurationForm extends ConfigFormBase {
@@ -30,7 +28,7 @@ class ConfigurationForm extends ConfigFormBase {
   public static function getMediaNames() {
     return [
       'facebook',
-      'twitter',
+      'x',
       'youtube',
       'instagram',
       'linkedin',
@@ -74,7 +72,7 @@ class ConfigurationForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     parent::submitForm($form, $form_state);
 
     foreach (self::getMediaNames() as $name) {

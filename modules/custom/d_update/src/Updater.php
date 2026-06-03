@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_update;
 
-use Drupal\block\Entity\Block;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ConfigManagerInterface;
+use Drupal\Core\Config\Entity\ConfigEntityStorageInterface;
+use Drupal\Core\Config\Entity\ConfigEntityTypeInterface;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\StorageException;
 use Drupal\Core\Config\StorageInterface;
@@ -17,185 +20,85 @@ use Drupal\Core\Extension\Exception\UnknownExtensionException;
 use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleInstallerInterface;
-use Drupal\Core\Logger\LoggerChannelTrait;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\block\Entity\Block;
 use Drupal\d_p\Helper\NestedArrayHelper;
 
 /**
- * Helper class to update configuration.
+ * Helper service that orchestrates Droopler config updates.
+ *
+ * Provides:
+ *  - importing config from a module's `config/install` or `config/optional`
+ *    directory (with hash-fenced safety),
+ *  - patching live configuration via declarative YAML diffs in
+ *    `config/update/<name>.yml` (delete / delete_value / change / add),
+ *  - installing modules (with dependency resolution),
+ *  - cloning block configs to a new subtheme.
  */
 class Updater {
 
   use StringTranslationTrait;
-  use LoggerChannelTrait;
+
+  protected const string LOGGER_CHANNEL = 'd_update';
 
   /**
-   * Module installer service.
-   *
-   * @var \Drupal\Core\Extension\ModuleInstallerInterface
+   * Logger channel for d_update.
    */
-  protected $moduleInstaller;
+  protected readonly LoggerChannelInterface $logger;
 
-  /**
-   * Config storage service.
-   *
-   * @var \Drupal\Core\Config\StorageInterface
-   */
-  protected $configStorage;
-
-  /**
-   * Entity type manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
-
-  /**
-   * D update config compare service.
-   *
-   * @var \Drupal\d_update\ConfigCompareInterface
-   */
-  protected $configCompare;
-
-  /**
-   * Config manager service.
-   *
-   * @var \Drupal\Core\Config\ConfigManagerInterface
-   */
-  protected $configManager;
-
-  /**
-   * Config factory service.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * Update Checklist service.
-   *
-   * @var \Drupal\d_update\UpdateChecklist
-   */
-  protected $checklist;
-
-  /**
-   * Modules Extensions List service.
-   *
-   * @var \Drupal\Core\Extension\ModuleExtensionList
-   */
-  protected $moduleExtensionList;
-
-  /**
-   * Logger.
-   *
-   * @var \Psr\Log\LoggerInterface
-   */
-  protected $logger;
-
-  /**
-   * ExtensionPathResolver service.
-   *
-   * @var \Drupal\Core\Extension\ExtensionPathResolver
-   */
-  protected ExtensionPathResolver $extensionPathResolver;
-
-  /**
-   * Constructs the Updater.
-   *
-   * @param \Drupal\Core\Extension\ModuleInstallerInterface $module_installer
-   *   Module installer service.
-   * @param \Drupal\Core\Config\StorageInterface $config_storage
-   *   Config storage service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   Entity type manager service.
-   * @param \Drupal\d_update\ConfigCompareInterface $config_compare
-   *   D Update Config compare service.
-   * @param \Drupal\Core\Config\ConfigManagerInterface $config_manager
-   *   Config manager service.
-   * @param \Drupal\d_update\UpdateChecklist $checklist
-   *   Update Checklist service.
-   * @param \Drupal\Core\Extension\ModuleExtensionList $module_extension_list
-   *   Update Module Extension List service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   Config factory service.
-   * @param \Drupal\Core\Extension\ExtensionPathResolver $extension_path_resolver
-   *   The extension path resolver.
-   */
   public function __construct(
-    ModuleInstallerInterface $module_installer,
-    StorageInterface $config_storage,
-    EntityTypeManagerInterface $entity_type_manager,
-    ConfigCompareInterface $config_compare,
-    ConfigManagerInterface $config_manager,
-    UpdateChecklist $checklist,
-    ModuleExtensionList $module_extension_list,
-    ConfigFactoryInterface $config_factory,
-    ExtensionPathResolver $extension_path_resolver
+    protected readonly ModuleInstallerInterface $moduleInstaller,
+    protected readonly StorageInterface $configStorage,
+    protected readonly EntityTypeManagerInterface $entityTypeManager,
+    protected readonly ConfigCompareInterface $configCompare,
+    protected readonly ConfigManagerInterface $configManager,
+    protected readonly UpdateChecklist $checklist,
+    protected readonly ModuleExtensionList $moduleExtensionList,
+    protected readonly ConfigFactoryInterface $configFactory,
+    protected readonly ExtensionPathResolver $extensionPathResolver,
+    LoggerChannelFactoryInterface $logger_channel_factory,
   ) {
-    $this->moduleInstaller = $module_installer;
-    $this->configStorage = $config_storage;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->configCompare = $config_compare;
-    $this->configManager = $config_manager;
-    $this->checklist = $checklist;
-    $this->moduleExtensionList = $module_extension_list;
-    $this->configFactory = $config_factory;
-    $this->logger = $this->getLogger('d_update');
-    $this->extensionPathResolver = $extension_path_resolver;
+    $this->logger = $logger_channel_factory->get(self::LOGGER_CHANNEL);
   }
 
   /**
-   * Returns the update checklist.
-   *
-   * @return \Drupal\d_update\UpdateChecklist
-   *   Returns the update checklist.
+   * Update checklist service.
    */
-  public function checklist() {
+  public function checklist(): UpdateChecklist {
     return $this->checklist;
   }
 
   /**
-   * Import a config file if the module exists.
+   * Import a config file if the module/theme exists.
    *
-   * The method tries to read config files from the modules' 'install' or
-   * 'optional' directories, if the config has been found and the module
-   * exists - the config is imported.
-   *
-   * @param string $source
-   *   Module/theme name.
-   * @param string $name
-   *   Config file name without .yml extension.
-   * @param string $hash
-   *   Hashed array with config data.
+   * Tries `config/install` then `config/optional` under the source extension.
+   * When the source extension isn't installed the call no-ops with a warning
+   * and returns TRUE (so caller iteration continues).
    *
    * @return bool
-   *   TRUE if the config was imported successfully or the module does not
-   *   exist, FALSE otherwise.
+   *   TRUE on successful import or skipped-missing-module, FALSE on real
+   *   failure (missing file, hash mismatch, storage exception).
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function importConfig($source, $name, $hash) {
+  public function importConfig(string $source, string $name, string $hash): bool {
     $data = $this->readConfigFromFile($source, $name, 'install');
-
     if (empty($data)) {
       $data = $this->readConfigFromFile($source, $name, 'optional');
     }
-
     if (empty($data)) {
-      $this->logger
-        ->error('Cannot find file for %config', ['%config' => $name]);
-
+      $this->logger->error('Cannot find file for %config', ['%config' => $name]);
       return FALSE;
     }
 
-    // Check if the module exists.
     try {
       $this->moduleExtensionList->getExtensionInfo($source);
     }
-    catch (UnknownExtensionException $exception) {
+    catch (UnknownExtensionException) {
       $this->logger->warning('The specified extensions %extension could not be found or is not installed. Configuration import skipped.', ['%extension' => $source]);
-
       return TRUE;
     }
 
@@ -203,96 +106,62 @@ class Updater {
   }
 
   /**
-   * Reads config file data from directory based on source and type.
+   * Read a config file from an extension's `config/<source_directory>` folder.
    *
-   * @param string $source
-   *   Module/theme name.
-   * @param string $name
-   *   Config file name without extension.
-   * @param string $source_directory
-   *   Specify if file should be looked inside optional or install.
-   *
-   * @return array|bool
-   *   The configuration data stored for the configuration object name. If no
-   *   configuration data exists for the given name, FALSE is returned.
+   * @return array<string, mixed>|false
+   *   Config data, or FALSE if the file doesn't exist.
    */
-  public function readConfigFromFile($source, $name, $source_directory) {
+  public function readConfigFromFile(string $source, string $name, string $source_directory): array|false {
     $source_info = $this->getSourceInformation($source);
     $config_path = $this->extensionPathResolver->getPath($source_info['source_type'], $source_info['source']) . '/config';
-    $source = new FileStorage($config_path . '/' . $source_directory);
+    $storage = new FileStorage($config_path . '/' . $source_directory);
 
-    return $source->read($name);
+    return $storage->read($name);
   }
 
   /**
-   * Returns array with source name and source_type.
+   * Import multiple config files at once.
    *
-   * @param string $source
-   *   Module/theme name.
-   *
-   * @return array
-   *   Array containing source_type and source name.
-   */
-  protected function getSourceInformation($source) {
-    // Parameter $source equal to "foo" means a module, "theme/foo"
-    // means a theme.
-    $source_type = 'module';
-    $parts = explode('/', $source);
-    if (count($parts) == 2) {
-      $source_type = $parts[0];
-      $source = $parts[1];
-    }
-    return [
-      'source_type' => $source_type,
-      'source' => $source,
-    ];
-  }
-
-  /**
-   * Import many config files at once.
-   *
-   * @param array $configs
-   *   Two dimensional array with structure "theme_or_module_name" =>
-   *   ["config_file_name" => "config_hash"].
+   * @param array<string, array<string, string>> $configs
+   *   Mapping of `source => [config_name => hash]`.
    *
    * @return bool
-   *   Returns if all of the configs were imported successfully.
+   *   TRUE iff every config was imported (or its module was missing).
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function importConfigs(array $configs) {
+  public function importConfigs(array $configs): bool {
     $status = [];
     foreach ($configs as $source => $config) {
       foreach ($config as $config_name => $config_hash) {
-        $status[] = $this->importConfig($source, $config_name, $config_hash);
+        $status[] = $this->importConfig((string) $source, (string) $config_name, (string) $config_hash);
       }
     }
-
-    return !in_array(FALSE, $status);
+    return !in_array(FALSE, $status, TRUE);
   }
 
   /**
-   * Install modules.
+   * Install a list of modules.
    *
-   * @param array $modules
-   *   Numeric array with module names.
+   * @param string[] $modules
+   *   Module machine names.
    * @param bool $enable_dependencies
-   *   Should dependencies for modules be enabled.
+   *   When TRUE, recursively install missing dependencies.
    *
    * @return bool
-   *   Returns if modules were installed successfully.
+   *   TRUE on success, FALSE when the list is empty or unknown modules appear.
    *
    * @throws \Drupal\Core\Extension\MissingDependencyException
    */
-  public function installModules(array $modules, $enable_dependencies = TRUE) {
-    if (empty($modules) || !is_array($modules)) {
+  public function installModules(array $modules, bool $enable_dependencies = TRUE): bool {
+    if ($modules === []) {
       return FALSE;
     }
 
     $module_data = $this->moduleExtensionList->getList();
     $modules = array_combine($modules, $modules);
-    if (array_diff_key($modules, $module_data)) {
+    if (array_diff_key($modules, $module_data) !== []) {
       return FALSE;
     }
 
@@ -300,14 +169,14 @@ class Updater {
   }
 
   /**
-   * Method creates new instance of existing blocks inside another theme.
+   * Clone block configs to a new subtheme.
    *
    * @param string $subthemeName
-   *   Name of the subtheme to place block into.
-   * @param array $configs
-   *   List of blocks configs to instantiate.
+   *   Machine name of the subtheme to clone blocks into.
+   * @param array<string, array<string, string>> $configs
+   *   Mapping of `base_theme => [block_config_name => hash]`.
    */
-  public function instantiateBlocksForSubtheme($subthemeName, array $configs) {
+  public function instantiateBlocksForSubtheme(string $subthemeName, array $configs): void {
     foreach ($configs as $baseThemeConfigs) {
       foreach ($baseThemeConfigs as $configName => $hash) {
         $baseConfig = $this->configFactory->get($configName)->getRawData();
@@ -318,146 +187,83 @@ class Updater {
         try {
           $block->save();
         }
-        catch (EntityStorageException $e) {
-          $this->logger->error('Error while instantiating block from %config', [
-            '%config' => $configName,
-          ]);
+        catch (EntityStorageException) {
+          $this->logger->error('Error while instantiating block from %config', ['%config' => $configName]);
         }
       }
     }
   }
 
   /**
-   * Creates config entities from name, file and hash.
+   * Create / overwrite a config entity (or plain config) from imported data.
    *
    * @param string $name
-   *   Config name.
-   * @param array|bool $data
-   *   Data read from file.
+   *   Config name (the YAML file basename without extension).
+   * @param array<string, mixed>|false $data
+   *   Config data as read from the source file. Passing FALSE returns FALSE
+   *   (defensive — kept for backwards compatibility with old callers).
    * @param string $hash
-   *   Config hash.
+   *   Hash strategy understood by ::verifyHash() (`override`, empty, or value).
    *
    * @return bool
-   *   Status of config import.
+   *   TRUE when the import succeeded, FALSE when aborted by hash mismatch.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function createConfig($name, $data, $hash) {
-
+  public function createConfig(string $name, array|false $data, string $hash): bool {
+    if ($data === FALSE) {
+      return FALSE;
+    }
     if (!$this->verifyHash($name, $hash)) {
-      $this->logger->warning('Detected changes in %config, aborting import...', [
-        '%config' => $name,
-      ]);
+      $this->logger->warning('Detected changes in %config, aborting import...', ['%config' => $name]);
       return FALSE;
     }
 
     $entity_type = $this->configManager->getEntityTypeIdByName($name);
-    if (!empty($entity_type)) {
-      // If this is field config, handle it properly.
-      /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
-      $storage = $this->entityTypeManager->getStorage($entity_type);
-
-      // Try to load the existing config.
-      $id = $storage->getIDFromConfigName($name, $storage->getEntityType()
-        ->getConfigPrefix());
-      $existingEntity = $storage->load($id);
-      if (!empty($existingEntity)) {
-        // Set the proper UUID to avoid conflicts.
-        $data['uuid'] = $existingEntity->uuid();
-      }
-
-      $entity = $storage->createFromStorageRecord($data);
-
-      // If we need an update, we have to inform the storage about it.
-      if (!empty($existingEntity)) {
-        $entity->original = $existingEntity;
-        $entity->enforceIsNew(FALSE);
-      }
-
-      // Do the update.
-      try {
-        $entity->save();
-        $this->logger->info('Successfully imported field config %config', [
-          '%config' => $name,
-        ]);
-        return TRUE;
-      }
-      catch (EntityStorageException $e) {
-        $this->logger->error('Error while importing entity config %config', [
-          '%config' => $name,
-        ]);
-        return FALSE;
-      }
+    if (empty($entity_type)) {
+      return $this->writePlainConfig($name, $data);
     }
-    else {
-      // Otherwise use plain config storage.
-      try {
-        $this->configStorage->write($name, $data);
-        $this->logger->info('Successfully imported config %config', [
-          '%config' => $name,
-        ]);
-        return TRUE;
-      }
-      catch (StorageException $e) {
-        $this->logger->error('Error while importing config %config', [
-          '%config' => $name,
-        ]);
-        return FALSE;
-      }
-    }
+
+    /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
+    $storage = $this->entityTypeManager->getStorage($entity_type);
+    return $this->writeEntityConfig($storage, $name, $data);
   }
 
   /**
-   * Returns whether adding config to database should proceed.
+   * Decide whether import should proceed based on the stored hash strategy.
    *
-   * @param string $name
-   *   Config name without extension.
-   * @param string $hash
-   *   Config hash or keyword, empty for new configs.
-   *
-   * @return bool
-   *   Returns TRUE for proceed, false for halt.
+   * `override` → always proceed.
+   * empty hash → proceed only when no config currently exists.
+   * any other → proceed only when the live config matches the hash exactly.
    */
-  public function verifyHash($name, $hash) {
-    switch ($hash) {
-      case 'override':
-        return TRUE;
-
-      case '':
-        return !$this->configCompare->configExists($name);
-
-      default:
-        return $this->configCompare->compare($name, $hash);
-    }
+  public function verifyHash(string $name, string $hash): bool {
+    return match ($hash) {
+      'override' => TRUE,
+      '' => !$this->configCompare->configExists($name),
+      default => $this->configCompare->compare($name, $hash),
+    };
   }
 
   /**
-   * Allows updating of single config, based on yml file.
+   * Apply a declarative YAML diff over each config in an update file.
    *
-   * @todo Implement mechanism for "change" keyword.
-   *
-   * @param string $source
-   *   Module/theme name.
-   * @param string $name
-   *   Config file name without extension.
-   *
-   * @return bool
-   *   Returns if config was modified successfully.
+   * Reads `config/update/<name>.yml` and applies any of the supported
+   * operations (`delete`, `delete_value`, `change`, `add`) per config entry.
    */
-  public function updateConfigurations($source, $name) {
+  public function updateConfigurations(string $source, string $name): bool {
     $data = $this->readConfigFromFile($source, $name, 'update');
-    $status = [];
     if (empty($data)) {
       $this->logger->error('Cannot find file for %config', ['%config' => $name]);
-
       return FALSE;
     }
+
+    $status = [];
     foreach ($data as $configName => $configOperations) {
       $updates = $configOperations;
       $config = $this->configFactory->getEditable($configName);
       $newConfig = $config->get();
-      $isOptional = $updates['optional'] ?? FALSE;
+      $isOptional = (bool) ($updates['optional'] ?? FALSE);
 
       if (isset($updates['delete'])) {
         foreach ($updates['delete'] as $update) {
@@ -468,9 +274,8 @@ class Updater {
       if (isset($updates['delete_value'])) {
         foreach ($updates['delete_value'] as $update) {
           $exp = explode(':', $update['parents']);
-
           foreach ($update['values'] as $value) {
-            NestedArrayHelper::unsetValueIfEqualTo($newConfig, $exp, $value);
+            NestedArrayHelper::unsetValueIfEqualTo($newConfig, $exp, (string) $value);
           }
         }
       }
@@ -483,72 +288,119 @@ class Updater {
         $newConfig = NestedArray::mergeDeep($newConfig, $updates['add']);
       }
 
-      if (!isset($updates['change']['expected'])) {
-        $updates['change']['expected'] = NULL;
+      $expected = $updates['change']['expected'] ?? NULL;
+      if ($this->modifyConfig($configName, $newConfig, $expected)) {
+        continue;
       }
-
-      if (!$this->modifyConfig($configName, $newConfig, $updates['change']['expected'])) {
-        if ($isOptional) {
-          $this->logger->notice('Update failed for optional %config, skipping', ['%config' => $name]);
-        }
-        else {
-          $status[] = FALSE;
-          $this->logger->error('Update failed for %config', ['%config' => $name]);
-        }
+      if ($isOptional) {
+        $this->logger->notice('Update failed for optional %config, skipping', ['%config' => $name]);
+        continue;
       }
+      $status[] = FALSE;
+      $this->logger->error('Update failed for %config', ['%config' => $name]);
     }
 
-    return !in_array(FALSE, $status);
+    return !in_array(FALSE, $status, TRUE);
   }
 
   /**
-   * Loads and changes config.
+   * Resolve `source_type` (`module` / `theme`) and `source` (machine name).
    *
-   * @param string $configName
-   *   Name of config to modify.
-   * @param array $newConfig
-   *   Array containing changes to apply.
-   * @param array $expectedConfig
-   *   Array containing expected config values.
-   *
-   * @return bool
-   *   Return if the config was changed successfully.
+   * @return array{source_type: string, source: string}
+   *   Source descriptor parsed from a `type/name` string.
    */
-  private function modifyConfig($configName, array $newConfig, array $expectedConfig = NULL) {
+  protected function getSourceInformation(string $source): array {
+    $parts = explode('/', $source);
+    if (count($parts) === 2) {
+      return [
+        'source_type' => $parts[0],
+        'source' => $parts[1],
+      ];
+    }
+    return [
+      'source_type' => 'module',
+      'source' => $source,
+    ];
+  }
+
+  /**
+   * Write data to a plain (non-entity) config object.
+   */
+  protected function writePlainConfig(string $name, array $data): bool {
+    try {
+      $this->configStorage->write($name, $data);
+      $this->logger->info('Successfully imported config %config', ['%config' => $name]);
+      return TRUE;
+    }
+    catch (StorageException) {
+      $this->logger->error('Error while importing config %config', ['%config' => $name]);
+      return FALSE;
+    }
+  }
+
+  /**
+   * Write data to a config entity, updating in place when one already exists.
+   */
+  protected function writeEntityConfig(ConfigEntityStorageInterface $storage, string $name, array $data): bool {
+    $entityType = $storage->getEntityType();
+    assert($entityType instanceof ConfigEntityTypeInterface);
+    $id = $storage->getIDFromConfigName($name, $entityType->getConfigPrefix());
+    $existingEntity = $storage->load($id);
+    if ($existingEntity !== NULL) {
+      $data['uuid'] = $existingEntity->uuid();
+    }
+
+    $entity = $storage->createFromStorageRecord($data);
+    if ($existingEntity !== NULL) {
+      $entity->original = $existingEntity;
+      $entity->enforceIsNew(FALSE);
+    }
+
+    try {
+      $entity->save();
+      $this->logger->info('Successfully imported field config %config', ['%config' => $name]);
+      return TRUE;
+    }
+    catch (EntityStorageException) {
+      $this->logger->error('Error while importing entity config %config', ['%config' => $name]);
+      return FALSE;
+    }
+  }
+
+  /**
+   * Apply patched data to a config, optionally guarded by expected diff.
+   *
+   * Returns FALSE (without writing) when:
+   *  - the target config is new or empty,
+   *  - `$expectedConfig` is provided and the live config doesn't already
+   *    contain it (recursive diff guard against drift).
+   */
+  protected function modifyConfig(string $configName, array $newConfig, ?array $expectedConfig = NULL): bool {
     $configName = $this->replacePlaceholders($configName);
     $config = $this->configFactory->getEditable($configName);
     $configData = $config->get();
 
     if ($config->isNew() || empty($configData)) {
-      $this->logger
-        ->error("Unable to modify newly created or empty %config configuration. Aborting import", ['%config' => $configName]);
+      $this->logger->error('Unable to modify newly created or empty %config configuration. Aborting import', ['%config' => $configName]);
       return FALSE;
     }
 
     if (!empty($expectedConfig) && DiffArray::diffAssocRecursive($expectedConfig, $configData)) {
-      $this->logger
-        ->error('Detected changes in configuration %config. Aborting import', ['%config' => $configName]);
+      $this->logger->error('Detected changes in configuration %config. Aborting import', ['%config' => $configName]);
       return FALSE;
     }
 
     $config->setData($newConfig)->save();
-
     return TRUE;
   }
 
   /**
-   * Replace placeholders in config file names.
-   *
-   * @param string $name
-   *   Config file name.
-   *
-   * @return string
-   *   Config file name with placeholders replaced.
+   * Replace `@theme` placeholder in config names with the active theme.
    */
-  protected function replacePlaceholders(string $name) {
-    return (new FormattableMarkup($name, [
+  protected function replacePlaceholders(string $name): string {
+    return (string) (new FormattableMarkup($name, [
       '@theme' => $this->configFactory->get('system.theme')->get('default'),
-    ]))->__toString();
+    ]));
   }
 
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_update\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
@@ -26,10 +28,11 @@ class Update extends ContentEntityBase implements UpdateInterface {
   /**
    * {@inheritdoc}
    *
-   * When a new entity instance is added, set the user_id entity reference to
-   * the current user as the creator of the instance.
+   * Tag the entity with the current uid; `\Drupal::currentUser()` is used
+   * here because `preCreate()` runs before the entity is wired to the
+   * service container.
    */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
+  public static function preCreate(EntityStorageInterface $storage_controller, array &$values): void {
     parent::preCreate($storage_controller, $values);
     $values += [
       'user_id' => \Drupal::currentUser()->id(),
@@ -39,21 +42,21 @@ class Update extends ContentEntityBase implements UpdateInterface {
   /**
    * {@inheritdoc}
    */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
+  public function getCreatedTime(): int {
+    return (int) $this->get('created')->value;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
+  public function getChangedTime(): int {
+    return (int) $this->get('changed')->value;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setChangedTime($timestamp) {
+  public function setChangedTime($timestamp): self {
     $this->set('changed', $timestamp);
     return $this;
   }
@@ -61,11 +64,10 @@ class Update extends ContentEntityBase implements UpdateInterface {
   /**
    * {@inheritdoc}
    */
-  public function getChangedTimeAcrossTranslations() {
+  public function getChangedTimeAcrossTranslations(): int {
     $changed = $this->getUntranslated()->getChangedTime();
     foreach ($this->getTranslationLanguages(FALSE) as $language) {
-      $translation_changed = $this->getTranslation($language->getId())
-        ->getChangedTime();
+      $translation_changed = $this->getTranslation($language->getId())->getChangedTime();
       $changed = max($translation_changed, $changed);
     }
     return $changed;
@@ -74,14 +76,16 @@ class Update extends ContentEntityBase implements UpdateInterface {
   /**
    * {@inheritdoc}
    */
-  public function wasSuccessfulByHook() {
-    return $this->get('successful_by_hook')->value;
+  #[\Override]
+  public function wasSuccessfulByHook(): bool {
+    return (bool) $this->get('successful_by_hook')->value;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setSuccessfulByHook($success) {
+  #[\Override]
+  public function setSuccessfulByHook(bool $success): self {
     $this->set('successful_by_hook', $success);
     return $this;
   }
@@ -89,20 +93,19 @@ class Update extends ContentEntityBase implements UpdateInterface {
   /**
    * {@inheritdoc}
    */
-  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
+    $fields = [];
 
-    // Standard field, used as unique if primary index.
     $fields['id'] = BaseFieldDefinition::create('string')
       ->setLabel(t('ID'))
       ->setDescription(t('The ID of the Update entity.'))
       ->setReadOnly(TRUE)
       ->setSettings([
         'default_value' => '',
-        'max_length' => 50,
+        'max_length'    => 50,
         'text_processing' => 0,
       ]);
 
-    // Standard field, unique outside of the scope of the current project.
     $fields['uuid'] = BaseFieldDefinition::create('uuid')
       ->setLabel(t('UUID'))
       ->setDescription(t('The UUID of the Update entity.'))

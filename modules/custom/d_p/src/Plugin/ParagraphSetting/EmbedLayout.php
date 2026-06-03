@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -18,18 +20,18 @@ class EmbedLayout extends ParagraphSettingPluginBase implements ParagraphSetting
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#type' => 'select',
       '#options' => $this->getOptions(),
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function getOptions(): array {
     return [
       'left' => $this->t('Left'),
@@ -41,7 +43,8 @@ class EmbedLayout extends ParagraphSettingPluginBase implements ParagraphSetting
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 'left';
   }
 

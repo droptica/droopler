@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_media\Plugin\Provider;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
 
 /**
- * Providers an interface for embed providers.
+ * Provides an interface for video-embed provider plugins.
  *
  * @property string $baseUrl
  */
@@ -15,54 +17,42 @@ interface ProviderPluginInterface extends PluginInspectionInterface {
    * Check if the plugin is applicable to the user input.
    *
    * @param string $input
-   *   User input to check if it's a URL for the given provider.
+   *   User input to test against the plugin's URL pattern.
    *
    * @return bool
-   *   If the plugin works for the given URL.
+   *   TRUE when the plugin can handle the URL.
    */
-  public static function isApplicable($input);
+  public static function isApplicable(string $input): bool;
 
   /**
-   * Render embed code.
-   *
-   * @return mixed
-   *   A renderable array of the embed code.
+   * Render the embed code as a render array.
    */
-  public function renderEmbedCode();
+  public function renderEmbedCode(): array;
 
   /**
-   * Get the ID of the video from user input.
+   * Get the video id from a free-form user input.
    *
-   * @param string $input
-   *   Input a user would enter into a video field.
-   *
-   * @return string
-   *   The ID in whatever format makes sense for the provider.
+   * @return string|false
+   *   The video id, or FALSE when the input doesn't match the pattern.
    */
-  public static function getIdFromInput($input);
+  public static function getIdFromInput(string $input): string|false;
 
   /**
    * Setter for player settings.
-   *
-   * @param array $settings
-   *   An array of settings from formatter for player.
    */
-  public function setPlayerSettings(array $settings);
+  public function setPlayerSettings(array $settings): void;
 
   /**
    * Setter for video settings.
-   *
-   * @param array $settings
-   *   An array of settings from formatter for video.
    */
-  public function setVideoSettings(array $settings);
+  public function setVideoSettings(array $settings): void;
 
   /**
-   * Get the video oembed data.
+   * Get the video oEmbed payload.
    *
    * @return object
-   *   Data from the oembed endpoint.
+   *   Data from the oEmbed endpoint.
    */
-  public function oEmbedData();
+  public function oEmbedData(): object;
 
 }

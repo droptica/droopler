@@ -2,21 +2,24 @@
   "name": "droopler_theme",
   "description": "Droopler Theme for Drupal",
   "author": "Droptica (https://droptica.com)",
+  "engines": {
+    "node": ">=22"
+  },
   "devDependencies": {
-    "del": "^6.0.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
-    "gulp-dart-sass": "1.0.2",
-    "gulp-postcss": "^9.0.0",
-    "gulp-rename": "^2.0.0",
+    "del": "^8.0.1",
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^10.0.0",
+    "gulp-dart-sass": "^1.1.0",
+    "gulp-rename": "^2.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.2",
-    "gulp-watch": "^5.0.1",
-    "pump": "^3.0.0",
-    "yargs": "^17.0.1"
+    "pump": "^3.0.4"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0",
-    "sass": "1.43.4"
+    "bootstrap": "^4.6.2",
+    "sass": "^1.99.0"
+  },
+  "overrides": {
+    "postcss": "^8.5.11"
   }
 }

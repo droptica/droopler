@@ -13,11 +13,9 @@
 {{ attach_library('droopler_theme/dropbutton') }}
 
 {% if children %}
-  {% apply spaceless %}
-    <div class="dropbutton-wrapper">
-      <div class="dropbutton-widget">
-        {{ children }}
-      </div>
+  <div class="dropbutton-wrapper">
+    <div class="dropbutton-widget">
+      {{ children }}
     </div>
-  {% endapply %}
+  </div>
 {% endif %}

@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_block_field;
 
+use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Field\FieldItemInterface;
 
 /**
@@ -10,11 +13,12 @@ use Drupal\Core\Field\FieldItemInterface;
 interface BlockFieldItemInterface extends FieldItemInterface {
 
   /**
-   * Get block instance.
+   * Resolve and return the block plugin instance for this field item.
    *
-   * @return null|\Drupal\Core\Block\BlockPluginInterface
-   *   Return the block instance or NULL if the block does not exist.
+   * @return \Drupal\Core\Block\BlockPluginInterface|null
+   *   The block instance, or NULL if the plugin id is empty, the plugin
+   *   is `broken`, or it's a `block_content` whose UUID no longer resolves.
    */
-  public function getBlock();
+  public function getBlock(): ?BlockPluginInterface;
 
 }

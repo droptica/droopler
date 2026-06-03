@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -22,19 +24,19 @@ class MarginBottom extends ParagraphSettingPluginBase implements ParagraphSettin
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#description' => $this->t('Choose the size of bottom margin.'),
       '#type' => 'select',
       '#options' => $this->getOptions(),
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function getOptions(): array {
     return [
       'margin-bottom-default' => $this->t('Default'),
@@ -48,7 +50,8 @@ class MarginBottom extends ParagraphSettingPluginBase implements ParagraphSettin
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 'margin-bottom-default';
   }
 

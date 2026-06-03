@@ -2,310 +2,33 @@
 
 /**
  * @file
- * Contains d_paragraphs.module.
- */
-
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Template\Attribute;
-use Drupal\d_p\Exception\MissingConfigurationStorageFieldException;
-use Drupal\d_p\ParagraphSettingTypesInterface;
-use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
-
-/**
- * Implements hook_theme().
- */
-function d_p_theme($existing, $type, $theme, $path) {
-  return [
-    'field__field_d_main_title' => [
-      'base hook' => 'field',
-    ],
-    'field__field_d_subtitle' => [
-      'base hook' => 'field',
-    ],
-  ];
-}
-
-/**
- * Returns responsive style ids.
+ * Procedural shim for the d_p module.
  *
- * @return string[]
- *   Array of responsive style ids.
+ * All hook implementations live in \Drupal\d_p\Hook\Hooks. The one hook
+ * below — `hook_module_implements_alter()` — MUST remain a global
+ * procedural function: it is part of the mechanism that builds the hook
+ * registry itself and therefore cannot be discovered through OOP
+ * `#[Hook]` attributes. Drupal core (HookCollectorPass) explicitly
+ * refuses to register `module_implements_alter` as an OOP hook.
  */
-function d_p_responsive_style_ids() {
-  // @todo should the helpers be a class?
-  $styles_ids = [
-    'responsive_image_2000',
-    'responsive_image_768',
-    'responsive_image_992',
-    'responsive_image_1200',
-    'responsive_image_1600',
-    'responsive_image_2000',
-  ];
 
-  return $styles_ids;
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function d_p_preprocess_paragraph(&$variables) {
-  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
-  $paragraph = $variables['paragraph'];
-
-  $bundle = $paragraph->bundle();
-  $paragraph_id = 'paragraph-' . $bundle . '-' . $paragraph->id();
-  $wrapper_attributes = [
-    'id' => $paragraph_id,
-    'class' => [
-      'wrapper-' . $bundle,
-    ],
-  ];
-
-  $paragraphFieldDefinitions = $paragraph->getFieldDefinitions();
-
-  /**
-   * @var \Drupal\field\Entity\FieldConfig $field
-   */
-  foreach ($paragraphFieldDefinitions as $fieldName => $fieldConfig) {
-    if ($fieldName == 'field_d_settings') {
-      /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $field */
-      $field = $paragraph->get($fieldName);
-
-      if ($field->isEmpty()) {
-        continue;
-      }
-
-      if (
-        !$field->hasClasses()
-        || !$field->hasSettingValue(ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME)
-        || !$field->hasClass('theme-custom')
-      ) {
-        continue;
-      }
-
-      $custom_theme = $field->getSettingValue(ParagraphSettingTypesInterface::THEME_COLORS_SETTING_NAME);
-
-      $wrapper_attributes['style'] = [
-        'background-color: ' . $custom_theme->background . ';',
-        'color: ' . $custom_theme->text . ';',
-      ];
-    }
-
-    if ($fieldName == 'field_d_long_text') {
-      $field = $paragraph->get($fieldName);
-      if (!$field->isEmpty()) {
-        $wrapper_attributes['class'][] = 'with-long-text';
-      }
-    }
-
-    // Set background image if field is not empty.
-    // This overrides background color settings.
-    if ($fieldName == 'field_d_media_background' && $bundle == 'd_p_single_text_block') {
-      $field = $paragraph->get($fieldName);
-      if (!$field->isEmpty()) {
-        $wrapper_attributes['class'][] = 'user-image-background';
-      }
-    }
-
-  }
-
-  try {
-    /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
-    $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($paragraph);
-
-    if (!$setting_field->isEmpty()) {
-      unset($variables['content'][$setting_field->getName()]);
-    }
-
-    $wrapper_attributes['class'] = array_merge($wrapper_attributes['class'], $setting_field->getClasses());
-  }
-  catch (\Throwable $exception) {
-  }
-
-  $paragraph_attributes = [
-    'data-id' => $paragraph_id,
-  ];
-
-  $variables['wrapper_attributes'] = new Attribute($wrapper_attributes);
-  $variables['paragraph_attributes'] = new Attribute($paragraph_attributes);
-  $variables['#attached']['library'][] = 'd_p/d_p';
-}
-
-/**
- * Implements hook_form_alter().
- */
-function d_p_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $form['#attached']['library'][] = 'd_p/d_p_ckeditor';
-  // Create heading type selector under the title.
-  if (isset($form["field_page_section"]["widget"]["#max_delta"])) {
-    // Locate all paragraph subforms.
-    for ($i = 0; $i <= $form["field_page_section"]["widget"]["#max_delta"]; $i++) {
-      if (!isset($form["field_page_section"]["widget"][$i]["subform"])) {
-        continue;
-      }
-
-      d_p_move_heading_type($form["field_page_section"]["widget"][$i]["subform"]);
-    }
-  }
-  else {
-    d_p_move_heading_type($form);
-  }
-}
-
-/**
- * Move "heading_type" field from "Paragraph settings" under the main title.
- *
- * @param array $form
- *   The form that contains the d_settings field.
- */
-function d_p_move_heading_type(array &$form) {
-  if (isset($form["field_d_settings"]["widget"][0]["value"]["heading_type"]) && isset($form["field_d_main_title"])) {
-    $widget = &$form["field_d_settings"]["widget"][0]["value"];
-    $widget['heading_type']['#weight'] = $form["field_d_main_title"]["#weight"] + 0.5;
-    $widget['heading_type']['#element_validate'] = ['d_p_heading_type_validate'];
-
-    // If field_d_main_title is in fieldgroup, locate it and move
-    // the heading_type under it.
-    if (isset($form["#group_children"]["field_d_main_title"])) {
-      $group = $form["#group_children"]["field_d_main_title"];
-      $form["#group_children"]['heading_type'] = $group;
-      $form[$group]['heading_type'] = $widget['heading_type'];
-    }
-    else {
-      $form['heading_type'] = $widget["heading_type"];
-    }
-    unset($widget["heading_type"]);
-  }
-}
-
-/**
- * Custom validator for Heading Type.
- *
- * @param array $element
- *   Array of element.
- * @param \Drupal\Core\Form\FormStateInterface $form_state
- *   State of form.
- */
-function d_p_heading_type_validate(array $element, FormStateInterface $form_state) {
-  $parents = [];
-  foreach ($element["#parents"] as $index) {
-    if (!in_array($index, ['widget', 'heading_type'], TRUE)
-      && !preg_match('/^group_/', $index)) {
-      $parents[] = $index;
-    }
-  }
-  $parents[] = 'field_d_settings';
-  $current_settings = $form_state->getValue($parents);
-
-  // Inject heading_type settings into d_settings storage.
-  if (is_string($current_settings[0]['value'])) {
-    $decoded = json_decode($current_settings[0]['value'], TRUE);
-    $decoded['heading_type'] = $element["#value"];
-    $current_settings[0]['value'] = json_encode($decoded);
-  }
-  else {
-    $current_settings[0]['value']['heading_type'] = $element["#value"];
-  }
-  $form_state->setValue($parents, $current_settings);
-}
+declare(strict_types=1);
 
 /**
  * Implements hook_module_implements_alter().
- */
-function d_p_module_implements_alter(&$implementations, $hook) {
-  // Form alter hook runs as last.
-  if ($hook == 'form_alter' && in_array('d_p', $implementations)) {
-    $group = $implementations['d_p'];
-    unset($implementations['d_p']);
-    $implementations['d_p'] = $group;
-  }
-}
-
-/**
- * Implements hook_field_widget_single_element_form_alter().
- */
-function d_p_field_widget_single_element_form_alter(&$element, FormStateInterface $form_state, &$context) {
-  $field_definition = $context['items']->getFieldDefinition();
-
-  if ($field_definition instanceof FieldConfig) {
-    $config = $field_definition->id();
-    [, $bundle, $field_name] = explode('.', $config);
-
-    // Make the content of the CKEditor centred by default for the specified
-    // paragraph types.
-    d_p_centered_ckeditor_widget_content($element, $form_state, $context, $bundle);
-
-    if ($field_name === 'field_d_cta_link' &&
-      empty($element['url']['#default_value']) &&
-      empty($element['options']['attributes']['class']['#default_value']) &&
-      !isset($element['attributes']['#value']['class'])
-    ) {
-      if (in_array($bundle, ['d_p_group_of_counters'])) {
-        $default_value = 'btn btn-secondary';
-      }
-      else {
-        $default_value = 'btn btn-primary';
-      }
-      $element['options']['attributes']['class']['#default_value'] = $default_value;
-    }
-  }
-}
-
-/**
- * Implements template_preprocess_field().
- */
-function d_p_preprocess_field(&$variables) {
-  // Alter field_d_main_title.
-  if ($variables['element']['#field_name'] == 'field_d_main_title') {
-    $entity = $variables["element"]["#object"];
-    if ($entity->getEntityTypeId() === 'paragraph') {
-      try {
-        /** @var \Drupal\d_p\Plugin\Field\ConfigurationStorageFieldItemListInterface $setting_field */
-        $setting_field = ConfigurationStorage::getSettingsFieldFromEntity($entity);
-        $variables['heading_tag'] = $setting_field->getSettingValue(ParagraphSettingTypesInterface::HEADING_TYPE_SETTING_NAME);
-      }
-      catch (MissingConfigurationStorageFieldException $exception) {
-      }
-    }
-  }
-}
-
-/**
- * Make the content of the CKEditor centred for the specified paragraph types.
  *
- * @param array $element
- *   The field widget form element.
- * @param \Drupal\Core\Form\FormStateInterface $form_state
- *   The current state of the form.
- * @param array $context
- *   An associative array containing widget attributes.
- * @param string $paragraph_type
- *   Type of the processing paragraph.
- *
- * @see: d_p_preprocess_textarea();
+ * Ensures d_p's `hook_form_alter` runs last so we can react to other
+ * modules' mutations.
  */
-function d_p_centered_ckeditor_widget_content(array &$element, FormStateInterface $form_state, array $context, $paragraph_type) {
-  if ($context['widget'] instanceof TextareaWidget) {
-    $paragraph_types = [];
-    \Drupal::moduleHandler()
-      ->invokeAll('d_p_centered_ckeditor_widget_paragraphs', [&$paragraph_types]);
-    if (in_array($paragraph_type, $paragraph_types)) {
-      $element['#d_p_ckeditor_centered'] = TRUE;
-    }
+function d_p_module_implements_alter(array &$implementations, string $hook): void {
+  if ($hook !== 'form_alter') {
+    return;
   }
-}
+  if (!array_key_exists('d_p', $implementations)) {
+    return;
+  }
 
-/**
- * Implements hook_preprocess_HOOK().
- *
- * Make the content of the CKEditor centred for the specified paragraph types.
- *
- * @see: d_p_centered_ckeditor_widget_content();
- */
-function d_p_preprocess_textarea(&$variables) {
-  if ($variables['element']['#d_p_ckeditor_centered'] ?? FALSE) {
-    $variables['wrapper_attributes']->addClass('d_p_ckeditor_centered');
-  }
+  $group = $implementations['d_p'];
+  unset($implementations['d_p']);
+  $implementations['d_p'] = $group;
 }

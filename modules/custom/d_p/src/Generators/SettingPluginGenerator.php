@@ -1,46 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Generators;
 
+use DrupalCodeGenerator\Asset\AssetCollection;
+use DrupalCodeGenerator\Attribute\Generator;
 use DrupalCodeGenerator\Command\BaseGenerator;
-use DrupalCodeGenerator\Utils;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use DrupalCodeGenerator\GeneratorType;
 
 /**
- * The class that adds Droopler Setting Plugin generator to Drush.
+ * Registers the drush generator for paragraph setting plugins.
  */
-class SettingPluginGenerator extends BaseGenerator {
+#[Generator(
+  name: 'droopler-setting-plugin',
+  description: 'Generates a Droopler Setting plugin.',
+  aliases: ['drosep'],
+  templatePath: __DIR__,
+  type: GeneratorType::MODULE_COMPONENT,
+)]
+final class SettingPluginGenerator extends BaseGenerator {
 
   /**
    * {@inheritdoc}
    */
-  protected $name = 'droopler-setting-plugin';
+  protected function generate(array &$vars, AssetCollection $assets): void {
+    $ir                   = $this->createInterviewer($vars);
+    $vars['machine_name'] = $ir->askMachineName();
+    $vars['name']         = $ir->askName();
+    $vars['plugin_label'] = $ir->askPluginLabel();
+    $vars['plugin_id']    = $ir->askPluginId();
+    $vars['class']        = $ir->askPluginClass(suffix: 'ParagraphSetting');
 
-  /**
-   * {@inheritdoc}
-   */
-  protected $description = 'Generates a Droopler Setting plugin.';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected $alias = 'drosep';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected $templatePath = __DIR__;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function interact(InputInterface $input, OutputInterface $output) {
-    $questions = Utils::moduleQuestions() + Utils::pluginQuestions();
-    $this->collectVars($input, $output, $questions);
-
-    $this->addFile()
-      ->path('src/Plugin/ParagraphSetting/{class}.php')
+    $assets->addFile('src/Plugin/ParagraphSetting/{class}.php')
       ->template('setting-plugin.twig');
   }
 

@@ -15,8 +15,6 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
  * Content init manager base.
- *
- * @package Drupal\d_content_init
  */
 abstract class ContentInitManagerBase {
 
@@ -65,7 +63,7 @@ abstract class ContentInitManagerBase {
   protected $moduleHandler;
 
   /**
-   * ContentInitManagerBase constructor.
+   * Constructs a new ContentInitManagerBase.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
@@ -86,7 +84,8 @@ abstract class ContentInitManagerBase {
     LoggerChannelFactory $logger_factory,
     AccountProxyInterface $current_user,
     LanguageManagerInterface $language_manager,
-    ModuleHandlerInterface $module_handler) {
+    ModuleHandlerInterface $module_handler,
+  ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->serialization = $serialization;
     $this->logger = $logger_factory->get('d_content_init');
@@ -128,7 +127,7 @@ abstract class ContentInitManagerBase {
    * @param array $structure
    *   Structure of the content to import.
    */
-  public function importFromFiles(array $structure) {
+  public function importFromFiles(array $structure): void {
     foreach ($structure as $data) {
       if (!$this->importFromFile($data['file'])) {
         $this->logger->error($this->t('Entity from @file was not created.', [
@@ -200,7 +199,7 @@ abstract class ContentInitManagerBase {
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   Entity to operate on.
    */
-  protected function processFields(array $block, EntityInterface &$entity) {
+  protected function processFields(array $block, EntityInterface &$entity): void {
     try {
       if (isset($block['fields'])) {
         foreach ($block['fields'] as $field_name => $field) {

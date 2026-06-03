@@ -3,3 +3,36 @@ modules/develop/
 themes/contrib/
 .idea/
 libraries/
+
+# Composer-managed dev dependencies (installed locally for phpcs/phpstan).
+/vendor/
+/composer.lock
+
+# PHPStan result cache.
+/.phpstan-cache/
+
+# AI assistant working notes (do not commit).
+/MODERNIZATION.md
+
+# Drupal core composer scaffold artifacts (populated when running composer
+# install from inside the profile directory for local phpcs/phpstan work).
+/.csslintrc
+/.editorconfig
+/.eslintignore
+/.eslintrc.json
+/.gitattributes
+/.ht.router.php
+/.htaccess
+/INSTALL.txt
+/autoload.php
+/example.gitignore
+/index.php
+/robots.txt
+/update.php
+/modules/.gitignore
+/core/
+/profiles/
+/recipes/
+/sites/
+/themes/.gitignore
+/themes/README.txt

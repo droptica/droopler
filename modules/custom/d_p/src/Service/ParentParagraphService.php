@@ -1,55 +1,55 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Service;
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 
 /**
- * Paragraph service.
- *
- * @package Drupal\d_p\Service
+ * Resolves the referencing field of an entity (e.g. media inside a paragraph).
  */
 class ParentParagraphService {
 
   /**
-   * Returns referencing field id.
+   * Get the field config id that references `$mediaEntity` (if any).
    *
-   * (Example: paragraph.d_p_tiles.field_d_media_image)
+   * Example return: `paragraph.d_p_tiles.field_d_media_image`.
    *
    * @param \Drupal\Core\Entity\ContentEntityInterface $mediaEntity
-   *   Media Entity to get parent field info.
+   *   Entity whose parent field reference we look up.
    *
-   * @return int|string|null
-   *   Id of field referencing passed entity.
+   * @return string|null
+   *   Field config id, or NULL when no referencing field is available.
    */
-  public function getParentParagraphFieldId(ContentEntityInterface $mediaEntity) {
+  public function getParentParagraphFieldId(ContentEntityInterface $mediaEntity): ?string {
     $parentField = $this->getReferencingField($mediaEntity);
-
-    if ($parentField) {
-      /** @var \Drupal\field\Entity\FieldConfig $fieldDefinition */
-      $fieldDefinition = $parentField->getFieldDefinition();
-
-      return $fieldDefinition->id();
+    if ($parentField === NULL) {
+      return NULL;
     }
 
-    return NULL;
+    /** @var \Drupal\field\Entity\FieldConfig $field_definition */
+    $field_definition = $parentField->getFieldDefinition();
+    return (string) $field_definition->id();
   }
 
   /**
-   * Method return referencing field for passed media entity.
-   *
-   * @param \Drupal\Core\Entity\ContentEntityInterface $mediaEntity
-   *   Media Entity to get parent field info.
+   * Resolve the entity reference field item that points to `$mediaEntity`.
    *
    * @return \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem|null
-   *   Field referencing passed media entity.
+   *   Referencing field item or NULL when not available.
    */
-  protected function getReferencingField(ContentEntityInterface $mediaEntity) {
-    if ($mediaEntity && isset($mediaEntity->_referringItem) && method_exists($mediaEntity->_referringItem, 'getParent')) {
-      /** @var \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem $parentEntity */
-      return $mediaEntity->_referringItem->getParent();
+  protected function getReferencingField(ContentEntityInterface $mediaEntity): ?EntityReferenceItem {
+    if (!isset($mediaEntity->_referringItem)) {
+      return NULL;
     }
-    return NULL;
+    if (!method_exists($mediaEntity->_referringItem, 'getParent')) {
+      return NULL;
+    }
+
+    $parent = $mediaEntity->_referringItem->getParent();
+    return $parent instanceof EntityReferenceItem ? $parent : NULL;
   }
 
 }

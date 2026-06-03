@@ -7,10 +7,12 @@
 
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\search\Plugin\SearchIndexingInterface;
 use Drupal\search_api\Entity\Index;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
@@ -183,7 +185,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
         $path = d_content_init_parse_file_path($file['path'] ?? '');
         $alt = $file['alt'] ?? '';
         $media_entity = $media_manager->createMediaImageFromFile($path, $destination_directory, $alt);
-        if ($entity) {
+        if ($media_entity !== NULL) {
           $entity->$name->appendItem($media_entity);
         }
         else {
@@ -332,12 +334,10 @@ function d_content_init_add_node(array $params) {
   $nid = d_content_init_save_node($page_array);
 
   // Set homepage.
-  if ($homepage = isset($page_array['info']['homepage'])) {
-    if ($homepage) {
-      $config = \Drupal::configFactory()->getEditable('system.site');
-      $config->set('page.front', '/node/' . $nid)->save();
-      $params['parent'] = 'standard.front_page';
-    }
+  if (!empty($page_array['info']['homepage'])) {
+    $config = \Drupal::configFactory()->getEditable('system.site');
+    $config->set('page.front', '/node/' . $nid)->save();
+    $params['parent'] = 'standard.front_page';
   }
 
   // If title is not empty add menu link.
@@ -426,7 +426,7 @@ function d_content_init_get_file($path, $dst_dir = NULL) {
   // Save the file.
   $data = file_get_contents(d_content_init_parse_file_path($path));
   $filename = basename($path);
-  $image = \Drupal::service('file.repository')->writeData($data, $directory . $filename, FileSystemInterface::EXISTS_REPLACE);
+  $image = \Drupal::service('file.repository')->writeData($data, $directory . $filename, FileExists::Replace);
   return $image;
 }
 
@@ -518,17 +518,38 @@ function d_content_init_create_all($type = NULL) {
   }
 
   if (empty($type) || $type === 'index_content') {
-    if ($module_handler->moduleExists('search_api')) {
-      $indices = [];
-      $module_handler
-        ->invokeAll('d_content_init_index_content', [&$indices]);
-      d_content_init_index_content($indices);
+    // Drupal's theme registry merges module hook_theme() only outside
+    // MAINTENANCE_MODE install; indexing renders entities and triggers
+    // formatters (#theme hooks). Skip here and resume from hook_rebuild() /
+    // hook_cron() after caches are rebuilt.
+    if (defined('MAINTENANCE_MODE') && constant('MAINTENANCE_MODE') === 'install') {
+      \Drupal::state()->set('d_content_init.pending_search_index', TRUE);
     }
+    else {
+      d_content_init_run_search_indexes();
+    }
+  }
+}
 
-    if ($module_handler->moduleExists('search')) {
-      $search_page_repository = \Drupal::service('search.search_page_repository');
-      foreach ($search_page_repository->getIndexableSearchPages() as $entity) {
-        $entity->getPlugin()->updateIndex();
+/**
+ * Runs Search API and core Search indexing (post-content-init).
+ *
+ * Deferred during profile install batches while MAINTENANCE_MODE is 'install'.
+ */
+function d_content_init_run_search_indexes(): void {
+  $module_handler = \Drupal::moduleHandler();
+  if ($module_handler->moduleExists('search_api')) {
+    $indices = [];
+    $module_handler->invokeAll('d_content_init_index_content', [&$indices]);
+    d_content_init_index_content($indices);
+  }
+
+  if ($module_handler->moduleExists('search')) {
+    $search_page_repository = \Drupal::service('search.search_page_repository');
+    foreach ($search_page_repository->getIndexableSearchPages() as $entity) {
+      $plugin = $entity->getPlugin();
+      if ($plugin instanceof SearchIndexingInterface) {
+        $plugin->updateIndex();
       }
     }
   }
@@ -545,7 +566,6 @@ function d_content_init_create_all($type = NULL) {
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function d_content_init_create_all_batch(string $type, array &$context) {
-
   // Here is only message added. The content is inserted
   // by calling method bellow this switch.
   switch ($type) {
@@ -596,4 +616,34 @@ function d_content_init_index_content(array $indices) {
     $index->indexItems();
     \Drupal::logger('d_content_init')->notice("{$indexName} indexed.");
   }
+}
+
+/**
+ * Runs deferred search indexing after installer cache rebuild or cron.
+ *
+ * @internal
+ */
+function _d_content_init_run_pending_search_indexes_if_any(): void {
+  if (defined('MAINTENANCE_MODE')) {
+    return;
+  }
+  if (!\Drupal::state()->get('d_content_init.pending_search_index')) {
+    return;
+  }
+  \Drupal::state()->delete('d_content_init.pending_search_index');
+  d_content_init_run_search_indexes();
+}
+
+/**
+ * Implements hook_rebuild().
+ */
+function d_content_init_rebuild(): void {
+  _d_content_init_run_pending_search_indexes_if_any();
+}
+
+/**
+ * Implements hook_cron().
+ */
+function d_content_init_cron(): void {
+  _d_content_init_run_pending_search_indexes_if_any();
 }

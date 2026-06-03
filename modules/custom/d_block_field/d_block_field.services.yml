@@ -4,3 +4,6 @@ services:
     arguments:
       - '@plugin.manager.block'
       - '@context.repository'
+
+  # Autowire alias.
+  Drupal\d_block_field\BlockFieldManagerInterface: '@d_block_field.manager'

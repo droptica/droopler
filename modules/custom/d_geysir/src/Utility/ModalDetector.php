@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Provides utility service to detect geysir modal.
- *
- * @package Drupal\d_geysir\Utility
  */
 class ModalDetector implements ModalDetectorInterface {
 

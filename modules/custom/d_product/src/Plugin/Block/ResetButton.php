@@ -23,12 +23,12 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * Current Request.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Symfony\Component\HttpFoundation\Request|null
    */
   protected $request;
 
   /**
-   * CommerceResetButton constructor.
+   * Constructs a new ResetButton block plugin.
    *
    * @param array $configuration
    *   Configuration options.
@@ -60,6 +60,7 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
    *   Static.
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    // @phpstan-ignore-next-line Drupal uses late static binding for plugin factory pattern.
     return new static(
       $configuration,
       $plugin_id,
@@ -102,7 +103,7 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public function blockSubmit($form, FormStateInterface $formState) {
+  public function blockSubmit($form, FormStateInterface $formState): void {
     $this->configuration['button_text'] = $formState->getValue('button_text');
     $this->configuration['button_class'] = $formState->getValue('button_class');
     $this->configuration['button_target'] = '/' . ltrim(
@@ -119,7 +120,7 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
    */
   public function build() {
 
-    if (!$this->request->get('f')) {
+    if ($this->request === NULL || empty($this->request->query->all('f'))) {
       return [
         '#markup' => '',
         '#cache' => [
@@ -151,7 +152,7 @@ class ResetButton extends BlockBase implements ContainerFactoryPluginInterface {
           'class' => $this->configuration['button_class'],
           'target' => '_self',
         ],
-        '#url' => URL::fromUserInput($this->configuration['button_target']),
+        '#url' => Url::fromUserInput($this->configuration['button_target']),
         '#cache' => [
           'contexts' => ['url.query_args:f'],
         ],
