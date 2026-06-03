@@ -2,28 +2,31 @@
 
 /**
  * @file
- * D_updater install hooks.
+ * D_update install/uninstall hooks.
  */
+
+declare(strict_types=1);
 
 use Drupal\Core\Extension\MissingDependencyException;
 
 /**
- * Install d_update.
+ * Implements hook_install().
+ *
+ * Soft-depends on `checklistapi`: if the module is missing the install
+ * proceeds silently (the toolbar update link is hidden via SystemManager
+ * instead). When checklistapi is present, all updates are pre-marked as
+ * complete so a fresh site doesn't show every historical update as pending.
  */
-function d_update_install() {
+function d_update_install(): void {
   $logger = \Drupal::logger('d_update');
 
   try {
     \Drupal::service('module_installer')->install(['checklistapi']);
   }
-  catch (MissingDependencyException $e) {
-    $logger->warning(
-      'Could not install Checklist API module. You will not see information
-      about updates in the drupal admin pages.'
-    );
+  catch (MissingDependencyException) {
+    $logger->warning('Could not install Checklist API module. You will not see information about updates in the Drupal admin pages.');
   }
   finally {
-    $status = TRUE;
-    \Drupal::service('d_update.update_checklist')->markAllUpdates($status);
+    \Drupal::service('d_update.update_checklist')->markAllUpdates(TRUE);
   }
 }

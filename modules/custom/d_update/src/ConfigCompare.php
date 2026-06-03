@@ -1,78 +1,77 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_update;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\ImmutableConfig;
 
 /**
- * Config Compare service.
+ * Config-comparison service: fingerprints configuration objects.
  *
- * @package Drupal\d_update
+ * MD5 is intentionally used here as a non-cryptographic fingerprint —
+ * hashes are stored verbatim in update hooks and `updates.yml` across many
+ * sites. Switching the hash algorithm would invalidate every existing
+ * recorded hash, so MD5 stays. Collision-resistance is irrelevant for this
+ * use-case.
  */
 class ConfigCompare implements ConfigCompareInterface {
 
   /**
-   * Config factory service.
+   * Volatile keys excluded from the fingerprint computation.
    *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   * @var string[]
    */
-  protected $configFactory;
+  protected const array IGNORED_KEYS = [
+    'uuid',
+    'lang',
+    'langcode',
+    'icon_default',
+  ];
 
-  /**
-   * ConfigCompare constructor.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   Config factory service.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory) {
-    $this->configFactory = $config_factory;
-  }
+  public function __construct(
+    protected readonly ConfigFactoryInterface $configFactory,
+  ) {}
 
   /**
    * {@inheritdoc}
    */
-  public function generateHashFromDatabase($config_name) {
+  public function generateHashFromDatabase(string $config_name): string|false {
     $config_storage = $this->getConfig($config_name);
-
     if ($config_storage->isNew()) {
       return FALSE;
     }
 
     $config = $config_storage->getRawData();
+    foreach (self::IGNORED_KEYS as $key) {
+      unset($config[$key]);
+    }
 
-    unset($config['uuid']);
-    unset($config['lang']);
-    unset($config['langcode']);
-    unset($config['icon_default']);
-    $config_string = serialize($config);
-
-    return md5($config_string);
+    return md5(serialize($config));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function configExists($config_name) {
+  public function configExists(string $config_name): bool {
     return !$this->getConfig($config_name)->isNew();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function compare($config_name, $hash = NULL) {
-    return $this->generateHashFromDatabase($config_name) == $hash;
+  public function compare(string $config_name, ?string $hash = NULL): bool {
+    if ($hash === NULL || $hash === '') {
+      return TRUE;
+    }
+    return $this->generateHashFromDatabase($config_name) === $hash;
   }
 
   /**
-   * Gets config object for the given config name.
-   *
-   * @param string $config_name
-   *   Full name of the config, eg node.type.content_page.
-   *
-   * @return \Drupal\Core\Config\ImmutableConfig
-   *   Config object.
+   * Resolve a config object for the given config name.
    */
-  protected function getConfig($config_name) {
+  protected function getConfig(string $config_name): ImmutableConfig {
     return $this->configFactory->get($config_name);
   }
 

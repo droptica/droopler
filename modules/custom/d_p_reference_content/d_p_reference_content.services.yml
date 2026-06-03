@@ -4,3 +4,6 @@ services:
     arguments:
       - '@database'
       - '@entity_type.manager'
+
+  # Autowire alias.
+  Drupal\d_p_reference_content\Helpers\ContentHelper: '@d_p_reference_content.content_helper'

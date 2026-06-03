@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\Field;
+
+use Drupal\Core\Field\FieldItemListInterface;
 
 /**
  * Provides interface for configuration storage field item list.
- *
- * @package Drupal\d_p\Plugin\Field
  */
-interface ConfigurationStorageFieldItemListInterface {
+interface ConfigurationStorageFieldItemListInterface extends FieldItemListInterface {
 
-  const CSS_CLASS_DELIMITER = ' ';
+  public const string CSS_CLASS_DELIMITER = ' ';
 
   /**
    * Check if the given class exists in classes.

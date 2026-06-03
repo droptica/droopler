@@ -28,7 +28,7 @@ class CommerceResetButton extends BlockBase implements ContainerFactoryPluginInt
   protected $request;
 
   /**
-   * CommerceResetButton constructor.
+   * Constructs a new CommerceResetButton block plugin.
    *
    * @param array $configuration
    *   Configuration options.

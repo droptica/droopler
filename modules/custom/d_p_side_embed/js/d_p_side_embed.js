@@ -68,9 +68,11 @@
         // Set proper height for full width embed element.
         $(window).on("resize", function () {
           if ($(window).width() > 767) {
-            var $contentH = parseInt($this.find('.embed-side-full .d-p-side-embed-content').innerHeight());
+            var $full = $this.find('.embed-side-full');
+            var $contentH = parseInt($full.find('.d-p-side-embed-content').innerHeight());
             if (!isNaN($contentH)) {
               var $height = $contentH + 300;
+              $full.css('min-height', $height);
               $this.find('.d-p-side-embed-embed').css('height', $height);
             }
           }

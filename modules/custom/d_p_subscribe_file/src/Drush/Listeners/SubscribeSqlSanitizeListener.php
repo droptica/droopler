@@ -10,8 +10,8 @@ use Drush\Boot\DrupalBootLevels;
 use Drush\Event\SanitizeConfirmsEvent;
 use Drush\Sql\SqlBase;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 

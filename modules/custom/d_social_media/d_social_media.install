@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the d_social_media module.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Migrate `link_twitter` config to `link_x` and rewrite twitter.com URLs.
+ */
+function d_social_media_update_8001(): void {
+  $config = \Drupal::configFactory()->getEditable('d_social_media.settings');
+  $legacy = $config->get('link_twitter');
+
+  if ($legacy !== NULL) {
+    if ($config->get('link_x') === NULL && $legacy !== '') {
+      $config->set('link_x', str_replace('twitter.com', 'x.com', (string) $legacy));
+    }
+    $config->clear('link_twitter');
+  }
+
+  $current = $config->get('link_x');
+  if (is_string($current) && str_contains($current, 'twitter.com')) {
+    $config->set('link_x', str_replace('twitter.com', 'x.com', $current));
+  }
+
+  $config->save();
+}

@@ -1,53 +1,59 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p;
 
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Logger\LoggerChannelTrait;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
+use Drupal\d_p\Annotation\ParagraphSetting;
 
 /**
  * The plugin manager for paragraph settings plugins.
- *
- * @package Drupal\d_p
  */
 class ParagraphSettingPluginManager extends DefaultPluginManager implements ParagraphSettingPluginManagerInterface {
 
-  use LoggerChannelTrait;
+  protected const string LOGGER_CHANNEL = 'd_p';
 
   /**
-   * Logger.
-   *
-   * @var \Psr\Log\LoggerInterface
+   * Logger channel for the d_p plugin manager.
    */
-  protected $logger;
+  protected readonly LoggerChannelInterface $logger;
 
   /**
-   * Creates the discovery object.
+   * Constructs the plugin manager.
    *
    * @param \Traversable $namespaces
-   *   An object that implements \Traversable which contains the root paths
-   *   keyed by the corresponding namespace to look for plugin implementations.
+   *   Root paths keyed by namespace.
    * @param \Drupal\Core\Cache\CacheBackendInterface $cache_backend
-   *   Cache backend instance to use.
+   *   Cache backend used for plugin definitions.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   The module handler to invoke the alter hook with.
+   *   Module handler used for the alter hook.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_channel_factory
+   *   Logger factory used to obtain the d_p channel.
    */
-  public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
+  public function __construct(
+    \Traversable $namespaces,
+    CacheBackendInterface $cache_backend,
+    ModuleHandlerInterface $module_handler,
+    LoggerChannelFactoryInterface $logger_channel_factory,
+  ) {
     parent::__construct(
       'Plugin/ParagraphSetting',
       $namespaces,
       $module_handler,
-      'Drupal\d_p\ParagraphSettingInterface',
-      'Drupal\d_p\Annotation\ParagraphSetting'
+      ParagraphSettingInterface::class,
+      ParagraphSetting::class,
     );
 
     $this->alterInfo('paragraph_setting_info');
     $this->setCacheBackend($cache_backend, 'paragraph_setting_plugins');
-    $this->logger = $this->getLogger('d_p');
+    $this->logger = $logger_channel_factory->get(self::LOGGER_CHANNEL);
   }
 
   /**
@@ -60,8 +66,10 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
   /**
    * {@inheritdoc}
    */
-  public function getPluginById(string $plugin_id) {
-    return $this->createInstance($plugin_id);
+  public function getPluginById(string $plugin_id): ParagraphSettingInterface {
+    /** @var \Drupal\d_p\ParagraphSettingInterface $instance */
+    $instance = $this->createInstance($plugin_id);
+    return $instance;
   }
 
   /**
@@ -71,7 +79,7 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
     $definitions = [];
 
     foreach ($this->getDefinitions() as $definition) {
-      if (isset($definition['settings']['parent']) && $definition['settings']['parent'] === $parent_plugin_id) {
+      if (($definition['settings']['parent'] ?? NULL) === $parent_plugin_id) {
         $definitions[] = $definition;
       }
     }
@@ -84,31 +92,28 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
    */
   public function getSettingsForm(): array {
     $cache = $this->cacheGet(self::SETTINGS_FORM_STORAGE_CID);
-
     if ($cache) {
-      $form = $cache->data;
+      return $cache->data;
     }
-    else {
-      /** @var \Drupal\d_p\ParagraphSettingInterface[] $plugins */
-      $plugins = $this->getAll();
-      $form = [];
 
-      foreach ($plugins as $plugin) {
-        if (!$plugin->isSubtype()) {
-          $form[$plugin->id()] = $plugin->formElement();
-        }
+    /** @var array<string, \Drupal\d_p\ParagraphSettingInterface> $plugins */
+    $plugins = $this->getAll();
+    $form = [];
+
+    foreach ($plugins as $plugin) {
+      if (!$plugin->isSubtype()) {
+        $form[$plugin->id()] = $plugin->formElement();
       }
-
-      foreach ($plugins as $plugin) {
-        if ($plugin->isSubtype()) {
-          $form[$plugin->getParentPluginId()][self::SETTINGS_SUBTYPE_ID][$plugin->id()] = $plugin->formElement();
-        }
-      }
-
-      $this->moduleHandler->alter('d_settings', $form);
-
-      $this->cacheSet(self::SETTINGS_FORM_STORAGE_CID, $form, Cache::PERMANENT, [self::SETTINGS_FORM_STORAGE_CID]);
     }
+
+    foreach ($plugins as $plugin) {
+      if ($plugin->isSubtype()) {
+        $form[$plugin->getParentPluginId()][self::SETTINGS_SUBTYPE_ID][$plugin->id()] = $plugin->formElement();
+      }
+    }
+
+    $this->moduleHandler->alter('d_settings', $form);
+    $this->cacheSet(self::SETTINGS_FORM_STORAGE_CID, $form, Cache::PERMANENT, [self::SETTINGS_FORM_STORAGE_CID]);
 
     return $form;
   }
@@ -123,11 +128,12 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
       $options[$id] = [
         'label' => $element['#title'],
       ];
-      $modifiers = self::SETTINGS_SUBTYPE_ID;
-      if (isset($element[$modifiers])) {
-        foreach ($element[$modifiers] as $mid => $modifier) {
-          $options[$id][$modifiers][$mid]['label'] = $modifier['#title'];
-        }
+      $modifiers_key = self::SETTINGS_SUBTYPE_ID;
+      if (!isset($element[$modifiers_key])) {
+        continue;
+      }
+      foreach ($element[$modifiers_key] as $modifier_id => $modifier) {
+        $options[$id][$modifiers_key][$modifier_id]['label'] = $modifier['#title'];
       }
     }
 
@@ -139,18 +145,18 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
   /**
    * Load all plugins by given definitions.
    *
-   * @param array $definitions
+   * @param array<int|string, array<string, mixed>> $definitions
    *   Plugin definitions.
    *
-   * @return array
-   *   Loaded plugin instances.
+   * @return array<string, \Drupal\d_p\ParagraphSettingInterface>
+   *   Loaded plugin instances keyed by plugin id.
    */
   protected function loadPluginsFromDefinitions(array $definitions): array {
     $plugins = [];
 
     foreach ($definitions as $definition) {
       try {
-        // @todo We can think of keeping the configuration in yml files.
+        // @todo Consider keeping the configuration in yml files.
         $plugins[$definition['id']] = $this->getPluginById($definition['id']);
       }
       catch (PluginException $exception) {
@@ -163,14 +169,9 @@ class ParagraphSettingPluginManager extends DefaultPluginManager implements Para
 
   /**
    * Provides alphabetic sorting for settings options.
-   *
-   * @param array $options
-   *   Settings options.
    */
   protected function sortSettingsOptions(array &$options): void {
-    uasort($options, function ($a, $b) {
-      return $a['label'] <=> $b['label'];
-    });
+    uasort($options, static fn (array $a, array $b): int => $a['label'] <=> $b['label']);
 
     foreach ($options as &$option) {
       if (isset($option[self::SETTINGS_SUBTYPE_ID])) {

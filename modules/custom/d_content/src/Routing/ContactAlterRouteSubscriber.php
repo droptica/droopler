@@ -34,7 +34,7 @@ class ContactAlterRouteSubscriber extends RouteSubscriberBase {
   /**
    * {@inheritdoc}
    */
-  public function alterRoutes(RouteCollection $collection) {
+  public function alterRoutes(RouteCollection $collection): void {
     // Remove the /contact route.
     if ($collection->get('contact.site_page')) {
       $collection->remove('contact.site_page');

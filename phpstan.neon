@@ -1,0 +1,99 @@
+parameters:
+    level: 6
+
+    paths:
+        - droopler.install
+        - droopler.profile
+        - src
+        - modules/custom
+        - themes/custom
+
+    fileExtensions:
+        - php
+        - module
+        - inc
+        - install
+        - profile
+        - theme
+        - test
+
+    ignoreErrors:
+        # Drupal render/form/settings arrays are mixed-shape by design.
+        -
+            identifier: missingType.iterableValue
+            reportUnmatched: false
+        # Drupal core plugin/field base classes carry stub-only generics.
+        -
+            identifier: missingType.generics
+            reportUnmatched: false
+        # Legacy procedural hooks (.install/.theme/.module) don't need full typing.
+        -
+            identifier: missingType.return
+            paths:
+                - '*.install'
+                - '*.theme'
+                - '*.module'
+                - '*.inc'
+            reportUnmatched: false
+        -
+            identifier: missingType.parameter
+            paths:
+                - '*.install'
+                - '*.theme'
+                - '*.module'
+                - '*.inc'
+            reportUnmatched: false
+        -
+            message: "#^Unsafe usage of new static#"
+            reportUnmatched: false
+        -
+            message: "#\\\\Drupal calls should be avoided in classes, use dependency injection instead#"
+            reportUnmatched: false
+        # Generic EntityInterface typehints calling FieldableEntityInterface methods.
+        -
+            message: "#Call to an undefined method Drupal\\\\Core\\\\Entity\\\\EntityInterface::(get|set|hasField|getEntityType|setThirdPartySetting|getUrlProcessorName)\\(\\)#"
+            reportUnmatched: false
+        # Field magic properties on node/entity instances.
+        -
+            message: "#Access to an undefined property Drupal\\\\(node|Core)\\\\.+::\\$(field_|original)\\w*#"
+            reportUnmatched: false
+        # FieldItem magic properties — proxied to underlying $values via __get/__set.
+        -
+            message: "#Access to an undefined property Drupal\\\\.+FieldItem\\w*::\\$\\w+#"
+            reportUnmatched: false
+        # FieldableEntityInterface narrowing inside legacy procedural update hooks.
+        -
+            message: "#getSettingsFieldFromEntity\\(\\) expects Drupal\\\\Core\\\\Entity\\\\FieldableEntityInterface#"
+            path: droopler.install
+            reportUnmatched: false
+        # WeMegaMenuBuilder accepts JSON strings at runtime despite object typehint.
+        -
+            message: "#WeMegaMenuBuilder::saveConfig\\(\\) expects object#"
+            reportUnmatched: false
+        # Symfony Constraint subclass properties accessed via parent class typehint.
+        -
+            message: "#Access to an undefined property Symfony\\\\Component\\\\Validator\\\\Constraint::\\$\\w+#"
+            reportUnmatched: false
+
+    excludePaths:
+        - vendor (?)
+        - */vendor/*
+        - modules/contrib
+        - themes/contrib (?)
+        - */node_modules/*
+        - */dist/*
+        - */build/*
+        # Drush / DCG command classes — parent classes live in dev-only packages.
+        - modules/custom/d_p/src/Generators/*
+        - modules/custom/d_update/src/Commands/*
+        - */Drush/Listeners/*
+        # drupal/commerce is an optional contrib dependency, not required.
+        - modules/custom/d_commerce/*
+        # STARTERKIT_* are scaffolding templates, not runtime code.
+        - themes/custom/*/STARTERKIT_*/*
+
+    phpVersion: 80300
+
+    treatPhpDocTypesAsCertain: false
+
+    tmpDir: .phpstan-cache

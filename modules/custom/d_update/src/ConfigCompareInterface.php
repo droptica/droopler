@@ -1,48 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_update;
 
 /**
- * Provides an interface for configuration comparison.
+ * Provides an interface for configuration fingerprinting and comparison.
  *
- * @package Drupal\d_update
+ * The fingerprint is a hash of the current active configuration with volatile
+ * keys (`uuid`, `lang`, `langcode`, `icon_default`) stripped. It lets update
+ * hooks detect whether a configuration has been customised by the site
+ * operator before importing a new revision.
  */
 interface ConfigCompareInterface {
 
   /**
-   * Generates hash for the specified config.
+   * Generate a fingerprint hash for the given configuration name.
    *
    * @param string $config_name
-   *   Full name of the config, eg node.type.content_page.
+   *   Full config name, e.g. `node.type.content_page`.
    *
-   * @return bool|string
-   *   Returns hash or false if there is no config with provided name.
+   * @return string|false
+   *   Hash of the active configuration, or FALSE when no config exists.
    */
-  public function generateHashFromDatabase($config_name);
+  public function generateHashFromDatabase(string $config_name): string|false;
 
   /**
-   * Check if the given config exists.
-   *
-   * @param string $config_name
-   *   Full name of the config, eg node.type.content_page.
-   *
-   * @return bool
-   *   True if the given config exists, false otherwise.
+   * Check whether a configuration exists in the active store.
    */
-  public function configExists($config_name);
+  public function configExists(string $config_name): bool;
 
   /**
-   * Compares config name hash wit provided hash.
+   * Compare a configuration's fingerprint with a previously-generated hash.
    *
    * @param string $config_name
-   *   Full name of the config, eg node.type.content_page.
-   * @param string $hash
-   *   Optional argument with hash.
+   *   Full config name, e.g. `node.type.content_page`.
+   * @param string|null $hash
+   *   Expected hash. NULL or empty string matches anything.
    *
    * @return bool
-   *   Returns true if hashes are the same or hash was not provided, false on
-   *   different hashes.
+   *   TRUE when the hashes match (or no expected hash was provided),
+   *   FALSE otherwise.
    */
-  public function compare($config_name, $hash = NULL);
+  public function compare(string $config_name, ?string $hash = NULL): bool;
 
 }

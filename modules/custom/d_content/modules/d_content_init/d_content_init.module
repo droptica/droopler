@@ -12,6 +12,7 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\search\Plugin\SearchIndexingInterface;
 use Drupal\search_api\Entity\Index;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
@@ -184,7 +185,7 @@ function d_content_init_init_field_alter(EntityInterface &$entity, string &$name
         $path = d_content_init_parse_file_path($file['path'] ?? '');
         $alt = $file['alt'] ?? '';
         $media_entity = $media_manager->createMediaImageFromFile($path, $destination_directory, $alt);
-        if ($entity) {
+        if ($media_entity !== NULL) {
           $entity->$name->appendItem($media_entity);
         }
         else {
@@ -333,12 +334,10 @@ function d_content_init_add_node(array $params) {
   $nid = d_content_init_save_node($page_array);
 
   // Set homepage.
-  if ($homepage = isset($page_array['info']['homepage'])) {
-    if ($homepage) {
-      $config = \Drupal::configFactory()->getEditable('system.site');
-      $config->set('page.front', '/node/' . $nid)->save();
-      $params['parent'] = 'standard.front_page';
-    }
+  if (!empty($page_array['info']['homepage'])) {
+    $config = \Drupal::configFactory()->getEditable('system.site');
+    $config->set('page.front', '/node/' . $nid)->save();
+    $params['parent'] = 'standard.front_page';
   }
 
   // If title is not empty add menu link.
@@ -548,7 +547,10 @@ function d_content_init_run_search_indexes(): void {
   if ($module_handler->moduleExists('search')) {
     $search_page_repository = \Drupal::service('search.search_page_repository');
     foreach ($search_page_repository->getIndexableSearchPages() as $entity) {
-      $entity->getPlugin()->updateIndex();
+      $plugin = $entity->getPlugin();
+      if ($plugin instanceof SearchIndexingInterface) {
+        $plugin->updateIndex();
+      }
     }
   }
 }

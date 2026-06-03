@@ -4,8 +4,6 @@ namespace Drupal\d_geysir\Utility;
 
 /**
  * Provides interface for detecting geysir modal.
- *
- * @package Drupal\d_geysir\Utility
  */
 interface ModalDetectorInterface {
 

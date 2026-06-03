@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_media\Annotation;
 
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines a VideoEmbedProvider item annotation object.
+ * Defines a VideoEmbedProvider plugin annotation object.
  *
  * @Annotation
  */

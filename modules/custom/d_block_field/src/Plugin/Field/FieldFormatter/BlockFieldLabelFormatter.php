@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_block_field\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,44 +23,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   }
  * )
  */
-class BlockFieldLabelFormatter extends FormatterBase {
+class BlockFieldLabelFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
 
-  /**
-   * The renderer service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
-   * The current user.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $currentUser;
-
-  /**
-   * Constructs a BlockFieldLabelFormatter object.
-   *
-   * @param string $plugin_id
-   *   The plugin_id for the formatter.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
-   *   The definition of the field to which the formatter is associated.
-   * @param array $settings
-   *   The formatter settings.
-   * @param string $label
-   *   The formatter label display setting.
-   * @param string $view_mode
-   *   The view mode.
-   * @param array $third_party_settings
-   *   Any third party settings.
-   * @param \Drupal\Core\Render\RendererInterface $renderer
-   *   The renderer service.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
-   */
   public function __construct(
     $plugin_id,
     $plugin_definition,
@@ -66,19 +33,16 @@ class BlockFieldLabelFormatter extends FormatterBase {
     $label,
     $view_mode,
     array $third_party_settings,
-    RendererInterface $renderer,
-    AccountInterface $current_user
+    protected readonly RendererInterface $renderer,
+    protected readonly AccountInterface $currentUser,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
-    $this->renderer = $renderer;
-    $this->currentUser = $current_user;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    // @phpstan-ignore-next-line Drupal uses late static binding for plugin factory pattern.
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $plugin_id,
       $plugin_definition,
@@ -95,13 +59,12 @@ class BlockFieldLabelFormatter extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode) {
+  public function viewElements(FieldItemListInterface $items, $langcode): array {
     $elements = [];
     foreach ($items as $delta => $item) {
       /** @var \Drupal\d_block_field\BlockFieldItemInterface $item */
       $block_instance = $item->getBlock();
-      // Make sure the block exists and is accessible.
-      if (!$block_instance || !$block_instance->access($this->currentUser)) {
+      if ($block_instance === NULL || !$block_instance->access($this->currentUser)) {
         continue;
       }
 

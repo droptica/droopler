@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -22,19 +24,19 @@ class PaddingTop extends ParagraphSettingPluginBase implements ParagraphSettingS
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#description' => $this->t('Choose the size of top padding.'),
       '#type' => 'select',
       '#options' => $this->getOptions(),
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function getOptions(): array {
     return [
       'padding-top-default' => $this->t('Default'),
@@ -47,7 +49,8 @@ class PaddingTop extends ParagraphSettingPluginBase implements ParagraphSettingS
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 'padding-top-default';
   }
 

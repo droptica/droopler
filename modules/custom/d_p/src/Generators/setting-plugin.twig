@@ -1,6 +1,9 @@
 <?php
 
-namespace Drupal\{{ machine_name }}\Plugin\ParagraphSetting;
+declare(strict_types=1);
+
+namespace Drupal\{{machine_name }
+}ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
 
@@ -12,25 +15,31 @@ use Drupal\d_p\ParagraphSettingPluginBase;
  *   label = @Translation("{{ plugin_label }}"),
  * )
  */
-class {{ class }} extends ParagraphSettingPluginBase {
+class {{
 
   /**
-   * {@inheritdoc}
+   *
    */
-  public function formElement(): array {
-    $element = parent::formElement();
+  class}
+} extends ParagraphSettingPluginBase {
 
-    return [
-      '#type' => 'textfield',
-      '#description' => $this->t('{{ plugin_label }}'),
-    ] + $element;
-  }
+/**
+ * {@inheritdoc}
+ */
+#[\Override]
+public function formElement(): array {
+  return [
+    '#type' => 'textfield',
+    '#description' => $this->t('{{ plugin_label }}'),
+  ] + parent::formElement();
+}
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getDefaultValue() {
-    return '';
-  }
+/**
+ * {@inheritdoc}
+ */
+#[\Override]
+public function getDefaultValue(): mixed {
+  return '';
+}
 
 }

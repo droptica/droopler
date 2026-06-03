@@ -2,3 +2,6 @@ services:
   d_geysir.utility.modal_detector:
     class: Drupal\d_geysir\Utility\ModalDetector
     arguments: ['@request_stack', '@controller_resolver']
+
+  # Autowire alias.
+  Drupal\d_geysir\Utility\ModalDetectorInterface: '@d_geysir.utility.modal_detector'

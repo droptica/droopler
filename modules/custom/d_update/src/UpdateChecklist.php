@@ -1,112 +1,92 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_update;
 
-use Drupal\checklistapi\ChecklistapiChecklist;
-use Drupal\checklistapi\Storage\StateStorage;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\checklistapi\ChecklistapiChecklist;
+use Drupal\checklistapi\Storage\StateStorage;
 use Drupal\d_update\Entity\Update;
 
 /**
  * Update checklist service.
  *
- * @package Drupal\d_update
+ * Wraps the `checklistapi` module's checklist storage with Droopler-specific
+ * behaviour: persists "update was run" markers on the `d_update_update`
+ * content entity in addition to the checklistapi state storage.
  */
 class UpdateChecklist {
 
   use MessengerTrait;
   use StringTranslationTrait;
 
-  /**
-   * The Checklist API object.
-   *
-   * @var \Drupal\checklistapi\ChecklistapiChecklist
-   */
-  protected $updateChecklist;
+  protected const string CHECKLIST_ID = 'd_update';
 
   /**
-   * Site configFactory object.
+   * Resolved checklistapi checklist, or NULL when checklistapi is missing.
    *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   * Resolved lazily on first access to avoid a circular reference: invoking
+   * `checklistapi_checklist_load()` during this service's construction fires
+   * `hook_checklistapi_checklist_info`, which would request our own
+   * `\Drupal\d_update\Hook\Hooks` service while it is still being built.
    */
-  protected $configFactory;
+  protected ?ChecklistapiChecklist $updateChecklist = NULL;
 
   /**
-   * ChecklistApi storage object.
-   *
-   * @var \Drupal\checklistapi\Storage\StateStorage
+   * Whether the lazy resolution above has already been attempted.
    */
-  protected $checkListStateStorage;
+  protected bool $checklistResolved = FALSE;
 
   /**
-   * The account object.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
+   * Storage scoped to this module's checklist id.
    */
-  protected $account;
+  protected readonly StateStorage $checkListStateStorage;
 
-  /**
-   * Module installer service.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
-
-  /**
-   * Update checklist constructor.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   Config factory service.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   Module handler service.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   The current user.
-   * @param \Drupal\checklistapi\Storage\StateStorage $state_storage
-   *   Storage for checklist config.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory,
-                              ModuleHandlerInterface $module_handler,
-                              AccountInterface $account,
-                              StateStorage $state_storage) {
-    $this->configFactory = $config_factory;
-    $this->moduleHandler = $module_handler;
-    $this->account = $account;
-    $this->checkListStateStorage = $state_storage->setChecklistId('d_update');
-
-    if ($this->moduleHandler->moduleExists('checklistapi')) {
-      $this->updateChecklist = checklistapi_checklist_load('d_update');
-    }
-    else {
-      $this->updateChecklist = FALSE;
-    }
+  public function __construct(
+    protected readonly ConfigFactoryInterface $configFactory,
+    protected readonly AccountInterface $account,
+    StateStorage $state_storage,
+  ) {
+    $state_storage->setChecklistId(self::CHECKLIST_ID);
+    $this->checkListStateStorage = $state_storage;
   }
 
   /**
-   * Update checklist is available.
-   *
-   * @return bool
-   *   Returns if update checklist is available.
+   * Lazily resolve the checklistapi checklist for this module.
    */
-  public function isAvailable() {
-    return boolval($this->updateChecklist);
+  protected function getChecklist(): ?ChecklistapiChecklist {
+    if (!$this->checklistResolved) {
+      $this->updateChecklist = function_exists('checklistapi_checklist_load')
+        ? checklistapi_checklist_load(self::CHECKLIST_ID)
+        : NULL;
+      $this->checklistResolved = TRUE;
+    }
+    return $this->updateChecklist;
   }
 
   /**
-   * Marks a list of updates as successful.
+   * Whether the underlying checklistapi checklist is loaded.
+   */
+  public function isAvailable(): bool {
+    return $this->getChecklist() !== NULL;
+  }
+
+  /**
+   * Mark a list of updates as successful.
    *
-   * @param array $names
-   *   Array of update ids.
+   * @param string[] $names
+   *   Update ids.
    * @param bool $check_list_points
-   *   Indicates the corresponding checkbox should be checked.
+   *   Also tick the corresponding checkbox in checklistapi.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function markUpdatesSuccessful(array $names, $check_list_points = TRUE) {
-    if ($this->updateChecklist === FALSE) {
+  public function markUpdatesSuccessful(array $names, bool $check_list_points = TRUE): void {
+    if ($this->getChecklist() === NULL) {
       return;
     }
     $this->setSuccessfulByHook($names, TRUE);
@@ -116,35 +96,33 @@ class UpdateChecklist {
   }
 
   /**
-   * Marks a list of updates as failed.
+   * Mark a list of updates as failed.
    *
-   * @param array $names
-   *   Array of update ids.
+   * @param string[] $names
+   *   Update ids.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function markUpdatesFailed(array $names) {
-    if ($this->updateChecklist === FALSE) {
+  public function markUpdatesFailed(array $names): void {
+    if ($this->getChecklist() === NULL) {
       return;
     }
     $this->setSuccessfulByHook($names, FALSE);
   }
 
   /**
-   * Marks a list of updates.
-   *
-   * @param bool $status
-   *   Checkboxes enabled or disabled.
+   * Mark every update on the checklist with the given status.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function markAllUpdates($status = TRUE) {
-    if ($this->updateChecklist === FALSE) {
+  public function markAllUpdates(bool $status = TRUE): void {
+    $checklist = $this->getChecklist();
+    if ($checklist === NULL) {
       return;
     }
 
     $keys = [];
-    foreach ($this->updateChecklist->items as $version_items) {
+    foreach ($checklist->items as $version_items) {
       foreach ($version_items as $key => $item) {
         if (is_array($item)) {
           $keys[] = $key;
@@ -157,105 +135,19 @@ class UpdateChecklist {
   }
 
   /**
-   * Set status for update keys.
-   *
-   * @param array $keys
-   *   Keys for update entries.
-   * @param bool $status
-   *   Status that should be set.
-   *
-   * @throws \Drupal\Core\Entity\EntityStorageException
-   */
-  protected function setSuccessfulByHook(array $keys, $status = TRUE) {
-    foreach ($keys as $key) {
-      if ($update = Update::load($key)) {
-        $update->setSuccessfulByHook($status)->save();
-      }
-      else {
-        Update::create(
-          [
-            'id' => $key,
-            'successful_by_hook' => $status,
-          ]
-        )->save();
-      }
-    }
-  }
-
-  /**
-   * Checks an array of bulletpoints on a checklist.
-   *
-   * @param array $names
-   *   Array of the bulletpoints.
-   */
-  protected function checkListPoints(array $names) {
-
-    /** @var \Drupal\Core\Config\Config $droopler_update_config */
-    $currentProgress = $this->getChecklistSavedProgress();
-    $user = $this->account->id();
-    $time = time();
-    foreach ($names as $name) {
-      if (!isset($currentProgress['#items'][$name])) {
-        $currentProgress['#items'][$name] = [
-          '#completed' => $time,
-          '#uid' => $user,
-        ];
-      }
-    }
-
-    $currentProgress['#completed_items'] = count($currentProgress['#items']);
-    $currentProgress['#changed'] = $time;
-    $currentProgress['#changed_by'] = $user;
-    $this->setChecklistSavedProgress($currentProgress);
-  }
-
-  /**
-   * Checks all the bulletpoints on a checklist.
-   *
-   * @param bool $status
-   *   Checkboxes enabled or disabled.
-   */
-  protected function checkAllListPoints($status = TRUE) {
-    $user = $this->account->id();
-    $time = time();
-    $currentProgress = $this->getChecklistSavedProgress();
-    $currentProgress['#changed'] = $time;
-    $currentProgress['#changed_by'] = $user;
-
-    $exclude = [
-      '#title',
-      '#description',
-      '#weight',
-    ];
-    foreach ($this->updateChecklist->items as $version_items) {
-      foreach ($version_items as $item_name => $item) {
-        if (!in_array($item_name, $exclude)) {
-          if ($status) {
-            $currentProgress['#items'][$item_name] = [
-              '#completed' => $time,
-              '#uid' => $user,
-            ];
-          }
-          else {
-            unset($currentProgress['#items'][$item_name]);
-          }
-        }
-      }
-    }
-    $currentProgress['#completed_items'] = count($currentProgress['#items']);
-    $this->setChecklistSavedProgress($currentProgress);
-  }
-
-  /**
    * Updates and saves progress of the update checklist.
    *
-   * @param array $values
-   *   Two dimensional array with structure "version_key" => ["checkbox_id" =>
-   *   TRUE|FALSE].
+   * @param array<string, array<string, bool>> $values
+   *   Two-dimensional structure `[version_key => [checkbox_id => bool]]`.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function saveProgress(array $values) {
+  public function saveProgress(array $values): void {
+    $checklist = $this->getChecklist();
+    if ($checklist === NULL) {
+      return;
+    }
+
     $time = time();
     $num_changed_items = 0;
     $progress = $this->getChecklistSavedProgress();
@@ -281,7 +173,6 @@ class UpdateChecklist {
           continue;
         }
         if ($item) {
-          // Item is checked.
           $status['positive'][] = $item_key;
           $num_changed_items++;
           $progress['#completed_items']++;
@@ -289,11 +180,9 @@ class UpdateChecklist {
             '#completed' => $time,
             '#uid' => $this->account->id(),
           ];
+          continue;
         }
-        else {
-          // Item is unchecked.
-          $status['negative'][] = $item_key;
-        }
+        $status['negative'][] = $item_key;
       }
     }
 
@@ -301,61 +190,142 @@ class UpdateChecklist {
     $this->setSuccessfulByHook($status['negative'], FALSE);
 
     ksort($progress);
-
     $this->setChecklistSavedProgress($progress);
 
     $message = $this->formatPlural(
       $num_changed_items,
       '%title progress has been saved. 1 item changed.',
       '%title progress has been saved. @count items changed.',
-      ['%title' => $this->updateChecklist->title]
+      ['%title' => $checklist->title],
     );
     $this->messenger()->addStatus($message);
   }
 
   /**
-   * Getter for saved progress in checklist storage.
-   *
-   * @return mixed
-   *   The stored value or NULL if no value exists.
+   * Copy checklist values from legacy config-based storage to state-based.
    */
-  protected function getChecklistSavedProgress() {
+  public function migrateConfigProgressToStateProgress(): void {
+    $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
+    $config_key = defined(ChecklistapiChecklist::class . '::PROGRESS_CONFIG_KEY')
+      ? ChecklistapiChecklist::PROGRESS_CONFIG_KEY
+      : 'progress';
+
+    $oldSavedProgress = $droopler_update_config->get($config_key);
+    if (empty($oldSavedProgress)) {
+      return;
+    }
+
+    $newSavedProgress = $this->getChecklistSavedProgress();
+    if (!empty($newSavedProgress)) {
+      $newSavedProgress['#items'] = array_merge(
+        $newSavedProgress['#items'] ?? [],
+        $oldSavedProgress['#items'] ?? [],
+      );
+    }
+    else {
+      $newSavedProgress = $oldSavedProgress;
+    }
+
+    $this->setChecklistSavedProgress($newSavedProgress);
+    $droopler_update_config->clear($config_key)->save();
+  }
+
+  /**
+   * Persist `successful_by_hook` status on the Update entity for each key.
+   *
+   * @param string[] $keys
+   *   Update ids.
+   * @param bool $status
+   *   Status value to persist on each Update entity.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  protected function setSuccessfulByHook(array $keys, bool $status = TRUE): void {
+    foreach ($keys as $key) {
+      $update = Update::load($key);
+      if ($update instanceof Update) {
+        $update->setSuccessfulByHook($status)->save();
+        continue;
+      }
+      Update::create([
+        'id' => $key,
+        'successful_by_hook' => $status,
+      ])->save();
+    }
+  }
+
+  /**
+   * Tick a list of checklistapi bulletpoints.
+   *
+   * @param string[] $names
+   *   Bulletpoint ids.
+   */
+  protected function checkListPoints(array $names): void {
+    $currentProgress = $this->getChecklistSavedProgress();
+    $user = $this->account->id();
+    $time = time();
+    foreach ($names as $name) {
+      if (!isset($currentProgress['#items'][$name])) {
+        $currentProgress['#items'][$name] = [
+          '#completed' => $time,
+          '#uid' => $user,
+        ];
+      }
+    }
+
+    $currentProgress['#completed_items'] = count($currentProgress['#items']);
+    $currentProgress['#changed'] = $time;
+    $currentProgress['#changed_by'] = $user;
+    $this->setChecklistSavedProgress($currentProgress);
+  }
+
+  /**
+   * Tick / untick every bulletpoint on the checklist.
+   */
+  protected function checkAllListPoints(bool $status = TRUE): void {
+    $checklist = $this->getChecklist();
+    if ($checklist === NULL) {
+      return;
+    }
+
+    $user = $this->account->id();
+    $time = time();
+    $currentProgress = $this->getChecklistSavedProgress();
+    $currentProgress['#changed'] = $time;
+    $currentProgress['#changed_by'] = $user;
+
+    $exclude = ['#title', '#description', '#weight'];
+    foreach ($checklist->items as $version_items) {
+      foreach ($version_items as $item_name => $item) {
+        if (in_array($item_name, $exclude, TRUE)) {
+          continue;
+        }
+        if ($status) {
+          $currentProgress['#items'][$item_name] = [
+            '#completed' => $time,
+            '#uid' => $user,
+          ];
+          continue;
+        }
+        unset($currentProgress['#items'][$item_name]);
+      }
+    }
+    $currentProgress['#completed_items'] = count($currentProgress['#items']);
+    $this->setChecklistSavedProgress($currentProgress);
+  }
+
+  /**
+   * Saved progress from checklist storage (NULL when nothing is stored).
+   */
+  protected function getChecklistSavedProgress(): mixed {
     return $this->checkListStateStorage->getSavedProgress();
   }
 
   /**
-   * Setter for saving progress to checklist storage.
-   *
-   * @param array $progress
-   *   An array of checklist progress data.
+   * Persist progress to checklist storage.
    */
-  protected function setChecklistSavedProgress(array $progress) {
+  protected function setChecklistSavedProgress(array $progress): void {
     $this->checkListStateStorage->setSavedProgress($progress);
-  }
-
-  /**
-   * Function copies checklist.
-   *
-   * Function copies checklist values stored by old method to a
-   * new checklist storage.
-   */
-  public function migrateConfigProgressToStateProgress() {
-    $droopler_update_config = $this->configFactory->getEditable('checklistapi.progress.d_update');
-    $config_key = defined(ChecklistapiChecklist::class . '::PROGRESS_CONFIG_KEY') ? ChecklistapiChecklist::PROGRESS_CONFIG_KEY : 'progress';
-    if ($droopler_update_config) {
-      $oldSavedProgress = $droopler_update_config->get($config_key);
-      if ($oldSavedProgress) {
-        $newSavedProgress = $this->getChecklistSavedProgress();
-        if (!empty($newSavedProgress)) {
-          $newSavedProgress['#items'] = array_merge($newSavedProgress['#items'] ?? [], $oldSavedProgress['#items'] ?? []);
-        }
-        else {
-          $newSavedProgress = $oldSavedProgress;
-        }
-        $this->setChecklistSavedProgress($newSavedProgress);
-        $droopler_update_config->clear($config_key)->save();
-      }
-    }
   }
 
 }

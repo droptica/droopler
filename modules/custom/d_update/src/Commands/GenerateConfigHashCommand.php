@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_update\Commands;
 
 use Drupal\d_update\ConfigCompareInterface;
@@ -7,33 +9,21 @@ use Drush\Commands\DrushCommands;
 use Drush\Drush;
 
 /**
- * Drush command for config hash generation.
+ * Drush command exposing `ConfigCompare::generateHashFromDatabase()`.
  *
- * @package Drupal\d_update\Commands
+ * Useful when an integrator needs to capture a hash of the current
+ * configuration to embed in an update hook.
  */
 class GenerateConfigHashCommand extends DrushCommands {
 
-  /**
-   * Config compare service.
-   *
-   * @var \Drupal\d_update\ConfigCompareInterface
-   */
-  protected $configCompare;
-
-  /**
-   * GenerateConfigHashCommand constructor.
-   *
-   * @param \Drupal\d_update\ConfigCompareInterface $config_compare
-   *   Config compare service.
-   */
-  public function __construct(ConfigCompareInterface $config_compare) {
+  public function __construct(
+    protected readonly ConfigCompareInterface $configCompare,
+  ) {
     parent::__construct();
-
-    $this->configCompare = $config_compare;
   }
 
   /**
-   * Generates config hash for given config name.
+   * Generates a config hash for the given config name.
    *
    * @param string $config_name
    *   Configuration name.
@@ -48,8 +38,9 @@ class GenerateConfigHashCommand extends DrushCommands {
     Drush::output()->writeln(
       dt('Generated hash for config @config_name: @hash', [
         '@config_name' => $config_name,
-        '@hash' => $hash,
-      ]));
+        '@hash' => $hash === FALSE ? '<no config found>' : $hash,
+      ]),
+    );
   }
 
 }

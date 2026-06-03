@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\d_p\Plugin\ParagraphSetting;
 
 use Drupal\d_p\ParagraphSettingPluginBase;
@@ -21,9 +23,8 @@ class ColumnCount extends ParagraphSettingPluginBase {
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function formElement(): array {
-    $element = parent::formElement();
-
     return [
       '#description' => $this->t('Select the number of items in one row.'),
       '#type' => 'number',
@@ -32,19 +33,21 @@ class ColumnCount extends ParagraphSettingPluginBase {
       '#element_validate' => [
         [ParagraphSettingsValidation::class, 'validateColumnCount'],
       ],
-    ] + $element;
+    ] + parent::formElement();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDefaultValue() {
+  #[\Override]
+  public function getDefaultValue(): mixed {
     return 4;
   }
 
   /**
    * {@inheritdoc}
    */
+  #[\Override]
   public function getValidationRulesDefinition(): array {
     return [
       'column_count' => [

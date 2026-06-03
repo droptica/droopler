@@ -24,6 +24,7 @@
         "bower-asset/colorbox": "^1.6",
         "bower-asset/lazysizes": "^5.2",
         "bower-asset/masonry": "^4.2",
+        "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7.3",
         "drupal/admin_toolbar": "^3.6",
         "drupal/better_exposed_filters": "^7.1",
@@ -70,15 +71,39 @@
         "bower-asset/jquery": "*",
         "bower-asset/outlayer": "*"
     },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "drupal/coder": "^8.3",
+        "mglaman/phpstan-drupal": "^2.0",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "slevomat/coding-standard": "^8.15",
+        "squizlabs/php_codesniffer": "^3.10"
+    },
     "conflict": {
         "drupal/drupal": "*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
+        }
     },
     "extra": {
+        "installer-paths": {
+            "modules/contrib/{$name}": ["type:drupal-module"],
+            "themes/contrib/{$name}": ["type:drupal-theme"]
+        },
         "patches": {
             "drupal/core": {
                 "jQuery 3.7.1 instead of core jQuery 4 (contrib compatibility)": "web/profiles/contrib/droopler/patches/jquery-3.7.1-compat-core-11.3.patch"

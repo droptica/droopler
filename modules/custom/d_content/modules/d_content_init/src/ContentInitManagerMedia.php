@@ -17,8 +17,6 @@ use Drupal\file\FileRepositoryInterface;
 
 /**
  * Content init media manager.
- *
- * @package Drupal\d_content_init
  */
 class ContentInitManagerMedia extends ContentInitManagerBase {
 
@@ -37,7 +35,7 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
   protected $fileRepository;
 
   /**
-   * ContentInitManagerMedia constructor.
+   * Constructs a new ContentInitManagerMedia.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity manager interface.
@@ -64,7 +62,8 @@ class ContentInitManagerMedia extends ContentInitManagerBase {
     LanguageManagerInterface $language_manager,
     ModuleHandlerInterface $module_handler,
     FileSystemInterface $file_system,
-    FileRepositoryInterface $file_repository) {
+    FileRepositoryInterface $file_repository,
+  ) {
     parent::__construct($entity_type_manager, $serialization, $logger_factory, $current_user, $language_manager, $module_handler);
     $this->fileSystem = $file_system;
     $this->fileRepository = $file_repository;

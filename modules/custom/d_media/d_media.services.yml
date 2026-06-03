@@ -2,3 +2,6 @@ services:
   d_media.video_provider_manager:
     class: Drupal\d_media\Service\ProviderManager
     parent: default_plugin_manager
+
+  # Autowire alias.
+  Drupal\d_media\Service\ProviderManagerInterface: '@d_media.video_provider_manager'

@@ -8,3 +8,8 @@ services:
   d_content_init.config_update:
     class: Drupal\d_content_init\Services\ConfigUpdate
     arguments: ['@config.factory', '@module_handler', '@logger.factory']
+
+  # Autowire aliases.
+  Drupal\d_content_init\ContentInitManagerBlock: '@d_content_init.manager_block'
+  Drupal\d_content_init\ContentInitManagerMedia: '@d_content_init.manager_media'
+  Drupal\d_content_init\Services\ConfigUpdate: '@d_content_init.config_update'
