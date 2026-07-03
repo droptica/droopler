@@ -18,7 +18,11 @@ function d_commerce_product_preprocess_field(&$variables) {
     switch ($variables['field_name']) {
       case 'field_product_images':
         $variables['#attached']['library'][] = 'd_commerce_product/d_product_commerce_slider';
-        $slider = views_embed_view('commerce_product_images', 'block_1');
+        $slider = [
+          '#type' => 'view',
+          '#name' => 'commerce_product_images',
+          '#display_id' => 'block_1',
+        ];
         $variables['slider'] = \Drupal::service('renderer')->render($slider);
         break;
 

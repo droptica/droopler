@@ -10,6 +10,7 @@ use Drupal\Core\Extension\MissingDependencyException;
 use Drupal\d_p\ParagraphSettingTypesInterface;
 use Drupal\d_p\Plugin\Field\FieldType\ConfigurationStorage;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\shortcut\Entity\Shortcut;
 use Drupal\user\Entity\Role;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 
@@ -21,9 +22,31 @@ use Drupal\we_megamenu\WeMegaMenuBuilder;
  * @see system_install()
  */
 function droopler_install() {
-  // First, do everything in standard profile.
-  include_once DRUPAL_ROOT . '/core/profiles/standard/standard.install';
-  standard_install();
+  // Seed the default shortcut set. Drupal 11.4 removed
+  // core/profiles/standard/standard.install (whose standard_install() only did
+  // this); call it when present and replicate it otherwise, so the profile
+  // installs on both Drupal 11.3 and 11.4+.
+  $standard_install = DRUPAL_ROOT . '/core/profiles/standard/standard.install';
+  if (is_file($standard_install)) {
+    include_once $standard_install;
+  }
+  if (function_exists('standard_install')) {
+    standard_install();
+  }
+  else {
+    Shortcut::create([
+      'shortcut_set' => 'default',
+      'title' => (string) t('Add content'),
+      'weight' => -20,
+      'link' => ['uri' => 'internal:/node/add'],
+    ])->save();
+    Shortcut::create([
+      'shortcut_set' => 'default',
+      'title' => (string) t('All content'),
+      'weight' => -19,
+      'link' => ['uri' => 'internal:/admin/content'],
+    ])->save();
+  }
 
   \Drupal::configFactory()
     ->getEditable('node.settings')
