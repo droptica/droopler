@@ -6,7 +6,6 @@ namespace Drupal\d_p_subscribe_file\Hook;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\DependencyInjection\ClassResolverInterface;
-use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Render\RendererInterface;
@@ -22,7 +21,6 @@ class Hooks {
 
   public function __construct(
     protected readonly ClassResolverInterface $classResolver,
-    protected readonly FormBuilderInterface $formBuilder,
     protected readonly ConfigFactoryInterface $configFactory,
     protected readonly RendererInterface $renderer,
   ) {}
@@ -39,7 +37,10 @@ class Hooks {
     $form_object = $this->classResolver->getInstanceFromDefinition(SubscribeFileForm::class);
     $form_object->setParagraph($paragraph);
 
-    $variables['subscribe_file_form'] = $this->formBuilder->getForm($form_object);
+    // Load form_builder lazily to avoid a service circular reference:
+    // this hook class would otherwise pull form_builder -> url_generator ->
+    // router eagerly whenever any of its hooks fire.
+    $variables['subscribe_file_form'] = \Drupal::formBuilder()->getForm($form_object);
   }
 
   /**

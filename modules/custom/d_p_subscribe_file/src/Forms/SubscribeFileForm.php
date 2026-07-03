@@ -15,6 +15,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * File subscribe form.
+ *
+ * Injected services are intentionally not readonly: FormBase uses
+ * DependencySerializationTrait, whose __wakeup() reinjects them by property
+ * assignment from trait scope when a cached form is unserialized. A readonly
+ * promoted property can only be initialized from its declaring class scope, so
+ * unserializing would throw "Cannot initialize readonly property".
  */
 class SubscribeFileForm extends FormBase {
 
@@ -29,8 +35,8 @@ class SubscribeFileForm extends FormBase {
   protected ?ParagraphInterface $paragraph = NULL;
 
   public function __construct(
-    protected readonly AccountInterface $currentUser,
-    protected readonly MailManagerInterface $mailManager,
+    protected AccountInterface $currentUser,
+    protected MailManagerInterface $mailManager,
   ) {}
 
   /**

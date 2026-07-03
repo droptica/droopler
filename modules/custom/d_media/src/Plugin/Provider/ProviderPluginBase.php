@@ -65,7 +65,7 @@ abstract class ProviderPluginBase extends PluginBase implements ProviderPluginIn
     array $configuration,
     string $plugin_id,
     array $plugin_definition,
-    protected readonly EntityTypeManagerInterface $entityTypeManager,
+    protected EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 

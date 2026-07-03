@@ -266,8 +266,8 @@ class Hooks {
   /**
    * Build custom term links pointing to a facet path.
    *
-   * @return string[]
-   *   Rendered term link markup keyed by delta.
+   * @return array[]
+   *   Render arrays for each term link, keyed by delta.
    */
   protected function generateTermLinks(iterable $items, string $element): array {
     $links = [];
@@ -284,8 +284,8 @@ class Hooks {
         'query' => ['f[0]' => $element . ':' . strtolower($name)],
       ];
       // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
-      $links[] = (string) Link::fromTextAndUrl($this->t($name), Url::fromUri('internal:/products', $options))
-        ->toString();
+      $links[] = Link::fromTextAndUrl($this->t($name), Url::fromUri('internal:/products', $options))
+        ->toRenderable();
     }
     return $links;
   }

@@ -7,6 +7,7 @@
 
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Drupal\commerce_product\Entity\ProductInterface;
 use Drupal\facets\Entity\Facet;
 use Drupal\search_api\Plugin\views\query\SearchApiQuery;
@@ -76,16 +77,18 @@ function d_commerce_products_list_preprocess_field(&$variables) {
       $view_id = 'view.droopler_commerce_products_list.page_1';
 
       $facet = Facet::load($facet_id);
-      $alias_cleaner = Drupal::service('pathauto.alias_cleaner');
+      if ($facet === NULL) {
+        return;
+      }
 
       foreach ($variables['element']['#items'] as $key => $item) {
-        $taxonomy_name = $alias_cleaner->cleanString($variables['element'][$key]['#title']);
-
-        $view_url = $variables['element'][$key]['#url']->fromRoute($view_id, [
-          'arg_0' => $facet->getUrlAlias(),
-          'arg_1' => $taxonomy_name,
+        // Facets pretty paths uses a single {facets_query} segment holding the
+        // raw facet value; the old arg_0/arg_1 + cleanString path no longer
+        // matches the term name and breaks filtering.
+        $facets_query = $facet->getUrlAlias() . '/' . $variables['element'][$key]['#title'];
+        $variables['items'][$key]['content']['#url'] = Url::fromRoute($view_id, [
+          'facets_query' => $facets_query,
         ]);
-        $variables['items'][$key]['content']['#url'] = $view_url;
       }
     }
   }

@@ -33,8 +33,8 @@ class BlockFieldLabelFormatter extends FormatterBase implements ContainerFactory
     $label,
     $view_mode,
     array $third_party_settings,
-    protected readonly RendererInterface $renderer,
-    protected readonly AccountInterface $currentUser,
+    protected RendererInterface $renderer,
+    protected AccountInterface $currentUser,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
   }
