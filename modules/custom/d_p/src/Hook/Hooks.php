@@ -84,8 +84,11 @@ class Hooks {
     }
 
     $setting_field = ParagraphSettingsAccessor::field($paragraph);
-    if ($setting_field !== NULL && !$setting_field->isEmpty()) {
+    if ($setting_field !== NULL) {
       unset($variables['content'][$setting_field->getName()]);
+      // Apply classes even when the field is empty: getClasses() emits the
+      // configured per-modifier defaults (padding/margin/theme), which legacy
+      // paragraphs with no stored settings still need for correct spacing.
       $wrapper_attributes['class'] = array_merge(
         $wrapper_attributes['class'],
         $setting_field->getClasses(),

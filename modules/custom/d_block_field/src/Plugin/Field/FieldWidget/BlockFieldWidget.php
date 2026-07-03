@@ -41,9 +41,9 @@ class BlockFieldWidget extends WidgetBase implements ContainerFactoryPluginInter
     FieldDefinitionInterface $field_definition,
     array $settings,
     array $third_party_settings,
-    protected readonly BlockManagerInterface $blockManager,
-    protected readonly BlockFieldManagerInterface $fieldManager,
-    protected readonly ContextRepositoryInterface $contextRepository,
+    protected BlockManagerInterface $blockManager,
+    protected BlockFieldManagerInterface $fieldManager,
+    protected ContextRepositoryInterface $contextRepository,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
   }

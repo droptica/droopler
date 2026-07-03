@@ -11,6 +11,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides base plugin implementation for paragraph setting plugins.
+ *
+ * $settingManager is intentionally not readonly: PluginBase uses
+ * DependencySerializationTrait, whose __wakeup() reinjects services by
+ * assigning to the property from PluginBase scope. A readonly promoted property
+ * can only be initialized from its declaring class scope, so unserializing a
+ * cached plugin would throw "Cannot initialize readonly property".
  */
 abstract class ParagraphSettingPluginBase extends PluginBase implements ParagraphSettingInterface, ContainerFactoryPluginInterface {
 
@@ -18,7 +24,7 @@ abstract class ParagraphSettingPluginBase extends PluginBase implements Paragrap
     array $configuration,
     string $plugin_id,
     mixed $plugin_definition,
-    protected readonly ParagraphSettingPluginManagerInterface $settingManager,
+    protected ParagraphSettingPluginManagerInterface $settingManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }

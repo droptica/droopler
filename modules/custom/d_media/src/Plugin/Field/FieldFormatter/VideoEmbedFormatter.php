@@ -47,8 +47,8 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
     $label,
     $view_mode,
     array $third_party_settings,
-    protected readonly ProviderManagerInterface $providerManager,
-    protected readonly EntityStorageInterface $imageStyleStorage,
+    protected ProviderManagerInterface $providerManager,
+    protected EntityStorageInterface $imageStyleStorage,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
   }
