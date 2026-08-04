@@ -1,22 +1,14 @@
 countup:
-  remote: http://github.com/inorganik/countUp.js
+  remote: https://github.com/inorganik/countUp.js
   version: VERSION
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
     gpl-compatible: false
   js:
-    /libraries/countup/dist/countUp.min.js: { minified: true }
-
-countup-dev:
-  remote: http://github.com/inorganik/countUp.js
-  version: VERSION
-  license:
-    name: MIT
-    url: https://opensource.org/licenses/MIT
-    gpl-compatible: false
-  js:
-    /libraries/countup/dist/countUp.js: { }
+    # CountUp 2.x ships countUp.js/countUp.min.js as ES modules; only the UMD
+    # build exposes the global used by d_p_counters.js.
+    /libraries/countup.js/dist/countUp.umd.js: { minified: true }
 
 in-viewport:
   remote: http://github.com/vvo/in-viewport
@@ -35,6 +27,6 @@ d_p_counters:
   dependencies:
     - core/jquery
     - core/drupal
-    - core/jquery.once
+    - core/once
     - d_p_counters/in-viewport
     - d_p_counters/countup
