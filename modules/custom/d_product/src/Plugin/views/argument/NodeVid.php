@@ -3,6 +3,7 @@
 namespace Drupal\d_product\Plugin\views\argument;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\node\Plugin\views\argument\Vid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -30,8 +31,8 @@ class NodeVid extends Vid {
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\node\NodeStorageInterface $node_storage
-   *   The node storage.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    * @param \Drupal\Core\Database\Connection $database
    *   The current database.
    */
@@ -39,9 +40,12 @@ class NodeVid extends Vid {
     array $configuration,
     $plugin_id,
     $plugin_definition,
-    NodeStorageInterface $node_storage,
+    EntityTypeManagerInterface $entity_type_manager,
     Connection $database,
   ) {
+    $node_storage = $entity_type_manager->getStorage('node');
+    // Vid::__construct() typehints the concrete node storage interface.
+    assert($node_storage instanceof NodeStorageInterface);
     parent::__construct($configuration, $plugin_id, $plugin_definition, $node_storage);
     $this->database = $database;
   }
@@ -55,7 +59,7 @@ class NodeVid extends Vid {
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity_type.manager')->getStorage('node'),
+      $container->get('entity_type.manager'),
       $container->get('database')
     );
   }

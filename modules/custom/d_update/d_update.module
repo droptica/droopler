@@ -13,9 +13,9 @@
 
 declare(strict_types=1);
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Url;
 use Drupal\d_update\Entity\Update;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Callback for the d_update checklistapi checklist.
@@ -29,7 +29,7 @@ use Symfony\Component\Yaml\Yaml;
  * @see \Drupal\d_update\Hook\Hooks::checklistapiChecklistInfo()
  */
 function d_update_checklistapi_checklist_items(): array {
-  $tasks = Yaml::parse(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'updates.yml'));
+  $tasks = Yaml::decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'updates.yml'));
 
   foreach ($tasks as $version => $updates) {
     foreach ($updates as $key => $update) {

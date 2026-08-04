@@ -20,7 +20,7 @@ class AdditionalComponentsForm extends FormBase {
    *
    * @var \Drupal\Core\Extension\ModuleExtensionList
    */
-  private $moduleExtensionList;
+  protected $moduleExtensionList;
 
   /**
    * Constructs a new class instance.
@@ -46,7 +46,7 @@ class AdditionalComponentsForm extends FormBase {
    *
    * @var string[]
    */
-  private $modules = [
+  protected $modules = [
     'd_blog' => 'This module allows you to create professional blog posts, with all Droopler paragraphs',
     'd_product' => 'This module provides the way to showcase your products without advanced e-commerce features',
     'd_commerce' => 'Out-of-the-box support for Commerce module for Drupal.',
@@ -57,7 +57,7 @@ class AdditionalComponentsForm extends FormBase {
    *
    * @var string[]
    */
-  private $commerceModules = [
+  protected $commerceModules = [
     'commerce',
     'commerce_cart',
     'commerce_checkout',

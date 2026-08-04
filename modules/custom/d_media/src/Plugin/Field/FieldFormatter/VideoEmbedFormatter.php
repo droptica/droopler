@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\d_media\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
@@ -48,7 +48,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
     $view_mode,
     array $third_party_settings,
     protected ProviderManagerInterface $providerManager,
-    protected EntityStorageInterface $imageStyleStorage,
+    protected EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
   }
@@ -67,7 +67,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
       $configuration['view_mode'],
       $configuration['third_party_settings'],
       $container->get('d_media.video_provider_manager'),
-      $container->get('entity_type.manager')->getStorage('image_style'),
+      $container->get('entity_type.manager'),
     );
   }
 
@@ -266,7 +266,7 @@ class VideoEmbedFormatter extends FormatterBase implements ContainerFactoryPlugi
    */
   protected function imageStyleOptions(): array {
     $options = [];
-    foreach ($this->imageStyleStorage->loadMultiple() as $name => $style) {
+    foreach ($this->entityTypeManager->getStorage('image_style')->loadMultiple() as $name => $style) {
       $options[$name] = $style->label();
     }
     if ($options === []) {
